@@ -316,11 +316,19 @@ In the euclidean metric space $\mathbb{R}^2$:
 2. $(0,1)^2$ is **open**.
 3. $[0,1] \times (0,1)$ is **neither open nor closed**.
 
-> **[FIG-W02-05]** *(Corsin p. 8)* Three small sketches, one per case: a solid-bordered square
-> with a purple sequence $x_n$ converging to a red $\times$ on the boundary; a dashed-bordered
-> square with $x_n$ approaching from outside; and a square with solid left/right and dashed
-> top/bottom edges carrying two sequences $x_n$, $y_n$ with limits $\times$ and $y$.
-> → TikZ, three sub-panels.
+> **[FIG-W02-05]** *(Corsin p. 8)* Three small square sketches side by side, one per case, each
+> illustrating a converging sequence:
+> (1) $[0,1]^2$, **closed** — solid-bordered square; a purple dotted trail labelled $x_n$
+> spirals inward from the interior toward a red $\times$ marked at the top-right corner of the
+> square (the limit lies on the boundary, and belongs to the closed set).
+> (2) $(0,1)^2$, **open** — dashed-bordered square; a purple dotted trail labelled $x_n$
+> approaches from just outside the square's upper-left corner, illustrating a sequence whose
+> limit (unmarked, on the boundary) would not lie in the open set.
+> (3) $[0,1]\times(0,1)$, **neither** — square with solid left and right edges but dashed top
+> and bottom edges; an orange dotted trail labelled $y_n$ climbs toward a point $y$ marked on
+> the dashed top edge (limit not attained — open side), while a purple dotted trail labelled
+> $x_n$ descends toward a red $\times$ at the bottom-right corner on a solid edge (limit
+> attained — closed side). → TikZ, three sub-panels.
 
 **Common misconception!** *(Corsin p. 8)*
 
@@ -330,9 +338,13 @@ In the euclidean metric space $X = [0,1]^2$, the set $[0,1]^2$ **is open**!!!
 |---|---|
 | **Not open**, since $B_\varepsilon(x)$ is not contained in $[0,1]^2$ if $x$ is on the boundary. | **Open**, since the full space is always open, as shown before. |
 
-> **[FIG-W02-06]** *(Corsin p. 8)* Two panels side by side: left, a square with a red boundary
-> point $x$ and an orange dashed ε-ball spilling outside; right, the same square where the ε-ball
-> is clipped to the square. → TikZ, two panels.
+> **[FIG-W02-06]** *(Corsin p. 8)* Two square panels side by side, both depicting $[0,1]^2$.
+> Left panel — ambient space $\mathbb{R}^2$: a red point $x$ sits on the square's boundary
+> (right edge); an orange dashed circle (the $\varepsilon$-ball centred at $x$) is drawn around
+> it, extending visibly outside the square's edge. Right panel — ambient space $[0,1]^2$ itself:
+> the same red boundary point $x$, but the orange dashed $\varepsilon$-ball is clipped exactly at
+> the square's edge, i.e.\ only the portion of the disk lying inside the square is drawn.
+> → TikZ, two panels.
 
 #### Exercise *(Corsin p. 9)*
 
@@ -450,8 +462,11 @@ A metric space $(X,d)$ is **compact** ("kompakt") if every open cover has a fini
 **Theorem.** $(X,d)$ metric space is **compact** if and only if every sequence in $X$ has a
 convergent subsequence in $X$.
 
-> **[FIG-W02-09]** *(Corsin p. 14)* Open cover of a metric space: a blue blob $X$ tiled by three
-> dotted overlapping regions $U_1$ (red), $U_2$ (orange), $U_3$ (purple), annotated
+> **[FIG-W02-09]** *(Corsin p. 14)* A large blue freeform blob (cloud-like outline) labelled $X$.
+> Inside it, three overlapping dotted freeform loops, arranged Venn-style so every point of $X$
+> falls inside at least one: $U_1$ (red) occupying roughly the lower area, $U_2$ (orange)
+> occupying the upper-right, $U_3$ (purple) occupying the upper-left; all three overlap near the
+> centre. Each label sits just inside its own loop's boundary. Below, the annotation
 > $U_1 \cup U_2 \cup U_3 = X$, $U_i \subseteq X$ open sets. → TikZ freeform regions.
 
 *(Corsin p. 14)* A subset $K$ of a metric space $(X,d)$ is compact if the metric space
@@ -468,9 +483,12 @@ $(K, d|_{K \times K})$ is compact. This is equivalent to the definition in the s
 > 2. $K$ is **topologically compact**: every family of open sets $\{U_i\}_{i \in I}$ that cover
 >    $K$, has a finite subcover.
 
-> **[FIG-W02-10]** *(Corsin p. 14)* Open cover of a subset: a blue blob $X$ containing a purple
-> blob $K$, covered by three dotted regions $U_1$ (red), $U_2$ (purple), $U_3$ (green) that
-> extend beyond $K$; annotated $K \subseteq U_1 \cup U_2 \cup U_3 \subseteq X$. → TikZ freeform regions.
+> **[FIG-W02-10]** *(Corsin p. 14)* A large blue freeform blob labelled $X$, with a smaller
+> purple/pink freeform blob $K$ nested centrally inside it. Three dotted freeform loops overlap
+> over $K$ and extend past its boundary into the surrounding part of $X$ (but stay inside $X$):
+> $U_1$ (green) lower-left, $U_2$ (orange) upper, $U_3$ (magenta, dashed) right — arranged so
+> their union covers all of $K$. Below, the annotation
+> $K \subseteq U_1 \cup U_2 \cup U_3 \subseteq X$, $U_i \subseteq X$ open. → TikZ freeform regions.
 
 #### Exercise *(Corsin p. 15)*
 

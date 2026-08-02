@@ -27,7 +27,8 @@ due 2 March 2026). Attribution: Prof. Joaquim Serra, D-MATH, ETH Zürich.*
 
 > Some of these problems have a closed-answer format, similar to what you might find on the
 > final exam. "Multiple Choice" means that zero, one or more answers can be correct.
-> Questions marked with (\*) are a bit more complex.
+> Questions marked with (\*) are a bit more complex, you might want to skip them at the first
+> read. Hints available in the last page.
 
 ### 2.1 — Examples and Non-examples of Metric spaces
 
@@ -159,9 +160,12 @@ called a **space** ("Raum") in this context — which we will denote by $X$:
   - Super important!
   - Covered in *Linalg*, sometimes used in *Analysis*. $X$ is a vector space.
 
-> **[FIG-W02-01]** *(Corsin p. 3)* Four nested regions labelled, from outside in: *Topological
-> spaces* (red), *Metric spaces* (yellow), *Normed vector spaces* (green), *Inner product spaces*
-> (blue). → TikZ concentric rounded shapes.
+> **[FIG-W02-01]** *(Corsin p. 3)* Four concentric rounded blobs (irregular circle-like shapes,
+> not perfect circles), each nested fully inside the next, largest to smallest: outermost red
+> blob labelled *Topological spaces* (label near the top, inside the red band); yellow blob
+> inside it labelled *Metric spaces*; green blob inside that labelled *Normed vector spaces*;
+> innermost blue blob labelled *Inner product spaces*. Each label sits inside its own coloured
+> band, stacked top to bottom in the same nesting order. → TikZ concentric rounded shapes.
 
 *(Corsin p. 3)*
 
@@ -187,8 +191,12 @@ $$d(x,y) := \|x - y\|, \qquad x, y \in X.$$
 3. $d(x,z) \leq d(x,y) + d(y,z)$ — *(Δ-inequality, the triangle inequality)*
    "detours make the way longer"
 
-> **[FIG-W02-02]** *(Corsin p. 3)* Triangle inequality on axes: points $x$, $y$, $z$; blue path
-> $x \to y \to z$, red direct edge $x \to z$, annotated $d(x,z) \le d(x,y) + d(y,z)$. → TikZ 2D sketch.
+> **[FIG-W02-02]** *(Corsin p. 3)* On a pair of coordinate axes (origin at bottom-left): point
+> $x$ sits near the origin (bottom-left), $y$ sits upper-middle, $z$ sits upper-right, so the
+> three points form a flattened, lever-like triangle. A blue two-segment path traces
+> $x \to y \to z$ (up, then across). A red straight edge connects $x$ directly to $z$, cutting
+> beneath the blue path. Below the sketch, the annotation
+> $d(x,z) \le d(x,y) + d(y,z)$ in red. → TikZ 2D sketch.
 
 #### Examples
 
@@ -209,9 +217,12 @@ $$d(x,y) := \|x - y\|, \qquad x, y \in X.$$
    **(c) Supremum metric:**
    $$d_3(x,y) = \sup_{k = 1,\dots,n} |x_k - y_k|$$
 
-> **[FIG-W02-03]** *(Corsin p. 5)* The three metrics in $\mathbb{R}^2$: axes $x_1$/$x_2$, points
-> $x = (x_1,x_2)$ and $y = (y_1,y_2)$; blue hypotenuse labelled $d_2$, red vertical leg labelled
-> $d_1$, orange horizontal segment labelled $d_3$. → TikZ 2D sketch.
+> **[FIG-W02-03]** *(Corsin p. 5)* Axes $x_1$ (horizontal), $x_2$ (vertical). Point $x = (x_1,x_2)$
+> lower-left, point $y = (y_1,y_2)$ upper-right, each with dotted guide lines down/across to the
+> axes. A right triangle is formed: the blue hypotenuse runs diagonally from $x$ straight to $y$,
+> labelled $d_2$; the red vertical leg runs up the right side, at horizontal position $y_1$, from
+> height $x_2$ to $y$, labelled $d_1$; the orange horizontal leg runs along the bottom, at height
+> $x_2$, from $x_1$ to $y_1$, labelled $d_3$. → TikZ 2D sketch.
 
 *(Corsin p. 5)* In general,
 $$d(x,y) = \sqrt[m]{\sum_{k=1}^{n} (x_k - y_k)^m}$$
@@ -226,9 +237,13 @@ is a metric on $\mathbb{R}^n$ for any $m$.
    sphere is an **arc of a great circle** (a *geodesic*). This defines a metric, similar to how
    straight lines define a metric on $\mathbb{R}^n$.
 
-> **[FIG-W02-04]** *(Corsin p. 5)* Two panels: left, a sphere $S^2$ with a geodesic arc $d(x,y)$
-> between $x$ and $y$; right, the same two points with the blue arc (distance on the sphere) and
-> the orange dashed chord (Euclidean distance). → TikZ 3D sphere, two views.
+> **[FIG-W02-04]** *(Corsin p. 5)* Two panels, each a wireframe sphere (outline circle with a
+> dashed equator ellipse for 3D shading). Left panel: point $x$ red, near the front/bottom of the
+> sphere; point $y$ red, near the top; a blue arc runs over the surface between them, labelled
+> $d(x,y)$. Right panel: the same sphere outline with the same two points $x$ (lower) and $y$
+> (upper); the blue surface arc is drawn again (labelled "distance on sphere"), and in addition
+> an orange dashed straight chord cuts directly through the sphere's interior from $x$ to $y$
+> (labelled "euclidean distance"). → TikZ 3D sphere, two views.
 
 #### Exercise *(Corsin p. 6)*
 

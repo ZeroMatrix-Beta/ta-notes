@@ -23,7 +23,20 @@ worth a second opinion.
 | OQ-10 | Corsin Week 4, p. 10 | Multi-index recall written `∂^α = ∂_{α₁}∂_{α₂}⋯∂_{α_n}`, e.g. `∂^(2,1) = ∂₂∂₁`. | **resolved** — a multi-index counts applications, so `∂^(2,1) = ∂₁²∂₂`. His own expansion uses `∂₁²∂₂`, confirming intent. Corrected. |
 | OQ-11 | Corsin Week 4, p. 11 | Both compact Taylor formulas are written `Σ_{ℓ=1}^k`, omitting the `ℓ=0` term `f(x̄)`. | **resolved** — must be `Σ_{ℓ=0}^k`; the explicit expansion on p. 10 includes `f(x̄)`. Corrected. |
 
-*(populated during Phase 2)*
+| OQ-12 | Corsin Week 5, p. 5 | Constraint written `g(x) = |x| − 1`, but the Lagrangian differentiates `x²+y²+z²−1 = |x|²−1`. | **resolved** — both cut out the same sphere; the squared version is the one used. Typeset with `|x|²−1` throughout. |
+| OQ-13 | Corsin Week 5, p. 7 | The Hessian test is stated for `f ∈ C³`. | **resolved** — `C²` suffices and is what the Hessian's own definition assumes. Relaxed to `C²`. |
+| OQ-14 | Corsin Week 5, p. 8 | Characteristic equation written `A − λId = 0` (determinant missing). | **resolved** — must be `det(A − λId) = 0`. Corrected. |
+| OQ-15 | Corsin Week 6, p. 11 | The two implicit functions `x(y)` and `y(x)` are given swapped domains relative to his own IFT setup (`r` around `x₀`, `s` around `y₀`). | **resolved** — swapped back: `x(y) : (−s,s)→(−r,r)`, `y(x) : (−r,r)→(−s,s)`. |
+| OQ-16 | `exercises/Ex7_Analysis2_eng.pdf`, 7.9 | Refers to "Exercise 6.3.3"; the function `y²(1−x)−x³` is item 2 of Exercise **7.3** on the same sheet. | **resolved** — typo in the official sheet. Cross-referenced to 7.3.2. |
+| OQ-17 | Corsin Week 8, p. 13 | In the final integration the α-term is written `(π/2)·α/(1+α²)` and integrates to `(π/4)log(1+α²)` — both a factor 2 off from `I'(α)`, whose α-term is `απ/4`. | **resolved** — corrected to `(π/4)·α/(1+α²)` and `(π/8)log(1+α²)`, which makes his two bracket terms genuinely equal. **Final answer `π log 2/8` is correct** and matches the known value. |
+| OQ-18 | Corsin Week 8, p. 4 | Quiz bullet says "for `α ≠ √2`, ∇f is a local diffeo"; `det Hf(0) = 2−α²` also vanishes at `α = −√2`. | **resolved** — should read `α ≠ ±√2`. Same oversight the next bullet exploits. Corrected with a note. |
+| OQ-19 | Corsin Week 8, p. 8 | Fubini example 1 writes `∫dx∫dy` but takes the inner antiderivative in `x`. | **resolved** — differentials swapped relative to the computation; result correct. Order fixed. |
+| OQ-20 | Corsin Week 9, p. 1 | Hint for 9.1 labels `(r sinθ cosφ, r sinθ sinφ, r cosθ)` as **cylindrical** coordinates; that is the **spherical** formula. Range also given as `θ ∈ (−π/2, π/2)` rather than `(0,π)`. | **resolved** — relabelled *spherical* and the range corrected; the formula (not the label) is what is useful here. The official sheet's own hint does say "cylindrical". |
+| OQ-21 | `Corsin Nick/Class Notes/Week 10.pdf`, cover | Cover reads "Week 9" while the problems listed are 10.1–10.6. | **resolved** — same class of slip as `OQ-01`; file name + exercise numbers win. |
+| OQ-22 | Corsin Week 10, p. 11 | Gauss example header says `Ω = S²`; the theorem needs the solid ball. | **resolved** — the computation does integrate over `B₁(0)`; only the label was loose. Corrected. |
+| OQ-23 | Corsin Week 11, p. 10 | Differential `p`-form defined via `ω_x : ℝⁿ → ℝ` "antisymmetric, `n`-linear". | **resolved** — must be `ω_x : (ℝⁿ)^p → ℝ`, antisymmetric and `p`-linear; his own expansion uses `p` indices. Corrected. |
+
+*(weeks 12–13 and the ODE appendix still to come)*
 
 ## Conventions
 

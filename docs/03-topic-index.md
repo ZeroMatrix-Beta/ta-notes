@@ -8,6 +8,27 @@ the document.
 So: **supplements attach to a topic, never to a date.** This table is the only mapping that
 matters. Built during Phase 3 from the finished transcripts.
 
+## Status
+
+Weeks 2–11 verified against the actual transcripts. **The provisional map (derived from Jérôme
+Paschoud's German file names) was wrong in several places** — Corsin runs roughly a week ahead of
+it from Week 4 onwards. Corrections applied below; the chapter titles in `transcript/week-*.md`
+are the authority. Weeks 12–13 rows are still provisional.
+
+| Provisional (from file names) | Actual (from Corsin's notes) |
+|---|---|
+| Week 4: norms, differential, chain rule | Week 4: differential, chain rule, **and Taylor** |
+| Week 5: Taylor, optimization | Week 5: optimization, **Lagrange, Hessian test** (no Taylor) |
+| Week 6: optimization II, inverse function thm | Week 6: convexity, inverse **and implicit** function thms |
+| Week 7: implicit function thm, submanifolds | Week 7: submanifolds, **tangent & normal spaces** |
+| Week 8: tangent spaces, Jordan measure, Riemann | Week 8: **repetition quiz**, change of variables, Fubini, **Feynman's trick** |
+| Week 9: change of variables, d-volume | Week 9: **determinants & volume, Gram determinant**, d-volume, curve length |
+| Week 10: integrals over submanifolds, divergence thm | Week 10: **geodesics**, C¹ domains, flux, Gauss' theorem |
+| Week 11: divergence thm, Green, line integrals | Week 11: Gauss revisited, **alternating forms, wedge product, differential forms, exterior derivative** |
+
+Notably, **line integrals and Green's theorem do not appear in Corsin's notes at all** — a genuine
+gap, and the first strong candidate for a Phase 3 supplement.
+
 ## Skeleton (from Corsin's week structure; filled in as transcription proceeds)
 
 | Topic | Owning week/section | Lecture notes § | Sheet | Supplements |

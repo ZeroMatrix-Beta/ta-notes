@@ -4,6 +4,15 @@ Turning the exercise-class notes of 17 ETH teaching assistants into one polished
 document. Course: **401-1262-07L, Analysis II: Several Variables**, Prof. Joaquim Serra,
 FS 2026.
 
+## Where the work stands
+
+**Phase 1 done** (scaffolding). **Phase 2 in progress** — Corsin Nick's weeks **2–11 are fully
+transcribed**; weeks **12, 13 and the ODE appendix remain**. Phases 3–5 not started.
+
+To resume: `transcript/week-12.md` is the next file. Read
+`Corsin Nick/Class Notes/Week 12.pdf` (7 pp) and `exercises/Ex12_Analysis2_eng.pdf`, then follow
+the format of any finished week (`week-11.md` is the richest example).
+
 ## Read these first
 
 | File | What it settles |

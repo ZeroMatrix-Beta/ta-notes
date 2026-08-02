@@ -238,7 +238,7 @@ Colours are part of Corsin's convention (blue / orange / red / green / purple) â
 Costs nothing extra at transcription time, and removes an entire second pass over the source.
 
 **Weeks 2â€“11 were written to the weaker standard.** The Group A / Group B split at the bottom of
-`05-figure-queue.md` records which of those 49 figures are still self-sufficient (mathematically
+`05-figure-queue.md` records which of those 45 figures are still self-sufficient (mathematically
 determined) and which need the page in view.
 
 ## 8. Prose

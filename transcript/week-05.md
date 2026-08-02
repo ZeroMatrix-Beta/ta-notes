@@ -133,11 +133,12 @@ a curve in a "map" representing the longitude and latitude of a car at time $t$.
 
 Define the "rotating" spherical coordinates $F : \mathbb{R}^2\times\mathbb{R}\to\mathbb{R}^3$,
 $$F((x,y),t) = \big(R\cos y\cos(\omega t + x),\ R\cos y\sin(\omega t + x),\ R\sin y\big),$$
-representing what a point on the map looks like on Earth from a satellite at time $t$ (we consider
-the Earth as a rotating sphere with speed $\omega$, and forget about translation around the Sun).
+representing what a point on the map looks like on Earth from a satellite (thus we consider the
+Earth as a rotating sphere with speed given by $\omega$, and we forget about translation around
+the Sun) at time $t$.
 
-Consider $r : \mathbb{R}\to\mathbb{R}^3$, $r(t) = F(\sigma(t), t)$, the position of the car at
-time $t$.
+Consider $r : \mathbb{R}\to\mathbb{R}^3$, $r(t) = F(\sigma(t), t)$, which is the position of the
+car at time $t$.
 
 1. Compute the acceleration $r''(t)$ using the chain rule.
 2. Assume that the acceleration is always proportional to the radial vector $r(t)$, i.e.
@@ -165,10 +166,13 @@ $x_0 \in \operatorname{int}(U)$ is a local extremum, then $\nabla f(x_0) = 0$.
 
 **Intuition.** *(Corsin p. 2)*
 
-> **[FIG-W05-01]** *(Corsin p. 2)* A blue paraboloid-like surface $f(x,y)$ over an $xy$-grid;
-> purple level sets projected onto the plane, an orange gradient arrow, a green marked minimum,
-> and a red "steepest ascent" arrow on the surface. → TikZ 3D surface + contours.
-> *(Reference asset: `Toby Lane/geogebra/gradient_contour.ggb`.)*
+> **[FIG-W05-01]** *(Corsin p. 2)* A blue goblet-shaped surface $f(x,y)$ standing on an $xy$-grid
+> ($y$-axis to the upper left, $x$-axis to the right); a purple closed level-set curve is drawn on
+> the grid directly under the surface's rim. A green dot labelled "minimum" sits on the grid at the
+> level curve; a dotted orange line rises from it to the curve, and a horizontal orange arrow
+> labelled "gradient" points left from that dot. A red arrow labelled "steepest ascent" starts at
+> the green dot and climbs up the outside of the surface, following its curvature, to the rim.
+> → TikZ 3D surface + contours. *(Reference asset: `Toby Lane/geogebra/gradient_contour.ggb`.)*
 
 $$\langle\nabla f(x_0), v\rangle = 0 \iff \nabla f(x_0) \perp v,$$
 $$\text{and this for all } v \in \mathbb{R}^2 \iff \nabla f(x_0) = 0.$$
@@ -184,14 +188,16 @@ $$T \in C^\infty(\mathbb{R}^3, (0,\infty)) \qquad \text{(absolute zero is not at
 If we model the earth as $S^2 := \{x \in \mathbb{R}^3 : |x| = 1\}$, then we want to find the local
 maxima of $T|_{S^2}$, which **are not necessarily critical points of $T$!**
 
-> **[FIG-W05-02]** *(Corsin p. 3)* A blue sphere $S^2$. At a point $q$ near the top, a red arrow
-> $\nabla T(q)$ points radially outward, annotated "local extremum of $T|_{S^2}$". At a point $p$
-> lower down, an orange arrow $\nabla T(p)$ points obliquely, annotated: "has a component pointing
+> **[FIG-W05-02]** *(Corsin p. 3)* A blue sphere $S^2$ drawn in 3D with a dashed equator ellipse.
+> Near the top, a point $q$ has a dotted red arrow $\nabla T(q)$ pointing straight outward along the
+> radius (perpendicular to the sphere), labelled "local extremum of $T|_{S^2}$". Lower down, on the
+> front of the sphere, a point $p$ has a dotted orange arrow $\nabla T(p)$ pointing obliquely
+> up-and-out (not radial — visibly tilted toward the surface), labelled "has a component pointing
 > along the tangent, **not** a local extremum of $T|_{S^2}$, since $T$ increases along a direction
 > on $S^2$." → TikZ 3D sphere with two gradient arrows.
 
 So $T|_{S^2}$ has a local extremum if it is **perpendicular to the surface** $S^2$. Note that
-$S^2$ is the **level set** $g(x) = 0$ for $g(x) = |x| - 1$, or $S^2 = g^{-1}\{0\}$.
+$S^2$ is the **level set** ("Niveaumenge") $g(x) = 0$ for $g(x) = |x| - 1$, or $S^2 = g^{-1}\{0\}$.
 
 **Note.** $\nabla g(x) = \dfrac{x}{|x|}$ is perpendicular to $S^2$. In general, **the gradient is
 perpendicular to the level sets.**
@@ -275,8 +281,8 @@ with respect to the standard basis of $\mathbb{R}^n$. By **Schwarz's lemma**
 
 **Definition (sign of a symmetric matrix).** A symmetric matrix $A \in \mathbb{R}^{n\times n}$ is:
 
-- **positive definite** if $v^{\mathsf T}Av > 0$ for all $v \in \mathbb{R}^n\setminus\{0\}$;
-- **negative definite** if $v^{\mathsf T}Av < 0$ for all $v \in \mathbb{R}^n\setminus\{0\}$;
+- **positive definite** ("positiv definit") if $v^{\mathsf T}Av > 0$ for all $v \in \mathbb{R}^n\setminus\{0\}$;
+- **negative definite** ("negativ definit") if $v^{\mathsf T}Av < 0$ for all $v \in \mathbb{R}^n\setminus\{0\}$;
 - **indefinite** if there exist $v, u \in \mathbb{R}^n\setminus\{0\}$ such that
   $v^{\mathsf T}Av > 0$ and $u^{\mathsf T}Au < 0$;
 - **degenerate** if there exists $v \in \mathbb{R}^n\setminus\{0\}$ such that $v^{\mathsf T}Av = 0$.
@@ -285,7 +291,8 @@ If $f \in C^3(U,\mathbb{R})$ has a critical point $x_0 \in \operatorname{int}(U)
 
 - $\mathcal{H}f(x_0)$ **positive definite** $\Rightarrow$ local **min** at $x_0$;
 - $\mathcal{H}f(x_0)$ **negative definite** $\Rightarrow$ local **max** at $x_0$;
-- $\mathcal{H}f(x_0)$ **indefinite and not degenerate** $\Rightarrow$ **saddle point** at $x_0$.
+- $\mathcal{H}f(x_0)$ **indefinite and not degenerate** $\Rightarrow$ **saddle point**
+  ("Sattelpunkt") at $x_0$.
 
 Mnemonic *(Corsin p. 7)*: positive $= \smile \dots$ min; negative $= \frown \dots$ max;
 indefinite $= $ saddle.

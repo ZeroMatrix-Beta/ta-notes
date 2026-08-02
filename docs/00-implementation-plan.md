@@ -1,5 +1,22 @@
 # Analysis II — TA Notes → Typeset Document
 
+> ## ⚠️ PHASE ORDER CORRECTION — supersedes the numbering below
+>
+> The phases below number **supplement-mining as Phase 3, ahead of the LaTeX build**. That is
+> wrong for this project's actual priority and must not be followed.
+>
+> The user's standing instruction is that **Corsin Nick alone is the deliverable**: *"If
+> everything from Corsin Nick is transcribed nicely and you just have a look at the others,
+> that's fine for me."* So the other 16 tutors are touched **only after a PDF compiles**.
+>
+> **Correct order:** scaffolding → transcribe Corsin (weeks 2–13 + ODEs) → retarget `main.tex`
+> and convert to LaTeX → **build until it compiles** → TikZ figures → *then, optionally,*
+> supplements.
+>
+> Read the phase descriptions below for their *content*; take the *ordering* from the table in
+> `CLAUDE.md`. Everything from "Phase 3 — Topic index & curated supplements" onwards is
+> renumbered accordingly: it is now the last step, and it is optional.
+
 > **Amendments after approval (2026-08-02).** Two additions from the user:
 >
 > 4. **Official course material acquired.** The whole of

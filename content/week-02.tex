@@ -1,0 +1,597 @@
+% Corsin Week 2, transcript/week-02.md
+\chapter{Week 2 --- Metric Spaces, Topology \& Continuity}
+
+\exercisesheet{2}
+
+\textit{Statements quoted verbatim from \texttt{exercises/Ex2\_Analysis2\_eng.pdf} (assigned 23
+February 2026, due 2 March 2026). Attribution: Prof. Joaquim Serra, D-MATH, ETH Z\"urich.}
+
+\begin{notation}
+Some of these problems have a closed-answer format, similar to what you might find on the final
+exam. ``Multiple Choice'' means that zero, one or more answers can be correct. Questions marked
+with (*) are a bit more complex, you might want to skip them at the first read. Hints available
+on the last page.
+\end{notation}
+
+\begin{exercise}[2.1 --- Examples and Non-examples of Metric spaces]
+\label{ex:2.1}
+Which of the following pairs are metric spaces? Prove it or provide a counterexample.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item $(B(X), d)$, where $B(X)$ denotes the set of all bounded functions from a non-empty set
+    $X$ to $\mathbb{R}$ and
+    $$d(f,g) := \sup_{x \in X} |f(x) - g(x)|.$$
+  \item $(\mathbb{Q}_+, d)$, where $\mathbb{Q}_+$ are the positive rational numbers and
+    $d(x,y) := \left|\tfrac{1}{x} - \tfrac{1}{y}\right|$.
+  \item $(\mathbb{R}^2, d)$, where $d(x,y) := (x_1 - y_1)^2 + |x_2 - y_2|$.
+  \item $(\mathbb{R}^2, d)$, where $d(x,y) := |x_1 - y_1|^{1/2} + |x_2 - y_2|$.
+  \item $(\mathbb{R}^{n \times n}, d)$ with
+    $d(X,Y) := \left(\Tr\{(X-Y)\transp(X-Y)\}\right)^{1/2}$.
+  \item \textbf{(*)} $(\mathbb{R}^{n \times n}, d)$ with
+    $$d(X,Y) := \sup\{|v\transp(X-Y)v| : v \in \mathbb{R}^n, \|v\| = 1\},$$
+    and $\mathbb{R}^{n\times n}$ denoting the set of square matrices.
+  \item \textbf{(*)} $(\mathbb{R}^2/\mathbb{Z}^2, d)$ where the flat 2-dimensional torus
+    $\mathbb{R}^2/\mathbb{Z}^2$ is the set of equivalence classes of pairs of real numbers under
+    the equivalence relation
+    $$x, y \in \mathbb{R}^2, \quad x \sim y \iff x_1 - y_1 \in \mathbb{Z},\ x_2 - y_2 \in \mathbb{Z},$$
+    and $d([x],[y]) := \inf_{k,h \in \mathbb{Z}} \|x - y + (k,h)\|$, with $\|\cdot\|$ denoting the
+    Euclidean distance and $[x] \in \mathbb{R}^2/\mathbb{Z}^2$ denoting the equivalence class of
+    $x \in \mathbb{R}^2$.
+\end{enumerate}
+
+\textit{Official hints:} \textbf{2.1.3} and \textbf{2.1.4} --- ignore what happens in the second
+variable, it is there only to distract you. \textbf{2.1.5} --- rewrite, for a general matrix
+$A := X - Y$, what $\Tr\{A\transp A\}^{1/2}$ actually means; it should look familiar.
+\textbf{2.1.6} --- see what happens if $(X-Y)$ is anti-symmetric. \textbf{2.1.7} --- convince
+yourself first that the ``inf'' is in fact a ``min''.
+\end{exercise}
+
+\begin{exercise}[2.2 --- Multiple choice (closure)]
+\label{ex:2.2}
+Let $(X,d)$ be a metric space, and $Y_1, Y_2 \subset X$ subsets. Select all the statements below
+that are necessarily true.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $\overline{Y_1 \cup Y_2} = \overline{Y_1} \cup \overline{Y_2}$
+  \item $\overline{Y_1} \cap \overline{Y_2} \subset \overline{Y_1 \cap Y_2}$
+  \item $\overline{Y_1 \cap Y_2} \subset \overline{Y_1} \cap \overline{Y_2}$
+  \item $\overline{Y_1 \cap Y_2} = \overline{Y_1} \cap \overline{Y_2}$
+\end{enumerate}
+\textit{Official hints:} \textbf{(b)} --- compare with \cref{ex:2.1}.3. \textbf{(d)} --- play
+with a set of three points (a triangle).
+\end{exercise}
+
+\begin{exercise}[2.3 --- Multiple choice (distance from a set)]
+\label{ex:2.3}
+Let $(X,d)$ be a metric space, and $A \subset X$ a non-empty subset. We define the function
+``distance from $A$'' as
+$$d(\cdot, A) : X \to [0,\infty), \qquad d(x,A) := \inf_{a \in A} d(x,a).$$
+Select all the statements below that are necessarily true.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item If $A$ is closed and $x \in A^c$, then $d(x,A) > 0$.
+  \item The set $M := \{x \in X : d(x,A) \geq 1\}$ is closed in $X$.
+  \item For $x, y \in X$, $d(x,A) \leq d(x,y) + d(y,A)$ holds.
+  \item If $A^\circ$ is non-empty and $x \in X$, then $d(x,A) = d(x, A^\circ)$.
+\end{enumerate}
+\textit{Official hint:} first convince yourself with a drawing that the name of this function is
+appropriate; then use the characterization of open/closed sets with sequences.
+\end{exercise}
+
+\begin{exercise}[2.4 --- Boundary, Interior etc.]
+\label{ex:2.4}
+Determine the interior, closure, and boundary of the following subsets $Y$ of $\mathbb{R}$, for
+the standard topology on $\mathbb{R}$. No need to justify the answer.
+\begin{center}
+\begin{tabular}{ll ll}
+(1) & $Y = [0,1]$ & (2) & $Y = \mathbb{Q}$ \\
+(3) & $Y = \emptyset$ & (4) & $Y = (0,1)$ \\
+(5) & $Y = [-1,1) \setminus \{0\}$ & (6) & $Y = [0,\infty)$ \\
+(7) & $Y = \{0\}$ & (8) & $Y = \left\{\tfrac{1}{n} \mid n \in \mathbb{N}\setminus\{0\}\right\}$
+\end{tabular}
+\end{center}
+\end{exercise}
+
+\begin{exercise}[2.5 --- Product of metric spaces]
+\label{ex:2.5}
+Let $(X, d_X)$ and $(Y, d_Y)$ be a pair of metric spaces. Recall that the set of ordered pairs
+$(x,y)$ with $x \in X$ and $y \in Y$ is denoted by $X \times Y$. Consider the following functions
+$X \times Y \to [0,\infty)$:
+$$
+\begin{aligned}
+d_1((x,y),(x',y')) &:= \max\{d_X(x,x'), d_Y(y,y')\} \\
+d_2((x,y),(x',y')) &:= d_X(x,x') + d_Y(y,y') \\
+d_3((x,y),(x',y')) &:= \sqrt{d_X(x,x')^2 + d_Y(y,y')^2}.
+\end{aligned}
+$$
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Show that they are all valid distance functions on $X \times Y$.
+  \item Show that they are all equivalent, i.e.\ there is a number $C > 0$ such that
+    $$d_1((x,y),(x',y')) \leq C\,d_2((x,y),(x',y')) \leq C^2 d_3((x,y),(x',y')) \leq C^3 d_1((x,y),(x',y'))$$
+    for all $x, x' \in X$, $y, y' \in Y$.
+  \item Show that a sequence $(x_n, y_n) \to (x,y)$ with respect to $(X \times Y, d_3)$ if and
+    only if $x_n \to x$ with respect to $d_X$ and $y_n \to y$ with respect to $d_Y$.
+\end{enumerate}
+\textit{Official hint:} don't get distracted by the abstract set-up --- you already know all
+these things for $\mathbb{R} \times \mathbb{R}$; start from there, then rewrite those arguments in
+this general framework.
+\end{exercise}
+
+\begin{exercise}[2.6 --- Continuity of the distance]
+\label{ex:2.6}
+Let $(X,d)$ be a metric space, and endow $X \times X$ with the product distance
+$d_2(x,y) := d(x_1,y_1) + d(x_2,y_2)$. Show that the distance function
+$d : X \times X \to \mathbb{R}$ is continuous with respect to $d_2$ and, more precisely, that it
+is 1-Lipschitz. Is $d$ also continuous with respect to the distance
+$d_1(x,y) := \max\{d(x_1,y_1), d(x_2,y_2)\}$? Is $d$ also Lipschitz continuous with respect to the
+distance $d_3(x,y) := \sqrt{d(x_1,y_1)^2 + d(x_2,y_2)^2}$? (Notation consistent with
+\cref{ex:2.5}.)
+\end{exercise}
+
+\begin{exercise}[2.7 --- Continuity of the composition]
+\label{ex:2.7}
+Let $X, Y, Z$ be metric spaces and let $f : X \to Y$, $g : Y \to Z$ be continuous functions. Show
+that $g \circ f : X \to Z$ is continuous using at least two of the three equivalent definitions of
+continuity seen in class.
+\end{exercise}
+
+\begin{remark}
+The three equivalent definitions of continuity referenced in \cref{ex:2.7} are exactly the ones
+stated in \cref{sec:continuity} below (\(\varepsilon\)--\(\delta\), sequential, topological).
+\end{remark}
+
+\session{Monday}
+
+\section{Structured spaces}
+\label{sec:structured_spaces}
+
+This semester you will be introduced to certain structures that can be given to a set --- also
+called a \newterm{space} (\germanterm{Raum}) in this context --- which we will denote by $X$:
+
+\begin{description}
+  \item[0. Topological spaces] fourth semester.
+  \item[1. Metric spaces] (\germanterm{metrischer Raum}) $(X,\ d : X \times X \to \mathbb{R}_{\geq 0})$
+    \begin{itemize}
+      \item Define a \textbf{distance} between points.
+      \item $X$ is \textbf{not} necessarily a vector space.
+      \item Covered in \textit{Analysis}.
+    \end{itemize}
+  \item[2. Normed metric spaces] $(X,\ \|\cdot\| : X \to \mathbb{R}_{\geq 0})$
+    \begin{itemize}
+      \item Define the \textbf{length} of a vector.
+      \item Presuppose a linear structure, i.e.\ $X$ is a \textbf{vector space}.
+      \item Covered in \textit{Linalg / Analysis}.
+    \end{itemize}
+  \item[3. Inner product spaces] $(X,\ \langle\cdot,\cdot\rangle : X \times X \to \mathbb{R})$
+    \begin{itemize}
+      \item Define \textbf{both} lengths \textbf{and} angles!
+      \item Super important!
+      \item Covered in \textit{Linalg}, sometimes used in \textit{Analysis}. $X$ is a vector space.
+    \end{itemize}
+\end{description}
+
+\begin{figurestub}{FIG-W02-01}
+Four concentric rounded blobs (irregular circle-like shapes, not perfect circles), each nested
+fully inside the next, largest to smallest: outermost red blob labelled \textit{Topological
+spaces} (label near the top, inside the red band); yellow blob inside it labelled \textit{Metric
+spaces}; green blob inside that labelled \textit{Normed vector spaces}; innermost blue blob
+labelled \textit{Inner product spaces}. Each label sits inside its own coloured band, stacked top
+to bottom in the same nesting order.
+\end{figurestub}
+
+The precise definitions will follow later. You will see that an \textbf{inner product}
+$\langle\cdot,\cdot\rangle$ induces a \textbf{norm} by the formula
+$$\|x\| := \sqrt{\langle x, x\rangle}, \qquad x \in X.$$
+Furthermore, a \textbf{norm} induces a \textbf{metric} by
+$$d(x,y) := \|x - y\|, \qquad x, y \in X.$$
+
+\section{Metric spaces}
+\label{sec:metric_spaces}
+
+\begin{definition}
+\label{def:metric_space}
+A \newterm{metric space} (\germanterm{metrischer Raum}) $(X,d)$ is any set $X$ with a
+\newterm{metric} (\germanterm{Metrik}) $d : X \times X \to \mathbb{R}_{\geq 0}$ such that for all
+$x, y, z \in X$:
+\begin{description}
+  \item[definiteness] $d(x,y) \geq 0$, with equality if and only if $x = y$. In words: the
+    distance is non-negative, and a point has zero distance to itself.
+  \item[symmetry] $d(x,y) = d(y,x)$, i.e.\ $x$ has the same distance to $y$ as $y$ to $x$.
+  \item[triangle inequality] ($\Delta$-inequality) $d(x,z) \leq d(x,y) + d(y,z)$ ---
+    \qt{detours make the way longer}.
+\end{description}
+\end{definition}
+
+\begin{remark}
+Corsin's gloss on definiteness reads \qt{the distance positive}; the formula $d \geq 0$ is
+correct, but the gloss omits the ``non-''. Corrected in the prose above. See \texttt{OQ-02}.
+\end{remark}
+
+\begin{figurestub}{FIG-W02-02}
+On a pair of coordinate axes (origin at bottom-left): point $x$ sits near the origin
+(bottom-left), $y$ sits upper-middle, $z$ sits upper-right, so the three points form a flattened,
+lever-like triangle. A blue two-segment path traces $x \to y \to z$ (up, then across). A red
+straight edge connects $x$ directly to $z$, cutting beneath the blue path. Below the sketch, the
+annotation $d(x,z) \le d(x,y) + d(y,z)$ in red.
+\end{figurestub}
+
+\subsection{Examples}
+
+\begin{example}
+\label{ex:metric_examples}
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Let $X$ be a set. The \newterm{discrete metric} is given by
+    $$d(x,y) = \begin{cases} 1 & \text{if } x \neq y \\ 0 & \text{if } x = y \end{cases}$$
+    Important for counterexamples!
+  \item Let $X = \mathbb{R}^n$. Then we have many choices for a metric; some common ones are:
+  \begin{description}
+    \item[(a) Manhattan metric:]
+      $$d_1(x,y) = |x_1 - y_1| + \dots + |x_n - y_n| = \sum_{k=1}^{n} |x_k - y_k|$$
+    \item[(b) Standard metric:]
+      $$d_2(x,y) = \sqrt{(x_1-y_1)^2 + \dots + (x_n-y_n)^2} = \sqrt{\sum_{k=1}^{n}(x_k - y_k)^2}$$
+    \item[(c) Supremum metric:]
+      $$d_3(x,y) = \sup_{k = 1,\dots,n} |x_k - y_k|$$
+  \end{description}
+\end{enumerate}
+\end{example}
+
+\begin{figurestub}{FIG-W02-03}
+Axes $x_1$ (horizontal), $x_2$ (vertical). Point $x = (x_1,x_2)$ lower-left, point
+$y = (y_1,y_2)$ upper-right, each with dotted guide lines down/across to the axes. A right
+triangle is formed: the blue hypotenuse runs diagonally from $x$ straight to $y$, labelled $d_2$;
+the red vertical leg runs up the right side, at horizontal position $y_1$, from height $x_2$ to
+$y$, labelled $d_1$; the orange horizontal leg runs along the bottom, at height $x_2$, from $x_1$
+to $y_1$, labelled $d_3$.
+\end{figurestub}
+
+In general,
+$$d(x,y) = \sqrt[m]{\sum_{k=1}^{n} (x_k - y_k)^m}$$
+is a metric on $\mathbb{R}^n$ for any $m$.
+
+\begin{example}[continued]
+\begin{enumerate}[label=\textbf{\arabic*.}, start=3]
+  \item $X = C^0([0,1], \mathbb{R})$, the set of continuous functions $[0,1] \to \mathbb{R}$.
+    Then we can define the \textbf{supremum metric} for $f, g \in X$:
+    $$d(f,g) = \sup_{x \in [0,1]} |f(x) - g(x)|$$
+  \item $X = S^2 := \{(x_1,x_2,x_3) \in \mathbb{R}^3 : x_1^2 + x_2^2 + x_3^2 = 1\}$. $S^n$ is
+    called the \textbf{$n$-dimensional sphere}, or \textbf{$n$-sphere}. The closest path between
+    two points on the sphere is an \textbf{arc of a great circle} (a \textit{geodesic}). This
+    defines a metric, similar to how straight lines define a metric on $\mathbb{R}^n$.
+\end{enumerate}
+\end{example}
+
+\begin{figurestub}{FIG-W02-04}
+Two panels, each a wireframe sphere (outline circle with a dashed equator ellipse for 3D
+shading). Left panel: point $x$ red, near the front/bottom of the sphere; point $y$ red, near the
+top; a blue arc runs over the surface between them, labelled $d(x,y)$. Right panel: the same
+sphere outline with the same two points $x$ (lower) and $y$ (upper); the blue surface arc is
+drawn again (labelled ``distance on sphere''), and in addition an orange dashed straight chord
+cuts directly through the sphere's interior from $x$ to $y$ (labelled ``euclidean distance'').
+\end{figurestub}
+
+\begin{exercise}
+\label{ex:sup_metric_is_metric}
+Show that the supremum metric from \cref{ex:metric_examples}.3 is a metric.
+\end{exercise}
+
+\begin{exercisesolution}[\cref{ex:sup_metric_is_metric}]
+Symmetry and definiteness are clear. For the triangle inequality, let $f, g, h \in C^0([0,1])$ and
+set $p := f - h$, $q := h - g$. Then for all $x \in [0,1]$:
+$$|p(x)| \leq \sup|p| \qquad \text{and} \qquad |q(x)| \leq \sup|q|.$$
+Adding the inequalities, for all $x \in [0,1]$:
+$$
+\begin{aligned}
+|f(x) - g(x)| = |p(x) + q(x)| &\leq |p(x)| + |q(x)| \\
+&\leq \sup|p| + \sup|q| \\
+&= \sup|f - h| + \sup|h - g|.
+\end{aligned}
+$$
+\end{exercisesolution}
+
+\section{Open and closed sets}
+\label{sec:open_closed_sets}
+
+\begin{definition}
+\label{def:open_ball}
+Let $(X,d)$ be a metric space, let $x \in X$, and let $r \in \mathbb{R}$. Then we define the
+\newterm{open ball} of radius $r$ as
+$$B_r(x) := \{\,\boxed{y \in X}\, : d(y,x) < r\,\}$$
+\end{definition}
+
+\begin{importantremark}
+Corsin marks the boxed part in red as an \qt{important subtlety}: the ambient set $X$ in
+$y \in X$ is what makes openness relative to the space, and it is exactly what the common
+misconception on \cref{rem:common_misconception} turns on.
+\end{importantremark}
+
+\begin{remark}
+\Cref{def:open_ball} is stated for $r \in \mathbb{R}$ rather than $r > 0$. Harmless here, but
+loose. See \texttt{OQ-03}.
+\end{remark}
+
+\begin{definition}
+Then we call a subset $U \subseteq X$ \newterm{open} (\germanterm{offen}) if and only if
+$$\forall y \in U \ \exists \varepsilon > 0 \text{ such that } B_\varepsilon(y) \subseteq U.$$
+And we call $A \subseteq X$ \newterm{closed} (\germanterm{abgeschlossen}) if and only if
+$X \setminus A$ is open.
+\end{definition}
+
+\begin{exercise}
+\label{ex:X_empty_clopen}
+Let $(X,d)$ be a metric space. Show that $X$ and $\emptyset$ are both open and closed.
+\end{exercise}
+
+\begin{exercisesolution}[\cref{ex:X_empty_clopen}]
+$X$ is open, since $B_r(x) \subseteq X$ for all $r > 0$, $x \in X$. The empty set contains no
+points and is therefore vacuously open. Since $X$ and $\emptyset$ are each other's complement in
+$X$, they are also closed.
+\end{exercisesolution}
+
+\subsection{Sequences and convergence}
+
+\begin{definition}
+A \newterm{sequence} $(x_n)_{n=0}^{\infty}$ in a metric space $(X,d)$ is a function
+$x : \mathbb{N} \to X$. We say that $(x_n)_{n=0}^{\infty}$ \newterm{converges} to $x \in X$ if
+$$\forall \varepsilon > 0 \ \exists N \in \mathbb{N} \text{ such that } d(x_n, x) < \varepsilon \quad \forall n \geq N.$$
+\end{definition}
+
+\begin{proposition}
+\label{prop:open_closed_via_sequences}
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item $U \subseteq X$ is \textbf{open} if and only if, for every sequence in $X$ with limit in
+    $U$, the sequence eventually lies in $U$.
+  \item $A \subseteq X$ is \textbf{closed} if and only if every convergent sequence in $A$ has its
+    limit in $A$.
+\end{enumerate}
+\end{proposition}
+
+\begin{example}[in $\mathbb{R}^2$]
+In the euclidean metric space $\mathbb{R}^2$:
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item $[0,1]^2$ is \textbf{closed}.
+  \item $(0,1)^2$ is \textbf{open}.
+  \item $[0,1] \times (0,1)$ is \textbf{neither open nor closed}.
+\end{enumerate}
+\end{example}
+
+\begin{figurestub}{FIG-W02-05}
+Three small square sketches side by side, one per case, each illustrating a converging sequence.
+(1) $[0,1]^2$, closed --- solid-bordered square; a purple dotted trail labelled $x_n$ spirals
+inward from the interior toward a red $\times$ marked at the top-right corner of the square (the
+limit lies on the boundary, and belongs to the closed set). (2) $(0,1)^2$, open ---
+dashed-bordered square; a purple dotted trail labelled $x_n$ approaches from just outside the
+square's upper-left corner, illustrating a sequence whose limit (unmarked, on the boundary) would
+not lie in the open set. (3) $[0,1]\times(0,1)$, neither --- square with solid left and right
+edges but dashed top and bottom edges; an orange dotted trail labelled $y_n$ climbs toward a
+point $y$ marked on the dashed top edge (limit not attained --- open side), while a purple dotted
+trail labelled $x_n$ descends toward a red $\times$ at the bottom-right corner on a solid edge
+(limit attained --- closed side).
+\end{figurestub}
+
+\begin{importantremark}[Common misconception!]
+\label{rem:common_misconception}
+In the euclidean metric space $X = [0,1]^2$, the set $[0,1]^2$ \textbf{is open}!
+\begin{center}
+\begin{tabular}{p{0.42\linewidth} p{0.42\linewidth}}
+\textbf{$[0,1]^2 \subseteq \mathbb{R}^2$} & \textbf{$[0,1]^2 \subseteq [0,1]^2$} \\
+Not open, since $B_\varepsilon(x)$ is not contained in $[0,1]^2$ if $x$ is on the boundary. &
+Open, since the full space is always open, as shown before.
+\end{tabular}
+\end{center}
+\end{importantremark}
+
+\begin{figurestub}{FIG-W02-06}
+Two square panels side by side, both depicting $[0,1]^2$. Left panel --- ambient space
+$\mathbb{R}^2$: a red point $x$ sits on the square's boundary (right edge); an orange dashed
+circle (the $\varepsilon$-ball centred at $x$) is drawn around it, extending visibly outside the
+square's edge. Right panel --- ambient space $[0,1]^2$ itself: the same red boundary point $x$,
+but the orange dashed $\varepsilon$-ball is clipped exactly at the square's edge, i.e.\ only the
+portion of the disk lying inside the square is drawn.
+\end{figurestub}
+
+\begin{exercise}
+\label{ex:uniform_convergence}
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Write down the definition of convergence of a sequence $(f_n)_{n=0}^{\infty}$ to $f$ in
+    the metric space $X$ of bounded functions $[0,1] \to \mathbb{R}$ with the supremum metric.
+  \item You know the resulting expression from Analysis 1. What is it called?
+  \item \textit{(Optional)} Use the fact that $C^0([0,1]) \subseteq X$ is closed and
+    \cref{prop:open_closed_via_sequences} on ``sequentially closed'' to conclude a big result
+    from Analysis 1.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercisesolution}[\cref{ex:uniform_convergence}]
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item $\displaystyle \forall \varepsilon > 0 \ \exists N \in \mathbb{N} : \sup_{x \in [0,1]} |f_n - f| < \varepsilon \quad \forall n \geq N$.
+  \item This is \newterm{uniform convergence} (\germanterm{gleichm\"assige Konvergenz})!
+  \item $C^0([0,1])$ is closed in the space of bounded functions with the supremum metric.
+
+    \textit{Proof.} Let $f \in X \setminus C^0([0,1])$, i.e.\ $f : [0,1] \to \mathbb{R}$ is
+    bounded and has at least one discontinuity at a point $x_0 \in [0,1]$. That is, we find
+    $\varepsilon > 0$ such that for all $\delta > 0$ there exists $y \in (x_0 - \delta, x_0 +
+    \delta)$ with $|f(x_0) - f(y)| \geq \varepsilon$. Then the $\tfrac{\varepsilon}{3}$-ball in
+    $X$,
+    $$B_{\varepsilon/3}(f) = \Big\{ g \in X : \sup_{x \in [0,1]} |f(x) - g(x)| < \tfrac{\varepsilon}{3} \Big\},$$
+    is contained in $X \setminus C^0([0,1])$.
+
+    Given this fact, \cref{prop:open_closed_via_sequences} ensures that the uniform limit $f$ of
+    $(f_n)_{n=0}^{\infty}$ in $C^0([0,1])$ is also in $C^0([0,1])$, i.e.\ continuous, given that
+    $f : [0,1] \to \mathbb{R}$ is bounded. This is the case, since $f_n$ is bounded for all
+    $n \in \mathbb{N}$, and with $\varepsilon = 1$ we find $N \in \mathbb{N}$ such that
+    $$\sup_{x \in [0,1]} |f_N(x) - f(x)| < 1 \implies f \text{ bounded.}$$
+\end{enumerate}
+\end{exercisesolution}
+
+\begin{figurestub}{FIG-W02-07}
+The ``$\varepsilon$-tube'': a blue curve $f$ on $[0,1]$ flanked by two red dotted curves at
+vertical distance $\varepsilon/3$, with an orange double arrow marking $\varepsilon$. Caption:
+$B_\varepsilon(f)$ in the space of bounded functions on $[0,1]$ is the ``$\varepsilon$-tube''
+around $f$.
+\end{figurestub}
+
+\session{Friday}
+
+\begin{warmup}
+What is the shape of $B_1(0) \subseteq \mathbb{R}^2$ with the supremum metric? With the Manhattan
+metric?
+\end{warmup}
+
+\begin{answer}
+Supremum: the axis-aligned \textbf{square} $[-1,1]^2$, whose edge midpoints are $(\pm 1, 0)$ and
+$(0,\pm 1)$. Manhattan: the \textbf{diamond} with vertices $(\pm 1, 0)$, $(0,\pm 1)$.
+\end{answer}
+
+\begin{figurestub}{FIG-W02-08}
+Two axis systems side by side; left, a blue dashed square (supremum unit ball) with $(0,1)$ and
+$(1,0)$ marked orange; right, a blue dashed diamond (Manhattan unit ball) with the same two
+points marked.
+\end{figurestub}
+
+\section{Continuity}
+\label{sec:continuity}
+
+\begin{definition}
+\label{def:continuous}
+For $(X, d_X)$, $(Y, d_Y)$ metric spaces, a function $f : X \to Y$ is called \newterm{continuous}
+(\germanterm{stetig}) if one of the following equivalent conditions holds:
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item[\textbf{($\varepsilon$--$\delta$)}] $\forall x_0 \in X$, $\varepsilon > 0$
+    $\exists \delta > 0$ such that for all $x \in X$:
+    $$d(x_0, x) < \delta \implies d(f(x_0), f(x)) < \varepsilon$$
+  \item[\textbf{(sequentially continuous)}] for any sequence $(x_n)_{n=0}^{\infty}$ in $X$ with
+    limit $x \in X$, $\lim_{n\to\infty} f(x_n) = f(x)$ (and the limit exists).
+  \item[\textbf{(topological)}] for all $U \subseteq Y$ open, $f^{-1}(U) \subseteq X$ is open.
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+Corsin writes $d(x_0,x) < \varepsilon$ in the ($\varepsilon$--$\delta$) hypothesis above, which
+must read $\delta$ --- otherwise the quantified $\delta$ is never used. A slip of the pen;
+corrected in \cref{def:continuous}. See \texttt{OQ-05}.
+\end{remark}
+
+\begin{example}
+Let $f : \mathbb{R} \to \mathbb{R}$, $x \mapsto x^2$. Let $a < b \in \mathbb{R}$. Then
+\begin{itemize}
+  \item for $a < 0 < b$: $\quad f^{-1}((a,b)) = (-\sqrt{b}, \sqrt{b})$, open.
+  \item for $a < b < 0$: $\quad f^{-1}((a,b)) = \emptyset$.
+  \item for $0 < a < b$: $\quad f^{-1}((a,b)) = (-\sqrt{b}, -\sqrt{a}) \cup (\sqrt{a}, \sqrt{b})$.
+\end{itemize}
+\textit{Why is it enough to check only these cases?} Hint:
+$f^{-1}(U_1 \cup U_2) = f^{-1}(U_1) \cup f^{-1}(U_2)$.
+\end{example}
+
+\begin{question}
+Let $(X, d_X)$ and $(Y, d_Y)$ be metric spaces, where $d_Y$ is the discrete metric. Is
+$f : (X,d_X) \to (Y,d_Y)$ continuous?
+\end{question}
+
+\begin{answer}
+\textbf{No.} For example, take the spaces $X = Y = \mathbb{R}$, $d_X$ the standard metric, and
+$f = \id : X \to Y$, $z \mapsto z$. Then $\{0\} \subseteq Y$ is open, but
+$\{0\} = \id^{-1}\{0\}$ is not open in $(X, d_X)$.
+\end{answer}
+
+\begin{question}
+What if $d_X$ is the discrete metric and $d_Y$ is arbitrary?
+\end{question}
+
+\begin{answer}
+\textbf{Any} subset of $X$ is open; therefore $f^{-1}(U)$ is open for any open $U \subseteq Y$. So
+every such $f$ is continuous.
+\end{answer}
+
+\section{Completeness}
+\label{sec:completeness}
+
+\begin{definition}
+Let $(X,d)$ be a metric space and $(x_n)_{n=0}^{\infty}$ a sequence in $X$. We say that
+$(x_n)_{n=0}^{\infty}$ is \newterm{Cauchy} if
+$$\forall \varepsilon > 0 \ \exists N \in \mathbb{N} \text{ such that } d(x_n, x_m) < \varepsilon \quad \forall n, m \geq N.$$
+$(X,d)$ is a \newterm{complete metric space} (\germanterm{vollst\"andiger metrischer Raum}) if
+every Cauchy sequence in $X$ converges with respect to $d$.
+\end{definition}
+
+\begin{example}
+\begin{itemize}
+  \item The Euclidean spaces $(\mathbb{R}^n, \langle\cdot,\cdot\rangle_{\text{eucl}})$ are
+    \textbf{complete}.
+  \item Any \textbf{non-closed} subset $U \subseteq \mathbb{R}^n$ (standard metric) and the
+    rationals $\mathbb{Q}$ are \textbf{not complete}.
+  \item $\big(C^0([0,1]), \sup_{x \in [0,1]}|\cdot|\big)$ is \textbf{complete} (Zorich, p.\ 22).
+\end{itemize}
+\end{example}
+
+\section{Compactness}
+\label{sec:compactness}
+
+\begin{definition}
+A metric space $(X,d)$ is \newterm{compact} (\germanterm{kompakt}) if every open cover has a
+finite subcover.
+\end{definition}
+
+\begin{theorem}
+$(X,d)$ metric space is compact if and only if every sequence in $X$ has a convergent
+subsequence in $X$.
+\end{theorem}
+
+\begin{figurestub}{FIG-W02-09}
+A large blue freeform blob (cloud-like outline) labelled $X$. Inside it, three overlapping
+dotted freeform loops, arranged Venn-style so every point of $X$ falls inside at least one:
+$U_1$ (red) occupying roughly the lower area, $U_2$ (orange) occupying the upper-right, $U_3$
+(purple) occupying the upper-left; all three overlap near the centre. Each label sits just
+inside its own loop's boundary. Below, the annotation $U_1 \cup U_2 \cup U_3 = X$,
+$U_i \subseteq X$ open sets.
+\end{figurestub}
+
+A subset $K$ of a metric space $(X,d)$ is compact if the metric space $(K, d|_{K \times K})$ is
+compact. This is equivalent to the definition in the script:
+
+\begin{definition}[9.63, quoted from the official lecture notes]
+Let $(X,d)$ be a metric space. A subset $K \subset X$ is called \textbf{compact} if one of the
+following equivalent conditions hold:
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item $K$ is \textbf{sequentially compact}: every sequence $(x_n)_{n\in\mathbb{N}}$ in $K$ has
+    a subsequence that is convergent in $K$.
+  \item $K$ is \textbf{topologically compact}: every family of open sets $\{U_i\}_{i \in I}$ that
+    cover $K$, has a finite subcover.
+\end{enumerate}
+\end{definition}
+
+\begin{figurestub}{FIG-W02-10}
+A large blue freeform blob labelled $X$, with a smaller purple/pink freeform blob $K$ nested
+centrally inside it. Three dotted freeform loops overlap over $K$ and extend past its boundary
+into the surrounding part of $X$ (but stay inside $X$): $U_1$ (green) lower-left, $U_2$ (orange)
+upper, $U_3$ (magenta, dashed) right --- arranged so their union covers all of $K$. Below, the
+annotation $K \subseteq U_1 \cup U_2 \cup U_3 \subseteq X$, $U_i \subseteq X$ open.
+\end{figurestub}
+
+\begin{exercise}
+\label{ex:compact_finite_complete}
+Let $(X,d)$ be a metric space.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Show that every finite subset $\{x_1, \dots, x_n\} \subseteq X$ is compact.
+  \item If $X$ is compact, is it complete?
+\end{enumerate}
+\end{exercise}
+
+\begin{exercisesolution}[\cref{ex:compact_finite_complete}]
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Let $\{U_\alpha\}_{\alpha \in I}$ be an open cover of $\{x_1, \dots, x_n\}$. For each
+    $i = 1, \dots, n$, pick $U_{\alpha_i}$ such that $x_i \in U_{\alpha_i}$. Then
+    $\{U_{\alpha_i}\}_{i=1,\dots,n}$ is a finite subcover.
+  \item \textbf{Yes.} Let $(x_n)_{n=0}^{\infty}$ be a Cauchy sequence in $X$. Then, because $X$ is
+    compact, we find a convergent subsequence, $\lim_{i \to \infty} x_{n_i} = x \in X$.
+
+    Fix $\varepsilon > 0$. We find $N_1 \in \mathbb{N}$ such that
+    $$d(x_n, x_m) < \varepsilon \quad \forall n, m > N_1$$
+    and $N_2 \in \mathbb{N}$ such that
+    $$d(x, x_{n_i}) < \varepsilon \quad \forall i > N_2.$$
+    For $N := \max\{N_1, N_2\}$ and $k > N$:
+    $$d(x, x_k) \leq d(x, x_{n_k}) + d(x_{n_k}, x_k) < 2\varepsilon$$
+    where we used $n_k \geq k > N$. So any Cauchy sequence converges.
+\end{enumerate}
+\end{exercisesolution}
+
+\begin{remark}
+Corsin writes $n_k > k$ above; for a subsequence the standing fact is $n_k \geq k$. Immaterial to
+the argument. See \texttt{OQ-06}.
+\end{remark}

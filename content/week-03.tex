@@ -1,0 +1,499 @@
+% Corsin Week 3, transcript/week-03.md
+\chapter{Week 3 --- Compactness, Connectedness \& Cauchy--Schwarz}
+
+\exercisesheet{3}
+
+\textit{Statements quoted verbatim from \texttt{exercises/Ex3\_Analysis2\_eng.pdf} (assigned 2
+March 2026, due 9 March 2026). Attribution: Prof. Joaquim Serra, D-MATH, ETH Z\"urich.}
+
+\begin{exercise}[3.1 --- Lipschitz or not]
+\label{ex:3.1}
+Give an example of:
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item A $\tfrac{1}{2}$-Lipschitz function $f : [0,1) \to [0,1)$ that has no fixed point.
+  \item A map $f : \mathbb{R}^2 \to \mathbb{R}^2$ that has no fixed point, but is an isometry,
+    i.e.\ $\|f(x) - f(x')\| = \|x - x'\|$ for all $x, x' \in \mathbb{R}^2$.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[3.2 --- Problems at the origin]
+\label{ex:3.2}
+Show that there is no continuous function $f : \mathbb{R}^2 \to \mathbb{R}$ such that
+$f(x,y) = xy/(x^2+y^2)$ for all $(x,y) \neq (0,0)$. On the other hand, show that there is exactly
+one continuous function $g : \mathbb{R}^2 \to \mathbb{R}$ such that
+$g(x,y) = xy/\sqrt{x^2+y^2}$ for all $(x,y) \neq (0,0)$.
+
+\textit{Official hint:} if a function is continuous at $0$ and $x_k \to 0$ and $y_k \to 0$, then
+$f(x_k)$ and $f(y_k)$ must converge to the same value.
+\end{exercise}
+
+\begin{exercise}[3.3 --- Open, closed, complete and compact]
+\label{ex:3.3}
+For each of the following subsets of $\mathbb{R}^N$ say whether they are open / closed / none /
+compact (with respect to the standard Euclidean structure). Try to prove your assertions
+``efficiently''.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item $E_1 := \{x \in \mathbb{R}^3 : 0 < x_2 \leq 2\}$
+  \item $E_2 := \{x \in \mathbb{R}^n : \sin(\|x\|) \geq \tfrac{1}{4}\}$
+  \item $E_3 := \bigcup_{n \geq 1}\{x \in \mathbb{R}^3 : x_1^4 - \tfrac{1}{n}x_3^2 - x_2^2 > \tfrac{1}{n},\ x_1 + x_2 < 6\}$
+  \item $E_4 := \{(x,y) \in (\mathbb{R}^n \times \mathbb{R}^n) : x \cdot y > \tfrac{1}{2}\|x\|\|y\|\}$
+  \item $E_5 := \{X \in \mathbb{R}^{n\times n} : \text{the matrix } X \text{ is invertible}\}$
+  \item $E_6 := \{X \in \mathbb{R}^{n\times n} : \text{the matrix } X \text{ is symmetric}\}$
+  \item $E_7 := \{X \in \mathbb{R}^{n\times n} : \text{the entries of } X \text{ are either } 0 \text{ or } 1\}$
+  \item $E_8 := \{x \in \mathbb{R}^n : |x_i| \leq 6 \text{ for all } 1 \leq i \leq n\}$
+  \item $E_9 := E_8 \times E_3 \subset \mathbb{R}^{n+3}$
+  \item $E_{10} := E_2 \cap E_8 \subset \mathbb{R}^n$
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[3.4 --- Multiple choice (open, complete, compact)]
+\label{ex:3.4}
+Select all the statements below that are true.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item A nonempty open strict subset of $\mathbb{R}^n$ cannot be compact.
+  \item A nonempty open strict subset of $\mathbb{R}^n$ cannot be complete.
+  \item A complete subset of $\mathbb{R}^n$ contains all its accumulation points.
+  \item Countable union of complete subsets of $\mathbb{R}^n$ is complete.
+  \item A subset is closed in $\mathbb{R}^n$ if and only if it is complete as a metric space
+    itself (with the distance inherited from $\mathbb{R}^n$).
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[3.5 --- Multiple choice (fixed points)]
+\label{ex:3.5}
+Select all the statements below that are true.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item If you spread a map of Zurich on your desk, then one point of the desk will coincide with
+    its representation on the map (in an ideal world).
+  \item If $f : [0,1] \to [0,2]$ is $\tfrac{1}{2}$-Lipschitz, then $f$ has a fixed point.
+  \item If $f : [0,2] \to [0,1]$ is $\tfrac{1}{2}$-Lipschitz, then $f$ has a fixed point.
+  \item If $f : [0,1] \cup [2,3] \to [0,1] \cup [2,3]$ is continuously differentiable with
+    $|f'(x)| < 1$ for all $x \in [0,1]\cup[2,3]$, then it has a fixed point.
+  \item \textbf{(*)} If $f : [0,1] \to [0,1]$ is differentiable with $|f'(x)| < 1$ for all
+    $x \in (0,1)$, then it has a fixed point.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[3.6 --- Multiple choice (uniform continuity)]
+\label{ex:3.6}
+Select all the statements below that are true.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item The function $(x,y) \mapsto x+y$ is uniformly continuous in $\mathbb{R}^2$.
+  \item The function $(x,y) \mapsto xy$ is uniformly continuous in $\mathbb{R}^2$.
+  \item The function $(x,y) \mapsto x+y$ is uniformly continuous in $[0,1]^2$.
+  \item The function $(x,y) \mapsto xy$ is uniformly continuous in $[0,1]^2$.
+\end{enumerate}
+\end{exercise}
+
+\begin{remark}
+Corsin's third reason to care about compactness (\cref{sec:compactness_continued}) is precisely
+that a continuous function on a compact space is uniformly continuous --- which settles
+\cref{ex:3.6}(c) and (d) at once.
+\end{remark}
+
+\begin{exercise}[3.7 --- Cauchy--Schwarz]
+\label{ex:3.7}
+Let $V$ be a vector space over $\mathbb{R}$, let $\langle\cdot,\cdot\rangle$ be an inner product
+on $V$, and let $\|\cdot\| : V \to \mathbb{R}$ be given by $\|v\| = \sqrt{\langle v,v\rangle}$.
+Then the inequality
+$$|\langle v,w\rangle| \leq \|v\|\|w\| \tag{1}$$
+holds for all $v, w \in V$. Furthermore, equality in (1) holds if and only if $v$ and $w$ are
+linearly dependent.
+\end{exercise}
+
+\begin{remark}
+Corsin devotes the whole second half of Friday (\cref{sec:cauchy_schwarz}) to this problem,
+including the geometric reading and an explicit proof hint.
+\end{remark}
+
+\begin{exercise}[3.8 --- Inner product and norm]
+\label{ex:3.8}
+Let $V$ be a vector space over $\mathbb{R}$, let $\langle -,-\rangle$ be an inner product on $V$.
+The map defined by
+$$\|\cdot\| : V \to \mathbb{R}, \qquad \|v\| = \sqrt{\langle v,v\rangle}$$
+satisfies the triangular inequality and is a norm.
+\end{exercise}
+
+\begin{exercise}[3.9 --- All norms are equivalent in $\mathbb{R}^n$]
+\label{ex:3.9}
+Let $|\cdot|$ denote the standard Euclidean norm in $\mathbb{R}^n$ and let
+$f : \mathbb{R}^n \to [0,\infty)$ be another norm (that is, a function satisfying the properties
+of \textit{Definition 9.89}).
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Expressing $x$ in a basis and using the ``abstract'' properties that $f$ must have, show
+    that there is a constant $C_1 > 0$ such that $f(x) \leq C_1|x|$ for all $x \in \mathbb{R}^n$.
+  \item Show that $f$ is continuous in $\mathbb{R}^n$ (with respect to the standard distance of
+    $\mathbb{R}^n$!).
+  \item Show that there is a number $c_2 > 0$ such that $f(x) \geq c_2$ for all $|x| = 1$.
+  \item Conclude that $f(x) \geq c_2|x|$ for all $x \in \mathbb{R}^n$.
+  \item Show that if $\tilde f$ is yet another norm, then there is $C > 0$ such that
+    $C^{-1}f(x) \leq \tilde f(x) \leq Cf(x)$ for all $x \in \mathbb{R}^n$.
+\end{enumerate}
+\textit{Official hints:} \textbf{3.9.2} --- recall that from the definition it follows that
+$|f(x) - f(y)| \leq f(x-y)$, and that Lipschitz functions are always continuous. \textbf{3.9.3}
+--- apply the Weierstrass theorem to $f$ on $S := \{x \in \mathbb{R}^n : |x| = 1\}$ and use that
+$f$, being a norm, is nondegenerate. \textbf{3.9.5} --- if $f$ is equivalent to $|\cdot|$ and
+$\tilde f$ is equivalent to $|\cdot|$, it follows by transitivity that $f$ is equivalent to
+$\tilde f$.
+\end{exercise}
+
+\begin{remark}
+Hint 3.9.3 is exactly Corsin's reason \#2 for caring about compactness
+(\cref{sec:compactness_continued}) --- the Weierstrass/extreme value theorem on the compact unit
+sphere.
+\end{remark}
+
+\begin{exercise}[3.10 --- Hilbert--Schmidt norm of the composition]
+\label{ex:3.10}
+Take two linear functions $\varphi : \mathbb{R}^d \to \mathbb{R}^n$ and
+$\psi : \mathbb{R}^n \to \mathbb{R}^m$, and denote with $\Phi$, $\Psi$ the matrices that represent
+them in the canonical bases. Recall that the linear map
+$\psi \circ \varphi : \mathbb{R}^d \to \mathbb{R}^m$ is represented in these bases by the matrix
+$\Psi \cdot \Phi$. Show that
+$$\|\Psi \cdot \Phi\| \leq \|\Psi\|\|\Phi\|,$$
+where $\|\cdot\|$ is the Hilbert--Schmidt norm of a matrix (see \textit{Definition 9.96} in the
+notes).
+
+\textit{Official hint:} recall that $\|M\|^2$ is the sum of the squares of the entries of $M$.
+Notice that $(\Psi\cdot\Phi)^i_j$ ($i$-th row, $j$-th column) is the scalar product of $\Psi^i$
+and $\Phi_j$, which are vectors of $\mathbb{R}^n$. Apply Cauchy--Schwarz to each of them.
+\end{exercise}
+
+\begin{exercise}[3.11 --- (*) Uniform continuity and moduli of continuity]
+\label{ex:3.11}
+Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces and let $f : X \to Y$.
+
+A \textbf{modulus of continuity} is a function $\omega : [0,\infty) \to [0,\infty]$ such that
+$$\omega(0) = 0, \qquad \omega \text{ is nondecreasing}, \qquad \lim_{t \downarrow 0}\omega(t) = 0.$$
+(Here $[0,\infty]$ means we also allow the value $+\infty$.) We say that $f$ \textbf{has modulus
+of continuity} $\omega$ if
+$$d_Y\big(f(x), f(y)\big) \leq \omega\big(d_X(x,y)\big) \qquad \forall x,y \in X.$$
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Prove that $f$ is uniformly continuous on $X$ if and only if $f$ has a modulus of
+    continuity.
+  \item \textit{(Bonus 1)} Assume $X \subset \mathbb{R}$ is an interval with the usual distance
+    $d_X(x,y) = |x-y|$. Show that the modulus constructed in (1) can be chosen
+    \textbf{subadditive}, i.e.\ $\omega(t_1+t_2) \leq \omega(t_1) + \omega(t_2)$ for all
+    $t_1, t_2 \geq 0$.
+  \item \textit{(Bonus 2)} Assume $X \subset \mathbb{R}^n$ is \textbf{convex}, meaning: for all
+    $x_1, x_2 \in X$ and all $\lambda \in [0,1]$, $(1-\lambda)x_1 + \lambda x_2 \in X$. With
+    $d_X(x,y) = \|x-y\|$ (Euclidean distance), show again that the modulus from (1) can be chosen
+    subadditive.
+\end{enumerate}
+
+\begin{remark}[official]
+In general metric spaces a modulus of continuity may have infinite value for finite $t > 0$.
+Example: $X = \mathbb{Z}$ with the usual distance, $Y = \mathbb{R}$, $f(n) = n^2$. This $f$ is
+uniformly continuous on $\mathbb{Z}$ (because points closer than 1 must be equal), but no finite
+$\omega(1)$ can bound $|f(n+1) - f(n)| = 2n+1$ for all $n$. Allowing the value $+\infty$ avoids
+this issue, and in many familiar settings (e.g.\ intervals/convex sets in $\mathbb{R}^n$) the
+resulting $\omega_f(t)$ is finite for all $t$.
+\end{remark}
+
+\textit{Official hints:} \textbf{3.11.1} --- define the ``worst oscillation at scale $t$''
+$\omega_f(t) := \sup\{d_Y(f(x),f(y)) : d_X(x,y) \leq t\}$. \textbf{3.11.2 / 3.11.3} --- if
+$d_X(x,y) \leq t_1 + t_2$, choose an intermediate point $z$ on the segment from $x$ to $y$ so
+that $d_X(x,z) \leq t_1$ and $d_X(z,y) \leq t_2$, then use the triangle inequality in $Y$.
+\end{exercise}
+
+\session{Monday}
+
+\section{Compactness --- continued}
+\label{sec:compactness_continued}
+\continuedfrom{sec:compactness}
+
+\begin{theorem}[Heine--Borel]
+\label{thm:heine_borel}
+A subset $K \subseteq \mathbb{R}^n$ equipped with the \textbf{standard metric} is
+\textbf{compact} if and only if it is \newterm{closed} and \newterm{bounded}
+(\germanterm{beschr\"ankt}).
+\end{theorem}
+
+This captures our intuition of a ``compact'' set. We will briefly show that Heine--Borel is
+\textbf{false} for $\mathbb{R}^n$ with an \textbf{arbitrary metric}.
+
+\begin{exercise}
+\label{ex:heine_borel_fails}
+Let $(X,d)$ be a metric space.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item \textit{(Optional)} Show that $\tilde d(x,y) := \dfrac{d(x,y)}{1 + d(x,y)}$ is a metric on
+    $X$.
+  \item Show that, if $U \subseteq X$ is open with respect to $d$, then $U$ is open with respect
+    to $\tilde d$.
+  \item Show that, for $X = \mathbb{R}^n$, $d(x,y) = \dfrac{|x-y|}{1+|x-y|}$,
+    $\mathbb{N} \subseteq X$ is closed and bounded but not compact.
+\end{enumerate}
+\end{exercise}
+
+\begin{remark}
+Part 3 above sets $X = \mathbb{R}^n$ but then works with $\mathbb{N} \subseteq X$ and $|x-y|$,
+which only parses for $n = 1$. See \texttt{OQ-04}.
+\end{remark}
+
+\begin{exercisesolution}[\cref{ex:heine_borel_fails}]
+\textbf{1.} Non-negativity, definiteness and symmetry follow from $d(x,y)$.
+
+\textit{Triangle inequality.} We want to show
+$$\frac{d(x,y)}{1+d(x,y)} \leq \frac{d(x,z)}{1+d(x,z)} + \frac{d(z,y)}{1+d(z,y)}.$$
+Denote $d(x,y) = d_1$, $d(x,z) = d_2$, $d(z,y) = d_3$ and multiply out:
+$$
+\begin{aligned}
+&d_1(1+d_2)(1+d_3) \leq d_2(1+d_1)(1+d_3) + d_3(1+d_1)(1+d_2) \\
+\iff\ & (d_1 + d_1d_2)(1+d_3) \leq (d_2 + d_2d_1)(1+d_3) + (d_3 + d_1d_3)(1+d_2) \\
+\iff\ & d_1 + d_1d_3 + d_1d_2d_3 + d_1d_2 \leq d_2 + d_3d_2 + d_2d_1d_3 + d_2d_1 \\
+& \qquad\qquad\qquad\qquad\qquad\quad + d_3 + d_3d_2 + d_1d_3 + d_1d_3d_2 \\
+\iff\ & d_1 \leq d_2 + 2d_2d_3 + d_3 + d_1d_2d_3 \\
+\iff\ & 0 \leq 2d_2d_3 + d_1d_2d_3 \qquad \text{(subtract the triangle inequality } d_1 \leq d_2 + d_3\text{)}
+\end{aligned}
+$$
+which is true by non-negativity.
+
+\textbf{2.} Let $U \subseteq X$ be open. Then, given $x \in U$, we find $r > 0$ such that
+$B_r(x) := \{y \in X : d(x,y) < r\} \subseteq U$. Let $\varepsilon := \dfrac{r}{1+r}$. Then
+$\tilde B_\varepsilon(x) \subseteq B_r(x) \subseteq U$, where
+$\tilde B_\varepsilon(x) := \{y \in X : \tilde d(x,y) < \varepsilon\}$.
+
+\textbf{3.} Note that for all $x, y \in \mathbb{R}$, $\dfrac{|x-y|}{1+|x-y|} < 1$. So
+$\mathbb{N} \subseteq B_1(0)$, thus it is \textbf{bounded} with respect to this metric. Also,
+$\mathbb{N}$ is \textbf{closed}, as follows from (2). But $x_n = n$ defines a sequence in
+$\mathbb{N}$ with no convergent subsequence, thus $\mathbb{N}$ is \textbf{not compact}.
+\end{exercisesolution}
+
+\begin{remark}
+The cancellation in the derivation above originally contained a stray $d_2d_1d_2$ where the
+expansion gives $d_2d_1d_3$; the cancelled terms and the conclusion $0 \leq 2d_2d_3 + d_1d_2d_3$
+are unaffected. Re-derived cleanly above. See \texttt{OQ-08}.
+\end{remark}
+
+\subsection{Why do we care about compactness?}
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item \textbf{Preserved by continuous functions.} $X$, $Y$ metric spaces, $K \subseteq X$
+    compact, $f : X \to Y$ continuous. Then $f(K) \subseteq Y$ is compact.
+  \item \textbf{Weierstrass theorem / Extreme value theorem.} $X$ metric space,
+    $K \subseteq X$ compact, $f : K \to \mathbb{R}$ continuous. Then $f$ attains its maximum and
+    minimum in $K$. In particular, $f$ is bounded.
+  \item \textbf{Uniform continuity.} $X$, $Y$ metric spaces, $f : X \to Y$ continuous. If $X$ is
+    compact, then $f$ is \newterm{uniformly continuous} (\germanterm{gleichm\"assig stetig}).
+\end{enumerate}
+
+\begin{figurestub}{FIG-W03-01}
+Pasted stock illustration (must be redrawn): a continuous function $f(x)$ on a closed interval
+$[a,b]$, with the absolute maximum $f(c)$ marked red and the absolute minimum $f(d)$ marked blue,
+with dashed guide lines to the axes.
+\end{figurestub}
+
+\section{Connectedness}
+\label{sec:connectedness}
+
+\begin{definition}[connected metric space / subset]
+A metric space $(X,d)$ is \newterm{disconnected} (\germanterm{unzusammenh\"angend}) if there
+exist $U_1, U_2 \subseteq X$ subsets which are
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item \textbf{open},
+  \item \textbf{non-empty}, $U_1 \neq \emptyset \neq U_2$,
+  \item \textbf{disjoint}, $U_1 \cap U_2 = \emptyset$,
+\end{enumerate}
+such that $X = U_1 \cup U_2$. Similarly, for a subset $A \subseteq X$, it is disconnected if it is
+disconnected as a metric space with the induced metric $d|_{A \times A}$. \newterm{Connected}
+(\germanterm{zusammenh\"angend}) is the negation of disconnected.
+\end{definition}
+
+Typically, proving that a set or metric space is connected is done \textbf{by contradiction},
+which is why one should remember the definition of \textit{disconnected}. Intuitively, connected
+means: \qt{the space cannot be separated by open sets.}
+
+\begin{figurestub}{FIG-W03-02}
+Two panels. Left, disconnected: two separate black blobs, each enclosed by its own blue dashed
+open set $U_1$, $U_2$. Right, connected: a single black blob with two blue dashed sets $U_1$,
+$U_2$ whose boundary curves leave a small gap (orange annotation) --- plus a detached purple
+dashed set annotated ``no intersection''.
+\end{figurestub}
+
+\begin{theorem}[Continuous functions preserve connected sets]
+\label{thm:continuity_preserves_connected}
+Let $X$, $Y$ be metric spaces, $f : X \to Y$ continuous. If $A \subseteq X$ is connected, then
+$f(A)$ is connected.
+\end{theorem}
+
+\begin{exercise}
+\label{ex:connectedness_tf}
+Are the following true or false?
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item The union of connected subsets with a common point is connected.
+  \item The intersection of connected subsets is connected.
+  \item The \newterm{closure} (\germanterm{Abschluss}) of a connected subset is connected.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercisesolution}[\cref{ex:connectedness_tf}]
+\textbf{1. True.} \textit{Proof.} Let $X$ be a metric space, $V_1, V_2 \subseteq X$ connected,
+and $x_0 \in V_1 \cap V_2$. Suppose $V_1 \cup V_2 \subseteq U_1 \cup U_2$ with
+$U_1, U_2 \subseteq X$ open and disjoint. Assume without loss of generality $x_0 \in U_1$. Then
+$U_1 \cap V_1 \neq \emptyset$ and $U_1 \cap V_2 \neq \emptyset$. So, since $V_1, V_2$ are
+connected, $V_1 \cap U_2 = V_2 \cap U_2 = \emptyset$. Therefore
+$(V_1 \cup V_2) \cap U_2 = \emptyset$ and $V_1 \cup V_2$ is connected.
+
+\textbf{2. False.} \textit{Counterexample:}
+$$X = \mathbb{R}^2, \quad U = [-1,1] \times \{0\}, \quad V = S^1 = \{x \in \mathbb{R}^2 : \|x\| = 1\},$$
+$$U \cap V = \{(-1,0), (1,0)\}.$$
+
+\textbf{3. True.} Suppose $X$ is a metric space, $A \subseteq X$ a subset with closure
+$\overline{A}$. Suppose $U_1, U_2 \subseteq X$ are disjoint open sets covering $\overline{A}$, and
+assume without loss of generality $\overline{A} \cap U_1 \neq \emptyset$. Then, since $U_1$ is
+open, $A \cap U_1 \neq \emptyset$. By connectedness of $A$, $U_2 \cap A = \emptyset$, and since
+$U_2$ is open, also $U_2 \cap \overline{A} = \emptyset$.
+\end{exercisesolution}
+
+\begin{remark}
+Corsin writes $\|x\| = R^2$ in the definition of $S^1$ above; it must be $\|x\| = 1$, as the
+stated intersection $\{(\pm 1, 0)\}$ confirms. Corrected here. See \texttt{OQ-07}.
+\end{remark}
+
+\begin{figurestub}{FIG-W03-03}
+Two overlapping orange blobs $V_1$, $V_2$ sharing the purple point $x_0$, both enclosed in a red
+dotted region $U_1$; a separate red dotted region $U_2$ to the right, annotated ``no
+intersection''.
+\end{figurestub}
+
+\begin{figurestub}{FIG-W03-04}
+Axes with a red unit circle $S^1$ and an orange horizontal segment $[-1,1]\times\{0\}$ through
+the origin; the two intersection points $(\pm 1, 0)$ marked.
+\end{figurestub}
+
+\session{Friday}
+
+\section{Path connectedness}
+\label{sec:path_connectedness}
+
+\begin{definition}[paths]
+Let $(X,d)$ be a metric space. A continuous function $\gamma : [0,1] \to X$, where $[0,1]$
+carries the standard metric, is called a \newterm{path} (\germanterm{Weg}). More generally, we
+can replace $[0,1]$ by $[a,b]$ for $a < b$.
+\end{definition}
+
+\begin{definition}[path-connected]
+A metric space $X$ (or subset thereof) is \newterm{path-connected}
+(\germanterm{wegzusammenh\"angend}) if for all $x, y \in X$ there exists a path
+$\gamma : [0,1] \to X$ with $\gamma(0) = x$, $\gamma(1) = y$.
+\end{definition}
+
+\begin{lemma}[path connected is connected]
+Let $X$ be a metric space. Then $X$ path-connected implies $X$ connected.
+\end{lemma}
+
+\begin{proposition}[for open euclidean subsets, connected is path-connected]
+Let $U \subseteq \mathbb{R}^n$ be open. Then
+$$U \text{ path-connected} \iff U \text{ connected}.$$
+\end{proposition}
+
+\begin{importantremark}
+Only for open subsets!
+\end{importantremark}
+
+\begin{example}[the topologist's sine curve]
+$$S := \left\{\left(t, \sin\left(\tfrac{1}{t}\right)\right) : t > 0\right\} \cup \{0\} \subseteq \mathbb{R}^2$$
+$S$ is \textbf{connected} but \textbf{not path-connected}!
+\end{example}
+
+\begin{figurestub}{FIG-W03-05}
+Plot of $\sin(1/t)$ for $t \in (0, 0.2]$, oscillating ever faster and filling a solid blue band
+as $t \to 0$; vertical range $[-1,1]$.
+\end{figurestub}
+
+\begin{proof}[$S$ is connected]
+Any open set $U$ with $0 \in U$ will also contain elements from $S \setminus \{0\}$, which is
+path-connected. Since path-connected implies connected and $U \setminus \{0\}$ is also open,
+``$S$ disconnected'' gives a contradiction.
+\end{proof}
+
+\begin{proof}[$S$ is not path-connected]
+Assume by contradiction there is a path from $(0,0)$ to $(\tfrac{1}{\pi}, 0)$,
+$$\gamma : [0,1] \to [0, \tfrac{1}{\pi}] \times [-1,1], \qquad t \mapsto (x(t), y(t)).$$
+Since $\gamma$ is continuous, $x$ and $y$ must also be continuous. By the \newterm{intermediate
+value theorem}, $x : [0,1] \to [0,\tfrac{1}{\pi}]$ attains every value in $[0,\tfrac{1}{\pi}]$,
+since $x(0) = 0$, $x(1) = \tfrac{1}{\pi}$. Therefore we find a sequence
+$(a_n)_{n=0}^{\infty}$ such that
+$$x(a_n) = \frac{1}{2\pi n + \tfrac{\pi}{2}}.$$
+Note that $y(a_n) = 1$ for all $n \in \mathbb{N}$. Thus in the limit $n \to \infty$, $a_n \to 0$,
+but $\gamma(a_n) \to (0,1) \neq \gamma(0)$. Contradiction to sequential continuity.
+\end{proof}
+
+\begin{figurestub}{FIG-W03-06}
+Two annotated copies of the sine-curve plot. Top: a small orange dashed circle labelled $U$
+around the origin. Bottom: red dots marking the points $\gamma(a_n)$ along the crests $y = 1$,
+with $\gamma(a_n)$ labelled on the rightmost crest and $\gamma(0)$ labelled at the origin.
+\end{figurestub}
+
+\section{Cauchy--Schwarz}
+\label{sec:cauchy_schwarz}
+
+\begin{definition}[inner product / scalar product]
+Let $V$ be a \textbf{vector space} over $\mathbb{R}$. An \newterm{inner product}
+(\germanterm{Skalarprodukt}) on $V$ is a map
+$$\langle\cdot,\cdot\rangle : V \times V \to \mathbb{R}$$
+satisfying, for all $u, v, w \in V$ and $\alpha, \beta \in \mathbb{R}$:
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item \textbf{Bilinearity:}
+    $\langle \alpha u + \beta v, w\rangle = \alpha\langle u,w\rangle + \beta\langle v,w\rangle$,
+    and equivalently in the second variable.
+  \item \textbf{Symmetry:} $\langle u,v\rangle = \langle v,u\rangle$.
+  \item \textbf{Definiteness:} $\langle u,u\rangle \geq 0$, and $\langle u,u\rangle = 0 \iff u = 0$.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[norm]
+Let $V$ be a \textbf{real} vector space. A \newterm{norm} (\germanterm{Norm}) on $V$ is a map
+$\|\cdot\| : V \to [0,\infty)$ satisfying, for all $u, v \in V$ and $\alpha \in \mathbb{R}$:
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item \textbf{Definiteness:} $\|v\| \geq 0$, and $\|v\| = 0 \iff v = 0$.
+  \item \textbf{Homogeneity:} $\|\alpha v\| = |\alpha|\|v\|$.
+  \item \textbf{$\Delta$-inequality:} $\|u+v\| \leq \|u\| + \|v\|$.
+\end{enumerate}
+\end{definition}
+
+\begin{itemize}
+  \item $\|v\| := \sqrt{\langle v,v\rangle}$ defines a norm.
+  \item $d(x,y) := \|x-y\|$ defines a metric.
+\end{itemize}
+
+\subsection{Geometric meaning of the inner product}
+
+In $\mathbb{R}^2$, the following identity holds:
+$$\langle x,y\rangle := x_1y_1 + x_2y_2 := \|x\|\|y\|\cos\theta$$
+where $\theta$ is the angle between $x, y \in \mathbb{R}^2$.
+
+To see this, conveniently choose our basis vectors such that $x = (x_1, 0)$, $y = (y_1, y_2)$.
+
+\begin{figurestub}{FIG-W03-07}
+Two axis systems joined by a curved arrow labelled ``change of basis (rotation)''. Left: vectors
+$x$ (blue) and $y$ (orange) at angle $\theta$, both off-axis. Right: the same pair rotated so
+that $x$ lies along the positive horizontal axis, with a dotted drop-line from $y$.
+\end{figurestub}
+
+Then
+$$\langle x,y\rangle = x_1y_1 = x_1\|y\|\cos\theta = \|x\|\|y\|\cos\theta.$$
+
+For more rigour, you will show in Linalg that the rotations in $\mathbb{R}^2$ are given by
+matrices $R$ satisfying $\langle Rx, Ry\rangle = \langle x,y\rangle$.
+
+In a general inner product space $V$, this becomes the \textbf{definition} of the angle $\theta$.
+It then makes sense to define the \newterm{projection onto $v$}, $\pi_v$:
+$$\pi_v(u) = \frac{\langle u,v\rangle}{\|v\|^2}\,v = \|u\|\cos\theta\,\frac{v}{\|v\|}.$$
+
+\begin{figurestub}{FIG-W03-08}
+A blue vector $u$ and an orange vector $v$ from a common origin, angle $\theta$ marked in green;
+a purple dashed perpendicular from the tip of $u$ onto the line spanned by $v$, with the foot
+labelled $\pi_v(u)$ and a right-angle marker.
+\end{figurestub}
+
+In words, $\pi_v(u)$ is the part of $u$ which points along $v$. In particular,
+$$\|\pi_v(u)\| = \|u\|\,|\cos\theta| = \frac{|\langle u,v\rangle|}{\|v\|}.$$
+In this sense, Cauchy--Schwarz says something very obvious --- see the picture above:
+$$\frac{|\langle u,v\rangle|}{\|v\|} \leq \|u\| \iff \|\pi_v(u)\| \leq \|u\| \iff \|u\|\,|\cos\theta| \leq \|u\|.$$
+
+\begin{remark}[hint for the proof of Cauchy--Schwarz]
+Use definiteness and expand the term
+$$\langle u - \pi_v(u),\ u - \pi_v(u)\rangle = \dots$$
+where $u - \pi_v(u)$ is the \textbf{perpendicular part} of $u$ to $v$.
+\end{remark}

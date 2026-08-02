@@ -26,6 +26,11 @@ March 2026, due 23 March 2026). Attribution: Prof. Joaquim Serra, D-MATH, ETH Z\
 \end{center}
 \end{notation}
 
+\begin{notation}
+Only the exercises tagged \textbf{important} above are reproduced below. The full sheet
+(5.1--5.7, including 5.4--5.7) is transcribed in \texttt{content/exercise-sheets/week-05.tex}.
+\end{notation}
+
 \begin{exercise}[5.1 --- Derivatives \textnormal{(important)}]
 \label{ex:5.1}
 \begin{enumerate}[label=\textbf{(\alph*)}]
@@ -75,87 +80,6 @@ Mark all and only the statements which are true.
     $x = 0$ and $\partial_{11}f(0) = 0$.
 \end{enumerate}
 \textit{Official hint:} revise \textit{Corollary 10.45}.
-\end{exercise}
-
-\begin{exercise}[5.4 --- Computation of derivatives \textnormal{(semi-important)}]
-\label{ex:5.4}
-For each of the following functions compute the directional derivative in the general direction
-$v$ at a general point $x$, that is $\partial_v f(x)$, where applicable.
-\begin{enumerate}[label=\textbf{\arabic*.}]
-  \item $x_1/x_2$, $e^{-x_1/x_2}$ for $x \in \mathbb{R}^2\setminus\{x_2 = 0\}$. (Also: can they be
-    extended continuously or differentiably across $\{x_2 = 0\}$?)
-  \item $e^{x_1x_2}\sin(x_1+x_2^2)$, $\dfrac{x_1^2}{x_1^2+x_2^2}$,
-    $\dfrac{x_1^2x_2}{x_1^2+x_2^2}$, $\dfrac{x_1^2x_2}{x_1^2+x_2^4}$ for
-    $x \in \mathbb{R}^2\setminus\{0\}$. (Also: can they be extended continuously or
-    differentiably across the origin?)
-  \item $|x|$, $|x|^\alpha$, $x/|x|$, $g(|x|)$, $x\cdot e$, $g(x\cdot e)$, for
-    $\alpha \in \mathbb{R}$, $e \in \mathbb{R}^n$ and $g \in C^1(\mathbb{R})$.
-  \item $ax$, $x\transp$, $\Tr(x)$, $x^2$, $x^3$, $\Tr(x^2)$ for $x, a \in \mathbb{R}^{n\times n}$.
-  \item \textbf{(*)} $x^{-1}$, $x^{-2}$ for $x \in \mathbb{R}^{n\times n}$ with $\det x \neq 0$.
-\end{enumerate}
-\textit{Official hints:} to prove that a function \textbf{is} differentiable at 0 you have two
-tools --- the definition of differentiability, and the sufficient condition of
-\textit{Theorem 10.16}. To prove that a function \textbf{is not} differentiable at 0 you have
-two tools --- show that the necessary condition of \textit{Proposition 10.14} does not hold, or
-show that for some $C^1$ curve $\gamma : (-\delta,\delta)\to\mathbb{R}^n$ the function
-$(f\circ\gamma)(t)$ is \textbf{not} differentiable at $t = 0$ (simpler, as you study a function of
-one variable). \textbf{5.4.3} --- these functions are $C^\infty$, so compute them on $x+tv$ and
-find an expansion in powers of $t$; by \textit{Corollary 10.45} it must be the Taylor polynomial,
-from which the derivatives can be read off. For example $(x+tv)^2 = x^2 + (xv+vx)t + O(t^2)$.
-\end{exercise}
-
-\begin{exercise}[5.5 --- Multiple choice (cost of a Taylor expansion) \textnormal{(optional)}]
-\label{ex:5.5}
-Assume $g \in C^\infty(\mathbb{R})$ and $f \in C^\infty(\mathbb{R}^n)$ is such that
-$$f(x) = x_1 + x_2x_1 + O(|x|^4) \quad \text{as } x \to 0.$$
-We want to compute the Taylor expansion of $(g\circ f)$ at $x = 0$ of the highest possible order
-with the information we have. We can ask for the value $g^{(k)}(t)$ for arbitrary
-$k \in \mathbb{N}$, $t \in \mathbb{R}$, but we have to pay 5 CHF each time.
-
-For a general $g$, which is the degree of the best (i.e.\ highest-order) Taylor polynomial we can
-compute? How expensive will it be to compute it?
-\begin{enumerate}[label=\textbf{(\alph*)}]
-  \item degree 3 and 20 CHF
-  \item degree 2 and 15 CHF
-  \item degree 2 and 10 CHF
-  \item degree 3 and 15 CHF
-\end{enumerate}
-\end{exercise}
-
-\begin{exercise}[5.6 --- Polynomials \textnormal{(optional --- ``interesting, but irrelevant for the course'')}]
-\label{ex:5.6}
-Let $P, Q \in \mathbb{R}[x_1,\dots,x_n]$ be polynomials of $n$ variables; assume that there are
-positive numbers $M, \sigma$ such that
-$$|P(x) - Q(x)| \leq M|x|^\sigma \quad \text{for all } |x| \leq 1.$$
-Show that $P$ and $Q$ have the same coefficients of order smaller than $\sigma$. That is, if we
-write $P(X) = \sum_{\alpha\in\mathbb{N}^n} a_\alpha X^\alpha$,
-$Q(X) = \sum_{\alpha\in\mathbb{N}^n} b_\alpha X^\alpha$, then $a_\alpha = b_\alpha$ for all
-$|\alpha| < \sigma$.
-\end{exercise}
-
-\begin{exercise}[5.7 --- Chain rule for a curve, or: a car on Earth \textnormal{(optional --- ``interesting for physicists'')}]
-\label{ex:5.7}
-Let $R > 0$ and $\omega \in \mathbb{R}$ be constants. Let
-$\sigma : I \subset \mathbb{R}\to\mathbb{R}^2$, $\sigma(t) = (a(t), b(t))$, which we interpret as
-a curve in a ``map'' representing the longitude and latitude of a car at time $t$.
-
-Define the ``rotating'' spherical coordinates $F : \mathbb{R}^2\times\mathbb{R}\to\mathbb{R}^3$,
-$$F((x,y),t) = \big(R\cos y\cos(\omega t + x),\ R\cos y\sin(\omega t + x),\ R\sin y\big),$$
-representing what a point on the map looks like on Earth from a satellite (thus we consider the
-Earth as a rotating sphere with speed given by $\omega$, and we forget about translation around
-the Sun) at time $t$.
-
-Consider $r : \mathbb{R}\to\mathbb{R}^3$, $r(t) = F(\sigma(t), t)$, which is the position of the
-car at time $t$.
-\begin{enumerate}[label=\textbf{\arabic*.}]
-  \item Compute the acceleration $r''(t)$ using the chain rule.
-  \item Assume that the acceleration is always proportional to the radial vector $r(t)$, i.e.\
-    $r''(t) = \lambda(t)\,r(t)$ for some scalar function $\lambda(t)$. Show that $a$ and $b$
-    satisfy
-    $$b'' + \sin b\cos b\,(\omega+a')^2 = 0, \qquad \cos b\,a'' - 2\sin b\,(\omega+a')b' = 0.$$
-    Equivalently, away from the poles ($\cos b \neq 0$),
-    $$a'' - 2\tan b\,(\omega+a')\,b' = 0.$$
-\end{enumerate}
 \end{exercise}
 
 \begin{importantremark}

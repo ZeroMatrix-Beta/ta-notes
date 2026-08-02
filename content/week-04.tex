@@ -25,6 +25,12 @@ red \textbf{= optional}.
 \end{center}
 \end{notation}
 
+\begin{notation}
+Only the exercises tagged \textbf{important} above are reproduced below. The full sheet
+(4.1--4.6, including 4.4 and 4.5) is transcribed in
+\texttt{content/exercise-sheets/week-04.tex}.
+\end{notation}
+
 \begin{exercise}[4.1 --- Derivative computation \textnormal{(important)}]
 \label{ex:4.1}
 Consider the function $u : (x,y) \mapsto x^{\sin(y)}$, defined for
@@ -69,39 +75,6 @@ you need. \textbf{4.3.5} --- write the convexity inequality between $x$, $y$ and
 $(x+y)/2$. To get the general case from the one with positive coordinates, observe that for
 $x \in \mathbb{R}^n$, denoting $\hat x := (|x_1|,\dots,|x_n|)$, we have
 $|x+y|_p \leq |\hat x + \hat y|_p$ and $|\hat x|_p = |x|_p$ for all $x,y \in \mathbb{R}^n$.
-\end{exercise}
-
-\begin{exercise}[4.4 --- $p$-means \textnormal{(optional)}]
-\label{ex:4.4}
-For $x \in \mathbb{R}^n$ with positive coordinates and $p \neq 0$ define the \textbf{$p$-mean} as
-$$\mu_p(x) := \left(\frac{x_1^p + \dots + x_n^p}{n}\right)^{1/p}.$$
-\begin{enumerate}[label=\textbf{\arabic*.}]
-  \item Compute the limits $p \to \pm\infty$, $p \to 0$ and define accordingly
-    $\mu_{-\infty}(x)$, $\mu_0(x)$, $\mu_{+\infty}(x)$.
-  \item For any $n$-tuple of numbers $a_i > 0$ show that
-    $$\sum_{i=1}^{n} \frac{a_i\log(a_i)}{a_1 + \dots + a_n} \geq \log\left(\frac{a_1 \dots + a_n}{n}\right).$$
-  \item For a fixed $x$, show that the function $f : \mathbb{R}\to\mathbb{R}$, given by
-    $f(t) := \mu_t(x)$, is continuous and increasing.
-  \item Prove the Arithmetic--Geometric inequality and Arithmetic--Quadratic inequality:
-    $$n(x_1x_2\cdots x_n)^{1/n} \leq x_1 + \dots + x_n, \qquad (x_1+\dots+x_n)^2 \leq n(x_1^2+\dots+x_n^2).$$
-  \item \textbf{(*)} Is $f$ continuously differentiable in the whole $\mathbb{R}$?
-\end{enumerate}
-\textit{Official hints:} \textbf{4.4.2} --- combine the concavity of $\log(\cdot)$ and the
-Cauchy--Schwarz inequality; use the generalisation of the concavity inequality: for any concave
-$f : \mathbb{R}\to\mathbb{R}$,
-$f(\lambda_1x_1 + \dots + \lambda_nx_n) \geq \lambda_1f(x_1)+\dots+\lambda_nf(x_n)$ for all
-$x_i \in \mathbb{R}$, $0 \leq \lambda_i \leq 1$ with $\lambda_1+\dots+\lambda_n = 1$.
-\textbf{4.4.3} --- it might be more convenient to work with $\log f(t)$.
-\end{exercise}
-
-\begin{exercise}[4.5 --- Mean value for vector-valued functions \textnormal{(optional)}]
-\label{ex:4.5}
-Let $f \in C^1(\mathbb{R},\mathbb{R}^m)$ for $m > 1$. Is it true that there is $t \in [0,1]$ such
-that
-$$f(1) - f(0) = Df_t(1) = \begin{pmatrix} f_1'(t) \\ \vdots \\ f_m'(t) \end{pmatrix}?$$
-Prove it or provide a counterexample.
-
-\textit{Official hint:} try $f(t) = (\sin(2\pi t), \cos(2\pi t))$.
 \end{exercise}
 
 \begin{exercise}[4.6 --- A directional derivative vanishes \textnormal{(important)}]

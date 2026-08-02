@@ -1,0 +1,126 @@
+% Corsin Week 4 -- full exercise sheet (complete; important problems 4.1, 4.2, 4.3, 4.6 are
+% also duplicated inline at the top of content/week-04.tex). NOT \input by main.tex --
+% reference source only.
+\exercisesheet{4}
+
+\textit{Statements quoted verbatim from \texttt{exercises/Ex4\_Analysis2\_eng.pdf} (assigned 9
+March 2026, due 16 March 2026). Attribution: Prof. Joaquim Serra, D-MATH, ETH Z\"urich.}
+
+\begin{notation}[Corsin's recommendations]
+Colour key, as given on the page: blue \textbf{= important}, orange \textbf{= semi-important},
+red \textbf{= optional}.
+
+\begin{center}
+\begin{tabular}{lll}
+\textbf{Problem} & \textbf{Priority} & \textbf{Corsin's note} \\
+\hline
+4.1 & important & ``Use the chain rule'' \\
+4.2 & important & ``Recall that path connected $\implies$ connected'' \\
+4.3 & semi-important --- parts 1, 2, 3, 5; & ``For 3., use Cauchy--Schwarz in $\mathbb{R}^n$ \\
+    & \textbf{parts 4 and 6 important} & applied to convenient vectors.'' \\
+4.4 & optional & --- \\
+4.5 & optional & --- \\
+4.6 & important --- parts 1, 2, 3 & --- \\
+\end{tabular}
+\end{center}
+\end{notation}
+
+\begin{exercise}[4.1 --- Derivative computation \textnormal{(important)}]
+\label{ex:4.1}
+Consider the function $u : (x,y) \mapsto x^{\sin(y)}$, defined for
+$(x,y) \in (0,\infty)\times\mathbb{R} \subset \mathbb{R}^2$. Compute $\partial_x u$ and
+$\partial_y u$.
+\end{exercise}
+
+\begin{exercise}[4.2 --- Connected graphs \textnormal{(important)}]
+\label{ex:4.2}
+Let $U \subset \mathbb{R}^n$ be open and connected and let $f \in C^1(U, \mathbb{R}^m)$. Show that
+its graph
+$$\Gamma_f := \{(x, f(x)) : x \in U\}$$
+is a connected subset of $\mathbb{R}^n \times \mathbb{R}^m$.
+\end{exercise}
+
+\begin{exercise}[4.3 --- $p$-norms \textnormal{(semi-important; parts 4 and 6 important)}]
+\label{ex:4.3}
+For $p \geq 1$ and $x \in \mathbb{R}^n$ define the \textbf{$p$-norm} of $x$ as
+$$|x|_p := \Big(\sum_{i=1}^{n} |x_i|^p\Big)^{1/p}.$$
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item For $n = 2$ and $p = 1, 2, 10$ sketch the sets $\{x \in \mathbb{R}^2 : |x|_p \leq 1\}$.
+  \item For a given $x \in \mathbb{R}^n$, compute the limit
+    $|x|_\infty := \lim_{p\to\infty}|x|_p$.
+  \item Using an appropriate inequality that you have seen in class, prove that
+    $$\Big(\sum_{i=1}^{n} a_i^{p-1}b_i\Big)^2 \leq \Big(\sum_{i=1}^{n}a_i^p\Big)\Big(\sum_{i=1}^{n}a_i^{p-2}b_i^2\Big),$$
+    whenever $a_i, b_i$ are $n$-tuples of positive numbers.
+  \item Fix $x, y \in \mathbb{R}^n$ and consider the function $f : [0,1] \to \mathbb{R}$ defined
+    as
+    \begin{equation*}
+    f(t) := |tx + (1-t)y|_p = \Big(\sum_{i=1}^{n}|tx_i + (1-t)y_i|^p\Big)^{1/p}. \tag{1}
+    \end{equation*}
+    Show that $f$ is convex. You may assume that the coordinates of $x$ and $y$ are all strictly
+    positive and use the inequality of the previous point.
+  \item Deduce from the previous point that the triangular inequality holds, i.e.\
+    $|x+y|_p \leq |x|_p + |y|_p$ for all $x,y \in \mathbb{R}^n$.
+  \item What happens for $p \in (0,1)$?
+\end{enumerate}
+\textit{Official hints:} \textbf{4.3.3} --- use Cauchy--Schwarz and the fact that
+$a_i^{p-1}b_i = a_i^{p/2}\cdot a_i^{(p-2)/2}b_i$. \textbf{4.3.4} --- show that $f''(t) \geq 0$; it
+is not the simplest derivative, but if you get it right the inequality in 4.3.3 will be just what
+you need. \textbf{4.3.5} --- write the convexity inequality between $x$, $y$ and the middle point
+$(x+y)/2$. To get the general case from the one with positive coordinates, observe that for
+$x \in \mathbb{R}^n$, denoting $\hat x := (|x_1|,\dots,|x_n|)$, we have
+$|x+y|_p \leq |\hat x + \hat y|_p$ and $|\hat x|_p = |x|_p$ for all $x,y \in \mathbb{R}^n$.
+\end{exercise}
+
+\begin{exercise}[4.4 --- $p$-means \textnormal{(optional)}]
+\label{ex:4.4}
+For $x \in \mathbb{R}^n$ with positive coordinates and $p \neq 0$ define the \textbf{$p$-mean} as
+$$\mu_p(x) := \left(\frac{x_1^p + \dots + x_n^p}{n}\right)^{1/p}.$$
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Compute the limits $p \to \pm\infty$, $p \to 0$ and define accordingly
+    $\mu_{-\infty}(x)$, $\mu_0(x)$, $\mu_{+\infty}(x)$.
+  \item For any $n$-tuple of numbers $a_i > 0$ show that
+    $$\sum_{i=1}^{n} \frac{a_i\log(a_i)}{a_1 + \dots + a_n} \geq \log\left(\frac{a_1 \dots + a_n}{n}\right).$$
+  \item For a fixed $x$, show that the function $f : \mathbb{R}\to\mathbb{R}$, given by
+    $f(t) := \mu_t(x)$, is continuous and increasing.
+  \item Prove the Arithmetic--Geometric inequality and Arithmetic--Quadratic inequality:
+    $$n(x_1x_2\cdots x_n)^{1/n} \leq x_1 + \dots + x_n, \qquad (x_1+\dots+x_n)^2 \leq n(x_1^2+\dots+x_n^2).$$
+  \item \textbf{(*)} Is $f$ continuously differentiable in the whole $\mathbb{R}$?
+\end{enumerate}
+\textit{Official hints:} \textbf{4.4.2} --- combine the concavity of $\log(\cdot)$ and the
+Cauchy--Schwarz inequality; use the generalisation of the concavity inequality: for any concave
+$f : \mathbb{R}\to\mathbb{R}$,
+$f(\lambda_1x_1 + \dots + \lambda_nx_n) \geq \lambda_1f(x_1)+\dots+\lambda_nf(x_n)$ for all
+$x_i \in \mathbb{R}$, $0 \leq \lambda_i \leq 1$ with $\lambda_1+\dots+\lambda_n = 1$.
+\textbf{4.4.3} --- it might be more convenient to work with $\log f(t)$.
+\end{exercise}
+
+\begin{exercise}[4.5 --- Mean value for vector-valued functions \textnormal{(optional)}]
+\label{ex:4.5}
+Let $f \in C^1(\mathbb{R},\mathbb{R}^m)$ for $m > 1$. Is it true that there is $t \in [0,1]$ such
+that
+$$f(1) - f(0) = Df_t(1) = \begin{pmatrix} f_1'(t) \\ \vdots \\ f_m'(t) \end{pmatrix}?$$
+Prove it or provide a counterexample.
+
+\textit{Official hint:} try $f(t) = (\sin(2\pi t), \cos(2\pi t))$.
+\end{exercise}
+
+\begin{exercise}[4.6 --- A directional derivative vanishes \textnormal{(important)}]
+\label{ex:4.6}
+Let $u \in C^1(\mathbb{R}^n)$ and $\nu \in \mathbb{R}^n$. Show that
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item If $\partial_1 u \equiv 0$ then ``$u$ does not depend on $x_1$''; more rigorously: there
+    exists a unique function $v \in C^1(\mathbb{R}^{n-1})$ such that
+    \begin{equation*}
+    u(x_1,\dots,x_n) = v(x_2,\dots,x_n) \quad \text{for all } x \in \mathbb{R}^n. \tag{2}
+    \end{equation*}
+  \item If $\partial_\nu u \equiv 0$ and $\nu\cdot e_1 \neq 0$ then ``$u$ is a function of $n-1$
+    variables''; more rigorously: there exists a unique function $w \in C^1(\mathbb{R}^{n-1})$
+    such that
+    $$u(x_1,\dots,x_n) = w\!\left(x_2 - \frac{x_1\nu_2}{\nu_1}, \dots, x_n - \frac{x_1\nu_n}{\nu_1}\right) \quad \text{for all } x \in \mathbb{R}^n.$$
+  \item \textbf{(*)} What can we conclude if we assume only that $\partial_1 u = 0$ in an open
+    connected subset $U \subset \mathbb{R}^n$?
+\end{enumerate}
+\textit{Official hints:} \textbf{4.6.2} --- apply the mean value theorem to $u(x + t\nu)$.
+\textbf{4.6.3} --- consider the domain $U := \{(x,y) : x^2 < y < x^2+1\}$ and the function
+$$u(x,y) := \begin{cases} \max\{0, y-2\}^2 & \text{if } x \geq 0, \\ 0 & \text{if } x \leq 0.\end{cases}$$
+\end{exercise}

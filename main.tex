@@ -1,0 +1,662 @@
+\documentclass{report}
+
+% GEMINI
+
+% ==========================================
+% FONTS & ENCODING
+% ==========================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+% Body font. Comment the next line out to fall back to plain Computer Modern.
+\usepackage{lmodern}          % Latin Modern -- has a full sans family
+\usepackage{anyfontsize}
+\renewcommand{\sfdefault}{lmss}
+% --- Body font: switch to Palatino by uncommenting the next line (single-line change) ---
+% \usepackage{mathpazo}
+
+\usepackage[english]{babel}
+\usepackage{csquotes}
+
+% --- HYPHENATION / LINE-BREAKING TUNING ---
+\hyphenpenalty=100
+\exhyphenpenalty=100
+\doublehyphendemerits=10000
+\finalhyphendemerits=5000
+\tolerance=1500
+\emergencystretch=3em
+\hfuzz=0.25ex
+
+% ==========================================
+% CORE PACKAGES
+% ==========================================
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{aliascnt}   % lets lemma/corollary/... share the theorem counter
+                        % while keeping distinct names for cleveref
+\usepackage{mathtools}
+\usepackage{etoolbox}
+\usepackage[dvipsnames, x11names]{xcolor}
+\usepackage[top=15mm, bottom=15mm, includehead, includefoot,
+            headheight=9mm, headsep=3.5mm, footskip=9mm,
+            nomarginpar]{geometry} % try 25 mm
+
+% change enumerations:
+\usepackage{enumitem, tabstackengine}
+\usepackage{multirow}
+
+% use tikz:
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{tikz-3dplot}
+\usepackage{subcaption}
+\usetikzlibrary{matrix}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{shapes}
+\usetikzlibrary{shadows}
+\usetikzlibrary{babel, calc}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+\usepackage{fontawesome5}
+
+% change page-header/footer:
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{lastpage}
+
+% ==========================================
+% GLOBAL COLOR PALETTE
+% ==========================================
+\definecolor{ThemePurple}{HTML}{6A3199}
+\colorlet{ThemePrimary}{ThemePurple}
+\colorlet{ThemeSecondary}{MidnightBlue}
+\colorlet{ThemeWeekNumber}{OliveGreen}
+\colorlet{ThemeAccent1}{BurntOrange}
+
+% --- Theorem environments ---
+\colorlet{EnvTheorem}{ThemePurple}
+
+% --- Proofs ---
+\colorlet{ProofTint}{OliveGreen}
+\colorlet{ProofQEDText}{ProofTint}
+\colorlet{ProofQEDBg}{white}
+
+% --- Running text ---
+\colorlet{TextEmphColor}{MidnightBlue}
+\colorlet{TextBoldColor}{Brown!80!black}   % Espresso brown
+\colorlet{TextMetaNote}{Gray}
+\colorlet{LinkColor}{MidnightBlue}
+\colorlet{FileColor}{Magenta}
+
+% --- Lists ---
+\colorlet{ItemizeBullet}{BurntOrange}
+\colorlet{EnumerateBullet}{MidnightBlue}
+
+% --- Headings ---
+\colorlet{ChapTitleText}{MidnightBlue!90!black}
+\colorlet{ChapNumberText}{OliveGreen}
+\colorlet{ChapLine}{MidnightBlue!80!black}
+\colorlet{SecTitleColor}{ThemePurple}
+\colorlet{SecNumberColor}{OliveGreen}
+\colorlet{SubSecTitleColor}{TextBoldColor}   % same colour as \textbf
+\colorlet{SubSubSecTitleColor}{TextBoldColor}
+\colorlet{HeaderFooterFaint}{OliveGreen!45!Gray}
+\colorlet{HeaderFooterLine}{HeaderFooterFaint!50}
+
+% --- TOC entry colours ---
+% These must be *named* colours (not `A!95!B' expressions), because they are
+% handed to hyperref's linkcolor as well -- otherwise the link colour would
+% override the entry colour and the whole TOC would come out midnight blue.
+\colorlet{TocChapColor}{ThemePurple!95!black}
+\colorlet{TocSecColor}{TextEmphColor}
+\colorlet{TocSubsecColor}{TextBoldColor}
+\colorlet{TocSubsubColor}{gray}
+\colorlet{TocLabelColor}{ThemePurple!85!black}
+
+% --- EMPHASIS STYLE OVERRIDE ---
+\DeclareTextFontCommand{\emph}{\sffamily\bfseries\color{TextEmphColor}}
+\RenewDocumentCommand{\textbf}{m}{{\sffamily\bfseries\color{TextBoldColor}#1}}
+\setlist[enumerate]{font=\color{EnumerateBullet}\colorlet{TextBoldColor}{EnumerateBullet}\bfseries}
+
+% ==========================================
+% HYPERLINKS & CLEVEREF  (hyperref must come before cleveref)
+% ==========================================
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=LinkColor,
+  filecolor=FileColor,
+  urlcolor=LinkColor,
+  citecolor=LinkColor,
+  bookmarksopen=true
+}
+\usepackage{bookmark}   % tolerates skipped heading levels (e.g. \chapter -> \subsection)
+\usepackage[nameinlink, capitalize]{cleveref}
+
+% ==========================================
+% SPACING UNITS (everything in ex -- do not mix in pt)
+% ==========================================
+\newlength{\customparskip}
+\setlength{\customparskip}{1ex plus 0.5ex minus 0.2ex}
+
+\newlength{\customenvspace}
+\setlength{\customenvspace}{2.5ex plus 0.5ex minus 0.2ex}
+
+% Inline math breathing room
+\setlength{\mathsurround}{0.25ex}
+
+% ...but NOT inside TikZ. A node's boundary is derived from the width of the box
+% it contains, and \mathsurround pads every math box on both sides. TikZ then
+% anchors arrows on the padded boundary while the glyphs sit elsewhere, so
+% tikz-cd arrows overshoot their targets and nodes collide. Must be 0 in there.
+\AtBeginEnvironment{tikzpicture}{\setlength{\mathsurround}{0pt}}
+\AtBeginEnvironment{tikzcd}{\setlength{\mathsurround}{0pt}}
+
+% Matrix and table rows
+\renewcommand{\arraystretch}{1.15}
+
+% Proportional math display spacing
+\AtBeginDocument{
+  \setlength{\abovedisplayskip}{1.2\customparskip plus 0.5ex minus 0.2ex}
+  \setlength{\belowdisplayskip}{1.2\customparskip plus 0.5ex minus 0.2ex}
+  \setlength{\abovedisplayshortskip}{0.5\customparskip plus 0.2ex}
+  \setlength{\belowdisplayshortskip}{0.8\customparskip plus 0.2ex minus 0.1ex}
+}
+
+% Macro for omitted content (kept for future use if needed)
+\newcommand{\omitted}[1]{\textcolor{red}{#1}}
+
+% Custom commands for italicized terminology and "quotes".
+% \newterm    -> English quotes ``...''   (the default; this is an English text)
+% \germanterm -> German quotes  \glqq...\grqq  for German technical terms
+\newcommand{\newterm}[1]{\textcolor{BrickRed}{``}\textcolor{TextBoldColor}{\textit{#1}}\textcolor{BrickRed}{''}}
+\newcommand{\germanterm}[1]{\textcolor{BrickRed}{\glqq}\textcolor{TextBoldColor}{\textit{#1}}\textcolor{BrickRed}{\grqq}}
+\newcommand{\qt}[1]{\textit{\textcolor{BrickRed}{``}#1\textcolor{BrickRed}{''}}}
+\newcommand{\inlinemetanote}[1]{\textit{[\textcolor{TextMetaNote}{#1}]}}
+
+% Redefine \bigbreak to ensure the following paragraph is not indented
+\let\oldbigbreak\bigbreak
+\renewcommand{\bigbreak}{\oldbigbreak\noindent}
+
+% ==========================================
+% HEADING FORMATTING & SPACING
+% ==========================================
+\usepackage[explicit]{titlesec}
+\usepackage{titletoc}
+
+% Headings hang into the left margin, staggered by level.
+\newlength{\chapouthang}\setlength{\chapouthang}{-3.2ex}
+\newlength{\secouthang}\setlength{\secouthang}{-2.4ex}
+\newlength{\subsecouthang}\setlength{\subsecouthang}{-1.6ex}
+\newlength{\subsubsecouthang}\setlength{\subsubsecouthang}{-0.8ex}
+
+% 1. Custom Chapter Format: Title (chapter X)
+\titleformat{name=\chapter}[block]  % [block] forces it onto a single line
+{\normalfont\sffamily\Large\bfseries\color{ChapTitleText}}  % Main style
+{}                           % Empty standard label
+{0ex}                        % Separation
+% #1 is the title. Suffix is \large (smaller) and un-bolded
+{#1 {\large\mdseries\color{ChapNumberText}(Chapter \thechapter)}}
+[{\color{ChapLine}\rule{\textwidth}{0.8pt}}]
+
+\titleformat{name=\chapter,numberless}[block]
+{\normalfont\sffamily\Large\bfseries\color{ChapTitleText}}
+{}
+{0ex}
+{#1}
+[{\color{ChapLine}\rule{\textwidth}{0.8pt}}]
+
+% 2. Space-efficient Chapter Headings
+\titlespacing*{\chapter}{\chapouthang}{-7ex}{2.2ex}
+
+% 3. Custom Section Format: Title (section X.Y)
+\titleformat{name=\section}
+{\normalfont\sffamily\Large\bfseries\color{SecTitleColor}}
+{}
+{0ex}
+{#1 {\large\mdseries\color{SecNumberColor}(Section \thechapter.\alph{section})}}
+
+\titleformat{name=\section,numberless}
+{\normalfont\sffamily\Large\bfseries\color{SecTitleColor}}
+{}
+{0ex}
+{#1}
+
+% Make the sub-sub section numbers logically and visually disappear:
+% 1. Global limit: Only Chapters and Sections get numbers
+\setcounter{secnumdepth}{1}
+\setcounter{tocdepth}{2}
+
+% Section numbers use the letter form everywhere (body heading, TOC, \cref),
+% i.e. "5.a" rather than the default "5.1".
+\renewcommand{\thesection}{\thechapter.\alph{section}}
+
+% 2. Visual styling for Subsections / Subsubsections (Clean & Unnumbered)
+\titleformat{\subsection}
+{\normalfont\sffamily\large\bfseries\color{SubSecTitleColor}}
+{}
+{0ex}
+{#1}
+
+\titleformat{\subsubsection}
+{\normalfont\sffamily\normalsize\bfseries\color{SubSubSecTitleColor}}
+{}
+{0ex}
+{#1}
+
+% 4. Space-efficient Heading Spacing
+\titlespacing*{\section}{\secouthang}{3.2ex plus 0.8ex minus .2ex}{1.3ex plus .2ex}
+\titlespacing*{\subsection}{\subsecouthang}{2.7ex plus 0.8ex minus .2ex}{1.1ex plus .2ex}
+\titlespacing*{\subsubsection}{\subsubsecouthang}{2.2ex plus 0.8ex minus .2ex}{0.9ex plus .2ex}
+
+% ==========================================
+% TABLE OF CONTENTS TYPOGRAPHY & COLORS
+% ==========================================
+% Width reserved for the page number at the right edge.
+\contentsmargin{4.7ex}
+
+% Staggered indentation per level; dotted leaders in the faint header colour.
+\titlecontents{chapter}[0ex]
+  {\addvspace{3.7ex}\hypersetup{linkcolor=TocChapColor}\sffamily\bfseries\large\color{TocChapColor}}
+  {\color{ChapNumberText}\MakeUppercase{\chaptername}\ \thecontentslabel\hspace{1.9ex}\color{TocChapColor}}
+  {}
+  {\color{HeaderFooterLine}\titlerule*[0.6pc]{.}\color{ChapNumberText}\contentspage}
+
+\titlecontents{section}[4.2ex]
+  {\addvspace{1.2ex}\hypersetup{linkcolor=TocSecColor}\sffamily\bfseries\color{TocSecColor}}
+  {\color{TocLabelColor}\thecontentslabel\hspace{1.9ex}\color{TocSecColor}}
+  {}
+  {\color{HeaderFooterLine}\titlerule*[0.6pc]{.}\color{TocSecColor}\contentspage}
+
+\titlecontents{subsection}[9.3ex]
+  {\addvspace{0.6ex}\hypersetup{linkcolor=TocSubsecColor}\sffamily\color{TocSubsecColor}}
+  {\color{TocSubsecColor}\thecontentslabel\hspace{1.9ex}\color{TocSubsecColor}}
+  {}
+  {\color{HeaderFooterLine}\titlerule*[0.6pc]{.}\color{TocSubsecColor}\contentspage}
+
+\titlecontents{subsubsection}[15.1ex]
+  {\addvspace{0.35ex}\hypersetup{linkcolor=TocSubsubColor}\sffamily\small\bfseries\color{TocSubsubColor}}
+  {\color{TocSubsubColor}\thecontentslabel\hspace{1.9ex}\color{TocSubsubColor}}
+  {}
+  {\normalfont\color{HeaderFooterLine}\titlerule*[0.6pc]{.}\color{TocSubsubColor}\contentspage}
+
+% ==========================================
+% LIST FORMATTING
+% ==========================================
+\setlist{
+  topsep=0.6ex plus 0.2ex minus 0.1ex,
+  partopsep=0ex,
+  parsep=0.5\customparskip,
+  itemsep=0.4ex plus 0.2ex minus 0.1ex,
+}
+
+\setlist[itemize,1]{
+  label=\textcolor{ItemizeBullet}{\textbullet},
+  leftmargin=2.5em
+}
+
+\setlist[enumerate]{
+  font=\color{EnumerateBullet}\colorlet{TextBoldColor}{EnumerateBullet}\bfseries
+}
+
+\setlist[enumerate,1]{
+  label=(\alph*),
+  ref=(\alph*),
+  leftmargin=2.5em
+}
+
+\setlist[description]{
+  style=unboxed,
+  leftmargin=2.5em,
+  font=\bfseries\color{TextBoldColor}
+}
+
+% Nested lists stay tight
+\setlist[itemize,2]{topsep=0ex, itemsep=0ex, parsep=0ex}
+\setlist[enumerate,2]{topsep=0ex, itemsep=0ex, parsep=0ex}
+
+% --- FIX: LISTS DIRECTLY AFTER A THEOREM HEADING ---
+\makeatletter
+\newcommand{\fixlistaftertheorem}{%
+  \if@inlabel
+    \leavevmode \par
+  \fi
+}
+\BeforeBeginEnvironment{itemize}{\fixlistaftertheorem}
+\BeforeBeginEnvironment{enumerate}{\fixlistaftertheorem}
+\BeforeBeginEnvironment{description}{\fixlistaftertheorem}
+\makeatother
+
+% ==========================================
+% THEOREM CONFIGURATION
+% ==========================================
+\newtheoremstyle{purplethm}%
+{\customenvspace}{\customenvspace}{\normalfont}{}{\color{EnvTheorem}\sffamily\bfseries}{:}{0.5em}%
+% NB: the space before the number lives in \thmnumber, not in \thmname -- otherwise
+% unnumbered environments (\newtheorem*) would emit a stray space before the note
+% or before the colon ("Remark  (...)", "Important remark :").
+{\thmname{\textcolor{EnvTheorem}{\sffamily\bfseries#1}}\thmnumber{\sffamily\bfseries\ #2}%
+ \thmnote{\ \textcolor{EnvTheorem}{\bfseries(}{\normalfont\sffamily\itshape#3}\textcolor{EnvTheorem}{\bfseries)}}}
+
+\theoremstyle{purplethm}
+
+% NB: deliberately NOT \newtheorem{theorem}{Theorem}[section].
+% Each content file hard-codes its own \thetheorem prefix so that the printed
+% numbers stay synchronised with Prof. Biran's handwritten notes, where one
+% source part (e.g. `25.isometries.v03') may be typeset here as several
+% \section's. An automatic per-section reset therefore restarted the counter in
+% the middle of a source part and printed e.g. "25.a.1" three times. The counter
+% now resets per chapter only; a file that opens a new source part resets it
+% explicitly with \setcounter{theorem}{0}.
+\newtheorem{theorem}{Theorem}
+
+% The decoupled theorem display format: Chapter.letter.Number
+% Robust against chapters that jump straight to \subsection (i.e. no \section at
+% all): in that case the section letter is simply omitted -> "Chapter.Number".
+\renewcommand{\thetheorem}{%
+  \thechapter.\ifnum\value{section}>0 \alph{section}.\fi\arabic{theorem}}
+
+% hyperref builds its anchor names from \theH<counter>, NOT from \the<counter>.
+% Its default for a counter reset by `section' omits the chapter, so e.g. the
+% first theorem of every section of every chapter would claim the anchor
+% `theorem.<n>.1' -- the duplicates get dropped and \cref links silently jump to
+% the wrong environment. Mirroring the printed number keeps the anchors unique.
+% (\AtBeginDocument: hyperref installs its own defaults late, so a plain
+% \renewcommand here would simply be overwritten.)
+\makeatletter
+\AtBeginDocument{%
+  \renewcommand{\theHtheorem}{\thechapter.\alph{section}.\arabic{theorem}}%
+  \renewcommand{\theHequation}{\thechapter.\alph{section}.\arabic{equation}}%
+  % The aliased counters below need the same treatment, and must point at the
+  % *same* anchor as \theHtheorem -- they are one counter under four names.
+  \@namedef{theHlemma}{\theHtheorem}%
+  \@namedef{theHcorollary}{\theHtheorem}%
+  \@namedef{theHdefinition}{\theHtheorem}%
+  \@namedef{theHproposition}{\theHtheorem}%
+}
+\makeatother
+
+% Reset the theorem counter at every chapter too, not only at every section --
+% otherwise a section-less chapter would keep counting from the previous one.
+\makeatletter
+\@addtoreset{theorem}{chapter}
+\makeatother
+
+\setcounter{MaxMatrixCols}{20}
+
+% --- NUMBERED ENVIRONMENTS ---
+% NB: deliberately NOT \newtheorem{lemma}[theorem]{Lemma}.
+% That form makes `lemma' share the *counter named* `theorem', and cleveref
+% derives a reference's type from the counter name -- so every \cref to a
+% lemma, corollary, definition or proposition printed "Theorem". Only 52 of the
+% ~290 numbered environments in this document are actually theorems, so almost
+% every cross-reference was mislabelled.
+%
+% aliascnt gives each environment a counter of its own name that is merely an
+% alias of `theorem'. The shared, continuous numbering is preserved exactly
+% (\thelemma expands to \thetheorem, dynamically, so the per-file
+% \renewcommand{\thetheorem} prefixes still apply), but cleveref can now tell
+% the environments apart.
+\newaliascnt{lemma}{theorem}
+\newtheorem{lemma}[lemma]{Lemma}
+\aliascntresetthe{lemma}
+
+\newaliascnt{corollary}{theorem}
+\newtheorem{corollary}[corollary]{Corollary}
+\aliascntresetthe{corollary}
+
+\newaliascnt{definition}{theorem}
+\newtheorem{definition}[definition]{Definition}
+\aliascntresetthe{definition}
+
+\newaliascnt{proposition}{theorem}
+\newtheorem{proposition}[proposition]{Proposition}
+\aliascntresetthe{proposition}
+
+% --- UNNUMBERED ENVIRONMENTS ---
+% The asterisk (*) prevents them from being numbered!
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem*{definition*}{Definition}
+\newtheorem*{corollary*}{Corollary}
+\newtheorem*{claim*}{Claim}
+
+\newtheorem*{notation}{Notation}
+\newtheorem*{remark}{Remark}
+\newtheorem*{exercise}{Exercise}
+\newtheorem*{example}{Example}
+\newtheorem*{summary}{Summary}
+\newtheorem*{warmup}{Warm up}
+\newtheorem*{question}{Question}
+\newtheorem*{answer}{Answer}
+\newtheorem*{importantremark}{Important remark}
+\newtheorem*{goals}{Goals}
+\newtheorem*{conclusion}{Conclusion}
+\newtheorem*{ainote}{AI-Note}
+
+% ==========================================
+% CLEVEREF NAMES
+% ==========================================
+\crefname{theorem}{Theorem}{Theorems}
+\Crefname{theorem}{Theorem}{Theorems}
+\crefname{lemma}{Lemma}{Lemmata}
+\Crefname{lemma}{Lemma}{Lemmata}
+\crefname{corollary}{Corollary}{Corollaries}
+\Crefname{corollary}{Corollary}{Corollaries}
+\crefname{definition}{Definition}{Definitions}
+\Crefname{definition}{Definition}{Definitions}
+\crefname{proposition}{Proposition}{Propositions}
+\Crefname{proposition}{Proposition}{Propositions}
+\crefname{chapter}{Chapter}{Chapters}
+\Crefname{chapter}{Chapter}{Chapters}
+\crefname{section}{Section}{Sections}
+\Crefname{section}{Section}{Sections}
+\crefname{equation}{Equation}{Equations}
+\Crefname{equation}{Equation}{Equations}
+\crefname{figure}{Figure}{Figures}
+\Crefname{figure}{Figure}{Figures}
+\crefname{table}{Table}{Tables}
+\Crefname{table}{Table}{Tables}
+\crefname{item}{Part}{Parts}
+\Crefname{item}{Part}{Parts}
+
+% ==========================================
+% PROOF ENVIRONMENT (olive green, upright, standard text Q.E.D.)
+% ==========================================
+\newcommand{\qedbox}{\textcolor{ProofTint}{\sffamily\bfseries Q.E.D.}}
+\renewcommand{\qedsymbol}{\qedbox}
+
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{%
+  \par\if@nobreak\vspace{-1ex}\else\addvspace{2.2ex plus 0.5ex minus 0.2ex}\fi
+  \noindent{\normalfont\sffamily\bfseries\color{ProofTint}#1:}%
+  \par\nobreak\vspace{0.8ex plus .1ex}\vspace{-\parskip}
+  \@afterindentfalse\@afterheading
+}{%
+  \unskip\nobreak\hfill\penalty50\hskip2em\null\nobreak\hfill
+  \qedbox
+  {\parfillskip=0pt\par}\vspace{2ex}
+}
+\makeatother
+
+\newenvironment{exercisesolution}[1][Solution]{%
+  \begin{proof}[#1]%
+}{%
+  \end{proof}%
+}
+
+% --- MATH OPERATORS ---
+\newcommand{\M}{\mathcal{M}}
+\DeclareMathOperator{\ColS}{Cols}
+\DeclareMathOperator{\RowS}{Rows}
+\DeclareMathOperator{\Eig}{Eig}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Fib}{Fib}
+\DeclareMathOperator{\Img}{Im}
+\DeclareMathOperator{\Sol}{Sol}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\blockdiag}{blockdiag}
+\DeclareMathOperator{\adj}{adj}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\Rea}{Re}   % real part; \Re is taken by the fraktur symbol
+
+% Matrix groups. Declared as operators so that "O", "U", "SO", "SU" stay upright
+% and are never mistaken for the italic variables O, U (which this text also uses
+% -- e.g. "let $O \in \Orth(n)$").
+\DeclareMathOperator{\Orth}{O}
+\DeclareMathOperator{\Unit}{U}
+\DeclareMathOperator{\SOrth}{SO}
+\DeclareMathOperator{\SUnit}{SU}
+
+% ==========================================
+% TRANSPOSE  --  one switch for the whole document
+% ==========================================
+% Usage: A\transp, (PAQ)\transp, \overline{v}\transp.
+%
+% This text uses `T' constantly for linear maps ($T$, $T_A$, $[T]$), so an
+% italic $A^T$ reads as an index or a map name. An upright sans-serif T cannot
+% be confused with it and survives being shrunk to superscript size, which is
+% why it is preferred here over a bold T (bold at 70% mostly reads as smudged,
+% and bold+colour is already reserved for \textbf / \emph in this document).
+%
+% To switch the whole document to a bold transpose, change \mathsf to \mathbf
+% on the next line -- nothing else needs touching.
+\newcommand{\transposesymbol}{\mathsf{T}}
+\newcommand{\transp}{^{\transposesymbol}}
+
+
+% ==========================================
+% HEADER & FOOTER
+% ==========================================
+% Header: chapter (left) / page x of y (right).
+% Footer: current section (left) / current subsection (right).
+\pagestyle{fancy}
+\fancyhf{}
+
+% \parbox[b] lets a multi-line header grow upwards, so it always sits flush
+% with the page number on the rule.
+\fancyhead[L]{\parbox[b]{0.8\textwidth}{\sloppy\raggedright\small\sffamily\color{HeaderFooterFaint}\leftmark}}
+\fancyhead[R]{\parbox[b]{0.18\textwidth}{\sloppy\raggedleft\small\sffamily\color{HeaderFooterFaint}\textbf{\thepage} / \pageref*{LastPage}}}
+
+\fancyfoot[L]{\parbox[t]{0.47\textwidth}{\sloppy\raggedright\small\sffamily\color{HeaderFooterFaint}\rightmark}}
+\fancyfoot[R]{\parbox[t]{0.47\textwidth}{\sloppy\raggedleft\small\sffamily\color{HeaderFooterFaint}\lastxmark}}
+
+\renewcommand{\headrule}{\hbox to\headwidth{\color{HeaderFooterLine}\leaders\hrule height 0.5pt\hfill}}
+\renewcommand{\footrule}{\hbox to\headwidth{\color{HeaderFooterLine}\leaders\hrule height 0.5pt\hfill}}
+
+% Chapter openings switch to 'plain' automatically: no rules, centred page number.
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyfoot[C]{\small\sffamily\color{HeaderFooterFaint}\textbf{\thepage} / \pageref*{LastPage}}%
+  \renewcommand{\headrule}{}%
+  \renewcommand{\footrule}{}%
+}
+
+% What goes into the marks.
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter\ \ ---\ \ #1}{}}
+\renewcommand{\sectionmark}[1]{%
+  \markright{\thesection\ \ ---\ \ #1}%
+  \extramarks{}{}%
+}
+\renewcommand{\subsectionmark}[1]{%
+  \extramarks{#1}{#1}%
+}
+
+\begin{document}
+
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture, overlay]
+  % Dezent geometrische Akzentformen oben rechts
+  \fill[ThemeSecondary!12, rounded corners=18pt] ($(current page.north east) + (-6.5cm,-2.5cm)$) rectangle ($(current page.north east) + (-1.2cm,-7.8cm)$);
+  \fill[ThemeWeekNumber!20, rounded corners=12pt] ($(current page.north east) + (-4.8cm,-4.2cm)$) rectangle ($(current page.north east) + (-0.6cm,-9.0cm)$);
+\end{tikzpicture}
+
+\vspace*{4.5cm}
+\noindent\begin{minipage}{\textwidth}
+    {\sffamily\fontsize{40pt}{48pt}\selectfont\bfseries\color{ThemePrimary!95!black} Linear Algebra I/II \par}
+    \vspace{1.2cm}
+    {\color{ThemeWeekNumber}\rule{\linewidth}{2.5pt}\par}
+    \vspace{0.2cm}
+    {\color{ThemeAccent1}\rule{0.6\linewidth}{1.5pt}\par}
+    \vspace{2.0cm}
+    {\sffamily\fontsize{18pt}{24pt}\selectfont\bfseries\color{TextEmphColor} Lecture Notes \& Transcript \par}
+    \vspace{0.6cm}
+    {\sffamily\fontsize{15pt}{22pt}\selectfont\color{TextBoldColor} Lecturer: \textbf{Prof. Dr. Paul Biran} \par}
+    \vspace{0.3cm}
+    {\sffamily\fontsize{14pt}{20pt}\selectfont\color{OliveGreen} Department of Mathematics -- ETH Zürich \par}
+    \vspace{2.5cm}
+    {\sffamily\fontsize{14pt}{20pt}\selectfont\bfseries\color{ThemeWeekNumber}\faGraduationCap\quad Academic Year 2025/2026 \par}
+\end{minipage}
+\vfill
+\noindent\begin{minipage}{\textwidth}
+    \begin{tcolorbox}[
+        arc=6pt,
+        boxrule=0.7pt,
+        colback=MidnightBlue!3!white,
+        colframe=MidnightBlue!30!white,
+        left=10pt, right=10pt, top=8pt, bottom=8pt
+    ]
+    {\sffamily\bfseries\small\color{MidnightBlue!90!black}\faInfoCircle\quad Notice \& Transcription Disclaimer \par}
+    \vspace{0.25cm}
+    \sffamily\small\color{black!75}
+    \begin{itemize}[leftmargin=1.5em, itemsep=3pt, topsep=0pt, parsep=0pt]
+        \item[\textcolor{MidnightBlue!80!black}{\small\faRobot}] \textbf{AI-Generated Notes:} This document was automatically generated using AI/LLM systems from the hand-written notes.
+        \item[\textcolor{MidnightBlue!80!black}{\small\faUserShield}] \textbf{Unofficial Document:} This is \emph{not} official course material of ETH Zürich or the lecturers, and has \emph{not} been manually corrected or proofread by the staff (unreviewed draft).
+        \item[\textcolor{MidnightBlue!80!black}{\small\faExclamationTriangle}] \textbf{Disclaimer:} Artificial intelligence can make errors (e.g., in notation, indices, or logical derivations). Use at your own risk --- without warranty of any kind regarding accuracy, completeness, or relevance to exams.
+    \end{itemize}
+    \end{tcolorbox}
+\end{minipage}
+\vspace*{0.5cm}
+\end{titlepage}
+% TOC entry spacing is now handled by the \titlecontents blocks in the preamble.
+\tableofcontents % This generates the TOC
+\hypersetup{linkcolor=LinkColor} % restore after the per-level TOC link colours
+\cleardoublepage
+
+% Include content
+\input{content/01-fibonacci.tex}
+\input{content/02-logic.tex}
+\input{content/03-set-theory.tex}
+\input{content/04-maps.tex}
+\input{content/05-fields.tex}
+\input{content/06-systems-of-linear-equations.tex}
+\input{content/07-vector-spaces.tex}
+\input{content/08-span.tex}
+\input{content/09-linear-independence.tex}
+\input{content/10a-bases-part-a.tex}
+\input{content/11-bases-part-b.tex}
+\input{content/12-dimension.tex}
+\input{content/13-row-and-col-space.tex}
+\input{content/14-sums-of-vector-spaces.tex}
+\input{content/15a-linear-maps.tex}
+\input{content/16-linear-maps-and-bases.tex}
+\input{content/17a-matrices_a_matrix_multiplication.tex}
+\input{content/17b-matrices_b_change_of_basis.tex}
+\input{content/17c-matrices_c_column_rank_and_row_rank.tex}
+\input{content/17d-matrices_d_more_on_matrices_and_lineq.tex}
+\input{content/17e-matrices_e_elemntary_row_operations_revisited.tex}
+\input{content/18-vs-out-of-old-ones.tex}
+\input{content/19-misc.tex}
+\input{content/20-determinants.tex}
+\input{content/21-eigenvalues-eigenvectors.tex}
+\input{content/22a-euclidean-hermetian-spaces-a.tex}
+\input{content/22b-euclidean-hermetian-spaces-b.tex}
+\input{content/23a-dual-spaces-inner-products-a.tex}
+\input{content/24-spectral-thoerem.tex}
+\input{content/25-isometries.tex}
+\input{content/26-singular-value-decomposition.tex}
+\input{content/27-bilinear-and-quadratic-forms.tex}
+\input{content/28-jordan-a.tex}
+
+\end{document}

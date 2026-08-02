@@ -1,0 +1,47 @@
+# ---------------------------------------------------------------
+# Source material — 952 MB of PDFs. Read-only inputs, never edited,
+# and far too large for git. Keep them out; the transcripts in
+# transcript/ carry a page pointer back to every one of them.
+# ---------------------------------------------------------------
+Adrien Martelli/
+Corsin Nick/
+Damien Lesieur/
+Diego Torres Tejeda/
+Fabio Guger/
+Jérôme Paschoud/
+Lennard Trautmann/
+Linus Lüchinger/
+Lukas Krause/
+Maarten Cnoops/
+Noah Larsson/
+Riccardo Vanoni/
+Sascha Brack/
+Simon Kamps/
+Tim Fessler/
+Toby Lane/
+Toprak Erakay/
+
+# Official course material, re-downloadable from
+# https://metaphor.ethz.ch/x/2026/fs/401-1262-07L/
+exercises/
+
+# ---------------------------------------------------------------
+# LaTeX build artefacts
+# ---------------------------------------------------------------
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.pdf
+!docs/**/*.pdf
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+*.swp
+*~

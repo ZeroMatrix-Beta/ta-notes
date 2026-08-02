@@ -487,6 +487,20 @@
   \end{proof}%
 }
 
+% ==========================================
+% FIGURE STUB (placeholder box until the dedicated TikZ pass, step 5)
+% ==========================================
+% Usage: \begin{figurestub}{FIG-W02-01} description text \end{figurestub}
+% Renders the drawing spec inline so the document compiles now; a later pass
+% replaces each box with a real tikzpicture without touching content/*.tex prose.
+\newtcolorbox{figurestub}[1]{
+  enhanced, breakable, arc=2pt, boxrule=0.4pt,
+  colback=Gray!5, colframe=Gray!50!black,
+  fonttitle=\sffamily\bfseries\small,
+  coltitle=black, colbacktitle=Gray!20,
+  title={Figure stub --- #1}
+}
+
 % --- MATH OPERATORS ---
 \newcommand{\M}{\mathcal{M}}
 \DeclareMathOperator{\ColS}{Cols}

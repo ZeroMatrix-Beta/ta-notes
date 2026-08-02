@@ -77,14 +77,17 @@ plane) · `FIG-W07-06` (sphere + normal line) · `FIG-W08-01` (figure-eight (sin
 `FIG-W10-01` (torus — formulas given on the page and already transcribed) ·
 `FIG-W11-01` (unit square + four normals) · `FIG-W11-02` (commutative triangle, `tikz-cd`)
 
+`FIG-W02-01`–`FIG-W02-07`, `FIG-W02-09`, `FIG-W02-10` were upgraded to full drawing
+specs during the Week 2 review-and-polish pass (relative positions, colours, dashed/solid/dotted
+styling, and label placement all now spelled out in `transcript/week-02.md`) — moved here from
+Group B below; no further source re-read needed.
+
 ### Group B — compositional sketches: **look at the page first**
 
 Freeform blobs, hand-placed labels, multi-panel layouts. The prose stub gives the idea but not
 the arrangement, and fidelity to Corsin's picture is part of the point.
 
-`FIG-W02-01` (nested space ovals) · `FIG-W02-02` (triangle inequality) · `FIG-W02-03` (three
-metrics) · `FIG-W02-04` (geodesic vs chord) · `FIG-W02-05`, `FIG-W02-06` (open/closed panels) ·
-`FIG-W02-07` (ε-tube) · `FIG-W02-09`, `FIG-W02-10` (open covers) · `FIG-W03-01` (Weierstrass —
+`FIG-W03-01` (Weierstrass —
 *pasted stock image, must be redrawn anyway*) · `FIG-W03-02`, `FIG-W03-03` (connectedness) ·
 `FIG-W03-07`, `FIG-W03-08` (rotation, projection) · `FIG-W05-01` (paraboloid + level sets +
 gradient) · `FIG-W05-02` (∇T on the sphere) · `FIG-W06-01` (convexity + two tangents) ·

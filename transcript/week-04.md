@@ -195,7 +195,7 @@ $$f : \mathbb{R}^3\to\mathbb{R}, \qquad (x,y,z) \mapsto 2x^2 + y^2 + 3z^2 - 2xyz
 What is $Jf(x,y,z)$?
 $$Jf(x,y,z) = (4x - 2yz,\ 2y - 2xz,\ 6z - 2xy) = \left(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, \frac{\partial f}{\partial z}\right) = (\nabla f)^{\mathsf T}$$
 
-From this, we see that the **rows** of the Jacobian are the gradients:
+From this, we see that the **rows** of the Jacobian are the **gradients** ("Gradient"):
 $$JF(x) = \begin{pmatrix} \nabla F_1 \\ \hline \vdots \\ \hline \nabla F_m \end{pmatrix}$$
 
 > ⚠️ **Check:** Corsin's sentence reads "the **columns** of the Jacobian are the gradients", but
@@ -207,8 +207,8 @@ $$JF(x) = \begin{pmatrix} \nabla F_1 \\ \hline \vdots \\ \hline \nabla F_m \end{
 
 *(Corsin p. 5)*
 
-For $f : U \subseteq \mathbb{R}^n \to \mathbb{R}^m$, $g : V \subseteq \mathbb{R}^m \to \mathbb{R}^d$
-differentiable, it holds:
+The **chain rule** ("Kettenregel") states: for $f : U \subseteq \mathbb{R}^n \to \mathbb{R}^m$,
+$g : V \subseteq \mathbb{R}^m \to \mathbb{R}^d$ differentiable, it holds:
 $$D(g\circ f)(x) = Dg(f(x))\,Df(x)$$
 And equivalently for the Jacobians.
 
@@ -229,8 +229,9 @@ J(g\circ f) &= \begin{pmatrix} e^{x_1x_2} & 0 \\ x_2+x_3 & x_1x_2\end{pmatrix}\b
 \end{aligned}
 $$
 
-*(Corsin p. 6)* Sometimes the differential is not easily expressed as a Jacobian. Then it can be
-convenient to use the formula for **directional derivatives**:
+*(Corsin p. 6)* Sometimes the **differential** ("das Differential") is not easily expressed as a
+Jacobian. Then it can be convenient to use the formula for **directional derivatives**
+("Richtungsableitung"):
 $$DF_{x_0}(v) = \partial_v F(x_0) = \left.\frac{d}{ds}\right|_{s=0} F(x_0 + sv) \tag{$*$}$$
 
 > ⚠️ The directional derivative $\partial_v F(x_0)$ can exist (depending on $v$ and $x_0$) even if
@@ -272,7 +273,7 @@ $$
 
 An important special case of the chain rule is that of a **composition of a scalar field with a
 path**. Suppose $f : \mathbb{R}^n \supseteq U \to \mathbb{R}$ and $\gamma : [0,1]\to\mathbb{R}^n$
-are a $C^1$ scalar field and path, respectively. Then
+are a $C^1$ **scalar field** ("Skalarfeld") and path, respectively. Then
 $$
 \begin{aligned}
 D(f\circ\gamma)(t) &= Df(\gamma(t))\cdot D\gamma(t) \\

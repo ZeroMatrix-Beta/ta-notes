@@ -57,6 +57,46 @@ inlined as ASCII. TikZ is done in one dedicated pass (Phase 4.3) so it never blo
 
 *(weeks 12–13 and the ODE appendix still to come)*
 
+## Does drawing this need the original PDF page?
+
+The descriptions above were written while looking at Corsin's drawings, so they are summaries,
+not specifications. Whether that summary suffices depends on the figure.
+
+### Group A — mathematically determined: **no source needed**
+
+The content is fixed by the mathematics; the description only says *which* object to draw. Render
+these from the formula and move on.
+
+`FIG-W02-08` (unit balls in sup/Manhattan metric) · `FIG-W03-04` (S¹ and the segment) ·
+`FIG-W03-05`, `FIG-W03-06` (topologist's sine curve) · `FIG-W04-01` (circle + tangent at π/4) ·
+`FIG-W05-03` (sphere + inscribed cube) · `FIG-W06-02` (cosine, not injective) ·
+`FIG-W06-07` (implicit y(x); plot x = −y⁵−y³−y with axes swapped — exact and trivial) ·
+`FIG-W07-02` (circle of radius R) · `FIG-W07-03` (parabola) · `FIG-W07-05` (sphere + tangent
+plane) · `FIG-W07-06` (sphere + normal line) · `FIG-W08-01` (figure-eight (sin t, sin 2t)) ·
+`FIG-W09-01` (parallelogram from x, y) · `FIG-W09-02` (3D parallelogram, angle θ) ·
+`FIG-W10-01` (torus — formulas given on the page and already transcribed) ·
+`FIG-W11-01` (unit square + four normals) · `FIG-W11-02` (commutative triangle, `tikz-cd`)
+
+### Group B — compositional sketches: **look at the page first**
+
+Freeform blobs, hand-placed labels, multi-panel layouts. The prose stub gives the idea but not
+the arrangement, and fidelity to Corsin's picture is part of the point.
+
+`FIG-W02-01` (nested space ovals) · `FIG-W02-02` (triangle inequality) · `FIG-W02-03` (three
+metrics) · `FIG-W02-04` (geodesic vs chord) · `FIG-W02-05`, `FIG-W02-06` (open/closed panels) ·
+`FIG-W02-07` (ε-tube) · `FIG-W02-09`, `FIG-W02-10` (open covers) · `FIG-W03-01` (Weierstrass —
+*pasted stock image, must be redrawn anyway*) · `FIG-W03-02`, `FIG-W03-03` (connectedness) ·
+`FIG-W03-07`, `FIG-W03-08` (rotation, projection) · `FIG-W05-01` (paraboloid + level sets +
+gradient) · `FIG-W05-02` (∇T on the sphere) · `FIG-W06-01` (convexity + two tangents) ·
+`FIG-W06-03` (invertible-but-not-diffeo) · `FIG-W06-04`, `FIG-W06-05`, `FIG-W06-06` (IFT
+diagrams) · `FIG-W07-01` (submanifold chart) · `FIG-W07-04` (surface mesh + tangents) ·
+`FIG-W09-03` (Gram parallelogram on a surface) · `FIG-W09-04` (inscribed polygon) ·
+`FIG-W10-02` (geodesic competitors) · `FIG-W10-03` (fluid through a surface element)
+
+**How to work Group B economically:** it clusters by week, and each week's figures sit on a
+handful of pages. Re-read only those pages (`Read` with `pages`), draw that week's batch, move on
+— roughly 3–4 pages per week rather than the whole file.
+
 ## Reference assets
 
 `Toby Lane/geogebra/*.ggb` are interactive GeoGebra constructions covering several of the

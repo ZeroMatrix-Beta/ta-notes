@@ -164,7 +164,28 @@ unnumbered:  theorem* lemma* corollary* definition* proposition* claim*
 
 ---
 
-## 7. Prose
+## 7. Figure stubs — write specs, not pointers
+
+The goal of the transcript stage is that the LaTeX stage needs **only the Markdown**. Prose
+achieves that. Figures only achieve it if the stub is written as a *drawing specification*.
+
+While the page is still on screen, capture what a TikZ author would otherwise have to reopen the
+PDF for: relative positions, which objects are solid / dashed / dotted, arrow directions and what
+they connect, label text and where it sits, panel layout, and roughly where curves bend or cross.
+Colours are part of Corsin's convention (blue / orange / red / green / purple) — name them.
+
+- **Pointer (forces a re-read):** "blob $X$ covered by three dotted regions $U_1$, $U_2$, $U_3$."
+- **Spec (self-sufficient):** "kidney-shaped blue blob $X$; three overlapping dotted ellipses at
+  roughly 10, 2 and 6 o'clock, each crossing the boundary outward; labels $U_1$–$U_3$ placed
+  outside the blob next to their own ellipse; caption $U_1\cup U_2\cup U_3 = X$."
+
+Costs nothing extra at transcription time, and removes an entire second pass over the source.
+
+**Weeks 2–11 were written to the weaker standard.** The Group A / Group B split at the bottom of
+`05-figure-queue.md` records which of those 49 figures are still self-sufficient (mathematically
+determined) and which need the page in view.
+
+## 8. Prose
 
 - Prefer English connectives to arrows: "This implies that", "Consequently", "Hence",
   "Therefore". Avoid strings of isolated `\iff` interleaved with prose fragments.
@@ -178,7 +199,7 @@ unnumbered:  theorem* lemma* corollary* definition* proposition* claim*
 
 ---
 
-## 8. Provenance & honesty
+## 9. Provenance & honesty
 
 - Every environment in `content/*.tex` traces back to a page pointer in `transcript/*.md`.
 - Suspected errors in a source are **flagged, never silently corrected**:
@@ -188,7 +209,7 @@ unnumbered:  theorem* lemma* corollary* definition* proposition* claim*
 
 ---
 
-## 9. Forbidden
+## 10. Forbidden
 
 - `\vspace{1em}\noindent\hrulefill\vspace{1em}` spacer blocks.
 - Manual `\newpage`/`\vspace` for cosmetic tuning (the preamble handles spacing).

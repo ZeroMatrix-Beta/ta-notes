@@ -29,6 +29,25 @@ order:
 Steps 3–5 improve a document that already builds. Step 6 is the only one that opens another
 tutor's folder, and the project is a legitimate deliverable without it.
 
+## Committing — never `git add -A`
+
+More than one session has worked this repo at the same time. In a shared working directory
+`git add -A` stages **whatever happens to be on disk**, including another session's in-flight
+edits, which then land under your commit message. That happened once already: a commit whose
+message read "correct a figure count" carried 1,096 lines of someone else's LaTeX conversion.
+
+**Stage only the paths you touched:**
+
+```bash
+git add docs/04-style-guide.md transcript/week-12.md   # yes
+git add -A                                             # no
+```
+
+Branching does **not** fix this — two sessions in one directory share a worktree and an index
+regardless of branch. If you genuinely need parallel sessions, give each its own `git worktree`.
+Otherwise, path-scoped staging is enough. Check `git status --short` before every commit and
+leave anything you did not write alone.
+
 ## Where the work stands
 
 Corsin Nick's weeks **2–11 are fully transcribed** (~3,970 lines); weeks **12, 13 and the ODE

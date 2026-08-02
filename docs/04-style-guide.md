@@ -1,7 +1,8 @@
 # House style — Analysis II TA notes
 
-Derived from `gemini.md` (the prompt that worked on the Linear Algebra transcription).
-LinAlg-specific rules have been dropped; Analysis II rules added.
+`gemini.md` is our guideline — the base style prompt this project's house style is built on.
+This document adds Analysis-II-specific rules and settled decisions on top of it; it does not
+replace it. Where this document is silent, `gemini.md` governs.
 
 ---
 
@@ -204,7 +205,16 @@ unnumbered:  theorem* lemma* corollary* definition* proposition* claim*
   A proof of a multi-part statement mirrors the statement's `enumerate` exactly.
   Referencing a sub-part in prose keeps the bold: "by **(b)**".
 - **Named lists** (properties like *definiteness*, *symmetry*, *triangle inequality* —
-  Corsin labels these explicitly in Week 2, p. 3) use the `description` environment.
+  Corsin labels these explicitly in Week 2, p. 3) use `itemize` or `enumerate`, never
+  `description` (forbidden, see section 10) — bold the name inline with `\textbf{name}`
+  rather than putting it in a `description` item label:
+  `\item \textbf{definiteness:} $d(x,y) \geq 0$, ...`.
+- **No custom bracketed titles on environments.** Never
+  `\begin{theorem}[Heine--Borel]`, `\begin{exercise}[3.7 --- Cauchy--Schwarz]`,
+  `\begin{definition}[sign of a symmetric matrix]`. Use the plain, unbracketed environment;
+  put the name in the prose immediately before or after it, or in the `\label` slug. The
+  `exercisesolution[<title>]` pointer to the exercise being solved is the one sanctioned
+  exception — it is a structural cross-reference, not a name.
 - **Labels** are descriptive slugs, never numbers: `\label{thm:heine_borel}`,
   `\label{def:metric_space}`. Place immediately after `\begin{…}`. Prefix by type
   (`thm:`, `lem:`, `cor:`, `def:`, `prop:`, `ex:`, `fig:`, `eq:`).
@@ -272,3 +282,7 @@ determined) and which need the page in view.
 - Touching the theorem / `aliascnt` / `cleveref` machinery in `main.tex:334–463` — the
   comments there document real bugs already solved. Do not regress them.
 - Editing anything inside the 17 tutor source folders or `exercises/`.
+- The `description` environment, for any purpose. Use `itemize`/`enumerate` instead.
+- Custom bracketed titles on environments (`\begin{theorem}[Name]` and the like) — see
+  section 6. Existing `content/*.tex` written before this rule was settled does not yet
+  conform; fix opportunistically, not required to block on a dedicated pass.

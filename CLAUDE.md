@@ -87,8 +87,19 @@ stage 1.
 | `docs/05-figure-queue.md` | Diagrams awaiting TikZ |
 | `docs/06-open-questions.md` | Illegible passages, suspected errors, unresolved calls |
 
-`gemini.md` is the *previous* project's style prompt, kept for reference only.
-`docs/04-style-guide.md` supersedes it.
+`gemini.md` is our guideline — the base style prompt this project's house style is built on.
+`docs/04-style-guide.md` sits on top of it: Analysis-II-specific deltas and settled decisions,
+not a replacement. Where the two don't overlap, `gemini.md` still governs.
+
+### Settled LaTeX conventions (apply retroactively — existing content may not conform yet)
+
+- **No `description` environment.** Use `itemize` or `enumerate` instead, even for named lists
+  (properties like *definiteness*, *symmetry*, *triangle inequality*) — bold the name inline
+  with `\textbf{name}` rather than putting it in a `description` item label.
+- **No custom bracketed titles on environments** — i.e. no
+  `\begin{theorem}[Heine--Borel]`, `\begin{exercise}[3.7 --- Cauchy--Schwarz]`,
+  `\begin{definition}[sign of a symmetric matrix]`. Use the plain, unbracketed environment and
+  put the name/title in prose or in the `\label`, never in `[...]`.
 
 ## The five things that matter
 

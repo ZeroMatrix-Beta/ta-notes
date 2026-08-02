@@ -196,7 +196,7 @@ that $d_X(x,z) \leq t_1$ and $d_X(z,y) \leq t_2$, then use the triangle inequali
 *(Corsin p. 1)*
 
 **Theorem (Heine–Borel).** A subset $K \subseteq \mathbb{R}^n$ equipped with the **standard
-metric** is **compact** if and only if it is **closed** and **bounded**.
+metric** is **compact** if and only if it is **closed** and **bounded** ("beschränkt").
 
 This captures our intuition of a "compact" set. We will briefly show that Heine–Borel is **false**
 for $\mathbb{R}^n$ with an **arbitrary metric**.
@@ -239,7 +239,7 @@ which is true by non-negativity. $\square$
 > See `OQ-08`.
 
 **2.** Let $U \subseteq X$ be open. Then, given $x \in U$, we find $r > 0$ such that
-$B_r(x) = \{y \in X : d(x,y) < r\} \subseteq U$. Let $\varepsilon := \dfrac{r}{1+r}$. Then
+$B_r(x) := \{y \in X : d(x,y) < r\} \subseteq U$. Let $\varepsilon := \dfrac{r}{1+r}$. Then
 $\tilde B_\varepsilon(x) \subseteq B_r(x) \subseteq U$, where
 $\tilde B_\varepsilon(x) := \{y \in X : \tilde d(x,y) < \varepsilon\}$. $\square$
 
@@ -301,7 +301,7 @@ Are the following true or false?
 
 1. The union of connected subsets with a common point is connected.
 2. The intersection of connected subsets is connected.
-3. The closure of a connected subset is connected.
+3. The **closure** ("Abschluss") of a connected subset is connected.
 
 #### Solution *(Corsin pp. 5–6)*
 

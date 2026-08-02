@@ -488,6 +488,28 @@
 }
 
 % ==========================================
+% WEEK/TOPIC SKELETON MACROS (chapter = week, section = topic; see docs/04-style-guide.md §5)
+% ==========================================
+% Monday/Friday class marker. Deliberately NOT a sectioning command: it must not
+% consume a section letter, disturb theorem numbering, or enter the TOC.
+\newcommand{\session}[1]{%
+  \par\addvspace{2.5ex}%
+  \noindent{\sffamily\bfseries\color{ThemeWeekNumber}#1}%
+  \hspace{0.75em}\textcolor{HeaderFooterLine}{\leaders\hrule height 0.5pt\hfill}%
+  \par\addvspace{1.2ex}\noindent\ignorespaces}
+
+% The week's problem sheet. Unnumbered so it does not consume a section letter
+% (theorem numbers stay tied to topics), but listed in the TOC so it is findable.
+\newcommand{\exercisesheet}[1]{%
+  \section*{Exercise sheet #1}%
+  \addcontentsline{toc}{section}{Exercise sheet #1}%
+  \markright{Exercise sheet #1}}
+
+% A topic carried over from the previous week.
+\newcommand{\continuedfrom}[1]{%
+  \par\noindent{\small\itshape\color{TextMetaNote}Continued from \cref{#1}.}\par\addvspace{1ex}}
+
+% ==========================================
 % FIGURE STUB (placeholder box until the dedicated TikZ pass, step 5)
 % ==========================================
 % Usage: \begin{figurestub}{FIG-W02-01} description text \end{figurestub}
@@ -523,6 +545,14 @@
 \DeclareMathOperator{\diag}{diag}
 \DeclareMathOperator{\dist}{dist}
 \DeclareMathOperator{\Rea}{Re}   % real part; \Re is taken by the fraktur symbol
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\vol}{vol}
+\DeclareMathOperator{\divg}{div}
+\DeclareMathOperator{\curl}{curl}
+\DeclareMathOperator{\Jac}{J}
+\DeclareMathOperator{\Hess}{Hess}
+\DeclareMathOperator{\grad}{grad}
 
 % Matrix groups. Declared as operators so that "O", "U", "SO", "SU" stay upright
 % and are never mistaken for the italic variables O, U (which this text also uses
@@ -598,19 +628,21 @@
 
 \vspace*{4.5cm}
 \noindent\begin{minipage}{\textwidth}
-    {\sffamily\fontsize{40pt}{48pt}\selectfont\bfseries\color{ThemePrimary!95!black} Linear Algebra I/II \par}
+    {\sffamily\fontsize{40pt}{48pt}\selectfont\bfseries\color{ThemePrimary!95!black} Analysis II \par}
     \vspace{1.2cm}
     {\color{ThemeWeekNumber}\rule{\linewidth}{2.5pt}\par}
     \vspace{0.2cm}
     {\color{ThemeAccent1}\rule{0.6\linewidth}{1.5pt}\par}
     \vspace{2.0cm}
-    {\sffamily\fontsize{18pt}{24pt}\selectfont\bfseries\color{TextEmphColor} Lecture Notes \& Transcript \par}
+    {\sffamily\fontsize{18pt}{24pt}\selectfont\bfseries\color{TextEmphColor} Several Variables --- Exercise Class Notes \& Transcript \par}
     \vspace{0.6cm}
-    {\sffamily\fontsize{15pt}{22pt}\selectfont\color{TextBoldColor} Lecturer: \textbf{Prof. Dr. Paul Biran} \par}
+    {\sffamily\fontsize{15pt}{22pt}\selectfont\color{TextBoldColor} Lecturer: \textbf{Prof. Joaquim Serra} \par}
+    \vspace{0.1cm}
+    {\sffamily\fontsize{14pt}{20pt}\selectfont\color{TextBoldColor} Teaching Assistant: \textbf{Corsin Nick} \par}
     \vspace{0.3cm}
     {\sffamily\fontsize{14pt}{20pt}\selectfont\color{OliveGreen} Department of Mathematics -- ETH Zürich \par}
     \vspace{2.5cm}
-    {\sffamily\fontsize{14pt}{20pt}\selectfont\bfseries\color{ThemeWeekNumber}\faGraduationCap\quad Academic Year 2025/2026 \par}
+    {\sffamily\fontsize{14pt}{20pt}\selectfont\bfseries\color{ThemeWeekNumber}\faGraduationCap\quad Spring Semester 2026 (401-1262-07L) \par}
 \end{minipage}
 \vfill
 \noindent\begin{minipage}{\textwidth}
@@ -639,38 +671,9 @@
 \cleardoublepage
 
 % Include content
-\input{content/01-fibonacci.tex}
-\input{content/02-logic.tex}
-\input{content/03-set-theory.tex}
-\input{content/04-maps.tex}
-\input{content/05-fields.tex}
-\input{content/06-systems-of-linear-equations.tex}
-\input{content/07-vector-spaces.tex}
-\input{content/08-span.tex}
-\input{content/09-linear-independence.tex}
-\input{content/10a-bases-part-a.tex}
-\input{content/11-bases-part-b.tex}
-\input{content/12-dimension.tex}
-\input{content/13-row-and-col-space.tex}
-\input{content/14-sums-of-vector-spaces.tex}
-\input{content/15a-linear-maps.tex}
-\input{content/16-linear-maps-and-bases.tex}
-\input{content/17a-matrices_a_matrix_multiplication.tex}
-\input{content/17b-matrices_b_change_of_basis.tex}
-\input{content/17c-matrices_c_column_rank_and_row_rank.tex}
-\input{content/17d-matrices_d_more_on_matrices_and_lineq.tex}
-\input{content/17e-matrices_e_elemntary_row_operations_revisited.tex}
-\input{content/18-vs-out-of-old-ones.tex}
-\input{content/19-misc.tex}
-\input{content/20-determinants.tex}
-\input{content/21-eigenvalues-eigenvectors.tex}
-\input{content/22a-euclidean-hermetian-spaces-a.tex}
-\input{content/22b-euclidean-hermetian-spaces-b.tex}
-\input{content/23a-dual-spaces-inner-products-a.tex}
-\input{content/24-spectral-thoerem.tex}
-\input{content/25-isometries.tex}
-\input{content/26-singular-value-decomposition.tex}
-\input{content/27-bilinear-and-quadratic-forms.tex}
-\input{content/28-jordan-a.tex}
+\input{content/week-02.tex}
+\input{content/week-03.tex}
+\input{content/week-04.tex}
+\input{content/week-05.tex}
 
 \end{document}

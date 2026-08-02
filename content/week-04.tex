@@ -53,7 +53,9 @@ $$|x|_p := \Big(\sum_{i=1}^{n} |x_i|^p\Big)^{1/p}.$$
     whenever $a_i, b_i$ are $n$-tuples of positive numbers.
   \item Fix $x, y \in \mathbb{R}^n$ and consider the function $f : [0,1] \to \mathbb{R}$ defined
     as
-    $$f(t) := |tx + (1-t)y|_p = \Big(\sum_{i=1}^{n}|tx_i + (1-t)y_i|^p\Big)^{1/p}. \tag{1}$$
+    \begin{equation*}
+    f(t) := |tx + (1-t)y|_p = \Big(\sum_{i=1}^{n}|tx_i + (1-t)y_i|^p\Big)^{1/p}. \tag{1}
+    \end{equation*}
     Show that $f$ is convex. You may assume that the coordinates of $x$ and $y$ are all strictly
     positive and use the inequality of the previous point.
   \item Deduce from the previous point that the triangular inequality holds, i.e.\
@@ -108,7 +110,9 @@ Let $u \in C^1(\mathbb{R}^n)$ and $\nu \in \mathbb{R}^n$. Show that
 \begin{enumerate}[label=\textbf{\arabic*.}]
   \item If $\partial_1 u \equiv 0$ then ``$u$ does not depend on $x_1$''; more rigorously: there
     exists a unique function $v \in C^1(\mathbb{R}^{n-1})$ such that
-    $$u(x_1,\dots,x_n) = v(x_2,\dots,x_n) \quad \text{for all } x \in \mathbb{R}^n. \tag{2}$$
+    \begin{equation*}
+    u(x_1,\dots,x_n) = v(x_2,\dots,x_n) \quad \text{for all } x \in \mathbb{R}^n. \tag{2}
+    \end{equation*}
   \item If $\partial_\nu u \equiv 0$ and $\nu\cdot e_1 \neq 0$ then ``$u$ is a function of $n-1$
     variables''; more rigorously: there exists a unique function $w \in C^1(\mathbb{R}^{n-1})$
     such that
@@ -237,7 +241,9 @@ $$
 Sometimes the \newterm{differential} (\germanterm{das Differential}) is not easily expressed as a
 Jacobian. Then it can be convenient to use the formula for \newterm{directional derivatives}
 (\germanterm{Richtungsableitung}):
-$$DF_{x_0}(v) = \partial_v F(x_0) = \left.\frac{d}{ds}\right|_{s=0} F(x_0 + sv) \tag{$*$}$$
+\begin{equation*}
+DF_{x_0}(v) = \partial_v F(x_0) = \left.\frac{d}{ds}\right|_{s=0} F(x_0 + sv) \tag{$*$}
+\end{equation*}
 
 \begin{importantremark}
 The directional derivative $\partial_v F(x_0)$ can exist (depending on $v$ and $x_0$) even if $F$

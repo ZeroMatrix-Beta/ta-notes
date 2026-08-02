@@ -13,6 +13,22 @@ To resume: `transcript/week-12.md` is the next file. Read
 `Corsin Nick/Class Notes/Week 12.pdf` (7 pp) and `exercises/Ex12_Analysis2_eng.pdf`, then follow
 the format of any finished week (`week-11.md` is the richest example).
 
+### Do these as two separate sessions — they have opposite cost profiles
+
+1. **Finish transcription** — weeks 12, 13, `Analysis 1 lesson on ODEs.pdf` (~29 pp).
+   Reads PDF page images, so it is context-hungry. Stay in Markdown for these three: switching
+   to direct-LaTeX for the last 23% would buy little and cost consistency.
+2. **LaTeX conversion + `main.tex` retarget** — **opens no PDFs at all.** Pure text→text over
+   `transcript/`, so it is cheap and can run in a session that never touches the source folders.
+   The TikZ figure pass (`05-figure-queue.md`) belongs here too.
+
+*Retrospective, for whoever plans the next project like this:* the Markdown→LaTeX two-stage
+pipeline was a judgement call that cost a second pass over every week. Writing `content/*.tex`
+directly, with `% Corsin Week 5, p. 4` comments carrying the provenance, would have achieved the
+same traceability in one pass. The transcripts' math is already LaTeX, so stage 2 is mostly
+wrapping prose in environments. Not worth reversing now — 10 of 13 weeks are already through
+stage 1.
+
 ## Read these first
 
 | File | What it settles |

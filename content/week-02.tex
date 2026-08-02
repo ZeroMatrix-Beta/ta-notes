@@ -40,14 +40,22 @@ called a \newterm{space} (\germanterm{Raum}) in this context --- which we will d
     \end{itemize}
 \end{description}
 
-\begin{figurestub}{FIG-W02-01}
-Four concentric rounded blobs (irregular circle-like shapes, not perfect circles), each nested
-fully inside the next, largest to smallest: outermost red blob labelled \textit{Topological
-spaces} (label near the top, inside the red band); yellow blob inside it labelled \textit{Metric
-spaces}; green blob inside that labelled \textit{Normed vector spaces}; innermost blue blob
-labelled \textit{Inner product spaces}. Each label sits inside its own coloured band, stacked top
-to bottom in the same nesting order.
-\end{figurestub}
+\begin{center}
+\begin{tikzpicture}
+\fill[red!25] (0,0) ellipse (3.2 and 2.4);
+\fill[yellow!35] (0,-0.1) ellipse (2.4 and 1.8);
+\fill[green!25] (0,-0.2) ellipse (1.6 and 1.2);
+\fill[blue!25] (0,-0.3) ellipse (0.8 and 0.6);
+\draw[red!70!black] (0,0) ellipse (3.2 and 2.4);
+\draw[yellow!70!black] (0,-0.1) ellipse (2.4 and 1.8);
+\draw[green!60!black] (0,-0.2) ellipse (1.6 and 1.2);
+\draw[blue!70!black] (0,-0.3) ellipse (0.8 and 0.6);
+\node[red!70!black] at (0,2.0) {\footnotesize Topological spaces};
+\node[yellow!70!black] at (0,1.35) {\footnotesize Metric spaces};
+\node[green!60!black] at (0,0.75) {\footnotesize Normed vector spaces};
+\node[blue!70!black] at (0,-0.3) {\footnotesize Inner product spaces};
+\end{tikzpicture}
+\end{center}
 
 The precise definitions will follow later. You will see that an \textbf{inner product}
 $\langle\cdot,\cdot\rangle$ induces a \textbf{norm} by the formula
@@ -77,13 +85,25 @@ Corsin's gloss on definiteness reads \qt{the distance positive}; the formula $d 
 correct, but the gloss omits the ``non-''. Corrected in the prose above. See \texttt{OQ-02}.
 \end{remark}
 
-\begin{figurestub}{FIG-W02-02}
-On a pair of coordinate axes (origin at bottom-left): point $x$ sits near the origin
-(bottom-left), $y$ sits upper-middle, $z$ sits upper-right, so the three points form a flattened,
-lever-like triangle. A blue two-segment path traces $x \to y \to z$ (up, then across). A red
-straight edge connects $x$ directly to $z$, cutting beneath the blue path. Below the sketch, the
-annotation $d(x,z) \le d(x,y) + d(y,z)$ in red.
-\end{figurestub}
+\begin{center}
+\begin{tikzpicture}[>=Latex]
+\draw[->] (-0.3,0) -- (4.2,0);
+\draw[->] (0,-0.3) -- (0,3);
+\coordinate (x) at (0.2,0.2);
+\coordinate (y) at (1.6,2.0);
+\coordinate (z) at (3.6,2.3);
+\draw[blue,thick,->] (x) -- (y);
+\draw[blue,thick,->] (y) -- (z);
+\draw[red,thick,->] (x) -- (z);
+\fill (x) circle (1.5pt) node[below]{$x$};
+\fill (y) circle (1.5pt) node[above]{$y$};
+\fill (z) circle (1.5pt) node[above]{$z$};
+\node[red] at (2.3,0.7) {\footnotesize $d(x,z)$};
+\node[blue] at (0.6,1.3) {\footnotesize $d(x,y)$};
+\node[blue] at (2.7,2.4) {\footnotesize $d(y,z)$};
+\node[red,below] at (2,-0.6) {\small $d(x,z) \le d(x,y)+d(y,z)$};
+\end{tikzpicture}
+\end{center}
 
 \subsection{Examples}
 

@@ -102,34 +102,90 @@ In the Markdown transcripts write it as `**compact** ("kompakt")` so conversion 
 
 ---
 
-## 5. Document skeleton
+## 5. Document skeleton — SETTLED
 
-One `\chapter` per teaching week, matching Corsin's file names:
-
-```latex
-\chapter{Week 2 --- Metric Spaces, Topology \& Continuity}
-  \subsection*{Recommended exercises}   % the week's problem sheet
-  \session{Monday}                      % -> \section{...}, see below
-    \subsection{Metric spaces}
-  \session{Friday}
-```
-
-**`\session`.** Corsin splits every week into a Monday and a Friday class. Rather than
-hard-coding `\section{Monday}` everywhere, define one macro in the preamble so the day
-headings stay a single restylable unit:
+**Chapter = week (container). Section = topic (the navigable level). Day = a marker, not a
+sectioning level.**
 
 ```latex
-% Week N, Monday/Friday class heading.
-\newcommand{\session}[1]{\section{#1}}
+\chapter{Week 2 --- Metric Spaces, Topology \& Continuity}   % chapter no. = week no.
+
+\exercisesheet{2}            % \section*, but does appear in the TOC
+\session{Monday}             % styled rule in the body; NOT a sectioning command
+\section{Structured spaces}          % -> 2.a
+\section{Metric spaces}              % -> 2.b
+  \subsection{Examples}              % unnumbered (secnumdepth = 1)
+\section{Open and closed sets}       % -> 2.c
+\session{Friday}
+\section{Continuity}                 % -> 2.d
 ```
 
-Because `\thesection` is `\thechapter.\alph{section}`, this numbers the Monday class of
-Week 5 as *5.a* and the Friday class as *5.b*, and theorems inside them as `5.a.1`, `5.b.1`.
-That is exactly the numbering the preamble was already built for — no override needed.
-Changing the look of every day heading later is then a one-line edit.
+### Why day is not a sectioning level
 
-Weeks with only one recorded session (Corsin's Week 7 and Week 10 have no Friday file) simply
-omit the second `\session`.
+Only **weeks 2, 3 and 4** carry Monday/Friday markers in Corsin's notes; weeks 5–11 have none
+(each transcript records "no session split"). Making day a `\section` would leave nine chapters
+with a single section or none, and would push topics down to `\subsection`, which is unnumbered
+under `secnumdepth = 1` — so theorems would lose their topic anchor. Topic-as-section also matches
+the sibling project `en-ta-notes-analysis2-sb`, which sections purely by topic.
+
+### What this buys
+
+`\thesection` is already `\thechapter.\alph{section}` and theorems already number
+`Chapter.SectionLetter.Number`, so with no preamble override:
+
+- chapter number **equals** the week number — Week 7 is Chapter 7;
+- sections read *2.a Structured spaces*, *2.b Metric spaces*, … — a TOC you can navigate by topic;
+- theorems land as `2.c.1`, anchored to a **topic**, not to a weekday;
+- `\cref{sec:metric_spaces}` resolves to something meaningful.
+
+### Macros to add to the preamble
+
+```latex
+% Monday/Friday class marker. Deliberately NOT a sectioning command: it must not
+% consume a section letter, disturb theorem numbering, or enter the TOC.
+\newcommand{\session}[1]{%
+  \par\addvspace{2.5ex}%
+  \noindent{\sffamily\bfseries\color{ThemeWeekNumber}#1}%
+  \hspace{0.75em}\textcolor{HeaderFooterLine}{\leaders\hrule height 0.5pt\hfill}%
+  \par\addvspace{1.2ex}\noindent\ignorespaces}
+
+% The week's problem sheet. Unnumbered so it does not consume a section letter
+% (theorem numbers stay tied to topics), but listed in the TOC so it is findable.
+\newcommand{\exercisesheet}[1]{%
+  \section*{Exercise sheet #1}%
+  \addcontentsline{toc}{section}{Exercise sheet #1}%
+  \markright{Exercise sheet #1}}
+
+% A topic carried over from the previous week.
+\newcommand{\continuedfrom}[1]{%
+  \par\noindent{\small\itshape\color{TextMetaNote}Continued from \cref{#1}.}\par\addvspace{1ex}}
+```
+
+### Topics that span weeks
+
+Corsin himself writes *"Compactness (continued)"* at the top of Week 3. Mirror that:
+
+```latex
+\section{Compactness --- continued}
+\label{sec:compactness_continued}
+\continuedfrom{sec:compactness}
+```
+
+The `---` form is the house convention for any carried-over topic. Always add
+`\continuedfrom{...}` so the reader can jump back.
+
+### Finding a topic across weeks
+
+Because chapters are weeks, a topic split over two weeks appears twice. The fix is **not** to
+restructure but to add **Appendix C — Thematic index**: lecture chapters 9–14 → the week/section
+that covers them, generated from `docs/03-topic-index.md`. Readers who think in lecture chapters
+use that; readers who think in weeks use the TOC.
+
+### File naming
+
+`content/week-02.tex` etc., one file per week — matching `transcript/week-02.md` one-to-one, so
+the two stages stay in lockstep. (The sibling `-sb` project splits one file per topic; that suits
+a single-week pilot, not 12 weeks.)
 
 ## 6. Structure & environments
 

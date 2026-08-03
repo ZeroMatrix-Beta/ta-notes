@@ -108,6 +108,50 @@ are unaffected. Re-derived cleanly above. See \texttt{OQ-08}.
     compact, then $f$ is \newterm{uniformly continuous} (\germanterm{gleichm\"assig stetig}).
 \end{enumerate}
 
+% Quelle: Linus Lüchinger/Slides/Slides-03-02.pdf, pp. 10--13 -- Sonnet 5 (Medium)
+\begin{ainote}
+Corsin never formally introduces \newterm{Lipschitz continuity}, even though a
+\newterm{Lipschitz constant} is already used informally for contraction mappings
+(\cref{def:contraction_mapping}, below). Lüchinger's exercise slides motivate and name it as a
+strictly stronger condition than uniform continuity, and give a quick self-test; both are
+reproduced here (reformulated), since they fill a genuine gap.
+\end{ainote}
+
+\begin{definition}[Lipschitz continuity]
+\label{def:lipschitz_continuous}
+Let $(X,d_X)$, $(Y,d_Y)$ be metric spaces. A function $f : X \to Y$ is \newterm{Lipschitz
+continuous} (\germanterm{Lipschitz-stetig}) if there exists $L \geq 0$, a \newterm{Lipschitz
+constant} for $f$, such that
+$$d_Y(f(x),f(x')) \leq L\cdot d_X(x,x') \quad \text{for all } x,x' \in X.$$
+\end{definition}
+
+\begin{remark}[Hierarchy of continuity notions]
+Lipschitz continuous $\implies$ uniformly continuous (\cref{item:uniform_continuity_compact})
+$\implies$ continuous (\cref{def:continuous}): given $L$, the choice $\delta := \varepsilon/L$
+works uniformly in $x$, independently of $\varepsilon$. Every continuously differentiable
+function on a compact domain is Lipschitz continuous (with $L := \sup|f'|$, by the mean value
+theorem), but the converse implications all fail in general --- $\delta(\varepsilon) \leq
+\varepsilon^2$ for $f(x) := \sqrt x$ near $0$ decays too fast for any linear bound, so $\sqrt{\cdot}$
+is uniformly continuous on $[0,\infty)$ but not Lipschitz.
+\end{remark}
+
+\begin{aiexercise}[Classifying continuity]
+\label{ex:ai_continuity_classification}
+% Generator: Claude Sonnet 5 (Medium), after Linus Lüchinger/Slides/Slides-03-02.pdf, p. 13
+For each of the following functions, determine whether it is continuous, uniformly continuous,
+and/or Lipschitz continuous on the given domain:
+\begin{center}
+\begin{tabular}{ll}
+\textbf{Function} & \textbf{Domain} \\
+\hline
+$\sqrt{x}$ & $[0,\infty)$ \\
+$1/x$ & $(0,1)$ \\
+$\sgn(x)$ & $(-1,1)$ \\
+$|x|^{3/2}$ & $(-1,1)$
+\end{tabular}
+\end{center}
+\end{aiexercise}
+
 \begin{center}
 \begin{tikzpicture}[>=Latex, scale=1.2]
   \draw[->] (-0.3,0) -- (3.5,0) node[right] {$x$};
@@ -545,9 +589,9 @@ completeness (\cref{def:complete_metric_space}) from Week 2.
 \begin{definition}[Contraction mapping]
 \label{def:contraction_mapping}
 Let $(X,d)$ be a metric space. A map $f : X \to X$ is a \newterm{contraction}
-(\germanterm{Kontraktion}) if there exists $L \in [0,1)$ such that
-$$d(f(x),f(y)) \leq L \cdot d(x,y) \quad \text{for all } x,y \in X;$$
-such an $L$ is called a \newterm{Lipschitz constant} for $f$.
+(\germanterm{Kontraktion}) if it is Lipschitz continuous (\cref{def:lipschitz_continuous}) with
+some Lipschitz constant $L \in [0,1)$, i.e.,
+$$d(f(x),f(y)) \leq L \cdot d(x,y) \quad \text{for all } x,y \in X.$$
 \end{definition}
 
 \begin{theorem}[Banach fixed point theorem]
@@ -580,11 +624,30 @@ Let $f \colon X \to Y$ be a continuous map between metric spaces. Prove that if 
 \label{sec:week03_solutions}
 
 \begin{ainote}
-Only the two \texttt{aiexercise} problems below have solutions in this section: Corsin's own
+Only the \texttt{aiexercise} problems below have solutions in this section: Corsin's own
 exercises in this chapter (\cref{ex:heine_borel_fails,ex:connectedness_tf}) are solved inline,
 immediately after their statement, mirroring how he presents them in his own notes (see the
 "Kept inline" comments above each).
 \end{ainote}
+
+\begin{exercisesolution}[Solution to \cref{ex:ai_continuity_classification}]
+% Generator: Claude Sonnet 5 (Medium)
+\begin{itemize}
+  \item $\sqrt{x}$ on $[0,\infty)$: \textbf{uniformly continuous, not Lipschitz.} Uniform
+    continuity follows from continuity on $[0,1]$ (compact, \cref{item:uniform_continuity_compact})
+    together with $1$-Lipschitz behaviour on $[1,\infty)$ (since $|\sqrt x - \sqrt y| \leq
+    \tfrac12|x-y|$ there by the mean value theorem). Not Lipschitz near $0$: for $x_n :=
+    1/n^2 \to 0$, $\dfrac{|\sqrt{x_n}-\sqrt0|}{|x_n-0|} = n \to \infty$, so no global $L$ works.
+  \item $1/x$ on $(0,1)$: \textbf{continuous, neither uniformly nor Lipschitz continuous.} For
+    $x_n := 1/n$, $y_n := 1/(2n)$, $|x_n-y_n| \to 0$ but $|1/x_n - 1/y_n| = n \to \infty$, so no
+    uniform $\delta(\varepsilon)$ (and hence no Lipschitz constant) can work near $0$.
+  \item $\sgn(x)$ on $(-1,1)$: \textbf{none of the three} --- discontinuous at $0$.
+  \item $|x|^{3/2}$ on $(-1,1)$: \textbf{Lipschitz, hence also uniformly continuous and
+    continuous.} $|x|^{3/2}$ is $C^1$ on $(-1,1)\setminus\{0\}$ with $\big|\tfrac{d}{dx}|x|^{3/2}\big|
+    = \tfrac32|x|^{1/2} \leq \tfrac32$, and the bound extends across $0$ by direct estimation, so
+    $L := \tfrac32$ works globally.
+\end{itemize}
+\end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:ai_contraction_cos}]
 % Generator: Gemini 3.6 Flash (Medium)

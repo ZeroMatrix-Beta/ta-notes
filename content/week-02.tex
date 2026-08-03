@@ -738,6 +738,22 @@ all $k \leq n$. If this process never terminates, sequential compactness gives a
 Cauchy, subsequence $(x_{n_k})_k$; but $d(x_{n_k},x_{n_{k+1}}) \geq \varepsilon$ for all $k$
 contradicts the Cauchy property. So the process must terminate after finitely many steps, giving
 the desired finite $\varepsilon$-net.
+
+% Sonnet 5 (Medium)
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+  \draw[blue!70!black, thick] plot[smooth cycle, tension=0.7] coordinates
+    {(-2,-1) (-1.5,1.3) (1.2,1.5) (2.1,-0.4) (0.8,-1.6)};
+  \foreach \p/\lab in {(-1.1,0.2)/x_1,(0.1,0.9)/x_2,(1.1,0.1)/x_3,(-0.2,-0.8)/x_4} {
+    \fill \p circle (1.5pt);
+    \draw[orange!90!black, dashed] \p circle (0.85);
+  }
+  \node[font=\scriptsize, below left] at (-1.1,0.2) {$x_1$};
+  \node[font=\scriptsize, above] at (0.1,0.9) {$x_2$};
+  \node[font=\scriptsize, right] at (1.1,0.1) {$x_3$};
+  \node[font=\scriptsize, below] at (-0.2,-0.8) {$x_4$};
+\end{tikzpicture}
+\end{center}
 \end{proof}
 
 \begin{theorem}[Sequential and topological compactness agree]

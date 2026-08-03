@@ -196,6 +196,17 @@ Yet $f$ is not even continuous at $(0,0)$: along the diagonal $y=x$, $f(x,x) = \
 even though both partial derivatives exist there.
 \end{aiexample}
 
+% Sonnet 5 (Medium)
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.0]
+  \draw[->] (-1.6,0) -- (1.6,0) node[right, font=\small] {$x$};
+  \draw[->] (0,-1.6) -- (0,1.6) node[above, font=\small] {$y$};
+  \draw[orange!90!black, thick, ->] (0,0) -- (1.3,0) node[below right, font=\scriptsize] {$f\equiv0$};
+  \draw[orange!90!black, thick, ->] (0,0) -- (0,1.3) node[above left, font=\scriptsize] {$f\equiv0$};
+  \draw[purple, thick, ->] (0,0) -- (1.1,1.1) node[above right, font=\scriptsize] {$f\equiv\tfrac12$};
+\end{tikzpicture}
+\end{center}
+
 % Source: Corsin Nick/Class Notes/Week 4.pdf, p. 4
 \subsection{Examples}
 

@@ -119,6 +119,9 @@ Hessian test, depending on $a, b$.
 \section{Convexity}
 \label{sec:convexity}
 
+% Sonnet 5 (Medium)
+\subsection{Definitions and characterizations}
+
 \begin{definition}[Convex set and convex function]
 \label{def:convex_set_function}
 A subset $A \subseteq \mathbb{R}^n$ is \newterm{convex} (\germanterm{konvex}) if for all
@@ -157,6 +160,9 @@ $$\partial_i\partial_j p(x) = 2\delta_{ij} \implies \Hess p(x) = 2\id_n,$$
 and every eigenvalue is $2>0$, so $\Hess p(x)$ is positive definite (hence positive semidefinite)
 for every $x$, and $p$ is convex by \cref{prop:convexity_characterizations}.
 \end{example}
+
+% Sonnet 5 (Medium)
+\subsection{Proof of the characterizations}
 
 % Source: Corsin Nick/Class Notes/Week 6.pdf, pp. 3--6
 \begin{exercise}[Equivalent characterizations of convexity]
@@ -229,6 +235,11 @@ Let $U \subseteq \mathbb{R}^n$ be open and convex.
 
 % Figure: FIG-W06-01 (queued) --- see docs/05-figure-queue.md
 
+% Sonnet 5 (Medium)
+We now change subject entirely: from convexity to the question of when a map is locally
+invertible --- the tool that makes the implicit function theorem, and later submanifolds
+(\cref{sec:submanifolds}), possible.
+
 % Source: Corsin Nick/Class Notes/Week 6.pdf, pp. 8--9
 \section{The inverse function theorem}
 \label{sec:inverse_function_theorem}
@@ -276,6 +287,11 @@ invertible (everywhere invertible differential) but not globally injective: a pl
 \end{ainote}
 
 % Figure: FIG-W06-02, FIG-W06-03 (queued) --- see docs/05-figure-queue.md
+
+% Sonnet 5 (Medium)
+The inverse function theorem asks when $f(x)=y$ can be solved for $x$ as a function of $y$. The
+implicit function theorem generalizes this: it asks when an equation $f(x,y)=0$ can be solved for
+\emph{some} of the variables in terms of the others, without $f$ itself being invertible.
 
 % Source: Corsin Nick/Class Notes/Week 6.pdf, pp. 10--12
 \section{The implicit function theorem}

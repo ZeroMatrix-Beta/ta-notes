@@ -123,6 +123,11 @@ are unaffected. Re-derived cleanly above. See \texttt{OQ-08}.
 \end{tikzpicture}
 \end{center}
 
+% Sonnet 5 (Medium)
+Compactness told us when a space has \qt{enough finiteness} to guarantee extrema and uniform
+behaviour. We now turn to a completely different, qualitative kind of structure: whether a space
+can be split into separate pieces at all.
+
 \section{Connectedness}
 \label{sec:connectedness}
 
@@ -198,7 +203,8 @@ Are the following true or false?
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item The union of connected subsets with a common point is connected.
   \item The intersection of connected subsets is connected.
-  \item The \newterm{closure} (\germanterm{Abschluss}) of a connected subset is connected.
+  \item The \newterm{closure} (\germanterm{Abschluss}, \cref{def:interior_closure_boundary}) of a
+    connected subset is connected.
 \end{enumerate}
 \end{exercise}
 
@@ -282,17 +288,18 @@ can replace $[0,1]$ by $[a,b]$ for $a < b$.
 \label{def:path_connected}
 A metric space $X$ (or subset thereof) is \newterm{path-connected}
 (\germanterm{wegzusammenh\"angend}) if for all $x, y \in X$ there exists a path
-$\gamma : [0,1] \to X$ with $\gamma(0) = x$, $\gamma(1) = y$.
+(\cref{def:path}) $\gamma : [0,1] \to X$ with $\gamma(0) = x$, $\gamma(1) = y$.
 \end{definition}
 
 \begin{lemma}[Path-connected implies connected]
 \label{lem:path_connected_implies_connected}
-Let $X$ be a metric space. Then $X$ path-connected implies $X$ connected.
+Let $X$ be a metric space. Then $X$ path-connected (\cref{def:path_connected}) implies $X$
+connected (\cref{def:connectedness}).
 \end{lemma}
 
 \begin{proposition}[Connectedness and path-connectedness in open Euclidean subsets]
 \label{prop:open_euclidean_connected_path_connected}
-Let $U \subseteq \mathbb{R}^n$ be open. Then
+Let $U \subseteq \mathbb{R}^n$ be open (\cref{def:open_closed}). Then
 \[
 U \text{ path-connected} \iff U \text{ connected}.
 \]
@@ -364,8 +371,14 @@ but $\gamma(a_n) \to (0,1) \neq \gamma(0)$. Contradiction to sequential continui
 \end{tikzpicture}
 \end{center}
 
+% Sonnet 5 (Medium)
+We close the week with a change of subject: away from topology and back to the linear-algebraic
+structure (\cref{sec:structured_spaces}) that lets us talk about angles, not just distances.
+
 \section{Cauchy--Schwarz}
 \label{sec:cauchy_schwarz}
+
+\subsection{Inner products and norms}
 
 \begin{definition}[Inner product / scalar product]
 \label{def:inner_product}
@@ -486,13 +499,69 @@ Use definiteness and expand the term
 where $u - \pi_v(u)$ is the \textbf{perpendicular part} of $u$ to $v$.
 \end{remark}
 
+% Sonnet 5 (Medium)
+\subsection{The Cauchy--Schwarz inequality}
+
+\begin{ainote}
+Corsin's own notes stop at the hint above (\cref{rem:proof_hint_cauchy_schwarz}) and never state
+the inequality itself as a formal result --- somewhat notable, since it names the section. Filled
+in below, carrying out exactly the hinted computation.
+\end{ainote}
+
+\begin{theorem}[Cauchy--Schwarz inequality]
+\label{thm:cauchy_schwarz}
+Let $V$ be an inner product space (\cref{def:inner_product}) with induced norm
+$\|\cdot\| := \sqrt{\langle\cdot,\cdot\rangle}$ (\cref{def:norm}). Then for all $u,v \in V$,
+$$|\langle u,v\rangle| \leq \|u\|\,\|v\|,$$
+with equality if and only if $u,v$ are linearly dependent.
+\end{theorem}
+
+\begin{proof}
+If $v = 0$, both sides vanish and the claim holds trivially, so assume $v \neq 0$. Following
+\cref{rem:proof_hint_cauchy_schwarz}, definiteness (\cref{def:inner_product}) gives
+$$0 \leq \langle u-\pi_v(u),\ u-\pi_v(u)\rangle = \langle u,u\rangle - 2\langle u,\pi_v(u)\rangle + \langle \pi_v(u),\pi_v(u)\rangle.$$
+Using $\pi_v(u) = \tfrac{\langle u,v\rangle}{\|v\|^2}v$ and bilinearity,
+$$\langle u,\pi_v(u)\rangle = \frac{\langle u,v\rangle^2}{\|v\|^2}, \qquad \langle \pi_v(u),\pi_v(u)\rangle = \frac{\langle u,v\rangle^2}{\|v\|^4}\langle v,v\rangle = \frac{\langle u,v\rangle^2}{\|v\|^2}.$$
+Substituting,
+$$0 \leq \|u\|^2 - \frac{2\langle u,v\rangle^2}{\|v\|^2} + \frac{\langle u,v\rangle^2}{\|v\|^2} = \|u\|^2 - \frac{\langle u,v\rangle^2}{\|v\|^2},$$
+which rearranges to $\langle u,v\rangle^2 \leq \|u\|^2\|v\|^2$, i.e., $|\langle u,v\rangle| \leq \|u\|\|v\|$. Equality holds
+if and only if $u - \pi_v(u) = 0$ by definiteness, i.e., $u$ is a scalar multiple of $v$.
+\end{proof}
+
+% Sonnet 5 (Medium)
+\subsection{Contraction mappings and the Banach fixed point theorem}
+
+\begin{ainote}
+Not in Corsin's own Week 3 notes either, but needed to justify the appeal to the \qt{Banach Fixed
+Point Theorem} in the solution to \cref{ex:ai_contraction_cos} below --- a standard companion to
+completeness (\cref{def:complete_metric_space}) from Week 2.
+\end{ainote}
+
+\begin{definition}[Contraction mapping]
+\label{def:contraction_mapping}
+Let $(X,d)$ be a metric space. A map $f : X \to X$ is a \newterm{contraction}
+(\germanterm{Kontraktion}) if there exists $L \in [0,1)$ such that
+$$d(f(x),f(y)) \leq L \cdot d(x,y) \quad \text{for all } x,y \in X;$$
+such an $L$ is called a \newterm{Lipschitz constant} for $f$.
+\end{definition}
+
+\begin{theorem}[Banach fixed point theorem]
+\label{thm:banach_fixed_point}
+Let $(X,d)$ be a nonempty complete metric space (\cref{def:complete_metric_space}) and let
+$f : X \to X$ be a contraction (\cref{def:contraction_mapping}). Then $f$ has a unique
+\newterm{fixed point} (\germanterm{Fixpunkt}) $x^* \in X$, i.e., $f(x^*) = x^*$; moreover, for any
+$x_0 \in X$, the iterates $x_{n+1} := f(x_n)$ converge to $x^*$.
+\end{theorem}
+
 \begin{aiexercise}[{Contraction Mapping on $[0,1]$}]
 \label{ex:ai_contraction_cos}
 % Generator: Gemini 3.6 Flash (Medium)
 Let $f \colon [0,1] \to [0,1]$ be defined by $f(x) := \frac{1}{2}\cos(x)$.
 \begin{enumerate}[label=\textbf{(\alph*)}]
-  \item Show that $f$ is a contraction mapping with Lipschitz constant $L = \frac{1}{2}\sin(1) < 1$.
-  \item Deduce that $f$ has a unique fixed point $x^* \in [0,1]$.
+  \item Show that $f$ is a contraction mapping (\cref{def:contraction_mapping}) with Lipschitz
+    constant $L = \frac{1}{2}\sin(1) < 1$.
+  \item Deduce, using \cref{thm:banach_fixed_point}, that $f$ has a unique fixed point
+    $x^* \in [0,1]$.
 \end{enumerate}
 \end{aiexercise}
 
@@ -515,8 +584,8 @@ immediately after their statement, mirroring how he presents them in his own not
 \begin{exercisesolution}[Proof of \cref{ex:ai_contraction_cos}]
 % Generator: Gemini 3.6 Flash (Medium)
 \begin{enumerate}[label=\textbf{(\alph*)}]
-  \item By the Mean Value Theorem, for any $x, y \in [0,1]$, there exists $\xi \in (0,1)$ such that $|f(x) - f(y)| = |f'(\xi)| |x-y| = \frac{1}{2}\sin(\xi) |x-y|$. Since $\sin(x)$ is strictly increasing on $[0,1]$, $\sup_{\xi \in [0,1]} \frac{1}{2}\sin(\xi) = \frac{1}{2}\sin(1) \approx 0.4207 < 1$. Thus $f$ is a contraction with $L = \frac{1}{2}\sin(1) < 1$.
-  \item Since $[0,1]$ equipped with the Euclidean metric is a complete metric space and $f([0,1]) \subseteq [0,1]$, the Banach Fixed Point Theorem guarantees the existence and uniqueness of a fixed point $x^* \in [0,1]$ satisfying $f(x^*) = x^*$.
+  \item By the Mean Value Theorem, for any $x, y \in [0,1]$, there exists $\xi \in (0,1)$ such that $|f(x) - f(y)| = |f'(\xi)| |x-y| = \frac{1}{2}\sin(\xi) |x-y|$. Since $\sin(x)$ is strictly increasing on $[0,1]$, $\sup_{\xi \in [0,1]} \frac{1}{2}\sin(\xi) = \frac{1}{2}\sin(1) \approx 0.4207 < 1$. Thus $f$ is a contraction (\cref{def:contraction_mapping}) with $L = \frac{1}{2}\sin(1) < 1$.
+  \item Since $[0,1]$ equipped with the Euclidean metric is a complete metric space (\cref{def:complete_metric_space}) and $f([0,1]) \subseteq [0,1]$, \cref{thm:banach_fixed_point} guarantees the existence and uniqueness of a fixed point $x^* \in [0,1]$ satisfying $f(x^*) = x^*$.
 \end{enumerate}
 \end{exercisesolution}
 

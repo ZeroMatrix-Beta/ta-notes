@@ -115,6 +115,242 @@ parameters $a, b \in \mathbb{R}$. Find all critical points and determine their n
 Hessian test, depending on $a, b$.
 \end{exercise}
 
+% Source: Corsin Nick/Class Notes/Week 6.pdf, p. 2
+\section{Convexity}
+\label{sec:convexity}
+
+\begin{definition}[Convex set and convex function]
+\label{def:convex_set_function}
+A subset $A \subseteq \mathbb{R}^n$ is \newterm{convex} (\germanterm{konvex}) if for all
+$x,y \in A$ and every $t \in [0,1]$, the point $p := (1-t)x+ty$ is an element of $A$.
+
+A function $f : A \to \mathbb{R}$ is convex if $A$ is convex and, for all $x,y \in A$ and
+$t \in [0,1]$,
+$$f\big((1-t)x+ty\big) \leq (1-t)f(x)+tf(y).$$
+\end{definition}
+
+\begin{ainote}
+Recall from \cref{def:sign_symmetric_matrix} the sign classes of a symmetric matrix
+(positive/negative definite, indefinite, degenerate). The proposition below needs the boundary
+cases as well: a symmetric $A \in \mathbb{R}^{n\times n}$ is \newterm{positive semidefinite}
+(\germanterm{positiv semidefinit}), also called \textbf{nonnegative definite}, if
+$v\transp Av \geq 0$ for all $v \in \mathbb{R}^n$; and \newterm{negative semidefinite}
+(\germanterm{negativ semidefinit}), or \textbf{nonpositive definite}, if $v\transp Av \leq 0$ for
+all $v$. These terms are used freely from \cref{ex:6.8} onward but were not named when
+\cref{def:sign_symmetric_matrix} was introduced in Week 5; recorded here instead.
+\end{ainote}
+
+\begin{proposition}[Characterizations of convexity]
+\label{prop:convexity_characterizations}
+Let $U \subseteq \mathbb{R}^n$ be open and convex, and let $f \in C^2(U)$. Then the following are
+equivalent:
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $f$ is convex;
+  \item $\Hess f(x)$ is positive semidefinite for all $x \in U$;
+  \item $f(y)-f(x) \geq Df_x(y-x)$ for all $x,y \in U$.
+\end{enumerate}
+\end{proposition}
+
+\begin{example}[The parabola]
+The parabola $p : \mathbb{R}^n \to \mathbb{R}$, $x \mapsto |x|^2 = \sum_{i=1}^n x_i^2$, is convex:
+$$\partial_i\partial_j p(x) = 2\delta_{ij} \implies \Hess p(x) = 2\id_n,$$
+and every eigenvalue is $2>0$, so $\Hess p(x)$ is positive definite (hence positive semidefinite)
+for every $x$, and $p$ is convex by \cref{prop:convexity_characterizations}.
+\end{example}
+
+% Source: Corsin Nick/Class Notes/Week 6.pdf, pp. 3--6
+\begin{exercise}[Equivalent characterizations of convexity]
+\label{ex:convexity_characterizations}
+Let $U \subseteq \mathbb{R}^n$ be open and convex.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Show that $f : U \to \mathbb{R}$ is convex if and only if the functions
+    $$f_{x,y} : [0,1] \to \mathbb{R}, \qquad s \mapsto f(x+s(y-x))$$
+    are convex for all $x,y \in U$.
+  \item Show that
+    $$f \text{ convex} \iff f(y)-f(x) \geq Df_x(y-x) \quad \text{for all } x,y \in U.$$
+    This also holds for $f \in C^1(U)$, $U \subseteq \mathbb{R}^n$ open and convex.
+  \item Conclude that if $f \in C^1(U)$ is convex and has a critical point at $x_0 \in U$, then $f$
+    has a minimum at $x_0$.
+\end{enumerate}
+\end{exercise}
+
+% Kept inline: solved directly in Corsin Nick/Class Notes/Week 6.pdf, pp. 3--6.
+\begin{exercisesolution}[Solution to \cref{ex:convexity_characterizations}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item By definition, $f_{x,y}$ is convex if and only if
+    $$f_{x,y}\big((1-t)s_0+ts_1\big) \leq (1-t)f_{x,y}(s_0)+tf_{x,y}(s_1) \quad \text{for all } s_0,s_1,t \in [0,1],$$
+    which, unwinding the definition of $f_{x,y}$, reads
+    $$f\big(x+[(1-t)s_0+ts_1](y-x)\big) \leq (1-t)f(x+s_0(y-x))+tf(x+s_1(y-x)),$$
+    that is,
+    $$f\big((1-t)(x+s_0(y-x))+t(x+s_1(y-x))\big) \leq (1-t)f(x+s_0(y-x))+tf(x+s_1(y-x)).$$
+    Setting $s_0=0$, $s_1=1$ recovers exactly the convexity inequality for $f$ at the points $x$
+    and $y$, so if this holds for all $x,y \in U$, then $f$ is convex. Conversely, if $f$ is
+    convex, then convexity of $f_{x,y}$ for each fixed $x,y \in U$ follows by applying convexity
+    of $f$ to the two points $x+s_0(y-x)$ and $x+s_1(y-x)$, which both lie in $U$ since $U$ is
+    convex.
+  \item Recall that $g \in C^1(I)$, for $I \subseteq \mathbb{R}$ an interval, is convex if and
+    only if $g'$ is increasing. Combined with \textbf{(a)}, this gives
+    $$f \text{ convex} \iff f'_{x,y} \text{ is increasing, for all } x,y \in U.$$
+    By the chain rule, for $t \in [0,1]$,
+    $$f'_{x,y}(t) = Df_{x+t(y-x)}(y-x),$$
+    and by the mean value theorem there exists $s \in (0,1)$ such that
+    $$f(y)-f(x) = f_{x,y}(1)-f_{x,y}(0) = f'_{x,y}(s) = Df_{x+s(y-x)}(y-x).$$
+
+    \textbf{($\Rightarrow$)} If $f$ is convex, then $f_{x,y}$ is convex for all $x,y \in U$ by
+    \textbf{(a)}, so $f'_{x,y}$ is increasing, and in particular $f'_{x,y}(s) \geq f'_{x,y}(0)$.
+    Combined with the mean value theorem identity above, this yields
+    $$f(y)-f(x) \geq Df_x(y-x).$$
+
+    \textbf{($\Leftarrow$)} Suppose $f(y)-f(x) \geq Df_x(y-x)$ for all $x,y \in U$. We must show
+    that $0 \leq s < t \leq 1 \implies f'_{x,y}(s) \leq f'_{x,y}(t)$. Set $u := x+s(y-x)$ and
+    $v := x+t(y-x)$, so that $u-v = (s-t)(y-x)$. Applying the hypothesis to the pairs $(u,v)$ and
+    $(v,u)$ gives
+    $$Df_u(v-u) \leq f(v)-f(u), \qquad Df_v(u-v) \leq f(u)-f(v).$$
+    Therefore,
+    $$(t-s)f'_{x,y}(s) = Df_u(v-u) \leq f(v)-f(u) \leq -Df_v(u-v) = Df_v(v-u) = (t-s)f'_{x,y}(t),$$
+    and since $t-s>0$, this gives $f'_{x,y}(s) \leq f'_{x,y}(t)$, i.e., $f'_{x,y}$ is increasing,
+    hence $f_{x,y}$ is convex for all $x,y \in U$, and so $f$ is convex by \textbf{(a)}.
+
+    \begin{ainote}
+    The argument above only ever used differentiability of $f$, never twice-differentiability, so
+    the equivalence in \textbf{(b)} already holds for $f \in C^1(U)$ with $U \subseteq
+    \mathbb{R}^n$ open and convex --- one order of regularity weaker than
+    \cref{prop:convexity_characterizations}, which is stated for $f \in C^2(U)$. This is exactly
+    the fact used in \cref{ex:6.7}\textbf{(b)}.
+    \end{ainote}
+  \item Since $f$ is convex and $x_0 \in U$ is a critical point, $Df_{x_0} = 0$, so \textbf{(b)}
+    gives
+    $$0 = Df_{x_0}(y-x_0) \leq f(y)-f(x_0) \quad \text{for all } y \in U,$$
+    i.e., $f(y) \geq f(x_0)$ for all $y \in U$. Hence $f$ has a minimum at $x_0$ --- in fact a
+    global minimum on $U$, sharpening \cref{prop:extremum_implies_critical} (which only guarantees
+    that critical points are the sole \emph{candidates} for extrema) in the convex case.
+\end{enumerate}
+\end{exercisesolution}
+
+% Figure: FIG-W06-01 (queued) --- see docs/05-figure-queue.md
+
+% Source: Corsin Nick/Class Notes/Week 6.pdf, pp. 8--9
+\section{The inverse function theorem}
+\label{sec:inverse_function_theorem}
+
+\begin{theorem}[Inverse function theorem]
+\label{thm:inverse_function_theorem}
+Let $U \subseteq \mathbb{R}^n$ be open, let $f \in C^k(U,\mathbb{R}^n)$, and let $x_0 \in U$ be
+such that $Df_{x_0}$ is invertible. Then there exists an open neighbourhood $U_0 \subseteq U$ of
+$x_0$ such that
+$$f|_{U_0} : U_0 \to f(U_0)$$
+is a $C^k$-\newterm{diffeomorphism} (\germanterm{Diffeomorphismus}) and
+$$D\big(f|_{U_0}^{-1}\big)_{f(x)} = D\big(f|_{U_0}\big)_x^{-1} \quad \text{for all } x \in U_0.$$
+\end{theorem}
+
+\begin{question}
+\begin{enumerate}[label=\textbf{Q\arabic*.}]
+  \item If $f : \mathbb{R}^n \to \mathbb{R}^n$ is $C^k$ and a \newterm{homeomorphism}
+    (\germanterm{Hom\"oomorphismus}) --- that is, bijective with continuous inverse --- is it
+    necessarily a $C^k$-diffeomorphism?
+  \item If $f \in C^\infty(U,\mathbb{R}^n)$ has an everywhere invertible differential, i.e.,
+    $Df_x$ is invertible for all $x \in U$ with $U \subseteq \mathbb{R}^n$ open, then $f$ is a
+    $C^\infty$-diffeomorphism onto its image. True or false?
+\end{enumerate}
+\end{question}
+
+\begin{answer}
+\begin{enumerate}[label=\textbf{A\arabic*.}]
+  \item \textbf{False.} Consider $f : \mathbb{R} \to \mathbb{R}$, $x \mapsto x^3$. Then
+    $f^{-1} : \mathbb{R} \to \mathbb{R}$, $x \mapsto \sqrt[3]{x}$, is not continuously
+    differentiable at $0 \in \mathbb{R}$.
+  \item \textbf{False.} Consider
+    $$\cos|_{\mathbb{R}\setminus\pi\mathbb{Z}} : \mathbb{R}\setminus\pi\mathbb{Z} \to (-1,1), \qquad x \mapsto \cos(x).$$
+    For any $x \in \mathbb{R}\setminus\pi\mathbb{Z}$, $\cos'(x) = -\sin(x) \neq 0$, so the
+    differential is everywhere invertible, but the cosine is not injective on this domain, so it
+    fails to be a diffeomorphism onto its image.
+\end{enumerate}
+\end{answer}
+
+\begin{ainote}
+Corsin illustrates \textbf{A2} with a second sketch of a wiggly $C^\infty$ curve that is locally
+invertible (everywhere invertible differential) but not globally injective: a plateau where it is
+"invertible, but not diffeo" locally, a hump where a horizontal level meets the graph twice
+("not invertible"), and a final monotone stretch where the inverse function theorem does apply
+("diffeo by IFT"). See \texttt{FIG-W06-03}.
+\end{ainote}
+
+% Figure: FIG-W06-02, FIG-W06-03 (queued) --- see docs/05-figure-queue.md
+
+% Source: Corsin Nick/Class Notes/Week 6.pdf, pp. 10--12
+\section{The implicit function theorem}
+\label{sec:implicit_function_theorem}
+
+\begin{theorem}[Implicit function theorem]
+\label{thm:implicit_function_theorem}
+Let $1 \leq n-d < n$, let $f \in C^k(\mathbb{R}^d\times\mathbb{R}^{n-d}, \mathbb{R}^{n-d})$ (or an
+open subset of $\mathbb{R}^d\times\mathbb{R}^{n-d}$), and suppose $f(x_0,y_0) = 0$ for some
+$(x_0,y_0) \in \mathbb{R}^d\times\mathbb{R}^{n-d}$ such that the differential $D_yf(x_0,y_0)$ of
+$y \mapsto f(x_0,y)$ at $y_0$ is bijective (so $\Jac_yf(x_0,y_0)$ is invertible). Then there exist
+balls $B_r(x_0) \subseteq \mathbb{R}^d$ and $B_s(y_0) \subseteq \mathbb{R}^{n-d}$ and
+$g \in C^k(B_r(x_0), B_s(y_0))$ such that, for all $(x,y) \in B_r(x_0)\times B_s(y_0)$,
+$$f(x,y) = 0 \iff y = g(x).$$
+Furthermore,
+$$\Jac g(x) = -\big(\Jac_yf(x,g(x))\big)^{-1}\Jac_xf(x,g(x)).$$
+\end{theorem}
+
+In the picture, this means that the \newterm{level set} (\germanterm{Niveaumenge})
+$\{f(x,y)=0\}$ can locally be expressed as a graph over $x$.
+
+\begin{remark}[Why $\Jac g$ has this form]
+Differentiating the identity $f(x,g(x)) \equiv 0$ (which holds by definition of $g$) with the
+chain rule gives
+$$0 = D_xf(x,g(x)) + D_yf(x,g(x))\cdot Dg(x),$$
+and solving for $Dg(x)$ --- valid since $D_yf(x,g(x))$ is invertible near $(x_0,y_0)$ --- recovers
+exactly the formula for $\Jac g(x)$ above.
+
+\begin{ainote}
+Corsin remarks in his own notes that ``the geometrical meaning of this one eludes me, sorry''; the
+chain-rule derivation above at least pins down where the formula comes from algebraically.
+\end{ainote}
+\end{remark}
+
+% Figure: FIG-W06-04, FIG-W06-05 (queued) --- see docs/05-figure-queue.md
+
+\begin{example}[The circle $S^1$]
+The circle $S^1 = \{(x,y) \in \mathbb{R}^2 : x^2+y^2-1=0\}$ is the level set at $0$ of
+$F(x,y) := x^2+y^2-1$, i.e., $S^1 = F^{-1}\{0\}$. Locally, there are explicit functions
+$$x \mapsto \pm\sqrt{1-x^2} = y(x),$$
+defined on open intervals around $x_0$ whenever $y(x_0)\neq0$. And indeed,
+$$D_yF(x,y) = \frac{\partial F}{\partial y} = 2y$$
+is bijective whenever $y \neq 0$, so the implicit function theorem holds there.
+
+\begin{ainote}
+At $\bar x = 1$ (where $y=0$), $D_yF(1,0)=0$ fails to be bijective, and indeed no such graph
+$y(x)$ exists around $y=0$ there --- the circle is vertical at that point, so it cannot locally be
+written as a graph over $x$.
+\end{ainote}
+\end{example}
+
+% Figure: FIG-W06-06 (queued) --- see docs/05-figure-queue.md
+
+\begin{example}[An implicit quintic]
+Let $G(x,y) := y^5+y^3+y+x$, and consider its level set at $0$,
+$G^{-1}\{0\} = \{(x,y)\in\mathbb{R}^2 : G(x,y)=0\}$. Clearly $(0,0)\in G^{-1}\{0\}$, since
+$G(0,0)=0^5+0^3+0+0=0$. Now both
+$$\partial_xG(0,0)=1\neq0, \qquad \partial_yG(0,0)=\big[5y^4+3y^2+1\big]_{y=0}=1\neq0,$$
+so by the implicit function theorem there are open intervals (balls) $(-r,r)$, $(-s,s)$ and
+functions
+$$(-r,r)\to(-s,s), \quad y\mapsto x(y) = -y^5-y^3-y,$$
+$$(-s,s)\to(-r,r), \quad x\mapsto y(x),$$
+satisfying
+$$y^5+y^3+y+x(y)=0, \qquad y(x)^5+y(x)^3+y(x)+x=0.$$
+
+\begin{ainote}
+As Galois and Abel showed, no closed-form expression for $y(x)$ in radicals exists in general,
+since $y^5+y^3+y+x=0$ is a genuine quintic in $y$. Nevertheless, the implicit function theorem
+guarantees that $y(x)$ exists (and is $C^\infty$, since $G$ is a polynomial), and it can be
+computed and plotted numerically.
+\end{ainote}
+\end{example}
+
+% Figure: FIG-W06-07 (queued) --- see docs/05-figure-queue.md
+
 \section{Solutions}
 \label{sec:week06_solutions}
 

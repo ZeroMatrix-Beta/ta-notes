@@ -1,0 +1,346 @@
+% Source: Corsin Nick/Class Notes/Week 7.pdf, pp. 1--10
+\chapter{Week 7 --- Submanifolds, Tangent \& Normal Spaces}
+
+\exercisesheet{7}
+
+\textit{Statements quoted verbatim from \texttt{exercises/Ex7\_Analysis2\_eng.pdf} (assigned 27
+March 2026, due 13 April 2026). Attribution: Prof. Joaquim Serra, D-MATH, ETH Z\"urich.}
+
+% Source: Corsin Nick/Class Notes/Week 7.pdf, p. 1
+\begin{ainote}[Corsin's recommendations]
+Colour key, as given on the page: blue \textbf{= important}, orange \textbf{= semi-important},
+red \textbf{= optional}. 7.2--7.4 and 7.9 carry no colour marker on the page.
+
+\begin{center}
+\begin{tabular}{lll}
+\textbf{Problem} & \textbf{Priority} & \textbf{Corsin's note} \\
+\hline
+7.1 & important & ``First think of a diffeomorphism $(a,b) \leftrightarrow \mathbb{R}$ and \\
+    & & adjust it such that $(a,b)=(0,1)$.'' \\
+7.2 & unmarked & --- \\
+7.3 & unmarked & --- \\
+7.4 & unmarked & --- \\
+7.5 & important & ``This is a great exercise to help with understanding of IFT.'' \\
+7.6 & important & ``You will need these coordinates very often over the next weeks.'' \\
+7.7 & semi-important & ``In \textbf{1)}, only the M\"obius strip should be enough.'' \\
+7.8 & semi-important & ``Do \textbf{1)} and \textbf{2)}. The others will be in the lecture.'' \\
+7.9 & unmarked & --- \\
+\end{tabular}
+\end{center}
+\end{ainote}
+
+\begin{ainote}
+Corsin's handwritten notes read ``In 7),'' and ``Do 7) and 2)'', but neither exercise 7.7 nor 7.8
+has a sub-item numbered \textbf{7}) --- both are numbered \textbf{1}.--\textbf{3}. (7.7) and
+\textbf{1}.--\textbf{4}. (7.8). Read as \textbf{1)} above (a plausible misreading of Corsin's
+handwritten ``1'', which this week is slightly closed at the top); this also makes the notes
+self-consistent, since the referenced sub-items (the M\"obius strip inside 7.7's part 1, and the
+parametrization/tangent-space parts of 7.8) exist under number 1, not 7.
+\end{ainote}
+
+\begin{ainote}
+Only the exercises tagged \textbf{important} above are reproduced below (their wording only, no
+solutions yet): 7.1, 7.5, 7.6. The full sheet (7.1--7.9) has not yet been transcribed into
+\texttt{content/exercise-sheets/week-07.tex}.
+\end{ainote}
+
+\begin{exercise}[7.1 --- Diffeomorphism \textnormal{(important)}]
+\label{ex:7.1}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Give a diffeomorphism between $\mathbb{R}^2$ and $(0,1)\times(0,1)$.
+  \item Is $f(x) = x^5$, $x \in \mathbb{R}$ a diffeomorphism of $\mathbb{R}$ to itself? Motivate
+    rigorously your answer.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[7.5 --- Implicit function II \textnormal{(important)}]
+\label{ex:7.5}
+Show that the system of equations
+$$\begin{cases} xy^5+yu^5+zv^5=1, \\ x^5y+y^5u+z^5v=1, \end{cases}$$
+is solvable for the variables $u$ and $v$ in a neighborhood of the point
+$(x_0,y_0,z_0,u_0,v_0) = (0,1,1,1,0)$ and determine the derivatives $D_{(0,1,1)}u$ and
+$D_{(0,1,1)}v$ of the implicitly defined functions $u=u(x,y,z)$ and $v=v(x,y,z)$.
+\end{exercise}
+
+\begin{exercise}[7.6 --- Spherical coordinates \textnormal{(important)}]
+\label{ex:7.6}
+The mapping $\Phi : (0,\infty)\times(0,\pi)\times(-\pi,\pi) \to \mathbb{R}^3$ defined by
+$$\Phi(r,\theta,\varphi) = \begin{pmatrix} r\sin\theta\cos\varphi \\ r\sin\theta\sin\varphi \\ r\cos\theta \end{pmatrix}$$
+is called \textit{spherical coordinates}.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Sketch the images of $r \mapsto \Phi(r,\theta_0,\varphi_0)$, $\theta \mapsto
+    \Phi(r_0,\theta,\varphi_0)$ and $\varphi \mapsto \Phi(r_0,\theta_0,\varphi)$ for some fixed
+    $r_0 \in (0,\infty)$, $\theta_0 \in (0,\pi)$, $\varphi_0 \in (-\pi,\pi)$.
+  \item What is the image of $\Phi$?
+  \item Show that $\det(D_{(r,\theta,\varphi)}\Phi) = r^2\sin\theta$ holds.
+  \item Conclude that the mapping $\Phi$ is a diffeomorphism onto its image.
+\end{enumerate}
+\end{exercise}
+
+% Source: Corsin Nick/Class Notes/Week 7.pdf, p. 2
+\section{Submanifolds}
+\label{sec:submanifolds}
+
+Recall that a \newterm{$C^k$-diffeomorphism} (\cref{thm:inverse_function_theorem}) is a $C^k$
+bijective function whose inverse is also $C^k$.
+
+\begin{definition}[Submanifold]
+\label{def:submanifold}
+$M^m \subseteq \mathbb{R}^n$ is a $C^k$, $m$-dimensional \newterm{submanifold}
+(\germanterm{Untermannigfaltigkeit}) of $\mathbb{R}^n$ if for any point $p \in M$ there are an
+open neighbourhood $U \subseteq \mathbb{R}^n$ of $p$, an open neighbourhood $V \subseteq
+\mathbb{R}^n$ of $0$, and a $C^k$-diffeomorphism $\Phi : U \to V$ with $\Phi(p) = 0$ (a
+\newterm{submanifold chart}) such that
+$$\Phi(U \cap M) = (\mathbb{R}^m\times\{0\}) \cap V = \{x \in V : x_{m+1}=\dots=x_n=0\}.$$
+\end{definition}
+
+\begin{ainote}
+Finding such a chart directly can be very difficult. Corsin notes it is often easier to use one of
+the following equivalent representations instead: the \textbf{implicit} representation (regular
+value theorem, below) or the \textbf{explicit/graphical} representation (local parametrization
+theorem, below).
+\end{ainote}
+
+\subsection{The regular value theorem}
+
+\begin{theorem}[Regular value theorem]
+\label{thm:regular_value_theorem}
+Suppose $U \subseteq \mathbb{R}^n$ is open, $F \in C^k(U,\mathbb{R}^\ell)$, and $y \in F(U)$. If
+$$DF_x : \mathbb{R}^n \to \mathbb{R}^\ell$$
+is surjective (i.e., $\Jac F(x)$ has full rank) for all $x \in F^{-1}\{y\} = \{\bar x \in U :
+F(\bar x) = y\}$, then $F^{-1}\{y\}$ is a $C^k$ submanifold of dimension $n-\ell$.
+\end{theorem}
+
+\begin{example}[Circle of radius $R$]
+Let $F : \mathbb{R}^2 \to \mathbb{R}$, $(x,y) \mapsto x^2+y^2$. Then
+$$\Jac F(x,y) = (2x,\ 2y)$$
+has full rank (is injective as a linear map, i.e., nonzero) if $x \neq 0$ or $y \neq 0$, that is,
+for all $(x,y) \in \mathbb{R}^2\setminus\{0\}$. For $R>0$, $(0,0) \notin F^{-1}\{R^2\}$, so
+$$F^{-1}\{R^2\} = \{(x,y) \in \mathbb{R}^2 : x^2+y^2=R^2\}$$
+is a submanifold of dimension $2-1=1$ by \cref{thm:regular_value_theorem}. Similarly,
+$\{x \in \mathbb{R}^n : |x|^2=R^2\}$ is a submanifold of dimension $n-1$ for $n \geq 1$ (the
+\newterm{$n$-sphere} of radius $R$).
+\end{example}
+
+% Source: Corsin Nick/Class Notes/Week 7.pdf, p. 4
+\subsubsection{Connection to Lagrange multipliers}
+
+\begin{ainote}[Constraint sets are submanifolds]
+Recall the Lagrangian from \cref{prop:constrained_optimization}: when optimizing $f|_M$ for
+$f \in C^k(\mathbb{R}^n,\mathbb{R})$, where $g_1,\dots,g_k : U \to \mathbb{R}$,
+$$M := \{x \in \mathbb{R}^n : g_1(x)=\dots=g_k(x)=0\}, \qquad (\nabla g_1,\dots,\nabla g_k) \text{ linearly independent for all } x \in M$$
+(hence $k \leq n$). This means precisely that, for $g : \mathbb{R}^n \to \mathbb{R}^k$,
+$x \mapsto (g_1(x),\dots,g_k(x))$, the Jacobian
+$$\Jac g(x) = \begin{pmatrix} \nabla g_1(x) \longrightarrow \\ \vdots \\ \nabla g_k(x) \longrightarrow \end{pmatrix}$$
+has full rank. Therefore, $M = g^{-1}\{0\}$ is an $(n-k)$-dimensional submanifold by the regular
+value theorem: the constraint sets of Week 5's Lagrange-multiplier problems were submanifolds all
+along.
+\end{ainote}
+
+% Source: Corsin Nick/Class Notes/Week 7.pdf, p. 5
+\subsection{The local parametrization theorem}
+
+\begin{theorem}[Local parametrization]
+\label{thm:local_parametrization}
+Let $M \subseteq \mathbb{R}^n$. Then $M$ is a $C^k$ submanifold with $\dim M = m$ if and only if
+for every $p \in M$ there exist an open neighbourhood $V$ of $p$, an open set $U \subseteq
+\mathbb{R}^m$, and a $C^k$ map $f : U \to V \cap M$ such that
+\begin{itemize}
+  \item $Df_x : \mathbb{R}^m \to \mathbb{R}^n$ is injective for all $x \in U$;
+  \item $f$ is a homeomorphism (bijective, continuous, with continuous inverse $f^{-1}$).
+\end{itemize}
+\end{theorem}
+
+\begin{example}[The $n$-parabola]
+Let $P := \{(x,t) \in \mathbb{R}^n\times\mathbb{R} : t=|x|^2\}$. One could use the regular value
+theorem, but instead take
+$$f : \mathbb{R}^n \to \mathbb{R}^n\times\mathbb{R}, \qquad x \mapsto (x,|x|^2).$$
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item $\Jac f(x) = \begin{pmatrix} \id_{n\times n} \\ 2x\transp \end{pmatrix}$ has full rank
+    (is injective) at every $x$.
+  \item $f$ is bijective onto $P$ and continuous, with inverse $\pi : f(U) \to \mathbb{R}^n$,
+    $(x,t) \mapsto x$ (the canonical projection), which is also continuous.
+  \item $f(\mathbb{R}^n) = P$.
+\end{enumerate}
+So $P$ is an $n$-dimensional submanifold by \cref{thm:local_parametrization}.
+
+\begin{ainote}
+The graphical representation of a submanifold (as the graph of a function, here $x \mapsto |x|^2$)
+is therefore a common, and equivalent, special case of a local parametrization: it is always
+injective on its domain by construction, and its inverse is simply the projection forgetting the
+last coordinate.
+\end{ainote}
+\end{example}
+
+% Source: Corsin Nick/Class Notes/Week 7.pdf, p. 6
+\subsubsection{An alternative optimization technique}
+
+\begin{ainote}[Parametrized optimization, revisiting \cref{ex:6.9}]
+Local parametrizations give a second route to constrained-extremum problems, alongside Lagrange
+multipliers: parametrize the constraint set and optimize the resulting unconstrained function of
+fewer variables. Corsin illustrates this by revisiting $f(x,y) := 2x^2+y^2-x$ on
+$S^1 = \{(x,y)\in\mathbb{R}^2 : x^2+y^2=1\}$ --- exactly \cref{ex:6.9}\textbf{(a)}, which was
+solved there via Lagrange multipliers.
+
+Parametrize $S^1$ by $(x(\theta),y(\theta)) := (\cos\theta,\sin\theta)$. Then
+$$f(\theta) := f(x(\theta),y(\theta)) = 2\cos^2\theta+\sin^2\theta-\cos\theta = \cos^2\theta-\cos\theta+1,$$
+using $\sin^2\theta = 1-\cos^2\theta$. Differentiating,
+$$f'(\theta) = -2\cos\theta\sin\theta+\sin\theta \overset{!}{=} 0.$$
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item $\sin\theta = 0 \implies \theta_1 \in \{0,\pi\}$.
+  \item $\sin\theta \neq 0 \implies -2\cos\theta+1=0 \implies \cos\theta = \tfrac12 \implies
+    \theta_2 \in \{\tfrac{\pi}{3},\tfrac{5\pi}{3}\}$.
+\end{enumerate}
+So the extrema are at $(\cos\theta_1,\sin\theta_1) = (\pm1,0)$ and
+$(\cos\theta_2,\sin\theta_2) = \big(\tfrac12,\pm\tfrac{\sqrt3}{2}\big)$ --- exactly the four points
+found via Lagrange multipliers in the solution to \cref{ex:6.9}\textbf{(a)}, confirming the two
+methods agree.
+\end{ainote}
+
+% Source: Corsin Nick/Class Notes/Week 7.pdf, pp. 7--8
+\section{Tangent and normal spaces}
+\label{sec:tangent_normal_spaces}
+
+\subsection{Tangent space}
+
+Suppose $M^m \subseteq \mathbb{R}^n$ is a submanifold and $f : U \to f(U) \subseteq M$ is a local
+parametrization around some point $p \in f(U)$ with $f(q) = p$. The $n\times m$ matrix
+$$\Jac f(q) = \begin{pmatrix} \dfrac{\partial f}{\partial q_1} & \cdots & \dfrac{\partial f}{\partial q_m} \end{pmatrix}$$
+has full rank, that is, the column vectors $\partial_if(q)$ are linearly independent. They form a
+basis of $T_pM$:
+
+\begin{definition}[Tangent space]
+\label{def:tangent_space}
+For $M$, $f$ as above, the \newterm{tangent space} (\germanterm{Tangentialraum}) of $M$ at
+$p \in M$ is
+$$T_pM := \operatorname{span}\{\partial_1f(q),\dots,\partial_mf(q)\} = Df_q(\mathbb{R}^m);$$
+it is independent of the choice of $f$.
+\end{definition}
+
+\begin{example}[Tangent space to the upper hemisphere]
+Parametrize the upper hemisphere $S^2_+ := \{(x,y,z)\in\mathbb{R}^3 : x^2+y^2+z^2=1,\ z>0\}$
+graphically, i.e.,
+$$f(x,y) = \begin{pmatrix} x \\ y \\ \sqrt{1-x^2-y^2} \end{pmatrix}.$$
+We determine $T_{e_3}S^2_+$, where $e_3 = (0,0,1)$:
+$$\left.\frac{\partial f}{\partial x}\right|_{x=0} = \left.\begin{pmatrix} 1 \\ 0 \\ \dfrac{-x}{\sqrt{1-x^2-y^2}}\end{pmatrix}\right|_{x=0} = \begin{pmatrix}1\\0\\0\end{pmatrix} = e_1, \qquad \left.\frac{\partial f}{\partial y}\right|_{y=0} = \begin{pmatrix}0\\1\\0\end{pmatrix} = e_2.$$
+So $T_{e_3}S^2_+ = T_{e_3}S^2 = \operatorname{span}\{e_1,e_2\} = \mathbb{R}^2\times\{0\}$.
+\end{example}
+
+\subsection{Normal space}
+
+% Source: Corsin Nick/Class Notes/Week 7.pdf, pp. 9--10
+Suppose $F : U \to \mathbb{R}^{n-m}$ is an implicit representation of $M^m = F^{-1}\{0\}$ (via the
+regular value theorem) and $f : V^m \to M$ is a local parametrization, $M$ a submanifold. Then, by
+definition,
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item $\Jac F(x) = \begin{pmatrix} \nabla F_1(x) \longrightarrow \\ \vdots \\ \nabla F_{n-m}(x) \longrightarrow \end{pmatrix}$
+    has full rank, i.e., $\{\nabla F_i(x)\}_{i=1,\dots,n-m}$ are linearly independent;
+  \item $T_{f(q)}M = \operatorname{span}\{\partial_if(q)\}$, as above;
+  \item $F(f(x)) = 0$ for all $x \in V$, since $f(x) \in M = F^{-1}\{0\}$.
+\end{enumerate}
+From \textbf{3}, it follows that
+$$\Jac(F\circ f)(q) = \Jac F(f(q))\cdot\Jac f(q) = \begin{pmatrix} \nabla F_1(f(q)) \longrightarrow \\ \vdots \\ \nabla F_{n-m}(f(q)) \longrightarrow \end{pmatrix}\begin{pmatrix} \dfrac{\partial f}{\partial q_1} & \cdots & \dfrac{\partial f}{\partial q_m}\end{pmatrix} = 0.$$
+Now, since $\big(\Jac F(f(q))\cdot\Jac f(q)\big)_{ij} = \langle \nabla F_i(f(q)), \partial_jf(q)\rangle = 0$
+for all $i=1,\dots,n-m$, $j=1,\dots,m$, the vectors $\nabla F_i(f(q))$ are perpendicular, that is,
+\newterm{normal}, to $T_{f(q)}M$. Since by \textbf{1} we have $n-m$ linearly independent vectors
+normal to the $m$-dimensional plane $T_{f(q)}M$, we can define:
+
+\begin{definition}[Normal space]
+\label{def:normal_space}
+Let $M^m \subseteq \mathbb{R}^n$ be a submanifold and $F : U^n \to \mathbb{R}^{n-m}$ an implicit
+representation, $M = F^{-1}\{0\}$. Then the \newterm{normal space} (\germanterm{Normalraum}) of
+$M$ at $p \in M$ is
+$$N_pM := \operatorname{span}\{\nabla F_1(p),\dots,\nabla F_{n-m}(p)\}.$$
+\end{definition}
+
+\begin{example}[Normal space to the sphere]
+Represent $S^2$ implicitly: $S^2 = F^{-1}\{1\} = \{(x,y,z)\in\mathbb{R}^3 : F(x,y,z)=1\}$ where
+$F(x,y,z) = x^2+y^2+z^2$. We determine $N_{e_3}S^2$:
+$$\nabla F(0,0,1) = (2x,2y,2z)\big|_{(x,y,z)=(0,0,1)} = 2e_3.$$
+So $N_{e_3}S^2 = \operatorname{span}\{e_3\} = \{0\}\times\mathbb{R}$.
+\end{example}
+
+% Figure: FIG-W07-01, FIG-W07-02, FIG-W07-03, FIG-W07-04, FIG-W07-05, FIG-W07-06 (queued) --- see docs/05-figure-queue.md
+
+\section{Solutions}
+\label{sec:week07_solutions}
+
+\begin{ainote}
+Corsin's Week 7 notes cover only the theory (submanifolds, the regular value and local
+parametrization theorems, tangent and normal spaces), with no page working out any of the
+official-sheet exercises, so all solutions below are original. Each has been checked against
+\texttt{exercises/Sol7\_Analysis2\_eng.pdf}; no divergence from the official solutions was found.
+\end{ainote}
+
+\begin{exercisesolution}[Solution to \cref{ex:7.1}]
+% Generator: Claude Sonnet 5 (Medium)
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item First build a diffeomorphism $\mathbb{R} \to (0,1)$: the function
+    $$\psi : \mathbb{R} \to (0,1), \qquad \psi(t) := \frac12+\frac1\pi\arctan(t)$$
+    is $C^\infty$, strictly increasing (since $\arctan' > 0$), and bijective onto $(0,1)$ (as
+    $\arctan$ is bijective onto $(-\tfrac\pi2,\tfrac\pi2)$), with $C^\infty$ inverse
+    $\psi^{-1}(s) = \tan\big(\pi(s-\tfrac12)\big)$. Applying $\psi$ in each coordinate gives the
+    diffeomorphism
+    $$\phi : \mathbb{R}^2 \to (0,1)\times(0,1), \qquad \phi(x,y) := \Big(\frac12+\frac1\pi\arctan(x),\ \frac12+\frac1\pi\arctan(y)\Big).$$
+  \item \textbf{No.} $f$ is a $C^\infty$ bijection of $\mathbb{R}$ with $f^{-1}(x) =
+    \sqrt[5]{x}$, but $f'(0) = 5\cdot0^4 = 0$. If $f$ were a diffeomorphism, then by the
+    chain rule applied to $f^{-1}\circ f = \id$,
+    $$1 = (f^{-1})'(f(x))\cdot f'(x) \quad \text{for all } x,$$
+    which is impossible at $x=0$ since $f'(0)=0$. Equivalently, $(f^{-1})'(x) =
+    \tfrac15x^{-4/5} \to \infty$ as $x \to 0$, so $f^{-1}$ is not even differentiable at $0$,
+    let alone continuously so.
+\end{enumerate}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:7.5}]
+% Generator: Claude Sonnet 5 (Medium)
+Write the system as $F(x,y,z,u,v) = 0$ for $F : \mathbb{R}^5 \to \mathbb{R}^2$,
+$$F(x,y,z,u,v) := \begin{pmatrix} xy^5+yu^5+zv^5-1 \\ x^5y+y^5u+z^5v-1 \end{pmatrix}.$$
+The differential is
+$$\Jac F(x,y,z,u,v) = \begin{pmatrix} y^5 & 4xy^4+u^5 & v^5 & 5yu^4 & 5zv^4 \\ 5x^4y & x^5+5y^4u & 5z^4v & y^5 & z^5 \end{pmatrix},$$
+so at the base point,
+$$\Jac F(0,1,1,1,0) = \begin{pmatrix} 1 & 1 & 0 & 5 & 0 \\ 0 & 5 & 0 & 1 & 1 \end{pmatrix}.$$
+By the implicit function theorem applied with $(x,y,z)$ as the free variables and $(u,v)$ as the
+variables to solve for, we need the submatrix of partial derivatives with respect to $u,v$ to be
+invertible; this is
+$$D_{(u,v)}F(0,1,1,1,0) = \begin{pmatrix} 5 & 0 \\ 1 & 1\end{pmatrix}, \qquad \det = 5 \neq 0,$$
+so the implicit function theorem applies, and the system is indeed solvable for $u,v$ as
+$C^\infty$ functions of $(x,y,z)$ near $(0,1,1)$. Writing $G(x,y,z) := (u(x,y,z),v(x,y,z))$, the
+theorem gives
+$$\Jac G(0,1,1) = -\begin{pmatrix}5&0\\1&1\end{pmatrix}^{-1}\begin{pmatrix}1&1&0\\0&5&0\end{pmatrix} = -\frac15\begin{pmatrix}1&0\\-1&5\end{pmatrix}\begin{pmatrix}1&1&0\\0&5&0\end{pmatrix} = -\frac15\begin{pmatrix}1&1&0\\-1&24&0\end{pmatrix}.$$
+So $D_{(0,1,1)}u = -\tfrac15\begin{pmatrix}1&1&0\end{pmatrix}$ and
+$D_{(0,1,1)}v = -\tfrac15\begin{pmatrix}-1&24&0\end{pmatrix}$.
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:7.6}]
+% Generator: Claude Sonnet 5 (Medium)
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Fixing $\theta_0,\varphi_0$, the image of $r \mapsto \Phi(r,\theta_0,\varphi_0)$ is the
+    radial half-line through the point $p_0 := (\sin\theta_0\cos\varphi_0,
+    \sin\theta_0\sin\varphi_0, \cos\theta_0)$ on the unit sphere, i.e., $\{rp_0 : r \in
+    (0,\infty)\}$. Fixing $r_0,\varphi_0$, the image of $\theta \mapsto \Phi(r_0,\theta,\varphi_0)$
+    is a semicircle of radius $r_0$ from the north pole to the south pole (excluding the poles),
+    at longitude $\varphi_0$. Fixing $r_0,\theta_0$, the image of $\varphi \mapsto
+    \Phi(r_0,\theta_0,\varphi)$ is a circle of latitude of radius $r_0\sin\theta_0$ at height
+    $r_0\cos\theta_0$ (excluding the point at $\varphi = \pm\pi$).
+  \item For each fixed $r$, the image sweeps out the sphere of radius $r$ minus the half-plane
+    at $\varphi = \pm\pi$ (the ``prime meridian''); overall,
+    $$\operatorname{im}(\Phi) = \mathbb{R}^3\setminus\big((-\infty,0]\times\{0\}\times\mathbb{R}\big).$$
+  \item Computing,
+    $$D_{(r,\theta,\varphi)}\Phi = \begin{pmatrix} \sin\theta\cos\varphi & r\cos\theta\cos\varphi & -r\sin\theta\sin\varphi \\ \sin\theta\sin\varphi & r\cos\theta\sin\varphi & r\sin\theta\cos\varphi \\ \cos\theta & -r\sin\theta & 0 \end{pmatrix},$$
+    hence, expanding along the last row,
+    $$\begin{aligned}
+    \det(D_{(r,\theta,\varphi)}\Phi) &= r^2\sin\theta\cos^2\theta\cos^2\varphi+r^2\sin^3\theta\sin^2\varphi+r^2\sin\theta\cos^2\theta\sin^2\varphi+r^2\sin^3\theta\cos^2\varphi \\
+    &= r^2\big(\sin\theta\cos^2\theta+\sin^3\theta\big) = r^2\sin\theta.
+    \end{aligned}$$
+  \item Since $r \in (0,\infty)$ and $\theta \in (0,\pi)$, $r^2\sin\theta$ is never $0$, so
+    $\Jac\Phi(r,\theta,\varphi)$ is everywhere invertible and $\Phi$ is a local diffeomorphism by
+    \cref{thm:inverse_function_theorem}. To see it is a \textbf{global} diffeomorphism onto its
+    image, it remains to check $\Phi$ is injective: if $\Phi(r_1,\theta_1,\varphi_1) =
+    \Phi(r_2,\theta_2,\varphi_2)$, then $r_1=r_2$ follows by taking the norm of both sides; since
+    $\cos : (0,\pi) \to (-1,1)$ is injective, the third coordinate gives $\theta_1=\theta_2$;
+    finally $(\cos\varphi,\sin\varphi)$ with $\varphi \in (-\pi,\pi)$ determines a unique point on
+    the unit circle, so $\varphi_1=\varphi_2$. Hence $\Phi$ is injective, and (being a local
+    diffeomorphism everywhere on its domain) a diffeomorphism onto its image.
+\end{enumerate}
+\end{exercisesolution}

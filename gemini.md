@@ -291,6 +291,15 @@ You are authorized to improve the prose and apply the established "House Style" 
 \DeclareMathOperator{\GL}{GL}
 ```
 
+* **This project's override — no unnumbered environments.** The generic template above uses
+  `\newtheorem*` (asterisked, unnumbered) for `remark`/`example`/`ainote`/etc. **This repository's
+  `main.tex` does not** — every environment is numbered via the same `\newaliascnt{name}{theorem}`
+  pattern as `lemma`/`corollary`/`definition`/`proposition`, because an unnumbered environment has
+  no counter, so a `\label` placed inside it is silently misattributed by `cleveref` to whatever
+  ambient counter (e.g. the enclosing subsection) was last stepped — producing wrong `\cref` output
+  that still looks plausible. See `main.tex`'s theorem/`aliascnt`/`cleveref` block (currently
+  around line 348–560) for the actual, current list of environments and their `\crefname`s.
+
 * **Math Operators**: Use the macros already declared in the project's preamble, never raw
   `\mathrm{}` or `\text{}` for an operator name. If a needed operator has no macro yet, propose
   one (`\DeclareMathOperator`) rather than writing it out ad hoc.
@@ -380,8 +389,15 @@ cd "C:/Users/miche/latex/ta-notes" && latexmk -pdf -interaction=nonstopmode main
 ```
 
 MiKTeX at `C:\Users\miche\AppData\Local\Programs\MiKTeX\miktex\bin\x64`.
-**Do not touch** the theorem / `aliascnt` / `cleveref` block at `main.tex:334–463` —
-its comments document real bugs already solved. Do not regress them.
+**Be careful with** the theorem / `aliascnt` / `cleveref` block at roughly `main.tex:348–560` —
+its comments document real bugs already solved (duplicate hyperref anchors, `cleveref` printing
+the wrong environment name for aliased counters). If you extend it, follow the existing pattern
+exactly: **every** environment in this project is numbered (there are no more `\newtheorem*`
+environments — an unnumbered environment has no counter, so a `\label` placed inside it gets
+silently misattributed to the last-stepped ambient counter, e.g. `\cref` printing "Section 2.d.4"
+instead of "AI-Exercise 2.d.26"). Adding a new environment means: `\newaliascnt{name}{theorem}`,
+`\newtheorem{name}[name]{Display Name}`, `\aliascntresetthe{name}`, a `\theHname` entry in the
+`\AtBeginDocument` block, and a `\crefname`/`\Crefname` pair — mirroring `lemma`/`corollary`/etc.
 
 ### Week numbering trap
 

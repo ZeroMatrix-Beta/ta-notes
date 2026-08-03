@@ -225,6 +225,11 @@ Adding the inequalities, we obtain for all $x \in [0,1]$:
 \end{align*}
 \end{exercisesolution}
 
+% Sonnet 5 (Medium)
+Having pinned down what a metric space is and collected a stock of examples to test our intuition
+against, we turn from measuring distance to describing shape: which subsets of a metric space
+deserve to be called \qt{open}, and what that buys us.
+
 \section{Open and closed sets}
 \label{sec:open_closed_sets}
 
@@ -254,9 +259,23 @@ And we call $A \subseteq X$ \newterm{closed} (\germanterm{abgeschlossen}) if and
 $X \setminus A$ is open.
 \end{definition}
 
+% Sonnet 5 (Medium)
+\begin{definition}[Interior, closure, and boundary]
+\label{def:interior_closure_boundary}
+Let $(X,d)$ be a metric space and $A \subseteq X$. The \newterm{interior}
+(\germanterm{Inneres}) of $A$ is
+$$\operatorname{int}(A) := \{x \in A : \exists\, r>0 \text{ such that } B_r(x) \subseteq A\},$$
+the largest open subset of $X$ contained in $A$. The \newterm{closure} (\germanterm{Abschluss}) of
+$A$ is
+$$\overline{A} := \{x \in X : B_r(x) \cap A \neq \emptyset \text{ for all } r > 0\},$$
+the smallest closed subset of $X$ containing $A$. The \newterm{boundary} (\germanterm{Rand}) of
+$A$ is $\partial A := \overline{A} \setminus \operatorname{int}(A)$.
+\end{definition}
+
 \begin{aiexample}[Interior, Closure, and Boundary of an Interval]
 % Generator: Gemini 3.6 Flash (Medium)
-Let $A := (0,1] \subset \mathbb{R}$ under the standard Euclidean metric.
+Applying \cref{def:interior_closure_boundary} to $A := (0,1] \subset \mathbb{R}$ under the
+standard Euclidean metric:
 \begin{itemize}
   \item The \textbf{interior} is $\operatorname{int}(A) = (0,1)$, the largest open set contained in $A$.
   \item The \textbf{closure} is $\overline{A} = [0,1]$, the smallest closed set containing $A$.
@@ -271,7 +290,8 @@ Let $(X,d)$ be a metric space. Show that $X$ and $\emptyset$ are both open and c
 
 % Kept inline: solved directly in Corsin Nick/Class Notes/Week 2.pdf, p. 7.
 \begin{exercisesolution}[Proof of \cref{ex:X_empty_clopen}]
-$X$ is open, since $B_r(x) \subseteq X$ for all $r > 0$ and $x \in X$. The empty set contains no
+$X$ is open, since $B_r(x) \subseteq X$ for all $r > 0$ and $x \in X$
+(\cref{def:open_ball}). The empty set contains no
 points and is therefore vacuously open. Since $X$ and $\emptyset$ are each other's complement in
 $X$, they are also closed.
 \end{exercisesolution}
@@ -285,11 +305,32 @@ $x : \mathbb{N} \to X$. We say that $(x_n)_{n=0}^{\infty}$ \newterm{converges} t
 $$\forall \varepsilon > 0 \ \exists N \in \mathbb{N} \text{ such that } d(x_n, x) < \varepsilon \quad \forall n \geq N.$$
 \end{definition}
 
+% Sonnet 5 (Medium)
+\begin{proposition}[Uniqueness of limits]
+\label{prop:uniqueness_of_limits}
+Let $(X,d)$ be a metric space. If a sequence $(x_n)_{n=0}^{\infty}$ in $X$ converges to both
+$x \in X$ and $x' \in X$, then $x = x'$.
+\end{proposition}
+
+\begin{proof}
+Fix $\varepsilon > 0$. By \cref{def:convergent_sequence}, there exist $N, N' \in \mathbb{N}$ such
+that $d(x_n,x) < \varepsilon/2$ for all $n \geq N$ and $d(x_n,x') < \varepsilon/2$ for all
+$n \geq N'$. For any $n \geq \max\{N,N'\}$, the triangle inequality (\cref{def:metric_space})
+gives
+$$d(x,x') \leq d(x,x_n) + d(x_n,x') < \varepsilon.$$
+Since $\varepsilon > 0$ was arbitrary, $d(x,x') = 0$, so $x = x'$ by definiteness
+(\cref{def:metric_space}).
+\end{proof}
+
+This justifies speaking of \qt{the} limit of a convergent sequence, as we do implicitly
+throughout.
+
 \begin{proposition}[Open/closed sets via sequences]
 \label{prop:open_closed_via_sequences}
 \begin{enumerate}[label=\textbf{(\alph*)}]
-  \item $U \subseteq X$ is \textbf{open} if and only if, for every sequence in $X$ with limit in
-    $U$, the sequence eventually lies in $U$.
+  \item $U \subseteq X$ is \textbf{open} if and only if, for every convergent sequence
+    (\cref{def:convergent_sequence}) in $X$ with limit in $U$, the sequence eventually lies in
+    $U$.
   \item $A \subseteq X$ is \textbf{closed} if and only if every convergent sequence in $A$ has its
     limit in $A$.
 \end{enumerate}
@@ -482,7 +523,8 @@ For $(X, d_X)$ and $(Y, d_Y)$ metric spaces, a function $f : X \to Y$ is called 
     $$d(x_0, x) < \delta \implies d(f(x_0), f(x)) < \varepsilon$$
   \item \textbf{(Sequentially continuous):} for any sequence $(x_n)_{n=0}^{\infty}$ in $X$ with
     limit $x \in X$, $\lim_{n\to\infty} f(x_n) = f(x)$ (and the limit exists).
-  \item \textbf{(Topological):} for all $U \subseteq Y$ open, $f^{-1}(U) \subseteq X$ is open.
+  \item \textbf{(Topological):} for all $U \subseteq Y$ open, $f^{-1}(U) \subseteq X$ is open
+    (\cref{def:open_closed}).
 \end{enumerate}
 \end{definition}
 
@@ -523,6 +565,11 @@ What if $d_X$ is the discrete metric and $d_Y$ is arbitrary?
 every such $f$ is continuous.
 \end{answer}
 
+% Sonnet 5 (Medium)
+Having examined how maps behave locally between metric spaces, we return to a property of a
+single space: whether every sequence that \qt{looks like} it should converge (\cref{def:convergent_sequence})
+actually does.
+
 \section{Completeness}
 \label{sec:completeness}
 
@@ -545,19 +592,25 @@ every Cauchy sequence in $X$ converges with respect to $d$.
 \end{itemize}
 \end{example}
 
+% Sonnet 5 (Medium)
+Compactness will turn out to be a strictly stronger finiteness-type property than completeness:
+every compact metric space is complete (\cref{ex:compact_finite_complete}), but the converse
+fails --- $\mathbb{R}^n$ itself is complete, yet (being unbounded) not compact, as we will see
+next (\cref{thm:sequential_compactness}, \cref{sec:compactness_continued}).
+
 \section{Compactness}
 \label{sec:compactness}
 
 \begin{definition}[Compact metric space]
 \label{def:compact_metric_space}
-A metric space $(X,d)$ is \newterm{compact} (\germanterm{kompakt}) if every open cover has a
-finite subcover.
+A metric space $(X,d)$ is \newterm{compact} (\germanterm{kompakt}) if every open cover
+(by sets open in the sense of \cref{def:open_closed}) has a finite subcover.
 \end{definition}
 
 \begin{theorem}[Sequential compactness]
 \label{thm:sequential_compactness}
 A metric space $(X,d)$ is compact if and only if every sequence in $X$ has a convergent
-subsequence in $X$.
+(\cref{def:convergent_sequence}) subsequence in $X$.
 \end{theorem}
 
 \begin{center}
@@ -578,17 +631,20 @@ subsequence in $X$.
 \end{tikzpicture}
 \end{center}
 
+% Sonnet 5 (Medium)
+\subsection{Compact subsets}
+
 A subset $K$ of a metric space $(X,d)$ is compact if the metric space $(K, d|_{K \times K})$ is
-compact. This is equivalent to the definition in the script:
+compact (\cref{def:compact_metric_space}). This is equivalent to the definition in the script:
 
 \begin{definition}[9.63, quoted from the official lecture notes]
 Let $(X,d)$ be a metric space. A subset $K \subset X$ is called \textbf{compact} if one of the
 following equivalent conditions hold:
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item $K$ is \textbf{sequentially compact}: every sequence $(x_n)_{n\in\mathbb{N}}$ in $K$ has
-    a subsequence that is convergent in $K$.
-  \item $K$ is \textbf{topologically compact}: every family of open sets $\{U_i\}_{i \in I}$ that
-    cover $K$, has a finite subcover.
+    a subsequence that is convergent (\cref{def:convergent_sequence}) in $K$.
+  \item $K$ is \textbf{topologically compact}: every family of open sets
+    (\cref{def:open_closed}) $\{U_i\}_{i \in I}$ that cover $K$, has a finite subcover.
 \end{enumerate}
 \end{definition}
 
@@ -618,7 +674,7 @@ following equivalent conditions hold:
 Let $(X,d)$ be a metric space.
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item Show that every finite subset $\{x_1, \dots, x_n\} \subseteq X$ is compact.
-  \item If $X$ is compact, is it complete?
+  \item If $X$ is compact, is it complete (\cref{def:complete_metric_space})?
 \end{enumerate}
 \end{exercise}
 
@@ -678,7 +734,7 @@ For any $x = (x_1, x_2) \in \mathbb{R}^2$, we have $\max\{|x_1|, |x_2|\} \leq |x
 
 \begin{exercisesolution}[Proof of \cref{ex:ai_disk_boundary}]
 % Generator: Gemini 3.6 Flash (Medium)
-Since $D$ is open, its interior is $\operatorname{int}(D) = D$. The closure of $D$ is $\overline{D} = \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 \leq 1\}$. By definition, the boundary is:
+Since $D$ is open, its interior is $\operatorname{int}(D) = D$. The closure of $D$ is $\overline{D} = \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 \leq 1\}$. By \cref{def:interior_closure_boundary}, the boundary is:
 \begin{align*}
 \partial D &= \overline{D} \setminus \operatorname{int}(D) \\
 &= \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 \leq 1\} \setminus \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 < 1\} \\

@@ -99,6 +99,10 @@ Let $u \in C^1(\mathbb{R}^n)$ and $\nu \in \mathbb{R}^n$. Show that
 $$u(x,y) := \begin{cases} \max\{0, y-2\}^2 & \text{if } x \geq 0, \\ 0 & \text{if } x \leq 0.\end{cases}$$
 \end{exercise}
 
+% Sonnet 5 (Medium)
+With the exercise sheet quoted, we turn to this week's actual subject: generalizing the
+single-variable derivative to maps between Euclidean spaces of arbitrary dimension.
+
 \session{Monday}
 
 % Source: Corsin Nick/Class Notes/Week 4.pdf, p. 2
@@ -127,11 +131,42 @@ $x_0, h \in \mathbb{R}^n$. (Of course, equivalently for $U \subseteq \mathbb{R}^
 $F : U \to \mathbb{R}^m$.)
 \end{definition}
 
+% Sonnet 5 (Medium)
+\begin{ainote}
+The linear map $DF_{x_0}$ in \cref{def:differentiable}, when it exists, is automatically unique:
+if $L_1, L_2$ both satisfy the defining limit, then
+$(L_1-L_2)(h)/|h| \to 0$ as $h \to 0$ along every direction, which forces the linear map
+$L_1 - L_2$ to vanish identically (a nonzero linear map cannot decay along its own domain). This
+is the multivariable analogue of the uniqueness-of-limits argument from
+\cref{prop:uniqueness_of_limits}.
+\end{ainote}
+
+\begin{proposition}[Differentiability implies continuity]
+\label{prop:differentiable_implies_continuous}
+If $F : U \to \mathbb{R}^m$, $U \subseteq \mathbb{R}^n$ open, is differentiable
+(\cref{def:differentiable}) at $x_0 \in U$, then $F$ is continuous at $x_0$.
+\end{proposition}
+
+\begin{proof}
+By \cref{def:differentiable}, $F(x_0+h) - F(x_0) = DF_{x_0}(h) + o(|h|)$ as $h \to 0$. Since
+$DF_{x_0}$ is linear on the finite-di\-men\-sional space $\mathbb{R}^n$, it is bounded, i.e.\ there
+exists $C \geq 0$ with $|DF_{x_0}(h)| \leq C|h|$ for all $h$. Hence
+$$|F(x_0+h) - F(x_0)| \leq |DF_{x_0}(h)| + o(|h|) \leq C|h| + o(|h|) \xrightarrow{h\to 0} 0,$$
+so $F(x_0+h) \to F(x_0)$ as $h \to 0$, i.e.\ $F$ is continuous at $x_0$.
+\end{proof}
+
+\begin{ainote}
+The converse fails: continuity does not imply differentiability, exactly as in one variable
+(e.g.\ $x \mapsto |x|$ at $0$). \Cref{ex:partial_derivatives_not_continuous} below shows the
+gap is even wider in several variables --- \emph{all} partial derivatives can exist at a point
+without $F$ even being continuous there, let alone differentiable.
+\end{ainote}
+
 % Source: Corsin Nick/Class Notes/Week 4.pdf, p. 3
 \section{The Jacobi matrix}
 \label{sec:jacobi_matrix}
 
-Since $DF_{x_0} : \mathbb{R}^n \to \mathbb{R}^m$ is a linear map, there is a \textbf{1--1
+Since $DF_{x_0} : \mathbb{R}^n \to \mathbb{R}^m$ (\cref{def:differentiable}) is a linear map, there is a \textbf{1--1
 correspondence with a matrix once a basis is fixed}! In the standard basis of $\mathbb{R}^n$,
 $(e_1,\dots,e_n)$, this is the \newterm{Jacobi matrix} (\germanterm{Jacobi-Matrix}):
 $$DF_x \;\cong\; \Jac F(x) = \begin{pmatrix} \dfrac{\partial F_1}{\partial x_1} & \cdots & \dfrac{\partial F_1}{\partial x_n} \\[1ex] \vdots & \ddots & \vdots \\[1ex] \dfrac{\partial F_m}{\partial x_1} & \cdots & \dfrac{\partial F_m}{\partial x_n}\end{pmatrix}$$
@@ -145,6 +180,21 @@ $$\partial_i F(x) = DF_x(e_i).$$
 \begin{importantremark}
 The partial derivatives can exist even if $F : U \to \mathbb{R}^m$ is not differentiable!
 \end{importantremark}
+
+% Sonnet 5 (Medium)
+\begin{aiexample}[All partial derivatives exist, yet $f$ is not even continuous]
+\label{ex:partial_derivatives_not_continuous}
+% Generator: Claude Sonnet 5 (Medium)
+Let $f : \mathbb{R}^2 \to \mathbb{R}$ be defined by
+$$f(x,y) := \begin{cases} \dfrac{xy}{x^2+y^2} & (x,y) \neq (0,0), \\ 0 & (x,y) = (0,0). \end{cases}$$
+Along each axis, $f$ vanishes identically ($f(x,0) = f(0,y) = 0$), so both partial derivatives at
+the origin exist and equal $0$:
+$$\partial_x f(0,0) = \lim_{s\to 0}\frac{f(s,0)-f(0,0)}{s} = 0, \qquad \partial_y f(0,0) = 0.$$
+Yet $f$ is not even continuous at $(0,0)$: along the diagonal $y=x$, $f(x,x) = \tfrac{x^2}{2x^2} =
+\tfrac12$ for all $x \neq 0$, so $f(x,x) \to \tfrac12 \neq 0 = f(0,0)$ as $x \to 0$. By
+\cref{prop:differentiable_implies_continuous}, $f$ is therefore not differentiable at $(0,0)$,
+even though both partial derivatives exist there.
+\end{aiexample}
 
 % Source: Corsin Nick/Class Notes/Week 4.pdf, p. 4
 \subsection{Examples}
@@ -202,6 +252,10 @@ matrix stacks $\nabla F_1, \dots, \nabla F_m$ as rows --- which is the correct s
 consistent with $(\nabla f)\transp$ just above. Corrected to ``rows''. See \texttt{OQ-09}.
 \end{ainote}
 
+% Sonnet 5 (Medium)
+Having encoded the differential as a matrix, we now ask how it interacts with composition of
+functions --- the single most useful computational tool in this chapter.
+
 % Source: Corsin Nick/Class Notes/Week 4.pdf, p. 5
 \section{Chain rule}
 \label{sec:chain_rule}
@@ -244,6 +298,9 @@ $$
 \end{aligned}
 $$
 \end{exercisesolution}
+
+% Sonnet 5 (Medium)
+\subsection{Directional derivatives}
 
 % Source: Corsin Nick/Class Notes/Week 4.pdf, p. 6
 Sometimes the \newterm{differential} (\germanterm{das Differential}) is not easily expressed as a
@@ -311,9 +368,16 @@ This operation is so common in physics that it has its own notation: for $f$ as 
 each coordinate as a function of \textbf{time} and differentiate:
 $$\frac{d}{dt}f(x_1,\dots,x_n) := Df(x_1(t),\dots,x_n(t)) = \sum_{i=1}^{n}\frac{\partial f}{\partial x_i}\frac{\partial x_i}{\partial t}.$$
 
+% Sonnet 5 (Medium)
+Having linearized $F$ once, we now ask how good that linear approximation is, and how to improve
+it order by order --- the multivariable analogue of the Taylor series from Analysis 1.
+
 % Source: Corsin Nick/Class Notes/Week 4.pdf, p. 9
 \section{Taylor expansions}
 \label{sec:taylor_expansions}
+
+% Sonnet 5 (Medium)
+\subsection{The general formula}
 
 In the lecture, you have seen the following formula. For
 $f \in C^k(U \subseteq \mathbb{R}^n, \mathbb{R})$, $\bar x \in U$:
@@ -364,6 +428,9 @@ $\partial_1^2\partial_2 f(\bar x)\,\tfrac{h_1^2h_2}{2}$ for $\delta_2$, confirmi
 meaning. Corrected above. See \texttt{OQ-10}.
 \end{ainote}
 
+% Sonnet 5 (Medium)
+\subsection{The working formula}
+
 % Source: Corsin Nick/Class Notes/Week 4.pdf, p. 11
 We can rewrite this as
 $$f(\bar x + h) = \sum_{\ell=0}^{k}\frac{1}{\ell!}\big(h_1\partial_1 + h_2\partial_2\big)^\ell f(\bar x).$$
@@ -381,6 +448,9 @@ starting index) in the source. The $\ell = 0$ term is $f(\bar x)$ itself, which 
 expansion above does include, so the lower limit must be $0$. Corrected above. See
 \texttt{OQ-11}.
 \end{ainote}
+
+% Sonnet 5 (Medium)
+\subsection{A worked example}
 
 % Source: Corsin Nick/Class Notes/Week 4.pdf, pp. 11--12
 \begin{exercise}[Taylor expansion of $(x+y^2)e^{-x^2-y^2}$]
@@ -406,8 +476,12 @@ $$
 $$
 \end{exercisesolution}
 
+% Sonnet 5 (Medium)
+\subsection{Second-order form and the Hessian}
+
 % Source: Corsin Nick/Class Notes/Week 4.pdf, p. 12
 \begin{remark}[Second-order Taylor formula with Hessian]
+\label{rem:second_order_taylor_hessian}
 The second-order Taylor approximation of $f \in C^2(\mathbb{R}^n,\mathbb{R})$ around
 $x_0 \in \mathbb{R}^n$ can be expressed compactly as
 $$f(x_0+x) = f(x_0) + \nabla f(x_0)\cdot x + \tfrac{1}{2}x\transp \cdot \Hess f(x_0)\cdot x + o(|x|^2)$$

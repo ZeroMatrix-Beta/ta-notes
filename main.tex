@@ -77,6 +77,8 @@
 
 % --- Theorem environments ---
 \colorlet{EnvTheorem}{ThemePurple}
+\definecolor{GoldOrange}{HTML}{C26B00}
+\colorlet{EnvAINote}{GoldOrange}
 
 % --- Proofs ---
 \colorlet{ProofTint}{OliveGreen}
@@ -98,9 +100,9 @@
 \colorlet{ChapTitleText}{MidnightBlue!90!black}
 \colorlet{ChapNumberText}{OliveGreen}
 \colorlet{ChapLine}{MidnightBlue!80!black}
-\colorlet{SecTitleColor}{ThemePurple}
+\colorlet{SecTitleColor}{MidnightBlue}
 \colorlet{SecNumberColor}{OliveGreen}
-\colorlet{SubSecTitleColor}{TextBoldColor}   % same colour as \textbf
+\colorlet{SubSecTitleColor}{MidnightBlue}
 \colorlet{SubSubSecTitleColor}{TextBoldColor}
 \colorlet{HeaderFooterFaint}{OliveGreen!45!Gray}
 \colorlet{HeaderFooterLine}{HeaderFooterFaint!50}
@@ -136,16 +138,21 @@
 \usepackage[nameinlink, capitalize]{cleveref}
 
 % ==========================================
-% SPACING UNITS (everything in ex -- do not mix in pt)
+% TYPOGRAPHY & SPACING UNITS
 % ==========================================
+\linespread{1.05}
+
 \newlength{\customparskip}
-\setlength{\customparskip}{1ex plus 0.5ex minus 0.2ex}
+\setlength{\customparskip}{3pt plus 1.5pt minus 0.5pt}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{\customparskip}
 
 \newlength{\customenvspace}
-\setlength{\customenvspace}{2.5ex plus 0.5ex minus 0.2ex}
+\setlength{\customenvspace}{2.0ex plus 0.5ex minus 0.2ex}
 
 % Inline math breathing room
-\setlength{\mathsurround}{0.25ex}
+\setlength{\mathsurround}{1pt}
 
 % ...but NOT inside TikZ. A node's boundary is derived from the width of the box
 % it contains, and \mathsurround pads every math box on both sides. TikZ then
@@ -192,6 +199,7 @@
 \newlength{\subsecouthang}\setlength{\subsecouthang}{-1.6ex}
 \newlength{\subsubsecouthang}\setlength{\subsubsecouthang}{-0.8ex}
 
+
 % 1. Custom Chapter Format: Title (chapter X)
 \titleformat{name=\chapter}[block]  % [block] forces it onto a single line
 {\normalfont\sffamily\Large\bfseries\color{ChapTitleText}}  % Main style
@@ -211,12 +219,19 @@
 % 2. Space-efficient Chapter Headings
 \titlespacing*{\chapter}{\chapouthang}{-7ex}{2.2ex}
 
-% 3. Custom Section Format: Title (section X.Y)
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+\renewcommand{\thesection}{\thechapter.\alph{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+
+% 3. Custom Section Format: Title (Section X.a)
 \titleformat{name=\section}
 {\normalfont\sffamily\Large\bfseries\color{SecTitleColor}}
 {}
 {0ex}
-{#1 {\large\mdseries\color{SecNumberColor}(Section \thechapter.\alph{section})}}
+{#1 {\large\mdseries\color{SecNumberColor}(Section \thesection)}}
 
 \titleformat{name=\section,numberless}
 {\normalfont\sffamily\Large\bfseries\color{SecTitleColor}}
@@ -224,23 +239,27 @@
 {0ex}
 {#1}
 
-% Make the sub-sub section numbers logically and visually disappear:
-% 1. Global limit: Only Chapters and Sections get numbers
-\setcounter{secnumdepth}{1}
-\setcounter{tocdepth}{2}
+% 4. Custom Subsection Format: Title (Subsection X.a.Y)
+\titleformat{name=\subsection}
+{\normalfont\sffamily\large\bfseries\color{SubSecTitleColor}}
+{}
+{0ex}
+{#1 {\normalsize\mdseries\color{SecNumberColor}(Subsection \thesubsection)}}
 
-% Section numbers use the letter form everywhere (body heading, TOC, \cref),
-% i.e. "5.a" rather than the default "5.1".
-\renewcommand{\thesection}{\thechapter.\alph{section}}
-
-% 2. Visual styling for Subsections / Subsubsections (Clean & Unnumbered)
-\titleformat{\subsection}
+\titleformat{name=\subsection,numberless}
 {\normalfont\sffamily\large\bfseries\color{SubSecTitleColor}}
 {}
 {0ex}
 {#1}
 
-\titleformat{\subsubsection}
+% 5. Custom Subsubsection Format: Title (Subsubsection X.a.Y.Z)
+\titleformat{name=\subsubsection}
+{\normalfont\sffamily\normalsize\bfseries\color{SubSubSecTitleColor}}
+{}
+{0ex}
+{#1 {\small\mdseries\color{SecNumberColor}(Subsubsection \thesubsubsection)}}
+
+\titleformat{name=\subsubsection,numberless}
 {\normalfont\sffamily\normalsize\bfseries\color{SubSubSecTitleColor}}
 {}
 {0ex}
@@ -286,42 +305,36 @@
 % LIST FORMATTING
 % ==========================================
 \setlist{
-  topsep=0.6ex plus 0.2ex minus 0.1ex,
-  partopsep=0ex,
-  parsep=0.5\customparskip,
-  itemsep=0.4ex plus 0.2ex minus 0.1ex,
+  topsep=0pt, 
+  partopsep=0pt, 
+  parsep=0.5\customparskip, 
+  itemsep=0pt, 
 }
 
-\setlist[itemize,1]{
-  label=\textcolor{ItemizeBullet}{\textbullet},
-  leftmargin=2.5em
+\setlist[itemize]{
+  label=\textcolor{ItemizeBullet}{\textbullet}
 }
 
 \setlist[enumerate]{
-  font=\color{EnumerateBullet}\colorlet{TextBoldColor}{EnumerateBullet}\bfseries
-}
-
-\setlist[enumerate,1]{
-  label=(\alph*),
-  ref=(\alph*),
-  leftmargin=2.5em
+  font=\colorlet{TextBoldColor}{EnumerateBullet}, 
+  label=\textcolor{EnumerateBullet}{\bfseries(\alph*)}, 
+  ref=(\alph*)
 }
 
 \setlist[description]{
   style=unboxed,
-  leftmargin=2.5em,
-  font=\bfseries\color{TextBoldColor}
+  labelsep=0.333em plus 0.167em minus 0.111em
 }
 
-% Nested lists stay tight
-\setlist[itemize,2]{topsep=0ex, itemsep=0ex, parsep=0ex}
-\setlist[enumerate,2]{topsep=0ex, itemsep=0ex, parsep=0ex}
+% Abstände bei geschachtelten Listen 
+\setlist[itemize,2]{topsep=0pt, itemsep=0pt, parsep=0pt}
+\setlist[enumerate,2]{topsep=0pt, itemsep=0pt, parsep=0pt}
 
-% --- FIX: LISTS DIRECTLY AFTER A THEOREM HEADING ---
+% --- FIX: LISTEN DIREKT NACH THEOREM-HEADING ---
 \makeatletter
-\newcommand{\fixlistaftertheorem}{%
-  \if@inlabel
-    \leavevmode \par
+\providecommand{\fixlistaftertheorem}{%
+  \if@inlabel 
+    \leavevmode \par 
   \fi
 }
 \BeforeBeginEnvironment{itemize}{\fixlistaftertheorem}
@@ -370,11 +383,29 @@
   \renewcommand{\theHtheorem}{\thechapter.\alph{section}.\arabic{theorem}}%
   \renewcommand{\theHequation}{\thechapter.\alph{section}.\arabic{equation}}%
   % The aliased counters below need the same treatment, and must point at the
-  % *same* anchor as \theHtheorem -- they are one counter under four names.
+  % *same* anchor as \theHtheorem -- they are one counter under many names.
   \@namedef{theHlemma}{\theHtheorem}%
   \@namedef{theHcorollary}{\theHtheorem}%
   \@namedef{theHdefinition}{\theHtheorem}%
   \@namedef{theHproposition}{\theHtheorem}%
+  \@namedef{theHexercise}{\theHtheorem}%
+  % Sonnet 5 (Medium): every formerly-unnumbered environment below is now
+  % aliased to the theorem counter too (see "NUMBERED ENVIRONMENTS, continued"),
+  % so it needs the same anchor treatment as lemma/corollary/... above.
+  \@namedef{theHclaim}{\theHtheorem}%
+  \@namedef{theHnotation}{\theHtheorem}%
+  \@namedef{theHremark}{\theHtheorem}%
+  \@namedef{theHexample}{\theHtheorem}%
+  \@namedef{theHsummary}{\theHtheorem}%
+  \@namedef{theHwarmup}{\theHtheorem}%
+  \@namedef{theHquestion}{\theHtheorem}%
+  \@namedef{theHanswer}{\theHtheorem}%
+  \@namedef{theHimportantremark}{\theHtheorem}%
+  \@namedef{theHgoals}{\theHtheorem}%
+  \@namedef{theHconclusion}{\theHtheorem}%
+  \@namedef{theHainote}{\theHtheorem}%
+  \@namedef{theHaiexample}{\theHtheorem}%
+  \@namedef{theHaiexercise}{\theHtheorem}%
 }
 \makeatother
 
@@ -415,27 +446,85 @@
 \newtheorem{proposition}[proposition]{Proposition}
 \aliascntresetthe{proposition}
 
-% --- UNNUMBERED ENVIRONMENTS ---
-% The asterisk (*) prevents them from being numbered!
-\newtheorem*{theorem*}{Theorem}
-\newtheorem*{lemma*}{Lemma}
-\newtheorem*{proposition*}{Proposition}
-\newtheorem*{definition*}{Definition}
-\newtheorem*{corollary*}{Corollary}
-\newtheorem*{claim*}{Claim}
+\newaliascnt{exercise}{theorem}
+\newtheorem{exercise}[exercise]{Exercise}
+\aliascntresetthe{exercise}
 
-\newtheorem*{notation}{Notation}
-\newtheorem*{remark}{Remark}
-\newtheorem*{exercise}{Exercise}
-\newtheorem*{example}{Example}
-\newtheorem*{summary}{Summary}
-\newtheorem*{warmup}{Warm up}
-\newtheorem*{question}{Question}
-\newtheorem*{answer}{Answer}
-\newtheorem*{importantremark}{Important remark}
-\newtheorem*{goals}{Goals}
-\newtheorem*{conclusion}{Conclusion}
-\newtheorem*{ainote}{AI-Note}
+% --- NUMBERED ENVIRONMENTS, continued ---
+% Sonnet 5 (Medium): this project wants every environment numbered, so that
+% cleveref/\cref can identify and cross-reference every instance -- an
+% environment created with \newtheorem* has NO counter at all, so a \label
+% placed inside one is silently attributed to whatever ambient counter (e.g.
+% the enclosing subsection) was last stepped, producing wrong \cref output
+% (e.g. "Section 2.d.4" instead of "AI-Exercise 2.d.13"). Every environment
+% below therefore follows the same \newaliascnt pattern as lemma/corollary/
+% definition/proposition/exercise above, so it shares the single running
+% Chapter.Section.N sequence and cleveref can tell it apart by name. The
+% starred (theorem*, lemma*, ...) escape-hatch environments are removed
+% entirely, since they were unused (grep across content/*.tex) and are now
+% redundant with their numbered counterparts.
+\newaliascnt{claim}{theorem}
+\newtheorem{claim}[claim]{Claim}
+\aliascntresetthe{claim}
+
+\newaliascnt{notation}{theorem}
+\newtheorem{notation}[notation]{Notation}
+\aliascntresetthe{notation}
+
+\newaliascnt{remark}{theorem}
+\newtheorem{remark}[remark]{Remark}
+\aliascntresetthe{remark}
+
+\newaliascnt{example}{theorem}
+\newtheorem{example}[example]{Example}
+\aliascntresetthe{example}
+
+\newaliascnt{summary}{theorem}
+\newtheorem{summary}[summary]{Summary}
+\aliascntresetthe{summary}
+
+\newaliascnt{warmup}{theorem}
+\newtheorem{warmup}[warmup]{Warm up}
+\aliascntresetthe{warmup}
+
+\newaliascnt{question}{theorem}
+\newtheorem{question}[question]{Question}
+\aliascntresetthe{question}
+
+\newaliascnt{answer}{theorem}
+\newtheorem{answer}[answer]{Answer}
+\aliascntresetthe{answer}
+
+\newaliascnt{importantremark}{theorem}
+\newtheorem{importantremark}[importantremark]{Important remark}
+\aliascntresetthe{importantremark}
+
+\newaliascnt{goals}{theorem}
+\newtheorem{goals}[goals]{Goals}
+\aliascntresetthe{goals}
+
+\newaliascnt{conclusion}{theorem}
+\newtheorem{conclusion}[conclusion]{Conclusion}
+\aliascntresetthe{conclusion}
+
+\newtheoremstyle{ainotethm}%
+{\customenvspace}{\customenvspace}{\normalfont}{}{\color{EnvAINote}\sffamily\bfseries}{:}{0.5em}%
+{\thmname{\textcolor{EnvAINote}{\sffamily\bfseries#1}}\thmnumber{\sffamily\bfseries\ #2}%
+ \thmnote{\ \textcolor{EnvAINote}{\bfseries(}{\normalfont\sffamily\itshape#3}\textcolor{EnvAINote}{\bfseries)}}}
+
+\theoremstyle{ainotethm}
+\newaliascnt{ainote}{theorem}
+\newtheorem{ainote}[ainote]{AI-Note}
+\aliascntresetthe{ainote}
+
+\newaliascnt{aiexample}{theorem}
+\newtheorem{aiexample}[aiexample]{AI-Example}
+\aliascntresetthe{aiexample}
+
+\newaliascnt{aiexercise}{theorem}
+\newtheorem{aiexercise}[aiexercise]{AI-Exercise}
+\aliascntresetthe{aiexercise}
+\theoremstyle{purplethm}
 
 % ==========================================
 % CLEVEREF NAMES
@@ -450,6 +539,8 @@
 \Crefname{definition}{Definition}{Definitions}
 \crefname{proposition}{Proposition}{Propositions}
 \Crefname{proposition}{Proposition}{Propositions}
+\crefname{exercise}{Exercise}{Exercises}
+\Crefname{exercise}{Exercise}{Exercises}
 \crefname{chapter}{Chapter}{Chapters}
 \Crefname{chapter}{Chapter}{Chapters}
 \crefname{section}{Section}{Sections}
@@ -462,6 +553,36 @@
 \Crefname{table}{Table}{Tables}
 \crefname{item}{Part}{Parts}
 \Crefname{item}{Part}{Parts}
+
+% Sonnet 5 (Medium): cleveref names for the newly-numbered environments above.
+\crefname{claim}{Claim}{Claims}
+\Crefname{claim}{Claim}{Claims}
+\crefname{notation}{Notation}{Notations}
+\Crefname{notation}{Notation}{Notations}
+\crefname{remark}{Remark}{Remarks}
+\Crefname{remark}{Remark}{Remarks}
+\crefname{example}{Example}{Examples}
+\Crefname{example}{Example}{Examples}
+\crefname{summary}{Summary}{Summaries}
+\Crefname{summary}{Summary}{Summaries}
+\crefname{warmup}{Warm up}{Warm ups}
+\Crefname{warmup}{Warm up}{Warm ups}
+\crefname{question}{Question}{Questions}
+\Crefname{question}{Question}{Questions}
+\crefname{answer}{Answer}{Answers}
+\Crefname{answer}{Answer}{Answers}
+\crefname{importantremark}{Important remark}{Important remarks}
+\Crefname{importantremark}{Important remark}{Important remarks}
+\crefname{goals}{Goals}{Goals}
+\Crefname{goals}{Goals}{Goals}
+\crefname{conclusion}{Conclusion}{Conclusions}
+\Crefname{conclusion}{Conclusion}{Conclusions}
+\crefname{ainote}{AI-Note}{AI-Notes}
+\Crefname{ainote}{AI-Note}{AI-Notes}
+\crefname{aiexample}{AI-Example}{AI-Examples}
+\Crefname{aiexample}{AI-Example}{AI-Examples}
+\crefname{aiexercise}{AI-Exercise}{AI-Exercises}
+\Crefname{aiexercise}{AI-Exercise}{AI-Exercises}
 
 % ==========================================
 % PROOF ENVIRONMENT (olive green, upright, standard text Q.E.D.)
@@ -677,5 +798,6 @@
 \input{content/week-04.tex}
 \input{content/week-05.tex}
 \input{content/week-06.tex}
+\input{content/week-07.tex}
 
 \end{document}

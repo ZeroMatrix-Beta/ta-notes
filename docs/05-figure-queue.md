@@ -27,10 +27,10 @@ inlined as ASCII. TikZ is done in one dedicated pass (Phase 4.3) so it never blo
 | FIG-W03-06 | Corsin Week 3, p. 8 | Same curve, annotated twice: open U around 0; the points γ(aₙ) on the crests y = 1 | pgfplots + annotations | done |
 | FIG-W03-07 | Corsin Week 3, p. 10 | Change of basis (rotation) aligning x with the horizontal axis, angle θ preserved | 2 panels + arrow | done |
 | FIG-W03-08 | Corsin Week 3, p. 11 | Projection π_v(u): u, v, angle θ, perpendicular dropped onto span(v) | 2D sketch | done |
-| FIG-W04-01 | Corsin Week 4, p. 4 | Unit circle with the point γ(π/4) and its orange tangent (velocity) arrow | 2D sketch on axes | queued |
-| FIG-W05-01 | Corsin Week 5, p. 2 | Paraboloid f(x,y) over the xy-plane, purple level sets, orange gradient arrow, green minimum, red steepest-ascent arrow | 3D surface + contours | queued |
-| FIG-W05-02 | Corsin Week 5, p. 3 | Sphere with ∇T(q) radial (a constrained extremum) vs. ∇T(p) oblique (not one) | 3D sphere + 2 arrows | queued |
-| FIG-W05-03 | Corsin Week 5, p. 6 | Sphere with the 8 points (±1,±1,±1)/√3 marked, forming an inscribed cube | 3D sphere + cube | queued |
+| FIG-W04-01 | Corsin Week 4, p. 4 | Unit circle with the point γ(π/4) and its orange tangent (velocity) arrow | 2D sketch on axes | done |
+| FIG-W05-01 | Corsin Week 5, p. 2 | Paraboloid f(x,y) over the xy-plane, purple level sets, orange gradient arrow, green minimum, red steepest-ascent arrow | 3D surface + contours | done |
+| FIG-W05-02 | Corsin Week 5, p. 3 | Sphere with ∇T(q) radial (a constrained extremum) vs. ∇T(p) oblique (not one) | 3D sphere + 2 arrows | done |
+| FIG-W05-03 | Corsin Week 5, p. 6 | Sphere with the 8 points (±1,±1,±1)/√3 marked, forming an inscribed cube | 3D sphere + cube | done |
 | FIG-W06-01 | Corsin Week 6, p. 5 | Convex f_{x,y} on [0,1] with two supporting tangent lines at s and t | Plot + 2 tangents | queued |
 | FIG-W06-02 | Corsin Week 6, p. 8 | Cosine curve with a horizontal level crossing it repeatedly — "not injective" | pgfplots | queued |
 | FIG-W06-03 | Corsin Week 6, p. 8 | Wiggly curve with levels annotated "not invertible" / "invertible but not diffeo" / "diffeo by IFT" | Freehand-style plot | queued |

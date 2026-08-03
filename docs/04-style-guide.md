@@ -200,6 +200,11 @@ unnumbered:  theorem* lemma* corollary* definition* proposition* claim*
              proof   exercisesolution[<title>]
 ```
 
+- **Named theorem environments.** All theorem-like environments should carry a `[Name]`
+  bracket where a natural name exists:
+  `\begin{theorem}[Heine--Borel]`, `\begin{definition}[Metric space]`,
+  `\begin{lemma}[Gronwall's inequality]`. This is now the **preferred** style.
+  See `gemini.md` for the `proof`-adjacency exception and macro restrictions.
 - **Sub-parts** use alphabetical labels via the environment, never hard-coded:
   `\begin{enumerate}[label=\textbf{(\alph*)}]` + plain `\item`. Never `\item[(a)]`.
   A proof of a multi-part statement mirrors the statement's `enumerate` exactly.
@@ -209,24 +214,27 @@ unnumbered:  theorem* lemma* corollary* definition* proposition* claim*
   `description` (forbidden, see section 10) — bold the name inline with `\textbf{name}`
   rather than putting it in a `description` item label:
   `\item \textbf{definiteness:} $d(x,y) \geq 0$, ...`.
-- **No custom bracketed titles on environments.** Never
-  `\begin{theorem}[Heine--Borel]`, `\begin{exercise}[3.7 --- Cauchy--Schwarz]`,
-  `\begin{definition}[sign of a symmetric matrix]`. Use the plain, unbracketed environment;
-  put the name in the prose immediately before or after it, or in the `\label` slug. The
-  `exercisesolution[<title>]` pointer to the exercise being solved is the one sanctioned
-  exception — it is a structural cross-reference, not a name.
 - **Labels** are descriptive slugs, never numbers: `\label{thm:heine_borel}`,
-  `\label{def:metric_space}`. Place immediately after `\begin{…}`. Prefix by type
+  `\label{def:metric_space}`. Place immediately after `\begin{\ldots}`. Prefix by type
   (`thm:`, `lem:`, `cor:`, `def:`, `prop:`, `ex:`, `fig:`, `eq:`).
-- **Cross-references** use `\cref{…}` (mid-sentence) / `\Cref{…}` (sentence-initial);
-  never write "Theorem" manually. Equations use `\eqref{…}`.
-- **New terminology** uses `\newterm{…}`. `\qt{…}` is for literal quotes and informal
+- **Cross-references** use `\cref{\ldots}` (mid-sentence) / `\Cref{\ldots}` (sentence-initial);
+  never write "Theorem" manually. Equations use `\eqref{\ldots}`.
+- **New terminology** uses `\newterm{\ldots}`. `\qt{\ldots}` is for literal quotes and informal
   phrases only — e.g. Corsin's *"detours make the way longer"* gloss on the triangle
   inequality — never for a term being defined.
 - **Never** put `\newterm`/`\qt`/any formatting macro inside an environment's `[...]`
   header argument.
+- **Exercises — prefer numbered.** Use a numbered `exercise` counter so `\cref{ex:...}` works.
+  The preamble's `\newtheorem*{exercise}` (unnumbered) is available for truly standalone
+  exercises; for everything else, numbered is preferred. Always reference exercises with
+  `\cref{ex:...}` or, if unnumbered, `\cpageref{ex:...}`.
 - **Solutions** to exercises use `exercisesolution`, titled with `\cref` to the exercise.
 - **Commutative diagrams**: `tikz-cd`.
+- **Environment semantics.** See `gemini.md § ENVIRONMENT SEMANTICS` for the authoritative
+  rules on when to use `remark` vs. `notation` vs. `ainote`. Short version:
+  - `ainote` is the **only** home for AI/editorial/meta remarks.
+  - `notation` is purely for introducing source notation; not for commentary on the notation.
+  - `remark` is for mathematical observations only.
 
 ---
 
@@ -268,10 +276,22 @@ determined) and which need the page in view.
 ## 9. Provenance & honesty
 
 - Every environment in `content/*.tex` traces back to a page pointer in `transcript/*.md`.
+- **Source provenance comments in LaTeX.** At the top of each `\section` (or `\subsection`
+  if a section spans material from multiple sources), insert:
+  ```latex
+  % Source: Corsin Nick/Class Notes/Week 5.pdf, pp. 1--3
+  \section{Compactness}
+  ```
+  Use a relative path from the project root and a page range. When merging a second tutor's
+  material, add a `% Supplement:` line beneath it. Do **not** add per-theorem or per-definition
+  comments — section-level granularity is sufficient and keeps token cost manageable.
 - Suspected errors in a source are **flagged, never silently corrected**:
-  `\omitted{…}` / a dark-red note in the text, plus an entry in `06-open-questions.md`.
+  `\omitted{\ldots}` / a dark-red note in the text, plus an entry in `06-open-questions.md`.
 - Illegible source text: `⟨?word⟩` in the transcript + an `OQ-` entry. Never guess silently.
 - Content taken from a tutor other than Corsin is attributed in the text.
+- **Custom sections are allowed.** You may inject `\section`, `\subsection`, and
+  `\subsubsection` headings that are not in the handwritten source whenever they improve
+  readability or navigation. This is an editorial decision within your authority.
 
 ---
 
@@ -279,10 +299,9 @@ determined) and which need the page in view.
 
 - `\vspace{1em}\noindent\hrulefill\vspace{1em}` spacer blocks.
 - Manual `\newpage`/`\vspace` for cosmetic tuning (the preamble handles spacing).
-- Touching the theorem / `aliascnt` / `cleveref` machinery in `main.tex:334–463` — the
+- Touching the theorem / `aliascnt` / `cleveref` machinery in `main.tex:334--463` — the
   comments there document real bugs already solved. Do not regress them.
 - Editing anything inside the 17 tutor source folders or `exercises/`.
 - The `description` environment, for any purpose. Use `itemize`/`enumerate` instead.
-- Custom bracketed titles on environments (`\begin{theorem}[Name]` and the like) — see
-  section 6. Existing `content/*.tex` written before this rule was settled does not yet
-  conform; fix opportunistically, not required to block on a dedicated pass.
+- Using `remark`, `notation`, or any semantic mathematical environment for AI/editorial
+  meta-remarks — use `ainote` exclusively for those. See `gemini.md § ENVIRONMENT SEMANTICS`.

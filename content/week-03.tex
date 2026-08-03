@@ -1,14 +1,14 @@
-% Corsin Week 3, transcript/week-03.md
+% Source: Corsin Nick/Class Notes/Week 3.pdf, pp. 1--14
 \chapter{Week 3 --- Compactness, Connectedness \& Cauchy--Schwarz}
 
 \exercisesheet{3}
 
-\begin{notation}
+\begin{ainote}
 No priority page this week: Corsin's colour-coded \textit{Recommended exercises} page starts
 later in the semester; Week 3 opens directly with the Monday class, so none of this week's
 problems are singled out as important. The full sheet (3.1--3.11) is transcribed in
 \texttt{content/exercise-sheets/week-03.tex}.
-\end{notation}
+\end{ainote}
 
 \session{Monday}
 
@@ -26,10 +26,10 @@ A subset $K \subseteq \mathbb{R}^n$ equipped with the \textbf{standard metric} i
 This captures our intuition of a ``compact'' set. We will briefly show that Heine--Borel is
 \textbf{false} for $\mathbb{R}^n$ with an \textbf{arbitrary metric}.
 
-\begin{exercise}
+\begin{exercise}[Heine--Borel fails for arbitrary metrics]
 \label{ex:heine_borel_fails}
 Let $(X,d)$ be a metric space.
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item \textit{(Optional)} Show that $\tilde d(x,y) := \dfrac{d(x,y)}{1 + d(x,y)}$ is a metric on
     $X$.
   \item Show that, if $U \subseteq X$ is open with respect to $d$, then $U$ is open with respect
@@ -39,18 +39,20 @@ Let $(X,d)$ be a metric space.
 \end{enumerate}
 \end{exercise}
 
-\begin{remark}
-Part 3 above sets $X = \mathbb{R}^n$ but then works with $\mathbb{N} \subseteq X$ and $|x-y|$,
+\begin{ainote}
+Part \textbf{(c)} above sets $X = \mathbb{R}^n$ but then works with $\mathbb{N} \subseteq X$ and $|x-y|$,
 which only parses for $n = 1$. See \texttt{OQ-04}.
-\end{remark}
+\end{ainote}
 
-\begin{exercisesolution}[\cref{ex:heine_borel_fails}]
-\textbf{1.} Non-negativity, definiteness and symmetry follow from $d(x,y)$.
+\begin{exercisesolution}[Proof of \cref{ex:heine_borel_fails}]
+\textbf{(a)} Non-negativity, definiteness and symmetry follow from $d(x,y)$.
 
 \textit{Triangle inequality.} We want to show
-$$\frac{d(x,y)}{1+d(x,y)} \leq \frac{d(x,z)}{1+d(x,z)} + \frac{d(z,y)}{1+d(z,y)}.$$
+\[
+\frac{d(x,y)}{1+d(x,y)} \leq \frac{d(x,z)}{1+d(x,z)} + \frac{d(z,y)}{1+d(z,y)}.
+\]
 Denote $d(x,y) = d_1$, $d(x,z) = d_2$, $d(z,y) = d_3$ and multiply out:
-$$
+\[
 \begin{aligned}
 &d_1(1+d_2)(1+d_3) \leq d_2(1+d_1)(1+d_3) + d_3(1+d_1)(1+d_2) \\
 \iff\ & (d_1 + d_1d_2)(1+d_3) \leq (d_2 + d_2d_1)(1+d_3) + (d_3 + d_1d_3)(1+d_2) \\
@@ -59,51 +61,66 @@ $$
 \iff\ & d_1 \leq d_2 + 2d_2d_3 + d_3 + d_1d_2d_3 \\
 \iff\ & 0 \leq 2d_2d_3 + d_1d_2d_3 \qquad \text{(subtract the triangle inequality } d_1 \leq d_2 + d_3\text{)}
 \end{aligned}
-$$
+\]
 which is true by non-negativity.
 
-\textbf{2.} Let $U \subseteq X$ be open. Then, given $x \in U$, we find $r > 0$ such that
+\textbf{(b)} Let $U \subseteq X$ be open. Then, given $x \in U$, we find $r > 0$ such that
 $B_r(x) := \{y \in X : d(x,y) < r\} \subseteq U$. Let $\varepsilon := \dfrac{r}{1+r}$. Then
 $\tilde B_\varepsilon(x) \subseteq B_r(x) \subseteq U$, where
 $\tilde B_\varepsilon(x) := \{y \in X : \tilde d(x,y) < \varepsilon\}$.
 
-\textbf{3.} Note that for all $x, y \in \mathbb{R}$, $\dfrac{|x-y|}{1+|x-y|} < 1$. So
+\textbf{(c)} Note that for all $x, y \in \mathbb{R}$, $\dfrac{|x-y|}{1+|x-y|} < 1$. So
 $\mathbb{N} \subseteq B_1(0)$, thus it is \textbf{bounded} with respect to this metric. Also,
-$\mathbb{N}$ is \textbf{closed}, as follows from (2). But $x_n = n$ defines a sequence in
+$\mathbb{N}$ is \textbf{closed}, as follows from \textbf{(b)}. But $x_n = n$ defines a sequence in
 $\mathbb{N}$ with no convergent subsequence, thus $\mathbb{N}$ is \textbf{not compact}.
 \end{exercisesolution}
 
-\begin{remark}
+\begin{ainote}
 The cancellation in the derivation above originally contained a stray $d_2d_1d_2$ where the
 expansion gives $d_2d_1d_3$; the cancelled terms and the conclusion $0 \leq 2d_2d_3 + d_1d_2d_3$
 are unaffected. Re-derived cleanly above. See \texttt{OQ-08}.
-\end{remark}
+\end{ainote}
 
 \subsection{Why do we care about compactness?}
 
-\begin{enumerate}[label=\textbf{\arabic*.}]
-  \item \textbf{Preserved by continuous functions.} $X$, $Y$ metric spaces, $K \subseteq X$
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{Preserved by continuous functions:} $X$, $Y$ metric spaces, $K \subseteq X$
     compact, $f : X \to Y$ continuous. Then $f(K) \subseteq Y$ is compact.
-  \item \textbf{Weierstrass theorem / Extreme value theorem.} $X$ metric space,
+  \item \textbf{Weierstrass theorem / Extreme value theorem:} $X$ metric space,
     $K \subseteq X$ compact, $f : K \to \mathbb{R}$ continuous. Then $f$ attains its maximum and
     minimum in $K$. In particular, $f$ is bounded.
-  \item \textbf{Uniform continuity.} $X$, $Y$ metric spaces, $f : X \to Y$ continuous. If $X$ is
+  \item \textbf{Uniform continuity:} $X$, $Y$ metric spaces, $f : X \to Y$ continuous. If $X$ is
     compact, then $f$ is \newterm{uniformly continuous} (\germanterm{gleichm\"assig stetig}).
 \end{enumerate}
 
-\begin{figurestub}{FIG-W03-01}
-Pasted stock illustration (must be redrawn): a continuous function $f(x)$ on a closed interval
-$[a,b]$, with the absolute maximum $f(c)$ marked red and the absolute minimum $f(d)$ marked blue,
-with dashed guide lines to the axes.
-\end{figurestub}
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.2]
+  \draw[->] (-0.3,0) -- (3.5,0) node[right] {$x$};
+  \draw[->] (0,-0.3) -- (0,2.8) node[above] {$y$};
+
+  \draw[green!60!black, thick] plot[smooth, tension=0.8] coordinates {(0.3,0.8) (0.9,2.3) (2.1,0.4) (3.0,1.8)};
+
+  \draw (0.3,0.05) -- (0.3,-0.05) node[below] {$a$};
+  \draw (0.9,0.05) -- (0.9,-0.05) node[below] {$c$};
+  \draw (2.1,0.05) -- (2.1,-0.05) node[below] {$d$};
+  \draw (3.0,0.05) -- (3.0,-0.05) node[below] {$b$};
+
+  \draw[dashed, red!80!black] (0,2.3) node[left, font=\small] {$f(c)$} -- (0.9,2.3) -- (0.9,0);
+  \fill[red!80!black] (0.9,2.3) circle (2pt);
+
+  \draw[dashed, blue!80!black] (0,0.4) node[left, font=\small] {$f(d)$} -- (2.1,0.4) -- (2.1,0);
+  \fill[blue!80!black] (2.1,0.4) circle (2pt);
+\end{tikzpicture}
+\end{center}
 
 \section{Connectedness}
 \label{sec:connectedness}
 
-\begin{definition}[connected metric space / subset]
+\begin{definition}[Connected and disconnected metric spaces]
+\label{def:connectedness}
 A metric space $(X,d)$ is \newterm{disconnected} (\germanterm{unzusammenh\"angend}) if there
 exist $U_1, U_2 \subseteq X$ subsets which are
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item \textbf{open},
   \item \textbf{non-empty}, $U_1 \neq \emptyset \neq U_2$,
   \item \textbf{disjoint}, $U_1 \cap U_2 = \emptyset$,
@@ -117,103 +134,172 @@ Typically, proving that a set or metric space is connected is done \textbf{by co
 which is why one should remember the definition of \textit{disconnected}. Intuitively, connected
 means: \qt{the space cannot be separated by open sets.}
 
-\begin{figurestub}{FIG-W03-02}
-Two panels. Left, disconnected: two separate black blobs, each enclosed by its own blue dashed
-open set $U_1$, $U_2$. Right, connected: a single black blob with two blue dashed sets $U_1$,
-$U_2$ whose boundary curves leave a small gap (orange annotation) --- plus a detached purple
-dashed set annotated ``no intersection''.
-\end{figurestub}
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+  % Left panel: Disconnected
+  \begin{scope}[shift={(0,0)}]
+    \draw[thick] plot[smooth cycle, tension=0.7] coordinates {(-1.5,-0.8) (-1.8,0.6) (-0.8,1.2) (-0.6,-0.2)};
+    \draw[thick] plot[smooth cycle, tension=0.7] coordinates {(0.4,-0.6) (0.2,0.8) (1.2,1.0) (1.0,-0.4)};
 
-\begin{theorem}[Continuous functions preserve connected sets]
+    \draw[blue!80!black, thick, dashed] plot[smooth cycle, tension=0.7] coordinates {(-1.7,-1.0) (-2.0,0.8) (-0.6,1.4) (-0.4,-0.4)};
+    \node[blue!80!black] at (-1.2,1.2) {$U_1$};
+
+    \draw[blue!80!black, thick, dashed] plot[smooth cycle, tension=0.7] coordinates {(0.2,-0.8) (0.0,1.0) (1.4,1.2) (1.2,-0.6)};
+    \node[blue!80!black] at (0.8,1.0) {$U_2$};
+
+    \node[below, font=\small] at (-0.3,-1.3) {\textbf{Disconnected}};
+  \end{scope}
+
+  % Right panel: Connected
+  \begin{scope}[shift={(5.0,0)}]
+    \draw[thick] plot[smooth cycle, tension=0.7] coordinates {(-1.4,-0.6) (-1.6,1.2) (0.2,0.6) (1.2,1.0) (1.0,-0.8) (-0.2,-1.0)};
+
+    \draw[blue!80!black, thick, dashed] (-1.7,-0.8) .. controls (-1.9,1.4) and (0.0,1.0) .. (0.1,0.2) .. controls (0.0,-0.8) and (-0.5,-1.2) .. (-1.7,-0.8);
+    \node[blue!80!black] at (-1.2,1.1) {$U_1$};
+
+    \draw[blue!80!black, thick, dashed] (1.3,-0.9) .. controls (1.5,1.2) and (-0.1,0.8) .. (0.2,0.0) .. controls (0.1,-0.7) and (0.6,-1.1) .. (1.3,-0.9);
+    \node[blue!80!black] at (1.0,0.9) {$U_2$};
+
+    \draw[orange!90!black, <->, thick] (0.1,0.2) -- node[above, font=\tiny] {gap} (0.2,0.0);
+
+    \node[below, font=\small] at (0,-1.3) {\textbf{Connected}};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+\begin{theorem}[Continuous functions preserve connectedness]
 \label{thm:continuity_preserves_connected}
 Let $X$, $Y$ be metric spaces, $f : X \to Y$ continuous. If $A \subseteq X$ is connected, then
 $f(A)$ is connected.
 \end{theorem}
 
-\begin{exercise}
+\begin{exercise}[Properties of connectedness]
 \label{ex:connectedness_tf}
 Are the following true or false?
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item The union of connected subsets with a common point is connected.
   \item The intersection of connected subsets is connected.
   \item The \newterm{closure} (\germanterm{Abschluss}) of a connected subset is connected.
 \end{enumerate}
 \end{exercise}
 
-\begin{exercisesolution}[\cref{ex:connectedness_tf}]
-\textbf{1. True.} \textit{Proof.} Let $X$ be a metric space, $V_1, V_2 \subseteq X$ connected,
+\begin{exercisesolution}[Proof of \cref{ex:connectedness_tf}]
+\textbf{(a) True.} \textit{Proof.} Let $X$ be a metric space, $V_1, V_2 \subseteq X$ connected,
 and $x_0 \in V_1 \cap V_2$. Suppose $V_1 \cup V_2 \subseteq U_1 \cup U_2$ with
 $U_1, U_2 \subseteq X$ open and disjoint. Assume without loss of generality $x_0 \in U_1$. Then
 $U_1 \cap V_1 \neq \emptyset$ and $U_1 \cap V_2 \neq \emptyset$. So, since $V_1, V_2$ are
 connected, $V_1 \cap U_2 = V_2 \cap U_2 = \emptyset$. Therefore
 $(V_1 \cup V_2) \cap U_2 = \emptyset$ and $V_1 \cup V_2$ is connected.
 
-\textbf{2. False.} \textit{Counterexample:}
-$$X = \mathbb{R}^2, \quad U = [-1,1] \times \{0\}, \quad V = S^1 = \{x \in \mathbb{R}^2 : \|x\| = 1\},$$
-$$U \cap V = \{(-1,0), (1,0)\}.$$
+\textbf{(b) False.} \textit{Counterexample:}
+\[
+X = \mathbb{R}^2, \quad U = [-1,1] \times \{0\}, \quad V = S^1 = \{x \in \mathbb{R}^2 : \|x\| = 1\},
+\]
+\[
+U \cap V = \{(-1,0), (1,0)\}.
+\]
 
-\textbf{3. True.} Suppose $X$ is a metric space, $A \subseteq X$ a subset with closure
+\textbf{(c) True.} Suppose $X$ is a metric space, $A \subseteq X$ a subset with closure
 $\overline{A}$. Suppose $U_1, U_2 \subseteq X$ are disjoint open sets covering $\overline{A}$, and
 assume without loss of generality $\overline{A} \cap U_1 \neq \emptyset$. Then, since $U_1$ is
 open, $A \cap U_1 \neq \emptyset$. By connectedness of $A$, $U_2 \cap A = \emptyset$, and since
 $U_2$ is open, also $U_2 \cap \overline{A} = \emptyset$.
 \end{exercisesolution}
 
-\begin{remark}
+\begin{ainote}
 Corsin writes $\|x\| = R^2$ in the definition of $S^1$ above; it must be $\|x\| = 1$, as the
 stated intersection $\{(\pm 1, 0)\}$ confirms. Corrected here. See \texttt{OQ-07}.
-\end{remark}
+\end{ainote}
 
-\begin{figurestub}{FIG-W03-03}
-Two overlapping orange blobs $V_1$, $V_2$ sharing the purple point $x_0$, both enclosed in a red
-dotted region $U_1$; a separate red dotted region $U_2$ to the right, annotated ``no
-intersection''.
-\end{figurestub}
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+  \draw[orange!90!black, thick, fill=orange!10] plot[smooth cycle, tension=0.7] coordinates {(-1.6,-0.6) (-1.8,0.8) (-0.3,0.6) (-0.5,-0.6)};
+  \node[orange!90!black, font=\large] at (-1.2,0) {$V_1$};
 
-\begin{figurestub}{FIG-W03-04}
-Axes with a red unit circle $S^1$ and an orange horizontal segment $[-1,1]\times\{0\}$ through
-the origin; the two intersection points $(\pm 1, 0)$ marked.
-\end{figurestub}
+  \draw[orange!90!black, thick, fill=orange!10] plot[smooth cycle, tension=0.7] coordinates {(-0.3,-0.6) (-0.5,0.6) (1.0,0.8) (0.8,-0.6)};
+  \node[orange!90!black, font=\large] at (0.5,0) {$V_2$};
+
+  \fill[purple] (-0.4,0) circle (2.5pt) node[below, font=\small] {$x_0$};
+
+  \draw[red!80!black, thick, dotted] plot[smooth cycle, tension=0.7] coordinates {(-2.0,-0.9) (-2.1,1.1) (1.3,1.1) (1.1,-0.9)};
+  \node[red!80!black, font=\large] at (-1.6,-0.7) {$U_1$};
+
+  \draw[red!80!black, thick, dotted] plot[smooth cycle, tension=0.7] coordinates {(2.0,-0.8) (1.8,0.9) (3.0,0.9) (2.8,-0.8)};
+  \node[red!80!black, font=\large] at (2.4,0) {$U_2$};
+  \node[red!80!black, font=\footnotesize, align=center] at (2.4,-1.1) {no\\intersection};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.3]
+  \draw[->] (-1.6,0) -- (1.6,0) node[right] {$x$};
+  \draw[->] (0,-1.6) -- (0,1.6) node[above] {$y$};
+
+  \draw[red!80!black, thick] (0,0) circle (1.0);
+  \node[red!80!black, above right] at (0.7,0.7) {$S^1$};
+
+  \draw[orange!90!black, ultra thick] (-1,0) -- (1,0);
+  \node[orange!90!black, below] at (0,-0.1) {$U = [-1,1]\times\{0\}$};
+
+  \fill[purple] (-1,0) circle (2pt) node[above left, font=\footnotesize] {$(-1,0)$};
+  \fill[purple] (1,0) circle (2pt) node[above right, font=\footnotesize] {$(1,0)$};
+\end{tikzpicture}
+\end{center}
 
 \session{Friday}
 
 \section{Path connectedness}
 \label{sec:path_connectedness}
 
-\begin{definition}[paths]
+\begin{definition}[Path]
+\label{def:path}
 Let $(X,d)$ be a metric space. A continuous function $\gamma : [0,1] \to X$, where $[0,1]$
 carries the standard metric, is called a \newterm{path} (\germanterm{Weg}). More generally, we
 can replace $[0,1]$ by $[a,b]$ for $a < b$.
 \end{definition}
 
-\begin{definition}[path-connected]
+\begin{definition}[Path-connected]
+\label{def:path_connected}
 A metric space $X$ (or subset thereof) is \newterm{path-connected}
 (\germanterm{wegzusammenh\"angend}) if for all $x, y \in X$ there exists a path
 $\gamma : [0,1] \to X$ with $\gamma(0) = x$, $\gamma(1) = y$.
 \end{definition}
 
-\begin{lemma}[path connected is connected]
+\begin{lemma}[Path-connected implies connected]
+\label{lem:path_connected_implies_connected}
 Let $X$ be a metric space. Then $X$ path-connected implies $X$ connected.
 \end{lemma}
 
-\begin{proposition}[for open euclidean subsets, connected is path-connected]
+\begin{proposition}[Connectedness and path-connectedness in open Euclidean subsets]
+\label{prop:open_euclidean_connected_path_connected}
 Let $U \subseteq \mathbb{R}^n$ be open. Then
-$$U \text{ path-connected} \iff U \text{ connected}.$$
+\[
+U \text{ path-connected} \iff U \text{ connected}.
+\]
 \end{proposition}
 
 \begin{importantremark}
 Only for open subsets!
 \end{importantremark}
 
-\begin{example}[the topologist's sine curve]
+\begin{example}[The topologist's sine curve]
 $$S := \left\{\left(t, \sin\left(\tfrac{1}{t}\right)\right) : t > 0\right\} \cup \{0\} \subseteq \mathbb{R}^2$$
 $S$ is \textbf{connected} but \textbf{not path-connected}!
 \end{example}
 
-\begin{figurestub}{FIG-W03-05}
-Plot of $\sin(1/t)$ for $t \in (0, 0.2]$, oscillating ever faster and filling a solid blue band
-as $t \to 0$; vertical range $[-1,1]$.
-\end{figurestub}
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.3]
+  \draw[->] (-0.2,0) -- (3.2,0) node[right] {$t$};
+  \draw[->] (0,-1.4) -- (0,1.4) node[above] {$y$};
+  \draw (0,1.0) -- (-0.05,1.0) node[left, font=\footnotesize] {$1$};
+  \draw (0,-1.0) -- (-0.05,-1.0) node[left, font=\footnotesize] {$-1$};
+  \draw (2.8,0.05) -- (2.8,-0.05) node[below, font=\footnotesize] {$0.2$};
+
+  \draw[blue!80!black, thick] plot[domain=0.08:2.8, samples=250] (\x, {sin((1.0/(\x*0.1)) r)});
+  \fill[blue!80!black] (0,0) circle (1.5pt) node[left, font=\footnotesize] {$(0,0)$};
+  \node[above, font=\small] at (1.5,1.3) {$S = \{(t, \sin(1/t)) : t > 0\} \cup \{(0,0)\}$};
+\end{tikzpicture}
+\end{center}
 
 \begin{proof}[$S$ is connected]
 Any open set $U$ with $0 \in U$ will also contain elements from $S \setminus \{0\}$, which is
@@ -223,31 +309,53 @@ path-connected. Since path-connected implies connected and $U \setminus \{0\}$ i
 
 \begin{proof}[$S$ is not path-connected]
 Assume by contradiction there is a path from $(0,0)$ to $(\tfrac{1}{\pi}, 0)$,
-$$\gamma : [0,1] \to [0, \tfrac{1}{\pi}] \times [-1,1], \qquad t \mapsto (x(t), y(t)).$$
+\[
+\gamma : [0,1] \to [0, \tfrac{1}{\pi}] \times [-1,1], \qquad t \mapsto (x(t), y(t)).
+\]
 Since $\gamma$ is continuous, $x$ and $y$ must also be continuous. By the \newterm{intermediate
 value theorem}, $x : [0,1] \to [0,\tfrac{1}{\pi}]$ attains every value in $[0,\tfrac{1}{\pi}]$,
 since $x(0) = 0$, $x(1) = \tfrac{1}{\pi}$. Therefore we find a sequence
 $(a_n)_{n=0}^{\infty}$ such that
-$$x(a_n) = \frac{1}{2\pi n + \tfrac{\pi}{2}}.$$
+\[
+x(a_n) = \frac{1}{2\pi n + \tfrac{\pi}{2}}.
+\]
 Note that $y(a_n) = 1$ for all $n \in \mathbb{N}$. Thus in the limit $n \to \infty$, $a_n \to 0$,
 but $\gamma(a_n) \to (0,1) \neq \gamma(0)$. Contradiction to sequential continuity.
 \end{proof}
 
-\begin{figurestub}{FIG-W03-06}
-Two annotated copies of the sine-curve plot. Top: a small orange dashed circle labelled $U$
-around the origin. Bottom: red dots marking the points $\gamma(a_n)$ along the crests $y = 1$,
-with $\gamma(a_n)$ labelled on the rightmost crest and $\gamma(0)$ labelled at the origin.
-\end{figurestub}
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.3]
+  \draw[->] (-0.3,0) -- (3.2,0) node[right] {$t$};
+  \draw[->] (0,-1.4) -- (0,1.4) node[above] {$y$};
+
+  \draw[blue!80!black, thick] plot[domain=0.08:2.8, samples=250] (\x, {sin((1.0/(\x*0.1)) r)});
+
+  \draw[orange!90!black, thick, dashed] (0,0) circle (0.45);
+  \node[orange!90!black, font=\small, above left] at (-0.1,0.3) {$U$};
+
+  \fill[red!80!black] (0,0) circle (2pt) node[left, font=\small] {$\gamma(0)$};
+
+  \fill[red!80!black] (2.54, 1.0) circle (2pt) node[above, font=\footnotesize] {$\gamma(a_0)$};
+  \fill[red!80!black] (0.51, 1.0) circle (1.8pt);
+  \fill[red!80!black] (0.28, 1.0) circle (1.5pt);
+  \fill[red!80!black] (0.19, 1.0) circle (1.2pt);
+
+  \node[red!80!black, font=\small, right] at (2.6, 1.0) {$\gamma(a_n) \to (0,1) \neq \gamma(0)$};
+\end{tikzpicture}
+\end{center}
 
 \section{Cauchy--Schwarz}
 \label{sec:cauchy_schwarz}
 
-\begin{definition}[inner product / scalar product]
+\begin{definition}[Inner product / scalar product]
+\label{def:inner_product}
 Let $V$ be a \textbf{vector space} over $\mathbb{R}$. An \newterm{inner product}
 (\germanterm{Skalarprodukt}) on $V$ is a map
-$$\langle\cdot,\cdot\rangle : V \times V \to \mathbb{R}$$
+\[
+\langle\cdot,\cdot\rangle : V \times V \to \mathbb{R}
+\]
 satisfying, for all $u, v, w \in V$ and $\alpha, \beta \in \mathbb{R}$:
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item \textbf{Bilinearity:}
     $\langle \alpha u + \beta v, w\rangle = \alpha\langle u,w\rangle + \beta\langle v,w\rangle$,
     and equivalently in the second variable.
@@ -256,10 +364,11 @@ satisfying, for all $u, v, w \in V$ and $\alpha, \beta \in \mathbb{R}$:
 \end{enumerate}
 \end{definition}
 
-\begin{definition}[norm]
+\begin{definition}[Norm]
+\label{def:norm}
 Let $V$ be a \textbf{real} vector space. A \newterm{norm} (\germanterm{Norm}) on $V$ is a map
 $\|\cdot\| : V \to [0,\infty)$ satisfying, for all $u, v \in V$ and $\alpha \in \mathbb{R}$:
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item \textbf{Definiteness:} $\|v\| \geq 0$, and $\|v\| = 0 \iff v = 0$.
   \item \textbf{Homogeneity:} $\|\alpha v\| = |\alpha|\|v\|$.
   \item \textbf{$\Delta$-inequality:} $\|u+v\| \leq \|u\| + \|v\|$.
@@ -274,40 +383,85 @@ $\|\cdot\| : V \to [0,\infty)$ satisfying, for all $u, v \in V$ and $\alpha \in 
 \subsection{Geometric meaning of the inner product}
 
 In $\mathbb{R}^2$, the following identity holds:
-$$\langle x,y\rangle := x_1y_1 + x_2y_2 := \|x\|\|y\|\cos\theta$$
+\[
+\langle x,y\rangle := x_1y_1 + x_2y_2 = \|x\|\|y\|\cos\theta
+\]
 where $\theta$ is the angle between $x, y \in \mathbb{R}^2$.
 
 To see this, conveniently choose our basis vectors such that $x = (x_1, 0)$, $y = (y_1, y_2)$.
 
-\begin{figurestub}{FIG-W03-07}
-Two axis systems joined by a curved arrow labelled ``change of basis (rotation)''. Left: vectors
-$x$ (blue) and $y$ (orange) at angle $\theta$, both off-axis. Right: the same pair rotated so
-that $x$ lies along the positive horizontal axis, with a dotted drop-line from $y$.
-\end{figurestub}
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.1]
+  \begin{scope}[shift={(0,0)}]
+    \draw[->] (-0.3,0) -- (2.2,0);
+    \draw[->] (0,-0.3) -- (0,2.2);
+    \draw[blue!80!black, thick, ->] (0,0) -- (1.5,0.6) node[right] {$x$};
+    \draw[orange!90!black, thick, ->] (0,0) -- (0.8,1.8) node[above] {$y$};
+    \draw[purple, thick] (0.5,0.2) arc (21.8:66.0:0.5);
+    \node[purple, font=\footnotesize] at (0.7,0.45) {$\theta$};
+  \end{scope}
+
+  \draw[->, thick] (2.4,1.0) .. controls (2.8,1.3) .. (3.3,1.0) node[midway, above, red, font=\tiny] {\shortstack{change of basis\\(rotation)}};
+
+  \begin{scope}[shift={(3.8,0)}]
+    \draw[->] (-0.3,0) -- (2.5,0);
+    \draw[->] (0,-0.3) -- (0,2.2);
+    \draw[blue!80!black, thick, ->] (0,0) -- (1.8,0) node[below] {$x$};
+    \draw[orange!90!black, thick, ->] (0,0) -- (1.2,1.6) node[above right] {$y$};
+    \draw[dotted, gray] (1.2,1.6) -- (1.2,0);
+    \draw[purple, thick] (0.5,0) arc (0:53.1:0.5);
+    \node[purple, font=\footnotesize] at (0.7,0.25) {$\theta$};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
 
 Then
-$$\langle x,y\rangle = x_1y_1 = x_1\|y\|\cos\theta = \|x\|\|y\|\cos\theta.$$
+\[
+\langle x,y\rangle = x_1y_1 = x_1\|y\|\cos\theta = \|x\|\|y\|\cos\theta.
+\]
 
 For more rigour, you will show in Linalg that the rotations in $\mathbb{R}^2$ are given by
 matrices $R$ satisfying $\langle Rx, Ry\rangle = \langle x,y\rangle$.
 
 In a general inner product space $V$, this becomes the \textbf{definition} of the angle $\theta$.
 It then makes sense to define the \newterm{projection onto $v$}, $\pi_v$:
-$$\pi_v(u) = \frac{\langle u,v\rangle}{\|v\|^2}\,v = \|u\|\cos\theta\,\frac{v}{\|v\|}.$$
+\[
+\pi_v(u) := \frac{\langle u,v\rangle}{\|v\|^2}\,v = \|u\|\cos\theta\,\frac{v}{\|v\|}.
+\]
 
-\begin{figurestub}{FIG-W03-08}
-A blue vector $u$ and an orange vector $v$ from a common origin, angle $\theta$ marked in green;
-a purple dashed perpendicular from the tip of $u$ onto the line spanned by $v$, with the foot
-labelled $\pi_v(u)$ and a right-angle marker.
-\end{figurestub}
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.2]
+  \draw[->] (-0.3,0) -- (3.5,0);
+  \draw[->] (0,-0.3) -- (0,2.5);
+
+  \draw[orange!90!black, thick, ->] (0,0) -- (3.2,0.8) node[right] {$v$};
+  \draw[blue!80!black, thick, ->] (0,0) -- (1.2,2.0) node[above left] {$u$};
+
+  \coordinate (P) at (1.60, 0.40);
+  \coordinate (U) at (1.2, 2.0);
+
+  \draw[purple!80!black, thick, dashed] (U) -- (P);
+  \fill[purple!80!black] (P) circle (2pt) node[below right, font=\small] {$\pi_v(u)$};
+
+  \draw[green!60!black, thick] (0.5,0.125) arc (14:59:0.5);
+  \node[green!60!black, font=\small] at (0.6,0.3) {$\theta$};
+\end{tikzpicture}
+\end{center}
 
 In words, $\pi_v(u)$ is the part of $u$ which points along $v$. In particular,
-$$\|\pi_v(u)\| = \|u\|\,|\cos\theta| = \frac{|\langle u,v\rangle|}{\|v\|}.$$
+\[
+\|\pi_v(u)\| = \|u\|\,|\cos\theta| = \frac{|\langle u,v\rangle|}{\|v\|}.
+\]
 In this sense, Cauchy--Schwarz says something very obvious --- see the picture above:
-$$\frac{|\langle u,v\rangle|}{\|v\|} \leq \|u\| \iff \|\pi_v(u)\| \leq \|u\| \iff \|u\|\,|\cos\theta| \leq \|u\|.$$
+\[
+\frac{|\langle u,v\rangle|}{\|v\|} \leq \|u\| \iff \|\pi_v(u)\| \leq \|u\| \iff \|u\|\,|\cos\theta| \leq \|u\|.
+\]
 
-\begin{remark}[hint for the proof of Cauchy--Schwarz]
+\begin{remark}[Hint for the proof of Cauchy--Schwarz]
+\label{rem:proof_hint_cauchy_schwarz}
 Use definiteness and expand the term
-$$\langle u - \pi_v(u),\ u - \pi_v(u)\rangle = \dots$$
+\[
+\langle u - \pi_v(u),\ u - \pi_v(u)\rangle = \dots
+\]
 where $u - \pi_v(u)$ is the \textbf{perpendicular part} of $u$ to $v$.
 \end{remark}

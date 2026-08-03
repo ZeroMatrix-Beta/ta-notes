@@ -6,6 +6,7 @@
 \textit{Statements quoted verbatim from \texttt{exercises/Ex4\_Analysis2\_eng.pdf} (assigned 9
 March 2026, due 16 March 2026). Attribution: Prof. Joaquim Serra, D-MATH, ETH Z\"urich.}
 
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 1
 \begin{ainote}[Corsin's recommendations]
 Colour key, as given on the page: blue \textbf{= important}, orange \textbf{= semi-important},
 red \textbf{= optional}.
@@ -100,6 +101,7 @@ $$u(x,y) := \begin{cases} \max\{0, y-2\}^2 & \text{if } x \geq 0, \\ 0 & \text{i
 
 \session{Monday}
 
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 2
 \section{The differential}
 \label{sec:the_differential}
 
@@ -125,6 +127,7 @@ $x_0, h \in \mathbb{R}^n$. (Of course, equivalently for $U \subseteq \mathbb{R}^
 $F : U \to \mathbb{R}^m$.)
 \end{definition}
 
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 3
 \section{The Jacobi matrix}
 \label{sec:jacobi_matrix}
 
@@ -143,6 +146,7 @@ $$\partial_i F(x) = DF_x(e_i).$$
 The partial derivatives can exist even if $F : U \to \mathbb{R}^m$ is not differentiable!
 \end{importantremark}
 
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 4
 \subsection{Examples}
 
 \begin{example}[Derivative of a curve]
@@ -151,10 +155,26 @@ What is $\gamma'(\tfrac{\pi}{4}) := D\gamma_{\pi/4}$?
 $$\gamma'\!\left(\tfrac{\pi}{4}\right) = \begin{pmatrix}\partial_t\gamma_1(\pi/4) \\ \partial_t\gamma_2(\pi/4)\end{pmatrix} = \begin{pmatrix}-1/\sqrt{2} \\ 1/\sqrt{2}\end{pmatrix}$$
 \end{example}
 
-\begin{figurestub}{FIG-W04-01}
-Unit circle on axes; the point $\gamma(\pi/4)$ marked with an orange tangent arrow pointing
-up-left, and a dotted radius to the point.
-\end{figurestub}
+\begin{aiexample}[Jacobian Matrix of Polar Coordinates]
+% Generator: Gemini 3.6 Flash (Medium)
+Let $f \colon (0,\infty) \times (0,2\pi) \to \mathbb{R}^2$ be the polar coordinate map $f(r,\theta) := (r\cos\theta, r\sin\theta)\transp$. The Jacobian matrix $\Jac f(r,\theta)$ is:
+\[
+\Jac f(r,\theta) = \begin{pmatrix} \dfrac{\partial f_1}{\partial r} & \dfrac{\partial f_1}{\partial \theta} \\[1ex] \dfrac{\partial f_2}{\partial r} & \dfrac{\partial f_2}{\partial \theta} \end{pmatrix} = \begin{pmatrix} \cos\theta & -r\sin\theta \\ \sin\theta & r\cos\theta \end{pmatrix}.
+\]
+Its determinant is $\det \Jac f(r,\theta) = r\cos^2\theta + r\sin^2\theta = r > 0$.
+\end{aiexample}
+
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.3]
+  \draw[->] (-1.4,0) -- (1.4,0) node[right] {$x$};
+  \draw[->] (0,-1.4) -- (0,1.4) node[above] {$y$};
+  \draw[thick] (0,0) circle (1.0);
+  \coordinate (P) at (0.707, 0.707);
+  \draw[dotted, orange!90!black, thick] (0,0) -- (P);
+  \fill[orange!90!black] (P) circle (2pt) node[above right, font=\footnotesize] {$\gamma(\pi/4)$};
+  \draw[orange!90!black, ultra thick, ->] (P) -- ++(-0.6, 0.6) node[above left, font=\small] {$\gamma'(\pi/4)$};
+\end{tikzpicture}
+\end{center}
 
 This is also called the \textbf{speed of the curve}. We get that
 $$\gamma\!\left(\tfrac{\pi}{4}+h\right) = \frac{1}{\sqrt{2}}\begin{pmatrix}1\\1\end{pmatrix} + \frac{h}{\sqrt{2}}\begin{pmatrix}-1\\1\end{pmatrix} + o(|h|).$$
@@ -165,6 +185,7 @@ $$\Jac F(x) = \left(\frac{\partial F}{\partial x_1}\ \Big|\ \cdots\ \Big|\ \frac
 and therefore, in the canonical basis, with $v = (v_1,\dots,v_n)\transp$:
 $$\partial_v F(x) = DF_x(v) = \Jac F(x)\,v = \sum_{i=1}^{n} v_i\,\frac{\partial F}{\partial x_i}.$$
 
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 5
 \begin{example}[Scalar field gradient]
 $$f : \mathbb{R}^3\to\mathbb{R}, \qquad (x,y,z) \mapsto 2x^2 + y^2 + 3z^2 - 2xyz$$
 What is $\Jac f(x,y,z)$?
@@ -181,6 +202,7 @@ matrix stacks $\nabla F_1, \dots, \nabla F_m$ as rows --- which is the correct s
 consistent with $(\nabla f)\transp$ just above. Corrected to ``rows''. See \texttt{OQ-09}.
 \end{ainote}
 
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 5
 \section{Chain rule}
 \label{sec:chain_rule}
 
@@ -193,12 +215,24 @@ $$D(g\circ f)(x) = Dg(f(x))\,Df(x)$$
 And equivalently for the Jacobians.
 \end{theorem}
 
+\begin{aiexample}[Chain Rule for Vector Fields]
+% Generator: Gemini 3.6 Flash (Medium)
+Let $f(u,v) := u^2 + v^2$ and let $g(r,\theta) := (r\cos\theta, r\sin\theta)\transp$. The composite function is $(f \circ g)(r,\theta) = r^2\cos^2\theta + r^2\sin^2\theta = r^2$.
+By the multi-variable Chain Rule, the Jacobian matrix of $f \circ g$ satisfies:
+\[
+D(f \circ g)(r,\theta) = Df(g(r,\theta)) \cdot Dg(r,\theta) = \begin{pmatrix} 2r\cos\theta & 2r\sin\theta \end{pmatrix} \begin{pmatrix} \cos\theta & -r\sin\theta \\ \sin\theta & r\cos\theta \end{pmatrix} = \begin{pmatrix} 2r & 0 \end{pmatrix},
+\]
+which matches the direct calculation $\frac{\partial}{\partial r}(r^2) = 2r$ and $\frac{\partial}{\partial \theta}(r^2) = 0$.
+\end{aiexample}
+
+% Source: Corsin Nick/Class Notes/Week 4.pdf, pp. 5--6
 \begin{exercise}[Jacobian of a composite map]
 \label{ex:chain_rule_computation}
 Compute $\Jac(g\circ f)$ for
 $$f : \mathbb{R}^3\to\mathbb{R}^2,\ x \mapsto (x_1x_2,\ x_2+x_3), \qquad g : \mathbb{R}^2\to\mathbb{R}^2,\ x \mapsto (e^{x_1},\ x_1x_2).$$
 \end{exercise}
 
+% Kept inline: solved directly in Corsin Nick/Class Notes/Week 4.pdf, pp. 5--6.
 \begin{exercisesolution}[\cref{ex:chain_rule_computation}]
 We have
 $$\Jac f(x) = \begin{pmatrix} x_2 & x_1 & 0 \\ 0 & 1 & 1\end{pmatrix}, \qquad \Jac g(x) = \begin{pmatrix} e^{x_1} & 0 \\ x_2 & x_1 \end{pmatrix}.$$
@@ -211,6 +245,7 @@ $$
 $$
 \end{exercisesolution}
 
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 6
 Sometimes the \newterm{differential} (\germanterm{das Differential}) is not easily expressed as a
 Jacobian. Then it can be convenient to use the formula for \newterm{directional derivatives}
 (\germanterm{Richtungsableitung}):
@@ -224,6 +259,7 @@ is not differentiable at $x_0$, i.e.\ $DF_{x_0}$ does not exist. However, if $DF
 the formula $(*)$ holds.
 \end{importantremark}
 
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 7
 \begin{exercise}[Differential of $A \mapsto A\transp A$]
 \label{ex:transpose_diff}
 We identify the inner product space of real-valued matrices $\mathbb{R}^{n\times n}$ with inner
@@ -238,6 +274,7 @@ $X \in \mathbb{R}^{n\times n}$:
 $$DF_{\id}(X) = \partial_X F(\id).$$
 \end{exercise}
 
+% Kept inline: solved directly in Corsin Nick/Class Notes/Week 4.pdf, p. 7.
 \begin{exercisesolution}[\cref{ex:transpose_diff}]
 We use $(*)$:
 $$
@@ -252,6 +289,7 @@ $$
 
 \session{Friday}
 
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 8
 \section{The chain rule along a path}
 \label{sec:chain_rule_along_path}
 
@@ -273,6 +311,7 @@ This operation is so common in physics that it has its own notation: for $f$ as 
 each coordinate as a function of \textbf{time} and differentiate:
 $$\frac{d}{dt}f(x_1,\dots,x_n) := Df(x_1(t),\dots,x_n(t)) = \sum_{i=1}^{n}\frac{\partial f}{\partial x_i}\frac{\partial x_i}{\partial t}.$$
 
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 9
 \section{Taylor expansions}
 \label{sec:taylor_expansions}
 
@@ -283,11 +322,13 @@ where $\alpha$ is a \newterm{multi-index} (\germanterm{Multiindex}) in $\mathbb{
 
 In practice, we never use this formula, but to shed some light on it:
 
+% Source: Corsin Nick/Class Notes/Week 4.pdf, pp. 9--10
 \begin{exercise}[Maximal Taylor expansion in $\mathbb{R}^2$]
 \label{ex:taylor_maximal_expansion}
 Let $f \in C^3(\mathbb{R}^2,\mathbb{R})$. Write out the maximal Taylor approximation.
 \end{exercise}
 
+% Kept inline: solved directly in Corsin Nick/Class Notes/Week 4.pdf, pp. 9--10.
 \begin{exercisesolution}[\cref{ex:taylor_maximal_expansion}]
 The multi-indices are:
 \begin{itemize}
@@ -323,6 +364,7 @@ $\partial_1^2\partial_2 f(\bar x)\,\tfrac{h_1^2h_2}{2}$ for $\delta_2$, confirmi
 meaning. Corrected above. See \texttt{OQ-10}.
 \end{ainote}
 
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 11
 We can rewrite this as
 $$f(\bar x + h) = \sum_{\ell=0}^{k}\frac{1}{\ell!}\big(h_1\partial_1 + h_2\partial_2\big)^\ell f(\bar x).$$
 
@@ -340,6 +382,7 @@ expansion above does include, so the lower limit must be $0$. Corrected above. S
 \texttt{OQ-11}.
 \end{ainote}
 
+% Source: Corsin Nick/Class Notes/Week 4.pdf, pp. 11--12
 \begin{exercise}[Taylor expansion of $(x+y^2)e^{-x^2-y^2}$]
 \label{ex:taylor_explicit_example}
 Compute the Taylor expansion of
@@ -347,6 +390,7 @@ $$f : \mathbb{R}^2\to\mathbb{R}, \qquad (x,y) \mapsto (x+y^2)e^{-x^2-y^2}$$
 around $(0,0)$ up to third order.
 \end{exercise}
 
+% Kept inline: solved directly in Corsin Nick/Class Notes/Week 4.pdf, pp. 11--12.
 \begin{exercisesolution}[\cref{ex:taylor_explicit_example}, cumbersome solution]
 Calculate all partial derivatives up to third order and use the definition. (Please never do
 this.)
@@ -362,6 +406,7 @@ $$
 $$
 \end{exercisesolution}
 
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 12
 \begin{remark}[Second-order Taylor formula with Hessian]
 The second-order Taylor approximation of $f \in C^2(\mathbb{R}^n,\mathbb{R})$ around
 $x_0 \in \mathbb{R}^n$ can be expressed compactly as
@@ -381,6 +426,7 @@ $(th) \mapsto f(x_0+th)$ in $(th)$ around $0$ coincide?
 we need the assumption $x_0 + th \in U$ for all $t \in [0,1]$.
 \end{answer}
 
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 13
 \begin{exercise}[Proof of second-order Taylor formula]
 \label{ex:hessian_taylor_proof}
 Prove the formula from above:
@@ -388,6 +434,7 @@ $$f(x_0+h) = f(x_0) + \nabla f(x_0)h + \tfrac{1}{2}h\transp \Hess f(x_0)h + \dot
 for $f \in C^k(U,\mathbb{R})$ with $x_0 + th \in U$ for all $t \in [0,1]$.
 \end{exercise}
 
+% Kept inline: solved directly in Corsin Nick/Class Notes/Week 4.pdf, p. 13.
 \begin{exercisesolution}[Proof of \cref{ex:hessian_taylor_proof}]
 We expand $t \mapsto f(x_0+th)$ in $t$:
 $$
@@ -399,4 +446,146 @@ f(x_0+th) &= f(x_0) + t\left.\frac{d}{dt}\right|_{t=0}f(x_0+th) + \frac{t^2}{2}\
 \end{aligned}
 $$
 Setting $t = 1$ gives the result.
+\end{exercisesolution}
+
+\begin{aiexercise}[Differential and Linearization at $(1,0)$]
+\label{ex:ai_differential_linearization}
+% Generator: Gemini 3.6 Flash (Medium)
+Let $f(x,y) := x^2 y + \sin(xy)$ defined on $\mathbb{R}^2$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Compute the gradient $\nabla f(x,y)$ and the total differential $Df(1,0)$.
+  \item Find the linear approximation $L(x,y)$ of $f$ around the point $(1,0)$.
+\end{enumerate}
+\end{aiexercise}
+
+\begin{aiexercise}[Directional Derivative along a Unit Vector]
+\label{ex:ai_directional_derivative}
+% Generator: Gemini 3.6 Flash (Medium)
+Let $f(x,y) := x^2 y$ defined on $\mathbb{R}^2$. Compute the directional derivative $D_v f(1,2)$ of $f$ at the point $(1,2)$ along the unit vector $v := \frac{1}{\sqrt{2}}(1,1)\transp$.
+\end{aiexercise}
+
+\section{Solutions}
+\label{sec:week04_solutions}
+
+\begin{ainote}
+This section holds solutions only for the official-sheet exercises Corsin did not himself work
+out (\cref{ex:4.1,ex:4.2,ex:4.3,ex:4.6} --- he gives only hints on his priority page, p. 1) and
+the two \texttt{aiexercise} problems. Corsin's own exercises in this chapter
+(\cref{ex:chain_rule_computation,ex:transpose_diff,ex:taylor_maximal_expansion,%
+ex:taylor_explicit_example,ex:hessian_taylor_proof}) are solved inline, immediately after their
+statement, mirroring how he presents them in his own notes (see the "Kept inline" comments above
+each).
+\end{ainote}
+
+\begin{exercisesolution}[Solution to \cref{ex:4.1}]
+% Generator: Claude Sonnet 5 (Medium)
+Write $u(x,y) = x^{\sin(y)} = e^{\sin(y)\ln x}$ for $x > 0$. Differentiating with the chain rule:
+\[
+\partial_x u = \sin(y)\,x^{\sin(y)-1}, \qquad \partial_y u = \cos(y)\ln(x)\,x^{\sin(y)} = \cos(y)\ln(x)\,e^{\sin(y)\ln x}.
+\]
+\end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:4.2}]
+% Generator: Claude Sonnet 5 (Medium)
+Consider the map
+\[
+\varphi : U \to \mathbb{R}^n \times \mathbb{R}^m, \qquad x \mapsto (x, f(x)).
+\]
+Since $f \in C^1(U,\mathbb{R}^m)$ is in particular continuous, and the identity on $U$ is
+continuous, $\varphi$ is continuous. By definition $\Gamma_f = \varphi(U)$. Since $U$ is connected
+and $\varphi$ is continuous, \cref{thm:continuity_preserves_connected} gives that $\varphi(U) =
+\Gamma_f$ is connected.
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:4.3}]
+% Generator: Claude Sonnet 5 (Medium)
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item For $n=2$, $\{x : |x|_1 \leq 1\}$ is the diamond with vertices $(\pm 1, 0)$, $(0,\pm 1)$;
+    $\{x : |x|_2 \leq 1\}$ is the Euclidean unit disc; $\{x : |x|_{10} \leq 1\}$ is a curve close
+    to the square $[-1,1]^2$, with rounded corners that flatten as $p$ grows.
+  \item Let $M := \max_i |x_i|$. Then
+    \[
+    M \leq |x|_p = M\Big(\sum_{i=1}^{n}\Big(\frac{|x_i|}{M}\Big)^p\Big)^{1/p} \leq M\,n^{1/p}.
+    \]
+    Since $n^{1/p} \to 1$ as $p \to \infty$, the squeeze theorem gives $|x|_\infty = \lim_{p\to\infty}|x|_p = M = \max_i |x_i|$.
+  \item Set $u_i := a_i^{p/2}$ and $v_i := a_i^{(p-2)/2}b_i$, so that $u_iv_i = a_i^{p-1}b_i$,
+    $u_i^2 = a_i^p$, and $v_i^2 = a_i^{p-2}b_i^2$. Cauchy--Schwarz in $\mathbb{R}^n$ gives
+    \[
+    \Big(\sum_{i=1}^n a_i^{p-1}b_i\Big)^2 = \Big(\sum_{i=1}^n u_iv_i\Big)^2 \leq \Big(\sum_{i=1}^n u_i^2\Big)\Big(\sum_{i=1}^n v_i^2\Big) = \Big(\sum_{i=1}^n a_i^p\Big)\Big(\sum_{i=1}^n a_i^{p-2}b_i^2\Big).
+    \]
+  \item Fix $x, y$ with all coordinates strictly positive, let $d := x - y$, and write
+    $z(t) := tx+(1-t)y = y + td$, so $z_i(t) > 0$ for all $t \in [0,1]$. Let $g(t) := f(t)^p =
+    \sum_i z_i(t)^p$, so $f = g^{1/p}$. Since $z_i'(t) = d_i$,
+    \[
+    g'(t) = p\sum_i z_i(t)^{p-1}d_i.
+    \]
+    Differentiating $f = g^{1/p}$ twice and simplifying,
+    \[
+    f''(t) = (p-1)\,g(t)^{1/p-2}\left[g(t)\sum_i z_i(t)^{p-2}d_i^2 - \Big(\sum_i z_i(t)^{p-1}d_i\Big)^2\right].
+    \]
+    Applying the inequality of the previous point with $a_i = z_i(t) > 0$ and $b_i = d_i$ (any
+    sign is allowed, since the inequality only uses $b_i^2$ on the right and squares the left)
+    shows the bracket is $\geq 0$. Since $g(t) > 0$ and $p \geq 1$, we get $f''(t) \geq 0$ for
+    $p > 1$ (for $p=1$, $f$ is affine in $t$ and hence convex). Thus $f$ is convex on $[0,1]$.
+  \item Convexity of $f$ at $t = \tfrac12$ gives $f(\tfrac12) \leq \tfrac12(f(0)+f(1))$, i.e.
+    \[
+    \Big|\frac{x+y}{2}\Big|_p \leq \frac{|x|_p + |y|_p}{2} \quad \Longrightarrow \quad |x+y|_p \leq |x|_p + |y|_p
+    \]
+    for $x, y$ with strictly positive coordinates. For general $x, y \in \mathbb{R}^n$, write
+    $\hat x := (|x_1|,\dots,|x_n|)$, $\hat y := (|y_1|,\dots,|y_n|)$; these have non-negative
+    coordinates (the strictly positive case above extends to this case by continuity), and
+    $|x+y|_p \leq |\hat x + \hat y|_p \leq |\hat x|_p + |\hat y|_p = |x|_p + |y|_p$.
+  \item For $p \in (0,1)$, the triangle inequality fails, so $|\cdot|_p$ is not a norm: taking
+    $x = e_1$, $y = e_2$ gives $|x|_p = |y|_p = 1$ but $|x+y|_p = 2^{1/p} > 2 = |x|_p+|y|_p$.
+\end{enumerate}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:4.6}]
+% Generator: Claude Sonnet 5 (Medium)
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Define $v(x_2,\dots,x_n) := u(0,x_2,\dots,x_n)$, which is $C^1$ as the restriction of $u$
+    to the hyperplane $x_1 = 0$. For fixed $(x_2,\dots,x_n)$, the function
+    $t \mapsto u(t,x_2,\dots,x_n)$ has derivative $\partial_1 u \equiv 0$ everywhere, hence is
+    constant in $t$; evaluating at $t=0$ gives $u(x_1,\dots,x_n) = u(0,x_2,\dots,x_n) =
+    v(x_2,\dots,x_n)$ for all $x_1$. Uniqueness: if some $\tilde v$ also satisfies
+    $u(x) = \tilde v(x_2,\dots,x_n)$, then setting $x_1 = 0$ gives $\tilde v = v$.
+  \item Since $\nu\cdot e_1 = \nu_1 \neq 0$, consider the invertible linear change of coordinates
+    $y_i := x_i - \dfrac{x_1\nu_i}{\nu_1}$ for $i = 2,\dots,n$, together with $x_1$ itself.
+    Moving $x_1$ by $t$ while holding $y_2,\dots,y_n$ fixed forces $x_i$ to move by
+    $t\nu_i/\nu_1$, i.e.\ moves $x$ in the direction $\tfrac{1}{\nu_1}\nu$. By the hint, applying
+    the mean value theorem to $u(x+t\nu)$ shows $t \mapsto u(x+t\nu)$ is constant since
+    $\partial_\nu u \equiv 0$; consequently $u$, expressed in the coordinates $(x_1, y_2,\dots,
+    y_n)$, has vanishing $x_1$-derivative and is therefore (by part 1) independent of $x_1$ in
+    these coordinates. Hence there is a (unique, by the same argument as in part 1) function
+    $w \in C^1(\mathbb{R}^{n-1})$ with
+    \[
+    u(x_1,\dots,x_n) = w\!\left(x_2 - \frac{x_1\nu_2}{\nu_1},\dots,x_n - \frac{x_1\nu_n}{\nu_1}\right).
+    \]
+  \item In general, only \textbf{locally}: on any open subset where every fiber
+    $\{x_1 : (x_1,x_2,\dots,x_n) \in U\}$ (for fixed $(x_2,\dots,x_n)$) is connected, the same
+    argument as in part 1 shows $u$ is locally of the form $v(x_2,\dots,x_n)$. But this need not
+    hold \textbf{globally} on all of $U$, even though $U$ itself is connected: with
+    $U := \{(x,y) : x^2 < y < x^2+1\}$ and $u(x,y) := \max\{0,y-2\}^2$ for $x \geq 0$, $u := 0$
+    for $x \leq 0$, one checks $\partial_1 u \equiv 0$ throughout $U$ (near $x=0$ both branches
+    agree, since $y < 2$ there), yet $u$ is not globally independent of $x$: for $y > 2$, the
+    fiber of $U$ over $y$ splits into two disconnected intervals (one with $x>0$, one with
+    $x<0$), and $u$ takes different values on each. So connectedness of $U$ alone does not
+    suffice; what is needed is connectedness of each vertical fiber of $U$.
+\end{enumerate}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:ai_differential_linearization}]
+% Generator: Gemini 3.6 Flash (Medium)
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Partial derivatives are $\frac{\partial f}{\partial x} = 2xy + y\cos(xy)$ and $\frac{\partial f}{\partial y} = x^2 + x\cos(xy)$. Evaluating at $(1,0)$ yields $\frac{\partial f}{\partial x}(1,0) = 0$ and $\frac{\partial f}{\partial y}(1,0) = 1 + 1 = 2$. Thus $\nabla f(1,0) = (0, 2)\transp$, and the total differential $Df(1,0) \colon \mathbb{R}^2 \to \mathbb{R}$ is $Df(1,0)(h_1, h_2) = 2h_2$.
+  \item Since $f(1,0) = 0$, the linearization at $(1,0)$ is $L(x,y) = f(1,0) + Df(1,0)(x-1, y-0) = 0 + 0(x-1) + 2y = 2y$.
+\end{enumerate}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:ai_directional_derivative}]
+% Generator: Gemini 3.6 Flash (Medium)
+The gradient of $f(x,y)$ is $\nabla f(x,y) = (2xy, x^2)\transp$. Evaluating at $(1,2)$ gives $\nabla f(1,2) = (4,1)\transp$. Since $f$ is continuously differentiable ($C^\infty$), the directional derivative along the unit vector $v$ is given by the inner product:
+\[
+D_v f(1,2) = \nabla f(1,2) \cdot v = \begin{pmatrix} 4 \\ 1 \end{pmatrix} \cdot \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\ 1 \end{pmatrix} = \frac{4 + 1}{\sqrt{2}} = \frac{5}{\sqrt{2}}.
+\]
 \end{exercisesolution}

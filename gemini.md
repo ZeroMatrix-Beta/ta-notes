@@ -98,13 +98,20 @@ You are authorized to improve the prose and apply the established "House Style" 
 * **Structural Flow:** Use commas to separate conditional clauses (If... , then...), but avoid grammatically incorrect commas before "that" or between verbs and objects. Use commas in front of "and therefore" if appropriate.
 * **Syllabication:** To assist LaTeX with professional justification and avoid margin overflows, use manual hyphenation hints for long technical terms. For example, always use `finite-di\-men\-sional` instead of the plain version.
 * **Punctuation and Math Mode:** Always place standard punctuation (like commas or periods) *outside* of inline math mode (e.g., `$x=2$,` instead of `$x=2,$`) to ensure proper spacing.
-## TIKZ AND DIAGRAM GUIDELINES
+
+## TYPOGRAPHY & SPACING RULES
+
+* **Paragraph Spacing & Indentation:** Paragraph indentation is set globally to `\setlength{\parindent}{0pt}` with `\setlength{\parskip}{3pt plus 1.5pt minus 0.5pt}`. Paragraphs must NEVER have indentation — whether preceded by `\section`, `\subsection`, or `\subsubsection`, or followed/preceded by `itemize` or `enumerate`.
+* **List Spacing:** Top-level and nested `itemize`/`enumerate` environments use compact zero-spacing (`topsep=0pt`, `itemsep=0pt`, `parsep=0.5\customparskip`).
+* **Theorem Environment Spacing:** All theorem-like environments use `\customenvspace` (`2.0ex plus 0.5ex minus 0.2ex`) for above and below spacing.
+* **Line Spread:** Line spread is configured to `\linespread{1.05}` across the entire document.
 
 * **Commutative Diagrams:** Always use the `tikz-cd` package for commutative diagrams.
 * **Coordinate Calculations:** In TikZ `\draw` and `\node` coordinates, unbraced math expressions containing commas or operations will fail to parse (e.g., `at (2.6, 1.0 + 0.3*sin(...))`). Always enclose coordinate math expressions in curly braces `{}` (e.g., `at (2.6, {1.0 + 0.3*sin(...)})`) or pre-calculate the numeric coordinate (e.g., `at (2.6, 1.06)`).
 * **Multi-line Node Text:** Avoid using `align=center` without a set `text width` on simple nodes, as it can cause TikZ label text parsing errors (*"A node must have a label text"*). Use `\shortstack{Line 1\\Line 2}` for multi-line text inside nodes to guarantee robust compilation across all TeX engines.
 * **Function Plot Domains & Overflow:** When plotting functions with singular or rapidly growing terms near $0$ (such as $\sin(1/t)$ for the topologist's sine curve), bound the plot domain strictly away from zero (e.g., `domain=0.08:2.8`) to avoid PGF math `! Dimension too large` errors.
 * **Scope Syntax:** Always terminate `\end{scope}` cleanly with a closing brace `}`, never a trailing semicolon (e.g., avoid `\end{scope};`).
+* **Rotation and Transformation Syntax:** In TikZ scope transformations, always use spaces in rotation keys (e.g., `rotate around x=65`) or define explicit 3D coordinate system vectors (e.g., `x={(0.866cm,-0.3cm)}, y={(0.5cm,0.4cm)}`). Never write unspaced key strings like `rotatearound x`, which cause PGF key parsing errors.
 * **Environment Centering:** Wrap inline TikZ figures in standard `\begin{center} ... \end{center}` environments or floating `figure` environments.
 * **Figure Stubs — write specs, not pointers.** When a diagram cannot be drawn immediately,
   the stub must be a self-sufficient *drawing specification* so that no one needs to reopen the
@@ -123,6 +130,7 @@ You are authorized to improve the prose and apply the established "House Style" 
 ## OPERATIONAL DIRECTIVES
 
 * **Inline Edits:** When performing inline edits, prioritize keeping the surrounding LaTeX syntax intact.
+* **Multi-Pass Compilation for Cross-References:** When adding or modifying labels, `\cref` references, or `lastpage` counters, always run full multi-pass compilation (e.g. `latexmk`) until `.aux` files stabilize and all cross-reference warnings resolve.
 * **Logic Checks:** If a proof seems circular or a matrix calculation is visibly incorrect, flag it to the user while applying the stylistic edits. Use some color, for example dark-red.
 * **Commit Messages:** When asked to generate a commit message, be specific about the mathematical or stylistic changes made.
 * **Flagging errors — never silently correct.** If a source appears to contain an error,
@@ -164,7 +172,66 @@ You are authorized to improve the prose and apply the established "House Style" 
   `exercise*` variant remains available for edge cases. Always cross-reference exercises with
   `\cref{ex:...}`; if the environment is truly unnumbered, fall back to
   `\cpageref{ex:...}` with a descriptive label slug.
-* **Exercise Solutions:** Make an extra section or subsection for the solutions to the exercises at the end of each section. When an exercise is tied to a specific numbered environment, use `\cref` to reference it in the solution title, preferring the word "Proof" if it is a proof (e.g., `\begin{exercisesolution}[Proof of \cref{prop:properties_adjoint_matrix}]`). To reference specific subitems (e.g., part (c) of a Lemma), combine `\cref` with the bolded letter manually (e.g., `\begin{exercisesolution}[Proof of \cref{lem:properties_adjoint_map} \textbf{(c)}]`). If the exercise is tied to an *unnumbered* environment (like a `claim*`), you must add a label to that environment and reference its page number in the solution title using `\cpageref` along with a highly descriptive name. For example: `\begin{exercisesolution}[Proof of Linearity of $\varphi_u$ (on \cpageref{claim:linearity_phi_u})]`.
+* **Exercise Solutions — mirror the source, and record the decision in-line.** Where a solution
+  lives in the LaTeX depends on how the *original tutor's own handwritten notes* present it for
+  that specific exercise — check the source PDF, don't default blindly:
+  * **If the tutor solves the exercise immediately in their own notes** (e.g. a handwritten
+    "Exercise: ... Solution: ..." block, solved right there on the page), **keep the solution
+    inline** in the LaTeX too, directly after the `exercise` environment, exactly mirroring the
+    source's structure. Immediately above that `exercisesolution`, add a one-line comment
+    recording *why* it is inline and citing the precise source page, e.g.
+    ```latex
+    % Kept inline: solved directly in Corsin Nick/Class Notes/Week 2.pdf, p. 6.
+    \begin{exercisesolution}[...]
+    ...
+    \end{exercisesolution}
+    ```
+    This makes the placement decision traceable in the source itself, not just in an edit
+    summary. This applies to **every** tutor's notes as they get merged in, not only Corsin's.
+  * **If there is no source solution to mirror** — e.g. the exercise is quoted verbatim from the
+    official problem sheet and the tutor only gives a hint/priority marker rather than a worked
+    solution, or the exercise is an `aiexercise`/`aiexample` invented for these notes — collect
+    its solution into a single dedicated `\section{Solutions}` (or `\section*{Solutions}`) at the
+    **end of the chapter (week)**, after all other content, ordered to match the order the
+    exercises first appear in the chapter.
+  * **Every `exercise` in a chapter must have a corresponding `exercisesolution`** somewhere
+    (inline or in the end-of-chapter section per the rule above) — this includes exercises
+    quoted verbatim from the official problem sheet. When the tutor left no worked solution and
+    you must write one yourself, mark it with `% Generator: <model name> (<effort>)` directly
+    inside the `exercisesolution`, matching the `aiexercise`/`aiexample` convention. Cross-check
+    your solution against the official `SolN_Analysis2_eng.pdf` where one exists; if your
+    reasoning or final answer genuinely diverges from it, flag the divergence with an `ainote`
+    right there and log it in `docs/06-open-questions.md` — never silently prefer your own
+    answer over the official solution without saying so. Even when your solution agrees with the
+    official one, feel free to add an `ainote` for anything genuinely worth flagging about the
+    master solution or the exercise itself — a subtlety it skates past, a non-obvious step, a
+    result that looks surprising at first, or a detail (like a critical point being only a
+    *local*, non-global extremum) that's easy to miss. This is about noteworthy observations, not
+    routine restating of the solution.
+  * **Never delete a tutor's original worked solution.** If you are unsure whether a solution
+    already existed before an edit, check the source PDF before assuming it should be
+    reconstructed — but if it turns out the tutor's own solution was removed by mistake,
+    transcribe it back in (citing its page, as above) and keep any AI-authored alternative as a
+    clearly separate, additional `exercisesolution` rather than overwriting it.
+  * When an exercise is tied to a specific numbered environment, use `\cref` to reference it in
+    the solution title, preferring the word "Proof" if it is a proof (e.g.,
+    `\begin{exercisesolution}[Proof of \cref{prop:properties_adjoint_matrix}]`). To reference
+    specific subitems (e.g., part (c) of a Lemma), combine `\cref` with the bolded letter
+    manually (e.g., `\begin{exercisesolution}[Proof of \cref{lem:properties_adjoint_map}
+    \textbf{(c)}]`). If the exercise is tied to an *unnumbered* environment (like a `claim*`),
+    you must add a label to that environment and reference its page number in the solution title
+    using `\cpageref` along with a highly descriptive name. For example:
+    `\begin{exercisesolution}[Proof of Linearity of $\varphi_u$ (on
+    \cpageref{claim:linearity_phi_u})]`.
+
+* **Editorial transitions between spliced source content — tag them, as a reflex, not a
+  process.** When you write a short bridging sentence or paragraph to smooth the join between
+  two blocks of transcribed/quoted content (rather than transcribing it from any source), mark it
+  with a brief comment naming the model that wrote it, e.g. `% Transition: Claude Sonnet 5`. If
+  the insertion sits between a content block and the `% Source: ...` comment that used to sit
+  right above it, re-cite that same source comment immediately above the resumed transcribed
+  content so the provenance isn't visually severed by your insertion. Keep this lightweight —
+  a one-line comment each time, not a ceremony.
 
 ## MORE LATEX DIRECTIVES
 
@@ -256,6 +323,14 @@ Each environment has a precise semantic role. Using the wrong one is a style err
   ```
   An `ainote` is the **only** place for AI self-reference or editorial intervention. Never
   smuggle such content into a `remark`, `notation`, or any semantic mathematical environment.
+* **`aiexample`** (AI-Example) — for AI-generated illustrative mathematical examples that clarify a definition, theorem, or technique.
+  - **Generator Comment:** Must contain a LaTeX comment `% Generator: Gemini 3.6 Flash (Medium)` directly inside the environment.
+  - Rendered in GoldOrange style (`EnvAINote`).
+* **`aiexercise`** (AI-Exercise) — for AI-generated practice problems created to reinforce the surrounding material.
+  - **Difficulty:** Maximum **medium difficulty** (pedagogical, clarifying core concepts).
+  - **Generator Comment:** Must contain a LaTeX comment `% Generator: Gemini 3.6 Flash (Medium)` directly inside the environment.
+  - **Mandatory Solution:** Every `aiexercise` MUST have a corresponding complete worked solution in the solutions section at the end of the chapter/week.
+
 ## PROJECT CONTEXT — ANALYSIS II
 
 ### ⚠️ Priority — read first
@@ -267,25 +342,24 @@ Correct work order:
 
 | # | Step | Reads PDFs? |
 |---|---|---|
-| 1 | Scaffolding (`docs/`, `transcript/`) | no |
-| 2 | Transcribe Corsin — weeks 2–13 + ODE appendix | **yes, heavily** |
-| 3 | Retarget `main.tex`, convert `transcript/*.md` → `content/*.tex` | no |
-| 4 | Build: `latexmk` until it compiles clean | no |
-| 5 | TikZ figures (`docs/05-figure-queue.md`) | Group B only |
-| 6 | *Optional:* supplements from other tutors | yes — **not before step 4** |
+| 1 | Scaffolding (`docs/`) | no |
+| 2 | Typeset Corsin — weeks 2–13 + ODE appendix directly into `content/*.tex` | **yes, heavily** |
+| 3 | Build & Verify: `latexmk` until `main.pdf` compiles clean | no |
+| 4 | TikZ figures (`docs/05-figure-queue.md`) | Group B only |
+| 5 | *Optional:* supplements from other tutors | yes — **not before step 3** |
 
 ### The five things that matter
 
 1. **Corsin Nick is the blueprint.** His notes define the document structure
-   (one chapter per week). Everyone else is mined for gaps only.
+   (one chapter per week). Everyone else is mined for gaps only. Complete Corsin FIRST!
 2. **Merge by topic, never by date.** `docs/03-topic-index.md` is the only
    valid topic→week mapping.
-3. **Transcript before LaTeX.** `transcript/week-NN.md` first, with a page
-   pointer on every block; `content/week-NN.tex` derived from it.
-4. **Never silently correct a source.** Flag it inline; log it in
+3. **Direct LaTeX with Fine Provenance.** Typeset directly into `content/week-NN.tex`
+   with precise `% Source: Corsin Nick/Class Notes/Week N.pdf, p. M` comments on every section.
+4. **Never silently correct a source.** Flag it inline with `\begin{ainote}`; log it in
    `docs/06-open-questions.md`.
 5. **Source folders are read-only.** The 17 tutor folders and `exercises/`
-   are inputs. Output goes to `docs/`, `transcript/`, `content/`.
+   are inputs. Output goes to `docs/` and `content/`.
 
 ### Git — never `git add -A`
 
@@ -386,6 +460,7 @@ All generic rules in this file apply. Additional project-specific conventions:
 
 **Chapter = week. Section = topic (the navigable level). Day = a styled marker, not a section.**
 
+
 ```latex
 \chapter{Week 2 --- Metric Spaces, Topology \& Continuity}  % chapter no. = week no.
 
@@ -400,6 +475,17 @@ All generic rules in this file apply. Additional project-specific conventions:
 
 Do **not** make `\session{...}` a `\section` — it must not consume a section letter
 or disturb theorem numbering. Theorems land as `2.b.1`, anchored to a topic.
+
+**Heading Styles & Suffixes:**
+* **Colors:**
+  - Section Title: `MidnightBlue` (`SecTitleColor`)
+  - Subsection Title: `MidnightBlue` (`SubSecTitleColor`)
+  - Subsubsection Title: `TextBoldColor` (`SubSubSecTitleColor`)
+  - Green `(...)` Suffix: `OliveGreen` (`SecNumberColor`)
+* **Suffix Format:** All numbered headings carry a green suffix:
+  - `\section{...}` -> `Title (Section 2.a)`
+  - `\subsection{...}` -> `Title (Subsection 2.a.1)`
+  - `\subsubsection{...}` -> `Title (Subsubsection 2.a.1.1)`
 
 **Preamble macros:**
 

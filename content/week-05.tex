@@ -6,6 +6,7 @@
 \textit{Statements quoted verbatim from \texttt{exercises/Ex5\_Analysis2\_eng.pdf} (assigned 16
 March 2026, due 23 March 2026). Attribution: Prof. Joaquim Serra, D-MATH, ETH Z\"urich.}
 
+% Source: Corsin Nick/Class Notes/Week 5.pdf, p. 1
 \begin{ainote}[Corsin's recommendations]
 \begin{center}
 \begin{tabular}{lll}
@@ -87,6 +88,7 @@ Unlike Weeks 2--4, Corsin marks no Monday / Friday split in this week's notes; t
 continuously from optimization through Lagrange multipliers to the Hessian test.
 \end{ainote}
 
+% Source: Corsin Nick/Class Notes/Week 5.pdf, p. 2
 \section{Optimization}
 \label{sec:optimization}
 
@@ -114,16 +116,39 @@ $$\langle\nabla f(x_0), v\rangle = 0 \iff \nabla f(x_0) \perp v,$$
 $$\text{and this for all } v \in \mathbb{R}^2 \iff \nabla f(x_0) = 0.$$
 \end{remark}
 
-\begin{figurestub}{FIG-W05-01}
-A blue goblet-shaped surface $f(x,y)$ standing on an $xy$-grid ($y$-axis to the upper left,
-$x$-axis to the right); a purple closed level-set curve is drawn on the grid directly under the
-surface's rim. A green dot labelled ``minimum'' sits on the grid at the level curve; a dotted
-orange line rises from it to the curve, and a horizontal orange arrow labelled ``gradient''
-points left from that dot. A red arrow labelled ``steepest ascent'' starts at the green dot and
-climbs up the outside of the surface, following its curvature, to the rim. (Reference asset:
-\texttt{Toby Lane/geogebra/gradient\_contour.ggb}.)
-\end{figurestub}
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.3]
+  % Grid on xy-plane
+  \begin{scope}[x={(0.866cm,-0.3cm)}, y={(0.5cm,0.4cm)}]
+    % Plane axes
+    \draw[thick, ->] (-1.5,-1.5) -- (2.2,-1.5) node[right] {$x$};
+    \draw[thick, ->] (-1.5,-1.5) -- (-1.5,2.2) node[above] {$y$};
+    \draw[gray!40, thin] (-1.5,-0.5) -- (1.8,-0.5);
+    \draw[gray!40, thin] (-1.5,0.5) -- (1.8,0.5);
+    \draw[gray!40, thin] (-1.5,1.5) -- (1.8,1.5);
+    \draw[gray!40, thin] (-0.5,-1.5) -- (-0.5,1.8);
+    \draw[gray!40, thin] (0.5,-1.5) -- (0.5,1.8);
+    \draw[gray!40, thin] (1.5,-1.5) -- (1.5,1.8);
+    % Projected level set
+    \draw[purple, thick] (0,0) circle (1.0);
+    \fill[green!60!black] (0.707,-0.707) circle (2pt) node[below right, font=\tiny] {minimum};
+    \draw[orange!90!black, thick, ->] (0.707,-0.707) -- (0.1,-0.707) node[below, font=\tiny] {gradient};
+  \end{scope}
 
+  % Paraboloid surface
+  \draw[blue!80!black, thick] (0,0.8) ellipse (1.3 and 0.5);
+  \draw[blue!80!black, thick] (-1.3,0.8) .. controls (-1.0,-0.6) and (1.0,-0.6) .. (1.3,0.8);
+  \draw[purple, thick, dashed] (0,0.1) ellipse (0.85 and 0.32);
+
+  % Connecting dotted line & steepest ascent arrow
+  \draw[orange!90!black, thick, dotted] (0.55,-0.55) -- (0.55,0.1);
+  \draw[red, thick, ->] (0.55,0.1) .. controls (0.75,0.3) .. (0.95,0.75) node[above left, font=\tiny] {steepest ascent};
+  \node[blue!80!black, right] at (1.3,0.8) {$f(x,y)$};
+  \node[purple, right, font=\tiny] at (0.85,0.1) {level sets};
+\end{tikzpicture}
+\end{center}
+
+% Source: Corsin Nick/Class Notes/Week 5.pdf, pp. 3--4
 \section{Lagrange multipliers}
 \label{sec:lagrange_multipliers}
 
@@ -133,14 +158,27 @@ $$T \in C^\infty(\mathbb{R}^3, (0,\infty)) \qquad \text{(absolute zero is not at
 If we model the earth as $S^2 := \{x \in \mathbb{R}^3 : |x| = 1\}$, then we want to find the local
 maxima of $T|_{S^2}$, which \textbf{are not necessarily critical points of $T$}!
 
-\begin{figurestub}{FIG-W05-02}
-A blue sphere $S^2$ drawn in 3D with a dashed equator ellipse. Near the top, a point $q$ has a
-dotted red arrow $\nabla T(q)$ pointing straight outward along the radius (perpendicular to the
-sphere), labelled ``local extremum of $T|_{S^2}$''. Lower down, on the front of the sphere, a
-point $p$ has a dotted orange arrow $\nabla T(p)$ pointing obliquely up-and-out (not radial ---
-visibly tilted toward the surface), labelled ``has a component pointing along the tangent, not a
-local extremum of $T|_{S^2}$, since $T$ increases along a direction on $S^2$.''
-\end{figurestub}
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.3]
+  \draw[blue!80!black, thick] (0,0) circle (1.3);
+  \draw[blue!80!black, dashed] (1.3,0) arc (0:180:1.3 and 0.4);
+  \draw[blue!80!black] (-1.3,0) arc (180:360:1.3 and 0.4);
+  \node[blue!80!black, font=\large] at (-0.6,0.5) {$S^2$};
+
+  % Point q (radial gradient = extremum)
+  \coordinate (Q) at (-0.55, 0.95);
+  \fill[red!80!black] (Q) circle (1.8pt) node[left, font=\footnotesize] {$q$};
+  \draw[red!80!black, thick, ->] (Q) -- ++(-0.4, 0.7) node[above right, font=\small] {$\nabla T(q)$};
+  \node[red!80!black, font=\tiny, right] at (-0.1, 1.4) {local extremum of $T|_{S^2}$};
+
+  % Point p (oblique gradient = not extremum)
+  \coordinate (P) at (0.35, -0.45);
+  \fill[orange!90!black] (P) circle (1.8pt) node[left, font=\footnotesize] {$p$};
+  \draw[orange!90!black, thick, ->] (P) -- ++(0.75, -0.2) node[below right, font=\small] {$\nabla T(p)$};
+  \draw[orange!90!black, dotted, thick] (-0.3, -0.3) -- (1.0, -0.6);
+  \node[orange!90!black, font=\tiny, align=left] at (1.1, -0.1) {has tangent component $\implies$\\not a local extremum};
+\end{tikzpicture}
+\end{center}
 
 So $T|_{S^2}$ has a local extremum if it is \textbf{perpendicular to the surface} $S^2$. Note
 that $S^2$ is the \newterm{level set} (\germanterm{Niveaumenge}) $g(x) = 0$ for
@@ -151,6 +189,16 @@ $\nabla g(x) = \dfrac{x}{|x|}$ is perpendicular to $S^2$. In general, the gradie
 perpendicular to the level sets.
 \end{remark}
 
+\begin{aiexample}[Classifying Saddle Points via the Hessian]
+% Generator: Gemini 3.6 Flash (Medium)
+Consider $f(x,y) := x^2 - y^2$ on $\mathbb{R}^2$. The gradient is $\nabla f(x,y) = (2x, -2y)\transp$, which vanishes at $(0,0)$. The Hessian matrix is constant:
+\[
+\Hess f(0,0) = \begin{pmatrix} 2 & 0 \\ 0 & -2 \end{pmatrix}.
+\]
+Its eigenvalues are $\lambda_1 = 2 > 0$ and $\lambda_2 = -2 < 0$, making $\Hess f(0,0)$ indefinite. Thus $(0,0)$ is a saddle point of $f$.
+\end{aiexample}
+
+% Source: Corsin Nick/Class Notes/Week 5.pdf, pp. 4--5
 This intuition is made rigorous in the following.
 
 \begin{proposition}[Constrained optimization problems]
@@ -177,12 +225,14 @@ $$
 We then find local extrema by forcing $\nabla L(x,\lambda) = 0$, i.e.
 $$\underbrace{\frac{\partial L}{\partial x_i} = 0 \ \ \forall i = 1,\dots,n}_{\nabla f(x) - \lambda\cdot\nabla g(x) = 0} \qquad \text{and} \qquad \underbrace{\frac{\partial L}{\partial \lambda_j} = 0 \ \ \forall j = 1,\dots,k}_{g_j(x) = 0}$$
 
+% Source: Corsin Nick/Class Notes/Week 5.pdf, pp. 5--6
 \begin{exercise}[Extrema of $xyz$ on the unit ball]
 \label{ex:xyz_on_ball}
 Find the local extrema of
 $$f : K \to \mathbb{R}, \quad (x,y,z) \mapsto xyz, \qquad K = \{(x,y,z) \in \mathbb{R}^3 : x^2+y^2+z^2 \leq 1\}.$$
 \end{exercise}
 
+% Kept inline: solved directly in Corsin Nick/Class Notes/Week 5.pdf, pp. 5--6.
 \begin{exercisesolution}[Proof of \cref{ex:xyz_on_ball}]
 We first find the \textbf{interior critical points}:
 $$\nabla f(x,y,z) = (yz,\ xz,\ xy) \overset{!}{=} 0 \implies x = y = 0 \ \text{ or } \ x = z = 0 \ \text{ or } \ y = z = 0.$$
@@ -223,12 +273,44 @@ $x^2+y^2+z^2-1$, i.e.\ $|x|^2-1$. Both cut out the same sphere; the squared vers
 actually differentiated, so it is used throughout. See \texttt{OQ-12}.
 \end{ainote}
 
-\begin{figurestub}{FIG-W05-03}
-A blue sphere with the three green coordinate axes through the centre; the eight points
-$\tfrac{1}{\sqrt3}(\pm1,\pm1,\pm1)$ marked in red, connected by red dotted lines forming an
-inscribed cube.
-\end{figurestub}
+% Source: Corsin Nick/Class Notes/Week 5.pdf, p. 6
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.4]
+  % Sphere
+  \draw[blue!80!black, thick] (0,0) circle (1.4);
+  \draw[blue!80!black, dashed] (1.4,0) arc (0:180:1.4 and 0.45);
+  \draw[blue!80!black] (-1.4,0) arc (180:360:1.4 and 0.45);
 
+  % Axes
+  \draw[green!60!black, thick, ->] (-1.6,0) -- (1.6,0) node[right, font=\footnotesize] {$x$};
+  \draw[green!60!black, thick, ->] (0,-1.6) -- (0,1.6) node[above, font=\footnotesize] {$z$};
+  \draw[green!60!black, thick, ->] (0.8,-1.0) -- (-0.8,1.0) node[above left, font=\footnotesize] {$y$};
+
+  % Inscribed cube vertices (+-1/sqrt(3), +-1/sqrt(3), +-1/sqrt(3))
+  \coordinate (A1) at (-0.6, -0.5);
+  \coordinate (A2) at (0.6, -0.5);
+  \coordinate (A3) at (0.8, 0.2);
+  \coordinate (A4) at (-0.4, 0.2);
+
+  \coordinate (B1) at (-0.6, 0.7);
+  \coordinate (B2) at (0.6, 0.7);
+  \coordinate (B3) at (0.8, 1.4);
+  \coordinate (B4) at (-0.4, 1.4);
+
+  % Cube edges
+  \draw[red!80!black, thick, dotted] (A1)--(A2)--(A3)--(A4)--cycle;
+  \draw[red!80!black, thick, dotted] (B1)--(B2)--(B3)--(B4)--cycle;
+  \draw[red!80!black, thick, dotted] (A1)--(B1) (A2)--(B2) (A3)--(B3) (A4)--(B4);
+
+  % Vertex dots
+  \foreach \p in {A1,A2,A3,A4,B1,B2,B3,B4} {
+    \fill[red!80!black] (\p) circle (1.8pt);
+  }
+  \node[below, font=\small] at (0,-1.7) {8 critical points $\tfrac{1}{\sqrt{3}}(\pm 1, \pm 1, \pm 1)$ on $S^2$};
+\end{tikzpicture}
+\end{center}
+
+% Source: Corsin Nick/Class Notes/Week 5.pdf, p. 7
 \section{The Hessian test}
 \label{sec:hessian_test}
 
@@ -273,6 +355,17 @@ $C^2$ (which is what the Hessian's definition assumes). Relaxed to $C^2$ above. 
 \texttt{OQ-13}.
 \end{ainote}
 
+\begin{aiexample}[Inconclusive Hessian Test at a Degenerate Critical Point]
+% Generator: Gemini 3.6 Flash (Medium)
+Consider $f(x,y) := x^4 + y^4$ and $g(x,y) := x^4 - y^4$ at the critical point $(0,0)$.
+\begin{itemize}
+  \item For both functions, all second-order partial derivatives at $(0,0)$ vanish, so $\Hess f(0,0) = \Hess g(0,0) = \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}$.
+  \item The Hessian test is \textbf{inconclusive} since $\det \Hess = 0$.
+  \item However, direct inspection reveals that $f(x,y) \geq 0 = f(0,0)$ for all $(x,y)$, so $(0,0)$ is a strict local minimum for $f$, whereas $g(x,0) > 0$ and $g(0,y) < 0$ for non-zero $x,y$, so $(0,0)$ is a saddle point for $g$.
+\end{itemize}
+\end{aiexample}
+
+% Source: Corsin Nick/Class Notes/Week 5.pdf, pp. 8--9
 \subsection{How do I determine positive/negative definiteness?}
 
 Let $A \in \mathbb{R}^{n\times n}$ be symmetric with eigenvalues $\lambda_1,\dots,\lambda_n$.
@@ -307,6 +400,7 @@ Corsin writes the characteristic equation as ``$A - \lambda\id = 0$'', omitting 
 Corrected above. See \texttt{OQ-14}.
 \end{ainote}
 
+% Source: Corsin Nick/Class Notes/Week 5.pdf, pp. 9--10
 \begin{example}[Definiteness calculations]
 \begin{center}
 \begin{tabular}{lll}
@@ -321,6 +415,7 @@ $\begin{pmatrix}-1&0&-4\\0&2&-2\\-4&-2&22\end{pmatrix}$ & $A_1 = -1 < 0$, $A_2 =
 \end{center}
 \end{example}
 
+% Source: Corsin Nick/Class Notes/Week 5.pdf, pp. 10--11
 \begin{exercise}[Critical values of $x^3 - y^3 + 3\alpha xy$]
 \label{ex:cubic_saddle_family}
 Find the critical values of
@@ -328,6 +423,7 @@ $$f_\alpha : \mathbb{R}^2 \to \mathbb{R}, \qquad (x,y) \mapsto x^3 - y^3 + 3\alp
 for $\alpha \in \mathbb{R}\setminus\{0\}$ and determine min/max/saddle points.
 \end{exercise}
 
+% Kept inline: solved directly in Corsin Nick/Class Notes/Week 5.pdf, pp. 10--11.
 \begin{exercisesolution}[Solution to \cref{ex:cubic_saddle_family}]
 $$
 \begin{aligned}
@@ -351,4 +447,146 @@ For $\alpha > 0$ this is positive definite; for $\alpha < 0$ it is negative defi
   \item $(\alpha,-\alpha) \longrightarrow$ \textbf{local minimum} for $\alpha > 0$; \textbf{local
     maximum} for $\alpha < 0$
 \end{itemize}
+\end{exercisesolution}
+
+\begin{aiexercise}[Extrema on a Circle via Lagrange Multipliers]
+\label{ex:ai_lagrange_circle}
+% Generator: Gemini 3.6 Flash (Medium)
+Find the maximum and minimum values of $f(x,y) := x + 2y$ subject to the constraint $g(x,y) := x^2 + y^2 - 5 = 0$.
+\end{aiexercise}
+
+\begin{aiexercise}[Global Extrema on a Compact Triangle]
+\label{ex:ai_extrema_triangle}
+% Generator: Gemini 3.6 Flash (Medium)
+Find the global maximum and minimum values of $f(x,y) := xy$ on the compact triangular region $T := \{(x,y) \in \mathbb{R}^2 \mid x \ge 0, y \ge 0, x+y \le 2\}$.
+\end{aiexercise}
+
+\section{Solutions}
+\label{sec:week05_solutions}
+
+\begin{ainote}
+This section holds solutions only for the official-sheet exercises Corsin did not himself work
+out (\cref{ex:5.1,ex:5.2,ex:5.3} --- he gives only hints on his priority page, p. 1) and the two
+\texttt{aiexercise} problems. Corsin's own exercises in this chapter
+(\cref{ex:xyz_on_ball,ex:cubic_saddle_family}) are solved inline, immediately after their
+statement, mirroring how he presents them in his own notes (see the "Kept inline" comments above
+each).
+\end{ainote}
+
+\begin{exercisesolution}[Solution to \cref{ex:5.1}]
+% Generator: Claude Sonnet 5 (Medium)
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Since $e^{-x^2-y^2} > 0$ everywhere, the gradient of $f(x,y) = xy^2e^{-x^2-y^2}$ vanishes
+    exactly where its two factors below vanish:
+    \[
+    \partial_x f = y^2(1-2x^2)e^{-x^2-y^2}, \qquad \partial_y f = 2xy(1-y^2)e^{-x^2-y^2}.
+    \]
+    \textbf{If $y=0$:} both partials vanish for every $x$ (indeed $f(x,0) \equiv 0$), so the
+    entire line $\{(x,0) : x \in \mathbb{R}\}$ consists of critical points.
+    \textbf{If $y \neq 0$:} $\partial_x f = 0$ forces $x = \pm\tfrac{1}{\sqrt2}$, and since then
+    $x \neq 0$, $\partial_y f = 0$ forces $y = \pm 1$. This gives the four additional critical
+    points $\big(\pm\tfrac{1}{\sqrt2}, \pm 1\big)$.
+  \item A directional derivative $\partial_v g(x,y) = \nabla g(x,y)\cdot v$ is always
+    \textbf{linear} in $v$. The prescribed expression
+    $2\cos(x^2y)xv_2 + \cos(x^2y)v_1^2 y$ contains a $v_1^2$ term with coefficient
+    $y\cos(x^2y)$, which is not identically zero (e.g.\ at $(x,y)=(0,1)$ it equals $1$). Hence
+    the expression is not linear in $v$ at every point, so \textbf{no such $g \in C^1(\mathbb{R}^2)$
+    can exist}.
+\end{enumerate}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:5.2}]
+% Generator: Claude Sonnet 5 (Medium)
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item $\overline{U}$ is closed and bounded in $\mathbb{R}^3$, hence compact by Heine--Borel, and
+    $f$ is a polynomial, hence continuous. By the extreme value theorem, $f$ attains its absolute
+    maximum and minimum on $\overline{U}$.
+  \item $\nabla f(x,y,z) = (-2x+4,\ -2y,\ 0)$ vanishes only at $x=2$, $y=0$ (any $z$), and no such
+    point lies in $U$ (since $x=2$ already violates $x^2+y^2+z^2<1$). So $f$ has \textbf{no
+    critical point in the interior of $U$}; consequently, by
+    \cref{prop:extremum_implies_critical}, $\sup_U f$ and $\inf_U f$ are \textbf{not attained} at
+    any interior point.
+  \item $\partial U$ is compact (a sphere) and $f$ is continuous, so $\max_{\partial U} f$ and
+    $\min_{\partial U} f$ \textbf{both exist}, again by the extreme value theorem.
+  \item With $g(x,y,z) := x^2+y^2+z^2-1$, the Lagrange condition $\nabla f = \lambda \nabla g$
+    reads $(-2x+4,-2y,0) = \lambda(2x,2y,2z)$. The last coordinate gives $\lambda z = 0$.
+    \textbf{If $z \neq 0$:} then $\lambda = 0$, so $-2x+4=0 \Rightarrow x=2$, impossible on
+    $\partial U$. So $z = 0$. Then $x^2+y^2=1$, and the remaining equations are
+    $4-2x = 2\lambda x$ and $-2y = 2\lambda y$, i.e.\ $-2y(1+\lambda) = 0$.
+    \textbf{If $\lambda = -1$:} the first equation becomes $4-2x=-2x$, i.e.\ $4=0$, impossible.
+    So $y = 0$, and $x^2=1$ gives $x = \pm 1$. The Lagrange candidates are
+    $(1,0,0)$ (with $\lambda = 1$) and $(-1,0,0)$ (with $\lambda = -3$).
+  \item Evaluating, $f(1,0,0) = 1-1+4 = 4$ and $f(-1,0,0) = 1-1-4 = -4$. Since there are no
+    interior critical points, these are the global extrema on $\overline{U}$: the
+    \textbf{maximum} $4$ is attained at $(1,0,0)$, and the \textbf{minimum} $-4$ at $(-1,0,0)$.
+\end{enumerate}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:5.3}]
+% Generator: Claude Sonnet 5 (Medium)
+Throughout, recall the hint: \textit{as $x \to 0$} and \textit{as $|x| \to 0$} describe the same
+limit, so both phrasings are treated identically below. The recurring subtlety is instead between
+a statement holding \textbf{at} the single point $x=0$ (which a remainder estimate as $x \to 0$
+can establish) versus \textbf{around}/in a whole neighbourhood of $x=0$ (which it cannot).
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{True.} Since $|x_2x_1^2| \leq |x|\cdot|x_1|^2 \leq |x|^3 = O(|x|^2)$ (as
+    $|x|^3/|x|^2 = |x| \to 0$) and $O(x_1^2) = O(|x|^2)$ (since $x_1^2 \leq |x|^2$), the sum
+    $f(x) = x_2x_1^2 + O(x_1^2)$ is a sum of two $O(|x|^2)$ terms, hence $f(x) = O(|x|^2)$.
+  \item \textbf{False.} It suffices to show $x_2x_1^2$ itself is not $O(x_1^3)$. Along the path
+    $x_1 = t^2$, $x_2 = t$ (so $x \to 0$ as $t \to 0$), $\dfrac{|x_2x_1^2|}{|x_1|^3} =
+    \dfrac{t\cdot t^4}{t^6} = \dfrac{1}{t} \to \infty$, so no bound $|x_2x_1^2| \leq C|x_1|^3$ can
+    hold near $0$. Adding an $O(x_1^3)$ term cannot repair this, so $f(x) \neq O(x_1^3)$ in
+    general.
+  \item \textbf{True.} Since $x_2x_1 = O(|x|^2)$ and the hypothesis adds a further $O(|x|^2)$
+    term, $f(x) = O(|x|^2) = o(|x|)$ as $|x| \to 0$. Hence $f(x) = 0\cdot x + o(|x|)$, i.e.\ $f$ is
+    differentiable \textbf{at} $x=0$ with $Df(0) = 0$.
+  \item \textbf{False.} The hypothesis only constrains the behaviour of $f$ as $x \to 0$, i.e.\ at
+    the single point $0$; it says nothing about $f$ at nearby points $x_0 \neq 0$, so twice
+    differentiability \textbf{around} (in a neighbourhood of) $x=0$ does not follow. Concretely,
+    take $f(x) := \max\{0,x_1\}^2$: this satisfies $f(x) = x_2x_1 + O(|x|^2)$ as $x \to 0$ (indeed
+    even $f(x) = O(|x|^2)$, since $x_2x_1$ itself is $O(|x|^2)$ and so contributes nothing extra
+    to the hypothesis), yet along $x_1$ alone, $t \mapsto \max\{0,t\}^2$ has derivative $2\max\{0,t\}$,
+    which is not differentiable at $t=0$ (its one-sided difference quotients at $0$ are $2$ from
+    the right and $0$ from the left). So $f$ is not twice differentiable at $x=0$, let alone
+    around it.
+  \item \textbf{False}, for the same reason as \textbf{(d)}: even the sharper estimate
+    $f(x) = x_2x_1 + O(|x|^3)$ only pins down the second-order Taylor data of $f$ \textbf{at} the
+    point $x=0$ (by Corollary 10.45, this does give $f$ twice differentiable \emph{at} $0$ with
+    $\partial_{11}f(0) = 0$), but it does not force twice differentiability in a whole
+    neighbourhood \textbf{around} $x=0$ --- without an a priori assumption like $f \in C^2$ near
+    $0$, one can cook up genuinely pathological examples, e.g.\
+    $f(x) := x_1x_2 + |x|^4\sin(|x|^{-100})$, for which $\partial_1 f(x) \to \infty$ as
+    $x \to 0$, so $\partial_1 f$ is not even continuous at $0$.
+\end{enumerate}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:ai_lagrange_circle}]
+% Generator: Gemini 3.6 Flash (Medium)
+The constraint set $S = \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 = 5\}$ is compact and $\nabla g(x,y) = (2x, 2y)\transp \neq (0,0)\transp$ on $S$. By Lagrange Multipliers, candidates satisfy $\nabla f = \lambda \nabla g$, i.e.:
+\[
+1 = 2\lambda x \quad \text{and} \quad 2 = 2\lambda y \implies y = 2x.
+\]
+Substituting $y = 2x$ into $x^2 + y^2 = 5$ gives $5x^2 = 5 \implies x = \pm 1$. The candidate points are $(1,2)$ and $(-1,-2)$. Evaluating $f$:
+\[
+f(1,2) = 1 + 4 = 5 \quad (\text{maximum}), \qquad f(-1,-2) = -1 - 4 = -5 \quad (\text{minimum}).
+\]
+\end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:ai_extrema_triangle}]
+% Generator: Gemini 3.6 Flash (Medium)
+Since $T$ is compact and $f$ is continuous, global extrema exist.
+\begin{itemize}
+  \item \textbf{Interior of $T$:} Critical points satisfy $\nabla f(x,y) = (y,x)\transp = (0,0)\transp \implies (x,y) = (0,0)$, which lies on the boundary. Thus there are no critical points in $\operatorname{int}(T)$.
+  \item \textbf{Boundary of $T$:}
+    \begin{itemize}
+      \item Along the leg $x = 0$ ($0 \le y \le 2$), $f(0,y) = 0$.
+      \item Along the leg $y = 0$ ($0 \le x \le 2$), $f(x,0) = 0$.
+      \item Along the hypotenuse $x+y = 2$ ($0 \le x \le 2$), substitute $y = 2-x$:
+        \[
+        h(x) := x(2-x) = 2x - x^2 \implies h'(x) = 2 - 2x = 0 \implies x = 1.
+        \]
+        This gives candidate point $(1,1)$ with $f(1,1) = 1$. The endpoints $(2,0)$ and $(0,2)$ yield $f = 0$.
+    \end{itemize}
+\end{itemize}
+Comparing values, the \textbf{global maximum} is $1$ at $(1,1)$, and the \textbf{global minimum} is $0$, attained everywhere on the coordinate axes legs of $T$.
 \end{exercisesolution}

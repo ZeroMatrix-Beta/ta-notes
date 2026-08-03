@@ -125,6 +125,15 @@ correct, but the gloss omits the ``non-''. Corrected in the prose above. See \te
 \end{enumerate}
 \end{example}
 
+\begin{aiexample}[Open Balls in the Discrete Metric]
+% Generator: Gemini 3.6 Flash (Medium)
+Let $(X, d_{\text{disc}})$ be a discrete metric space. The open ball $B_r(x)$ centered at $x \in X$ with radius $r > 0$ is:
+\[
+B_r(x) = \begin{cases} \{x\} & \text{if } 0 < r \leq 1, \\ X & \text{if } r > 1. \end{cases}
+\]
+Hence, every singleton set $\{x\}$ is open in the discrete metric, and consequently every subset of $X$ is both open and closed (clopen).
+\end{aiexample}
+
 \begin{center}
 \begin{tikzpicture}[>=Latex, scale=1.1]
   \draw[->] (-0.3,0) -- (4.5,0) node[right] {$x_1$};
@@ -202,6 +211,7 @@ is a metric on $\mathbb{R}^n$ for any $m$.
 Show that the supremum metric from \cref{ex:metric_examples} \textbf{(c)} is a metric.
 \end{exercise}
 
+% Kept inline: solved directly in Corsin Nick/Class Notes/Week 2.pdf, p. 6.
 \begin{exercisesolution}[Proof of \cref{ex:sup_metric_is_metric}]
 Clearly, symmetry and definiteness hold. For the triangle inequality, let $f, g, h \in C^0([0,1])$ and
 set $p := f - h$ and $q := h - g$. Then for all $x \in [0,1]$, we have:
@@ -244,11 +254,22 @@ And we call $A \subseteq X$ \newterm{closed} (\germanterm{abgeschlossen}) if and
 $X \setminus A$ is open.
 \end{definition}
 
+\begin{aiexample}[Interior, Closure, and Boundary of an Interval]
+% Generator: Gemini 3.6 Flash (Medium)
+Let $A := (0,1] \subset \mathbb{R}$ under the standard Euclidean metric.
+\begin{itemize}
+  \item The \textbf{interior} is $\operatorname{int}(A) = (0,1)$, the largest open set contained in $A$.
+  \item The \textbf{closure} is $\overline{A} = [0,1]$, the smallest closed set containing $A$.
+  \item The \textbf{boundary} is $\partial A = \overline{A} \setminus \operatorname{int}(A) = \{0, 1\}$.
+\end{itemize}
+\end{aiexample}
+
 \begin{exercise}[$X$ and $\emptyset$ are clopen]
 \label{ex:X_empty_clopen}
 Let $(X,d)$ be a metric space. Show that $X$ and $\emptyset$ are both open and closed.
 \end{exercise}
 
+% Kept inline: solved directly in Corsin Nick/Class Notes/Week 2.pdf, p. 7.
 \begin{exercisesolution}[Proof of \cref{ex:X_empty_clopen}]
 $X$ is open, since $B_r(x) \subseteq X$ for all $r > 0$ and $x \in X$. The empty set contains no
 points and is therefore vacuously open. Since $X$ and $\emptyset$ are each other's complement in
@@ -369,6 +390,7 @@ Open, since the full space is always open, as shown before.
 \end{enumerate}
 \end{exercise}
 
+% Kept inline: solved directly in Corsin Nick/Class Notes/Week 2.pdf, pp. 9--10.
 \begin{exercisesolution}[Solution to \cref{ex:uniform_convergence}]
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item $\displaystyle \forall \varepsilon > 0 \ \exists N \in \mathbb{N} : \sup_{x \in [0,1]} |f_n(x) - f(x)| < \varepsilon \quad \forall n \geq N$.
@@ -600,6 +622,8 @@ Let $(X,d)$ be a metric space.
 \end{enumerate}
 \end{exercise}
 
+% Kept inline: solved directly in Corsin Nick/Class Notes/Week 2.pdf, p. 15. (The chapter-level
+% "pp. 1--13" Source comment above predates this exercise; the PDF actually runs to p. 16+.)
 \begin{exercisesolution}[Proof of \cref{ex:compact_finite_complete}]
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item Let $\{U_\alpha\}_{\alpha \in I}$ be an open cover of $\{x_1, \dots, x_n\}$. For each
@@ -618,7 +642,46 @@ Let $(X,d)$ be a metric space.
 \end{enumerate}
 \end{exercisesolution}
 
+\begin{aiexercise}[Equivalence of Manhattan and Supremum Metrics]
+\label{ex:ai_metric_equivalence}
+% Generator: Gemini 3.6 Flash (Medium)
+Let $x = (x_1, x_2) \in \mathbb{R}^2$. Show that the Manhattan metric $d_1(x,0) := |x_1| + |x_2|$ and the supremum metric $d_3(x,0) := \max\{|x_1|, |x_2|\}$ satisfy the sharp inequalities:
+\[
+d_3(x,0) \leq d_1(x,0) \leq 2 \, d_3(x,0).
+\]
+\end{aiexercise}
+
+\begin{aiexercise}[Boundary of the Open Unit Disk]
+\label{ex:ai_disk_boundary}
+% Generator: Gemini 3.6 Flash (Medium)
+Let $D := \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 < 1\}$ be the open unit disk in $\mathbb{R}^2$. Show that the boundary of $D$ is the unit circle $\partial D = \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 = 1\}$.
+\end{aiexercise}
+
 \begin{ainote}
 Corsin writes $n_k > k$ above; for a subsequence the standing fact is $n_k \geq k$. Immaterial to
 the argument. See \texttt{OQ-06}.
 \end{ainote}
+
+\section{Solutions}
+\label{sec:week02_solutions}
+
+\begin{ainote}
+Only the two \texttt{aiexercise} problems below have solutions in this section: Corsin's own
+exercises in this chapter are solved inline, immediately after their statement, mirroring how he
+presents them in his own notes (see the "Kept inline" comments above each).
+\end{ainote}
+
+\begin{exercisesolution}[Proof of \cref{ex:ai_metric_equivalence}]
+% Generator: Gemini 3.6 Flash (Medium)
+For any $x = (x_1, x_2) \in \mathbb{R}^2$, we have $\max\{|x_1|, |x_2|\} \leq |x_1| + |x_2|$, giving $d_3(x,0) \leq d_1(x,0)$. Conversely, since $|x_1| \leq \max\{|x_1|, |x_2|\}$ and $|x_2| \leq \max\{|x_1|, |x_2|\}$, summing these yields $|x_1| + |x_2| \leq 2 \max\{|x_1|, |x_2|\}$, i.e., $d_1(x,0) \leq 2 \, d_3(x,0)$. Both bounds are sharp: equality on the left holds for $x=(1,0)$, and equality on the right holds for $x=(1,1)$.
+\end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:ai_disk_boundary}]
+% Generator: Gemini 3.6 Flash (Medium)
+Since $D$ is open, its interior is $\operatorname{int}(D) = D$. The closure of $D$ is $\overline{D} = \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 \leq 1\}$. By definition, the boundary is:
+\begin{align*}
+\partial D &= \overline{D} \setminus \operatorname{int}(D) \\
+&= \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 \leq 1\} \setminus \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 < 1\} \\
+&= \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 = 1\}.
+\end{align*}
+\end{exercisesolution}

@@ -44,6 +44,16 @@ Part \textbf{(c)} above sets $X = \mathbb{R}^n$ but then works with $\mathbb{N} 
 which only parses for $n = 1$. See \texttt{OQ-04}.
 \end{ainote}
 
+\begin{aiexample}[Open Cover of $(0,1)$ with No Finite Subcover]
+% Generator: Gemini 3.6 Flash (Medium)
+Consider the open interval $X = (0,1)$ under the standard Euclidean metric. The family of open sets
+\[
+U_n := \left(\frac{1}{n}, 1\right) \quad \text{for } n \in \mathbb{N}_{\ge 2}
+\]
+forms an open cover of $(0,1)$ because for any $x \in (0,1)$, there exists $n \in \mathbb{N}$ with $1/n < x$. However, any finite subcollection $\{U_{n_1}, \dots, U_{n_k}\}$ has a maximum index $N := \max\{n_1, \dots, n_k\}$, so its union is $U_N = (1/N, 1)$, which fails to cover points in $(0, 1/N]$. Thus $(0,1)$ is bounded but not compact.
+\end{aiexample}
+
+% Kept inline: solved directly in Corsin Nick/Class Notes/Week 3.pdf, pp. 1--2.
 \begin{exercisesolution}[Proof of \cref{ex:heine_borel_fails}]
 \textbf{(a)} Non-negativity, definiteness and symmetry follow from $d(x,y)$.
 
@@ -167,6 +177,15 @@ means: \qt{the space cannot be separated by open sets.}
 \end{tikzpicture}
 \end{center}
 
+\begin{aiexample}[Disconnectedness of Rational Numbers]
+% Generator: Gemini 3.6 Flash (Medium)
+The set of rational numbers $\mathbb{Q} \subset \mathbb{R}$ equipped with the subspace topology is disconnected. To see this, define
+\[
+U := \mathbb{Q} \cap (-\infty, \sqrt{2}) \quad \text{and} \quad V := \mathbb{Q} \cap (\sqrt{2}, \infty).
+\]
+Since $\sqrt{2} \notin \mathbb{Q}$, we have $U \cup V = \mathbb{Q}$ and $U \cap V = \emptyset$. Both $U$ and $V$ are non-empty and open in the subspace topology of $\mathbb{Q}$ (as intersections of $\mathbb{Q}$ with open intervals in $\mathbb{R}$). Hence $U$ and $V$ form a separation of $\mathbb{Q}$.
+\end{aiexample}
+
 \begin{theorem}[Continuous functions preserve connectedness]
 \label{thm:continuity_preserves_connected}
 Let $X$, $Y$ be metric spaces, $f : X \to Y$ continuous. If $A \subseteq X$ is connected, then
@@ -183,6 +202,7 @@ Are the following true or false?
 \end{enumerate}
 \end{exercise}
 
+% Kept inline: solved directly in Corsin Nick/Class Notes/Week 3.pdf, pp. 5--6.
 \begin{exercisesolution}[Proof of \cref{ex:connectedness_tf}]
 \textbf{(a) True.} \textit{Proof.} Let $X$ be a metric space, $V_1, V_2 \subseteq X$ connected,
 and $x_0 \in V_1 \cap V_2$. Suppose $V_1 \cup V_2 \subseteq U_1 \cup U_2$ with
@@ -465,3 +485,42 @@ Use definiteness and expand the term
 \]
 where $u - \pi_v(u)$ is the \textbf{perpendicular part} of $u$ to $v$.
 \end{remark}
+
+\begin{aiexercise}[{Contraction Mapping on $[0,1]$}]
+\label{ex:ai_contraction_cos}
+% Generator: Gemini 3.6 Flash (Medium)
+Let $f \colon [0,1] \to [0,1]$ be defined by $f(x) := \frac{1}{2}\cos(x)$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Show that $f$ is a contraction mapping with Lipschitz constant $L = \frac{1}{2}\sin(1) < 1$.
+  \item Deduce that $f$ has a unique fixed point $x^* \in [0,1]$.
+\end{enumerate}
+\end{aiexercise}
+
+\begin{aiexercise}[Continuous Image of a Connected Set]
+\label{ex:ai_connected_image}
+% Generator: Gemini 3.6 Flash (Medium)
+Let $f \colon X \to Y$ be a continuous map between metric spaces. Prove that if $X$ is connected, then $f(X)$ is connected.
+\end{aiexercise}
+
+\section{Solutions}
+\label{sec:week03_solutions}
+
+\begin{ainote}
+Only the two \texttt{aiexercise} problems below have solutions in this section: Corsin's own
+exercises in this chapter (\cref{ex:heine_borel_fails,ex:connectedness_tf}) are solved inline,
+immediately after their statement, mirroring how he presents them in his own notes (see the
+"Kept inline" comments above each).
+\end{ainote}
+
+\begin{exercisesolution}[Proof of \cref{ex:ai_contraction_cos}]
+% Generator: Gemini 3.6 Flash (Medium)
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item By the Mean Value Theorem, for any $x, y \in [0,1]$, there exists $\xi \in (0,1)$ such that $|f(x) - f(y)| = |f'(\xi)| |x-y| = \frac{1}{2}\sin(\xi) |x-y|$. Since $\sin(x)$ is strictly increasing on $[0,1]$, $\sup_{\xi \in [0,1]} \frac{1}{2}\sin(\xi) = \frac{1}{2}\sin(1) \approx 0.4207 < 1$. Thus $f$ is a contraction with $L = \frac{1}{2}\sin(1) < 1$.
+  \item Since $[0,1]$ equipped with the Euclidean metric is a complete metric space and $f([0,1]) \subseteq [0,1]$, the Banach Fixed Point Theorem guarantees the existence and uniqueness of a fixed point $x^* \in [0,1]$ satisfying $f(x^*) = x^*$.
+\end{enumerate}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:ai_connected_image}]
+% Generator: Gemini 3.6 Flash (Medium)
+Suppose $f(X)$ is disconnected. Then there exist open sets $V_1, V_2 \subseteq Y$ such that $V_1 \cap f(X) \neq \emptyset$, $V_2 \cap f(X) \neq \emptyset$, $f(X) \subseteq V_1 \cup V_2$, and $(V_1 \cap V_2) \cap f(X) = \emptyset$. Since $f$ is continuous, the preimages $U_1 := f^{-1}(V_1)$ and $U_2 := f^{-1}(V_2)$ are open in $X$. Moreover, $U_1 \neq \emptyset$, $U_2 \neq \emptyset$, $U_1 \cup U_2 = X$, and $U_1 \cap U_2 = \emptyset$. This forms a separation of $X$, contradicting the connectedness of $X$. Thus $f(X)$ must be connected.
+\end{exercisesolution}

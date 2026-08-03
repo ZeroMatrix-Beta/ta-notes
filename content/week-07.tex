@@ -230,6 +230,41 @@ $$\left.\frac{\partial f}{\partial x}\right|_{x=0} = \left.\begin{pmatrix} 1 \\ 
 So $T_{e_3}S^2_+ = T_{e_3}S^2 = \operatorname{span}\{e_1,e_2\} = \mathbb{R}^2\times\{0\}$.
 \end{example}
 
+% Quelle: Diego Torres Tejeda/Notes - 30.03 - Diego Torres Tejeda.pdf, p. 2 -- Sonnet 5 (Medium)
+\begin{ainote}[Tangent vectors as velocities of curves]
+Corsin defines $T_pM$ only via a parametrization (\cref{def:tangent_space}). Diego's notes give
+an equivalent, more intrinsic description --- a vector is tangent to $M$ if it is the velocity of
+some curve running along $M$ --- which is worth recording since it is how tangent vectors are
+usually pictured, and is often the quicker way to check whether a given vector lies in $T_pM$
+without first writing down a parametrization.
+\end{ainote}
+
+\begin{proposition}[Tangent space via curves]
+\label{prop:tangent_space_via_curves}
+Let $M^m \subseteq \mathbb{R}^n$ be a $C^k$ submanifold ($k\geq1$) and $p \in M$. Then
+$$T_pM = \big\{\gamma'(0) : \gamma \in C^1\big((-\varepsilon,\varepsilon), \mathbb{R}^n\big),\ \varepsilon>0,\ \gamma(t) \in M \text{ for all } t,\ \gamma(0)=p\big\}.$$
+\end{proposition}
+
+\begin{proof}
+Let $\Phi : U \to V$ be a submanifold chart at $p$ (\cref{def:submanifold}), so
+$\Phi(U\cap M) = (\mathbb{R}^m\times\{0\})\cap V$ and $\Phi(p)=0$; equivalently, let
+$f := \Phi^{-1}|_{(\mathbb{R}^m\times\{0\})\cap V}$ be the corresponding local parametrization
+(\cref{thm:local_parametrization}), $f(q)=p$.
+
+\textbf{($\subseteq$)} Let $v \in T_pM = Df_q(\mathbb{R}^m)$, say $v = Df_q(w)$. The curve
+$\gamma(t) := f(q+tw)$, defined for $t$ small enough that $q+tw$ stays in $f$'s domain, satisfies
+$\gamma(t) \in M$ for all such $t$, $\gamma(0) = p$, and by the chain rule
+$\gamma'(0) = Df_q(w) = v$.
+
+\textbf{($\supseteq$)} Let $\gamma$ be a curve as in the statement. Since $\Phi$ is a
+diffeomorphism with $\Phi(\gamma(t)) \in \mathbb{R}^m\times\{0\}$ for all $t$ near $0$, write
+$\Phi\circ\gamma =: (\eta,0)$ with $\eta \in C^1\big((-\varepsilon,\varepsilon),\mathbb{R}^m\big)$.
+Then $\gamma = \Phi^{-1}(\eta,0) = f(\eta(\cdot))$ near $0$ (shrinking $U$ if necessary so that
+$f$ is defined on all of $\eta$'s image), so by the chain rule,
+$$\gamma'(0) = Df_{\eta(0)}\big(\eta'(0)\big) \in Df_q(\mathbb{R}^m) = T_pM$$
+(using $\eta(0)=q$, since $\Phi(p)=0=\Phi(f(q))$ and $\Phi$ is injective).
+\end{proof}
+
 \subsection{Normal space}
 
 % Source: Corsin Nick/Class Notes/Week 7.pdf, pp. 9--10

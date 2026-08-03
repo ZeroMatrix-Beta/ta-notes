@@ -111,6 +111,27 @@ are unaffected. Re-derived cleanly above. See \texttt{OQ-08}.
     of the cover $\{f^{-1}(B_{\varepsilon/2}(y))\}_{y}$.
 \end{enumerate}
 
+% Quelle: Diego Torres Tejeda/Notes - 16.03 - Diego Torres Tejeda.pdf, p. 1 -- Sonnet 5 (Medium)
+\begin{ainote}[What continuous maps do and do not preserve]
+Diego's exercise-class notes collect \cref{item:continuity_preserves_compact} and the analogous
+fact for connectedness (\cref{thm:continuity_preserves_connected}) into one table, together with
+the dual statement for preimages, and a caution worth stating explicitly:
+\begin{center}
+\begin{tabular}{lll}
+& \textbf{Preserved by $f^{-1}$} & \textbf{Preserved by $f$} \\
+\hline
+open & yes (\cref{def:continuous}) & not in general \\
+closed & yes & not in general \\
+compact & not in general & yes (\cref{item:continuity_preserves_compact}) \\
+connected & not in general & yes (\cref{thm:continuity_preserves_connected}) \\
+\end{tabular}
+\end{center}
+\textbf{Caution:} completeness and boundedness are \emph{not} topological properties, so they
+are not preserved by continuous maps or their inverses in general --- e.g.\ $\tan :
+(-\tfrac\pi2,\tfrac\pi2) \to \mathbb{R}$ is a continuous bijection from a bounded set onto an
+unbounded one.
+\end{ainote}
+
 % Quelle: Linus Lüchinger/Slides/Slides-03-02.pdf, pp. 10--13 -- Sonnet 5 (Medium)
 \begin{ainote}
 Corsin never formally introduces \newterm{Lipschitz continuity}, even though a

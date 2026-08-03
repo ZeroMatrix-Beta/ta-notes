@@ -88,6 +88,10 @@ Unlike Weeks 2--4, Corsin marks no Monday / Friday split in this week's notes; t
 continuously from optimization through Lagrange multipliers to the Hessian test.
 \end{ainote}
 
+% Sonnet 5 (Medium)
+With the exercise sheet quoted, we turn to this week's subject: finding the extrema of a
+function of several variables, first freely, then subject to a constraint.
+
 % Source: Corsin Nick/Class Notes/Week 5.pdf, p. 2
 \section{Optimization}
 \label{sec:optimization}
@@ -147,6 +151,11 @@ $$\text{and this for all } v \in \mathbb{R}^2 \iff \nabla f(x_0) = 0.$$
   \node[purple, right, font=\tiny] at (0.85,0.1) {level sets};
 \end{tikzpicture}
 \end{center}
+
+% Sonnet 5 (Medium)
+Unconstrained extrema are found by \cref{prop:extremum_implies_critical}. We now ask the same
+question when $x$ is restricted to a lower-dimensional constraint set, where the gradient
+condition $\nabla f(x_0) = 0$ is generally too strong to hold anywhere.
 
 % Source: Corsin Nick/Class Notes/Week 5.pdf, pp. 3--4
 \section{Lagrange multipliers}
@@ -208,6 +217,14 @@ is open, and write $g = (g_1,\dots,g_k)$. If $f|_{g^{-1}\{0\}}$ has a local extr
 $x_0 \in g^{-1}\{0\}$, then
 $$\{\nabla f(x_0), \nabla g_1(x_0), \dots, \nabla g_k(x_0)\} \text{ are linearly dependent.}$$
 \end{proposition}
+
+\begin{ainote}
+Once $(\nabla g_1,\dots,\nabla g_k)$ are linearly independent everywhere on $g^{-1}\{0\}$ (the
+standing assumption below), the constraint set $g^{-1}\{0\}$ is in fact a submanifold of
+$\mathbb{R}^n$ --- this is made precise in Week 7 (\cref{thm:regular_value_theorem}), which also
+explains \cref{prop:constrained_optimization} geometrically: $\nabla f(x_0)$ must be normal to the
+tangent space of the constraint set at a constrained extremum.
+\end{ainote}
 
 For $k = 1$, this corresponds to our intuition above of $\nabla f(x_0)$ \textbf{parallel to}
 $\nabla g(x_0)$.
@@ -501,16 +518,18 @@ each).
 \begin{exercisesolution}[Solution to \cref{ex:5.2}]
 % Generator: Claude Sonnet 5 (Medium)
 \begin{enumerate}[label=\textbf{\arabic*.}]
-  \item $\overline{U}$ is closed and bounded in $\mathbb{R}^3$, hence compact by Heine--Borel, and
-    $f$ is a polynomial, hence continuous. By the extreme value theorem, $f$ attains its absolute
-    maximum and minimum on $\overline{U}$.
+  \item $\overline{U}$ is closed and bounded in $\mathbb{R}^3$, hence compact by
+    \cref{thm:heine_borel}, and $f$ is a polynomial, hence continuous. By the extreme value
+    theorem (\cref{item:extreme_value_theorem}), $f$ attains its absolute maximum and minimum on
+    $\overline{U}$.
   \item $\nabla f(x,y,z) = (-2x+4,\ -2y,\ 0)$ vanishes only at $x=2$, $y=0$ (any $z$), and no such
     point lies in $U$ (since $x=2$ already violates $x^2+y^2+z^2<1$). So $f$ has \textbf{no
     critical point in the interior of $U$}; consequently, by
     \cref{prop:extremum_implies_critical}, $\sup_U f$ and $\inf_U f$ are \textbf{not attained} at
     any interior point.
   \item $\partial U$ is compact (a sphere) and $f$ is continuous, so $\max_{\partial U} f$ and
-    $\min_{\partial U} f$ \textbf{both exist}, again by the extreme value theorem.
+    $\min_{\partial U} f$ \textbf{both exist}, again by the extreme value theorem
+    (\cref{item:extreme_value_theorem}).
   \item With $g(x,y,z) := x^2+y^2+z^2-1$, the Lagrange condition $\nabla f = \lambda \nabla g$
     reads $(-2x+4,-2y,0) = \lambda(2x,2y,2z)$. The last coordinate gives $\lambda z = 0$.
     \textbf{If $z \neq 0$:} then $\lambda = 0$, so $-2x+4=0 \Rightarrow x=2$, impossible on
@@ -577,7 +596,8 @@ f(1,2) = 1 + 4 = 5 \quad (\text{maximum}), \qquad f(-1,-2) = -1 - 4 = -5 \quad (
 
 \begin{exercisesolution}[Proof of \cref{ex:ai_extrema_triangle}]
 % Generator: Gemini 3.6 Flash (Medium)
-Since $T$ is compact and $f$ is continuous, global extrema exist.
+Since $T$ is compact and $f$ is continuous, global extrema exist by the extreme value theorem
+(\cref{item:extreme_value_theorem}).
 \begin{itemize}
   \item \textbf{Interior of $T$:} Critical points satisfy $\nabla f(x,y) = (y,x)\transp = (0,0)\transp \implies (x,y) = (0,0)$, which lies on the boundary. Thus there are no critical points in $\operatorname{int}(T)$.
   \item \textbf{Boundary of $T$:}

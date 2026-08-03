@@ -93,13 +93,18 @@ are unaffected. Re-derived cleanly above. See \texttt{OQ-08}.
 
 \subsection{Why do we care about compactness?}
 
+% Sonnet 5 (Medium): added \label on each item so these three facts (heavily cited by name in
+% later chapters, e.g. the extreme value theorem) can be \cref-ed instead of just named in prose.
 \begin{enumerate}[label=\textbf{(\alph*)}]
-  \item \textbf{Preserved by continuous functions:} $X$, $Y$ metric spaces, $K \subseteq X$
+  \item \label{item:continuity_preserves_compact}
+    \textbf{Preserved by continuous functions:} $X$, $Y$ metric spaces, $K \subseteq X$
     compact, $f : X \to Y$ continuous. Then $f(K) \subseteq Y$ is compact.
-  \item \textbf{Weierstrass theorem / Extreme value theorem:} $X$ metric space,
+  \item \label{item:extreme_value_theorem}
+    \textbf{Weierstrass theorem / Extreme value theorem:} $X$ metric space,
     $K \subseteq X$ compact, $f : K \to \mathbb{R}$ continuous. Then $f$ attains its maximum and
     minimum in $K$. In particular, $f$ is bounded.
-  \item \textbf{Uniform continuity:} $X$, $Y$ metric spaces, $f : X \to Y$ continuous. If $X$ is
+  \item \label{item:uniform_continuity_compact}
+    \textbf{Uniform continuity:} $X$, $Y$ metric spaces, $f : X \to Y$ continuous. If $X$ is
     compact, then $f$ is \newterm{uniformly continuous} (\germanterm{gleichm\"assig stetig}).
 \end{enumerate}
 

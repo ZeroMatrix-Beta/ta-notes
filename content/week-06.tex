@@ -233,7 +233,37 @@ Let $U \subseteq \mathbb{R}^n$ be open and convex.
 \end{enumerate}
 \end{exercisesolution}
 
-% Figure: FIG-W06-01 (queued) --- see docs/05-figure-queue.md
+% Sonnet 5 (Medium) --- FIG-W06-01, drawn from the page image seen while transcribing
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.15]
+  \draw[->] (-0.3,0) -- (5.2,0) node[right, font=\small] {$r$};
+  \draw[->] (0,-0.3) -- (0,3.0);
+
+  \draw[green!60!black, thick, domain=0.2:5.0, samples=60, smooth]
+    plot ({\x}, {0.20*(\x-2.6)*(\x-2.6) + 1.0});
+  \node[green!60!black, font=\small] at (5.35,2.2) {$f_{x,y}(r)$};
+
+  % Tangent-ish lines through s and t, matching the slopes of the convex curve there
+  \draw[orange!90!black, thick, domain=0.3:4.3]
+    plot ({\x}, {-0.4*(\x-1.2) + 1.86});
+  \draw[purple, thick, domain=1.7:5.0]
+    plot ({\x}, {0.72*(\x-3.6) + 1.39});
+
+  % Labels placed well clear of both lines and the curve, with leader lines to the
+  % point they describe (the line's value directly above s, resp. t).
+  \node[orange!90!black, font=\scriptsize, align=center] (LabU) at (1.2,2.75) {$Df_u(r(y-x))$\\$+\ \text{const}$};
+  \draw[orange!90!black, thin, ->] (LabU) -- (1.2,1.96);
+  \node[purple, font=\scriptsize, align=center] (LabV) at (3.6,0.35) {$Df_v(r(y-x))$\\$+\ \text{const}$};
+  \draw[purple, thin, ->] (LabV) -- (3.6,1.29);
+
+  \draw (0,0.05) -- (0,-0.05) node[below, font=\small] {$0$};
+  \draw (1.2,0.05) -- (1.2,-0.05) node[below, font=\small] {$s$};
+  \draw (3.6,0.05) -- (3.6,-0.05) node[below, font=\small] {$t$};
+  \draw (4.9,0.05) -- (4.9,-0.05) node[below, font=\small] {$1$};
+  \draw[dashed, gray] (1.2,0) -- (1.2,1.86);
+  \draw[dashed, gray] (3.6,0) -- (3.6,1.39);
+\end{tikzpicture}
+\end{center}
 
 % Sonnet 5 (Medium)
 We now change subject entirely: from convexity to the question of when a map is locally
@@ -286,7 +316,50 @@ invertible (everywhere invertible differential) but not globally injective: a pl
 ("diffeo by IFT"). See \texttt{FIG-W06-03}.
 \end{ainote}
 
-% Figure: FIG-W06-02, FIG-W06-03 (queued) --- see docs/05-figure-queue.md
+% Sonnet 5 (Medium) --- FIG-W06-03, drawn from the page image seen while transcribing
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.05]
+  \draw[->] (-0.3,0) -- (8.2,0) node[right, font=\small] {$x$};
+  \draw[->] (0,-0.3) -- (0,5.9);
+
+  \draw[blue!80!black, thick] plot[smooth] coordinates {
+    (0,0.3) (0.7,0.95) (1.3,1.55) (1.8,1.85) (2.15,1.95) (2.5,2.05)
+    (2.9,2.35) (3.6,3.0) (4.4,2.1) (5.2,3.3) (6.0,4.0) (6.8,4.65) (7.6,5.3)};
+
+  % "Invertible, but not diffeo" -- the flat shoulder near x=1.8..2.5
+  \draw[red!80!black, dashed, thick] (1.8,1.95) -- (2.5,1.95);
+  \node[red!80!black, font=\scriptsize, align=center] (LabShoulder) at (1.0,3.4)
+    {invertible,\\ but not diffeo};
+  \draw[red!80!black, thin, ->] (LabShoulder) -- (2.1,2.05);
+
+  % "Not invertible" -- the hump between x=3.1 and x=5.0, three crossings at y=2.6
+  \draw[red!80!black, dashed, thick] (3.1,2.6) -- (5.0,2.6);
+  \node[red!80!black, font=\scriptsize, align=center] (LabHump) at (5.9,1.2)
+    {not\\ invertible};
+  \draw[red!80!black, thin, ->] (LabHump) -- (4.15,2.55);
+
+  % "Diffeo by IFT" -- the final monotone stretch
+  \node[green!60!black, font=\scriptsize, align=center] (LabIFT) at (5.6,4.9)
+    {diffeo\\ by IFT};
+  \draw[green!60!black, thin, ->] (LabIFT) -- (6.7,4.55);
+\end{tikzpicture}
+\end{center}
+
+% Sonnet 5 (Medium) --- FIG-W06-02, drawn from the page image seen while transcribing
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.1]
+  \draw[->] (-0.3,0) -- (7.3,0) node[right, font=\small] {$x$};
+  \draw[->] (0,-1.6) -- (0,1.6) node[above, font=\small] {$y$};
+  \draw (0,1) -- (-0.05,1) node[left, font=\footnotesize] {$1$};
+  \draw (0,-1) -- (-0.05,-1) node[left, font=\footnotesize] {$-1$};
+
+  \draw[blue!80!black, thick, domain=0:7, samples=120, smooth]
+    plot ({\x}, {cos(\x r)}) node[right, font=\small] {$\cos(x)$};
+
+  \draw[red!80!black, dashed, thick] (0,0.4) -- (7,0.4);
+  \node[red!80!black, font=\scriptsize, right] at (7,0.4) {not injective};
+\end{tikzpicture}
+\end{center}
 
 % Sonnet 5 (Medium)
 The inverse function theorem asks when $f(x)=y$ can be solved for $x$ as a function of $y$. The
@@ -326,7 +399,50 @@ chain-rule derivation above at least pins down where the formula comes from alge
 \end{ainote}
 \end{remark}
 
-% Figure: FIG-W06-04, FIG-W06-05 (queued) --- see docs/05-figure-queue.md
+% Sonnet 5 (Medium) --- FIG-W06-04, drawn from the page image seen while transcribing
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.05]
+  \draw[green!60!black, thick, ->] (-0.3,0) -- (3.6,0) node[right, font=\small] {$x \in \mathbb{R}^d$};
+  \draw[orange!90!black, thick, ->] (0,-0.3) -- (0,3.3) node[above, font=\small] {$y \in \mathbb{R}^{n-d}$};
+
+  \coordinate (P) at (1.6,1.9);
+  \draw[dotted, gray] (1.6,0) -- (P) -- (0,1.9);
+  \node[below, font=\small] at (1.6,-0.05) {$x_0$};
+  \node[left, font=\small] at (-0.05,1.9) {$y_0$};
+  \fill (P) circle (1.5pt) node[above right, font=\small] {$(x_0,y_0)$};
+  \draw[orange!90!black, thick, ->] (P) -- ++(0,1.0) node[above, font=\scriptsize] {$\partial y$};
+
+  \draw[purple, thick, ->] (2.0,2.4) .. controls (3.2,3.0) .. (4.6,2.0)
+    node[midway, above, font=\scriptsize] {$D_yf(x_0,y_0)$};
+
+  \draw[->, thick] (4.9,0) -- (4.9,3.2) node[above, font=\small] {$\mathbb{R}^{n-d}$};
+  \fill (4.9,2.0) circle (1.5pt) node[right, font=\small] {$0=f(x_0,y_0)$};
+  \draw[->, thick, blue!80!black] (P) .. controls (3.4,0.6) .. (4.9,2.0)
+    node[midway, below, font=\small] {$f$};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.05]
+  \draw[green!60!black, thick, ->] (-0.3,0) -- (4.3,0) node[right, font=\small] {$x \in \mathbb{R}^d$};
+  \draw[orange!90!black, thick, ->] (0,-0.3) -- (0,3.3) node[above, font=\small] {$y \in \mathbb{R}^{n-d}$};
+
+  \draw[green!60!black, thick] (0.6,-0.08) -- (0.6,0.08) node[below, font=\scriptsize] {\phantom{x}};
+  \draw[green!60!black, thick] (0.6,-0.08) node[below, font=\scriptsize] {$x_0$};
+  \draw[green!60!black] (0.4,0) rectangle (3.4,1.9);
+  \node[green!60!black, font=\scriptsize] at (1.9,-0.3) {$B_r(x_0)$};
+  \draw[orange!90!black] (0.4,0.5) -- (0.35,0.5) node[left, font=\scriptsize] {$B_s(y_0)$};
+
+  \draw[purple, thick, domain=0.4:3.4, samples=60, smooth]
+    plot ({\x}, {1.1 + 0.35*sin((\x-0.4) r * 2.2)}) node[midway] {};
+  \node[purple, font=\scriptsize, above] at (1.9,1.55) {$(x,g(x))$};
+
+  \draw[->, thick] (5.1,0) -- (5.1,3.2) node[above, font=\small] {$\mathbb{R}^{n-d}$};
+  \fill (5.1,1.5) circle (1.5pt) node[right, font=\small] {$0=f(x,g(x))$};
+  \draw[->, thick, blue!80!black] (1.9,1.55) .. controls (3.8,2.4) .. (5.1,1.5)
+    node[midway, above, font=\small] {$f$};
+\end{tikzpicture}
+\end{center}
 
 \begin{example}[The circle $S^1$]
 The circle $S^1 = \{(x,y) \in \mathbb{R}^2 : x^2+y^2-1=0\}$ is the level set at $0$ of
@@ -343,7 +459,30 @@ written as a graph over $x$.
 \end{ainote}
 \end{example}
 
-% Figure: FIG-W06-06 (queued) --- see docs/05-figure-queue.md
+% Sonnet 5 (Medium) --- FIG-W06-06, drawn from the page image seen while transcribing
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.3]
+  \draw[->] (-1.6,0) -- (1.9,0) node[right, font=\small] {$x$};
+  \draw[->] (0,-1.6) -- (0,1.6) node[above, font=\small] {$y$};
+  \draw[green!60!black, thick] (0,0) circle (1);
+
+  \draw[red!80!black, dashed, thick, domain=-0.9:0.9, samples=40, smooth]
+    plot ({\x}, {sqrt(1-\x*\x)}) node[right, font=\scriptsize] {$y=\sqrt{1-x^2}$};
+
+  \coordinate (X0) at (0.4,0);
+  \draw[dotted, gray] (X0) -- (0.4,0.917);
+  \node[below, font=\scriptsize] at (X0) {$x_0$};
+
+  \fill[red!80!black] (1,0) circle (1.5pt) node[below right, font=\scriptsize] {$\bar x$};
+  \node[red!80!black, font=\scriptsize, below right, align=left] at (1.0,-0.5)
+    {not possible\\around $y=0$};
+
+  \draw[->, thick] (2.6,-1.0) -- (2.6,1.3) node[above, font=\small] {$\mathbb{R}$};
+  \fill (2.6,0) circle (1.5pt) node[right, font=\small] {$0$};
+  \draw[->, thick, blue!80!black] (1.15,0.6) .. controls (2.0,1.0) .. (2.6,0)
+    node[midway, above, font=\small] {$F$};
+\end{tikzpicture}
+\end{center}
 
 \begin{example}[An implicit quintic]
 Let $G(x,y) := y^5+y^3+y+x$, and consider its level set at $0$,
@@ -365,7 +504,20 @@ computed and plotted numerically.
 \end{ainote}
 \end{example}
 
-% Figure: FIG-W06-07 (queued) --- see docs/05-figure-queue.md
+% Sonnet 5 (Medium) --- FIG-W06-07, drawn from the page image seen while transcribing
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=0.62]
+  \draw[->] (-11,0) -- (11,0) node[right, font=\small] {$x$};
+  \draw[->] (0,-2.0) -- (0,2.0) node[above, font=\small] {$y(x)$};
+  \foreach \x in {-10,-7.5,-5,-2.5,2.5,5,7.5,10}
+    \draw (\x,0.08) -- (\x,-0.08) node[below, font=\tiny] {$\x$};
+  \foreach \y in {-1.5,-1.0,-0.5,0.5,1.0,1.5}
+    \draw (0.15,\y) -- (-0.15,\y) node[left, font=\tiny] {$\y$};
+
+  \draw[blue!80!black, thick, variable=\t, domain=-1.42:1.42, samples=120, smooth]
+    plot ({-\t*\t*\t*\t*\t - \t*\t*\t - \t}, {\t});
+\end{tikzpicture}
+\end{center}
 
 \section{Solutions}
 \label{sec:week06_solutions}

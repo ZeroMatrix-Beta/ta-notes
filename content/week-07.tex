@@ -94,6 +94,34 @@ open neighbourhood $U \subseteq \mathbb{R}^n$ of $p$, an open neighbourhood $V \
 $$\Phi(U \cap M) = (\mathbb{R}^m\times\{0\}) \cap V = \{x \in V : x_{m+1}=\dots=x_n=0\}.$$
 \end{definition}
 
+% Sonnet 5 (Medium) --- FIG-W07-01
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.0]
+  % Left panel: the curved submanifold M with a chart neighbourhood U around p
+  \begin{scope}[shift={(0,0)}]
+    \draw[blue!70!black, thick] plot[smooth] coordinates
+      {(-1.6,-0.4) (-0.9,0.5) (0.0,0.1) (0.9,0.7) (1.7,-0.1)};
+    \node[blue!70!black, font=\small] at (1.9,-0.4) {$M$};
+    \draw[orange!90!black, thick, dashed] (0.0,0.35) ellipse (0.85 and 0.75);
+    \node[orange!90!black, font=\small] at (0.0,1.25) {$U$};
+    \fill (0.0,0.1) circle (1.5pt) node[below, font=\small] {$p$};
+    \node[below, font=\small] at (0,-1.3) {$\mathbb{R}^n$};
+  \end{scope}
+
+  \draw[->, thick] (2.5,0) -- (3.7,0) node[midway, above, font=\small] {$\Phi$};
+
+  % Right panel: the flattened image, R^m x {0} as a horizontal line inside V
+  \begin{scope}[shift={(4.4,0)}]
+    \draw[orange!90!black, thick] (-1.1,-0.9) rectangle (1.9,1.1);
+    \node[orange!90!black, font=\small] at (0.4,1.35) {$V$};
+    \draw[green!60!black, thick, ->] (-1.05,0) -- (1.85,0)
+      node[right, font=\scriptsize] {$\mathbb{R}^m\times\{0\}$};
+    \fill (0,0) circle (1.5pt) node[below, font=\small] {$0 = \Phi(p)$};
+    \node[below, font=\small] at (0.4,-1.3) {$\mathbb{R}^n$};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
 \begin{ainote}
 Finding such a chart directly can be very difficult. Corsin notes it is often easier to use one of
 the following equivalent representations instead: the \textbf{implicit} representation (regular
@@ -121,6 +149,20 @@ is a submanifold of dimension $2-1=1$ by \cref{thm:regular_value_theorem}. Simil
 $\{x \in \mathbb{R}^n : |x|^2=R^2\}$ is a submanifold of dimension $n-1$ for $n \geq 1$ (the
 \newterm{$n$-sphere} of radius $R$).
 \end{example}
+
+% Sonnet 5 (Medium) --- FIG-W07-02
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.1]
+  \draw[->] (-1.7,0) -- (1.7,0) node[right, font=\small] {$x$};
+  \draw[->] (0,-1.7) -- (0,1.7) node[above, font=\small] {$y$};
+  \draw[blue!70!black, thick] (0,0) circle (1.3);
+  \node[blue!70!black, font=\small] at (1.05,1.05) {$F^{-1}\{R^2\}$};
+  \coordinate (Q) at (0.92,0.92);
+  \fill (Q) circle (1.5pt);
+  \draw[orange!90!black, thick, ->] (Q) -- ++(0.55,0.55)
+    node[above right, font=\scriptsize] {$\nabla F(x,y) = (2x,2y)$};
+\end{tikzpicture}
+\end{center}
 
 % Source: Corsin Nick/Class Notes/Week 7.pdf, p. 4
 \subsubsection{Connection to Lagrange multipliers}
@@ -172,6 +214,16 @@ last coordinate.
 \end{ainote}
 \end{example}
 
+% Sonnet 5 (Medium) --- FIG-W07-03
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.1]
+  \draw[->] (-1.9,0) -- (1.9,0) node[right, font=\small] {$x$};
+  \draw[->] (0,-0.3) -- (0,2.7) node[above, font=\small] {$t$};
+  \draw[blue!70!black, thick, domain=-1.6:1.6, samples=60, smooth]
+    plot ({\x}, {\x*\x}) node[above right, font=\small] {$P = \{(x,t) : t=|x|^2\}$};
+\end{tikzpicture}
+\end{center}
+
 % Source: Corsin Nick/Class Notes/Week 7.pdf, p. 6
 \subsubsection{An alternative optimization technique}
 
@@ -213,6 +265,27 @@ $$\Jac f(q) = \begin{pmatrix} \dfrac{\partial f}{\partial q_1} & \cdots & \dfrac
 has full rank, that is, the column vectors $\partial_if(q)$ are linearly independent. They form a
 basis of $T_pM$:
 
+% Sonnet 5 (Medium) --- FIG-W07-04
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.1]
+  % A wireframe surface patch (parallel curve families) with a marked point p
+  \foreach \i in {0,0.6,...,2.4} {
+    \draw[blue!40!black, thin] plot[smooth] coordinates
+      {(-1.4+\i*0.15,-1.1+\i*0.25) (-0.5+\i*0.15,-0.3+\i*0.25) (0.6+\i*0.15,0.1+\i*0.25) (1.6+\i*0.15,-0.2+\i*0.25)};
+  }
+  \foreach \j in {0,0.55,...,2.2} {
+    \draw[blue!40!black, thin] plot[smooth] coordinates
+      {(-1.4+\j*0.15,-1.1+\j*0.05) (-0.6+\j*0.35,-0.55+\j*0.15) (0.3+\j*0.55,-0.1+\j*0.2) (1.3+\j*0.7,0.05+\j*0.2)};
+  }
+  \coordinate (P) at (0.1,-0.05);
+  \fill (P) circle (1.7pt) node[below, font=\small] {$p = f(q)$};
+  \draw[orange!90!black, thick, ->] (P) -- ++(1.1,0.35)
+    node[right, font=\scriptsize] {$\partial f/\partial x_1$};
+  \draw[purple, thick, ->] (P) -- ++(0.35,0.95)
+    node[above, font=\scriptsize] {$\partial f/\partial x_2$};
+\end{tikzpicture}
+\end{center}
+
 \begin{definition}[Tangent space]
 \label{def:tangent_space}
 For $M$, $f$ as above, the \newterm{tangent space} (\germanterm{Tangentialraum}) of $M$ at
@@ -229,6 +302,21 @@ We determine $T_{e_3}S^2_+$, where $e_3 = (0,0,1)$:
 $$\left.\frac{\partial f}{\partial x}\right|_{x=0} = \left.\begin{pmatrix} 1 \\ 0 \\ \dfrac{-x}{\sqrt{1-x^2-y^2}}\end{pmatrix}\right|_{x=0} = \begin{pmatrix}1\\0\\0\end{pmatrix} = e_1, \qquad \left.\frac{\partial f}{\partial y}\right|_{y=0} = \begin{pmatrix}0\\1\\0\end{pmatrix} = e_2.$$
 So $T_{e_3}S^2_+ = T_{e_3}S^2 = \operatorname{span}\{e_1,e_2\} = \mathbb{R}^2\times\{0\}$.
 \end{example}
+
+% Sonnet 5 (Medium) --- FIG-W07-05
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+  \draw[blue!70!black, thick] (0,0) circle (1.3);
+  \draw[blue!70!black, dashed] (1.3,0) arc (0:180:1.3 and 0.4);
+  \draw[blue!70!black] (-1.3,0) arc (180:360:1.3 and 0.4);
+  \node[blue!70!black, font=\small] at (-1.0,0.5) {$S^2$};
+
+  \fill (0,1.3) circle (1.7pt) node[right, font=\small] {$e_3$};
+  \draw[orange!90!black, thick, fill=orange!10, fill opacity=0.5]
+    (-1.7,1.3) -- (1.7,1.3) -- (2.0,1.8) -- (-1.4,1.8) -- cycle;
+  \node[orange!90!black, font=\small] at (1.5,1.65) {$T_{e_3}S^2$};
+\end{tikzpicture}
+\end{center}
 
 % Quelle: Diego Torres Tejeda/Notes - 30.03 - Diego Torres Tejeda.pdf, p. 2 -- Sonnet 5 (Medium)
 \begin{ainote}[Tangent vectors as velocities of curves]
@@ -299,7 +387,19 @@ $$\nabla F(0,0,1) = (2x,2y,2z)\big|_{(x,y,z)=(0,0,1)} = 2e_3.$$
 So $N_{e_3}S^2 = \operatorname{span}\{e_3\} = \{0\}\times\mathbb{R}$.
 \end{example}
 
-% Figure: FIG-W07-01, FIG-W07-02, FIG-W07-03, FIG-W07-04, FIG-W07-05, FIG-W07-06 (queued) --- see docs/05-figure-queue.md
+% Sonnet 5 (Medium) --- FIG-W07-06
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+  \draw[blue!70!black, thick] (0,0) circle (1.3);
+  \draw[blue!70!black, dashed] (1.3,0) arc (0:180:1.3 and 0.4);
+  \draw[blue!70!black] (-1.3,0) arc (180:360:1.3 and 0.4);
+  \node[blue!70!black, font=\small] at (-1.0,0.5) {$S^2$};
+
+  \draw[purple, thick, ->] (0,-2.0) -- (0,2.1) node[above, font=\small] {$N_{e_3}S^2$};
+  \fill (0,1.3) circle (1.7pt) node[right, font=\small] {$e_3$};
+  \fill (0,-1.3) circle (1.7pt) node[right, font=\small] {$-e_3$};
+\end{tikzpicture}
+\end{center}
 
 \section{Solutions}
 \label{sec:week07_solutions}

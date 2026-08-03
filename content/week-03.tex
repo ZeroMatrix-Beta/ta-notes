@@ -102,10 +102,13 @@ are unaffected. Re-derived cleanly above. See \texttt{OQ-08}.
   \item \label{item:extreme_value_theorem}
     \textbf{Weierstrass theorem / Extreme value theorem:} $X$ metric space,
     $K \subseteq X$ compact, $f : K \to \mathbb{R}$ continuous. Then $f$ attains its maximum and
-    minimum in $K$. In particular, $f$ is bounded.
+    minimum in $K$. In particular, $f$ is bounded --- proved as
+    \cref{lem:sequential_compactness_extreme_values} in Week 2.
   \item \label{item:uniform_continuity_compact}
     \textbf{Uniform continuity:} $X$, $Y$ metric spaces, $f : X \to Y$ continuous. If $X$ is
-    compact, then $f$ is \newterm{uniformly continuous} (\germanterm{gleichm\"assig stetig}).
+    compact, then $f$ is \newterm{uniformly continuous} (\germanterm{gleichm\"assig stetig}) ---
+    proved as \cref{prop:compact_implies_uniformly_continuous} in Week 2, via the Lebesgue number
+    of the cover $\{f^{-1}(B_{\varepsilon/2}(y))\}_{y}$.
 \end{enumerate}
 
 % Quelle: Linus Lüchinger/Slides/Slides-03-02.pdf, pp. 10--13 -- Sonnet 5 (Medium)

@@ -227,11 +227,20 @@ You are authorized to improve the prose and apply the established "House Style" 
 * **Editorial transitions between spliced source content — tag them, as a reflex, not a
   process.** When you write a short bridging sentence or paragraph to smooth the join between
   two blocks of transcribed/quoted content (rather than transcribing it from any source), mark it
-  with a brief comment naming the model that wrote it, e.g. `% Transition: Claude Sonnet 5`. If
-  the insertion sits between a content block and the `% Source: ...` comment that used to sit
-  right above it, re-cite that same source comment immediately above the resumed transcribed
-  content so the provenance isn't visually severed by your insertion. Keep this lightweight —
-  a one-line comment each time, not a ceremony.
+  with a brief comment naming the model that wrote it, e.g. `% Transition: Claude Sonnet 5` (this
+  project's sessions have also used the equivalent shorthand `% Sonnet 5 (Medium)` — either is
+  fine, pick one and be consistent within a file). If the insertion sits between a content block
+  and the `% Source: ...` comment that used to sit right above it, re-cite that same source
+  comment immediately above the resumed transcribed content so the provenance isn't visually
+  severed by your insertion — the comment documents where the *following* code came from, not
+  the inserted block, so it must stay attached to what it actually describes. Keep this
+  lightweight — a one-line comment each time, not a ceremony.
+* **Integrating a second tutor's supplementary material** (not the primary blueprint tutor) into
+  an already-transcribed section: cite it with a `% Quelle: <relative path>` (or `% Source: ...`)
+  comment naming the exact file, and where relevant the page/section, e.g.
+  `% Quelle: Diego Torres Tejeda/Addendum - Sequential and Topological Compactness.pdf`. State in
+  an `ainote` *why* the primary tutor's notes don't already cover it (skipped, stated without
+  proof, etc.) before presenting the supplement, and reformulate rather than copying verbatim.
 
 ## MORE LATEX DIRECTIVES
 

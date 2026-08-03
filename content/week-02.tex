@@ -613,6 +613,12 @@ A metric space $(X,d)$ is compact if and only if every sequence in $X$ has a con
 (\cref{def:convergent_sequence}) subsequence in $X$.
 \end{theorem}
 
+\begin{ainote}
+Neither Corsin nor the official lecture notes prove this here; the proof is given below as
+\cref{thm:sequential_topological_compactness_equivalence}, once the tools it needs (total
+boundedness) are available.
+\end{ainote}
+
 \begin{center}
 \begin{tikzpicture}[scale=1.1]
   \draw[blue!80!black, thick, fill=blue!5] plot[smooth cycle, tension=0.7] coordinates {(-2, -1.2) (-1.5, 1.5) (1.2, 1.8) (2.2, -0.5) (1.0, -1.5)};
@@ -638,12 +644,15 @@ A subset $K$ of a metric space $(X,d)$ is compact if the metric space $(K, d|_{K
 compact (\cref{def:compact_metric_space}). This is equivalent to the definition in the script:
 
 \begin{definition}[9.63, quoted from the official lecture notes]
+\label{def:sequential_topological_compactness}
 Let $(X,d)$ be a metric space. A subset $K \subset X$ is called \textbf{compact} if one of the
 following equivalent conditions hold:
 \begin{enumerate}[label=\textbf{(\alph*)}]
-  \item $K$ is \textbf{sequentially compact}: every sequence $(x_n)_{n\in\mathbb{N}}$ in $K$ has
+  \item \label{item:seq_compact_def963}
+    $K$ is \textbf{sequentially compact}: every sequence $(x_n)_{n\in\mathbb{N}}$ in $K$ has
     a subsequence that is convergent (\cref{def:convergent_sequence}) in $K$.
-  \item $K$ is \textbf{topologically compact}: every family of open sets
+  \item \label{item:top_compact_def963}
+    $K$ is \textbf{topologically compact}: every family of open sets
     (\cref{def:open_closed}) $\{U_i\}_{i \in I}$ that cover $K$, has a finite subcover.
 \end{enumerate}
 \end{definition}
@@ -668,6 +677,148 @@ following equivalent conditions hold:
   \node[below, font=\small] at (0, -1.9) {$K \subseteq U_1 \cup U_2 \cup U_3 \subseteq X$};
 \end{tikzpicture}
 \end{center}
+
+% Quelle: Diego Torres Tejeda/Addendum - Sequential and Topological Compactness.pdf -- Sonnet 5 (Medium)
+\subsection{Sequential and topological compactness agree}
+
+\begin{ainote}
+Corsin (and \cref{def:sequential_topological_compactness}, quoting the official lecture notes)
+states this equivalence but never proves it, nor does he prove \cref{thm:sequential_compactness}
+above. Diego Torres Tejeda's supplementary note \texttt{Addendum - Sequential and Topological
+Compactness.pdf} --- the one typeset document among his materials, the rest being handwritten
+scans --- works out a complete, self-contained proof. Adapted below into this project's notation
+and house style; by the reduction already noted above (compactness of $K \subseteq X$ is
+compactness of the metric space $(K,d|_{K\times K})$), it suffices to treat a whole metric space
+$X$ rather than a subset $K$.
+\end{ainote}
+
+\begin{lemma}[Continuous functions attain extrema on sequentially compact spaces]
+\label{lem:sequential_compactness_extreme_values}
+Let $(X,d)$ be sequentially compact (\cref{item:seq_compact_def963}) and $f : X \to \mathbb{R}$
+continuous. Then $f$ attains a maximum and a minimum on $X$.
+\end{lemma}
+
+\begin{proof}
+It suffices to find a minimum (apply the result to $-f$ for the maximum). Let
+$m := \inf_{x\in X} f(x) \in [-\infty,\infty)$ and choose a sequence $(x_n)_{n}$ with
+$f(x_n) \to m$. By sequential compactness, some subsequence $x_{n_k} \to x \in X$; by continuity,
+$f(x) = \lim_k f(x_{n_k}) = m$. In particular $m \neq -\infty$, so $f$ attains its minimum $m$ at
+$x$.
+\end{proof}
+
+\begin{ainote}
+This is exactly the extreme value theorem (\cref{item:extreme_value_theorem}) proved from first
+principles, without presupposing \cref{thm:sequential_compactness} --- needed here since that
+theorem is precisely what we are about to prove.
+\end{ainote}
+
+\begin{definition}[Totally bounded]
+\label{def:totally_bounded}
+A metric space $(X,d)$ is \newterm{totally bounded} (\germanterm{total beschr\"ankt}) if for
+every $\varepsilon > 0$ there exist finitely many points $x_1,\dots,x_n \in X$ such that
+$$X = \bigcup_{k=1}^{n} B_\varepsilon(x_k).$$
+\end{definition}
+
+\begin{lemma}[Sequential compactness gives (total) boundedness]
+\label{lem:sequentially_compact_totally_bounded}
+Let $(X,d)$ be sequentially compact. Then $X$ is bounded and totally bounded
+(\cref{def:totally_bounded}).
+\end{lemma}
+
+\begin{proof}
+\textbf{Bounded.} Fix $x_0 \in X$; the function $f(y) := d(x_0,y)$ is continuous, so by
+\cref{lem:sequential_compactness_extreme_values} it attains a maximum $M \geq 0$ on $X$. Then
+$X = B_{M+1}(x_0)$.
+
+\textbf{Totally bounded.} Fix $\varepsilon > 0$. Construct a sequence inductively: let
+$x_1 \in X$ be arbitrary, and, having chosen $x_1,\dots,x_n$, let
+$U_n := \bigcup_{k=1}^n B_\varepsilon(x_k)$; if $U_n = X$, stop --- we have the desired finite
+cover. Otherwise, pick $x_{n+1} \in X\setminus U_n$, so that $d(x_{n+1},x_k) \geq \varepsilon$ for
+all $k \leq n$. If this process never terminates, sequential compactness gives a convergent, hence
+Cauchy, subsequence $(x_{n_k})_k$; but $d(x_{n_k},x_{n_{k+1}}) \geq \varepsilon$ for all $k$
+contradicts the Cauchy property. So the process must terminate after finitely many steps, giving
+the desired finite $\varepsilon$-net.
+\end{proof}
+
+\begin{theorem}[Sequential and topological compactness agree]
+\label{thm:sequential_topological_compactness_equivalence}
+A metric space $(X,d)$ is sequentially compact (\cref{item:seq_compact_def963}) if and only if it
+is topologically compact (\cref{def:compact_metric_space}). In particular,
+\cref{thm:sequential_compactness} holds.
+\end{theorem}
+
+\begin{proof}
+\textbf{($\Leftarrow$)} Suppose $X$ is not sequentially compact, so some sequence
+$(x_n)_{n\in\mathbb{N}}$ has no convergent subsequence. Then no $x \in X$ is the limit of any
+subsequence, so there exist $\varepsilon_x > 0$ and $N_x \in \mathbb{N}$ such that
+$B_{\varepsilon_x}(x) \cap \{x_n : n \geq N_x\} = \emptyset$. The balls
+$\{B_{\varepsilon_x}(x)\}_{x \in X}$ cover $X$, so topological compactness gives finitely many
+$x_1,\dots,x_m$ with $X = \bigcup_{k=1}^m B_{\varepsilon_{x_k}}(x_k)$. With
+$N := \max\{N_{x_1},\dots,N_{x_m}\}$, every $x_n$ with $n \geq N$ then avoids
+$B_{\varepsilon_{x_1}}(x_1) \cup \dots \cup B_{\varepsilon_{x_m}}(x_m) = X$ --- absurd. So $X$ is
+sequentially compact.
+
+\textbf{($\Rightarrow$)} Suppose $X$ is sequentially compact and let $\{U_i\}_{i\in I}$ be an open
+cover; we may assume no single $U_i$ equals $X$ (else $\{U_i\}$ is itself a finite subcover).
+Define
+$$r(x) := \tfrac12\sup\{r \geq 0 : B_r(x) \subseteq U_i \text{ for some } i \in I\}, \qquad x \in X.$$
+\textit{$r$ is finite and positive.} Since $\{U_i\}$ covers $X$ and each $U_i$ is open, some
+$U_{i_0} \ni x$ contains a ball around $x$, so $r(x) > 0$; and since $X$ is bounded
+(\cref{lem:sequentially_compact_totally_bounded}) but no $U_i$ equals $X$, $r(x) < \infty$.
+
+\textit{$r$ is $1$-Lipschitz (\cref{def:lipschitz_continuous}), hence continuous.} For
+$x,y \in X$ with $d(x,y) < r(x)$, the point $y$ lies in $B_{r(x)}(x) \subseteq U_i$ for some $i$,
+so the triangle inequality gives $B_{r(x)-d(x,y)}(y) \subseteq B_{r(x)}(x) \subseteq U_i$, hence
+$r(y) \geq r(x)-d(x,y)$; this also holds trivially when $d(x,y) \geq r(x)$, since $r(y) \geq 0$.
+By symmetry (swapping $x,y$), $|r(x)-r(y)| \leq d(x,y)$.
+
+By \cref{lem:sequential_compactness_extreme_values}, $r$ attains a minimum
+$\varepsilon := \min_{x\in X} r(x) > 0$ on $X$. Then $B_\varepsilon(x) \subseteq U_i$ for some $i$,
+for every $x \in X$. By \cref{lem:sequentially_compact_totally_bounded}, $X$ is totally bounded,
+so there are $x_1,\dots,x_n \in X$ with $X = \bigcup_{k=1}^n B_\varepsilon(x_k)$; choosing, for
+each $k$, an index $i_k$ with $B_\varepsilon(x_k) \subseteq U_{i_k}$, the sets
+$U_{i_1},\dots,U_{i_n}$ form a finite subcover of $X$.
+\end{proof}
+
+\begin{ainote}[Total boundedness, more generally]
+Diego's note records a sharper characterization as a further exercise: $(X,d)$ is compact if and
+only if it is complete and totally bounded. \Cref{lem:sequentially_compact_totally_bounded} gives
+one direction (compact $\implies$ complete, by \cref{ex:compact_finite_complete} below, and
+totally bounded); for the converse, a Cauchy subsequence can be extracted from any sequence using
+total boundedness (cover by finitely many $\tfrac1k$-balls for $k=1,2,\dots$ and pass to nested
+subsequences), and it converges by completeness.
+\end{ainote}
+
+% Quelle: Diego Torres Tejeda/Addendum - Sequential and Topological Compactness.pdf, \S4(b)
+\begin{definition}[Lebesgue number]
+\label{def:lebesgue_number}
+Let $(X,d)$ be a metric space and $\{U_i\}_{i\in I}$ an open cover of $X$. A number
+$\varepsilon > 0$ is a \newterm{Lebesgue number} (\germanterm{Lebesgue-Zahl}) for the cover if
+$$\forall x \in X\ \exists i \in I: B_\varepsilon(x) \subseteq U_i.$$
+\end{definition}
+
+\begin{ainote}[Lebesgue's covering lemma]
+The proof of \cref{thm:sequential_topological_compactness_equivalence} ($\Rightarrow$) shows
+more than stated: on a compact metric space, \emph{every} open cover has a Lebesgue number (take
+$\varepsilon := \min_{x\in X} r(x)$ as constructed there). This is known as \newterm{Lebesgue's
+covering lemma} (\germanterm{Lebesguesches \"Uberdeckungslemma}).
+\end{ainote}
+
+\begin{proposition}[Compactness implies uniform continuity]
+\label{prop:compact_implies_uniformly_continuous}
+Let $(X,d_X)$, $(Y,d_Y)$ be metric spaces with $X$ compact, and let $f : X \to Y$ be continuous.
+Then $f$ is uniformly continuous (\cref{def:continuous}).
+\end{proposition}
+
+\begin{proof}
+% Generator: Claude Sonnet 5 (Medium), after Diego Torres Tejeda/Addendum, §4(b)
+Let $\varepsilon > 0$. The sets $f^{-1}(B_{\varepsilon/2}(y))$, $y \in Y$, are open
+(\cref{def:continuous}) and cover $X$, so they admit a Lebesgue number $\delta > 0$
+(\cref{def:lebesgue_number}). For any $x,x' \in X$ with $d_X(x,x') < \delta$, the ball
+$B_\delta(x)$ lies inside some $f^{-1}(B_{\varepsilon/2}(y))$, so $x' \in B_\delta(x)$ gives
+$f(x),f(x') \in B_{\varepsilon/2}(y)$, hence $d_Y(f(x),f(x')) < \varepsilon$ by the triangle
+inequality. Since $\delta$ did not depend on $x$, $f$ is uniformly continuous.
+\end{proof}
 
 \begin{exercise}[Compact sets are complete]
 \label{ex:compact_finite_complete}

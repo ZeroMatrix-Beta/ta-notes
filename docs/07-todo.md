@@ -1,10 +1,10 @@
 # TODO — next session
 
 ## Transcription (primary, per gemini.md priority)
-- [x] Corsin Week 8 — pp. 1–13 transcribed (quiz Q1–Q7, change of variables,
-      Fubini, Feynman's trick). Priority page done. **Still open:** the sheet-8
-      exercise *statements* (`exercises/Ex8_Analysis2_eng.pdf` not yet read) and
-      therefore `sec:week08_solutions` is empty. Reproduce 8.2, 8.4, 8.5.
+- [x] Corsin Week 8 — fully transcribed (pp. 1–13: quiz Q1–Q7, change of
+      variables, Fubini, Feynman). Priority page + exercise statements 8.2, 8.4,
+      8.5 in. **Still open:** `sec:week08_solutions` is empty — solutions to
+      8.2/8.4/8.5 not yet written (Sol8_Analysis2_eng.pdf not read).
 - [ ] Corsin Weeks 9–13 + ODE appendix
 - [ ] `latexmk` to 0 errors after each week
 

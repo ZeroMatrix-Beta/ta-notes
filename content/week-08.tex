@@ -478,12 +478,82 @@ red \textbf{= optional}.
 \end{center}
 \end{ainote}
 
-\begin{ainote}[TODO --- exercise statements not yet transcribed]
-The priority page above is transcribed, but \textbf{the exercise statements themselves are not
-yet in}: they come from \texttt{exercises/Ex8\_Analysis2\_eng.pdf}, which has not been read on
-this pass. Following the convention of Weeks 4--7, the ones to reproduce are those marked
-\textbf{important} --- 8.2, 8.4 and 8.5 --- with 8.5 singled out by Corsin as the one to do if
-time is short.
+\begin{ainote}
+Only the exercises tagged \textbf{important} above are reproduced below: 8.2, 8.4 and 8.5. The
+full sheet also contains 8.1 (Jordan-null sets), 8.3 (an open set with non-null boundary) and
+8.6 (a Cantor-type set, marked \textbf{(*)} \qt{a bit more complex} on the sheet).
+\end{ainote}
+
+\begin{exercise}[8.2 --- True or False \textnormal{(important)}]
+\label{ex:8.2}
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item A bounded countable set is always Jordan-null.
+  \item A countable set is always Lebesgue-null.
+  \item Let $D \subset [0,1]$ be a dense set (i.e.\ $\overline D = [0,1]$). Then
+    $\mu_{out}(D) = 1$. ($\mu_{out}$ was defined in Definition 13.10.)
+  \item Let $X, Y \subset [0,1]$ Jordan measurable sets such that $\mu(X) > 1/2$ and
+    $\mu(Y) > 1/2$. Then $X \cap Y \neq \emptyset$.
+  \item Let $X, Y \subset [0,1]$ such that $\mu_{out}(X) > 1/2$ and $\mu_{out}(Y) > 1/2$. Then
+    $X \cap Y \neq \emptyset$.
+\end{enumerate}
+\textit{Official hint:} \textbf{8.2.5} --- $\mu_{out}$ can be positive and large on very sparse
+sets\dots
+\end{exercise}
+
+\begin{exercise}[8.4 --- Multiple Choice \textnormal{(important)}]
+\label{ex:8.4}
+Let $U \subset \mathbb{R}^n$ be a nonempty, open subset, $f : U \to \mathbb{R}^m$ a function,
+and $N \subset U$ a Jordan null set. In which of the following cases is the image
+$f(N) \subset \mathbb{R}^m$ necessarily a null set? \textit{Attention: Only one answer is
+correct!}
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item If $f$ is uniformly continuous.
+  \item If $f$ is uniformly continuous and $m \geq n$.
+  \item If $f$ is locally Lipschitz continuous.
+  \item If $f$ is locally Lipschitz continuous and $m \geq n$.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[8.5 --- Change of variables and Jacobians \textnormal{(important)}]
+\label{ex:8.5}
+For each of the following domains and change of variables find the jacobian and the appropriate
+transformed domain. There is no need to actually compute the integrals!
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item $A := \{(x_1,x_2) \in \mathbb{R}^2 : x_1 > 0,\ x_2 < x_1,\ 1 < x_1^2+x_2^2 < 4\}$ and
+    $x_1 = r\cos\theta$, $x_2 = r\sin\theta$. Using the change of variables formula, complete
+    the dots in the following formula
+    $$\int_A x_1^2\sin(x_2)\,dx_1dx_2 = \int_{\dots}\dots\,dr\,d\theta$$
+  \item $B := \{(x,y) \in \mathbb{R}^2 \mid 1 < xy < 2,\ x^2 < y < 2x^2\}$ and $u := xy$,
+    $v := x^2$. Using the change of variables formula, complete the dots in the following
+    formula
+    $$\int_B y^2e^{-xy}\,dx\,dy = \int_{\dots}\dots\,du\,dv$$
+  \item $C := \{(x,y,z) \in \mathbb{R}^3 \mid 1 < z-2y < 2,\ 0 < z < 1,\ -2 < 3x+y+z < 0\}$ and
+    $u := z$, $v := z-2y$, $w := 3x+y+z$. Using the change of variables formula, complete the
+    dots in the following formula
+    $$\int_C xyz\,dx\,dy = \int_{\dots}\dots\,du\,dv\,dw.$$
+\end{enumerate}
+\end{exercise}
+
+\begin{ainote}
+The integral in \textbf{8.5.3} is written $\int_C xyz\,dx\,dy$ on the official sheet, but $C$ is
+a subset of $\mathbb{R}^3$ and the right-hand side carries three differentials, so this must
+read $dx\,dy\,dz$. Quoted verbatim above, as the sheet is a primary source. See
+\texttt{OQ-29}.
+\end{ainote}
+
+% Generator: Claude Opus 5 (Medium)
+\begin{ainote}
+\Cref{ex:8.5} is the direct continuation of \cref{ex:change_of_variables_domain}, and the three
+parts are graded. Part 1 is polar coordinates, already computed in Week 4. Part 3 is a
+\emph{linear} change of variables, so $\det\Jac$ is a constant and the transformed domain is
+literally the box $(0,1)\times(1,2)\times(-2,0)$ --- read straight off the three constraints.
+Part 2 is the interesting one: $1 < xy < 2$ becomes $1 < u < 2$ immediately, but the second
+constraint $x^2 < y < 2x^2$ does \emph{not} become a box, since $y = u/\sqrt v$ turns it into
+$v^{3/2} < u < 2v^{3/2}$. Straightening one constraint does not oblige the other to cooperate.
+
+Note also that the exercise deliberately stops before the integration: what is being drilled is
+finding $\lvert\det\Jac\rvert$ and the new domain, which is where both the marks and the
+mistakes are.
 \end{ainote}
 
 \section{Solutions}

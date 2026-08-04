@@ -83,6 +83,34 @@ You are authorized to improve the prose and apply the established "House Style" 
   It does **not** apply inside LaTeX comments (`% ...`), which are never typeset. Note that
   grepping for `"` produces false positives from umlaut escapes (`\"a`, `\"o`, `\"u`); filter
   those out before assuming a hit is real.
+
+## Build traps in this preamble (each has cost a broken build at least once)
+
+* **`\textbf{...}` inside `$$...$$` errors** with *"Command \sffamily invalid in math mode"*.
+  The sans-serif theorem fonts leak into math mode. Use `\text{\textbf{(1)}}` (mathtools is
+  loaded) or `\mathbf`.
+* **`question` and `answer` take NO optional argument.** `\begin{question}[Some title]` fails
+  with the same `\sffamily` error. Put the title in the body text instead.
+* **`ainote` is unnumbered (`\newtheorem*`) and must never carry a `\label`.** If you find
+  yourself wanting to `\cref` one, it is content, not commentary — make it a `remark`. See the
+  comment at its `\newtheorem*` in `main.tex`.
+* **Never bulk-edit `.tex` with `perl -pi -e 's/.../.../'` containing backslashes.** In the
+  replacement, `\\qt` collapses to `qt`, and in the *pattern* `\d`, `\p`, `\l`, `\C` are read as
+  regex classes, not literal `\dots`, `\pi`, `\leq`, `\Crefname`. This has silently corrupted
+  nine `\qt{}` and one `\leq` into `qt{}` and `eq` — which **typeset without erroring**, so a
+  clean build does not prove the edit was safe. Prefer the `Edit` tool. If you must use perl,
+  verify afterwards with `grep -nE '(^|[^\\])qt\{'` and similar.
+* **`main.pdf` is often locked** by an open viewer; `latexmk` then dies with
+  *"I can't write on file"*. Build with `-jobname=check` to a throwaway name instead.
+
+## Verifying figures
+
+Do **not** trust TikZ source. Build, render the page (`pdftoppm -png -r 95 -f N -l N`), and
+*look*. Several figures in this document asserted things their own coordinates contradicted: a
+chord whose endpoints were not on the curve, "tangent" lines tangent to nothing, an open cover
+that did not cover, marked points sitting where the curve was at its minimum. Where a figure
+encodes a computation, check the arithmetic in a comment above it (see `week-06.tex`
+FIG-W06-03 for the pattern).
 * **Custom bracketed names on theorem environments are encouraged.** All theorem-like
   environments (`theorem`, `lemma`, `definition`, `proposition`, `corollary`, and their starred
   variants, `claim*`, `example`, `remark`, `exercise`, etc.) **should** carry a descriptive

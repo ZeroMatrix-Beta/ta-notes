@@ -39,6 +39,8 @@ worth a second opinion.
 
 | OQ-28 | Corsin Week 5, p. 3 | Remark gives `∇g(x) = x/\|x\|` for the `g` just fixed as `g(x) = \|x\|² − 1`, whose gradient is `2x`. `x/\|x\|` is `∇(\|x\|)`. | **resolved** — same `\|x\|` vs `\|x\|²` confusion as `OQ-12`, one page earlier. The two gradients are positive multiples of each other so the geometry (perpendicular to the level set) is unaffected, but the Lagrangian below differentiates the squared version. Corrected to `2x` with a note. |
 
+| OQ-29 | `exercises/Ex8_Analysis2_eng.pdf`, 8.5.3 | Integral written `∫_C xyz dxdy`, but `C ⊂ ℝ³` and the right-hand side carries three differentials `dudvdw`. | **resolved** — typo in the official sheet; must read `dx dy dz`. Quoted verbatim in the chapter (the sheet is a primary source) with a note. |
+
 *(weeks 12–13 and the ODE appendix still to come)*
 
 ## Conventions

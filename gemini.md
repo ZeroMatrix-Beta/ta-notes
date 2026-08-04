@@ -37,6 +37,24 @@ You are authorized to improve the prose and apply the established "House Style" 
 ## MATHEMATICAL NOTATION (THE HOUSE STYLE)
 
 * **Definitional Equal Sign (`:=`):** Always use `:=` (colon-equal) when introducing a new symbol, defining a set/function/subspace, or making a local assignment in proofs and definitions (e.g., `Let $r := \rank(A)$`, `Let $Q := \begin{pmatrix} ... \end{pmatrix}$`, `\operatorname{Im}(T) := \{T(v) \mid v \in V\}`, `\langle \cdot, \cdot \rangle' := \langle \cdot, \cdot \rangle_A`). Reserve standard `=` strictly for mathematical equations, identities, and calculations between existing quantities.
+
+  The test is **"am I naming something, or claiming something?"** Naming takes `:=`; claiming
+  takes `=`. The distinction is easy to get wrong in both directions:
+
+  | | Correct | Why |
+  |---|---|---|
+  | naming | `Let $X := \mathbb{R}^n$.` | $X$ did not exist a moment ago |
+  | naming | `the Lagrangian $L := f - \lambda g$` | introduces $L$ |
+  | naming | `with $g(x) := \lvert x\rvert^2-1$` | fixes what $g$ means |
+  | **claiming** | `so $X = \bigcup_k B_\varepsilon(x_k)$` | an assertion to be proved, not a definition |
+  | **claiming** | `$\dim M = m$` | a fact about $M$ |
+  | **claiming** | `$\det = 27\alpha^2 > 0$` | the outcome of a computation |
+  | **claiming** | `(with $\lambda = 1$)` | a value that was solved for, not chosen |
+
+  Two standing exceptions. **(1)** Text quoted verbatim from an official problem sheet is never
+  re-punctuated — leave its `=` alone even where the sheet is defining something. **(2)** In a
+  chain like `$L(x,\lambda) := f(x) - \lambda g(x) = xyz - \lambda(\dots)$`, only the *first*
+  sign is definitional; the rest is computation.
 * **Matrices & Long Display Equations:** Use `\begin{pmatrix}` for displayed block equations `\[ ... \]` and `\left(\begin{smallmatrix} ... \end{smallmatrix}\right)` for 2D matrices in inline math `$ ... $`. **Tall / Block Matrices:** Large matrices or multi-row block representations (such as column-block matrices $\begin{pmatrix} | & & | \\ v_1 & \dots & v_n \\ | & & | \end{pmatrix}$ or matrices with 3+ rows) must NEVER be written inline inside `$ ... $`; always elevate them to display math `\[ ... \]`.
   * **Multi-line Equation Splitting:** Never let wide display equations with large matrix blocks overflow page boundaries. Split them using `align` or `split` at major equal signs or logical steps. Suppress intermediate equation numbers using `\nonumber` unless specifically referenced.
     * **BAD Example (Single-line overflow):**
@@ -63,7 +81,17 @@ You are authorized to improve the prose and apply the established "House Style" 
 * **General Linear Group:** Always use the macro `\GL` for the general linear group (e.g., `\GL_n(K)` or `\GL(n, K)`). This renders as `\operatorname{GL}`.
 * **Sub-part Labels:** Always use alphabetical numbering for sub-parts, items, and cases (e.g., `\textbf{(a)}`, `\textbf{(b)}`). Do NOT use numerical labels like `(1), 2)`. This applies to proof sections, lists, and TikZ nodes. **Important:** Do NOT hardcode custom labels using `\item[...]` — this applies to **both** `itemize` and `enumerate`, with no exceptions. Instead, set `\begin{enumerate}[label=\textbf{(\alph*)}]` on the environment itself and use plain `\item`; for `itemize`, use plain `\item` and put any name/label as `\textbf{name:}` at the start of the item's text. **Proof Sub-parts:** Do NOT write `Proof of (a):` or use `\item[...]`. Write sub-part proof headers using `\begin{enumerate}[label=\textbf{(\alph*)}]` with plain `\item`, or write `\textbf{(a)}` directly in prose. When referencing a specific sub-part or custom enumerate label in prose, maintain the bold formatting (e.g., "statement \textbf{(d)}", "from \textbf{(K4)}"). If a theorem/proposition statement uses an `enumerate` environment to list sub-claims/points, any proof that proves those individual points must also structure its proof using an identical `enumerate` environment matching those points.
 * **Labels:** Use descriptive, human-readable slugs for labels instead of numbering schemes. For example, use `\label{prop:unique_solution_criterion}` instead of `\label{prop:17.d.4}`. If possible (i.e. available), always place the original handwritten note label as a comment directly above the new descriptive label (e.g., `% prop:17.d.4`). This avoids duplicates and makes the LaTeX source much easier to navigate. **Placement:** Always place the `\label{...}` immediately after the `\begin{...}` statement (e.g., right after `\begin{theorem}`), rather than at the end of the environment.
-* **Theorem Numbering:** The global theorem numbering scheme is `Chapter.SectionLetter.TheoremNumber` (e.g., 15.a.1). To ensure stability across included files, always explicitly override the theorem numbering format at the top of each part's file to match its specific section letter, e.g., `\renewcommand{\thetheorem}{23.a.\arabic{theorem}}` and `\setcounter{theorem}{0}`. If a specific chapter requires simpler numbering, it is permissible to override this locally to `Chapter.TheoremNumber` (e.g., 12.1).
+* **Theorem Numbering — do NOT set it per file in this project.** The scheme is
+  `Chapter.SectionLetter.TheoremNumber` (e.g. 2.b.1), and `main.tex:371` already derives it
+  automatically from `\thechapter` and the section counter, resetting per chapter. **No
+  `content/*.tex` file overrides `\thetheorem`, and none should.**
+
+  > ⚠️ Older revisions of this file instructed writing
+  > `\renewcommand{\thetheorem}{23.a.\arabic{theorem}}` at the top of each part's file. That is
+  > imported from a different repository (a linear-algebra project whose source parts did not
+  > map one-to-one onto sections — the leftover comment naming "Prof. Biran" at `main.tex:359`
+  > is from the same import). Following it here would hard-code a wrong chapter number into
+  > every week and desynchronise the numbering from the actual chapter. Ignore it.
 * **Cross-Referencing:** Use `\cref{...}` (from the `cleveref` package) for referencing sections, theorems, propositions, lemmas, and definitions. `\cref` automatically adds the appropriate label (like "Theorem 1"), so do not add manual prefixes. **Important:** If a sentence starts with a reference, use `\Cref{...}` instead so that the word is properly capitalized (e.g., "Theorem 1"). Use `\eqref{...}` exclusively for referencing equations (this automatically adds parentheses around the number).
 * **Lists with Descriptions — the `description` environment is FORBIDDEN.** For lists where
   each item has a specific name or title (e.g., "Associativity", "Distributivity"), use `itemize`
@@ -84,8 +112,49 @@ You are authorized to improve the prose and apply the established "House Style" 
   grepping for `"` produces false positives from umlaut escapes (`\"a`, `\"o`, `\"u`); filter
   those out before assuming a hit is real.
 
+* **Custom bracketed names on theorem environments are encouraged.** All theorem-like
+  environments (`theorem`, `lemma`, `definition`, `proposition`, `corollary`, `claim*`,
+  `example`, `remark`, `exercise`, etc.) **should** carry a descriptive `[...]` name/title where
+  a natural one exists. Examples: `\begin{theorem}[Heine--Borel]`,
+  `\begin{definition}[Metric space]`, `\begin{lemma}[Gronwall's inequality]`. This applies
+  retroactively; adding names to existing environments is encouraged when revisiting a file.
+  * **Not every environment needs one.** A short `ainote` correcting a slip, or a one-line
+    `remark`, reads better untitled than with a laboured title. Roughly 1 in 6 `ainote`s in
+    Weeks 1–7 carry a title, and that ratio is about right: title it when the title *names*
+    something ("Lebesgue's covering lemma", "Corsin's recommendations"), not when it merely
+    restates the first sentence.
+  * **`question` and `answer` take NO optional argument** — see the build traps below.
+  * **Sole exception — `proof` immediately after its parent environment:** A `proof`
+    environment that directly and immediately follows the theorem/proposition/lemma it belongs
+    to does **not** need a `[Proof of \cref{...}]` label — the adjacency already makes the
+    connection clear. Add a `[Proof of \cref{...}]` title only when the proof is separated
+    from its statement (e.g., deferred to a solution section or a later page).
+  * **Macro restrictions inside `[...]` still apply:** NEVER use `\qt{...}`, `\newterm{...}`,
+    or other formatting macros inside the bracketed header argument — plain text and math are
+    safe, macros with fragile arguments are not. `\cref{...}` is safe inside
+    `exercisesolution[...]` and deferred `proof[...]` headers.
+
 ## Build traps in this preamble (each has cost a broken build at least once)
 
+* **`\end{ainote>` — closing an environment with `>` instead of `}`.** Every model working on
+  this file has made this one, repeatedly, and it is the single most common break. The error
+  message does not point at it; you get *"Paragraph ended before \end was complete"* plus
+  *"`\begin{ainote}` on input line N ended by `\end{document}`"*, with a line number pointing at
+  the **opening** brace, often hundreds of lines earlier. It also cascades into hundreds of
+  bogus "undefined reference" warnings, which look alarming and are not the problem.
+
+  * **BAD:** `\end{ainote>`  `\end{remark>`  `\end{aiexample>`
+  * **GOOD:** `\end{ainote}`  `\end{remark}`  `\end{aiexample}`
+
+  Cheap detector, worth running after any batch of edits:
+
+  ```bash
+  grep -nE '\\(begin|end)\{[a-z*]+[>)\]]' content/*.tex     # malformed closers
+  for f in content/week-0*.tex; do \
+    echo "$f $(grep -c 'begin{ainote}' $f) $(grep -c 'end{ainote}' $f)"; done
+  ```
+
+  If the two counts differ, that file has the bug. Do this **before** reading the log.
 * **`\textbf{...}` inside `$$...$$` errors** with *"Command \sffamily invalid in math mode"*.
   The sans-serif theorem fonts leak into math mode. Use `\text{\textbf{(1)}}` (mathtools is
   loaded) or `\mathbf`.
@@ -111,26 +180,34 @@ chord whose endpoints were not on the curve, "tangent" lines tangent to nothing,
 that did not cover, marked points sitting where the curve was at its minimum. Where a figure
 encodes a computation, check the arithmetic in a comment above it (see `week-06.tex`
 FIG-W06-03 for the pattern).
-* **Custom bracketed names on theorem environments are encouraged.** All theorem-like
-  environments (`theorem`, `lemma`, `definition`, `proposition`, `corollary`, and their starred
-  variants, `claim*`, `example`, `remark`, `exercise`, etc.) **should** carry a descriptive
-  `[...]` name/title where a natural one exists. Examples:
-  `\begin{theorem}[Heine--Borel]`, `\begin{definition}[Metric space]`,
-  `\begin{lemma}[Gronwall's inequality]`. This applies retroactively; adding names to
-  existing environments is encouraged when revisiting a file.
-  * **Sole exception — `proof` immediately after its parent environment:** A `proof`
-    environment that directly and immediately follows the theorem/proposition/lemma it belongs
-    to does **not** need a `[Proof of \cref{...}]` label — the adjacency already makes the
-    connection clear. Add a `[Proof of \cref{...}]` title only when the proof is separated
-    from its statement (e.g., deferred to a solution section or a later page).
-  * **Macro restrictions inside `[...]` still apply:** NEVER use `\qt{...}`, `\newterm{...}`,
-    or other formatting macros inside the bracketed header argument — plain text and math are
-    safe, macros with fragile arguments are not. `\cref{...}` is safe inside
-    `exercisesolution[...]` and deferred `proof[...]` headers.
 
 ## GRAMMAR AND PROSE STYLE
 
 * **Logical Arrows:** The default for prose should be natural words (e.g., This implies that, Consequently, Therefore, Hence, Thus, if and only if). Handwritten shorthand like "iff" must be expanded to "if and only if" in prose text, but the macro `\iff` is fully permitted in math. Avoid overusing isolated `\iff` arrows interspersed with prose (e.g., alternating between inline `\iff`, prose fragments, and `\iff` again); choose full English phrasing like "if and only if" whenever it makes the sentence sound more natural. Avoid using `\implies` inside displayed equations (`\[ ... \]`); write out logical implications using full prose (e.g., ", which implies that", "Consequently,") between separate display equations instead. `\implies` should still be used sparingly.
+
+  The line to draw: an arrow may **join two equations**; it may not **replace a verb**.
+
+  * **BAD** (arrow standing in for "hence", inside a display):
+    ```latex
+    $$\nabla f(x,y) = (y,x)\transp = (0,0)\transp \implies (x,y) = (0,0)$$
+    ```
+  * **GOOD** (the deduction is prose, the display holds only mathematics):
+    ```latex
+    The critical points satisfy $\nabla f(x,y) = (y,x)\transp = (0,0)\transp$, and therefore
+    $(x,y) = (0,0)$.
+    ```
+  * **BAD** (an `\iff` plus a slash carrying two definitions at once):
+    ```latex
+    \item \textbf{Strict} min/max $\iff f(x) > f(x_0)$ / $f(x) < f(x_0)$.
+    ```
+  * **GOOD:**
+    ```latex
+    \item The extremum is \textbf{strict} if the inequality is strict: $f(x) > f(x_0)$ for a
+      strict minimum, $f(x) < f(x_0)$ for a strict maximum.
+    ```
+
+  Arrows are fine inside a genuine chain of algebra (`$x^{3/2} = (x')^{3/2} \implies x = x'$`),
+  where both sides really are equations and no English is being displaced.
 * **Sophisticated Academic Prose:** Maintain a formal, structural tone.
 * **Introductory Phrases:** Always place a comma after introductory adverbs (e.g., Clearly, So, Moreover, In this case, Hence, Thus, Next).
 * **Conjunctions:** Where grammatically sound, use commas around transition phrases like ", and therefore," (e.g., The determinant is non-zero, and therefore, the matrix is invertible.).
@@ -147,7 +224,12 @@ FIG-W06-03 for the pattern).
 
 * **Commutative Diagrams:** Always use the `tikz-cd` package for commutative diagrams.
 * **Coordinate Calculations:** In TikZ `\draw` and `\node` coordinates, unbraced math expressions containing commas or operations will fail to parse (e.g., `at (2.6, 1.0 + 0.3*sin(...))`). Always enclose coordinate math expressions in curly braces `{}` (e.g., `at (2.6, {1.0 + 0.3*sin(...)})`) or pre-calculate the numeric coordinate (e.g., `at (2.6, 1.06)`).
-* **Multi-line Node Text:** Avoid using `align=center` without a set `text width` on simple nodes, as it can cause TikZ label text parsing errors (*"A node must have a label text"*). Use `\shortstack{Line 1\\Line 2}` for multi-line text inside nodes to guarantee robust compilation across all TeX engines.
+* **Multi-line Node Text:** `\node[align=center] {Line 1\\Line 2}` is fine and is what this
+  project uses throughout — no `text width` is required, provided the node text is non-empty and
+  contains an explicit `\\`. The *"A node must have a label text"* error comes from an
+  **empty or absent** node body (e.g. a stray `node {}` left on a `plot`), not from `align`
+  itself; look for that instead. `\shortstack{...}` also works but nests badly inside `tabular`
+  and is not needed here.
 * **Function Plot Domains & Overflow:** When plotting functions with singular or rapidly growing terms near $0$ (such as $\sin(1/t)$ for the topologist's sine curve), bound the plot domain strictly away from zero (e.g., `domain=0.08:2.8`) to avoid PGF math `! Dimension too large` errors.
 * **Scope Syntax:** Always terminate `\end{scope}` cleanly with a closing brace `}`, never a trailing semicolon (e.g., avoid `\end{scope};`).
 * **Rotation and Transformation Syntax:** In TikZ scope transformations, always use spaces in rotation keys (e.g., `rotate around x=65`) or define explicit 3D coordinate system vectors (e.g., `x={(0.866cm,-0.3cm)}, y={(0.5cm,0.4cm)}`). Never write unspaced key strings like `rotatearound x`, which cause PGF key parsing errors.
@@ -203,14 +285,12 @@ FIG-W06-03 for the pattern).
   \section{Compactness}
   ```
 
-* **Exercises — prefer numbered:** In this project, exercises should in general be **numbered**
-  so that `\cref{ex:...}` resolves to a clickable reference. Use the preamble's `exercise`
-  environment (which is `\newtheorem*{exercise}`) only when a specific exercise is genuinely
-  standalone or unnumbered in the source. When numbering is needed, declare a numbered
-  `exercise` counter locally or use the project's numbering scheme; the preamble's unnumbered
-  `exercise*` variant remains available for edge cases. Always cross-reference exercises with
-  `\cref{ex:...}`; if the environment is truly unnumbered, fall back to
-  `\cpageref{ex:...}` with a descriptive label slug.
+* **Exercises are already numbered — nothing to configure.** `main.tex:449` declares
+  `exercise` via `\newaliascnt{exercise}{theorem}`, so every `\begin{exercise}` is numbered and
+  `\cref{ex:...}` resolves to a clickable reference out of the box. Do **not** declare a local
+  counter, and do not look for an `exercise*` variant — there isn't one. Give every exercise a
+  descriptive label (`\label{ex:heine_borel_fails}`, or `\label{ex:4.3}` for a problem quoted
+  from the official sheet) and reference it with `\cref`.
 * **Exercise Solutions — mirror the source, and record the decision in-line.** Where a solution
   lives in the LaTeX depends on how the *original tutor's own handwritten notes* present it for
   that specific exercise — check the source PDF, don't default blindly:
@@ -300,26 +380,14 @@ FIG-W06-03 for the pattern).
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{proposition}[theorem]{Proposition}
 
-% --- UNNUMBERED ENVIRONMENTS ---
-% The asterisk (*) prevents them from being numbered!
-\newtheorem*{theorem*}{Theorem}
-\newtheorem*{lemma*}{Lemma}
-\newtheorem*{proposition*}{Proposition}
-\newtheorem*{definition*}{Definition}
-\newtheorem*{corollary*}{Corollary}
-\newtheorem*{claim*}{Claim}
-
-\newtheorem*{remark}{Remark}
-\newtheorem*{exercise}{Exercise}
-\newtheorem*{example}{Example}
-\newtheorem*{summary}{Summary}
-\newtheorem*{warmup}{Warm up}
-\newtheorem*{question}{Question}
-\newtheorem*{answer}{Answer}
-\newtheorem*{importantremark}{Important remark}
-\newtheorem*{goals}{Goals}
-\newtheorem*{conclusion}{Conclusion}
-\newtheorem*{ainote}{AI-Note}
+% !! The block below is the GENERIC TEMPLATE and is NOT what this repo does. !!
+% In this project every one of these is NUMBERED via \newaliascnt{name}{theorem},
+% except `ainote`. See "This project's override" below, and main.tex:348-590,
+% which is authoritative. Reproduced here only to show the available names:
+%   remark, exercise, example, summary, warmup, question, answer,
+%   importantremark, goals, conclusion, notation, ainote, aiexample, aiexercise
+%   theorem, lemma, corollary, definition, proposition, claim*
+\newtheorem*{ainote}{AI-Note}   % <- the ONE genuinely unnumbered environment
 \newenvironment{exercisesolution}[1][Solution]{%
   \begin{proof}[#1]%
 }{%
@@ -339,14 +407,25 @@ FIG-W06-03 for the pattern).
 \DeclareMathOperator{\GL}{GL}
 ```
 
-* **This project's override — no unnumbered environments.** The generic template above uses
-  `\newtheorem*` (asterisked, unnumbered) for `remark`/`example`/`ainote`/etc. **This repository's
-  `main.tex` does not** — every environment is numbered via the same `\newaliascnt{name}{theorem}`
-  pattern as `lemma`/`corollary`/`definition`/`proposition`, because an unnumbered environment has
-  no counter, so a `\label` placed inside it is silently misattributed by `cleveref` to whatever
-  ambient counter (e.g. the enclosing subsection) was last stepped — producing wrong `\cref` output
-  that still looks plausible. See `main.tex`'s theorem/`aliascnt`/`cleveref` block (currently
-  around line 348–560) for the actual, current list of environments and their `\crefname`s.
+* **This project's override — everything is numbered, with exactly one exception.** The generic
+  template above uses `\newtheorem*` (asterisked, unnumbered) for `remark`/`example`/`exercise`/
+  etc. **This repository's `main.tex` does not** — they are all numbered via the same
+  `\newaliascnt{name}{theorem}` pattern as `lemma`/`corollary`/`definition`/`proposition`,
+  because an unnumbered environment has no counter, so a `\label` placed inside it is silently
+  misattributed by `cleveref` to whatever ambient counter (e.g. the enclosing subsection) was
+  last stepped — producing wrong `\cref` output that still looks plausible.
+
+  **The one exception is `ainote`, which IS `\newtheorem*` and unnumbered** (`main.tex:526`).
+  The hazard above needs a `\label` to bite, and an AI-Note never carries one: it is editorial
+  commentary about the transcription, not a result anyone cites. Numbering them only inflated
+  the shared theorem counter, so that a Lemma 2.f.43 was followed by a Definition 2.f.46 with
+  two AI-Notes in between. There is therefore no `\theHainote` entry and no `\crefname` for it
+  either.
+
+  **Corollary of that exception:** if you find yourself wanting to `\label` an `ainote`, that is
+  the signal it is *content*, not commentary — convert it to a `remark` (see the semantics
+  section below). See `main.tex`'s theorem/`aliascnt`/`cleveref` block (roughly lines 348–590)
+  for the current list of environments and their `\crefname`s.
 
 * **Math Operators**: Use the macros already declared in the project's preamble, never raw
   `\mathrm{}` or `\text{}` for an operator name. If a needed operator has no macro yet, propose
@@ -380,12 +459,43 @@ Each environment has a precise semantic role. Using the wrong one is a style err
   ```
   An `ainote` is the **only** place for AI self-reference or editorial intervention. Never
   smuggle such content into a `remark`, `notation`, or any semantic mathematical environment.
+
+  **The test — "would this text exist if the notes had been written from scratch, by a human,
+  with no source PDFs at all?"** If yes, it is mathematics: use `remark`. If no — if it only
+  exists *because* of the transcription — it is an `ainote`. This is not a nicety: 20 blocks in
+  Weeks 1–7 were originally filed as AI-Notes when they were plain mathematics, which buried
+  real content under an editorial label.
+
+  * **`ainote` (fails the test — exists only because there is a source):**
+    ```latex
+    \begin{ainote}
+    Corsin writes $\partial^{(2,1)} = \partial_2\partial_1$; a multi-index counts how many
+    times each $\partial_i$ is applied, so this must be $\partial_1^2\partial_2$. His own
+    expansion below confirms the intent. Corrected. See \texttt{OQ-10}.
+    \end{ainote}
+    ```
+  * **`remark` (passes the test — this is just mathematics):**
+    ```latex
+    \begin{remark}[Lebesgue's covering lemma]
+    The proof above shows more than was stated: on a compact metric space \emph{every} open
+    cover has a Lebesgue number. This is known as \newterm{Lebesgue's covering lemma}.
+    \end{remark}
+    ```
+
+  Two reliable smells that an `ainote` is really a `remark`: it contains a `\newterm{...}`
+  (you are formally introducing terminology — that is content), or you want to `\cref` it
+  (AI-Notes are unnumbered and cannot be referenced). A note that states a theorem, gives a
+  counterexample, or explains a concept is a `remark`, however it came to be written.
+
+  Conversely, do not over-correct: notes that say *"Corsin does not prove this here"*,
+  *"no priority page this week"*, *"only the important exercises are reproduced below"*, or that
+  introduce a second tutor's supplement, are genuinely editorial and belong in `ainote`.
 * **`aiexample`** (AI-Example) — for AI-generated illustrative mathematical examples that clarify a definition, theorem, or technique.
-  - **Generator Comment:** Must contain a LaTeX comment `% Generator: Gemini 3.6 Flash (Medium)` directly inside the environment.
+  - **Generator Comment:** Must contain a LaTeX comment naming the model that wrote it, `% Generator: <model> (<effort>)` -- e.g. `% Generator: Gemini 3.6 Flash (Medium)` or `% Generator: Claude Opus 5 (Medium)` -- directly inside the environment.
   - Rendered in GoldOrange style (`EnvAINote`).
 * **`aiexercise`** (AI-Exercise) — for AI-generated practice problems created to reinforce the surrounding material.
   - **Difficulty:** Maximum **medium difficulty** (pedagogical, clarifying core concepts).
-  - **Generator Comment:** Must contain a LaTeX comment `% Generator: Gemini 3.6 Flash (Medium)` directly inside the environment.
+  - **Generator Comment:** Must contain a LaTeX comment naming the model that wrote it, `% Generator: <model> (<effort>)` -- e.g. `% Generator: Gemini 3.6 Flash (Medium)` or `% Generator: Claude Opus 5 (Medium)` -- directly inside the environment.
   - **Mandatory Solution:** Every `aiexercise` MUST have a corresponding complete worked solution in the solutions section at the end of the chapter/week.
 
 ## PROJECT CONTEXT — ANALYSIS II
@@ -440,10 +550,11 @@ MiKTeX at `C:\Users\miche\AppData\Local\Programs\MiKTeX\miktex\bin\x64`.
 **Be careful with** the theorem / `aliascnt` / `cleveref` block at roughly `main.tex:348–560` —
 its comments document real bugs already solved (duplicate hyperref anchors, `cleveref` printing
 the wrong environment name for aliased counters). If you extend it, follow the existing pattern
-exactly: **every** environment in this project is numbered (there are no more `\newtheorem*`
-environments — an unnumbered environment has no counter, so a `\label` placed inside it gets
-silently misattributed to the last-stepped ambient counter, e.g. `\cref` printing "Section 2.d.4"
-instead of "AI-Exercise 2.d.26"). Adding a new environment means: `\newaliascnt{name}{theorem}`,
+exactly: every environment in this project is numbered **except `ainote`** (an unnumbered
+environment has no counter, so a `\label` placed inside it gets silently misattributed to the
+last-stepped ambient counter, e.g. `\cref` printing "Section 2.d.4" instead of
+"AI-Exercise 2.d.26" — `ainote` is safe only because it never carries a `\label`).
+Adding a new environment means: `\newaliascnt{name}{theorem}`,
 `\newtheorem{name}[name]{Display Name}`, `\aliascntresetthe{name}`, a `\theHname` entry in the
 `\AtBeginDocument` block, and a `\crefname`/`\Crefname` pair — mirroring `lemma`/`corollary`/etc.
 

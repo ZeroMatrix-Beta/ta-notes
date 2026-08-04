@@ -155,7 +155,7 @@ of them are maxima, which minima, and which neither is a separate step, and in p
 by simply evaluating $T$ at each and comparing.
 
 Note also that $S^2$ is the \newterm{level set} (\germanterm{Niveaumenge}) $g(x) = 0$ for
-$g(x) := |x|^2 - 1$, or $S^2 = g^{-1}\{0\}$.
+$g(x) := |x|^2 - 1$ (i.e., $S^2 = g^{-1}\{0\}$).
 
 \begin{remark}[Gradient perpendicular to level sets]
 For $g(x) := |x|^2-1$ we have $\nabla g(x) = 2x$, which at a point $x \in S^2$ is the outward
@@ -167,8 +167,7 @@ level sets.
 Corsin writes $\nabla g(x) = \tfrac{x}{|x|}$ here. That is the gradient of $x \mapsto |x|$, not
 of the $g(x) = |x|^2-1$ just fixed above, whose gradient is $2x$. The two differ only by the
 positive factor $2|x|$, so they point the same way and the geometric conclusion is unaffected
---- but the constraint actually differentiated in the Lagrangian below is the squared one. See
-, and for the same $|x|$ versus $|x|^2$ slip in the exercise.
+--- but the constraint actually differentiated in the Lagrangian below is the squared one. See \cref{ex:xyz_on_ball} for the same $|x|$ versus $|x|^2$ slip in the exercise.
 \end{ainote}
 
 % Source: Corsin Nick/Class Notes/Week 5.pdf, pp. 4--5
@@ -194,7 +193,7 @@ For $k = 1$, this corresponds to our intuition above of $\nabla f(x_0)$ \textbf{
 $\nabla g(x_0)$.
 
 \textit{In practice}, we assume $(\nabla g_1, \dots, \nabla g_k)$ nowhere linearly dependent,
-since otherwise $\lambda_0 = 0$ is possible, which does not give us anything.
+since otherwise $\lambda_0 = 0$ is possible (which does not give us anything).
 
 % Generator: Claude Opus 5 (Medium)
 \begin{aiexample}[What goes wrong when $\nabla g$ vanishes]
@@ -471,8 +470,7 @@ positive $= \smile \dots$ min; negative $= \frown \dots$ max; indefinite $=$ sad
 
 \begin{ainote}
 The regularity in \cref{thm:hessian_test} is stated by Corsin as $C^3$; the test needs only
-$C^2$ (which is what the Hessian's definition assumes). Relaxed to $C^2$ above. See
-.
+$C^2$ (which is what the Hessian's definition assumes). Relaxed to $C^2$ above.
 \end{ainote}
 
 \begin{aiexample}[Inconclusive Hessian Test at a Degenerate Critical Point]

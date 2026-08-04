@@ -440,6 +440,18 @@ Each environment has a precise semantic role. Using the wrong one is a style err
   mathematical content: a subtlety of a definition, a common pitfall, a clarifying observation.
   Do **not** use `remark` to make meta-comments about a tutor's notation style, about your own
   AI limitations, or about the typesetting process.
+  * **Settled: didactic content goes here — do NOT add a separate environment for it.** The
+    sibling project `eth-grundstrukturen-fs2026-ki-transkription` has a `didactic-insight`
+    tcolorbox, and it works well there (36 uses, on par with its 34 `remark`s). It was
+    considered for this project and **rejected**: its content splits into history/philosophy
+    (Hilbert, the Wiener Kreis, Cantor) plus three categories — why a hypothesis is essential,
+    proof ideas, appreciation of a technique — that are ordinary `remark`s. Only the first is
+    genuinely homeless, and Grundstrukturen is full of it because logic and set theory *are*
+    philosophical. Analysis II has almost none (the Galois/Abel note in `week-06.tex` is about
+    the only instance in eight weeks), so the box would stand near-empty and the other three
+    categories would drift into it. Use a **titled** remark instead —
+    `\begin{remark}[Why this hypothesis is there]` — which buys the same skimmability with no
+    new semantics and no twelfth colour-coded box competing with `importantremark`.
 * **`notation`** — strictly for introducing or summarising notation conventions used by the
   author in their notes. Do **not** use `notation` to comment on the fact that a particular
   tutor uses unusual notation — that is an `ainote`.

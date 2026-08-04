@@ -1,0 +1,218 @@
+% Source: Corsin Nick/Class Notes/Week 8.pdf, pp. 5--9 (pp. 1--4 and 10--13 NOT yet read).
+% ============================================================================
+% PARTIAL TRANSCRIPTION. Pages 5-9 are transcribed below from the source. Pages
+% 1-4 (priority page + start of the repetition quiz) and 10-13 (rest of the
+% change-of-variables example, Feynman's trick) are NOT yet transcribed and are
+% marked with TODO ainotes. See docs/07-todo.md.
+% ============================================================================
+\chapter{Week 8 --- Submanifold Quiz, Change of Variables \& Fubini}
+\label{ch:week08}
+
+\begin{ainote}[Chapter partially transcribed]
+Pages 5--9 of the source are transcribed below. \textbf{Pages 1--4 and 10--13 are not yet
+done} --- each gap is marked with its own TODO note at the point where it belongs.
+\end{ainote}
+
+\begin{ainote}[TODO --- quiz items 1--5 not transcribed]
+The repetition quiz starts on p.~2; only items \textbf{6} and \textbf{7} (p.~5--6) are
+transcribed here. One item in the untranscribed part is already known via \texttt{OQ-18}: a
+bullet on p.~4 with $\det \Hess f(0) = 2-\alpha^2$ claims $\nabla f$ is a local diffeomorphism
+\qt{for $\alpha \neq \sqrt2$}, but $2-\alpha^2$ vanishes at $-\sqrt2$ too, so it must read
+$\alpha \neq \pm\sqrt2$.
+\end{ainote}
+
+% Source: Corsin Nick/Class Notes/Week 8.pdf, p. 5
+\section{Repetition quiz}
+\label{sec:week08_quiz}
+
+\begin{question}[Quiz 6 --- graph over which variable?]
+\label{q:week08_graph_over}
+Let $V := \{(x,y) \in \mathbb{R}^2 : y^4+y^2 = x^3+x\}$. Decide:
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $V$ is a graph over $y$ in a neighbourhood of $(0,0)$.
+  \item $V$ is a graph over $x$ in a neighbourhood of $(0,0)$.
+\end{enumerate}
+\end{question}
+
+\begin{answer}
+\textbf{(a) True.} Notice that $V = f^{-1}\{0\}$ for $f(x,y) := y^4+y^2-x^3-x$. Then
+$$\Jac f(x,y) = (\partial_xf,\ \partial_yf) = (-3x^2-1,\ 4y^3+2y), \qquad \Jac f(0,0) = (-1,\ 0).$$
+Since $\partial_xf(0,0) = -1 \neq 0$, the implicit function theorem
+(\cref{thm:implicit_function_theorem}) applies with $x$ as the solved variable: in a
+neighbourhood of $(0,0)$,
+$$(x,y) \in V \iff f(x,y) = 0 \iff x = x(y).$$
+The theorem does \textbf{not} apply for $y$, since $\partial_yf(0,0) = 0$.
+
+\textbf{(b) False.} Solving the defining equation for $y^2$ by the quadratic formula gives
+$$y^2 = -\tfrac12 + \sqrt{\tfrac14 + x^3 + x},$$
+which has no solution for $x \in (-\varepsilon,0)$: there $x^3+x < 0$, so the square root falls
+below $\tfrac12$ and the right-hand side is negative, while $y^2 \geq 0$. So $V$ has no points
+at all just to the left of the origin, and cannot be a graph over $x$ there.
+\end{answer}
+
+% Sonnet 5 (Medium)
+\begin{ainote}
+This is \cref{thm:implicit_function_theorem} used as a decision procedure rather than an
+existence theorem, and it is worth noticing that the two parts are settled by different means:
+\textbf{(a)} by checking a derivative, \textbf{(b)} by an explicit computation showing the set is
+empty on one side. The theorem gives no negative results --- failure of its hypothesis proves
+nothing, exactly as discussed in \cref{sec:implicit_function_theorem}.
+\end{ainote}
+
+% Source: Corsin Nick/Class Notes/Week 8.pdf, p. 6
+\begin{question}[Quiz 7 --- is an injective smooth curve a submanifold?]
+\label{q:week08_injective_curve}
+Let $\gamma : I \to \mathbb{R}^2$ be injective and smooth, $I$ an open interval. Is $\gamma(I)$
+then a smooth submanifold of $\mathbb{R}^2$?
+\end{question}
+
+\begin{answer}
+\textbf{False.} Consider the \newterm{figure eight} (\germanterm{Lemniskate})
+$$\gamma : (0,2\pi) \to \mathbb{R}^2, \qquad t \mapsto (\sin t,\ \sin 2t).$$
+This is injective and smooth, but there is no graphical representation of
+$\operatorname{im}(\gamma)$ around $(0,0)$ --- the image crosses itself there.
+\end{answer}
+
+% Sonnet 5 (Medium) --- FIG-W08-01, the figure-eight from the source page.
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.5]
+  \draw[->] (-1.35,0) -- (1.35,0) node[right, font=\scriptsize] {$x$};
+  \draw[->] (0,-1.25) -- (0,1.25) node[above, font=\scriptsize] {$y$};
+  \draw[blue!80!black, thick, variable=\t, domain=0:6.2832, samples=200, smooth]
+    plot ({sin(\t r)}, {sin(2*\t r)});
+  \draw[red!80!black, thick, dashed] (0,0) circle (0.34);
+  \node[red!80!black, font=\scriptsize, right] at (0.42,0.30) {problem!};
+  \draw[red!80!black, thin, ->] (0.42,0.26) -- (0.18,0.12);
+\end{tikzpicture}
+\end{center}
+
+\begin{ainote}
+The endpoints $t \to 0^+$ and $t \to 2\pi^-$ both send $\gamma(t) \to (0,0)$, so the origin is
+approached from two different parameter ends without ever being attained --- which is how the
+image can cross itself while $\gamma$ stays injective. The reason $\operatorname{im}(\gamma)$
+fails to be a submanifold at the origin is exactly the component count of
+\cref{ex:cross_not_submanifold}: deleting the crossing point leaves four pieces, a line minus a
+point leaves two. Note also what this says about \cref{thm:local_parametrization} --- injectivity
+and an injective differential are \emph{not} sufficient; the theorem also demands that the
+parametrization be a \textbf{homeomorphism} onto its image, and that is what fails here.
+\end{ainote}
+
+% Sonnet 5 (Medium)
+The rest of the week leaves differential topology behind and starts the theory of integration in
+several variables.
+
+% Source: Corsin Nick/Class Notes/Week 8.pdf, p. 7
+\section{Multivariate integration}
+\label{sec:multivariate_integration}
+
+\subsection{Change of variables}
+\label{sec:change_of_variables}
+
+\begin{theorem}[Change of variables]
+\label{thm:change_of_variables}
+Suppose $U,V \subseteq \mathbb{R}^n$ are open sets and $\Phi : U \to V$ is a
+$C^1$-diffeomorphism. If $A \subseteq U$ is Jordan measurable with $\overline{A} \subseteq U$,
+and $f : A \to \mathbb{R}$ is continuous, then
+$$\int_A f(x)\,dx = \int_{\Phi(A)} \frac{f\circ\Phi^{-1}(y)}{\big|\det \Jac\Phi\big(\Phi^{-1}(y)\big)\big|}\,dy.$$
+\end{theorem}
+
+\begin{ainote}[TODO --- Jordan measurability not transcribed]
+\newterm{Jordan measurable} (\germanterm{Jordan-messbar}) is used here without being defined;
+per \texttt{docs/03-topic-index.md} Week 8 covers Jordan measure (lecture ch.~13), presumably on
+one of the pages not yet read. Definition still to be transcribed.
+\end{ainote}
+
+% Source: Corsin Nick/Class Notes/Week 8.pdf, p. 7
+\subsection{Fubini's theorem}
+\label{sec:fubini}
+
+\begin{theorem}[Fubini]
+\label{thm:fubini}
+Let $X \subseteq \mathbb{R}^m$ and $Y \subseteq \mathbb{R}^n$ be intervals (\qt{boxes}), and let
+$f : X\times Y \to \mathbb{R}$, $(x,y)\mapsto f(x,y)$, be continuous. Then
+$$\int_{X\times Y} f(x,y)\,dx\,dy
+  = \int_X\left(\int_Y f(x,y)\,dy\right)dx
+  = \int_Y\left(\int_X f(x,y)\,dx\right)dy.$$
+\end{theorem}
+
+Here we look at the expression in brackets as a function, e.g.\
+$x \mapsto \int_Y f(x,y)\,dy$.
+
+% Source: Corsin Nick/Class Notes/Week 8.pdf, p. 8
+\begin{example}[Fubini on the unit square]
+\label{ex:fubini_unit_square}
+$$
+\begin{aligned}
+\int_{[0,1]^2} x^{y+1}\,dx\,dy
+  &= \int_0^1 dy \int_0^1 dx\ x^{y+1}
+   = \int_0^1 dy\ \left[\frac{x^{y+2}}{y+2}\right]_0^1 \\
+  &= \int_0^1 dy\ \frac{1}{y+2}
+   = \log|y+2|\,\Big|_0^1
+   = \log\!\left(\tfrac32\right).
+\end{aligned}
+$$
+\end{example}
+
+\begin{ainote}
+Corsin writes the first line as $\int_0^1 dx \int_0^1 dy$, but the inner antiderivative taken on
+the next line is in $x$ (it produces $x^{y+2}/(y+2)$, evaluated from $0$ to $1$). The
+differentials are therefore swapped relative to the computation performed; the order is
+corrected above and the result is unaffected. See \texttt{OQ-19}.
+\end{ainote}
+
+% Source: Corsin Nick/Class Notes/Week 8.pdf, pp. 8--9
+\begin{example}[A domain that Fubini alone cannot handle]
+\label{ex:change_of_variables_domain}
+Consider
+$$\int_A \frac{y}{\sqrt{x}}\,dy\,dx, \qquad
+A := \left\{(x,y) \in \mathbb{R}^2 \ :\ x,y>0,\ \ 1 \leq \frac{y}{\sqrt x} \leq 2,\ \ 1 \leq xy \leq 2\right\}.$$
+This is not easily integrated with Fubini alone. But we can apply a transformation of variables
+to simplify the integration domain $A$: take
+$$\Phi : U \to V, \qquad \begin{pmatrix}x\\y\end{pmatrix} \mapsto
+  \begin{pmatrix}u(x,y)\\v(x,y)\end{pmatrix} = \begin{pmatrix}\tfrac{y}{\sqrt x}\\[2pt] xy\end{pmatrix},$$
+with $U$, $V$ still to be determined --- they must be open.
+
+\textbf{Check injectivity.} Suppose, for $x,y,x',y'>0$,
+$$\textbf{(1)}\ \ \frac{y}{\sqrt x} = \frac{y'}{\sqrt{x'}},
+\qquad\qquad \textbf{(2)}\ \ xy = x'y'.$$
+From \textbf{(2)}, $\dfrac{x}{x'} = \dfrac{y'}{y}$. Inserting into \textbf{(1)},
+$$\frac{1}{\sqrt x} = \frac{y'}{y}\cdot\frac{1}{\sqrt{x'}} = \frac{x}{x'}\cdot\frac{1}{\sqrt{x'}}
+\quad\Longrightarrow\quad x^{3/2} = (x')^{3/2} \quad\Longrightarrow\quad x = x',$$
+and consequently $\dfrac{y'}{y} = \dfrac{x}{x'} = 1$. So for $U := (0,\infty)^2$ and
+$V := \Phi(U)$, the map $\Phi$ is a bijection between open sets.
+
+We calculate the functional determinant $|\det \Jac\Phi|$. If it is strictly positive, we can
+proceed with a change of variables, since $\Phi$ is then a local diffeomorphism and a bijection.
+\end{example}
+
+\begin{ainote}[TODO --- example unfinished]
+The source continues on p.~10 with the determinant computation and the resulting integral over
+the rectangle $[1,2]^2$. \textbf{Pages 10--13 are not yet transcribed}, so this example breaks
+off mid-argument. Also still to come on those pages, per
+\texttt{docs/03-topic-index.md}: \newterm{Feynman's trick} (differentiation under the integral
+sign). One item there is already known via \texttt{OQ-17}: in the final integration on p.~13 the
+$\alpha$-term reads $\tfrac{\pi}{2}\cdot\tfrac{\alpha}{1+\alpha^2}$ integrating to
+$\tfrac{\pi}{4}\log(1+\alpha^2)$, both a factor $2$ off; corrected they are
+$\tfrac{\pi}{4}\cdot\tfrac{\alpha}{1+\alpha^2}$ and $\tfrac{\pi}{8}\log(1+\alpha^2)$, which
+makes his two bracket terms equal. His final answer $\tfrac{\pi\log 2}{8}$ is correct.
+\end{ainote}
+
+\exercisesheet{8}
+
+\begin{ainote}[TODO --- recommended exercises deliberately skipped]
+\textbf{Corsin's \textit{Recommended exercises} priority page for Week 8 (p.~1) has not been
+transcribed}, and was skipped deliberately on this pass rather than overlooked. Every week from
+4 onward carries one: a colour-coded table (blue \textbf{= important}, orange
+\textbf{= semi-important}, red \textbf{= optional}) with a note per problem, transcribed into an
+\texttt{ainote[Corsin's recommendations]} block --- see \cref{ch:week07} for the pattern.
+
+Consequently \textbf{no exercises from sheet 8 are reproduced below}, since which ones to
+reproduce is decided by that table. The sheet is \texttt{exercises/Ex8\_Analysis2\_eng.pdf}.
+\end{ainote}
+
+\section{Solutions}
+\label{sec:week08_solutions}
+
+\begin{ainote}[TODO --- empty pending transcription]
+Empty until the exercise selection above is made.
+\end{ainote}

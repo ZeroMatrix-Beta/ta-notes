@@ -66,8 +66,14 @@ gap, and the first strong candidate for a Phase 3 supplement.
 | Stokes' theorem | Week 13 | ch. 14 | 13 | |
 | ODEs, Picard–Lindelöf | Week 13 + Appendix A | — | 13 | |
 
-Chapter numbers are provisional (inferred from Adrien Martelli's chapter-tagged file names);
-they get pinned against `exercises/lec_notes.pdf` in Phase 3.
+Chapter numbers were provisional (inferred from Adrien Martelli's chapter-tagged file names).
+**Ch. 9 is now confirmed** against Damien Lesieur's `TA_notes_analysis_2.pdf`, which mirrors the
+official lecture numbering directly (his `Definition 9.3` = metric space, `Theorem 9.69`/`9.74`
+= the three faces of compactness / Heine–Borel, `Proposition 9.83` = continuous image of
+connected, etc.) — all metric-space/topology/compactness/connectedness content (Weeks 2–3) is
+ch. 9. Chapters 10 (differentiation) and 11 (optimization) are consistent with Damien's file
+structure (his notes continue past compactness into differentiation next) but were not checked
+page-by-page against `exercises/lec_notes.pdf` here; still worth a full pin-down in a later pass.
 
 ## How to add a supplement
 

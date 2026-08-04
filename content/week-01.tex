@@ -3,8 +3,7 @@
 
 % Transition: Claude Sonnet 5
 Corsin's own class notes begin only with the material covered in \emph{Analysis II}'s
-\emph{second} week of teaching (see the file-naming remark in
-\texttt{docs/03-topic-index.md}); no tutor's notes cover the first week on its own terms, since
+\emph{second} week of teaching (his files are named by the week they were taught); no tutor's notes cover the first week on its own terms, since
 it consists mostly of a recap of \emph{Analysis I} and a warm-up on reading and drawing subsets
 of $\mathbb{R}^n$. This chapter fills that gap: it collects the recap material several tutors
 independently found worth revisiting, works through the first problem sheet, and proves Young's
@@ -108,7 +107,7 @@ Both techniques are applied to the actual exercise sheet in \cref{sec:week01_sol
 Several tutors' slides (e.g.\ those using Desmos 3D or GeoGebra to plot these sets live) note that
 students commonly guess the wrong growth rate for sets like
 $\{(x,y,z) : z = \sqrt{1+x^2+y^2}\}$, sketching a cone instead of a hyperboloid-like bowl that
-flattens out; the slicing technique above makes the mistake visible immediately, since the slice
+steepens towards slope $1$; the slicing technique above makes the mistake visible immediately, since the slice
 at height $t$ only exists for $t \geq 1$ and has radius $\sqrt{t^2-1}$, not $t$.
 \end{remark}
 
@@ -201,13 +200,10 @@ official \texttt{exercises/Sol1\_Analysis2\_eng.pdf}.
 \begin{exercisesolution}[Solution of \cref{ex:1.1}]
 % Generator: Claude Sonnet 5 (Medium)
 \begin{enumerate}[label=\textbf{\arabic*.}]
-  \item No. The sequence $x_k := \tfrac{3}{2} + \left(-\tfrac{1}{2}\right)^k$ lies in $[1,2]$ but
-    oscillates between values approaching $\tfrac{3}{2}$ from above and below without settling,
-    so it does not converge (it has two distinct subsequential limits, $\tfrac{3}{2} \pm 0$,
-    which in fact coincide here in the limit, but the same construction with e.g.
-    $x_k := \tfrac{3}{2} + \tfrac{1}{2}(-1)^k$ gives two genuinely different accumulation points
-    $1$ and $2$). What \emph{is} true, by the Bolzano--Weierstrass theorem, is that every bounded
-    sequence in $\mathbb{R}$ has a convergent subsequence.
+  \item No. The sequence $x_k := \tfrac{3}{2} + \tfrac{1}{2}(-1)^k$ lies in $[1,2]$ but
+    oscillates between $1$ and $2$ without settling, so it does not converge (it has two distinct
+    accumulation points, $1$ and $2$). What \emph{is} true, by the Bolzano--Weierstrass theorem, is
+    that every bounded sequence in $\mathbb{R}$ has a convergent subsequence.
   \item On each of the intervals $(-\infty,0)$ and $(0,\infty)$ separately, $f'(x) = 1/x$ forces
     $f(x) = \log|x| + c$ for some constant $c$, since two antiderivatives on a common interval
     differ by a constant. The subtlety is that $\mathbb{R}\setminus\{0\}$ is \emph{disconnected}
@@ -226,7 +222,7 @@ official \texttt{exercises/Sol1\_Analysis2\_eng.pdf}.
   \item Yes. Substituting $t = \cos(x)$, $dt = -\sin(x)\,dx$, and $\sin(x) = \sqrt{1-t^2}$ for
     $x \in [0,\pi/2]$ turns the left integral into the right one; this is the one-variable change
     of variables formula, which Week 9's change-of-variables theorem generalizes to
-    $\mathbb{R}^n$ (not yet part of this document; see \texttt{docs/03-topic-index.md}).
+    $\mathbb{R}^n$.
   \item Yes: take $f(x) := e^{-x}$. Then $f''(x) = e^{-x} > 0$ for all $x$, yet $f$ attains its
     global maximum on $[0,\infty)$ at the boundary point $x=0$. Everywhere-positive second
     derivative (strict convexity) rules out an \emph{interior} local maximum, but says nothing
@@ -311,7 +307,7 @@ official \texttt{exercises/Sol1\_Analysis2\_eng.pdf}.
   \item Remove two small disjoint squares from a large square, e.g.
     $\{10 > \max\{|x|,|y|\} > 1\} \setminus \{\max\{|x-5|,|y-6|\} \leq 1\}$.
   \item Intersect the closed unit ball with the plane: $\{x^2+y^2+z^2 \leq 1\} \cap \{x+y+z=0\}$.
-  \item Remove a $30^\circ$ wedge from a disk:
+  \item Remove a $60^\circ$ wedge from a disk:
     $\{x^2+y^2 \leq 1\} \setminus \{|\arctan(y/x)| \leq \pi/6,\ x>0\}$.
   \item Combining the square level sets from \cref{ex:1.2} part 6 with the conical slicing from
     part 4: $\{1-z = \max\{|x|,|y|\},\ 0 \leq z \leq 1\}$ is a pyramid of height $1$ over the

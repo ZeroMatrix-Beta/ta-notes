@@ -38,7 +38,7 @@ Let $(X,d)$ be a metric space.
 
 \begin{ainote}
 Part \textbf{(c)} above sets $X = \mathbb{R}^n$ but then works with $\mathbb{N} \subseteq X$ and $|x-y|$,
-which only parses for $n = 1$. See \texttt{OQ-04}.
+which only parses for $n = 1$.
 \end{ainote}
 
 \begin{aiexample}[Open Cover of $(0,1)$ with No Finite Subcover]
@@ -68,7 +68,8 @@ Denote $d(x,y) = d_1$, $d(x,z) = d_2$, $d(z,y) = d_3$ and multiply out:
 \iff\ & d_1 + d_1d_3 + d_1d_2d_3 + d_1d_2 \leq d_2 + d_3d_2 + d_2d_1d_3 + d_2d_1 \\
 & \qquad\qquad\qquad\qquad\qquad\quad + d_3 + d_3d_2 + d_1d_3 + d_1d_3d_2 \\
 \iff\ & d_1 \leq d_2 + 2d_2d_3 + d_3 + d_1d_2d_3 \\
-\iff\ & 0 \leq 2d_2d_3 + d_1d_2d_3 \qquad \text{(subtract the triangle inequality } d_1 \leq d_2 + d_3\text{)}
+\Longleftarrow\ & 0 \leq 2d_2d_3 + d_1d_2d_3 \quad \text{together with } d_1 \leq d_2+d_3
+  \text{ (the triangle inequality for } d\text{)}
 \end{aligned}
 \]
 which is true by non-negativity.
@@ -87,7 +88,7 @@ $\mathbb{N}$ with no convergent subsequence, thus $\mathbb{N}$ is \textbf{not co
 \begin{ainote}
 The cancellation in the derivation above originally contained a stray $d_2d_1d_2$ where the
 expansion gives $d_2d_1d_3$; the cancelled terms and the conclusion $0 \leq 2d_2d_3 + d_1d_2d_3$
-are unaffected. Re-derived cleanly above. See \texttt{OQ-08}.
+are unaffected. Re-derived cleanly above.
 \end{ainote}
 
 % Generator: Claude Opus 5 (Medium)
@@ -373,10 +374,10 @@ means: \qt{the space cannot be separated by open sets.}
   \begin{scope}[shift={(5.0,0)}]
     \draw[thick] plot[smooth cycle, tension=0.7] coordinates {(-1.4,-0.6) (-1.6,1.2) (0.2,0.6) (1.2,1.0) (1.0,-0.8) (-0.2,-1.0)};
 
-    \draw[blue!80!black, thick, dashed] (-1.7,-0.8) .. controls (-1.9,1.4) and (0.0,1.0) .. (0.1,0.2) .. controls (0.0,-0.8) and (-0.5,-1.2) .. (-1.7,-0.8);
+    \draw[blue!80!black, thick, dashed] (-1.7,-0.8).. controls (-1.9,1.4) and (0.0,1.0).. (0.1,0.2).. controls (0.0,-0.8) and (-0.5,-1.2).. (-1.7,-0.8);
     \node[blue!80!black] at (-1.2,1.1) {$U_1$};
 
-    \draw[blue!80!black, thick, dashed] (1.3,-0.9) .. controls (1.5,1.2) and (-0.1,0.8) .. (0.2,0.0) .. controls (0.1,-0.7) and (0.6,-1.1) .. (1.3,-0.9);
+    \draw[blue!80!black, thick, dashed] (1.3,-0.9).. controls (1.5,1.2) and (-0.1,0.8).. (0.2,0.0).. controls (0.1,-0.7) and (0.6,-1.1).. (1.3,-0.9);
     \node[blue!80!black] at (1.0,0.9) {$U_2$};
 
     \draw[orange!90!black, <->, thick] (0.1,0.2) -- node[above, font=\tiny] {gap} (0.2,0.0);
@@ -438,7 +439,7 @@ $U_2$ is open, also $U_2 \cap \overline{A} = \emptyset$.
 
 \begin{ainote}
 Corsin writes $\|x\| = R^2$ in the definition of $S^1$ above; it must be $\|x\| = 1$, as the
-stated intersection $\{(\pm 1, 0)\}$ confirms. Corrected here. See \texttt{OQ-07}.
+stated intersection $\{(\pm 1, 0)\}$ confirms. Corrected here.
 \end{ainote}
 
 \begin{center}
@@ -659,7 +660,7 @@ To see this, conveniently choose our basis vectors such that $x = (x_1, 0)$, $y 
     \node[purple, font=\footnotesize] at (0.7,0.45) {$\theta$};
   \end{scope}
 
-  \draw[->, thick] (2.4,1.0) .. controls (2.8,1.3) .. (3.3,1.0) node[midway, above, red, font=\tiny] {\shortstack{change of basis\\(rotation)}};
+  \draw[->, thick] (2.4,1.0).. controls (2.8,1.3).. (3.3,1.0) node[midway, above, red, font=\tiny] {\shortstack{change of basis\\(rotation)}};
 
   % Same lengths and same angle as the left panel -- a rotation preserves both.
   % Left:  |x| = 1.616 at 21.80 deg, |y| = 1.970 at 66.04 deg, so theta = 44.24 deg.

@@ -38,7 +38,7 @@ The failure mode this guards against is drift by small steps: no single refineme
 fidelity, yet after ten of them the chapter no longer follows the tutor. So if a refinement makes
 you want to reorder sections, replace a proof with a slicker one, or cut an example you find
 redundant — that is a *transcription-level* decision. Reopen the PDF, or leave it alone and note
-it in `docs/07-todo.md`.
+it inline in an `ainote`.
 
 ## 2. THE EDITORIAL LAYER (Style)
 
@@ -395,7 +395,7 @@ FIG-W06-03 for the pattern).
     Work the problem cold, then compare. Cross-check your solution against the official
     `SolN_Analysis2_eng.pdf` where one exists; if your reasoning or final answer genuinely
     diverges from it, flag the divergence with an `ainote` right there and log it in
-    `docs/06-open-questions.md` — never silently prefer your own answer over the official
+    an `ainote` — never silently prefer your own answer over the official
     solution without saying so. Even when your solution agrees with the official one, feel free
     to add an `ainote` for anything genuinely worth flagging about the master solution or the
     exercise itself — a subtlety it skates past, a non-obvious step, a result that looks
@@ -618,10 +618,9 @@ Correct work order:
 
 | # | Step | Reads PDFs? |
 |---|---|---|
-| 1 | Scaffolding (`docs/`) | no |
 | 2 | Typeset Corsin — weeks 2–13 + ODE appendix directly into `content/*.tex` | **yes, heavily** |
 | 3 | Build & Verify: `latexmk` until `main.pdf` compiles clean | no |
-| 4 | TikZ figures (`docs/05-figure-queue.md`) | Group B only |
+| 4 | TikZ figures | Group B only |
 | 5 | *Optional:* supplements from other tutors | yes — **not before step 3** |
 
 ### The five things that matter
@@ -629,7 +628,7 @@ Correct work order:
 1. **Corsin Nick is the blueprint.** His notes define the document structure
    (one chapter per week). Everyone else is mined for gaps only. Complete Corsin FIRST!
 2. **Merge by topic, never by date — and never by the other tutor's week number either.**
-   `docs/03-topic-index.md` is the only valid topic→week mapping, and the ultimate authority is
+   The ultimate authority for topic→week is
    `content/week-NN.tex` itself (grep for the section label).
 
    The trap is subtler than dates. **A file named `Week_03_...pdf` is not the source for our
@@ -649,14 +648,13 @@ Correct work order:
    Two consequences. **(a)** Open a supplementary file expecting to find *some* topic, not a
    particular week's topic, and file each piece where the topic lives. **(b)** Heavy repetition
    between a tutor's own files is normal — do not assume a file is new material because it
-   carries a different week number. Skim for what is *added*, and record in `docs/07-todo.md`
-   which files are read, so the repetition is not re-read later.
+   carries a different week number. Skim for what is *added*.
 3. **Direct LaTeX with Fine Provenance.** Typeset directly into `content/week-NN.tex`
    with precise `% Source: Corsin Nick/Class Notes/Week N.pdf, p. M` comments on every section.
 4. **Never silently correct a source.** Flag it inline with `\begin{ainote}`; log it in
-   `docs/06-open-questions.md`.
+   an inline `ainote`.
 5. **Source folders are read-only.** The 17 tutor folders and `exercises/`
-   are inputs. Output goes to `docs/` and `content/`.
+   are inputs. Output goes to `content/`.
 
 ### Git — never `git add -A`
 
@@ -664,7 +662,6 @@ Multiple sessions share one worktree. `git add -A` stages whatever is on disk,
 including another session's in-flight edits. **Stage only the paths you touched:**
 
 ```bash
-git add content/week-12.tex docs/06-open-questions.md   # yes
 git add -A                                          # no
 ```
 
@@ -698,12 +695,6 @@ exercise-sheet numbers.
 
 | File | What it settles |
 |---|---|
-| `docs/00-implementation-plan.md` | Whole plan; phase *numbering* superseded by priority table above |
-| `docs/01-file-structure.md` | Layout, naming, two-stage pipeline |
-| `docs/02-source-inventory.md` | Every tutor and file: transcribed, skipped, why |
-| `docs/03-topic-index.md` | Topic → week. **The merge key** |
-| `docs/05-figure-queue.md` | Diagrams awaiting TikZ |
-| `docs/06-open-questions.md` | Illegible passages, suspected errors |
 
 ### Exercises
 
@@ -729,7 +720,6 @@ Each week opens with the official problem sheet (`exercises/ExN_Analysis2_eng.pd
   follows.
 - Corsin’s hint follows the statement, attributed and page-pointed.
 - TAs’ worked solutions are presented; `SolN_Analysis2_eng.pdf` is used to **check**
-  them, not replace them. A genuine divergence goes in `06-open-questions.md`.
 
 ### German mirroring
 
@@ -830,5 +820,4 @@ or disturb theorem numbering. Theorems land as `2.b.1`, anchored to a topic.
 ```
 
 **File naming:** `content/week-02.tex` etc., one file per week. Chapter number = week number.
-There is no `transcript/` stage -- typeset straight into `content/` (see
-`docs/01-file-structure.md`).
+There is no `transcript/` stage -- typeset straight into `content/`.

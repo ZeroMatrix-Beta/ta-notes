@@ -91,12 +91,12 @@ built around.
 
   % Paraboloid surface
   \draw[blue!80!black, thick] (0,0.8) ellipse (1.3 and 0.5);
-  \draw[blue!80!black, thick] (-1.3,0.8) .. controls (-1.0,-0.6) and (1.0,-0.6) .. (1.3,0.8);
+  \draw[blue!80!black, thick] (-1.3,0.8).. controls (-1.0,-0.6) and (1.0,-0.6).. (1.3,0.8);
   \draw[purple, thick, dashed] (0,0.1) ellipse (0.85 and 0.32);
 
   % Connecting dotted line & steepest ascent arrow
   \draw[orange!90!black, thick, dotted] (0.55,-0.55) -- (0.55,0.1);
-  \draw[red, thick, ->] (0.55,0.1) .. controls (0.75,0.3) .. (0.95,0.75) node[above left, font=\tiny] {steepest ascent};
+  \draw[red, thick, ->] (0.55,0.1).. controls (0.75,0.3).. (0.95,0.75) node[above left, font=\tiny] {steepest ascent};
   \node[blue!80!black, right] at (1.3,0.8) {$f(x,y)$};
   \node[purple, right, font=\tiny] at (0.85,0.1) {level sets};
 \end{tikzpicture}
@@ -168,7 +168,7 @@ Corsin writes $\nabla g(x) = \tfrac{x}{|x|}$ here. That is the gradient of $x \m
 of the $g(x) = |x|^2-1$ just fixed above, whose gradient is $2x$. The two differ only by the
 positive factor $2|x|$, so they point the same way and the geometric conclusion is unaffected
 --- but the constraint actually differentiated in the Lagrangian below is the squared one. See
-\texttt{OQ-28}, and \texttt{OQ-12} for the same $|x|$ versus $|x|^2$ slip in the exercise.
+, and for the same $|x|$ versus $|x|^2$ slip in the exercise.
 \end{ainote}
 
 % Source: Corsin Nick/Class Notes/Week 5.pdf, pp. 4--5
@@ -347,7 +347,7 @@ $xyz<0$ --- flip the sign of one coordinate. They are the three-variable analogu
 \begin{ainote}
 Corsin writes $g(x) = |x| - 1$ for the constraint above, but the Lagrangian uses
 $x^2+y^2+z^2-1$, i.e.\ $|x|^2-1$. Both cut out the same sphere; the squared version is the one
-actually differentiated, so it is used throughout. See \texttt{OQ-12}.
+actually differentiated, so it is used throughout.
 \end{ainote}
 
 % Source: Corsin Nick/Class Notes/Week 5.pdf, p. 6
@@ -422,7 +422,7 @@ $u\transp Au < 0$, then $t \mapsto (tv+(1-t)u)\transp A(tv+(1-t)u)$ is continuou
 sign, so it vanishes at some $w \neq 0$ --- making \emph{every} indefinite matrix degenerate,
 and the third bullet of \cref{thm:hessian_test} vacuous. The intended notion is a nontrivial
 kernel ($\det A = 0$), which is also what \cref{ex:6.2} in Week 6 states. Corrected above.
-See \texttt{OQ-24}.
+
 \end{ainote}
 
 \begin{theorem}[The Hessian test]
@@ -472,7 +472,7 @@ positive $= \smile \dots$ min; negative $= \frown \dots$ max; indefinite $=$ sad
 \begin{ainote}
 The regularity in \cref{thm:hessian_test} is stated by Corsin as $C^3$; the test needs only
 $C^2$ (which is what the Hessian's definition assumes). Relaxed to $C^2$ above. See
-\texttt{OQ-13}.
+.
 \end{ainote}
 
 \begin{aiexample}[Inconclusive Hessian Test at a Degenerate Critical Point]
@@ -517,7 +517,7 @@ Note: $\det(A) = \lambda_1\cdots\lambda_n$ and $\Tr(A) = \lambda_1+\dots+\lambda
 
 \begin{ainote}
 Corsin writes the characteristic equation as ``$A - \lambda\id = 0$'', omitting the determinant.
-Corrected above. See \texttt{OQ-14}.
+Corrected above.
 \end{ainote}
 
 % Source: Corsin Nick/Class Notes/Week 5.pdf, pp. 9--10

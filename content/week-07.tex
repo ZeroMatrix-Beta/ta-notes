@@ -1,81 +1,10 @@
 % Source: Corsin Nick/Class Notes/Week 7.pdf, pp. 1--10
 \chapter{Week 7 --- Submanifolds, Tangent \& Normal Spaces}
 
-\exercisesheet{7}
-
-\textit{Statements quoted verbatim from \texttt{exercises/Ex7\_Analysis2\_eng.pdf} (assigned 27
-March 2026, due 13 April 2026). Attribution: Prof. Joaquim Serra, D-MATH, ETH Z\"urich.}
-
-% Source: Corsin Nick/Class Notes/Week 7.pdf, p. 1
-\begin{ainote}[Corsin's recommendations]
-Colour key, as given on the page: blue \textbf{= important}, orange \textbf{= semi-important},
-red \textbf{= optional}. 7.2--7.4 and 7.9 carry no colour marker on the page.
-
-\begin{center}
-\begin{tabular}{lll}
-\textbf{Problem} & \textbf{Priority} & \textbf{Corsin's note} \\
-\hline
-7.1 & important & ``First think of a diffeomorphism $(a,b) \leftrightarrow \mathbb{R}$ and \\
-    & & adjust it such that $(a,b)=(0,1)$.'' \\
-7.2 & unmarked & --- \\
-7.3 & unmarked & --- \\
-7.4 & unmarked & --- \\
-7.5 & important & ``This is a great exercise to help with understanding of IFT.'' \\
-7.6 & important & ``You will need these coordinates very often over the next weeks.'' \\
-7.7 & semi-important & ``In \textbf{1)}, only the M\"obius strip should be enough.'' \\
-7.8 & semi-important & ``Do \textbf{1)} and \textbf{2)}. The others will be in the lecture.'' \\
-7.9 & unmarked & --- \\
-\end{tabular}
-\end{center}
-\end{ainote}
-
-\begin{ainote}
-Corsin's handwritten notes read ``In 7),'' and ``Do 7) and 2)'', but neither exercise 7.7 nor 7.8
-has a sub-item numbered \textbf{7}) --- both are numbered \textbf{1}.--\textbf{3}. (7.7) and
-\textbf{1}.--\textbf{4}. (7.8). Read as \textbf{1)} above (a plausible misreading of Corsin's
-handwritten ``1'', which this week is slightly closed at the top); this also makes the notes
-self-consistent, since the referenced sub-items (the M\"obius strip inside 7.7's part 1, and the
-parametrization/tangent-space parts of 7.8) exist under number 1, not 7.
-\end{ainote}
-
-\begin{ainote}
-Only the exercises tagged \textbf{important} above are reproduced below (their wording only, no
-solutions yet): 7.1, 7.5, 7.6. The full sheet (7.1--7.9) has not yet been transcribed into
-\texttt{content/exercise-sheets/week-07.tex}.
-\end{ainote}
-
-\begin{exercise}[7.1 --- Diffeomorphism \textnormal{(important)}]
-\label{ex:7.1}
-\begin{enumerate}[label=\textbf{(\alph*)}]
-  \item Give a diffeomorphism between $\mathbb{R}^2$ and $(0,1)\times(0,1)$.
-  \item Is $f(x) = x^5$, $x \in \mathbb{R}$ a diffeomorphism of $\mathbb{R}$ to itself? Motivate
-    rigorously your answer.
-\end{enumerate}
-\end{exercise}
-
-\begin{exercise}[7.5 --- Implicit function II \textnormal{(important)}]
-\label{ex:7.5}
-Show that the system of equations
-$$\begin{cases} xy^5+yu^5+zv^5=1, \\ x^5y+y^5u+z^5v=1, \end{cases}$$
-is solvable for the variables $u$ and $v$ in a neighborhood of the point
-$(x_0,y_0,z_0,u_0,v_0) = (0,1,1,1,0)$ and determine the derivatives $D_{(0,1,1)}u$ and
-$D_{(0,1,1)}v$ of the implicitly defined functions $u=u(x,y,z)$ and $v=v(x,y,z)$.
-\end{exercise}
-
-\begin{exercise}[7.6 --- Spherical coordinates \textnormal{(important)}]
-\label{ex:7.6}
-The mapping $\Phi : (0,\infty)\times(0,\pi)\times(-\pi,\pi) \to \mathbb{R}^3$ defined by
-$$\Phi(r,\theta,\varphi) = \begin{pmatrix} r\sin\theta\cos\varphi \\ r\sin\theta\sin\varphi \\ r\cos\theta \end{pmatrix}$$
-is called \textit{spherical coordinates}.
-\begin{enumerate}[label=\textbf{\arabic*.}]
-  \item Sketch the images of $r \mapsto \Phi(r,\theta_0,\varphi_0)$, $\theta \mapsto
-    \Phi(r_0,\theta,\varphi_0)$ and $\varphi \mapsto \Phi(r_0,\theta_0,\varphi)$ for some fixed
-    $r_0 \in (0,\infty)$, $\theta_0 \in (0,\pi)$, $\varphi_0 \in (-\pi,\pi)$.
-  \item What is the image of $\Phi$?
-  \item Show that $\det(D_{(r,\theta,\varphi)}\Phi) = r^2\sin\theta$ holds.
-  \item Conclude that the mapping $\Phi$ is a diffeomorphism onto its image.
-\end{enumerate}
-\end{exercise}
+% Transition: Claude Sonnet 5
+This chapter's subject is submanifolds of $\mathbb{R}^n$: the regular value and local
+parametrization theorems that characterize them, and their tangent and normal spaces. The
+exercise sheet is at the end of the chapter, in \cref{sec:week07_solutions}.
 
 % Source: Corsin Nick/Class Notes/Week 7.pdf, p. 2
 \section{Submanifolds}
@@ -139,10 +68,33 @@ is surjective (i.e., $\Jac F(x)$ has full rank) for all $x \in F^{-1}\{y\} = \{\
 F(\bar x) = y\}$, then $F^{-1}\{y\}$ is a $C^k$ submanifold of dimension $n-\ell$.
 \end{theorem}
 
+% Sonnet 5 (Medium)
+\begin{importantremark}[Full rank means two opposite things]
+\label{rem:full_rank_two_meanings}
+\qt{Full rank} is decided by the \textbf{shape} of the matrix, and the two representations of a
+submanifold sit on opposite sides of it:
+\begin{itemize}
+  \item An \textbf{implicit} description $F : \mathbb{R}^n \to \mathbb{R}^\ell$ cuts $M$ out by
+    $\ell$ equations, so $\Jac F$ is \textbf{wide} ($\ell \times n$ with $\ell \leq n$). Full
+    rank $=\ell$ means $DF_x$ is \textbf{surjective} --- the $\ell$ constraints are independent,
+    each one genuinely cutting a dimension. Here $\dim M = n - \ell$.
+  \item A \textbf{parametrization} $f : \mathbb{R}^m \to \mathbb{R}^n$ sweeps $M$ out by $m$
+    parameters, so $\Jac f$ is \textbf{tall} ($n \times m$ with $m \leq n$). Full rank $=m$
+    means $Df_x$ is \textbf{injective} --- the $m$ parameters move in independent directions,
+    none of them wasted. Here $\dim M = m$.
+\end{itemize}
+Same phrase, opposite condition. A wide matrix is never injective and a tall one is never
+surjective, so there is no ambiguity in practice --- but it is worth checking which side you are
+on before writing down what \qt{full rank} is supposed to give you.
+\end{importantremark}
+
+% Source: Corsin Nick/Class Notes/Week 7.pdf, p. 2
 \begin{example}[Circle of radius $R$]
 Let $F : \mathbb{R}^2 \to \mathbb{R}$, $(x,y) \mapsto x^2+y^2$. Then
 $$\Jac F(x,y) = (2x,\ 2y)$$
-has full rank (is injective as a linear map, i.e., nonzero) if $x \neq 0$ or $y \neq 0$, that is,
+has full rank --- here $\ell = 1$, so by \cref{rem:full_rank_two_meanings} full rank means
+$DF_{(x,y)} : \mathbb{R}^2 \to \mathbb{R}$ is \textbf{surjective}, i.e.\ simply that the row
+$(2x,2y)$ is nonzero --- if $x \neq 0$ or $y \neq 0$, that is,
 for all $(x,y) \in \mathbb{R}^2\setminus\{0\}$. For $R>0$, $(0,0) \notin F^{-1}\{R^2\}$, so
 $$F^{-1}\{R^2\} = \{(x,y) \in \mathbb{R}^2 : x^2+y^2=R^2\}$$
 is a submanifold of dimension $2-1=1$ by \cref{thm:regular_value_theorem}. Similarly,
@@ -167,7 +119,7 @@ $\{x \in \mathbb{R}^n : |x|^2=R^2\}$ is a submanifold of dimension $n-1$ for $n 
 % Source: Corsin Nick/Class Notes/Week 7.pdf, p. 4
 \subsubsection{Connection to Lagrange multipliers}
 
-\begin{ainote}[Constraint sets are submanifolds]
+\begin{remark}[Constraint sets are submanifolds]
 Recall the Lagrangian from \cref{prop:constrained_optimization}: when optimizing $f|_M$ for
 $f \in C^k(\mathbb{R}^n,\mathbb{R})$, where $g_1,\dots,g_k : U \to \mathbb{R}$,
 $$M := \{x \in \mathbb{R}^n : g_1(x)=\dots=g_k(x)=0\}, \qquad (\nabla g_1,\dots,\nabla g_k) \text{ linearly independent for all } x \in M$$
@@ -177,7 +129,7 @@ $$\Jac g(x) = \begin{pmatrix} \nabla g_1(x) \longrightarrow \\ \vdots \\ \nabla 
 has full rank. Therefore, $M = g^{-1}\{0\}$ is an $(n-k)$-dimensional submanifold by the regular
 value theorem: the constraint sets of Week 5's Lagrange-multiplier problems were submanifolds all
 along.
-\end{ainote}
+\end{remark}
 
 % Source: Corsin Nick/Class Notes/Week 7.pdf, p. 5
 \subsection{The local parametrization theorem}
@@ -199,19 +151,20 @@ theorem, but instead take
 $$f : \mathbb{R}^n \to \mathbb{R}^n\times\mathbb{R}, \qquad x \mapsto (x,|x|^2).$$
 \begin{enumerate}[label=\textbf{\arabic*.}]
   \item $\Jac f(x) = \begin{pmatrix} \id_{n\times n} \\ 2x\transp \end{pmatrix}$ has full rank
-    (is injective) at every $x$.
+    $n$ at every $x$ --- a tall matrix now, so by \cref{rem:full_rank_two_meanings} this means
+    $Df_x$ is \textbf{injective}, which is clear from the $\id_{n\times n}$ block alone.
   \item $f$ is bijective onto $P$ and continuous, with inverse $\pi : f(U) \to \mathbb{R}^n$,
     $(x,t) \mapsto x$ (the canonical projection), which is also continuous.
   \item $f(\mathbb{R}^n) = P$.
 \end{enumerate}
 So $P$ is an $n$-dimensional submanifold by \cref{thm:local_parametrization}.
 
-\begin{ainote}
+\begin{remark}
 The graphical representation of a submanifold (as the graph of a function, here $x \mapsto |x|^2$)
 is therefore a common, and equivalent, special case of a local parametrization: it is always
 injective on its domain by construction, and its inverse is simply the projection forgetting the
 last coordinate.
-\end{ainote}
+\end{remark}
 \end{example}
 
 % Sonnet 5 (Medium) --- FIG-W07-03
@@ -227,7 +180,7 @@ last coordinate.
 % Source: Corsin Nick/Class Notes/Week 7.pdf, p. 6
 \subsubsection{An alternative optimization technique}
 
-\begin{ainote}[Parametrized optimization, revisiting \cref{ex:6.9}]
+\begin{remark}[Parametrized optimization, revisiting \cref{ex:6.9}]
 Local parametrizations give a second route to constrained-extremum problems, alongside Lagrange
 multipliers: parametrize the constraint set and optimize the resulting unconstrained function of
 fewer variables. Corsin illustrates this by revisiting $f(x,y) := 2x^2+y^2-x$ on
@@ -243,11 +196,11 @@ $$f'(\theta) = -2\cos\theta\sin\theta+\sin\theta \overset{!}{=} 0.$$
   \item $\sin\theta \neq 0 \implies -2\cos\theta+1=0 \implies \cos\theta = \tfrac12 \implies
     \theta_2 \in \{\tfrac{\pi}{3},\tfrac{5\pi}{3}\}$.
 \end{enumerate}
-So the extrema are at $(\cos\theta_1,\sin\theta_1) = (\pm1,0)$ and
+So, the extrema are at $(\cos\theta_1,\sin\theta_1) = (\pm1,0)$ and
 $(\cos\theta_2,\sin\theta_2) = \big(\tfrac12,\pm\tfrac{\sqrt3}{2}\big)$ --- exactly the four points
 found via Lagrange multipliers in the solution to \cref{ex:6.9}\textbf{(a)}, confirming the two
 methods agree.
-\end{ainote}
+\end{remark}
 
 % Sonnet 5 (Medium)
 Having two equivalent ways to recognize and parametrize a submanifold, we turn to studying its
@@ -299,7 +252,14 @@ Parametrize the upper hemisphere $S^2_+ := \{(x,y,z)\in\mathbb{R}^3 : x^2+y^2+z^
 graphically, i.e.,
 $$f(x,y) = \begin{pmatrix} x \\ y \\ \sqrt{1-x^2-y^2} \end{pmatrix}.$$
 We determine $T_{e_3}S^2_+$, where $e_3 = (0,0,1)$:
-$$\left.\frac{\partial f}{\partial x}\right|_{x=0} = \left.\begin{pmatrix} 1 \\ 0 \\ \dfrac{-x}{\sqrt{1-x^2-y^2}}\end{pmatrix}\right|_{x=0} = \begin{pmatrix}1\\0\\0\end{pmatrix} = e_1, \qquad \left.\frac{\partial f}{\partial y}\right|_{y=0} = \begin{pmatrix}0\\1\\0\end{pmatrix} = e_2.$$
+\begin{align*}
+\left.\frac{\partial f}{\partial x}\right|_{(x,y)=(0,0)}
+  &= \left.\begin{pmatrix} 1 \\ 0 \\ \dfrac{-x}{\sqrt{1-x^2-y^2}}\end{pmatrix}\right|_{(x,y)=(0,0)}
+   = \begin{pmatrix}1\\0\\0\end{pmatrix} = e_1, \\[1ex]
+\left.\frac{\partial f}{\partial y}\right|_{(x,y)=(0,0)}
+  &= \left.\begin{pmatrix} 0 \\ 1 \\ \dfrac{-y}{\sqrt{1-x^2-y^2}}\end{pmatrix}\right|_{(x,y)=(0,0)}
+   = \begin{pmatrix}0\\1\\0\end{pmatrix} = e_2.
+\end{align*}
 So $T_{e_3}S^2_+ = T_{e_3}S^2 = \operatorname{span}\{e_1,e_2\} = \mathbb{R}^2\times\{0\}$.
 \end{example}
 
@@ -377,7 +337,13 @@ definition,
   \item $F(f(x)) = 0$ for all $x \in V$, since $f(x) \in M = F^{-1}\{0\}$.
 \end{enumerate}
 From \textbf{3}, it follows that
-$$\Jac(F\circ f)(q) = \Jac F(f(q))\cdot\Jac f(q) = \begin{pmatrix} \nabla F_1(f(q)) \longrightarrow \\ \vdots \\ \nabla F_{n-m}(f(q)) \longrightarrow \end{pmatrix}\begin{pmatrix} \dfrac{\partial f}{\partial q_1} & \cdots & \dfrac{\partial f}{\partial q_m}\end{pmatrix} = 0.$$
+\begin{align*}
+\Jac(F\circ f)(q)
+  &= \Jac F(f(q))\cdot\Jac f(q) \\
+  &= \begin{pmatrix} \nabla F_1(f(q)) \longrightarrow \\ \vdots \\ \nabla F_{n-m}(f(q)) \longrightarrow \end{pmatrix}
+     \begin{pmatrix} \dfrac{\partial f}{\partial q_1} & \cdots & \dfrac{\partial f}{\partial q_m}\end{pmatrix}
+   \;=\; 0.
+\end{align*}
 Now, since $\big(\Jac F(f(q))\cdot\Jac f(q)\big)_{ij} = \langle \nabla F_i(f(q)), \partial_jf(q)\rangle = 0$
 for all $i=1,\dots,n-m$, $j=1,\dots,m$, the vectors $\nabla F_i(f(q))$ are perpendicular, that is,
 \newterm{normal}, to $T_{f(q)}M$. Since by \textbf{1} we have $n-m$ linearly independent vectors
@@ -411,6 +377,83 @@ So $N_{e_3}S^2 = \operatorname{span}\{e_3\} = \{0\}\times\mathbb{R}$.
   \fill (0,-1.3) circle (1.7pt) node[right, font=\small] {$-e_3$};
 \end{tikzpicture}
 \end{center}
+
+\exercisesheet{7}
+
+\textit{Statements quoted verbatim from \texttt{exercises/Ex7\_Analysis2\_eng.pdf} (assigned 27
+March 2026, due 13 April 2026). Attribution: Prof. Joaquim Serra, D-MATH, ETH Z\"urich.}
+
+% Source: Corsin Nick/Class Notes/Week 7.pdf, p. 1
+\begin{ainote}[Corsin's recommendations]
+Colour key, as given on the page: blue \textbf{= important}, orange \textbf{= semi-important},
+red \textbf{= optional}. 7.2--7.4 and 7.9 carry no colour marker on the page.
+
+\begin{center}
+% p-column so the notes wrap on their own instead of being hand-broken with \\.
+\begin{tabular}{@{}l l p{0.52\linewidth}@{}}
+\textbf{Problem} & \textbf{Priority} & \textbf{Corsin's note} \\
+\hline
+7.1 & important & ``First think of a diffeomorphism $(a,b) \leftrightarrow \mathbb{R}$ and
+  adjust it such that $(a,b)=(0,1)$.'' \\[3pt]
+7.2 & unmarked & --- \\[3pt]
+7.3 & unmarked & --- \\[3pt]
+7.4 & unmarked & --- \\[3pt]
+7.5 & important & ``This is a great exercise to help with understanding of IFT.'' \\[3pt]
+7.6 & important & ``You will need these coordinates very often over the next weeks.'' \\[3pt]
+7.7 & semi-important & ``In \textbf{1)}, only the M\"obius strip should be enough.'' \\[3pt]
+7.8 & semi-important & ``Do \textbf{1)} and \textbf{2)}. The others will be in the lecture.'' \\[3pt]
+7.9 & unmarked & --- \\
+\end{tabular}
+\end{center}
+\end{ainote}
+
+\begin{ainote}
+Corsin's handwritten notes read ``In 7),'' and ``Do 7) and 2)'', but neither exercise 7.7 nor 7.8
+has a sub-item numbered \textbf{7}) --- both are numbered \textbf{1}.--\textbf{3}. (7.7) and
+\textbf{1}.--\textbf{4}. (7.8). Read as \textbf{1)} above (a plausible misreading of Corsin's
+handwritten ``1'', which this week is slightly closed at the top); this also makes the notes
+self-consistent, since the referenced sub-items (the M\"obius strip inside 7.7's part 1, and the
+parametrization/tangent-space parts of 7.8) exist under number 1, not 7.
+\end{ainote}
+
+\begin{ainote}
+Only the exercises tagged \textbf{important} above are reproduced below (their wording only, no
+solutions yet): 7.1, 7.5, 7.6. The full sheet (7.1--7.9) has not yet been transcribed into
+\texttt{content/exercise-sheets/week-07.tex}.
+\end{ainote}
+
+\begin{exercise}[7.1 --- Diffeomorphism \textnormal{(important)}]
+\label{ex:7.1}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Give a diffeomorphism between $\mathbb{R}^2$ and $(0,1)\times(0,1)$.
+  \item Is $f(x) = x^5$, $x \in \mathbb{R}$ a diffeomorphism of $\mathbb{R}$ to itself? Motivate
+    rigorously your answer.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[7.5 --- Implicit function II \textnormal{(important)}]
+\label{ex:7.5}
+Show that the system of equations
+$$\begin{cases} xy^5+yu^5+zv^5=1, \\ x^5y+y^5u+z^5v=1, \end{cases}$$
+is solvable for the variables $u$ and $v$ in a neighborhood of the point
+$(x_0,y_0,z_0,u_0,v_0) = (0,1,1,1,0)$ and determine the derivatives $D_{(0,1,1)}u$ and
+$D_{(0,1,1)}v$ of the implicitly defined functions $u=u(x,y,z)$ and $v=v(x,y,z)$.
+\end{exercise}
+
+\begin{exercise}[7.6 --- Spherical coordinates \textnormal{(important)}]
+\label{ex:7.6}
+The mapping $\Phi : (0,\infty)\times(0,\pi)\times(-\pi,\pi) \to \mathbb{R}^3$ defined by
+$$\Phi(r,\theta,\varphi) = \begin{pmatrix} r\sin\theta\cos\varphi \\ r\sin\theta\sin\varphi \\ r\cos\theta \end{pmatrix}$$
+is called \textit{spherical coordinates}.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Sketch the images of $r \mapsto \Phi(r,\theta_0,\varphi_0)$, $\theta \mapsto
+    \Phi(r_0,\theta,\varphi_0)$ and $\varphi \mapsto \Phi(r_0,\theta_0,\varphi)$ for some fixed
+    $r_0 \in (0,\infty)$, $\theta_0 \in (0,\pi)$, $\varphi_0 \in (-\pi,\pi)$.
+  \item What is the image of $\Phi$?
+  \item Show that $\det(D_{(r,\theta,\varphi)}\Phi) = r^2\sin\theta$ holds.
+  \item Conclude that the mapping $\Phi$ is a diffeomorphism onto its image.
+\end{enumerate}
+\end{exercise}
 
 \section{Solutions}
 \label{sec:week07_solutions}
@@ -457,7 +500,12 @@ $$D_{(u,v)}F(0,1,1,1,0) = \begin{pmatrix} 5 & 0 \\ 1 & 1\end{pmatrix}, \qquad \d
 so the implicit function theorem applies, and the system is indeed solvable for $u,v$ as
 $C^\infty$ functions of $(x,y,z)$ near $(0,1,1)$. Writing $G(x,y,z) := (u(x,y,z),v(x,y,z))$, the
 theorem gives
-$$\Jac G(0,1,1) = -\begin{pmatrix}5&0\\1&1\end{pmatrix}^{-1}\begin{pmatrix}1&1&0\\0&5&0\end{pmatrix} = -\frac15\begin{pmatrix}1&0\\-1&5\end{pmatrix}\begin{pmatrix}1&1&0\\0&5&0\end{pmatrix} = -\frac15\begin{pmatrix}1&1&0\\-1&24&0\end{pmatrix}.$$
+\begin{align*}
+\Jac G(0,1,1)
+  &= -\begin{pmatrix}5&0\\1&1\end{pmatrix}^{-1}\begin{pmatrix}1&1&0\\0&5&0\end{pmatrix} \\
+  &= -\frac15\begin{pmatrix}1&0\\-1&5\end{pmatrix}\begin{pmatrix}1&1&0\\0&5&0\end{pmatrix} \\
+  &= -\frac15\begin{pmatrix}1&1&0\\-1&24&0\end{pmatrix}.
+\end{align*}
 So $D_{(0,1,1)}u = -\tfrac15\begin{pmatrix}1&1&0\end{pmatrix}$ and
 $D_{(0,1,1)}v = -\tfrac15\begin{pmatrix}-1&24&0\end{pmatrix}$.
 \end{exercisesolution}

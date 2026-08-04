@@ -1,14 +1,12 @@
 % Source: Corsin Nick/Class Notes/Week 2.pdf, pp. 1--13
 \chapter{Week 2 --- Metric Spaces, Topology \& Continuity}
 
-\exercisesheet{2}
-
-\begin{ainote}
-No priority page this week: from Week 3 onwards Corsin opens each file with a colour-coded
-\textit{Recommended exercises} page; Week 2 has none, so none of this week's problems are singled
-out as important. The full sheet (2.1--2.7) is transcribed in
-\texttt{content/exercise-sheets/week-02.tex}.
-\end{ainote}
+% Transition: Claude Sonnet 5
+This chapter introduces the structures --- topological, metric, normed, and inner-product
+spaces --- that everything else in the course builds on, then specializes to metric spaces:
+their open and closed sets, sequences and convergence, continuity, completeness, and
+compactness. The exercise sheet for the week is at the end of the chapter, in
+\cref{sec:week02_solutions}.
 
 \session{Monday}
 
@@ -51,7 +49,7 @@ called a \newterm{space} (\germanterm{Raum}) in this context --- which we will d
 \draw[green!60!black] (0,-0.2) ellipse (1.6 and 1.2);
 \draw[blue!70!black] (0,-0.3) ellipse (0.8 and 0.6);
 \node[red!70!black] at (0,2.0) {\footnotesize Topological spaces};
-\node[yellow!70!black] at (0,1.35) {\footnotesize Metric spaces};
+\node[olive!60!black] at (0,1.35) {\footnotesize Metric spaces};
 \node[green!60!black] at (0,0.75) {\footnotesize Normed vector spaces};
 \node[blue!70!black] at (0,-0.3) {\footnotesize Inner product spaces};
 \end{tikzpicture}
@@ -113,7 +111,7 @@ correct, but the gloss omits the ``non-''. Corrected in the prose above. See \te
   \item Let $X$ be a set. The \newterm{discrete metric} is given by
     $$d(x,y) := \begin{cases} 1 & \text{if } x \neq y \\ 0 & \text{if } x = y \end{cases}$$
     Important for counterexamples!
-  \item Let $X = \mathbb{R}^n$. Then we have many choices for a metric; some common ones are:
+  \item Let $X := \mathbb{R}^n$. Then we have many choices for a metric; some common ones are:
   \begin{enumerate}[label=\textbf{(\roman*)}]
     \item \textbf{Manhattan metric:}
       $$d_1(x,y) := |x_1 - y_1| + \dots + |x_n - y_n| = \sum_{k=1}^{n} |x_k - y_k|$$
@@ -142,17 +140,32 @@ Hence, every singleton set $\{x\}$ is open in the discrete metric, and consequen
   \coordinate (Y) at (3.8, 2.8);
   \coordinate (Corner) at (3.8, 0.8);
 
-  \draw[dotted, gray] (0, 0.8) node[left] {$x_2$} -- (X) -- (0.8, 0) node[below] {$x_1$};
-  \draw[dotted, gray] (0, 2.8) node[left] {$y_2$} -- (Y) -- (3.8, 0) node[below] {$y_1$};
+  \draw[dotted, gray] (0, 0.8) node[left, font=\footnotesize] {$x_2$} -- (X) -- (0.8, 0) node[below, font=\footnotesize] {$x_1$};
+  \draw[dotted, gray] (0, 2.8) node[left, font=\footnotesize] {$y_2$} -- (Y) -- (3.8, 0) node[below, font=\footnotesize] {$y_1$};
 
-  \draw[orange!90!black, thick] (X) -- node[below, font=\small] {$d_3 = |x_1 - y_1|$} (Corner);
-  \draw[red!80!black, thick] (Corner) -- node[right, font=\small] {$d_1 = |x_2 - y_2|$} (Y);
-  \draw[blue!80!black, thick] (X) -- node[above left, font=\small] {$d_2 = \sqrt{(x_1-y_1)^2 + (x_2-y_2)^2}$} (Y);
+  % The two legs are just coordinate differences -- neither one IS a metric.
+  \draw[orange!90!black, ultra thick] (X) -- (Corner) -- (Y);
+  \node[below, font=\small, orange!90!black] at (2.3,0.72) {$a := |x_1-y_1|$};
+  \node[right, font=\small, orange!90!black] at (3.9,1.8) {$b := |x_2-y_2|$};
+
+  \draw[blue!80!black, very thick] (X) -- (Y);
+  \node[above left, font=\small, blue!80!black] at (2.9,2.1) {$d_2 = \sqrt{a^2+b^2}$};
 
   \fill (X) circle (2pt) node[above left] {$x$};
   \fill (Y) circle (2pt) node[above right] {$y$};
+
+  % d_3 picks out the longer leg; here a > b.
+  \draw[red!80!black, thick, <->] (0.8,-0.95) -- node[below, font=\small] {$d_3 = \max\{a,b\} = a$} (3.8,-0.95);
+  \draw[red!80!black, dotted] (0.8,0) -- (0.8,-0.95);
+  \draw[red!80!black, dotted] (3.8,0) -- (3.8,-0.95);
+
+  \node[orange!90!black, font=\small, anchor=west] at (0.1,3.25) {$d_1 = a+b$ \ (the full orange path)};
 \end{tikzpicture}
 \end{center}
+
+Note that $d_1$ is the \textbf{sum} of the two legs and $d_3$ the \textbf{larger} of them ---
+neither is a single leg on its own. Only $d_2$ is the straight-line distance you would draw by
+reflex.
 
 In general,
 \[
@@ -162,7 +175,7 @@ is a metric on $\mathbb{R}^n$ for any $m$.
 
 \begin{example}[continued]
 \begin{enumerate}[label=\textbf{(\alph*)}, start=3]
-  \item Let $X = C^0([0,1], \mathbb{R})$ be the set of continuous functions $[0,1] \to \mathbb{R}$.
+  \item Let $X := C^0([0,1], \mathbb{R})$ be the set of continuous functions $[0,1] \to \mathbb{R}$.
     Then we can define the \newterm{supremum metric} for $f, g \in X$:
     \[
     d(f,g) := \sup_{x \in [0,1]} |f(x) - g(x)|
@@ -325,6 +338,30 @@ Since $\varepsilon > 0$ was arbitrary, $d(x,x') = 0$, so $x = x'$ by definitenes
 This justifies speaking of \qt{the} limit of a convergent sequence, as we do implicitly
 throughout.
 
+\begin{definition}[Accumulation point]
+\label{def:accumulation_point}
+Let $(x_n)_{n=0}^{\infty}$ be a sequence in a metric space $(X,d)$. A point $x \in X$ is an
+\newterm{accumulation point} (\germanterm{H\"aufungspunkt}) of $(x_n)_{n=0}^{\infty}$ if some
+subsequence $(x_{n_k})_{k=0}^{\infty}$ converges to $x$.
+\end{definition}
+
+% Supplement: Sascha Brack/Class Notes/Week_02_Notes_Monday_Updated.pdf, p. 3
+\begin{remark}[A claim in the lecture script that is not fully correct]
+The official lecture script states that a sequence converges to $x$ if and only if $x$ is its
+\emph{only} accumulation point (\cref{def:accumulation_point}). Sascha Brack's class notes flag
+this as false in general, with two counterexamples worth recording. First, a sequence can have a
+unique accumulation point without converging: on $[0,1)$, let $x_{2n+1} := \tfrac1n$ and
+$x_{2n} := 1-\tfrac1n$; the only accumulation point is $0$, yet $(x_n)$ does not converge, since
+the terms $x_{2n} \to 1 \notin [0,1)$ leave every neighbourhood of $0$ infinitely often. Second,
+even in $\mathbb{R}$ itself, the sequence with $x_n := \tfrac1n$ for odd $n$ and $x_n := n$ for
+even $n$ has $0$ as its only accumulation point but is unbounded, hence divergent. What \emph{is}
+true is the easier direction: if $(x_n)$ converges to $x$, then $x$ is its unique accumulation
+point (this follows directly from \cref{prop:uniqueness_of_limits} together with the fact that
+every subsequence of a convergent sequence converges to the same limit). The converse needs an
+extra hypothesis, such as compactness of the ambient space (\cref{sec:compactness}) together with
+some control ruling out the first counterexample's boundary-escaping behaviour.
+\end{remark}
+
 \begin{proposition}[Open/closed sets via sequences]
 \label{prop:open_closed_via_sequences}
 \begin{enumerate}[label=\textbf{(\alph*)}]
@@ -336,7 +373,7 @@ throughout.
 \end{enumerate}
 \end{proposition}
 
-\begin{example}[in $\mathbb{R}^2$]
+\begin{example}[Open, closed, and neither in $\mathbb{R}^2$]
 In the euclidean metric space $\mathbb{R}^2$:
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item $[0,1]^2$ is \textbf{closed}.
@@ -534,6 +571,35 @@ must read $\delta$ --- otherwise the quantified $\delta$ is never used. A slip o
 corrected in \cref{def:continuous}. See \texttt{OQ-05}.
 \end{ainote}
 
+% Sonnet 5 (Medium)
+\begin{definition}[Uniform continuity]
+\label{def:uniformly_continuous}
+For $(X,d_X)$ and $(Y,d_Y)$ metric spaces, a function $f : X \to Y$ is \newterm{uniformly
+continuous} (\germanterm{gleichm\"assig stetig}) if
+$$\forall \varepsilon > 0 \ \exists \delta > 0 \ \forall x, x' \in X : \quad d_X(x,x') < \delta \ \text{ implies } \ d_Y(f(x),f(x')) < \varepsilon.$$
+\end{definition}
+
+\begin{importantremark}[Where the quantifiers sit]
+\label{rem:continuity_vs_uniform_continuity}
+Compare \cref{def:continuous} \textbf{(a)} with \cref{def:uniformly_continuous}: the
+\emph{formulas} differ only in the order of two quantifiers, and that order is the whole
+content.
+\begin{itemize}
+  \item \textbf{Continuity:} $\forall x_0\ \forall\varepsilon\ \exists\delta$. The point $x_0$
+    is chosen \emph{before} $\delta$, so $\delta$ may depend on it --- a different $\delta$ is
+    allowed at every point.
+  \item \textbf{Uniform continuity:} $\forall\varepsilon\ \exists\delta\ \forall x$. Now
+    $\delta$ is chosen \emph{before} seeing the point, so one and the same $\delta$ must work
+    everywhere at once.
+\end{itemize}
+Uniform continuity is therefore strictly stronger. The standard witness is
+$f(x) := 1/x$ on $(0,1)$: it is continuous, but near $0$ the graph steepens without bound, so
+the $\delta$ that works at $x_0 = \tfrac12$ is hopeless at $x_0 = \tfrac{1}{1000}$, and no
+single $\delta$ survives. \Cref{prop:compact_implies_uniformly_continuous} below says that on a
+\emph{compact} space this can never happen --- the gap between the two notions closes exactly
+when there is no room to run off to a bad point.
+\end{importantremark}
+
 \begin{example}[$f(x) = x^2$]
 Let $f : \mathbb{R} \to \mathbb{R}, x \mapsto x^2$. Let $a < b \in \mathbb{R}$. Then
 \begin{itemize}
@@ -547,7 +613,7 @@ $f^{-1}(U_1 \cup U_2) = f^{-1}(U_1) \cup f^{-1}(U_2)$.
 
 \begin{question}
 Let $(X, d_X)$ and $(Y, d_Y)$ be metric spaces, where $d_Y$ is the discrete metric. Is
-$f : (X,d_X) \to (Y,d_Y)$ continuous?
+\emph{every} function $f : (X,d_X) \to (Y,d_Y)$ continuous?
 \end{question}
 
 \begin{answer}
@@ -557,7 +623,7 @@ $\{0\} = \id^{-1}(\{0\})$ is not open in $(X, d_X)$.
 \end{answer}
 
 \begin{question}
-What if $d_X$ is the discrete metric and $d_Y$ is arbitrary?
+And what if the roles are reversed --- $d_X$ the discrete metric, $d_Y$ arbitrary?
 \end{question}
 
 \begin{answer}
@@ -622,18 +688,20 @@ boundedness) are available.
 \begin{center}
 \begin{tikzpicture}[scale=1.1]
   \draw[blue!80!black, thick, fill=blue!5] plot[smooth cycle, tension=0.7] coordinates {(-2, -1.2) (-1.5, 1.5) (1.2, 1.8) (2.2, -0.5) (1.0, -1.5)};
-  \node[blue!80!black, font=\large] at (-1.8, 1.4) {$X$};
+  \node[blue!80!black, font=\large] at (-2.55, 1.55) {$X$};
 
-  \draw[red!80!black, thick, dotted, fill=red!15, fill opacity=0.4] plot[smooth cycle, tension=0.7] coordinates {(-1.5, -0.8) (-1.0, 0.5) (0.8, -0.2) (0.2, -1.2)};
-  \node[red!80!black, font=\small] at (-0.8, -0.7) {$U_1$};
+  % The three sets must genuinely cover X -- ellipses chosen so every point of the
+  % blob lies inside at least one of them (that is the whole point of a cover).
+  \draw[red!80!black, thick, dotted, fill=red!15, fill opacity=0.35] (-1.15,0.05) ellipse (1.6 and 1.75);
+  \node[red!80!black, font=\small] at (-1.75, -1.35) {$U_1$};
 
-  \draw[orange!90!black, thick, dotted, fill=orange!20, fill opacity=0.4] plot[smooth cycle, tension=0.7] coordinates {(-0.5, 0.2) (0.2, 1.5) (1.8, 0.8) (1.0, -0.4)};
-  \node[orange!90!black, font=\small] at (0.8, 0.9) {$U_2$};
+  \draw[orange!90!black, thick, dotted, fill=orange!20, fill opacity=0.35] (0.5,0.95) ellipse (1.5 and 1.25);
+  \node[orange!90!black, font=\small] at (1.35, 1.75) {$U_2$};
 
-  \draw[purple!80!black, thick, dotted, fill=purple!15, fill opacity=0.4] plot[smooth cycle, tension=0.7] coordinates {(-1.8, 0.0) (-1.2, 1.2) (0.2, 0.8) (-0.8, -0.6)};
-  \node[purple!80!black, font=\small] at (-1.1, 0.7) {$U_3$};
+  \draw[purple!80!black, thick, dotted, fill=purple!15, fill opacity=0.35] (1.15,-0.55) ellipse (1.5 and 1.3);
+  \node[purple!80!black, font=\small] at (2.1, -1.35) {$U_3$};
 
-  \node[below, font=\small] at (0, -1.7) {$X = U_1 \cup U_2 \cup U_3$};
+  \node[below, font=\small] at (0, -2.1) {$X = U_1 \cup U_2 \cup U_3$};
 \end{tikzpicture}
 \end{center}
 
@@ -665,16 +733,18 @@ following equivalent conditions hold:
   \draw[violet, thick, fill=violet!25] plot[smooth cycle, tension=0.7] coordinates {(-0.8, -0.5) (-0.5, 0.8) (0.8, 0.5) (0.6, -0.6)};
   \node[violet, font=\large] at (0.2, 0.1) {$K$};
 
-  \draw[green!60!black, thick, dotted] plot[smooth cycle, tension=0.7] coordinates {(-1.2, -0.9) (-0.8, 0.2) (0.2, -0.2) (-0.4, -1.1)};
-  \node[green!60!black, font=\small] at (-0.9, -0.7) {$U_1$};
+  % As above: the three sets must cover all of K (they need not, and here do not,
+  % cover all of X -- that is exactly the difference between the two pictures).
+  \draw[green!60!black, thick, dotted] (-0.45,-0.1) ellipse (0.85 and 0.95);
+  \node[green!60!black, font=\small] at (-1.15, -0.85) {$U_1$};
 
-  \draw[orange!90!black, thick, dotted] plot[smooth cycle, tension=0.7] coordinates {(-0.8, 0.3) (-0.2, 1.2) (1.1, 0.8) (0.4, 0.1)};
-  \node[orange!90!black, font=\small] at (0.4, 1.0) {$U_2$};
+  \draw[orange!90!black, thick, dotted] (0.15,0.55) ellipse (0.85 and 0.75);
+  \node[orange!90!black, font=\small] at (0.55, 1.45) {$U_2$};
 
-  \draw[magenta!90!black, thick, dashed] plot[smooth cycle, tension=0.7] coordinates {(0.1, -0.8) (0.3, 0.4) (1.4, 0.1) (1.1, -0.9)};
-  \node[magenta!90!black, font=\small] at (1.0, -0.6) {$U_3$};
+  \draw[magenta!90!black, thick, dashed] (0.55,-0.25) ellipse (0.8 and 0.8);
+  \node[magenta!90!black, font=\small] at (1.35, -0.85) {$U_3$};
 
-  \node[below, font=\small] at (0, -1.9) {$K \subseteq U_1 \cup U_2 \cup U_3 \subseteq X$};
+  \node[below, font=\small] at (0, -2.2) {$K \subseteq U_1 \cup U_2 \cup U_3 \subseteq X$};
 \end{tikzpicture}
 \end{center}
 
@@ -706,11 +776,11 @@ $f(x) = \lim_k f(x_{n_k}) = m$. In particular $m \neq -\infty$, so $f$ attains i
 $x$.
 \end{proof}
 
-\begin{ainote}
+\begin{remark}
 This is exactly the extreme value theorem (\cref{item:extreme_value_theorem}) proved from first
 principles, without presupposing \cref{thm:sequential_compactness} --- needed here since that
 theorem is precisely what we are about to prove.
-\end{ainote}
+\end{remark}
 
 \begin{definition}[Totally bounded]
 \label{def:totally_bounded}
@@ -736,7 +806,7 @@ $U_n := \bigcup_{k=1}^n B_\varepsilon(x_k)$; if $U_n = X$, stop --- we have the 
 cover. Otherwise, pick $x_{n+1} \in X\setminus U_n$, so that $d(x_{n+1},x_k) \geq \varepsilon$ for
 all $k \leq n$. If this process never terminates, sequential compactness gives a convergent, hence
 Cauchy, subsequence $(x_{n_k})_k$; but $d(x_{n_k},x_{n_{k+1}}) \geq \varepsilon$ for all $k$
-contradicts the Cauchy property. So the process must terminate after finitely many steps, giving
+contradicts the Cauchy property. So, the process must terminate after finitely many steps, giving
 the desired finite $\varepsilon$-net.
 
 % Sonnet 5 (Medium)
@@ -744,14 +814,17 @@ the desired finite $\varepsilon$-net.
 \begin{tikzpicture}[scale=0.9]
   \draw[blue!70!black, thick] plot[smooth cycle, tension=0.7] coordinates
     {(-2,-1) (-1.5,1.3) (1.2,1.5) (2.1,-0.4) (0.8,-1.6)};
-  \foreach \p/\lab in {(-1.1,0.2)/x_1,(0.1,0.9)/x_2,(1.1,0.1)/x_3,(-0.2,-0.8)/x_4} {
+  % Total boundedness means the finitely many balls really do cover X, so the
+  % radius must be large enough to reach the corners of the blob.
+  \foreach \p in {(-1.2,0.1),(0.0,1.0),(1.2,0.0),(-0.1,-0.9)} {
     \fill \p circle (1.5pt);
-    \draw[orange!90!black, dashed] \p circle (0.85);
+    \draw[orange!90!black, dashed] \p circle (1.45);
   }
-  \node[font=\scriptsize, below left] at (-1.1,0.2) {$x_1$};
-  \node[font=\scriptsize, above] at (0.1,0.9) {$x_2$};
-  \node[font=\scriptsize, right] at (1.1,0.1) {$x_3$};
-  \node[font=\scriptsize, below] at (-0.2,-0.8) {$x_4$};
+  \node[font=\scriptsize, below left] at (-1.2,0.1) {$x_1$};
+  \node[font=\scriptsize, above right] at (0.0,1.0) {$x_2$};
+  \node[font=\scriptsize, right] at (1.2,0.0) {$x_3$};
+  \node[font=\scriptsize, below] at (-0.1,-0.9) {$x_4$};
+  \node[font=\scriptsize, orange!90!black, below] at (0,-2.6) {$X = B_\varepsilon(x_1)\cup\dots\cup B_\varepsilon(x_4)$};
 \end{tikzpicture}
 \end{center}
 \end{proof}
@@ -796,14 +869,14 @@ each $k$, an index $i_k$ with $B_\varepsilon(x_k) \subseteq U_{i_k}$, the sets
 $U_{i_1},\dots,U_{i_n}$ form a finite subcover of $X$.
 \end{proof}
 
-\begin{ainote}[Total boundedness, more generally]
+\begin{remark}[Total boundedness, more generally]
 Diego's note records a sharper characterization as a further exercise: $(X,d)$ is compact if and
 only if it is complete and totally bounded. \Cref{lem:sequentially_compact_totally_bounded} gives
 one direction (compact $\implies$ complete, by \cref{ex:compact_finite_complete} below, and
 totally bounded); for the converse, a Cauchy subsequence can be extracted from any sequence using
 total boundedness (cover by finitely many $\tfrac1k$-balls for $k=1,2,\dots$ and pass to nested
 subsequences), and it converges by completeness.
-\end{ainote}
+\end{remark}
 
 % Quelle: Diego Torres Tejeda/Addendum - Sequential and Topological Compactness.pdf, \S4(b)
 \begin{definition}[Lebesgue number]
@@ -813,17 +886,17 @@ $\varepsilon > 0$ is a \newterm{Lebesgue number} (\germanterm{Lebesgue-Zahl}) fo
 $$\forall x \in X\ \exists i \in I: B_\varepsilon(x) \subseteq U_i.$$
 \end{definition}
 
-\begin{ainote}[Lebesgue's covering lemma]
+\begin{remark}[Lebesgue's covering lemma]
 The proof of \cref{thm:sequential_topological_compactness_equivalence} ($\Rightarrow$) shows
 more than stated: on a compact metric space, \emph{every} open cover has a Lebesgue number (take
 $\varepsilon := \min_{x\in X} r(x)$ as constructed there). This is known as \newterm{Lebesgue's
 covering lemma} (\germanterm{Lebesguesches \"Uberdeckungslemma}).
-\end{ainote}
+\end{remark}
 
 \begin{proposition}[Compactness implies uniform continuity]
 \label{prop:compact_implies_uniformly_continuous}
 Let $(X,d_X)$, $(Y,d_Y)$ be metric spaces with $X$ compact, and let $f : X \to Y$ be continuous.
-Then $f$ is uniformly continuous (\cref{def:continuous}).
+Then $f$ is uniformly continuous (\cref{def:uniformly_continuous}).
 \end{proposition}
 
 \begin{proof}
@@ -885,13 +958,22 @@ Corsin writes $n_k > k$ above; for a subsequence the standing fact is $n_k \geq 
 the argument. See \texttt{OQ-06}.
 \end{ainote}
 
+\exercisesheet{2}
+
+\begin{ainote}
+No priority page this week: from Week 3 onwards Corsin opens each file with a colour-coded
+\textit{Recommended exercises} page; Week 2 has none, so none of this week's problems are singled
+out as important. The full sheet (2.1--2.7) is transcribed in
+\texttt{content/exercise-sheets/week-02.tex}.
+\end{ainote}
+
 \section{Solutions}
 \label{sec:week02_solutions}
 
 \begin{ainote}
 Only the two \texttt{aiexercise} problems below have solutions in this section: Corsin's own
 exercises in this chapter are solved inline, immediately after their statement, mirroring how he
-presents them in his own notes (see the "Kept inline" comments above each).
+presents them in his own notes (see the qt{Kept inline} comments above each).
 \end{ainote}
 
 \begin{exercisesolution}[Proof of \cref{ex:ai_metric_equivalence}]

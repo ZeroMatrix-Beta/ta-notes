@@ -1,0 +1,331 @@
+\chapter{Week 1 --- Prerequisites and a First Look at $\mathbb{R}^n$}
+\label{ch:week01}
+
+% Transition: Claude Sonnet 5
+Corsin's own class notes begin only with the material covered in \emph{Analysis II}'s
+\emph{second} week of teaching (see the file-naming remark in
+\texttt{docs/03-topic-index.md}); no tutor's notes cover the first week on its own terms, since
+it consists mostly of a recap of \emph{Analysis I} and a warm-up on reading and drawing subsets
+of $\mathbb{R}^n$. This chapter fills that gap: it collects the recap material several tutors
+independently found worth revisiting, works through the first problem sheet, and proves Young's
+inequality (\cref{prop:youngs_inequality}), a fact used repeatedly once norms and Hölder-type
+estimates appear from Week 2 onward.
+
+\section{From Analysis I to several variables}
+\label{sec:analysis1_recap}
+
+% Source: Maarten Cnoops/Woche 1.pdf, p. 1
+Several of the definitions you will meet in the coming weeks are exactly the definitions you
+already know from \emph{Analysis I}, only stripped of their reliance on the real line. A
+\newterm{sequence} (\germanterm{Folge}) $(x_k)_{k \in \mathbb{N}}$ in a set $X$ converging to
+$x \in X$, a function being continuous at a point, a set being open or closed --- all of these
+notions carry over to $\mathbb{R}^n$ and, as \cref{sec:structured_spaces} will show, to much more
+general spaces than $\mathbb{R}^n$. What does \emph{not} carry over automatically is anything
+that relied on the \emph{order} of $\mathbb{R}$: there is no qt{$eq$} on $\mathbb{R}^n$ for
+$n \geq 2$, so statements like the intermediate value theorem or qt{every bounded sequence has a
+convergent subsequence} need new proofs, or new hypotheses, once we leave $\mathbb{R}$.
+
+\begin{remark}
+That last fact --- bounded does \emph{not} imply convergent, but bounded sequences in
+$\mathbb{R}^n$ do always have a convergent \emph{subsequence} --- is exactly the statement of the
+Bolzano--Weierstrass theorem, revisited via \cref{ex:1.1} in \cref{sec:week01_solutions} below. It
+reappears as the Heine--Borel theorem once compactness is introduced in \cref{sec:compactness}.
+\end{remark}
+
+\section{Young's inequality}
+\label{sec:youngs_inequality}
+
+The following inequality is not part of the lecture's main line of development, but it is the
+cleanest route to comparing different norms on $\mathbb{R}^n$ (\cref{sec:cauchy_schwarz}) and to
+the Hölder-type estimates that show up when comparing $L^p$-type metrics. It is worth proving
+once and citing from then on.
+
+\begin{proposition}[Young's inequality]
+\label{prop:youngs_inequality}
+% Source: exercises/Ex1_Analysis2_eng.pdf, Problem 1.4
+Let $a, b > 0$ and let $p, q > 1$ satisfy $\tfrac{1}{p} + \tfrac{1}{q} = 1$. Then
+\[
+  ab \leq \frac{a^p}{p} + \frac{b^q}{q}.
+\]
+\end{proposition}
+
+\begin{remark}
+The case $p = q = 2$ recovers the familiar inequality $ab \leq \tfrac{a^2}{2} + \tfrac{b^2}{2}$,
+which is just a rewriting of $(a-b)^2 \geq 0$.
+\end{remark}
+
+\begin{proof}
+Fix $t > 0$ and define $g(t) := \tfrac{t}{p} + \tfrac{1}{q} - t^{1/p}$. We first show that
+$g(t) \geq 0$ for all $t > 0$, with equality only at $t = 1$. Differentiating,
+\[
+  g'(t) = \frac{1}{p}\left(1 - t^{-(p-1)/p}\right),
+\]
+which is negative for $t \in (0,1)$ and positive for $t > 1$, so $g$ has a global minimum at
+$t = 1$. Since $g(1) = \tfrac{1}{p} + \tfrac{1}{q} - 1 = 0$, this proves that
+\[
+  t^{1/p} \leq \frac{t}{p} + \frac{1}{q} \qquad \text{for all } t > 0.
+\]
+Now fix $a, b > 0$ and apply this with $t := a^p / b^q$. Multiplying both sides by $b^q$ gives
+\[
+  \left(\frac{a^p}{b^q}\right)^{1/p} b^q \leq \frac{a^p}{p} + \frac{b^q}{q},
+\]
+and since $\left(\tfrac{a^p}{b^q}\right)^{1/p} b^q = a\, b^{q - q/p} = a\,b^{q(1 - 1/p)} = a\,b$
+using $\tfrac{1}{q} = 1 - \tfrac{1}{p}$, this is exactly $ab \leq \tfrac{a^p}{p} + \tfrac{b^q}{q}$.
+\end{proof}
+
+\begin{remark}
+The exercise sheet also asks for the vector version
+$\langle a,b\rangle \leq \tfrac{\|a\|_p^p}{p} + \tfrac{\|b\|_q^q}{q}$ for $a,b \in \mathbb{R}^n$,
+where $\|x\|_p := \left(\sum_i |x_i|^p\right)^{1/p}$. This is exactly Hölder's inequality once
+combined with the scalar case applied coordinatewise; see the solution of \cref{ex:1.4} below.
+This is a first hint of why $p$-norms other than $p=2$ are worth naming: \cref{sec:cauchy_schwarz}
+only treats $p = 2$, but the same machinery bounds $\langle a, b\rangle$ for every conjugate pair
+$(p,q)$.
+\end{remark}
+
+\section{Visualizing sets in $\mathbb{R}^2$ and $\mathbb{R}^3$}
+\label{sec:visualizing_sets}
+
+Much of the geometric intuition for this course --- open sets, level sets, submanifolds --- rests
+on a skill that has nothing to do with any theorem: reading a set-builder description and
+producing an accurate picture, or going the other way. Two techniques are worth naming
+explicitly, both used repeatedly in the solutions below.
+
+\begin{itemize}
+  \item \textbf{Slicing.} To sketch a set $S \subseteq \mathbb{R}^3$ defined by an equation
+    involving $z$, fix $z = t$ and sketch the resulting planar slice $S \cap \{z = t\}$ as $t$
+    varies. Stacking the slices gives the full picture.
+  \item \textbf{Level sets.} If a set is defined by $f(x,y) = t$ for a fixed $t$, first work out
+    the level sets $\{f = t\}$ of $f$ for varying $t$; many natural functions (e.g.
+    $f(x,y) = \max\{|x|,|y|\}$, whose level sets are squares, or $f(x,y) = \sqrt{x^2+y^2}$, whose
+    level sets are circles) have level sets that are easy to name, which turns a 3D sketch into a
+    stack of named 2D shapes.
+\end{itemize}
+
+Both techniques are applied to the actual exercise sheet in \cref{sec:week01_solutions} below.
+
+\begin{remark}
+Several tutors' slides (e.g.\ those using Desmos 3D or GeoGebra to plot these sets live) note that
+students commonly guess the wrong growth rate for sets like
+$\{(x,y,z) : z = \sqrt{1+x^2+y^2}\}$, sketching a cone instead of a hyperboloid-like bowl that
+flattens out; the slicing technique above makes the mistake visible immediately, since the slice
+at height $t$ only exists for $t \geq 1$ and has radius $\sqrt{t^2-1}$, not $t$.
+\end{remark}
+
+\exercisesheet{1}
+
+\begin{ainote}
+% Supplement: Linus Lüchinger/Slides/Slides-02-23.pdf
+Linus Lüchinger's first exercise-session slides collect the most common mistakes on this exact
+sheet as qt{Gotchas}, worth flagging before attempting the problems below: on \cref{ex:1.1} part 2,
+most students first guessed $f(x) = \log|x| + c$ for a single constant $c$ --- wrong, since the
+two constants on $(-\infty,0)$ and $(0,\infty)$ may genuinely differ (see
+\cref{sec:week01_solutions}). On part 4, most students assumed a function with everywhere-positive
+second derivative cannot have a global maximum; it can, at the boundary of the domain.
+\end{ainote}
+
+\begin{exercise}[1.1 --- Recap Questions]
+\label{ex:1.1}
+% Source: exercises/Ex1_Analysis2_eng.pdf, p. 1
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Let $\{x_k\}_{k \in \mathbb{N}} \subset [1,2] \subset \mathbb{R}$ be a sequence. Is it
+    necessarily convergent?
+  \item Describe all differentiable functions $f : \mathbb{R} \setminus \{0\} \to \mathbb{R}$ such
+    that $f'(x) = 1/x$ for all $x \neq 0$.
+  \item Let $f : \mathbb{R} \to \mathbb{R}$ be continuous and bounded. Is it true that
+    \[
+      \int_0^{\pi/2} f(\cos(x))\,dx = \int_0^1 \frac{f(t)}{\sqrt{1-t^2}}\,dt \, ?
+    \]
+  \item Let $f : [0,\infty) \to \mathbb{R}$ have $f''(x) > 0$ for all $x \geq 0$. Can $f$ have a
+    global maximum point?
+  \item Let $\phi : \mathbb{R}^2 \to \mathbb{R}^2$ be a linear map and let
+    $Q := [0,1] \times [0,1]$ be the unit square. How does $\phi(Q)$ look like? What are the
+    possibilities?
+  \item Consider the vector space $V$ of polynomials of degree less than $4$, and the function
+    $D : V \to V$ which associates to a polynomial $p$ its derivative $p'$. Is $D$ a linear map?
+    If so, what is the dimension of its null space?
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[1.2 --- From equations to drawings]
+\label{ex:1.2}
+% Source: exercises/Ex1_Analysis2_eng.pdf, p. 1
+Sketch the following subsets of $\mathbb{R}^2$, $\mathbb{R}^3$.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item $A := \{(x,y) : x^2+y^2 < 1,\ y \geq x^2\}$
+  \item $B := \{(x,y) : y^2 = x^3 - x\}$
+  \item $C := \{(x,y) : \tfrac{\pi}{6} < \arctan(y/x) < \tfrac{\pi}{3},\ 0 < x < y\}$
+  \item $D := \{(x,y,z) : \sqrt{x^2+y^2} = 1-z,\ 0 < z < 1\}$
+  \item $E := \{(x,y,z) : z = \sqrt{1+x^2+y^2}\}$
+  \item $F := \{(x,y,z) : z = \max\{|x|,|y|\}\}$
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[1.3 --- From drawings to equations]
+\label{ex:1.3}
+% Source: exercises/Ex1_Analysis2_eng.pdf, p. 1
+Express in terms of functions and equations the following sets.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item The coordinates of a point in the plane that goes endlessly back and forth from the
+    origin to the point $(-1,1)$.
+  \item A planar domain with two holes in it.
+  \item A bi-dimensional disk sitting inside the plane $\{x+y+z=0\}$ in $\mathbb{R}^3$.
+  \item A Pac-Man shaped domain in the plane.
+  \item A pyramid, whose base is a square, sitting in $\mathbb{R}^3$.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[1.4 --- Young's inequality]
+\label{ex:1.4}
+% Source: exercises/Ex1_Analysis2_eng.pdf, p. 2
+Let $a,b > 0$, and let $p,q>1$ with $\tfrac{1}{p}+\tfrac{1}{q}=1$. Prove that
+$ab \leq \tfrac{a^p}{p} + \tfrac{b^q}{q}$.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Prove that for all $t>0$, $t^{1/p} \leq \tfrac{t}{p} + \tfrac{1}{q}$.
+  \item Multiply the inequality by $b^q$ and choose an appropriate value of $t$ to conclude.
+\end{enumerate}
+\textbf{A bonus:} show that $\langle a,b\rangle \leq \tfrac{\|a\|_p^p}{p} + \tfrac{\|b\|_q^q}{q}$
+for all $a,b \in \mathbb{R}^n$.
+\end{exercise}
+
+\section{Solutions}
+\label{sec:week01_solutions}
+
+\begin{ainote}
+None of the tutors sampled for this sheet left a full worked solution to transcribe (most
+exercise-class notes for Week 1 are session logistics or qt{gotcha} summaries, not worked
+solutions); the solutions below are written for this document and cross-checked against the
+official \texttt{exercises/Sol1\_Analysis2\_eng.pdf}.
+\end{ainote}
+
+\begin{exercisesolution}[Solution of \cref{ex:1.1}]
+% Generator: Claude Sonnet 5 (Medium)
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item No. The sequence $x_k := \tfrac{3}{2} + \left(-\tfrac{1}{2}\right)^k$ lies in $[1,2]$ but
+    oscillates between values approaching $\tfrac{3}{2}$ from above and below without settling,
+    so it does not converge (it has two distinct subsequential limits, $\tfrac{3}{2} \pm 0$,
+    which in fact coincide here in the limit, but the same construction with e.g.
+    $x_k := \tfrac{3}{2} + \tfrac{1}{2}(-1)^k$ gives two genuinely different accumulation points
+    $1$ and $2$). What \emph{is} true, by the Bolzano--Weierstrass theorem, is that every bounded
+    sequence in $\mathbb{R}$ has a convergent subsequence.
+  \item On each of the intervals $(-\infty,0)$ and $(0,\infty)$ separately, $f'(x) = 1/x$ forces
+    $f(x) = \log|x| + c$ for some constant $c$, since two antiderivatives on a common interval
+    differ by a constant. The subtlety is that $\mathbb{R}\setminus\{0\}$ is \emph{disconnected}
+    into these two intervals, so the two constants need not agree:
+    \[
+      f(x) =
+      \begin{cases}
+        \alpha + \log(x) & x > 0, \\
+        \beta + \log(-x) & x < 0,
+      \end{cases}
+      \qquad \alpha, \beta \in \mathbb{R} \text{ arbitrary}.
+    \]
+    The answer $f(x) = \log|x| + c$ for a \emph{single} constant $c$ is wrong; connectedness of
+    the domain is exactly what would be needed to force $\alpha = \beta$, and it is precisely
+    what \cref{sec:connectedness} in the next chapter formalizes.
+  \item Yes. Substituting $t = \cos(x)$, $dt = -\sin(x)\,dx$, and $\sin(x) = \sqrt{1-t^2}$ for
+    $x \in [0,\pi/2]$ turns the left integral into the right one; this is the one-variable change
+    of variables formula, which Week 9's change-of-variables theorem generalizes to
+    $\mathbb{R}^n$ (not yet part of this document; see \texttt{docs/03-topic-index.md}).
+  \item Yes: take $f(x) := e^{-x}$. Then $f''(x) = e^{-x} > 0$ for all $x$, yet $f$ attains its
+    global maximum on $[0,\infty)$ at the boundary point $x=0$. Everywhere-positive second
+    derivative (strict convexity) rules out an \emph{interior} local maximum, but says nothing
+    about the boundary of the domain --- exactly the gotcha flagged above.
+  \item $\phi(Q)$ is the parallelogram spanned by $\phi(1,0)$ and $\phi(0,1)$, with vertices at
+    $0$, $\phi(1,0)$, $\phi(0,1)$, and $\phi(1,0)+\phi(0,1)$. Two degenerate cases occur: if
+    $\phi(1,0)$ and $\phi(0,1)$ are linearly dependent (parallel or one is zero) but not both
+    zero, the parallelogram collapses to a line segment; if $\phi \equiv 0$, it collapses to the
+    single point $\{0\}$.
+  \item Yes: differentiation is linear on functions in general, hence in particular on the
+    subspace of polynomials of degree $< 4$. With respect to the basis
+    $\mathcal{B} = \{1, X, X^2, X^3\}$, the map $D$ sends $1 \mapsto 0$, $X \mapsto 1$,
+    $X^2 \mapsto 2X$, $X^3 \mapsto 3X^2$, giving matrix
+    \[
+      [D]_{\mathcal{B},\mathcal{B}} =
+      \begin{pmatrix} 0&1&0&0 \\ 0&0&2&0 \\ 0&0&0&3 \\ 0&0&0&0 \end{pmatrix}.
+    \]
+    This matrix has rank $3$ (its three nonzero rows are independent), so by the rank--nullity
+    theorem the null space has dimension $4 - 3 = 1$ --- spanned by the constant polynomials.
+\end{enumerate}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution of \cref{ex:1.2}]
+% Generator: Claude Sonnet 5 (Medium)
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item $A$ is the intersection of the open unit disk with the region on or above the parabola
+    $y = x^2$, a lens-shaped region:
+    \begin{center}
+    \begin{tikzpicture}[scale=1.8]
+      \begin{scope}
+        \clip (0,0) circle (1);
+        \clip plot[domain=-1.1:1.1,samples=60] (\x,{\x*\x}) -- (1.1,1.3) -- (-1.1,1.3) -- cycle;
+        \fill[blue!25] (-1.3,-1.3) rectangle (1.3,1.3);
+      \end{scope}
+      \draw[blue!60!black] (0,0) circle (1);
+      \draw[blue!60!black,domain=-1:1,samples=60] plot (\x,{\x*\x});
+      \node at (0,-0.55) {\footnotesize $x^2+y^2<1$};
+      \node at (0,1.05) {\footnotesize $y \geq x^2$};
+    \end{tikzpicture}
+    \end{center}
+  \item Since $x^3-x = x(x+1)(x-1) \geq 0$ exactly for $x \in [-1,0]\cup[1,\infty)$, the curve
+    $y = \pm\sqrt{x^3-x}$ is only real on these two intervals; $B$ is the union of the graphs of
+    $f(x) := \sqrt{x^3-x}$ and $-f(x)$, giving a closed loop over $[-1,0]$ and an unbounded branch
+    over $[1,\infty)$ growing like $x^{3/2}$.
+  \item Since $0 < x < y$, points of $C$ lie in the first octant with $y > x$; the condition
+    $\pi/6 < \arctan(y/x) < \pi/3$ says the angle to the positive $x$-axis is between $30^\circ$
+    and $60^\circ$. So $C$ is the open angular sector between the lines $y=x$ and $y=\sqrt{3}\,x$:
+    \begin{center}
+    \begin{tikzpicture}[scale=1.4]
+      \fill[blue!20] (0,0) -- (1.6,1.6) -- (0.92,1.6) -- cycle;
+      \draw[blue!60!black] (0,0) -- (1.6,1.6) node[right] {\footnotesize $y=x$};
+      \draw[blue!60!black] (0,0) -- (0.92,1.6) node[above] {\footnotesize $y=\sqrt{3}x$};
+      \draw[->] (-0.2,0) -- (1.8,0) node[right] {\footnotesize $x$};
+      \draw[->] (0,-0.2) -- (0,1.8) node[above] {\footnotesize $y$};
+      \draw (0.5,0) arc (0:45:0.5);
+      \node at (0.65,0.22) {\footnotesize $30^\circ$--$60^\circ$};
+    \end{tikzpicture}
+    \end{center}
+  \item Slicing at height $z=t \in (0,1)$: the equation $\sqrt{x^2+y^2} = 1-t$ describes a circle
+    of radius $1-t$ centered on the $z$-axis. As $t$ ranges over $(0,1)$, the radius shrinks
+    linearly from $1$ to $0$, so $D$ is the lateral surface of a right circular cone of height $1$
+    over the unit circle, apex at $(0,0,1)$, base circle excluded (the inequalities are strict).
+  \item Slicing at height $z=t$: the equation $\sqrt{1+x^2+y^2}=t$ has solutions only for
+    $t \geq 1$, with radius $\sqrt{t^2-1}$ (not $t$, per the gotcha in
+    \cref{sec:visualizing_sets}). $E$ is thus a bowl-shaped surface of revolution, vertex at
+    $(0,0,1)$, obtained by rotating the curve $y = \sqrt{1+x^2}$ around the $z$-axis; it flattens
+    out to slope $\approx 1$ for large $x,y$, unlike a true cone.
+  \item The level sets $\{\max\{|x|,|y|\}=t\}$ are the boundaries of the squares $[-t,t]^2$.
+    Stacking these square outlines at height $z=t$ as $t$ grows from $0$ upward sweeps out four
+    flat triangular faces meeting at the apex $(0,0,0)$. So $F$ is an upward-opening
+    \emph{square cone}: the exact analogue of the circular cone of part 4, with the round level
+    circles of $\sqrt{x^2+y^2}$ replaced by the square level curves of $\max\{|x|,|y|\}$.
+\end{enumerate}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution of \cref{ex:1.3}]
+% Generator: Claude Sonnet 5 (Medium)
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item A point moving back and forth along the segment from $(0,0)$ to $(-1,1)$ can be
+    parametrized as $t \mapsto (-f(t), f(t))$ for $t \geq 0$, where $f : [0,\infty) \to [0,1]$
+    oscillates endlessly; $f(t) := \tfrac{1}{2}(1+\sin t)$ is one valid choice.
+  \item Remove two small disjoint squares from a large square, e.g.
+    $\{10 > \max\{|x|,|y|\} > 1\} \setminus \{\max\{|x-5|,|y-6|\} \leq 1\}$.
+  \item Intersect the closed unit ball with the plane: $\{x^2+y^2+z^2 \leq 1\} \cap \{x+y+z=0\}$.
+  \item Remove a $30^\circ$ wedge from a disk:
+    $\{x^2+y^2 \leq 1\} \setminus \{|\arctan(y/x)| \leq \pi/6,\ x>0\}$.
+  \item Combining the square level sets from \cref{ex:1.2} part 6 with the conical slicing from
+    part 4: $\{1-z = \max\{|x|,|y|\},\ 0 \leq z \leq 1\}$ is a pyramid of height $1$ over the
+    square $[-1,1]^2$, apex at $(0,0,1)$.
+\end{enumerate}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution of \cref{ex:1.4}]
+% Generator: Claude Sonnet 5 (Medium)
+Parts 1 and 2 are exactly the proof of \cref{prop:youngs_inequality} above. For the bonus vector
+version, apply the scalar inequality coordinatewise with $a = |a_i|$, $b=|b_i|$ and sum over $i$:
+\[
+  \langle a,b\rangle \leq \sum_{i=1}^n |a_i||b_i| \leq \sum_{i=1}^n \left(\frac{|a_i|^p}{p} +
+  \frac{|b_i|^q}{q}\right) = \frac{1}{p}\sum_{i=1}^n |a_i|^p + \frac{1}{q}\sum_{i=1}^n |b_i|^q
+  = \frac{\|a\|_p^p}{p} + \frac{\|b\|_q^q}{q}.
+\]
+\end{exercisesolution}

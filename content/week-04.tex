@@ -1,107 +1,11 @@
 % Source: Corsin Nick/Class Notes/Week 4.pdf, pp. 1--13
 \chapter{Week 4 --- The Differential, the Chain Rule \& Taylor Expansions}
 
-\exercisesheet{4}
-
-\textit{Statements quoted verbatim from \texttt{exercises/Ex4\_Analysis2\_eng.pdf} (assigned 9
-March 2026, due 16 March 2026). Attribution: Prof. Joaquim Serra, D-MATH, ETH Z\"urich.}
-
-% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 1
-\begin{ainote}[Corsin's recommendations]
-Colour key, as given on the page: blue \textbf{= important}, orange \textbf{= semi-important},
-red \textbf{= optional}.
-
-\begin{center}
-\begin{tabular}{lll}
-\textbf{Problem} & \textbf{Priority} & \textbf{Corsin's note} \\
-\hline
-4.1 & important & ``Use the chain rule'' \\
-4.2 & important & ``Recall that path connected $\implies$ connected'' \\
-4.3 & semi-important --- parts 1, 2, 3, 5; & ``For 3., use Cauchy--Schwarz in $\mathbb{R}^n$ \\
-    & \textbf{parts 4 and 6 important} & applied to convenient vectors.'' \\
-4.4 & optional & --- \\
-4.5 & optional & --- \\
-4.6 & important --- parts 1, 2, 3 & --- \\
-\end{tabular}
-\end{center}
-\end{ainote}
-
-\begin{ainote}
-Only the exercises tagged \textbf{important} above are reproduced below. The full sheet
-(4.1--4.6, including 4.4 and 4.5) is transcribed in
-\texttt{content/exercise-sheets/week-04.tex}.
-\end{ainote}
-
-\begin{exercise}[4.1 --- Derivative computation \textnormal{(important)}]
-\label{ex:4.1}
-Consider the function $u : (x,y) \mapsto x^{\sin(y)}$, defined for
-$(x,y) \in (0,\infty)\times\mathbb{R} \subset \mathbb{R}^2$. Compute $\partial_x u$ and
-$\partial_y u$.
-\end{exercise}
-
-\begin{exercise}[4.2 --- Connected graphs \textnormal{(important)}]
-\label{ex:4.2}
-Let $U \subset \mathbb{R}^n$ be open and connected and let $f \in C^1(U, \mathbb{R}^m)$. Show that
-its graph
-$$\Gamma_f := \{(x, f(x)) : x \in U\}$$
-is a connected subset of $\mathbb{R}^n \times \mathbb{R}^m$.
-\end{exercise}
-
-\begin{exercise}[4.3 --- $p$-norms \textnormal{(semi-important; parts 4 and 6 important)}]
-\label{ex:4.3}
-For $p \geq 1$ and $x \in \mathbb{R}^n$ define the \textbf{$p$-norm} of $x$ as
-$$|x|_p := \Big(\sum_{i=1}^{n} |x_i|^p\Big)^{1/p}.$$
-\begin{enumerate}[label=\textbf{\arabic*.}]
-  \item For $n = 2$ and $p = 1, 2, 10$ sketch the sets $\{x \in \mathbb{R}^2 : |x|_p \leq 1\}$.
-  \item For a given $x \in \mathbb{R}^n$, compute the limit
-    $|x|_\infty := \lim_{p\to\infty}|x|_p$.
-  \item Using an appropriate inequality that you have seen in class, prove that
-    $$\Big(\sum_{i=1}^{n} a_i^{p-1}b_i\Big)^2 \leq \Big(\sum_{i=1}^{n}a_i^p\Big)\Big(\sum_{i=1}^{n}a_i^{p-2}b_i^2\Big),$$
-    whenever $a_i, b_i$ are $n$-tuples of positive numbers.
-  \item Fix $x, y \in \mathbb{R}^n$ and consider the function $f : [0,1] \to \mathbb{R}$ defined
-    as
-    \begin{equation*}
-    f(t) := |tx + (1-t)y|_p = \Big(\sum_{i=1}^{n}|tx_i + (1-t)y_i|^p\Big)^{1/p}. \tag{1}
-    \end{equation*}
-    Show that $f$ is convex. You may assume that the coordinates of $x$ and $y$ are all strictly
-    positive and use the inequality of the previous point.
-  \item Deduce from the previous point that the triangular inequality holds, i.e.\
-    $|x+y|_p \leq |x|_p + |y|_p$ for all $x,y \in \mathbb{R}^n$.
-  \item What happens for $p \in (0,1)$?
-\end{enumerate}
-\textit{Official hints:} \textbf{4.3.3} --- use Cauchy--Schwarz and the fact that
-$a_i^{p-1}b_i = a_i^{p/2}\cdot a_i^{(p-2)/2}b_i$. \textbf{4.3.4} --- show that $f''(t) \geq 0$; it
-is not the simplest derivative, but if you get it right the inequality in 4.3.3 will be just what
-you need. \textbf{4.3.5} --- write the convexity inequality between $x$, $y$ and the middle point
-$(x+y)/2$. To get the general case from the one with positive coordinates, observe that for
-$x \in \mathbb{R}^n$, denoting $\hat x := (|x_1|,\dots,|x_n|)$, we have
-$|x+y|_p \leq |\hat x + \hat y|_p$ and $|\hat x|_p = |x|_p$ for all $x,y \in \mathbb{R}^n$.
-\end{exercise}
-
-\begin{exercise}[4.6 --- A directional derivative vanishes \textnormal{(important)}]
-\label{ex:4.6}
-Let $u \in C^1(\mathbb{R}^n)$ and $\nu \in \mathbb{R}^n$. Show that
-\begin{enumerate}[label=\textbf{\arabic*.}]
-  \item If $\partial_1 u \equiv 0$ then ``$u$ does not depend on $x_1$''; more rigorously: there
-    exists a unique function $v \in C^1(\mathbb{R}^{n-1})$ such that
-    \begin{equation*}
-    u(x_1,\dots,x_n) = v(x_2,\dots,x_n) \quad \text{for all } x \in \mathbb{R}^n. \tag{2}
-    \end{equation*}
-  \item If $\partial_\nu u \equiv 0$ and $\nu\cdot e_1 \neq 0$ then ``$u$ is a function of $n-1$
-    variables''; more rigorously: there exists a unique function $w \in C^1(\mathbb{R}^{n-1})$
-    such that
-    $$u(x_1,\dots,x_n) = w\!\left(x_2 - \frac{x_1\nu_2}{\nu_1}, \dots, x_n - \frac{x_1\nu_n}{\nu_1}\right) \quad \text{for all } x \in \mathbb{R}^n.$$
-  \item \textbf{(*)} What can we conclude if we assume only that $\partial_1 u = 0$ in an open
-    connected subset $U \subset \mathbb{R}^n$?
-\end{enumerate}
-\textit{Official hints:} \textbf{4.6.2} --- apply the mean value theorem to $u(x + t\nu)$.
-\textbf{4.6.3} --- consider the domain $U := \{(x,y) : x^2 < y < x^2+1\}$ and the function
-$$u(x,y) := \begin{cases} \max\{0, y-2\}^2 & \text{if } x \geq 0, \\ 0 & \text{if } x \leq 0.\end{cases}$$
-\end{exercise}
-
-% Sonnet 5 (Medium)
-With the exercise sheet quoted, we turn to this week's actual subject: generalizing the
-single-variable derivative to maps between Euclidean spaces of arbitrary dimension.
+% Transition: Claude Sonnet 5
+This chapter generalizes the single-variable derivative to maps between Euclidean spaces of
+arbitrary dimension: the differential, the Jacobi matrix, the chain rule (including along a
+path), and multivariable Taylor expansions up to the Hessian. The exercise sheet is at the end of
+the chapter, in \cref{sec:week04_solutions}.
 
 \session{Monday}
 
@@ -119,27 +23,44 @@ $$\lim_{h\to 0}\left|\frac{f(x_0+h)-f(x_0)-f'(x_0)h}{h}\right| = 0$$
 For $F : \mathbb{R}^n \to \mathbb{R}^m$ differentiable at $x_0 \in \mathbb{R}^n$:
 $$F(x_0+h) = F(x_0) + \underbrace{DF_{x_0}(h)}_{\text{linear map}} + o(|h|)$$
 $$\Updownarrow$$
-$$\lim_{h\to 0}\frac{F(x_0+h)-F(x_0)}{|h|} = DF_{x_0}\!\left(\frac{h}{|h|}\right) = \partial_{\frac{h}{|h|}}F(x_0) \quad \text{(directional derivative in direction } h\text{)}$$
-$$\Updownarrow$$
 $$\lim_{h\to 0}\frac{|F(x_0+h)-F(x_0)-DF_{x_0}(h)|}{|h|} = 0$$
+$$\Downarrow$$
+$$\lim_{s\to 0}\frac{F(x_0+sv)-F(x_0)}{s} = DF_{x_0}(v) = \partial_vF(x_0) \quad \text{for each fixed } v \in \mathbb{R}^n$$
+$$\text{(the \newterm{directional derivative} of } F \text{ at } x_0 \text{ in direction } v\text{)}$$
+
+Note that the last arrow points \textbf{one way only}. The first two lines say the same thing;
+the third is a strictly weaker consequence, and recovering differentiability from it is exactly
+what fails in several variables --- see \cref{ex:partial_derivatives_not_continuous} below.
+
+\begin{ainote}
+Corsin's middle line reads
+$\lim_{h\to0}\frac{F(x_0+h)-F(x_0)}{|h|} = DF_{x_0}\!\left(\frac{h}{|h|}\right)$, inside a chain
+of $\Updownarrow$. As written that limit does not exist: $h$ is being sent to $0$ on the left
+while still appearing on the right, and the quotient genuinely depends on the direction of
+approach. The intended statement is the one typeset above --- fix a direction $v$ first, then
+let the scalar $s \to 0$ --- and it is only an \emph{implication}, not an equivalence. The
+distinction is not pedantic: it is the entire content of
+\cref{ex:partial_derivatives_not_continuous} and of
+\cref{rem:directional_derivative_caveat}. See \texttt{OQ-25}.
+\end{ainote}
 
 \begin{definition}[Differentiability]
 \label{def:differentiable}
 We say that $F : \mathbb{R}^n \to \mathbb{R}^m$ is \newterm{differentiable}
 (\germanterm{differenzierbar}) at $x_0$ if a linear map $DF_{x_0}$ as above exists, where
-$x_0, h \in \mathbb{R}^n$. (Of course, equivalently for $U \subseteq \mathbb{R}^n$ a subset,
-$F : U \to \mathbb{R}^m$.)
+$x_0, h \in \mathbb{R}^n$. The same definition applies verbatim to $F : U \to \mathbb{R}^m$
+for any open subset $U \subseteq \mathbb{R}^n$, and we use it in that generality throughout.
 \end{definition}
 
 % Sonnet 5 (Medium)
-\begin{ainote}
+\begin{remark}
 The linear map $DF_{x_0}$ in \cref{def:differentiable}, when it exists, is automatically unique:
 if $L_1, L_2$ both satisfy the defining limit, then
 $(L_1-L_2)(h)/|h| \to 0$ as $h \to 0$ along every direction, which forces the linear map
 $L_1 - L_2$ to vanish identically (a nonzero linear map cannot decay along its own domain). This
 is the multivariable analogue of the uniqueness-of-limits argument from
 \cref{prop:uniqueness_of_limits}.
-\end{ainote}
+\end{remark}
 
 \begin{proposition}[Differentiability implies continuity]
 \label{prop:differentiable_implies_continuous}
@@ -155,12 +76,12 @@ $$|F(x_0+h) - F(x_0)| \leq |DF_{x_0}(h)| + o(|h|) \leq C|h| + o(|h|) \xrightarro
 so $F(x_0+h) \to F(x_0)$ as $h \to 0$, i.e.\ $F$ is continuous at $x_0$.
 \end{proof}
 
-\begin{ainote}
+\begin{remark}
 The converse fails: continuity does not imply differentiability, exactly as in one variable
 (e.g.\ $x \mapsto |x|$ at $0$). \Cref{ex:partial_derivatives_not_continuous} below shows the
 gap is even wider in several variables --- \emph{all} partial derivatives can exist at a point
 without $F$ even being continuous there, let alone differentiable.
-\end{ainote}
+\end{remark}
 
 % Source: Corsin Nick/Class Notes/Week 4.pdf, p. 3
 \section{The Jacobi matrix}
@@ -237,13 +158,22 @@ Its determinant is $\det \Jac f(r,\theta) = r\cos^2\theta + r\sin^2\theta = r > 
 \end{tikzpicture}
 \end{center}
 
-This is also called the \textbf{speed of the curve}. We get that
+This vector is the \textbf{velocity of the curve} (\germanterm{Geschwindigkeit}) at
+$t = \tfrac{\pi}{4}$; its length $|\gamma'(t)|$ is the \textbf{speed}. We get that
 $$\gamma\!\left(\tfrac{\pi}{4}+h\right) = \frac{1}{\sqrt{2}}\begin{pmatrix}1\\1\end{pmatrix} + \frac{h}{\sqrt{2}}\begin{pmatrix}-1\\1\end{pmatrix} + o(|h|).$$
 
+\begin{ainote}
+Corsin calls $\gamma'(\tfrac{\pi}{4})$ the \qt{speed} of the curve. Strictly, $\gamma'(t)$ is the
+\emph{velocity} --- a vector, carrying both a direction and a magnitude --- while the speed is
+the scalar $|\gamma'(t)|$, here $|(-1,1)|/\sqrt2 = 1$. Since the display below uses the vector,
+the distinction matters; corrected above. See \texttt{OQ-27}.
+\end{ainote}
+
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 4
 From this example, we see that the \textbf{column} vectors of the Jacobian are the partial
 derivatives:
 $$\Jac F(x) = \left(\frac{\partial F}{\partial x_1}\ \Big|\ \cdots\ \Big|\ \frac{\partial F}{\partial x_n}\right)$$
-and therefore, in the canonical basis, with $v = (v_1,\dots,v_n)\transp$:
+and therefore, in the canonical basis, with $v := (v_1,\dots,v_n)\transp$:
 $$\partial_v F(x) = DF_x(v) = \Jac F(x)\,v = \sum_{i=1}^{n} v_i\,\frac{\partial F}{\partial x_i}.$$
 
 % Source: Corsin Nick/Class Notes/Week 4.pdf, p. 5
@@ -276,8 +206,9 @@ functions --- the single most useful computational tool in this chapter.
 The \newterm{chain rule} (\germanterm{Kettenregel}) states: for
 $f : U \subseteq \mathbb{R}^n \to \mathbb{R}^m$, $g : V \subseteq \mathbb{R}^m \to \mathbb{R}^d$
 differentiable, it holds:
-$$D(g\circ f)(x) = Dg(f(x))\,Df(x)$$
-And equivalently for the Jacobians.
+$$D(g\circ f)(x) = Dg(f(x))\,Df(x).$$
+The same identity holds for the corresponding Jacobi matrices, where the composition on the
+right becomes an ordinary matrix product.
 \end{theorem}
 
 \begin{aiexample}[Chain Rule for Vector Fields]
@@ -322,6 +253,7 @@ DF_{x_0}(v) = \partial_v F(x_0) = \left.\frac{d}{ds}\right|_{s=0} F(x_0 + sv) \t
 \end{equation*}
 
 \begin{importantremark}
+\label{rem:directional_derivative_caveat}
 The directional derivative $\partial_v F(x_0)$ can exist (depending on $v$ and $x_0$) even if $F$
 is not differentiable at $x_0$, i.e.\ $DF_{x_0}$ does not exist. However, if $DF_{x_0}$ exists,
 the formula $(*)$ holds.
@@ -395,7 +327,7 @@ $f \in C^k(U \subseteq \mathbb{R}^n, \mathbb{R})$, $\bar x \in U$:
 $$f(\bar x + h) = \sum_{|\alpha| = 0}^{k} \partial^\alpha f(\bar x)\,\frac{h^\alpha}{\alpha!} + o(|h|^k)$$
 where $\alpha$ is a \newterm{multi-index} (\germanterm{Multiindex}) in $\mathbb{N}^n$.
 
-In practice, we never use this formula, but to shed some light on it:
+In practice, we never use this formula directly, but it is worth unpacking once.
 
 % Source: Corsin Nick/Class Notes/Week 4.pdf, pp. 9--10
 \begin{exercise}[Maximal Taylor expansion in $\mathbb{R}^2$]
@@ -459,6 +391,26 @@ starting index) in the source. The $\ell = 0$ term is $f(\bar x)$ itself, which 
 expansion above does include, so the lower limit must be $0$. Corrected above. See
 \texttt{OQ-11}.
 \end{ainote}
+
+% Supplement: Toby Lane/class-document.pdf, §3.4.4
+\begin{remark}[Two ways to weight the same expansion]
+\Cref{ex:taylor_maximal_expansion} above and \cref{thm:taylor_working_formula} look like they
+disagree on how heavily mixed partial derivatives are weighted --- e.g.\ the coefficient of
+$h_1^2h_2$ is $\tfrac12$ in the explicit multi-index expansion, but expanding the working formula
+$\tfrac{1}{\ell!}(h_1\partial_1+h_2\partial_2)^\ell$ by the multinomial theorem produces a
+coefficient $\tfrac{\ell!}{\alpha!} \cdot \tfrac{1}{\ell!} = \tfrac{1}{\alpha!}$ for the term
+$h^\alpha\partial^\alpha f$, which for $\alpha = (2,1)$ (so $\ell = |\alpha| = 3$) is
+$\tfrac{1}{2!\,1!} = \tfrac12$ as well --- they agree, but for two different reasons. The working
+formula's $\tfrac{1}{\ell!}$ weights \emph{all} $\ell$-fold products of partials \emph{globally},
+including repeated ones like $\partial_1\partial_2$ appearing in more than one order in the
+multinomial expansion of $(h_1\partial_1+h_2\partial_2)^\ell$; by Schwarz's lemma (equality of
+mixed partial derivatives, valid here since $f \in C^k$) those repeats collapse onto the
+same $\partial^\alpha$, and it is exactly this collapsing --- a multinomial coefficient
+$\ell!/\alpha!$ of them --- that turns the global $1/\ell!$ into the per-term $1/\alpha!$ seen in
+\cref{ex:taylor_maximal_expansion}. In short: $1/\ell!$ weights \emph{paths} through the mixed
+partial derivatives, while $1/\alpha!$ weights the \emph{distinct} derivatives themselves once
+those paths are identified with each other.
+\end{remark}
 
 % Sonnet 5 (Medium)
 \subsection{A worked example}
@@ -549,6 +501,105 @@ Let $f(x,y) := x^2 y + \sin(xy)$ defined on $\mathbb{R}^2$.
 Let $f(x,y) := x^2 y$ defined on $\mathbb{R}^2$. Compute the directional derivative $D_v f(1,2)$ of $f$ at the point $(1,2)$ along the unit vector $v := \frac{1}{\sqrt{2}}(1,1)\transp$.
 \end{aiexercise}
 
+\exercisesheet{4}
+
+\textit{Statements quoted verbatim from \texttt{exercises/Ex4\_Analysis2\_eng.pdf} (assigned 9
+March 2026, due 16 March 2026). Attribution: Prof. Joaquim Serra, D-MATH, ETH Z\"urich.}
+
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 1
+\begin{ainote}[Corsin's recommendations]
+Colour key, as given on the page: blue \textbf{= important}, orange \textbf{= semi-important},
+red \textbf{= optional}.
+
+\begin{center}
+% p-columns so both the priority and the note wrap on their own.
+\begin{tabular}{@{}l p{0.24\linewidth} p{0.42\linewidth}@{}}
+\textbf{Problem} & \textbf{Priority} & \textbf{Corsin's note} \\
+\hline
+4.1 & important & ``Use the chain rule'' \\[3pt]
+4.2 & important & ``Recall that path connected implies connected'' \\[3pt]
+4.3 & semi-important --- parts 1, 2, 3, 5; \textbf{parts 4 and 6 important} &
+  ``For 3., use Cauchy--Schwarz in $\mathbb{R}^n$ applied to convenient vectors.'' \\[3pt]
+4.4 & optional & --- \\[3pt]
+4.5 & optional & --- \\[3pt]
+4.6 & important --- parts 1, 2, 3 & --- \\
+\end{tabular}
+\end{center}
+\end{ainote}
+
+\begin{ainote}
+Only the exercises tagged \textbf{important} above are reproduced below. The full sheet
+(4.1--4.6, including 4.4 and 4.5) is transcribed in
+\texttt{content/exercise-sheets/week-04.tex}.
+\end{ainote}
+
+\begin{exercise}[4.1 --- Derivative computation \textnormal{(important)}]
+\label{ex:4.1}
+Consider the function $u : (x,y) \mapsto x^{\sin(y)}$, defined for
+$(x,y) \in (0,\infty)\times\mathbb{R} \subset \mathbb{R}^2$. Compute $\partial_x u$ and
+$\partial_y u$.
+\end{exercise}
+
+\begin{exercise}[4.2 --- Connected graphs \textnormal{(important)}]
+\label{ex:4.2}
+Let $U \subset \mathbb{R}^n$ be open and connected and let $f \in C^1(U, \mathbb{R}^m)$. Show that
+its graph
+$$\Gamma_f := \{(x, f(x)) : x \in U\}$$
+is a connected subset of $\mathbb{R}^n \times \mathbb{R}^m$.
+\end{exercise}
+
+\begin{exercise}[4.3 --- $p$-norms \textnormal{(semi-important; parts 4 and 6 important)}]
+\label{ex:4.3}
+For $p \geq 1$ and $x \in \mathbb{R}^n$ define the \textbf{$p$-norm} of $x$ as
+$$|x|_p := \Big(\sum_{i=1}^{n} |x_i|^p\Big)^{1/p}.$$
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item For $n = 2$ and $p = 1, 2, 10$ sketch the sets $\{x \in \mathbb{R}^2 : |x|_p \leq 1\}$.
+  \item For a given $x \in \mathbb{R}^n$, compute the limit
+    $|x|_\infty := \lim_{p\to\infty}|x|_p$.
+  \item Using an appropriate inequality that you have seen in class, prove that
+    $$\Big(\sum_{i=1}^{n} a_i^{p-1}b_i\Big)^2 \leq \Big(\sum_{i=1}^{n}a_i^p\Big)\Big(\sum_{i=1}^{n}a_i^{p-2}b_i^2\Big),$$
+    whenever $a_i, b_i$ are $n$-tuples of positive numbers.
+  \item Fix $x, y \in \mathbb{R}^n$ and consider the function $f : [0,1] \to \mathbb{R}$ defined
+    as
+    \begin{equation*}
+    f(t) := |tx + (1-t)y|_p = \Big(\sum_{i=1}^{n}|tx_i + (1-t)y_i|^p\Big)^{1/p}. \tag{1}
+    \end{equation*}
+    Show that $f$ is convex. You may assume that the coordinates of $x$ and $y$ are all strictly
+    positive and use the inequality of the previous point.
+  \item Deduce from the previous point that the triangular inequality holds, i.e.\
+    $|x+y|_p \leq |x|_p + |y|_p$ for all $x,y \in \mathbb{R}^n$.
+  \item What happens for $p \in (0,1)$?
+\end{enumerate}
+\textit{Official hints:} \textbf{4.3.3} --- use Cauchy--Schwarz and the fact that
+$a_i^{p-1}b_i = a_i^{p/2}\cdot a_i^{(p-2)/2}b_i$. \textbf{4.3.4} --- show that $f''(t) \geq 0$; it
+is not the simplest derivative, but if you get it right the inequality in 4.3.3 will be just what
+you need. \textbf{4.3.5} --- write the convexity inequality between $x$, $y$ and the middle point
+$(x+y)/2$. To get the general case from the one with positive coordinates, observe that for
+$x \in \mathbb{R}^n$, denoting $\hat x := (|x_1|,\dots,|x_n|)$, we have
+$|x+y|_p \leq |\hat x + \hat y|_p$ and $|\hat x|_p = |x|_p$ for all $x,y \in \mathbb{R}^n$.
+\end{exercise}
+
+\begin{exercise}[4.6 --- A directional derivative vanishes \textnormal{(important)}]
+\label{ex:4.6}
+Let $u \in C^1(\mathbb{R}^n)$ and $\nu \in \mathbb{R}^n$. Show that
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item If $\partial_1 u \equiv 0$ then ``$u$ does not depend on $x_1$''; more rigorously: there
+    exists a unique function $v \in C^1(\mathbb{R}^{n-1})$ such that
+    \begin{equation*}
+    u(x_1,\dots,x_n) = v(x_2,\dots,x_n) \quad \text{for all } x \in \mathbb{R}^n. \tag{2}
+    \end{equation*}
+  \item If $\partial_\nu u \equiv 0$ and $\nu\cdot e_1 \neq 0$ then ``$u$ is a function of $n-1$
+    variables''; more rigorously: there exists a unique function $w \in C^1(\mathbb{R}^{n-1})$
+    such that
+    $$u(x_1,\dots,x_n) = w\!\left(x_2 - \frac{x_1\nu_2}{\nu_1}, \dots, x_n - \frac{x_1\nu_n}{\nu_1}\right) \quad \text{for all } x \in \mathbb{R}^n.$$
+  \item \textbf{(*)} What can we conclude if we assume only that $\partial_1 u = 0$ in an open
+    connected subset $U \subset \mathbb{R}^n$?
+\end{enumerate}
+\textit{Official hints:} \textbf{4.6.2} --- apply the mean value theorem to $u(x + t\nu)$.
+\textbf{4.6.3} --- consider the domain $U := \{(x,y) : x^2 < y < x^2+1\}$ and the function
+$$u(x,y) := \begin{cases} \max\{0, y-2\}^2 & \text{if } x \geq 0, \\ 0 & \text{if } x \leq 0.\end{cases}$$
+\end{exercise}
+
 \section{Solutions}
 \label{sec:week04_solutions}
 
@@ -558,7 +609,7 @@ out (\cref{ex:4.1,ex:4.2,ex:4.3,ex:4.6} --- he gives only hints on his priority 
 the two \texttt{aiexercise} problems. Corsin's own exercises in this chapter
 (\cref{ex:chain_rule_computation,ex:transpose_diff,ex:taylor_maximal_expansion,%
 ex:taylor_explicit_example,ex:hessian_taylor_proof}) are solved inline, immediately after their
-statement, mirroring how he presents them in his own notes (see the "Kept inline" comments above
+statement, mirroring how he presents them in his own notes (see the qt{Kept inline} comments above
 each).
 \end{ainote}
 
@@ -641,7 +692,7 @@ and $\varphi$ is continuous, \cref{thm:continuity_preserves_connected} gives tha
     the mean value theorem to $u(x+t\nu)$ shows $t \mapsto u(x+t\nu)$ is constant since
     $\partial_\nu u \equiv 0$; consequently $u$, expressed in the coordinates $(x_1, y_2,\dots,
     y_n)$, has vanishing $x_1$-derivative and is therefore (by part 1) independent of $x_1$ in
-    these coordinates. Hence there is a (unique, by the same argument as in part 1) function
+    these coordinates. Hence, there is a (unique, by the same argument as in part 1) function
     $w \in C^1(\mathbb{R}^{n-1})$ with
     \[
     u(x_1,\dots,x_n) = w\!\left(x_2 - \frac{x_1\nu_2}{\nu_1},\dots,x_n - \frac{x_1\nu_n}{\nu_1}\right).
@@ -654,7 +705,7 @@ and $\varphi$ is continuous, \cref{thm:continuity_preserves_connected} gives tha
     for $x \leq 0$, one checks $\partial_1 u \equiv 0$ throughout $U$ (near $x=0$ both branches
     agree, since $y < 2$ there), yet $u$ is not globally independent of $x$: for $y > 2$, the
     fiber of $U$ over $y$ splits into two disconnected intervals (one with $x>0$, one with
-    $x<0$), and $u$ takes different values on each. So connectedness of $U$ alone does not
+    $x<0$), and $u$ takes different values on each. So, connectedness of $U$ alone does not
     suffice; what is needed is connectedness of each vertical fiber of $U$.
 \end{enumerate}
 \end{exercisesolution}

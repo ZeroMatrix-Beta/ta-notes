@@ -72,6 +72,17 @@ You are authorized to improve the prose and apply the established "House Style" 
   standard numbered lists, use `enumerate` but do not hard-code labels; rely on the global style
   defined in the preamble.
 * **New Terminology & Quotes:** Use `\newterm{...}` for introducing newly defined mathematical terms (the first definition or formal introduction of a concept). Use `\qt{...}` strictly for quoting text, literal quotes, colloquial terms, or informal emphasis—never use `\qt{...}` where a term is being formally defined or introduced for the first time.
+* **Raw ASCII double quotes `"..."` are FORBIDDEN in typeset text.** They render as `”…”` —
+  two *closing* quotes — because TeX has no notion of an opening `"`. Always use `\qt{...}`
+  instead (or, where `\qt`'s italics are unwanted, the explicit ``` ``...'' ```).
+
+  * **BAD:** `statements like "every bounded sequence has a convergent subsequence" need new proofs`
+  * **GOOD:** `statements like \qt{every bounded sequence has a convergent subsequence} need new proofs`
+
+  This applies to scare quotes, quoted phrases, colloquialisms, and quoted source strings alike.
+  It does **not** apply inside LaTeX comments (`% ...`), which are never typeset. Note that
+  grepping for `"` produces false positives from umlaut escapes (`\"a`, `\"o`, `\"u`); filter
+  those out before assuming a hit is real.
 * **Custom bracketed names on theorem environments are encouraged.** All theorem-like
   environments (`theorem`, `lemma`, `definition`, `proposition`, `corollary`, and their starred
   variants, `claim*`, `example`, `remark`, `exercise`, etc.) **should** carry a descriptive

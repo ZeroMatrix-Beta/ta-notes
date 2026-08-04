@@ -403,7 +403,7 @@
   \@namedef{theHimportantremark}{\theHtheorem}%
   \@namedef{theHgoals}{\theHtheorem}%
   \@namedef{theHconclusion}{\theHtheorem}%
-  \@namedef{theHainote}{\theHtheorem}%
+  % (no theHainote: ainote is unnumbered, see its \newtheorem* below)
   \@namedef{theHaiexample}{\theHtheorem}%
   \@namedef{theHaiexercise}{\theHtheorem}%
 }
@@ -513,9 +513,17 @@
  \thmnote{\ \textcolor{EnvAINote}{\bfseries(}{\normalfont\sffamily\itshape#3}\textcolor{EnvAINote}{\bfseries)}}}
 
 \theoremstyle{ainotethm}
-\newaliascnt{ainote}{theorem}
-\newtheorem{ainote}[ainote]{AI-Note}
-\aliascntresetthe{ainote}
+% ainote is the ONE deliberately unnumbered environment in this document.
+% The project-wide "everything is numbered" rule exists because a \label inside an
+% unnumbered environment is silently misattributed by cleveref to the last-stepped
+% ambient counter. That hazard needs a \label to bite, and an ainote never carries
+% one: an AI-Note is editorial commentary about the transcription, never a result
+% anyone cites. Numbering them only inflated the shared theorem counter, so that
+% e.g. a Lemma 2.f.43 was followed by Definition 2.f.46 with two AI-Notes in
+% between. Consequently there is no \theHainote entry and no \crefname either.
+% If you ever need to \label one, it is content, not commentary -- make it a
+% remark (see the semantics section in gemini.md).
+\newtheorem*{ainote}{AI-Note}
 
 \newaliascnt{aiexample}{theorem}
 \newtheorem{aiexample}[aiexample]{AI-Example}
@@ -577,8 +585,8 @@
 \Crefname{goals}{Goals}{Goals}
 \crefname{conclusion}{Conclusion}{Conclusions}
 \Crefname{conclusion}{Conclusion}{Conclusions}
-\crefname{ainote}{AI-Note}{AI-Notes}
-\Crefname{ainote}{AI-Note}{AI-Notes}
+% No \crefname for ainote: it is unnumbered by design and carries no counter,
+% so it cannot (and should not) be cross-referenced. See the note at its \newtheorem*.
 \crefname{aiexample}{AI-Example}{AI-Examples}
 \Crefname{aiexample}{AI-Example}{AI-Examples}
 \crefname{aiexercise}{AI-Exercise}{AI-Exercises}
@@ -793,6 +801,7 @@
 \cleardoublepage
 
 % Include content
+\input{content/week-01.tex}
 \input{content/week-02.tex}
 \input{content/week-03.tex}
 \input{content/week-04.tex}

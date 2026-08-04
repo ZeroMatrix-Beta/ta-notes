@@ -1,6 +1,604 @@
 % Source: Corsin Nick/Class Notes/Week 6.pdf, p. 1
 \chapter{Week 6 --- Convexity}
 
+% Transition: Claude Sonnet 5
+This chapter's subject is convexity: its definitions and characterizations, then two of the
+central existence theorems for maps between Euclidean spaces, the inverse and implicit function
+theorems. The exercise sheet is at the end of the chapter, in \cref{sec:week06_solutions}.
+
+% Source: Corsin Nick/Class Notes/Week 6.pdf, p. 2
+\section{Convexity}
+\label{sec:convexity}
+
+% Sonnet 5 (Medium)
+\subsection{Definitions and characterizations}
+
+\begin{definition}[Convex set and convex function]
+\label{def:convex_set_function}
+A subset $A \subseteq \mathbb{R}^n$ is \newterm{convex} (\germanterm{konvex}) if for all
+$x,y \in A$ and every $t \in [0,1]$, the point $p := (1-t)x+ty$ is an element of $A$.
+
+A function $f : A \to \mathbb{R}$ is convex if $A$ is convex and, for all $x,y \in A$ and
+$t \in [0,1]$,
+$$f\big((1-t)x+ty\big) \leq (1-t)f(x)+tf(y).$$
+\end{definition}
+
+% Sonnet 5 (Medium)
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.0]
+  % Curve is 0.18(r-2.6)^2 + 0.4; the chord endpoints must SIT on it:
+  %   f(0.7) = 1.0498,  f(4.6) = 1.12.
+  % Interior point at t = 0.35: r = 2.065, chord height 1.0744, curve height 0.4515.
+  \draw[->] (-0.3,0) -- (5.6,0);
+  \draw[->] (0,-0.3) -- (0,2.0);
+  \draw[blue!70!black, thick, domain=0.2:5, samples=60, smooth]
+    plot ({\x}, {0.18*(\x-2.6)*(\x-2.6)+0.4});
+  \node[blue!70!black, font=\small] at (5.3,1.55) {$f$};
+
+  \draw[orange!90!black, thick] (0.7,1.0498) -- (4.6,1.12);
+  \node[orange!90!black, font=\scriptsize] at (3.5,1.32) {chord};
+  \fill (0.7,1.0498) circle (1.5pt) node[left, font=\small] {$f(x)$};
+  \fill (4.6,1.12) circle (1.5pt) node[below right, font=\small] {$f(y)$};
+
+  % The convexity inequality, read off vertically at the interior point.
+  \draw[gray, dashed] (2.065,0) -- (2.065,1.0744);
+  \fill[orange!90!black] (2.065,1.0744) circle (1.5pt);
+  \fill[blue!70!black] (2.065,0.4515) circle (1.5pt);
+  \draw[red!80!black, <->, thick] (2.065,0.4515) -- (2.065,1.0744);
+
+  \draw (0.7,0.05) -- (0.7,-0.05) node[below, font=\small] {$x$};
+  \draw (4.6,0.05) -- (4.6,-0.05) node[below, font=\small] {$y$};
+  \draw (2.065,0.05) -- (2.065,-0.05);
+  \node[font=\scriptsize, below] at (2.065,-0.12) {$(1-t)x+ty$};
+  \node[red!80!black, font=\small] at (2.9,-0.85)
+    {$f\big((1-t)x+ty\big) \leq (1-t)f(x)+tf(y)$};
+\end{tikzpicture}
+\end{center}
+
+\begin{definition}[Semidefinite matrices]
+\label{def:semidefinite_matrix}
+Let $A \in \mathbb{R}^{n\times n}$ be symmetric. Then $A$ is
+\begin{itemize}
+  \item \newterm{positive semidefinite} (\germanterm{positiv semidefinit}), also called
+    \textbf{nonnegative definite}, if $v\transp Av \geq 0$ for all $v \in \mathbb{R}^n$;
+  \item \newterm{negative semidefinite} (\germanterm{negativ semidefinit}), or
+    \textbf{nonpositive definite}, if $v\transp Av \leq 0$ for all $v \in \mathbb{R}^n$.
+\end{itemize}
+These are the boundary cases of \cref{def:sign_symmetric_matrix}: positive definite implies
+positive semidefinite, and the two differ exactly on the degenerate matrices, where
+$v\transp Av = 0$ is allowed for some $v \neq 0$.
+\end{definition}
+
+\begin{ainote}
+\Cref{def:semidefinite_matrix} is not in Corsin's notes. The terms are used freely from
+\cref{prop:convexity_characterizations} and \cref{ex:6.8} onward but were never named when
+\cref{def:sign_symmetric_matrix} was introduced in Week 5, so they are defined here instead of
+being left implicit.
+\end{ainote}
+
+\begin{proposition}[Characterizations of convexity]
+\label{prop:convexity_characterizations}
+Let $U \subseteq \mathbb{R}^n$ be open and convex, and let $f \in C^2(U)$. Then the following are
+equivalent:
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $f$ is convex;
+  \item $\Hess f(x)$ is positive semidefinite for all $x \in U$;
+  \item $f(y)-f(x) \geq Df_x(y-x)$ for all $x,y \in U$.
+\end{enumerate}
+\end{proposition}
+
+\begin{example}[The parabola]
+The parabola $p : \mathbb{R}^n \to \mathbb{R}$, $x \mapsto |x|^2 = \sum_{i=1}^n x_i^2$, is convex:
+$$\partial_i\partial_j p(x) = 2\delta_{ij} \implies \Hess p(x) = 2\id_n,$$
+and every eigenvalue is $2>0$, so $\Hess p(x)$ is positive definite (hence positive semidefinite)
+for every $x$, and $p$ is convex by \cref{prop:convexity_characterizations}.
+\end{example}
+
+% Sonnet 5 (Medium)
+\subsection{Proof of the characterizations}
+
+% Source: Corsin Nick/Class Notes/Week 6.pdf, pp. 3--6
+\begin{exercise}[Equivalent characterizations of convexity]
+\label{ex:convexity_characterizations}
+Let $U \subseteq \mathbb{R}^n$ be open and convex.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Show that $f : U \to \mathbb{R}$ is convex if and only if the functions
+    $$f_{x,y} : [0,1] \to \mathbb{R}, \qquad s \mapsto f(x+s(y-x))$$
+    are convex for all $x,y \in U$.
+  \item Show that
+    $$f \text{ convex} \iff f(y)-f(x) \geq Df_x(y-x) \quad \text{for all } x,y \in U.$$
+    This also holds for $f \in C^1(U)$, $U \subseteq \mathbb{R}^n$ open and convex.
+  \item Conclude that if $f \in C^1(U)$ is convex and has a critical point at $x_0 \in U$, then $f$
+    has a minimum at $x_0$.
+\end{enumerate}
+\end{exercise}
+
+% Kept inline: solved directly in Corsin Nick/Class Notes/Week 6.pdf, pp. 3--6.
+\begin{exercisesolution}[Solution to \cref{ex:convexity_characterizations}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item By definition, $f_{x,y}$ is convex if and only if
+    $$f_{x,y}\big((1-t)s_0+ts_1\big) \leq (1-t)f_{x,y}(s_0)+tf_{x,y}(s_1) \quad \text{for all } s_0,s_1,t \in [0,1],$$
+    which, unwinding the definition of $f_{x,y}$, reads
+    $$f\big(x+[(1-t)s_0+ts_1](y-x)\big) \leq (1-t)f(x+s_0(y-x))+tf(x+s_1(y-x)),$$
+    that is,
+    $$f\big((1-t)(x+s_0(y-x))+t(x+s_1(y-x))\big) \leq (1-t)f(x+s_0(y-x))+tf(x+s_1(y-x)).$$
+    Setting $s_0=0$, $s_1=1$ recovers exactly the convexity inequality for $f$ at the points $x$
+    and $y$, so if this holds for all $x,y \in U$, then $f$ is convex. Conversely, if $f$ is
+    convex, then convexity of $f_{x,y}$ for each fixed $x,y \in U$ follows by applying convexity
+    of $f$ to the two points $x+s_0(y-x)$ and $x+s_1(y-x)$, which both lie in $U$ since $U$ is
+    convex.
+  \item Recall that $g \in C^1(I)$, for $I \subseteq \mathbb{R}$ an interval, is convex if and
+    only if $g'$ is increasing. Combined with \textbf{(a)}, this gives
+    $$f \text{ convex} \iff f'_{x,y} \text{ is increasing, for all } x,y \in U.$$
+    By the chain rule, for $t \in [0,1]$,
+    $$f'_{x,y}(t) = Df_{x+t(y-x)}(y-x),$$
+    and by the mean value theorem there exists $s \in (0,1)$ such that
+    $$f(y)-f(x) = f_{x,y}(1)-f_{x,y}(0) = f'_{x,y}(s) = Df_{x+s(y-x)}(y-x).$$
+
+    \textbf{($\Rightarrow$)} If $f$ is convex, then $f_{x,y}$ is convex for all $x,y \in U$ by
+    \textbf{(a)}, so $f'_{x,y}$ is increasing, and in particular $f'_{x,y}(s) \geq f'_{x,y}(0)$.
+    Combined with the mean value theorem identity above, this yields
+    $$f(y)-f(x) \geq Df_x(y-x).$$
+
+    \textbf{($\Leftarrow$)} Suppose $f(y)-f(x) \geq Df_x(y-x)$ for all $x,y \in U$. We must show
+    that $0 \leq s < t \leq 1 \implies f'_{x,y}(s) \leq f'_{x,y}(t)$. Set $u := x+s(y-x)$ and
+    $v := x+t(y-x)$, so that $u-v = (s-t)(y-x)$. Applying the hypothesis to the pairs $(u,v)$ and
+    $(v,u)$ gives
+    $$Df_u(v-u) \leq f(v)-f(u), \qquad Df_v(u-v) \leq f(u)-f(v).$$
+    Therefore,
+    $$(t-s)f'_{x,y}(s) = Df_u(v-u) \leq f(v)-f(u) \leq -Df_v(u-v) = Df_v(v-u) = (t-s)f'_{x,y}(t),$$
+    and since $t-s>0$, this gives $f'_{x,y}(s) \leq f'_{x,y}(t)$, i.e., $f'_{x,y}$ is increasing,
+    hence $f_{x,y}$ is convex for all $x,y \in U$, and so $f$ is convex by \textbf{(a)}.
+
+    \begin{remark}
+    The argument above only ever used differentiability of $f$, never twice-differentiability, so
+    the equivalence in \textbf{(b)} already holds for $f \in C^1(U)$ with $U \subseteq
+    \mathbb{R}^n$ open and convex --- one order of regularity weaker than
+    \cref{prop:convexity_characterizations}, which is stated for $f \in C^2(U)$. This is exactly
+    the fact used in \cref{ex:6.7}\textbf{(b)}.
+    \end{remark}
+  \item Since $f$ is convex and $x_0 \in U$ is a critical point, $Df_{x_0} = 0$, so \textbf{(b)}
+    gives
+    $$0 = Df_{x_0}(y-x_0) \leq f(y)-f(x_0) \quad \text{for all } y \in U,$$
+    i.e., $f(y) \geq f(x_0)$ for all $y \in U$. Hence $f$ has a minimum at $x_0$ --- in fact a
+    global minimum on $U$, sharpening \cref{prop:extremum_implies_critical} (which only guarantees
+    that critical points are the sole \emph{candidates} for extrema) in the convex case.
+\end{enumerate}
+\end{exercisesolution}
+
+% Sonnet 5 (Medium) --- FIG-W06-01, drawn from the page image seen while transcribing
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.15]
+  \draw[->] (-0.3,0) -- (5.2,0) node[right, font=\small] {$r$};
+  \draw[->] (0,-0.3) -- (0,3.0);
+
+  \draw[green!60!black, thick, domain=0.2:5.0, samples=60, smooth]
+    plot ({\x}, {0.20*(\x-2.6)*(\x-2.6) + 1.0});
+  \node[green!60!black, font=\small] at (5.35,2.2) {$f_{x,y}(r)$};
+
+  % True tangents to f_{x,y}(r) = 0.20(r-2.6)^2 + 1.0:
+  %   at s = 1.2: value 1.392, slope -0.56;   at t = 3.6: value 1.200, slope +0.40.
+  % They must touch the curve and lie below it -- that is what part (b) says.
+  \draw[orange!90!black, thick, domain=0.3:3.0]
+    plot ({\x}, {-0.56*(\x-1.2) + 1.392});
+  \draw[purple, thick, domain=1.8:5.0]
+    plot ({\x}, {0.40*(\x-3.6) + 1.200});
+
+  \fill[orange!90!black] (1.2,1.392) circle (1.6pt);
+  \fill[purple] (3.6,1.200) circle (1.6pt);
+
+  \node[orange!90!black, font=\scriptsize, align=center] (LabU) at (1.45,2.45)
+    {slope $f'_{x,y}(s) = Df_u(y-x) < 0$};
+  \draw[orange!90!black, thin, ->] (LabU) -- (1.2,1.47);
+  \node[purple, font=\scriptsize, align=center] (LabV) at (4.15,0.45)
+    {slope $f'_{x,y}(t) = Df_v(y-x) > 0$};
+  \draw[purple, thin, ->] (LabV) -- (3.6,1.12);
+
+  \draw (0,0.05) -- (0,-0.05) node[below, font=\small] {$0$};
+  \draw (1.2,0.05) -- (1.2,-0.05) node[below, font=\small] {$s$};
+  \draw (3.6,0.05) -- (3.6,-0.05) node[below, font=\small] {$t$};
+  \draw (4.9,0.05) -- (4.9,-0.05) node[below, font=\small] {$1$};
+  \draw[dashed, gray] (1.2,0) -- (1.2,1.392);
+  \draw[dashed, gray] (3.6,0) -- (3.6,1.200);
+\end{tikzpicture}
+\end{center}
+
+The picture records both halves of \textbf{(b)} at once: each tangent line lies weakly
+\emph{below} the graph --- which is the inequality $f(y)-f(x) \geq Df_x(y-x)$ read along the
+segment --- and the slope grows from $s$ to $t$, which is $f'_{x,y}$ increasing.
+
+% Sonnet 5 (Medium)
+We now change subject entirely: from convexity to the question of when a map is locally
+invertible --- the tool that makes the implicit function theorem, and later submanifolds
+(\cref{sec:submanifolds}), possible.
+
+% Source: Corsin Nick/Class Notes/Week 6.pdf, pp. 8--9
+\section{The inverse function theorem}
+\label{sec:inverse_function_theorem}
+
+\begin{theorem}[Inverse function theorem]
+\label{thm:inverse_function_theorem}
+Let $U \subseteq \mathbb{R}^n$ be open, let $f \in C^k(U,\mathbb{R}^n)$, and let $x_0 \in U$ be
+such that $Df_{x_0}$ is invertible. Then there exists an open neighbourhood $U_0 \subseteq U$ of
+$x_0$ such that
+$$f|_{U_0} : U_0 \to f(U_0)$$
+is a $C^k$-\newterm{diffeomorphism} (\germanterm{Diffeomorphismus}) and
+$$D\big(f|_{U_0}^{-1}\big)_{f(x)} = D\big(f|_{U_0}\big)_x^{-1} \quad \text{for all } x \in U_0.$$
+\end{theorem}
+
+\begin{question}
+\begin{enumerate}[label=\textbf{Q\arabic*.}]
+  \item If $f : \mathbb{R}^n \to \mathbb{R}^n$ is $C^k$ and a \newterm{homeomorphism}
+    (\germanterm{Hom\"oomorphismus}) --- that is, bijective with continuous inverse --- is it
+    necessarily a $C^k$-diffeomorphism?
+  \item If $f \in C^\infty(U,\mathbb{R}^n)$ has an everywhere invertible differential, i.e.,
+    $Df_x$ is invertible for all $x \in U$ with $U \subseteq \mathbb{R}^n$ open, then $f$ is a
+    $C^\infty$-diffeomorphism onto its image. True or false?
+\end{enumerate}
+\end{question}
+
+\begin{answer}
+\begin{enumerate}[label=\textbf{A\arabic*.}]
+  \item \textbf{False.} Consider $f : \mathbb{R} \to \mathbb{R}$, $x \mapsto x^3$. Then
+    $f^{-1} : \mathbb{R} \to \mathbb{R}$, $x \mapsto \sqrt[3]{x}$, is not continuously
+    differentiable at $0 \in \mathbb{R}$.
+  \item \textbf{False.} Consider
+    $$\cos|_{\mathbb{R}\setminus\pi\mathbb{Z}} : \mathbb{R}\setminus\pi\mathbb{Z} \to (-1,1), \qquad x \mapsto \cos(x).$$
+    For any $x \in \mathbb{R}\setminus\pi\mathbb{Z}$, $\cos'(x) = -\sin(x) \neq 0$, so the
+    differential is everywhere invertible, but the cosine is not injective on this domain, so it
+    fails to be a diffeomorphism onto its image.
+\end{enumerate}
+\end{answer}
+
+\begin{ainote}
+Corsin illustrates \textbf{A2} with a second sketch: one $C^\infty$ curve carrying all three
+possibilities at once. The figure below reproduces it, with the three regions labelled by
+\emph{which hypothesis of the inverse function theorem fails}.
+\end{ainote}
+
+% Sonnet 5 (Medium) --- FIG-W06-03, drawn from the page image seen while transcribing.
+% The first region must have a genuinely HORIZONTAL tangent (f'=0) -- drawn as an explicit
+% cubic 1.95 + 0.15(x-2.15)^3, which is strictly increasing yet has f'(2.15) = 0. A merely
+% shallow slope would not do: where f' != 0 the IFT applies and f IS a local diffeomorphism.
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.05]
+  \draw[->] (-0.3,0) -- (8.4,0) node[right, font=\small] {$x$};
+  \draw[->] (0,-0.3) -- (0,5.6) node[above, font=\small] {$y$};
+
+  % Region 1: strictly increasing, but with f'(2.15) = 0 (an x^3-type inflection).
+  \draw[blue!80!black, thick, domain=0.25:3.1, samples=60, smooth]
+    plot ({\x}, {1.95 + 0.15*(\x-2.15)*(\x-2.15)*(\x-2.15)});
+  % Regions 2 and 3: a hump (three preimages), then a strictly monotone stretch.
+  \draw[blue!80!black, thick] plot[smooth] coordinates {
+    (3.1,2.079) (3.5,2.40) (4.0,2.62) (4.5,2.45) (4.95,2.20)
+    (5.4,2.50) (6.1,3.20) (6.9,4.00) (7.6,4.70)};
+
+  % Region 1 marker: the horizontal tangent itself.
+  \draw[red!80!black, dashed, thick] (1.45,1.95) -- (2.85,1.95);
+  \fill[red!80!black] (2.15,1.95) circle (1.7pt);
+  \draw (2.15,0.05) -- (2.15,-0.05) node[below, font=\scriptsize] {$x_0$};
+  \node[red!80!black, font=\scriptsize, align=center] (LabFlat) at (1.15,3.9)
+    {$f'(x_0)=0$:\\ injective, but $f^{-1}$\\ not differentiable};
+  \draw[red!80!black, thin, ->] (LabFlat) -- (2.10,2.10);
+
+  % Region 2 marker: one value, three preimages.
+  \draw[orange!90!black, dashed, thick] (3.2,2.35) -- (5.65,2.35);
+  \fill[orange!90!black] (3.45,2.35) circle (1.5pt);
+  \fill[orange!90!black] (4.61,2.35) circle (1.5pt);
+  \fill[orange!90!black] (5.24,2.35) circle (1.5pt);
+  \node[orange!90!black, font=\scriptsize, align=center] (LabHump) at (4.4,1.15)
+    {not injective:\\ one value, three preimages};
+  \draw[orange!90!black, thin, ->] (LabHump) -- (4.55,2.24);
+
+  % Region 3 marker: the IFT applies.
+  \node[green!60!black, font=\scriptsize, align=center] (LabIFT) at (5.75,4.75)
+    {$f'\neq0$ and injective:\\ diffeomorphism by the IFT};
+  \draw[green!60!black, thin, ->] (LabIFT) -- (6.85,4.00);
+\end{tikzpicture}
+\end{center}
+
+Reading the three regions left to right makes the two answers above concrete.
+
+\begin{itemize}
+  \item At $x_0$ the curve is still \emph{strictly increasing}, so $f$ is injective there and
+    $f^{-1}$ exists --- but the tangent is horizontal, so the tangent to $f^{-1}$ at $f(x_0)$ is
+    \emph{vertical} and $f^{-1}$ fails to be differentiable. Invertible, yet not a
+    diffeomorphism: this is exactly $x \mapsto x^3$ from \textbf{A1}, and it is why
+    \cref{thm:inverse_function_theorem} assumes $Df_{x_0}$ invertible rather than merely
+    assuming $f$ bijective.
+  \item On the hump, $f' \neq 0$ at every individual point, so $f$ \emph{is} a local
+    diffeomorphism near each of them --- yet one value has three preimages, so $f$ is not
+    globally injective. This is \textbf{A2}: an everywhere-invertible differential buys locality
+    and nothing more.
+  \item On the final stretch both hypotheses hold, and the inverse function theorem delivers a
+    genuine $C^\infty$-diffeomorphism onto the image.
+\end{itemize}
+
+% Sonnet 5 (Medium) --- FIG-W06-02, drawn from the page image seen while transcribing
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.1]
+  \draw[->] (-0.3,0) -- (7.3,0) node[right, font=\small] {$x$};
+  \draw[->] (0,-1.6) -- (0,1.6) node[above, font=\small] {$y$};
+  \draw (0,1) -- (-0.05,1) node[left, font=\footnotesize] {$1$};
+  \draw (0,-1) -- (-0.05,-1) node[left, font=\footnotesize] {$-1$};
+
+  \draw[blue!80!black, thick, domain=0:7, samples=120, smooth]
+    plot ({\x}, {cos(\x r)}) node[right, font=\small] {$\cos(x)$};
+
+  \draw[red!80!black, dashed, thick] (0,0.4) -- (7,0.4);
+  \node[red!80!black, font=\scriptsize, right] at (7,0.4) {not injective};
+\end{tikzpicture}
+\end{center}
+
+% Sonnet 5 (Medium)
+The inverse function theorem asks when $f(x)=y$ can be solved for $x$ as a function of $y$. The
+implicit function theorem generalizes this: it asks when an equation $f(x,y)=0$ can be solved for
+\emph{some} of the variables in terms of the others, without $f$ itself being invertible.
+
+% Source: Corsin Nick/Class Notes/Week 6.pdf, pp. 10--12
+\section{The implicit function theorem}
+\label{sec:implicit_function_theorem}
+
+\begin{theorem}[Implicit function theorem]
+\label{thm:implicit_function_theorem}
+Let $1 \leq n-d < n$, let $f \in C^k(\mathbb{R}^d\times\mathbb{R}^{n-d}, \mathbb{R}^{n-d})$ (or an
+open subset of $\mathbb{R}^d\times\mathbb{R}^{n-d}$), and suppose $f(x_0,y_0) = 0$ for some
+$(x_0,y_0) \in \mathbb{R}^d\times\mathbb{R}^{n-d}$ such that the differential $D_yf(x_0,y_0)$ of
+$y \mapsto f(x_0,y)$ at $y_0$ is bijective (so $\Jac_yf(x_0,y_0)$ is invertible). Then there exist
+balls $B_r(x_0) \subseteq \mathbb{R}^d$ and $B_s(y_0) \subseteq \mathbb{R}^{n-d}$ and
+$g \in C^k(B_r(x_0), B_s(y_0))$ such that, for all $(x,y) \in B_r(x_0)\times B_s(y_0)$,
+$$f(x,y) = 0 \iff y = g(x).$$
+Furthermore,
+$$\Jac g(x) = -\big(\Jac_yf(x,g(x))\big)^{-1}\Jac_xf(x,g(x)).$$
+\end{theorem}
+
+% Sonnet 5 (Medium)
+In words: the equation $f(x,y)=0$ ties $x$ and $y$ together without telling us what $y$ is. The
+theorem says that near a point where the tie is \emph{non-degenerate in $y$}, the equation can be
+untangled --- there is an honest function $g$ producing the right $y$ for each nearby $x$, it is
+as smooth as $f$ was, and its derivative is computable without ever writing $g$ down.
+
+Three things are worth reading off the statement before the pictures.
+\begin{itemize}
+  \item \textbf{Which variables get solved for is a choice.} Splitting the $n$ coordinates into
+    $d$ \qt{free} ones and $n-d$ \qt{solved} ones is ours to make; the theorem only demands that
+    the block $\Jac_yf$ belonging to the solved variables be invertible. Choose a different
+    split and a different block has to be invertible.
+  \item \textbf{The conclusion is an equivalence, not just an inclusion.} Inside the box,
+    $f(x,y)=0 \iff y=g(x)$. So $g$ does not merely produce \emph{some} solutions: within the
+    box there are no others.
+  \item \textbf{Nothing is claimed globally.} The level set $\{f(x,y)=0\}$ is a graph over $x$
+    only near the chosen point --- \cref{sec:submanifolds} in Week 7 will call such a set a
+    submanifold, and this local-graph property is exactly what that definition abstracts.
+\end{itemize}
+
+\begin{remark}[Why $\Jac g$ has this form]
+The formula is just implicit differentiation, done in blocks. By construction $g$ satisfies
+$f(x,g(x)) \equiv 0$ for every $x \in B_r(x_0)$: the left-hand side is identically zero as a
+function of $x$, so its derivative is too. Differentiating with the chain rule
+(\cref{thm:chain_rule}), and remembering that $x$ enters both directly and through $g$,
+$$0 = \underbrace{D_xf(x,g(x))}_{\text{direct}} + \underbrace{D_yf(x,g(x))\cdot Dg(x)}_{\text{through } g},$$
+and since $D_yf(x,g(x))$ is invertible near $(x_0,y_0)$ we may move it to the other side:
+$$Dg(x) = -\big(D_yf(x,g(x))\big)^{-1} D_xf(x,g(x)),$$
+which is the formula in \cref{thm:implicit_function_theorem}.
+
+Read it as an exchange rate. Nudging $x$ changes $f$ by $D_xf$; to keep the equation satisfied,
+$y$ must move by whatever compensates, and $\big(D_yf\big)^{-1}$ converts \qt{how much $f$ moved}
+back into \qt{how far $y$ must travel}. The minus sign is the compensation. This is also why
+invertibility of $D_yf$ is the hypothesis: if $D_yf$ were singular, some change in $f$ could not
+be absorbed by moving $y$ at all, and there would be nothing for $g$ to do.
+\end{remark}
+
+\begin{ainote}
+Corsin remarks in his own notes that ``the geometrical meaning of this one eludes me, sorry''.
+The exchange-rate reading above and the two figures below are this document's attempt at the
+geometry he was after; the algebra itself is his chain-rule derivation.
+\end{ainote}
+
+% Sonnet 5 (Medium) --- FIG-W06-04, replacing the original arrow diagram.
+% The hypothesis "D_y f invertible" is a statement about the DIRECTION of the level set at
+% the point, so the figure shows the level set and its tangent, not an abstract arrow.
+\subsubsection*{What the hypothesis means}
+
+The condition on $D_yf(x_0,y_0)$ is a statement about the \emph{direction} in which the level
+set $\{f=0\}$ runs at the point. Moving off $(x_0,y_0)$ straight up, in the $y$-direction alone,
+changes $f$ to first order by $D_yf(x_0,y_0)$. If that map is invertible, no vertical motion
+leaves $f$ unchanged, so the level set cannot run vertically at $(x_0,y_0)$ --- and a curve that
+is not vertical is locally a graph over $x$. If instead $D_yf(x_0,y_0)=0$, the level set is free
+to turn vertical, and above a single $x$ there may sit two values of $y$, or none.
+
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.05]
+  % --- Left panel: D_y f invertible, level set transverse to the vertical ---
+  \begin{scope}
+    \draw[green!60!black, thick, ->] (-0.3,0) -- (3.5,0) node[right, font=\small] {$x$};
+    \draw[orange!90!black, thick, ->] (0,-0.3) -- (0,3.2) node[above, font=\small] {$y$};
+
+    \draw[blue!80!black, very thick, domain=0.35:3.1, samples=60, smooth]
+      plot ({\x}, {1.55 + 0.55*(\x-1.6) - 0.16*(\x-1.6)*(\x-1.6)});
+    \node[blue!80!black, font=\scriptsize, below right] at (2.75,1.95) {$\{f=0\}$};
+
+    \coordinate (P) at (1.6,1.55);
+    \draw[dotted, gray] (1.6,0) -- (P) -- (0,1.55);
+    \node[below, font=\scriptsize] at (1.6,-0.05) {$x_0$};
+    \node[left, font=\scriptsize] at (-0.05,1.55) {$y_0$};
+    \fill (P) circle (1.7pt);
+
+    % vertical probe: moving in y alone leaves the level set
+    \draw[red!80!black, very thick, ->] (P) -- ++(0,0.85);
+    \node[red!80!black, font=\scriptsize, align=center] at (1.6,2.78)
+      {move in $y$ only:\\ $f$ changes};
+
+    \node[font=\scriptsize, align=center] at (1.55,-0.85)
+      {$D_yf(x_0,y_0)$ invertible\\ \textbf{solvable for $y$}};
+  \end{scope}
+
+  % --- Right panel: D_y f = 0, level set vertical, no graph over x ---
+  \begin{scope}[shift={(5.4,0)}]
+    \draw[green!60!black, thick, ->] (-0.3,0) -- (3.5,0) node[right, font=\small] {$x$};
+    \draw[orange!90!black, thick, ->] (0,-0.3) -- (0,3.2) node[above, font=\small] {$y$};
+
+    \draw[blue!80!black, very thick, domain=0.35:2.75, samples=60, smooth]
+      plot ({1.6 - 1.05*(\x-1.55)*(\x-1.55)}, {\x});
+    \node[blue!80!black, font=\scriptsize, right] at (0.30,0.38) {$\{f=0\}$};
+
+    \coordinate (Q) at (1.6,1.55);
+    \draw[dotted, gray] (1.6,0) -- (Q) -- (0,1.55);
+    \node[below, font=\scriptsize] at (1.6,-0.05) {$x_0$};
+    \node[left, font=\scriptsize] at (-0.05,1.55) {$y_0$};
+    \fill (Q) circle (1.7pt);
+
+    \draw[red!80!black, very thick, ->] (Q) -- ++(0,0.85);
+    \node[red!80!black, font=\scriptsize, align=center] at (1.75,2.95)
+      {move in $y$ only: $f$ unchanged to first order};
+
+    % two y's over one x, just left of x_0; none just right of it
+    \draw[gray, dashed] (1.15,0) -- (1.15,2.75);
+    \fill[orange!90!black] (1.15,0.89) circle (1.6pt);
+    \fill[orange!90!black] (1.15,2.21) circle (1.6pt);
+    \node[orange!90!black, font=\scriptsize, align=center] at (0.62,1.55)
+      {two $y$'s\\ here};
+    \draw[gray, dashed] (2.15,0) -- (2.15,2.75);
+    \node[orange!90!black, font=\scriptsize, align=center] at (2.75,1.15)
+      {none\\ here};
+
+    \node[font=\scriptsize, align=center] at (1.55,-0.85)
+      {$D_yf(x_0,y_0)=0$\\ \textbf{not solvable for $y$}};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+% Sonnet 5 (Medium) --- FIG-W06-05, replacing the original box-and-arrow diagram.
+\subsubsection*{What the conclusion gives}
+
+The theorem does not say the whole level set is a graph --- only that it is one \emph{inside a
+small enough box}. On $B_r(x_0)\times B_s(y_0)$ the two descriptions coincide exactly: the
+zero set of $f$ and the graph of $g$ are the same set. Outside the box the level set may do
+anything at all, including doubling back or carrying further branches, and that is precisely
+why the statement is local.
+
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.2]
+  \draw[green!60!black, thick, ->] (-0.4,0) -- (5.3,0) node[right, font=\small] {$x \in \mathbb{R}^d$};
+  \draw[orange!90!black, thick, ->] (0,-0.4) -- (0,3.4) node[above, font=\small] {$y \in \mathbb{R}^{n-d}$};
+
+  % Level set: inside the box a clean graph; outside it doubles back and branches.
+  \draw[gray!55, very thick, smooth]
+    plot coordinates {(0.45,2.95) (0.8,2.35) (1.1,1.98) (1.4,1.751)};
+  \draw[gray!55, very thick, smooth]
+    plot coordinates {(3.6,1.531) (4.05,1.33) (4.35,0.78) (4.15,0.28)};
+  \node[gray!55!black, font=\scriptsize, right] at (4.45,0.80) {further branches};
+
+  % The box, then the graph redrawn on top so it reads as the box's content.
+  \draw[green!60!black, thick, fill=green!7] (1.4,0.9) rectangle (3.6,2.4);
+  \draw[blue!80!black, very thick, domain=1.4:3.6, samples=60, smooth]
+    plot ({\x}, {1.72 - 0.30*(\x-1.5) + 0.10*(\x-1.5)*(\x-1.5)});
+
+  \coordinate (P) at (2.5,1.52);
+  \fill (P) circle (1.7pt) node[above left, font=\scriptsize] {$(x_0,y_0)$};
+
+  % Box extents.
+  \draw[green!60!black, <->] (1.4,0.62) -- node[below, font=\scriptsize] {$B_r(x_0)$} (3.6,0.62);
+  \draw[orange!90!black, <->] (1.13,0.9) -- node[left, font=\scriptsize] {$B_s(y_0)$} (1.13,2.4);
+  \draw[dotted, gray] (2.5,0) -- (P);
+  \node[below, font=\scriptsize] at (2.5,-0.05) {$x_0$};
+
+  \node[blue!80!black, font=\scriptsize, right, align=left] at (3.72,2.55)
+    {inside the box:\\ $f(x,y)=0 \iff y=g(x)$};
+  \draw[blue!80!black, thin, ->] (3.72,2.35) -- (3.05,1.62);
+\end{tikzpicture}
+\end{center}
+
+\begin{example}[The circle $S^1$]
+The circle $S^1 = \{(x,y) \in \mathbb{R}^2 : x^2+y^2-1=0\}$ is the level set at $0$ of
+$F(x,y) := x^2+y^2-1$, i.e., $S^1 = F^{-1}\{0\}$. Locally, there are explicit functions
+$$x \mapsto \pm\sqrt{1-x^2} = y(x),$$
+defined on open intervals around $x_0$ whenever $y(x_0)\neq0$. And indeed,
+$$D_yF(x,y) = \frac{\partial F}{\partial y} = 2y$$
+is bijective whenever $y \neq 0$, so the implicit function theorem holds there.
+
+\begin{remark}[The circle realizes both panels]
+The circle exhibits both cases of the figure above, and it is worth checking them against each
+other.
+
+At a point with $y_0 \neq 0$ --- say $(0,1)$ --- we have $D_yF = 2y_0 \neq 0$, the circle meets
+that point at a non-vertical angle, and near it the circle really is the graph
+$y = \sqrt{1-x^2}$. That is the left panel.
+
+At $\bar x = 1$, where $y = 0$, we get $D_yF(1,0) = 0$. The circle is \emph{vertical} there, and
+no graph $y(x)$ can exist around it: for $x$ slightly less than $1$ there are two points of the
+circle above $x$, namely $\pm\sqrt{1-x^2}$, and for $x$ slightly greater than $1$ there are none.
+That is the right panel exactly --- two $y$'s on one side, none on the other.
+
+Note what has \emph{not} gone wrong at $\bar x = 1$: the circle is a perfectly smooth curve
+there, with no corner and no break. What fails is only the attempt to describe it as a graph
+\emph{over $x$}. Swap the roles of the two variables and everything works again, since
+$D_xF(1,0) = 2 \neq 0$: near $(1,0)$ the circle is the graph $x = \sqrt{1-y^2}$ of a function
+of $y$. This is the \qt{which variables get solved for is a choice} point above, in its
+smallest possible instance.
+\end{remark}
+\end{example}
+
+% Sonnet 5 (Medium) --- FIG-W06-06, drawn from the page image seen while transcribing
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.3]
+  \draw[->] (-1.6,0) -- (1.9,0) node[right, font=\small] {$x$};
+  \draw[->] (0,-1.6) -- (0,1.6) node[above, font=\small] {$y$};
+  \draw[green!60!black, thick] (0,0) circle (1);
+
+  \draw[red!80!black, dashed, thick, domain=-0.9:0.9, samples=40, smooth]
+    plot ({\x}, {sqrt(1-\x*\x)}) node[right, font=\scriptsize] {$y=\sqrt{1-x^2}$};
+
+  \coordinate (X0) at (0.4,0);
+  \draw[dotted, gray] (X0) -- (0.4,0.917);
+  \node[below, font=\scriptsize] at (X0) {$x_0$};
+
+  \fill[red!80!black] (1,0) circle (1.5pt) node[below right, font=\scriptsize] {$\bar x$};
+  \node[red!80!black, font=\scriptsize, below right, align=left] at (1.0,-0.5)
+    {not possible\\around $y=0$};
+
+  \draw[->, thick] (2.6,-1.0) -- (2.6,1.3) node[above, font=\small] {$\mathbb{R}$};
+  \fill (2.6,0) circle (1.5pt) node[right, font=\small] {$0$};
+  \draw[->, thick, blue!80!black] (1.15,0.6) .. controls (2.0,1.0) .. (2.6,0)
+    node[midway, above, font=\small] {$F$};
+\end{tikzpicture}
+\end{center}
+
+\begin{example}[An implicit quintic]
+Let $G(x,y) := y^5+y^3+y+x$, and consider its level set at $0$,
+$G^{-1}\{0\} = \{(x,y)\in\mathbb{R}^2 : G(x,y)=0\}$. Clearly $(0,0)\in G^{-1}\{0\}$, since
+$G(0,0)=0^5+0^3+0+0=0$. Now both
+$$\partial_xG(0,0)=1\neq0, \qquad \partial_yG(0,0)=\big[5y^4+3y^2+1\big]_{y=0}=1\neq0,$$
+so by the implicit function theorem there are open intervals (balls) $(-r,r)$, $(-s,s)$ and
+functions
+$$(-r,r)\to(-s,s), \quad y\mapsto x(y) = -y^5-y^3-y,$$
+$$(-s,s)\to(-r,r), \quad x\mapsto y(x),$$
+satisfying
+$$y^5+y^3+y+x(y)=0, \qquad y(x)^5+y(x)^3+y(x)+x=0.$$
+
+\begin{remark}
+As Galois and Abel showed, no closed-form expression for $y(x)$ in radicals exists in general,
+since $y^5+y^3+y+x=0$ is a genuine quintic in $y$. Nevertheless, the implicit function theorem
+guarantees that $y(x)$ exists (and is $C^\infty$, since $G$ is a polynomial), and it can be
+computed and plotted numerically.
+\end{remark}
+\end{example}
+
+% Sonnet 5 (Medium) --- FIG-W06-07, drawn from the page image seen while transcribing
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=0.62]
+  \draw[->] (-11,0) -- (11,0) node[right, font=\small] {$x$};
+  \draw[->] (0,-2.0) -- (0,2.0) node[above, font=\small] {$y(x)$};
+  \foreach \x in {-10,-7.5,-5,-2.5,2.5,5,7.5,10}
+    \draw (\x,0.08) -- (\x,-0.08) node[below, font=\tiny] {$\x$};
+  \foreach \y in {-1.5,-1.0,-0.5,0.5,1.0,1.5}
+    \draw (0.15,\y) -- (-0.15,\y) node[left, font=\tiny] {$\y$};
+
+  \draw[blue!80!black, thick, variable=\t, domain=-1.42:1.42, samples=120, smooth]
+    plot ({-\t*\t*\t*\t*\t - \t*\t*\t - \t}, {\t});
+\end{tikzpicture}
+\end{center}
+
 \exercisesheet{6}
 
 \textit{Statements quoted verbatim from \texttt{exercises/Ex6\_Analysis2\_eng.pdf} (assigned 20
@@ -11,23 +609,23 @@ Colour key, as given on the page: blue \textbf{= important}, orange \textbf{= se
 red \textbf{= optional}. 6.1 and 6.4 carry no colour marker on the page.
 
 \begin{center}
-\begin{tabular}{lll}
+% p-column so the notes wrap on their own instead of being hand-broken with \\.
+\begin{tabular}{@{}l l p{0.52\linewidth}@{}}
 \textbf{Problem} & \textbf{Priority} & \textbf{Corsin's note} \\
 \hline
-6.1 & unmarked & --- \\
-6.2 & important & ``This is what we covered on Friday. Find a Lemma in your linear \\
-    & & algebra notes which relates the determinant and trace to the eigenvalues.'' \\
-6.3 & semi-important & ``By using $\alpha+\beta+\gamma=\pi$ for the angles, you can express \\
-    & & this as an optimization problem in two variables.'' \\
-6.4 & unmarked & --- \\
-6.5 & optional & ``See `data analysis'.'' \\
-6.6 & optional & ``Do two or three, not all of them.'' \\
-6.7 & important & --- \\
-6.8 & important & --- \\
-6.9 & important & --- \\
-6.10 & important & \multirow{3}{*}{\shortstack[l]{``These are good exercises, but how many\\ optimization problems do you really need?''}} \\
-6.11 & important & \\
-6.12 & important & \\
+6.1 & unmarked & --- \\[3pt]
+6.2 & important & ``This is what we covered on Friday. Find a Lemma in your linear algebra
+  notes which relates the determinant and trace to the eigenvalues.'' \\[3pt]
+6.3 & semi-important & ``By using $\alpha+\beta+\gamma=\pi$ for the angles, you can express
+  this as an optimization problem in two variables.'' \\[3pt]
+6.4 & unmarked & --- \\[3pt]
+6.5 & optional & ``See `data analysis'.'' \\[3pt]
+6.6 & optional & ``Do two or three, not all of them.'' \\[3pt]
+6.7 & important & --- \\[3pt]
+6.8 & important & --- \\[3pt]
+6.9 & important & --- \\[3pt]
+6.10--6.12 & important & ``These are good exercises, but how many optimization problems do
+  you really need?'' \\
 \end{tabular}
 \end{center}
 \end{ainote}
@@ -115,425 +713,6 @@ parameters $a, b \in \mathbb{R}$. Find all critical points and determine their n
 Hessian test, depending on $a, b$.
 \end{exercise}
 
-% Source: Corsin Nick/Class Notes/Week 6.pdf, p. 2
-\section{Convexity}
-\label{sec:convexity}
-
-% Sonnet 5 (Medium)
-\subsection{Definitions and characterizations}
-
-\begin{definition}[Convex set and convex function]
-\label{def:convex_set_function}
-A subset $A \subseteq \mathbb{R}^n$ is \newterm{convex} (\germanterm{konvex}) if for all
-$x,y \in A$ and every $t \in [0,1]$, the point $p := (1-t)x+ty$ is an element of $A$.
-
-A function $f : A \to \mathbb{R}$ is convex if $A$ is convex and, for all $x,y \in A$ and
-$t \in [0,1]$,
-$$f\big((1-t)x+ty\big) \leq (1-t)f(x)+tf(y).$$
-\end{definition}
-
-% Sonnet 5 (Medium)
-\begin{center}
-\begin{tikzpicture}[>=Latex, scale=1.0]
-  \draw[->] (-0.3,0) -- (5.2,0);
-  \draw[blue!70!black, thick, domain=0.2:5, samples=50, smooth]
-    plot ({\x}, {0.18*(\x-2.6)*(\x-2.6)+0.4});
-  \draw[orange!90!black, thick] (0.6,1.34) -- (4.6,0.85);
-  \fill (0.6,1.34) circle (1.5pt) node[above, font=\small] {$f(x)$};
-  \fill (4.6,0.85) circle (1.5pt) node[above, font=\small] {$f(y)$};
-  \fill (2.6,1.06) circle (1.5pt) node[above, font=\scriptsize] {chord};
-  \node[below, font=\small] at (0.6,0) {$x$};
-  \node[below, font=\small] at (4.6,0) {$y$};
-\end{tikzpicture}
-\end{center}
-
-\begin{ainote}
-Recall from \cref{def:sign_symmetric_matrix} the sign classes of a symmetric matrix
-(positive/negative definite, indefinite, degenerate). The proposition below needs the boundary
-cases as well: a symmetric $A \in \mathbb{R}^{n\times n}$ is \newterm{positive semidefinite}
-(\germanterm{positiv semidefinit}), also called \textbf{nonnegative definite}, if
-$v\transp Av \geq 0$ for all $v \in \mathbb{R}^n$; and \newterm{negative semidefinite}
-(\germanterm{negativ semidefinit}), or \textbf{nonpositive definite}, if $v\transp Av \leq 0$ for
-all $v$. These terms are used freely from \cref{ex:6.8} onward but were not named when
-\cref{def:sign_symmetric_matrix} was introduced in Week 5; recorded here instead.
-\end{ainote}
-
-\begin{proposition}[Characterizations of convexity]
-\label{prop:convexity_characterizations}
-Let $U \subseteq \mathbb{R}^n$ be open and convex, and let $f \in C^2(U)$. Then the following are
-equivalent:
-\begin{enumerate}[label=\textbf{(\alph*)}]
-  \item $f$ is convex;
-  \item $\Hess f(x)$ is positive semidefinite for all $x \in U$;
-  \item $f(y)-f(x) \geq Df_x(y-x)$ for all $x,y \in U$.
-\end{enumerate}
-\end{proposition}
-
-\begin{example}[The parabola]
-The parabola $p : \mathbb{R}^n \to \mathbb{R}$, $x \mapsto |x|^2 = \sum_{i=1}^n x_i^2$, is convex:
-$$\partial_i\partial_j p(x) = 2\delta_{ij} \implies \Hess p(x) = 2\id_n,$$
-and every eigenvalue is $2>0$, so $\Hess p(x)$ is positive definite (hence positive semidefinite)
-for every $x$, and $p$ is convex by \cref{prop:convexity_characterizations}.
-\end{example}
-
-% Sonnet 5 (Medium)
-\subsection{Proof of the characterizations}
-
-% Source: Corsin Nick/Class Notes/Week 6.pdf, pp. 3--6
-\begin{exercise}[Equivalent characterizations of convexity]
-\label{ex:convexity_characterizations}
-Let $U \subseteq \mathbb{R}^n$ be open and convex.
-\begin{enumerate}[label=\textbf{(\alph*)}]
-  \item Show that $f : U \to \mathbb{R}$ is convex if and only if the functions
-    $$f_{x,y} : [0,1] \to \mathbb{R}, \qquad s \mapsto f(x+s(y-x))$$
-    are convex for all $x,y \in U$.
-  \item Show that
-    $$f \text{ convex} \iff f(y)-f(x) \geq Df_x(y-x) \quad \text{for all } x,y \in U.$$
-    This also holds for $f \in C^1(U)$, $U \subseteq \mathbb{R}^n$ open and convex.
-  \item Conclude that if $f \in C^1(U)$ is convex and has a critical point at $x_0 \in U$, then $f$
-    has a minimum at $x_0$.
-\end{enumerate}
-\end{exercise}
-
-% Kept inline: solved directly in Corsin Nick/Class Notes/Week 6.pdf, pp. 3--6.
-\begin{exercisesolution}[Solution to \cref{ex:convexity_characterizations}]
-\begin{enumerate}[label=\textbf{(\alph*)}]
-  \item By definition, $f_{x,y}$ is convex if and only if
-    $$f_{x,y}\big((1-t)s_0+ts_1\big) \leq (1-t)f_{x,y}(s_0)+tf_{x,y}(s_1) \quad \text{for all } s_0,s_1,t \in [0,1],$$
-    which, unwinding the definition of $f_{x,y}$, reads
-    $$f\big(x+[(1-t)s_0+ts_1](y-x)\big) \leq (1-t)f(x+s_0(y-x))+tf(x+s_1(y-x)),$$
-    that is,
-    $$f\big((1-t)(x+s_0(y-x))+t(x+s_1(y-x))\big) \leq (1-t)f(x+s_0(y-x))+tf(x+s_1(y-x)).$$
-    Setting $s_0=0$, $s_1=1$ recovers exactly the convexity inequality for $f$ at the points $x$
-    and $y$, so if this holds for all $x,y \in U$, then $f$ is convex. Conversely, if $f$ is
-    convex, then convexity of $f_{x,y}$ for each fixed $x,y \in U$ follows by applying convexity
-    of $f$ to the two points $x+s_0(y-x)$ and $x+s_1(y-x)$, which both lie in $U$ since $U$ is
-    convex.
-  \item Recall that $g \in C^1(I)$, for $I \subseteq \mathbb{R}$ an interval, is convex if and
-    only if $g'$ is increasing. Combined with \textbf{(a)}, this gives
-    $$f \text{ convex} \iff f'_{x,y} \text{ is increasing, for all } x,y \in U.$$
-    By the chain rule, for $t \in [0,1]$,
-    $$f'_{x,y}(t) = Df_{x+t(y-x)}(y-x),$$
-    and by the mean value theorem there exists $s \in (0,1)$ such that
-    $$f(y)-f(x) = f_{x,y}(1)-f_{x,y}(0) = f'_{x,y}(s) = Df_{x+s(y-x)}(y-x).$$
-
-    \textbf{($\Rightarrow$)} If $f$ is convex, then $f_{x,y}$ is convex for all $x,y \in U$ by
-    \textbf{(a)}, so $f'_{x,y}$ is increasing, and in particular $f'_{x,y}(s) \geq f'_{x,y}(0)$.
-    Combined with the mean value theorem identity above, this yields
-    $$f(y)-f(x) \geq Df_x(y-x).$$
-
-    \textbf{($\Leftarrow$)} Suppose $f(y)-f(x) \geq Df_x(y-x)$ for all $x,y \in U$. We must show
-    that $0 \leq s < t \leq 1 \implies f'_{x,y}(s) \leq f'_{x,y}(t)$. Set $u := x+s(y-x)$ and
-    $v := x+t(y-x)$, so that $u-v = (s-t)(y-x)$. Applying the hypothesis to the pairs $(u,v)$ and
-    $(v,u)$ gives
-    $$Df_u(v-u) \leq f(v)-f(u), \qquad Df_v(u-v) \leq f(u)-f(v).$$
-    Therefore,
-    $$(t-s)f'_{x,y}(s) = Df_u(v-u) \leq f(v)-f(u) \leq -Df_v(u-v) = Df_v(v-u) = (t-s)f'_{x,y}(t),$$
-    and since $t-s>0$, this gives $f'_{x,y}(s) \leq f'_{x,y}(t)$, i.e., $f'_{x,y}$ is increasing,
-    hence $f_{x,y}$ is convex for all $x,y \in U$, and so $f$ is convex by \textbf{(a)}.
-
-    \begin{ainote}
-    The argument above only ever used differentiability of $f$, never twice-differentiability, so
-    the equivalence in \textbf{(b)} already holds for $f \in C^1(U)$ with $U \subseteq
-    \mathbb{R}^n$ open and convex --- one order of regularity weaker than
-    \cref{prop:convexity_characterizations}, which is stated for $f \in C^2(U)$. This is exactly
-    the fact used in \cref{ex:6.7}\textbf{(b)}.
-    \end{ainote}
-  \item Since $f$ is convex and $x_0 \in U$ is a critical point, $Df_{x_0} = 0$, so \textbf{(b)}
-    gives
-    $$0 = Df_{x_0}(y-x_0) \leq f(y)-f(x_0) \quad \text{for all } y \in U,$$
-    i.e., $f(y) \geq f(x_0)$ for all $y \in U$. Hence $f$ has a minimum at $x_0$ --- in fact a
-    global minimum on $U$, sharpening \cref{prop:extremum_implies_critical} (which only guarantees
-    that critical points are the sole \emph{candidates} for extrema) in the convex case.
-\end{enumerate}
-\end{exercisesolution}
-
-% Sonnet 5 (Medium) --- FIG-W06-01, drawn from the page image seen while transcribing
-\begin{center}
-\begin{tikzpicture}[>=Latex, scale=1.15]
-  \draw[->] (-0.3,0) -- (5.2,0) node[right, font=\small] {$r$};
-  \draw[->] (0,-0.3) -- (0,3.0);
-
-  \draw[green!60!black, thick, domain=0.2:5.0, samples=60, smooth]
-    plot ({\x}, {0.20*(\x-2.6)*(\x-2.6) + 1.0});
-  \node[green!60!black, font=\small] at (5.35,2.2) {$f_{x,y}(r)$};
-
-  % Tangent-ish lines through s and t, matching the slopes of the convex curve there
-  \draw[orange!90!black, thick, domain=0.3:4.3]
-    plot ({\x}, {-0.4*(\x-1.2) + 1.86});
-  \draw[purple, thick, domain=1.7:5.0]
-    plot ({\x}, {0.72*(\x-3.6) + 1.39});
-
-  % Labels placed well clear of both lines and the curve, with leader lines to the
-  % point they describe (the line's value directly above s, resp. t).
-  \node[orange!90!black, font=\scriptsize, align=center] (LabU) at (1.2,2.75) {$Df_u(r(y-x))$\\$+\ \text{const}$};
-  \draw[orange!90!black, thin, ->] (LabU) -- (1.2,1.96);
-  \node[purple, font=\scriptsize, align=center] (LabV) at (3.6,0.35) {$Df_v(r(y-x))$\\$+\ \text{const}$};
-  \draw[purple, thin, ->] (LabV) -- (3.6,1.29);
-
-  \draw (0,0.05) -- (0,-0.05) node[below, font=\small] {$0$};
-  \draw (1.2,0.05) -- (1.2,-0.05) node[below, font=\small] {$s$};
-  \draw (3.6,0.05) -- (3.6,-0.05) node[below, font=\small] {$t$};
-  \draw (4.9,0.05) -- (4.9,-0.05) node[below, font=\small] {$1$};
-  \draw[dashed, gray] (1.2,0) -- (1.2,1.86);
-  \draw[dashed, gray] (3.6,0) -- (3.6,1.39);
-\end{tikzpicture}
-\end{center}
-
-% Sonnet 5 (Medium)
-We now change subject entirely: from convexity to the question of when a map is locally
-invertible --- the tool that makes the implicit function theorem, and later submanifolds
-(\cref{sec:submanifolds}), possible.
-
-% Source: Corsin Nick/Class Notes/Week 6.pdf, pp. 8--9
-\section{The inverse function theorem}
-\label{sec:inverse_function_theorem}
-
-\begin{theorem}[Inverse function theorem]
-\label{thm:inverse_function_theorem}
-Let $U \subseteq \mathbb{R}^n$ be open, let $f \in C^k(U,\mathbb{R}^n)$, and let $x_0 \in U$ be
-such that $Df_{x_0}$ is invertible. Then there exists an open neighbourhood $U_0 \subseteq U$ of
-$x_0$ such that
-$$f|_{U_0} : U_0 \to f(U_0)$$
-is a $C^k$-\newterm{diffeomorphism} (\germanterm{Diffeomorphismus}) and
-$$D\big(f|_{U_0}^{-1}\big)_{f(x)} = D\big(f|_{U_0}\big)_x^{-1} \quad \text{for all } x \in U_0.$$
-\end{theorem}
-
-\begin{question}
-\begin{enumerate}[label=\textbf{Q\arabic*.}]
-  \item If $f : \mathbb{R}^n \to \mathbb{R}^n$ is $C^k$ and a \newterm{homeomorphism}
-    (\germanterm{Hom\"oomorphismus}) --- that is, bijective with continuous inverse --- is it
-    necessarily a $C^k$-diffeomorphism?
-  \item If $f \in C^\infty(U,\mathbb{R}^n)$ has an everywhere invertible differential, i.e.,
-    $Df_x$ is invertible for all $x \in U$ with $U \subseteq \mathbb{R}^n$ open, then $f$ is a
-    $C^\infty$-diffeomorphism onto its image. True or false?
-\end{enumerate}
-\end{question}
-
-\begin{answer}
-\begin{enumerate}[label=\textbf{A\arabic*.}]
-  \item \textbf{False.} Consider $f : \mathbb{R} \to \mathbb{R}$, $x \mapsto x^3$. Then
-    $f^{-1} : \mathbb{R} \to \mathbb{R}$, $x \mapsto \sqrt[3]{x}$, is not continuously
-    differentiable at $0 \in \mathbb{R}$.
-  \item \textbf{False.} Consider
-    $$\cos|_{\mathbb{R}\setminus\pi\mathbb{Z}} : \mathbb{R}\setminus\pi\mathbb{Z} \to (-1,1), \qquad x \mapsto \cos(x).$$
-    For any $x \in \mathbb{R}\setminus\pi\mathbb{Z}$, $\cos'(x) = -\sin(x) \neq 0$, so the
-    differential is everywhere invertible, but the cosine is not injective on this domain, so it
-    fails to be a diffeomorphism onto its image.
-\end{enumerate}
-\end{answer}
-
-\begin{ainote}
-Corsin illustrates \textbf{A2} with a second sketch of a wiggly $C^\infty$ curve that is locally
-invertible (everywhere invertible differential) but not globally injective: a plateau where it is
-"invertible, but not diffeo" locally, a hump where a horizontal level meets the graph twice
-("not invertible"), and a final monotone stretch where the inverse function theorem does apply
-("diffeo by IFT"). See \texttt{FIG-W06-03}.
-\end{ainote}
-
-% Sonnet 5 (Medium) --- FIG-W06-03, drawn from the page image seen while transcribing
-\begin{center}
-\begin{tikzpicture}[>=Latex, scale=1.05]
-  \draw[->] (-0.3,0) -- (8.2,0) node[right, font=\small] {$x$};
-  \draw[->] (0,-0.3) -- (0,5.9);
-
-  \draw[blue!80!black, thick] plot[smooth] coordinates {
-    (0,0.3) (0.7,0.95) (1.3,1.55) (1.8,1.85) (2.15,1.95) (2.5,2.05)
-    (2.9,2.35) (3.6,3.0) (4.4,2.1) (5.2,3.3) (6.0,4.0) (6.8,4.65) (7.6,5.3)};
-
-  % "Invertible, but not diffeo" -- the flat shoulder near x=1.8..2.5
-  \draw[red!80!black, dashed, thick] (1.8,1.95) -- (2.5,1.95);
-  \node[red!80!black, font=\scriptsize, align=center] (LabShoulder) at (1.0,3.4)
-    {invertible,\\ but not diffeo};
-  \draw[red!80!black, thin, ->] (LabShoulder) -- (2.1,2.05);
-
-  % "Not invertible" -- the hump between x=3.1 and x=5.0, three crossings at y=2.6
-  \draw[red!80!black, dashed, thick] (3.1,2.6) -- (5.0,2.6);
-  \node[red!80!black, font=\scriptsize, align=center] (LabHump) at (5.9,1.2)
-    {not\\ invertible};
-  \draw[red!80!black, thin, ->] (LabHump) -- (4.15,2.55);
-
-  % "Diffeo by IFT" -- the final monotone stretch
-  \node[green!60!black, font=\scriptsize, align=center] (LabIFT) at (5.6,4.9)
-    {diffeo\\ by IFT};
-  \draw[green!60!black, thin, ->] (LabIFT) -- (6.7,4.55);
-\end{tikzpicture}
-\end{center}
-
-% Sonnet 5 (Medium) --- FIG-W06-02, drawn from the page image seen while transcribing
-\begin{center}
-\begin{tikzpicture}[>=Latex, scale=1.1]
-  \draw[->] (-0.3,0) -- (7.3,0) node[right, font=\small] {$x$};
-  \draw[->] (0,-1.6) -- (0,1.6) node[above, font=\small] {$y$};
-  \draw (0,1) -- (-0.05,1) node[left, font=\footnotesize] {$1$};
-  \draw (0,-1) -- (-0.05,-1) node[left, font=\footnotesize] {$-1$};
-
-  \draw[blue!80!black, thick, domain=0:7, samples=120, smooth]
-    plot ({\x}, {cos(\x r)}) node[right, font=\small] {$\cos(x)$};
-
-  \draw[red!80!black, dashed, thick] (0,0.4) -- (7,0.4);
-  \node[red!80!black, font=\scriptsize, right] at (7,0.4) {not injective};
-\end{tikzpicture}
-\end{center}
-
-% Sonnet 5 (Medium)
-The inverse function theorem asks when $f(x)=y$ can be solved for $x$ as a function of $y$. The
-implicit function theorem generalizes this: it asks when an equation $f(x,y)=0$ can be solved for
-\emph{some} of the variables in terms of the others, without $f$ itself being invertible.
-
-% Source: Corsin Nick/Class Notes/Week 6.pdf, pp. 10--12
-\section{The implicit function theorem}
-\label{sec:implicit_function_theorem}
-
-\begin{theorem}[Implicit function theorem]
-\label{thm:implicit_function_theorem}
-Let $1 \leq n-d < n$, let $f \in C^k(\mathbb{R}^d\times\mathbb{R}^{n-d}, \mathbb{R}^{n-d})$ (or an
-open subset of $\mathbb{R}^d\times\mathbb{R}^{n-d}$), and suppose $f(x_0,y_0) = 0$ for some
-$(x_0,y_0) \in \mathbb{R}^d\times\mathbb{R}^{n-d}$ such that the differential $D_yf(x_0,y_0)$ of
-$y \mapsto f(x_0,y)$ at $y_0$ is bijective (so $\Jac_yf(x_0,y_0)$ is invertible). Then there exist
-balls $B_r(x_0) \subseteq \mathbb{R}^d$ and $B_s(y_0) \subseteq \mathbb{R}^{n-d}$ and
-$g \in C^k(B_r(x_0), B_s(y_0))$ such that, for all $(x,y) \in B_r(x_0)\times B_s(y_0)$,
-$$f(x,y) = 0 \iff y = g(x).$$
-Furthermore,
-$$\Jac g(x) = -\big(\Jac_yf(x,g(x))\big)^{-1}\Jac_xf(x,g(x)).$$
-\end{theorem}
-
-In the picture, this means that the \newterm{level set} (\germanterm{Niveaumenge})
-$\{f(x,y)=0\}$ can locally be expressed as a graph over $x$.
-
-\begin{remark}[Why $\Jac g$ has this form]
-Differentiating the identity $f(x,g(x)) \equiv 0$ (which holds by definition of $g$) with the
-chain rule gives
-$$0 = D_xf(x,g(x)) + D_yf(x,g(x))\cdot Dg(x),$$
-and solving for $Dg(x)$ --- valid since $D_yf(x,g(x))$ is invertible near $(x_0,y_0)$ --- recovers
-exactly the formula for $\Jac g(x)$ above.
-
-\begin{ainote}
-Corsin remarks in his own notes that ``the geometrical meaning of this one eludes me, sorry''; the
-chain-rule derivation above at least pins down where the formula comes from algebraically.
-\end{ainote}
-\end{remark}
-
-% Sonnet 5 (Medium) --- FIG-W06-04, drawn from the page image seen while transcribing
-\begin{center}
-\begin{tikzpicture}[>=Latex, scale=1.05]
-  \draw[green!60!black, thick, ->] (-0.3,0) -- (3.6,0) node[right, font=\small] {$x \in \mathbb{R}^d$};
-  \draw[orange!90!black, thick, ->] (0,-0.3) -- (0,3.3) node[above, font=\small] {$y \in \mathbb{R}^{n-d}$};
-
-  \coordinate (P) at (1.6,1.9);
-  \draw[dotted, gray] (1.6,0) -- (P) -- (0,1.9);
-  \node[below, font=\small] at (1.6,-0.05) {$x_0$};
-  \node[left, font=\small] at (-0.05,1.9) {$y_0$};
-  \fill (P) circle (1.5pt) node[above right, font=\small] {$(x_0,y_0)$};
-  \draw[orange!90!black, thick, ->] (P) -- ++(0,1.0) node[above, font=\scriptsize] {$\partial y$};
-
-  \draw[purple, thick, ->] (2.0,2.4) .. controls (3.2,3.0) .. (4.6,2.0)
-    node[midway, above, font=\scriptsize] {$D_yf(x_0,y_0)$};
-
-  \draw[->, thick] (4.9,0) -- (4.9,3.2) node[above, font=\small] {$\mathbb{R}^{n-d}$};
-  \fill (4.9,2.0) circle (1.5pt) node[right, font=\small] {$0=f(x_0,y_0)$};
-  \draw[->, thick, blue!80!black] (P) .. controls (3.4,0.6) .. (4.9,2.0)
-    node[midway, below, font=\small] {$f$};
-\end{tikzpicture}
-\end{center}
-
-\begin{center}
-\begin{tikzpicture}[>=Latex, scale=1.05]
-  \draw[green!60!black, thick, ->] (-0.3,0) -- (4.3,0) node[right, font=\small] {$x \in \mathbb{R}^d$};
-  \draw[orange!90!black, thick, ->] (0,-0.3) -- (0,3.3) node[above, font=\small] {$y \in \mathbb{R}^{n-d}$};
-
-  \draw[green!60!black, thick] (0.6,-0.08) -- (0.6,0.08) node[below, font=\scriptsize] {\phantom{x}};
-  \draw[green!60!black, thick] (0.6,-0.08) node[below, font=\scriptsize] {$x_0$};
-  \draw[green!60!black] (0.4,0) rectangle (3.4,1.9);
-  \node[green!60!black, font=\scriptsize] at (1.9,-0.3) {$B_r(x_0)$};
-  \draw[orange!90!black] (0.4,0.5) -- (0.35,0.5) node[left, font=\scriptsize] {$B_s(y_0)$};
-
-  \draw[purple, thick, domain=0.4:3.4, samples=60, smooth]
-    plot ({\x}, {1.1 + 0.35*sin((\x-0.4) r * 2.2)}) node[midway] {};
-  \node[purple, font=\scriptsize, above] at (1.9,1.55) {$(x,g(x))$};
-
-  \draw[->, thick] (5.1,0) -- (5.1,3.2) node[above, font=\small] {$\mathbb{R}^{n-d}$};
-  \fill (5.1,1.5) circle (1.5pt) node[right, font=\small] {$0=f(x,g(x))$};
-  \draw[->, thick, blue!80!black] (1.9,1.55) .. controls (3.8,2.4) .. (5.1,1.5)
-    node[midway, above, font=\small] {$f$};
-\end{tikzpicture}
-\end{center}
-
-\begin{example}[The circle $S^1$]
-The circle $S^1 = \{(x,y) \in \mathbb{R}^2 : x^2+y^2-1=0\}$ is the level set at $0$ of
-$F(x,y) := x^2+y^2-1$, i.e., $S^1 = F^{-1}\{0\}$. Locally, there are explicit functions
-$$x \mapsto \pm\sqrt{1-x^2} = y(x),$$
-defined on open intervals around $x_0$ whenever $y(x_0)\neq0$. And indeed,
-$$D_yF(x,y) = \frac{\partial F}{\partial y} = 2y$$
-is bijective whenever $y \neq 0$, so the implicit function theorem holds there.
-
-\begin{ainote}
-At $\bar x = 1$ (where $y=0$), $D_yF(1,0)=0$ fails to be bijective, and indeed no such graph
-$y(x)$ exists around $y=0$ there --- the circle is vertical at that point, so it cannot locally be
-written as a graph over $x$.
-\end{ainote}
-\end{example}
-
-% Sonnet 5 (Medium) --- FIG-W06-06, drawn from the page image seen while transcribing
-\begin{center}
-\begin{tikzpicture}[>=Latex, scale=1.3]
-  \draw[->] (-1.6,0) -- (1.9,0) node[right, font=\small] {$x$};
-  \draw[->] (0,-1.6) -- (0,1.6) node[above, font=\small] {$y$};
-  \draw[green!60!black, thick] (0,0) circle (1);
-
-  \draw[red!80!black, dashed, thick, domain=-0.9:0.9, samples=40, smooth]
-    plot ({\x}, {sqrt(1-\x*\x)}) node[right, font=\scriptsize] {$y=\sqrt{1-x^2}$};
-
-  \coordinate (X0) at (0.4,0);
-  \draw[dotted, gray] (X0) -- (0.4,0.917);
-  \node[below, font=\scriptsize] at (X0) {$x_0$};
-
-  \fill[red!80!black] (1,0) circle (1.5pt) node[below right, font=\scriptsize] {$\bar x$};
-  \node[red!80!black, font=\scriptsize, below right, align=left] at (1.0,-0.5)
-    {not possible\\around $y=0$};
-
-  \draw[->, thick] (2.6,-1.0) -- (2.6,1.3) node[above, font=\small] {$\mathbb{R}$};
-  \fill (2.6,0) circle (1.5pt) node[right, font=\small] {$0$};
-  \draw[->, thick, blue!80!black] (1.15,0.6) .. controls (2.0,1.0) .. (2.6,0)
-    node[midway, above, font=\small] {$F$};
-\end{tikzpicture}
-\end{center}
-
-\begin{example}[An implicit quintic]
-Let $G(x,y) := y^5+y^3+y+x$, and consider its level set at $0$,
-$G^{-1}\{0\} = \{(x,y)\in\mathbb{R}^2 : G(x,y)=0\}$. Clearly $(0,0)\in G^{-1}\{0\}$, since
-$G(0,0)=0^5+0^3+0+0=0$. Now both
-$$\partial_xG(0,0)=1\neq0, \qquad \partial_yG(0,0)=\big[5y^4+3y^2+1\big]_{y=0}=1\neq0,$$
-so by the implicit function theorem there are open intervals (balls) $(-r,r)$, $(-s,s)$ and
-functions
-$$(-r,r)\to(-s,s), \quad y\mapsto x(y) = -y^5-y^3-y,$$
-$$(-s,s)\to(-r,r), \quad x\mapsto y(x),$$
-satisfying
-$$y^5+y^3+y+x(y)=0, \qquad y(x)^5+y(x)^3+y(x)+x=0.$$
-
-\begin{ainote}
-As Galois and Abel showed, no closed-form expression for $y(x)$ in radicals exists in general,
-since $y^5+y^3+y+x=0$ is a genuine quintic in $y$. Nevertheless, the implicit function theorem
-guarantees that $y(x)$ exists (and is $C^\infty$, since $G$ is a polynomial), and it can be
-computed and plotted numerically.
-\end{ainote}
-\end{example}
-
-% Sonnet 5 (Medium) --- FIG-W06-07, drawn from the page image seen while transcribing
-\begin{center}
-\begin{tikzpicture}[>=Latex, scale=0.62]
-  \draw[->] (-11,0) -- (11,0) node[right, font=\small] {$x$};
-  \draw[->] (0,-2.0) -- (0,2.0) node[above, font=\small] {$y(x)$};
-  \foreach \x in {-10,-7.5,-5,-2.5,2.5,5,7.5,10}
-    \draw (\x,0.08) -- (\x,-0.08) node[below, font=\tiny] {$\x$};
-  \foreach \y in {-1.5,-1.0,-0.5,0.5,1.0,1.5}
-    \draw (0.15,\y) -- (-0.15,\y) node[left, font=\tiny] {$\y$};
-
-  \draw[blue!80!black, thick, variable=\t, domain=-1.42:1.42, samples=120, smooth]
-    plot ({-\t*\t*\t*\t*\t - \t*\t*\t - \t}, {\t});
-\end{tikzpicture}
-\end{center}
-
 \section{Solutions}
 \label{sec:week06_solutions}
 
@@ -566,19 +745,19 @@ follow immediately:
 % Generator: Claude Sonnet 5 (Medium)
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item \textbf{False.} Let $f(x) := \max\{x_1, \tfrac12\}^4$ on $U := B_1 \subset \mathbb{R}^n$.
-    Being $(\max\{x_1,\tfrac12\})^4$ with $\max\{x_1,\tfrac12\} \geq \tfrac12 > 0$, and $t \mapsto
-    t^4$ convex and increasing on $(0,\infty)$ composed with the convex function
-    $x \mapsto \max\{x_1,\tfrac12\}$, $f$ is convex. For all $x \in U$ with $x_1 \leq \tfrac12$,
+    The inner function $x \mapsto \max\{x_1,\tfrac12\}$ is convex and takes values in
+    $[\tfrac12,\infty)$, and $t \mapsto t^4$ is convex and increasing there. A convex
+    increasing function composed with a convex function is convex, so $f$ is convex. For all $x \in U$ with $x_1 \leq \tfrac12$,
     $f(x) = (\tfrac12)^4$ identically, so $f$ has a (non-strict) local maximum at $x=0$, yet
     $\nabla f$ does not vanish once $x_1 > \tfrac12$.
 
-    \begin{ainote}
+    \begin{remark}
     Worth noting: $x=0$ here is simultaneously a (non-strict) local \emph{minimum} too, since $f$
     is locally constant on the whole region $\{x_1 \leq \tfrac12\} \cap U$. This is exactly why
     the counterexample doesn't contradict \textbf{(b)}: $x=0$ is not a \emph{global} maximum of
     $f$ on $U$ (as $f$ grows without bound as $x_1 \to 1$), so \textbf{(b)}'s stronger hypothesis
     simply isn't triggered.
-    \end{ainote}
+    \end{remark}
   \item \textbf{True.} Since $z$ is a local maximum, $\nabla f(z) = 0$
     (\cref{prop:extremum_implies_critical}). Convexity gives $f(x) \geq f(z) + \nabla f(z)\cdot(x-z)
     = f(z)$ for all $x \in U$; but $z$ being a global maximum also gives $f(x) \leq f(z)$ for all
@@ -622,7 +801,7 @@ statements necessarily hold.
 \begin{exercisesolution}[Solution to \cref{ex:6.9}]
 % Generator: Claude Sonnet 5 (Medium)
 \begin{enumerate}[label=\textbf{(\alph*)}]
-  \item With $g(x,y) := x^2+y^2-1$, the Lagrangian is $L(x,y,\lambda) = f(x,y) - \lambda g(x,y)$,
+  \item With $g(x,y) := x^2+y^2-1$, the Lagrangian is $L(x,y,\lambda) := f(x,y) - \lambda g(x,y)$,
     giving the system
     $$0 = \partial_x L = 2x(2-\lambda) - 1, \qquad 0 = \partial_y L = 2y(2-2\lambda), \qquad 0 = \partial_\lambda L = -(x^2+y^2-1).$$
     From the middle equation, either $y = 0$ or $\lambda = 1$.
@@ -641,7 +820,7 @@ statements necessarily hold.
 \end{exercisesolution}
 
 \begin{ainote}
-The official solution lists $(1,0)$ alongside $(-1,0)$ as "local extrema" from the Lagrange
+The official solution lists $(1,0)$ alongside $(-1,0)$ as qt{local extrema} from the Lagrange
 system, then only mentions it again implicitly by omission from the final global-extrema summary
 --- worth flagging explicitly: \textbf{Lagrange's condition finds all \emph{critical} points of
 $f|_{S^1}$, not automatically the global extrema}. Here $(1,0)$ is a genuine local maximum along
@@ -665,7 +844,7 @@ at the end distinguishes it from the global maximum at $(-1,0)$ (value $3$).
 \begin{exercisesolution}[Solution to \cref{ex:6.10}]
 % Generator: Claude Sonnet 5 (Medium)
 With $g_1(x,y,z) := x^2+y^2+z^2-1$ and $g_2(x,y,z) := x+y$, the Lagrangian
-$L = f - \lambda_1 g_1 - \lambda_2 g_2$ gives the system
+$L := f - \lambda_1 g_1 - \lambda_2 g_2$ gives the system
 $$3 - 2\lambda_1 x - \lambda_2 = 0, \qquad -1-2\lambda_1 y - \lambda_2 = 0, \qquad 2 - 2\lambda_1 z = 0, \qquad x+y=0, \qquad x^2+y^2+z^2=1.$$
 From $x+y=0$, $y=-x$. Subtracting the second equation from the first eliminates $\lambda_2$:
 $$4 - 2\lambda_1 x - 2\lambda_1(-x) \cdot(-1)= 4-2\lambda_1x-2\lambda_1x=4-4\lambda_1 x = 0 \implies \lambda_1 x = 1.$$
@@ -719,7 +898,11 @@ extra points $(\pm1,0)$: minima if $a<0$, maxima if $a>0$.
 \textbf{Case $a,b \neq 0$, $a \neq b$:} setting $x=0$ or $y=0$ in the gradient equations gives the
 five critical points $(0,0)$, $(0,\pm1)$, $(\pm1,0)$ (checking $x,y\neq0$ simultaneously forces
 $a=b$, excluded here). The Hessians are
-$$\Hess f(0,0) = \begin{pmatrix}2a&0\\0&2b\end{pmatrix}, \quad \Hess f(0,\pm1) = \begin{pmatrix}2(a-b)&0\\0&-4b\end{pmatrix}e^{-1}, \quad \Hess f(\pm1,0) = \begin{pmatrix}-4a&0\\0&2(b-a)\end{pmatrix}e^{-1}.$$
+\begin{align*}
+\Hess f(0,0) &= \begin{pmatrix}2a&0\\0&2b\end{pmatrix}, \\
+\Hess f(0,\pm1) &= e^{-1}\begin{pmatrix}2(a-b)&0\\0&-4b\end{pmatrix}, \\
+\Hess f(\pm1,0) &= e^{-1}\begin{pmatrix}-4a&0\\0&2(b-a)\end{pmatrix}.
+\end{align*}
 Reading off signs for each ordering of $a,b$ against $0$:
 \begin{itemize}
   \item $a>b>0$: min at $(0,0)$, saddle at $(0,\pm1)$, max at $(\pm1,0)$.
@@ -731,7 +914,9 @@ Reading off signs for each ordering of $a,b$ against $0$:
 \end{itemize}
 
 \textbf{Case $a=b\neq0$:} beyond $(0,0)$, $(0,\pm1)$, $(\pm1,0)$, setting $x,y\neq0$ now gives
-$a-ax^2-ay^2=0 \iff x^2+y^2=1$, so the entire unit circle is critical. There,
-$\Hess f(x,y) = \operatorname{diag}(-4ax^2,-4ay^2)$ off-diagonal $-4axy$, which has determinant
-$0$ (singular), consistent with a whole curve of critical points.
+$a-ax^2-ay^2=0$, that is, $x^2+y^2=1$, so the entire unit circle is critical. On that circle,
+$$\Hess f(x,y) = -4a\,e^{-1}\begin{pmatrix} x^2 & xy \\ xy & y^2 \end{pmatrix},$$
+whose determinant is $16a^2e^{-2}(x^2y^2 - x^2y^2) = 0$. The Hessian is therefore degenerate
+(\cref{def:sign_symmetric_matrix}) at every such point, and the test is inconclusive --- as it
+must be, since a whole curve of critical points cannot consist of isolated extrema.
 \end{exercisesolution}

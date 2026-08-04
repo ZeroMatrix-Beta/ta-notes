@@ -1,96 +1,16 @@
 % Source: Corsin Nick/Class Notes/Week 5.pdf, pp. 1--11
 \chapter{Week 5 --- Optimization, Lagrange Multipliers \& the Hessian Test}
 
-\exercisesheet{5}
-
-\textit{Statements quoted verbatim from \texttt{exercises/Ex5\_Analysis2\_eng.pdf} (assigned 16
-March 2026, due 23 March 2026). Attribution: Prof. Joaquim Serra, D-MATH, ETH Z\"urich.}
-
-% Source: Corsin Nick/Class Notes/Week 5.pdf, p. 1
-\begin{ainote}[Corsin's recommendations]
-\begin{center}
-\begin{tabular}{lll}
-\textbf{Problem} & \textbf{Priority} & \textbf{Corsin's note} \\
-\hline
-5.1 & important & ``Recall the linearity of the differential and that $C^1 \Rightarrow$ \\
-    & & differentiable'' \\
-5.2 & important & ``Compare with the example from the script and recall that continuous \\
-    & & functions on compact sets attain their extrema.'' \\
-5.3 & important & ``There is no difference between $x \to 0$ and $|x| \to 0$.'' \\
-5.4 & semi-important & ``Use the definition of directional derivative, \\
-    & & $\partial_v f(x) = \left.\frac{\partial}{\partial t}\right\|_{t=0} f(x+tv)$. Solve a \\
-    & & few of these, but not all.'' \\
-5.5 & optional & --- \\
-5.6 & optional & ``Interesting, but irrelevant for the course'' \\
-5.7 & optional & ``Interesting for physicists, will be covered in classical mechanics.'' \\
-\end{tabular}
-\end{center}
-\end{ainote}
-
-\begin{ainote}
-Only the exercises tagged \textbf{important} above are reproduced below. The full sheet
-(5.1--5.7, including 5.4--5.7) is transcribed in \texttt{content/exercise-sheets/week-05.tex}.
-\end{ainote}
-
-\begin{exercise}[5.1 --- Derivatives \textnormal{(important)}]
-\label{ex:5.1}
-\begin{enumerate}[label=\textbf{(\alph*)}]
-  \item Consider $f(x,y) := xy^2e^{-x^2-y^2}$ for $(x,y) \in \mathbb{R}^2$. Find all the critical
-    points of $f$, that is all the points where the gradient of $f$ vanishes. (The point will be
-    given if and only if all the numerical values you find are correct\ldots\ so check your
-    computations twice.)
-  \item We want to find a function $g \in C^1(\mathbb{R}^2)$ with the following directional
-    derivative:
-    $$\partial_v g(x,y) = 2\cos(x^2y)xv_2 + \cos(x^2y)v_1^2y \quad \text{for all } (x,y) \text{ and } (v_1,v_2) \in \mathbb{R}^2.$$
-    Give an explicit example of such a function $g$ or prove that a function with these
-    properties cannot exist.
-\end{enumerate}
-\end{exercise}
-
-\begin{ainote}
-Corsin's hint --- \textit{recall the linearity of the differential} --- is the whole of
-\cref{ex:5.1}(b): a directional derivative must be \textbf{linear} in $v$, and $v_1^2$ is not.
-\end{ainote}
-
-\begin{exercise}[5.2 --- Lagrange multipliers \textnormal{(important)}]
-\label{ex:5.2}
-Consider the ball $U := \{(x,y,z) : x^2+y^2+z^2 < 1\}$ and the function
-$$f(x,y,z) := 1 - x^2 - y^2 + 4x.$$
-\begin{enumerate}[label=\textbf{\arabic*.}]
-  \item Motivate rigorously why $f$ attains its absolute maximum and minimum in $\overline{U}$.
-  \item Find all the critical points of $f$ which lie in the interior of $U$. Say whether
-    $\sup_U f$ (or $\inf_U f$) is attained at some point in $U$.
-  \item Say whether $\max_{\partial U} f$ and $\min_{\partial U}$ exist.
-  \item With the method of Lagrange multipliers, find the possible critical points for the
-    constrained problem $\max\{f(x,y,z) : (x,y,z) \in \partial U\}$, and same for min.
-  \item Among all the points you have found, clarify at which points the maximum/minimum of $f$
-    is attained.
-\end{enumerate}
-\end{exercise}
-
-\begin{exercise}[5.3 --- Multiple choice (Landau notation) \textnormal{(important)}]
-\label{ex:5.3}
-Mark all and only the statements which are true.
-\begin{enumerate}[label=\textbf{(\alph*)}]
-  \item As $|x| \to 0$, if $f(x) = x_2x_1^2 + O(x_1^2)$, then $f(x) = O(|x|^2)$.
-  \item As $x \to 0$, if $f(x) = x_2x_1^2 + O(x_1^3)$, then $f(x) = O(x_1^3)$.
-  \item As $|x| \to 0$, if $f(x) = x_2x_1 + O(|x|^2)$, then $f$ is differentiable at $x = 0$.
-  \item As $x \to 0$, if $f(x) = x_2x_1 + O(|x|^2)$, then $f$ is twice differentiable around
-    $x = 0$.
-  \item As $|x| \to 0$, if $f(x) = x_2x_1 + O(|x|^3)$, then $f$ is twice differentiable around
-    $x = 0$ and $\partial_{11}f(0) = 0$.
-\end{enumerate}
-\textit{Official hint:} revise \textit{Corollary 10.45}.
-\end{exercise}
+% Transition: Claude Sonnet 5
+This chapter's subject is finding the extrema of a function of several variables, first freely,
+then subject to a constraint: unconstrained optimization, Lagrange multipliers, and the Hessian
+test for classifying critical points. The exercise sheet is at the end of the chapter, in
+\cref{sec:week05_solutions}.
 
 \begin{ainote}
 Unlike Weeks 2--4, Corsin marks no Monday / Friday split in this week's notes; the material runs
 continuously from optimization through Lagrange multipliers to the Hessian test.
 \end{ainote}
-
-% Sonnet 5 (Medium)
-With the exercise sheet quoted, we turn to this week's subject: finding the extrema of a
-function of several variables, first freely, then subject to a constraint.
 
 % Source: Corsin Nick/Class Notes/Week 5.pdf, p. 2
 \section{Optimization}
@@ -191,12 +111,21 @@ maxima of $T|_{S^2}$, which \textbf{are not necessarily critical points of $T$}!
 
 So $T|_{S^2}$ has a local extremum if it is \textbf{perpendicular to the surface} $S^2$. Note
 that $S^2$ is the \newterm{level set} (\germanterm{Niveaumenge}) $g(x) = 0$ for
-$g(x) = |x|^2 - 1$, or $S^2 = g^{-1}\{0\}$.
+$g(x) := |x|^2 - 1$, or $S^2 = g^{-1}\{0\}$.
 
 \begin{remark}[Gradient perpendicular to level sets]
-$\nabla g(x) = \dfrac{x}{|x|}$ is perpendicular to $S^2$. In general, the gradient is
-perpendicular to the level sets.
+For $g(x) := |x|^2-1$ we have $\nabla g(x) = 2x$, which at a point $x \in S^2$ is the outward
+radial direction --- perpendicular to $S^2$. In general, the gradient is perpendicular to the
+level sets.
 \end{remark}
+
+\begin{ainote}
+Corsin writes $\nabla g(x) = \tfrac{x}{|x|}$ here. That is the gradient of $x \mapsto |x|$, not
+of the $g(x) = |x|^2-1$ just fixed above, whose gradient is $2x$. The two differ only by the
+positive factor $2|x|$, so they point the same way and the geometric conclusion is unaffected
+--- but the constraint actually differentiated in the Lagrangian below is the squared one. See
+\texttt{OQ-28}, and \texttt{OQ-12} for the same $|x|$ versus $|x|^2$ slip in the exercise.
+\end{ainote}
 
 \begin{aiexample}[Classifying Saddle Points via the Hessian]
 % Generator: Gemini 3.6 Flash (Medium)
@@ -213,25 +142,45 @@ This intuition is made rigorous in the following.
 \begin{proposition}[Constrained optimization problems]
 \label{prop:constrained_optimization}
 Suppose $f : U \to \mathbb{R}$, $g : U \to \mathbb{R}^k$ are $C^1$ and $U \subseteq \mathbb{R}^n$
-is open, and write $g = (g_1,\dots,g_k)$. If $f|_{g^{-1}\{0\}}$ has a local extremum at
+is open, and write $g := (g_1,\dots,g_k)$. If $f|_{g^{-1}\{0\}}$ has a local extremum at
 $x_0 \in g^{-1}\{0\}$, then
 $$\{\nabla f(x_0), \nabla g_1(x_0), \dots, \nabla g_k(x_0)\} \text{ are linearly dependent.}$$
 \end{proposition}
 
-\begin{ainote}
+\begin{remark}
 Once $(\nabla g_1,\dots,\nabla g_k)$ are linearly independent everywhere on $g^{-1}\{0\}$ (the
 standing assumption below), the constraint set $g^{-1}\{0\}$ is in fact a submanifold of
 $\mathbb{R}^n$ --- this is made precise in Week 7 (\cref{thm:regular_value_theorem}), which also
 explains \cref{prop:constrained_optimization} geometrically: $\nabla f(x_0)$ must be normal to the
 tangent space of the constraint set at a constrained extremum.
-\end{ainote}
+\end{remark}
 
 For $k = 1$, this corresponds to our intuition above of $\nabla f(x_0)$ \textbf{parallel to}
 $\nabla g(x_0)$.
 
 \textit{In practice}, we assume $(\nabla g_1, \dots, \nabla g_k)$ nowhere linearly dependent,
-since otherwise $\lambda_0 = 0$ is possible, which does not give us anything. We then eliminate
-the perpendicular part of $\nabla f(x_0)$ by forming the \newterm{Lagrangian}
+since otherwise $\lambda_0 = 0$ is possible, which does not give us anything.
+
+% Supplement: Adrien Martelli/Notes/20.03-Notes_Chap11_Lagrangemultipliers_geometric_explanation.pdf
+\begin{remark}[Where the coefficient $\lambda_0$ went]
+\Cref{prop:constrained_optimization} asserts linear \emph{dependence} of
+$\{\nabla f(x_0), \nabla g_1(x_0), \dots, \nabla g_k(x_0)\}$, i.e.\ scalars
+$\lambda_0, \lambda_1, \dots, \lambda_k$, not all zero, with
+$\lambda_0 \nabla f(x_0) + \lambda_1 \nabla g_1(x_0) + \dots + \lambda_k \nabla g_k(x_0) = 0$.
+The standing assumption above --- $(\nabla g_1,\dots,\nabla g_k)$ linearly independent --- is
+exactly what rules out $\lambda_0 = 0$ (else the $\nabla g_j$'s alone would already be dependent),
+so $\lambda_0 \neq 0$ and we may divide by it, silently renaming $\lambda_j/\lambda_0$ as
+$\lambda_j$; this is why the Lagrangian below carries no separate $\lambda_0$. Adrien Martelli's
+notes keep $\lambda_0$ explicit instead of dividing it away, pairing the dependence relation with
+a normalization constraint $\lambda_0^2 + \dots + \lambda_k^2 = 1$ (any nonzero vector of
+multipliers can be rescaled to satisfy this). The two formulations are equivalent whenever
+$\lambda_0 \neq 0$; keeping $\lambda_0$ explicit only matters in degenerate settings where the
+independence assumption on $(\nabla g_1,\dots,\nabla g_k)$ fails and $\lambda_0 = 0$ is genuinely
+forced, e.g.\ if $x_0$ is itself a critical point of the constraint map $g$.
+\end{remark}
+
+% Source: Corsin Nick/Class Notes/Week 5.pdf, pp. 4--5
+We then eliminate the perpendicular part of $\nabla f(x_0)$ by forming the \newterm{Lagrangian}
 (\germanterm{Lagrange-Funktion}):
 $$
 \begin{aligned}
@@ -257,7 +206,7 @@ Then we look for local extrema \textbf{on the boundary}. We need to find the loc
 $f|_{g^{-1}\{0\}}$, where $g : \mathbb{R}^3\to\mathbb{R}$ is given by $g(x) = |x|^2 - 1$.
 
 The Lagrangian is
-$$L(x,y,z,\lambda) = f(x,y,z) - \lambda g(x,y,z) = xyz - \lambda(x^2+y^2+z^2-1),$$
+$$L(x,y,z,\lambda) := f(x,y,z) - \lambda g(x,y,z) = xyz - \lambda(x^2+y^2+z^2-1),$$
 giving the system of equations
 $$
 \begin{aligned}
@@ -349,10 +298,21 @@ A symmetric matrix $A \in \mathbb{R}^{n\times n}$ is:
     $v \in \mathbb{R}^n\setminus\{0\}$;
   \item \textbf{indefinite} if there exist $v, u \in \mathbb{R}^n\setminus\{0\}$ such that
     $v\transp Av > 0$ and $u\transp Au < 0$;
-  \item \textbf{degenerate} if there exists $v \in \mathbb{R}^n\setminus\{0\}$ such that
-    $v\transp Av = 0$.
+  \item \textbf{degenerate} (\germanterm{entartet}) if there exists
+    $v \in \mathbb{R}^n\setminus\{0\}$ such that $Av = 0$; equivalently, if $\det A = 0$, or
+    if $0$ is an eigenvalue of $A$.
 \end{itemize}
 \end{definition}
+
+\begin{ainote}
+Corsin defines degenerate as \qt{there exists $v \neq 0$ with $v\transp Av = 0$}. That
+condition is much weaker than intended: if $A$ is indefinite, with $v\transp Av > 0$ and
+$u\transp Au < 0$, then $t \mapsto (tv+(1-t)u)\transp A(tv+(1-t)u)$ is continuous and changes
+sign, so it vanishes at some $w \neq 0$ --- making \emph{every} indefinite matrix degenerate,
+and the third bullet of \cref{thm:hessian_test} vacuous. The intended notion is a nontrivial
+kernel ($\det A = 0$), which is also what \cref{ex:6.2} in Week 6 states. Corrected above.
+See \texttt{OQ-24}.
+\end{ainote}
 
 \begin{theorem}[The Hessian test]
 \label{thm:hessian_test}
@@ -360,10 +320,23 @@ If $f \in C^2(U,\mathbb{R})$ has a critical point $x_0 \in \operatorname{int}(U)
 \begin{itemize}
   \item $\Hess f(x_0)$ \textbf{positive definite} $\Rightarrow$ local \textbf{min} at $x_0$;
   \item $\Hess f(x_0)$ \textbf{negative definite} $\Rightarrow$ local \textbf{max} at $x_0$;
-  \item $\Hess f(x_0)$ \textbf{indefinite and not degenerate} $\Rightarrow$ \newterm{saddle point}
+  \item $\Hess f(x_0)$ \textbf{indefinite} $\Rightarrow$ \newterm{saddle point}
     (\germanterm{Sattelpunkt}) at $x_0$.
 \end{itemize}
+If $\Hess f(x_0)$ is degenerate but not indefinite --- that is, positive or negative
+semidefinite with $0$ an eigenvalue --- the test gives \textbf{no information}, and all three
+behaviours are possible.
 \end{theorem}
+
+\begin{ainote}
+Corsin's third bullet reads \qt{indefinite and not degenerate}. With degeneracy corrected to
+$\det A = 0$ the extra hypothesis is unnecessary: indefiniteness alone already forces a saddle,
+since directions $v$ with $v\transp\Hess f(x_0)v > 0$ and $u$ with $u\transp\Hess f(x_0)u < 0$
+make $t\mapsto f(x_0+tv)$ increase and $t\mapsto f(x_0+tu)$ decrease away from $x_0$. Dropped
+above, and the genuinely inconclusive case --- semidefinite \emph{and} degenerate --- stated
+explicitly instead, since that is the one students actually run into
+(\cref{ex:6.8} in Week 6 is exactly this trap).
+\end{ainote}
 
 \begin{remark}[Mnemonic]
 positive $= \smile \dots$ min; negative $= \frown \dots$ max; indefinite $=$ saddle.
@@ -455,12 +428,16 @@ $$
   \item $x = y = 0$
   \item $x \neq 0 \implies x^3 = \alpha^3 \implies x = \alpha$, $y = -\alpha$
 \end{enumerate}
-So we have critical points $(0,0)$ and $(\alpha, -\alpha)$.
+So, we have critical points $(0,0)$ and $(\alpha, -\alpha)$.
 
 Compute the Hessian:
 $$\begin{pmatrix} \partial_x^2 f & \partial_x\partial_y f \\ \partial_x\partial_y f & \partial_y^2 f\end{pmatrix} = \begin{pmatrix} 6x & 3\alpha \\ 3\alpha & -6y \end{pmatrix} = \Hess f(x,y)$$
 $$\Hess f(0,0) = \begin{pmatrix} 0 & 3\alpha \\ 3\alpha & 0\end{pmatrix}, \qquad \det = -9\alpha^2 < 0 \implies \text{indefinite}$$
-$$\Hess f(\alpha,-\alpha) = \begin{pmatrix} 6\alpha & 3\alpha \\ 3\alpha & 6\alpha\end{pmatrix} = 3\alpha\begin{pmatrix} 2 & 1 \\ 1 & 2\end{pmatrix}, \qquad \det = 27\alpha^2 > 0, \quad \Tr = 12\alpha$$
+\begin{align*}
+\Hess f(\alpha,-\alpha) &= \begin{pmatrix} 6\alpha & 3\alpha \\ 3\alpha & 6\alpha\end{pmatrix}
+  = 3\alpha\begin{pmatrix} 2 & 1 \\ 1 & 2\end{pmatrix}, \\
+\det &= 27\alpha^2 > 0, \qquad \Tr = 12\alpha.
+\end{align*}
 For $\alpha > 0$ this is positive definite; for $\alpha < 0$ it is negative definite. So:
 \begin{itemize}
   \item $(0,0) \longrightarrow$ \textbf{saddle point}
@@ -481,6 +458,89 @@ Find the maximum and minimum values of $f(x,y) := x + 2y$ subject to the constra
 Find the global maximum and minimum values of $f(x,y) := xy$ on the compact triangular region $T := \{(x,y) \in \mathbb{R}^2 \mid x \ge 0, y \ge 0, x+y \le 2\}$.
 \end{aiexercise}
 
+\exercisesheet{5}
+
+\textit{Statements quoted verbatim from \texttt{exercises/Ex5\_Analysis2\_eng.pdf} (assigned 16
+March 2026, due 23 March 2026). Attribution: Prof. Joaquim Serra, D-MATH, ETH Z\"urich.}
+
+% Source: Corsin Nick/Class Notes/Week 5.pdf, p. 1
+\begin{ainote}[Corsin's recommendations]
+\begin{center}
+% p-column so the notes wrap on their own instead of being hand-broken with \\.
+\begin{tabular}{@{}l l p{0.52\linewidth}@{}}
+\textbf{Problem} & \textbf{Priority} & \textbf{Corsin's note} \\
+\hline
+5.1 & important & ``Recall the linearity of the differential and that $C^1 \Rightarrow$
+  differentiable'' \\[3pt]
+5.2 & important & ``Compare with the example from the script and recall that continuous
+  functions on compact sets attain their extrema.'' \\[3pt]
+5.3 & important & ``There is no difference between $x \to 0$ and $|x| \to 0$.'' \\[3pt]
+5.4 & semi-important & ``Use the definition of directional derivative,
+  $\partial_v f(x) = \left.\frac{\partial}{\partial t}\right|_{t=0} f(x+tv)$. Solve a few of
+  these, but not all.'' \\[3pt]
+5.5 & optional & --- \\[3pt]
+5.6 & optional & ``Interesting, but irrelevant for the course'' \\[3pt]
+5.7 & optional & ``Interesting for physicists, will be covered in classical mechanics.'' \\
+\end{tabular}
+\end{center}
+\end{ainote}
+
+\begin{ainote}
+Only the exercises tagged \textbf{important} above are reproduced below. The full sheet
+(5.1--5.7, including 5.4--5.7) is transcribed in \texttt{content/exercise-sheets/week-05.tex}.
+\end{ainote}
+
+\begin{exercise}[5.1 --- Derivatives \textnormal{(important)}]
+\label{ex:5.1}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Consider $f(x,y) := xy^2e^{-x^2-y^2}$ for $(x,y) \in \mathbb{R}^2$. Find all the critical
+    points of $f$, that is all the points where the gradient of $f$ vanishes. (The point will be
+    given if and only if all the numerical values you find are correct\ldots\ so check your
+    computations twice.)
+  \item We want to find a function $g \in C^1(\mathbb{R}^2)$ with the following directional
+    derivative:
+    $$\partial_v g(x,y) = 2\cos(x^2y)xv_2 + \cos(x^2y)v_1^2y \quad \text{for all } (x,y) \text{ and } (v_1,v_2) \in \mathbb{R}^2.$$
+    Give an explicit example of such a function $g$ or prove that a function with these
+    properties cannot exist.
+\end{enumerate}
+\end{exercise}
+
+\begin{remark}
+Corsin's hint --- \textit{recall the linearity of the differential} --- is the whole of
+\cref{ex:5.1}(b): a directional derivative must be \textbf{linear} in $v$, and $v_1^2$ is not.
+\end{remark}
+
+\begin{exercise}[5.2 --- Lagrange multipliers \textnormal{(important)}]
+\label{ex:5.2}
+Consider the ball $U := \{(x,y,z) : x^2+y^2+z^2 < 1\}$ and the function
+$$f(x,y,z) := 1 - x^2 - y^2 + 4x.$$
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Motivate rigorously why $f$ attains its absolute maximum and minimum in $\overline{U}$.
+  \item Find all the critical points of $f$ which lie in the interior of $U$. Say whether
+    $\sup_U f$ (or $\inf_U f$) is attained at some point in $U$.
+  \item Say whether $\max_{\partial U} f$ and $\min_{\partial U}$ exist.
+  \item With the method of Lagrange multipliers, find the possible critical points for the
+    constrained problem $\max\{f(x,y,z) : (x,y,z) \in \partial U\}$, and same for min.
+  \item Among all the points you have found, clarify at which points the maximum/minimum of $f$
+    is attained.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[5.3 --- Multiple choice (Landau notation) \textnormal{(important)}]
+\label{ex:5.3}
+Mark all and only the statements which are true.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item As $|x| \to 0$, if $f(x) = x_2x_1^2 + O(x_1^2)$, then $f(x) = O(|x|^2)$.
+  \item As $x \to 0$, if $f(x) = x_2x_1^2 + O(x_1^3)$, then $f(x) = O(x_1^3)$.
+  \item As $|x| \to 0$, if $f(x) = x_2x_1 + O(|x|^2)$, then $f$ is differentiable at $x = 0$.
+  \item As $x \to 0$, if $f(x) = x_2x_1 + O(|x|^2)$, then $f$ is twice differentiable around
+    $x = 0$.
+  \item As $|x| \to 0$, if $f(x) = x_2x_1 + O(|x|^3)$, then $f$ is twice differentiable around
+    $x = 0$ and $\partial_{11}f(0) = 0$.
+\end{enumerate}
+\textit{Official hint:} revise \textit{Corollary 10.45}.
+\end{exercise}
+
 \section{Solutions}
 \label{sec:week05_solutions}
 
@@ -490,7 +550,7 @@ This section holds solutions only for the official-sheet exercises Corsin did no
 out (\cref{ex:5.1,ex:5.2,ex:5.3} --- he gives only hints on his priority page, p. 1) and the two
 \texttt{aiexercise} problems. Corsin's own exercises in this chapter
 (\cref{ex:xyz_on_ball,ex:cubic_saddle_family}) are solved inline, immediately after their
-statement, mirroring how he presents them in his own notes (see the "Kept inline" comments above
+statement, mirroring how he presents them in his own notes (see the qt{Kept inline} comments above
 each).
 \end{ainote}
 
@@ -585,7 +645,7 @@ can establish) versus \textbf{around}/in a whole neighbourhood of $x=0$ (which i
 
 \begin{exercisesolution}[Proof of \cref{ex:ai_lagrange_circle}]
 % Generator: Gemini 3.6 Flash (Medium)
-The constraint set $S = \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 = 5\}$ is compact and $\nabla g(x,y) = (2x, 2y)\transp \neq (0,0)\transp$ on $S$. By Lagrange Multipliers, candidates satisfy $\nabla f = \lambda \nabla g$, i.e.:
+The constraint set $S := \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 = 5\}$ is compact and $\nabla g(x,y) = (2x, 2y)\transp \neq (0,0)\transp$ on $S$. By Lagrange Multipliers, candidates satisfy $\nabla f = \lambda \nabla g$, i.e.:
 \[
 1 = 2\lambda x \quad \text{and} \quad 2 = 2\lambda y \implies y = 2x.
 \]
@@ -600,7 +660,7 @@ f(1,2) = 1 + 4 = 5 \quad (\text{maximum}), \qquad f(-1,-2) = -1 - 4 = -5 \quad (
 Since $T$ is compact and $f$ is continuous, global extrema exist by the extreme value theorem
 (\cref{item:extreme_value_theorem}).
 \begin{itemize}
-  \item \textbf{Interior of $T$:} Critical points satisfy $\nabla f(x,y) = (y,x)\transp = (0,0)\transp \implies (x,y) = (0,0)$, which lies on the boundary. Thus there are no critical points in $\operatorname{int}(T)$.
+  \item \textbf{Interior of $T$:} Critical points satisfy $\nabla f(x,y) = (y,x)\transp = (0,0)\transp \implies (x,y) = (0,0)$, which lies on the boundary. Thus, there are no critical points in $\operatorname{int}(T)$.
   \item \textbf{Boundary of $T$:}
     \begin{itemize}
       \item Along the leg $x = 0$ ($0 \le y \le 2$), $f(0,y) = 0$.

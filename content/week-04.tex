@@ -356,6 +356,106 @@ Two lessons worth keeping.
 \end{itemize}
 \end{aiexample}
 
+% Supplement: Sascha Brack/Class Notes/Week_04_Notes_Monday_Updated.pdf, pp. 3--5
+\subsection{What \emph{does} imply differentiability}
+\label{sec:sufficient_condition_differentiability}
+
+\begin{ainote}
+Corsin's notes give the definition and the warnings, but never state a \emph{sufficient}
+condition --- so far we have two counterexamples and no positive test. Sascha Brack's notes
+(Lecture 8) state one as Theorem 2.9 and organise the whole picture into a chain of
+implications; both are reproduced below, since without them the practical question
+\qt{how do I actually check differentiability?} is left unanswered.
+\end{ainote}
+
+\begin{theorem}[Continuous partial derivatives suffice]
+\label{thm:continuous_partials_imply_differentiable}
+Let $U \subseteq \mathbb{R}^n$ be open and $F : U \to \mathbb{R}^m$. If all partial derivatives
+$\partial_iF$ exist on $U$ \textbf{and are continuous} at every $x \in U$, then $F$ is
+differentiable at every $x \in U$, and
+$$DF_x = \big(\partial_1F(x),\ \dots,\ \partial_nF(x)\big).$$
+Such an $F$ is called \newterm{continuously differentiable}, written $F \in C^1(U)$.
+\end{theorem}
+
+This is the theorem that makes the subject workable: in practice one almost never checks the
+definition directly. Compute the partials, observe that they are built from continuous pieces,
+and differentiability follows --- which is exactly why the course can write $f \in C^1$, $C^2$,
+$C^k$ so freely from here onward.
+
+Together with the two counterexamples, the whole landscape is a single chain, each link
+one-directional:
+
+% Sonnet 5 (Medium) --- FIG-W04-02, after the diagram on Sascha Brack's p. 3.
+\begin{center}
+\begin{tikzpicture}[>=Latex, node distance=0pt]
+  \tikzset{
+    box/.style={draw, rounded corners=2pt, align=center, font=\small,
+                inner sep=4pt, minimum height=8mm},
+    imp/.style={->, very thick, green!45!black},
+    nimp/.style={->, thick, red!75!black, dashed}}
+
+  \node[box, fill=green!8] (c1) at (0,4.5) {$F \in C^1$ near $x_0$\\[-2pt]
+    {\scriptsize (all $\partial_iF$ exist \emph{and} are continuous)}};
+  \node[box, fill=blue!8] (df) at (0,2.9) {$F$ differentiable at $x_0$};
+  \node[box] (dir) at (0,1.4) {all directional derivatives $\partial_vF(x_0)$ exist};
+  \node[box] (par) at (0,-0.1) {all partial derivatives $\partial_iF(x_0)$ exist};
+
+  \draw[imp] (c1) -- (df);
+  \draw[imp] (df) -- (dir);
+  \draw[imp] (dir) -- (par);
+
+  \node[font=\scriptsize, green!45!black, right] at (0.15,3.7)
+    {\cref{thm:continuous_partials_imply_differentiable}};
+  \node[font=\scriptsize, green!45!black, right] at (0.15,2.15) {formula $(*)$};
+  \node[font=\scriptsize, green!45!black, right] at (0.15,0.65) {take $v = e_i$};
+
+  % the reverse arrows, all false
+  \draw[nimp] (df.west) to[out=160, in=200, looseness=1.6] (c1.west);
+  \draw[nimp] (dir.west) to[out=160, in=200, looseness=1.6] (df.west);
+  \draw[nimp] (par.west) to[out=160, in=200, looseness=1.6] (dir.west);
+  \node[font=\scriptsize, red!75!black, align=right, anchor=east] at (-2.6,3.7)
+    {\textbf{no:} $(x^2{+}y^2)\sin\tfrac{1}{\lVert x\rVert}$};
+  \node[font=\scriptsize, red!75!black, align=right, anchor=east] at (-2.6,2.15)
+    {\textbf{no:} \cref{ex:all_directional_derivatives_exist}};
+  \node[font=\scriptsize, red!75!black, align=right, anchor=east] at (-2.6,0.65)
+    {\textbf{no:} \cref{ex:partial_derivatives_not_continuous}};
+\end{tikzpicture}
+\end{center}
+
+Every downward arrow holds; \textbf{not one of them reverses}, and each failure is witnessed by
+an example already in this chapter --- except the topmost, for which
+$F(x,y) := (x^2+y^2)\sin\big(1/\sqrt{x^2+y^2}\big)$ (and $F(0,0):=0$) serves: it \emph{is}
+differentiable at the origin, since $|F(h)|/\lVert h\rVert \leq \lVert h\rVert \to 0$ gives
+$DF_0 = 0$, yet
+$$\partial_1F(x,y) = 2x\sin\tfrac{1}{r} - \tfrac{x}{r}\cos\tfrac{1}{r},
+\qquad r := \sqrt{x^2+y^2},$$
+does not tend to $\partial_1F(0,0)=0$: along $(\tfrac1n,0)$ it equals
+$\tfrac2n\sin n - \cos n$, and $\cos n$ has no limit. So differentiable does \textbf{not} imply
+$C^1$ --- the chain really is strict at every step.
+
+% Supplement: Sascha Brack/Class Notes/Week_04_Notes_Monday_Updated.pdf, p. 5
+\begin{remark}[A recipe for checking differentiability at a point]
+\label{rem:differentiability_recipe}
+Sascha's notes distil the above into three steps, worth following in this order.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item \textbf{Compute the partial derivatives $\partial_iF(x_0)$.} If one of them fails to
+    exist, $F$ is not differentiable and you are done. If they all exist \emph{and are
+    continuous near $x_0$}, $F$ \emph{is} differentiable by
+    \cref{thm:continuous_partials_imply_differentiable} --- also done. Most exercises end here.
+  \item \textbf{Otherwise, guess the candidate.} If $F$ is differentiable at all, the differential
+    can only be $L := \big(\partial_1F(x_0),\dots,\partial_nF(x_0)\big)$, since the partials are
+    forced (\cref{sec:jacobi_matrix}).
+  \item \textbf{Verify the candidate against the definition:}
+    $$\lim_{h\to0}\frac{\big|F(x_0+h)-F(x_0)-L(h)\big|}{\lVert h\rVert} \overset{?}{=} 0.$$
+    In $\mathbb{R}^2$, substituting $h = (r\cos\theta,\ r\sin\theta)$ and checking that the
+    result tends to $0$ \emph{uniformly in $\theta$} is usually the quickest route --- the same
+    polar trick used in \cref{ex:all_directional_derivatives_exist} and, later, in
+    \cref{q:week08_q4}.
+\end{enumerate}
+Step 1 is the one students skip; it settles the overwhelming majority of cases without any
+$\varepsilon$--$\delta$ work at all.
+\end{remark}
+
 % Source: Corsin Nick/Class Notes/Week 4.pdf, p. 7
 \begin{exercise}[Differential of $A \mapsto A\transp A$]
 \label{ex:transpose_diff}

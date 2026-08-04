@@ -38,6 +38,38 @@ unreadable — worth finishing, unlike items that are merely unproved:
 - [ ] Per new week: missing standard defs/theorems the tutor only uses but never
       states; new subsections; transition sentences; heavy `\cref` (incl. cross-week)
 
+## Sascha Brack — class-notes mining (in progress)
+
+**Read so far:** `Week_02_Notes_Friday_Updated.pdf` (10 p), `Week_03_Notes_Monday.pdf` (7 p),
+`Week_04_Notes_Monday_Updated.pdf` (11 p). `Week_02_Notes_Monday_Updated.pdf` was mined earlier
+for the accumulation-point counterexample now in `week-02.tex`.
+
+**Still to read (weeks 4–8):** `Week_03_Notes_Friday.pdf` (7 p),
+`Week_04_Notes_Friday_Updated.pdf` (10 p), `Week_05_*` (17 p), `Week_06_*` (10 p),
+`Week_07_Notes_Monday.pdf` (2 p), `Week_08_*` (16 p).
+
+**Taken:** the sufficient condition for differentiability + implication chain + recipe
+(`week-04.tex`, `sec:sufficient_condition_differentiability`).
+
+**Found but NOT yet integrated** — all verified as genuine gaps by grep:
+- [ ] **The open/closed/compact/complete classification table** (Week 2 Friday p. 8, repeated
+      Week 3 Monday p. 3). ~11 subsets of $\mathbb{R}^n$ to classify in four columns:
+      `[0,1]`, `Q`, `B_1(0)⊆R³`, `B_1(0)∩B_1(1)⊆R²`, `{0}∪{1/n}`, `⋃_n B_{1/n}(n)`,
+      `(-∞,1]`, `f([0,1])`, `f⁻¹([0,1])`, `f⁻¹((0,1))`, `S=span((1,0),(3,0))`,
+      `{x∈R³ : d(x,S)<1}`. Exactly the "simple but illustrative corner cases" format —
+      would make an excellent `aiexercise` in Week 3 **with a solution table**.
+- [ ] **Arbitrary unions / finite intersections of open sets are open** (and the dual for
+      closed). Sascha's Lemmas 1.21–1.22. **Absent from `week-02.tex` entirely** — these are
+      foundational and currently missing.
+- [ ] **A closed subset of a compact set is compact** (his Corollary 1.37.3, with a neat proof
+      adding `X∖A` to the cover). Also absent.
+- [ ] **Continuity contrast pair** (Week 3 Monday p. 7): `xy/(x²+y²)` vs `x²y²/(x²+y²)` at the
+      origin — the first discontinuous, the second continuous, both settled by polar
+      coordinates. Our Week 4 has only the first; the pair is what shows the method
+      discriminates.
+- [ ] **Norm equivalence** (Week 3 Monday p. 6): Def 9.105 + Thm 9.107 "all norms on `R^n` are
+      equivalent", with proof strategy. Check whether `week-03.tex` covers it.
+
 ## Second-tutor mining (only on clear hits, ~30% hit rate so far)
 - [ ] Linus Lüchinger: sessions 5–9, 11, 13+ not yet checked
       (mapping: session 3 ~ Week 2, +1 session per week roughly)

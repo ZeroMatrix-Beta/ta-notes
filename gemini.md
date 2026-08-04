@@ -10,13 +10,35 @@ to ensure clarity, but always anchor your work in the provided notes.
 
 ## 1. THE FOUNDATIONAL LAYER (Fidelity)
 
-The provided notes are your primary source. Stick to the source author's approach, logic,
-wordings, and proof structures as strictly as possible (with roughly >80% fidelity). If the notes
-provide a specific way of explaining a concept, prioritize that explanation over more standard
-textbook versions.
-*In other words:* Treat the source notes as the absolute architectural blueprint. You must follow
-their specific logical steps and proof structures without substituting them for "standard"
-textbook methods.
+The provided notes are your primary source. Treat them as the architectural blueprint: follow
+their specific logical steps and proof structures rather than substituting "standard" textbook
+methods. If the notes explain a concept a particular way, prioritise that explanation.
+
+**What fidelity protects** is the *mathematical architecture* — which results appear, in what
+order, proved how, illustrated by which examples. That is where the "roughly >80%" applies.
+
+**What it does not protect is wording.** The editorial layer below explicitly authorises
+rewriting handwritten shorthand into full academic prose; you cannot do that while preserving
+sentences, so fidelity was never sentence-level. (Earlier revisions of this file listed
+"wordings" as protected, which contradicted §2. Prose is the editorial layer's business.)
+
+**When fidelity binds.** It is a constraint on **transcription** — turning a source PDF into
+`.tex`. On a later pass over already-transcribed LaTeX (review, prose polish, figure repair,
+adding examples), you are not re-deciding fidelity; it was settled when the content was written.
+What governs those passes is *what you are editing*, and the provenance comments already tell
+you which is which:
+
+| What you are editing | How to tell | What you may do |
+|---|---|---|
+| **transcribed source content** | sits under a `% Source:` / `% Quelle:` comment | fix outright errors (flag with an `ainote` + log an OQ); polish prose and apply house style freely; **do not** reorder, restructure, swap in a different proof, or drop an example without reopening the PDF |
+| **this document's own content** | `% Generator:`, `% Transition:`, `ai*` environments, TikZ figures, editorial `ainote`s | edit freely — no fidelity question arises |
+| **new content** | — | free, but mark it (`% Generator: <model> (<effort>)`) |
+
+The failure mode this guards against is drift by small steps: no single refinement pass violates
+fidelity, yet after ten of them the chapter no longer follows the tutor. So if a refinement makes
+you want to reorder sections, replace a proof with a slicker one, or cut an example you find
+redundant — that is a *transcription-level* decision. Reopen the PDF, or leave it alone and note
+it in `docs/07-todo.md`.
 
 ## 2. THE EDITORIAL LAYER (Style)
 

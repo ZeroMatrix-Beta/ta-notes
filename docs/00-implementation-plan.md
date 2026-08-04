@@ -42,4 +42,14 @@ Digital handwriting, very legible, English, consistently structured:
 | Week 13 | 9 | Stokes, ODEs |
 | Analysis 1 lesson on ODEs | 13 | ODE recap → appendix |
 
-⚠️ **Numbering note:** The file name of Corsin's PDF is canonical (`Week 2.pdf` = Chapter 1 = Week 2).
+⚠️ **Numbering note:** The file name of Corsin's PDF is canonical, and **chapter number = week
+number**: `Week 2.pdf` → `content/week-02.tex` → Chapter 2. (An earlier revision said
+"`Week 2.pdf` = Chapter 1"; that is wrong — `main.tex` derives theorem numbers as
+`\thechapter.<section letter>.<n>`, so a chapter/week mismatch would desynchronise every
+reference in the document. `content/week-01.tex` now exists and is Chapter 1: it covers the
+Analysis I recap and problem sheet 1, which none of the tutors documented on its own terms.)
+
+⚠️ **Week 8 topics in the table above are the *lecture's*, not Corsin's.** Having now read
+`Week 8.pdf`: Corsin actually covers a mid-semester repetition quiz, the change-of-variables
+theorem, Fubini, and Feynman's trick. Jordan measure and the Riemann integral are used but never
+defined — a genuine gap. See `docs/03-topic-index.md`.

@@ -257,7 +257,7 @@ FIG-W06-03 for the pattern).
 * **Flagging errors — never silently correct.** If a source appears to contain an error,
   flag it inline with `\omitted{...}` or a dark-red note, and log it in the project's
   open-questions file. Do **not** silently substitute a corrected version.
-* **Illegible source text:** Mark as `⟨?word⟩` in any intermediate transcript and add an
+* **Illegible source text:** Mark as `⟨?word⟩` inline in the `.tex` and add an
   open-questions entry. Never guess silently.
 * **Custom Sections:** You are allowed and encouraged to inject custom `\section`, `\subsection`,
   and `\subsubsection` headings wherever they improve readability or navigation — do not feel
@@ -534,7 +534,7 @@ Multiple sessions share one worktree. `git add -A` stages whatever is on disk,
 including another session's in-flight edits. **Stage only the paths you touched:**
 
 ```bash
-git add transcript/week-12.md content/week-12.tex   # yes
+git add content/week-12.tex docs/06-open-questions.md   # yes
 git add -A                                          # no
 ```
 
@@ -608,7 +608,8 @@ the \newterm{implicit function theorem} (\germanterm{Satz über implizite Funkti
 `\germanterm{...}` is defined at `main.tex:174`. Only on first introduction — never
 repeated. Canonical German wording comes from **Jérôme Paschoud**’s topic-named files.
 Every term pair also goes into `content/appendix-b-glossary.tex`.
-In Markdown transcripts write it as `**compact** ("kompakt")` so conversion is mechanical.
+(An earlier two-stage pipeline wrote these into Markdown transcripts first; that stage was
+dropped -- there is no `transcript/` directory. Write the LaTeX form directly.)
 
 ### Mathematical notation — Analysis II specifics
 
@@ -692,5 +693,6 @@ or disturb theorem numbering. Theorems land as `2.b.1`, anchored to a topic.
 \continuedfrom{sec:compactness}
 ```
 
-**File naming:** `content/week-02.tex` etc., one file per week, matching
-`transcript/week-02.md` one-to-one.
+**File naming:** `content/week-02.tex` etc., one file per week. Chapter number = week number.
+There is no `transcript/` stage -- typeset straight into `content/` (see
+`docs/01-file-structure.md`).

@@ -15,17 +15,26 @@ ta-notes/
 │   ├── 03-topic-index.md        topic -> owning week (the merge key)
 │   ├── 04-style-guide.md        redirect to gemini.md
 │   ├── 05-figure-queue.md       diagrams awaiting TikZ
-│   └── 06-open-questions.md     illegible passages, suspected errors
+│   ├── 06-open-questions.md     illegible passages, suspected errors
+│   ├── 07-todo.md               next-session handover
+│   ├── 07-tutor-review.md       skim of the 16 non-Corsin tutors
+│   └── 08-latex-review.md       maths/figure/prose review of Weeks 1–7
 │
 ├── content/                     the actual LaTeX files
-│   ├── week-02.tex … week-13.tex
-│   ├── appendix-a-odes.tex
-│   └── appendix-b-glossary.tex
+│   ├── week-01.tex … week-08.tex        (09–13 not yet written)
+│   ├── exercise-sheets/                 full sheets: week-02 … week-05 only
+│   ├── appendix-a-odes.tex              PLANNED — does not exist yet
+│   └── appendix-b-glossary.tex          PLANNED — does not exist yet
 │
-├── exercise-sheets/             official Serie01–13 problem statements
+├── exercises/                   official ExN_/SolN_Analysis2_eng.pdf sheets
 │
 └── <17 tutor folders>/          SOURCE MATERIAL — never modified
 ```
+
+⚠️ Two paths above are easy to get wrong. The transcribed problem sheets live in
+`content/exercise-sheets/`, **not** at the top level; the top-level `exercises/` folder holds
+the official PDFs and is read-only. And there is **no `transcript/` directory** — the two-stage
+transcript pipeline was dropped in favour of the direct workflow below.
 
 ## Naming
 

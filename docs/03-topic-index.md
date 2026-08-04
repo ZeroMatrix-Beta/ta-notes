@@ -6,14 +6,24 @@ Jérôme splits it over *Woche 5.2* and *Woche 6.1*. Merging by calendar week wo
 the document.
 
 So: **supplements attach to a topic, never to a date.** This table is the only mapping that
-matters. Built during Phase 3 from the finished transcripts.
+matters.
 
 ## Status
 
-Weeks 2–11 verified against the actual transcripts. **The provisional map (derived from Jérôme
-Paschoud's German file names) was wrong in several places** — Corsin runs roughly a week ahead of
-it from Week 4 onwards. Corrections applied below; the chapter titles in `transcript/week-*.md`
-are the authority. Weeks 12–13 rows are still provisional.
+**The provisional map (derived from Jérôme Paschoud's German file names) was wrong in several
+places** — Corsin runs roughly a week ahead of it from Week 4 onwards.
+
+⚠️ **The Skeleton table below carried that provisional map, uncorrected, until Weeks 1–8 were
+typeset.** Six rows were off by one week (Taylor, Lagrange, the Hessian test, the implicit
+function theorem, tangent spaces, change of variables) — i.e. the correction table immediately
+below was never propagated into the table people actually use. Rows verified against
+`content/week-0N.tex` are now marked in **bold**. Weeks 9–13 remain provisional and should be
+treated as unverified until those chapters are typeset.
+
+**The authority is `content/week-NN.tex` itself** — grep for the section label, e.g.
+`grep -l 'label{sec:lagrange_multipliers}' content/*.tex`. (Earlier revisions of this file named
+`transcript/week-*.md` as the authority; that directory does not exist — the project typesets
+directly into `content/`, see `docs/01-file-structure.md`.)
 
 | Provisional (from file names) | Actual (from Corsin's notes) |
 |---|---|
@@ -44,17 +54,21 @@ gap, and the first strong candidate for a Phase 3 supplement.
 | Norm equivalence on ℝⁿ | Week 3–4 | ch. 9 | 3 | |
 | The differential, partial derivatives | Week 4 | ch. 10 | 4 | |
 | Chain rule, mean value theorem | Week 4 | ch. 10 | 4 | |
-| Taylor expansion | Week 5 | ch. 10 | 5 | |
+| Taylor expansion | **Week 4** | ch. 10 | 4 | |
 | Optimization: critical points, gradient | Week 5 | ch. 11 | 5 | |
-| Hessian, convexity, extremal points | Week 6 | ch. 11 | 6 | |
-| Lagrange multipliers | Week 6 | ch. 11 | 6 | |
+| Lagrange multipliers | **Week 5** | ch. 11 | 5 | |
+| Hessian test, extremal points | **Week 5** | ch. 11 | 5 | |
+| Convexity | Week 6 | ch. 11 | 6 | |
 | Inverse function theorem | Week 6 | ch. 12 | 6 | |
-| Implicit function theorem | Week 7 | ch. 12 | 7 | |
+| Implicit function theorem | **Week 6** | ch. 12 | 6 | |
 | Submanifolds, parametrizations | Week 7 | ch. 12 | 7 | |
-| Tangent spaces | Week 8 | ch. 12 | 8 | |
-| Jordan measure | Week 8 | ch. 13 | 8 | |
-| Riemann integral, Fubini | Week 8 | ch. 13 | 8 | |
-| Change of variables / substitution | Week 9 | ch. 13 | 9 | |
+| Tangent & normal spaces | **Week 7** | ch. 12 | 7 | |
+| Repetition quiz (mid-semester, Weeks 2–7) | **Week 8** | — | — | |
+| Change of variables / substitution | **Week 8** | ch. 13 | 8 | |
+| Fubini's theorem | **Week 8** | ch. 13 | 8 | |
+| Feynman's trick (differentiation under $\int$) | **Week 8** | ch. 13 | 8 | |
+| Jordan measure | *not covered by Corsin* | ch. 13 | 8 | ⚠ used in Week 8 without being defined — gap |
+| Riemann integral (several variables) | *not covered by Corsin* | ch. 13 | 8 | ⚠ gap |
 | Length, area, volume; determinant & volume | Week 9 | ch. 13 | 9 | |
 | d-volume, improper integrals | Week 9 | ch. 13 | 9 | |
 | Integrals over submanifolds | Week 10 | ch. 13 | 10 | |

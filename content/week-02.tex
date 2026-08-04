@@ -583,6 +583,17 @@ Open, since the full space is always open, as shown before.
     \]
     is contained in $X \setminus C^0([0,1])$.
 
+    \textit{Why:} let $g \in B_{\varepsilon/3}(f)$ and let $\delta > 0$ be arbitrary. Choose
+    $y \in (x_0-\delta,\,x_0+\delta)$ with $|f(x_0)-f(y)| \geq \varepsilon$. Then
+    $$\varepsilon \leq |f(x_0)-f(y)|
+      \leq \underbrace{|f(x_0)-g(x_0)|}_{<\ \varepsilon/3}
+         + |g(x_0)-g(y)|
+         + \underbrace{|g(y)-f(y)|}_{<\ \varepsilon/3},$$
+    so $|g(x_0)-g(y)| > \varepsilon/3$. As $\delta$ was arbitrary, $g$ is discontinuous at
+    $x_0$ too, i.e.\ $g \notin C^0([0,1])$. The whole point of the $\tfrac{\varepsilon}{3}$ is
+    that two of the three terms are spent on moving from $f$ to $g$ and back, leaving a third
+    of the jump behind.
+
     Given this fact, \cref{prop:open_closed_via_sequences} ensures that the uniform limit $f$ of
     $(f_n)_{n=0}^{\infty}$ in $C^0([0,1])$ is also in $C^0([0,1])$, i.e., continuous, given that
     $f : [0,1] \to \mathbb{R}$ is bounded. This is the case, since $f_n$ is bounded for all
@@ -1056,11 +1067,19 @@ $$r(x) := \tfrac12\sup\{r \geq 0 : B_r(x) \subseteq U_i \text{ for some } i \in 
 $U_{i_0} \ni x$ contains a ball around $x$, so $r(x) > 0$; and since $X$ is bounded
 (\cref{lem:sequentially_compact_totally_bounded}) but no $U_i$ equals $X$, $r(x) < \infty$.
 
-\textit{$r$ is $1$-Lipschitz (\cref{def:lipschitz_continuous}), hence continuous.} For
-$x,y \in X$ with $d(x,y) < r(x)$, the point $y$ lies in $B_{r(x)}(x) \subseteq U_i$ for some $i$,
-so the triangle inequality gives $B_{r(x)-d(x,y)}(y) \subseteq B_{r(x)}(x) \subseteq U_i$, hence
-$r(y) \geq r(x)-d(x,y)$; this also holds trivially when $d(x,y) \geq r(x)$, since $r(y) \geq 0$.
-By symmetry (swapping $x,y$), $|r(x)-r(y)| \leq d(x,y)$.
+\textit{$r$ is Lipschitz (\cref{def:lipschitz_continuous}), hence continuous.} Write
+$R(x) := \sup\{\rho \geq 0 : B_\rho(x) \subseteq U_i \text{ for some } i\}$, so that
+$r = \tfrac12 R$; it is $R$ that the argument bounds, and the factor $\tfrac12$ must be carried
+through.
+
+Let $x,y \in X$ with $d(x,y) < r(x)$. Since $r(x) < R(x)$, we have
+$B_{r(x)}(x) \subseteq U_i$ for some $i$, so $y \in U_i$, and the triangle inequality gives
+$$B_{r(x)-d(x,y)}(y) \subseteq B_{r(x)}(x) \subseteq U_i
+\qquad\Longrightarrow\qquad R(y) \geq r(x)-d(x,y).$$
+Halving, $r(y) = \tfrac12R(y) \geq \tfrac12\big(r(x)-d(x,y)\big)$, which also holds trivially
+when $d(x,y) \geq r(x)$ since $r(y) \geq 0$. By symmetry,
+$$|r(x)-r(y)| \leq \tfrac12\,d(x,y),$$
+so $r$ is $\tfrac12$-Lipschitz --- in particular continuous, which is all that is needed below.
 
 By \cref{lem:sequential_compactness_extreme_values}, $r$ attains a minimum
 $\varepsilon := \min_{x\in X} r(x) > 0$ on $X$. Then $B_\varepsilon(x) \subseteq U_i$ for some $i$,

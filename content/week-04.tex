@@ -57,7 +57,11 @@ for any open subset $U \subseteq \mathbb{R}^n$, and we use it in that generality
 The linear map $DF_{x_0}$ in \cref{def:differentiable}, when it exists, is automatically unique:
 if $L_1, L_2$ both satisfy the defining limit, then
 $(L_1-L_2)(h)/|h| \to 0$ as $h \to 0$ along every direction, which forces the linear map
-$L_1 - L_2$ to vanish identically (a nonzero linear map cannot decay along its own domain). This
+$L_1 - L_2$ to vanish identically. Concretely: write $L := L_1-L_2$ and suppose $L(h) \neq 0$
+for some $h$. Along the ray $th$, $t > 0$, linearity gives
+$$\frac{|L(th)|}{|th|} = \frac{t\,|L(h)|}{t\,|h|} = \frac{|L(h)|}{|h|} \neq 0,$$
+a nonzero \emph{constant} --- so the quotient cannot tend to $0$ as $t \to 0$. Hence $L(h)=0$
+for every $h$. This
 is the multivariable analogue of the uniqueness-of-limits argument from
 \cref{prop:uniqueness_of_limits}.
 \end{remark}

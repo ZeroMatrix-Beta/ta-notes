@@ -492,9 +492,23 @@ $S$ is \textbf{connected} but \textbf{not path-connected}!
 \end{center}
 
 \begin{proof}[$S$ is connected]
-Any open set $U$ with $0 \in U$ will also contain elements from $S \setminus \{0\}$, which is
-path-connected. Since path-connected implies connected and $U \setminus \{0\}$ is also open,
-``$S$ disconnected'' gives a contradiction.
+Write $G := S \setminus \{(0,0)\} = \{(t,\sin(1/t)) : t>0\}$ for the graph part, and suppose for
+contradiction that $S$ is disconnected, say $S = V_1 \sqcup V_2$ with $V_1,V_2$ non-empty,
+disjoint and open in $S$. Say $(0,0) \in V_1$.
+
+$G$ is the continuous image of the interval $(0,\infty)$ under
+$t \mapsto (t,\sin(1/t))$, hence path-connected, hence connected
+(\cref{lem:path_connected_implies_connected}). A connected set meeting both parts of a
+separation would itself be separated, so $G$ lies entirely in $V_1$ or entirely in $V_2$.
+
+It cannot lie in $V_1$: then $V_2 \subseteq S \setminus (G \cup \{(0,0)\}) = \emptyset$,
+contradicting $V_2 \neq \emptyset$. So $G \subseteq V_2$, and therefore
+$V_1 = \{(0,0)\}$.
+
+But $V_1$ is open in $S$, so some ball $B_\varepsilon\big((0,0)\big) \cap S$ equals
+$\{(0,0)\}$ --- and that is false: for $t := \tfrac{1}{k\pi}$ with $k$ large, the point
+$(t,\sin(1/t)) = (t,0) \in G$ lies within $\varepsilon$ of the origin. Contradiction, so $S$ is
+connected.
 \end{proof}
 
 \begin{proof}[$S$ is not path-connected]

@@ -57,6 +57,41 @@ $\langle\cdot,\cdot\rangle$ induces a \textbf{norm} by the formula
 Furthermore, a \textbf{norm} induces a \textbf{metric} by
 \[d(x,y) := \|x - y\|, \qquad x, y \in X.\]
 
+% Supplement: Sascha Brack/Class Notes/Week_02_Notes_Monday_Updated.pdf, p. 4
+\begin{remark}[Geometric angle and projection in inner product spaces]
+\label{rem:inner_product_angle_geometry}
+In an inner product space $(X, \langle\cdot,\cdot\rangle)$ over $\mathbb{R}$, the Cauchy--Schwarz inequality $|\langle x, y\rangle| \leq \|x\|\,\|y\|$ guarantees that for any non-zero vectors $x, y \in X$,
+\[
+-1 \leq \frac{\langle x, y\rangle}{\|x\|\,\|y\|} \leq 1.
+\]
+This allows us to formally define the \newterm{angle} $\Theta(x,y) \in [0,\pi]$ between $x$ and $y$ via
+\[
+\Theta(x,y) := \arccos\left(\frac{\langle x, y\rangle}{\|x\|\,\|y\|}\right).
+\]
+Geometrically, when $\|x\| = \|y\| = 1$, the inner product $\langle x, y\rangle$ represents the signed length of the orthogonal projection of $y$ onto the direction of $x$.
+\end{remark}
+
+% Quelle: Diego Torres Tejeda/Notes - 09.03 - Diego Torres Tejeda.pdf, pp. 1--2
+\begin{proposition}[Geometric derivation of the Cauchy--Schwarz inequality]
+\label{prop:cauchy_schwarz_geometric_proof}
+Let $(V, \langle\cdot,\cdot\rangle)$ be a real inner product space. Then for all $v, w \in V$,
+\[
+|\langle v, w\rangle| \leq \|v\|\,\|w\|.
+\]
+\end{proposition}
+
+\begin{proof}
+If $w = 0$, both sides vanish and the inequality holds trivially. For $w \neq 0$, consider the distance squared from $v$ to points on the line $L := \operatorname{Span}_{\mathbb{R}}\{w\}$ parametrized by $\lambda \mapsto \lambda w$:
+\[
+f(\lambda) := \|v - \lambda w\|^2 = \langle v - \lambda w, v - \lambda w\rangle = \|v\|^2 - 2\lambda\langle v, w\rangle + \lambda^2\|w\|^2.
+\]
+Since $f(\lambda) \geq 0$ for all $\lambda \in \mathbb{R}$, $f$ is a convex quadratic polynomial in $\lambda$ with positive leading coefficient $\|w\|^2 > 0$. Differentiating or completing the square shows that $f$ attains its global minimum at $\lambda_0 := \frac{\langle v, w\rangle}{\|w\|^2}$. Evaluating $f$ at $\lambda_0$ yields
+\[
+0 \leq f(\lambda_0) = \|v\|^2 - 2\frac{\langle v, w\rangle^2}{\|w\|^2} + \frac{\langle v, w\rangle^2}{\|w\|^2} = \|v\|^2 - \frac{\langle v, w\rangle^2}{\|w\|^2}.
+\]
+Multiplying by $\|w\|^2$ and taking square roots gives $|\langle v, w\rangle| \leq \|v\|\,\|w\|$. Geometrically, $\pi_L(v) := \lambda_0 w = \frac{\langle v, w\rangle}{\|w\|^2}w$ is the unique orthogonal projection of $v$ onto the line $L$, achieving the minimal distance $d(v, L) = \sqrt{f(\lambda_0)}$.
+\end{proof}
+
 \section{Metric spaces}
 \label{sec:metric_spaces}
 
@@ -198,7 +233,7 @@ $|x+y|_m = 2^{1/m} > 2 = |x|_m+|y|_m$. Written as stated above.
     \[
     d(f,g) := \sup_{x \in [0,1]} |f(x) - g(x)|
     \]
-  \item Let $X = S^2 := \{(x_1,x_2,x_3) \in \mathbb{R}^3 : x_1^2 + x_2^2 + x_3^2 = 1\}$. $S^n$ is
+  \item Let $X := S^2 := \{(x_1,x_2,x_3) \in \mathbb{R}^3 : x_1^2 + x_2^2 + x_3^2 = 1\}$. $S^n$ is
     called the \newterm{$n$-dimensional sphere}, or \newterm{$n$-sphere}. The closest path between
     two points on the sphere is an \textbf{arc of a great circle} (a \textit{geodesic}). This
     defines a metric, similar to how straight lines define a metric on $\mathbb{R}^n$.
@@ -1206,7 +1241,7 @@ the argument.
 \begin{aiexercise}[Equivalence of Manhattan and Supremum Metrics]
 \label{ex:ai_metric_equivalence}
 % Generator: Gemini 3.6 Flash (Medium)
-Let $x = (x_1, x_2) \in \mathbb{R}^2$. Show that the Manhattan metric $d_1(x,0) := |x_1| + |x_2|$ and the supremum metric $d_3(x,0) := \max\{|x_1|, |x_2|\}$ satisfy the sharp inequalities:
+Let $x := (x_1, x_2) \in \mathbb{R}^2$. Show that the Manhattan metric $d_1(x,0) := |x_1| + |x_2|$ and the supremum metric $d_3(x,0) := \max\{|x_1|, |x_2|\}$ satisfy the sharp inequalities:
 \[
 d_3(x,0) \leq d_1(x,0) \leq 2 \, d_3(x,0).
 \]

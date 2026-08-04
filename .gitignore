@@ -45,3 +45,8 @@ exercises/
 Thumbs.db
 *.swp
 *~
+
+# Temporary scratch directory and rendered PNG images
+scratch/
+*.png
+

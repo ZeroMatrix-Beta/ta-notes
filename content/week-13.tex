@@ -1,0 +1,264 @@
+% Source: Corsin Nick/Class Notes/Week 13.pdf, pp. 2--9
+\chapter{Week 13 --- Stokes' Theorem, Green's Theorem \& Oriented Boundaries}
+\label{ch:week13}
+
+% Transition: Claude Sonnet 5
+This chapter states the general Stokes' theorem and works through its two most classical
+special cases --- Green's theorem in the plane and the curl theorem in $\mathbb{R}^3$ ---
+before turning to the geometric prerequisite Stokes' theorem needs to make sense at all:
+what it means for a submanifold to have a boundary, and how an orientation of the manifold
+determines one on that boundary. A worked cylinder example closes the chapter by showing this
+induced orientation in action on a manifold with two separate boundary components.
+
+\begin{ainote}
+Corsin's exercise sheet for this week (\texttt{Ex13\_Analysis2\_eng.pdf}) is, in its entirety,
+about ordinary differential equations --- constant-coefficient linear ODEs, the
+Cauchy--Lipschitz--Picard theorem, and matrix exponentials for linear systems --- with no
+connection to this week's lecture content on Stokes' theorem and orientation. Corsin's own
+page~1 points to the reason: \qt{You can find my notes on ODEs from last semester in the
+Polybox}, i.e.\ the ODE material is not covered in these Week 13 class notes at all, but in a
+separate document, \texttt{Corsin Nick/Class Notes/Analysis 1 lesson on ODEs.pdf}, carried
+over from an earlier course. Per the project's own plan (see \texttt{gemini.md}, \qt{Typeset
+Corsin --- weeks 2--13 + ODE appendix}), the ODE material and its exercise sheet belong in a
+dedicated ODE appendix built from that separate file, not in this chapter. Deferred
+accordingly; not reproduced here.
+\end{ainote}
+
+\section{Stokes' theorem}
+\label{sec:stokes_general}
+
+% Source: Corsin Nick/Class Notes/Week 13.pdf, p. 2
+\begin{theorem}[Stokes' theorem]
+\label{thm:stokes_general}
+Let $M \subseteq \mathbb{R}^n$ be an orientable $m$-manifold with (possibly empty) boundary,
+and let $\omega \in \Omega^{m-1}(\mathbb{R}^n)$ have compact support in $\mathbb{R}^n$. Then
+\[\int_{\partial M} \omega = \int_M d\omega.\]
+\end{theorem}
+
+\begin{ainote}
+\Cref{thm:stokes_classical} of Week 12 was stated ahead of Corsin's own notes, as background
+needed to solve \cref{ex:12.3}, in its classical $\mathbb{R}^3$ curl-theorem form. It is
+exactly the case $m=2$, $n=3$, $\omega=\omega_F$ of the general theorem above, as
+\cref{sec:stokes_in_r3} below confirms directly from Corsin's own derivation.
+\end{ainote}
+
+\subsection{Example: Green's theorem}
+\label{sec:green_theorem_example}
+
+% Source: Corsin Nick/Class Notes/Week 13.pdf, p. 2
+\begin{example}[The exterior derivative of a $1$-form on $\mathbb{R}^2$]
+\label{ex:exterior_derivative_r2}
+Let $\omega(x,y) = P(x,y)\,dx + Q(x,y)\,dy$ be a $1$-form on $\mathbb{R}^2$. Then
+\[
+d\omega = dP\wedge dx + dQ\wedge dy = \left(\frac{\partial P}{\partial x}dx +
+  \frac{\partial P}{\partial y}dy\right)\wedge dx + \left(\frac{\partial Q}{\partial x}dx +
+  \frac{\partial Q}{\partial y}dy\right)\wedge dy = \left(\frac{\partial Q}{\partial x} -
+  \frac{\partial P}{\partial y}\right) dx\wedge dy,
+\]
+using $dx\wedge dx = dy\wedge dy = 0$ and $dy\wedge dx = -dx\wedge dy$.
+\end{example}
+
+\subsection{Example: proof of Green's theorem}
+\label{sec:green_theorem_proof}
+
+% Source: Corsin Nick/Class Notes/Week 13.pdf, p. 3
+\begin{ainote}
+The theorem below is reproduced by Corsin directly from the lecture script (numbered there as
+Theorem 14.24), as with the two definitions quoted in \cref{sec:orientable_manifolds} of
+Week 12.
+\end{ainote}
+
+\begin{theorem}[Green's theorem in the plane]
+\label{thm:green_theorem}
+Let $F : U \to \mathbb{R}^2$ be a continuously differentiable vector field on an open set
+$U \subseteq \mathbb{R}^2$. Then, for any compact $C^1$ domain $\Omega \subseteq U$,
+\[\int_\Omega \curl F\,dx = \int_{\partial\Omega} F\cdot\tau\,dL,\]
+with $\tau = \nu^\perp = (-\nu_2,\nu_1)$, where $\nu$ is the exterior unit normal.
+\end{theorem}
+
+Writing $F(x,y) = (P(x,y),Q(x,y))$, so that $\curl F = \partial_xQ - \partial_yP$ (the scalar
+$2$-dimensional curl), \cref{thm:green_theorem} follows from
+\cref{thm:stokes_general,ex:exterior_derivative_r2} applied to $\omega = P\,dx+Q\,dy$:
+\[
+\int_\Omega \curl F\,dx\,dy = \int_\Omega \left(\frac{\partial Q}{\partial x} -
+  \frac{\partial P}{\partial y}\right) dx\wedge dy = \int_\Omega d\omega
+  \overset{\text{Stokes}}{=} \int_{\partial\Omega} P(x,y)\,dx + Q(x,y)\,dy
+  = \int_{\partial\Omega} F\cdot\tau\,dL.
+\]
+
+\begin{proof}[Justification of the last step]
+Suppose $\gamma : [0,L] \to \partial\Omega$ is a $C^1$ curve of unit speed and positive
+orientation, i.e.\ $\gamma'(t) = \tau(\gamma(t))$. Then
+\[\langle F,\tau\rangle = \langle F,\gamma'(t)\rangle = (P\,dx+Q\,dy)(\gamma'(t)),\]
+since $\tau = \begin{pmatrix}0&-1\\1&0\end{pmatrix}\nu$ is the tangent vector consistent with
+the induced orientation, so integrating $(P\,dx+Q\,dy)(\gamma'(t))$ over $t \in [0,L]$ is
+exactly $\int_{\partial\Omega} P\,dx+Q\,dy$ by \cref{def:integral_of_form_over_submanifold}.
+\end{proof}
+
+\subsection{Example: Stokes' theorem in \texorpdfstring{$\mathbb{R}^3$}{R\^{}3}}
+\label{sec:stokes_in_r3}
+
+% Source: Corsin Nick/Class Notes/Week 13.pdf, p. 4
+Recall from \cref{ex:exterior_derivative_gradient_curl} of Week 11 that for $\omega_F =
+\langle F,\cdot\rangle$, $d\omega_F = \langle\curl F,\cdot\times\cdot\rangle$. So, if $\Omega
+\subseteq \mathbb{R}^3$ is a $2$-dimensional submanifold with boundary, parametrized by $\phi$
+with tangent vectors $\tau_i := \partial_i\phi$ and exterior unit normal $\nu$, then
+\[
+\int_\Omega d\omega_F = \int_\Omega \langle\curl F,\tau_1\times\tau_2\rangle\,dx
+  = \int_\Omega \langle\curl F,\nu\rangle\,d\vol_2 = \int_\Omega \vec\nabla\times\vec F\cdot
+  d\vec A,
+\]
+and
+\[\int_{\partial\Omega} \omega_F = \int_{\partial\Omega} \langle F,\tau\rangle\,d\vol_1
+  = \int_{\partial\Omega} \vec F\cdot d\vec s.\]
+By \cref{thm:stokes_general}, these are equal --- recovering \cref{thm:stokes_classical} of
+Week 12.
+
+\section{Area via Green's formula}
+\label{sec:area_via_green}
+
+% Source: Corsin Nick/Class Notes/Week 13.pdf, pp. 5--6
+% Kept inline: solved directly in Corsin Nick/Class Notes/Week 13.pdf, pp. 5--6.
+\begin{exercise}[Area as a boundary functional]
+\label{ex:area_boundary_functional}
+Suppose $\gamma : [0,L) \to \mathbb{R}^2$ traces the boundary of a connected $C^\infty$-domain
+$U \subseteq \mathbb{R}^2$ in the positive direction. Express the area of $U$ as a functional
+of $\gamma$.
+\end{exercise}
+
+\begin{exercisesolution}
+By definition, $A(U) = \int_U dx\,dy = \int_U 1\,dx\wedge dy$. By Green's formula
+(\cref{thm:green_theorem}, in its $1$-form guise $\int_\Omega d\omega =
+\int_{\partial\Omega}\omega$),
+\[\int_U 1\,dx\wedge dy = \int_0^L \langle F\circ\gamma(t),\gamma'(t)\rangle\,dt\]
+for any $F : \overline U \to \mathbb{R}^2$ satisfying $\partial_xF^2 - \partial_yF^1 = 1$. This
+is satisfied by $F(x,y) = \tfrac12(-y,x)$, giving the \newterm{shoelace formula}
+(\germanterm{Gau\ss sche Trapezformel})
+\[A(\gamma) = \frac12\int_0^L \big[\gamma_1(t)\gamma_2'(t) - \gamma_2(t)\gamma_1'(t)\big]\,dt.\]
+\end{exercisesolution}
+
+\begin{example}[Ellipse]
+\label{ex:area_ellipse}
+The path $\gamma : [0,2\pi) \to \mathbb{R}^2$, $t \mapsto (a\cos t,b\sin t)$, traces the
+boundary of an ellipse. By \cref{ex:area_boundary_functional},
+\[
+A(\gamma) = \frac12\int_0^{2\pi} \big[a\cos t\cdot b\cos t - b\sin t\cdot(-a\sin t)\big]\,dt
+  = \frac{ab}{2}\int_0^{2\pi} dt = \pi ab.
+\]
+For the circle $a=b=:r$, this gives the familiar $A = \pi r^2$.
+\end{example}
+
+\begin{ainote}
+Corsin adds, in the same breath as the ellipse's area: \qt{Famously, there exists no closed
+form solution for the length of the boundary of an ellipse} --- the ellipse's perimeter is a
+complete elliptic integral of the second kind, not an elementary function, unlike its area.
+\end{ainote}
+
+\section{Submanifolds with boundary and induced orientation}
+\label{sec:submanifolds_with_boundary}
+
+% Source: Corsin Nick/Class Notes/Week 13.pdf, pp. 6--7
+\begin{ainote}
+Corsin recaps \cref{thm:local_parametrization} of Week 7 verbatim --- for every $p \in M$, an
+open neighbourhood $V$ of $p$, an open set $U \subseteq \mathbb{R}^k$, and $\phi : U \to
+V\cap M$ that is smooth, has $D\phi_x$ injective for all $x \in U$, and is a homeomorphism onto
+$V\cap M$ --- before extending it to submanifolds with boundary below. Not repeated; see
+Week 7.
+\end{ainote}
+
+\begin{definition}[Submanifold with boundary]
+\label{def:submanifold_with_boundary}
+For a $k$-dimensional submanifold \emph{with boundary}, we require similarly that for a local
+parametrization $\phi : U \to V\cap M$ as in \cref{thm:local_parametrization}, either $U
+\subseteq \mathbb{R}^k$ is open, or
+\[U = U' \cap \mathcal{H}^k, \qquad U' \subseteq \mathbb{R}^k \text{ open}, \qquad
+  \mathcal{H}^k := \{(x_1,\ldots,x_k) \in \mathbb{R}^k : x_1 \leq 0\}\]
+the (closed) \newterm{left half-space}. If $p \in \partial M$ and $\phi : U \subseteq
+\mathcal{H}^k \to V\cap M$ is a local parametrization of $M$ around $p$, then $\phi|_{\partial
+\mathcal{H}^k}$ (identifying $\partial\mathcal{H}^k = \{0\}\times\mathbb{R}^{k-1} \cong
+\mathbb{R}^{k-1}$) is a local parametrization of $\partial M$ around $p$.
+\end{definition}
+
+% Sonnet 5 (Medium) --- FIG-W13-01
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.0]
+  \draw[green!50!black, thick] (0,0) .. controls (0.3,1.3) and (1.3,2.0) .. (2.6,1.9)
+    .. controls (3.9,1.8) and (4.6,1.0) .. (4.4,0.1) .. controls (3.5,-0.5) and (1.5,-0.6)
+    .. (0,0);
+  \fill (0.9,0.55) circle (1.1pt);
+  \draw[red, dashed, thick] (-0.05,-0.55) .. controls (0.4,0.0) and (0.5,1.1) .. (0.15,1.55);
+  \draw[red, thick, ->] (0.9,0.55) -- (1.75,0.75) node[right, font=\scriptsize] {$\partial_2\phi$};
+  \draw[red, thick, ->] (0.9,0.55) -- (0.55,1.3) node[above, font=\scriptsize] {$\partial_1\phi$};
+  \node[font=\scriptsize] at (0.6,-0.85) {$p \in \partial M$};
+  \draw[->] (5.3,0.7) -- (6.3,0.7) node[right, font=\scriptsize] {};
+  \node[font=\scriptsize] at (5.8,1.0) {$\phi$};
+  \draw[red, thick] (7.1,0.1) rectangle (8.4,1.4);
+  \draw[red, thick, dashed] (7.1,0.1) -- (7.1,1.4);
+  \draw[red, ->] (7.1,0.75) -- (7.7,0.75) node[right, font=\scriptsize] {$e_1$};
+  \draw[red, ->] (7.1,0.75) -- (7.1,1.25) node[above, font=\scriptsize] {$e_2$};
+  \node[font=\scriptsize] at (7.1,-0.15) {$0$};
+  \node[font=\scriptsize] at (7.75,-0.2) {$U \subseteq \mathcal{H}^2$};
+\end{tikzpicture}
+\end{center}
+
+\begin{definition}[Induced orientation]
+\label{def:induced_orientation}
+If $\{\partial_1\phi,\ldots,\partial_k\phi\}$ is the oriented basis of $T_pM$ given by a local
+parametrization $\phi$ around $p \in \partial M$, then $\{\partial_2\phi,\ldots,\partial_k
+\phi\}$ is the \newterm{induced} oriented basis of $T_p(\partial M)$ around $p$.
+\end{definition}
+
+\subsection{Example: cylinder}
+\label{sec:cylinder_orientation_example}
+
+% Source: Corsin Nick/Class Notes/Week 13.pdf, pp. 8--9
+Consider the cylindrical surface
+\[C = \{(x,y,z) \in \mathbb{R}^3 : y^2+z^2 = r^2,\ 0\leq x\leq L\},\]
+a $2$-dimensional submanifold with boundary, and the two parametrizations $\phi,\psi :
+[-L,0]\times[0,2\pi] \to C$ (both domains $\subseteq \mathcal{H}^2$),
+\[\phi(x,\theta) = \begin{pmatrix} -x \\ r\cos\theta \\ -r\sin\theta \end{pmatrix}, \qquad
+  \psi(x,\theta) = \begin{pmatrix} x+L \\ r\cos\theta \\ r\sin\theta \end{pmatrix}.\]
+Both cover all of $C$: as the local $x$-coordinate ranges over $[-L,0]$, $-x$ and $x+L$ both
+range over $[0,L]$.
+
+The two are positively oriented with respect to each other: writing out the composition,
+\[\phi^{-1}\circ\psi(x,\theta) = \phi^{-1}(x+L,\,r\cos\theta,\,r\sin\theta) = (-x-L,-\theta)
+  = -(x+L,\theta),\]
+so $D(\phi^{-1}\circ\psi) = \begin{pmatrix}-1&0\\0&-1\end{pmatrix}$ and $\det D(\phi^{-1}
+\circ\psi) = 1 > 0$: $\{\phi,\psi\}$ is a valid orientation of $C$ by
+\cref{def:orientable_manifold}.
+
+But restricted to the line $\partial\mathcal{H}^2 = \{(x,\theta) : x=0\}$, $\phi$ and $\psi$
+parametrize \emph{opposite} boundary components of the cylinder --- $\phi(0,\cdot)$ traces the
+circle at $x=0$, $\psi(0,\cdot)$ the circle at $x=L$ --- and \cref{def:induced_orientation}
+gives them opposite rotational senses when both are drawn in the same $(y,z)$-view:
+
+% Sonnet 5 (Medium) --- FIG-W13-02
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=0.95]
+  \draw[blue!70!black, thick] (0,2.4) rectangle (4.5,3.5);
+  \draw[blue!70!black, thick] (0,2.4) circle (0.55 and 0.55);
+  \draw[blue!70!black, thick] (4.5,2.95) ellipse (0.35 and 0.55);
+  \draw[red, thick, ->] (-0.5,3.5) arc (150:490:0.55);
+  \node[red, font=\scriptsize] at (-0.85,3.5) {$t\mapsto\phi(0,t)$};
+  \node[font=\scriptsize] at (0,1.7) {\textbf{left end} ($x=0$)};
+
+  \draw[blue!70!black, thick] (6.5,2.4) rectangle (11,3.5);
+  \draw[blue!70!black, thick, dashed] (6.5,2.95) ellipse (0.35 and 0.55);
+  \draw[blue!70!black, thick] (11,2.4) circle (0.55 and 0.55);
+  \draw[orange, thick, ->] (11.5,2.4) arc (-30:330:0.55);
+  \node[orange, font=\scriptsize] at (11.9,3.5) {$t\mapsto\psi(0,t)$};
+  \node[font=\scriptsize] at (8.75,1.7) {\textbf{right end} ($x=L$)};
+\end{tikzpicture}
+\end{center}
+
+\begin{ainote}
+This is not a contradiction, and Corsin does not present it as one: $\{\phi,\psi\}$ is a
+perfectly good orientation of $C$ as a whole (the overlap check above is what
+\cref{def:orientable_manifold} demands, and it passes). What the picture shows is that a
+\emph{consistently} oriented cylinder induces boundary orientations on its two ends that look
+like opposite rotational senses when both circles are drawn from the same external viewpoint
+--- exactly the familiar fact, from the divergence theorem, that the outward normal at the two
+ends of a solid cylinder points in opposite $x$-directions. Induced orientation is doing its
+job correctly here, not failing.
+\end{ainote}

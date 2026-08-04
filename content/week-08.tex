@@ -484,6 +484,19 @@ full sheet also contains 8.1 (Jordan-null sets), 8.3 (an open set with non-null 
 8.6 (a Cantor-type set, marked \textbf{(*)} \qt{a bit more complex} on the sheet).
 \end{ainote}
 
+% Supplement: Sascha Brack/Ex Sheet Hints/Ex8_Analysis2_hints.pdf, pp. 1--2
+\begin{ainote}[A second TA's priorities, and his hints]
+Corsin gives priorities but no hints for this sheet. Sascha Brack annotates his own copy of the
+sheet directly, and the two agree where it matters: he rings \textbf{8.1, 8.2, 8.4} and
+\textbf{8.5}, so \textbf{8.2, 8.4 and 8.5 are independently flagged by both TAs}. The only
+divergence is 8.1, which Sascha rings and Corsin marks merely semi-important. On 8.3 Sascha
+writes that the result is interesting \qt{but first focus on other exercises} --- again
+consistent with Corsin.
+
+His hints are reproduced with the relevant exercises below.
+\end{ainote}
+
+% Source: exercises/Ex8_Analysis2_eng.pdf, p. 1
 \begin{exercise}[8.2 --- True or False \textnormal{(important)}]
 \label{ex:8.2}
 \begin{enumerate}[label=\textbf{\arabic*.}]
@@ -498,8 +511,17 @@ full sheet also contains 8.1 (Jordan-null sets), 8.3 (an open set with non-null 
 \end{enumerate}
 \textit{Official hint:} \textbf{8.2.5} --- $\mu_{out}$ can be positive and large on very sparse
 sets\dots
+
+% Supplement: Sascha Brack/Ex Sheet Hints/Ex8_Analysis2_hints.pdf, p. 1
+\textit{Sascha Brack's hints:} a toolkit of sets worth testing every part against ---
+$\mathbb{Q}$, the irrationals $\mathbb{R}\setminus\mathbb{Q}$, $\mathbb{Q}\cap[0,1]$, and
+$(\mathbb{R}\setminus\mathbb{Q})\cap[0,1]$. For \textbf{8.2.3} specifically: monotonicity already
+gives $\mu_{out}(D) \leq \mu_{out}([0,1]) = 1$, so the work is showing
+$\mu_{out}(D) \geq 1$ --- essentially, that the \qt{smallest} dyadic set containing $D$ also
+contains $[0,1]$.
 \end{exercise}
 
+% Source: exercises/Ex8_Analysis2_eng.pdf, p. 1
 \begin{exercise}[8.4 --- Multiple Choice \textnormal{(important)}]
 \label{ex:8.4}
 Let $U \subset \mathbb{R}^n$ be a nonempty, open subset, $f : U \to \mathbb{R}^m$ a function,
@@ -514,6 +536,7 @@ correct!}
 \end{enumerate}
 \end{exercise}
 
+% Source: exercises/Ex8_Analysis2_eng.pdf, pp. 1--2
 \begin{exercise}[8.5 --- Change of variables and Jacobians \textnormal{(important)}]
 \label{ex:8.5}
 For each of the following domains and change of variables find the jacobian and the appropriate
@@ -532,6 +555,12 @@ transformed domain. There is no need to actually compute the integrals!
     dots in the following formula
     $$\int_C xyz\,dx\,dy = \int_{\dots}\dots\,du\,dv\,dw.$$
 \end{enumerate}
+
+% Supplement: Sascha Brack/Ex Sheet Hints/Ex8_Analysis2_hints.pdf, p. 1
+\textit{Sascha Brack's hint} on \textbf{8.5.2:} first pin down the signs. The constraints force
+$x \neq 0$ and $y \neq 0$; then $y > 0$ forces $x > 0$, so $u > 0$ and $v > 0$ throughout $B$.
+That is what lets you divide by $x$ and $y$ and rearrange the inequalities without their
+directions flipping.
 \end{exercise}
 
 \begin{ainote}

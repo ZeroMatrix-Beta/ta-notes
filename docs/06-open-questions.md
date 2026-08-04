@@ -41,6 +41,8 @@ worth a second opinion.
 
 | OQ-29 | `exercises/Ex8_Analysis2_eng.pdf`, 8.5.3 | Integral written `∫_C xyz dxdy`, but `C ⊂ ℝ³` and the right-hand side carries three differentials `dudvdw`. | **resolved** — typo in the official sheet; must read `dx dy dz`. Quoted verbatim in the chapter (the sheet is a primary source) with a note. |
 
+| OQ-30 | `exercises/Ex8_Analysis2_eng.pdf` vs `Sascha Brack/Ex Sheet Hints/Ex8_Analysis2_hints.pdf` | **The two copies of sheet 8 cite different lecture-notes definition numbers.** Ours: Jordan-null = "Definition 13.18", `μ_out` = "Definition 13.10". Sascha's: "Definition 13.8" and "Definition 13.7". Problem text is otherwise word-for-word identical. | **open** — the sheet was evidently reissued with renumbered references (or the lecture notes were). Ours is presumably the later one; it is what is quoted in `week-08.tex`. Worth pinning against `exercises/lec_notes.pdf` before relying on either number. |
+
 *(weeks 12–13 and the ODE appendix still to come)*
 
 ## Conventions

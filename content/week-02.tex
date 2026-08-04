@@ -707,6 +707,42 @@ every Cauchy sequence in $X$ converges with respect to $d$.
 \end{itemize}
 \end{example}
 
+% Generator: Claude Opus 5 (Medium)
+\begin{remark}[Completeness is not the same as closedness]
+\label{rem:complete_vs_closed}
+The second bullet is easy to over-read as \qt{complete means closed}. It does not, and the
+difference is worth pinning down now, because it recurs.
+
+\textbf{Closedness is relative, completeness is intrinsic.} \qt{Closed} only means anything once
+you say \emph{closed in what}: it is a statement about how a set sits inside an ambient space.
+Completeness asks nothing about an ambient space --- only whether the Cauchy sequences of the
+space converge \emph{within it}. So:
+\begin{itemize}
+  \item $\mathbb{Q}$ is \textbf{closed in $\mathbb{Q}$} --- every space is closed in itself
+    (\cref{ex:X_empty_clopen}) --- and yet \textbf{not complete}: the sequence
+    $1,\,1.4,\,1.41,\,1.414,\dots$ is Cauchy in $\mathbb{Q}$ and converges to nothing there.
+  \item $(0,1)$ is \textbf{not closed in $\mathbb{R}$} and also not complete, which is the
+    second bullet's case --- but the two failures have different causes, and the first does not
+    imply the second in general.
+\end{itemize}
+
+What \emph{is} true is a one-directional statement, and only inside a complete ambient space:
+if $X$ is complete and $A \subseteq X$, then
+$$A \text{ closed in } X \iff A \text{ complete}.$$
+This is why the second bullet is correct \emph{as stated for $\mathbb{R}^n$} --- it silently uses
+completeness of the ambient $\mathbb{R}^n$. Drop that hypothesis and the equivalence dies, as
+$\mathbb{Q}$ inside $\mathbb{Q}$ shows.
+
+\begin{ainote}
+The same relative-versus-intrinsic distinction is the one behind
+\cref{rem:common_misconception} ($[0,1]^2$ is open in itself, not in $\mathbb{R}^2$), and it
+returns in Week 3 as \cref{rem:boundedness_not_topological}. Compactness, by contrast, is
+intrinsic like completeness: a subset $K$ is compact exactly when the metric space
+$(K, d|_{K\times K})$ is, with no reference to the ambient space at all --- which is precisely
+the reduction used in \cref{def:sequential_topological_compactness}.
+\end{ainote}
+\end{remark}
+
 % Sonnet 5 (Medium)
 Compactness will turn out to be a strictly stronger finiteness-type property than completeness:
 every compact metric space is complete (\cref{ex:compact_finite_complete}), but the converse

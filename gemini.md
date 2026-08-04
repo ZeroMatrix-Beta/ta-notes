@@ -623,8 +623,14 @@ Each week opens with the official problem sheet (`exercises/ExN_Analysis2_eng.pd
   | red ▨ | `**optional**` |
   | official `(*)` | `**harder**` |
 
-- Where a second TA (Sascha Brack’s `Ex Sheet Hints/`, Simon Kamps’s `SerieNNHints.pdf`)
-  independently flags the same problem, note it — cross-TA agreement is worth surfacing.
+- ⚠️ **Standing decision: do NOT mine the other TAs' exercise-sheet hint files.** This applies
+  to `Sascha Brack/Ex Sheet Hints/` and `Simon Kamps/SerieNNHints.pdf`. It was tried once, for
+  sheet 8 (see `content/week-08.tex`, the *"A second TA's priorities, and his hints"* block and
+  the two per-exercise hints) — that material stays, but **do not add more of it**. The files
+  are annotated copies of the official sheet rather than independent notes, so the yield is
+  cross-TA priority agreement plus short margin hints, which is not worth the reading cost or
+  the clutter next to Corsin's own priority table. Corsin's priorities are the ones the document
+  follows.
 - Corsin’s hint follows the statement, attributed and page-pointed.
 - TAs’ worked solutions are presented; `SolN_Analysis2_eng.pdf` is used to **check**
   them, not replace them. A genuine divergence goes in `06-open-questions.md`.

@@ -321,6 +321,55 @@ And we call $A \subseteq X$ \newterm{closed} (\germanterm{abgeschlossen}) if and
 $X \setminus A$ is open.
 \end{definition}
 
+% Supplement: Sascha Brack/Class Notes/Week_02_Notes_Friday_Updated.pdf, p. 1
+\begin{proposition}[How open and closed sets combine]
+\label{prop:open_closed_operations}
+Let $(X,d)$ be a metric space.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \label{item:arbitrary_union_open}
+    \textbf{Arbitrary} unions of open sets are open: if $\{U_i\}_{i \in I}$ are open, so is
+    $\bigcup_{i\in I}U_i$.
+  \item \label{item:finite_intersection_open}
+    \textbf{Finite} intersections of open sets are open: if $U_1,\dots,U_k$ are open, so is
+    $\bigcap_{i=1}^{k}U_i$.
+  \item \textbf{Arbitrary} intersections of closed sets are closed, and \textbf{finite} unions
+    of closed sets are closed.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\textbf{(a)} Let $x \in \bigcup_i U_i$. Then $x \in U_{i_0}$ for some $i_0$, and since $U_{i_0}$
+is open there is $\varepsilon>0$ with $B_\varepsilon(x) \subseteq U_{i_0} \subseteq \bigcup_iU_i$.
+
+\textbf{(b)} Let $x \in \bigcap_{i=1}^kU_i$. For each $i$ pick $\varepsilon_i>0$ with
+$B_{\varepsilon_i}(x) \subseteq U_i$, and set $\varepsilon := \min\{\varepsilon_1,\dots,\varepsilon_k\}$.
+Then $\varepsilon > 0$ --- \emph{this is where finiteness is used} --- and
+$B_\varepsilon(x) \subseteq U_i$ for every $i$, hence $B_\varepsilon(x) \subseteq \bigcap_iU_i$.
+
+\textbf{(c)} Take complements and apply \textbf{(a)}, \textbf{(b)} via De Morgan:
+$X\setminus\bigcap_iA_i = \bigcup_i(X\setminus A_i)$ and
+$X\setminus\bigcup_{i=1}^kA_i = \bigcap_{i=1}^k(X\setminus A_i)$.
+\end{proof}
+
+% Generator: Claude Opus 5 (Medium)
+\begin{importantremark}[The asymmetry is real, not an artefact of the proof]
+\label{rem:finiteness_is_necessary}
+It is tempting to read \qt{finite} in \textbf{(b)} as laziness. It is not: an infinite
+intersection of open sets genuinely need not be open. In $\mathbb{R}$,
+$$\bigcap_{n=1}^{\infty}\left(-\tfrac1n,\ \tfrac1n\right) = \{0\},$$
+an intersection of open intervals which is not open. The proof shows exactly where it breaks:
+$\varepsilon := \min_i\varepsilon_i$ is the whole argument, and an infimum of infinitely many
+positive numbers can be $0$. Dually, $\bigcup_{n\geq1}\big[\tfrac1n,1\big] = (0,1]$ is an
+infinite union of closed sets that is not closed.
+
+\begin{ainote}
+These four closure properties are exactly the axioms of a \newterm{topology}, which is how the
+subject is set up when one drops the metric altogether (\cref{sec:structured_spaces},
+\qt{fourth semester}). That is why they are worth isolating: they are the only facts about open
+sets that survive into the general theory.
+\end{ainote}
+\end{importantremark}
+
 % Sonnet 5 (Medium)
 \begin{definition}[Interior, closure, and boundary]
 \label{def:interior_closure_boundary}
@@ -994,6 +1043,32 @@ $B_\delta(x)$ lies inside some $f^{-1}(B_{\varepsilon/2}(y))$, so $x' \in B_\del
 $f(x),f(x') \in B_{\varepsilon/2}(y)$, hence $d_Y(f(x),f(x')) < \varepsilon$ by the triangle
 inequality. Since $\delta$ did not depend on $x$, $f$ is uniformly continuous.
 \end{proof}
+
+% Supplement: Sascha Brack/Class Notes/Week_02_Notes_Friday_Updated.pdf, p. 6
+\begin{proposition}[A closed subset of a compact set is compact]
+\label{prop:closed_subset_of_compact}
+Let $(X,d)$ be a metric space, $K \subseteq X$ compact, and $A \subseteq K$ closed in $X$. Then
+$A$ is compact.
+\end{proposition}
+
+\begin{proof}
+Let $\mathcal{U}$ be an open cover of $A$. Since $A$ is closed, $X\setminus A$ is open, so
+$$\mathcal{U}' := \mathcal{U} \cup \{X\setminus A\}$$
+is an open cover of $K$ --- it covers $A$ by assumption and everything outside $A$ by the added
+set. Compactness of $K$ gives a finite subcover
+$U_{1},\dots,U_{m} \in \mathcal{U}'$ of $K$, hence of $A$.
+
+Now simply discard $X\setminus A$ from that list if it occurs: it contains no point of $A$, so
+the remaining sets still cover $A$. They all belong to $\mathcal{U}$, and there are finitely
+many. As $\mathcal{U}$ was arbitrary, $A$ is compact.
+\end{proof}
+
+\begin{ainote}
+The trick --- \emph{enlarge the cover by the complement of the set you care about, then throw it
+away again} --- is the standard way to transfer compactness downward, and worth remembering: it
+reappears whenever one needs a compact subset of a compact set. Note the hypothesis \qt{closed}
+is essential: $(0,1) \subseteq [0,1]$ sits inside a compact set without being compact.
+\end{ainote}
 
 \begin{exercise}[Compact sets are complete]
 \label{ex:compact_finite_complete}

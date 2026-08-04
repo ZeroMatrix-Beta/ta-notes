@@ -117,6 +117,30 @@ Yet $f$ is not even continuous at $(0,0)$: along the diagonal $y=x$, $f(x,x) = \
 even though both partial derivatives exist there.
 \end{aiexample}
 
+% Supplement: Sascha Brack/Class Notes/Week_03_Notes_Monday.pdf, p. 7
+\begin{remark}[The same expression, squared, behaves completely differently]
+\label{rem:continuity_contrast_pair}
+Sascha Brack pairs the function above with one that looks almost identical, as a test of whether
+you can tell them apart:
+$$f_1(x,y) := \frac{xy}{x^2+y^2}, \qquad\qquad f_2(x,y) := \frac{x^2y^2}{x^2+y^2},$$
+both extended by $0$ at the origin. Substituting $x = r\cos\theta$, $y = r\sin\theta$ settles
+both at once:
+$$f_1 = \frac{r^2\cos\theta\sin\theta}{r^2} = \cos\theta\sin\theta,
+\qquad\qquad
+f_2 = \frac{r^4\cos^2\theta\sin^2\theta}{r^2} = r^2\cos^2\theta\sin^2\theta.$$
+In $f_1$ every $r$ cancels: the function is constant along each ray and takes a different
+constant on different rays, so no limit exists and $f_1$ is discontinuous at the origin. In
+$f_2$ a factor $r^2$ survives, and since $|\cos^2\theta\sin^2\theta| \leq 1$ we get
+$|f_2| \leq r^2 \to 0$ \emph{uniformly in $\theta$} --- so $f_2$ is continuous at the origin.
+
+The pair is worth doing once because it shows what the polar substitution is actually testing.
+The question is never \qt{does the expression go to zero along each fixed ray?} --- $f_1$ does
+not even do that --- but \textbf{does the $\theta$-dependence get killed by a positive power of
+$r$?} If the $r$'s cancel completely, the direction survives into the limit and there is none.
+This is the same test used in \cref{q:week08_q4} on the Week 8 repetition quiz, and the reason
+step 3 of \cref{rem:differentiability_recipe} insists on \qt{uniformly in $\theta$}.
+\end{remark}
+
 % Sonnet 5 (Medium)
 \begin{center}
 \begin{tikzpicture}[>=Latex, scale=1.0]

@@ -524,6 +524,30 @@ Each environment has a precise semantic role. Using the wrong one is a style err
   Conversely, do not over-correct: notes that say *"Corsin does not prove this here"*,
   *"no priority page this week"*, *"only the important exercises are reproduced below"*, or that
   introduce a second tutor's supplement, are genuinely editorial and belong in `ainote`.
+* ⚠️ **The `ai*` prefix means "invented here", NOT "typeset by an AI".** Everything in this
+  document is typeset by an AI, so that reading would make the prefix meaningless. What
+  `aiexample` / `aiexercise` mark is **provenance**: the item does not exist in any source.
+  This is the same authored-here-versus-transcribed line as `remark` versus `ainote`.
+
+  The mistake to avoid is reaching for `aiexercise` whenever *you* are the one adding the block.
+  An exercise lifted from a tutor's notes is a plain `exercise` with a `% Source:` /
+  `% Supplement:` comment, however much reformatting it took — the exercise is theirs.
+
+  * **BAD** — Sascha Brack's classification table, transcribed from his notes:
+    ```latex
+    \begin{aiexercise}[Classify these sets]   % wrong: it is his exercise, not ours
+    ```
+  * **GOOD:**
+    ```latex
+    % Supplement: Sascha Brack/Class Notes/Week_02_Notes_Friday_Updated.pdf, p. 8
+    \begin{exercise}[Classify these sets]
+    ```
+
+  **A transcribed exercise with an authored solution is the normal case**, and it is not a
+  contradiction: the `exercise` is transcribed, and the `exercisesolution` carries
+  `% Generator: <model> (<effort>)` because the tutor left the answer blank. Label slugs should
+  match — use `ex:classification_table`, not `ex:ai_classification_table`, when the exercise is
+  not ours.
 * **`aiexample`** (AI-Example) — for AI-generated illustrative mathematical examples that clarify a definition, theorem, or technique.
   - **Generator Comment:** Must contain a LaTeX comment naming the model that wrote it, `% Generator: <model> (<effort>)` -- e.g. `% Generator: Gemini 3.6 Flash (Medium)` or `% Generator: Claude Opus 5 (Medium)` -- directly inside the environment.
   - Rendered in GoldOrange style (`EnvAINote`).

@@ -90,6 +90,41 @@ expansion gives $d_2d_1d_3$; the cancelled terms and the conclusion $0 \leq 2d_2
 are unaffected. Re-derived cleanly above. See \texttt{OQ-08}.
 \end{ainote}
 
+% Generator: Claude Opus 5 (Medium)
+\begin{remark}[The moral: boundedness is not a topological property]
+\label{rem:boundedness_not_topological}
+It is worth saying out loud what \cref{ex:heine_borel_fails} has just demonstrated, because the
+three parts are more striking together than separately.
+
+Part \textbf{(b)} shows that $d$ and $\tilde d$ have the \emph{same open sets}. (Only one
+direction is asked for, but the converse follows the same way: given
+$\tilde B_\varepsilon(x)$, the choice $r := \tfrac{\varepsilon}{1-\varepsilon}$ gives
+$B_r(x) \subseteq \tilde B_\varepsilon(x)$.) Two metrics with the same open sets have the same
+convergent sequences, the same continuous functions, and --- crucially --- the same
+\textbf{compact} sets, since compactness is defined purely by open covers
+(\cref{def:compact_metric_space}).
+
+Part \textbf{(c)} shows that they do \emph{not} have the same bounded sets. Indeed
+$\tilde d < 1$ always, so under $\tilde d$ \emph{every} subset of \emph{every} metric space is
+bounded --- the notion collapses entirely.
+
+Putting those together: \textbf{compactness is topological, boundedness is not.} Boundedness is
+a property of the chosen metric, not of the open sets it generates, so no theorem of the form
+\qt{compact $\iff$ closed and bounded} can hold for a general metric. That is precisely why
+\cref{thm:heine_borel} carries the hypothesis \textbf{standard metric}, and it is not a
+technicality to be skimmed --- it is the entire content of the hypothesis.
+
+\begin{ainote}
+The right general replacement is already in Week 2: compact $\iff$ complete \emph{and}
+\newterm{totally bounded} (\cref{def:totally_bounded}, \cref{rem:compact_iff_complete_totally_bounded}).
+Total boundedness is the notion boundedness was trying and failing to be, and $\mathbb{N}$ under
+$\tilde d$ separates them cleanly: for $\varepsilon < \tfrac12$ the ball
+$\tilde B_\varepsilon(n)$ contains no integer but $n$ itself, so no finite family of
+$\varepsilon$-balls covers $\mathbb{N}$. Bounded, not totally bounded --- and that is exactly
+the gap through which compactness escapes.
+\end{ainote}
+\end{remark}
+
 \subsection{Why do we care about compactness?}
 
 % Sonnet 5 (Medium): added \label on each item so these three facts (heavily cited by name in

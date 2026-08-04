@@ -262,6 +262,34 @@ $$
 We then find local extrema by forcing $\nabla L(x,\lambda) = 0$, i.e.
 $$\underbrace{\frac{\partial L}{\partial x_i} = 0 \ \ \forall i = 1,\dots,n}_{\nabla f(x) - \lambda\cdot\nabla g(x) = 0} \qquad \text{and} \qquad \underbrace{\frac{\partial L}{\partial \lambda_j} = 0 \ \ \forall j = 1,\dots,k}_{g_j(x) = 0}$$
 
+% Generator: Claude Opus 5 (Medium)
+\begin{remark}[Why the Lagrangian is built this way]
+\label{rem:why_the_lagrangian}
+The construction can look like a trick pulled out of nowhere. It is not: $L$ is assembled
+precisely so that setting \emph{one} gradient to zero encodes \emph{both} halves of the problem
+at once.
+
+Read the two underbraces. Differentiating in the $x_i$ reproduces the geometric condition ---
+$\nabla f$ parallel to the $\nabla g_j$, i.e.\ no tangential component left. Differentiating in
+$\lambda_j$ returns $g_j(x)=0$, the constraint itself, because $\lambda_j$ appears in $L$ only
+in the term $-\lambda_jg_j(x)$, linearly. So the multipliers are not auxiliary clutter: they are
+exactly the bookkeeping that lets a \emph{constrained} problem in $n$ variables be written as an
+\emph{unconstrained} critical-point problem in $n+k$ variables, which is the one kind of problem
+we already know how to solve (\cref{prop:extremum_implies_critical}).
+
+That also explains the minus sign, which is arbitrary: writing $f + \lambda\cdot g$ merely flips
+the sign of every $\lambda_j$ and changes nothing. And it explains why $\lambda$ is discarded at
+the end --- it is scaffolding, not part of the answer.
+
+\begin{ainote}
+Though $\lambda$ is not meaningless. In applications it is the \newterm{shadow price}
+(\germanterm{Schattenpreis}): if the constraint is relaxed from $g=0$ to $g=c$, the optimal value
+changes at rate $\lambda$ to first order, $\tfrac{d}{dc}f_{\text{opt}}(c) = \lambda$. This is
+where the name comes from in economics, and it is why $\lambda$ carries units. Not needed for
+this course, but it is the usual answer to \qt{what \emph{is} $\lambda$?}
+\end{ainote}
+\end{remark}
+
 % Source: Corsin Nick/Class Notes/Week 5.pdf, pp. 5--6
 \begin{exercise}[Extrema of $xyz$ on the unit ball]
 \label{ex:xyz_on_ball}

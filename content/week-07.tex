@@ -183,6 +183,38 @@ for every $p \in M$ there exist an open neighbourhood $V$ of $p$, an open set $U
 \end{itemize}
 \end{theorem}
 
+% Generator: Claude Opus 5 (Medium)
+\begin{remark}[Three descriptions, and which one to reach for]
+\label{rem:three_submanifold_descriptions}
+There are now three ways to certify that $M$ is an $m$-dimensional submanifold, and they are
+equivalent --- but they are not equally convenient, and choosing badly is what makes these
+exercises feel hard.
+
+\begin{itemize}
+  \item \textbf{Chart} (\cref{def:submanifold}) --- the definition. Straighten $M$ out with a
+    diffeomorphism. Almost never used directly for a concrete $M$: producing $\Phi$ by hand is
+    painful. Its role is theoretical, and it is what the other two are proved from.
+  \item \textbf{Implicit / regular value} (\cref{thm:regular_value_theorem}) --- use when $M$
+    arrives as \emph{equations}: $\{x^2+y^2=R^2\}$, $\{g_1=\dots=g_k=0\}$. Check a rank
+    condition on $\Jac F$ and you are done, with no parametrization ever written. This is
+    normally the cheapest route.
+  \item \textbf{Parametrization} (\cref{thm:local_parametrization}) --- use when $M$ arrives as
+    a \emph{picture you can sweep out}: a graph, a surface of revolution, a curve given by a
+    formula in a parameter. Also the one to use when you subsequently need the tangent space,
+    since $\partial_1f,\dots,\partial_mf$ hand you a basis directly
+    (\cref{def:tangent_space}).
+\end{itemize}
+
+The rough rule: \textbf{equations $\to$ regular value theorem; a formula with parameters $\to$
+local parametrization.} A graph $\{(x,f(x))\}$ satisfies both, which is why graphs are the
+easiest case of all.
+
+Two cautions carried over from \cref{rem:full_rank_two_meanings}. \qt{Full rank} means
+\emph{surjective} in the first case and \emph{injective} in the second --- the shape of the
+matrix decides. And neither theorem yields a negative: if the rank condition fails, you have
+learned nothing, and must argue separately (see \cref{ex:cross_not_submanifold}).
+\end{remark}
+
 \begin{example}[The $n$-parabola]
 Let $P := \{(x,t) \in \mathbb{R}^n\times\mathbb{R} : t=|x|^2\}$. One could use the regular value
 theorem, but instead take

@@ -233,6 +233,59 @@ differentiable, it holds:
 $$D(g\circ f)(x) = Dg(f(x))\,Df(x).$$
 The same identity holds for the corresponding Jacobi matrices, where the composition on the
 right becomes an ordinary matrix product.
+
+% Supplement: Sascha Brack/Class Notes/Week_04_Notes_Friday_Updated.pdf, pp. 7--10
+\begin{remark}[The chain rule as a sum over paths]
+\label{rem:chain_rule_paths}
+Stated as $D(g\circ f) = Dg\cdot Df$ the rule is compact but, as Sascha Brack puts it in his
+notes, \qt{pretty abstract} --- it says nothing about \emph{why} a sum appears when you write
+it out in coordinates. His device is to draw the variables as a graph and read the formula off
+it.
+
+Write $x \in \mathbb{R}^n \xmapsto{\ f\ } y \in \mathbb{R}^m \xmapsto{\ g\ } z \in \mathbb{R}^k$
+and join each variable to those it feeds into. Then $x_i$ influences $z_j$ only by first moving
+some intermediate $y_\ell$, and the contribution of that route is the product of the two rates
+along it. Summing over the routes gives the chain rule:
+
+% Sonnet 5 (Medium) --- FIG-W04-03, after the variable graph on Sascha Brack's p. 10.
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.0]
+  \node (xi) at (0,2.4) {$x_i$};
+  \node (y1) at (-2.2,1.1) {$y_1$};
+  \node (y2) at (-0.7,1.1) {$y_2$};
+  \node (yd) at (0.75,1.1) {$\cdots$};
+  \node (ym) at (2.2,1.1) {$y_m$};
+  \node (zj) at (0,-0.2) {$z_j$};
+
+  \foreach \t in {y1,y2,ym}{\draw[->, blue!70!black] (xi) -- (\t);}
+  \foreach \s in {y1,y2,ym}{\draw[->, orange!90!black] (\s) -- (zj);}
+
+  \node[blue!70!black, font=\scriptsize, above left] at (-1.25,1.75)
+    {$\dfrac{\partial y_\ell}{\partial x_i}$};
+  \node[orange!90!black, font=\scriptsize, below left] at (-1.25,0.55)
+    {$\dfrac{\partial z_j}{\partial y_\ell}$};
+\end{tikzpicture}
+\end{center}
+
+$$\frac{\partial z_j}{\partial x_i}
+  \;=\; \sum_{\ell=1}^{m}
+  \underbrace{\frac{\partial z_j}{\partial y_\ell}}_{(\Jac g)_{j\ell}}
+  \underbrace{\frac{\partial y_\ell}{\partial x_i}}_{(\Jac f)_{\ell i}}
+  \;=\; \big(\Jac g(f(x))\,\Jac f(x)\big)_{ji}.$$
+
+The right-hand equality is just the definition of matrix multiplication --- which is the point:
+\textbf{matrix multiplication is a sum over paths}, and the chain rule looks like a product of
+matrices precisely because composing functions composes those graphs. Sascha's summary is that
+computing $\partial z_j/\partial x_i$ this way is nothing more than \qt{computing single
+components of the chain rule}.
+
+The reading is worth having because it makes the coordinate form reconstructible instead of
+memorised: count the intermediate variables, one term each, each term a product of two factors,
+and the index that is summed over is the one belonging to the middle layer. It is also the
+form in which the rule is actually used in physics --- compare
+\cref{sec:chain_rule_along_path}, which is this picture with a single intermediate layer
+$\gamma_1,\dots,\gamma_n$ and a single source variable $t$.
+\end{remark}
 \end{theorem}
 
 \begin{aiexample}[Chain Rule for Vector Fields]

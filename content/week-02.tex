@@ -746,6 +746,43 @@ $(X,d)$ is a \newterm{complete metric space} (\germanterm{vollst\"andiger metris
 every Cauchy sequence in $X$ converges with respect to $d$.
 \end{definition}
 
+% Supplement: Sascha Brack/Class Notes/Week_02_Notes_Monday_Updated.pdf, pp. 7--9
+\begin{proposition}[Convergence in $\mathbb{R}^n$ is coordinatewise; $\mathbb{R}^n$ is complete]
+\label{prop:Rn_coordinatewise_complete}
+Equip $\mathbb{R}^n$ with the standard metric $d_2$, and write
+$x_m = (x_{m,1},\dots,x_{m,n})$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $x_m \to x$ in $\mathbb{R}^n$ if and only if $x_{m,i} \to x_i$ in $\mathbb{R}$ for every
+    $i = 1,\dots,n$.
+  \item $(\mathbb{R}^n, d_2)$ is complete.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Everything follows from the two-sided estimate, valid for every $j$:
+$$|x_{m,j}-x_j| \ \leq\ \lVert x_m-x\rVert \ =\ \sqrt{\sum_{i=1}^n|x_{m,i}-x_i|^2}
+  \ \leq\ \sqrt{n}\,\max_i|x_{m,i}-x_i|.$$
+
+\textbf{(a)} If $\lVert x_m-x\rVert \to 0$, the left inequality forces each coordinate to
+converge. Conversely, if every coordinate converges then $\max_i|x_{m,i}-x_i| \to 0$ (a maximum
+of \emph{finitely} many null sequences), so the right inequality forces
+$\lVert x_m - x\rVert \to 0$.
+
+\textbf{(b)} Let $(x_m)$ be Cauchy in $\mathbb{R}^n$. The same left inequality gives
+$|x_{m,j}-x_{k,j}| \leq \lVert x_m-x_k\rVert$, so each coordinate sequence $(x_{m,j})_m$ is
+Cauchy in $\mathbb{R}$. Since $\mathbb{R}$ is complete --- this is the completeness axiom from
+\emph{Analysis I}, and the only input the proof has --- each converges, say
+$x_{m,j} \to x_j$. Setting $x := (x_1,\dots,x_n)$, part \textbf{(a)} gives $x_m \to x$.
+\end{proof}
+
+\begin{ainote}
+Worth noting how little is proved here: completeness of $\mathbb{R}^n$ is completeness of
+$\mathbb{R}$, applied $n$ times. That is also where the argument would fail in infinite
+dimensions --- $\max_i$ over infinitely many coordinates need not tend to $0$ even when each
+does, which is exactly the phenomenon behind the $\varepsilon$-net argument in
+\cref{lem:sequentially_compact_totally_bounded}.
+\end{ainote}
+
 \begin{example}[Completeness examples]
 \begin{itemize}
   \item The Euclidean spaces $(\mathbb{R}^n, \langle\cdot,\cdot\rangle_{\text{eucl}})$ are

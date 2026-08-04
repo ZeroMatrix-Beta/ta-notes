@@ -38,7 +38,35 @@ unreadable — worth finishing, unlike items that are merely unproved:
 - [ ] Per new week: missing standard defs/theorems the tutor only uses but never
       states; new subsections; transition sentences; heavy `\cref` (incl. cross-week)
 
-## Sascha Brack — class-notes mining (in progress)
+## Sascha Brack — class notes: WEEKS 1–4 COMPLETE
+
+All six files covering our Weeks 1–4 have been read and mined. **Do not re-read them.**
+`Week_02_Notes_Monday_Updated.pdf`, `Week_02_Notes_Friday_Updated.pdf`,
+`Week_03_Notes_Monday.pdf`, `Week_03_Notes_Friday.pdf`,
+`Week_04_Notes_Monday_Updated.pdf`, `Week_04_Notes_Friday_Updated.pdf`.
+
+Note the heavy repetition (see the merge rule in `gemini.md`): his Week 3 files are almost
+entirely our Week 2 material plus a preview of our Week 4, and his Week 4 Friday is ~80% a
+repeat of his own Monday. Only the *additions* were taken.
+
+**Remaining for weeks 5–8:** `Week_05_*` (17 p), `Week_06_*` (10 p),
+`Week_07_Notes_Monday.pdf` (2 p), `Week_08_*` (16 p) — 45 pages, best done fresh.
+
+## Diego Torres Tejeda — one find logged, not yet integrated
+
+- [ ] **`Notes - 06.03`, p. 2 — completeness is not a topological property.** An exercise:
+      on $X=(0,\infty)$ compare $d_{\text{Eucl}}$ with $d(x,y) := \lvert 1/x - 1/y\rvert$.
+      Show (1) $d$ is a metric, (2) $(X,d_{\text{Eucl}})$ is **not** complete, (3) $(X,d)$
+      **is** complete, (4) both induce the **same topology**. This is the exact analogue of
+      `rem:boundedness_not_topological` in Week 3, and would complete the trio: compactness
+      **is** topological, boundedness and completeness are **not**. Would slot next to
+      `rem:complete_vs_closed` in `week-02.tex`. His p. 1 also frames it well: "topological
+      properties (continuity, convergence, compactness, connectedness) are the same regardless
+      of the norm; however some properties are not topological, e.g. completeness."
+- Diego's remaining unread files for weeks 2–4: `23.02` (10 p), `27.02` (16 p), `02.03` (13 p),
+  `09.03` (8 p), `13.03` (6 p). Already mined: the Addendum, `16.03`, `30.03`.
+
+## Sascha Brack — class-notes mining (superseded by the section above)
 
 **Read so far:** `Week_02_Notes_Friday_Updated.pdf` (10 p), `Week_03_Notes_Monday.pdf` (7 p),
 `Week_04_Notes_Monday_Updated.pdf` (11 p). `Week_02_Notes_Monday_Updated.pdf` was mined earlier

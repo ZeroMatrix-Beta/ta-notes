@@ -577,8 +577,29 @@ Correct work order:
 
 1. **Corsin Nick is the blueprint.** His notes define the document structure
    (one chapter per week). Everyone else is mined for gaps only. Complete Corsin FIRST!
-2. **Merge by topic, never by date.** `docs/03-topic-index.md` is the only
-   valid topic→week mapping.
+2. **Merge by topic, never by date — and never by the other tutor's week number either.**
+   `docs/03-topic-index.md` is the only valid topic→week mapping, and the ultimate authority is
+   `content/week-NN.tex` itself (grep for the section label).
+
+   The trap is subtler than dates. **A file named `Week_03_...pdf` is not the source for our
+   `week-03.tex`.** Tutors run their own schedule, repeat material across sessions, and split
+   topics differently from Corsin. Observed directly:
+   - Sascha Brack's `Week_03_Notes_Monday.pdf` and `Week_03_Notes_Friday.pdf` both consist of
+     material belonging to **our Week 2** (compactness corollaries, Heine–Borel, connectedness,
+     normed and inner-product spaces) plus a preview of **our Week 4** (differentiability, the
+     implication diagram, the checking recipe). Almost none of it is our Week 3.
+   - His `Week_02_Notes_Friday_Updated.pdf` already reaches compactness and Heine–Borel, i.e.
+     our Week 3.
+   - His `Week_04_Notes_Friday_Updated.pdf` is ~80% a repeat of his own Monday file; the only
+     new content is the chain-rule variable graph.
+   - Diego Torres Tejeda's files are named by **date**, and route by topic to scattered weeks:
+     `16.03` supplied our Week 3, `30.03` our Week 7.
+
+   Two consequences. **(a)** Open a supplementary file expecting to find *some* topic, not a
+   particular week's topic, and file each piece where the topic lives. **(b)** Heavy repetition
+   between a tutor's own files is normal — do not assume a file is new material because it
+   carries a different week number. Skim for what is *added*, and record in `docs/07-todo.md`
+   which files are read, so the repetition is not re-read later.
 3. **Direct LaTeX with Fine Provenance.** Typeset directly into `content/week-NN.tex`
    with precise `% Source: Corsin Nick/Class Notes/Week N.pdf, p. M` comments on every section.
 4. **Never silently correct a source.** Flag it inline with `\begin{ainote}`; log it in

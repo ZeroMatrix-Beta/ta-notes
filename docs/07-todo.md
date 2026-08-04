@@ -69,6 +69,22 @@ Also already mined earlier: the typed `Addendum` (→ `week-02.tex`), `Notes - 1
 rule in `gemini.md`): `16.03` supplied our Week 3 and `30.03` our Week 7, so the dates run
 ahead of the corresponding chapter.
 
+**Also read and mined:** `Notes - 09.03` (8 p) — the mean value theorem plus the warning that
+it fails for vector-valued `f`, now `thm:mean_value_theorem` and
+`rem:mvt_fails_vector_valued` in `week-04.tex` (the MVT was *used* twice in that chapter and
+never stated).
+
+**⚠️ Found in `09.03` but NOT taken — needs care, do not copy blindly.** His pp. 6–8 give a
+third counterexample, `f(x,y) = xy/√(x²+y²)`, which is *continuous* at the origin and has all
+directional derivatives, yet is not differentiable because `v ↦ ∂_v f(0)` is not linear. That
+would be the sharpest of the three (ours are both discontinuous, so continuity is the visible
+obstruction; here it is genuinely the non-linearity). **But he uses the one-sided convention**
+`∂_v f = lim_{s→0⁺}` (explicit on his p. 5). Under our two-sided
+`def:differentiable` / formula `(*)`, the computation gives
+`(f(sv)−f(0))/s = sgn(s)·v_x v_y/|v|`, so the limit does **not** exist for `v_x v_y ≠ 0` and
+his Claim 2 is false as we define things. To use the example, either state the one-sided
+convention explicitly or replace it — verify before adding.
+
 **Found in `02.03` but NOT taken** (all verified plausible, none checked against our text):
 - [ ] p. 11 — *connected + locally path-connected $\Rightarrow$ path-connected*, and hence the
       proof of the Week 3 theorem that an **open** $U\subseteq\mathbb{R}^n$ is connected iff

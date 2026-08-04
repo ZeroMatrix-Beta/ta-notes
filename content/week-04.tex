@@ -537,6 +537,51 @@ Step 1 is the one students skip; it settles the overwhelming majority of cases w
 $\varepsilon$--$\delta$ work at all.
 \end{remark}
 
+% Quelle: Diego Torres Tejeda/Notes - 09.03 - Diego Torres Tejeda.pdf, p. 8
+\subsection{The mean value theorem}
+\label{sec:mean_value_theorem}
+
+\begin{ainote}
+The mean value theorem is used twice in this chapter --- in the official hint to
+\cref{ex:4.6} and in its solution --- but Corsin never states it. Diego Torres Tejeda's notes
+state it, together with the warning that follows, which is what \cref{ex:4.6} actually turns on.
+\end{ainote}
+
+\begin{theorem}[Mean value theorem]
+\label{thm:mean_value_theorem}
+Let $f : U \to \mathbb{R}$ be differentiable, $x \in U$ and $h \in \mathbb{R}^n$ with
+$x+th \in U$ for all $t \in [0,1]$. Then there is $t_0 \in (0,1)$ such that, writing
+$\xi := x+t_0h$,
+$$f(x+h)-f(x) = \partial_hf(\xi).$$
+\end{theorem}
+
+\begin{proof}
+Apply the one-variable mean value theorem to $\varphi(t) := f(x+th)$ on $[0,1]$, which is
+differentiable with $\varphi'(t) = \partial_hf(x+th)$ by the chain rule along a path
+(\cref{sec:chain_rule_along_path}). It gives $t_0 \in (0,1)$ with
+$\varphi(1)-\varphi(0) = \varphi'(t_0)$, which is the claim.
+\end{proof}
+
+\begin{importantremark}[It fails for vector-valued $f$]
+\label{rem:mvt_fails_vector_valued}
+The hypothesis \qt{$f : U \to \mathbb{R}$} is essential --- \textbf{the theorem is false the
+moment the target is $\mathbb{R}^m$ with $m \geq 2$}, and this is exactly what
+\cref{ex:4.6} on the problem sheet probes.
+
+Applying the scalar result to each component $f_1,\dots,f_m$ separately does produce points
+$\xi_1,\dots,\xi_m$ with
+$$f(x+h)-f(x) = \begin{pmatrix}\partial_hf_1(\xi_1) \\ \vdots \\ \partial_hf_m(\xi_m)\end{pmatrix},$$
+but the $\xi_i$ are \emph{different points} in general, and no single $\xi$ need work for all
+components at once. The standard witness is the helix
+$\gamma(t) := (\cos t, \sin t)$ on $[0,2\pi]$: here $\gamma(2\pi)-\gamma(0) = 0$, while
+$\gamma'(t) = (-\sin t,\cos t)$ has $|\gamma'(t)| = 1$ and so never vanishes --- there is no
+$\xi$ at all.
+
+What survives for vector-valued $f$ is the \emph{mean value inequality},
+$|f(x+h)-f(x)| \leq \sup_{t\in[0,1]}\lVert Df_{x+th}\rVert\,|h|$, which is what one actually
+uses in practice.
+\end{importantremark}
+
 % Source: Corsin Nick/Class Notes/Week 4.pdf, p. 7
 \begin{exercise}[Differential of $A \mapsto A\transp A$]
 \label{ex:transpose_diff}

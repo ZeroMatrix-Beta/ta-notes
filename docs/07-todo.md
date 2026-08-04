@@ -61,10 +61,28 @@ false; repaired to `(0,1]`, see `OQ-31`.
 Also already mined earlier: the typed `Addendum` (→ `week-02.tex`), `Notes - 16.03`
 (→ `week-03.tex`), `Notes - 30.03` (→ `week-07.tex`).
 
-**Still unread, weeks 1–4 range only:** `23.02` (10 p), `27.02` (16 p), `02.03` (13 p),
-`09.03` (8 p), `13.03` (6 p) — 53 pages. Route by **topic**, not by the date in the filename
-(see the merge rule in `gemini.md`): `16.03` supplied our Week 3 and `30.03` our Week 7, so the
-dates run ahead of the corresponding chapter.
+**Also read and mined:** `Notes - 02.03` (13 p) — the local-to-global framing, now
+`rem:local_to_global` in `week-03.tex`.
+
+**Still unread, weeks 1–4 range only:** `23.02` (10 p), `27.02` (16 p), `09.03` (8 p),
+`13.03` (6 p) — 40 pages. Route by **topic**, not by the date in the filename (see the merge
+rule in `gemini.md`): `16.03` supplied our Week 3 and `30.03` our Week 7, so the dates run
+ahead of the corresponding chapter.
+
+**Found in `02.03` but NOT taken** (all verified plausible, none checked against our text):
+- [ ] p. 11 — *connected + locally path-connected $\Rightarrow$ path-connected*, and hence the
+      proof of the Week 3 theorem that an **open** $U\subseteq\mathbb{R}^n$ is connected iff
+      path-connected (hint: open balls are path-connected). We state that theorem without
+      proof; this is the route.
+- [ ] p. 13 — the **parallelogram law**: a norm comes from an inner product iff
+      $\lVert x+y\rVert^2+\lVert x-y\rVert^2 = 2\lVert x\rVert^2+2\lVert y\rVert^2$, and the
+      $p$-norm on $\mathbb{R}^n$ comes from an inner product iff $p=2$. Would sit in the
+      Cauchy–Schwarz section of `week-03.tex`.
+- [ ] p. 5 — $d(\cdot,A)$ is $1$-Lipschitz, proved by taking infima of a pointwise inequality
+      ("when dealing with infima or suprema, prove a pointwise statement first, then take the
+      inf"). That heuristic is reusable and we use $\dist$ implicitly in places.
+- [ ] pp. 2–4 — the torus $\mathbb{R}^2/\mathbb{Z}^2$ as a metric space, with the
+      disjoint-half-balls argument for definiteness. Nice but well beyond scope.
 
 ## Second-tutor mining (only on clear hits, ~30% hit rate so far)
 - [ ] Linus Lüchinger: sessions 5–9, 11, 13+ not yet checked

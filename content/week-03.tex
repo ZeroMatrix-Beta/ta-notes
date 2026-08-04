@@ -173,6 +173,49 @@ Both extrema are attained \emph{inside} $K$ --- that is the content of \textbf{(
 exactly what fails on a non-compact domain: on the open interval $(a,b)$ the same $f$ may
 approach a supremum it never reaches.
 
+% Quelle: Diego Torres Tejeda/Notes - 02.03 - Diego Torres Tejeda.pdf, pp. 8--10
+\begin{remark}[What compactness and connectedness are \emph{for}: local to global]
+\label{rem:local_to_global}
+The three facts above look like a list of unrelated services compactness happens to provide.
+Diego Torres Tejeda's notes give the idea that unifies them, and it is worth having early
+because it also explains why connectedness sits in the same chapter.
+
+\textbf{Local-to-global arguments} are a recurring theme across mathematics. It is often easy to
+check a property \emph{locally} --- on some ball $B_\varepsilon(x)$ around each point --- and
+what one actually wants is the property \emph{globally}, on all of $X$. Compactness and
+connectedness are the two hypotheses that license that jump. Schematically, a local-to-global
+statement reads:
+\begin{quote}
+\itshape
+If for every $x \in X$ there is $\varepsilon>0$ such that $B_\varepsilon(x)$ has property $P$,
+then $X$ has property $P$.
+\end{quote}
+Each of the two hypotheses powers its own version, and the proofs are three lines each.
+
+\textbf{Connectedness turns \qt{locally constant} into \qt{constant}.} Let $(X,d)$ be connected
+and $f : X \to \mathbb{R}$ locally constant. Every level set $f^{-1}(a)$ is then open. Fix
+$a \in f(X)$ and split
+$$X = \underbrace{f^{-1}(a)}_{=:U} \ \sqcup \underbrace{\bigcup_{b \neq a}f^{-1}(b)}_{=:V},$$
+a disjoint union of two open sets. Since $U \neq \emptyset$, connectedness forces $V=\emptyset$,
+i.e.\ $f \equiv a$.
+
+\textbf{Compactness turns \qt{locally bounded} into \qt{bounded}.} Let $X$ be compact and
+suppose each $x$ has an open $U_x \ni x$ on which $f$ is bounded. The $\{U_x\}_{x\in X}$ cover
+$X$, so finitely many suffice, say $U_1,\dots,U_n$, and then
+$$\sup_{x \in X}|f(x)| \;=\; \max_{1\leq i\leq n}\ \sup_{x \in U_i}|f(x)| \;<\; \infty,$$
+because a \emph{maximum of finitely many} finite numbers is finite. Taking $f$ continuous ---
+which is locally bounded, since $|f|<|f(x)|+1$ near each $x$ --- recovers the boundedness half
+of \cref{item:extreme_value_theorem}.
+
+Read this way the two proofs are the same proof twice, with different notions of \qt{finitely
+many}: connectedness says a partition into two open pieces must be trivial, compactness says a
+cover can be taken finite. Both convert local information into global. Every application in
+\cref{item:continuity_preserves_compact,item:extreme_value_theorem,item:uniform_continuity_compact}
+is an instance --- uniform continuity most visibly, where the whole difficulty is that the
+$\delta$ from continuity is local and one needs a single global one
+(\cref{rem:continuity_vs_uniform_continuity}).
+\end{remark}
+
 % Supplement: Sascha Brack/Class Notes/Week_02_Notes_Friday_Updated.pdf, p. 8
 \begin{exercise}[Classify these sets]
 \label{ex:classification_table}

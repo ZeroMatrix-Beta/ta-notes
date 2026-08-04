@@ -11,7 +11,15 @@
       solutions (checked against `Sol9_Analysis2_eng.pdf`, matched exactly).
       **Still open:** 9.3--9.7 not reproduced (no colour/hint marker on the
       source page for them) or solved.
-- [ ] Corsin Weeks 10–13 + ODE appendix
+- [x] Corsin Week 10 — fully transcribed (pp. 1, 3--12: geodesics derivation,
+      bounded C^1 domains / Gauss map / Jordan-Brouwer, flux, Gauss' divergence
+      theorem, continuity equation). p. 2 is a verbatim repeat of Week 9's
+      length-of-a-curve page, not duplicated (cross-referenced instead).
+      Priority page + exercises 10.1-10.3 in, with original solutions
+      (checked against `Sol10_Analysis2_eng.pdf`, matched exactly, including
+      the harder (*) part 5 of 10.3). **Still open:** 10.4--10.6 (tractrix,
+      logarithmic spiral, moment of inertia) not reproduced or solved.
+- [ ] Corsin Weeks 11–13 + ODE appendix
 - [ ] `latexmk` to 0 errors after each week
 
 ## Started but not finished (from the Weeks 1–7 review, docs/08-latex-review.md)
@@ -112,9 +120,9 @@ convention explicitly or replace it — verify before adding.
 - [x] Tim Fessler: confirmed no new substance, skip entirely
 
 ## TikZ figures
-- [x] FIG-W06-01..07, FIG-W07-01..06, FIG-W08-01, FIG-W09-01..04 — done, in
-      docs/05-figure-queue.md
-- [ ] FIG-W10+ pre-logged as "queued" in docs/05-figure-queue.md, waiting on
+- [x] FIG-W06-01..07, FIG-W07-01..06, FIG-W08-01, FIG-W09-01..04,
+      FIG-W10-01..03 — done, in docs/05-figure-queue.md
+- [ ] FIG-W11+ pre-logged as "queued" in docs/05-figure-queue.md, waiting on
       transcription of those weeks first
 
 ## Candidate spots for an original (not-from-source) TikZ, not yet drawn

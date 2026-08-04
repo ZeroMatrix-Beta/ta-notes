@@ -49,9 +49,9 @@ inlined as ASCII. TikZ is done in one dedicated pass (Phase 4.3) so it never blo
 | FIG-W09-02 | Corsin Week 9, p. 4 | 3D parallelogram spanned by x, y with angle θ and height \|x\|sin θ | 3D sketch | done |
 | FIG-W09-03 | Corsin Week 9, p. 5 | Surface with ∂₁φ, ∂₂φ spanning the hatched Gram parallelogram | Surface + parallelogram | done |
 | FIG-W09-04 | Corsin Week 9, p. 8 | Curve with inscribed polygon through c(t₁)…c(t₇) (length as a sup) | Freehand curve + polyline | done |
-| FIG-W10-01 | Corsin Week 10, p. 1 | Torus parametrization: 3D view, top view (R, θ), side view (r, φ) | 3 panels | queued |
-| FIG-W10-02 | Corsin Week 10, p. 4 | Straight geodesic c from 0 to x inside a family of bowed competitors c_ε | Line + curve family | queued |
-| FIG-W10-03 | Corsin Week 10, p. 12 | Fluid swept through a surface element: v arrows, angle θ, h = \|dA\|cos θ, L = Δt\|v\| | 3D-ish sketch | queued |
+| FIG-W10-01 | Corsin Week 10, p. 1 | Torus parametrization: 3D view, top view (R, θ), side view (r, φ) | 3 panels | done |
+| FIG-W10-02 | Corsin Week 10, p. 4 | Straight geodesic c from 0 to x inside a family of bowed competitors c_ε | Line + curve family | done |
+| FIG-W10-03 | Corsin Week 10, p. 12 | Fluid swept through a surface element: v arrows, angle θ, h = \|dA\|cos θ, L = Δt\|v\| | 3D-ish sketch | done |
 | FIG-W11-01 | Corsin Week 11, p. 3 | Unit square with the four outward normals ±e₁, ±e₂ on its edges | 2D sketch | queued |
 | FIG-W11-02 | Corsin Week 11, p. 4 | Commutative triangle D → M, V → D (diffeo Ψ, det DΨ > 0), V → M | `tikz-cd` | queued |
 

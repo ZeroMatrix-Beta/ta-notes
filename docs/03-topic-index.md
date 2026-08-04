@@ -17,8 +17,8 @@ places** — Corsin runs roughly a week ahead of it from Week 4 onwards.
 typeset.** Six rows were off by one week (Taylor, Lagrange, the Hessian test, the implicit
 function theorem, tangent spaces, change of variables) — i.e. the correction table immediately
 below was never propagated into the table people actually use. Rows verified against
-`content/week-0N.tex` are now marked in **bold**. Week 9 is now typeset and verified. Weeks
-10–13 remain provisional and should be treated as unverified until those chapters are
+`content/week-0N.tex` are now marked in **bold**. Weeks 9–10 are now typeset and verified.
+Weeks 11–13 remain provisional and should be treated as unverified until those chapters are
 typeset.
 
 **The authority is `content/week-NN.tex` itself** — grep for the section label, e.g.
@@ -34,7 +34,7 @@ directly into `content/`, see `docs/01-file-structure.md`.)
 | Week 7: implicit function thm, submanifolds | Week 7: submanifolds, **tangent & normal spaces** |
 | Week 8: tangent spaces, Jordan measure, Riemann | Week 8: **repetition quiz**, change of variables, Fubini, **Feynman's trick** |
 | Week 9: change of variables, d-volume | Week 9: **determinants & volume, Gram determinant**, d-volume, curve length |
-| Week 10: integrals over submanifolds, divergence thm | Week 10: **geodesics**, C¹ domains, flux, Gauss' theorem |
+| Week 10: integrals over submanifolds, divergence thm | Week 10: **geodesics, C¹ domains, flux, Gauss' theorem** |
 | Week 11: divergence thm, Green, line integrals | Week 11: Gauss revisited, **alternating forms, wedge product, differential forms, exterior derivative** |
 
 Notably, **line integrals and Green's theorem do not appear in Corsin's notes at all** — a genuine

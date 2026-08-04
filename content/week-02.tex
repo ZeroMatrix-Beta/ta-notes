@@ -829,6 +829,34 @@ the reduction used in \cref{def:sequential_topological_compactness}.
 \end{ainote}
 \end{remark}
 
+% Quelle: Diego Torres Tejeda/Notes - 06.03 - Diego Torres Tejeda.pdf, p. 2
+\begin{exercise}[Completeness is not a topological property]
+\label{ex:completeness_not_topological}
+Corsin does not address whether completeness survives a change of metric; Diego Torres Tejeda
+sets this exercise, which settles it. Let $X := (0,1]$, let $d_{\text{eucl}}(x,y) := |x-y|$ be
+the standard metric on $X$, and define
+$$d(x,y) := \left|\frac1x - \frac1y\right|, \qquad x,y \in X.$$
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Show that $d$ is a metric on $X$.
+  \item Show that $(X,d_{\text{eucl}})$ is \textbf{not} complete.
+  \item Show that $(X,d)$ \textbf{is} complete.
+  \item Show that $d_{\text{eucl}}$ and $d$ induce the \textbf{same topology} on $X$.
+\end{enumerate}
+\textit{Diego's hint for} \textbf{(c)}: let $(x_n)$ be $d$-Cauchy. Then $(1/x_n)$ is Cauchy for
+the standard metric, so it has a limit $\ell \in \mathbb{R}$; show $\ell \geq 1$ and that
+$x_n \to 1/\ell$.
+\end{exercise}
+
+\begin{ainote}
+Diego states the exercise on $X = (0,\infty)$, but there part \textbf{(c)} is false: on
+$(0,\infty)$ the map $x\mapsto1/x$ is a bijection \emph{onto} $(0,\infty)$, so $(X,d)$ is
+isometric to $\big((0,\infty),|\cdot|\big)$, which is not complete --- concretely $x_n := n$
+satisfies $d(x_n,x_m) = |\tfrac1n-\tfrac1m| \to 0$ yet has no limit in $X$. His own hint asks to
+show $\ell > 0$, and that is precisely the step that fails. Restricting to a bounded interval
+repairs it: on $(0,1]$ the image is $[1,\infty)$, which \emph{is} closed in $\mathbb{R}$ and
+hence complete. Typeset with $X := (0,1]$ above. See \texttt{OQ-31}.
+\end{ainote}
+
 % Sonnet 5 (Medium)
 Compactness will turn out to be a strictly stronger finiteness-type property than completeness:
 every compact metric space is complete (\cref{ex:compact_finite_complete}), but the converse
@@ -1173,6 +1201,53 @@ Only the two \texttt{aiexercise} problems below have solutions in this section: 
 exercises in this chapter are solved inline, immediately after their statement, mirroring how he
 presents them in his own notes (see the \qt{Kept inline} comments above each).
 \end{ainote}
+
+\begin{exercisesolution}[Solution to \cref{ex:completeness_not_topological}]
+% Generator: Claude Opus 5 (Medium)
+Write $\varphi : (0,1] \to [1,\infty)$, $\varphi(x) := 1/x$. It is a bijection, and by
+construction $d(x,y) = |\varphi(x)-\varphi(y)|$ --- so $d$ is nothing but the Euclidean metric
+of $[1,\infty)$ transported back to $(0,1]$ along $\varphi$. Every part follows from that.
+
+\textbf{(a)} Symmetry and the triangle inequality are inherited from $|\cdot|$ directly. For
+definiteness, $d(x,y)=0$ forces $\varphi(x)=\varphi(y)$, and $\varphi$ is injective, so $x=y$.
+
+\textbf{(b)} The sequence $x_n := \tfrac1n$ lies in $(0,1]$ and is Cauchy for
+$d_{\text{eucl}}$, being Cauchy in $\mathbb{R}$. Its limit in $\mathbb{R}$ is $0 \notin X$, and
+limits in $\mathbb{R}$ are unique (\cref{prop:uniqueness_of_limits}), so it has no limit in $X$.
+
+\textbf{(c)} Let $(x_n)$ be $d$-Cauchy. Then $\big(\varphi(x_n)\big)$ is Cauchy in $\mathbb{R}$,
+hence converges to some $\ell \in \mathbb{R}$. Since $\varphi(x_n) \geq 1$ for every $n$, also
+$\ell \geq 1$; in particular $\ell \neq 0$, so $x := 1/\ell$ lies in $(0,1]$. Then
+$$d(x_n,x) = \big|\varphi(x_n) - \varphi(x)\big| = \big|\varphi(x_n)-\ell\big| \longrightarrow 0,$$
+so $x_n \to x$ in $(X,d)$. Note where the boundedness of $X$ entered: it is what forces
+$\ell \geq 1$ rather than merely $\ell \geq 0$.
+
+\textbf{(d)} $\varphi$ and $\varphi^{-1}(t) = 1/t$ are continuous, so $\varphi$ is a
+homeomorphism. A set is $d$-open exactly when its $\varphi$-image is open in $[1,\infty)$,
+exactly when it is $d_{\text{eucl}}$-open. Concretely, the same two-sided-ball argument as in
+\cref{ex:heine_borel_fails}\textbf{(b)} works: on $(0,1]$ one has
+$|x-y| \leq d(x,y) \leq \tfrac{1}{x y}\,|x-y|$ with $\tfrac{1}{xy}$ locally bounded.
+
+\begin{remark}
+So $d_{\text{eucl}}$ and $d$ have the \emph{same open sets}, the same convergent sequences, the
+same continuous functions and the same compact sets --- and yet one is complete and the other is
+not. \textbf{Completeness is a property of the metric, not of the topology it generates.}
+
+This completes a trio worth holding together, all three proved by the same device of comparing
+two metrics that induce one topology:
+\begin{itemize}
+  \item \textbf{Compactness is topological} --- it is defined by open covers alone
+    (\cref{def:compact_metric_space}), so it cannot distinguish two metrics with the same open
+    sets.
+  \item \textbf{Boundedness is not} --- \cref{rem:boundedness_not_topological} in Week 3.
+  \item \textbf{Completeness is not} --- this exercise.
+\end{itemize}
+Which is exactly why \qt{compact $\iff$ closed and bounded} needs the standard metric, and why
+the correct general replacement is \qt{complete and totally bounded}
+(\cref{rem:compact_iff_complete_totally_bounded}) --- both of its ingredients are
+non-topological, and only their combination is.
+\end{remark}
+\end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:ai_open_balls_are_open}]
 % Generator: Claude Opus 5 (Medium)

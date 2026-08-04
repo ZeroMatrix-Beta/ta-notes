@@ -43,6 +43,8 @@ worth a second opinion.
 
 | OQ-30 | `exercises/Ex8_Analysis2_eng.pdf` vs `Sascha Brack/Ex Sheet Hints/Ex8_Analysis2_hints.pdf` | **The two copies of sheet 8 cite different lecture-notes definition numbers.** Ours: Jordan-null = "Definition 13.18", `μ_out` = "Definition 13.10". Sascha's: "Definition 13.8" and "Definition 13.7". Problem text is otherwise word-for-word identical. | **open** — the sheet was evidently reissued with renumbered references (or the lecture notes were). Ours is presumably the later one; it is what is quoted in `week-08.tex`. Worth pinning against `exercises/lec_notes.pdf` before relying on either number. |
 
+| OQ-31 | `Diego Torres Tejeda/Notes - 06.03`, p. 2 | Exercise sets `X = (0,∞)` with `d(x,y) = \|1/x − 1/y\|` and asks to show `(X,d)` is **complete**. False as stated: `x ↦ 1/x` maps `(0,∞)` *onto* `(0,∞)`, so `(X,d)` is isometric to `((0,∞), \|·\|)`, which is not complete — `x_n := n` is `d`-Cauchy with no limit in `X`. His own hint ("show `ℓ > 0`") is exactly the step that fails. | **resolved** — the exercise is repaired by restricting to a *bounded* interval: on `(0,1]` the image is `[1,∞)`, closed in `ℝ` and hence complete, and parts (a), (b), (d) are unaffected. Typeset with `X := (0,1]` in `week-02.tex` (`ex:completeness_not_topological`) with an `ainote` recording the discrepancy. |
+
 *(weeks 12–13 and the ODE appendix still to come)*
 
 ## Conventions

@@ -52,7 +52,21 @@ repeat of his own Monday. Only the *additions* were taken.
 **Remaining for weeks 5–8:** `Week_05_*` (17 p), `Week_06_*` (10 p),
 `Week_07_Notes_Monday.pdf` (2 p), `Week_08_*` (16 p) — 45 pages, best done fresh.
 
-## Diego Torres Tejeda — one find logged, not yet integrated
+## Diego Torres Tejeda — weeks 1–4
+
+**Read and mined:** `Notes - 06.03` (3 p) — the completeness-is-not-topological exercise, now
+`ex:completeness_not_topological` in `week-02.tex`. His stated `X = (0,∞)` makes part (c)
+false; repaired to `(0,1]`, see `OQ-31`.
+
+Also already mined earlier: the typed `Addendum` (→ `week-02.tex`), `Notes - 16.03`
+(→ `week-03.tex`), `Notes - 30.03` (→ `week-07.tex`).
+
+**Still unread, weeks 1–4 range only:** `23.02` (10 p), `27.02` (16 p), `02.03` (13 p),
+`09.03` (8 p), `13.03` (6 p) — 53 pages. Route by **topic**, not by the date in the filename
+(see the merge rule in `gemini.md`): `16.03` supplied our Week 3 and `30.03` our Week 7, so the
+dates run ahead of the corresponding chapter.
+
+## (superseded) Diego — one find logged, not yet integrated
 
 - [ ] **`Notes - 06.03`, p. 2 — completeness is not a topological property.** An exercise:
       on $X=(0,\infty)$ compare $d_{\text{Eucl}}$ with $d(x,y) := \lvert 1/x - 1/y\rvert$.

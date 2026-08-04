@@ -1,32 +1,165 @@
-% Source: Corsin Nick/Class Notes/Week 8.pdf, pp. 5--9 (pp. 1--4 and 10--13 NOT yet read).
-% ============================================================================
-% PARTIAL TRANSCRIPTION. Pages 5-9 are transcribed below from the source. Pages
-% 1-4 (priority page + start of the repetition quiz) and 10-13 (rest of the
-% change-of-variables example, Feynman's trick) are NOT yet transcribed and are
-% marked with TODO ainotes. See docs/07-todo.md.
-% ============================================================================
-\chapter{Week 8 --- Submanifold Quiz, Change of Variables \& Fubini}
+% Source: Corsin Nick/Class Notes/Week 8.pdf, pp. 1--13
+\chapter{Week 8 --- Repetition Quiz, Change of Variables \& Fubini}
 \label{ch:week08}
 
-\begin{ainote}[Chapter partially transcribed]
-Pages 5--9 of the source are transcribed below. \textbf{Pages 1--4 and 10--13 are not yet
-done} --- each gap is marked with its own TODO note at the point where it belongs.
-\end{ainote}
+% Transition: Claude Opus 5
+This chapter falls in two halves. The first is a repetition quiz covering Weeks 2--7, which
+Corsin ran as a live Kahoot at the mid-semester point; it is reproduced here because the wrong
+answers are as instructive as the right ones. The second opens the theory of integration in
+several variables: the change-of-variables formula, Fubini's theorem, and differentiation under
+the integral sign. The exercise sheet is at the end of the chapter, in
+\cref{sec:week08_solutions}.
 
-\begin{ainote}[TODO --- quiz items 1--5 not transcribed]
-The repetition quiz starts on p.~2; only items \textbf{6} and \textbf{7} (p.~5--6) are
-transcribed here. One item in the untranscribed part is already known via \texttt{OQ-18}: a
-bullet on p.~4 with $\det \Hess f(0) = 2-\alpha^2$ claims $\nabla f$ is a local diffeomorphism
-\qt{for $\alpha \neq \sqrt2$}, but $2-\alpha^2$ vanishes at $-\sqrt2$ too, so it must read
-$\alpha \neq \pm\sqrt2$.
-\end{ainote}
-
-% Source: Corsin Nick/Class Notes/Week 8.pdf, p. 5
+% Source: Corsin Nick/Class Notes/Week 8.pdf, p. 2
 \section{Repetition quiz}
 \label{sec:week08_quiz}
 
-\begin{question}[Quiz 6 --- graph over which variable?]
-\label{q:week08_graph_over}
+\begin{ainote}
+Corsin credits the questions to Prof.\ Serra and Prof.\ Lang, and ran them from a shared Kahoot
+at the mid-semester repetition session. On his pages, \textcolor{green!60!black}{green} marks the
+\emph{correct} statement and \textcolor{red!80!black}{red} an \emph{incorrect} one; that colouring
+is rendered below as explicit \textbf{True}/\textbf{False} verdicts.
+\end{ainote}
+
+\begin{question}
+\label{q:week08_q1}
+Let $U := \{(x,y) \in \mathbb{R}^2 : 1 \leq x^2+y^2 \leq 4\}$ and
+$f(x,y) := \sin(xy) - y^4$. Which of the following holds?
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $f(U) = [a,b]$ for some $a < b$.
+  \item $f(U)$ is disconnected and closed with two connected components.
+\end{enumerate}
+\end{question}
+
+\begin{answer}
+\textbf{(a) is true, (b) is false.} $U$ is compact and connected and $f$ is continuous, so
+$f(U) \subseteq \mathbb{R}$ is compact (\cref{item:continuity_preserves_compact}) and connected
+(\cref{thm:continuity_preserves_connected}). The connected subsets of $\mathbb{R}$ are exactly
+the intervals, and a compact one is closed and bounded, so $f(U) = [a,b]$.
+\end{answer}
+
+\begin{ainote}
+Worth noting how little computation this needs: $f$ is never evaluated. The annulus $U$ is
+connected --- it is \emph{not} simply connected, but that is a different property and irrelevant
+here --- and the two preservation theorems from Week 3 do the rest. Recognising that a question
+is asking about preserved properties rather than about values is most of the work.
+\end{ainote}
+
+\begin{question}
+\label{q:week08_q2}
+Let $X \subseteq \mathbb{R}^2$ with $X \neq \mathbb{R}^2$ and $X \neq \emptyset$. If $X$ is
+complete, is it closed?
+\end{question}
+
+\begin{answer}
+\textbf{True.} Let $(a_n)_{n=0}^\infty$ be a convergent sequence with elements in $X$. Then
+$(a_n)$ is Cauchy, and by completeness it has a limit point in $X$. So $X$ is sequentially
+closed, hence closed (\cref{prop:open_closed_via_sequences}).
+\end{answer}
+
+\begin{ainote}
+The limit is taken in $\mathbb{R}^2$, and completeness of $X$ is what forces it back into $X$.
+The converse also holds here, but only because the ambient space $\mathbb{R}^2$ is itself
+complete: a closed subset of a complete space is complete. In a non-complete ambient space
+closedness gives nothing --- $\mathbb{Q}$ is closed in $\mathbb{Q}$ and not complete.
+\end{ainote}
+
+% Source: Corsin Nick/Class Notes/Week 8.pdf, p. 3
+\begin{question}
+\label{q:week08_q3}
+Let $X \subseteq \mathbb{R}^2$ as above. If $X$ is not open, is it closed?
+\end{question}
+
+\begin{answer}
+\textbf{False.}
+\end{answer}
+
+% Generator: Claude Opus 5 (Medium) --- Corsin gives the verdict without a counterexample.
+\begin{ainote}
+Corsin marks this false but gives no counterexample; the half-open square
+$X := [0,1] \times (0,1)$ from \cref{sec:open_closed_sets} in Week 2 is one, being neither open
+nor closed. \qt{Open} and \qt{closed} are not opposites and not exhaustive: $\emptyset$ and
+$\mathbb{R}^2$ are both, most sets are neither, and the excluded values
+$X \neq \emptyset,\ X \neq \mathbb{R}^2$ in the hypothesis are there precisely to rule out the
+two clopen cases.
+\end{ainote}
+
+\begin{question}
+\label{q:week08_q4}
+Let
+$$f(x,y,z) := \frac{xy^2}{x^2+y^2+z^2} \quad \text{for } (x,y,z) \neq 0, \qquad f(0,0,0) := 0.$$
+Is $f \in C^1(\mathbb{R}^3)$?
+\end{question}
+
+\begin{answer}
+\textbf{False.} We compute
+$$\partial_xf = \frac{y^2}{x^2+y^2+z^2} - 2\,\frac{x^2y^2}{(x^2+y^2+z^2)^2}.$$
+In spherical coordinates $x = r\sin\theta\cos\varphi$, $y = r\sin\theta\sin\varphi$,
+$z = r\cos\theta$, every power of $r$ cancels:
+$$\partial_xf = \sin^2\theta\sin^2\varphi - 2\sin^4\theta\cos^2\varphi\sin^2\varphi.$$
+The limit $\lim_{r\to0}\partial_xf(r,\theta,\varphi)$ is therefore ill-defined --- it depends on
+the direction $(\theta,\varphi)$ along which the origin is approached --- and $\partial_xf$ is
+not sequentially continuous at $0$.
+\end{answer}
+
+\begin{ainote}
+The cancellation of $r$ is the whole argument, and it is worth naming the reason: $\partial_xf$
+is \newterm{homogeneous of degree $0$}, so it is constant along each ray from the origin and
+takes a different constant on different rays. Compare
+\cref{ex:all_directional_derivatives_exist} in Week 4, where the same trick --- restrict to a
+ray, watch the parameter cancel --- exposed a function whose directional derivatives all existed
+without it being differentiable.
+\end{ainote}
+
+% Source: Corsin Nick/Class Notes/Week 8.pdf, pp. 3--4
+\begin{question}
+\label{q:week08_q5}
+Let $f \in C^\infty(\mathbb{R}^3)$ and $\alpha \in \mathbb{R}$ be such that
+$$\nabla f(0) = (0,0,0), \qquad
+\Hess f(0) = \begin{pmatrix} 1 & \alpha & 0 \\ \alpha & 2 & 0 \\ 0 & 0 & 1\end{pmatrix}.$$
+Which of the following is \textbf{false}?
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item For all $\alpha \in \mathbb{R}$, $0$ is not a local maximum point of $f$.
+  \item For $\alpha > \sqrt2$, $0$ is a saddle point.
+  \item For $\alpha \neq \pm\sqrt2$, $\nabla f : \mathbb{R}^3 \to \mathbb{R}^3$ is a local
+    diffeomorphism around $0$.
+  \item For $\alpha < \sqrt2$, $0$ is a local minimum point of $f$.
+\end{enumerate}
+\end{question}
+
+\begin{answer}
+\textbf{(d) is the false one.}
+
+\textbf{(a) is true,} since $1 > 0$ is clearly an eigenvalue of $\Hess f(0)$ for any choice of
+$\alpha$ (the third standard basis vector is an eigenvector), so $\Hess f(0)$ is never negative
+semidefinite and $0$ can never be a local maximum.
+
+\textbf{(b) is true.} Let $\lambda_1,\lambda_2,\lambda_3 = 1$ be the eigenvalues of
+$\Hess f(0)$. Then
+$$\lambda_1\lambda_2 = \det\big(\Hess f(0)\big) = 2-\alpha^2 < 0 \quad \text{for } \alpha > \sqrt2,$$
+so $\Hess f(0)$ has both positive and negative eigenvalues, making it indefinite, and $0$ is a
+saddle point by \cref{thm:hessian_test}.
+
+\textbf{(c) is true.} For these values $\det(\Hess f(0)) \neq 0$, and therefore the inverse
+function theorem (\cref{thm:inverse_function_theorem}) applies. Note that
+$\Hess f(0) = D(\nabla f)_0$: the Hessian of $f$ \emph{is} the differential of the gradient map.
+
+\textbf{(d) is false,} because the same reasoning as in \textbf{(b)} gives that for
+$\alpha < -\sqrt2 < \sqrt2$ we again have $2-\alpha^2 < 0$, so $0$ is a saddle point of $f$, not
+a local minimum. The statement is true only on $-\sqrt2 < \alpha < \sqrt2$.
+\end{answer}
+
+\begin{ainote}
+Corsin's third bullet reads \qt{for $\alpha \neq \sqrt2$}, but $\det(\Hess f(0)) = 2-\alpha^2$
+vanishes at $\alpha = -\sqrt2$ as well, so it must read $\alpha \neq \pm\sqrt2$; typeset with
+$\pm$ above. The oversight is a conspicuous one here, since the \emph{next} bullet is false for
+exactly the reason the third one omits --- the quiz is built around the missing negative root.
+See \texttt{OQ-18}.
+\end{ainote}
+
+% Source: Corsin Nick/Class Notes/Week 8.pdf, p. 5
+\begin{question}
+\label{q:week08_q6}
 Let $V := \{(x,y) \in \mathbb{R}^2 : y^4+y^2 = x^3+x\}$. Decide:
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item $V$ is a graph over $y$ in a neighbourhood of $(0,0)$.
@@ -38,68 +171,71 @@ Let $V := \{(x,y) \in \mathbb{R}^2 : y^4+y^2 = x^3+x\}$. Decide:
 \textbf{(a) True.} Notice that $V = f^{-1}\{0\}$ for $f(x,y) := y^4+y^2-x^3-x$. Then
 $$\Jac f(x,y) = (\partial_xf,\ \partial_yf) = (-3x^2-1,\ 4y^3+2y), \qquad \Jac f(0,0) = (-1,\ 0).$$
 Since $\partial_xf(0,0) = -1 \neq 0$, the implicit function theorem
-(\cref{thm:implicit_function_theorem}) applies with $x$ as the solved variable: in a
+(\cref{thm:implicit_function_theorem}) applies with $x$ as the variable to solve for: in a
 neighbourhood of $(0,0)$,
 $$(x,y) \in V \iff f(x,y) = 0 \iff x = x(y).$$
 The theorem does \textbf{not} apply for $y$, since $\partial_yf(0,0) = 0$.
 
 \textbf{(b) False.} Solving the defining equation for $y^2$ by the quadratic formula gives
 $$y^2 = -\tfrac12 + \sqrt{\tfrac14 + x^3 + x},$$
-which has no solution for $x \in (-\varepsilon,0)$: there $x^3+x < 0$, so the square root falls
-below $\tfrac12$ and the right-hand side is negative, while $y^2 \geq 0$. So $V$ has no points
-at all just to the left of the origin, and cannot be a graph over $x$ there.
+which has no solution for $x \in (-\varepsilon,0)$: there $x^3+x < 0$, so the square root is
+smaller than $\tfrac12$ and the right-hand side is negative, while $y^2 \geq 0$. So $V$ contains
+no points at all just to the left of the origin, and cannot be a graph over $x$ there.
 \end{answer}
 
-% Sonnet 5 (Medium)
 \begin{ainote}
-This is \cref{thm:implicit_function_theorem} used as a decision procedure rather than an
-existence theorem, and it is worth noticing that the two parts are settled by different means:
-\textbf{(a)} by checking a derivative, \textbf{(b)} by an explicit computation showing the set is
-empty on one side. The theorem gives no negative results --- failure of its hypothesis proves
-nothing, exactly as discussed in \cref{sec:implicit_function_theorem}.
+The two parts are settled by different means, and the asymmetry is the point. Part \textbf{(a)}
+is decided by \emph{checking a derivative}; part \textbf{(b)} needs an \emph{explicit
+computation} showing the set is empty on one side. That is because the implicit function theorem
+yields no negative results: failure of its hypothesis proves nothing on its own, exactly as
+discussed after \cref{thm:implicit_function_theorem} in Week 6.
 \end{ainote}
 
 % Source: Corsin Nick/Class Notes/Week 8.pdf, p. 6
-\begin{question}[Quiz 7 --- is an injective smooth curve a submanifold?]
-\label{q:week08_injective_curve}
-Let $\gamma : I \to \mathbb{R}^2$ be injective and smooth, $I$ an open interval. Is $\gamma(I)$
-then a smooth submanifold of $\mathbb{R}^2$?
+\begin{question}
+\label{q:week08_q7}
+Let $\gamma : I \to \mathbb{R}^2$ be injective and smooth, with $I$ an open interval. Is
+$\gamma(I)$ then a smooth submanifold of $\mathbb{R}^2$?
 \end{question}
 
 \begin{answer}
-\textbf{False.} Consider the \newterm{figure eight} (\germanterm{Lemniskate})
-$$\gamma : (0,2\pi) \to \mathbb{R}^2, \qquad t \mapsto (\sin t,\ \sin 2t).$$
-This is injective and smooth, but there is no graphical representation of
-$\operatorname{im}(\gamma)$ around $(0,0)$ --- the image crosses itself there.
+\textbf{False.} Consider
+$$\gamma : (0,2\pi) \to \mathbb{R}^2, \qquad t \mapsto \big(\sin t,\ \sin 2t\big),$$
+whose image is a \newterm{figure eight} (\germanterm{Lemniskate}). This $\gamma$ is injective and
+smooth, but there is no graphical representation of $\operatorname{im}(\gamma)$ around $(0,0)$.
 \end{answer}
 
-% Sonnet 5 (Medium) --- FIG-W08-01, the figure-eight from the source page.
+% Sonnet 5 (Medium) --- FIG-W08-01, redrawn from the plot on the source page.
 \begin{center}
-\begin{tikzpicture}[>=Latex, scale=1.5]
+\begin{tikzpicture}[>=Latex, scale=1.45]
   \draw[->] (-1.35,0) -- (1.35,0) node[right, font=\scriptsize] {$x$};
   \draw[->] (0,-1.25) -- (0,1.25) node[above, font=\scriptsize] {$y$};
   \draw[blue!80!black, thick, variable=\t, domain=0:6.2832, samples=200, smooth]
     plot ({sin(\t r)}, {sin(2*\t r)});
-  \draw[red!80!black, thick, dashed] (0,0) circle (0.34);
-  \node[red!80!black, font=\scriptsize, right] at (0.42,0.30) {problem!};
-  \draw[red!80!black, thin, ->] (0.42,0.26) -- (0.18,0.12);
+  \draw[red!80!black, thick, dashed] (0,0) circle (0.33);
+  \node[red!80!black, font=\scriptsize, right] at (0.52,0.34) {problem!};
+  \draw[red!80!black, thin, ->] (0.50,0.30) -- (0.20,0.13);
 \end{tikzpicture}
 \end{center}
 
 \begin{ainote}
-The endpoints $t \to 0^+$ and $t \to 2\pi^-$ both send $\gamma(t) \to (0,0)$, so the origin is
-approached from two different parameter ends without ever being attained --- which is how the
-image can cross itself while $\gamma$ stays injective. The reason $\operatorname{im}(\gamma)$
-fails to be a submanifold at the origin is exactly the component count of
-\cref{ex:cross_not_submanifold}: deleting the crossing point leaves four pieces, a line minus a
-point leaves two. Note also what this says about \cref{thm:local_parametrization} --- injectivity
-and an injective differential are \emph{not} sufficient; the theorem also demands that the
-parametrization be a \textbf{homeomorphism} onto its image, and that is what fails here.
+Two things are worth extracting. First, how injectivity survives a self-crossing at all: the two
+parameter ends $t \to 0^+$ and $t \to 2\pi^-$ both send $\gamma(t) \to (0,0)$, but neither
+\emph{attains} it, so the image passes through the origin only once --- via $t = \pi$ --- while
+being approached from two further directions.
+
+Second, this locates precisely which hypothesis of \cref{thm:local_parametrization} fails. It is
+not injectivity, and not injectivity of $D\gamma_t$; it is the requirement that the
+parametrization be a \textbf{homeomorphism} onto its image. Here $\gamma^{-1}$ is discontinuous
+at $(0,0)$: points of the image arbitrarily close to the origin have parameters near $0$ and near
+$2\pi$, far apart in $I$. That the resulting set is not a submanifold can then be confirmed by
+the component count of \cref{ex:cross_not_submanifold} --- deleting the crossing point leaves
+four pieces, while deleting a point from an interval leaves two.
 \end{ainote}
 
 % Sonnet 5 (Medium)
-The rest of the week leaves differential topology behind and starts the theory of integration in
-several variables.
+The quiz ends here, and with it the differential-topology half of the course. The rest of the
+week starts integration in several variables.
 
 % Source: Corsin Nick/Class Notes/Week 8.pdf, p. 7
 \section{Multivariate integration}
@@ -113,13 +249,22 @@ several variables.
 Suppose $U,V \subseteq \mathbb{R}^n$ are open sets and $\Phi : U \to V$ is a
 $C^1$-diffeomorphism. If $A \subseteq U$ is Jordan measurable with $\overline{A} \subseteq U$,
 and $f : A \to \mathbb{R}$ is continuous, then
-$$\int_A f(x)\,dx = \int_{\Phi(A)} \frac{f\circ\Phi^{-1}(y)}{\big|\det \Jac\Phi\big(\Phi^{-1}(y)\big)\big|}\,dy.$$
+$$\int_A f(x)\,dx
+  = \int_{\Phi(A)} \frac{f\circ\Phi^{-1}(y)}{\big|\det \Jac\Phi\big(\Phi^{-1}(y)\big)\big|}\,dy.$$
 \end{theorem}
 
-\begin{ainote}[TODO --- Jordan measurability not transcribed]
-\newterm{Jordan measurable} (\germanterm{Jordan-messbar}) is used here without being defined;
-per \texttt{docs/03-topic-index.md} Week 8 covers Jordan measure (lecture ch.~13), presumably on
-one of the pages not yet read. Definition still to be transcribed.
+\begin{ainote}
+Corsin uses \newterm{Jordan measurable} (\germanterm{Jordan-messbar}) here without defining it;
+the definition is in the lecture (ch.~13). For this chapter it is enough to know that boxes,
+and the bounded regions cut out by finitely many smooth curves that appear in the examples, are
+all Jordan measurable.
+
+On the shape of the formula: it is often quoted the other way round, as
+$\int_{\Phi(A)} f = \int_A (f\circ\Phi)\,\lvert\det\Jac\Phi\rvert$. The version above is the same
+statement with $\Phi$ pushed to the other side, which is why the determinant appears
+\emph{divided} rather than multiplied. Which form is convenient depends on whether it is $\Phi$
+or $\Phi^{-1}$ that you can write down --- in \cref{ex:change_of_variables_domain} below it is
+$\Phi$, so the dividing form is the one that saves work.
 \end{ainote}
 
 % Source: Corsin Nick/Class Notes/Week 8.pdf, p. 7
@@ -132,11 +277,10 @@ Let $X \subseteq \mathbb{R}^m$ and $Y \subseteq \mathbb{R}^n$ be intervals (\qt{
 $f : X\times Y \to \mathbb{R}$, $(x,y)\mapsto f(x,y)$, be continuous. Then
 $$\int_{X\times Y} f(x,y)\,dx\,dy
   = \int_X\left(\int_Y f(x,y)\,dy\right)dx
-  = \int_Y\left(\int_X f(x,y)\,dx\right)dy.$$
-\end{theorem}
-
-Here we look at the expression in brackets as a function, e.g.\
+  = \int_Y\left(\int_X f(x,y)\,dx\right)dy,$$
+where we look at the expression in brackets as a function, e.g.\
 $x \mapsto \int_Y f(x,y)\,dy$.
+\end{theorem}
 
 % Source: Corsin Nick/Class Notes/Week 8.pdf, p. 8
 \begin{example}[Fubini on the unit square]
@@ -154,13 +298,17 @@ $$
 \end{example}
 
 \begin{ainote}
-Corsin writes the first line as $\int_0^1 dx \int_0^1 dy$, but the inner antiderivative taken on
-the next line is in $x$ (it produces $x^{y+2}/(y+2)$, evaluated from $0$ to $1$). The
-differentials are therefore swapped relative to the computation performed; the order is
-corrected above and the result is unaffected. See \texttt{OQ-19}.
+Corsin writes the first line as $\int_0^1 dx \int_0^1 dy$, but the antiderivative taken on the
+next line is in $x$ --- it produces $x^{y+2}/(y+2)$, evaluated from $0$ to $1$. The differentials
+are therefore swapped relative to the computation actually performed; the order is corrected
+above and the result is unaffected. See \texttt{OQ-19}.
+
+The example is well chosen: integrating $x^{y+1}$ in $y$ first would mean integrating an
+exponential in the exponent, which is far worse. Fubini's real use is that you may pick the
+easier order, and here only one of the two is comfortable.
 \end{ainote}
 
-% Source: Corsin Nick/Class Notes/Week 8.pdf, pp. 8--9
+% Source: Corsin Nick/Class Notes/Week 8.pdf, pp. 8--10
 \begin{example}[A domain that Fubini alone cannot handle]
 \label{ex:change_of_variables_domain}
 Consider
@@ -170,49 +318,179 @@ This is not easily integrated with Fubini alone. But we can apply a transformati
 to simplify the integration domain $A$: take
 $$\Phi : U \to V, \qquad \begin{pmatrix}x\\y\end{pmatrix} \mapsto
   \begin{pmatrix}u(x,y)\\v(x,y)\end{pmatrix} = \begin{pmatrix}\tfrac{y}{\sqrt x}\\[2pt] xy\end{pmatrix},$$
-with $U$, $V$ still to be determined --- they must be open.
+with $U$ and $V$ still to be determined --- they must be open.
 
-\textbf{Check injectivity.} Suppose, for $x,y,x',y'>0$,
-$$\textbf{(1)}\ \ \frac{y}{\sqrt x} = \frac{y'}{\sqrt{x'}},
-\qquad\qquad \textbf{(2)}\ \ xy = x'y'.$$
+\textbf{Check injectivity.} Suppose, for $x,y,x',y' > 0$,
+$$\text{\textbf{(1)}}\ \ \frac{y}{\sqrt x} = \frac{y'}{\sqrt{x'}},
+\qquad\qquad \text{\textbf{(2)}}\ \ xy = x'y'.$$
 From \textbf{(2)}, $\dfrac{x}{x'} = \dfrac{y'}{y}$. Inserting into \textbf{(1)},
 $$\frac{1}{\sqrt x} = \frac{y'}{y}\cdot\frac{1}{\sqrt{x'}} = \frac{x}{x'}\cdot\frac{1}{\sqrt{x'}}
 \quad\Longrightarrow\quad x^{3/2} = (x')^{3/2} \quad\Longrightarrow\quad x = x',$$
 and consequently $\dfrac{y'}{y} = \dfrac{x}{x'} = 1$. So for $U := (0,\infty)^2$ and
 $V := \Phi(U)$, the map $\Phi$ is a bijection between open sets.
 
-We calculate the functional determinant $|\det \Jac\Phi|$. If it is strictly positive, we can
-proceed with a change of variables, since $\Phi$ is then a local diffeomorphism and a bijection.
+\textbf{Functional determinant.} We calculate $|\det \Jac\Phi|$; if it is strictly positive we
+may proceed, since $\Phi$ is then a local diffeomorphism as well as a bijection, hence a
+diffeomorphism. Now
+$$\Jac\Phi(x,y) = \begin{pmatrix} -\dfrac{y}{2\sqrt{x}^{\,3}} & \dfrac{1}{\sqrt x} \\[2ex] y & x \end{pmatrix},$$
+so that
+$$\big|\det \Jac\Phi(x,y)\big| = \left|-\frac32\,\frac{y}{\sqrt x}\right| = \frac32\,\frac{y}{\sqrt x} = \frac32\,u(x,y).$$
+So $\Phi$ is a diffeomorphism and $du\,dv = \tfrac32 u\,dx\,dy$. Furthermore, by design,
+$$\Phi(A) = (1,2)^2.$$
+So with the change of variables (\cref{thm:change_of_variables}), followed by Fubini
+(\cref{thm:fubini}),
+$$\int_A \frac{y}{\sqrt x}\,dy\,dx
+  = \int_{(1,2)^2} u\,\frac{1}{\tfrac32 u}\,du\,dv
+  = \frac23\int_1^2 dv \int_1^2 du
+  = \frac23.$$
 \end{example}
 
-\begin{ainote}[TODO --- example unfinished]
-The source continues on p.~10 with the determinant computation and the resulting integral over
-the rectangle $[1,2]^2$. \textbf{Pages 10--13 are not yet transcribed}, so this example breaks
-off mid-argument. Also still to come on those pages, per
-\texttt{docs/03-topic-index.md}: \newterm{Feynman's trick} (differentiation under the integral
-sign). One item there is already known via \texttt{OQ-17}: in the final integration on p.~13 the
-$\alpha$-term reads $\tfrac{\pi}{2}\cdot\tfrac{\alpha}{1+\alpha^2}$ integrating to
-$\tfrac{\pi}{4}\log(1+\alpha^2)$, both a factor $2$ off; corrected they are
-$\tfrac{\pi}{4}\cdot\tfrac{\alpha}{1+\alpha^2}$ and $\tfrac{\pi}{8}\log(1+\alpha^2)$, which
-makes his two bracket terms equal. His final answer $\tfrac{\pi\log 2}{8}$ is correct.
+\begin{ainote}
+The design principle is worth stating, because it is the reverse of how substitution is usually
+taught. Here $\Phi$ was not chosen to simplify the \emph{integrand} but to straighten the
+\emph{domain}: the two constraints defining $A$ are literally $1 \leq u \leq 2$ and
+$1 \leq v \leq 2$, so $\Phi$ turns an awkward curvilinear region into a square, and only then
+does Fubini become available. That the integrand $y/\sqrt x$ is itself $u$, and cancels against
+most of the Jacobian factor, is a bonus of the same choice.
+\end{ainote}
+
+% Sonnet 5 (Medium)
+We now want to look at a powerful new integration technique using ODEs.
+
+% Source: Corsin Nick/Class Notes/Week 8.pdf, p. 11
+\section{Feynman's trick}
+\label{sec:feynmans_trick}
+
+\begin{theorem}[Differentiation under the integral sign]
+\label{thm:feynmans_trick}
+Let $U \subseteq \mathbb{R}^n\times\mathbb{R}$ be open, $f \in C^1(U)$, and let
+$K \subseteq \mathbb{R}^n$ be compact such that $K\times[a,b] \subseteq U$. Then the function
+$$(a,b) \to \mathbb{R}, \qquad y \mapsto \int_K f(x,y)\,dx$$
+is continuously differentiable, and
+$$\frac{d}{dy}\int_K f(x,y)\,dx = \int_K \frac{\partial}{\partial y}f(x,y)\,dx
+\qquad \text{for all } y \in (a,b).$$
+\end{theorem}
+
+% Source: Corsin Nick/Class Notes/Week 8.pdf, pp. 11--13
+\begin{example}[$\int_0^1 \frac{\log(1+x)}{1+x^2}\,dx$ by Feynman's trick]
+\label{ex:feynman_log_integral}
+We want to compute the integral
+$$I(1) = \int_0^1 \frac{\log(1+x)}{1+x^2}\,dx,$$
+which has no convenient antiderivative. By introducing a parameter $\alpha \in (-1,1)$:
+$$I(\alpha) := \int_0^1 \frac{\log(1+\alpha x)}{1+x^2}\,dx.$$
+Note that the integrand is a $C^1$ function on
+$U := \big(-\tfrac{1}{1+\varepsilon},\ \tfrac1\varepsilon\big) \times (-\varepsilon,\ 1+\varepsilon)$
+in the variables $(x,\alpha)$, with $K := [0,1]$ and $[a,b] := [0,1]$ satisfying
+$K\times[a,b] \subseteq U$ for $0 < \varepsilon < 1$ (pay attention to the logarithm --- it is
+what forces $1+\alpha x > 0$). So we may differentiate under the integral!
+
+\textbf{We obtain an ordinary differential equation.} By \cref{thm:feynmans_trick},
+$$I'(\alpha) = \frac{d}{d\alpha}\int_0^1 \frac{\log(1+\alpha x)}{1+x^2}\,dx
+  = \int_0^1 \frac{x}{(1+\alpha x)(1+x^2)}\,dx.$$
+Partial fractions: writing
+$$\frac{x}{(1+\alpha x)(1+x^2)} = \frac{A}{1+\alpha x} + \frac{Bx+C}{1+x^2}$$
+and clearing denominators gives $A + Ax^2 + Bx + B\alpha x^2 + C + C\alpha x = x$, so comparing
+coefficients,
+$$-A = C, \qquad -\tfrac{A}{\alpha} = B, \qquad B + C\alpha = 1
+  \implies -\tfrac{A}{\alpha} - A\alpha = 1,$$
+whence
+$$A = -\frac{\alpha}{1+\alpha^2}, \qquad B = \frac{1}{1+\alpha^2}, \qquad C = \frac{\alpha}{1+\alpha^2}.$$
+Therefore
+$$
+\begin{aligned}
+I'(\alpha) &= \left(\int_0^1 \frac{-\alpha}{1+\alpha x} + \frac{x+\alpha}{1+x^2}\,dx\right)\frac{1}{1+\alpha^2} \\
+&= \frac{1}{1+\alpha^2}\Big[-\log(1+\alpha x) + \tfrac12\log(1+x^2) + \alpha\arctan(x)\Big]_0^1 \\
+&= \frac{1}{1+\alpha^2}\Big[\log\sqrt2 + \tfrac{\alpha\pi}{4} - \log(1+\alpha)\Big].
+\end{aligned}
+$$
+
+\textbf{With initial value} $I(0) = \int_0^1 \frac{\log(1)}{1+x^2}\,dx = 0$, we obtain from the
+fundamental theorem of calculus
+$$
+\begin{aligned}
+\int_0^1 \frac{\log(1+x)}{1+x^2}\,dx = I(1) &= I(1)-I(0) \\
+&= \int_0^1\left(\frac{\log\sqrt2}{1+\alpha^2} + \frac{\pi}{4}\,\frac{\alpha}{1+\alpha^2}
+   - \underbrace{\frac{\log(1+\alpha)}{1+\alpha^2}}_{\textstyle \to\, I(1)}\right)d\alpha.
+\end{aligned}
+$$
+The last term is $I(1)$ again --- the integral we started from, with $\alpha$ merely renamed ---
+so bringing it to the left-hand side,
+$$
+\begin{aligned}
+2\,I(1) &= \Big[\log\sqrt2\,\arctan(\alpha) + \tfrac{\pi}{8}\log(1+\alpha^2)\Big]_0^1
+ = \frac{\pi\log\sqrt2}{4} + \frac{\pi\log\sqrt2}{4}, \\[1ex]
+\implies\quad I(1) &= \frac{\pi\log\sqrt2}{4} = \boxed{\ \frac{\pi\log 2}{8}\ }.
+\end{aligned}
+$$
+\end{example}
+
+\begin{ainote}
+Corsin's final integration writes the $\alpha$-term as
+$\tfrac{\pi}{2}\cdot\tfrac{\alpha}{1+\alpha^2}$, integrating to $\tfrac{\pi}{4}\log(1+\alpha^2)$.
+Both are a factor $2$ away from what $I'(\alpha)$ gives: his own line above has
+$\tfrac{\alpha\pi}{4}$, so the term is $\tfrac{\pi}{4}\cdot\tfrac{\alpha}{1+\alpha^2}$ and its
+antiderivative is $\tfrac{\pi}{8}\log(1+\alpha^2)$. Corrected above --- and the correction is
+self-checking, since it is exactly what makes his two bracket terms come out equal, as his own
+next line asserts:
+$\tfrac{\pi}{8}\log 2 = \tfrac{\pi}{8}\cdot 2\log\sqrt2 = \tfrac{\pi\log\sqrt2}{4}$. His final
+answer $\tfrac{\pi\log 2}{8}$ is correct and matches the known value. See \texttt{OQ-17}.
+\end{ainote}
+
+% Generator: Claude Opus 5 (Medium)
+\begin{ainote}[Why this is called a trick, and when to reach for it]
+The move that makes this work is not the differentiation --- it is noticing that the
+\emph{antiderivative} of the resulting integrand is elementary while the original one is not.
+The pattern is worth naming:
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Insert a parameter $\alpha$ so that the target is $I(\alpha_1)$ for some
+    $\alpha_1$, and so that $I(\alpha_0)$ is trivial for some other $\alpha_0$ --- here
+    $I(0)=0$, because $\log 1 = 0$.
+  \item Differentiate under the integral. The $\log$ disappears, leaving a rational function
+    that partial fractions can handle.
+  \item Integrate $I'$ back from $\alpha_0$ to $\alpha_1$.
+\end{enumerate}
+The self-reference in step 3 --- the answer reappearing on the right-hand side, so that one
+solves for $I(1)$ rather than computing it --- is specific to this integral and is the reason it
+is a classic. Do not expect it in general; usually step 3 is an honest integration.
 \end{ainote}
 
 \exercisesheet{8}
 
-\begin{ainote}[TODO --- recommended exercises deliberately skipped]
-\textbf{Corsin's \textit{Recommended exercises} priority page for Week 8 (p.~1) has not been
-transcribed}, and was skipped deliberately on this pass rather than overlooked. Every week from
-4 onward carries one: a colour-coded table (blue \textbf{= important}, orange
-\textbf{= semi-important}, red \textbf{= optional}) with a note per problem, transcribed into an
-\texttt{ainote[Corsin's recommendations]} block --- see \cref{ch:week07} for the pattern.
+\textit{Statements quoted verbatim from \texttt{exercises/Ex8\_Analysis2\_eng.pdf}.
+Attribution: Prof.\ Joaquim Serra, D-MATH, ETH Z\"urich.}
 
-Consequently \textbf{no exercises from sheet 8 are reproduced below}, since which ones to
-reproduce is decided by that table. The sheet is \texttt{exercises/Ex8\_Analysis2\_eng.pdf}.
+% Source: Corsin Nick/Class Notes/Week 8.pdf, p. 1
+\begin{ainote}[Corsin's recommendations]
+Colour key, as given on the page: blue \textbf{= important}, orange \textbf{= semi-important},
+red \textbf{= optional}.
+
+\begin{center}
+\begin{tabular}{@{}l l p{0.52\linewidth}@{}}
+\textbf{Problem} & \textbf{Priority} & \textbf{Corsin's note} \\
+\hline
+8.1 & semi-important & --- \\[3pt]
+8.2 & important & --- \\[3pt]
+8.3 & semi-important & --- \\[3pt]
+8.4 & important & --- \\[3pt]
+8.5 & important & ``If you don't have much time, try to definitely do this exercise!'' \\[3pt]
+8.6 & optional & --- \\
+\end{tabular}
+\end{center}
+\end{ainote}
+
+\begin{ainote}[TODO --- exercise statements not yet transcribed]
+The priority page above is transcribed, but \textbf{the exercise statements themselves are not
+yet in}: they come from \texttt{exercises/Ex8\_Analysis2\_eng.pdf}, which has not been read on
+this pass. Following the convention of Weeks 4--7, the ones to reproduce are those marked
+\textbf{important} --- 8.2, 8.4 and 8.5 --- with 8.5 singled out by Corsin as the one to do if
+time is short.
 \end{ainote}
 
 \section{Solutions}
 \label{sec:week08_solutions}
 
-\begin{ainote}[TODO --- empty pending transcription]
-Empty until the exercise selection above is made.
+\begin{ainote}[TODO --- pending the exercise statements]
+Corsin works none of the official-sheet exercises in his Week 8 notes (the week is the quiz plus
+the integration theory above), so all solutions here will be original, as in Weeks 6--7. Empty
+until the statements are transcribed.
 \end{ainote}

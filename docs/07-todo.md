@@ -1,8 +1,38 @@
 # TODO — next session
 
 ## Transcription (primary, per gemini.md priority)
-- [ ] Corsin Weeks 8–13 + ODE appendix (only 2–7 done so far)
+- [x] Corsin Week 8 — pp. 1–13 transcribed (quiz Q1–Q7, change of variables,
+      Fubini, Feynman's trick). Priority page done. **Still open:** the sheet-8
+      exercise *statements* (`exercises/Ex8_Analysis2_eng.pdf` not yet read) and
+      therefore `sec:week08_solutions` is empty. Reproduce 8.2, 8.4, 8.5.
+- [ ] Corsin Weeks 9–13 + ODE appendix
 - [ ] `latexmk` to 0 errors after each week
+
+## Started but not finished (from the Weeks 1–7 review, docs/08-latex-review.md)
+Items where a proof/argument *exists in the document* but has a hole or is
+unreadable — worth finishing, unlike items that are merely unproved:
+- [ ] **C5a** `week-02.tex` — proof that `C⁰([0,1])` is closed asserts its crux:
+      "if sup|f−g| < ε/3 and f jumps by ε then g jumps by ≥ ε/3" is stated, not
+      shown. One line of triangle inequality; it is the only line with content.
+- [ ] **C5b** `week-02.tex` — Lebesgue-number proof conflates `r := ½·sup{…}`
+      with the un-halved sup. Shows `R(y) ≥ r(x) − d(x,y)`, concludes it for `r`.
+      Result is true (r is even ½-Lipschitz); the written argument is not. 2 symbols.
+- [ ] **C6a** `week-03.tex` — "S is connected" for the topologist's sine curve
+      does not parse ("U∖{0} is also open" is true and irrelevant; the
+      contradiction never appears). Rewrite at the same length.
+- [ ] **C6b** `week-03.tex` — "thus aₙ → 0" is asserted; the IVT gives *some*
+      aₙ, not a null sequence. **Decision: do NOT prove.** Add one clause
+      ("choose aₙ smallest, so aₙ ↓ 0") and leave it — the honest fix needs a
+      sup-of-the-zero-set argument that costs half a page and buys little here.
+- [ ] **C7** `week-04.tex` — "a nonzero linear map cannot decay along its own
+      domain" is doing too much work in one parenthesis. One clause: pick h with
+      L(h) ≠ 0, then L(th)/|th| = L(h)/|h| is a nonzero constant.
+- [ ] **F3** — 47 `\implies`, the subset acting as sentence connectives rather
+      than joining equations (`week-05.tex:26` `\iff` + slash carrying two
+      definitions; `:612`, `:625`; `week-06.tex:676`).
+- [ ] **F5** — normalise the `Gemini 3.6 Flash`-marked blocks: single unbroken
+      paragraphs with mid-sentence arrows, next to Sonnet-marked ones broken
+      into labelled cases. No maths changes.
 
 ## Enrichment pass (same as done for Weeks 2–7)
 - [ ] Per new week: missing standard defs/theorems the tutor only uses but never

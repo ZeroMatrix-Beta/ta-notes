@@ -252,12 +252,109 @@ Jacobian. Then it can be convenient to use the formula for \newterm{directional 
 DF_{x_0}(v) = \partial_v F(x_0) = \left.\frac{d}{ds}\right|_{s=0} F(x_0 + sv) \tag{$*$}
 \end{equation*}
 
+% Generator: Claude Opus 5 (Medium) --- the geometry behind (*): pick a ray, restrict to it,
+% and you are back to a one-variable derivative from Analysis I.
+Formula $(*)$ describes a two-step recipe, and the picture below is worth carrying around.
+\textbf{Step one:} pick a direction $v$ and walk away from $x_0$ along the straight ray
+$s \mapsto x_0+sv$, ignoring the rest of the domain. \textbf{Step two:} record the values of $F$
+along that ray. What you get is an ordinary function of \emph{one} variable $s$, and
+$\partial_vF(x_0)$ is simply its derivative at $s=0$ --- an Analysis I object. The partial
+derivative $\partial_iF$ is the special case $v = e_i$: walk parallel to the $i$-th axis.
+
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.0]
+  % --- Panel 1: the domain, and the rays we are allowed to walk along ---
+  \begin{scope}
+    \draw[->] (-0.3,0) -- (2.9,0) node[right, font=\small] {$x_1$};
+    \draw[->] (0,-0.3) -- (0,2.7) node[above, font=\small] {$x_2$};
+
+    \coordinate (P) at (1.15,1.0);
+    % the rays, extended in grey
+    \draw[gray!55, dashed] (-0.15,1.0) -- (2.75,1.0);
+    \draw[gray!55, dashed] (0.15,0.15) -- (2.35,2.35);
+
+    \draw[orange!90!black, very thick, ->] (P) -- ++(0.8,0) node[below, font=\scriptsize] {$e_1$};
+    \draw[green!55!black, very thick, ->] (P) -- ++(0,0.8) node[left, font=\scriptsize] {$e_2$};
+    \draw[purple, very thick, ->] (P) -- ++(0.62,0.62) node[above left, font=\scriptsize] {$v$};
+
+    \fill (P) circle (1.8pt) node[below left, font=\scriptsize] {$x_0$};
+    \node[below, font=\small, align=center] at (1.3,-0.75)
+      {pick a direction and\\ walk along that ray};
+  \end{scope}
+
+  % --- Panel 2: the profile along each ray, and its slope at s=0 ---
+  \begin{scope}[shift={(6.6,0)}]
+    \draw[->] (-1.1,0) -- (2.2,0) node[right, font=\small] {$s$};
+    \draw[->] (0,-0.3) -- (0,2.8) node[above right, font=\small] {$F(x_0+sv)$};
+    \draw (0,0.05) -- (0,-0.05) node[below right, font=\scriptsize] {$0$};
+
+    % profile along e_1 (gentle positive slope) and along v (negative slope)
+    \draw[orange!90!black, very thick, domain=-0.55:1.95, samples=50, smooth]
+      plot ({\x}, {1.4 + 0.35*\x + 0.18*\x*\x});
+    \draw[purple, very thick, domain=-0.55:1.55, samples=50, smooth]
+      plot ({\x}, {1.4 - 0.75*\x + 0.30*\x*\x});
+
+    % their tangents at s = 0
+    \draw[orange!90!black, dashed] (-0.5,1.225) -- (1.95,2.0825);
+    \draw[purple, dashed] (-0.5,1.775) -- (1.55,0.2375);
+
+    \fill (0,1.4) circle (1.8pt);
+    \draw[dotted, gray] (-0.62,1.4) -- (0,1.4);
+    \node[font=\scriptsize, left] at (-0.65,1.4) {$F(x_0)$};
+
+    % anchored just off the right end of each tangent line, clear of both curves
+    \node[orange!90!black, font=\scriptsize, right] at (2.0,2.20) {slope $=\partial_1F(x_0)$};
+    \node[purple, font=\scriptsize, right] at (1.62,0.22) {slope $=\partial_vF(x_0)$};
+
+    \node[below, font=\small, align=center] at (0.5,-0.75)
+      {each ray gives a one-variable function;\\ its slope at $0$ is $\partial_vF(x_0)$};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+The right-hand panel is also the cleanest way to see what differentiability adds. Every direction
+produces \emph{some} slope; nothing so far forces those slopes to be related to one another. Being
+differentiable is precisely the demand that all of them are read off a \emph{single} linear map
+via $\partial_vF(x_0) = DF_{x_0}(v)$ --- so that knowing the $n$ partial derivatives already
+determines every other direction. \Cref{ex:all_directional_derivatives_exist} below is the
+cautionary case where all the slopes exist but no such linear map governs them.
+
 \begin{importantremark}
 \label{rem:directional_derivative_caveat}
 The directional derivative $\partial_v F(x_0)$ can exist (depending on $v$ and $x_0$) even if $F$
 is not differentiable at $x_0$, i.e.\ $DF_{x_0}$ does not exist. However, if $DF_{x_0}$ exists,
 the formula $(*)$ holds.
 \end{importantremark}
+
+% Generator: Claude Opus 5 (Medium)
+\begin{aiexample}[Every direction, and still not continuous]
+\label{ex:all_directional_derivatives_exist}
+\Cref{ex:partial_derivatives_not_continuous} showed that the two \emph{partial} derivatives are
+too little. One might hope that asking for \emph{all} directions is enough. It is not. Let
+$$f(x,y) := \begin{cases} \dfrac{x^2y}{x^4+y^2} & (x,y) \neq (0,0), \\[1ex] 0 & (x,y)=(0,0).\end{cases}$$
+Fix a direction $v = (a,b) \neq 0$ and compute along the ray $t \mapsto tv$:
+$$\frac{f(ta,tb)}{t} = \frac{1}{t}\cdot\frac{t^2a^2\cdot tb}{t^4a^4+t^2b^2}
+   = \frac{a^2b}{t^2a^4+b^2} \;\xrightarrow{\ t\to0\ }\;
+   \begin{cases} \dfrac{a^2}{b} & b \neq 0, \\[1ex] 0 & b = 0.\end{cases}$$
+So $\partial_vf(0,0)$ exists for \textbf{every} direction $v$. Yet $f$ is not even continuous at
+the origin: approaching along the \emph{parabola} $y=x^2$ instead of along a straight line,
+$$f(x,x^2) = \frac{x^2\cdot x^2}{x^4+x^4} = \frac12 \quad\text{for all } x \neq 0.$$
+By \cref{prop:differentiable_implies_continuous}, $f$ is therefore not differentiable at the
+origin.
+
+Two lessons worth keeping.
+\begin{itemize}
+  \item \textbf{Straight lines cannot see everything.} Every directional derivative is computed
+    along a line, and this $f$ is well behaved along every line while misbehaving along a
+    parabola. Approaching a point in $\mathbb{R}^n$ is genuinely harder than in $\mathbb{R}$,
+    where there are only two directions.
+  \item \textbf{Watch whether $v \mapsto \partial_vf(x_0)$ is linear.} If $f$ were differentiable
+    we would need $\partial_vf(0,0) = DF_0(v)$, a \emph{linear} function of $v$; but $a^2/b$ is
+    not linear in $(a,b)$. That failure alone rules out differentiability, without any mention of
+    continuity --- and it is precisely the test that settles \cref{ex:5.1}\textbf{(b)} on the
+    Week 5 problem sheet.
+\end{itemize}
+\end{aiexample}
 
 % Source: Corsin Nick/Class Notes/Week 4.pdf, p. 7
 \begin{exercise}[Differential of $A \mapsto A\transp A$]
@@ -609,7 +706,7 @@ out (\cref{ex:4.1,ex:4.2,ex:4.3,ex:4.6} --- he gives only hints on his priority 
 the two \texttt{aiexercise} problems. Corsin's own exercises in this chapter
 (\cref{ex:chain_rule_computation,ex:transpose_diff,ex:taylor_maximal_expansion,%
 ex:taylor_explicit_example,ex:hessian_taylor_proof}) are solved inline, immediately after their
-statement, mirroring how he presents them in his own notes (see the qt{Kept inline} comments above
+statement, mirroring how he presents them in his own notes (see the \qt{Kept inline} comments above
 each).
 \end{ainote}
 

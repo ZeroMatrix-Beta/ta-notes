@@ -35,9 +35,39 @@ If $f \in C^1(U,\mathbb{R})$ and $x_0 \in \operatorname{int}(U)$ is a local extr
 $\nabla f(x_0) = 0$.
 \end{proposition}
 
-\begin{remark}[Intuition]
-$$\langle\nabla f(x_0), v\rangle = 0 \iff \nabla f(x_0) \perp v,$$
-$$\text{and this for all } v \in \mathbb{R}^2 \iff \nabla f(x_0) = 0.$$
+% Generator: Claude Opus 5 (Medium) --- Corsin states this without proof; the one-variable
+% reduction is two lines and is the argument every later Lagrange computation leans on.
+\begin{proof}
+Fix a direction $v \in \mathbb{R}^n$ and consider the one-variable function
+$\varphi(t) := f(x_0 + tv)$, defined for $|t|$ small enough that $x_0 + tv$ stays in $U$ --- this
+is where $x_0 \in \operatorname{int}(U)$ is used, and it is the only place. If $f$ has a local
+extremum at $x_0$, then $\varphi$ has one at the \emph{interior} point $t=0$, so by the
+one-variable result from Analysis I, $\varphi'(0) = 0$. By the chain rule along a path
+(\cref{sec:chain_rule_along_path}),
+$$0 = \varphi'(0) = \langle \nabla f(x_0), v\rangle.$$
+Since $v$ was arbitrary, $\nabla f(x_0)$ is orthogonal to every vector of $\mathbb{R}^n$,
+including itself: $\langle\nabla f(x_0),\nabla f(x_0)\rangle = |\nabla f(x_0)|^2 = 0$, hence
+$\nabla f(x_0) = 0$.
+\end{proof}
+
+\begin{remark}[Intuition, and two standing warnings]
+The proof says: at an interior extremum every direction is a \qt{flat} direction, and the only
+vector orthogonal to everything is the zero vector,
+$$\langle\nabla f(x_0), v\rangle = 0 \text{ for all } v \in \mathbb{R}^n
+  \iff \nabla f(x_0) = 0.$$
+Two things this proposition does \textbf{not} say, both of which the rest of the chapter is
+built around.
+\begin{itemize}
+  \item \textbf{The converse is false.} A critical point need not be an extremum:
+    $f(x,y) := x^2-y^2$ has $\nabla f(0,0)=0$ but a saddle there, and even in one variable
+    $f(x) := x^3$ has $f'(0)=0$ with no extremum. Critical points are \emph{candidates};
+    separating them is exactly what \cref{thm:hessian_test} is for.
+  \item \textbf{Interiority is essential.} On $U := [0,1]$ the function $f(x) := x$ attains both
+    its minimum and its maximum, at $x=0$ and $x=1$, and $f' \equiv 1$ never vanishes. The
+    hypothesis $x_0 \in \operatorname{int}(U)$ is what fails. This is why every optimization over
+    a closed region in this chapter is done in two steps --- interior critical points first, then
+    the boundary separately, the latter being what Lagrange multipliers handle.
+\end{itemize}
 \end{remark}
 
 \begin{center}
@@ -109,8 +139,22 @@ maxima of $T|_{S^2}$, which \textbf{are not necessarily critical points of $T$}!
 \end{tikzpicture}
 \end{center}
 
-So $T|_{S^2}$ has a local extremum if it is \textbf{perpendicular to the surface} $S^2$. Note
-that $S^2$ is the \newterm{level set} (\germanterm{Niveaumenge}) $g(x) = 0$ for
+% Generator: Claude Opus 5 (Medium) --- Corsin's sentence reads "T has a local extremum if it is
+% perpendicular", which is both missing its subject and the wrong direction of implication.
+Read the picture as follows. At $p$ the gradient $\nabla T(p)$ has a non-zero component
+\emph{along} the surface, so walking on $S^2$ in that direction increases $T$: the point $p$
+cannot be a local extremum of $T|_{S^2}$. So if $T|_{S^2}$ \emph{does} have a local extremum at a
+point, then $\nabla T$ there must have no tangential component left --- it must be
+\textbf{perpendicular to the surface}, as at $q$.
+
+Note the direction of that statement carefully: perpendicularity is \textbf{necessary, not
+sufficient}. Plenty of points have a perpendicular gradient without being extrema at all --- on
+the earth, the coldest place has a perpendicular gradient just as the hottest does, and so does
+many a saddle. What the condition delivers is a shortlist of \emph{candidates}; deciding which
+of them are maxima, which minima, and which neither is a separate step, and in practice is done
+by simply evaluating $T$ at each and comparing.
+
+Note also that $S^2$ is the \newterm{level set} (\germanterm{Niveaumenge}) $g(x) = 0$ for
 $g(x) := |x|^2 - 1$, or $S^2 = g^{-1}\{0\}$.
 
 \begin{remark}[Gradient perpendicular to level sets]
@@ -160,6 +204,33 @@ $\nabla g(x_0)$.
 
 \textit{In practice}, we assume $(\nabla g_1, \dots, \nabla g_k)$ nowhere linearly dependent,
 since otherwise $\lambda_0 = 0$ is possible, which does not give us anything.
+
+% Generator: Claude Opus 5 (Medium)
+\begin{aiexample}[What goes wrong when $\nabla g$ vanishes]
+\label{ex:constraint_qualification_fails}
+The standing assumption is not bookkeeping --- drop it and the method can miss an extremum
+outright. Let
+$$f(x,y) := x, \qquad M := \{(x,y) \in \mathbb{R}^2 : y^2 = x^3\},$$
+the \newterm{cuspidal cubic} (\germanterm{Neilsche Parabel}). Since $y^2 \geq 0$ forces
+$x^3 \geq 0$, every point of $M$ has $x \geq 0$, and $(0,0) \in M$. So $f$ attains a clear
+\textbf{global minimum on $M$ at the origin}.
+
+Now run the method with $g(x,y) := y^2-x^3$. The Lagrange condition $\nabla f = \lambda\nabla g$
+reads
+$$(1,0) = \lambda\,(-3x^2,\ 2y),$$
+whose first component demands $1 = -3\lambda x^2$. At the origin this says $1 = 0$: no
+multiplier $\lambda$ exists. The method returns \textbf{no candidates at all}, while the minimum
+sits there in plain sight.
+
+The culprit is visible in $\nabla g(0,0) = (0,0)$: the standing assumption fails at exactly the
+point that matters. Geometrically, $M$ has a \emph{cusp} at the origin --- it is not a smooth
+curve there, so it has no tangent line, and \qt{$\nabla f$ perpendicular to the constraint} has
+nothing to be perpendicular to.
+
+\textbf{The practical moral:} before trusting a Lagrange computation, check that
+$\nabla g \neq 0$ (or, for several constraints, that the $\nabla g_j$ are independent) at every
+point of the constraint set. Where it fails, add those points to your candidate list by hand.
+\end{aiexample}
 
 % Supplement: Adrien Martelli/Notes/20.03-Notes_Chap11_Lagrangemultipliers_geometric_explanation.pdf
 \begin{remark}[Where the coefficient $\lambda_0$ went]
@@ -231,6 +302,27 @@ $-\lambda x = -\lambda y = xy = 0$, giving $x = 0$ or $y = 0$, and $\lambda = 0$
 $x = y = z = 0$ does not satisfy $x^2+y^2+z^2 = 1$. Then, since $\lambda = 0$,
 $\nabla f(x,y,z) = 0$ and we have already found that point in the first step. Similarly for
 $y = 0$ or $x = 0$.
+
+% Generator: Claude Opus 5 (Medium) --- Corsin's solution stops at the candidate list. The
+% exercise asks for the local extrema, so the classification step is completed here.
+\textbf{Classifying the candidates.} The work so far produced candidates, not answers
+(\cref{prop:extremum_implies_critical} and the warning after it). Since $K$ is compact and $f$
+is continuous, $f$ does attain a global maximum and minimum on $K$, so it is enough to evaluate.
+
+At a boundary candidate $\tfrac{1}{\sqrt3}(\alpha,\beta,\gamma)$ with
+$\alpha,\beta,\gamma \in \{\pm1\}$,
+$$f\Big(\tfrac{1}{\sqrt3}(\alpha,\beta,\gamma)\Big)
+  = \frac{\alpha\beta\gamma}{3\sqrt3},$$
+so the value depends only on the sign $\alpha\beta\gamma$. Four of the eight points have
+$\alpha\beta\gamma = +1$ and give the maximal value $\tfrac{1}{3\sqrt3}$; the other four have
+$\alpha\beta\gamma = -1$ and give $-\tfrac{1}{3\sqrt3}$. On the coordinate axes found in the
+first step, $f \equiv 0$.
+
+Hence $f$ attains its \textbf{global maximum} $\tfrac{1}{3\sqrt3}$ at the four points with an
+even number of minus signs, and its \textbf{global minimum} $-\tfrac{1}{3\sqrt3}$ at the four
+with an odd number. The interior candidates are \textbf{not extrema at all}: at any point of a
+coordinate axis $f=0$, yet every neighbourhood contains points where $xyz>0$ and points where
+$xyz<0$ --- flip the sign of one coordinate. They are the three-variable analogue of a saddle.
 \end{exercisesolution}
 
 \begin{ainote}
@@ -550,7 +642,7 @@ This section holds solutions only for the official-sheet exercises Corsin did no
 out (\cref{ex:5.1,ex:5.2,ex:5.3} --- he gives only hints on his priority page, p. 1) and the two
 \texttt{aiexercise} problems. Corsin's own exercises in this chapter
 (\cref{ex:xyz_on_ball,ex:cubic_saddle_family}) are solved inline, immediately after their
-statement, mirroring how he presents them in his own notes (see the qt{Kept inline} comments above
+statement, mirroring how he presents them in his own notes (see the \qt{Kept inline} comments above
 each).
 \end{ainote}
 

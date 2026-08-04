@@ -116,6 +116,44 @@ $\{x \in \mathbb{R}^n : |x|^2=R^2\}$ is a submanifold of dimension $n-1$ for $n 
 \end{tikzpicture}
 \end{center}
 
+% Generator: Claude Opus 5 (Medium)
+\begin{aiexample}[A set that is \emph{not} a submanifold, and how to prove it]
+\label{ex:cross_not_submanifold}
+The regular value theorem is a one-way street: if $DF_x$ is surjective everywhere on the level
+set, we get a submanifold. When it is not, we get \emph{no information} --- the level set may
+still be a submanifold, or it may not. It is worth seeing a case where it is not.
+
+Let $F(x,y) := xy$ and consider $C := F^{-1}\{0\}$, the union of the two coordinate axes.
+Here $\Jac F(x,y) = (y,\ x)$, which is nonzero --- hence surjective --- at every point of $C$
+\emph{except} the origin. So \cref{thm:regular_value_theorem} does apply on
+$C \setminus \{(0,0)\}$, telling us that the four open half-axes are $1$-dimensional
+submanifolds, and says nothing at the origin.
+
+And at the origin $C$ genuinely fails to be a submanifold. The argument is a connectedness trick
+worth remembering, since it is the standard way to prove a negative here.
+
+Suppose $C$ were a $1$-dimensional submanifold. By \cref{def:submanifold} there would be a
+neighbourhood $U$ of the origin and a diffeomorphism $\Phi : U \to V$ carrying $C \cap U$ onto a
+piece of a \emph{line}, $(\mathbb{R}\times\{0\})\cap V$. Now delete the centre point from each
+side and count connected components (\cref{def:connectedness}):
+\begin{itemize}
+  \item Removing a point from a small piece of a line leaves \textbf{two} pieces.
+  \item Removing the origin from $C \cap U$ leaves \textbf{four} pieces --- one along each
+    half-axis.
+\end{itemize}
+But $\Phi$ is a homeomorphism, and homeomorphisms preserve the number of connected components
+(\cref{thm:continuity_preserves_connected}, applied to $\Phi$ and to $\Phi^{-1}$). Four cannot
+equal two, so no such $\Phi$ exists and $C$ is not a submanifold.
+
+\begin{remark}
+The moral is that submanifolds are forbidden from having \emph{crossings, corners or cusps}: near
+each of its points a submanifold must look like a flat piece of $\mathbb{R}^m$, and a crossing
+does not. Compare \cref{ex:constraint_qualification_fails} in Week 5, where the constraint set
+$\{y^2=x^3\}$ had a cusp at exactly the point where $\nabla g$ vanished --- the same phenomenon,
+seen through the Lagrange multiplier lens one chapter earlier.
+\end{remark}
+\end{aiexample}
+
 % Source: Corsin Nick/Class Notes/Week 7.pdf, p. 4
 \subsubsection{Connection to Lagrange multipliers}
 

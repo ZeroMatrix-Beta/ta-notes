@@ -207,6 +207,18 @@ and belongs 90 lines earlier, next to `item:extreme_value_theorem` in
 
 ## C. Gaps where a first-time reader will stall
 
+*(C1–C4 are done. C5–C7 remain: the two Week 2 proofs that assert their crux, both
+topologist's-sine-curve proofs, and the uniqueness-of-the-differential parenthetical.)*
+
+Content added alongside those fixes, as illustrative corner cases:
+`aiexample` on why each metric axiom is needed (one failure each), a remark on the two
+degenerate open balls ($r\leq0$ gives $\emptyset$, not $\{x\}$; discrete balls jump), an
+`aiexercise` that open balls are open (with solution), an `aiexample` where *all* directional
+derivatives exist yet $f$ is discontinuous, a two-panel figure for partial vs directional
+derivatives, an `aiexample` where the Lagrange constraint qualification fails outright (the
+cusp $y^2=x^3$), and an `aiexample` proving the coordinate cross is *not* a submanifold by
+component-counting.
+
 Not asking for full rigour — these are the spots where one or two added sentences change
 the note from "record of what was said" to "usable".
 

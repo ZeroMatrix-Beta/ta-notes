@@ -103,6 +103,29 @@ correct, but the gloss omits the ``non-''. Corrected in the prose above. See \te
 \end{tikzpicture}
 \end{center}
 
+% Generator: Claude Opus 5 (Medium)
+\begin{aiexample}[Each axiom rules out something, and none is redundant]
+\label{ex:metric_axioms_are_needed}
+Three functions on $\mathbb{R}$, each failing exactly one axiom of
+\cref{def:metric_space}. It is worth checking these once: a definition only becomes memorable
+once you know what it is keeping out.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{Definiteness fails:} $d(x,y) := |x^2-y^2|$. This is symmetric and satisfies the
+    triangle inequality (it is $|\cdot|$ composed with $x \mapsto x^2$), but
+    $d(-1,1) = 0$ while $-1 \neq 1$. Distinct points at distance zero: the space cannot tell
+    $-1$ from $1$, and no sequence could ever have a unique limit.
+  \item \textbf{Symmetry fails:} $d(x,y) := \max\{y-x,\,0\}$. Here $d(0,1)=1$ but $d(1,0)=0$, so
+    walking uphill costs and walking downhill is free. (Such a $d$ is called a
+    \newterm{quasi-metric} and is genuinely useful elsewhere --- but $B_r(x)$ would then depend
+    on which argument the centre sits in.)
+  \item \textbf{Triangle inequality fails:} $d(x,y) := (x-y)^2$. Definiteness and symmetry are
+    clear, but
+    $$d(0,2) = 4 \quad > \quad d(0,1)+d(1,2) = 1+1 = 2,$$
+    so the detour through $1$ is \emph{shorter} than going direct --- exactly the
+    \qt{detours make the way longer} slogan reversed.
+\end{enumerate}
+\end{aiexample}
+
 \subsection{Examples}
 
 \begin{example}[Standard metrics on $\mathbb{R}^n$]
@@ -263,6 +286,32 @@ misconception on \cref{rem:common_misconception} turns on.
 \Cref{def:open_ball} is stated for $r \in \mathbb{R}$ rather than $r > 0$. Harmless here, but
 loose. See \texttt{OQ-03}.
 \end{ainote}
+
+% Generator: Claude Opus 5 (Medium)
+\begin{remark}[Two degenerate balls worth knowing]
+Taking \cref{def:open_ball} literally at the edges of its range is a cheap way to test whether
+you have read it correctly.
+\begin{itemize}
+  \item If $r \leq 0$, then $B_r(x) = \emptyset$ --- \emph{not} $\{x\}$. The condition is
+    $d(y,x) < r$, strictly, and $d(x,x) = 0 \not< 0$. So even the centre is missing from
+    $B_0(x)$.
+  \item In the discrete metric $B_1(x) = \{x\}$, while $B_{1.01}(x) = X$: a ball can jump from a
+    single point to the entire space without passing through anything in between. Radii do not
+    have to behave like radii.
+\end{itemize}
+These are the two cases that make \qt{shrink the ball a little} arguments go wrong if applied
+without thinking.
+\end{remark}
+
+% Generator: Claude Opus 5 (Medium)
+\begin{aiexercise}[Open balls are open]
+\label{ex:ai_open_balls_are_open}
+The name promises it, but \cref{def:open_ball} does not say it. Show that in any metric space
+$(X,d)$ the ball $B_r(x)$ is an open set in the sense of \cref{def:open_closed}.
+
+\textit{Hint:} given $y \in B_r(x)$, the number $\varepsilon := r - d(y,x)$ is strictly positive.
+Draw the picture, then let the triangle inequality do the work.
+\end{aiexercise}
 
 \begin{definition}[Open and closed sets]
 \label{def:open_closed}
@@ -973,8 +1022,27 @@ out as important. The full sheet (2.1--2.7) is transcribed in
 \begin{ainote}
 Only the two \texttt{aiexercise} problems below have solutions in this section: Corsin's own
 exercises in this chapter are solved inline, immediately after their statement, mirroring how he
-presents them in his own notes (see the qt{Kept inline} comments above each).
+presents them in his own notes (see the \qt{Kept inline} comments above each).
 \end{ainote}
+
+\begin{exercisesolution}[Proof of \cref{ex:ai_open_balls_are_open}]
+% Generator: Claude Opus 5 (Medium)
+Let $y \in B_r(x)$, so $d(y,x) < r$, and set $\varepsilon := r - d(y,x) > 0$. We claim that
+$B_\varepsilon(y) \subseteq B_r(x)$, which is exactly what \cref{def:open_closed} requires.
+
+Let $z \in B_\varepsilon(y)$, so $d(z,y) < \varepsilon$. By the triangle inequality
+(\cref{def:metric_space}),
+$$d(z,x) \leq d(z,y) + d(y,x) < \varepsilon + d(y,x) = \big(r-d(y,x)\big) + d(y,x) = r,$$
+so $z \in B_r(x)$. Since $y \in B_r(x)$ was arbitrary, $B_r(x)$ is open.
+
+\begin{remark}
+The entire content is the choice $\varepsilon := r - d(y,x)$: the radius left over after
+travelling from the centre out to $y$. Note that it shrinks to $0$ as $y$ approaches the edge of
+the ball, so no \emph{single} $\varepsilon$ works for every $y$ at once. That is the same
+\qt{the constant depends on the point} phenomenon which separates continuity from uniform
+continuity in \cref{rem:continuity_vs_uniform_continuity}, met here for the first time.
+\end{remark}
+\end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:ai_metric_equivalence}]
 % Generator: Gemini 3.6 Flash (Medium)

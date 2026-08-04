@@ -307,6 +307,54 @@ FIG-W06-03 for the pattern).
   \section{Compactness}
   ```
 
+* ⚠️ **Provenance comments have SCOPE — this is the rule broken most often.**
+  A `% Source:` / `% Quelle:` / `% Supplement:` comment is not a decoration attached to the one
+  line beneath it. **It claims everything below it until the next provenance comment.** Stated
+  that way the rule below is obvious; stated any other way it keeps getting forgotten, because
+  it never feels like it applies to whatever you happen to be inserting.
+
+  **Consequence: any block you insert into transcribed material steals that material's
+  attribution.** It does not matter what the block is --- a remark, an example, an exercise, a
+  figure, an `ainote`, a transition. If transcribed content resumes below your insertion, you
+  must repeat the comment above it.
+
+  ```latex
+  % Source: Corsin Nick/Class Notes/Week 4.pdf, p. 4
+  \begin{example}[Derivative of a curve]...\end{example}
+
+  \begin{ainote}...\end{ainote}                        % <- your insertion
+
+  % Source: Corsin Nick/Class Notes/Week 4.pdf, p. 4    % <- MUST be repeated
+  From this example, we see that the columns of the Jacobian are ...
+  ```
+
+  The second failure mode is the same principle running the other way: **never let your own
+  `% Supplement:` comment come to rest directly above someone else's content.**
+
+  ```latex
+  % BAD -- now reads as though problem 8.2 came from Sascha's file
+  % Supplement: Sascha Brack/Ex Sheet Hints/Ex8_Analysis2_hints.pdf
+  \begin{ainote}...his priorities...\end{ainote}
+  \begin{exercise}[8.2 --- True or False]
+
+  % GOOD
+  % Supplement: Sascha Brack/Ex Sheet Hints/Ex8_Analysis2_hints.pdf
+  \begin{ainote}...his priorities...\end{ainote}
+  % Source: exercises/Ex8_Analysis2_eng.pdf, p. 1
+  \begin{exercise}[8.2 --- True or False]
+  ```
+
+  **Verify afterwards; do not rely on remembering.** After inserting, scroll *down* to the next
+  transcribed block and ask whether the nearest provenance comment above it is still the right
+  one. To see every claim boundary in a file at once:
+
+  ```bash
+  grep -nE '^% (Source|Quelle|Supplement|Generator|Transition):' content/week-04.tex
+  ```
+
+  Read that output as a list of ranges: every transcribed block must sit inside a range naming
+  *its own* source.
+
 * **Exercises are already numbered — nothing to configure.** `main.tex:449` declares
   `exercise` via `\newaliascnt{exercise}{theorem}`, so every `\begin{exercise}` is numbered and
   `\cref{ex:...}` resolves to a clickable reference out of the box. Do **not** declare a local
@@ -370,12 +418,10 @@ FIG-W06-03 for the pattern).
   two blocks of transcribed/quoted content (rather than transcribing it from any source), mark it
   with a brief comment naming the model that wrote it, e.g. `% Transition: Claude Sonnet 5` (this
   project's sessions have also used the equivalent shorthand `% Sonnet 5 (Medium)` — either is
-  fine, pick one and be consistent within a file). If the insertion sits between a content block
-  and the `% Source: ...` comment that used to sit right above it, re-cite that same source
-  comment immediately above the resumed transcribed content so the provenance isn't visually
-  severed by your insertion — the comment documents where the *following* code came from, not
-  the inserted block, so it must stay attached to what it actually describes. Keep this
-  lightweight — a one-line comment each time, not a ceremony.
+  fine, pick one and be consistent within a file). **If transcribed content resumes below your
+  insertion, re-cite its source comment above it** — see the *Provenance comments have SCOPE*
+  rule earlier in this section, which applies to every kind of insertion, not only transitions.
+  Keep this lightweight — a one-line comment each time, not a ceremony.
 * **Integrating a second tutor's supplementary material** (not the primary blueprint tutor) into
   an already-transcribed section: cite it with a `% Quelle: <relative path>` (or `% Source: ...`)
   comment naming the exact file, and where relevant the page/section, e.g.

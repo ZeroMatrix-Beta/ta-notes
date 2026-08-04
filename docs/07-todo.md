@@ -5,7 +5,13 @@
       variables, Fubini, Feynman). Priority page + exercise statements 8.2, 8.4,
       8.5 in. **Still open:** `sec:week08_solutions` is empty — solutions to
       8.2/8.4/8.5 not yet written (Sol8_Analysis2_eng.pdf not read).
-- [ ] Corsin Weeks 9–13 + ODE appendix
+- [x] Corsin Week 9 — fully transcribed (pp. 1--8: area of a parallelogram,
+      Gram determinant, volume of embedded surfaces, paraboloid-patch example,
+      length of a curve). Priority page + exercises 9.1, 9.2 in, with original
+      solutions (checked against `Sol9_Analysis2_eng.pdf`, matched exactly).
+      **Still open:** 9.3--9.7 not reproduced (no colour/hint marker on the
+      source page for them) or solved.
+- [ ] Corsin Weeks 10–13 + ODE appendix
 - [ ] `latexmk` to 0 errors after each week
 
 ## Started but not finished (from the Weeks 1–7 review, docs/08-latex-review.md)
@@ -106,8 +112,9 @@ convention explicitly or replace it — verify before adding.
 - [x] Tim Fessler: confirmed no new substance, skip entirely
 
 ## TikZ figures
-- [x] FIG-W06-01..07, FIG-W07-01..06 — done, in docs/05-figure-queue.md
-- [ ] FIG-W08+ pre-logged as "queued" in docs/05-figure-queue.md, waiting on
+- [x] FIG-W06-01..07, FIG-W07-01..06, FIG-W08-01, FIG-W09-01..04 — done, in
+      docs/05-figure-queue.md
+- [ ] FIG-W10+ pre-logged as "queued" in docs/05-figure-queue.md, waiting on
       transcription of those weeks first
 
 ## Candidate spots for an original (not-from-source) TikZ, not yet drawn

@@ -17,8 +17,9 @@ places** — Corsin runs roughly a week ahead of it from Week 4 onwards.
 typeset.** Six rows were off by one week (Taylor, Lagrange, the Hessian test, the implicit
 function theorem, tangent spaces, change of variables) — i.e. the correction table immediately
 below was never propagated into the table people actually use. Rows verified against
-`content/week-0N.tex` are now marked in **bold**. Weeks 9–13 remain provisional and should be
-treated as unverified until those chapters are typeset.
+`content/week-0N.tex` are now marked in **bold**. Week 9 is now typeset and verified. Weeks
+10–13 remain provisional and should be treated as unverified until those chapters are
+typeset.
 
 **The authority is `content/week-NN.tex` itself** — grep for the section label, e.g.
 `grep -l 'label{sec:lagrange_multipliers}' content/*.tex`. (Earlier revisions of this file named

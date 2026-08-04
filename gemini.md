@@ -387,16 +387,21 @@ FIG-W06-03 for the pattern).
     (inline or in the end-of-chapter section per the rule above) — this includes exercises
     quoted verbatim from the official problem sheet. When the tutor left no worked solution and
     you must write one yourself, mark it with `% Generator: <model name> (<effort>)` directly
-    inside the `exercisesolution`, matching the `aiexercise`/`aiexample` convention. Cross-check
-    your solution against the official `SolN_Analysis2_eng.pdf` where one exists; if your
-    reasoning or final answer genuinely diverges from it, flag the divergence with an `ainote`
-    right there and log it in `docs/06-open-questions.md` — never silently prefer your own
-    answer over the official solution without saying so. Even when your solution agrees with the
-    official one, feel free to add an `ainote` for anything genuinely worth flagging about the
-    master solution or the exercise itself — a subtlety it skates past, a non-obvious step, a
-    result that looks surprising at first, or a detail (like a critical point being only a
-    *local*, non-global extremum) that's easy to miss. This is about noteworthy observations, not
-    routine restating of the solution.
+    inside the `exercisesolution`, matching the `aiexercise`/`aiexample` convention.
+    **Derive your own solution first, and only open `SolN_Analysis2_eng.pdf` afterwards, to
+    check it.** Reading the official solution before attempting the problem lets it steer your
+    method and phrasing even when you don't copy it outright, which defeats the point of an
+    independent check — you end up confirming your own anchoring bias, not verifying correctness.
+    Work the problem cold, then compare. Cross-check your solution against the official
+    `SolN_Analysis2_eng.pdf` where one exists; if your reasoning or final answer genuinely
+    diverges from it, flag the divergence with an `ainote` right there and log it in
+    `docs/06-open-questions.md` — never silently prefer your own answer over the official
+    solution without saying so. Even when your solution agrees with the official one, feel free
+    to add an `ainote` for anything genuinely worth flagging about the master solution or the
+    exercise itself — a subtlety it skates past, a non-obvious step, a result that looks
+    surprising at first, or a detail (like a critical point being only a *local*, non-global
+    extremum) that's easy to miss. This is about noteworthy observations, not routine restating
+    of the solution.
   * **Never delete a tutor's original worked solution.** If you are unsure whether a solution
     already existed before an edit, check the source PDF before assuming it should be
     reconstructed — but if it turns out the tutor's own solution was removed by mistake,

@@ -44,11 +44,11 @@ inlined as ASCII. TikZ is done in one dedicated pass (Phase 4.3) so it never blo
 | FIG-W07-04 | Corsin Week 7, p. 7 | Surface mesh with ∂f/∂x₁, ∂f/∂x₂ spanning the tangent space | Surface + 2 vectors | done |
 | FIG-W07-05 | Corsin Week 7, p. 8 | Sphere with tangent plane T_{e₃}S² at the north pole | 3D sphere + plane | done |
 | FIG-W07-06 | Corsin Week 7, p. 10 | Sphere with the normal line N_{e₃}S² through the poles | 3D sphere + line | done |
-| FIG-W08-01 | Corsin Week 8, p. 6 | Figure-eight (sin t, sin 2t) with the self-intersection circled "problems!" | pgfplots parametric | queued |
-| FIG-W09-01 | Corsin Week 9, p. 2 | Parallelogram (0, x, x+y, y) with x = x₁e₁, showing area = \|det(x\|y)\| | 2D sketch on e₁/e₂ axes | queued |
-| FIG-W09-02 | Corsin Week 9, p. 4 | 3D parallelogram spanned by x, y with angle θ and height \|x\|sin θ | 3D sketch | queued |
-| FIG-W09-03 | Corsin Week 9, p. 5 | Surface with ∂₁φ, ∂₂φ spanning the hatched Gram parallelogram | Surface + parallelogram | queued |
-| FIG-W09-04 | Corsin Week 9, p. 8 | Curve with inscribed polygon through c(t₁)…c(t₇) (length as a sup) | Freehand curve + polyline | queued |
+| FIG-W08-01 | Corsin Week 8, p. 6 | Figure-eight (sin t, sin 2t) with the self-intersection circled "problems!" | pgfplots parametric | done |
+| FIG-W09-01 | Corsin Week 9, p. 2 | Parallelogram (0, x, x+y, y) with x = x₁e₁, showing area = \|det(x\|y)\| | 2D sketch on e₁/e₂ axes | done |
+| FIG-W09-02 | Corsin Week 9, p. 4 | 3D parallelogram spanned by x, y with angle θ and height \|x\|sin θ | 3D sketch | done |
+| FIG-W09-03 | Corsin Week 9, p. 5 | Surface with ∂₁φ, ∂₂φ spanning the hatched Gram parallelogram | Surface + parallelogram | done |
+| FIG-W09-04 | Corsin Week 9, p. 8 | Curve with inscribed polygon through c(t₁)…c(t₇) (length as a sup) | Freehand curve + polyline | done |
 | FIG-W10-01 | Corsin Week 10, p. 1 | Torus parametrization: 3D view, top view (R, θ), side view (r, φ) | 3 panels | queued |
 | FIG-W10-02 | Corsin Week 10, p. 4 | Straight geodesic c from 0 to x inside a family of bowed competitors c_ε | Line + curve family | queued |
 | FIG-W10-03 | Corsin Week 10, p. 12 | Fluid swept through a surface element: v arrows, angle θ, h = \|dA\|cos θ, L = Δt\|v\| | 3D-ish sketch | queued |

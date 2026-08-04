@@ -171,15 +171,6 @@ positive factor $2|x|$, so they point the same way and the geometric conclusion 
 \texttt{OQ-28}, and \texttt{OQ-12} for the same $|x|$ versus $|x|^2$ slip in the exercise.
 \end{ainote}
 
-\begin{aiexample}[Classifying Saddle Points via the Hessian]
-% Generator: Gemini 3.6 Flash (Medium)
-Consider $f(x,y) := x^2 - y^2$ on $\mathbb{R}^2$. The gradient is $\nabla f(x,y) = (2x, -2y)\transp$, which vanishes at $(0,0)$. The Hessian matrix is constant:
-\[
-\Hess f(0,0) = \begin{pmatrix} 2 & 0 \\ 0 & -2 \end{pmatrix}.
-\]
-Its eigenvalues are $\lambda_1 = 2 > 0$ and $\lambda_2 = -2 < 0$, making $\Hess f(0,0)$ indefinite. Thus $(0,0)$ is a saddle point of $f$.
-\end{aiexample}
-
 % Source: Corsin Nick/Class Notes/Week 5.pdf, pp. 4--5
 This intuition is made rigorous in the following.
 
@@ -457,6 +448,22 @@ above, and the genuinely inconclusive case --- semidefinite \emph{and} degenerat
 explicitly instead, since that is the one students actually run into
 (\cref{ex:6.8} in Week 6 is exactly this trap).
 \end{ainote}
+
+% Moved here from the Lagrange-multiplier section (review item D2): it uses the Hessian,
+% "indefinite" and the eigenvalue criterion, none of which were available at its former
+% position 260 lines earlier.
+\begin{aiexample}[Classifying saddle points via the Hessian]
+\label{ex:ai_saddle_via_hessian}
+% Generator: Gemini 3.6 Flash (Medium)
+Consider $f(x,y) := x^2-y^2$ on $\mathbb{R}^2$. The gradient
+$\nabla f(x,y) = (2x,\,-2y)\transp$ vanishes at $(0,0)$, and the Hessian is constant:
+\[
+\Hess f(0,0) = \begin{pmatrix} 2 & 0 \\ 0 & -2 \end{pmatrix}.
+\]
+Its eigenvalues are $\lambda_1 = 2 > 0$ and $\lambda_2 = -2 < 0$, so $\Hess f(0,0)$ is
+indefinite and $(0,0)$ is a saddle point by \cref{thm:hessian_test} --- the model case the word
+\qt{saddle} is named after, since $f$ rises along the $x$-axis and falls along the $y$-axis.
+\end{aiexample}
 
 \begin{remark}[Mnemonic]
 positive $= \smile \dots$ min; negative $= \frown \dots$ max; indefinite $=$ saddle.

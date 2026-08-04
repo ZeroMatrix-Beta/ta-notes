@@ -146,15 +146,6 @@ once you know what it is keeping out.
 \end{enumerate}
 \end{example}
 
-\begin{aiexample}[Open Balls in the Discrete Metric]
-% Generator: Gemini 3.6 Flash (Medium)
-Let $(X, d_{\text{disc}})$ be a discrete metric space. The open ball $B_r(x)$ centered at $x \in X$ with radius $r > 0$ is:
-\[
-B_r(x) = \begin{cases} \{x\} & \text{if } 0 < r \leq 1, \\ X & \text{if } r > 1. \end{cases}
-\]
-Hence, every singleton set $\{x\}$ is open in the discrete metric, and consequently every subset of $X$ is both open and closed (clopen).
-\end{aiexample}
-
 \begin{center}
 \begin{tikzpicture}[>=Latex, scale=1.1]
   \draw[->] (-0.3,0) -- (4.5,0) node[right] {$x_1$};
@@ -286,6 +277,21 @@ misconception on \cref{rem:common_misconception} turns on.
 \Cref{def:open_ball} is stated for $r \in \mathbb{R}$ rather than $r > 0$. Harmless here, but
 loose. See \texttt{OQ-03}.
 \end{ainote}
+
+% Moved here from before \cref{def:open_ball} (review item D1): it uses $B_r(x)$,
+% "open" and "clopen", none of which were defined at its former position.
+\begin{aiexample}[Open Balls in the Discrete Metric]
+% Generator: Gemini 3.6 Flash (Medium)
+Let $(X, d_{\text{disc}})$ be a discrete metric space. The open ball $B_r(x)$ centered at
+$x \in X$ with radius $r > 0$ is
+\[
+B_r(x) = \begin{cases} \{x\} & \text{if } 0 < r \leq 1, \\ X & \text{if } r > 1. \end{cases}
+\]
+Hence every singleton $\{x\}$ is open in the discrete metric, and consequently every subset of
+$X$ is both open and closed (\newterm{clopen}) --- which is exactly what
+\cref{ex:X_empty_clopen} below asks you to verify for $X$ and $\emptyset$ in a general metric
+space.
+\end{aiexample}
 
 % Generator: Claude Opus 5 (Medium)
 \begin{remark}[Two degenerate balls worth knowing]
@@ -1186,6 +1192,13 @@ Let $(X,d)$ be a metric space.
 \end{enumerate}
 \end{exercisesolution}
 
+% Moved here from after the two aiexercises below (review item D3): its "above" pointed
+% past them to this solution, which is what it actually comments on.
+\begin{ainote}
+Corsin writes $n_k > k$ above; for a subsequence the standing fact is $n_k \geq k$. Immaterial to
+the argument. See \texttt{OQ-06}.
+\end{ainote}
+
 \begin{aiexercise}[Equivalence of Manhattan and Supremum Metrics]
 \label{ex:ai_metric_equivalence}
 % Generator: Gemini 3.6 Flash (Medium)
@@ -1200,11 +1213,6 @@ d_3(x,0) \leq d_1(x,0) \leq 2 \, d_3(x,0).
 % Generator: Gemini 3.6 Flash (Medium)
 Let $D := \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 < 1\}$ be the open unit disk in $\mathbb{R}^2$. Show that the boundary of $D$ is the unit circle $\partial D = \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 = 1\}$.
 \end{aiexercise}
-
-\begin{ainote}
-Corsin writes $n_k > k$ above; for a subsequence the standing fact is $n_k \geq k$. Immaterial to
-the argument. See \texttt{OQ-06}.
-\end{ainote}
 
 \exercisesheet{2}
 

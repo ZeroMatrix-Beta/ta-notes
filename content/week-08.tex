@@ -8,7 +8,7 @@ Corsin ran as a live Kahoot at the mid-semester point; it is reproduced here bec
 answers are as instructive as the right ones. The second opens the theory of integration in
 several variables: the change-of-variables formula, Fubini's theorem, and differentiation under
 the integral sign. The exercise sheet is at the end of the chapter, in
-\cref{sec:week08_solutions}.
+\Cref{sec:week08_solutions}.
 
 % Source: Corsin Nick/Class Notes/Week 8.pdf, p. 2
 \section{Repetition quiz}
@@ -87,16 +87,16 @@ two clopen cases.
 \begin{question}
 \label{q:week08_q4}
 Let
-$$f(x,y,z) := \frac{xy^2}{x^2+y^2+z^2} \quad \text{for } (x,y,z) \neq 0, \qquad f(0,0,0) := 0.$$
+\[f(x,y,z) := \frac{xy^2}{x^2+y^2+z^2} \quad \text{for } (x,y,z) \neq 0, \qquad f(0,0,0) := 0.\]
 Is $f \in C^1(\mathbb{R}^3)$?
 \end{question}
 
 \begin{answer}
 \textbf{False.} We compute
-$$\partial_xf = \frac{y^2}{x^2+y^2+z^2} - 2\,\frac{x^2y^2}{(x^2+y^2+z^2)^2}.$$
+\[\partial_xf = \frac{y^2}{x^2+y^2+z^2} - 2\,\frac{x^2y^2}{(x^2+y^2+z^2)^2}.\]
 In spherical coordinates $x = r\sin\theta\cos\varphi$, $y = r\sin\theta\sin\varphi$,
 $z = r\cos\theta$, every power of $r$ cancels:
-$$\partial_xf = \sin^2\theta\sin^2\varphi - 2\sin^4\theta\cos^2\varphi\sin^2\varphi.$$
+\[\partial_xf = \sin^2\theta\sin^2\varphi - 2\sin^4\theta\cos^2\varphi\sin^2\varphi.\]
 The limit $\lim_{r\to0}\partial_xf(r,\theta,\varphi)$ is therefore ill-defined --- it depends on
 the direction $(\theta,\varphi)$ along which the origin is approached --- and $\partial_xf$ is
 not sequentially continuous at $0$.
@@ -106,7 +106,7 @@ not sequentially continuous at $0$.
 The cancellation of $r$ is the whole argument, and it is worth naming the reason: $\partial_xf$
 is \newterm{homogeneous of degree $0$}, so it is constant along each ray from the origin and
 takes a different constant on different rays. Compare
-\cref{ex:all_directional_derivatives_exist} in Week 4, where the same trick --- restrict to a
+\Cref{ex:all_directional_derivatives_exist} in Week 4, where the same trick --- restrict to a
 ray, watch the parameter cancel --- exposed a function whose directional derivatives all existed
 without it being differentiable.
 \end{ainote}
@@ -115,8 +115,8 @@ without it being differentiable.
 \begin{question}
 \label{q:week08_q5}
 Let $f \in C^\infty(\mathbb{R}^3)$ and $\alpha \in \mathbb{R}$ be such that
-$$\nabla f(0) = (0,0,0), \qquad
-\Hess f(0) = \begin{pmatrix} 1 & \alpha & 0 \\ \alpha & 2 & 0 \\ 0 & 0 & 1\end{pmatrix}.$$
+\[\nabla f(0) = (0,0,0), \qquad
+\Hess f(0) = \begin{pmatrix} 1 & \alpha & 0 \\ \alpha & 2 & 0 \\ 0 & 0 & 1\end{pmatrix}.\]
 Which of the following is \textbf{false}?
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item For all $\alpha \in \mathbb{R}$, $0$ is not a local maximum point of $f$.
@@ -136,7 +136,7 @@ semidefinite and $0$ can never be a local maximum.
 
 \textbf{(b) is true.} Let $\lambda_1,\lambda_2,\lambda_3 = 1$ be the eigenvalues of
 $\Hess f(0)$. Then
-$$\lambda_1\lambda_2 = \det\big(\Hess f(0)\big) = 2-\alpha^2 < 0 \quad \text{for } \alpha > \sqrt2,$$
+\[\lambda_1\lambda_2 = \det\big(\Hess f(0)\big) = 2-\alpha^2 < 0 \quad \text{for } \alpha > \sqrt2,\]
 so $\Hess f(0)$ has both positive and negative eigenvalues, making it indefinite, and $0$ is a
 saddle point by \cref{thm:hessian_test}.
 
@@ -169,15 +169,15 @@ Let $V := \{(x,y) \in \mathbb{R}^2 : y^4+y^2 = x^3+x\}$. Decide:
 
 \begin{answer}
 \textbf{(a) True.} Notice that $V = f^{-1}\{0\}$ for $f(x,y) := y^4+y^2-x^3-x$. Then
-$$\Jac f(x,y) = (\partial_xf,\ \partial_yf) = (-3x^2-1,\ 4y^3+2y), \qquad \Jac f(0,0) = (-1,\ 0).$$
+\[\Jac f(x,y) = (\partial_xf,\ \partial_yf) = (-3x^2-1,\ 4y^3+2y), \qquad \Jac f(0,0) = (-1,\ 0).\]
 Since $\partial_xf(0,0) = -1 \neq 0$, the implicit function theorem
 (\cref{thm:implicit_function_theorem}) applies with $x$ as the variable to solve for: in a
 neighbourhood of $(0,0)$,
-$$(x,y) \in V \iff f(x,y) = 0 \iff x = x(y).$$
+\[(x,y) \in V \iff f(x,y) = 0 \iff x = x(y).\]
 The theorem does \textbf{not} apply for $y$, since $\partial_yf(0,0) = 0$.
 
 \textbf{(b) False.} Solving the defining equation for $y^2$ by the quadratic formula gives
-$$y^2 = -\tfrac12 + \sqrt{\tfrac14 + x^3 + x},$$
+\[y^2 = -\tfrac12 + \sqrt{\tfrac14 + x^3 + x},\]
 which has no solution for $x \in (-\varepsilon,0)$: there $x^3+x < 0$, so the square root is
 smaller than $\tfrac12$ and the right-hand side is negative, while $y^2 \geq 0$. So $V$ contains
 no points at all just to the left of the origin, and cannot be a graph over $x$ there.
@@ -200,7 +200,7 @@ $\gamma(I)$ then a smooth submanifold of $\mathbb{R}^2$?
 
 \begin{answer}
 \textbf{False.} Consider
-$$\gamma : (0,2\pi) \to \mathbb{R}^2, \qquad t \mapsto \big(\sin t,\ \sin 2t\big),$$
+\[\gamma : (0,2\pi) \to \mathbb{R}^2, \qquad t \mapsto \big(\sin t,\ \sin 2t\big),\]
 whose image is a \newterm{figure eight} (\germanterm{Lemniskate}). This $\gamma$ is injective and
 smooth, but there is no graphical representation of $\operatorname{im}(\gamma)$ around $(0,0)$.
 \end{answer}
@@ -249,8 +249,8 @@ week starts integration in several variables.
 Suppose $U,V \subseteq \mathbb{R}^n$ are open sets and $\Phi : U \to V$ is a
 $C^1$-diffeomorphism. If $A \subseteq U$ is Jordan measurable with $\overline{A} \subseteq U$,
 and $f : A \to \mathbb{R}$ is continuous, then
-$$\int_A f(x)\,dx
-  = \int_{\Phi(A)} \frac{f\circ\Phi^{-1}(y)}{\big|\det \Jac\Phi\big(\Phi^{-1}(y)\big)\big|}\,dy.$$
+\[\int_A f(x)\,dx
+  = \int_{\Phi(A)} \frac{f\circ\Phi^{-1}(y)}{\big|\det \Jac\Phi\big(\Phi^{-1}(y)\big)\big|}\,dy.\]
 \end{theorem}
 
 \begin{ainote}
@@ -275,9 +275,9 @@ $\Phi$, so the dividing form is the one that saves work.
 \label{thm:fubini}
 Let $X \subseteq \mathbb{R}^m$ and $Y \subseteq \mathbb{R}^n$ be intervals (\qt{boxes}), and let
 $f : X\times Y \to \mathbb{R}$, $(x,y)\mapsto f(x,y)$, be continuous. Then
-$$\int_{X\times Y} f(x,y)\,dx\,dy
+\[\int_{X\times Y} f(x,y)\,dx\,dy
   = \int_X\left(\int_Y f(x,y)\,dy\right)dx
-  = \int_Y\left(\int_X f(x,y)\,dx\right)dy,$$
+  = \int_Y\left(\int_X f(x,y)\,dx\right)dy,\]
 where we look at the expression in brackets as a function, e.g.\
 $x \mapsto \int_Y f(x,y)\,dy$.
 \end{theorem}
@@ -285,7 +285,7 @@ $x \mapsto \int_Y f(x,y)\,dy$.
 % Source: Corsin Nick/Class Notes/Week 8.pdf, p. 8
 \begin{example}[Fubini on the unit square]
 \label{ex:fubini_unit_square}
-$$
+\[
 \begin{aligned}
 \int_{[0,1]^2} x^{y+1}\,dx\,dy
   &= \int_0^1 dy \int_0^1 dx\ x^{y+1}
@@ -294,7 +294,7 @@ $$
    = \log|y+2|\,\Big|_0^1
    = \log\!\left(\tfrac32\right).
 \end{aligned}
-$$
+\]
 \end{example}
 
 \begin{ainote}
@@ -312,37 +312,37 @@ easier order, and here only one of the two is comfortable.
 \begin{example}[A domain that Fubini alone cannot handle]
 \label{ex:change_of_variables_domain}
 Consider
-$$\int_A \frac{y}{\sqrt{x}}\,dy\,dx, \qquad
-A := \left\{(x,y) \in \mathbb{R}^2 \ :\ x,y>0,\ \ 1 \leq \frac{y}{\sqrt x} \leq 2,\ \ 1 \leq xy \leq 2\right\}.$$
+\[\int_A \frac{y}{\sqrt{x}}\,dy\,dx, \qquad
+A := \left\{(x,y) \in \mathbb{R}^2 \ :\ x,y>0,\ \ 1 \leq \frac{y}{\sqrt x} \leq 2,\ \ 1 \leq xy \leq 2\right\}.\]
 This is not easily integrated with Fubini alone. But we can apply a transformation of variables
 to simplify the integration domain $A$: take
-$$\Phi : U \to V, \qquad \begin{pmatrix}x\\y\end{pmatrix} \mapsto
-  \begin{pmatrix}u(x,y)\\v(x,y)\end{pmatrix} = \begin{pmatrix}\tfrac{y}{\sqrt x}\\[2pt] xy\end{pmatrix},$$
+\[\Phi : U \to V, \qquad \begin{pmatrix}x\\y\end{pmatrix} \mapsto
+  \begin{pmatrix}u(x,y)\\v(x,y)\end{pmatrix} = \begin{pmatrix}\tfrac{y}{\sqrt x}\\[2pt] xy\end{pmatrix},\]
 with $U$ and $V$ still to be determined --- they must be open.
 
 \textbf{Check injectivity.} Suppose, for $x,y,x',y' > 0$,
-$$\text{\textbf{(1)}}\ \ \frac{y}{\sqrt x} = \frac{y'}{\sqrt{x'}},
-\qquad\qquad \text{\textbf{(2)}}\ \ xy = x'y'.$$
+\[\text{\textbf{(1)}}\ \ \frac{y}{\sqrt x} = \frac{y'}{\sqrt{x'}},
+\qquad\qquad \text{\textbf{(2)}}\ \ xy = x'y'.\]
 From \textbf{(2)}, $\dfrac{x}{x'} = \dfrac{y'}{y}$. Inserting into \textbf{(1)},
-$$\frac{1}{\sqrt x} = \frac{y'}{y}\cdot\frac{1}{\sqrt{x'}} = \frac{x}{x'}\cdot\frac{1}{\sqrt{x'}}
-\quad\Longrightarrow\quad x^{3/2} = (x')^{3/2} \quad\Longrightarrow\quad x = x',$$
+\[\frac{1}{\sqrt x} = \frac{y'}{y}\cdot\frac{1}{\sqrt{x'}} = \frac{x}{x'}\cdot\frac{1}{\sqrt{x'}}
+\quad\Longrightarrow\quad x^{3/2} = (x')^{3/2} \quad\Longrightarrow\quad x = x',\]
 and consequently $\dfrac{y'}{y} = \dfrac{x}{x'} = 1$. So for $U := (0,\infty)^2$ and
 $V := \Phi(U)$, the map $\Phi$ is a bijection between open sets.
 
 \textbf{Functional determinant.} We calculate $|\det \Jac\Phi|$; if it is strictly positive we
 may proceed, since $\Phi$ is then a local diffeomorphism as well as a bijection, hence a
 diffeomorphism. Now
-$$\Jac\Phi(x,y) = \begin{pmatrix} -\dfrac{y}{2\sqrt{x}^{\,3}} & \dfrac{1}{\sqrt x} \\[2ex] y & x \end{pmatrix},$$
+\[\Jac\Phi(x,y) = \begin{pmatrix} -\dfrac{y}{2\sqrt{x}^{\,3}} & \dfrac{1}{\sqrt x} \\[2ex] y & x \end{pmatrix},\]
 so that
-$$\big|\det \Jac\Phi(x,y)\big| = \left|-\frac32\,\frac{y}{\sqrt x}\right| = \frac32\,\frac{y}{\sqrt x} = \frac32\,u(x,y).$$
+\[\big|\det \Jac\Phi(x,y)\big| = \left|-\frac32\,\frac{y}{\sqrt x}\right| = \frac32\,\frac{y}{\sqrt x} = \frac32\,u(x,y).\]
 So $\Phi$ is a diffeomorphism and $du\,dv = \tfrac32 u\,dx\,dy$. Furthermore, by design,
-$$\Phi(A) = (1,2)^2.$$
+\[\Phi(A) = (1,2)^2.\]
 So with the change of variables (\cref{thm:change_of_variables}), followed by Fubini
 (\cref{thm:fubini}),
-$$\int_A \frac{y}{\sqrt x}\,dy\,dx
+\[\int_A \frac{y}{\sqrt x}\,dy\,dx
   = \int_{(1,2)^2} u\,\frac{1}{\tfrac32 u}\,du\,dv
   = \frac23\int_1^2 dv \int_1^2 du
-  = \frac23.$$
+  = \frac23.\]
 \end{example}
 
 \begin{ainote}
@@ -365,19 +365,19 @@ We now want to look at a powerful new integration technique using ODEs.
 \label{thm:feynmans_trick}
 Let $U \subseteq \mathbb{R}^n\times\mathbb{R}$ be open, $f \in C^1(U)$, and let
 $K \subseteq \mathbb{R}^n$ be compact such that $K\times[a,b] \subseteq U$. Then the function
-$$(a,b) \to \mathbb{R}, \qquad y \mapsto \int_K f(x,y)\,dx$$
+\[(a,b) \to \mathbb{R}, \qquad y \mapsto \int_K f(x,y)\,dx\]
 is continuously differentiable, and
-$$\frac{d}{dy}\int_K f(x,y)\,dx = \int_K \frac{\partial}{\partial y}f(x,y)\,dx
-\qquad \text{for all } y \in (a,b).$$
+\[\frac{d}{dy}\int_K f(x,y)\,dx = \int_K \frac{\partial}{\partial y}f(x,y)\,dx
+\qquad \text{for all } y \in (a,b).\]
 \end{theorem}
 
 % Source: Corsin Nick/Class Notes/Week 8.pdf, pp. 11--13
 \begin{example}[$\int_0^1 \frac{\log(1+x)}{1+x^2}\,dx$ by Feynman's trick]
 \label{ex:feynman_log_integral}
 We want to compute the integral
-$$I(1) = \int_0^1 \frac{\log(1+x)}{1+x^2}\,dx,$$
+\[I(1) = \int_0^1 \frac{\log(1+x)}{1+x^2}\,dx,\]
 which has no convenient antiderivative. By introducing a parameter $\alpha \in (-1,1)$:
-$$I(\alpha) := \int_0^1 \frac{\log(1+\alpha x)}{1+x^2}\,dx.$$
+\[I(\alpha) := \int_0^1 \frac{\log(1+\alpha x)}{1+x^2}\,dx.\]
 Note that the integrand is a $C^1$ function on
 $U := \big(-\tfrac{1}{1+\varepsilon},\ \tfrac1\varepsilon\big) \times (-\varepsilon,\ 1+\varepsilon)$
 in the variables $(x,\alpha)$, with $K := [0,1]$ and $[a,b] := [0,1]$ satisfying
@@ -385,43 +385,43 @@ $K\times[a,b] \subseteq U$ for $0 < \varepsilon < 1$ (pay attention to the logar
 what forces $1+\alpha x > 0$). So we may differentiate under the integral!
 
 \textbf{We obtain an ordinary differential equation.} By \cref{thm:feynmans_trick},
-$$I'(\alpha) = \frac{d}{d\alpha}\int_0^1 \frac{\log(1+\alpha x)}{1+x^2}\,dx
-  = \int_0^1 \frac{x}{(1+\alpha x)(1+x^2)}\,dx.$$
+\[I'(\alpha) = \frac{d}{d\alpha}\int_0^1 \frac{\log(1+\alpha x)}{1+x^2}\,dx
+  = \int_0^1 \frac{x}{(1+\alpha x)(1+x^2)}\,dx.\]
 Partial fractions: writing
-$$\frac{x}{(1+\alpha x)(1+x^2)} = \frac{A}{1+\alpha x} + \frac{Bx+C}{1+x^2}$$
+\[\frac{x}{(1+\alpha x)(1+x^2)} = \frac{A}{1+\alpha x} + \frac{Bx+C}{1+x^2}\]
 and clearing denominators gives $A + Ax^2 + Bx + B\alpha x^2 + C + C\alpha x = x$, so comparing
 coefficients,
-$$-A = C, \qquad -\tfrac{A}{\alpha} = B, \qquad B + C\alpha = 1
-  \implies -\tfrac{A}{\alpha} - A\alpha = 1,$$
+\[-A = C, \qquad -\tfrac{A}{\alpha} = B, \qquad B + C\alpha = 1
+  \implies -\tfrac{A}{\alpha} - A\alpha = 1,\]
 whence
-$$A = -\frac{\alpha}{1+\alpha^2}, \qquad B = \frac{1}{1+\alpha^2}, \qquad C = \frac{\alpha}{1+\alpha^2}.$$
+\[A = -\frac{\alpha}{1+\alpha^2}, \qquad B = \frac{1}{1+\alpha^2}, \qquad C = \frac{\alpha}{1+\alpha^2}.\]
 Therefore
-$$
+\[
 \begin{aligned}
 I'(\alpha) &= \left(\int_0^1 \frac{-\alpha}{1+\alpha x} + \frac{x+\alpha}{1+x^2}\,dx\right)\frac{1}{1+\alpha^2} \\
 &= \frac{1}{1+\alpha^2}\Big[-\log(1+\alpha x) + \tfrac12\log(1+x^2) + \alpha\arctan(x)\Big]_0^1 \\
 &= \frac{1}{1+\alpha^2}\Big[\log\sqrt2 + \tfrac{\alpha\pi}{4} - \log(1+\alpha)\Big].
 \end{aligned}
-$$
+\]
 
 \textbf{With initial value} $I(0) = \int_0^1 \frac{\log(1)}{1+x^2}\,dx = 0$, we obtain from the
 fundamental theorem of calculus
-$$
+\[
 \begin{aligned}
 \int_0^1 \frac{\log(1+x)}{1+x^2}\,dx = I(1) &= I(1)-I(0) \\
 &= \int_0^1\left(\frac{\log\sqrt2}{1+\alpha^2} + \frac{\pi}{4}\,\frac{\alpha}{1+\alpha^2}
    - \underbrace{\frac{\log(1+\alpha)}{1+\alpha^2}}_{\textstyle \to\, I(1)}\right)d\alpha.
 \end{aligned}
-$$
+\]
 The last term is $I(1)$ again --- the integral we started from, with $\alpha$ merely renamed ---
 so bringing it to the left-hand side,
-$$
+\[
 \begin{aligned}
 2\,I(1) &= \Big[\log\sqrt2\,\arctan(\alpha) + \tfrac{\pi}{8}\log(1+\alpha^2)\Big]_0^1
  = \frac{\pi\log\sqrt2}{4} + \frac{\pi\log\sqrt2}{4}, \\[1ex]
 \implies\quad I(1) &= \frac{\pi\log\sqrt2}{4} = \boxed{\ \frac{\pi\log 2}{8}\ }.
 \end{aligned}
-$$
+\]
 \end{example}
 
 \begin{ainote}
@@ -545,15 +545,15 @@ transformed domain. There is no need to actually compute the integrals!
   \item $A := \{(x_1,x_2) \in \mathbb{R}^2 : x_1 > 0,\ x_2 < x_1,\ 1 < x_1^2+x_2^2 < 4\}$ and
     $x_1 = r\cos\theta$, $x_2 = r\sin\theta$. Using the change of variables formula, complete
     the dots in the following formula
-    $$\int_A x_1^2\sin(x_2)\,dx_1dx_2 = \int_{\dots}\dots\,dr\,d\theta$$
+    \[\int_A x_1^2\sin(x_2)\,dx_1dx_2 = \int_{\dots}\dots\,dr\,d\theta\]
   \item $B := \{(x,y) \in \mathbb{R}^2 \mid 1 < xy < 2,\ x^2 < y < 2x^2\}$ and $u := xy$,
     $v := x^2$. Using the change of variables formula, complete the dots in the following
     formula
-    $$\int_B y^2e^{-xy}\,dx\,dy = \int_{\dots}\dots\,du\,dv$$
+    \[\int_B y^2e^{-xy}\,dx\,dy = \int_{\dots}\dots\,du\,dv\]
   \item $C := \{(x,y,z) \in \mathbb{R}^3 \mid 1 < z-2y < 2,\ 0 < z < 1,\ -2 < 3x+y+z < 0\}$ and
     $u := z$, $v := z-2y$, $w := 3x+y+z$. Using the change of variables formula, complete the
     dots in the following formula
-    $$\int_C xyz\,dx\,dy = \int_{\dots}\dots\,du\,dv\,dw.$$
+    \[\int_C xyz\,dx\,dy = \int_{\dots}\dots\,du\,dv\,dw.\]
 \end{enumerate}
 
 % Supplement: Sascha Brack/Ex Sheet Hints/Ex8_Analysis2_hints.pdf, p. 1

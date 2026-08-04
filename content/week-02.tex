@@ -2,11 +2,7 @@
 \chapter{Week 2 --- Metric Spaces, Topology \& Continuity}
 
 % Transition: Claude Sonnet 5
-This chapter introduces the structures --- topological, metric, normed, and inner-product
-spaces --- that everything else in the course builds on, then specializes to metric spaces:
-their open and closed sets, sequences and convergence, continuity, completeness, and
-compactness. The exercise sheet for the week is at the end of the chapter, in
-\cref{sec:week02_solutions}.
+Building upon the Euclidean geometry and inequalities established in Week 1, this chapter abstracts the notion of distance from $\mathbb{R}^n$ to arbitrary sets. It introduces the hierarchy of structured spaces --- topological, metric, normed, and inner-product spaces --- that forms the foundational bedrock of several-variable calculus. We explore open and closed sets, sequence convergence, completeness, and compactness, highlighting key metric properties (such as completeness, which is metric rather than topological) and their role in analysis. The exercise sheet for the week is at the end of the chapter, in \Cref{sec:week02_solutions}.
 
 \session{Monday}
 
@@ -57,9 +53,9 @@ called a \newterm{space} (\germanterm{Raum}) in this context --- which we will d
 
 The precise definitions will follow later. You will see that an \textbf{inner product}
 $\langle\cdot,\cdot\rangle$ induces a \textbf{norm} by the formula
-$$\|x\| := \sqrt{\langle x, x\rangle}, \qquad x \in X.$$
+\[\|x\| := \sqrt{\langle x, x\rangle}, \qquad x \in X.\]
 Furthermore, a \textbf{norm} induces a \textbf{metric} by
-$$d(x,y) := \|x - y\|, \qquad x, y \in X.$$
+\[d(x,y) := \|x - y\|, \qquad x, y \in X.\]
 
 \section{Metric spaces}
 \label{sec:metric_spaces}
@@ -107,7 +103,7 @@ correct, but the gloss omits the ``non-''. Corrected in the prose above.
 \begin{aiexample}[Each axiom rules out something, and none is redundant]
 \label{ex:metric_axioms_are_needed}
 Three functions on $\mathbb{R}$, each failing exactly one axiom of
-\cref{def:metric_space}. It is worth checking these once: a definition only becomes memorable
+\Cref{def:metric_space}. It is worth checking these once: a definition only becomes memorable
 once you know what it is keeping out.
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item \textbf{Definiteness fails:} $d(x,y) := |x^2-y^2|$. This is symmetric and satisfies the
@@ -120,7 +116,7 @@ once you know what it is keeping out.
     on which argument the centre sits in.)
   \item \textbf{Triangle inequality fails:} $d(x,y) := (x-y)^2$. Definiteness and symmetry are
     clear, but
-    $$d(0,2) = 4 \quad > \quad d(0,1)+d(1,2) = 1+1 = 2,$$
+    \[d(0,2) = 4 \quad > \quad d(0,1)+d(1,2) = 1+1 = 2,\]
     so the detour through $1$ is \emph{shorter} than going direct --- exactly the
     \qt{detours make the way longer} slogan reversed.
 \end{enumerate}
@@ -132,16 +128,16 @@ once you know what it is keeping out.
 \label{ex:metric_examples}
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item Let $X$ be a set. The \newterm{discrete metric} is given by
-    $$d(x,y) := \begin{cases} 1 & \text{if } x \neq y \\ 0 & \text{if } x = y \end{cases}$$
+    \[d(x,y) := \begin{cases} 1 & \text{if } x \neq y \\ 0 & \text{if } x = y \end{cases}\]
     Important for counterexamples!
   \item Let $X := \mathbb{R}^n$. Then we have many choices for a metric; some common ones are:
   \begin{enumerate}[label=\textbf{(\roman*)}]
     \item \textbf{Manhattan metric:}
-      $$d_1(x,y) := |x_1 - y_1| + \dots + |x_n - y_n| = \sum_{k=1}^{n} |x_k - y_k|$$
+      \[d_1(x,y) := |x_1 - y_1| + \dots + |x_n - y_n| = \sum_{k=1}^{n} |x_k - y_k|\]
     \item \textbf{Standard metric:}
-      $$d_2(x,y) := \sqrt{(x_1-y_1)^2 + \dots + (x_n-y_n)^2} = \sqrt{\sum_{k=1}^{n}(x_k - y_k)^2}$$
+      \[d_2(x,y) := \sqrt{(x_1-y_1)^2 + \dots + (x_n-y_n)^2} = \sqrt{\sum_{k=1}^{n}(x_k - y_k)^2}\]
     \item \textbf{Supremum metric:}
-      $$d_3(x,y) := \sup_{k = 1,\dots,n} |x_k - y_k|$$
+      \[d_3(x,y) := \sup_{k = 1,\dots,n} |x_k - y_k|\]
   \end{enumerate}
 \end{enumerate}
 \end{example}
@@ -191,7 +187,7 @@ is a metric on $\mathbb{R}^n$ for any $m$.
 Two caveats Corsin leaves out. The powers must be taken of \textbf{absolute values},
 $\sqrt[m]{\sum_k|x_k-y_k|^m}$ --- otherwise for odd $m$ the radicand can be negative. And it is
 a metric only for $m \geq 1$: for $m \in (0,1)$ the triangle inequality fails, as
-\cref{ex:4.3}\textbf{.6} in Week 4 shows with $x=e_1$, $y=e_2$, where
+\Cref{ex:4.3}\textbf{.6} in Week 4 shows with $x=e_1$, $y=e_2$, where
 $|x+y|_m = 2^{1/m} > 2 = |x|_m+|y|_m$. Written as stated above.
 \end{ainote}
 
@@ -250,7 +246,7 @@ Show that the supremum metric from \cref{ex:metric_examples} \textbf{(c)} is a m
 \begin{exercisesolution}[Proof of \cref{ex:sup_metric_is_metric}]
 Clearly, symmetry and definiteness hold. For the triangle inequality, let $f, g, h \in C^0([0,1])$ and
 set $p := f - h$ and $q := h - g$. Then for all $x \in [0,1]$, we have:
-$$|p(x)| \leq \sup|p| \qquad \text{and} \qquad |q(x)| \leq \sup|q|.$$
+\[|p(x)| \leq \sup|p| \qquad \text{and} \qquad |q(x)| \leq \sup|q|.\]
 Adding the inequalities, we obtain for all $x \in [0,1]$:
 \begin{align*}
 |f(x) - g(x)| &= |p(x) + q(x)| \\
@@ -272,7 +268,7 @@ deserve to be called \qt{open}, and what that buys us.
 \label{def:open_ball}
 Let $(X,d)$ be a metric space, let $x \in X$, and let $r \in \mathbb{R}$. Then we define the
 \newterm{open ball} of radius $r$ as
-$$B_r(x) := \{\,\boxed{y \in X}\, : d(y,x) < r\,\}$$
+\[B_r(x) := \{\,\boxed{y \in X}\, : d(y,x) < r\,\}\]
 \end{definition}
 
 \begin{importantremark}
@@ -297,7 +293,7 @@ B_r(x) = \begin{cases} \{x\} & \text{if } 0 < r \leq 1, \\ X & \text{if } r > 1.
 \]
 Hence every singleton $\{x\}$ is open in the discrete metric, and consequently every subset of
 $X$ is both open and closed (\newterm{clopen}) --- which is exactly what
-\cref{ex:X_empty_clopen} below asks you to verify for $X$ and $\emptyset$ in a general metric
+\Cref{ex:X_empty_clopen} below asks you to verify for $X$ and $\emptyset$ in a general metric
 space.
 \end{aiexample}
 
@@ -330,7 +326,7 @@ Draw the picture, then let the triangle inequality do the work.
 \begin{definition}[Open and closed sets]
 \label{def:open_closed}
 Then, we call a subset $U \subseteq X$ \newterm{open} (\germanterm{offen}) if and only if
-$$\forall y \in U \ \exists \varepsilon > 0 \text{ such that } B_\varepsilon(y) \subseteq U.$$
+\[\forall y \in U \ \exists \varepsilon > 0 \text{ such that } B_\varepsilon(y) \subseteq U.\]
 And we call $A \subseteq X$ \newterm{closed} (\germanterm{abgeschlossen}) if and only if
 $X \setminus A$ is open.
 \end{definition}
@@ -370,7 +366,7 @@ $X\setminus\bigcup_{i=1}^kA_i = \bigcap_{i=1}^k(X\setminus A_i)$.
 \label{rem:finiteness_is_necessary}
 It is tempting to read \qt{finite} in \textbf{(b)} as laziness. It is not: an infinite
 intersection of open sets genuinely need not be open. In $\mathbb{R}$,
-$$\bigcap_{n=1}^{\infty}\left(-\tfrac1n,\ \tfrac1n\right) = \{0\},$$
+\[\bigcap_{n=1}^{\infty}\left(-\tfrac1n,\ \tfrac1n\right) = \{0\},\]
 an intersection of open intervals which is not open. The proof shows exactly where it breaks:
 $\varepsilon := \min_i\varepsilon_i$ is the whole argument, and an infimum of infinitely many
 positive numbers can be $0$. Dually, $\bigcup_{n\geq1}\big[\tfrac1n,1\big] = (0,1]$ is an
@@ -389,10 +385,10 @@ sets that survive into the general theory.
 \label{def:interior_closure_boundary}
 Let $(X,d)$ be a metric space and $A \subseteq X$. The \newterm{interior}
 (\germanterm{Inneres}) of $A$ is
-$$\operatorname{int}(A) := \{x \in A : \exists\, r>0 \text{ such that } B_r(x) \subseteq A\},$$
+\[\operatorname{int}(A) := \{x \in A : \exists\, r>0 \text{ such that } B_r(x) \subseteq A\},\]
 the largest open subset of $X$ contained in $A$. The \newterm{closure} (\germanterm{Abschluss}) of
 $A$ is
-$$\overline{A} := \{x \in X : B_r(x) \cap A \neq \emptyset \text{ for all } r > 0\},$$
+\[\overline{A} := \{x \in X : B_r(x) \cap A \neq \emptyset \text{ for all } r > 0\},\]
 the smallest closed subset of $X$ containing $A$. The \newterm{boundary} (\germanterm{Rand}) of
 $A$ is $\partial A := \overline{A} \setminus \operatorname{int}(A)$.
 \end{definition}
@@ -427,7 +423,7 @@ $X$, they are also closed.
 \label{def:convergent_sequence}
 A \newterm{sequence} $(x_n)_{n=0}^{\infty}$ in a metric space $(X,d)$ is a function
 $x : \mathbb{N} \to X$. We say that $(x_n)_{n=0}^{\infty}$ \newterm{converges} to $x \in X$ if
-$$\forall \varepsilon > 0 \ \exists N \in \mathbb{N} \text{ such that } d(x_n, x) < \varepsilon \quad \forall n \geq N.$$
+\[\forall \varepsilon > 0 \ \exists N \in \mathbb{N} \text{ such that } d(x_n, x) < \varepsilon \quad \forall n \geq N.\]
 \end{definition}
 
 % Sonnet 5 (Medium)
@@ -442,7 +438,7 @@ Fix $\varepsilon > 0$. By \cref{def:convergent_sequence}, there exist $N, N' \in
 that $d(x_n,x) < \varepsilon/2$ for all $n \geq N$ and $d(x_n,x') < \varepsilon/2$ for all
 $n \geq N'$. For any $n \geq \max\{N,N'\}$, the triangle inequality (\cref{def:metric_space})
 gives
-$$d(x,x') \leq d(x,x_n) + d(x_n,x') < \varepsilon.$$
+\[d(x,x') \leq d(x,x_n) + d(x_n,x') < \varepsilon.\]
 Since $\varepsilon > 0$ was arbitrary, $d(x,x') = 0$, so $x = x'$ by definiteness
 (\cref{def:metric_space}).
 \end{proof}
@@ -575,7 +571,7 @@ Open, since the full space is always open, as shown before.
     the metric space $X$ of bounded functions $[0,1] \to \mathbb{R}$ with the supremum metric.
   \item You know the resulting expression from Analysis 1. What is it called?
   \item \textit{(Optional)} Use the fact that $C^0([0,1]) \subseteq X$ is closed and
-    \cref{prop:open_closed_via_sequences} on \qt{sequentially closed} to conclude a big result
+    \Cref{prop:open_closed_via_sequences} on \qt{sequentially closed} to conclude a big result
     from Analysis 1.
 \end{enumerate}
 \end{exercise}
@@ -599,10 +595,10 @@ Open, since the full space is always open, as shown before.
 
     \textit{Why:} let $g \in B_{\varepsilon/3}(f)$ and let $\delta > 0$ be arbitrary. Choose
     $y \in (x_0-\delta,\,x_0+\delta)$ with $|f(x_0)-f(y)| \geq \varepsilon$. Then
-    $$\varepsilon \leq |f(x_0)-f(y)|
+    \[\varepsilon \leq |f(x_0)-f(y)|
       \leq \underbrace{|f(x_0)-g(x_0)|}_{<\ \varepsilon/3}
          + |g(x_0)-g(y)|
-         + \underbrace{|g(y)-f(y)|}_{<\ \varepsilon/3},$$
+         + \underbrace{|g(y)-f(y)|}_{<\ \varepsilon/3},\]
     so $|g(x_0)-g(y)| > \varepsilon/3$. As $\delta$ was arbitrary, $g$ is discontinuous at
     $x_0$ too, i.e.\ $g \notin C^0([0,1])$. The whole point of the $\tfrac{\varepsilon}{3}$ is
     that two of the three terms are spent on moving from $f$ to $g$ and back, leaving a third
@@ -680,7 +676,7 @@ For $(X, d_X)$ and $(Y, d_Y)$ metric spaces, a function $f : X \to Y$ is called 
 (\germanterm{stetig}) if one of the following equivalent conditions holds:
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item \textbf{($\varepsilon$--$\delta$):} $\forall x_0 \in X, \varepsilon > 0 \ \exists \delta > 0$ such that for all $x \in X$:
-    $$d(x_0, x) < \delta \implies d(f(x_0), f(x)) < \varepsilon$$
+    \[d(x_0, x) < \delta \implies d(f(x_0), f(x)) < \varepsilon\]
   \item \textbf{(Sequentially continuous):} for any sequence $(x_n)_{n=0}^{\infty}$ in $X$ with
     limit $x \in X$, $\lim_{n\to\infty} f(x_n) = f(x)$ (and the limit exists).
   \item \textbf{(Topological):} for all $U \subseteq Y$ open, $f^{-1}(U) \subseteq X$ is open
@@ -699,7 +695,7 @@ corrected in \cref{def:continuous}.
 \label{def:uniformly_continuous}
 For $(X,d_X)$ and $(Y,d_Y)$ metric spaces, a function $f : X \to Y$ is \newterm{uniformly
 continuous} (\germanterm{gleichm\"assig stetig}) if
-$$\forall \varepsilon > 0 \ \exists \delta > 0 \ \forall x, x' \in X : \quad d_X(x,x') < \delta \ \text{ implies } \ d_Y(f(x),f(x')) < \varepsilon.$$
+\[\forall \varepsilon > 0 \ \exists \delta > 0 \ \forall x, x' \in X : \quad d_X(x,x') < \delta \ \text{ implies } \ d_Y(f(x),f(x')) < \varepsilon.\]
 \end{definition}
 
 \begin{importantremark}[Where the quantifiers sit]
@@ -766,7 +762,7 @@ actually does.
 \label{def:complete_metric_space}
 Let $(X,d)$ be a metric space and $(x_n)_{n=0}^{\infty}$ a sequence in $X$. We say that
 $(x_n)_{n=0}^{\infty}$ is \newterm{Cauchy} if
-$$\forall \varepsilon > 0 \ \exists N \in \mathbb{N} \text{ such that } d(x_n, x_m) < \varepsilon \quad \forall n, m \geq N.$$
+\[\forall \varepsilon > 0 \ \exists N \in \mathbb{N} \text{ such that } d(x_n, x_m) < \varepsilon \quad \forall n, m \geq N.\]
 $(X,d)$ is a \newterm{complete metric space} (\germanterm{vollst\"andiger metrischer Raum}) if
 every Cauchy sequence in $X$ converges with respect to $d$.
 \end{definition}
@@ -785,8 +781,8 @@ $x_m = (x_{m,1},\dots,x_{m,n})$.
 
 \begin{proof}
 Everything follows from the two-sided estimate, valid for every $j$:
-$$|x_{m,j}-x_j| \ \leq\ \lVert x_m-x\rVert \ =\ \sqrt{\sum_{i=1}^n|x_{m,i}-x_i|^2}
-  \ \leq\ \sqrt{n}\,\max_i|x_{m,i}-x_i|.$$
+\[|x_{m,j}-x_j| \ \leq\ \lVert x_m-x\rVert \ =\ \sqrt{\sum_{i=1}^n|x_{m,i}-x_i|^2}
+  \ \leq\ \sqrt{n}\,\max_i|x_{m,i}-x_i|.\]
 
 \textbf{(a)} If $\lVert x_m-x\rVert \to 0$, the left inequality forces each coordinate to
 converge. Conversely, if every coordinate converges then $\max_i|x_{m,i}-x_i| \to 0$ (a maximum
@@ -805,7 +801,7 @@ Worth noting how little is proved here: completeness of $\mathbb{R}^n$ is comple
 $\mathbb{R}$, applied $n$ times. That is also where the argument would fail in infinite
 dimensions --- $\max_i$ over infinitely many coordinates need not tend to $0$ even when each
 does, which is exactly the phenomenon behind the $\varepsilon$-net argument in
-\cref{lem:sequentially_compact_totally_bounded}.
+\Cref{lem:sequentially_compact_totally_bounded}.
 \end{ainote}
 
 % Source: Corsin Nick/Class Notes/Week 2.pdf, pp. 1--13
@@ -840,14 +836,14 @@ space converge \emph{within it}. So:
 
 What \emph{is} true is a one-directional statement, and only inside a complete ambient space:
 if $X$ is complete and $A \subseteq X$, then
-$$A \text{ closed in } X \iff A \text{ complete}.$$
+\[A \text{ closed in } X \iff A \text{ complete}.\]
 This is why the second bullet is correct \emph{as stated for $\mathbb{R}^n$} --- it silently uses
 completeness of the ambient $\mathbb{R}^n$. Drop that hypothesis and the equivalence dies, as
 $\mathbb{Q}$ inside $\mathbb{Q}$ shows.
 
 \begin{ainote}
 The same relative-versus-intrinsic distinction is the one behind
-\cref{rem:common_misconception} ($[0,1]^2$ is open in itself, not in $\mathbb{R}^2$), and it
+\Cref{rem:common_misconception} ($[0,1]^2$ is open in itself, not in $\mathbb{R}^2$), and it
 returns in Week 3 as \cref{rem:boundedness_not_topological}. Compactness, by contrast, is
 intrinsic like completeness: a subset $K$ is compact exactly when the metric space
 $(K, d|_{K\times K})$ is, with no reference to the ambient space at all --- which is precisely
@@ -861,7 +857,7 @@ the reduction used in \cref{def:sequential_topological_compactness}.
 Corsin does not address whether completeness survives a change of metric; Diego Torres Tejeda
 sets this exercise, which settles it. Let $X := (0,1]$, let $d_{\text{eucl}}(x,y) := |x-y|$ be
 the standard metric on $X$, and define
-$$d(x,y) := \left|\frac1x - \frac1y\right|, \qquad x,y \in X.$$
+\[d(x,y) := \left|\frac1x - \frac1y\right|, \qquad x,y \in X.\]
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item Show that $d$ is a metric on $X$.
   \item Show that $(X,d_{\text{eucl}})$ is \textbf{not} complete.
@@ -907,7 +903,7 @@ A metric space $(X,d)$ is compact if and only if every sequence in $X$ has a con
 
 \begin{ainote}
 Neither Corsin nor the official lecture notes prove this here; the proof is given below as
-\cref{thm:sequential_topological_compactness_equivalence}, once the tools it needs (total
+\Cref{thm:sequential_topological_compactness_equivalence}, once the tools it needs (total
 boundedness) are available.
 \end{ainote}
 
@@ -1012,7 +1008,7 @@ theorem is precisely what we are about to prove.
 \label{def:totally_bounded}
 A metric space $(X,d)$ is \newterm{totally bounded} (\germanterm{total beschr\"ankt}) if for
 every $\varepsilon > 0$ there exist finitely many points $x_1,\dots,x_n \in X$ such that
-$$X = \bigcup_{k=1}^{n} B_\varepsilon(x_k).$$
+\[X = \bigcup_{k=1}^{n} B_\varepsilon(x_k).\]
 \end{definition}
 
 \begin{lemma}[Sequential compactness gives (total) boundedness]
@@ -1023,7 +1019,7 @@ Let $(X,d)$ be sequentially compact. Then $X$ is bounded and totally bounded
 
 \begin{proof}
 \textbf{Bounded.} Fix $x_0 \in X$; the function $f(y) := d(x_0,y)$ is continuous, so by
-\cref{lem:sequential_compactness_extreme_values} it attains a maximum $M \geq 0$ on $X$. Then
+\Cref{lem:sequential_compactness_extreme_values} it attains a maximum $M \geq 0$ on $X$. Then
 $X = B_{M+1}(x_0)$.
 
 \textbf{Totally bounded.} Fix $\varepsilon > 0$. Construct a sequence inductively: let
@@ -1059,7 +1055,7 @@ the desired finite $\varepsilon$-net.
 \label{thm:sequential_topological_compactness_equivalence}
 A metric space $(X,d)$ is sequentially compact (\cref{item:seq_compact_def963}) if and only if it
 is topologically compact (\cref{def:compact_metric_space}). In particular,
-\cref{thm:sequential_compactness} holds.
+\Cref{thm:sequential_compactness} holds.
 \end{theorem}
 
 \begin{proof}
@@ -1076,7 +1072,7 @@ sequentially compact.
 \textbf{($\Rightarrow$)} Suppose $X$ is sequentially compact and let $\{U_i\}_{i\in I}$ be an open
 cover; we may assume no single $U_i$ equals $X$ (else $\{U_i\}$ is itself a finite subcover).
 Define
-$$r(x) := \tfrac12\sup\{r \geq 0 : B_r(x) \subseteq U_i \text{ for some } i \in I\}, \qquad x \in X.$$
+\[r(x) := \tfrac12\sup\{r \geq 0 : B_r(x) \subseteq U_i \text{ for some } i \in I\}, \qquad x \in X.\]
 \textit{$r$ is finite and positive.} Since $\{U_i\}$ covers $X$ and each $U_i$ is open, some
 $U_{i_0} \ni x$ contains a ball around $x$, so $r(x) > 0$; and since $X$ is bounded
 (\cref{lem:sequentially_compact_totally_bounded}) but no $U_i$ equals $X$, $r(x) < \infty$.
@@ -1088,11 +1084,11 @@ through.
 
 Let $x,y \in X$ with $d(x,y) < r(x)$. Since $r(x) < R(x)$, we have
 $B_{r(x)}(x) \subseteq U_i$ for some $i$, so $y \in U_i$, and the triangle inequality gives
-$$B_{r(x)-d(x,y)}(y) \subseteq B_{r(x)}(x) \subseteq U_i
-\qquad\Longrightarrow\qquad R(y) \geq r(x)-d(x,y).$$
+\[B_{r(x)-d(x,y)}(y) \subseteq B_{r(x)}(x) \subseteq U_i
+\qquad\Longrightarrow\qquad R(y) \geq r(x)-d(x,y).\]
 Halving, $r(y) = \tfrac12R(y) \geq \tfrac12\big(r(x)-d(x,y)\big)$, which also holds trivially
 when $d(x,y) \geq r(x)$ since $r(y) \geq 0$. By symmetry,
-$$|r(x)-r(y)| \leq \tfrac12\,d(x,y),$$
+\[|r(x)-r(y)| \leq \tfrac12\,d(x,y),\]
 so $r$ is $\tfrac12$-Lipschitz --- in particular continuous, which is all that is needed below.
 
 By \cref{lem:sequential_compactness_extreme_values}, $r$ attains a minimum
@@ -1118,7 +1114,7 @@ subsequences), and it converges by completeness.
 \label{def:lebesgue_number}
 Let $(X,d)$ be a metric space and $\{U_i\}_{i\in I}$ an open cover of $X$. A number
 $\varepsilon > 0$ is a \newterm{Lebesgue number} (\germanterm{Lebesgue-Zahl}) for the cover if
-$$\forall x \in X\ \exists i \in I: B_\varepsilon(x) \subseteq U_i.$$
+\[\forall x \in X\ \exists i \in I: B_\varepsilon(x) \subseteq U_i.\]
 \end{definition}
 
 \begin{remark}[Lebesgue's covering lemma]
@@ -1153,7 +1149,7 @@ $A$ is compact.
 
 \begin{proof}
 Let $\mathcal{U}$ be an open cover of $A$. Since $A$ is closed, $X\setminus A$ is open, so
-$$\mathcal{U}' := \mathcal{U} \cup \{X\setminus A\}$$
+\[\mathcal{U}' := \mathcal{U} \cup \{X\setminus A\}\]
 is an open cover of $K$ --- it covers $A$ by assumption and everything outside $A$ by the added
 set. Compactness of $K$ gives a finite subcover
 $U_{1},\dots,U_{m} \in \mathcal{U}'$ of $K$, hence of $A$.
@@ -1191,11 +1187,11 @@ Let $(X,d)$ be a metric space.
     compact, we can extract a convergent subsequence such that $\lim_{i \to \infty} x_{n_i} = x \in X$.
 
     Fix $\varepsilon > 0$. We find $N_1 \in \mathbb{N}$ such that
-    $$d(x_n, x_m) < \varepsilon \quad \forall n, m > N_1$$
+    \[d(x_n, x_m) < \varepsilon \quad \forall n, m > N_1\]
     and $N_2 \in \mathbb{N}$ such that
-    $$d(x, x_{n_i}) < \varepsilon \quad \forall i > N_2.$$
+    \[d(x, x_{n_i}) < \varepsilon \quad \forall i > N_2.\]
     Let $N := \max\{N_1, N_2\}$. For any $k > N$, we have:
-    $$d(x, x_k) \leq d(x, x_{n_k}) + d(x_{n_k}, x_k) < 2\varepsilon$$
+    \[d(x, x_k) \leq d(x, x_{n_k}) + d(x_{n_k}, x_k) < 2\varepsilon\]
     where we used the fact that $n_k \geq k > N$. Thus, any Cauchy sequence converges.
 \end{enumerate}
 \end{exercisesolution}
@@ -1256,14 +1252,14 @@ limits in $\mathbb{R}$ are unique (\cref{prop:uniqueness_of_limits}), so it has 
 \textbf{(c)} Let $(x_n)$ be $d$-Cauchy. Then $\big(\varphi(x_n)\big)$ is Cauchy in $\mathbb{R}$,
 hence converges to some $\ell \in \mathbb{R}$. Since $\varphi(x_n) \geq 1$ for every $n$, also
 $\ell \geq 1$; in particular $\ell \neq 0$, so $x := 1/\ell$ lies in $(0,1]$. Then
-$$d(x_n,x) = \big|\varphi(x_n) - \varphi(x)\big| = \big|\varphi(x_n)-\ell\big| \longrightarrow 0,$$
+\[d(x_n,x) = \big|\varphi(x_n) - \varphi(x)\big| = \big|\varphi(x_n)-\ell\big| \longrightarrow 0,\]
 so $x_n \to x$ in $(X,d)$. Note where the boundedness of $X$ entered: it is what forces
 $\ell \geq 1$ rather than merely $\ell \geq 0$.
 
 \textbf{(d)} $\varphi$ and $\varphi^{-1}(t) = 1/t$ are continuous, so $\varphi$ is a
 homeomorphism. A set is $d$-open exactly when its $\varphi$-image is open in $[1,\infty)$,
 exactly when it is $d_{\text{eucl}}$-open. Concretely, the same two-sided-ball argument as in
-\cref{ex:heine_borel_fails}\textbf{(b)} works: on $(0,1]$ one has
+\Cref{ex:heine_borel_fails}\textbf{(b)} works: on $(0,1]$ one has
 $|x-y| \leq d(x,y) \leq \tfrac{1}{x y}\,|x-y|$ with $\tfrac{1}{xy}$ locally bounded.
 
 \begin{remark}
@@ -1280,7 +1276,7 @@ two metrics that induce one topology:
   \item \textbf{Boundedness is not} --- \cref{rem:boundedness_not_topological} in Week 3.
   \item \textbf{Completeness is not} --- this exercise.
 \end{itemize}
-Which is exactly why \qt{compact $\iff$ closed and bounded} needs the standard metric, and why
+Which is exactly why \qt{compact if and only if closed and bounded} needs the standard metric, and why
 the correct general replacement is \qt{complete and totally bounded}
 (\cref{rem:compact_iff_complete_totally_bounded}) --- both of its ingredients are
 non-topological, and only their combination is.
@@ -1294,7 +1290,7 @@ $B_\varepsilon(y) \subseteq B_r(x)$, which is exactly what \cref{def:open_closed
 
 Let $z \in B_\varepsilon(y)$, so $d(z,y) < \varepsilon$. By the triangle inequality
 (\cref{def:metric_space}),
-$$d(z,x) \leq d(z,y) + d(y,x) < \varepsilon + d(y,x) = \big(r-d(y,x)\big) + d(y,x) = r,$$
+\[d(z,x) \leq d(z,y) + d(y,x) < \varepsilon + d(y,x) = \big(r-d(y,x)\big) + d(y,x) = r,\]
 so $z \in B_r(x)$. Since $y \in B_r(x)$ was arbitrary, $B_r(x)$ is open.
 
 \begin{remark}

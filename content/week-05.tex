@@ -5,7 +5,7 @@
 This chapter's subject is finding the extrema of a function of several variables, first freely,
 then subject to a constraint: unconstrained optimization, Lagrange multipliers, and the Hessian
 test for classifying critical points. The exercise sheet is at the end of the chapter, in
-\cref{sec:week05_solutions}.
+\Cref{sec:week05_solutions}.
 
 \begin{ainote}
 Unlike Weeks 2--4, Corsin marks no Monday / Friday split in this week's notes; the material runs
@@ -21,7 +21,7 @@ continuously from optimization through Lagrange multipliers to the Hessian test.
 \begin{itemize}
   \item \newterm{Local minimum} (\germanterm{lokales Minimum}) of
     $f : U \subseteq \mathbb{R}^n \to \mathbb{R}$: $f$ has a local minimum at $x_0 \in U$ if
-    $$\exists\,\varepsilon > 0 \text{ such that } \forall x \in B_\varepsilon(x_0)\cap U : f(x) \geq f(x_0).$$
+    \[\exists\,\varepsilon > 0 \text{ such that } \forall x \in B_\varepsilon(x_0)\cap U : f(x) \geq f(x_0).\]
   \item \textbf{Local maxima} are defined analogously with $f(x) \leq f(x_0)$.
   \item \textbf{Strict} min/max $\iff f(x) > f(x_0)$ / $f(x) < f(x_0)$.
   \item A \newterm{critical point} (\germanterm{kritischer Punkt}) of $f \in C^1(U,\mathbb{R})$,
@@ -44,7 +44,7 @@ is where $x_0 \in \operatorname{int}(U)$ is used, and it is the only place. If $
 extremum at $x_0$, then $\varphi$ has one at the \emph{interior} point $t=0$, so by the
 one-variable result from Analysis I, $\varphi'(0) = 0$. By the chain rule along a path
 (\cref{sec:chain_rule_along_path}),
-$$0 = \varphi'(0) = \langle \nabla f(x_0), v\rangle.$$
+\[0 = \varphi'(0) = \langle \nabla f(x_0), v\rangle.\]
 Since $v$ was arbitrary, $\nabla f(x_0)$ is orthogonal to every vector of $\mathbb{R}^n$,
 including itself: $\langle\nabla f(x_0),\nabla f(x_0)\rangle = |\nabla f(x_0)|^2 = 0$, hence
 $\nabla f(x_0) = 0$.
@@ -53,8 +53,8 @@ $\nabla f(x_0) = 0$.
 \begin{remark}[Intuition, and two standing warnings]
 The proof says: at an interior extremum every direction is a \qt{flat} direction, and the only
 vector orthogonal to everything is the zero vector,
-$$\langle\nabla f(x_0), v\rangle = 0 \text{ for all } v \in \mathbb{R}^n
-  \iff \nabla f(x_0) = 0.$$
+\[\langle\nabla f(x_0), v\rangle = 0 \text{ for all } v \in \mathbb{R}^n
+  \iff \nabla f(x_0) = 0.\]
 Two things this proposition does \textbf{not} say, both of which the rest of the chapter is
 built around.
 \begin{itemize}
@@ -113,7 +113,7 @@ condition $\nabla f(x_0) = 0$ is generally too strong to hold anywhere.
 
 Suppose we want to find the hottest place on the surface of the earth. In theory, temperature is
 defined everywhere, giving some function
-$$T \in C^\infty(\mathbb{R}^3, (0,\infty)) \qquad \text{(absolute zero is not attainable)}$$
+\[T \in C^\infty(\mathbb{R}^3, (0,\infty)) \qquad \text{(absolute zero is not attainable)}\]
 If we model the earth as $S^2 := \{x \in \mathbb{R}^3 : |x| = 1\}$, then we want to find the local
 maxima of $T|_{S^2}$, which \textbf{are not necessarily critical points of $T$}!
 
@@ -179,7 +179,7 @@ This intuition is made rigorous in the following.
 Suppose $f : U \to \mathbb{R}$, $g : U \to \mathbb{R}^k$ are $C^1$ and $U \subseteq \mathbb{R}^n$
 is open, and write $g := (g_1,\dots,g_k)$. If $f|_{g^{-1}\{0\}}$ has a local extremum at
 $x_0 \in g^{-1}\{0\}$, then
-$$\{\nabla f(x_0), \nabla g_1(x_0), \dots, \nabla g_k(x_0)\} \text{ are linearly dependent.}$$
+\[\{\nabla f(x_0), \nabla g_1(x_0), \dots, \nabla g_k(x_0)\} \text{ are linearly dependent.}\]
 \end{proposition}
 
 \begin{remark}
@@ -201,14 +201,14 @@ since otherwise $\lambda_0 = 0$ is possible, which does not give us anything.
 \label{ex:constraint_qualification_fails}
 The standing assumption is not bookkeeping --- drop it and the method can miss an extremum
 outright. Let
-$$f(x,y) := x, \qquad M := \{(x,y) \in \mathbb{R}^2 : y^2 = x^3\},$$
+\[f(x,y) := x, \qquad M := \{(x,y) \in \mathbb{R}^2 : y^2 = x^3\},\]
 the \newterm{cuspidal cubic} (\germanterm{Neilsche Parabel}). Since $y^2 \geq 0$ forces
 $x^3 \geq 0$, every point of $M$ has $x \geq 0$, and $(0,0) \in M$. So $f$ attains a clear
 \textbf{global minimum on $M$ at the origin}.
 
 Now run the method with $g(x,y) := y^2-x^3$. The Lagrange condition $\nabla f = \lambda\nabla g$
 reads
-$$(1,0) = \lambda\,(-3x^2,\ 2y),$$
+\[(1,0) = \lambda\,(-3x^2,\ 2y),\]
 whose first component demands $1 = -3\lambda x^2$. At the origin this says $1 = 0$: no
 multiplier $\lambda$ exists. The method returns \textbf{no candidates at all}, while the minimum
 sits there in plain sight.
@@ -244,14 +244,14 @@ forced, e.g.\ if $x_0$ is itself a critical point of the constraint map $g$.
 % Source: Corsin Nick/Class Notes/Week 5.pdf, pp. 4--5
 We then eliminate the perpendicular part of $\nabla f(x_0)$ by forming the \newterm{Lagrangian}
 (\germanterm{Lagrange-Funktion}):
-$$
+\[
 \begin{aligned}
 L : U \times \mathbb{R}^k &\to \mathbb{R} \\
 (x,\lambda) &\mapsto f(x) - \lambda\cdot g(x) = f(x) - \lambda_1g_1(x) - \dots - \lambda_kg_k(x)
 \end{aligned}
-$$
+\]
 We then find local extrema by forcing $\nabla L(x,\lambda) = 0$, i.e.
-$$\underbrace{\frac{\partial L}{\partial x_i} = 0 \ \ \forall i = 1,\dots,n}_{\nabla f(x) - \lambda\cdot\nabla g(x) = 0} \qquad \text{and} \qquad \underbrace{\frac{\partial L}{\partial \lambda_j} = 0 \ \ \forall j = 1,\dots,k}_{g_j(x) = 0}$$
+\[\underbrace{\frac{\partial L}{\partial x_i} = 0 \ \ \forall i = 1,\dots,n}_{\nabla f(x) - \lambda\cdot\nabla g(x) = 0} \qquad \text{and} \qquad \underbrace{\frac{\partial L}{\partial \lambda_j} = 0 \ \ \forall j = 1,\dots,k}_{g_j(x) = 0}\]
 
 % Generator: Claude Opus 5 (Medium)
 \begin{remark}[Why the Lagrangian is built this way]
@@ -285,35 +285,35 @@ this course, but it is the usual answer to \qt{what \emph{is} $\lambda$?}
 \begin{exercise}[Extrema of $xyz$ on the unit ball]
 \label{ex:xyz_on_ball}
 Find the local extrema of
-$$f : K \to \mathbb{R}, \quad (x,y,z) \mapsto xyz, \qquad K = \{(x,y,z) \in \mathbb{R}^3 : x^2+y^2+z^2 \leq 1\}.$$
+\[f : K \to \mathbb{R}, \quad (x,y,z) \mapsto xyz, \qquad K = \{(x,y,z) \in \mathbb{R}^3 : x^2+y^2+z^2 \leq 1\}.\]
 \end{exercise}
 
 % Kept inline: solved directly in Corsin Nick/Class Notes/Week 5.pdf, pp. 5--6.
 \begin{exercisesolution}[Proof of \cref{ex:xyz_on_ball}]
 We first find the \textbf{interior critical points}:
-$$\nabla f(x,y,z) = (yz,\ xz,\ xy) \overset{!}{=} 0 \implies x = y = 0 \ \text{ or } \ x = z = 0 \ \text{ or } \ y = z = 0.$$
+\[\nabla f(x,y,z) = (yz,\ xz,\ xy) \overset{!}{=} 0 \implies x = y = 0 \ \text{ or } \ x = z = 0 \ \text{ or } \ y = z = 0.\]
 Then we look for local extrema \textbf{on the boundary}. We need to find the local extrema of
 $f|_{g^{-1}\{0\}}$, where $g : \mathbb{R}^3\to\mathbb{R}$ is given by $g(x) = |x|^2 - 1$.
 
 The Lagrangian is
-$$L(x,y,z,\lambda) := f(x,y,z) - \lambda g(x,y,z) = xyz - \lambda(x^2+y^2+z^2-1),$$
+\[L(x,y,z,\lambda) := f(x,y,z) - \lambda g(x,y,z) = xyz - \lambda(x^2+y^2+z^2-1),\]
 giving the system of equations
-$$
+\[
 \begin{aligned}
 \frac{\partial L}{\partial x} &= yz - 2\lambda x = 0, & \frac{\partial L}{\partial \lambda} &= 1 - (x^2+y^2+z^2) = 0. \\
 \frac{\partial L}{\partial y} &= xz - 2\lambda y = 0, \\
 \frac{\partial L}{\partial z} &= xy - 2\lambda z = 0,
 \end{aligned}
-$$
+\]
 We then have
 \begin{equation*}
 2\lambda = \frac{yz}{x} = \frac{xz}{y} = \frac{xy}{z} \tag{$*$}
 \end{equation*}
-$$\implies \underbrace{y^2z^2 = x^2z^2}_{y^2 = x^2} = \underbrace{x^2y^2}_{y^2 = z^2} \qquad \text{(if any coordinate is 0, so are the others)}$$
-$$\implies x^2 = y^2 = z^2.$$
+\[\implies \underbrace{y^2z^2 = x^2z^2}_{y^2 = x^2} = \underbrace{x^2y^2}_{y^2 = z^2} \qquad \text{(if any coordinate is 0, so are the others)}\]
+\[\implies x^2 = y^2 = z^2.\]
 Then $x^2+y^2+z^2 = 1 \implies 3x^2 = 1 \implies x = \pm\frac{1}{\sqrt{3}}$, giving
 \textbf{8 solutions}:
-$$(x,y,z) \in \left\{\tfrac{1}{\sqrt{3}}(\alpha,\beta,\gamma) : \alpha,\beta,\gamma \in \{\pm 1\}\right\}$$
+\[(x,y,z) \in \left\{\tfrac{1}{\sqrt{3}}(\alpha,\beta,\gamma) : \alpha,\beta,\gamma \in \{\pm 1\}\right\}\]
 plus the solutions $\{(x_1,x_2,x_3) \in K : x_i = x_j = 0,\ i \neq j\}$.
 
 \textbf{To justify division by $z$, $x$ or $y$ in $(*)$:} if $z = 0$, then
@@ -330,8 +330,8 @@ is continuous, $f$ does attain a global maximum and minimum on $K$, so it is eno
 
 At a boundary candidate $\tfrac{1}{\sqrt3}(\alpha,\beta,\gamma)$ with
 $\alpha,\beta,\gamma \in \{\pm1\}$,
-$$f\Big(\tfrac{1}{\sqrt3}(\alpha,\beta,\gamma)\Big)
-  = \frac{\alpha\beta\gamma}{3\sqrt3},$$
+\[f\Big(\tfrac{1}{\sqrt3}(\alpha,\beta,\gamma)\Big)
+  = \frac{\alpha\beta\gamma}{3\sqrt3},\]
 so the value depends only on the sign $\alpha\beta\gamma$. Four of the eight points have
 $\alpha\beta\gamma = +1$ and give the maximal value $\tfrac{1}{3\sqrt3}$; the other four have
 $\alpha\beta\gamma = -1$ and give $-\tfrac{1}{3\sqrt3}$. On the coordinate axes found in the
@@ -395,7 +395,7 @@ actually differentiated, so it is used throughout.
 % (Week 4); referencing it here instead of re-introducing the term with \newterm.
 The \textbf{Hessian} (\cref{rem:second_order_taylor_hessian}) of $f \in C^2(U,\mathbb{R})$,
 $U \subseteq \mathbb{R}^n$, is given by
-$$\Hess f(x) = (\partial_i\partial_j f)_{i,j=1,\dots,n}$$
+\[\Hess f(x) = (\partial_i\partial_j f)_{i,j=1,\dots,n}\]
 with respect to the standard basis of $\mathbb{R}^n$. By \newterm{Schwarz's lemma}
 (\germanterm{Satz von Schwarz}), $\Hess f(x)$ is symmetric.
 
@@ -479,7 +479,7 @@ $C^2$ (which is what the Hessian's definition assumes). Relaxed to $C^2$ above. 
 % Generator: Gemini 3.6 Flash (Medium)
 Consider $f(x,y) := x^4 + y^4$ and $g(x,y) := x^4 - y^4$ at the critical point $(0,0)$.
 \begin{itemize}
-  \item For both functions, all second-order partial derivatives at $(0,0)$ vanish, so $\Hess f(0,0) = \Hess g(0,0) = \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}$.
+  \item For both functions, all second-order partial derivatives at $(0,0)$ vanish, so $\Hess f(0,0) = \Hess g(0,0) = \left(\begin{smallmatrix} 0 & 0 \\ 0 & 0 \end{smallmatrix}\right)$.
   \item The Hessian test is \textbf{inconclusive} since $\det \Hess = 0$.
   \item However, direct inspection reveals that $f(x,y) \geq 0 = f(0,0)$ for all $(x,y)$, so $(0,0)$ is a strict local minimum for $f$, whereas $g(x,0) > 0$ and $g(0,y) < 0$ for non-zero $x,y$, so $(0,0)$ is a saddle point for $g$.
 \end{itemize}
@@ -503,13 +503,13 @@ Note: $\det(A) = \lambda_1\cdots\lambda_n$ and $\Tr(A) = \lambda_1+\dots+\lambda
   \item Solve the characteristic equation $\det(A - \lambda\id) = 0$ for $\lambda$ and check all
     eigenvalues.
   \item \newterm{Hurwitz criterion} (\germanterm{Hurwitz-Kriterium}): for
-    $$A = \begin{pmatrix} a_{11} & a_{12} & \cdots & a_{1n} \\ a_{21} & \ddots & & \vdots \\ \vdots & & \ddots & \\ a_{n1} & \cdots & & a_{nn}\end{pmatrix}$$
+    \[A = \begin{pmatrix} a_{11} & a_{12} & \cdots & a_{1n} \\ a_{21} & \ddots & & \vdots \\ \vdots & & \ddots & \\ a_{n1} & \cdots & & a_{nn}\end{pmatrix}\]
     define the leading principal minors
-    $$A_1 = \det(a_{11}), \quad A_2 = \det\begin{pmatrix} a_{11} & a_{12} \\ a_{21} & a_{22}\end{pmatrix}, \quad \dots, \quad A_n = \det(A).$$
+    \[A_1 = \det(a_{11}), \quad A_2 = \det\begin{pmatrix} a_{11} & a_{12} \\ a_{21} & a_{22}\end{pmatrix}, \quad \dots, \quad A_n = \det(A).\]
     Then:
     \begin{itemize}
-      \item $A_1 > 0$, $A_2 > 0$, $A_3 > 0$, \ldots\ $\iff$ \textbf{positive definite}
-      \item $A_1 < 0$, $A_2 > 0$, $A_3 < 0$, \ldots\ $\iff$ \textbf{negative definite}
+      \item $A_1 > 0$, $A_2 > 0$, $A_3 > 0$, \ldots\ if and only if the matrix is \textbf{positive definite}
+      \item $A_1 < 0$, $A_2 > 0$, $A_3 < 0$, \ldots\ if and only if the matrix is \textbf{negative definite}
       \item \textbf{indefinite} if neither $A_1 \geq 0, A_2 \geq 0, \dots$ nor
         $A_1 \leq 0, A_2 \geq 0, A_3 \leq 0, \dots$
     \end{itemize}
@@ -526,11 +526,11 @@ Corrected above.
 \begin{tabular}{lll}
 \textbf{Matrix} & \textbf{Computation} & \textbf{Conclusion} \\
 \hline
-$\begin{pmatrix}2&2\\2&5\end{pmatrix}$ & $\det = 6 > 0$, $\Tr = 7 > 0$ & positive definite \\
-$\begin{pmatrix}-4&2\\2&-4\end{pmatrix}$ & $\det = 12 > 0$, $\Tr = -8 < 0$ & negative definite \\
-$\begin{pmatrix}4&2\\2&-4\end{pmatrix}$ & $\det = -20 < 0$ & indefinite \\
-$\begin{pmatrix}-5&0&0\\0&-4&-2\\0&-2&-4\end{pmatrix}$ & $A_1 = -5 < 0$, $A_2 = 20 > 0$, $A_3 = -60 < 0$ & negative definite \\
-$\begin{pmatrix}-1&0&-4\\0&2&-2\\-4&-2&22\end{pmatrix}$ & $A_1 = -1 < 0$, $A_2 = -2 < 0$, $A_3 = -72 < 0$ & indefinite \\
+$\left(\begin{smallmatrix}2&2\\2&5\end{smallmatrix}\right)$ & $\det = 6 > 0$, $\Tr = 7 > 0$ & positive definite \\
+$\left(\begin{smallmatrix}-4&2\\2&-4\end{smallmatrix}\right)$ & $\det = 12 > 0$, $\Tr = -8 < 0$ & negative definite \\
+$\left(\begin{smallmatrix}4&2\\2&-4\end{smallmatrix}\right)$ & $\det = -20 < 0$ & indefinite \\
+$\left(\begin{smallmatrix}-5&0&0\\0&-4&-2\\0&-2&-4\end{smallmatrix}\right)$ & $A_1 = -5 < 0$, $A_2 = 20 > 0$, $A_3 = -60 < 0$ & negative definite \\
+$\left(\begin{smallmatrix}-1&0&-4\\0&2&-2\\-4&-2&22\end{smallmatrix}\right)$ & $A_1 = -1 < 0$, $A_2 = -2 < 0$, $A_3 = -72 < 0$ & indefinite \\
 \end{tabular}
 \end{center}
 \end{example}
@@ -539,18 +539,18 @@ $\begin{pmatrix}-1&0&-4\\0&2&-2\\-4&-2&22\end{pmatrix}$ & $A_1 = -1 < 0$, $A_2 =
 \begin{exercise}[Critical values of $x^3 - y^3 + 3\alpha xy$]
 \label{ex:cubic_saddle_family}
 Find the critical values of
-$$f_\alpha : \mathbb{R}^2 \to \mathbb{R}, \qquad (x,y) \mapsto x^3 - y^3 + 3\alpha xy$$
+\[f_\alpha : \mathbb{R}^2 \to \mathbb{R}, \qquad (x,y) \mapsto x^3 - y^3 + 3\alpha xy\]
 for $\alpha \in \mathbb{R}\setminus\{0\}$ and determine min/max/saddle points.
 \end{exercise}
 
 % Kept inline: solved directly in Corsin Nick/Class Notes/Week 5.pdf, pp. 10--11.
 \begin{exercisesolution}[Solution to \cref{ex:cubic_saddle_family}]
-$$
+\[
 \begin{aligned}
 \frac{\partial f_\alpha}{\partial x} &= 3x^2 + 3\alpha y \overset{!}{=} 0 &&\implies y = -\frac{x^2}{\alpha} \\
 \frac{\partial f_\alpha}{\partial y} &= -3y^2 + 3\alpha x \overset{!}{=} 0 &&\implies -\frac{x^4}{\alpha^2} + \alpha x = 0
 \end{aligned}
-$$
+\]
 \begin{enumerate}[label=\textbf{\arabic*.}]
   \item $x = y = 0$
   \item $x \neq 0 \implies x^3 = \alpha^3 \implies x = \alpha$, $y = -\alpha$
@@ -558,8 +558,8 @@ $$
 So, we have critical points $(0,0)$ and $(\alpha, -\alpha)$.
 
 Compute the Hessian:
-$$\begin{pmatrix} \partial_x^2 f & \partial_x\partial_y f \\ \partial_x\partial_y f & \partial_y^2 f\end{pmatrix} = \begin{pmatrix} 6x & 3\alpha \\ 3\alpha & -6y \end{pmatrix} = \Hess f(x,y)$$
-$$\Hess f(0,0) = \begin{pmatrix} 0 & 3\alpha \\ 3\alpha & 0\end{pmatrix}, \qquad \det = -9\alpha^2 < 0 \implies \text{indefinite}$$
+\[\begin{pmatrix} \partial_x^2 f & \partial_x\partial_y f \\ \partial_x\partial_y f & \partial_y^2 f\end{pmatrix} = \begin{pmatrix} 6x & 3\alpha \\ 3\alpha & -6y \end{pmatrix} = \Hess f(x,y)\]
+\[\Hess f(0,0) = \begin{pmatrix} 0 & 3\alpha \\ 3\alpha & 0\end{pmatrix}, \qquad \det = -9\alpha^2 < 0 \implies \text{indefinite}\]
 \begin{align*}
 \Hess f(\alpha,-\alpha) &= \begin{pmatrix} 6\alpha & 3\alpha \\ 3\alpha & 6\alpha\end{pmatrix}
   = 3\alpha\begin{pmatrix} 2 & 1 \\ 1 & 2\end{pmatrix}, \\
@@ -626,7 +626,7 @@ Only the exercises tagged \textbf{important} above are reproduced below. The ful
     computations twice.)
   \item We want to find a function $g \in C^1(\mathbb{R}^2)$ with the following directional
     derivative:
-    $$\partial_v g(x,y) = 2\cos(x^2y)xv_2 + \cos(x^2y)v_1^2y \quad \text{for all } (x,y) \text{ and } (v_1,v_2) \in \mathbb{R}^2.$$
+    \[\partial_v g(x,y) = 2\cos(x^2y)xv_2 + \cos(x^2y)v_1^2y \quad \text{for all } (x,y) \text{ and } (v_1,v_2) \in \mathbb{R}^2.\]
     Give an explicit example of such a function $g$ or prove that a function with these
     properties cannot exist.
 \end{enumerate}
@@ -634,13 +634,13 @@ Only the exercises tagged \textbf{important} above are reproduced below. The ful
 
 \begin{remark}
 Corsin's hint --- \textit{recall the linearity of the differential} --- is the whole of
-\cref{ex:5.1}(b): a directional derivative must be \textbf{linear} in $v$, and $v_1^2$ is not.
+\Cref{ex:5.1}(b): a directional derivative must be \textbf{linear} in $v$, and $v_1^2$ is not.
 \end{remark}
 
 \begin{exercise}[5.2 --- Lagrange multipliers \textnormal{(important)}]
 \label{ex:5.2}
 Consider the ball $U := \{(x,y,z) : x^2+y^2+z^2 < 1\}$ and the function
-$$f(x,y,z) := 1 - x^2 - y^2 + 4x.$$
+\[f(x,y,z) := 1 - x^2 - y^2 + 4x.\]
 \begin{enumerate}[label=\textbf{\arabic*.}]
   \item Motivate rigorously why $f$ attains its absolute maximum and minimum in $\overline{U}$.
   \item Find all the critical points of $f$ which lie in the interior of $U$. Say whether
@@ -707,13 +707,13 @@ each).
 % Generator: Claude Sonnet 5 (Medium)
 \begin{enumerate}[label=\textbf{\arabic*.}]
   \item $\overline{U}$ is closed and bounded in $\mathbb{R}^3$, hence compact by
-    \cref{thm:heine_borel}, and $f$ is a polynomial, hence continuous. By the extreme value
+    \Cref{thm:heine_borel}, and $f$ is a polynomial, hence continuous. By the extreme value
     theorem (\cref{item:extreme_value_theorem}), $f$ attains its absolute maximum and minimum on
     $\overline{U}$.
   \item $\nabla f(x,y,z) = (-2x+4,\ -2y,\ 0)$ vanishes only at $x=2$, $y=0$ (any $z$), and no such
     point lies in $U$ (since $x=2$ already violates $x^2+y^2+z^2<1$). So $f$ has \textbf{no
     critical point in the interior of $U$}; consequently, by
-    \cref{prop:extremum_implies_critical}, $\sup_U f$ and $\inf_U f$ are \textbf{not attained} at
+    \Cref{prop:extremum_implies_critical}, $\sup_U f$ and $\inf_U f$ are \textbf{not attained} at
     any interior point.
   \item $\partial U$ is compact (a sphere) and $f$ is continuous, so $\max_{\partial U} f$ and
     $\min_{\partial U} f$ \textbf{both exist}, again by the extreme value theorem

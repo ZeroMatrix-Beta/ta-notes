@@ -111,12 +111,12 @@ bounded --- the notion collapses entirely.
 
 Putting those together: \textbf{compactness is topological, boundedness is not.} Boundedness is
 a property of the chosen metric, not of the open sets it generates, so no theorem of the form
-\qt{compact $\iff$ closed and bounded} can hold for a general metric. That is precisely why
-\cref{thm:heine_borel} carries the hypothesis \textbf{standard metric}, and it is not a
+\qt{compact if and only if closed and bounded} can hold for a general metric. That is precisely why
+\Cref{thm:heine_borel} carries the hypothesis \textbf{standard metric}, and it is not a
 technicality to be skimmed --- it is the entire content of the hypothesis.
 
 \begin{ainote}
-The right general replacement is already in Week 2: compact $\iff$ complete \emph{and}
+The right general replacement is already in Week 2: compact if and only if complete \emph{and}
 \newterm{totally bounded} (\cref{def:totally_bounded}, \cref{rem:compact_iff_complete_totally_bounded}).
 Total boundedness is the notion boundedness was trying and failing to be, and $\mathbb{N}$ under
 $\tilde d$ separates them cleanly: for $\varepsilon < \tfrac12$ the ball
@@ -138,7 +138,7 @@ the gap through which compactness escapes.
     \textbf{Weierstrass theorem / Extreme value theorem:} $X$ metric space,
     $K \subseteq X$ compact, $f : K \to \mathbb{R}$ continuous. Then $f$ attains its maximum and
     minimum in $K$. In particular, $f$ is bounded --- proved as
-    \cref{lem:sequential_compactness_extreme_values} in Week 2.
+    \Cref{lem:sequential_compactness_extreme_values} in Week 2.
   \item \label{item:uniform_continuity_compact}
     \textbf{Uniform continuity:} $X$, $Y$ metric spaces, $f : X \to Y$ continuous. If $X$ is
     compact, then $f$ is uniformly continuous (\cref{def:uniformly_continuous}) ---
@@ -196,14 +196,14 @@ Each of the two hypotheses powers its own version, and the proofs are three line
 \textbf{Connectedness turns \qt{locally constant} into \qt{constant}.} Let $(X,d)$ be connected
 and $f : X \to \mathbb{R}$ locally constant. Every level set $f^{-1}(a)$ is then open. Fix
 $a \in f(X)$ and split
-$$X = \underbrace{f^{-1}(a)}_{=:U} \ \sqcup \underbrace{\bigcup_{b \neq a}f^{-1}(b)}_{=:V},$$
+\[X = \underbrace{f^{-1}(a)}_{=:U} \ \sqcup \underbrace{\bigcup_{b \neq a}f^{-1}(b)}_{=:V},\]
 a disjoint union of two open sets. Since $U \neq \emptyset$, connectedness forces $V=\emptyset$,
 i.e.\ $f \equiv a$.
 
 \textbf{Compactness turns \qt{locally bounded} into \qt{bounded}.} Let $X$ be compact and
 suppose each $x$ has an open $U_x \ni x$ on which $f$ is bounded. The $\{U_x\}_{x\in X}$ cover
 $X$, so finitely many suffice, say $U_1,\dots,U_n$, and then
-$$\sup_{x \in X}|f(x)| \;=\; \max_{1\leq i\leq n}\ \sup_{x \in U_i}|f(x)| \;<\; \infty,$$
+\[\sup_{x \in X}|f(x)| \;=\; \max_{1\leq i\leq n}\ \sup_{x \in U_i}|f(x)| \;<\; \infty,\]
 because a \emph{maximum of finitely many} finite numbers is finite. Taking $f$ continuous ---
 which is locally bounded, since $|f|<|f(x)|+1$ near each $x$ --- recovers the boundedness half
 of \cref{item:extreme_value_theorem}.
@@ -211,7 +211,7 @@ of \cref{item:extreme_value_theorem}.
 Read this way the two proofs are the same proof twice, with different notions of \qt{finitely
 many}: connectedness says a partition into two open pieces must be trivial, compactness says a
 cover can be taken finite. Both convert local information into global. Every application in
-\cref{item:continuity_preserves_compact,item:extreme_value_theorem,item:uniform_continuity_compact}
+\Cref{item:continuity_preserves_compact,item:extreme_value_theorem,item:uniform_continuity_compact}
 is an instance --- uniform continuity most visibly, where the whole difficulty is that the
 $\delta$ from continuity is local and one needs a single global one
 (\cref{rem:continuity_vs_uniform_continuity}).
@@ -274,7 +274,7 @@ reproduced here (reformulated), since they fill a genuine gap.
 Let $(X,d_X)$, $(Y,d_Y)$ be metric spaces. A function $f : X \to Y$ is \newterm{Lipschitz
 continuous} (\germanterm{Lipschitz-stetig}) if there exists $L \geq 0$, a \newterm{Lipschitz
 constant} for $f$, such that
-$$d_Y(f(x),f(x')) \leq L\cdot d_X(x,x') \quad \text{for all } x,x' \in X.$$
+\[d_Y(f(x),f(x')) \leq L\cdot d_X(x,x') \quad \text{for all } x,x' \in X.\]
 \end{definition}
 
 \begin{remark}[Hierarchy of continuity notions]
@@ -284,7 +284,7 @@ Lipschitz continuity is stronger than uniform continuity
 (\cref{def:continuous}). For the first implication, assume $L > 0$ (for $L = 0$ the function is
 constant and there is nothing to prove); then $\delta := \varepsilon/L$ satisfies the definition
 of uniform continuity, since
-$$d_X(x,x') < \frac{\varepsilon}{L} \quad \text{gives} \quad d_Y(f(x),f(x')) \leq L\,d_X(x,x') < \varepsilon$$
+\[d_X(x,x') < \frac{\varepsilon}{L} \quad \text{gives} \quad d_Y(f(x),f(x')) \leq L\,d_X(x,x') < \varepsilon\]
 for \emph{every} pair $x,x'$ --- the same $\delta$ at every point, which is exactly what
 uniform continuity asks for. The second implication is immediate: a $\delta$ that works at all
 points in particular works at each one.
@@ -515,7 +515,7 @@ Only for open subsets!
 \end{importantremark}
 
 \begin{example}[The topologist's sine curve]
-$$S := \left\{\left(t, \sin\left(\tfrac{1}{t}\right)\right) : t > 0\right\} \cup \{0\} \subseteq \mathbb{R}^2$$
+\[S := \left\{\left(t, \sin\left(\tfrac{1}{t}\right)\right) : t > 0\right\} \cup \{0\} \subseteq \mathbb{R}^2\]
 $S$ is \textbf{connected} but \textbf{not path-connected}!
 \end{example}
 
@@ -531,7 +531,7 @@ $S$ is \textbf{connected} but \textbf{not path-connected}!
 
   \draw[blue!80!black, thick] plot[domain=0.08:2.8, samples=250] (\x, {sin((1.0/(\x*0.1)) r)});
   \fill[blue!80!black] (0,0) circle (1.5pt) node[left, font=\footnotesize] {$(0,0)$};
-  \node[above, font=\small] at (1.5,1.3) {$S = \{(t, \sin(1/t)) : t > 0\} \cup \{(0,0)\}$};
+  \node[above, font=\small] at (1.5,1.3) {$S = \{(t, {\sin(1/t})) : t > 0\} \cup \{(0,0)\}$};
 \end{tikzpicture}
 \end{center}
 
@@ -741,18 +741,18 @@ in below, carrying out exactly the hinted computation.
 \label{thm:cauchy_schwarz}
 Let $V$ be an inner product space (\cref{def:inner_product}) with induced norm
 $\|\cdot\| := \sqrt{\langle\cdot,\cdot\rangle}$ (\cref{def:norm}). Then for all $u,v \in V$,
-$$|\langle u,v\rangle| \leq \|u\|\,\|v\|,$$
+\[|\langle u,v\rangle| \leq \|u\|\,\|v\|,\]
 with equality if and only if $u,v$ are linearly dependent.
 \end{theorem}
 
 \begin{proof}
 If $v = 0$, both sides vanish and the claim holds trivially, so assume $v \neq 0$. Following
-\cref{rem:proof_hint_cauchy_schwarz}, definiteness (\cref{def:inner_product}) gives
-$$0 \leq \langle u-\pi_v(u),\ u-\pi_v(u)\rangle = \langle u,u\rangle - 2\langle u,\pi_v(u)\rangle + \langle \pi_v(u),\pi_v(u)\rangle.$$
+\Cref{rem:proof_hint_cauchy_schwarz}, definiteness (\cref{def:inner_product}) gives
+\[0 \leq \langle u-\pi_v(u),\ u-\pi_v(u)\rangle = \langle u,u\rangle - 2\langle u,\pi_v(u)\rangle + \langle \pi_v(u),\pi_v(u)\rangle.\]
 Using $\pi_v(u) = \tfrac{\langle u,v\rangle}{\|v\|^2}v$ and bilinearity,
-$$\langle u,\pi_v(u)\rangle = \frac{\langle u,v\rangle^2}{\|v\|^2}, \qquad \langle \pi_v(u),\pi_v(u)\rangle = \frac{\langle u,v\rangle^2}{\|v\|^4}\langle v,v\rangle = \frac{\langle u,v\rangle^2}{\|v\|^2}.$$
+\[\langle u,\pi_v(u)\rangle = \frac{\langle u,v\rangle^2}{\|v\|^2}, \qquad \langle \pi_v(u),\pi_v(u)\rangle = \frac{\langle u,v\rangle^2}{\|v\|^4}\langle v,v\rangle = \frac{\langle u,v\rangle^2}{\|v\|^2}.\]
 Substituting,
-$$0 \leq \|u\|^2 - \frac{2\langle u,v\rangle^2}{\|v\|^2} + \frac{\langle u,v\rangle^2}{\|v\|^2} = \|u\|^2 - \frac{\langle u,v\rangle^2}{\|v\|^2},$$
+\[0 \leq \|u\|^2 - \frac{2\langle u,v\rangle^2}{\|v\|^2} + \frac{\langle u,v\rangle^2}{\|v\|^2} = \|u\|^2 - \frac{\langle u,v\rangle^2}{\|v\|^2},\]
 which rearranges to $\langle u,v\rangle^2 \leq \|u\|^2\|v\|^2$, i.e., $|\langle u,v\rangle| \leq \|u\|\|v\|$. Equality holds
 if and only if $u - \pi_v(u) = 0$ by definiteness, i.e., $u$ is a scalar multiple of $v$.
 \end{proof}
@@ -771,7 +771,7 @@ completeness (\cref{def:complete_metric_space}) from Week 2.
 Let $(X,d)$ be a metric space. A map $f : X \to X$ is a \newterm{contraction}
 (\germanterm{Kontraktion}) if it is Lipschitz continuous (\cref{def:lipschitz_continuous}) with
 some Lipschitz constant $L \in [0,1)$, i.e.,
-$$d(f(x),f(y)) \leq L \cdot d(x,y) \quad \text{for all } x,y \in X.$$
+\[d(f(x),f(y)) \leq L \cdot d(x,y) \quad \text{for all } x,y \in X.\]
 \end{definition}
 
 \begin{theorem}[Banach fixed point theorem]

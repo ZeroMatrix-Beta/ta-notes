@@ -20,7 +20,7 @@ $M^m \subseteq \mathbb{R}^n$ is a $C^k$, $m$-dimensional \newterm{submanifold}
 open neighbourhood $U \subseteq \mathbb{R}^n$ of $p$, an open neighbourhood $V \subseteq
 \mathbb{R}^n$ of $0$, and a $C^k$-diffeomorphism $\Phi : U \to V$ with $\Phi(p) = 0$ (a
 \newterm{submanifold chart}) such that
-$$\Phi(U \cap M) = (\mathbb{R}^m\times\{0\}) \cap V = \{x \in V : x_{m+1}=\dots=x_n=0\}.$$
+\[\Phi(U \cap M) = (\mathbb{R}^m\times\{0\}) \cap V = \{x \in V : x_{m+1}=\dots=x_n=0\}.\]
 \end{definition}
 
 % Sonnet 5 (Medium) --- FIG-W07-01
@@ -63,7 +63,7 @@ theorem, below).
 \begin{theorem}[Regular value theorem]
 \label{thm:regular_value_theorem}
 Suppose $U \subseteq \mathbb{R}^n$ is open, $F \in C^k(U,\mathbb{R}^\ell)$, and $y \in F(U)$. If
-$$DF_x : \mathbb{R}^n \to \mathbb{R}^\ell$$
+\[DF_x : \mathbb{R}^n \to \mathbb{R}^\ell\]
 is surjective (i.e., $\Jac F(x)$ has full rank) for all $x \in F^{-1}\{y\} = \{\bar x \in U :
 F(\bar x) = y\}$, then $F^{-1}\{y\}$ is a $C^k$ submanifold of dimension $n-\ell$.
 \end{theorem}
@@ -91,12 +91,12 @@ on before writing down what \qt{full rank} is supposed to give you.
 % Source: Corsin Nick/Class Notes/Week 7.pdf, p. 2
 \begin{example}[Circle of radius $R$]
 Let $F : \mathbb{R}^2 \to \mathbb{R}$, $(x,y) \mapsto x^2+y^2$. Then
-$$\Jac F(x,y) = (2x,\ 2y)$$
+\[\Jac F(x,y) = (2x,\ 2y)\]
 has full rank --- here $\ell = 1$, so by \cref{rem:full_rank_two_meanings} full rank means
 $DF_{(x,y)} : \mathbb{R}^2 \to \mathbb{R}$ is \textbf{surjective}, i.e.\ simply that the row
 $(2x,2y)$ is nonzero --- if $x \neq 0$ or $y \neq 0$, that is,
 for all $(x,y) \in \mathbb{R}^2\setminus\{0\}$. For $R>0$, $(0,0) \notin F^{-1}\{R^2\}$, so
-$$F^{-1}\{R^2\} = \{(x,y) \in \mathbb{R}^2 : x^2+y^2=R^2\}$$
+\[F^{-1}\{R^2\} = \{(x,y) \in \mathbb{R}^2 : x^2+y^2=R^2\}\]
 is a submanifold of dimension $2-1=1$ by \cref{thm:regular_value_theorem}. Similarly,
 $\{x \in \mathbb{R}^n : |x|^2=R^2\}$ is a submanifold of dimension $n-1$ for $n \geq 1$ (the
 \newterm{$n$-sphere} of radius $R$).
@@ -160,10 +160,10 @@ seen through the Lagrange multiplier lens one chapter earlier.
 \begin{remark}[Constraint sets are submanifolds]
 Recall the Lagrangian from \cref{prop:constrained_optimization}: when optimizing $f|_M$ for
 $f \in C^k(\mathbb{R}^n,\mathbb{R})$, where $g_1,\dots,g_k : U \to \mathbb{R}$,
-$$M := \{x \in \mathbb{R}^n : g_1(x)=\dots=g_k(x)=0\}, \qquad (\nabla g_1,\dots,\nabla g_k) \text{ linearly independent for all } x \in M$$
+\[M := \{x \in \mathbb{R}^n : g_1(x)=\dots=g_k(x)=0\}, \qquad (\nabla g_1,\dots,\nabla g_k) \text{ linearly independent for all } x \in M\]
 (hence $k \leq n$). This means precisely that, for $g : \mathbb{R}^n \to \mathbb{R}^k$,
 $x \mapsto (g_1(x),\dots,g_k(x))$, the Jacobian
-$$\Jac g(x) = \begin{pmatrix} \nabla g_1(x) \longrightarrow \\ \vdots \\ \nabla g_k(x) \longrightarrow \end{pmatrix}$$
+\[\Jac g(x) = \begin{pmatrix} \nabla g_1(x) \longrightarrow \\ \vdots \\ \nabla g_k(x) \longrightarrow \end{pmatrix}\]
 has full rank. Therefore, $M = g^{-1}\{0\}$ is an $(n-k)$-dimensional submanifold by the regular
 value theorem: the constraint sets of Week 5's Lagrange-multiplier problems were submanifolds all
 along.
@@ -218,9 +218,10 @@ learned nothing, and must argue separately (see \cref{ex:cross_not_submanifold})
 \begin{example}[The $n$-parabola]
 Let $P := \{(x,t) \in \mathbb{R}^n\times\mathbb{R} : t=|x|^2\}$. One could use the regular value
 theorem, but instead take
-$$f : \mathbb{R}^n \to \mathbb{R}^n\times\mathbb{R}, \qquad x \mapsto (x,|x|^2).$$
+\[f : \mathbb{R}^n \to \mathbb{R}^n\times\mathbb{R}, \qquad x \mapsto (x,|x|^2).\]
 \begin{enumerate}[label=\textbf{\arabic*.}]
-  \item $\Jac f(x) = \begin{pmatrix} \id_{n\times n} \\ 2x\transp \end{pmatrix}$ has full rank
+  \item The Jacobian matrix has full rank:
+\[ \Jac f(x) = \begin{pmatrix} \id_{n\times n} \\ 2x\transp \end{pmatrix} \]
     $n$ at every $x$ --- a tall matrix now, so by \cref{rem:full_rank_two_meanings} this means
     $Df_x$ is \textbf{injective}, which is clear from the $\id_{n\times n}$ block alone.
   \item $f$ is bijective onto $P$ and continuous, with inverse $\pi : f(U) \to \mathbb{R}^n$,
@@ -258,9 +259,9 @@ $S^1 = \{(x,y)\in\mathbb{R}^2 : x^2+y^2=1\}$ --- exactly \cref{ex:6.9}\textbf{(a
 solved there via Lagrange multipliers.
 
 Parametrize $S^1$ by $(x(\theta),y(\theta)) := (\cos\theta,\sin\theta)$. Then
-$$f(\theta) := f(x(\theta),y(\theta)) = 2\cos^2\theta+\sin^2\theta-\cos\theta = \cos^2\theta-\cos\theta+1,$$
+\[f(\theta) := f(x(\theta),y(\theta)) = 2\cos^2\theta+\sin^2\theta-\cos\theta = \cos^2\theta-\cos\theta+1,\]
 using $\sin^2\theta = 1-\cos^2\theta$. Differentiating,
-$$f'(\theta) = -2\cos\theta\sin\theta+\sin\theta \overset{!}{=} 0.$$
+\[f'(\theta) = -2\cos\theta\sin\theta+\sin\theta \overset{!}{=} 0.\]
 \begin{enumerate}[label=\textbf{\arabic*.}]
   \item $\sin\theta = 0 \implies \theta_1 \in \{0,\pi\}$.
   \item $\sin\theta \neq 0 \implies -2\cos\theta+1=0 \implies \cos\theta = \tfrac12 \implies
@@ -284,7 +285,7 @@ local linear structure: the tangent and normal spaces at a point.
 
 Suppose $M^m \subseteq \mathbb{R}^n$ is a submanifold and $f : U \to f(U) \subseteq M$ is a local
 parametrization around some point $p \in f(U)$ with $f(q) = p$. The $n\times m$ matrix
-$$\Jac f(q) = \begin{pmatrix} \dfrac{\partial f}{\partial q_1} & \cdots & \dfrac{\partial f}{\partial q_m} \end{pmatrix}$$
+\[\Jac f(q) = \begin{pmatrix} \dfrac{\partial f}{\partial q_1} & \cdots & \dfrac{\partial f}{\partial q_m} \end{pmatrix}\]
 has full rank, that is, the column vectors $\partial_if(q)$ are linearly independent. They form a
 basis of $T_pM$:
 
@@ -313,14 +314,14 @@ basis of $T_pM$:
 \label{def:tangent_space}
 For $M$, $f$ as above, the \newterm{tangent space} (\germanterm{Tangentialraum}) of $M$ at
 $p \in M$ is
-$$T_pM := \operatorname{span}\{\partial_1f(q),\dots,\partial_mf(q)\} = Df_q(\mathbb{R}^m);$$
+\[T_pM := \operatorname{span}\{\partial_1f(q),\dots,\partial_mf(q)\} = Df_q(\mathbb{R}^m);\]
 it is independent of the choice of $f$.
 \end{definition}
 
 \begin{example}[Tangent space to the upper hemisphere]
 Parametrize the upper hemisphere $S^2_+ := \{(x,y,z)\in\mathbb{R}^3 : x^2+y^2+z^2=1,\ z>0\}$
 graphically, i.e.,
-$$f(x,y) = \begin{pmatrix} x \\ y \\ \sqrt{1-x^2-y^2} \end{pmatrix}.$$
+\[f(x,y) = \begin{pmatrix} x \\ y \\ \sqrt{1-x^2-y^2} \end{pmatrix}.\]
 We determine $T_{e_3}S^2_+$, where $e_3 = (0,0,1)$:
 \begin{align*}
 \left.\frac{\partial f}{\partial x}\right|_{(x,y)=(0,0)}
@@ -360,7 +361,7 @@ without first writing down a parametrization.
 \begin{proposition}[Tangent space via curves]
 \label{prop:tangent_space_via_curves}
 Let $M^m \subseteq \mathbb{R}^n$ be a $C^k$ submanifold ($k\geq1$) and $p \in M$. Then
-$$T_pM = \big\{\gamma'(0) : \gamma \in C^1\big((-\varepsilon,\varepsilon), \mathbb{R}^n\big),\ \varepsilon>0,\ \gamma(t) \in M \text{ for all } t,\ \gamma(0)=p\big\}.$$
+\[T_pM = \big\{\gamma'(0) : \gamma \in C^1\big((-\varepsilon,\varepsilon), \mathbb{R}^n\big),\ \varepsilon>0,\ \gamma(t) \in M \text{ for all } t,\ \gamma(0)=p\big\}.\]
 \end{proposition}
 
 \begin{proof}
@@ -379,7 +380,7 @@ diffeomorphism with $\Phi(\gamma(t)) \in \mathbb{R}^m\times\{0\}$ for all $t$ ne
 $\Phi\circ\gamma =: (\eta,0)$ with $\eta \in C^1\big((-\varepsilon,\varepsilon),\mathbb{R}^m\big)$.
 Then $\gamma = \Phi^{-1}(\eta,0) = f(\eta(\cdot))$ near $0$ (shrinking $U$ if necessary so that
 $f$ is defined on all of $\eta$'s image), so by the chain rule,
-$$\gamma'(0) = Df_{\eta(0)}\big(\eta'(0)\big) \in Df_q(\mathbb{R}^m) = T_pM$$
+\[\gamma'(0) = Df_{\eta(0)}\big(\eta'(0)\big) \in Df_q(\mathbb{R}^m) = T_pM\]
 (using $\eta(0)=q$, since $\Phi(p)=0=\Phi(f(q))$ and $\Phi$ is injective).
 \end{proof}
 
@@ -401,7 +402,8 @@ Suppose $F : U \to \mathbb{R}^{n-m}$ is an implicit representation of $M^m = F^{
 regular value theorem) and $f : V^m \to M$ is a local parametrization, $M$ a submanifold. Then, by
 definition,
 \begin{enumerate}[label=\textbf{\arabic*.}]
-  \item $\Jac F(x) = \begin{pmatrix} \nabla F_1(x) \longrightarrow \\ \vdots \\ \nabla F_{n-m}(x) \longrightarrow \end{pmatrix}$
+  \item The Jacobian matrix:
+\[ \Jac F(x) = \begin{pmatrix} \nabla F_1(x) \longrightarrow \\ \vdots \\ \nabla F_{n-m}(x) \longrightarrow \end{pmatrix} \]
     has full rank, i.e., $\{\nabla F_i(x)\}_{i=1,\dots,n-m}$ are linearly independent;
   \item $T_{f(q)}M = \operatorname{span}\{\partial_if(q)\}$, as above;
   \item $F(f(x)) = 0$ for all $x \in V$, since $f(x) \in M = F^{-1}\{0\}$.
@@ -424,13 +426,13 @@ normal to the $m$-dimensional plane $T_{f(q)}M$, we can define:
 Let $M^m \subseteq \mathbb{R}^n$ be a submanifold and $F : U^n \to \mathbb{R}^{n-m}$ an implicit
 representation, $M = F^{-1}\{0\}$. Then the \newterm{normal space} (\germanterm{Normalraum}) of
 $M$ at $p \in M$ is
-$$N_pM := \operatorname{span}\{\nabla F_1(p),\dots,\nabla F_{n-m}(p)\}.$$
+\[N_pM := \operatorname{span}\{\nabla F_1(p),\dots,\nabla F_{n-m}(p)\}.\]
 \end{definition}
 
 \begin{example}[Normal space to the sphere]
 Represent $S^2$ implicitly: $S^2 = F^{-1}\{1\} = \{(x,y,z)\in\mathbb{R}^3 : F(x,y,z)=1\}$ where
 $F(x,y,z) = x^2+y^2+z^2$. We determine $N_{e_3}S^2$:
-$$\nabla F(0,0,1) = (2x,2y,2z)\big|_{(x,y,z)=(0,0,1)} = 2e_3.$$
+\[\nabla F(0,0,1) = (2x,2y,2z)\big|_{(x,y,z)=(0,0,1)} = 2e_3.\]
 So $N_{e_3}S^2 = \operatorname{span}\{e_3\} = \{0\}\times\mathbb{R}$.
 \end{example}
 
@@ -504,7 +506,7 @@ solutions yet): 7.1, 7.5, 7.6. The full sheet (7.1--7.9) has not yet been transc
 \begin{exercise}[7.5 --- Implicit function II \textnormal{(important)}]
 \label{ex:7.5}
 Show that the system of equations
-$$\begin{cases} xy^5+yu^5+zv^5=1, \\ x^5y+y^5u+z^5v=1, \end{cases}$$
+\[\begin{cases} xy^5+yu^5+zv^5=1, \\ x^5y+y^5u+z^5v=1, \end{cases}\]
 is solvable for the variables $u$ and $v$ in a neighborhood of the point
 $(x_0,y_0,z_0,u_0,v_0) = (0,1,1,1,0)$ and determine the derivatives $D_{(0,1,1)}u$ and
 $D_{(0,1,1)}v$ of the implicitly defined functions $u=u(x,y,z)$ and $v=v(x,y,z)$.
@@ -513,7 +515,7 @@ $D_{(0,1,1)}v$ of the implicitly defined functions $u=u(x,y,z)$ and $v=v(x,y,z)$
 \begin{exercise}[7.6 --- Spherical coordinates \textnormal{(important)}]
 \label{ex:7.6}
 The mapping $\Phi : (0,\infty)\times(0,\pi)\times(-\pi,\pi) \to \mathbb{R}^3$ defined by
-$$\Phi(r,\theta,\varphi) = \begin{pmatrix} r\sin\theta\cos\varphi \\ r\sin\theta\sin\varphi \\ r\cos\theta \end{pmatrix}$$
+\[\Phi(r,\theta,\varphi) = \begin{pmatrix} r\sin\theta\cos\varphi \\ r\sin\theta\sin\varphi \\ r\cos\theta \end{pmatrix}\]
 is called \textit{spherical coordinates}.
 \begin{enumerate}[label=\textbf{\arabic*.}]
   \item Sketch the images of $r \mapsto \Phi(r,\theta_0,\varphi_0)$, $\theta \mapsto
@@ -539,16 +541,16 @@ official-sheet exercises, so all solutions below are original. Each has been che
 % Generator: Claude Sonnet 5 (Medium)
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item First build a diffeomorphism $\mathbb{R} \to (0,1)$: the function
-    $$\psi : \mathbb{R} \to (0,1), \qquad \psi(t) := \frac12+\frac1\pi\arctan(t)$$
+    \[\psi : \mathbb{R} \to (0,1), \qquad \psi(t) := \frac12+\frac1\pi\arctan(t)\]
     is $C^\infty$, strictly increasing (since $\arctan' > 0$), and bijective onto $(0,1)$ (as
     $\arctan$ is bijective onto $(-\tfrac\pi2,\tfrac\pi2)$), with $C^\infty$ inverse
     $\psi^{-1}(s) = \tan\big(\pi(s-\tfrac12)\big)$. Applying $\psi$ in each coordinate gives the
     diffeomorphism
-    $$\phi : \mathbb{R}^2 \to (0,1)\times(0,1), \qquad \phi(x,y) := \Big(\frac12+\frac1\pi\arctan(x),\ \frac12+\frac1\pi\arctan(y)\Big).$$
+    \[\phi : \mathbb{R}^2 \to (0,1)\times(0,1), \qquad \phi(x,y) := \Big(\frac12+\frac1\pi\arctan(x),\ \frac12+\frac1\pi\arctan(y)\Big).\]
   \item \textbf{No.} $f$ is a $C^\infty$ bijection of $\mathbb{R}$ with $f^{-1}(x) =
     \sqrt[5]{x}$, but $f'(0) = 5\cdot0^4 = 0$. If $f$ were a diffeomorphism, then by the
     chain rule applied to $f^{-1}\circ f = \id$,
-    $$1 = (f^{-1})'(f(x))\cdot f'(x) \quad \text{for all } x,$$
+    \[1 = (f^{-1})'(f(x))\cdot f'(x) \quad \text{for all } x,\]
     which is impossible at $x=0$ since $f'(0)=0$. Equivalently, $(f^{-1})'(x) =
     \tfrac15x^{-4/5} \to \infty$ as $x \to 0$, so $f^{-1}$ is not even differentiable at $0$,
     let alone continuously so.
@@ -558,15 +560,15 @@ official-sheet exercises, so all solutions below are original. Each has been che
 \begin{exercisesolution}[Solution to \cref{ex:7.5}]
 % Generator: Claude Sonnet 5 (Medium)
 Write the system as $F(x,y,z,u,v) = 0$ for $F : \mathbb{R}^5 \to \mathbb{R}^2$,
-$$F(x,y,z,u,v) := \begin{pmatrix} xy^5+yu^5+zv^5-1 \\ x^5y+y^5u+z^5v-1 \end{pmatrix}.$$
+\[F(x,y,z,u,v) := \begin{pmatrix} xy^5+yu^5+zv^5-1 \\ x^5y+y^5u+z^5v-1 \end{pmatrix}.\]
 The differential is
-$$\Jac F(x,y,z,u,v) = \begin{pmatrix} y^5 & 5xy^4+u^5 & v^5 & 5yu^4 & 5zv^4 \\ 5x^4y & x^5+5y^4u & 5z^4v & y^5 & z^5 \end{pmatrix},$$
+\[\Jac F(x,y,z,u,v) = \begin{pmatrix} y^5 & 5xy^4+u^5 & v^5 & 5yu^4 & 5zv^4 \\ 5x^4y & x^5+5y^4u & 5z^4v & y^5 & z^5 \end{pmatrix},\]
 so at the base point,
-$$\Jac F(0,1,1,1,0) = \begin{pmatrix} 1 & 1 & 0 & 5 & 0 \\ 0 & 5 & 0 & 1 & 1 \end{pmatrix}.$$
+\[\Jac F(0,1,1,1,0) = \begin{pmatrix} 1 & 1 & 0 & 5 & 0 \\ 0 & 5 & 0 & 1 & 1 \end{pmatrix}.\]
 By the implicit function theorem applied with $(x,y,z)$ as the free variables and $(u,v)$ as the
 variables to solve for, we need the submatrix of partial derivatives with respect to $u,v$ to be
 invertible; this is
-$$D_{(u,v)}F(0,1,1,1,0) = \begin{pmatrix} 5 & 0 \\ 1 & 1\end{pmatrix}, \qquad \det = 5 \neq 0,$$
+\[D_{(u,v)}F(0,1,1,1,0) = \begin{pmatrix} 5 & 0 \\ 1 & 1\end{pmatrix}, \qquad \det = 5 \neq 0,\]
 so the implicit function theorem applies, and the system is indeed solvable for $u,v$ as
 $C^\infty$ functions of $(x,y,z)$ near $(0,1,1)$. Writing $G(x,y,z) := (u(x,y,z),v(x,y,z))$, the
 theorem gives
@@ -576,8 +578,8 @@ theorem gives
   &= -\frac15\begin{pmatrix}1&0\\-1&5\end{pmatrix}\begin{pmatrix}1&1&0\\0&5&0\end{pmatrix} \\
   &= -\frac15\begin{pmatrix}1&1&0\\-1&24&0\end{pmatrix}.
 \end{align*}
-So $D_{(0,1,1)}u = -\tfrac15\begin{pmatrix}1&1&0\end{pmatrix}$ and
-$D_{(0,1,1)}v = -\tfrac15\begin{pmatrix}-1&24&0\end{pmatrix}$.
+So $D_{(0,1,1)}u = -\tfrac15\left(\begin{smallmatrix}1&1&0\end{smallmatrix}\right)$ and
+$D_{(0,1,1)}v = -\tfrac15\left(\begin{smallmatrix}-1&24&0\end{smallmatrix}\right)$.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution to \cref{ex:7.6}]
@@ -594,17 +596,17 @@ $D_{(0,1,1)}v = -\tfrac15\begin{pmatrix}-1&24&0\end{pmatrix}$.
   \item For each fixed $r$, the image sweeps out the sphere of radius $r$ minus the half-plane
     at $\varphi = \pm\pi$ (the \emph{anti}-meridian --- the prime meridian is $\varphi = 0$);
     overall,
-    $$\operatorname{im}(\Phi) = \mathbb{R}^3\setminus\big((-\infty,0]\times\{0\}\times\mathbb{R}\big).$$
+    \[\operatorname{im}(\Phi) = \mathbb{R}^3\setminus\big((-\infty,0]\times\{0\}\times\mathbb{R}\big).\]
   \item Computing,
-    $$D_{(r,\theta,\varphi)}\Phi = \begin{pmatrix} \sin\theta\cos\varphi & r\cos\theta\cos\varphi & -r\sin\theta\sin\varphi \\ \sin\theta\sin\varphi & r\cos\theta\sin\varphi & r\sin\theta\cos\varphi \\ \cos\theta & -r\sin\theta & 0 \end{pmatrix},$$
+    \[D_{(r,\theta,\varphi)}\Phi = \begin{pmatrix} \sin\theta\cos\varphi & r\cos\theta\cos\varphi & -r\sin\theta\sin\varphi \\ \sin\theta\sin\varphi & r\cos\theta\sin\varphi & r\sin\theta\cos\varphi \\ \cos\theta & -r\sin\theta & 0 \end{pmatrix},\]
     hence, expanding along the last row,
-    $$\begin{aligned}
+    \[\begin{aligned}
     \det(D_{(r,\theta,\varphi)}\Phi) &= r^2\sin\theta\cos^2\theta\cos^2\varphi+r^2\sin^3\theta\sin^2\varphi+r^2\sin\theta\cos^2\theta\sin^2\varphi+r^2\sin^3\theta\cos^2\varphi \\
     &= r^2\big(\sin\theta\cos^2\theta+\sin^3\theta\big) = r^2\sin\theta.
-    \end{aligned}$$
+    \end{aligned}\]
   \item Since $r \in (0,\infty)$ and $\theta \in (0,\pi)$, $r^2\sin\theta$ is never $0$, so
     $\Jac\Phi(r,\theta,\varphi)$ is everywhere invertible and $\Phi$ is a local diffeomorphism by
-    \cref{thm:inverse_function_theorem}. To see it is a \textbf{global} diffeomorphism onto its
+    \Cref{thm:inverse_function_theorem}. To see it is a \textbf{global} diffeomorphism onto its
     image, it remains to check $\Phi$ is injective: if $\Phi(r_1,\theta_1,\varphi_1) =
     \Phi(r_2,\theta_2,\varphi_2)$, then $r_1=r_2$ follows by taking the norm of both sides; since
     $\cos : (0,\pi) \to (-1,1)$ is injective, the third coordinate gives $\theta_1=\theta_2$;

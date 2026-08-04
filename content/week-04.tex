@@ -2,10 +2,7 @@
 \chapter{Week 4 --- The Differential, the Chain Rule \& Taylor Expansions}
 
 % Transition: Claude Sonnet 5
-This chapter generalizes the single-variable derivative to maps between Euclidean spaces of
-arbitrary dimension: the differential, the Jacobi matrix, the chain rule (including along a
-path), and multivariable Taylor expansions up to the Hessian. The exercise sheet is at the end of
-the chapter, in \cref{sec:week04_solutions}.
+While Week 3 analyzed continuous functions as structure-preserving topological maps, this chapter advances from continuity to local linear approximation: the differential of maps $F: \mathbb{R}^n \to \mathbb{R}^m$. We examine the hierarchy connecting Fréchet differentiability, Gâteaux derivatives, and partial derivatives, explore the Jacobian matrix and chain rule along paths, and establish why vector-valued maps satisfy the Mean Value Inequality rather than exact equality. The exercise sheet is at the end of the chapter, in \cref{sec:week04_solutions}.
 
 \session{Monday}
 
@@ -14,19 +11,19 @@ the chapter, in \cref{sec:week04_solutions}.
 \label{sec:the_differential}
 
 For $f : \mathbb{R}\to\mathbb{R}$ differentiable at $x_0 \in \mathbb{R}$:
-$$f(x_0+h) = f(x_0) + f'(x_0)h + o(h)$$
-$$\Updownarrow$$
-$$\lim_{h\to 0}\frac{f(x_0+h)-f(x_0)}{h} = f'(x_0)$$
-$$\Updownarrow$$
-$$\lim_{h\to 0}\left|\frac{f(x_0+h)-f(x_0)-f'(x_0)h}{h}\right| = 0$$
+\[f(x_0+h) = f(x_0) + f'(x_0)h + o(h)\]
+\[\Updownarrow\]
+\[\lim_{h\to 0}\frac{f(x_0+h)-f(x_0)}{h} = f'(x_0)\]
+\[\Updownarrow\]
+\[\lim_{h\to 0}\left|\frac{f(x_0+h)-f(x_0)-f'(x_0)h}{h}\right| = 0\]
 
 For $F : \mathbb{R}^n \to \mathbb{R}^m$ differentiable at $x_0 \in \mathbb{R}^n$:
-$$F(x_0+h) = F(x_0) + \underbrace{DF_{x_0}(h)}_{\text{linear map}} + o(|h|)$$
-$$\Updownarrow$$
-$$\lim_{h\to 0}\frac{|F(x_0+h)-F(x_0)-DF_{x_0}(h)|}{|h|} = 0$$
-$$\Downarrow$$
-$$\lim_{s\to 0}\frac{F(x_0+sv)-F(x_0)}{s} = DF_{x_0}(v) = \partial_vF(x_0) \quad \text{for each fixed } v \in \mathbb{R}^n$$
-$$\text{(the \newterm{directional derivative} of } F \text{ at } x_0 \text{ in direction } v\text{)}$$
+\[F(x_0+h) = F(x_0) + \underbrace{DF_{x_0}(h)}_{\text{linear map}} + o(|h|)\]
+\[\Updownarrow\]
+\[\lim_{h\to 0}\frac{|F(x_0+h)-F(x_0)-DF_{x_0}(h)|}{|h|} = 0\]
+\[\Downarrow\]
+\[\lim_{s\to 0}\frac{F(x_0+sv)-F(x_0)}{s} = DF_{x_0}(v) = \partial_vF(x_0) \quad \text{for each fixed } v \in \mathbb{R}^n\]
+\[\text{(the \newterm{directional derivative} of } F \text{ at } x_0 \text{ in direction } v\text{)}\]
 
 Note that the last arrow points \textbf{one way only}. The first two lines say the same thing;
 the third is a strictly weaker consequence, and recovering differentiability from it is exactly
@@ -40,8 +37,8 @@ while still appearing on the right, and the quotient genuinely depends on the di
 approach. The intended statement is the one typeset above --- fix a direction $v$ first, then
 let the scalar $s \to 0$ --- and it is only an \emph{implication}, not an equivalence. The
 distinction is not pedantic: it is the entire content of
-\cref{ex:partial_derivatives_not_continuous} and of
-\cref{rem:directional_derivative_caveat}.
+\Cref{ex:partial_derivatives_not_continuous} and of
+\Cref{rem:directional_derivative_caveat}.
 \end{ainote}
 
 \begin{definition}[Differentiability]
@@ -59,11 +56,11 @@ if $L_1, L_2$ both satisfy the defining limit, then
 $(L_1-L_2)(h)/|h| \to 0$ as $h \to 0$ along every direction, which forces the linear map
 $L_1 - L_2$ to vanish identically. Concretely: write $L := L_1-L_2$ and suppose $L(h) \neq 0$
 for some $h$. Along the ray $th$, $t > 0$, linearity gives
-$$\frac{|L(th)|}{|th|} = \frac{t\,|L(h)|}{t\,|h|} = \frac{|L(h)|}{|h|} \neq 0,$$
+\[\frac{|L(th)|}{|th|} = \frac{t\,|L(h)|}{t\,|h|} = \frac{|L(h)|}{|h|} \neq 0,\]
 a nonzero \emph{constant} --- so the quotient cannot tend to $0$ as $t \to 0$. Hence $L(h)=0$
 for every $h$. This
 is the multivariable analogue of the uniqueness-of-limits argument from
-\cref{prop:uniqueness_of_limits}.
+\Cref{prop:uniqueness_of_limits}.
 \end{remark}
 
 \begin{proposition}[Differentiability implies continuity]
@@ -76,7 +73,7 @@ If $F : U \to \mathbb{R}^m$, $U \subseteq \mathbb{R}^n$ open, is differentiable
 By \cref{def:differentiable}, $F(x_0+h) - F(x_0) = DF_{x_0}(h) + o(|h|)$ as $h \to 0$. Since
 $DF_{x_0}$ is linear on the finite-di\-men\-sional space $\mathbb{R}^n$, it is bounded, i.e.\ there
 exists $C \geq 0$ with $|DF_{x_0}(h)| \leq C|h|$ for all $h$. Hence
-$$|F(x_0+h) - F(x_0)| \leq |DF_{x_0}(h)| + o(|h|) \leq C|h| + o(|h|) \xrightarrow{h\to 0} 0,$$
+\[|F(x_0+h) - F(x_0)| \leq |DF_{x_0}(h)| + o(|h|) \leq C|h| + o(|h|) \xrightarrow{h\to 0} 0,\]
 so $F(x_0+h) \to F(x_0)$ as $h \to 0$, i.e.\ $F$ is continuous at $x_0$.
 \end{proof}
 
@@ -94,13 +91,13 @@ without $F$ even being continuous there, let alone differentiable.
 Since $DF_{x_0} : \mathbb{R}^n \to \mathbb{R}^m$ (\cref{def:differentiable}) is a linear map, there is a \textbf{1--1
 correspondence with a matrix once a basis is fixed}! In the standard basis of $\mathbb{R}^n$,
 $(e_1,\dots,e_n)$, this is the \newterm{Jacobi matrix} (\germanterm{Jacobi-Matrix}):
-$$DF_x \;\cong\; \Jac F(x) = \begin{pmatrix} \dfrac{\partial F_1}{\partial x_1} & \cdots & \dfrac{\partial F_1}{\partial x_n} \\[1ex] \vdots & \ddots & \vdots \\[1ex] \dfrac{\partial F_m}{\partial x_1} & \cdots & \dfrac{\partial F_m}{\partial x_n}\end{pmatrix}$$
+\[DF_x \;\cong\; \Jac F(x) = \begin{pmatrix} \dfrac{\partial F_1}{\partial x_1} & \cdots & \dfrac{\partial F_1}{\partial x_n} \\[1ex] \vdots & \ddots & \vdots \\[1ex] \dfrac{\partial F_m}{\partial x_1} & \cdots & \dfrac{\partial F_m}{\partial x_n}\end{pmatrix}\]
 ($m$ rows, $n$ columns), where we wrote $F(x) = (F_1, \dots, F_m)\transp$ and
-$$\frac{\partial F}{\partial x_i} =: \partial_i F(x)$$
+\[\frac{\partial F}{\partial x_i} =: \partial_i F(x)\]
 is the \newterm{$i$-th partial derivative} (\germanterm{partielle Ableitung}) at $x$:
-$$\partial_i F(x) = \lim_{s\to 0}\frac{F(x+se_i)-F(x)}{s}.$$
+\[\partial_i F(x) = \lim_{s\to 0}\frac{F(x+se_i)-F(x)}{s}.\]
 This defines a function $\partial_i F : U \to \mathbb{R}^m$. If $F$ is differentiable, then
-$$\partial_i F(x) = DF_x(e_i).$$
+\[\partial_i F(x) = DF_x(e_i).\]
 
 \begin{importantremark}
 The partial derivatives can exist even if $F : U \to \mathbb{R}^m$ is not differentiable!
@@ -111,13 +108,13 @@ The partial derivatives can exist even if $F : U \to \mathbb{R}^m$ is not differ
 \label{ex:partial_derivatives_not_continuous}
 % Generator: Claude Sonnet 5 (Medium)
 Let $f : \mathbb{R}^2 \to \mathbb{R}$ be defined by
-$$f(x,y) := \begin{cases} \dfrac{xy}{x^2+y^2} & (x,y) \neq (0,0), \\ 0 & (x,y) = (0,0). \end{cases}$$
+\[f(x,y) := \begin{cases} \dfrac{xy}{x^2+y^2} & (x,y) \neq (0,0), \\ 0 & (x,y) = (0,0). \end{cases}\]
 Along each axis, $f$ vanishes identically ($f(x,0) = f(0,y) = 0$), so both partial derivatives at
 the origin exist and equal $0$:
-$$\partial_x f(0,0) = \lim_{s\to 0}\frac{f(s,0)-f(0,0)}{s} = 0, \qquad \partial_y f(0,0) = 0.$$
+\[\partial_x f(0,0) = \lim_{s\to 0}\frac{f(s,0)-f(0,0)}{s} = 0, \qquad \partial_y f(0,0) = 0.\]
 Yet $f$ is not even continuous at $(0,0)$: along the diagonal $y=x$, $f(x,x) = \tfrac{x^2}{2x^2} =
 \tfrac12$ for all $x \neq 0$, so $f(x,x) \to \tfrac12 \neq 0 = f(0,0)$ as $x \to 0$. By
-\cref{prop:differentiable_implies_continuous}, $f$ is therefore not differentiable at $(0,0)$,
+\Cref{prop:differentiable_implies_continuous}, $f$ is therefore not differentiable at $(0,0)$,
 even though both partial derivatives exist there.
 \end{aiexample}
 
@@ -126,12 +123,12 @@ even though both partial derivatives exist there.
 \label{rem:continuity_contrast_pair}
 Sascha Brack pairs the function above with one that looks almost identical, as a test of whether
 you can tell them apart:
-$$f_1(x,y) := \frac{xy}{x^2+y^2}, \qquad\qquad f_2(x,y) := \frac{x^2y^2}{x^2+y^2},$$
+\[f_1(x,y) := \frac{xy}{x^2+y^2}, \qquad\qquad f_2(x,y) := \frac{x^2y^2}{x^2+y^2},\]
 both extended by $0$ at the origin. Substituting $x = r\cos\theta$, $y = r\sin\theta$ settles
 both at once:
-$$f_1 = \frac{r^2\cos\theta\sin\theta}{r^2} = \cos\theta\sin\theta,
+\[f_1 = \frac{r^2\cos\theta\sin\theta}{r^2} = \cos\theta\sin\theta,
 \qquad\qquad
-f_2 = \frac{r^4\cos^2\theta\sin^2\theta}{r^2} = r^2\cos^2\theta\sin^2\theta.$$
+f_2 = \frac{r^4\cos^2\theta\sin^2\theta}{r^2} = r^2\cos^2\theta\sin^2\theta.\]
 In $f_1$ every $r$ cancels: the function is constant along each ray and takes a different
 constant on different rays, so no limit exists and $f_1$ is discontinuous at the origin. In
 $f_2$ a factor $r^2$ survives, and since $|\cos^2\theta\sin^2\theta| \leq 1$ we get
@@ -160,9 +157,9 @@ step 3 of \cref{rem:differentiability_recipe} insists on \qt{uniformly in $\thet
 \subsection{Examples}
 
 \begin{example}[Derivative of a curve]
-$$\gamma : \mathbb{R}\to\mathbb{R}^2, \qquad t \mapsto \begin{pmatrix}\cos t \\ \sin t\end{pmatrix}$$
+\[\gamma : \mathbb{R}\to\mathbb{R}^2, \qquad t \mapsto \begin{pmatrix}\cos t \\ \sin t\end{pmatrix}\]
 What is $\gamma'(\tfrac{\pi}{4}) := D\gamma_{\pi/4}$?
-$$\gamma'\!\left(\tfrac{\pi}{4}\right) = \begin{pmatrix}\partial_t\gamma_1(\pi/4) \\ \partial_t\gamma_2(\pi/4)\end{pmatrix} = \begin{pmatrix}-1/\sqrt{2} \\ 1/\sqrt{2}\end{pmatrix}$$
+\[\gamma'\!\left(\tfrac{\pi}{4}\right) = \begin{pmatrix}\partial_t\gamma_1(\pi/4) \\ \partial_t\gamma_2(\pi/4)\end{pmatrix} = \begin{pmatrix}-1/\sqrt{2} \\ 1/\sqrt{2}\end{pmatrix}\]
 \end{example}
 
 \begin{aiexample}[Jacobian Matrix of Polar Coordinates]
@@ -188,7 +185,7 @@ Its determinant is $\det \Jac f(r,\theta) = r\cos^2\theta + r\sin^2\theta = r > 
 
 This vector is the \textbf{velocity of the curve} (\germanterm{Geschwindigkeit}) at
 $t = \tfrac{\pi}{4}$; its length $|\gamma'(t)|$ is the \textbf{speed}. We get that
-$$\gamma\!\left(\tfrac{\pi}{4}+h\right) = \frac{1}{\sqrt{2}}\begin{pmatrix}1\\1\end{pmatrix} + \frac{h}{\sqrt{2}}\begin{pmatrix}-1\\1\end{pmatrix} + o(|h|).$$
+\[\gamma\!\left(\tfrac{\pi}{4}+h\right) = \frac{1}{\sqrt{2}}\begin{pmatrix}1\\1\end{pmatrix} + \frac{h}{\sqrt{2}}\begin{pmatrix}-1\\1\end{pmatrix} + o(|h|).\]
 
 \begin{ainote}
 Corsin calls $\gamma'(\tfrac{\pi}{4})$ the \qt{speed} of the curve. Strictly, $\gamma'(t)$ is the
@@ -200,20 +197,20 @@ the distinction matters; corrected above.
 % Source: Corsin Nick/Class Notes/Week 4.pdf, p. 4
 From this example, we see that the \textbf{column} vectors of the Jacobian are the partial
 derivatives:
-$$\Jac F(x) = \left(\frac{\partial F}{\partial x_1}\ \Big|\ \cdots\ \Big|\ \frac{\partial F}{\partial x_n}\right)$$
+\[\Jac F(x) = \left(\frac{\partial F}{\partial x_1}\ \Big|\ \cdots\ \Big|\ \frac{\partial F}{\partial x_n}\right)\]
 and therefore, in the canonical basis, with $v := (v_1,\dots,v_n)\transp$:
-$$\partial_v F(x) = DF_x(v) = \Jac F(x)\,v = \sum_{i=1}^{n} v_i\,\frac{\partial F}{\partial x_i}.$$
+\[\partial_v F(x) = DF_x(v) = \Jac F(x)\,v = \sum_{i=1}^{n} v_i\,\frac{\partial F}{\partial x_i}.\]
 
 % Source: Corsin Nick/Class Notes/Week 4.pdf, p. 5
 \begin{example}[Scalar field gradient]
-$$f : \mathbb{R}^3\to\mathbb{R}, \qquad (x,y,z) \mapsto 2x^2 + y^2 + 3z^2 - 2xyz$$
+\[f : \mathbb{R}^3\to\mathbb{R}, \qquad (x,y,z) \mapsto 2x^2 + y^2 + 3z^2 - 2xyz\]
 What is $\Jac f(x,y,z)$?
-$$\Jac f(x,y,z) = (4x - 2yz,\ 2y - 2xz,\ 6z - 2xy) = \left(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, \frac{\partial f}{\partial z}\right) = (\nabla f)\transp$$
+\[\Jac f(x,y,z) = (4x - 2yz,\ 2y - 2xz,\ 6z - 2xy) = \left(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, \frac{\partial f}{\partial z}\right) = (\nabla f)\transp\]
 \end{example}
 
 From this, we see that the \textbf{rows} of the Jacobian are the \newterm{gradients}
 (\germanterm{Gradient}):
-$$\Jac F(x) = \begin{pmatrix} \nabla F_1 \\ \hline \vdots \\ \hline \nabla F_m \end{pmatrix}$$
+\[\Jac F(x) = \begin{pmatrix} \nabla F_1 \\ \hline \vdots \\ \hline \nabla F_m \end{pmatrix}\]
 
 \begin{ainote}
 Corsin's sentence reads ``the columns of the Jacobian are the gradients'', but the displayed
@@ -234,7 +231,7 @@ functions --- the single most useful computational tool in this chapter.
 The \newterm{chain rule} (\germanterm{Kettenregel}) states: for
 $f : U \subseteq \mathbb{R}^n \to \mathbb{R}^m$, $g : V \subseteq \mathbb{R}^m \to \mathbb{R}^d$
 differentiable, it holds:
-$$D(g\circ f)(x) = Dg(f(x))\,Df(x).$$
+\[D(g\circ f)(x) = Dg(f(x))\,Df(x).\]
 The same identity holds for the corresponding Jacobi matrices, where the composition on the
 right becomes an ordinary matrix product.
 
@@ -271,11 +268,11 @@ along it. Summing over the routes gives the chain rule:
 \end{tikzpicture}
 \end{center}
 
-$$\frac{\partial z_j}{\partial x_i}
+\[\frac{\partial z_j}{\partial x_i}
   \;=\; \sum_{\ell=1}^{m}
   \underbrace{\frac{\partial z_j}{\partial y_\ell}}_{(\Jac g)_{j\ell}}
   \underbrace{\frac{\partial y_\ell}{\partial x_i}}_{(\Jac f)_{\ell i}}
-  \;=\; \big(\Jac g(f(x))\,\Jac f(x)\big)_{ji}.$$
+  \;=\; \big(\Jac g(f(x))\,\Jac f(x)\big)_{ji}.\]
 
 The right-hand equality is just the definition of matrix multiplication --- which is the point:
 \textbf{matrix multiplication is a sum over paths}, and the chain rule looks like a product of
@@ -287,7 +284,7 @@ The reading is worth having because it makes the coordinate form reconstructible
 memorised: count the intermediate variables, one term each, each term a product of two factors,
 and the index that is summed over is the one belonging to the middle layer. It is also the
 form in which the rule is actually used in physics --- compare
-\cref{sec:chain_rule_along_path}, which is this picture with a single intermediate layer
+\Cref{sec:chain_rule_along_path}, which is this picture with a single intermediate layer
 $\gamma_1,\dots,\gamma_n$ and a single source variable $t$.
 \end{remark}
 \end{theorem}
@@ -306,20 +303,20 @@ which matches the direct calculation $\frac{\partial}{\partial r}(r^2) = 2r$ and
 \begin{exercise}[Jacobian of a composite map]
 \label{ex:chain_rule_computation}
 Compute $\Jac(g\circ f)$ for
-$$f : \mathbb{R}^3\to\mathbb{R}^2,\ x \mapsto (x_1x_2,\ x_2+x_3), \qquad g : \mathbb{R}^2\to\mathbb{R}^2,\ x \mapsto (e^{x_1},\ x_1x_2).$$
+\[f : \mathbb{R}^3\to\mathbb{R}^2,\ x \mapsto (x_1x_2,\ x_2+x_3), \qquad g : \mathbb{R}^2\to\mathbb{R}^2,\ x \mapsto (e^{x_1},\ x_1x_2).\]
 \end{exercise}
 
 % Kept inline: solved directly in Corsin Nick/Class Notes/Week 4.pdf, pp. 5--6.
 \begin{exercisesolution}[\cref{ex:chain_rule_computation}]
 We have
-$$\Jac f(x) = \begin{pmatrix} x_2 & x_1 & 0 \\ 0 & 1 & 1\end{pmatrix}, \qquad \Jac g(x) = \begin{pmatrix} e^{x_1} & 0 \\ x_2 & x_1 \end{pmatrix}.$$
+\[\Jac f(x) = \begin{pmatrix} x_2 & x_1 & 0 \\ 0 & 1 & 1\end{pmatrix}, \qquad \Jac g(x) = \begin{pmatrix} e^{x_1} & 0 \\ x_2 & x_1 \end{pmatrix}.\]
 So:
-$$
+\[
 \begin{aligned}
 \Jac(g\circ f) &= \begin{pmatrix} e^{x_1x_2} & 0 \\ x_2+x_3 & x_1x_2\end{pmatrix}\begin{pmatrix} x_2 & x_1 & 0 \\ 0 & 1 & 1\end{pmatrix} \\
 &= \begin{pmatrix} x_2e^{x_1x_2} & x_1e^{x_1x_2} & 0 \\ x_2^2 + x_2x_3 & 2x_1x_2 + x_1x_3 & x_1x_2 \end{pmatrix}
 \end{aligned}
-$$
+\]
 \end{exercisesolution}
 
 % Sonnet 5 (Medium)
@@ -412,14 +409,14 @@ the formula $(*)$ holds.
 \label{ex:all_directional_derivatives_exist}
 \Cref{ex:partial_derivatives_not_continuous} showed that the two \emph{partial} derivatives are
 too little. One might hope that asking for \emph{all} directions is enough. It is not. Let
-$$f(x,y) := \begin{cases} \dfrac{x^2y}{x^4+y^2} & (x,y) \neq (0,0), \\[1ex] 0 & (x,y)=(0,0).\end{cases}$$
+\[f(x,y) := \begin{cases} \dfrac{x^2y}{x^4+y^2} & (x,y) \neq (0,0), \\[1ex] 0 & (x,y)=(0,0).\end{cases}\]
 Fix a direction $v = (a,b) \neq 0$ and compute along the ray $t \mapsto tv$:
-$$\frac{f(ta,tb)}{t} = \frac{1}{t}\cdot\frac{t^2a^2\cdot tb}{t^4a^4+t^2b^2}
+\[\frac{f(ta,tb)}{t} = \frac{1}{t}\cdot\frac{t^2a^2\cdot tb}{t^4a^4+t^2b^2}
    = \frac{a^2b}{t^2a^4+b^2} \;\xrightarrow{\ t\to0\ }\;
-   \begin{cases} \dfrac{a^2}{b} & b \neq 0, \\[1ex] 0 & b = 0.\end{cases}$$
+   \begin{cases} \dfrac{a^2}{b} & b \neq 0, \\[1ex] 0 & b = 0.\end{cases}\]
 So $\partial_vf(0,0)$ exists for \textbf{every} direction $v$. Yet $f$ is not even continuous at
 the origin: approaching along the \emph{parabola} $y=x^2$ instead of along a straight line,
-$$f(x,x^2) = \frac{x^2\cdot x^2}{x^4+x^4} = \frac12 \quad\text{for all } x \neq 0.$$
+\[f(x,x^2) = \frac{x^2\cdot x^2}{x^4+x^4} = \frac12 \quad\text{for all } x \neq 0.\]
 By \cref{prop:differentiable_implies_continuous}, $f$ is therefore not differentiable at the
 origin.
 
@@ -454,7 +451,7 @@ implications; both are reproduced below, since without them the practical questi
 Let $U \subseteq \mathbb{R}^n$ be open and $F : U \to \mathbb{R}^m$. If all partial derivatives
 $\partial_iF$ exist on $U$ \textbf{and are continuous} at every $x \in U$, then $F$ is
 differentiable at every $x \in U$, and
-$$DF_x = \big(\partial_1F(x),\ \dots,\ \partial_nF(x)\big).$$
+\[DF_x = \big(\partial_1F(x),\ \dots,\ \partial_nF(x)\big).\]
 Such an $F$ is called \newterm{continuously differentiable}, written $F \in C^1(U)$.
 \end{theorem}
 
@@ -508,8 +505,8 @@ an example already in this chapter --- except the topmost, for which
 $F(x,y) := (x^2+y^2)\sin\big(1/\sqrt{x^2+y^2}\big)$ (and $F(0,0):=0$) serves: it \emph{is}
 differentiable at the origin, since $|F(h)|/\lVert h\rVert \leq \lVert h\rVert \to 0$ gives
 $DF_0 = 0$, yet
-$$\partial_1F(x,y) = 2x\sin\tfrac{1}{r} - \tfrac{x}{r}\cos\tfrac{1}{r},
-\qquad r := \sqrt{x^2+y^2},$$
+\[\partial_1F(x,y) = 2x\sin\tfrac{1}{r} - \tfrac{x}{r}\cos\tfrac{1}{r},
+\qquad r := \sqrt{x^2+y^2},\]
 does not tend to $\partial_1F(0,0)=0$: along $(\tfrac1n,0)$ it equals
 $\tfrac2n\sin n - \cos n$, and $\cos n$ has no limit. So differentiable does \textbf{not} imply
 $C^1$ --- the chain really is strict at every step.
@@ -522,16 +519,16 @@ Sascha's notes distil the above into three steps, worth following in this order.
   \item \textbf{Compute the partial derivatives $\partial_iF(x_0)$.} If one of them fails to
     exist, $F$ is not differentiable and you are done. If they all exist \emph{and are
     continuous near $x_0$}, $F$ \emph{is} differentiable by
-    \cref{thm:continuous_partials_imply_differentiable} --- also done. Most exercises end here.
+    \Cref{thm:continuous_partials_imply_differentiable} --- also done. Most exercises end here.
   \item \textbf{Otherwise, guess the candidate.} If $F$ is differentiable at all, the differential
     can only be $L := \big(\partial_1F(x_0),\dots,\partial_nF(x_0)\big)$, since the partials are
     forced (\cref{sec:jacobi_matrix}).
   \item \textbf{Verify the candidate against the definition:}
-    $$\lim_{h\to0}\frac{\big|F(x_0+h)-F(x_0)-L(h)\big|}{\lVert h\rVert} \overset{?}{=} 0.$$
+    \[\lim_{h\to0}\frac{\big|F(x_0+h)-F(x_0)-L(h)\big|}{\lVert h\rVert} \overset{?}{=} 0.\]
     In $\mathbb{R}^2$, substituting $h = (r\cos\theta,\ r\sin\theta)$ and checking that the
     result tends to $0$ \emph{uniformly in $\theta$} is usually the quickest route --- the same
     polar trick used in \cref{ex:all_directional_derivatives_exist} and, later, in
-    \cref{q:week08_q4}.
+    \Cref{q:week08_q4}.
 \end{enumerate}
 Step 1 is the one students skip; it settles the overwhelming majority of cases without any
 $\varepsilon$--$\delta$ work at all.
@@ -543,7 +540,7 @@ $\varepsilon$--$\delta$ work at all.
 
 \begin{ainote}
 The mean value theorem is used twice in this chapter --- in the official hint to
-\cref{ex:4.6} and in its solution --- but Corsin never states it. Diego Torres Tejeda's notes
+\Cref{ex:4.6} and in its solution --- but Corsin never states it. Diego Torres Tejeda's notes
 state it, together with the warning that follows, which is what \cref{ex:4.6} actually turns on.
 \end{ainote}
 
@@ -552,7 +549,7 @@ state it, together with the warning that follows, which is what \cref{ex:4.6} ac
 Let $f : U \to \mathbb{R}$ be differentiable, $x \in U$ and $h \in \mathbb{R}^n$ with
 $x+th \in U$ for all $t \in [0,1]$. Then there is $t_0 \in (0,1)$ such that, writing
 $\xi := x+t_0h$,
-$$f(x+h)-f(x) = \partial_hf(\xi).$$
+\[f(x+h)-f(x) = \partial_hf(\xi).\]
 \end{theorem}
 
 \begin{proof}
@@ -566,11 +563,11 @@ $\varphi(1)-\varphi(0) = \varphi'(t_0)$, which is the claim.
 \label{rem:mvt_fails_vector_valued}
 The hypothesis \qt{$f : U \to \mathbb{R}$} is essential --- \textbf{the theorem is false the
 moment the target is $\mathbb{R}^m$ with $m \geq 2$}, and this is exactly what
-\cref{ex:4.6} on the problem sheet probes.
+\Cref{ex:4.6} on the problem sheet probes.
 
 Applying the scalar result to each component $f_1,\dots,f_m$ separately does produce points
 $\xi_1,\dots,\xi_m$ with
-$$f(x+h)-f(x) = \begin{pmatrix}\partial_hf_1(\xi_1) \\ \vdots \\ \partial_hf_m(\xi_m)\end{pmatrix},$$
+\[f(x+h)-f(x) = \begin{pmatrix}\partial_hf_1(\xi_1) \\ \vdots \\ \partial_hf_m(\xi_m)\end{pmatrix},\]
 but the $\xi_i$ are \emph{different points} in general, and no single $\xi$ need work for all
 components at once. The standard witness is the helix
 $\gamma(t) := (\cos t, \sin t)$ on $[0,2\pi]$: here $\gamma(2\pi)-\gamma(0) = 0$, while
@@ -587,27 +584,27 @@ uses in practice.
 \label{ex:transpose_diff}
 We identify the inner product space of real-valued matrices $\mathbb{R}^{n\times n}$ with inner
 product
-$$\langle A, B\rangle = \sum_{i,j=1}^{n} A_{ij}B_{ij} = \Tr(A\transp B)$$
+\[\langle A, B\rangle = \sum_{i,j=1}^{n} A_{ij}B_{ij} = \Tr(A\transp B)\]
 for $A, B \in \mathbb{R}^{n\times n}$, with the euclidean space
 $\mathbb{R}^{n^2}\cong\mathbb{R}^{n\times n}$, with the standard inner product. Then, consider
 the function
-$$F : \mathbb{R}^{n\times n}\to\mathbb{R}^{n\times n}, \qquad A \mapsto A\transp A.$$
+\[F : \mathbb{R}^{n\times n}\to\mathbb{R}^{n\times n}, \qquad A \mapsto A\transp A.\]
 Compute the differential at the identity matrix $\id \in \mathbb{R}^{n\times n}$ applied to
 $X \in \mathbb{R}^{n\times n}$:
-$$DF_{\id}(X) = \partial_X F(\id).$$
+\[DF_{\id}(X) = \partial_X F(\id).\]
 \end{exercise}
 
 % Kept inline: solved directly in Corsin Nick/Class Notes/Week 4.pdf, p. 7.
 \begin{exercisesolution}[\cref{ex:transpose_diff}]
 We use $(*)$:
-$$
+\[
 \begin{aligned}
 DF_{\id}(X) &= \left.\frac{d}{ds}\right|_{s=0} F(\id+sX) \\
 &= \left.\frac{d}{ds}\,(\id+sX)\transp(\id+sX)\right|_{s=0} \\
 &= \left.\frac{d}{ds}\left[\id + s(X\transp+X) + s^2X\transp X\right]\right|_{s=0} \\
 &= X\transp + X
 \end{aligned}
-$$
+\]
 \end{exercisesolution}
 
 \session{Friday}
@@ -620,19 +617,19 @@ An important special case of the chain rule is that of a composition of a scalar
 path. Suppose $f : \mathbb{R}^n \supseteq U \to \mathbb{R}$ and
 $\gamma : [0,1]\to\mathbb{R}^n$ are a $C^1$ \newterm{scalar field} (\germanterm{Skalarfeld}) and
 path, respectively. Then
-$$
+\[
 \begin{aligned}
 D(f\circ\gamma)(t) &= Df(\gamma(t))\cdot D\gamma(t) \\
 &= \langle \nabla f(\gamma(t)),\ \gamma'(t)\rangle \\
 &= \sum_{i=1}^{n} \frac{\partial f}{\partial \gamma_i}\frac{\partial \gamma_i}{\partial t}
 \end{aligned}
-$$
+\]
 where $\gamma = (\gamma_1,\dots,\gamma_n)$ and
 $\dfrac{\partial f}{\partial \gamma_i} := \partial_i f(\gamma(t))$.
 
 This operation is so common in physics that it has its own notation: for $f$ as above, we look at
 each coordinate as a function of \textbf{time} and differentiate:
-$$\frac{d}{dt}f(x_1,\dots,x_n) := Df(x_1(t),\dots,x_n(t)) = \sum_{i=1}^{n}\frac{\partial f}{\partial x_i}\frac{\partial x_i}{\partial t}.$$
+\[\frac{d}{dt}f(x_1,\dots,x_n) := Df(x_1(t),\dots,x_n(t)) = \sum_{i=1}^{n}\frac{\partial f}{\partial x_i}\frac{\partial x_i}{\partial t}.\]
 
 % Sonnet 5 (Medium)
 Having linearized $F$ once, we now ask how good that linear approximation is, and how to improve
@@ -647,7 +644,7 @@ it order by order --- the multivariable analogue of the Taylor series from Analy
 
 In the lecture, you have seen the following formula. For
 $f \in C^k(U \subseteq \mathbb{R}^n, \mathbb{R})$, $\bar x \in U$:
-$$f(\bar x + h) = \sum_{|\alpha| = 0}^{k} \partial^\alpha f(\bar x)\,\frac{h^\alpha}{\alpha!} + o(|h|^k)$$
+\[f(\bar x + h) = \sum_{|\alpha| = 0}^{k} \partial^\alpha f(\bar x)\,\frac{h^\alpha}{\alpha!} + o(|h|^k)\]
 where $\alpha$ is a \newterm{multi-index} (\germanterm{Multiindex}) in $\mathbb{N}^n$.
 
 In practice, we never use this formula directly, but it is worth unpacking once.
@@ -668,11 +665,11 @@ The multi-indices are:
   \item $|\delta| = 3$: $\delta_1 = (3,0)$, $\delta_2 = (2,1)$, $\delta_3 = (1,2)$, $\delta_4 = (0,3)$
 \end{itemize}
 Recall that
-$$\partial^\alpha = \partial_1^{\alpha_1}\partial_2^{\alpha_2}\cdots\partial_n^{\alpha_n}, \qquad \text{e.g.\ } \partial^{\delta_2} = \partial^{(2,1)} = \partial_1^2\partial_2,$$
+\[\partial^\alpha = \partial_1^{\alpha_1}\partial_2^{\alpha_2}\cdots\partial_n^{\alpha_n}, \qquad \text{e.g.\ } \partial^{\delta_2} = \partial^{(2,1)} = \partial_1^2\partial_2,\]
 and
-$$\alpha! = \alpha_1!\cdots\alpha_n!, \qquad \text{e.g.\ } \gamma_2! = (2,0)! = 2\cdot 1 = 2.$$
+\[\alpha! = \alpha_1!\cdots\alpha_n!, \qquad \text{e.g.\ } \gamma_2! = (2,0)! = 2\cdot 1 = 2.\]
 So:
-$$
+\[
 \begin{aligned}
 f(\bar x + h) = &\ f(\bar x) && (\alpha) \\
 &+ \partial_1 f(\bar x)h_1 + \partial_2 f(\bar x)h_2 && (\beta_1, \beta_2)\\
@@ -681,7 +678,7 @@ f(\bar x + h) = &\ f(\bar x) && (\alpha) \\
 &+ \partial_1\partial_2^2 f(\bar x)\frac{h_1h_2^2}{2} + \partial_2^3 f(\bar x)\frac{h_2^3}{6} && (\delta_3, \delta_4)\\
 &+ o(|h|^3)
 \end{aligned}
-$$
+\]
 \end{exercisesolution}
 
 \begin{ainote}
@@ -699,13 +696,13 @@ meaning. Corrected above.
 
 % Source: Corsin Nick/Class Notes/Week 4.pdf, p. 11
 We can rewrite this as
-$$f(\bar x + h) = \sum_{\ell=0}^{k}\frac{1}{\ell!}\big(h_1\partial_1 + h_2\partial_2\big)^\ell f(\bar x).$$
+\[f(\bar x + h) = \sum_{\ell=0}^{k}\frac{1}{\ell!}\big(h_1\partial_1 + h_2\partial_2\big)^\ell f(\bar x).\]
 
 \begin{theorem}[Taylor working formula]
 \label{thm:taylor_working_formula}
 For $f \in C^k(U \subseteq \mathbb{R}^n, \mathbb{R})$ with $\bar x + th \in U$ for all
 $t \in [0,1]$:
-$$f(\bar x + h) = \sum_{\ell=0}^{k}\frac{1}{\ell!}\left(\sum_{m=1}^{n} h_m\partial_m\right)^{\!\ell} f(\bar x) + o(|h|^k)$$
+\[f(\bar x + h) = \sum_{\ell=0}^{k}\frac{1}{\ell!}\left(\sum_{m=1}^{n} h_m\partial_m\right)^{\!\ell} f(\bar x) + o(|h|^k)\]
 \end{theorem}
 
 \begin{ainote}
@@ -730,7 +727,7 @@ multinomial expansion of $(h_1\partial_1+h_2\partial_2)^\ell$; by Schwarz's lemm
 mixed partial derivatives, valid here since $f \in C^k$) those repeats collapse onto the
 same $\partial^\alpha$, and it is exactly this collapsing --- a multinomial coefficient
 $\ell!/\alpha!$ of them --- that turns the global $1/\ell!$ into the per-term $1/\alpha!$ seen in
-\cref{ex:taylor_maximal_expansion}. In short: $1/\ell!$ weights \emph{paths} through the mixed
+\Cref{ex:taylor_maximal_expansion}. In short: $1/\ell!$ weights \emph{paths} through the mixed
 partial derivatives, while $1/\alpha!$ weights the \emph{distinct} derivatives themselves once
 those paths are identified with each other.
 \end{remark}
@@ -742,7 +739,7 @@ those paths are identified with each other.
 \begin{exercise}[Taylor expansion of $(x+y^2)e^{-x^2-y^2}$]
 \label{ex:taylor_explicit_example}
 Compute the Taylor expansion of
-$$f : \mathbb{R}^2\to\mathbb{R}, \qquad (x,y) \mapsto (x+y^2)e^{-x^2-y^2}$$
+\[f : \mathbb{R}^2\to\mathbb{R}, \qquad (x,y) \mapsto (x+y^2)e^{-x^2-y^2}\]
 around $(0,0)$ up to third order.
 \end{exercise}
 
@@ -754,12 +751,12 @@ this.)
 
 \begin{exercisesolution}[\cref{ex:taylor_explicit_example}, the easy solution]
 The substitution and multiplication rules we used in Analysis 1 still apply:
-$$
+\[
 \begin{aligned}
 (x+y^2)e^{-x^2-y^2} &= (x+y^2)\left(1 - x^2 - y^2 + o(|x^2+y^2|)\right) \\
 &= x + y^2 - x^3 - xy^2 + o\!\left(|(x,y)|^3\right)
 \end{aligned}
-$$
+\]
 \end{exercisesolution}
 
 % Sonnet 5 (Medium)
@@ -770,9 +767,9 @@ $$
 \label{rem:second_order_taylor_hessian}
 The second-order Taylor approximation of $f \in C^2(\mathbb{R}^n,\mathbb{R})$ around
 $x_0 \in \mathbb{R}^n$ can be expressed compactly as
-$$f(x_0+x) = f(x_0) + \nabla f(x_0)\cdot x + \tfrac{1}{2}x\transp \cdot \Hess f(x_0)\cdot x + o(|x|^2)$$
+\[f(x_0+x) = f(x_0) + \nabla f(x_0)\cdot x + \tfrac{1}{2}x\transp \cdot \Hess f(x_0)\cdot x + o(|x|^2)\]
 where
-$$\Hess f(x_0) = \big(\partial_i\partial_j f(x_0)\big)_{i,j=1,\dots,n}$$
+\[\Hess f(x_0) = \big(\partial_i\partial_j f(x_0)\big)_{i,j=1,\dots,n}\]
 is the \newterm{Hessian matrix} (\germanterm{Hesse-Matrix}) of $f$.
 \end{remark}
 
@@ -790,21 +787,21 @@ we need the assumption $x_0 + th \in U$ for all $t \in [0,1]$.
 \begin{exercise}[Proof of second-order Taylor formula]
 \label{ex:hessian_taylor_proof}
 Prove the formula from above:
-$$f(x_0+h) = f(x_0) + \nabla f(x_0)h + \tfrac{1}{2}h\transp \Hess f(x_0)h + \dots$$
+\[f(x_0+h) = f(x_0) + \nabla f(x_0)h + \tfrac{1}{2}h\transp \Hess f(x_0)h + \dots\]
 for $f \in C^k(U,\mathbb{R})$ with $x_0 + th \in U$ for all $t \in [0,1]$.
 \end{exercise}
 
 % Kept inline: solved directly in Corsin Nick/Class Notes/Week 4.pdf, p. 13.
 \begin{exercisesolution}[Proof of \cref{ex:hessian_taylor_proof}]
 We expand $t \mapsto f(x_0+th)$ in $t$:
-$$
+\[
 \begin{aligned}
 f(x_0+th) &= f(x_0) + t\left.\frac{d}{dt}\right|_{t=0}f(x_0+th) + \frac{t^2}{2}\left.\frac{d^2}{dt^2}\right|_{t=0}f(x_0+th) + o(|th|^2) \\
 &= f(x_0) + t\sum_{i=1}^{n}\partial_i f(x_0)h_i + \frac{t^2}{2}\frac{d}{dt}\left.\sum_{i=1}^{n}\partial_i f(x_0+th)h_i\right|_{t=0} + o(|h|^2) \\
 &= f(x_0) + t\nabla f(x_0)h + \frac{t^2}{2}\sum_{i,j=1}^{n}\partial_i\partial_j f(x_0)h_ih_j + o(|th|^2) \\
 &= f(x_0) + t\nabla f(x_0)h + \frac{t^2}{2}h\transp \Hess f(x_0)h + o(|th|^2)
 \end{aligned}
-$$
+\]
 Setting $t = 1$ gives the result.
 \end{exercisesolution}
 
@@ -867,20 +864,20 @@ $\partial_y u$.
 \label{ex:4.2}
 Let $U \subset \mathbb{R}^n$ be open and connected and let $f \in C^1(U, \mathbb{R}^m)$. Show that
 its graph
-$$\Gamma_f := \{(x, f(x)) : x \in U\}$$
+\[\Gamma_f := \{(x, f(x)) : x \in U\}\]
 is a connected subset of $\mathbb{R}^n \times \mathbb{R}^m$.
 \end{exercise}
 
 \begin{exercise}[4.3 --- $p$-norms \textnormal{(semi-important; parts 4 and 6 important)}]
 \label{ex:4.3}
 For $p \geq 1$ and $x \in \mathbb{R}^n$ define the \textbf{$p$-norm} of $x$ as
-$$|x|_p := \Big(\sum_{i=1}^{n} |x_i|^p\Big)^{1/p}.$$
+\[|x|_p := \Big(\sum_{i=1}^{n} |x_i|^p\Big)^{1/p}.\]
 \begin{enumerate}[label=\textbf{\arabic*.}]
   \item For $n = 2$ and $p = 1, 2, 10$ sketch the sets $\{x \in \mathbb{R}^2 : |x|_p \leq 1\}$.
   \item For a given $x \in \mathbb{R}^n$, compute the limit
     $|x|_\infty := \lim_{p\to\infty}|x|_p$.
   \item Using an appropriate inequality that you have seen in class, prove that
-    $$\Big(\sum_{i=1}^{n} a_i^{p-1}b_i\Big)^2 \leq \Big(\sum_{i=1}^{n}a_i^p\Big)\Big(\sum_{i=1}^{n}a_i^{p-2}b_i^2\Big),$$
+    \[\Big(\sum_{i=1}^{n} a_i^{p-1}b_i\Big)^2 \leq \Big(\sum_{i=1}^{n}a_i^p\Big)\Big(\sum_{i=1}^{n}a_i^{p-2}b_i^2\Big),\]
     whenever $a_i, b_i$ are $n$-tuples of positive numbers.
   \item Fix $x, y \in \mathbb{R}^n$ and consider the function $f : [0,1] \to \mathbb{R}$ defined
     as
@@ -914,13 +911,13 @@ Let $u \in C^1(\mathbb{R}^n)$ and $\nu \in \mathbb{R}^n$. Show that
   \item If $\partial_\nu u \equiv 0$ and $\nu\cdot e_1 \neq 0$ then ``$u$ is a function of $n-1$
     variables''; more rigorously: there exists a unique function $w \in C^1(\mathbb{R}^{n-1})$
     such that
-    $$u(x_1,\dots,x_n) = w\!\left(x_2 - \frac{x_1\nu_2}{\nu_1}, \dots, x_n - \frac{x_1\nu_n}{\nu_1}\right) \quad \text{for all } x \in \mathbb{R}^n.$$
+    \[u(x_1,\dots,x_n) = w\!\left(x_2 - \frac{x_1\nu_2}{\nu_1}, \dots, x_n - \frac{x_1\nu_n}{\nu_1}\right) \quad \text{for all } x \in \mathbb{R}^n.\]
   \item \textbf{(*)} What can we conclude if we assume only that $\partial_1 u = 0$ in an open
     connected subset $U \subset \mathbb{R}^n$?
 \end{enumerate}
 \textit{Official hints:} \textbf{4.6.2} --- apply the mean value theorem to $u(x + t\nu)$.
 \textbf{4.6.3} --- consider the domain $U := \{(x,y) : x^2 < y < x^2+1\}$ and the function
-$$u(x,y) := \begin{cases} \max\{0, y-2\}^2 & \text{if } x \geq 0, \\ 0 & \text{if } x \leq 0.\end{cases}$$
+\[u(x,y) := \begin{cases} \max\{0, y-2\}^2 & \text{if } x \geq 0, \\ 0 & \text{if } x \leq 0.\end{cases}\]
 \end{exercise}
 
 \section{Solutions}

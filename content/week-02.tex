@@ -1637,22 +1637,21 @@ d_3(x,0) \leq d_1(x,0) \leq 2 \, d_3(x,0).
 Let $D := \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 < 1\}$ be the open unit disk in $\mathbb{R}^2$. Show that the boundary of $D$ is the unit circle $\partial D = \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 = 1\}$.
 \end{aiexercise}
 
-\exercisesheet{2}
-
-\begin{ainote}
-No priority page this week: from Week 3 onwards Corsin opens each file with a colour-coded
-\textit{Recommended exercises} page; Week 2 has none, so none of this week's problems are singled
-out as important. The full sheet (2.1--2.7) is transcribed in
-\texttt{content/exercise-sheets/week-02.tex}.
-\end{ainote}
+% The sheet lives in its own file for editing convenience; it is part of this chapter and is
+% pulled in here. Solutions follow in \cref{sec:week02_solutions}.
+\input{content/exercise-sheets/week-02.tex}
 
 \section{Solutions}
 \label{sec:week02_solutions}
 
 \begin{ainote}
-Only the two \texttt{aiexercise} problems below have solutions in this section: Corsin's own
-exercises in this chapter are solved inline, immediately after their statement, mirroring how he
-presents them in his own notes (see the \qt{Kept inline} comments above each).
+This section holds solutions to the official sheet (\crefrange{ex:2.1}{ex:2.7}), to Diego Torres
+Tejeda's \cref{ex:completeness_not_topological}, and to the \texttt{aiexercise} problems.
+Corsin's own exercises in this chapter are solved \emph{inline}, immediately after their
+statement, mirroring how he presents them in his own notes (see the \qt{Kept inline} comments
+above each). The sheet solutions were worked independently and then checked against the official
+\texttt{exercises/Sol2\_Analysis2\_eng.pdf}; where anything is worth flagging, it is flagged in
+an AI-Note next to the solution.
 \end{ainote}
 
 \begin{exercisesolution}[Solution to \cref{ex:completeness_not_topological}]
@@ -1734,4 +1733,305 @@ Since $D$ is open, its interior is $\operatorname{int}(D) = D$. The closure of $
 &= \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 \leq 1\} \setminus \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 < 1\} \\
 &= \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 = 1\}.
 \end{align*}
+\end{exercisesolution}
+
+% ===========================================================================
+% Official sheet 2 (2.1--2.7). Derived independently, then checked against
+% exercises/Sol2_Analysis2_eng.pdf.
+% ===========================================================================
+
+\begin{exercisesolution}[Solution to \cref{ex:2.1}]
+% Generator: Claude Opus 5 (High)
+Throughout, non-negativity and symmetry are immediate in every part and are not belaboured; the
+interest is in \textbf{definiteness} and the \textbf{triangle inequality}.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item \textbf{Yes.} Boundedness of $f$ and $g$ makes the supremum finite, so $d$ really maps
+    into $\mathbb{R}$. Definiteness: $d(f,g)=0$ forces $|f(x)-g(x)| = 0$ for every $x$, i.e.\
+    $f=g$. For the triangle inequality, estimate pointwise and only then take the supremum:
+    \[|f(x)-h(x)| \leq |f(x)-g(x)| + |g(x)-h(x)| \leq d(f,g) + d(g,h) \quad \text{for all } x,\]
+    so the right-hand side is an upper bound for $|f-h|$ and hence dominates $d(f,h)$. This is
+    \cref{ex:sup_metric_is_metric} verbatim, with $[0,1]$ replaced by an arbitrary set $X$ and
+    continuity replaced by boundedness --- note that it was boundedness, not continuity, that
+    the argument there actually used.
+  \item \textbf{Yes.} Let $\varphi(x) := 1/x$, an injective map $\mathbb{Q}_+ \to \mathbb{Q}_+$,
+    and observe that $d(x,y) = |\varphi(x)-\varphi(y)|$. Symmetry and the triangle inequality
+    are inherited from $|\cdot|$ without any work, and definiteness is exactly injectivity of
+    $\varphi$: from $d(x,y)=0$ we get $1/x = 1/y$, hence $x=y$. This is the same pullback
+    construction as \cref{ex:completeness_not_topological}, and the same warning applies ---
+    pulling a metric back along an injection \emph{always} produces a metric, which is why the
+    interesting question about such a $d$ is never whether it is one, but whether it is
+    complete.
+  \item \textbf{No} --- the triangle inequality fails. Ignore the second coordinate, as the
+    official hint suggests, and take three collinear points $x := (0,0)$, $y := (1,0)$ and
+    $z := (2,0)$:
+    \[d(x,z) = 2^2 = 4 \quad > \quad d(x,y) + d(y,z) = 1 + 1 = 2.\]
+    Squaring produces the same failure as in
+    \cref{ex:metric_axioms_are_needed}\textbf{(c)}: a function growing faster than linearly
+    makes one long step more expensive than two short ones.
+  \item \textbf{Yes.} A sum of two metrics acting on separate coordinates is a metric, so
+    everything reduces to the first coordinate, where the claim is that
+    $(s,t) \mapsto |s-t|^{1/2}$ satisfies the triangle inequality on $\mathbb{R}$. That follows
+    from \textbf{subadditivity of the square root}, $\sqrt{a+b} \leq \sqrt a + \sqrt b$ for
+    $a,b \geq 0$, which holds because squaring the right-hand side gives
+    $a+b+2\sqrt{ab} \geq a+b$. Hence
+    \[|x_1-z_1|^{1/2} \leq \big(|x_1-y_1| + |y_1-z_1|\big)^{1/2}
+      \leq |x_1-y_1|^{1/2} + |y_1-z_1|^{1/2}.\]
+    Contrast this with part 3: $\sqrt{\cdot}$ is concave and vanishes at $0$, hence subadditive,
+    while $(\cdot)^2$ is convex, hence super-additive. That single distinction settles both
+    parts.
+  \item \textbf{Yes.} Write $A := X-Y$. Then
+    \[\Tr(A\transp A) = \sum_{i=1}^n (A\transp A)_{ii} = \sum_{i,j=1}^n A_{ji}^2,\]
+    so $d(X,Y)$ is nothing but the Euclidean distance between $X$ and $Y$ regarded as vectors of
+    $\mathbb{R}^{n^2}$, and it is a metric by
+    \cref{prop:induced_norm_and_metric}\textbf{(b)}. The associated norm is the
+    \newterm{Frobenius norm} (\germanterm{Frobeniusnorm}), also called the Hilbert--Schmidt norm.
+  \item \textbf{No} --- and here it is \textbf{definiteness} that fails, not the triangle
+    inequality. Following the hint, suppose $A := X-Y$ is \emph{anti-symmetric},
+    $A\transp = -A$. For any $v$ the number $v\transp Av$ is a $1\times1$ matrix, hence equal to
+    its own transpose:
+    \[v\transp A v = (v\transp A v)\transp = v\transp A\transp v = -\,v\transp A v,\]
+    so $v\transp Av = 0$ for \emph{every} $v$. Taking $n=2$ with
+    \[X := \begin{pmatrix} 0 & 1 \\ -1 & 0\end{pmatrix}, \qquad
+      Y := \begin{pmatrix} 0 & 0 \\ 0 & 0\end{pmatrix}\]
+    gives $X \neq Y$ but $d(X,Y) = 0$. Every other axiom does hold, so $d$ is a
+    \newterm{pseudo-metric} (\germanterm{Pseudometrik}): it cannot separate two matrices
+    differing by an anti-symmetric one. Equivalently, it restricts to a genuine metric on the
+    symmetric matrices.
+  \item \textbf{Yes.} Three things need checking, and the first is the one that is easy to skip.
+
+    \textit{Well defined.} Replacing $x$ by $x+(m,n)$ and $y$ by $y+(m',n')$ shifts $x-y$ by the
+    integer vector $(m-m',\,n-n')$, which merely re-indexes the infimum. So $d([x],[y])$ does
+    not depend on the representatives chosen.
+
+    \textit{The infimum is a minimum.} Only finitely many integer vectors $(k,h)$ satisfy
+    $\lVert x-y+(k,h)\rVert \leq \lVert x-y\rVert$, because $\mathbb{Z}^2$ is discrete; the
+    infimum is therefore taken over a finite non-empty set of candidates and is attained. This
+    is what the official hint asks you to settle first, and it is what makes the next step
+    legitimate.
+
+    \textit{Definiteness.} If $d([x],[y]) = 0$ then, the minimum being attained,
+    $x-y+(k,h) = 0$ for some integers $k,h$, that is $x \sim y$ and $[x] = [y]$. Note exactly
+    where \qt{the infimum is a minimum} was needed: an infimum equal to $0$ but not attained
+    would say nothing at all.
+
+    \textit{Triangle inequality.} Choose minimisers $(k_1,h_1)$ for the pair $(x,y)$ and
+    $(k_2,h_2)$ for $(y,z)$. Their sum is a legitimate candidate for the pair $(x,z)$, so
+    \begin{align*}
+      d([x],[z]) &\leq \big\lVert x-z+(k_1{+}k_2,\ h_1{+}h_2)\big\rVert \\
+      &= \big\lVert \big(x-y+(k_1,h_1)\big) + \big(y-z+(k_2,h_2)\big)\big\rVert \\
+      &\leq d([x],[y]) + d([y],[z]).
+    \end{align*}
+\end{enumerate}
+\end{exercisesolution}
+
+\begin{ainote}
+Parts 3, 4 and 6 are the ones worth revisiting, because each breaks (or rescues) a different
+axiom and together they cover every way the definition can fail. Part 3 kills the triangle
+inequality by growing too fast; part 4 rescues it by growing slowly enough; part 6 satisfies the
+triangle inequality perfectly and fails on definiteness instead. Read alongside
+\cref{ex:metric_axioms_are_needed}, they make the case that the three axioms are genuinely
+independent.
+\end{ainote}
+
+\begin{exercisesolution}[Solution to \cref{ex:2.2}]
+% Generator: Claude Opus 5 (High)
+\textbf{(a) and (c) are necessarily true; (b) and (d) are not.}
+
+\textbf{(a) True.} Both inclusions come from general properties of the closure. Since
+$Y_i \subseteq Y_1 \cup Y_2$ and the closure is monotone,
+$\overline{Y_i} \subseteq \overline{Y_1\cup Y_2}$ for $i=1,2$, which gives \qt{$\supseteq$}.
+Conversely $\overline{Y_1}\cup\overline{Y_2}$ is a \emph{finite} union of closed sets, hence
+closed (\cref{prop:open_closed_operations}\textbf{(c)}), and it contains $Y_1\cup Y_2$; since
+$\overline{Y_1\cup Y_2}$ is the smallest closed set containing $Y_1 \cup Y_2$
+(\cref{def:interior_closure_boundary}), \qt{$\subseteq$} follows.
+
+\textbf{(c) True,} and it is the easy half: $Y_1\cap Y_2 \subseteq Y_i$ gives
+$\overline{Y_1\cap Y_2} \subseteq \overline{Y_i}$ for each $i$ by monotonicity, hence
+$\overline{Y_1\cap Y_2} \subseteq \overline{Y_1}\cap\overline{Y_2}$.
+
+\textbf{(b) False,} and therefore \textbf{(d) False} as well, (d) being (b) and (c) combined. In
+$\mathbb{R}$ take
+\[Y_1 := (0,1), \qquad Y_2 := (1,2).\]
+Then $\overline{Y_1}\cap\overline{Y_2} = [0,1]\cap[1,2] = \{1\}$, whereas
+$Y_1\cap Y_2 = \emptyset$ and so $\overline{Y_1\cap Y_2} = \emptyset$. The two sets meet only in
+the limit, and the closure of the intersection cannot see a point belonging to neither set.
+
+\begin{remark}[Where finiteness enters, again]
+Part \textbf{(a)} is false for infinite unions, for exactly the reason given in
+\cref{rem:finiteness_is_necessary}. Taking $Y_q := \{q\}$ for each $q \in \mathbb{Q}$,
+\[\bigcup_{q\in\mathbb{Q}}\overline{Y_q} = \mathbb{Q}
+  \qquad\text{but}\qquad
+  \overline{\bigcup_{q\in\mathbb{Q}}Y_q} = \overline{\mathbb{Q}} = \mathbb{R}.\]
+So the honest statement is: the closure commutes with \emph{finite} unions, and only
+one-directionally with intersections. That is the same asymmetry that runs through the whole of
+\cref{prop:open_closed_operations}.
+\end{remark}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:2.3}]
+% Generator: Claude Opus 5 (High)
+\textbf{(a), (b) and (c) are necessarily true; (d) is not.} It is efficient to prove
+\textbf{(c)} first, since \textbf{(b)} then follows from it.
+
+\textbf{(c) True.} Fix $x,y \in X$. For every $a \in A$ the triangle inequality gives
+$d(x,a) \leq d(x,y) + d(y,a)$, and the left-hand side is bounded below by $d(x,A)$, so
+\[d(x,A) \leq d(x,y) + d(y,a) \qquad\text{for every } a \in A.\]
+Taking the infimum over $a$ on the right yields $d(x,A) \leq d(x,y) + d(y,A)$. Exchanging $x$
+and $y$ and combining,
+\[\big|d(x,A) - d(y,A)\big| \leq d(x,y),\]
+so $d(\cdot,A)$ is \textbf{$1$-Lipschitz} (\cref{def:lipschitz_continuous}), in particular
+continuous --- which is what the remaining parts use.
+
+\textbf{(a) True.} If $A$ is closed then $A^c$ is open, so for $x \in A^c$ there is $r>0$ with
+$B_r(x) \subseteq A^c$. No point of $A$ lies in that ball, i.e.\ $d(x,a) \geq r$ for every
+$a \in A$, and taking the infimum gives $d(x,A) \geq r > 0$.
+
+\textbf{(b) True.} By \textbf{(c)} the function $d(\cdot,A)$ is continuous, and
+$M = d(\cdot,A)^{-1}\big([1,\infty)\big)$ is the preimage of a closed set under a continuous
+map, hence closed (\cref{def:continuous}\textbf{(c)}, applied to complements).
+
+\textbf{(d) False.} In $\mathbb{R}$ take $A := [0,1]\cup\{2\}$, whose interior
+$A^\circ = (0,1)$ is non-empty as required. At the point $x := 2$,
+\[d(x,A) = 0 \quad\text{(because } 2 \in A\text{)}, \qquad\qquad
+  d(x,A^\circ) = \inf_{a\in(0,1)}|2-a| = 1.\]
+The isolated point $2$ of $A$ contributes to $d(\cdot,A)$ but is invisible to $A^\circ$. The
+hypothesis \qt{$A^\circ$ is non-empty} is far too weak, because it constrains $A$ nowhere near
+$x$; the statement would become true under a hypothesis such as $A = \overline{A^\circ}$.
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:2.4}]
+% Generator: Claude Opus 5 (High)
+All with respect to the standard metric on $\mathbb{R}$, using
+\cref{def:interior_closure_boundary}.
+\begin{center}
+\begin{tabular}{@{}c l l l l@{}}
+& \textbf{$Y$} & \textbf{$\operatorname{int}(Y)$} & \textbf{$\overline{Y}$} & \textbf{$\partial Y$} \\
+\hline
+(1) & $[0,1]$ & $(0,1)$ & $[0,1]$ & $\{0,1\}$ \\
+(2) & $\mathbb{Q}$ & $\emptyset$ & $\mathbb{R}$ & $\mathbb{R}$ \\
+(3) & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ \\
+(4) & $(0,1)$ & $(0,1)$ & $[0,1]$ & $\{0,1\}$ \\
+(5) & $[-1,1)\setminus\{0\}$ & $(-1,0)\cup(0,1)$ & $[-1,1]$ & $\{-1,0,1\}$ \\
+(6) & $[0,\infty)$ & $(0,\infty)$ & $[0,\infty)$ & $\{0\}$ \\
+(7) & $\{0\}$ & $\emptyset$ & $\{0\}$ & $\{0\}$ \\
+(8) & $\left\{\tfrac1n : n \geq 1\right\}$ & $\emptyset$ &
+  $\left\{\tfrac1n : n \geq 1\right\}\cup\{0\}$ &
+  $\left\{\tfrac1n : n \geq 1\right\}\cup\{0\}$ \\
+\end{tabular}
+\end{center}
+
+Three rows repay a second look.
+\begin{itemize}
+  \item \textbf{(1) versus (4).} The closed interval and the open interval have the same
+    interior, the same closure and the same boundary. These three operations simply cannot
+    distinguish a set from any other set squeezed between its interior and its closure.
+  \item \textbf{(5).} Removing the single point $0$ from $[-1,1)$ adds $0$ to the boundary
+    without changing the closure: a removed interior point becomes a boundary point. Note also
+    that $1 \in \partial Y$ although $1 \notin Y$, while $-1 \in \partial Y$ and $-1 \in Y$ ---
+    the boundary is indifferent to membership.
+  \item \textbf{(2) and (8).} Both have empty interior, so $\partial Y = \overline{Y}$: once a
+    set has no interior, the boundary swallows the entire closure. That is the general reason
+    for $\partial\mathbb{Q} = \mathbb{R}$ in
+    \cref{ex:interior_closure_boundary_more}\textbf{(c)}, and not an accident of $\mathbb{Q}$.
+\end{itemize}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:2.5}]
+% Generator: Claude Opus 5 (High)
+Write $s := d_X(x,x')$ and $t := d_Y(y,y')$ throughout, so that the three candidates are
+$d_1 = \max\{s,t\}$, $d_2 = s+t$ and $d_3 = \sqrt{s^2+t^2}$ --- that is, the supremum, Manhattan
+and standard metrics of \cref{ex:metric_examples} applied to the pair $(s,t)$. Almost everything
+below is that one observation.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item \textbf{All three are metrics.} Each vanishes exactly when $s = t = 0$, i.e.\ when
+    $x=x'$ and $y=y'$, which is definiteness; symmetry is inherited from $d_X$ and $d_Y$. For
+    the triangle inequality, set
+    \[a := \big(d_X(x,x'),\,d_Y(y,y')\big), \quad
+      b := \big(d_X(x',x''),\,d_Y(y',y'')\big), \quad
+      c := \big(d_X(x,x''),\,d_Y(y,y'')\big),\]
+    all lying in $[0,\infty)^2$. The triangle inequalities in $X$ and in $Y$ say precisely that
+    $c \leq a+b$ \emph{componentwise}. Each of $\max$, the sum and $\lVert\cdot\rVert_2$ is
+    monotone on $[0,\infty)^2$ and subadditive, so
+    \[N(c) \ \leq\ N(a+b) \ \leq\ N(a) + N(b)\]
+    for $N \in \{\max,\ \textstyle\sum,\ \lVert\cdot\rVert_2\}$ --- which is the required
+    inequality in all three cases at once.
+  \item \textbf{Equivalence.} For all $s,t \geq 0$,
+    \[\max\{s,t\} \ \leq\ \sqrt{s^2+t^2} \ \leq\ s+t \ \leq\ 2\max\{s,t\},\]
+    i.e.\ $d_1 \leq d_3 \leq d_2 \leq 2d_1$; the middle inequality holds because
+    $(s+t)^2 = s^2+t^2+2st \geq s^2+t^2$. Hence $C := 2$ satisfies the chain in the statement:
+    $d_1 \leq 2d_2$, then $2d_2 \leq 4d_3$ (since $d_2 \leq \sqrt2\,d_3$ by Cauchy--Schwarz,
+    and $\sqrt2 \leq 2$), and finally $4d_3 \leq 8d_1$ (since $d_3 \leq \sqrt2\,d_1$).
+  \item \textbf{Convergence is coordinatewise.} From part 2,
+    \[\max\big\{d_X(x_n,x),\ d_Y(y_n,y)\big\}
+      \ \leq\ d_3\big((x_n,y_n),(x,y)\big)
+      \ \leq\ d_X(x_n,x) + d_Y(y_n,y).\]
+    If the middle term tends to $0$, the left inequality forces both coordinates to converge; if
+    both coordinates converge, the right inequality forces the middle term to $0$. This is
+    \cref{prop:Rn_coordinatewise_complete}\textbf{(a)} with $n = 2$ and the two factors allowed
+    to be arbitrary metric spaces. By part 2 the same conclusion holds for $d_1$ and $d_2$,
+    since equivalent metrics have the same convergent sequences.
+\end{enumerate}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:2.6}]
+% Generator: Claude Opus 5 (High)
+\textbf{$d$ is $1$-Lipschitz with respect to $d_2$.} Let $x = (x_1,x_2)$ and $y = (y_1,y_2)$ be
+points of $X\times X$. Applying the triangle inequality in $X$ twice,
+\[d(x_1,x_2) \ \leq\ d(x_1,y_1) + d(y_1,y_2) + d(y_2,x_2),\]
+so $d(x_1,x_2) - d(y_1,y_2) \leq d(x_1,y_1) + d(x_2,y_2) = d_2(x,y)$. Exchanging the roles of
+$x$ and $y$ bounds the opposite difference in the same way, hence
+\[\big|d(x_1,x_2) - d(y_1,y_2)\big| \ \leq\ d_2(x,y),\]
+which is $1$-Lipschitz continuity (\cref{def:lipschitz_continuous}) and therefore continuity
+(\cref{rem:continuity_hierarchy}).
+
+\textbf{For $d_1$ and $d_3$: yes, still Lipschitz --- only the constant changes.} By
+\cref{ex:2.5} part 2 we have $d_2 \leq 2d_1$ and $d_2 \leq \sqrt2\,d_3$, so
+\[\big|d(x_1,x_2)-d(y_1,y_2)\big| \leq 2\,d_1(x,y)
+  \qquad\text{and}\qquad
+  \big|d(x_1,x_2)-d(y_1,y_2)\big| \leq \sqrt2\,d_3(x,y).\]
+This is a general principle rather than a computation: \textbf{Lipschitz continuity survives
+passage to an equivalent metric}, with the constant multiplied by the comparison factor.
+Continuity survives too, being topological, and by \cref{ex:2.5} the three product metrics
+induce the same topology.
+
+\begin{ainote}
+The constant $2$ for $d_1$ is sharp, so $d$ is genuinely \emph{not} $1$-Lipschitz with respect
+to $d_1$. Take $X = \mathbb{R}$ with $x := (0,0)$ and $y := (-1,1)$: then $d(x_1,x_2) = 0$ and
+$d(y_1,y_2) = 2$, while $d_1(x,y) = \max\{1,1\} = 1$, so the difference equals
+$2 = 2\,d_1(x,y)$. Worth noticing, since the problem asks only whether $d$ is Lipschitz for
+$d_1$ and $d_3$, and it is easy to answer \qt{yes, with the same constant} without checking.
+\end{ainote}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:2.7}]
+% Generator: Claude Opus 5 (High)
+All three arguments are short; the point of giving more than one is to see how differently the
+same fact reads through the three definitions of \cref{def:continuous}.
+
+\textbf{Topological (\cref{def:continuous}\textbf{(c)}).} This is the shortest, because
+preimages compose. Let $W \subseteq Z$ be open. Then
+\[(g\circ f)^{-1}(W) = f^{-1}\big(g^{-1}(W)\big),\]
+and $g^{-1}(W)$ is open in $Y$ by continuity of $g$, so its preimage under $f$ is open in $X$ by
+continuity of $f$. Hence $g\circ f$ is continuous.
+
+\textbf{Sequential (\cref{def:continuous}\textbf{(b)}).} Let $x_n \to x$ in $X$. Continuity of
+$f$ gives $f(x_n) \to f(x)$ in $Y$, and continuity of $g$ applied to \emph{that} sequence gives
+$g(f(x_n)) \to g(f(x))$ in $Z$.
+
+\textbf{$\varepsilon$--$\delta$ (\cref{def:continuous}\textbf{(a)}).} Fix $x_0 \in X$ and
+$\varepsilon > 0$. Continuity of $g$ at $f(x_0)$ supplies $\eta > 0$ such that
+$d_Y(f(x_0),y) < \eta$ implies $d_Z\big(g(f(x_0)),g(y)\big) < \varepsilon$. Continuity of $f$ at
+$x_0$, applied to \emph{that} $\eta$, supplies $\delta > 0$ such that $d_X(x_0,x) < \delta$
+implies $d_Y(f(x_0),f(x)) < \eta$. Chaining the two, $d_X(x_0,x) < \delta$ implies
+$d_Z\big((g\circ f)(x_0),(g\circ f)(x)\big) < \varepsilon$.
+
+\begin{remark}[Why the topological proof is the short one]
+The three arguments have the same shape --- apply the hypothesis for $g$ first, then feed the
+result to $f$ --- but only the topological version needs no quantifiers at all, because the set
+identity $(g\circ f)^{-1} = f^{-1}\circ g^{-1}$ does the bookkeeping the other two proofs carry
+out by hand. This is a fair advertisement for \cref{def:continuous}\textbf{(c)}, which can look
+like the least intuitive of the three on first meeting: it is the formulation in which
+composition is trivial, and that is exactly why general topology takes it as \emph{the}
+definition.
+\end{remark}
 \end{exercisesolution}

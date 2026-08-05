@@ -20,7 +20,76 @@ A subset $K \subseteq \mathbb{R}^n$ equipped with the \textbf{standard metric} i
 (\germanterm{beschr\"ankt}).
 \end{theorem}
 
-This captures our intuition of a ``compact'' set. We will briefly show that Heine--Borel is
+\begin{ainote}
+Neither Corsin nor this document proves \cref{thm:heine_borel}; it is proved in the lecture, and
+the full argument is longer than anything else in these two chapters. It is worth knowing what
+goes into it, though, since every ingredient has already appeared:
+\begin{itemize}
+  \item \textbf{($\Rightarrow$)} is short and general. A compact metric space is bounded and
+    complete (\cref{lem:sequentially_compact_totally_bounded},
+    \cref{ex:compact_finite_complete}), and a complete subset of the complete space
+    $\mathbb{R}^n$ is closed (\cref{rem:complete_vs_closed}).
+  \item \textbf{($\Leftarrow$)} is where the real content sits, and it is exactly
+    \textbf{Bolzano--Weierstrass}: a bounded sequence in $\mathbb{R}^n$ has a convergent
+    subsequence, obtained by bisecting a box $n$ times over, or by extracting coordinatewise
+    (\cref{prop:Rn_coordinatewise_complete}) $n$ times in succession. Closedness then puts the
+    limit back inside $K$, giving sequential compactness, which is compactness by
+    \cref{thm:sequential_topological_compactness_equivalence}.
+\end{itemize}
+The reason the theorem is special to $\mathbb{R}^n$ with the standard metric is that both steps
+use the completeness of $\mathbb{R}$ and the finiteness of the dimension.
+\Cref{ex:heine_borel_fails} below shows how thoroughly it fails otherwise.
+\end{ainote}
+
+% Supplement: Sascha Brack/Class Notes/Week_02_Notes_Friday_Updated.pdf, p. 7
+\begin{example}[Compactness via Heine-Borel and continuity]
+\label{ex:compactness_heine_borel_examples}
+Consider the following subsets and determine whether they are compact under the standard Euclidean metric:
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{Is $\mathbb{N} \subset \mathbb{R}$ compact?} No. While it is closed in $\mathbb{R}$, it is not bounded. By Heine-Borel, it cannot be compact.
+  \item \textbf{Is $[0,1] \times [0,1] \subset \mathbb{R}^2$ complete?} Yes. The square $[0,1]^2$ is closed and bounded in $\mathbb{R}^2$, hence compact by Heine-Borel. As every compact metric space is complete (\cref{ex:compact_finite_complete}), it is complete.
+  \item Let $f: \mathbb{R} \to \mathbb{R}^3, x \mapsto (\sin x, \cos x, 1)$. \textbf{Is $f([0,\pi/2])$ compact in $\mathbb{R}^3$?} Yes. We do not need to show this manually using sequences or open covers. Since the domain $[0,\pi/2]$ is compact in $\mathbb{R}$ (closed and bounded) and the function $f$ is continuous, its image $f([0,\pi/2])$ is compact in $\mathbb{R}^3$ (by \cref{item:continuity_preserves_compact}).
+\end{enumerate}
+\end{example}
+
+% Supplement: Sascha Brack/Class Notes/Week_03_Notes_Monday.pdf, p. 3
+\begin{exercise}[Topological properties of various subsets]
+\label{ex:topological_properties_table}
+Decide whether the following subsets are open, closed, compact, or complete (under the standard Euclidean metric):
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $[0,1] \subseteq \mathbb{R}$
+  \item $\mathbb{Q} \subseteq \mathbb{R}$
+  \item $B_1(0) \subseteq \mathbb{R}^3$
+  \item $B_1(0) \cap B_1(1) \subseteq \mathbb{R}^2$
+  \item $\{0\} \cup \{1/n \mid n \in \mathbb{N}_{\ge 1}\} \subseteq \mathbb{R}$
+  \item $\bigcup_{n=1}^\infty B_{1/n}(n) \subseteq \mathbb{R}$
+  \item $(-\infty, 1] \subseteq \mathbb{R}$
+  \item $f([0,1])$ where $f : \mathbb{R} \to \mathbb{R}^n$ is continuous
+  \item $f^{-1}([0,1])$ where $f : \mathbb{R}^n \to \mathbb{R}$ is continuous
+  \item $f^{-1}((0,1))$ where $f : \mathbb{R}^n \to \mathbb{R}$ is continuous
+  \item $S := \operatorname{span}\{(1,0,0)\transp, (3,1,0)\transp\} \subseteq \mathbb{R}^3$
+  \item $\{x \in \mathbb{R}^3 \mid \exists s \in S \text{ s.t.\ } d(x, s) < 1\}$ for a subset $S \subseteq \mathbb{R}^3$
+\end{enumerate}
+\end{exercise}
+
+\begin{exercisesolution}[Proof of \cref{ex:topological_properties_table}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $[0,1] \subseteq \mathbb{R}$: \textbf{Closed}, \textbf{compact}, \textbf{complete}. (Not open).
+  \item $\mathbb{Q} \subseteq \mathbb{R}$: \textbf{None}. It is neither open nor closed, not bounded (so not compact), and not complete.
+  \item $B_1(0) \subseteq \mathbb{R}^3$: \textbf{Open}.
+  \item $B_1(0) \cap B_1(1) \subseteq \mathbb{R}^2$: \textbf{Open} (finite intersection of open sets).
+  \item $\{0\} \cup \{1/n \mid n \in \mathbb{N}_{\ge 1}\} \subseteq \mathbb{R}$: \textbf{Closed}, \textbf{compact}, \textbf{complete} (bounded and contains its only limit point $0$).
+  \item $\bigcup_{n=1}^\infty B_{1/n}(n) \subseteq \mathbb{R}$: \textbf{Open} (arbitrary union of open sets).
+  \item $(-\infty, 1] \subseteq \mathbb{R}$: \textbf{Closed}, \textbf{complete}.
+  \item $f([0,1])$: \textbf{Closed}, \textbf{compact}, \textbf{complete} (continuous image of a compact set).
+  \item $f^{-1}([0,1])$: \textbf{Closed}, \textbf{complete} (continuous preimage of a closed set).
+  \item $f^{-1}((0,1))$: \textbf{Open} (continuous preimage of an open set).
+  \item $S := \operatorname{span}\{(1,0,0)\transp, (3,1,0)\transp\} \subseteq \mathbb{R}^3$: \textbf{Closed}, \textbf{complete} (it is a $2$-dimensional subspace, hence closed in $\mathbb{R}^3$).
+  \item $\{x \in \mathbb{R}^3 \mid \exists s \in S \text{ s.t.\ } d(x, s) < 1\}$: \textbf{Open}. This set is equivalently written as $\{x \in \mathbb{R}^3 \mid d(x, S) < 1\}$ or $\bigcup_{s \in S} B_1(s)$, which is an arbitrary union of open balls.
+\end{enumerate}
+\end{exercisesolution}
+
+This captures our intuition of a \qt{compact} set. We will briefly show that Heine--Borel is
 \textbf{false} for $\mathbb{R}^n$ with an \textbf{arbitrary metric}.
 
 \begin{exercise}[Heine--Borel fails for arbitrary metrics]
@@ -217,6 +286,17 @@ $\delta$ from continuity is local and one needs a single global one
 (\cref{rem:continuity_vs_uniform_continuity}).
 \end{remark}
 
+\begin{ainote}
+The exercise below overlaps heavily with \cref{ex:topological_properties_table} above --- both
+are Sascha Brack's, from two different files (his Week 2 Friday and Week 3 Monday notes), and
+he evidently reused the self-test. Both are kept, because deciding that one of them is redundant
+is a judgement about his notes rather than about this transcription, and the second version does
+add three things: the explicit \textbf{?} answers where the data is insufficient, the trap in
+the final item (two \emph{parallel} spanning vectors), and the four-column table format of the
+solution, which is where the lesson actually lands. Read
+\cref{ex:topological_properties_table} as the warm-up and this one as the real test.
+\end{ainote}
+
 % Supplement: Sascha Brack/Class Notes/Week_02_Notes_Friday_Updated.pdf, p. 8
 \begin{exercise}[Classify these sets]
 \label{ex:classification_table}
@@ -289,8 +369,10 @@ for \emph{every} pair $x,x'$ --- the same $\delta$ at every point, which is exac
 uniform continuity asks for. The second implication is immediate: a $\delta$ that works at all
 points in particular works at each one.
 
-Both converses fail. Every continuously differentiable function on a compact domain is
-Lipschitz continuous, with $L := \sup|f'|$ by the mean value theorem, but $f(x) := \sqrt{x}$ on
+Both converses fail. Every continuously differentiable function on a compact \emph{interval} is
+Lipschitz continuous, with $L := \sup|f'|$ by the mean value theorem --- the interval matters,
+since the mean value theorem needs the segment between the two points to lie in the domain ---
+but $f(x) := \sqrt{x}$ on
 $[0,\infty)$ is uniformly continuous and \emph{not} Lipschitz: a Lipschitz constant would force
 $\delta$ to shrink only linearly in $\varepsilon$, whereas here
 $|\sqrt{x}-\sqrt{x'}| < \varepsilon$ near $0$ already requires $\delta$ of order
@@ -387,6 +469,48 @@ means: \qt{the space cannot be separated by open sets.}
 \end{tikzpicture}
 \end{center}
 
+% Generator: Claude Opus 5 (High) --- the base case of connectedness, used three times in this
+% chapter (path-connectedness, the topologist's sine curve, the intermediate value theorem)
+% but stated nowhere in the source notes.
+\begin{proposition}[Intervals are connected]
+\label{prop:intervals_connected}
+Every interval $I \subseteq \mathbb{R}$ --- open, closed, half-open, bounded or not --- is
+connected (\cref{def:connectedness}). Conversely, a connected subset of $\mathbb{R}$ is an
+interval.
+\end{proposition}
+
+\begin{proof}
+Suppose $I = U_1 \sqcup U_2$ with $U_1, U_2$ open in $I$, disjoint and both non-empty. Pick
+$a \in U_1$ and $b \in U_2$; without loss of generality $a<b$, and $[a,b] \subseteq I$ because
+$I$ is an interval. Set
+\[c := \sup\{\,t \in [a,b] \ :\ [a,t] \subseteq U_1\,\},\]
+which is well defined since $a$ belongs to the set. Now $c \in [a,b] \subseteq I$, so $c$ lies
+in $U_1$ or in $U_2$, and both lead to a contradiction:
+\begin{itemize}
+  \item If $c \in U_1$, openness gives $\varepsilon>0$ with $(c-\varepsilon,c+\varepsilon)\cap I
+    \subseteq U_1$; together with $[a,c) \subseteq U_1$ this yields $[a,t] \subseteq U_1$ for
+    some $t>c$ unless $c=b$ --- contradicting either the supremum or $b \in U_2$.
+  \item If $c \in U_2$, openness gives $\varepsilon>0$ with $(c-\varepsilon,c] \cap I \subseteq
+    U_2$. But $c>a$ (as $a \in U_1$ is open in $I$), so by definition of the supremum there is
+    $t \in (c-\varepsilon,c]$ with $[a,t] \subseteq U_1$ --- contradicting disjointness.
+\end{itemize}
+So no such splitting exists, and $I$ is connected. For the converse, a set $A \subseteq
+\mathbb{R}$ that is not an interval admits $a<c<b$ with $a,b \in A$ and $c \notin A$; then
+$A \cap (-\infty,c)$ and $A \cap (c,\infty)$ disconnect it.
+\end{proof}
+
+\begin{remark}[Why this is the only example one ever needs]
+\label{rem:intervals_are_the_base_case}
+Every connectedness proof in this chapter reduces to \cref{prop:intervals_connected}: a path is
+a continuous image of $[0,1]$ (\cref{def:path}), so path-connected sets are connected
+(\cref{lem:path_connected_implies_connected}) purely because the \emph{interval} is; and the
+intermediate value theorem, invoked in the topologist's sine curve below, is
+\cref{thm:continuity_preserves_connected} applied to an interval, since the connected subsets of
+$\mathbb{R}$ are exactly the intervals. In other words, the single fact that $\mathbb{R}$ has no
+gaps --- the completeness axiom, which is what powers the supremum above --- is the source of
+all of it.
+\end{remark}
+
 \begin{aiexample}[Disconnectedness of Rational Numbers]
 % Generator: Gemini 3.6 Flash (Medium)
 The set of rational numbers $\mathbb{Q} \subset \mathbb{R}$ equipped with the subspace topology is disconnected. To see this, define
@@ -396,11 +520,54 @@ U := \mathbb{Q} \cap (-\infty, \sqrt{2}) \quad \text{and} \quad V := \mathbb{Q} 
 Since $\sqrt{2} \notin \mathbb{Q}$, we have $U \cup V = \mathbb{Q}$ and $U \cap V = \emptyset$. Both $U$ and $V$ are non-empty and open in the subspace topology of $\mathbb{Q}$ (as intersections of $\mathbb{Q}$ with open intervals in $\mathbb{R}$). Hence $U$ and $V$ form a separation of $\mathbb{Q}$.
 \end{aiexample}
 
+% Supplement: Sascha Brack/Class Notes/Week_02_Notes_Friday_Updated.pdf, p. 9
+\begin{example}[A disconnected set in $\mathbb{R}^2$]
+Let $X := ([0,1] \times [0,1]) \cup ([2,3] \times \{1\}) \subseteq \mathbb{R}^2$. Is $X$ connected?
+No. Let $U := \{(x,y) \in X \mid x < 1.5\}$ and $V := \{(x,y) \in X \mid x > 1.5\}$. We can write these as $U = X \cap \{(x,y) \in \mathbb{R}^2 \mid x < 1.5\}$ and $V = X \cap \{(x,y) \in \mathbb{R}^2 \mid x > 1.5\}$. Both $U$ and $V$ are open in the subspace topology of $X$ because they are intersections of $X$ with open half-planes in $\mathbb{R}^2$. Furthermore, $X = U \cup V$, and $U, V$ are disjoint and non-empty. Thus, $X$ is disconnected.
+\end{example}
+
 \begin{theorem}[Continuous functions preserve connectedness]
 \label{thm:continuity_preserves_connected}
 Let $X$, $Y$ be metric spaces, $f : X \to Y$ continuous. If $A \subseteq X$ is connected, then
 $f(A)$ is connected.
 \end{theorem}
+
+% Generator: Claude Opus 5 (High) --- stated without proof in the source; the argument is three
+% lines and is the exact dual of \cref{item:continuity_preserves_compact}.
+\begin{proof}
+We may assume $A = X$, replacing $X$ by $A$ with the induced metric and $Y$ by $f(A)$. Suppose
+$f(X)$ were disconnected, say $f(X) = V_1 \sqcup V_2$ with $V_1,V_2$ open in $f(X)$, disjoint
+and non-empty. Then $U_i := f^{-1}(V_i)$ is open by \cref{def:continuous}\textbf{(c)},
+non-empty because $V_i$ meets the image, and $U_1 \cap U_2 = \emptyset$ with
+$U_1 \cup U_2 = X$ because the $V_i$ partition $f(X)$. So $U_1,U_2$ disconnect $X$, contrary to
+hypothesis.
+\end{proof}
+
+\begin{corollary}[Intermediate value theorem]
+\label{cor:intermediate_value_theorem}
+Let $f : [a,b] \to \mathbb{R}$ be continuous. Then $f$ attains every value between $f(a)$ and
+$f(b)$.
+\end{corollary}
+
+\begin{proof}
+By \cref{prop:intervals_connected}, $[a,b]$ is connected, so $f([a,b])$ is connected by
+\cref{thm:continuity_preserves_connected}, hence is an interval (\cref{prop:intervals_connected}
+again). An interval containing $f(a)$ and $f(b)$ contains everything between them.
+\end{proof}
+
+\begin{ainote}
+The intermediate value theorem is a result from \emph{Analysis I}, but it is worth re-deriving
+it here in one line: it is the first place where connectedness earns its keep, and the proof
+makes visible that the theorem is really a statement about $\mathbb{R}$ having no gaps rather
+than about $f$. It is used in the topologist's sine curve
+(\cpageref{ex:topologists_sine_curve}) below.
+\end{ainote}
+
+% Supplement: Sascha Brack/Class Notes/Week_03_Notes_Monday.pdf, p. 4
+\begin{corollary}[Linear maps preserve the unit cube]
+\label{cor:linear_maps_unit_cube}
+Given the $n$-dimensional unit cube $[0,1]^n \subset \mathbb{R}^n$, any linear map $L : \mathbb{R}^n \to \mathbb{R}^n$ maps $[0,1]^n$ to an $n$-dimensional parallelepiped. Since linear maps in Euclidean space are continuous, the image $L([0,1]^n)$ is connected. Furthermore, since $[0,1]^n$ is compact, $L([0,1]^n)$ is also compact.
+\end{corollary}
 
 \begin{exercise}[Properties of connectedness]
 \label{ex:connectedness_tf}
@@ -502,6 +669,16 @@ Let $X$ be a metric space. Then $X$ path-connected (\cref{def:path_connected}) i
 connected (\cref{def:connectedness}).
 \end{lemma}
 
+% Generator: Claude Opus 5 (High) --- stated without proof in the source.
+\begin{proof}
+Suppose $X$ were path-connected but disconnected, say $X = U_1 \sqcup U_2$ with $U_1,U_2$ open,
+disjoint and non-empty. Pick $x \in U_1$, $y \in U_2$ and a path $\gamma : [0,1] \to X$ with
+$\gamma(0)=x$, $\gamma(1)=y$. Then $\gamma^{-1}(U_1)$ and $\gamma^{-1}(U_2)$ are open in $[0,1]$
+by \cref{def:continuous}\textbf{(c)}, disjoint, cover $[0,1]$, and are non-empty (they contain
+$0$ and $1$ respectively). This disconnects $[0,1]$, contradicting
+\cref{prop:intervals_connected}.
+\end{proof}
+
 \begin{proposition}[Connectedness and path-connectedness in open Euclidean subsets]
 \label{prop:open_euclidean_connected_path_connected}
 Let $U \subseteq \mathbb{R}^n$ be open (\cref{def:open_closed}). Then
@@ -510,14 +687,56 @@ U \text{ path-connected} \iff U \text{ connected}.
 \]
 \end{proposition}
 
-\begin{importantremark}
-Only for open subsets!
+% Generator: Claude Opus 5 (High) --- stated without proof in the source; the "(<=)" direction
+% is the standard "the set of reachable points is clopen" argument and is worth having, since it
+% is the only place in this chapter where openness is genuinely used.
+\begin{proof}
+\textbf{($\Rightarrow$)} is \cref{lem:path_connected_implies_connected}, which needs neither
+openness nor $\mathbb{R}^n$.
+
+\textbf{($\Leftarrow$)} Assume $U$ is connected and non-empty (the empty set is vacuously
+path-connected), and fix $x_0 \in U$. Let
+\[A := \{x \in U \ :\ \text{some path in } U \text{ joins } x_0 \text{ to } x\}.\]
+We show $A$ and $U \setminus A$ are both open; since $x_0 \in A$ (take the constant path),
+connectedness then forces $U\setminus A = \emptyset$, i.e.\ $A = U$, which is the claim.
+
+Let $x \in U$ and choose $r>0$ with $B_r(x) \subseteq U$, using that $U$ is open. The ball is
+convex, so every $y \in B_r(x)$ is joined to $x$ by the straight segment
+$t \mapsto (1-t)x+ty$, which stays inside $B_r(x) \subseteq U$. Consequently:
+\begin{itemize}
+  \item If $x \in A$, concatenating a path from $x_0$ to $x$ with that segment joins $x_0$ to
+    any $y \in B_r(x)$, so $B_r(x) \subseteq A$ and $A$ is open.
+  \item If $x \notin A$, then no $y \in B_r(x)$ can lie in $A$ --- otherwise running the segment
+    backwards from $y$ to $x$ would join $x_0$ to $x$. So $B_r(x) \subseteq U\setminus A$ and
+    $U\setminus A$ is open.
+\end{itemize}
+(Concatenation of two paths is again a path: traverse the first on $[0,\tfrac12]$ and the second
+on $[\tfrac12,1]$, each at double speed; the result is continuous because the two pieces agree
+at $t=\tfrac12$.)
+\end{proof}
+
+\begin{importantremark}[Only for open subsets]
+\label{rem:path_connected_needs_open}
+The implication \qt{connected $\Rightarrow$ path-connected} is \emph{false} without openness,
+and the proof shows exactly why: the ball $B_r(x)$ around a point of $U$ was needed to supply
+the straight segment. For a set that is not open there may be points with no room around them at
+all, and the topologist's sine curve (\cref{ex:topologists_sine_curve}) below is precisely such
+a case --- the origin has no neighbourhood in $S$ that is a nice piece of curve.
 \end{importantremark}
 
+% Source: Corsin Nick/Class Notes/Week 3.pdf, pp. 1--14
+% (Re-cited: the two proofs and the important remark above are additions, not transcription.)
 \begin{example}[The topologist's sine curve]
-\[S := \left\{\left(t, \sin\left(\tfrac{1}{t}\right)\right) : t > 0\right\} \cup \{0\} \subseteq \mathbb{R}^2\]
+\label{ex:topologists_sine_curve}
+\[S := \left\{\left(t, \sin\left(\tfrac{1}{t}\right)\right) : t > 0\right\} \cup \{(0,0)\} \subseteq \mathbb{R}^2\]
 $S$ is \textbf{connected} but \textbf{not path-connected}!
 \end{example}
+
+\begin{ainote}
+Corsin writes the second piece as $\cup\,\{0\}$; since $S \subseteq \mathbb{R}^2$, the point
+being adjoined is the origin $(0,0) \in \mathbb{R}^2$, not the number $0$. Written as
+$\cup\,\{(0,0)\}$ above, which is also what his own figure and the proof below use.
+\end{ainote}
 
 \begin{center}
 \begin{tikzpicture}[>=Latex, scale=1.3]
@@ -561,15 +780,33 @@ Assume by contradiction there is a path from $(0,0)$ to $(\tfrac{1}{\pi}, 0)$,
 \gamma : [0,1] \to [0, \tfrac{1}{\pi}] \times [-1,1], \qquad t \mapsto (x(t), y(t)).
 \]
 Since $\gamma$ is continuous, $x$ and $y$ must also be continuous. By the \newterm{intermediate
-value theorem}, $x : [0,1] \to [0,\tfrac{1}{\pi}]$ attains every value in $[0,\tfrac{1}{\pi}]$,
-since $x(0) = 0$, $x(1) = \tfrac{1}{\pi}$. Therefore, we find a sequence
-$(a_n)_{n=0}^{\infty}$ such that
+value theorem} (\cref{cor:intermediate_value_theorem}), $x : [0,1] \to [0,\tfrac{1}{\pi}]$
+attains every value in $[0,\tfrac{1}{\pi}]$, since $x(0) = 0$ and $x(1) = \tfrac{1}{\pi}$.
+Therefore, we find a sequence $(a_n)_{n=1}^{\infty}$ such that
 \[
 x(a_n) = \frac{1}{2\pi n + \tfrac{\pi}{2}}.
 \]
-Note that $y(a_n) = 1$ for all $n \in \mathbb{N}$. Thus, in the limit $n \to \infty$, $a_n \to 0$,
-but $\gamma(a_n) \to (0,1) \neq \gamma(0)$. Contradiction to sequential continuity.
+We may moreover choose the $a_n$ \textbf{decreasing}: having found $a_{n-1}$, apply the
+intermediate value theorem on $[0,a_{n-1}]$ rather than on $[0,1]$, which is legitimate because
+$x(0) = 0$ and $x(a_{n-1}) = \tfrac{1}{2\pi(n-1)+\pi/2}$ already straddle the next target value.
+This yields $a_n \in (0,a_{n-1})$, so $(a_n)$ is decreasing and bounded below, hence convergent,
+say $a_n \to \ell \in [0,1]$.
+
+Now evaluate $\gamma$ along this sequence. By construction $x(a_n) \to 0$, so continuity gives
+$x(\ell) = 0$; and $y(a_n) = \sin\!\big(2\pi n + \tfrac\pi2\big) = 1$ for every $n$, so
+$y(\ell) = 1$. Hence $\gamma(\ell) = (0,1)$. But $(0,1) \notin S$: the only point of $S$ whose
+first coordinate vanishes is the origin. This contradicts $\gamma([0,1]) \subseteq S$, so no
+such path exists.
 \end{proof}
+
+\begin{ainote}
+Corsin's argument produces the $a_n$ from the intermediate value theorem and then asserts
+$a_n \to 0$. That does not follow from the choice as stated --- the intermediate value theorem
+returns \emph{some} preimage, and nothing so far prevents all of them from sitting near $1$.
+The repair is the standard one and costs one sentence: apply the theorem on the shrinking
+intervals $[0,a_{n-1}]$ rather than on $[0,1]$ each time, which forces the $a_n$ down. Inserted
+above; the rest of his proof is unchanged.
+\end{ainote}
 
 \begin{center}
 \begin{tikzpicture}[>=Latex, scale=1.3]
@@ -638,6 +875,11 @@ $\|\cdot\| : V \to [0,\infty)$ satisfying, for all $u, v \in V$ and $\alpha \in 
   \item $\|v\| := \sqrt{\langle v,v\rangle}$ defines a norm.
   \item $d(x,y) := \|x-y\|$ defines a metric.
 \end{itemize}
+
+These are the two implications promised back in \cref{sec:structured_spaces}, and they are what
+make the hierarchy of \qt{structured spaces} a genuine nesting rather than a list. Both are
+proved as \cref{prop:induced_norm_and_metric} below, once Cauchy--Schwarz is available --- it is
+needed, and only for the triangle inequality.
 
 \subsection{Geometric meaning of the inner product}
 
@@ -757,6 +999,67 @@ which rearranges to $\langle u,v\rangle^2 \leq \|u\|^2\|v\|^2$, i.e., $|\langle 
 if and only if $u - \pi_v(u) = 0$ by definiteness, i.e., $u$ is a scalar multiple of $v$.
 \end{proof}
 
+% Generator: Claude Opus 5 (High)
+\begin{remark}[The same proof twice]
+\label{rem:two_proofs_cauchy_schwarz}
+This is the second proof of Cauchy--Schwarz in these notes;
+\cref{prop:cauchy_schwarz_geometric_proof} in Week 2 gave another, following Diego Torres
+Tejeda. They look different --- one minimises the quadratic
+$f(\lambda) := \|v-\lambda w\|^2$ over $\lambda$, the other expands
+$\|u-\pi_v(u)\|^2 \geq 0$ --- but the minimiser found there is
+$\lambda_0 = \tfrac{\langle v,w\rangle}{\|w\|^2}$, which is exactly the coefficient defining
+$\pi_w(v)$. So the first proof \emph{derives} the projection by optimisation and the second
+\emph{postulates} it and checks it works. Keeping both is worthwhile precisely because the pair
+shows where the projection comes from: it is not a lucky guess, it is the closest point of the
+line to $v$.
+\end{remark}
+
+% Generator: Claude Opus 5 (High) --- the two bullets after \cref{def:norm} are asserted without
+% proof in the source; both are short, and the first is the only place Cauchy--Schwarz is needed.
+\begin{proposition}[Inner product $\Rightarrow$ norm $\Rightarrow$ metric]
+\label{prop:induced_norm_and_metric}
+Let $V$ be a real vector space.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item If $\langle\cdot,\cdot\rangle$ is an inner product on $V$ (\cref{def:inner_product}),
+    then $\|v\| := \sqrt{\langle v,v\rangle}$ is a norm on $V$ (\cref{def:norm}).
+  \item If $\|\cdot\|$ is a norm on $V$, then $d(x,y) := \|x-y\|$ is a metric on $V$
+    (\cref{def:metric_space}).
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\textbf{(a)} Definiteness of the norm is definiteness of the inner product, and homogeneity
+follows from bilinearity: $\|\alpha v\|^2 = \langle\alpha v,\alpha v\rangle =
+\alpha^2\|v\|^2$. For the triangle inequality, expand and apply
+\cref{thm:cauchy_schwarz}:
+\[\|u+v\|^2 = \|u\|^2 + 2\langle u,v\rangle + \|v\|^2
+  \ \leq\ \|u\|^2 + 2\|u\|\,\|v\| + \|v\|^2 = \big(\|u\|+\|v\|\big)^2,\]
+and taking square roots gives $\|u+v\| \leq \|u\|+\|v\|$.
+
+\textbf{(b)} Definiteness: $d(x,y)=0$ means $\|x-y\|=0$, hence $x-y=0$. Symmetry: homogeneity
+with $\alpha=-1$ gives $\|x-y\| = \|-(y-x)\| = \|y-x\|$. Triangle inequality: writing
+$x-z = (x-y)+(y-z)$,
+\[d(x,z) = \|(x-y)+(y-z)\| \leq \|x-y\| + \|y-z\| = d(x,y)+d(y,z). \qedhere\]
+\end{proof}
+
+\begin{remark}[Neither arrow reverses]
+\label{rem:norm_not_from_inner_product}
+The nesting drawn in \cref{sec:structured_spaces} is strict at both steps.
+\begin{itemize}
+  \item \textbf{Not every metric comes from a norm.} The discrete metric
+    (\cref{ex:metric_examples}\textbf{(a)}) on a vector space cannot: a norm-induced metric
+    satisfies $d(\alpha x, 0) = |\alpha|\,d(x,0)$, which fails as soon as
+    $\alpha \neq 0,\pm1$.
+  \item \textbf{Not every norm comes from an inner product.} A norm induced by an inner product
+    obeys the \newterm{parallelogram law}
+    $\|u+v\|^2 + \|u-v\|^2 = 2\|u\|^2 + 2\|v\|^2$ (expand both sides by bilinearity). The
+    supremum norm on $\mathbb{R}^2$ violates it: for $u := (1,0)$ and $v := (0,1)$ the left side
+    is $1+1 = 2$ and the right side is $2+2 = 4$.
+\end{itemize}
+So each layer of the hierarchy really does carry strictly more structure than the one outside
+it.
+\end{remark}
+
 % Sonnet 5 (Medium)
 \subsection{Contraction mappings and the Banach fixed point theorem}
 
@@ -782,6 +1085,44 @@ $f : X \to X$ be a contraction (\cref{def:contraction_mapping}). Then $f$ has a 
 $x_0 \in X$, the iterates $x_{n+1} := f(x_n)$ converge to $x^*$.
 \end{theorem}
 
+% Supplement: Sascha Brack/Class Notes/Week_02_Notes_Monday_Updated.pdf, p. 13
+\begin{proof}[Proof idea]
+The core idea is to create a Cauchy sequence by repeatedly applying the contraction mapping $f$.
+Fix an arbitrary starting point $x_0 \in X$, and define the sequence by $x_{n+1} := f(x_n)$ for all $n \geq 0$.
+Comparing consecutive terms gives:
+\[
+d(x_{n+1}, x_n) = d(f(x_n), f(x_{n-1})) \leq \lambda \cdot d(x_n, x_{n-1}).
+\]
+Iterating this inequality yields $d(x_{n+1}, x_n) \leq \lambda^n d(x_1, x_0)$. Since $\lambda < 1$, one can use the triangle inequality and the geometric series to show that the distance between any two terms $x_m$ and $x_n$ (for $m > n$) becomes arbitrarily small as $n \to \infty$. Thus, the sequence is Cauchy.
+Because $X$ is a complete metric space, this sequence converges to some limit $x^* \in X$. Since contraction mappings are continuous, one can pass the limit inside the function to conclude $f(x^*) = x^*$.
+\end{proof}
+
+% Generator: Claude Opus 5 (High) --- Sascha's proof idea establishes existence only; uniqueness
+% is two lines and is half of what the theorem claims.
+\begin{proof}[Uniqueness of the fixed point]
+Suppose $f(x) = x$ and $f(y) = y$. Then
+\[d(x,y) = d\big(f(x),f(y)\big) \leq L\,d(x,y),\]
+so $(1-L)\,d(x,y) \leq 0$. Since $L<1$ we have $1-L>0$, forcing $d(x,y) \leq 0$ and hence
+$d(x,y)=0$, i.e.\ $x=y$.
+\end{proof}
+
+\begin{remark}[Where each hypothesis is used]
+\label{rem:banach_hypotheses}
+Both hypotheses of \cref{thm:banach_fixed_point} are indispensable, and each fails in a
+different way.
+\begin{itemize}
+  \item \textbf{Completeness} is what supplies the limit. On the incomplete space
+    $X := (0,1]$, the map $f(x) := x/2$ is a contraction with $L=\tfrac12$ and has no fixed
+    point in $X$ --- the iterates march towards $0$, which is missing.
+  \item \textbf{$L<1$ strictly} is what forces the iterates together. The map
+    $f(x) := x + \tfrac{1}{1+e^{x}}$ on the complete space $\mathbb{R}$ satisfies the strict
+    inequality $|f(x)-f(y)| < |x-y|$ for $x \neq y$, yet has no fixed point, since
+    $f(x)>x$ everywhere. A supremum of $1$ that is never attained is still not good enough.
+\end{itemize}
+The uniqueness proof above shows the second point cleanly: the whole argument is the division by
+$1-L$, which is exactly what $L=1$ forbids.
+\end{remark}
+
 \begin{aiexercise}[{Contraction Mapping on $[0,1]$}]
 \label{ex:ai_contraction_cos}
 % Generator: Gemini 3.6 Flash (Medium)
@@ -794,10 +1135,18 @@ Let $f \colon [0,1] \to [0,1]$ be defined by $f(x) := \frac{1}{2}\cos(x)$.
 \end{enumerate}
 \end{aiexercise}
 
-\begin{aiexercise}[Continuous Image of a Connected Set]
+\begin{aiexercise}[Continuous image of a path-connected set]
 \label{ex:ai_connected_image}
-% Generator: Gemini 3.6 Flash (Medium)
-Let $f \colon X \to Y$ be a continuous map between metric spaces. Prove that if $X$ is connected, then $f(X)$ is connected.
+% Generator: Claude Opus 5 (High). Replaces an earlier exercise asking for
+% \cref{thm:continuity_preserves_connected}, which now carries its own proof.
+Let $f \colon X \to Y$ be a continuous map between metric spaces.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Prove that if $X$ is path-connected (\cref{def:path_connected}), then so is $f(X)$.
+  \item Conclude that the graph $\Gamma_g := \{(x,g(x)) : x \in U\}$ of a continuous
+    $g : U \to \mathbb{R}^m$ is path-connected whenever $U \subseteq \mathbb{R}^n$ is convex.
+    (Compare \cref{ex:4.2} in Week 4, which asks the same question with \qt{connected} in place
+    of \qt{path-connected}.)
+\end{enumerate}
 \end{aiexercise}
 
 \exercisesheet{3}
@@ -875,8 +1224,9 @@ immediately after their statement, mirroring how he presents them in his own not
 \begin{itemize}
   \item $\sqrt{x}$ on $[0,\infty)$: \textbf{uniformly continuous, not Lipschitz.} Uniform
     continuity follows from continuity on $[0,1]$ (compact, \cref{item:uniform_continuity_compact})
-    together with $1$-Lipschitz behaviour on $[1,\infty)$ (since $|\sqrt x - \sqrt y| \leq
-    \tfrac12|x-y|$ there by the mean value theorem). Not Lipschitz near $0$: for $x_n :=
+    together with $\tfrac12$-Lipschitz behaviour on $[1,\infty)$ (since $|\sqrt x - \sqrt y| \leq
+    \tfrac12|x-y|$ there by the mean value theorem, as $|(\sqrt{\cdot})'| = \tfrac{1}{2\sqrt x}
+    \leq \tfrac12$ for $x \geq 1$). Not Lipschitz near $0$: for $x_n :=
     1/n^2 \to 0$, $\dfrac{|\sqrt{x_n}-\sqrt0|}{|x_n-0|} = n \to \infty$, so no global $L$ works.
   \item $1/x$ on $(0,1)$: \textbf{continuous, neither uniformly nor Lipschitz continuous.} For
     $x_n := 1/n$, $y_n := 1/(2n)$, $|x_n-y_n| \to 0$ but $|1/x_n - 1/y_n| = n \to \infty$, so no
@@ -898,6 +1248,26 @@ immediately after their statement, mirroring how he presents them in his own not
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:ai_connected_image}]
-% Generator: Gemini 3.6 Flash (Medium)
-Suppose $f(X)$ is disconnected. Then there exist open sets $V_1, V_2 \subseteq Y$ such that $V_1 \cap f(X) \neq \emptyset$, $V_2 \cap f(X) \neq \emptyset$, $f(X) \subseteq V_1 \cup V_2$, and $(V_1 \cap V_2) \cap f(X) = \emptyset$. Since $f$ is continuous, the preimages $U_1 := f^{-1}(V_1)$ and $U_2 := f^{-1}(V_2)$ are open in $X$. Moreover, $U_1 \neq \emptyset$, $U_2 \neq \emptyset$, $U_1 \cup U_2 = X$, and $U_1 \cap U_2 = \emptyset$. This forms a separation of $X$, contradicting the connectedness of $X$. Thus $f(X)$ must be connected.
+% Generator: Claude Opus 5 (High)
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Let $p, q \in f(X)$, say $p = f(x)$ and $q = f(y)$. Since $X$ is path-connected there is
+    a path $\gamma : [0,1] \to X$ with $\gamma(0)=x$ and $\gamma(1)=y$. Then
+    $f \circ \gamma : [0,1] \to f(X)$ is continuous as a composition of continuous maps, and it
+    satisfies $(f\circ\gamma)(0) = p$, $(f\circ\gamma)(1) = q$. So it is a path in $f(X)$ from
+    $p$ to $q$, and $f(X)$ is path-connected.
+  \item A convex set $U$ is path-connected: the straight segment $t \mapsto (1-t)x + ty$ lies in
+    $U$ and is continuous. The map $\varphi : U \to \mathbb{R}^n\times\mathbb{R}^m$,
+    $\varphi(x) := (x,g(x))$, is continuous because each component is, and
+    $\Gamma_g = \varphi(U)$. Apply \textbf{(a)}.
+\end{enumerate}
+
+\begin{remark}
+Part \textbf{(a)} is strictly easier than its connectedness counterpart
+(\cref{thm:continuity_preserves_connected}), because path-connectedness is a statement one
+verifies by \emph{exhibiting} something --- a path --- and continuous maps push paths forward
+directly. Connectedness has no such witness to push forward, which is why its proof has to run
+by contradiction through preimages instead. This asymmetry is worth noticing: it is the reason
+path-connectedness is usually the easier of the two to prove, and connectedness the easier of
+the two to \emph{use}.
+\end{remark}
 \end{exercisesolution}

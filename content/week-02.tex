@@ -51,11 +51,29 @@ called a \newterm{space} (\germanterm{Raum}) in this context --- which we will d
 \end{tikzpicture}
 \end{center}
 
-The precise definitions will follow later. You will see that an \textbf{inner product}
-$\langle\cdot,\cdot\rangle$ induces a \textbf{norm} by the formula
+The precise definitions will follow later: metric spaces in \cref{def:metric_space} just below,
+inner products and norms only in Week 3 (\cref{def:inner_product}, \cref{def:norm}). You will
+see that an \textbf{inner product} $\langle\cdot,\cdot\rangle$ induces a \textbf{norm} by the
+formula
 \[\|x\| := \sqrt{\langle x, x\rangle}, \qquad x \in X.\]
 Furthermore, a \textbf{norm} induces a \textbf{metric} by
 \[d(x,y) := \|x - y\|, \qquad x, y \in X.\]
+That both formulas really do produce a norm and a metric --- the triangle inequality being the
+only non-obvious part --- is \cref{prop:induced_norm_and_metric} in Week 3, where the tools to
+prove it are available.
+
+\begin{ainote}
+The two blocks that follow supplement Corsin's outline with material from other tutors, and both
+work with inner products and the Cauchy--Schwarz inequality \emph{before} this document
+formally defines them, because Corsin's own notes place that material in Week 3
+(\cref{sec:cauchy_schwarz}) and reordering his chapters is not something these notes do. Read
+them as a preview: nothing later depends on them, and \cref{sec:cauchy_schwarz} restates
+everything from scratch. \Cref{prop:cauchy_schwarz_geometric_proof} below and
+\cref{thm:cauchy_schwarz} in Week 3 are the same inequality proved twice, by
+\qt{minimise the distance to the line} and by \qt{expand the perpendicular part} respectively ---
+which are the same computation wearing different clothes, as
+\cref{rem:two_proofs_cauchy_schwarz} points out.
+\end{ainote}
 
 % Supplement: Sascha Brack/Class Notes/Week_02_Notes_Monday_Updated.pdf, p. 4
 \begin{remark}[Geometric angle and projection in inner product spaces]
@@ -145,10 +163,15 @@ once you know what it is keeping out.
     triangle inequality (it is $|\cdot|$ composed with $x \mapsto x^2$), but
     $d(-1,1) = 0$ while $-1 \neq 1$. Distinct points at distance zero: the space cannot tell
     $-1$ from $1$, and no sequence could ever have a unique limit.
-  \item \textbf{Symmetry fails:} $d(x,y) := \max\{y-x,\,0\}$. Here $d(0,1)=1$ but $d(1,0)=0$, so
-    walking uphill costs and walking downhill is free. (Such a $d$ is called a
-    \newterm{quasi-metric} and is genuinely useful elsewhere --- but $B_r(x)$ would then depend
-    on which argument the centre sits in.)
+  \item \textbf{Symmetry fails:} $d(x,y) := \max\{\,y-x,\ 2(x-y)\,\}$, i.e.\ moving to the right
+    costs $1$ per unit and moving to the left costs $2$. Here $d(0,1)=1$ but $d(1,0)=2$, so the
+    return trip is more expensive than the outward one. Definiteness still holds ---
+    $d(x,y) = 0$ forces $y-x \leq 0 \leq y-x$, hence $x=y$ --- and so does the triangle
+    inequality, since $d(x,y) = \varphi(y-x)$ for $\varphi(t) := \max\{t,-2t\}$, and $\varphi$
+    is a maximum of two linear functions vanishing at $0$, hence convex and positively
+    homogeneous, hence subadditive. (Such a $d$ is called a \newterm{quasi-metric} and is
+    genuinely useful elsewhere --- but $B_r(x)$ would then depend on which argument the centre
+    sits in.)
   \item \textbf{Triangle inequality fails:} $d(x,y) := (x-y)^2$. Definiteness and symmetry are
     clear, but
     \[d(0,2) = 4 \quad > \quad d(0,1)+d(1,2) = 1+1 = 2,\]
@@ -233,6 +256,12 @@ $|x+y|_m = 2^{1/m} > 2 = |x|_m+|y|_m$. Written as stated above.
     \[
     d(f,g) := \sup_{x \in [0,1]} |f(x) - g(x)|
     \]
+    This is well defined --- i.e.\ the supremum is a real number and not $+\infty$ --- because
+    $|f-g|$ is continuous on the compact interval $[0,1]$ and therefore bounded, by the extreme
+    value theorem from \emph{Analysis I} (revisited in this generality as
+    \cref{lem:sequential_compactness_extreme_values} below). Compactness of the domain is doing
+    real work here: on $C^0(\mathbb{R},\mathbb{R})$ the same formula would produce $\infty$ for
+    $f(x) := x$, $g := 0$.
   \item Let $X := S^2 := \{(x_1,x_2,x_3) \in \mathbb{R}^3 : x_1^2 + x_2^2 + x_3^2 = 1\}$. $S^n$ is
     called the \newterm{$n$-dimensional sphere}, or \newterm{$n$-sphere}. The closest path between
     two points on the sphere is an \textbf{arc of a great circle} (a \textit{geodesic}). This
@@ -415,6 +444,26 @@ sets that survive into the general theory.
 \end{ainote}
 \end{importantremark}
 
+% Supplement: Sascha Brack/Class Notes/Week_02_Notes_Friday_Updated.pdf, p. 1
+\begin{example}[Open and closed sets in $\mathbb{R}$]
+\label{ex:open_closed_R}
+Consider the following subsets of $\mathbb{R}$ with the standard metric:
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{Is $\mathbb{N}$ open, closed, or neither?} It is \textbf{closed}, since its
+    complement $\mathbb{R} \setminus \mathbb{N} = (-\infty, 1) \cup \bigcup_{n=1}^\infty (n, n+1)$
+    is a union of open intervals, which is open by
+    \Cref{prop:open_closed_operations}\textbf{\ref{item:arbitrary_union_open}}. It is not open,
+    because no open ball around any $n \in \mathbb{N}$ is contained in $\mathbb{N}$.
+  \item \textbf{Let $A := \{\frac{1}{n} \mid n = 1, 2, \dots\}$.} The set $A$ is \textbf{neither}
+    open nor closed. It is not open for the same reason as $\mathbb{N}$. It is not closed because
+    $0$ is an accumulation point of $A$, but $0 \notin A$, meaning its complement
+    $\mathbb{R} \setminus A$ is not open (any open ball around $0$ intersects $A$).
+  \item \textbf{Let $F := \{\frac{1}{n} \mid n = 1, 2, \dots\} \cup \{0\}$.} The set $F$ is
+    \textbf{closed}. By adding the limit point $0$, the complement $\mathbb{R} \setminus F$
+    becomes a union of open intervals, which is open.
+\end{enumerate}
+\end{example}
+
 % Sonnet 5 (Medium)
 \begin{definition}[Interior, closure, and boundary]
 \label{def:interior_closure_boundary}
@@ -437,8 +486,54 @@ standard Euclidean metric:
   \item The \textbf{closure} is $\overline{A} = [0,1]$, the smallest closed set containing $A$.
   \item The \textbf{boundary} is $\partial A = \overline{A} \setminus \operatorname{int}(A) = \{0, 1\}$.
 \end{itemize}
+Note that $1 \in A$ while $0 \notin A$: the boundary is not required to lie inside the set, nor
+outside it. That is the point of defining it as a difference of two other sets rather than as
+\qt{the edge of $A$}.
 \end{aiexample}
 
+% Generator: Claude Opus 5 (High) --- FIG-W02-01: the three notions in one picture.
+\begin{center}
+\begin{tikzpicture}[scale=1.25]
+  % A blob A. int(A) is the shaded open part; the solid curve is dA; closure = both together.
+  \draw[blue!70!black, thick, fill=blue!14, smooth cycle, tension=0.75]
+    plot coordinates {(-1.7,-0.9) (-1.9,0.7) (-0.3,1.4) (1.4,1.0) (1.8,-0.6) (0.2,-1.3)};
+
+  \node[blue!70!black, font=\small] at (-0.15,0.05) {$\operatorname{int}(A)$};
+
+  % a point of the interior, with a ball that fits
+  \fill (-1.0,0.35) circle (1.2pt);
+  \draw[green!55!black, dashed] (-1.0,0.35) circle (0.42);
+  \node[green!55!black, font=\scriptsize, below] at (-1.0,-0.15) {ball fits};
+
+  % a boundary point: every ball meets A and its complement
+  \fill[red!80!black] (1.61,0.32) circle (1.4pt);
+  \draw[red!80!black, dashed] (1.61,0.32) circle (0.42);
+  \node[red!80!black, font=\scriptsize, anchor=west] at (2.15,0.32) {no ball fits};
+
+  \node[blue!70!black, font=\small, anchor=east] at (-2.05,1.05) {$\partial A$};
+  \draw[blue!70!black, ->] (-2.0,0.95) -- (-1.55,0.62);
+
+  \node[font=\footnotesize, align=center] at (0,-2.05)
+    {$\operatorname{int}(A)$: points with a ball inside $A$ \quad$\cdot$\quad
+     $\partial A$: points every ball of which meets\\
+     both $A$ and $X\setminus A$ \quad$\cdot$\quad
+     $\overline{A} = \operatorname{int}(A) \cup \partial A$};
+\end{tikzpicture}
+\end{center}
+
+\begin{remark}[Interior and closure are dual]
+\label{rem:interior_closure_dual}
+The two constructions are not independent: taking complements swaps them,
+\[X \setminus \operatorname{int}(A) = \overline{X\setminus A},
+  \qquad\qquad
+  X \setminus \overline{A} = \operatorname{int}(X\setminus A).\]
+Both read off \cref{def:interior_closure_boundary} directly --- $x$ fails to have a ball inside
+$A$ exactly when every ball around $x$ meets $X\setminus A$. In particular $\partial A =
+\partial(X\setminus A)$: a set and its complement share their boundary, which is why the
+boundary of the open disk and of its closed complement are the same circle.
+\end{remark}
+
+% Source: Corsin Nick/Class Notes/Week 2.pdf, p. 7
 \begin{exercise}[$X$ and $\emptyset$ are clopen]
 \label{ex:X_empty_clopen}
 Let $(X,d)$ be a metric space. Show that $X$ and $\emptyset$ are both open and closed.
@@ -452,6 +547,17 @@ points and is therefore vacuously open. Since $X$ and $\emptyset$ are each other
 $X$, they are also closed.
 \end{exercisesolution}
 
+% Supplement: Sascha Brack/Class Notes/Week_02_Notes_Friday_Updated.pdf, p. 2
+\begin{example}[Interior, closure, and boundary in $\mathbb{R}$ and $\mathbb{R}^2$]
+\label{ex:interior_closure_boundary_more}
+Applying \cref{def:interior_closure_boundary} to various sets:
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Let $\Omega := \mathbb{Z} \subset \mathbb{R}$. Then $\operatorname{int}(\Omega) = \emptyset$ (no interval fits inside $\mathbb{Z}$), $\overline{\Omega} = \mathbb{Z}$ (it is already closed), and $\partial\Omega = \mathbb{Z} \setminus \emptyset = \mathbb{Z}$.
+  \item Let $\Omega := B_1(0) \subset \mathbb{R}^2$. Then $\operatorname{int}(\Omega) = B_1(0)$ (it is already open), the closure is the closed disk $\overline{\Omega} = \{x \in \mathbb{R}^2 \mid d(x,0) \leq 1\}$, and the boundary is the unit circle $\partial\Omega = \{x \in \mathbb{R}^2 \mid d(x,0) = 1\}$.
+  \item Let $\Omega := \mathbb{Q} \subset \mathbb{R}$. Then $\operatorname{int}(\Omega) = \emptyset$ (every open interval contains irrationals), $\overline{\Omega} = \mathbb{R}$ (every open interval contains rationals, so every real number is a closure point), and $\partial\Omega = \mathbb{R} \setminus \emptyset = \mathbb{R}$.
+\end{enumerate}
+\end{example}
+
 \subsection{Sequences and convergence}
 
 \begin{definition}[Convergent sequence]
@@ -460,6 +566,16 @@ A \newterm{sequence} $(x_n)_{n=0}^{\infty}$ in a metric space $(X,d)$ is a funct
 $x : \mathbb{N} \to X$. We say that $(x_n)_{n=0}^{\infty}$ \newterm{converges} to $x \in X$ if
 \[\forall \varepsilon > 0 \ \exists N \in \mathbb{N} \text{ such that } d(x_n, x) < \varepsilon \quad \forall n \geq N.\]
 \end{definition}
+
+% Supplement: Sascha Brack/Class Notes/Week_02_Notes_Monday_Updated.pdf, p. 7
+\begin{example}[A convergent sequence in $\mathbb{R}^3$]
+\label{ex:convergent_sequence_R3}
+Define a sequence $(x_n)_{n=1}^{\infty}$ in $\mathbb{R}^3$ by $x_n := \left(\frac{1}{n}, \frac{2}{n}, 1\right)$ for all $n \in \mathbb{N}$. Does a limit exist? If yes, what is it?
+Yes, the sequence converges. Its limit can be computed coordinate-wise:
+\[
+\lim_{n\to\infty} x_n = \left(\lim_{n\to\infty} \frac{1}{n}, \lim_{n\to\infty} \frac{2}{n}, \lim_{n\to\infty} 1\right) = (0,0,1).
+\]
+\end{example}
 
 % Sonnet 5 (Medium)
 \begin{proposition}[Uniqueness of limits]
@@ -516,13 +632,63 @@ some control ruling out the first counterexample's boundary-escaping behaviour.
 \end{enumerate}
 \end{proposition}
 
-\begin{example}[Open, closed, and neither in $\mathbb{R}^2$]
-In the euclidean metric space $\mathbb{R}^2$:
+% Generator: Claude Opus 5 (High) --- Corsin states this without proof, but it is the
+% workhorse behind the uniform-convergence exercise below, so the argument is filled in here.
+\begin{proof}
 \begin{enumerate}[label=\textbf{(\alph*)}]
-  \item $[0,1]^2$ is \textbf{closed}.
-  \item $(0,1)^2$ is \textbf{open}.
-  \item $[0,1] \times (0,1)$ is \textbf{neither open nor closed}.
+  \item \textbf{($\Rightarrow$)} Let $U$ be open and let $x_n \to x \in U$. Choose
+    $\varepsilon>0$ with $B_\varepsilon(x) \subseteq U$ (\cref{def:open_closed}). By
+    \cref{def:convergent_sequence} there is $N$ with $d(x_n,x)<\varepsilon$ for all $n \geq N$,
+    so $x_n \in B_\varepsilon(x) \subseteq U$ from $N$ onwards.
+
+    \textbf{($\Leftarrow$)} By contraposition. If $U$ is not open, some $x \in U$ has
+    $B_{1/n}(x) \not\subseteq U$ for every $n \geq 1$, so we may pick
+    $x_n \in B_{1/n}(x)\setminus U$. Then $d(x_n,x) < \tfrac1n \to 0$, so $x_n \to x \in U$ ---
+    yet \emph{no} term lies in $U$.
+  \item \textbf{($\Rightarrow$)} Let $A$ be closed, $(x_n)$ a sequence in $A$ with $x_n \to x$.
+    If $x \notin A$, then $x$ lies in the open set $X\setminus A$, so by \textbf{(a)} the
+    sequence eventually lies in $X\setminus A$ --- contradicting $x_n \in A$ for all $n$. Hence
+    $x \in A$.
+
+    \textbf{($\Leftarrow$)} We show $X\setminus A$ is open. If it were not, the same
+    construction as in \textbf{(a)} yields $x \in X\setminus A$ and points
+    $x_n \in B_{1/n}(x) \cap A$. Then $(x_n)$ is a sequence in $A$ converging to $x$, so the
+    hypothesis forces $x \in A$ --- a contradiction.
 \end{enumerate}
+\end{proof}
+
+\begin{remark}[The shrinking-ball construction]
+\label{rem:shrinking_ball_trick}
+Both \qt{$\Leftarrow$} directions used the same device: negating \qt{some ball fits inside $U$}
+gives a bad point in $B_{1/n}(x)$ for \emph{every} $n$, and collecting those points produces a
+sequence converging to $x$. It is worth recognising, because it is the standard bridge from a
+statement about balls to a statement about sequences, and it is exactly what makes
+\cref{def:open_closed} and \cref{prop:open_closed_via_sequences} interchangeable in practice ---
+one usually proves closedness by the sequence criterion and openness by the ball criterion.
+Note that it needs the radii $\tfrac1n$ to shrink to $0$, which is where the metric enters;
+in a general topological space the equivalence can fail.
+\end{remark}
+
+% Source: Corsin Nick/Class Notes/Week 2.pdf, pp. 1--13
+% (Re-cited: the proof and remark above this point are additions, not transcription.)
+\begin{example}[Open, closed, and neither in $\mathbb{R}^2$]
+\label{ex:open_closed_neither_R2}
+In the euclidean metric space $\mathbb{R}^2$, and with
+\cref{prop:open_closed_via_sequences} in hand, each answer is a one-line sequence argument:
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $[0,1]^2$ is \textbf{closed}: a sequence in $[0,1]^2$ converges coordinatewise
+    (\cref{prop:Rn_coordinatewise_complete}), and each coordinate limit stays in $[0,1]$ because
+    weak inequalities survive limits.
+  \item $(0,1)^2$ is \textbf{open}: given $x \in (0,1)^2$, the distance from $x$ to the nearest
+    edge is some $\varepsilon>0$, and $B_\varepsilon(x) \subseteq (0,1)^2$.
+  \item $[0,1] \times (0,1)$ is \textbf{neither open nor closed}: it is not open because no ball
+    around $(0,\tfrac12)$ fits inside it, and it is not closed because
+    $(\tfrac12, \tfrac1n) \to (\tfrac12, 0)$ is a convergent sequence in the set whose limit is
+    not.
+\end{enumerate}
+The picture below shows exactly these three witnesses --- in \textbf{(a)} the escaping sequence
+stays trapped, in \textbf{(c)} one sequence escapes through the open edge while another does
+not.
 \end{example}
 
 \begin{center}
@@ -676,9 +842,12 @@ metric?
 \end{warmup}
 
 \begin{answer}
-Supremum: the axis-aligned \textbf{square} $[-1,1]^2$, whose edge midpoints are $(\pm 1, 0)$ and
-$(0,\pm 1)$. Manhattan: the \textbf{diamond} with vertices $(\pm 1, 0)$, $(0,\pm 1)$.
+Supremum: the axis-aligned \textbf{open square} $(-1,1)^2$. Manhattan: the \textbf{open diamond}
+$\{|x_1|+|x_2| < 1\}$. In both cases the strict inequality in \cref{def:open_ball} matters: the
+points $(\pm 1,0)$ and $(0,\pm 1)$ sit on the boundary and are \emph{not} in the ball --- they
+are the corners of the diamond and the edge midpoints of the square, drawn hollow below.
 \end{answer}
+
 
 \begin{center}
 \begin{tikzpicture}[>=Latex, scale=1.2]
@@ -686,22 +855,65 @@ $(0,\pm 1)$. Manhattan: the \textbf{diamond} with vertices $(\pm 1, 0)$, $(0,\pm
     \draw[->] (-1.5,0) -- (1.5,0) node[right] {$x_1$};
     \draw[->] (0,-1.5) -- (0,1.5) node[above] {$x_2$};
     \draw[blue!80!black, thick, dashed, fill=blue!10] (-1,-1) rectangle (1,1);
-    \fill[orange!90!black] (1,0) circle (2pt) node[above right, font=\footnotesize] {$(1,0)$};
-    \fill[orange!90!black] (0,1) circle (2pt) node[above right, font=\footnotesize] {$(0,1)$};
-    \node[below, font=\small] at (0,-1.6) {Supremum metric: Square};
+    % Hollow: (1,0) and (0,1) have d_3 = 1, so they are NOT in the open ball B_1(0).
+    \draw[orange!90!black, thick, fill=white] (1,0) circle (2pt);
+    \node[orange!90!black, above right, font=\footnotesize] at (1,0) {$(1,0)$};
+    \draw[orange!90!black, thick, fill=white] (0,1) circle (2pt);
+    \node[orange!90!black, above right, font=\footnotesize] at (0,1) {$(0,1)$};
+    \node[below, font=\small, align=center] at (0,-1.6)
+      {Supremum metric $d_3$:\\ open square $(-1,1)^2$};
   \end{scope}
 
-  \begin{scope}[shift={(4,0)}]
+  \begin{scope}[shift={(4.4,0)}]
     \draw[->] (-1.5,0) -- (1.5,0) node[right] {$x_1$};
     \draw[->] (0,-1.5) -- (0,1.5) node[above] {$x_2$};
     \draw[blue!80!black, thick, dashed, fill=blue!10] (1,0) -- (0,1) -- (-1,0) -- (0,-1) -- cycle;
-    \fill[orange!90!black] (1,0) circle (2pt) node[above right, font=\footnotesize] {$(1,0)$};
-    \fill[orange!90!black] (0,1) circle (2pt) node[above right, font=\footnotesize] {$(0,1)$};
-    \node[below, font=\small] at (0,-1.6) {Manhattan metric: Diamond};
+    % Same here: d_1((1,0),0) = 1, so the corners are boundary points, not elements.
+    \draw[orange!90!black, thick, fill=white] (1,0) circle (2pt);
+    \node[orange!90!black, above right, font=\footnotesize] at (1,0) {$(1,0)$};
+    \draw[orange!90!black, thick, fill=white] (0,1) circle (2pt);
+    \node[orange!90!black, above right, font=\footnotesize] at (0,1) {$(0,1)$};
+    \node[below, font=\small, align=center] at (0,-1.6)
+      {Manhattan metric $d_1$:\\ open diamond};
+  \end{scope}
+
+  \begin{scope}[shift={(8.8,0)}]
+    \draw[->] (-1.5,0) -- (1.5,0) node[right] {$x_1$};
+    \draw[->] (0,-1.5) -- (0,1.5) node[above] {$x_2$};
+    \draw[blue!80!black, thick, dashed, fill=blue!10] (0,0) circle (1);
+    \draw[orange!90!black, thick, fill=white] (1,0) circle (2pt);
+    \node[orange!90!black, above right, font=\footnotesize] at (1,0) {$(1,0)$};
+    \draw[orange!90!black, thick, fill=white] (0,1) circle (2pt);
+    \node[orange!90!black, above right, font=\footnotesize] at (0,1) {$(0,1)$};
+    \node[below, font=\small, align=center] at (0,-1.6)
+      {Standard metric $d_2$:\\ open disk};
   \end{scope}
 \end{tikzpicture}
 \end{center}
 
+% Generator: Claude Opus 5 (High)
+\begin{remark}[The unit ball remembers which metric it came from]
+\label{rem:unit_balls_distinguish_metrics}
+Three metrics, three unmistakably different unit balls: the square for $d_3$, the disk for
+$d_2$, the diamond for $d_1$. This is the quickest way to tell the three apart, and it also
+makes \cref{ex:ai_metric_equivalence} visible --- the inclusions
+\[B^{d_1}_1(0) \ \subseteq\ B^{d_2}_1(0) \ \subseteq\ B^{d_3}_1(0)\]
+are precisely the inequalities $d_3 \leq d_2 \leq d_1$ read backwards: the larger the metric,
+the harder it is to be within distance $1$, hence the smaller the ball. The same family,
+continued to all $p \geq 1$, is sketched in \cref{ex:4.3}\textbf{.1} in Week 4, where the square
+reappears as the limiting case $p \to \infty$.
+
+None of this changes which sets are open, incidentally --- all three metrics have the same open
+sets, as \cref{ex:ai_metric_equivalence} shows. The balls look different; the topology does not
+notice.
+\end{remark}
+
+% Sonnet 5 (Medium)
+With distance, shape and convergence in place, we can finally ask the question the whole
+apparatus was built for: what does it mean for a map \emph{between} two metric spaces to respect
+that structure?
+
+% Source: Corsin Nick/Class Notes/Week 2.pdf, pp. 1--13
 \section{Continuity}
 \label{sec:continuity}
 
@@ -724,6 +936,47 @@ Corsin writes $d(x_0,x) < \varepsilon$ in the ($\varepsilon$--$\delta$) hypothes
 must read $\delta$ --- otherwise the quantified $\delta$ is never used. A slip of the pen;
 corrected in \cref{def:continuous}.
 \end{ainote}
+
+% Generator: Claude Opus 5 (High) --- \cref{def:continuous} asserts the equivalence of three
+% conditions without proving it; the cycle is short and uses only results already available.
+\begin{proposition}[The three definitions of continuity agree]
+\label{prop:continuity_equivalences}
+The conditions \textbf{(a)}, \textbf{(b)} and \textbf{(c)} of \cref{def:continuous} are
+equivalent, so \cref{def:continuous} is well posed.
+\end{proposition}
+
+\begin{proof}
+We prove the cycle
+$\text{\textbf{(a)}} \Rightarrow \text{\textbf{(b)}} \Rightarrow \text{\textbf{(c)}}
+\Rightarrow \text{\textbf{(a)}}$.
+
+\textbf{(a) $\Rightarrow$ (b).} Let $x_n \to x$ and let $\varepsilon>0$. Pick $\delta>0$ as in
+\textbf{(a)} for the point $x$, then $N$ with $d_X(x_n,x)<\delta$ for $n \geq N$. For those $n$,
+$d_Y(f(x_n),f(x)) < \varepsilon$, so $f(x_n) \to f(x)$.
+
+\textbf{(b) $\Rightarrow$ (c).} Let $U \subseteq Y$ be open and suppose $f^{-1}(U)$ were not.
+By the shrinking-ball construction (\cref{rem:shrinking_ball_trick}) there are
+$x \in f^{-1}(U)$ and points $x_n \in B_{1/n}(x)$ with $x_n \notin f^{-1}(U)$. Then $x_n \to x$,
+so $f(x_n) \to f(x) \in U$ by \textbf{(b)}, and since $U$ is open,
+\cref{prop:open_closed_via_sequences}\textbf{(a)} forces $f(x_n) \in U$ for large $n$ ---
+i.e.\ $x_n \in f^{-1}(U)$, a contradiction.
+
+\textbf{(c) $\Rightarrow$ (a).} Fix $x_0 \in X$ and $\varepsilon>0$. The ball
+$B_\varepsilon(f(x_0)) \subseteq Y$ is open (\cref{ex:ai_open_balls_are_open}), so
+$f^{-1}\big(B_\varepsilon(f(x_0))\big)$ is open by \textbf{(c)} and contains $x_0$. Hence there
+is $\delta>0$ with $B_\delta(x_0) \subseteq f^{-1}\big(B_\varepsilon(f(x_0))\big)$, which says
+precisely that $d_X(x_0,x)<\delta$ implies $d_Y(f(x_0),f(x))<\varepsilon$.
+\end{proof}
+
+\begin{remark}[Which of the three to reach for]
+Condition \textbf{(c)} is the only one that never mentions the metric, which is why it --- and
+not the $\varepsilon$--$\delta$ formulation --- is what survives into general topology
+(\cref{sec:structured_spaces}). Condition \textbf{(b)} is usually the fastest way to prove a
+function is \emph{dis}continuous, since a single badly chosen sequence suffices; this is exactly
+how \cref{ex:partial_derivatives_not_continuous} in Week 4 works. Condition \textbf{(a)} is the
+one to use when a quantitative modulus is wanted, as in
+\cref{def:uniformly_continuous} immediately below.
+\end{remark}
 
 % Sonnet 5 (Medium)
 \begin{definition}[Uniform continuity]
@@ -1112,7 +1365,9 @@ Define
 $U_{i_0} \ni x$ contains a ball around $x$, so $r(x) > 0$; and since $X$ is bounded
 (\cref{lem:sequentially_compact_totally_bounded}) but no $U_i$ equals $X$, $r(x) < \infty$.
 
-\textit{$r$ is Lipschitz (\cref{def:lipschitz_continuous}), hence continuous.} Write
+\textit{$r$ is Lipschitz, hence continuous.} (That is, $|r(x)-r(y)| \leq L\,d(x,y)$ for a
+constant $L$; the notion is named and placed in context as \cref{def:lipschitz_continuous} in
+Week 3, but only the displayed estimate is used here.) Write
 $R(x) := \sup\{\rho \geq 0 : B_\rho(x) \subseteq U_i \text{ for some } i\}$, so that
 $r = \tfrac12 R$; it is $R$ that the argument bounds, and the factor $\tfrac12$ must be carried
 through.

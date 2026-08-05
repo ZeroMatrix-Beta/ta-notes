@@ -153,6 +153,15 @@ step 3 of \cref{rem:differentiability_recipe} insists on \qt{uniformly in $\thet
 \end{tikzpicture}
 \end{center}
 
+% Supplement: Sascha Brack/Class Notes/Week_04_Notes_Monday_Updated.pdf, p. 4
+\begin{center}
+\begin{tikzcd}[row sep=3.5em, column sep=1.5em]
+  & \begin{tabular}{c}\textbf{Differentiable}\\($Df_{x_0}$ exists)\end{tabular} \arrow[dl, Rightarrow] \arrow[dr, Rightarrow] & \\
+  \begin{tabular}{c}\textbf{Partial derivatives}\\exist\end{tabular} & & \begin{tabular}{c}\textbf{Directional derivatives}\\exist\end{tabular} \\
+  \begin{tabular}{c}\textbf{Partial derivatives}\\exist\\and are continuous\end{tabular} \arrow[u, Rightarrow] \arrow[uur, Rightarrow] \arrow[rr, Leftrightarrow] & & \begin{tabular}{c}\textbf{Directional derivatives}\\exist\\and are continuous\end{tabular} \arrow[u, Rightarrow] \arrow[uul, Rightarrow]
+\end{tikzcd}
+\end{center}
+
 % Source: Corsin Nick/Class Notes/Week 4.pdf, p. 4
 \subsection{Examples}
 
@@ -208,6 +217,17 @@ What is $\Jac f(x,y,z)$?
 \[\Jac f(x,y,z) = (4x - 2yz,\ 2y - 2xz,\ 6z - 2xy) = \left(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, \frac{\partial f}{\partial z}\right) = (\nabla f)\transp\]
 \end{example}
 
+% Supplement: Sascha Brack/Class Notes/Week_04_Notes_Friday_Updated.pdf, p. 3
+\begin{example}[Jacobian matrix of a vector field]
+\label{ex:jacobian_vector_field}
+Consider $f : \mathbb{R}^2 \to \mathbb{R}^3$ defined by
+\[f(x,y) := \begin{pmatrix} x^2+y^2 \\ 2xy \\ e^x\sin(y) \end{pmatrix}.\]
+The partial derivatives with respect to $x$ and $y$ are the column vectors:
+\[\partial_1 f(x,y) = \begin{pmatrix} 2x \\ 2y \\ e^x\sin(y) \end{pmatrix}, \qquad \partial_2 f(x,y) = \begin{pmatrix} 2y \\ 2x \\ e^x\cos(y) \end{pmatrix}.\]
+Because these partial derivatives exist everywhere and are continuous, $f$ is differentiable on all of $\mathbb{R}^2$. The differential $Df_{(x_0,y_0)}$ is represented by the $3 \times 2$ Jacobian matrix:
+\[\Jac f(x_0,y_0) = \begin{pmatrix} 2x_0 & 2y_0 \\ 2y_0 & 2x_0 \\ e^{x_0}\sin(y_0) & e^{x_0}\cos(y_0) \end{pmatrix}.\]
+\end{example}
+
 From this, we see that the \textbf{rows} of the Jacobian are the \newterm{gradients}
 (\germanterm{Gradient}):
 \[\Jac F(x) = \begin{pmatrix} \nabla F_1 \\ \hline \vdots \\ \hline \nabla F_m \end{pmatrix}\]
@@ -217,6 +237,39 @@ Corsin's sentence reads ``the columns of the Jacobian are the gradients'', but t
 matrix stacks $\nabla F_1, \dots, \nabla F_m$ as rows --- which is the correct statement, and
 consistent with $(\nabla f)\transp$ just above. Corrected to ``rows''.
 \end{ainote}
+
+% Supplement: Sascha Brack/Class Notes/Week_04_Notes_Monday_Updated.pdf, pp. 10--11
+\begin{example}[A function that is differentiable but not $C^1$]
+\label{ex:differentiable_not_c1}
+Let $f : \mathbb{R}^2 \to \mathbb{R}$ be defined by
+\[
+f(x,y) := \begin{cases}
+  (x^2+y^2)\sin\left(\dfrac{1}{\sqrt{x^2+y^2}}\right), & \text{if } (x,y) \neq (0,0), \\
+  0, & \text{if } (x,y) = (0,0).
+\end{cases}
+\]
+We claim that $f$ is differentiable at $(0,0)$ with $Df_{(0,0)} = (0, 0)$, but the partial derivatives are not continuous at $(0,0)$. 
+
+\textbf{Step 1: Differentiability at $(0,0)$.} We use the definition of the differential. Let $L = (0, 0)$. We need to show that
+\[
+  \lim_{h \to (0,0)} \frac{f(h_1, h_2) - f(0,0) - L\begin{pmatrix}h_1\\h_2\end{pmatrix}}{\|h\|} = 0.
+\]
+Plugging in the definitions and changing to polar coordinates $(h_1, h_2) = (r\cos\theta, r\sin\theta)$ with $r = \|h\| = \sqrt{h_1^2+h_2^2}$:
+\[
+  \lim_{r \to 0} \frac{r^2 \sin(1/r) - 0 - 0}{r} = \lim_{r \to 0} r \sin(1/r) = 0.
+\]
+The sine term is bounded between $-1$ and $1$, so the limit evaluates to $0$. Thus, $f$ is differentiable at $(0,0)$ and $Df_{(0,0)} = (0, 0)$, which implies $\partial_1 f(0,0) = 0$ and $\partial_2 f(0,0) = 0$.
+
+\textbf{Step 2: Discontinuity of partial derivatives.} Let us compute $\partial_1 f(x,y)$ for $(x,y) \neq (0,0)$. Using the product and chain rules:
+\[
+  \partial_1 f(x,y) = 2x \sin\left(\frac{1}{\sqrt{x^2+y^2}}\right) - \frac{x}{\sqrt{x^2+y^2}} \cos\left(\frac{1}{\sqrt{x^2+y^2}}\right).
+\]
+Let us choose a sequence $(x_n, y_n) := (\frac{1}{n}, 0)$ which converges to $(0,0)$ as $n \to \infty$. Then
+\[
+  \lim_{n \to \infty} \partial_1 f\left(\frac{1}{n}, 0\right) = \lim_{n \to \infty} \left[ \frac{2}{n} \sin(n) - \cos(n) \right].
+\]
+The first term vanishes, but $\lim_{n \to \infty} \cos(n)$ does not exist. Thus, $\partial_1 f$ is not continuous at $(0,0)$, and so $f$ is not continuously differentiable ($C^1$) at $(0,0)$. (By symmetry, the same holds for $\partial_2 f$).
+\end{example}
 
 % Sonnet 5 (Medium)
 Having encoded the differential as a matrix, we now ask how it interacts with composition of
@@ -234,6 +287,16 @@ differentiable, it holds:
 \[D(g\circ f)(x) = Dg(f(x))\,Df(x).\]
 The same identity holds for the corresponding Jacobi matrices, where the composition on the
 right becomes an ordinary matrix product.
+\end{theorem}
+
+% Generator: Claude Opus 5 (High)
+\begin{ainote}
+Corsin states the chain rule without proof, as does the lecture at this point. The one-line
+reason it is true is worth carrying, though: differentiability says $f$ and $g$ are each well
+approximated by a linear map near the relevant point, and composing two approximations composes
+the linear maps, with the error terms of the two compositions still $o(|h|)$. Making that
+precise is the whole proof, and it is the same argument as in one variable.
+\end{ainote}
 
 % Supplement: Sascha Brack/Class Notes/Week_04_Notes_Friday_Updated.pdf, pp. 7--10
 \begin{remark}[The chain rule as a sum over paths]
@@ -287,7 +350,6 @@ form in which the rule is actually used in physics --- compare
 \Cref{sec:chain_rule_along_path}, which is this picture with a single intermediate layer
 $\gamma_1,\dots,\gamma_n$ and a single source variable $t$.
 \end{remark}
-\end{theorem}
 
 \begin{aiexample}[Chain Rule for Vector Fields]
 % Generator: Gemini 3.6 Flash (Medium)
@@ -492,7 +554,7 @@ one-directional:
   \draw[nimp] (dir.west) to[out=160, in=200, looseness=1.6] (df.west);
   \draw[nimp] (par.west) to[out=160, in=200, looseness=1.6] (dir.west);
   \node[font=\scriptsize, red!75!black, align=right, anchor=east] at (-2.6,3.7)
-    {\textbf{no:} $(x^2{+}y^2)\sin\tfrac{1}{\lVert x\rVert}$};
+    {\textbf{no:} \cref{ex:differentiable_not_c1}};
   \node[font=\scriptsize, red!75!black, align=right, anchor=east] at (-2.6,2.15)
     {\textbf{no:} \cref{ex:all_directional_derivatives_exist}};
   \node[font=\scriptsize, red!75!black, align=right, anchor=east] at (-2.6,0.65)
@@ -500,16 +562,26 @@ one-directional:
 \end{tikzpicture}
 \end{center}
 
-Every downward arrow holds; \textbf{not one of them reverses}, and each failure is witnessed by
-an example already in this chapter --- except the topmost, for which
-$F(x,y) := (x^2+y^2)\sin\big(1/\sqrt{x^2+y^2}\big)$ (and $F(0,0):=0$) serves: it \emph{is}
-differentiable at the origin, since $|F(h)|/\lVert h\rVert \leq \lVert h\rVert \to 0$ gives
-$DF_0 = 0$, yet
-\[\partial_1F(x,y) = 2x\sin\tfrac{1}{r} - \tfrac{x}{r}\cos\tfrac{1}{r},
-\qquad r := \sqrt{x^2+y^2},\]
-does not tend to $\partial_1F(0,0)=0$: along $(\tfrac1n,0)$ it equals
-$\tfrac2n\sin n - \cos n$, and $\cos n$ has no limit. So differentiable does \textbf{not} imply
-$C^1$ --- the chain really is strict at every step.
+Every downward arrow holds, and \textbf{not one of them reverses} --- each failure is witnessed
+by an example already in this chapter, so the diagram doubles as a map of where those
+counterexamples belong:
+\begin{itemize}
+  \item \textbf{Differentiable $\not\Rightarrow$ $C^1$:} \cref{ex:differentiable_not_c1}, whose
+    partial derivatives oscillate without limit at the origin even though the differential
+    exists there.
+  \item \textbf{All directional derivatives $\not\Rightarrow$ differentiable:}
+    \cref{ex:all_directional_derivatives_exist}, where every ray gives a slope but
+    $v \mapsto \partial_vf(0,0)$ is not linear.
+  \item \textbf{Partial derivatives $\not\Rightarrow$ all directional derivatives:}
+    \cref{ex:partial_derivatives_not_continuous} again. For $f = \tfrac{xy}{x^2+y^2}$ and a
+    direction $v = (a,b)$ with $ab \neq 0$,
+    \[\frac{f(ta,tb)}{t} = \frac{1}{t}\cdot\frac{t^2ab}{t^2(a^2+b^2)}
+      = \frac{ab}{t\,(a^2+b^2)} \ \xrightarrow{\ t \to 0\ }\ \pm\infty,\]
+    so $\partial_vf(0,0)$ exists only along the two axes --- the two directions the partial
+    derivatives happen to look at.
+\end{itemize}
+The three counterexamples are not variations on one theme; they fail at three different
+heights, which is precisely why the chain has three separate links.
 
 % Supplement: Sascha Brack/Class Notes/Week_04_Notes_Monday_Updated.pdf, p. 5
 \begin{remark}[A recipe for checking differentiability at a point]
@@ -533,6 +605,41 @@ Sascha's notes distil the above into three steps, worth following in this order.
 Step 1 is the one students skip; it settles the overwhelming majority of cases without any
 $\varepsilon$--$\delta$ work at all.
 \end{remark}
+
+% Supplement: Sascha Brack/Class Notes/Week_03_Notes_Friday.pdf, p. 7
+\begin{example}[Checking differentiability at the origin]
+\label{ex:differentiability_recipe_application}
+Let $f(x,y) := \frac{x^2 y}{x^2+y^2}$ for $(x,y) \neq (0,0)$ and $f(0,0) := 0$. We check if $f$ is differentiable at the origin.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item \textbf{Partial derivatives:}
+    \[\partial_1 f(0,0) = \lim_{t\to 0}\frac{f(t,0)-f(0,0)}{t} = \lim_{t\to 0}\frac{0}{t} = 0, \qquad \partial_2 f(0,0) = \lim_{t\to 0}\frac{f(0,t)-f(0,0)}{t} = 0.\]
+    They exist, but to use \cref{thm:continuous_partials_imply_differentiable} we would have to compute them everywhere and show they are continuous at $(0,0)$, which is tedious and (as we will see) false. We proceed to step 2.
+  \item \textbf{Guess the candidate:} The only possible differential is $L(h_1,h_2) = \partial_1 f(0,0)h_1 + \partial_2 f(0,0)h_2 = 0$.
+  \item \textbf{Verify against the definition:} We check whether the following limit is zero:
+    \[\lim_{h\to 0} \frac{|f(h_1,h_2) - f(0,0) - L(h)|}{\lVert h\rVert} = \lim_{h\to 0} \frac{\frac{h_1^2 h_2}{h_1^2+h_2^2}}{\sqrt{h_1^2+h_2^2}} = \lim_{h\to 0} \frac{h_1^2 h_2}{(h_1^2+h_2^2)^{3/2}}.\]
+    Passing to polar coordinates $h = (r\cos\theta, r\sin\theta)$, the expression becomes
+    \[\frac{r^3\cos^2\theta\sin\theta}{r^3} = \cos^2\theta\sin\theta.\]
+    This depends on the angle of approach $\theta$ (for instance, it is $0$ along the axes but $\frac{1}{2\sqrt{2}} \neq 0$ along $h_1=h_2$), so the limit as $r \to 0$ is not uniformly $0$. Hence $f$ is \textbf{not differentiable} at $(0,0)$.
+\end{enumerate}
+\end{example}
+
+% Supplement: Sascha Brack/Class Notes/Week_04_Notes_Friday_Updated.pdf, pp. 4--5
+\begin{example}[A function that is differentiable at the origin]
+\label{ex:differentiability_recipe_positive}
+Let $f(x,y) := \frac{x^2 y^2}{\sqrt{x^2+y^2}}$ for $(x,y) \neq (0,0)$ and $f(0,0) := 0$. We check differentiability at the origin following the recipe.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item \textbf{Partial derivatives:} For $(x,y) \neq (0,0)$, the quotient and chain rules give
+    \[\partial_1 f(x,y) = xy^2\frac{x^2+2y^2}{(x^2+y^2)^{3/2}}, \qquad \partial_2 f(x,y) = x^2y\frac{2x^2+y^2}{(x^2+y^2)^{3/2}}.\]
+    At the origin, computing directly from the definition yields $\partial_1 f(0,0) = 0$ and $\partial_2 f(0,0) = 0$.
+    To see if they are continuous at $(0,0)$, we substitute $x = r\cos\theta$ and $y = r\sin\theta$:
+    \[\partial_1 f(r\cos\theta, r\sin\theta) = \frac{r\cos\theta\,r^2\sin^2\theta \cdot r^2(1+\sin^2\theta)}{r^3} = r^2\cos\theta\sin^2\theta(1+\sin^2\theta).\]
+    As $r \to 0$, this tends to $0$ uniformly in $\theta$, so $\partial_1 f$ is continuous at $(0,0)$. The same holds for $\partial_2 f$. By \cref{thm:continuous_partials_imply_differentiable}, $f$ is differentiable at the origin.
+  \item \textbf{Guess the candidate:} We already know $f$ is differentiable and $L = (0,0)$. But for practice, let's verify it with the definition directly.
+  \item \textbf{Verify against the definition:} We check the limit
+    \[\lim_{h\to 0} \frac{|f(h_1,h_2) - f(0,0) - L(h)|}{\lVert h\rVert} = \lim_{h\to 0} \frac{\frac{h_1^2 h_2^2}{\sqrt{h_1^2+h_2^2}}}{\sqrt{h_1^2+h_2^2}} = \lim_{h\to 0} \frac{h_1^2 h_2^2}{h_1^2+h_2^2}.\]
+    In polar coordinates, this is $\frac{r^4\cos^2\theta\sin^2\theta}{r^2} = r^2\cos^2\theta\sin^2\theta$. As $r \to 0$, the limit is clearly $0$ uniformly in $\theta$, confirming $f$ is differentiable with $Df_0 = 0$.
+\end{enumerate}
+\end{example}
 
 % Quelle: Diego Torres Tejeda/Notes - 09.03 - Diego Torres Tejeda.pdf, p. 8
 \subsection{The mean value theorem}
@@ -569,15 +676,78 @@ Applying the scalar result to each component $f_1,\dots,f_m$ separately does pro
 $\xi_1,\dots,\xi_m$ with
 \[f(x+h)-f(x) = \begin{pmatrix}\partial_hf_1(\xi_1) \\ \vdots \\ \partial_hf_m(\xi_m)\end{pmatrix},\]
 but the $\xi_i$ are \emph{different points} in general, and no single $\xi$ need work for all
-components at once. The standard witness is the helix
+components at once. The standard witness is the \emph{circle}
 $\gamma(t) := (\cos t, \sin t)$ on $[0,2\pi]$: here $\gamma(2\pi)-\gamma(0) = 0$, while
 $\gamma'(t) = (-\sin t,\cos t)$ has $|\gamma'(t)| = 1$ and so never vanishes --- there is no
-$\xi$ at all.
+$\xi$ at all. Geometrically this is entirely reasonable: a walker who returns to the starting
+point must have had zero \emph{average} velocity, but need never have stood still. In one
+dimension \qt{returning} forces a turning point; in two it does not.
 
 What survives for vector-valued $f$ is the \emph{mean value inequality},
 $|f(x+h)-f(x)| \leq \sup_{t\in[0,1]}\lVert Df_{x+th}\rVert\,|h|$, which is what one actually
 uses in practice.
 \end{importantremark}
+
+\begin{center}
+% Generator: Claude Opus 5 (High) --- FIG-W04-06: the scalar theorem and its vector-valued
+% failure, side by side.
+% Left: f(x) = 0.35 + 1.5x - 0.55x^2 on [0.15, 2.4]. Chord slope between a=0.15 and b=2.4 is
+% f'(xi) with f'(x) = 1.5 - 1.1x, and (f(b)-f(a))/(b-a) = 1.5 - 1.1*(a+b)/2 = 1.5 - 1.4025
+% = 0.0975, so xi = (1.5 - 0.0975)/1.1 = 1.275 -- the midpoint (a+b)/2, as it must be for a
+% parabola. Marked there.
+% Right: the circle t -> (cos t, sin t); start = end, yet the velocity has length 1 throughout.
+\begin{tikzpicture}[>=Latex, scale=1.0]
+
+  % ---------- Left: the scalar mean value theorem ----------
+  \begin{scope}
+    \draw[->] (-0.2,0) -- (3.0,0) node[right, font=\footnotesize] {$x$};
+    \draw[->] (0,-0.2) -- (0,2.5) node[above, font=\footnotesize] {$y$};
+
+    \draw[blue!75!black, thick, domain=0.15:2.55, samples=70, smooth]
+      plot (\x, {0.35 + 1.5*\x - 0.55*\x*\x});
+
+    % Chord from a = 0.35 (y = 0.8076) to b = 2.4 (y = 0.7820); slope -0.0125.
+    % For a parabola the mean value point is the midpoint, xi = (0.35+2.4)/2 = 1.375,
+    % where f = 1.3727 and f' = 1.5 - 1.1*1.375 = -0.0125 -- equal to the chord slope.
+    \draw[red!80!black, thick] (0.35,0.8076) -- (2.4,0.7820);
+    \fill (0.35,0.8076) circle (1.2pt) node[below, font=\scriptsize] {$x$};
+    \fill (2.4,0.7820) circle (1.2pt) node[below right, font=\scriptsize] {$x+h$};
+
+    \draw[green!50!black, thick] (0.70,1.3811) -- (2.05,1.3643);
+    \fill[green!50!black] (1.375,1.3727) circle (1.4pt);
+    \node[green!50!black, font=\scriptsize, above] at (1.375,1.44) {$\xi$};
+
+    \node[font=\scriptsize, align=center, anchor=north] at (1.4,-0.42)
+      {\textbf{scalar $f$:} some $\xi$ has\\ tangent parallel to the chord};
+  \end{scope}
+
+  % ---------- Right: the vector-valued failure ----------
+  \begin{scope}[shift={(5.6,1.15)}]
+    \draw[->] (-1.5,0) -- (1.55,0) node[above right, font=\footnotesize] {$x$};
+    \draw[->] (0,-1.5) -- (0,1.6) node[above, font=\footnotesize] {$y$};
+
+    \draw[blue!75!black, thick] (0,0) circle (1);
+    \fill[red!80!black] (1,0) circle (1.6pt);
+    % Label placed below the axis: the velocity arrow at t = 0 points straight up from (1,0),
+    % and the x-axis label sits just above the axis, so both sides are occupied.
+    \draw[red!80!black, thin] (1,0) -- (1.18,-0.55);
+    \node[red!80!black, font=\scriptsize, anchor=north west] at (1.10,-0.52)
+      {$\gamma(0)=\gamma(2\pi)$};
+
+    % velocity vectors, always of length 1, never zero
+    \foreach \a in {0,72,144,216,288}{
+      \draw[green!50!black, very thick, ->]
+        ({cos(\a)},{sin(\a)}) -- ++({-0.52*sin(\a)},{0.52*cos(\a)});
+    }
+    \node[green!50!black, font=\scriptsize, anchor=east] at (-1.1,0.95)
+      {$|\gamma'|=1$};
+
+    \node[font=\scriptsize, align=center, anchor=north] at (0,-1.57)
+      {\textbf{vector-valued $\gamma$:} $\gamma(2\pi)-\gamma(0)=0$,\\ yet $\gamma'$ never
+       vanishes --- no $\xi$ exists};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
 
 % Source: Corsin Nick/Class Notes/Week 4.pdf, p. 7
 \begin{exercise}[Differential of $A \mapsto A\transp A$]
@@ -631,6 +801,66 @@ This operation is so common in physics that it has its own notation: for $f$ as 
 each coordinate as a function of \textbf{time} and differentiate:
 \[\frac{d}{dt}f(x_1,\dots,x_n) := Df(x_1(t),\dots,x_n(t)) = \sum_{i=1}^{n}\frac{\partial f}{\partial x_i}\frac{\partial x_i}{\partial t}.\]
 
+% Generator: Claude Opus 5 (High)
+The middle line, $D(f\circ\gamma)(t) = \langle\nabla f(\gamma(t)),\gamma'(t)\rangle$, is worth
+dwelling on, because it is the formula that gives the gradient its meaning. It says the rate at
+which $f$ changes along a path depends on the velocity only through its inner product with
+$\nabla f$ --- so by Cauchy--Schwarz (\cref{thm:cauchy_schwarz}) the change is fastest when
+$\gamma'$ points along $\nabla f$, and zero when $\gamma'$ is perpendicular to it. Two standard
+facts fall straight out:
+
+\begin{itemize}
+  \item \textbf{$\nabla f$ points in the direction of steepest ascent}, with
+    $|\nabla f|$ the rate of ascent in that direction.
+  \item \textbf{$\nabla f$ is perpendicular to the level sets of $f$.} If $\gamma$ stays inside
+    a level set $\{f = c\}$, then $f\circ\gamma$ is constant, so
+    $\langle\nabla f(\gamma(t)),\gamma'(t)\rangle = 0$ for every $t$ --- and $\gamma'$ runs
+    through the directions tangent to the level set.
+\end{itemize}
+
+\begin{center}
+% Generator: Claude Opus 5 (High) --- FIG-W04-04: level sets of f(x,y) = x^2 + 2y^2, a path
+% crossing them, and the decomposition of gamma' at one point.
+% Level sets are the ellipses x^2 + 2y^2 = c, i.e. semi-axes sqrt(c) and sqrt(c/2).
+% At P = (1.10, 0.55): grad f = (2x, 4y) = (2.20, 2.20), i.e. the 45-degree direction,
+% which is indeed normal to the ellipse there (the ellipse tangent has slope -x/(2y) = -1).
+\begin{tikzpicture}[>=Latex, scale=1.5]
+  \draw[->] (-2.35,0) -- (2.5,0) node[right, font=\footnotesize] {$x$};
+  \draw[->] (0,-1.75) -- (0,1.95) node[above, font=\footnotesize] {$y$};
+
+  % Three level sets of x^2 + 2y^2. The middle one, c = 2.142, is chosen to pass through the
+  % marked point P = (1.10, 0.6826): 1.10^2 + 2*0.6826^2 = 1.21 + 0.932 = 2.142.
+  \foreach \c in {0.9, 2.142, 4.0}{
+    \draw[gray!70, thin] (0,0) ellipse ({sqrt(\c)} and {sqrt(\c/2)});
+  }
+  % Kept in the upper LEFT: the gradient arrow and its label occupy the upper right.
+  \node[gray!75!black, font=\scriptsize, anchor=west] at (-2.25,1.45) {level sets $\{f=c\}$};
+
+  % a path crossing the level sets
+  \draw[blue!75!black, thick, domain=0.15:2.05, samples=60, smooth]
+    plot (\x, {0.28 + 0.30*\x + 0.06*\x*\x});
+  \node[blue!75!black, font=\scriptsize, anchor=south east] at (0.55,0.42) {$\gamma$};
+
+  % the point P on the middle ellipse (c = 1.815) and on the path:
+  % path at x = 1.10 gives y = 0.28 + 0.33 + 0.0726 = 0.6826 -- adjust c to match the point.
+  \coordinate (P) at (1.10,0.6826);
+  \fill[black] (P) circle (0.8pt);
+  \node[font=\scriptsize, below right] at (1.13,0.63) {$\gamma(t)$};
+
+  % gradient of f at P: (2x, 4y) = (2.20, 2.73), normalised and scaled to length 0.62
+  \draw[red!80!black, very thick, ->] (P) -- ++(0.39,0.48)
+    node[anchor=south west, font=\scriptsize] {$\nabla f$};
+  % velocity: gamma'(x) = 0.30 + 0.12x = 0.432, direction (1, 0.432), scaled
+  \draw[blue!75!black, very thick, ->] (P) -- ++(0.57,0.246)
+    node[anchor=north west, font=\scriptsize] {$\gamma'$};
+
+  \node[font=\scriptsize, align=center, anchor=north] at (0,-1.85)
+    {$\dfrac{d}{dt}f(\gamma(t)) = \langle \nabla f, \gamma'\rangle$: only the component of
+     $\gamma'$ along $\nabla f$ contributes,\\
+     so $f$ is constant along a level set and grows fastest along $\nabla f$};
+\end{tikzpicture}
+\end{center}
+
 % Sonnet 5 (Medium)
 Having linearized $F$ once, we now ask how good that linear approximation is, and how to improve
 it order by order --- the multivariable analogue of the Taylor series from Analysis 1.
@@ -648,6 +878,41 @@ $f \in C^k(U \subseteq \mathbb{R}^n, \mathbb{R})$, $\bar x \in U$:
 where $\alpha$ is a \newterm{multi-index} (\germanterm{Multiindex}) in $\mathbb{N}^n$.
 
 In practice, we never use this formula directly, but it is worth unpacking once (e.g., as in \cref{ex:taylor_maximal_expansion}).
+
+% Generator: Claude Opus 5 (High) --- the multi-index notation above is only well defined
+% because mixed partials commute; the fact is used twice below (in the expansion and in
+% \cref{rem:second_order_taylor_hessian}) but stated nowhere in the source notes.
+\begin{ainote}
+Before unpacking it, one hypothesis hidden in the notation deserves to be made explicit. Writing
+$\partial^\alpha$ for a multi-index $\alpha$ presumes that it does not matter \emph{in which
+order} the derivatives are taken --- otherwise $\partial^{(1,1)}$ would be ambiguous between
+$\partial_1\partial_2$ and $\partial_2\partial_1$. That this is legitimate is a theorem, stated
+next; neither Corsin's notes nor the working formula below mention it, yet both depend on it.
+\end{ainote}
+
+\begin{theorem}[Schwarz / Clairaut --- mixed partial derivatives commute]
+\label{thm:schwarz_mixed_partials}
+Let $U \subseteq \mathbb{R}^n$ be open and $f \in C^2(U,\mathbb{R})$. Then for all
+$i,j \in \{1,\dots,n\}$ and all $x \in U$,
+\[\partial_i\partial_j f(x) = \partial_j\partial_i f(x).\]
+More generally, for $f \in C^k(U,\mathbb{R})$ any $k$ partial derivatives may be permuted
+freely, so $\partial^\alpha f$ depends only on the multi-index $\alpha$ and not on the order of
+differentiation. In particular the Hessian $\Hess f(x)$ of
+\cref{rem:second_order_taylor_hessian} is a \textbf{symmetric} matrix.
+\end{theorem}
+
+\begin{remark}[The hypothesis is not decoration]
+\label{rem:schwarz_needs_c2}
+Continuity of the second derivatives is genuinely needed. The standard counterexample is
+\[f(x,y) := \begin{cases} xy\,\dfrac{x^2-y^2}{x^2+y^2} & (x,y)\neq(0,0), \\[1ex]
+  0 & (x,y)=(0,0),\end{cases}\]
+for which a direct computation from the definition gives
+$\partial_1\partial_2 f(0,0) = 1$ but $\partial_2\partial_1 f(0,0) = -1$. This $f$ has both
+mixed partials everywhere, but they are not continuous at the origin, so
+\cref{thm:schwarz_mixed_partials} does not apply --- and indeed fails. Since everything in
+\cref{sec:taylor_expansions} assumes $f \in C^k$, the issue never arises here; it is worth
+knowing that it \emph{could}.
+\end{remark}
 
 % Source: Corsin Nick/Class Notes/Week 4.pdf, pp. 9--10
 \begin{exercise}[Maximal Taylor expansion in $\mathbb{R}^2$]
@@ -708,8 +973,9 @@ $t \in [0,1]$:
 \begin{ainote}
 Both sums in \cref{thm:taylor_working_formula} are written with lower limit $\ell = 1$ (resp.\
 starting index) in the source. The $\ell = 0$ term is $f(\bar x)$ itself, which the explicit
-expansion above does include, so the lower limit must be $0$. Corrected above. See
-.
+expansion above does include, so the lower limit must be $0$. Corrected above; compare the
+$|\alpha| = 0$ line of \cref{ex:taylor_maximal_expansion}, which is the same term written in
+multi-index form.
 \end{ainote}
 
 % Supplement: Toby Lane/class-document.pdf, §3.4.4
@@ -773,6 +1039,63 @@ where
 is the \newterm{Hessian matrix} (\germanterm{Hesse-Matrix}) of $f$.
 \end{remark}
 
+% Generator: Claude Opus 5 (High)
+This is the form the rest of the course actually uses, and it is worth reading term by term as
+a sequence of ever-better approximations to $f$ near $x_0$:
+\begin{itemize}
+  \item the \textbf{constant} term $f(x_0)$ --- the crudest guess, exact only at $x_0$;
+  \item the \textbf{linear} term $\nabla f(x_0)\cdot x$ --- the tangent plane, i.e.\ exactly
+    the differential of \cref{def:differentiable};
+  \item the \textbf{quadratic} term $\tfrac12 x\transp\Hess f(x_0)\,x$ --- the first term that
+    sees curvature, and the one that decides in Week 5 whether a critical point is a minimum, a
+    maximum, or a saddle.
+\end{itemize}
+By \cref{thm:schwarz_mixed_partials} the Hessian is symmetric, which is what makes that
+last decision a question about the \emph{signs of its eigenvalues} rather than anything harder.
+
+\begin{center}
+% Generator: Claude Opus 5 (High) --- FIG-W04-05: the three approximations, in one variable,
+% where they can actually be drawn. f(x) = 1 + 0.55x - 0.5x^2 + 0.28x^3 about x_0 = 0, so
+% f(0) = 1, f'(0) = 0.55, f''(0) = -1: constant 1, tangent 1 + 0.55x, parabola 1 + 0.55x - 0.5x^2.
+\begin{tikzpicture}[>=Latex, scale=1.25]
+  \draw[->] (-1.7,0) -- (2.1,0) node[right, font=\footnotesize] {$x$};
+  \draw[->] (0,-0.3) -- (0,2.6) node[above, font=\footnotesize] {$y$};
+  \draw (0,0.05) -- (0,-0.05) node[below, font=\scriptsize] {$x_0$};
+
+  % order 0
+  \draw[gray!70, thick, dashed] (-1.6,1) -- (2.0,1);
+  \node[gray!70!black, font=\scriptsize, anchor=west] at (2.02,1.0) {order $0$};
+
+  % order 1: tangent
+  \draw[green!50!black, thick, domain=-1.6:2.0, samples=2]
+    plot (\x, {1 + 0.55*\x});
+  \node[green!50!black, font=\scriptsize, anchor=west] at (2.02,2.1) {order $1$};
+
+  % order 2: parabola
+  \draw[orange!90!black, thick, domain=-1.3:1.85, samples=60, smooth]
+    plot (\x, {1 + 0.55*\x - 0.5*\x*\x});
+  \node[orange!90!black, font=\scriptsize, anchor=west] at (1.88,0.40) {order $2$};
+
+  % the function itself
+  \draw[blue!75!black, very thick, domain=-1.35:1.75, samples=90, smooth]
+    plot (\x, {1 + 0.55*\x - 0.5*\x*\x + 0.28*\x*\x*\x});
+  \node[blue!75!black, font=\scriptsize, anchor=south east] at (-0.85,1.05) {$f$};
+
+  \fill (0,1) circle (1.1pt);
+
+  \node[font=\scriptsize, align=center, anchor=north] at (0.3,-0.62)
+    {each order matches one more derivative at $x_0$,\\
+     and the error drops from $O(|x|)$ to $O(|x|^2)$ to $O(|x|^3)$};
+\end{tikzpicture}
+\end{center}
+
+In several variables the same picture holds with \qt{tangent line} replaced by \emph{tangent
+plane} and \qt{parabola} by a paraboloid, bowl-shaped or saddle-shaped according to the
+signs of the eigenvalues of $\Hess f(x_0)$ --- which is exactly the classification carried out
+in Week 5.
+
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 12
+% (Re-cited: the reading of the three terms and the figure above are additions.)
 \begin{question}
 For $f \in C^k(U, \mathbb{R})$, do the Taylor expansions of $t \mapsto f(x_0+th)$ in $t$ and of
 $(th) \mapsto f(x_0+th)$ in $(th)$ around $0$ coincide?
@@ -958,7 +1281,57 @@ and $\varphi$ is continuous, \cref{thm:continuity_preserves_connected} gives tha
 \begin{enumerate}[label=\textbf{\arabic*.}]
   \item For $n=2$, $\{x : |x|_1 \leq 1\}$ is the diamond with vertices $(\pm 1, 0)$, $(0,\pm 1)$;
     $\{x : |x|_2 \leq 1\}$ is the Euclidean unit disc; $\{x : |x|_{10} \leq 1\}$ is a curve close
-    to the square $[-1,1]^2$, with rounded corners that flatten as $p$ grows.
+    to the square $[-1,1]^2$, with rounded corners that flatten as $p$ grows. All three contain
+    the four points $(\pm1,0)$, $(0,\pm1)$ --- since $|e_i|_p = 1$ for every $p$ --- and they
+    increase with $p$, which is the geometric content of part 2.
+    \begin{center}
+    % Generator: Claude Opus 5 (High) --- FIG-W04-01: the p-balls for p = 1, 2, 10, plus the
+    % limiting square. Plotted parametrically from |x|_p = 1 in the first quadrant,
+    % x = (cos t)^{2/p}, y = (sin t)^{2/p} for t in [0, pi/2], mirrored into the other three
+    % quadrants by symmetry. Check: t = pi/4 gives x = y = 2^{-1/p}, so the "corner" of the
+    % p-ball sits at distance 2^{1/2 - 1/p} from the origin -- 0.71 for p=1 (the diamond edge
+    % midpoint), 1 for p=2, and 1.32 for p=10, correctly approaching the corner (1,1) of the
+    % square, whose distance is sqrt2 = 1.41.
+    \begin{tikzpicture}[>=Latex, scale=1.9]
+      \draw[->] (-1.45,0) -- (1.5,0) node[right, font=\footnotesize] {$x_1$};
+      \draw[->] (0,-1.45) -- (0,1.5) node[above, font=\footnotesize] {$x_2$};
+
+      % p = infinity: the limiting square, drawn faintly for reference
+      \draw[gray!55, dashed] (-1,-1) rectangle (1,1);
+      % p = 1: the diamond
+      \draw[purple, thick] (1,0) -- (0,1) -- (-1,0) -- (0,-1) -- cycle;
+      % p = 2: the circle
+      \draw[blue!75!black, thick] (0,0) circle (1);
+      % p = 10, one quadrant at a time (x = (cos t)^{1/5}, y = (sin t)^{1/5})
+      \foreach \sx/\sy in {1/1,-1/1,-1/-1,1/-1}{
+        \draw[orange!90!black, thick, domain=0:90, samples=90, smooth]
+          plot ({\sx*pow(cos(\x),0.2)}, {\sy*pow(sin(\x),0.2)});
+      }
+
+      % The four points shared by every p-ball, since |e_i|_p = 1 for all p.
+      \fill (1,0) circle (0.7pt);
+      \fill (0,1) circle (0.7pt);
+      \fill (-1,0) circle (0.7pt);
+      \fill (0,-1) circle (0.7pt);
+
+      % Legend, placed clear of the curves rather than labelling them inline: along the
+      % 45-degree ray the four boundaries sit at radii 0.71, 1, 1.32 and 1.41, which is too
+      % little separation for inline labels to be legible.
+      % Raised clear of the $x_1$ axis label, which sits at (1.55, 0).
+      \begin{scope}[shift={(1.62,1.38)}]
+        \draw[purple, thick] (0,0) -- (0.30,0);
+        \node[font=\scriptsize, anchor=west] at (0.36,0) {$p=1$};
+        \draw[blue!75!black, thick] (0,-0.30) -- (0.30,-0.30);
+        \node[font=\scriptsize, anchor=west] at (0.36,-0.30) {$p=2$};
+        \draw[orange!90!black, thick] (0,-0.60) -- (0.30,-0.60);
+        \node[font=\scriptsize, anchor=west] at (0.36,-0.60) {$p=10$};
+        \draw[gray!55, dashed] (0,-0.90) -- (0.30,-0.90);
+        \node[font=\scriptsize, anchor=west] at (0.36,-0.90) {$p=\infty$};
+      \end{scope}
+    \end{tikzpicture}
+    \end{center}
+    % Generator: Claude Sonnet 5 (Medium) --- the solution continues below; only the figure
+    % above is an addition.
   \item Let $M := \max_i |x_i|$. Then
     \[
     M \leq |x|_p = M\Big(\sum_{i=1}^{n}\Big(\frac{|x_i|}{M}\Big)^p\Big)^{1/p} \leq M\,n^{1/p}.

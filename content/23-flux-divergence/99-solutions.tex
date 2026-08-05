@@ -1,0 +1,46 @@
+% Originally: content/week-11.tex, \section{Solutions}
+
+\section{Solutions}
+\label{sec:flux_solutions}
+
+\begin{exercisesolution}[Solution of \cref{ex:11.5}]
+\textbf{(1)} Writing $V_\alpha^i(x) = \lvert x\rvert^\alpha x_i$,
+\[
+\partial_i\big(\lvert x\rvert^\alpha x_i\big) = \alpha\lvert x\rvert^{\alpha-2}x_i^2
+  + \lvert x\rvert^\alpha \qquad \text{(no sum),}
+\]
+so, summing over $i=1,\ldots,n$,
+\[
+\divg V_\alpha(x) = \sum_{i=1}^n \Big(\alpha\lvert x\rvert^{\alpha-2}x_i^2 + \lvert
+  x\rvert^\alpha\Big) = \alpha\lvert x\rvert^{\alpha-2}\lvert x\rvert^2 + n\lvert x\rvert^\alpha
+  = (\alpha+n)\lvert x\rvert^\alpha.
+\]
+Since $\lvert x\rvert^\alpha \neq 0$ for $x\neq0$, this vanishes identically exactly when
+$\alpha = -n$.
+
+\textbf{(2)} For $\alpha=0$, $V_0(x)=x$ and, by part (1), $\divg V_0 \equiv n$. Applying
+\cref{thm:gauss_divergence} on $B_r$,
+\[\int_{B_r} \divg V_0\,dx = n\,\vol_n(B_r).\]
+On $\partial B_r$ the outward unit normal is $\nu(x) = x/r$, so $V_0(x)\cdot\nu(x) = x\cdot
+x/r = \lvert x\rvert^2/r = r$ (using $\lvert x\rvert=r$ on $\partial B_r$), giving
+\[\int_{\partial B_r} V_0\cdot\nu\,d\vol_{n-1} = r\,\vol_{n-1}(\partial B_r).\]
+Equating the two expressions of $\int_{B_r}\divg V_0\,dx = \int_{\partial B_r}V_0\cdot\nu\,
+d\vol_{n-1}$ gives $r\,\vol_{n-1}(\partial B_r) = n\,\vol_n(B_r)$.
+
+\textbf{(3)} By part (1), $\divg V_{-n}(x) = 0$ for every $x\neq0$, so $\int_{B_1}\divg
+V_{-n}(x)\,dx = 0$ trivially (the integrand vanishes on $B_1\setminus\{0\}$, a set of full
+measure in $B_1$). On $\partial B_1$, $\nu(x)=x$ and $\lvert x\rvert=1$, so $V_{-n}(x) =
+\lvert x\rvert^{-n}x = x$, giving
+\[\int_{\partial B_1} V_{-n}\cdot\nu\,d\vol_{n-1} = \int_{\partial B_1} x\cdot x\,d\vol_{n-1}
+  = \int_{\partial B_1} 1\,d\vol_{n-1} = \vol_{n-1}(\partial B_1) > 0.\]
+This does not contradict \cref{thm:gauss_divergence}: the theorem requires $F$ to be $C^1$ on
+all of $\overline{B_1}$, but $V_{-n}(x) = \lvert x\rvert^{-n}x$ is not even defined, let alone
+continuously differentiable, at $x=0 \in \overline{B_1}$ --- its hypotheses simply do not hold
+on this domain.
+\end{exercisesolution}
+
+\begin{ainote}
+Solved independently before consulting \texttt{Sol11\_Analysis2\_eng.pdf}; all three parts
+match the official solution exactly, including the closing remark that the contradiction is
+avoided because $V_{-n}$ fails to be $C^1$ at the origin, which lies inside $\overline{B_1}$.
+\end{ainote}

@@ -1,0 +1,66 @@
+% Originally: content/week-08.tex had a \section{Solutions} containing only an AI-Note reading
+% "TODO --- pending the exercise statements". The statements had in fact been transcribed, so
+% 8.5 stood in the document unsolved. Written here for the first time.
+\section{Solutions}
+\label{sec:change_of_variables_solutions}
+
+\begin{exercisesolution}[Solution to \cref{ex:8.5}]
+% Generator: Claude Opus 5 (High)
+In each part the work is the same two steps --- find $\lvert\det\Jac\rvert$, then translate every
+constraint --- and, as the exercise says, no integral is actually evaluated.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item \textbf{Polar coordinates.} Here $\Phi(r,\theta) := (r\cos\theta, r\sin\theta)$ has
+    $\det\Jac\Phi = r > 0$ (\cref{ex:polar_spherical_coordinates}), so
+    $dx_1dx_2 = r\,dr\,d\theta$. The three constraints translate one at a time:
+    \begin{itemize}
+      \item $1 < x_1^2+x_2^2 < 4$ becomes $1 < r < 2$;
+      \item $x_1 > 0$ becomes $\cos\theta > 0$, i.e.\ $\theta \in (-\tfrac\pi2, \tfrac\pi2)$;
+      \item $x_2 < x_1$ becomes $r\sin\theta < r\cos\theta$; since $r > 0$ and $\cos\theta > 0$
+        this is $\tan\theta < 1$, i.e.\ $\theta < \tfrac\pi4$.
+    \end{itemize}
+    So the transformed domain is the rectangle
+    $(r,\theta) \in (1,2)\times\big(-\tfrac\pi2,\tfrac\pi4\big)$ and
+    \[\int_A x_1^2\sin(x_2)\,dx_1dx_2
+      = \int_{1}^{2}\!\!\int_{-\pi/2}^{\pi/4} r^3\cos^2\theta\,\sin(r\sin\theta)\,d\theta\,dr,\]
+    the extra power of $r$ coming from $x_1^2 = r^2\cos^2\theta$ times the Jacobian factor $r$.
+  \item \textbf{$u := xy$, $v := x^2$.} Follow Sascha Brack's hint and fix the signs first. On $B$
+    the constraint $x^2 < y$ forces $y > 0$, and then $xy > 1 > 0$ forces $x > 0$; so
+    $u > 0$ and $v > 0$ throughout, and $x = \sqrt v$, $y = u/\sqrt v$.
+
+    Differentiating in the convenient direction,
+    \[\frac{\partial(u,v)}{\partial(x,y)}
+      = \det\begin{pmatrix} y & x \\ 2x & 0\end{pmatrix} = -2x^2 = -2v,
+      \qquad\text{so}\qquad dx\,dy = \frac{du\,dv}{2v}.\]
+    Now the constraints. $1 < xy < 2$ becomes $1 < u < 2$ at once. The second is the interesting
+    one: $x^2 < y < 2x^2$ reads $v < u/\sqrt v < 2v$, i.e.
+    \[v^{3/2} < u < 2\,v^{3/2}, \qquad\text{equivalently}\qquad
+      \Big(\frac{u}{2}\Big)^{2/3} < v < u^{2/3}.\]
+    The integrand becomes $y^2e^{-xy} = (u^2/v)\,e^{-u}$, so
+    \[\int_B y^2e^{-xy}\,dx\,dy
+      = \int_{1}^{2}\!\!\int_{(u/2)^{2/3}}^{u^{2/3}} \frac{u^2e^{-u}}{2v^2}\,dv\,du.\]
+    Note what did \emph{not} happen: straightening $1 < xy < 2$ into a pair of constant bounds
+    did not straighten the other constraint, which is exactly the point flagged in the AI-Note
+    beside the statement.
+  \item \textbf{A linear change of variables.} With $u := z$, $v := z-2y$, $w := 3x+y+z$,
+    \[\frac{\partial(u,v,w)}{\partial(x,y,z)}
+      = \det\begin{pmatrix} 0 & 0 & 1 \\ 0 & -2 & 1 \\ 3 & 1 & 1\end{pmatrix} = 6,
+      \qquad\text{so}\qquad dx\,dy\,dz = \frac{du\,dv\,dw}{6},\]
+    a constant, since the map is linear. Each constraint already \emph{is} one of the new
+    coordinates, so the transformed domain is literally the box
+    \[(u,v,w) \in (0,1)\times(1,2)\times(-2,0).\]
+    Inverting the substitution gives $z = u$, $y = \tfrac{u-v}{2}$ and
+    $x = \tfrac{1}{6}\big(2w - 3u + v\big)$, so $xyz = \tfrac{1}{12}\,u\,(u-v)\,(2w-3u+v)$ and
+    \[\int_C xyz\,dx\,dy\,dz
+      = \int_{0}^{1}\!\!\int_{1}^{2}\!\!\int_{-2}^{0}
+        \frac{u\,(u-v)\,(2w-3u+v)}{72}\,dw\,dv\,du.\]
+\end{enumerate}
+
+\begin{ainote}
+The three parts are graded deliberately, and comparing them is the lesson. In part 3 the change
+of variables was \emph{chosen} to be the constraints, so the domain is a box and the Jacobian a
+constant --- nothing is left to do. In part 1 the domain is a box in the new coordinates but the
+Jacobian is not constant. In part 2 neither holds: the Jacobian varies and one of the two
+constraints stays curved. Reading the substitution off the constraints, as in part 3, is the move
+worth remembering; it is available far more often than it looks.
+\end{ainote}
+\end{exercisesolution}

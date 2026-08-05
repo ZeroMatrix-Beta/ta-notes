@@ -1,0 +1,127 @@
+% Originally: content/week-11.tex, \section{Differential forms and the exterior derivative} (Corsin Week 11)
+
+\section{Differential forms and the exterior derivative}
+\label{sec:differential_forms}
+
+% Source: Corsin Nick/Class Notes/Week 11.pdf, p. 10
+\begin{definition}[Differential form]
+\label{def:differential_p_form}
+A \newterm{differential $p$-form} $\omega$ (\germanterm{Differentialform}) is defined on a
+domain $D \subseteq \mathbb{R}^n$ if, for every $x \in D$, $\omega(x) = \omega_x : (\mathbb{R}^n)^p
+\to \mathbb{R}$ is an antisymmetric $p$-linear map. Since $(e_1(x),\ldots,e_n(x))$ is a basis
+of $\mathbb{R}^n$ for every $x \in D$, \cref{prop:k_form_basis_expansion} lets us write
+\[\omega(x) = \sum_{1\leq i_1<\cdots<i_p\leq n} \omega_{i_1\cdots i_p}(x)\,e_{i_1}^*(x)\wedge
+  \cdots\wedge e_{i_p}^*(x)\]
+for functions $\omega_{i_1\cdots i_p} : \mathbb{R}^n \to \mathbb{R}$.
+\end{definition}
+
+% Source: Corsin Nick/Class Notes/Week 11.pdf, p. 11
+\begin{notation}
+We abbreviate $e_{i_1}^*\wedge\cdots\wedge e_{i_p}^* =: e_I^*$ for $I = (i_1,\ldots,i_p)$, and
+write $\Omega^p(U)$ for the set of $p$-forms on $U \subseteq \mathbb{R}^n$. By convention,
+$\Omega^0(U) = C^\infty(U)$.
+\end{notation}
+
+\begin{example}
+Let $U \subseteq \mathbb{R}^n$.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Any $f \in C^\infty(U)$ is a $0$-form.
+  \item A vector field $F : U \to \mathbb{R}^n$ has an associated $1$-form $\omega_F(x) : v
+  \mapsto \langle F(x),v\rangle$, that is,
+  \[\omega_F(x)(v) = \sum_{i=1}^n F^i(x)\,v^i = \sum_{i=1}^n F^i(x)\,e_i^*(x)(v)
+    \qquad\Longrightarrow\qquad \omega_F = \sum_{i=1}^n F^i\,e_i^*.\]
+% Source: Corsin Nick/Class Notes/Week 11.pdf, p. 12
+  \item $F : U \to \mathbb{R}^n$ also naturally induces an $(n-1)$-form
+  \[\omega_F^{n-1}(x)(v_1,\ldots,v_{n-1}) := \det\big(F(x)\mid v_1\mid\cdots\mid v_{n-1}\big).\]
+  Developing this determinant along the first column,
+  \begin{align}
+  \omega_F^{n-1}(x)(v_1,\ldots,v_{n-1}) &= \sum_{i=1}^n (-1)^{i-1}F^i(x)\det\!\left(
+    \begin{smallmatrix} v_1^1 & \cdots & v_{n-1}^1 \\ \vdots & & \vdots \\ v_1^{i-1} & \cdots &
+    v_{n-1}^{i-1} \\ v_1^{i+1} & \cdots & v_{n-1}^{i+1} \\ \vdots & & \vdots \\ v_1^n &
+    \cdots & v_{n-1}^n \end{smallmatrix}\right) \nonumber \\
+    &= \sum_{i=1}^n (-1)^{i-1}F^i(x)\,e_1^*\wedge\cdots\wedge\widehat{e_i^*}\wedge\cdots\wedge
+    e_n^*(v_1,\ldots,v_{n-1}), \nonumber
+  \end{align}
+  where $\widehat{e_i^*}$ denotes an omitted factor, so that $\omega_F^{n-1} =
+  \sum_{i=1}^n (-1)^{i-1}F^i\,e_1^*\wedge\cdots\wedge\widehat{e_i^*}\wedge\cdots\wedge e_n^*$.
+  \item In particular, for $F : \mathbb{R}^3 \to \mathbb{R}^3$,
+  \[\omega_F^2(x)(v_1,v_2) = \langle F(x),v_1\times v_2\rangle = \det\big(F(x)\mid v_1\mid
+    v_2\big).\]
+\end{enumerate}
+\end{example}
+
+\begin{ainote}
+Item 4 identifies $\omega_F^2$ with the flux integrand from
+\cref{sec:flux_divergence_theorem}: the flux $\int_S \langle F,\nu\rangle\,d\vol_2$ over a parametrized surface is
+exactly the integral, in the sense of the motivating change-of-variables calculation above, of
+the $2$-form $\omega_F^2$.
+\end{ainote}
+
+% Source: Corsin Nick/Class Notes/Week 11.pdf, p. 13
+\begin{theorem}[Exterior derivative]
+\label{thm:exterior_derivative}
+There exists a unique linear operator $d : \Omega^k(U) \to \Omega^{k+1}(U)$ satisfying
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+  \item for $f \in C^\infty(U) = \Omega^0(U)$: $df = Df$, the ordinary differential;
+  \item for $\omega \in \Omega^k(U)$, $\theta \in \Omega^s(U)$: $d(\omega\wedge\theta) =
+  d\omega\wedge\theta + (-1)^k\,\omega\wedge d\theta$;
+  \item $d\circ d\,\omega = d^2\omega = 0$.
+\end{enumerate}
+\end{theorem}
+
+\begin{ainote}
+Corsin states this as a fact seen in the lecture, without proof, and moves directly to its
+consequences. Not reproduced here for the same reason.
+\end{ainote}
+
+Denote by $dx^i$ the differential of $x \mapsto x^i$ in a moving frame $(e_1(x),\ldots,e_n(x))$,
+that is, $dx^i = e_i^*(x)$. Every $p$-form $\omega$ on $U \subseteq \mathbb{R}^n$ then takes
+the shape
+\[\omega = \sum_{1\leq i_1<\cdots<i_p\leq n} \omega_{i_1\cdots i_p}\,dx^{i_1}\wedge\cdots\wedge
+  dx^{i_p} = \sum_I \omega_I\,dx^I, \qquad \omega_I \in C^\infty(U),\]
+with exterior derivative
+\[d\omega = \sum_I d\omega_I \wedge dx^I.\]
+
+% Source: Corsin Nick/Class Notes/Week 11.pdf, pp. 14--15
+\begin{example}[The exterior derivative recovers the gradient and the curl]
+\label{ex:exterior_derivative_gradient_curl}
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item For $f \in C^\infty(\mathbb{R}^n) = \Omega^0(\mathbb{R}^n)$,
+  \[df_x(v) = \left(\frac{\partial f}{\partial x^1}\ \Big|\ \cdots\ \Big|\ \frac{\partial f}
+    {\partial x^n}\right)\!\begin{pmatrix}v^1\\ \vdots \\ v^n\end{pmatrix}
+    = \frac{\partial f}{\partial x^1}\,dx^1(v) + \cdots + \frac{\partial f}{\partial x^n}\,
+    dx^n(v),\]
+  so $df = \frac{\partial f}{\partial x^1}\,dx^1 + \cdots + \frac{\partial f}{\partial x^n}\,
+  dx^n = \langle \nabla f,\cdot\rangle$: the exterior derivative of a $0$-form is exactly the
+  $1$-form associated (as in the example above) to the gradient vector field $\nabla f$. This
+  is the shape that makes Stokes' theorem specialize to the FTC, as in
+  \cref{sec:gauss_intuition}.
+  \item Define a $1$-form on $U \subseteq \mathbb{R}^3$ by $\omega(x,y,z) = \langle
+  F(x,y,z),\cdot\rangle = F^1\,dx+F^2\,dy+F^3\,dz$ for a vector field $F$. By property (2) of
+  \cref{thm:exterior_derivative} and $d(dx^i)=0$ (since $dx^i = d(x^i)$ and $d^2=0$),
+  \[
+  d\omega = dF^1\wedge dx + dF^2\wedge dy + dF^3\wedge dz,
+  \]
+  and expanding each $dF^i = \partial_x F^i\,dx+\partial_y F^i\,dy+\partial_z F^i\,dz$, only
+  the cross terms survive the wedge (since $dx^i\wedge dx^i=0$ by antisymmetry):
+  \[
+  d\omega = \Big(\frac{\partial F^3}{\partial y}-\frac{\partial F^2}{\partial z}\Big)dy\wedge
+    dz + \Big(\frac{\partial F^1}{\partial z}-\frac{\partial F^3}{\partial x}\Big)dz\wedge dx
+    + \Big(\frac{\partial F^2}{\partial x}-\frac{\partial F^1}{\partial y}\Big)dx\wedge dy.
+  \]
+  Comparing with example item 4 in \cref{sec:differential_forms}, this is exactly
+  $\omega_{\nabla\times F}^2 = \langle\nabla\times F,\cdot\times\cdot\rangle = \det(\nabla
+  \times F\mid\cdot\mid\cdot)$: the exterior derivative of the $1$-form associated to $F$ is
+  the $2$-form associated to $\curl F$.
+  \end{enumerate}
+\end{example}
+
+\begin{ainote}
+Corsin leaves the middle expansion of $d\omega$ --- nine terms, one for each pair
+$(dF^i,dx^j)$ --- fully written out before collecting the six that survive into the three
+coefficient pairs above; condensed here to the surviving terms directly, since $dx\wedge
+dx=dy\wedge dy=dz\wedge dz=0$ kills exactly the three diagonal terms and antisymmetry
+($dy\wedge dx=-dx\wedge dy$, etc.) pairs up the rest.
+\end{ainote}
+
+% Supplement: Sascha Brack/Class Notes/Week_11_Notes_Friday.pdf, pp. 2--4

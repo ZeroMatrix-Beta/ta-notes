@@ -1,0 +1,38 @@
+% Originally: content/week-12.tex, \section{Pullback of forms} (Corsin Week 12)
+
+
+\section{Pullback of forms}
+\label{sec:pullback_of_forms}
+
+% Source: Corsin Nick/Class Notes/Week 12.pdf, p. 5
+\begin{definition}[Pullback of a form]
+\label{def:pullback_of_forms}
+Let $U \subseteq \mathbb{R}^m$, $V \subseteq \mathbb{R}^n$ be open, $F : U \to V$ a smooth
+map, and $\omega \in \Omega^p(V)$ a differential $p$-form on $V$. The \newterm{pullback}
+(\germanterm{Zur\"uckziehung}) of $\omega$ under $F$ is the differential $p$-form on $U$
+defined by
+\[(F^*\omega)_x(v_1,\ldots,v_p) := \omega_{F(x)}\big(DF_x(v_1),\ldots,DF_x(v_p)\big).\]
+\end{definition}
+
+\begin{ainote}
+Corsin also draws a commutative diagram $TU \xrightarrow{dF} TV \xrightarrow{\omega} \mathbb{R}$
+over $U \xrightarrow{F} V$, with tangent-bundle projections $\pi_U, \pi_V$, and labels it
+\qt{not exam relevant}. Omitted here for that reason; the formula above is the operative
+content.
+\end{ainote}
+
+The pullback satisfies two properties that make it the right tool for transporting forms
+along smooth maps:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+  \item $F^*(\omega\wedge\theta) = F^*\omega \wedge F^*\theta$;
+  \item $F^*(d\omega) = d(F^*\omega)$ (the pullback commutes with the exterior derivative).
+\end{enumerate}
+
+\begin{ainote}
+This is precisely the operation used, informally, in the reparametrization-invariance
+motivation for \cref{def:antisymmetric_k_linear_form}: writing $\phi^*\omega$ and
+$(\phi\circ\Psi)^*\omega$ for the two sides of that calculation makes it read as $\int_D
+\phi^*\omega = \int_V (\phi\circ\Psi)^*\omega = \int_V \Psi^*(\phi^*\omega)$, i.e.\ property (1)
+applied to $\phi^*\omega$ and the fact that pullback along a composition is the composition of
+pullbacks.
+\end{ainote}

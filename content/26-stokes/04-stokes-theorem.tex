@@ -1,0 +1,90 @@
+% Originally: content/week-13.tex, \section{Stokes' theorem} (Corsin Week 13)
+
+
+\section{Stokes' theorem}
+\label{sec:stokes_general}
+
+% Source: Corsin Nick/Class Notes/Week 13.pdf, p. 2
+\begin{theorem}[Stokes' theorem]
+\label{thm:stokes_general}
+Let $M \subseteq \mathbb{R}^n$ be an orientable $m$-manifold with (possibly empty) boundary,
+and let $\omega \in \Omega^{m-1}(\mathbb{R}^n)$ have compact support in $\mathbb{R}^n$. Then
+\[\int_{\partial M} \omega = \int_M d\omega.\]
+\end{theorem}
+
+\begin{ainote}
+\Cref{thm:stokes_classical} was stated ahead of Corsin's own notes, as background
+needed to solve \cref{ex:12.3}, in its classical $\mathbb{R}^3$ curl-theorem form. It is
+exactly the case $m=2$, $n=3$, $\omega=\omega_F$ of the general theorem above, as
+\cref{sec:stokes_in_r3} below confirms directly from Corsin's own derivation.
+\end{ainote}
+
+\subsection{Example: Green's theorem}
+\label{sec:green_theorem_example}
+
+% Source: Corsin Nick/Class Notes/Week 13.pdf, p. 2
+\begin{example}[The exterior derivative of a $1$-form on $\mathbb{R}^2$]
+\label{ex:exterior_derivative_r2}
+Let $\omega(x,y) = P(x,y)\,dx + Q(x,y)\,dy$ be a $1$-form on $\mathbb{R}^2$. Then
+\[
+d\omega = dP\wedge dx + dQ\wedge dy = \left(\frac{\partial P}{\partial x}dx +
+  \frac{\partial P}{\partial y}dy\right)\wedge dx + \left(\frac{\partial Q}{\partial x}dx +
+  \frac{\partial Q}{\partial y}dy\right)\wedge dy = \left(\frac{\partial Q}{\partial x} -
+  \frac{\partial P}{\partial y}\right) dx\wedge dy,
+\]
+using $dx\wedge dx = dy\wedge dy = 0$ and $dy\wedge dx = -dx\wedge dy$.
+\end{example}
+
+\subsection{Example: proof of Green's theorem}
+\label{sec:green_theorem_proof}
+
+% Source: Corsin Nick/Class Notes/Week 13.pdf, p. 3
+\begin{ainote}
+The theorem below is reproduced by Corsin directly from the lecture script (numbered there as
+Theorem 14.24), as with the two definitions quoted in \cref{sec:orientable_manifolds}.
+\end{ainote}
+
+\begin{theorem}[Green's theorem in the plane]
+\label{thm:green_theorem}
+Let $F : U \to \mathbb{R}^2$ be a continuously differentiable vector field on an open set
+$U \subseteq \mathbb{R}^2$. Then, for any compact $C^1$ domain $\Omega \subseteq U$,
+\[\int_\Omega \curl F\,dx = \int_{\partial\Omega} F\cdot\tau\,dL,\]
+with $\tau = \nu^\perp = (-\nu_2,\nu_1)$, where $\nu$ is the exterior unit normal.
+\end{theorem}
+
+Writing $F(x,y) = (P(x,y),Q(x,y))$, so that $\curl F = \partial_xQ - \partial_yP$ (the scalar
+$2$-dimensional curl), \cref{thm:green_theorem} follows from
+\cref{thm:stokes_general,ex:exterior_derivative_r2} applied to $\omega = P\,dx+Q\,dy$:
+\[
+\int_\Omega \curl F\,dx\,dy = \int_\Omega \left(\frac{\partial Q}{\partial x} -
+  \frac{\partial P}{\partial y}\right) dx\wedge dy = \int_\Omega d\omega
+  \overset{\text{Stokes}}{=} \int_{\partial\Omega} P(x,y)\,dx + Q(x,y)\,dy
+  = \int_{\partial\Omega} F\cdot\tau\,dL.
+\]
+
+\begin{proof}[Justification of the last step]
+Suppose $\gamma : [0,L] \to \partial\Omega$ is a $C^1$ curve of unit speed and positive
+orientation, i.e.\ $\gamma'(t) = \tau(\gamma(t))$. Then
+\[\langle F,\tau\rangle = \langle F,\gamma'(t)\rangle = (P\,dx+Q\,dy)(\gamma'(t)),\]
+since $\tau = \begin{pmatrix}0&-1\\1&0\end{pmatrix}\nu$ is the tangent vector consistent with
+the induced orientation, so integrating $(P\,dx+Q\,dy)(\gamma'(t))$ over $t \in [0,L]$ is
+exactly $\int_{\partial\Omega} P\,dx+Q\,dy$ by \cref{def:integral_of_form_over_submanifold}.
+\end{proof}
+
+\subsection{Example: Stokes' theorem in \texorpdfstring{$\mathbb{R}^3$}{R\^{}3}}
+\label{sec:stokes_in_r3}
+
+% Source: Corsin Nick/Class Notes/Week 13.pdf, p. 4
+Recall from \cref{ex:exterior_derivative_gradient_curl} that for $\omega_F =
+\langle F,\cdot\rangle$, $d\omega_F = \langle\curl F,\cdot\times\cdot\rangle$. So, if $\Omega
+\subseteq \mathbb{R}^3$ is a $2$-dimensional submanifold with boundary, parametrized by $\phi$
+with tangent vectors $\tau_i := \partial_i\phi$ and exterior unit normal $\nu$, then
+\[
+\int_\Omega d\omega_F = \int_\Omega \langle\curl F,\tau_1\times\tau_2\rangle\,dx
+  = \int_\Omega \langle\curl F,\nu\rangle\,d\vol_2 = \int_\Omega \vec\nabla\times\vec F\cdot
+  d\vec A,
+\]
+and
+\[\int_{\partial\Omega} \omega_F = \int_{\partial\Omega} \langle F,\tau\rangle\,d\vol_1
+  = \int_{\partial\Omega} \vec F\cdot d\vec s.\]
+By \cref{thm:stokes_general}, these are equal --- recovering \cref{thm:stokes_classical}.

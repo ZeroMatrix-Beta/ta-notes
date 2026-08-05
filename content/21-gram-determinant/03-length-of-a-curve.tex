@@ -1,0 +1,144 @@
+% Originally: content/week-09.tex, \subsection{Length of a curve} --- promoted to a section
+
+\section{Length of a curve}
+\label{sec:length_of_curve}
+
+% Source: Corsin Nick/Class Notes/Week 9.pdf, p. 8
+\begin{definition}[Length of a $C^1$-curve]
+\label{def:length_c1_curve}
+The \newterm{length} (\germanterm{Länge}) of a curve or path $\gamma \in
+C^1([a,b],\mathbb{R}^n)$ is given by
+\[L(\gamma) := \int_a^b \lvert\gamma'(t)\rvert\,dt.\]
+\end{definition}
+
+\begin{definition}[Length of a $C^0$-curve]
+\label{def:length_c0_curve}
+For a $C^0$-curve $c \in C^0([a,b],\mathbb{R}^n)$, the length is defined as
+\[L(c) := \sup\left\{\sum_{i=1}^{n-1} \lvert c(t_{i+1})-c(t_i)\rvert
+  \ :\ a = t_1 < \cdots < t_n = b\right\},\]
+the supremum over all lengths of inscribed polygons.
+\end{definition}
+
+% Sonnet 5 (Medium) --- FIG-W09-04
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.0]
+  \draw[thick] plot[smooth] coordinates
+    {(0,0) (0.6,0.9) (1.3,0.5) (1.9,0.15) (2.5,0.75) (3.1,0.5) (3.7,1.3)};
+  \node[font=\scriptsize] at (1.9,1.15) {$\operatorname{Im}(c)$};
+  \draw[blue, thick]
+    (0,0) -- (0.55,0.95) -- (1.35,0.55) -- (2.0,0.1) -- (2.55,0.7) -- (3.15,0.45) -- (3.7,1.25);
+  \foreach \x/\y/\lbl/\pos in {0/0/{c(t_1)}/below,0.55/0.95/{c(t_2)}/above,1.35/0.55/{c(t_3)}/above,2.0/0.1/{c(t_4)}/below,2.55/0.7/{c(t_5)}/{above left},3.15/0.45/{c(t_6)}/below,3.7/1.25/{c(t_7)}/right} {
+    \fill (\x,\y) circle (1.3pt);
+    \node[font=\scriptsize, \pos] at (\x,\y) {$\lbl$};
+  }
+\end{tikzpicture}
+\end{center}
+
+\begin{remark}
+For a $C^1$-curve, \cref{def:length_c1_curve,def:length_c0_curve} agree. Notice that
+\[\lvert\gamma'(t)\rvert = \sqrt{D\gamma(t)\transp \cdot D\gamma(t)}\]
+is exactly the Gram determinant of $D\gamma(t)$ in the sense of
+\Cref{def:volume_gram_determinant} --- the $m=1$ case of \cref{ex:gram_m1_length}, now
+applied pointwise along the curve. This is why the length of a curve is the special case
+$d=1$ of \cref{def:d_volume_parametrized_submanifold}: a curve is a $1$-dimensional
+parametrized submanifold, and $L(\gamma) = \vol_1(\gamma([a,b]))$.
+\end{remark}
+
+% Supplement: Sascha Brack/Class Notes/Week_09_Notes_Friday.pdf, p. 4
+\begin{example}[Line integral]
+\label{ex:line_integral}
+Let $\phi : [-\pi/2, \pi/2] \to \mathbb{R}^2$ be given by $\phi(\theta) = \begin{pmatrix} 3\sin\theta \\ 4\sin\theta \end{pmatrix}$.
+Compute the length of the curve $M := \operatorname{Im}\phi$, i.e.\ $\int_M 1 \mathop{d\text{vol}}_1$.
+
+First, we compute the Jacobian (which here is just the derivative vector):
+\[\Jac\phi(\theta) = \begin{pmatrix} 3\cos\theta \\ 4\cos\theta \end{pmatrix}.\]
+Then we compute the Gram determinant (which is the length of the tangent vector):
+\[\sqrt{\det(\Jac\phi(\theta)\transp \Jac\phi(\theta))} = \sqrt{9\cos^2\theta + 16\cos^2\theta} = \sqrt{25\cos^2\theta} = 5|\cos\theta|.\]
+Since $\cos\theta \geq 0$ for $\theta \in [-\pi/2, \pi/2]$, this simplifies to $5\cos\theta$.
+The length is:
+\[\int_{-\pi/2}^{\pi/2} 5\cos\theta \,d\theta = 5\big[\sin\theta\big]_{-\pi/2}^{\pi/2} = 5(1 - (-1)) = 10.\]
+\end{example}
+
+% Supplement: Sascha Brack/Class Notes/Week_09_Notes_Friday.pdf, p. 6
+\begin{example}[Spiral length]
+\label{ex:spiral_length}
+Consider the spiral parametrized by $\phi : (0,2\pi) \to \mathbb{R}^3$,
+\[\phi(t) = \begin{pmatrix} \cos(\omega t) \\ \sin(\omega t) \\ vt \end{pmatrix},\]
+where $v \in \mathbb{R}\setminus\{0\}$ and $\omega \in (0,\infty)$. Compute the length of the spiral $\operatorname{Im}\phi$.
+
+We compute the Jacobian:
+\[\Jac\phi(t) = \begin{pmatrix} -\omega\sin(\omega t) \\ \omega\cos(\omega t) \\ v \end{pmatrix}.\]
+The Gram determinant is:
+\[\sqrt{\Jac\phi(t)\transp \Jac\phi(t)} = \sqrt{\omega^2\sin^2(\omega t) + \omega^2\cos^2(\omega t) + v^2} = \sqrt{\omega^2 + v^2}.\]
+The length of the spiral is the integral over the parameter domain:
+\[\int_0^{2\pi} \sqrt{\omega^2 + v^2} \,dt = 2\pi\sqrt{\omega^2 + v^2}.\]
+\end{example}
+
+% Supplement: Sascha Brack/Class Notes/Week_09_Notes_Monday.pdf, p. 8
+\begin{example}[Line integral of a function on a circle]
+\label{ex:line_integral_function_circle}
+Given a function $f: \mathbb{R}^3 \to \mathbb{R}$, $f(x,y,z) = x^2+z^2$. We want to integrate this function on the circle $M := \{(x,y,z) \in \mathbb{R}^3 \mid x^2+y^2=1,\ z=2\}$.
+We parametrize the circle by $\phi: (0,2\pi) \to \mathbb{R}^3$,
+\[\phi(\varphi) = \begin{pmatrix} \cos\varphi \\ \sin\varphi \\ 2 \end{pmatrix}.\]
+The Jacobian is $\Jac\phi(\varphi) = \phi'(\varphi) = \begin{pmatrix} -\sin\varphi \\ \cos\varphi \\ 0 \end{pmatrix}$.
+The Gram determinant is $\sqrt{\Jac\phi\transp \Jac\phi} = |\phi'(\varphi)| = \sqrt{\sin^2\varphi + \cos^2\varphi} = 1$.
+The function evaluated on the curve is $f(\phi(\varphi)) = \cos^2\varphi + 4$.
+The line integral is thus:
+\begin{align*}
+\int_M f \mathop{d\text{vol}}_1 &= \int_0^{2\pi} f(\phi(\varphi)) |\phi'(\varphi)| \,d\varphi \\
+&= \int_0^{2\pi} (\cos^2\varphi + 4) \cdot 1 \,d\varphi \\
+&= \int_0^{2\pi} \cos^2\varphi \,d\varphi + \int_0^{2\pi} 4 \,d\varphi \\
+&= \pi + 8\pi = 9\pi.
+\end{align*}
+\end{example}
+
+
+% --- exercises relocated here from the dissolved sheet 9 ---
+
+% Originally: content/week-09.tex, \exercisesheet{9}, problem 9.2
+% Source: exercises/Ex9_Analysis2_eng.pdf
+
+% Source: exercises/Ex9_Analysis2_eng.pdf, p. 1
+\begin{exercise}[9.2 --- Multiple integrals]
+\label{ex:9.2}
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Let $D := [0,2]\times[0,1]$. Calculate $\displaystyle\iint_D (x^3+3x^2y+y^3)\,dx\,dy$.
+  \item Let $D \subset \mathbb{R}^2$ be the interior of the triangle with vertices $(0,0)$,
+    $(0,\pi)$, and $(\pi,\pi)$. Calculate $\displaystyle\iint_D x\cos(x+y)\,dx\,dy$.
+  \item Let $D := \{(x,y)\in\mathbb{R}^2 \mid x>1,\ y>1,\ x+y<3\}$. Calculate
+    $\displaystyle\iint_D \frac{1}{(x+y)^3}\,dx\,dy$.
+\end{enumerate}
+
+% Source: Corsin Nick/Class Notes/Week 9.pdf, p. 1
+\textit{Corsin's hint (part 2):} you can parametrize the triangle as
+\[D = \{(x,y)\in\mathbb{R}^2 : 0 \leq x \leq y \leq \pi\}.\]
+\end{exercise}
+
+% Originally: content/week-10.tex, \exercisesheet{10}, problem 10.3
+% Source: exercises/Ex10_Analysis2_eng.pdf
+
+% Source: exercises/Ex10_Analysis2_eng.pdf, p. 1
+\begin{exercise}[10.3 --- Solids of revolution \textnormal{(important)}]
+\label{ex:10.3}
+Given $f \in C^1((a,b))\cap C([a,b])$ such that $f\geq0$, define the \textnormal{rotational
+body around the $x$-axis} as
+\[\begin{aligned}
+  \Omega &:= \left\{(x,y,z)\in\mathbb{R}^3 \mid a<x<b,\ \sqrt{y^2+z^2}<f(x)\right\}, \\
+  \partial_{\mathrm{side}}\Omega &:= \left\{(x,y,z)\in\mathbb{R}^3 \mid a<x<b,\ \sqrt{y^2+z^2}=f(x)\right\}.
+\end{aligned}\]
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Say whether $\Omega$, $\partial_{\mathrm{side}}\Omega$ are open/closed/connected
+    subsets of $\mathbb{R}^3$.
+  \item Show that $\vol_3(\Omega) = \pi\int_a^b f(x)^2\,dx$.
+  \item Show that $\vol_2(\partial_{\mathrm{side}}\Omega) = 2\pi\int_a^b
+    \sqrt{1+f'(x)^2}\,f(x)\,dx$. \textit{Hint:} parametrize $(x,\theta)\mapsto (x,f(x)\cos\theta,
+    f(x)\sin\theta)$.
+  \item Calculate the volume and surface area of the `improper rotational body' that arises
+    when $f(x)=1/x$, $a=1$, $b=\infty$.
+  \item \textnormal{(*)} Show that $\Omega$ is a bounded $C^1$ domain (as in
+    \Cref{def:bounded_ck_domain}) if and only if
+    \begin{equation}
+    f(x)>0 \text{ in } (a,b), \qquad f'(a^+)=+\infty, \qquad f'(b^-)=-\infty. \tag{$*$}
+    \end{equation}
+\end{enumerate}
+\end{exercise}

@@ -1,0 +1,95 @@
+% Originally: content/week-12.tex, \section{Orientable manifolds} (Corsin Week 12)
+
+\section{Orientable manifolds}
+\label{sec:orientable_manifolds}
+
+% Source: Corsin Nick/Class Notes/Week 12.pdf, p. 7
+\begin{ainote}
+The two definitions below are reproduced by Corsin directly from the lecture script (numbered
+there as Definitions 14.68 and 14.65), rather than written out in his own hand; he adds the
+margin annotations quoted and figured below.
+\end{ainote}
+
+\begin{definition}[Support of a $k$-form]
+\label{def:support_of_k_form}
+Let $U \subseteq \mathbb{R}^n$ be open and $\alpha \in \Omega^k(U)$. The \newterm{support}
+(\germanterm{Tr\"ager}) of $\alpha$ is the closed set
+\[\supp\alpha := \overline{\{x\in U : \alpha_x \neq 0\}} \subseteq \overline{U}.\]
+We say $\alpha$ has \newterm{compact support} in $U$ if $\supp\alpha$ is bounded and contained
+in $U$.
+\end{definition}
+
+\begin{definition}[Orientable manifold]
+\label{def:orientable_manifold}
+Let $M \subseteq \mathbb{R}^n$ be a $k$-dimensional $C^\infty$ submanifold. We say $M$ is
+\newterm{orientable} (\germanterm{orientierbar}) if there exists a family of local
+parametrizations $\phi_i : V_i \to M \cap U_i$, $i \in I$, whose images cover $M$, and such
+that for every $i,j \in I$ with $M \cap U_i \cap U_j \neq \emptyset$, the transition map
+$\widetilde\phi_i^{-1}\circ\widetilde\phi_j : \widetilde V_j \to \widetilde V_i$ has positive
+Jacobian determinant:
+\[\det D(\widetilde\phi_i^{-1}\circ\widetilde\phi_j) > 0 \qquad \text{on } \widetilde V_j.\]
+Such a family $\{\phi_i\}$ is called an \newterm{atlas} of $M$; if it satisfies the
+determinant condition above it is called an \newterm{orientation} of $M$. Once such a family
+is chosen, $M$ is said to be \newterm{oriented}.
+\end{definition}
+
+\begin{ainote}
+Corsin marks the family $\{\phi_i\}$ itself with the margin note \qt{is called an Atlas} next
+to the covering condition, and the positivity condition with \qt{Atlas} again next to the
+determinant inequality --- i.e.\ he is flagging that \qt{atlas} names the family regardless of
+whether the determinant condition holds, while \qt{orientation} is the stronger notion once it
+does. This matches the definition's own wording above.
+\end{ainote}
+
+Corsin illustrates the failure of the orientation condition with a hand-drawn counterexample:
+two overlapping local parametrizations $\phi, \psi$ of the same patch of a surface, whose
+coordinate frames $(\partial_1\phi,\partial_2\phi)$ and $(\partial_1\psi,\partial_2\psi)$ at a
+shared point disagree in handedness.
+
+% Sonnet 5 (Medium) --- FIG-W12-01
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.0]
+  \draw[green!50!black, thick] (0,0) .. controls (1.5,0.9) and (3.5,0.6) .. (5,1.2)
+    .. controls (5,2.4) and (3,2.6) .. (1.5,2.0) .. controls (0,1.6) and (0,0.8) .. (0,0);
+  \draw[green!50!black, dotted] (0.4,1.0) .. controls (1.8,0.6) and (3.2,1.1) .. (4.4,1.6);
+  \fill (2.1,1.3) circle (1.2pt);
+  \draw[blue!70!black, thick, ->] (2.1,1.3) -- (3.3,1.55) node[right, font=\scriptsize]
+    {$\partial_1\phi$};
+  \draw[blue!70!black, thick, ->] (2.1,1.3) -- (1.7,2.15) node[above, font=\scriptsize]
+    {$\partial_2\phi$};
+  \draw[red, thick, ->] (2.1,1.3) -- (0.9,1.05) node[left, font=\scriptsize] {$\partial_1\psi$};
+  \draw[red, thick, ->] (2.1,1.3) -- (2.55,0.35) node[below, font=\scriptsize] {$\partial_2\psi$};
+  \node[font=\scriptsize] at (0.1,-0.35) {$\phi$};
+  \node[font=\scriptsize] at (4.4,2.7) {$\psi$};
+  \draw[blue!70!black, ->] (6.3,0.2) -- (7.3,0.2) node[right, font=\scriptsize] {$e_1$};
+  \draw[blue!70!black, ->] (6.3,0.2) -- (6.3,1.2) node[above, font=\scriptsize] {$e_2$};
+  \draw[red, ->] (8.6,0.2) -- (9.6,0.2) node[right, font=\scriptsize] {$e_1$};
+  \draw[red, ->] (8.6,0.2) -- (8.6,1.2) node[above, font=\scriptsize] {$e_2$};
+\end{tikzpicture}
+\end{center}
+
+\begin{ainote}
+At the shared point, $(\partial_1\phi,\partial_2\phi)$ turns counterclockwise while
+$(\partial_1\psi,\partial_2\psi)$ turns clockwise --- the two frames are mirror images of each
+other. Corsin's caption: \qt{Here, $\det(D(\phi^{-1}\circ\psi)) < 0$!} This is exactly the atlas
+$\{\phi,\psi\}$ failing \cref{def:orientable_manifold}: it covers the patch, but its transition
+map has \emph{negative} Jacobian determinant there, so $\{\phi,\psi\}$ is an atlas but not an
+orientation.
+\end{ainote}
+
+% Generator: Claude Sonnet 5 (Medium)
+\begin{ainote}
+\Cref{ex:12.3} and Exercise 12.6 (the latter not reproduced below, see the priority table)
+invoke \newterm{Stokes' theorem} in its classical $\mathbb{R}^3$ form, which none of Corsin's
+transcribed pages state explicitly. Recorded here for self-containedness, since the
+exercise-sheet solutions below rely on it.
+\end{ainote}
+
+\begin{theorem}[Stokes' theorem, classical form in $\mathbb{R}^3$]
+\label{thm:stokes_classical}
+% Generator: Claude Sonnet 5 (Medium)
+Let $S \subseteq \mathbb{R}^3$ be a compact, oriented $C^1$ surface with boundary $\partial S$
+carrying the induced orientation, and let $F$ be a $C^1$ vector field on a neighborhood of
+$S$. Then
+\[\int_S \curl F \cdot d\vec{n} = \int_{\partial S} F \cdot d\vec{s}.\]
+\end{theorem}

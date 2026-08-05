@@ -1,0 +1,121 @@
+% Originally: content/week-13.tex, \section{Area via Green's formula} (Corsin Week 13)
+
+\section{Area via Green's formula}
+\label{sec:area_via_green}
+
+% Source: Corsin Nick/Class Notes/Week 13.pdf, pp. 5--6
+% Kept inline: solved directly in Corsin Nick/Class Notes/Week 13.pdf, pp. 5--6.
+\begin{exercise}[Area as a boundary functional]
+\label{ex:area_boundary_functional}
+Suppose $\gamma : [0,L) \to \mathbb{R}^2$ traces the boundary of a connected $C^\infty$-domain
+$U \subseteq \mathbb{R}^2$ in the positive direction. Express the area of $U$ as a functional
+of $\gamma$.
+\end{exercise}
+
+\begin{exercisesolution}
+By definition, $A(U) = \int_U dx\,dy = \int_U 1\,dx\wedge dy$. By Green's formula
+(\cref{thm:green_theorem}, in its $1$-form guise $\int_\Omega d\omega =
+\int_{\partial\Omega}\omega$),
+\[\int_U 1\,dx\wedge dy = \int_0^L \langle F\circ\gamma(t),\gamma'(t)\rangle\,dt\]
+for any $F : \overline U \to \mathbb{R}^2$ satisfying $\partial_xF^2 - \partial_yF^1 = 1$. This
+is satisfied by $F(x,y) = \tfrac12(-y,x)$, giving the \newterm{shoelace formula}
+(\germanterm{Gau\ss sche Trapezformel})
+\[A(\gamma) = \frac12\int_0^L \big[\gamma_1(t)\gamma_2'(t) - \gamma_2(t)\gamma_1'(t)\big]\,dt.\]
+\end{exercisesolution}
+
+\begin{example}[Ellipse]
+\label{ex:area_ellipse}
+The path $\gamma : [0,2\pi) \to \mathbb{R}^2$, $t \mapsto (a\cos t,b\sin t)$, traces the
+boundary of an ellipse. By \cref{ex:area_boundary_functional},
+\[
+A(\gamma) = \frac12\int_0^{2\pi} \big[a\cos t\cdot b\cos t - b\sin t\cdot(-a\sin t)\big]\,dt
+  = \frac{ab}{2}\int_0^{2\pi} dt = \pi ab.
+\]
+For the circle $a=b=:r$, this gives the familiar $A = \pi r^2$.
+\end{example}
+
+\begin{ainote}
+Corsin adds, in the same breath as the ellipse's area: \qt{Famously, there exists no closed
+form solution for the length of the boundary of an ellipse} --- the ellipse's perimeter is a
+complete elliptic integral of the second kind, not an elementary function, unlike its area.
+\end{ainote}
+
+
+% --- exercises relocated here from the dissolved sheets ---
+
+% Originally: content/week-12.tex, \exercisesheet{12}, problem 12.3
+% Source: exercises/Ex12_Analysis2_eng.pdf
+
+\begin{exercise}[12.3 --- Work along paths and Stokes \textnormal{(important)}]
+\label{ex:12.3}
+Let $F : \mathbb{R}^3 \setminus (\{(0,0)\}\times\mathbb{R}) \to \mathbb{R}^3$ be the vector
+field defined by
+\[F(x,y,z) = \left(\frac{2(xz+y)}{x^2+y^2},\ \frac{2(yz-x)}{x^2+y^2},\ \log(x^2+y^2)\right)\]
+and let $\gamma_1,\gamma_2,\gamma_3 : [0,2\pi] \to \mathbb{R}^3$ be the paths
+\[\gamma_1(t) = (\cos t,\sin t,0), \qquad \gamma_2(t) = (2\cos t,2\sin t,2), \qquad
+  \gamma_3(t) = (3\cos t+6,3\sin t,3).\]
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Describe the domain of definition of $F$. Is it connected? Is it simply connected?
+  \item Compute the rotation $\curl(F)$ of $F$ and the path integral $\int_{\gamma_1} F\cdot
+  d\gamma_1$ of $F$ along $\gamma_1$. Is $F$ conservative?
+  \item Explain how the equation $\int_{\gamma_1} F\cdot d\gamma_1 = \int_{\gamma_2} F\cdot
+  d\gamma_2$ follows from Stokes' theorem.
+  \item Does Stokes' theorem imply that $\int_{\gamma_1} F\cdot d\gamma_1 = \int_{\gamma_3}
+  F\cdot d\gamma_3$ holds?
+\end{enumerate}
+\end{exercise}
+
+% Source: exercises/Ex12_Analysis2_eng.pdf, p. 2
+
+% Originally: content/week-12.tex, \exercisesheet{12}, problem 12.4
+% Source: exercises/Ex12_Analysis2_eng.pdf
+
+\begin{exercise}[12.4 --- True or False \textnormal{(important)}]
+\label{ex:12.4}
+Let $U := \mathbb{R}^3\setminus\{0\}$ and $F \in C^1(U,\mathbb{R}^3)$. For $r>0$ set
+\[I_r := \int_{\partial B_r} \langle F,n\rangle\,dS\]
+where $n$ denotes the outward normal. Which of the following statements are always true?
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item If $F$ is divergence-free, then $I_r=0$ for all $r>0$.
+  \item If $F$ is divergence-free, then the value of $I_r$ does not depend on $r$.
+  \item If $F$ is curl-free, then the value of $I_r$ does not depend on $r$.
+  \item If $F = \curl(G)$ for a vector field $G \in C^1(U,\mathbb{R}^3)$ and $\lvert F(x)
+  \rvert \leq C/\lvert x\rvert$, then $I_r=0$ for all $r>0$.
+\end{enumerate}
+\end{exercise}
+
+% Source: exercises/Ex12_Analysis2_eng.pdf, p. 2
+
+% Originally: content/week-12.tex, \exercisesheet{12}, problem 12.5
+% Source: exercises/Ex12_Analysis2_eng.pdf
+
+\begin{exercise}[12.5 --- Conservative vector fields \textnormal{(important)}]
+\label{ex:12.5}
+For which values of $\lambda \in \mathbb{R}$ is the vector field $F : \mathbb{R}^2 \to
+\mathbb{R}^2$ defined by
+\[F(x,y) = \begin{pmatrix} \lambda x e^y \\ (y+1+x^2)e^y \end{pmatrix}\]
+conservative? Determine a potential for $F$ for these values.
+\end{exercise}
+
+% Source: exercises/Ex12_Analysis2_eng.pdf, p. 3
+
+% Originally: content/week-12.tex, \exercisesheet{12}, problem 12.8
+% Source: exercises/Ex12_Analysis2_eng.pdf
+
+\begin{exercise}[12.8 --- Multiple Choice \textnormal{(important)}]
+\label{ex:12.8}
+Let $Q = [a,b]\times[c,d] \subseteq \mathbb{R}^2$ and $f \in C(Q,\mathbb{R}^2)$. Let $n$ be an
+outward normal field on $Q$ and
+\[I_b = \int_{[a,b]\times\{c\}} \langle f,n\rangle, \qquad I_t = \int_{[a,b]\times\{d\}}
+  \langle f,n\rangle, \qquad I_l = \int_{\{a\}\times[c,d]} \langle f,n\rangle, \qquad
+  I_r = \int_{\{b\}\times[c,d]} \langle f,n\rangle.\]
+Which of the following expressions corresponds to the outer flux of $f$ through $\partial Q$?
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $I_b - I_t + I_r - I_l$
+  \item $I_b + I_t + I_r + I_l$
+  \item $I_b + I_t - I_r - I_l$
+  \item $-I_b + I_t - I_r + I_l$
+\end{enumerate}
+\end{exercise}
+
+% Source: exercises/Ex12_Analysis2_eng.pdf, p. 3

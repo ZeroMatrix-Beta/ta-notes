@@ -1,0 +1,76 @@
+% Originally: content/week-11.tex, \section{Gauss' theorem revisited: the case n=1} (Corsin Week 11)
+
+
+\section{Gauss' theorem revisited: the case \texorpdfstring{$n=1$}{n=1}, and a direct proof
+for a square}
+\label{sec:gauss_intuition}
+\continuedfrom{sec:flux_divergence_theorem}
+
+% Source: Corsin Nick/Class Notes/Week 11.pdf, p. 2
+Gauss' theorem (\cref{thm:gauss_divergence}) is, in a precise sense, a higher-dimensional
+fundamental theorem of calculus: it trades a derivative integrated over a region for the
+original quantity evaluated on the region's boundary. Setting $n=1$ makes the analogy
+literal. Let $f \in C^1([a,b])$, viewed as a (one-dimensional) vector field. Since $\divg f =
+f'$ in dimension $1$, Gauss' formula becomes
+\[\int_a^b \frac{\partial f}{\partial x}\,dx = \int_{[a,b]} \divg f\,d\vol_1
+  = \int_{\partial[a,b]} \langle f,\nu\rangle\,d\vol_0
+  = f(b) - f(a) \qquad \text{(FTC, almost).}\]
+The last step identifies $\int_{\partial[a,b]} \langle f,\nu\rangle\,d\vol_0$ with $f(b)-f(a)$
+by treating $\partial[a,b] = \{a,b\}$ as a $0$-dimensional submanifold with outward unit
+normals $\nu(a) = -1$, $\nu(b) = +1$, and $\vol_0$ as counting measure.
+
+\begin{ainote}
+Corsin flags this himself: \qt{there are several problems with this argument, for example
+what a $0$-dim Jordan measure or $0$-dim submanifold is}, and notes that \qt{the definitions
+from the lecture can be extended to include this case} without carrying out the extension.
+The word \qt{almost} above is his. Not pursued further here; the point of the calculation is
+the analogy with the FTC, not a rigorous $n=1$ instance of \cref{thm:gauss_divergence}.
+\end{ainote}
+
+% Source: Corsin Nick/Class Notes/Week 11.pdf, p. 3
+\begin{proof}[Proof of \cref{thm:gauss_divergence} for $n=2$, $B = (0,1)^2$]
+Conversely, the fundamental theorem of calculus can be used to \emph{prove} Gauss' theorem;
+we carry this out for the unit square. Let $F : [0,1]^2 \to \mathbb{R}^2$ be a $C^1$ vector
+field and $B := (0,1)^2$. The boundary $\partial B$ splits into four edges, with outward unit
+normals $-e_1$, $e_1$, $-e_2$, $e_2$ on the left, right, bottom, and top edges respectively.
+
+% Sonnet 5 (Medium) --- FIG-W11-01
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.6]
+  \draw[thick] (0,0) rectangle (1,1);
+  \draw[->] (0,0.5) -- (-0.6,0.5) node[left, font=\scriptsize] {$-e_1$};
+  \draw[->] (1,0.5) -- (1.6,0.5) node[right, font=\scriptsize] {$e_1$};
+  \draw[->] (0.5,0) -- (0.5,-0.6) node[below, font=\scriptsize] {$-e_2$};
+  \draw[->] (0.5,1) -- (0.5,1.6) node[above, font=\scriptsize] {$e_2$};
+  \node[below left, font=\scriptsize] at (0,0) {$(0,0)$};
+  \node[below right, font=\scriptsize] at (1,0) {$(1,0)$};
+  \node[above left, font=\scriptsize] at (0,1) {$(0,1)$};
+  \node[above right, font=\scriptsize] at (1,1) {$(1,1)$};
+\end{tikzpicture}
+\end{center}
+
+Parametrizing each edge by $t \mapsto (0,t)$, $(1,t)$, $(t,0)$, $(t,1)$ for $t \in [0,1]$,
+\[
+\int_{\partial B} \langle F,\nu\rangle\,d\vol_1
+  = \int_0^1 \langle F(0,t),-e_1\rangle\,dt + \int_0^1 \langle F(1,t),e_1\rangle\,dt
+  + \int_0^1 \langle F(t,0),-e_2\rangle\,dt + \int_0^1 \langle F(t,1),e_2\rangle\,dt.
+\]
+Grouping the first pair and the second pair,
+\[
+\int_{\partial B} \langle F,\nu\rangle\,d\vol_1
+  = \int_0^1 \big[F_1(1,t) - F_1(0,t)\big]\,dt + \int_0^1 \big[F_2(t,1) - F_2(t,0)\big]\,dt.
+\]
+By the fundamental theorem of calculus applied to $t \mapsto F_1(s,t)$ along $s$ and to
+$s \mapsto F_2(t,s)$ along the second variable,
+\[
+\int_{\partial B} \langle F,\nu\rangle\,d\vol_1
+  = \int_0^1\!\!\left(\int_0^1 \partial_1 F_1(s,t)\,ds\right) dt
+  + \int_0^1\!\!\left(\int_0^1 \partial_2 F_2(t,s)\,ds\right) dt,
+\]
+and by Fubini,
+\[
+\int_{\partial B} \langle F,\nu\rangle\,d\vol_1
+  = \int_B \partial_1 F_1\,d\vol_2 + \int_B \partial_2 F_2\,d\vol_2
+  = \int_B \divg F\,d\vol_2. \qedhere
+\]
+\end{proof}

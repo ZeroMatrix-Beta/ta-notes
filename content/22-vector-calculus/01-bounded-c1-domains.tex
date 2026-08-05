@@ -1,0 +1,36 @@
+% Originally: content/week-10.tex, \section{Bounded C^1 domains ...} (Corsin Week 10)
+
+\section{Bounded \texorpdfstring{$C^1$}{C1} domains and why the definition in the script is so terrible}
+\label{sec:bounded_c1_domains}
+
+% Source: Corsin Nick/Class Notes/Week 10.pdf, p. 6
+% Def. 14.3
+\begin{definition}[Bounded $C^k$ domain]
+\label{def:bounded_ck_domain}
+Given $k \geq 1$, a bounded open set $\Omega \subset \mathbb{R}^n$ is called a
+\newterm{bounded $C^k$ domain} if $M := \partial\Omega$ is an $(n-1)$-dimensional submanifold
+of class $C^k$.
+\end{definition}
+
+Citing the 2024 lecture notes, Corsin builds up the machinery needed to actually \emph{use}
+this definition --- to define \newterm{flux} we need the concept of interior and exterior
+normal vectors. For $\Omega$ as above, a normal vector $v \in N_p(\partial\Omega)$ is
+\newterm{interior} if
+\[p + hv \in \Omega \quad \text{for all } h>0 \text{ small},\]
+and \newterm{exterior} if
+\[p + hv \in \mathbb{R}^n\setminus\Omega \quad \text{for all } h>0 \text{ small}.\]
+
+A \newterm{Gauss map} is a continuous map of unit normal vectors on $\partial\Omega$. There
+exists a unique interior and exterior Gauss map; write
+\[\nu \in C^0(\partial\Omega, \mathbb{S}^{n-1}) \text{ such that } \nu(p) \text{ is exterior
+  normal}\]
+for the exterior unit normal map.
+
+\begin{theorem}[Jordan--Brouwer separation theorem]
+\label{thm:jordan_brouwer}
+If $M \subseteq \mathbb{R}^{n+1}$ is an $n$-dimensional compact and connected submanifold,
+then $\mathbb{R}^{n+1}\setminus M$ has exactly two connected components, an
+\newterm{inside} and an \newterm{outside}.
+\end{theorem}
+
+% Supplement: Sascha Brack/Class Notes/Week_10_Notes_Monday.pdf, pp. 8--11

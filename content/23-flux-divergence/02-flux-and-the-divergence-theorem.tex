@@ -1,0 +1,239 @@
+% Originally: content/week-10.tex, \section{Flux and the divergence theorem} (Corsin Week 10)
+
+\section{Flux and the divergence theorem}
+\label{sec:flux_divergence_theorem}
+
+% Source: Corsin Nick/Class Notes/Week 10.pdf, p. 7
+\begin{definition}[Flux]
+\label{def:flux}
+Suppose $F : U \to \mathbb{R}^n$ is a $C^1$ vector field, $U \subseteq \mathbb{R}^n$ open, and
+$\Omega \subseteq U$ is a $C^1$ bounded domain. The \newterm{flux} (\germanterm{Fluss}) of $F$
+through $\partial\Omega$ is defined as
+\[\int_{\partial\Omega} \langle F,\nu\rangle\,d\vol_{n-1} \qquad \text{(analysis notation)}
+  \quad = \quad \int_{\partial\Omega} \vec F(x)\cdot d\vec A \qquad \text{(physics notation)}\]
+\[= \int_B \big\langle F\circ\phi(x),\ \nu\circ\phi(x)\big\rangle
+   \sqrt{\det D\phi(x)\transp D\phi(x)}\,dx \qquad \text{(explicit)},\]
+where $\nu : \partial\Omega \to \mathbb{S}^{n-1}$ is the exterior unit normal, i.e.\ $\nu(y)$
+is the outward-facing unit normal of $\partial\Omega$ at $y \in \partial\Omega$, and
+$\phi : B \to \partial\Omega$ is a (local) parametrization of $\partial\Omega$. In general,
+multiple integrals in the explicit formulation may be necessary.
+\end{definition}
+
+% Source: Corsin Nick/Class Notes/Week 10.pdf, p. 8
+\begin{proposition}[Flux in $\mathbb{R}^3$]
+\label{prop:flux_r3}
+Let $\Omega \subseteq \mathbb{R}^3$ be a bounded $C^1$ domain and $F \in
+C^1(\overline\Omega,\mathbb{R}^3)$ a vector field, and let $\phi : B \to \partial\Omega
+\setminus N$ be a parametrization of $\partial\Omega\setminus N$, where $N \subseteq
+\partial\Omega$ is a null set, $B \subseteq \mathbb{R}^2$. Then:
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item $\displaystyle\nu(x) := \frac{\partial_1\phi(x)\times\partial_2\phi(x)}
+    {\lvert\partial_1\phi(x)\times\partial_2\phi(x)\rvert}$ is an (interior or exterior) Gauss
+    map (more precisely, $\nu\circ\phi^{-1}$ is a Gauss map, i.e.\
+    $\nu(x) \in N_{\phi(x)}(\partial\Omega\setminus N)$).
+  \item The Gram determinant is given by
+    $\sqrt{\det D\phi(x)\transp D\phi(x)} = \lvert\partial_1\phi(x)\times\partial_2\phi(x)
+    \rvert$.
+  \item Therefore,
+    \[\int_{\partial\Omega} \vec F\cdot d\vec A = \pm\int_B \big\langle F\circ\phi(x),\
+      \partial_1\phi(x)\times\partial_2\phi(x)\big\rangle\,dx,\]
+    where the sign depends on whether $\nu(x)$ is interior ($-$) or exterior ($+$).
+\end{enumerate}
+\end{proposition}
+
+% Source: Corsin Nick/Class Notes/Week 10.pdf, pp. 9--10
+\begin{example}[Flux through the unit sphere]
+\label{ex:flux_unit_sphere}
+Compute the flux of $F(x,y,z) := (xz,\,z,\,y)$ through the surface of $\mathbb{S}^2$ with
+interior $B_1(0)$.
+
+We use spherical coordinates with $r\equiv1$:
+\[\phi : (0,2\pi)\times(0,\pi) \to \mathbb{R}^3, \qquad (\varphi,\theta) \mapsto
+  \begin{pmatrix}\sin\theta\cos\varphi \\ \sin\theta\sin\varphi \\ \cos\theta\end{pmatrix}.\]
+
+\textbf{Normal vector.}
+\[\partial_\varphi\phi = \begin{pmatrix}-\sin\theta\sin\varphi\\ \sin\theta\cos\varphi\\
+  0\end{pmatrix}, \qquad \partial_\theta\phi = \begin{pmatrix}\cos\theta\cos\varphi\\
+  \cos\theta\sin\varphi\\ -\sin\theta\end{pmatrix}
+  \quad \Longrightarrow \quad \partial_\varphi\phi\times\partial_\theta\phi
+  = \begin{pmatrix}-\sin^2\theta\cos\varphi\\ -\sin^2\theta\sin\varphi\\
+  -\sin\theta\cos\theta\end{pmatrix}.\]
+
+\textbf{Sanity check: does this make sense, and is it exterior or interior?} We have
+\[\partial_\varphi\phi\times\partial_\theta\phi = -\sin\theta\ \phi(\varphi,\theta)
+  = -\sin\theta\,(x,y,z),\]
+and the exterior normal of $\mathbb{S}^2$ is $+(x,y,z)$, so $\partial_\varphi\phi\times
+\partial_\theta\phi$ is an \emph{interior} normal (for $\theta\in(0,\pi)$, $\sin\theta>0$).
+So we multiply by $-1$ to switch the order in the cross product, matching the exterior sign
+in \cref{prop:flux_r3}.
+
+\textbf{The integral.}
+\[
+\begin{aligned}
+\int_{\mathbb{S}^2} \vec F\cdot d\vec A
+  &= \int_0^{2\pi}\!\!\int_0^\pi \begin{pmatrix}xz\\ z\\ y\end{pmatrix}\cdot
+     \begin{pmatrix}\sin\theta\cos\varphi\\ \sin\theta\sin\varphi\\ \cos\theta\end{pmatrix}
+     \sin\theta\,d\theta\,d\varphi \\
+  &= \int_0^{2\pi}\!\!\int_0^\pi \Big[\sin^3\theta\cos\theta\cos^2\varphi
+     + \sin^2\theta\cos\theta\sin\varphi + \sin^2\theta\cos\theta\sin\varphi\Big]\,d\theta\,
+     d\varphi \\
+  &= \pi\int_0^\pi \sin^3\theta\cos\theta\,d\theta
+   = \pi\left[\frac{\sin^4\theta}{4}\right]_0^\pi = 0,
+\end{aligned}
+\]
+using $\int_0^{2\pi}\cos^2\varphi\,d\varphi = \pi$ and $\int_0^{2\pi}\sin\varphi\,d\varphi=0$
+for the middle two terms.
+\end{example}
+
+% Source: Corsin Nick/Class Notes/Week 10.pdf, p. 11
+\begin{theorem}[Gauss]
+\label{thm:gauss_divergence}
+Let $\Omega \subseteq \mathbb{R}^n$ be a bounded $C^1$ domain and $F : \overline\Omega \to
+\mathbb{R}^n$ a $C^1$ vector field. Then
+\[\int_\Omega \divg F\,d\vol_n = \int_{\partial\Omega} \langle F,\nu\rangle\,d\vol_{n-1},
+  \qquad \text{or, in physics notation,} \qquad
+  \int_\Omega \vec\nabla\cdot\vec F\,dx = \int_{\partial\Omega} \vec F\cdot d\vec A.\]
+\end{theorem}
+
+\begin{ainote}
+Corsin dates the theorem to Lagrange (discovered 1762) and Ostrogradsky (proven 1828), and
+adds, next to the physics form, an unusually enthusiastic \qt{how cool is this!} --- a volume
+integral of a derivative reduced to a boundary integral of the original field, the same shape
+as the fundamental theorem of calculus.
+
+% Supplement: Sascha Brack/Class Notes/Week_10_Notes_Monday.pdf, p. 13
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+  % Domain Omega
+  \draw[ultra thick] (0,0) ellipse (2cm and 1.5cm);
+  \node at (-1.5,-1) {$\Omega$};
+  \node[right] at (2,-0.5) {$\partial\Omega$};
+  
+  % Internal sources (red)
+  \foreach \x/\y in {-0.5/0.5, 0.8/-0.2, 0/ -0.6, -1/-0.3} {
+    \fill[red] (\x,\y) circle (1.5pt);
+    \foreach \angle in {0,72,...,288} {
+      \draw[red, thick, ->] (\x,\y) -- ++(\angle:0.3);
+    }
+  }
+  
+  % Internal sinks (blue)
+  \foreach \x/\y in {1/0.6, 0.2/0.8, -0.2/-1.1, 1.2/-0.8} {
+    \fill[blue] (\x,\y) circle (1.5pt);
+    \foreach \angle in {0,72,...,288} {
+      \draw[blue, thick, <-] (\x,\y) -- ++(\angle:0.3);
+    }
+  }
+  
+  % Boundary flux
+  \foreach \angle in {0,45,90,135,180,225,270} {
+    \draw[red, thick, ->] ({2*cos(\angle)},{1.5*sin(\angle)}) -- ++(\angle:0.4);
+  }
+  % some blue inward arrows
+  \foreach \angle in {30,150,315} {
+    \draw[blue, thick, <-] ({2*cos(\angle)},{1.5*sin(\angle)}) -- ++(\angle:0.4);
+  }
+\end{tikzpicture}
+\end{center}
+\end{ainote}
+
+\begin{example}[Recomputing \cref{ex:flux_unit_sphere} via the divergence theorem]
+\label{ex:flux_unit_sphere_via_divergence}
+With $\Omega = B_1(0)$ and $F(x,y,z) = (xz,z,y)$ as before, $\divg F = \partial_x(xz) +
+\partial_y(z) + \partial_z(y) = z + 0 + 0 = z$. So, in spherical coordinates ($z =
+r\cos\theta$),
+\[
+\int_{\partial\Omega} \vec F\cdot d\vec A = \int_\Omega \divg F\,dx = \int_\Omega z\,dx
+  = \int_0^1\!\!\int_0^{2\pi}\!\!\int_0^\pi \underbrace{\cos\theta\sin\theta}_{=\,\frac12\sin(2\theta),\
+    \pi\text{-periodic}} r^3\,d\theta\,d\varphi\,dr = 0,
+\]
+since $\int_0^\pi \sin(2\theta)\,d\theta = 0$ --- confirming \cref{ex:flux_unit_sphere} with
+none of its cross-product bookkeeping.
+\end{example}
+
+\begin{ainote}
+Corsin writes the divergence as $\divg F = z$ directly without the intermediate
+$\partial_x(xz)+\partial_z(z)+\partial_y(y)$ step; spelled out above for clarity. Worth
+noting how much the two computations of the same flux differ in character: the direct
+definition needs an explicit Gauss map, an orientation sanity check, and three cross terms
+in the integrand, while the divergence theorem needs only $\divg F$ and a coordinate change
+already used in \cref{ex:paraboloid_patch_area}. This is the theorem's main
+practical use --- not conceptual elegance, but that $\divg F$ is often far simpler than $F$
+restricted to a curved boundary.
+\end{ainote}
+
+% Supplement: Sascha Brack/Class Notes/Week_10_Notes_Monday.pdf, p. 14
+\begin{example}[Computing flux using the divergence theorem]
+\label{ex:flux_divergence_cube}
+Let $\Omega := [-1,1]^3 \subset \mathbb{R}^3$ and $F(x,y,z) := (x^2, y^2, z^2)\transp$.
+We compute the flux of $F$ out of $\Omega$ using the divergence theorem.
+First, we find the divergence of $F$:
+\[\divg F(x,y,z) = \partial_x(x^2) + \partial_y(y^2) + \partial_z(z^2) = 2x + 2y + 2z.\]
+Then, integrating over $\Omega$:
+\begin{align*}
+\int_{\partial\Omega} \langle F(p),\ \nu(p)\rangle \mathop{d\text{vol}}_2(p) &= \int_\Omega \divg F(x,y,z) \mathop{d\text{vol}}_3(x,y,z) \\
+&= \int_{-1}^1 \int_{-1}^1 \int_{-1}^1 (2x + 2y + 2z) \,dx\,dy\,dz.
+\end{align*}
+By symmetry, the integral of $2x$ over $[-1,1]$ is $0$, and similarly for $y$ and $z$. Therefore, the total flux is $0$.
+\end{example}
+
+% Source: Corsin Nick/Class Notes/Week 10.pdf, p. 12
+Gauss' theorem is also a powerful tool in physics. For example, the volume $V$ of water in a
+moving fluid with velocity $\vec v$ passing through a surface element $d\vec A$ in time
+$\Delta t$ is
+\[V = \Delta t\,\vec v\cdot d\vec A\cdot\varrho \qquad (\varrho \text{ the density}),\]
+since a fluid column of length $L = \Delta t\,\lvert\vec v\rvert$ and cross-section $d\vec A$
+tilted at angle $\theta$ to $\vec v$ sweeps a volume $L\lvert d\vec A\rvert\cos\theta =
+\Delta t\,\vec v\cdot d\vec A$ through the surface element.
+
+% Sonnet 5 (Medium) --- FIG-W10-03
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.1]
+  \draw[purple, thick] (0,0) -- (2.4,0) -- (3.1,1.3) -- (0.7,1.3) -- cycle;
+  \draw[red, thick] (2.4,0) -- (2.4,1.5);
+  \foreach \y in {0.15,0.45,0.75,1.05} {
+    \draw[orange, thick, ->] (-1.1,\y) -- (0.9+0.29*\y,\y);
+  }
+  \draw[orange, thick, ->] (1.55,0.65) -- (2.85,1.15) node[right, font=\scriptsize] {$\vec v$};
+  \draw[green!50!black] (2.2,0.55) arc (160:70:0.5);
+  \node[green!50!black, font=\scriptsize] at (2.15,0.85) {$\theta$};
+  \node[font=\scriptsize] at (-1.3,0.6) {$\vec v$};
+  \node[purple, font=\scriptsize] at (1.55,-0.25) {$L=\Delta t\lvert\vec v\rvert$};
+  \node[red, font=\scriptsize, right] at (2.55,0.75) {$h=\lvert d\vec A\rvert\cos\theta$};
+\end{tikzpicture}
+\end{center}
+
+Therefore, the fluid flowing out of any bounded $C^1$ domain $\Omega$ per unit time is
+\[\int_{\partial\Omega} \varrho\vec v\cdot d\vec A = \int_\Omega \vec\nabla\cdot(\varrho
+  \vec v)\,dx.\]
+Of course, since the total amount of fluid is conserved, this is also the change in the
+amount of fluid in $\Omega$ over time:
+\[\int_\Omega \vec\nabla\cdot(\varrho\vec v)\,dx = -\frac{d}{dt}\int_\Omega \varrho\,dx
+  = -\int_\Omega \frac{\partial\varrho}{\partial t}\,dx.\]
+Since this holds for any $\Omega$, the \newterm{continuity equation}
+(\germanterm{Kontinuit\"atsgleichung}) follows:
+\[\vec\nabla\cdot(\varrho\vec v) + \frac{\partial\varrho}{\partial t} = 0.\]
+
+
+% --- exercises relocated here from the dissolved sheets ---
+
+% Originally: content/week-11.tex, \exercisesheet{11}, problem 11.5
+% Source: exercises/Ex11_Analysis2_eng.pdf
+
+\begin{exercise}[11.5 --- Radial vector fields \textnormal{(important)}]
+\label{ex:11.5}
+For $\alpha\in\mathbb{R}$ consider the vector field
+\[V_\alpha(x) = \lvert x\rvert^\alpha x, \qquad x\in\mathbb{R}^n\setminus\{0\},\]
+where $\lvert x\rvert$ is the usual Euclidean norm.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Compute $\divg V_\alpha(x)$ for all $x\neq0$, and show that it vanishes identically
+  for $\alpha=-n$.
+  \item Using the Divergence theorem on $V_0$, show the following relation between the
+  $n$-volume of a sphere and the $n-1$ volume of its boundary:
+  \[r\,\vol_{n-1}(\partial B_r) = n\,\vol_n(B_r), \qquad \forall r>0.\]
+  \item Show that
+  \[\int_{\partial B_1} V_{-n}\cdot\nu\,d\vol_{n-1} > 0, \qquad \int_{B_1} \divg V_{-n}(x)\,dx
+    = 0.\]
+  Why doesn't this contradict the Divergence Theorem?
+\end{enumerate}
+\end{exercise}

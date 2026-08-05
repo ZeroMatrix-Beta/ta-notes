@@ -1,0 +1,102 @@
+% Originally: content/week-10.tex, \section{A short introduction to geodesics} (Corsin Week 10)
+
+
+\section{A short introduction to geodesics}
+\label{sec:geodesics}
+
+\begin{ainote}
+Corsin marks this section \qt{not exam relevant}. It is included anyway, since the calculation
+is short and the underlying idea --- treat length as a functional and apply optimization to it
+--- is the same one used later in the course for genuinely examinable variational arguments.
+\end{ainote}
+
+We will try to find the shortest path (i.e., a geodesic) from $0 \in \mathbb{R}^n$ to $x \in \mathbb{R}^n$. This
+is, of course, the straight line, but the essentially same calculation can be used to find the
+shortest path between points on a sphere or any other submanifold.
+
+\textbf{Idea.} Apply \qt{optimization} to the map
+\[L : \mathcal A \to [0,\infty), \qquad c \mapsto L(c) = \int_0^1 \lvert c'(t)\rvert\,dt,
+  \qquad \mathcal A := \{\gamma \in C^1([0,1],\mathbb{R}^n) : \gamma(0)=0,\ \gamma(1)=x\}.\]
+
+\begin{lemma}[A few differentiation identities]
+\label{lem:inner_product_derivative_identities}
+Let $\alpha,\beta : (0,1) \to \mathbb{R}^n$ be $C^1$. Then
+\[\frac{d}{dt}\langle\alpha(t),\beta(t)\rangle = \langle\alpha'(t),\beta(t)\rangle
+  + \langle\alpha(t),\beta'(t)\rangle, \qquad
+  \frac{d}{dt}\lvert\alpha(t)\rvert = \frac{1}{\lvert\alpha(t)\rvert}\langle\alpha(t),\alpha'(t)\rangle.\]
+\end{lemma}
+
+% Source: Corsin Nick/Class Notes/Week 10.pdf, pp. 4--5
+\begin{proposition}[The shortest path is a straight line]
+\label{prop:geodesic_straight_line}
+Assume that $c \in C^\infty([0,1],\mathbb{R}^n)$ with $c(0)=0$, $c(1)=x$ and
+$\lvert c'(t)\rvert \equiv \lambda$ is the optimal path we are looking for. Then $c(t) = xt$
+and $\lambda = \lvert x\rvert$.
+\end{proposition}
+
+\begin{proof}
+Let $g \in C^\infty([0,1],\mathbb{R}^n)$ with $g(0)=g(1)=0$, and define, for $\varepsilon \in
+\mathbb{R}$, the family of paths $c_\varepsilon(t) := c(t) + \varepsilon g(t)$, so that
+$c_0 = c$.
+
+% Sonnet 5 (Medium) --- FIG-W10-02
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.2]
+  \draw[red, thick] (0,0) -- (3.6,1.1) node[midway, below, font=\scriptsize, sloped] {$c$};
+  \foreach \k in {1,2,3} {
+    \draw[green!45!black, thick, opacity={0.5+0.15*\k}]
+      plot[smooth] coordinates {(0,0) (1.1,{0.55+0.13*\k}) (2.3,{0.75+0.10*\k}) (3.6,1.1)};
+  }
+  \node[font=\scriptsize] at (2.0,1.55) {$c_\varepsilon$};
+  \fill (0,0) circle (1.3pt) node[left, font=\scriptsize] {$0$};
+  \fill (3.6,1.1) circle (1.3pt) node[right, font=\scriptsize] {$x$};
+\end{tikzpicture}
+\end{center}
+
+By assumption, $c$ is a minimizer of $L$, so it is a critical point of the family, i.e.
+\[\left.\frac{d}{d\varepsilon}\right|_{\varepsilon=0} L(c_\varepsilon) = 0.\]
+(This equality itself requires a proof, but the idea is exactly the same as that of
+optimization in $\mathbb{R}^n$.) First,
+\[\left.\frac{\partial}{\partial\varepsilon}\right|_{\varepsilon=0} c_\varepsilon(t)
+  = \left.\frac{\partial}{\partial\varepsilon}\right|_{\varepsilon=0}
+    \big(c(t)+\varepsilon g(t)\big) = g(t).\]
+Recalling $\lvert c'\rvert \equiv \lambda$ and using
+\Cref{lem:inner_product_derivative_identities},
+\[
+\begin{aligned}
+\left.\frac{d}{d\varepsilon}\right|_{\varepsilon=0} L(c_\varepsilon)
+  &= \left.\frac{d}{d\varepsilon}\int_0^1 \lvert c_\varepsilon'(t)\rvert\,dt\right|_{\varepsilon=0}
+   = \int_0^1 \left.\frac{\partial}{\partial\varepsilon}\lvert c_\varepsilon'(t)\rvert\,dt
+     \right|_{\varepsilon=0} \\
+  &= \int_0^1 \frac{\big\langle c_\varepsilon'(t),\ \partial_\varepsilon c_\varepsilon'(t)
+       \big\rangle}{\lvert c_\varepsilon'(t)\rvert}\,dt\bigg|_{\varepsilon=0}
+   = \frac1\lambda \int_0^1 \Big\langle c'(t),\ \partial_\varepsilon\big|_{\varepsilon=0}
+       c_\varepsilon'(t)\Big\rangle\,dt \\
+  &= \frac1\lambda \int_0^1 \frac{d}{dt}\Big\langle c'(t), g(t)\Big\rangle
+       - \big\langle c''(t), g(t)\big\rangle\,dt
+   = \frac1\lambda\left[\big\langle c'(t),g(t)\big\rangle\Big|_0^1
+       - \int_0^1 \big\langle c''(t),g(t)\big\rangle\,dt\right] \\
+  &= -\frac1\lambda \int_0^1 \big\langle c''(t),g(t)\big\rangle\,dt \ \overset{!}{=}\ 0,
+\end{aligned}
+\]
+where the boundary term vanished since $g(0)=g(1)=0$. Since $g$ is arbitrary, it follows that
+$c''(t) \equiv 0$, and together with $c(0)=0$, $c(1)=x$ this gives $c(t)=xt$ and $\lambda =
+\lvert x\rvert$.
+\end{proof}
+
+\begin{ainote}
+Corsin flags a subtlety in his own proof with a warning triangle at the step
+$\left.\frac{d}{d\varepsilon}\right|_{\varepsilon=0}L(c_\varepsilon) = 0$ and again at the final
+$= 0$: both are exactly the two places where genuine work is being hidden. The first
+is the claim that a minimizer of $L$ over the infinite-dimensional space $\mathcal A$ is a
+critical point of every one-parameter family through it --- the same fact used for
+$\mathbb{R}^n$-optimization of \cref{ch:extrema}, now needing $\mathcal A$ to be a vector space (it is
+not: $\mathcal A$ is an affine subspace, but $c_\varepsilon - c \in \{g : g(0)=g(1)=0\}$, a genuine
+vector space, which is what makes the argument go through). The second is the
+\newterm{fundamental lemma of the calculus of variations}: that
+$\int_0^1\langle c''(t),g(t)\rangle\,dt = 0$ for \emph{every} admissible $g$ forces
+$c''\equiv0$ pointwise, not just on average. Corsin does not name or prove this lemma; it is
+the standard fact that if a continuous function integrates to zero against every test function
+vanishing at the endpoints, it is identically zero (take $g$ a bump concentrated where $c''$
+is supposedly nonzero).
+\end{ainote}

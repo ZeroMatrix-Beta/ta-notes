@@ -1,0 +1,28 @@
+% Originally: content/week-11.tex, \section{Solutions}
+
+\section{Solutions}
+\label{sec:vector_calculus_solutions}
+
+\begin{exercisesolution}[Solution of \cref{ex:11.1}]
+The vector field $V(x,y,z) = (x,y,z-x^2-y^2)$ has divergence
+\[\divg V = \partial_x(x) + \partial_y(y) + \partial_z(z-x^2-y^2) = 1+1+1 = 3.\]
+$S$ is not itself the boundary of a bounded $C^1$ domain, so close it up with the equatorial
+disk $D := \{(x,y,0) : x^2+y^2\leq1\}$: then $\Omega := \{(x,y,z)\in B_1(0) : z\geq0\}$, the
+upper half ball, is a bounded $C^1$ domain with $\partial\Omega = S\cup D$, and $S$'s
+\qt{inside to outside} normal agrees with the outward normal of $\Omega$ on $S$. By
+\cref{thm:gauss_divergence},
+\[\int_S V\cdot\nu\,d\vol_2 + \int_D V\cdot\nu_D\,d\vol_2 = \int_\Omega \divg V\,dx
+  = 3\vol_3(\Omega) = 3\cdot\frac{2\pi}{3} = 2\pi,\]
+using $\vol_3(\Omega) = \frac12\cdot\frac43\pi = \frac{2\pi}{3}$. On $D$ the outward normal is
+$\nu_D = -e_3$, and $V(x,y,0) = (x,y,-x^2-y^2)$, so $V\cdot\nu_D = x^2+y^2$; in polar
+coordinates,
+\[\int_D V\cdot\nu_D\,d\vol_2 = \int_0^{2\pi}\!\!\int_0^1 r^2\cdot r\,dr\,d\varphi
+  = 2\pi\left[\frac{r^4}{4}\right]_0^1 = \frac{\pi}{2}.\]
+Hence
+\[\int_S V\cdot\nu\,d\vol_2 = 2\pi - \frac{\pi}{2} = \boxed{\ \frac{3\pi}{2}\ }.\]
+\end{exercisesolution}
+
+\begin{ainote}
+Solved independently before consulting \texttt{Sol11\_Analysis2\_eng.pdf}; the official
+solution uses the identical closing-disk argument and reaches the same value $3\pi/2$.
+\end{ainote}

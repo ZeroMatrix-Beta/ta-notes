@@ -1,0 +1,89 @@
+% Originally: content/week-08.tex had a \section{Solutions} containing only an AI-Note reading
+% "TODO --- pending the exercise statements". The statements had in fact been transcribed, so
+% 8.2 and 8.4 stood in the document unsolved. Written here for the first time.
+\section{Solutions}
+\label{sec:jordan_measure_solutions}
+
+\begin{exercisesolution}[Solution to \cref{ex:8.2}]
+% Generator: Claude Opus 5 (High)
+The whole problem turns on one distinction: \textbf{Jordan} outer measure is an infimum over
+\emph{finite} covers, \textbf{Lebesgue} outer measure over \emph{countable} ones. Parts 1--3 are
+that distinction three times; parts 4 and 5 are the difference between a measure and a merely
+sub-additive outer measure.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item \textbf{False.} Take $X := \mathbb{Q}\cap[0,1]$: bounded and countable, yet
+    $\mu_{out}(X) = 1$ by part 3, since $X$ is dense in $[0,1]$. Countability buys nothing here
+    --- only finitely many intervals are allowed at a time, and finitely many intervals covering
+    a dense set must cover the whole of $[0,1]$.
+  \item \textbf{True}, and this is exactly where countable covers do buy something. Enumerate
+    $X = \{x_1,x_2,\dots\}$ and, given $\varepsilon > 0$, cover $x_k$ by an interval of length
+    $\varepsilon 2^{-k}$. The total length is $\sum_{k\geq1}\varepsilon2^{-k} = \varepsilon$, and
+    $\varepsilon$ was arbitrary, so the Lebesgue outer measure is $0$.
+  \item \textbf{True.} Monotonicity gives $\mu_{out}(D) \leq \mu_{out}([0,1]) = 1$, so only the
+    lower bound needs an argument. Let $I_1,\dots,I_N$ be finitely many intervals covering $D$.
+    Enlarging each to its closure changes no length, so we may assume they are closed; then
+    $\bigcup_{k=1}^N I_k$ is \emph{closed} --- this is where finiteness enters --- and contains
+    $D$, hence contains $\overline D = [0,1]$. Therefore
+    $\sum_{k=1}^N |I_k| \geq \mu([0,1]) = 1$. Taking the infimum over such covers,
+    $\mu_{out}(D) \geq 1$.
+  \item \textbf{True.} Suppose $X \cap Y = \emptyset$. Jordan measure is additive on disjoint
+    Jordan measurable sets, so
+    \[\mu(X \cup Y) = \mu(X) + \mu(Y) > \tfrac12 + \tfrac12 = 1.\]
+    But $X \cup Y \subseteq [0,1]$, so monotonicity forces $\mu(X\cup Y) \leq 1$ --- a
+    contradiction. Hence $X \cap Y \neq \emptyset$.
+  \item \textbf{False}, and this is the official hint's point. Take
+    \[X := \mathbb{Q}\cap[0,1], \qquad Y := (\mathbb{R}\setminus\mathbb{Q})\cap[0,1].\]
+    Both are dense in $[0,1]$, so part 3 gives $\mu_{out}(X) = \mu_{out}(Y) = 1 > \tfrac12$; yet
+    $X \cap Y = \emptyset$ by construction. The argument of part 4 breaks at its first step:
+    $\mu_{out}$ is only \emph{sub}additive, so $\mu_{out}(X\cup Y) \leq \mu_{out}(X)+\mu_{out}(Y)$
+    --- an inequality pointing the wrong way to produce a contradiction. Neither set is Jordan
+    measurable, which is precisely why part 4 does not apply.
+\end{enumerate}
+
+\begin{ainote}
+Parts 1 and 5 are the same counterexample used twice, and part 3 is the lemma both rest on. It is
+worth extracting what makes it work: a \emph{finite} union of closed sets is closed, so a finite
+cover of $D$ automatically covers $\overline D$. Every difference between Jordan and Lebesgue
+theory visible on this sheet traces back to that one sentence.
+\end{ainote}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:8.4}]
+% Generator: Claude Opus 5 (High)
+\textbf{The correct answer is 4: $f$ locally Lipschitz continuous and $m \geq n$.} Both
+hypotheses are needed, and dropping either one admits a counterexample.
+
+\textbf{Why 1 and 2 fail --- uniform continuity is not enough.} Let $c : [0,1] \to [0,1]$ be the
+Cantor function, which is continuous on a compact interval and hence uniformly continuous, and
+let $N \subset [0,1]$ be the Cantor set. Then $N$ is Jordan-null (it is covered by $2^k$
+intervals of total length $(2/3)^k \to 0$), while $c(N) = [0,1]$ is not null. Here $n = m = 1$, so
+this single example kills option 1 \emph{and} option 2 --- the extra hypothesis $m \geq n$ does
+nothing to rescue mere continuity. Intuitively, a uniformly continuous map has no bound on how
+much it may stretch, only on how abruptly.
+
+\textbf{Why 3 fails --- $m \geq n$ is not decoration.} Let $f : \mathbb{R}^2 \to \mathbb{R}$,
+$f(x,y) := y$, which is Lipschitz with constant $1$, and let
+$N := \{0\}\times[0,1]$, a segment and so Jordan-null in $\mathbb{R}^2$. Then $f(N) = [0,1]$,
+which is not null in $\mathbb{R}^1$. Here $m = 1 < 2 = n$: a projection loses a dimension, and
+what was negligible in the source stops being negligible in the smaller target.
+
+\textbf{Why 4 holds.} Let $N$ be Jordan-null. Being Jordan-null it is bounded, and we may work on
+a compact neighbourhood $K \subset U$ of $\overline N$ on which $f$ is Lipschitz with some
+constant $L$ (local Lipschitz continuity plus compactness gives a single constant). Fix
+$\varepsilon > 0$ and cover $N$ by finitely many cubes $Q_1,\dots,Q_M \subset K$ of sides
+$s_i \leq 1$ with $\sum_i s_i^{\,n} < \varepsilon$. Each $Q_i$ has diameter $s_i\sqrt n$, so
+$f(Q_i \cap N)$ has diameter at most $L s_i\sqrt n$ and therefore fits inside a cube of side
+$L s_i \sqrt n$ in $\mathbb{R}^m$, of volume $(L\sqrt n)^m s_i^{\,m}$. Since $s_i \leq 1$ and
+$m \geq n$ we have $s_i^{\,m} \leq s_i^{\,n}$, so the images are covered with total volume at
+most
+\[(L\sqrt n)^m \sum_{i=1}^M s_i^{\,n} \;<\; (L\sqrt n)^m\,\varepsilon.\]
+As $\varepsilon$ was arbitrary, $f(N)$ is null.
+
+\begin{ainote}
+The proof shows exactly where each hypothesis is spent. \emph{Lipschitz} is what converts a bound
+on the side of a cube into a bound on the diameter of its image --- continuity alone gives no
+such conversion. \emph{$m \geq n$} is what makes $s_i^{\,m} \leq s_i^{\,n}$, i.e.\ what stops the
+volume from being measured with too few powers of $s_i$. The two counterexamples attack precisely
+these two steps.
+\end{ainote}
+\end{exercisesolution}

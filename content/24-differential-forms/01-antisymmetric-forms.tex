@@ -1,0 +1,160 @@
+% Originally: content/week-11.tex, \section{Antisymmetric k-linear forms and the wedge product} (Corsin Week 11)
+
+\section{Antisymmetric \texorpdfstring{$k$}{k}-linear forms and the wedge product}
+\label{sec:antisymmetric_forms}
+
+% Source: Corsin Nick/Class Notes/Week 11.pdf, p. 4
+\begin{ainote}[Motivation]
+Suppose one studies a submanifold $\mathcal{M} \subseteq \mathbb{R}^n$ via a parametrization
+$\phi : D \to \mathcal{M}$, and integrates some quantity over $\mathcal{M}$ (for instance the
+Gauss curvature, as in the Gauss--Bonnet theorem). The natural question is whether the
+resulting number is a property of $\phi$, or a property of $\mathcal{M}$ itself: if it is
+invariant under reparametrization, it must be the latter. \newterm{Differential forms} are
+built to satisfy exactly this property. For a diffeomorphism $\Psi : V \to D$ with
+$\det D\Psi > 0$ and a form $\omega$,
+\begin{align}
+\int_{\mathcal{M}} \omega &= \int_D \omega_{\phi(x)}(D\phi_x)\,dx \nonumber \\
+  &\overset{\text{change of var.}}{=} \int_V \omega_{\phi(\Psi(y))}(D\phi_{\Psi(y)})
+  \lvert\det D\Psi_y\rvert\,dy \nonumber \\
+  &= \int_V \omega_{(\phi\circ\Psi)(y)}(D(\phi\circ\Psi)_y)\,dy = \int_{\mathcal{M}} \omega,
+  \nonumber
+\end{align}
+where the middle equality uses the chain rule $D(\phi\circ\Psi)_y = D\phi_{\Psi(y)}\,D\Psi_y$
+together with multilinearity and $\det D\Psi_y = \lvert\det D\Psi_y\rvert$. This calculation
+is precisely why $\omega$ must be built from multilinear, antisymmetric maps: multilinearity
+lets the Jacobian $D\Psi_y$ factor out as $\det D\Psi_y$, matching the $\lvert\det
+D\Psi_y\rvert$ produced by the change-of-variables formula, exactly when $\det D\Psi_y > 0$.
+\end{ainote}
+
+% Source: Corsin Nick/Class Notes/Week 11.pdf, p. 5
+\begin{definition}[Antisymmetric $k$-linear form]
+\label{def:antisymmetric_k_linear_form}
+Let $V$ be an $n$-dimensional real vector space and let $L : V^k \to \mathbb{R}$. Then $L$ is
+an \newterm{antisymmetric $k$-linear form} (\germanterm{antisymmetrische $k$-lineare Form})
+if
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{($k$-linear):} $L$ is linear in every entry:
+  \[L(v_1,\ldots,\alpha v_i+\beta w_i,\ldots,v_k) = \alpha L(v_1,\ldots,v_i,\ldots,v_k)
+    + \beta L(v_1,\ldots,w_i,\ldots,v_k);\]
+  \item \textbf{(antisymmetric):} swapping any two entries negates the value:
+  \[L(v_1,\ldots,v_i,\ldots,v_j,\ldots,v_k) = -L(v_1,\ldots,v_j,\ldots,v_i,\ldots,v_k).\]
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+For $k=n$ and $V = \mathbb{R}^n$, the normalization $L(e_1,\ldots,e_n) = 1$ pins down a
+\emph{unique} such $L$, namely $L = \det$.
+\end{remark}
+
+\begin{notation}
+For $v \in V$ and a fixed basis $(e_1,\ldots,e_n)$ of $V$, superscripts index the coordinates
+of a single vector, $v = \sum_{i=1}^n v^i e_i = (v^1,\ldots,v^n)$, while subscripts index a
+list of vectors $v_1,\ldots,v_k \in V$ --- this distinguishes \qt{the $i$-th coordinate of
+$v$} from \qt{the $i$-th vector in the list}. From here on, $V = \mathbb{R}^n$ with the
+standard basis.
+\end{notation}
+
+% Source: Corsin Nick/Class Notes/Week 11.pdf, p. 6
+\begin{aiexample}[Two families of examples]
+% Generator: Claude Sonnet 5 (Medium)
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Fix $A \in \mathrm{Mat}_{k\times n}(\mathbb{R})$. For $v_1,\ldots,v_k \in
+  \mathbb{R}^n$, write $V := (v_1\mid\cdots\mid v_k) \in \mathrm{Mat}_{n\times k}(\mathbb{R})$
+  for the matrix with these columns; then $AV \in \mathrm{Mat}_{k\times k}(\mathbb{R})$, and
+  $L(v_1,\ldots,v_k) := \det(AV)$ is an antisymmetric $k$-linear form, since $\det$ is
+  multilinear and antisymmetric in the columns of its argument, and $v \mapsto Av$ is linear.
+  \item For $k=1$, $L : \mathbb{R}^n \to \mathbb{R}$ is a \newterm{covector},
+  $L \in (\mathbb{R}^n)^*$. The standard basis $(e_1^*,\ldots,e_n^*)$ of $(\mathbb{R}^n)^*$,
+  satisfying $e_i^*(e_j) = \delta_{ij}$, consists of $1$-forms; in particular
+  $e_i^*(v) = v^i$.
+\end{enumerate}
+\end{aiexample}
+
+\begin{remark}[An equivalent characterization]
+In the lecture, antisymmetry was replaced by the equivalent condition
+\[L(VA) = L(V)\det(A), \qquad V := (v_1,\ldots,v_k) \in \mathrm{Mat}_{n\times k}(\mathbb{R}),
+  \quad A \in \mathrm{Mat}_{k\times k}(\mathbb{R}),\]
+writing $L(V)$ for $L(v_1,\ldots,v_k)$. We verify the equivalence in the special case $n=3$,
+$k=2$: let $V = (v\mid w) \in \mathrm{Mat}_{3\times2}(\mathbb{R})$ and $A = \begin{pmatrix} a &
+b \\ c & d \end{pmatrix}$, so that $VA = (av+cw \mid bv+dw)$. Rewriting $L(VA)$ in bilinear
+form and using $L(v,v) = -L(v,v) = 0$ (from antisymmetry) together with $L(w,v) = -L(v,w)$,
+\begin{align}
+L(VA) &= L(av+cw,\,bv+dw) \nonumber \\
+  &= ab\,L(v,v) + ad\,L(v,w) + cb\,L(w,v) + cd\,L(w,w) \nonumber \\
+  &= (ad-bc)\,L(v,w) = L(V)\det(A). \nonumber
+\end{align}
+\end{remark}
+
+% Source: Corsin Nick/Class Notes/Week 11.pdf, p. 7
+\begin{definition}[Wedge product]
+\label{def:wedge_product}
+For a $k$-form $\alpha$ and an $m$-form $\beta$ on $\mathbb{R}^n$, the \newterm{wedge product}
+(\germanterm{Dachprodukt}) $\alpha \wedge \beta$ is the $(k+m)$-form
+\[
+(\alpha\wedge\beta)(v_1,\ldots,v_k,v_{k+1},\ldots,v_{k+m})
+  = \sum_{\sigma \in S_{k,m}} \sgn(\sigma)\,\alpha(v_{\sigma(1)},\ldots,v_{\sigma(k)})\,
+    \beta(v_{\sigma(k+1)},\ldots,v_{\sigma(k+m)}),
+\]
+where $S_{k,m}$ is the set of permutations $\sigma$ of $\{1,\ldots,k+m\}$ satisfying
+$\sigma(1) < \cdots < \sigma(k)$ and $\sigma(k+1) < \cdots < \sigma(k+m)$ (the
+\newterm{$(k,m)$-shuffles}).
+\end{definition}
+
+\begin{ainote}
+Corsin calls this formula \qt{not terribly important for our purposes} and instead has us work
+directly with the five properties below.
+\end{ainote}
+
+The following properties of $\wedge$ are the ones actually used:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+  \item $\wedge$ is bilinear.
+  \item For $\alpha$ a $k$-form and $\beta$ an $m$-form, $\alpha\wedge\beta$ is a $(k+m)$-form.
+  \item $(\alpha\wedge\beta)\wedge\gamma = \alpha\wedge(\beta\wedge\gamma) = \alpha\wedge\beta
+  \wedge\gamma$ (associativity).
+  \item For $1$-forms $L_1,\ldots,L_k$ and vectors $v_1,\ldots,v_k \in \mathbb{R}^n$,
+  \[L_1\wedge L_2\wedge\cdots\wedge L_k(v_1,\ldots,v_k) = \det\big(L_i(v_j)\big)_{1\leq i,j
+  \leq k}.\]
+  \item For $\alpha(T) := \det(AT)$, $\beta(S) := \det(BS)$ as in \cref{def:antisymmetric_k_linear_form}
+  example 1,
+  \[\alpha\wedge\beta(X) = \det\!\left(\begin{bmatrix} A \\ B \end{bmatrix} X\right).\]
+\end{enumerate}
+
+% Source: Corsin Nick/Class Notes/Week 11.pdf, p. 8
+\begin{example}
+By property (4), for $1 \leq i_1 < \cdots < i_k \leq n$,
+\[
+e_{i_1}^*\wedge\cdots\wedge e_{i_k}^*(v_1,\ldots,v_k) = \det\!\left(
+  \begin{pmatrix} v_1^{i_1} & \cdots & v_k^{i_1} \\ \vdots & \ddots & \vdots \\ v_1^{i_k} &
+  \cdots & v_k^{i_k} \end{pmatrix}\right)
+  = \det\!\left(\begin{bmatrix} e_{i_1}\transp \\ \vdots \\ e_{i_k}\transp \end{bmatrix}
+  \begin{bmatrix} v_1 & \cdots & v_k \end{bmatrix}\right).
+\]
+\end{example}
+
+% Source: Corsin Nick/Class Notes/Week 11.pdf, pp. 9--10
+\begin{proposition}[Every $k$-linear form is a combination of wedge products of covectors]
+\label{prop:k_form_basis_expansion}
+Every antisymmetric $k$-linear form $L$ on $\mathbb{R}^n$ can be written as
+\[L = \sum_{1\leq i_1<\cdots<i_k\leq n} \ell_{i_1\cdots i_k}\,e_{i_1}^*\wedge\cdots\wedge
+  e_{i_k}^*\]
+for uniquely determined scalars $\ell_{i_1\cdots i_k} \in \mathbb{R}$.
+\end{proposition}
+
+\begin{proof}
+Expand each argument $v_i = \sum_{m=1}^n v_i^m e_m$ and use $k$-linearity:
+\[L(v_1,\ldots,v_k) = L\!\left(\sum_{i_1=1}^n v_1^{i_1}e_{i_1},\ldots,\sum_{i_k=1}^n
+  v_k^{i_k}e_{i_k}\right) = \sum_{1\leq i_1,\ldots,i_k\leq n} L(e_{i_1},\ldots,e_{i_k})\,
+  v_1^{i_1}\cdots v_k^{i_k}.\]
+By antisymmetry, $L(e_{i_1},\ldots,e_{i_k}) = 0$ whenever two indices coincide, so the sum may
+be restricted to $i_1,\ldots,i_k$ pairwise distinct; regrouping each such tuple by the
+permutation $\sigma$ that sorts it into increasing order $i_{\sigma(1)}<\cdots<i_{\sigma(k)}$,
+\begin{align}
+L(v_1,\ldots,v_k) &= \sum_{1\leq i_1<\cdots<i_k\leq n} L(e_{i_1},\ldots,e_{i_k})
+  \sum_{\sigma\in S_k} \sgn(\sigma)\,v_1^{i_{\sigma(1)}}\cdots v_k^{i_{\sigma(k)}} \nonumber \\
+  &= \sum_{1\leq i_1<\cdots<i_k\leq n} \ell_{i_1\cdots i_k}\,e_{i_1}^*\wedge\cdots\wedge
+  e_{i_k}^*(v_1,\ldots,v_k), \nonumber
+\end{align}
+with $\ell_{i_1\cdots i_k} := L(e_{i_1},\ldots,e_{i_k})$, using that the inner sum over $\sigma$
+is exactly the determinant expansion of $e_{i_1}^*\wedge\cdots\wedge e_{i_k}^*(v_1,\ldots,v_k)$
+from property (4) above.
+\end{proof}

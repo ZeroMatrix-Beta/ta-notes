@@ -1,0 +1,60 @@
+% Originally: content/week-12.tex, \section{Integration of differential forms on submanifolds} (Corsin Week 12)
+
+\section{Integration of differential forms on submanifolds}
+\label{sec:integration_of_forms}
+
+% Source: Corsin Nick/Class Notes/Week 12.pdf, p. 6
+If $\mathcal{M}$ is an $m$-dimensional submanifold of $\mathbb{R}^m$ --- i.e.\ simply an open
+set --- and $\omega \in \Omega^m(\mathcal{M})$ an $m$-form, then
+\[\int_{\mathcal{M}} \omega := \int_{\mathcal{M}} \omega_x(e_1,\ldots,e_m)\,dx;\]
+in particular, for $f \in C^\infty(\mathcal{M})$,
+\[\int_{\mathcal{M}} f\,dx^1\wedge\cdots\wedge dx^m = \int_{\mathcal{M}} f(x)\,dx,\]
+recovering the ordinary Lebesgue integral of $f$.
+
+\begin{definition}[Integral of a form over a parametrized submanifold]
+\label{def:integral_of_form_over_submanifold}
+If $L^k \subseteq \mathbb{R}^n$ is a $k$-dimensional submanifold, $n>k$, and $\phi : U \to L$
+is a parametrization with $U \subseteq \mathbb{R}^k$ open, then the integral of $\omega \in
+\Omega^k(L)$ is defined as
+\[\int_L \omega := \int_U \phi^*\omega = \int_U \omega_{\phi(x)}\!\left(\frac{\partial\phi}
+  {\partial x^1},\ldots,\frac{\partial\phi}{\partial x^k}\right) dx.\]
+\end{definition}
+
+In particular, for $f \in C^\infty(L)$ and $1\leq i_1<\cdots<i_k\leq n$,
+\[\int_L f\,dx^{i_1}\wedge\cdots\wedge dx^{i_k} = \int_U f(x)\det\!\left(\frac{\partial
+  \phi^{i_s}}{\partial x^t}\right)_{1\leq s,t\leq k} dx,\]
+because, by property (4) of \cref{def:wedge_product},
+\[dx^{i_1}\wedge\cdots\wedge dx^{i_k}(\partial_1\phi,\ldots,\partial_k\phi) = \det\!\left(
+  \begin{smallmatrix} dx^{i_1}(\partial_1\phi) & \cdots & dx^{i_1}(\partial_k\phi) \\
+  \vdots & \ddots & \vdots \\ dx^{i_k}(\partial_1\phi) & \cdots & dx^{i_k}(\partial_k\phi)
+  \end{smallmatrix}\right) = \det\!\left(\frac{\partial\phi^{i_s}}{\partial x^t}\right)_{1\leq
+  s,t\leq k}.\]
+
+\begin{ainote}
+Applying \cref{def:integral_of_form_over_submanifold} to $\omega_F^{n-1}$ or $\omega_F^2$ from
+\cref{ch:differential_forms} recovers exactly the flux integrals of \cref{ch:flux} --- those
+were, all along,
+integrals of forms in this sense. And \cref{def:pullback_of_forms} is what makes the
+motivating reparametrization-invariance calculation precise: $\int_L \omega$ does
+not depend on the parametrization $\phi$ chosen, only on $L$ and its orientation.
+\end{ainote}
+
+
+% --- exercises relocated here from the dissolved sheets ---
+
+% Originally: content/week-12.tex, \exercisesheet{12}, problem 12.9
+% Source: exercises/Ex12_Analysis2_eng.pdf
+
+\begin{exercise}[12.9 --- Change of variables with differential forms \textnormal{(important)}]
+\label{ex:12.9}
+Let $U,V \subseteq \mathbb{R}^n$ be open sets, and let $\psi = (\psi^1,\ldots,\psi^n) : U \to
+V$ be a diffeomorphism with $\det\!\left(\frac{\partial\psi^j}{\partial x^i}\right) > 0$.
+Define an $n$-differential form $\omega$ on $U$ by $\omega = d\psi^1\wedge d\psi^2\wedge\cdots
+\wedge d\psi^n$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Show that $\omega = \det\!\left(\frac{\partial\psi^j}{\partial x^i}\right) dx^1\wedge
+  \cdots\wedge dx^n$.
+  \item From the relation in (a), rewrite the change of variables formula using differential
+  forms.
+\end{enumerate}
+\end{exercise}

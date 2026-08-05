@@ -51,28 +51,63 @@ called a \newterm{space} (\germanterm{Raum}) in this context --- which we will d
 \end{tikzpicture}
 \end{center}
 
-The precise definitions will follow later: metric spaces in \cref{def:metric_space} just below,
-inner products and norms only in Week 3 (\cref{def:inner_product}, \cref{def:norm}). You will
-see that an \textbf{inner product} $\langle\cdot,\cdot\rangle$ induces a \textbf{norm} by the
-formula
+You will see that an \textbf{inner product} $\langle\cdot,\cdot\rangle$ induces a \textbf{norm}
+by the formula
 \[\|x\| := \sqrt{\langle x, x\rangle}, \qquad x \in X.\]
 Furthermore, a \textbf{norm} induces a \textbf{metric} by
 \[d(x,y) := \|x - y\|, \qquad x, y \in X.\]
-That both formulas really do produce a norm and a metric --- the triangle inequality being the
-only non-obvious part --- is \cref{prop:induced_norm_and_metric} in Week 3, where the tools to
-prove it are available.
+
+% Moved here from Week 3 (\S Cauchy--Schwarz): Corsin defines inner products and norms on the
+% Friday of Week 3, but the two supplements below -- and the two displayed formulas above --
+% already use both, so the definitions are stated here, at the point of first use. Corsin's own
+% development of the geometry (angle, projection, the second proof of Cauchy--Schwarz) stays
+% where he taught it, in \cref{sec:cauchy_schwarz}.
+\begin{definition}[Inner product / scalar product]
+\label{def:inner_product}
+Let $V$ be a \textbf{vector space} over $\mathbb{R}$. An \newterm{inner product}
+(\germanterm{Skalarprodukt}) on $V$ is a map
+\[
+\langle\cdot,\cdot\rangle : V \times V \to \mathbb{R}
+\]
+satisfying, for all $u, v, w \in V$ and $\alpha, \beta \in \mathbb{R}$:
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{Bilinearity:}
+    $\langle \alpha u + \beta v, w\rangle = \alpha\langle u,w\rangle + \beta\langle v,w\rangle$,
+    and equivalently in the second variable.
+  \item \textbf{Symmetry:} $\langle u,v\rangle = \langle v,u\rangle$.
+  \item \textbf{Definiteness:} $\langle u,u\rangle \geq 0$, and $\langle u,u\rangle = 0 \iff u = 0$.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Norm]
+\label{def:norm}
+Let $V$ be a \textbf{real} vector space. A \newterm{norm} (\germanterm{Norm}) on $V$ is a map
+$\|\cdot\| : V \to [0,\infty)$ satisfying, for all $u, v \in V$ and $\alpha \in \mathbb{R}$:
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{Definiteness:} $\|v\| \geq 0$, and $\|v\| = 0 \iff v = 0$.
+  \item \textbf{Homogeneity:} $\|\alpha v\| = |\alpha|\|v\|$.
+  \item \textbf{$\Delta$-inequality:} $\|u+v\| \leq \|u\| + \|v\|$.
+\end{enumerate}
+\end{definition}
+
+% Transition: Claude Opus 5 (High)
+Comparing the three lists of axioms is already informative. A norm has exactly the three
+properties a metric has, restated for a single vector instead of a pair of points, plus
+homogeneity --- the one axiom that has no metric analogue, because it needs scalar
+multiplication. An inner product replaces the triangle inequality by bilinearity, which is far
+stronger, and gets the triangle inequality back as a \emph{theorem}
+(\cref{prop:induced_norm_and_metric}) rather than an assumption. That is the sense in which each
+layer carries more structure than the one outside it.
 
 \begin{ainote}
-The two blocks that follow supplement Corsin's outline with material from other tutors, and both
-work with inner products and the Cauchy--Schwarz inequality \emph{before} this document
-formally defines them, because Corsin's own notes place that material in Week 3
-(\cref{sec:cauchy_schwarz}) and reordering his chapters is not something these notes do. Read
-them as a preview: nothing later depends on them, and \cref{sec:cauchy_schwarz} restates
-everything from scratch. \Cref{prop:cauchy_schwarz_geometric_proof} below and
+The two blocks that follow supplement Corsin's outline with material from other tutors. Both
+belong here logically --- they are about the innermost layer of the hierarchy just drawn --- even
+though Corsin himself develops inner-product geometry on the Friday of Week 3
+(\cref{sec:cauchy_schwarz}). \Cref{prop:cauchy_schwarz_geometric_proof} below and
 \cref{thm:cauchy_schwarz} in Week 3 are the same inequality proved twice, by
 \qt{minimise the distance to the line} and by \qt{expand the perpendicular part} respectively ---
 which are the same computation wearing different clothes, as
-\cref{rem:two_proofs_cauchy_schwarz} points out.
+\cref{rem:two_proofs_cauchy_schwarz} points out. Corsin's own proof is kept in his own week.
 \end{ainote}
 
 % Supplement: Sascha Brack/Class Notes/Week_02_Notes_Monday_Updated.pdf, p. 4
@@ -110,6 +145,55 @@ Since $f(\lambda) \geq 0$ for all $\lambda \in \mathbb{R}$, $f$ is a convex quad
 Multiplying by $\|w\|^2$ and taking square roots gives $|\langle v, w\rangle| \leq \|v\|\,\|w\|$. Geometrically, $\pi_L(v) := \lambda_0 w = \frac{\langle v, w\rangle}{\|w\|^2}w$ is the unique orthogonal projection of $v$ onto the line $L$, achieving the minimal distance $d(v, L) = \sqrt{f(\lambda_0)}$.
 \end{proof}
 
+% Generator: Claude Opus 5 (High) --- moved here from Week 3 together with \cref{def:norm}:
+% Cauchy--Schwarz is now available (immediately above), which is the only input the triangle
+% inequality needs, so the two arrows of the hierarchy can be justified where they are drawn.
+\begin{proposition}[Inner product $\Rightarrow$ norm $\Rightarrow$ metric]
+\label{prop:induced_norm_and_metric}
+Let $V$ be a real vector space.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item If $\langle\cdot,\cdot\rangle$ is an inner product on $V$ (\cref{def:inner_product}),
+    then $\|v\| := \sqrt{\langle v,v\rangle}$ is a norm on $V$ (\cref{def:norm}).
+  \item If $\|\cdot\|$ is a norm on $V$, then $d(x,y) := \|x-y\|$ is a metric on $V$
+    (\cref{def:metric_space}).
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\textbf{(a)} Definiteness of the norm is definiteness of the inner product, and homogeneity
+follows from bilinearity: $\|\alpha v\|^2 = \langle\alpha v,\alpha v\rangle =
+\alpha^2\|v\|^2$. For the triangle inequality, expand and apply
+\cref{prop:cauchy_schwarz_geometric_proof}:
+\[\|u+v\|^2 = \|u\|^2 + 2\langle u,v\rangle + \|v\|^2
+  \ \leq\ \|u\|^2 + 2\|u\|\,\|v\| + \|v\|^2 = \big(\|u\|+\|v\|\big)^2,\]
+and taking square roots gives $\|u+v\| \leq \|u\|+\|v\|$.
+
+\textbf{(b)} Definiteness: $d(x,y)=0$ means $\|x-y\|=0$, hence $x=y$. Symmetry: homogeneity
+with $\alpha=-1$ gives $\|x-y\| = \|-(y-x)\| = \|y-x\|$. Triangle inequality: writing
+$x-z = (x-y)+(y-z)$,
+\[d(x,z) = \|(x-y)+(y-z)\| \leq \|x-y\| + \|y-z\| = d(x,y)+d(y,z). \qedhere\]
+\end{proof}
+
+\begin{remark}[Neither arrow reverses]
+\label{rem:norm_not_from_inner_product}
+The nesting drawn above is strict at both steps.
+\begin{itemize}
+  \item \textbf{Not every metric comes from a norm.} The discrete metric
+    (\cref{ex:metric_examples}\textbf{(a)}) on a vector space cannot: a norm-induced metric
+    satisfies $d(\alpha x, 0) = |\alpha|\,d(x,0)$, which fails as soon as
+    $\alpha \neq 0,\pm1$.
+  \item \textbf{Not every norm comes from an inner product.} A norm induced by an inner product
+    obeys the \newterm{parallelogram law}
+    $\|u+v\|^2 + \|u-v\|^2 = 2\|u\|^2 + 2\|v\|^2$ (expand both sides by bilinearity). The
+    supremum norm on $\mathbb{R}^2$ violates it: for $u := (1,0)$ and $v := (0,1)$ the left side
+    is $1+1 = 2$ and the right side is $2+2 = 4$.
+\end{itemize}
+So each layer of the hierarchy really does carry strictly more structure than the one outside
+it --- the picture at the start of this section is a genuine nesting of four distinct classes,
+not a chain of equivalent descriptions.
+\end{remark}
+
+% Source: Corsin Nick/Class Notes/Week 2.pdf, pp. 1--13
 \section{Metric spaces}
 \label{sec:metric_spaces}
 

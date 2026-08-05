@@ -852,55 +852,25 @@ structure (\cref{sec:structured_spaces}) that lets us talk about angles, not jus
 \section{Cauchy--Schwarz}
 \label{sec:cauchy_schwarz}
 
-\subsection{Inner products and norms}
+\subsection{Inner products and norms --- recap}
+\label{sec:inner_products_recap}
+\continuedfrom{sec:structured_spaces}
 
 % Transition: Claude Opus 5 (High)
-The two definitions below are the formal content of the hierarchy sketched in
-\cref{sec:structured_spaces}, read from the inside out. A metric measures \emph{distance between
-points} and needs no algebra at all --- which is why \cref{sec:metric_spaces} could work on the
-sphere and on spaces of functions. A norm measures the \emph{length of a vector}, so it
-presupposes that vectors can be added and scaled. An inner product measures \emph{length and
-angle together}, and is the richest of the three. Each notion induces the one outside it, and
-neither implication reverses (\cref{prop:induced_norm_and_metric},
-\cref{rem:norm_not_from_inner_product}).
-
-\begin{definition}[Inner product / scalar product]
-\label{def:inner_product}
-Let $V$ be a \textbf{vector space} over $\mathbb{R}$. An \newterm{inner product}
-(\germanterm{Skalarprodukt}) on $V$ is a map
-\[
-\langle\cdot,\cdot\rangle : V \times V \to \mathbb{R}
-\]
-satisfying, for all $u, v, w \in V$ and $\alpha, \beta \in \mathbb{R}$:
-\begin{enumerate}[label=\textbf{(\alph*)}]
-  \item \textbf{Bilinearity:}
-    $\langle \alpha u + \beta v, w\rangle = \alpha\langle u,w\rangle + \beta\langle v,w\rangle$,
-    and equivalently in the second variable.
-  \item \textbf{Symmetry:} $\langle u,v\rangle = \langle v,u\rangle$.
-  \item \textbf{Definiteness:} $\langle u,u\rangle \geq 0$, and $\langle u,u\rangle = 0 \iff u = 0$.
-\end{enumerate}
-\end{definition}
-
-\begin{definition}[Norm]
-\label{def:norm}
-Let $V$ be a \textbf{real} vector space. A \newterm{norm} (\germanterm{Norm}) on $V$ is a map
-$\|\cdot\| : V \to [0,\infty)$ satisfying, for all $u, v \in V$ and $\alpha \in \mathbb{R}$:
-\begin{enumerate}[label=\textbf{(\alph*)}]
-  \item \textbf{Definiteness:} $\|v\| \geq 0$, and $\|v\| = 0 \iff v = 0$.
-  \item \textbf{Homogeneity:} $\|\alpha v\| = |\alpha|\|v\|$.
-  \item \textbf{$\Delta$-inequality:} $\|u+v\| \leq \|u\| + \|v\|$.
-\end{enumerate}
-\end{definition}
-
+Corsin opens the Friday session by recalling the two definitions, which this document has
+already stated in Week 2 --- at the point where the hierarchy of structured spaces was drawn and
+where the first supplements needed them. Rather than repeat them, here is what to have in mind:
 \begin{itemize}
-  \item $\|v\| := \sqrt{\langle v,v\rangle}$ defines a norm.
-  \item $d(x,y) := \|x-y\|$ defines a metric.
+  \item An \emph{inner product} (\cref{def:inner_product}) is \textbf{bilinear},
+    \textbf{symmetric} and \textbf{definite}. It measures length \emph{and} angle.
+  \item A \emph{norm} (\cref{def:norm}) is \textbf{definite}, \textbf{homogeneous} and
+    satisfies the \textbf{triangle inequality}. It measures length only.
+  \item Each induces the next --- $\|v\| := \sqrt{\langle v,v\rangle}$ and
+    $d(x,y) := \|x-y\|$ --- and neither implication reverses
+    (\cref{prop:induced_norm_and_metric}, \cref{rem:norm_not_from_inner_product}).
 \end{itemize}
-
-These are the two implications promised back in \cref{sec:structured_spaces}, and they are what
-make the hierarchy of \qt{structured spaces} a genuine nesting rather than a list. Both are
-proved as \cref{prop:induced_norm_and_metric} below, once Cauchy--Schwarz is available --- it is
-needed, and only for the triangle inequality.
+What this section adds is the \emph{geometry}: why $\langle x,y\rangle$ deserves to be read as an
+angle at all, and the resulting second proof of Cauchy--Schwarz.
 
 \subsection{Geometric meaning of the inner product}
 
@@ -1033,52 +1003,6 @@ $\pi_w(v)$. So the first proof \emph{derives} the projection by optimisation and
 \emph{postulates} it and checks it works. Keeping both is worthwhile precisely because the pair
 shows where the projection comes from: it is not a lucky guess, it is the closest point of the
 line to $v$.
-\end{remark}
-
-% Generator: Claude Opus 5 (High) --- the two bullets after \cref{def:norm} are asserted without
-% proof in the source; both are short, and the first is the only place Cauchy--Schwarz is needed.
-\begin{proposition}[Inner product $\Rightarrow$ norm $\Rightarrow$ metric]
-\label{prop:induced_norm_and_metric}
-Let $V$ be a real vector space.
-\begin{enumerate}[label=\textbf{(\alph*)}]
-  \item If $\langle\cdot,\cdot\rangle$ is an inner product on $V$ (\cref{def:inner_product}),
-    then $\|v\| := \sqrt{\langle v,v\rangle}$ is a norm on $V$ (\cref{def:norm}).
-  \item If $\|\cdot\|$ is a norm on $V$, then $d(x,y) := \|x-y\|$ is a metric on $V$
-    (\cref{def:metric_space}).
-\end{enumerate}
-\end{proposition}
-
-\begin{proof}
-\textbf{(a)} Definiteness of the norm is definiteness of the inner product, and homogeneity
-follows from bilinearity: $\|\alpha v\|^2 = \langle\alpha v,\alpha v\rangle =
-\alpha^2\|v\|^2$. For the triangle inequality, expand and apply
-\cref{thm:cauchy_schwarz}:
-\[\|u+v\|^2 = \|u\|^2 + 2\langle u,v\rangle + \|v\|^2
-  \ \leq\ \|u\|^2 + 2\|u\|\,\|v\| + \|v\|^2 = \big(\|u\|+\|v\|\big)^2,\]
-and taking square roots gives $\|u+v\| \leq \|u\|+\|v\|$.
-
-\textbf{(b)} Definiteness: $d(x,y)=0$ means $\|x-y\|=0$, hence $x-y=0$. Symmetry: homogeneity
-with $\alpha=-1$ gives $\|x-y\| = \|-(y-x)\| = \|y-x\|$. Triangle inequality: writing
-$x-z = (x-y)+(y-z)$,
-\[d(x,z) = \|(x-y)+(y-z)\| \leq \|x-y\| + \|y-z\| = d(x,y)+d(y,z). \qedhere\]
-\end{proof}
-
-\begin{remark}[Neither arrow reverses]
-\label{rem:norm_not_from_inner_product}
-The nesting drawn in \cref{sec:structured_spaces} is strict at both steps.
-\begin{itemize}
-  \item \textbf{Not every metric comes from a norm.} The discrete metric
-    (\cref{ex:metric_examples}\textbf{(a)}) on a vector space cannot: a norm-induced metric
-    satisfies $d(\alpha x, 0) = |\alpha|\,d(x,0)$, which fails as soon as
-    $\alpha \neq 0,\pm1$.
-  \item \textbf{Not every norm comes from an inner product.} A norm induced by an inner product
-    obeys the \newterm{parallelogram law}
-    $\|u+v\|^2 + \|u-v\|^2 = 2\|u\|^2 + 2\|v\|^2$ (expand both sides by bilinearity). The
-    supremum norm on $\mathbb{R}^2$ violates it: for $u := (1,0)$ and $v := (0,1)$ the left side
-    is $1+1 = 2$ and the right side is $2+2 = 4$.
-\end{itemize}
-So each layer of the hierarchy really does carry strictly more structure than the one outside
-it.
 \end{remark}
 
 % Sonnet 5 (Medium)

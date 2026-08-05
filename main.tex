@@ -97,6 +97,8 @@
 \colorlet{EnumerateBullet}{MidnightBlue}
 
 % --- Headings ---
+\colorlet{PartTitleText}{ThemePurple!95!black}
+\colorlet{PartNumberText}{OliveGreen}
 \colorlet{ChapTitleText}{MidnightBlue!90!black}
 \colorlet{ChapNumberText}{OliveGreen}
 \colorlet{ChapLine}{MidnightBlue!80!black}
@@ -111,6 +113,7 @@
 % These must be *named* colours (not `A!95!B' expressions), because they are
 % handed to hyperref's linkcolor as well -- otherwise the link colour would
 % override the entry colour and the whole TOC would come out midnight blue.
+\colorlet{TocPartColor}{ThemePurple!85!black}
 \colorlet{TocChapColor}{ThemePurple!95!black}
 \colorlet{TocSecColor}{TextEmphColor}
 \colorlet{TocSubsecColor}{TextBoldColor}
@@ -200,6 +203,19 @@
 \newlength{\subsubsecouthang}\setlength{\subsubsecouthang}{-0.8ex}
 
 
+% 0. Custom Part Format: a title page carrying "PART III" over the part name.
+% Parts group the ~25 topic chapters into the seven thematic blocks of the course;
+% they do NOT reset \thechapter, so chapter (and therefore theorem) numbering runs
+% continuously across the whole document -- which is what \thetheorem below assumes.
+\titleformat{name=\part}[display]
+{\normalfont\sffamily\bfseries\filcenter}
+{\fontsize{15pt}{18pt}\selectfont\mdseries\color{PartNumberText}\MakeUppercase{\partname\ \thepart}}
+{2.4ex}
+{\fontsize{26pt}{32pt}\selectfont\color{PartTitleText}#1}
+[{\vspace{1.5ex}{\color{ChapLine}\rule{0.5\textwidth}{1pt}}}]
+
+\titlespacing*{\part}{0pt}{*4}{*3}
+
 % 1. Custom Chapter Format: Title (chapter X)
 \titleformat{name=\chapter}[block]  % [block] forces it onto a single line
 {\normalfont\sffamily\Large\bfseries\color{ChapTitleText}}  % Main style
@@ -277,6 +293,14 @@
 \contentsmargin{4.7ex}
 
 % Staggered indentation per level; dotted leaders in the faint header colour.
+% Parts carry no page number and no dotted leader: they head a block of chapters
+% rather than pointing at a page worth turning to.
+\titlecontents{part}[0ex]
+  {\addvspace{5.2ex}\hypersetup{linkcolor=TocPartColor}\sffamily\bfseries\Large\color{TocPartColor}}
+  {\color{PartNumberText}\MakeUppercase{\partname}\ \thecontentslabel\hspace{1.9ex}\color{TocPartColor}}
+  {}
+  {}
+
 \titlecontents{chapter}[0ex]
   {\addvspace{3.7ex}\hypersetup{linkcolor=TocChapColor}\sffamily\bfseries\large\color{TocChapColor}}
   {\color{ChapNumberText}\MakeUppercase{\chaptername}\ \thecontentslabel\hspace{1.9ex}\color{TocChapColor}}
@@ -549,6 +573,8 @@
 \Crefname{proposition}{Proposition}{Propositions}
 \crefname{exercise}{Exercise}{Exercises}
 \Crefname{exercise}{Exercise}{Exercises}
+\crefname{part}{Part}{Parts}
+\Crefname{part}{Part}{Parts}
 \crefname{chapter}{Chapter}{Chapters}
 \Crefname{chapter}{Chapter}{Chapters}
 \crefname{section}{Section}{Sections}

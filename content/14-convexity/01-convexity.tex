@@ -1,0 +1,232 @@
+% Originally: content/week-06.tex, \section{Convexity} (Corsin Week 6)
+
+% Source: Corsin Nick/Class Notes/Week 6.pdf, p. 2
+\section{Convexity}
+\label{sec:convexity}
+
+% Sonnet 5 (Medium)
+\subsection{Definitions and characterizations}
+
+\begin{definition}[Convex set and convex function]
+\label{def:convex_set_function}
+A subset $A \subseteq \mathbb{R}^n$ is \newterm{convex} (\germanterm{konvex}) if for all
+$x,y \in A$ and every $t \in [0,1]$, the point $p := (1-t)x+ty$ is an element of $A$.
+
+A function $f : A \to \mathbb{R}$ is convex if $A$ is convex and, for all $x,y \in A$ and
+$t \in [0,1]$,
+\[f\big((1-t)x+ty\big) \leq (1-t)f(x)+tf(y).\]
+\end{definition}
+
+% Sonnet 5 (Medium)
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.0]
+  % Curve is 0.18(r-2.6)^2 + 0.4; the chord endpoints must SIT on it:
+  %   f(0.7) = 1.0498,  f(4.6) = 1.12.
+  % Interior point at t = 0.35: r = 2.065, chord height 1.0744, curve height 0.4515.
+  \draw[->] (-0.3,0) -- (5.6,0);
+  \draw[->] (0,-0.3) -- (0,2.0);
+  \draw[blue!70!black, thick, domain=0.2:5, samples=60, smooth]
+    plot ({\x}, {0.18*(\x-2.6)*(\x-2.6)+0.4});
+  \node[blue!70!black, font=\small] at (5.3,1.55) {$f$};
+
+  \draw[orange!90!black, thick] (0.7,1.0498) -- (4.6,1.12);
+  \node[orange!90!black, font=\scriptsize] at (3.5,1.32) {chord};
+  \fill (0.7,1.0498) circle (1.5pt) node[left, font=\small] {$f(x)$};
+  \fill (4.6,1.12) circle (1.5pt) node[below right, font=\small] {$f(y)$};
+
+  % The convexity inequality, read off vertically at the interior point.
+  \draw[gray, dashed] (2.065,0) -- (2.065,1.0744);
+  \fill[orange!90!black] (2.065,1.0744) circle (1.5pt);
+  \fill[blue!70!black] (2.065,0.4515) circle (1.5pt);
+  \draw[red!80!black, <->, thick] (2.065,0.4515) -- (2.065,1.0744);
+
+  \draw (0.7,0.05) -- (0.7,-0.05) node[below, font=\small] {$x$};
+  \draw (4.6,0.05) -- (4.6,-0.05) node[below, font=\small] {$y$};
+  \draw (2.065,0.05) -- (2.065,-0.05);
+  \node[font=\scriptsize, below] at (2.065,-0.12) {$(1-t)x+ty$};
+  \node[red!80!black, font=\small] at (2.9,-0.85)
+    {$f\big((1-t)x+ty\big) \leq (1-t)f(x)+tf(y)$};
+\end{tikzpicture}
+\end{center}
+
+\begin{definition}[Semidefinite matrices]
+\label{def:semidefinite_matrix}
+Let $A \in \mathbb{R}^{n\times n}$ be symmetric. Then $A$ is
+\begin{itemize}
+  \item \newterm{positive semidefinite} (\germanterm{positiv semidefinit}), also called
+    \textbf{nonnegative definite}, if $v\transp Av \geq 0$ for all $v \in \mathbb{R}^n$;
+  \item \newterm{negative semidefinite} (\germanterm{negativ semidefinit}), or
+    \textbf{nonpositive definite}, if $v\transp Av \leq 0$ for all $v \in \mathbb{R}^n$.
+\end{itemize}
+These are the boundary cases of \cref{def:sign_symmetric_matrix}: positive definite implies
+positive semidefinite, and the two differ exactly on the degenerate matrices, where
+$v\transp Av = 0$ is allowed for some $v \neq 0$.
+\end{definition}
+
+\begin{ainote}
+\Cref{def:semidefinite_matrix} is not in Corsin's notes. The terms are used freely from
+\Cref{prop:convexity_characterizations} and \cref{ex:6.8} onward but were never named when
+\Cref{def:sign_symmetric_matrix} is introduced later, so they are defined here instead of
+being left implicit.
+\end{ainote}
+
+\begin{proposition}[Characterizations of convexity]
+\label{prop:convexity_characterizations}
+Let $U \subseteq \mathbb{R}^n$ be open and convex, and let $f \in C^2(U)$. Then the following are
+equivalent:
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $f$ is convex;
+  \item $\Hess f(x)$ is positive semidefinite for all $x \in U$;
+  \item $f(y)-f(x) \geq Df_x(y-x)$ for all $x,y \in U$.
+\end{enumerate}
+\end{proposition}
+
+\begin{example}[The parabola]
+The parabola $p : \mathbb{R}^n \to \mathbb{R}$, $x \mapsto |x|^2 = \sum_{i=1}^n x_i^2$, is convex:
+\[\partial_i\partial_j p(x) = 2\delta_{ij} \implies \Hess p(x) = 2\id_n,\]
+and every eigenvalue is $2>0$, so $\Hess p(x)$ is positive definite (hence positive semidefinite)
+for every $x$, and $p$ is convex by \cref{prop:convexity_characterizations}.
+\end{example}
+
+% Sonnet 5 (Medium)
+\subsection{Proof of the characterizations}
+
+% Source: Corsin Nick/Class Notes/Week 6.pdf, pp. 3--6
+\begin{exercise}[Equivalent characterizations of convexity]
+\label{ex:convexity_characterizations}
+Let $U \subseteq \mathbb{R}^n$ be open and convex.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Show that $f : U \to \mathbb{R}$ is convex if and only if the functions
+    \[f_{x,y} : [0,1] \to \mathbb{R}, \qquad s \mapsto f(x+s(y-x))\]
+    are convex for all $x,y \in U$.
+  \item Show that
+    \[f \text{ convex} \iff f(y)-f(x) \geq Df_x(y-x) \quad \text{for all } x,y \in U.\]
+    This also holds for $f \in C^1(U)$, $U \subseteq \mathbb{R}^n$ open and convex.
+  \item Conclude that if $f \in C^1(U)$ is convex and has a critical point at $x_0 \in U$, then $f$
+    has a minimum at $x_0$.
+\end{enumerate}
+\end{exercise}
+
+% Kept inline: solved directly in Corsin Nick/Class Notes/Week 6.pdf, pp. 3--6.
+\begin{exercisesolution}[Solution to \cref{ex:convexity_characterizations}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item By definition, $f_{x,y}$ is convex if and only if
+    \[f_{x,y}\big((1-t)s_0+ts_1\big) \leq (1-t)f_{x,y}(s_0)+tf_{x,y}(s_1) \quad \text{for all } s_0,s_1,t \in [0,1],\]
+    which, unwinding the definition of $f_{x,y}$, reads
+    \[f\big(x+[(1-t)s_0+ts_1](y-x)\big) \leq (1-t)f(x+s_0(y-x))+tf(x+s_1(y-x)),\]
+    that is,
+    \[f\big((1-t)(x+s_0(y-x))+t(x+s_1(y-x))\big) \leq (1-t)f(x+s_0(y-x))+tf(x+s_1(y-x)).\]
+    Setting $s_0=0$, $s_1=1$ recovers exactly the convexity inequality for $f$ at the points $x$
+    and $y$, so if this holds for all $x,y \in U$, then $f$ is convex. Conversely, if $f$ is
+    convex, then convexity of $f_{x,y}$ for each fixed $x,y \in U$ follows by applying convexity
+    of $f$ to the two points $x+s_0(y-x)$ and $x+s_1(y-x)$, which both lie in $U$ since $U$ is
+    convex.
+  \item Recall that $g \in C^1(I)$, for $I \subseteq \mathbb{R}$ an interval, is convex if and
+    only if $g'$ is increasing. Combined with \textbf{(a)}, this gives
+    \[f \text{ convex} \iff f'_{x,y} \text{ is increasing, for all } x,y \in U.\]
+    By the chain rule, for $t \in [0,1]$,
+    \[f'_{x,y}(t) = Df_{x+t(y-x)}(y-x),\]
+    and by the mean value theorem there exists $s \in (0,1)$ such that
+    \[f(y)-f(x) = f_{x,y}(1)-f_{x,y}(0) = f'_{x,y}(s) = Df_{x+s(y-x)}(y-x).\]
+
+    \textbf{($\Rightarrow$)} If $f$ is convex, then $f_{x,y}$ is convex for all $x,y \in U$ by
+    \textbf{(a)}, so $f'_{x,y}$ is increasing, and in particular $f'_{x,y}(s) \geq f'_{x,y}(0)$.
+    Combined with the mean value theorem identity above, this yields
+    \[f(y)-f(x) \geq Df_x(y-x).\]
+
+    \textbf{($\Leftarrow$)} Suppose $f(y)-f(x) \geq Df_x(y-x)$ for all $x,y \in U$. We must show
+    that $0 \leq s < t \leq 1 \implies f'_{x,y}(s) \leq f'_{x,y}(t)$. Set $u := x+s(y-x)$ and
+    $v := x+t(y-x)$, so that $u-v = (s-t)(y-x)$. Applying the hypothesis to the pairs $(u,v)$ and
+    $(v,u)$ gives
+    \[Df_u(v-u) \leq f(v)-f(u), \qquad Df_v(u-v) \leq f(u)-f(v).\]
+    Therefore,
+    \[(t-s)f'_{x,y}(s) = Df_u(v-u) \leq f(v)-f(u) \leq -Df_v(u-v) = Df_v(v-u) = (t-s)f'_{x,y}(t),\]
+    and since $t-s>0$, this gives $f'_{x,y}(s) \leq f'_{x,y}(t)$, i.e., $f'_{x,y}$ is increasing,
+    hence $f_{x,y}$ is convex for all $x,y \in U$, and so $f$ is convex by \textbf{(a)}.
+
+    \begin{remark}
+    The argument above only ever used differentiability of $f$, never twice-differentiability, so
+    the equivalence in \textbf{(b)} already holds for $f \in C^1(U)$ with $U \subseteq
+    \mathbb{R}^n$ open and convex --- one order of regularity weaker than
+    \Cref{prop:convexity_characterizations}, which is stated for $f \in C^2(U)$. This is exactly
+    the fact used in \cref{ex:6.7}\textbf{(b)}.
+    \end{remark}
+  \item Since $f$ is convex and $x_0 \in U$ is a critical point, $Df_{x_0} = 0$, so \textbf{(b)}
+    gives
+    \[0 = Df_{x_0}(y-x_0) \leq f(y)-f(x_0) \quad \text{for all } y \in U,\]
+    i.e., $f(y) \geq f(x_0)$ for all $y \in U$. Hence $f$ has a minimum at $x_0$ --- in fact a
+    global minimum on $U$, sharpening \cref{prop:extremum_implies_critical} (which only guarantees
+    that critical points are the sole \emph{candidates} for extrema) in the convex case.
+\end{enumerate}
+\end{exercisesolution}
+
+% Sonnet 5 (Medium) --- FIG-W06-01, drawn from the page image seen while transcribing
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.15]
+  \draw[->] (-0.3,0) -- (5.2,0) node[right, font=\small] {$r$};
+  \draw[->] (0,-0.3) -- (0,3.0);
+
+  \draw[green!60!black, thick, domain=0.2:5.0, samples=60, smooth]
+    plot ({\x}, {0.20*(\x-2.6)*(\x-2.6) + 1.0});
+  \node[green!60!black, font=\small] at (5.35,2.2) {$f_{x,y}(r)$};
+
+  % True tangents to f_{x,y}(r) = 0.20(r-2.6)^2 + 1.0:
+  %   at s = 1.2: value 1.392, slope -0.56;   at t = 3.6: value 1.200, slope +0.40.
+  % They must touch the curve and lie below it -- that is what part (b) says.
+  \draw[orange!90!black, thick, domain=0.3:3.0]
+    plot ({\x}, {-0.56*(\x-1.2) + 1.392});
+  \draw[purple, thick, domain=1.8:5.0]
+    plot ({\x}, {0.40*(\x-3.6) + 1.200});
+
+  \fill[orange!90!black] (1.2,1.392) circle (1.6pt);
+  \fill[purple] (3.6,1.200) circle (1.6pt);
+
+  \node[orange!90!black, font=\scriptsize, align=center] (LabU) at (1.45,2.45)
+    {slope $f'_{x,y}(s) = Df_u(y-x) < 0$};
+  \draw[orange!90!black, thin, ->] (LabU) -- (1.2,1.47);
+  \node[purple, font=\scriptsize, align=center] (LabV) at (4.15,0.45)
+    {slope $f'_{x,y}(t) = Df_v(y-x) > 0$};
+  \draw[purple, thin, ->] (LabV) -- (3.6,1.12);
+
+  \draw (0,0.05) -- (0,-0.05) node[below, font=\small] {$0$};
+  \draw (1.2,0.05) -- (1.2,-0.05) node[below, font=\small] {$s$};
+  \draw (3.6,0.05) -- (3.6,-0.05) node[below, font=\small] {$t$};
+  \draw (4.9,0.05) -- (4.9,-0.05) node[below, font=\small] {$1$};
+  \draw[dashed, gray] (1.2,0) -- (1.2,1.392);
+  \draw[dashed, gray] (3.6,0) -- (3.6,1.200);
+\end{tikzpicture}
+\end{center}
+
+The picture records both halves of \textbf{(b)} at once: each tangent line lies weakly
+\emph{below} the graph --- which is the inequality $f(y)-f(x) \geq Df_x(y-x)$ read along the
+segment --- and the slope grows from $s$ to $t$, which is $f'_{x,y}$ increasing.
+
+% Sonnet 5 (Medium)
+We now change subject entirely: from convexity to the question of when a map is locally
+invertible --- the tool that makes the implicit function theorem, and later submanifolds
+(\cref{sec:submanifolds}), possible.
+
+
+% --- exercises relocated here from the dissolved sheets ---
+
+% Originally: content/week-06.tex, \exercisesheet{6}, problem 6.7
+% Source: exercises/Ex6_Analysis2_eng.pdf
+
+\begin{exercise}[6.7 --- Multiple choice \textnormal{(important)}]
+\label{ex:6.7}
+Among the following statements about convex functions mark those (and only those) which are
+always true.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item If $f \in C^1(U)$ is convex in some open convex set $U \subset \mathbb{R}^n$ and $f$ has a
+    local maximum at $z \in U$, then $\nabla f \equiv 0$ in $U$.
+  \item If $f \in C^1(U)$ is convex in some open convex set $U \subset \mathbb{R}^n$ and $f$ has a
+    global maximum at $z \in U$, then $\nabla f \equiv 0$ in $U$.
+  \item Assume $f_n \in C^2(\mathbb{R})$ is a sequence of convex functions that converge
+    pointwise to some $f : \mathbb{R} \to \mathbb{R}$. Is $f$ necessarily convex?
+  \item There exists a convex function $f \in C^\infty(\mathbb{R}^2)$ such that
+    \[f(x) = 1 - 2x_1 + x_2^3 + O(|x|^4) \quad \text{as } |x| \to 0.\]
+  \item There exists a convex function $f \in C^\infty(\mathbb{R}^2)$ such that
+    \[f(x) = 1 - 2x_1 + x_2^4 + O(|x|^4) \quad \text{as } |x| \to 0.\]
+  \item A convex set is not necessarily connected.
+\end{enumerate}
+\end{exercise}

@@ -1,0 +1,83 @@
+% Originally: the \section{Solutions} of content/week-05.tex and content/week-06.tex
+
+\section{Solutions}
+\label{sec:lagrange_solutions}
+
+\begin{exercisesolution}[Solution to \cref{ex:5.2}]
+% Generator: Claude Sonnet 5 (Medium)
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item $\overline{U}$ is closed and bounded in $\mathbb{R}^3$, hence compact by
+    \Cref{thm:heine_borel}, and $f$ is a polynomial, hence continuous. By the extreme value
+    theorem (\cref{item:extreme_value_theorem}), $f$ attains its absolute maximum and minimum on
+    $\overline{U}$.
+  \item $\nabla f(x,y,z) = (-2x+4,\ -2y,\ 0)$ vanishes only at $x=2$, $y=0$ (any $z$), and no such
+    point lies in $U$ (since $x=2$ already violates $x^2+y^2+z^2<1$). So $f$ has \textbf{no
+    critical point in the interior of $U$}; consequently, by
+    \Cref{prop:extremum_implies_critical}, $\sup_U f$ and $\inf_U f$ are \textbf{not attained} at
+    any interior point.
+  \item $\partial U$ is compact (a sphere) and $f$ is continuous, so $\max_{\partial U} f$ and
+    $\min_{\partial U} f$ \textbf{both exist}, again by the extreme value theorem
+    (\cref{item:extreme_value_theorem}).
+  \item With $g(x,y,z) := x^2+y^2+z^2-1$, the Lagrange condition $\nabla f = \lambda \nabla g$
+    reads $(-2x+4,-2y,0) = \lambda(2x,2y,2z)$. The last coordinate gives $\lambda z = 0$.
+    \textbf{If $z \neq 0$:} then $\lambda = 0$, so $-2x+4=0 \Rightarrow x=2$, impossible on
+    $\partial U$. So $z = 0$. Then $x^2+y^2=1$, and the remaining equations are
+    $4-2x = 2\lambda x$ and $-2y = 2\lambda y$, i.e.\ $-2y(1+\lambda) = 0$.
+    \textbf{If $\lambda = -1$:} the first equation becomes $4-2x=-2x$, i.e.\ $4=0$, impossible.
+    So $y = 0$, and $x^2=1$ gives $x = \pm 1$. The Lagrange candidates are
+    $(1,0,0)$ (with $\lambda = 1$) and $(-1,0,0)$ (with $\lambda = -3$).
+  \item Evaluating, $f(1,0,0) = 1-1+4 = 4$ and $f(-1,0,0) = 1-1-4 = -4$. Since there are no
+    interior critical points, these are the global extrema on $\overline{U}$: the
+    \textbf{maximum} $4$ is attained at $(1,0,0)$, and the \textbf{minimum} $-4$ at $(-1,0,0)$.
+\end{enumerate}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:ai_lagrange_circle}]
+% Generator: Gemini 3.6 Flash (Medium)
+The constraint set $S := \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 = 5\}$ is compact and $\nabla g(x,y) = (2x, 2y)\transp \neq (0,0)\transp$ on $S$. By Lagrange Multipliers, candidates satisfy $\nabla f = \lambda \nabla g$, i.e.:
+\[
+1 = 2\lambda x \quad \text{and} \quad 2 = 2\lambda y \implies y = 2x.
+\]
+Substituting $y = 2x$ into $x^2 + y^2 = 5$ gives $5x^2 = 5 \implies x = \pm 1$. The candidate points are $(1,2)$ and $(-1,-2)$. Evaluating $f$:
+\[
+f(1,2) = 1 + 4 = 5 \quad (\text{maximum}), \qquad f(-1,-2) = -1 - 4 = -5 \quad (\text{minimum}).
+\]
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:6.10}]
+% Generator: Claude Sonnet 5 (Medium)
+With $g_1(x,y,z) := x^2+y^2+z^2-1$ and $g_2(x,y,z) := x+y$, the Lagrangian
+$L := f - \lambda_1 g_1 - \lambda_2 g_2$ gives the system
+\[3 - 2\lambda_1 x - \lambda_2 = 0, \qquad -1-2\lambda_1 y - \lambda_2 = 0, \qquad 2 - 2\lambda_1 z = 0, \qquad x+y=0, \qquad x^2+y^2+z^2=1.\]
+From $x+y=0$, $y=-x$. Subtracting the second equation from the first eliminates $\lambda_2$:
+\[4 - 2\lambda_1 x - 2\lambda_1(-x) \cdot(-1)= 4-2\lambda_1x-2\lambda_1x=4-4\lambda_1 x = 0 \implies \lambda_1 x = 1.\]
+From $2-2\lambda_1 z=0$, $\lambda_1 = 1/z$ (so $z \neq 0$), hence $x = z$ (from $\lambda_1 x = 1 =
+\lambda_1 z$). With $y=-x=-z$, the constraint becomes $3x^2 = 1$, i.e.\ $x = \pm\tfrac{1}{\sqrt3}$,
+giving the two points $\tfrac{1}{\sqrt3}(1,-1,1)$ and $-\tfrac{1}{\sqrt3}(1,-1,1)$. Evaluating,
+\[f\Big(\tfrac{1}{\sqrt3}(1,-1,1)\Big) = \frac{3+1+2}{\sqrt3} = 2\sqrt3, \qquad f\Big({-\tfrac{1}{\sqrt3}}(1,-1,1)\Big) = -2\sqrt3.\]
+Since $M$ is compact (closed and bounded in $\mathbb{R}^3$) and $f$ is continuous, these are the
+only Lagrange candidates, so $f$ attains its \textbf{maximum} $2\sqrt3$ at $\tfrac{1}{\sqrt3}(1,-1,1)$
+and its \textbf{minimum} $-2\sqrt3$ at $-\tfrac{1}{\sqrt3}(1,-1,1)$.
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:6.11}]
+% Generator: Claude Sonnet 5 (Medium)
+Minimizing the distance to $(0,0,1)$ is the same as minimizing
+$f(x,y,z) := x^2+y^2+(z-1)^2$ subject to $g(x,y,z) := z-x^2+y^2 = 0$. Since $f$ is a distance
+squared to a fixed point, its minimum over the (closed) constraint set is attained. Lagrange's
+condition $\nabla f = \lambda \nabla g$ reads
+\[2x = -2\lambda x, \qquad 2y = 2\lambda y, \qquad 2(z-1) = \lambda,\]
+i.e.\ $x(1+\lambda) = 0$ and $y(1-\lambda) = 0$.
+
+\textbf{Case $x=y=0$:} the constraint gives $z=0$, so $(0,0,0)$ with $d^2 = 1$.
+
+\textbf{Case $x \neq 0$ (so $\lambda=-1$):} then $2(z-1)=-1 \implies z = \tfrac12$, and $y(1-\lambda)=2y=0
+\implies y=0$. The constraint $z=x^2-y^2$ gives $x^2=\tfrac12$, i.e.\ $x=\pm\tfrac{1}{\sqrt2}$,
+giving $\big(\pm\tfrac{1}{\sqrt2},0,\tfrac12\big)$ with $d^2 = \tfrac12+0+\tfrac14 = \tfrac34$.
+
+\textbf{Case $y \neq 0$ (so $\lambda=1$):} then $2(z-1)=1 \implies z=\tfrac32$, and $x(1+\lambda)=2x=0
+\implies x=0$; the constraint becomes $-y^2 = \tfrac32$, which has no real solution.
+
+Comparing $d^2=1$ against $d^2=\tfrac34$, the \textbf{closest points} are
+$\big(\pm\tfrac{1}{\sqrt2},0,\tfrac12\big)$, at minimal distance $\tfrac{\sqrt3}{2}$.
+\end{exercisesolution}

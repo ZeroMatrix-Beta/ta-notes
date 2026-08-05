@@ -30,3 +30,100 @@ Geometrically the counterexample is a walker going once round a circle: they ret
 so the total displacement is zero, but they never once stand still.
 \end{ainote}
 \end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:5.3}]
+% Generator: Claude Sonnet 5 (Medium)
+Throughout, recall the hint: \textit{as $x \to 0$} and \textit{as $|x| \to 0$} describe the same
+limit, so both phrasings are treated identically below. The recurring subtlety is instead between
+a statement holding \textbf{at} the single point $x=0$ (which a remainder estimate as $x \to 0$
+can establish) versus \textbf{around}/in a whole neighbourhood of $x=0$ (which it cannot).
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{True.} Since $|x_2x_1^2| \leq |x|\cdot|x_1|^2 \leq |x|^3 = O(|x|^2)$ (as
+    $|x|^3/|x|^2 = |x| \to 0$) and $O(x_1^2) = O(|x|^2)$ (since $x_1^2 \leq |x|^2$), the sum
+    $f(x) = x_2x_1^2 + O(x_1^2)$ is a sum of two $O(|x|^2)$ terms, hence $f(x) = O(|x|^2)$.
+  \item \textbf{False.} It suffices to show $x_2x_1^2$ itself is not $O(x_1^3)$. Along the path
+    $x_1 = t^2$, $x_2 = t$ (so $x \to 0$ as $t \to 0$), $\dfrac{|x_2x_1^2|}{|x_1|^3} =
+    \dfrac{t\cdot t^4}{t^6} = \dfrac{1}{t} \to \infty$, so no bound $|x_2x_1^2| \leq C|x_1|^3$ can
+    hold near $0$. Adding an $O(x_1^3)$ term cannot repair this, so $f(x) \neq O(x_1^3)$ in
+    general.
+  \item \textbf{True.} Since $x_2x_1 = O(|x|^2)$ and the hypothesis adds a further $O(|x|^2)$
+    term, $f(x) = O(|x|^2) = o(|x|)$ as $|x| \to 0$. Hence $f(x) = 0\cdot x + o(|x|)$, i.e.\ $f$ is
+    differentiable \textbf{at} $x=0$ with $Df(0) = 0$.
+  \item \textbf{False.} The hypothesis only constrains the behaviour of $f$ as $x \to 0$, i.e.\ at
+    the single point $0$; it says nothing about $f$ at nearby points $x_0 \neq 0$, so twice
+    differentiability \textbf{around} (in a neighbourhood of) $x=0$ does not follow. Concretely,
+    take $f(x) := \max\{0,x_1\}^2$: this satisfies $f(x) = x_2x_1 + O(|x|^2)$ as $x \to 0$ (indeed
+    even $f(x) = O(|x|^2)$, since $x_2x_1$ itself is $O(|x|^2)$ and so contributes nothing extra
+    to the hypothesis), yet along $x_1$ alone, $t \mapsto \max\{0,t\}^2$ has derivative $2\max\{0,t\}$,
+    which is not differentiable at $t=0$ (its one-sided difference quotients at $0$ are $2$ from
+    the right and $0$ from the left). So $f$ is not twice differentiable at $x=0$, let alone
+    around it.
+  \item \textbf{False}, for the same reason as \textbf{(d)}: even the sharper estimate
+    $f(x) = x_2x_1 + O(|x|^3)$ only pins down the second-order Taylor data of $f$ \textbf{at} the
+    point $x=0$ (by Corollary 10.45, this does give $f$ twice differentiable \emph{at} $0$ with
+    $\partial_{11}f(0) = 0$), but it does not force twice differentiability in a whole
+    neighbourhood \textbf{around} $x=0$ --- without an a priori assumption like $f \in C^2$ near
+    $0$, one can cook up genuinely pathological examples, e.g.\
+    $f(x) := x_1x_2 + |x|^4\sin(|x|^{-100})$, for which $\partial_1 f(x) \to \infty$ as
+    $x \to 0$, so $\partial_1 f$ is not even continuous at $0$.
+\end{enumerate}
+\end{exercisesolution}
+
+% Originally: new. Problems 5.5 and 5.6 sat in content/exercise-sheets/week-05.tex, which was
+% never \input by anything, so neither had reached the built document or carried a solution.
+\begin{exercisesolution}[Solution to \cref{ex:5.5}]
+% Generator: Claude Opus 5 (High)
+\textbf{The answer is (a): degree 3, at a cost of 20 CHF.}
+
+The hypothesis $f(x) = x_1 + x_2x_1 + O(|x|^4)$ says two things at once: $f(0) = 0$, and $f$ is
+pinned down exactly up to order $3$ (its degree-$3$ part happens to be zero). Expanding $g$ about
+$f(0) = 0$,
+\[(g\circ f)(x) = \sum_{k \geq 0} \frac{g^{(k)}(0)}{k!}\,f(x)^k.\]
+Since $f = O(|x|)$, we have $f^k = O(|x|^k)$, so every term with $k \geq 4$ is already
+$O(|x|^4)$ and invisible at order $3$. The unknown $O(|x|^4)$ inside $f$ likewise only perturbs
+the answer at order $4$. So the degree-$3$ Taylor polynomial of $g \circ f$ is determined, and no
+more than that is: nothing in the data constrains the degree-$4$ coefficients of $f$.
+
+Concretely, truncating $f = x_1 + x_1x_2$ at order $3$ gives $f^2 = x_1^2 + 2x_1^2x_2 + O(|x|^4)$
+and $f^3 = x_1^3 + O(|x|^4)$, so
+\[(g\circ f)(x) = g(0) + g'(0)\big(x_1 + x_1x_2\big)
+  + \frac{g''(0)}{2}\big(x_1^2 + 2x_1^2x_2\big) + \frac{g'''(0)}{6}\,x_1^3 + O(|x|^4).\]
+That uses the four values $g(0), g'(0), g''(0), g'''(0)$ --- four queries at 5 CHF each, so
+\textbf{20 CHF}. Options (b) and (c) under-pay and cannot reach degree 3; (d) claims degree 3 for
+three queries, which is one derivative short.
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:5.6}]
+% Generator: Claude Opus 5 (High)
+Put $R := P - Q = \sum_\alpha c_\alpha X^\alpha$ with $c_\alpha := a_\alpha - b_\alpha$, so the
+hypothesis reads $|R(x)| \leq M|x|^\sigma$ for $|x| \leq 1$ and the claim is that
+$c_\alpha = 0$ whenever $|\alpha| < \sigma$.
+
+Suppose not, and let
+\[d := \min\{\,|\alpha| \ :\ c_\alpha \neq 0\,\} < \sigma.\]
+Split $R = R_d + \widetilde R$, where $R_d := \sum_{|\alpha| = d}c_\alpha X^\alpha$ is the
+homogeneous part of degree $d$ --- non-zero by the choice of $d$ --- and $\widetilde R$ collects
+the terms of degree $> d$, so that $\widetilde R(tu) = O(t^{d+1})$ uniformly over unit vectors
+$u$.
+
+Fix a unit vector $u$ and evaluate at $x := tu$ for $t \in (0,1]$. Homogeneity gives
+$R_d(tu) = t^dR_d(u)$, so
+\[\big|t^dR_d(u) + O(t^{d+1})\big| \ =\ |R(tu)| \ \leq\ M\,t^{\sigma},\]
+and dividing by $t^d > 0$,
+\[\big|R_d(u) + O(t)\big| \ \leq\ M\,t^{\sigma - d}.\]
+Here is where the hypothesis $d < \sigma$ is spent: the exponent $\sigma - d$ is \emph{strictly
+positive}, so the right-hand side tends to $0$ as $t \to 0^+$, and the left-hand side tends to
+$|R_d(u)|$. Hence $R_d(u) = 0$ for every unit vector $u$, and by homogeneity $R_d \equiv 0$ on
+all of $\mathbb{R}^n$.
+
+A polynomial vanishing identically on $\mathbb{R}^n$ has all coefficients zero, so $c_\alpha = 0$
+for every $|\alpha| = d$ --- contradicting the choice of $d$. Therefore no such $d$ exists, i.e.\
+$a_\alpha = b_\alpha$ for all $|\alpha| < \sigma$.
+
+\begin{ainote}
+The statement is sharp in the obvious way: coefficients of order exactly $\sigma$ need not agree.
+With $n=1$, $\sigma = 2$, $P(x) := x^2$ and $Q := 0$ we get $|P-Q| = |x|^2 \leq 1\cdot|x|^2$, and
+the order-$2$ coefficients differ. The argument above breaks at precisely the right place: for
+$d = \sigma$ the bound becomes $|R_d(u) + O(t)| \leq M$, which says nothing.
+\end{ainote}
+\end{exercisesolution}

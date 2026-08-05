@@ -1,0 +1,351 @@
+% Originally: content/week-05.tex, \section{Lagrange multipliers} (Corsin Week 5)
+
+% Source: Corsin Nick/Class Notes/Week 5.pdf, pp. 3--4
+\section{Lagrange multipliers}
+\label{sec:lagrange_multipliers}
+
+Suppose we want to find the hottest place on the surface of the earth. In theory, temperature is
+defined everywhere, giving some function
+\[T \in C^\infty(\mathbb{R}^3, (0,\infty)) \qquad \text{(absolute zero is not attainable)}\]
+If we model the earth as $S^2 := \{x \in \mathbb{R}^3 : |x| = 1\}$, then we want to find the local
+maxima of $T|_{S^2}$, which \textbf{are not necessarily critical points of $T$}!
+
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.3]
+  \draw[blue!80!black, thick] (0,0) circle (1.3);
+  \draw[blue!80!black, dashed] (1.3,0) arc (0:180:1.3 and 0.4);
+  \draw[blue!80!black] (-1.3,0) arc (180:360:1.3 and 0.4);
+  \node[blue!80!black, font=\large] at (-0.6,0.5) {$S^2$};
+
+  % Point q (radial gradient = extremum)
+  \coordinate (Q) at (-0.55, 0.95);
+  \fill[red!80!black] (Q) circle (1.8pt) node[left, font=\footnotesize] {$q$};
+  \draw[red!80!black, thick, ->] (Q) -- ++(-0.4, 0.7) node[above right, font=\small] {$\nabla T(q)$};
+  \node[red!80!black, font=\tiny, right] at (-0.1, 1.4) {local extremum of $T|_{S^2}$};
+
+  % Point p (oblique gradient = not extremum)
+  \coordinate (P) at (0.35, -0.45);
+  \fill[orange!90!black] (P) circle (1.8pt) node[left, font=\footnotesize] {$p$};
+  \draw[orange!90!black, thick, ->] (P) -- ++(0.75, -0.2) node[below right, font=\small] {$\nabla T(p)$};
+  \draw[orange!90!black, dotted, thick] (-0.3, -0.3) -- (1.0, -0.6);
+  \node[orange!90!black, font=\tiny, align=left] at (1.1, -0.1) {has tangent component $\implies$\\not a local extremum};
+\end{tikzpicture}
+\end{center}
+
+% Generator: Claude Opus 5 (Medium) --- Corsin's sentence reads "T has a local extremum if it is
+% perpendicular", which is both missing its subject and the wrong direction of implication.
+Read the picture as follows. At $p$ the gradient $\nabla T(p)$ has a non-zero component
+\emph{along} the surface, so walking on $S^2$ in that direction increases $T$: the point $p$
+cannot be a local extremum of $T|_{S^2}$. So if $T|_{S^2}$ \emph{does} have a local extremum at a
+point, then $\nabla T$ there must have no tangential component left --- it must be
+\textbf{perpendicular to the surface}, as at $q$.
+
+Note the direction of that statement carefully: perpendicularity is \textbf{necessary, not
+sufficient}. Plenty of points have a perpendicular gradient without being extrema at all --- on
+the earth, the coldest place has a perpendicular gradient just as the hottest does, and so does
+many a saddle. What the condition delivers is a shortlist of \emph{candidates}; deciding which
+of them are maxima, which minima, and which neither is a separate step, and in practice is done
+by simply evaluating $T$ at each and comparing.
+
+Note also that $S^2$ is the \newterm{level set} (\germanterm{Niveaumenge}) $g(x) = 0$ for
+$g(x) := |x|^2 - 1$ (i.e., $S^2 = g^{-1}\{0\}$).
+
+\begin{remark}[Gradient perpendicular to level sets]
+For $g(x) := |x|^2-1$ we have $\nabla g(x) = 2x$, which at a point $x \in S^2$ is the outward
+radial direction --- perpendicular to $S^2$. In general, the gradient is perpendicular to the
+level sets.
+\end{remark}
+
+\begin{ainote}
+Corsin writes $\nabla g(x) = \tfrac{x}{|x|}$ here. That is the gradient of $x \mapsto |x|$, not
+of the $g(x) = |x|^2-1$ just fixed above, whose gradient is $2x$. The two differ only by the
+positive factor $2|x|$, so they point the same way and the geometric conclusion is unaffected
+--- but the constraint actually differentiated in the Lagrangian below is the squared one. See \cref{ex:xyz_on_ball} for the same $|x|$ versus $|x|^2$ slip in the exercise.
+\end{ainote}
+
+% Source: Corsin Nick/Class Notes/Week 5.pdf, pp. 4--5
+This intuition is made rigorous in the following.
+
+\begin{proposition}[Constrained optimization problems]
+\label{prop:constrained_optimization}
+Suppose $f : U \to \mathbb{R}$, $g : U \to \mathbb{R}^k$ are $C^1$ and $U \subseteq \mathbb{R}^n$
+is open, and write $g := (g_1,\dots,g_k)$. If $f|_{g^{-1}\{0\}}$ has a local extremum at
+$x_0 \in g^{-1}\{0\}$, then
+\[\{\nabla f(x_0), \nabla g_1(x_0), \dots, \nabla g_k(x_0)\} \text{ are linearly dependent.}\]
+\end{proposition}
+
+\begin{remark}
+Once $(\nabla g_1,\dots,\nabla g_k)$ are linearly independent everywhere on $g^{-1}\{0\}$ (the
+standing assumption below), the constraint set $g^{-1}\{0\}$ is in fact a submanifold of
+$\mathbb{R}^n$ --- this is made precise by \cref{thm:regular_value_theorem}, which also
+explains \cref{prop:constrained_optimization} geometrically: $\nabla f(x_0)$ must be normal to the
+tangent space of the constraint set at a constrained extremum.
+\end{remark}
+
+For $k = 1$, this corresponds to our intuition above of $\nabla f(x_0)$ \textbf{parallel to}
+$\nabla g(x_0)$.
+
+\textit{In practice}, we assume $(\nabla g_1, \dots, \nabla g_k)$ nowhere linearly dependent,
+since otherwise $\lambda_0 = 0$ is possible (which does not give us anything).
+
+% Generator: Claude Opus 5 (Medium)
+\begin{aiexample}[What goes wrong when $\nabla g$ vanishes]
+\label{ex:constraint_qualification_fails}
+The standing assumption is not bookkeeping --- drop it and the method can miss an extremum
+outright. Let
+\[f(x,y) := x, \qquad M := \{(x,y) \in \mathbb{R}^2 : y^2 = x^3\},\]
+the \newterm{cuspidal cubic} (\germanterm{Neilsche Parabel}). Since $y^2 \geq 0$ forces
+$x^3 \geq 0$, every point of $M$ has $x \geq 0$, and $(0,0) \in M$. So $f$ attains a clear
+\textbf{global minimum on $M$ at the origin}.
+
+Now run the method with $g(x,y) := y^2-x^3$. The Lagrange condition $\nabla f = \lambda\nabla g$
+reads
+\[(1,0) = \lambda\,(-3x^2,\ 2y),\]
+whose first component demands $1 = -3\lambda x^2$. At the origin this says $1 = 0$: no
+multiplier $\lambda$ exists. The method returns \textbf{no candidates at all}, while the minimum
+sits there in plain sight.
+
+The culprit is visible in $\nabla g(0,0) = (0,0)$: the standing assumption fails at exactly the
+point that matters. Geometrically, $M$ has a \emph{cusp} at the origin --- it is not a smooth
+curve there, so it has no tangent line, and \qt{$\nabla f$ perpendicular to the constraint} has
+nothing to be perpendicular to.
+
+\textbf{The practical moral:} before trusting a Lagrange computation, check that
+$\nabla g \neq 0$ (or, for several constraints, that the $\nabla g_j$ are independent) at every
+point of the constraint set. Where it fails, add those points to your candidate list by hand.
+\end{aiexample}
+
+% Supplement: Adrien Martelli/Notes/20.03-Notes_Chap11_Lagrangemultipliers_geometric_explanation.pdf
+\begin{remark}[Where the coefficient $\lambda_0$ went]
+\Cref{prop:constrained_optimization} asserts linear \emph{dependence} of
+$\{\nabla f(x_0), \nabla g_1(x_0), \dots, \nabla g_k(x_0)\}$, i.e.\ scalars
+$\lambda_0, \lambda_1, \dots, \lambda_k$, not all zero, with
+$\lambda_0 \nabla f(x_0) + \lambda_1 \nabla g_1(x_0) + \dots + \lambda_k \nabla g_k(x_0) = 0$.
+The standing assumption above --- $(\nabla g_1,\dots,\nabla g_k)$ linearly independent --- is
+exactly what rules out $\lambda_0 = 0$ (else the $\nabla g_j$'s alone would already be dependent),
+so $\lambda_0 \neq 0$ and we may divide by it, silently renaming $\lambda_j/\lambda_0$ as
+$\lambda_j$; this is why the Lagrangian below carries no separate $\lambda_0$. Adrien Martelli's
+notes keep $\lambda_0$ explicit instead of dividing it away, pairing the dependence relation with
+a normalization constraint $\lambda_0^2 + \dots + \lambda_k^2 = 1$ (any nonzero vector of
+multipliers can be rescaled to satisfy this). The two formulations are equivalent whenever
+$\lambda_0 \neq 0$; keeping $\lambda_0$ explicit only matters in degenerate settings where the
+independence assumption on $(\nabla g_1,\dots,\nabla g_k)$ fails and $\lambda_0 = 0$ is genuinely
+forced, e.g.\ if $x_0$ is itself a critical point of the constraint map $g$.
+\end{remark}
+
+% Source: Corsin Nick/Class Notes/Week 5.pdf, pp. 4--5
+% Supplement: Sascha Brack/Class Notes/Week_05_Notes_Friday.pdf, p. 5
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.3]
+  \draw[very thick] (0,0) circle (1.2);
+  \node[font=\large] at (-0.5,0.7) {$M$};
+  \fill (0,0) circle (1.2pt) node[below right, font=\scriptsize] {$0$};
+
+  \coordinate (P1) at ({1.2*cos(20)}, {1.2*sin(20)});
+  \draw[magenta!90!black, thick, ->] (P1) -- ++({0.8*cos(20)}, {0.8*sin(20)}) node[above, font=\scriptsize] {$\nabla g(x_1, y_1)$};
+  \fill (P1) circle (1.5pt) node[below left, font=\scriptsize, magenta!90!black] {$(x_1, y_1)$};
+
+  \coordinate (P2) at ({1.2*cos(60)}, {1.2*sin(60)});
+  \draw[magenta!90!black, thick, ->] (P2) -- ++({0.8*cos(60)}, {0.8*sin(60)}) node[right, font=\scriptsize] {$\nabla g(x_2, y_2)$};
+  \fill (P2) circle (1.5pt) node[below left, font=\scriptsize, magenta!90!black] {$(x_2, y_2)$};
+
+  \coordinate (P3) at ({1.2*cos(150)}, {1.2*sin(150)});
+  \draw[magenta!90!black, thick, ->] (P3) -- ++({0.8*cos(150)}, {0.8*sin(150)}) node[above left, font=\scriptsize] {$\nabla g(x_3, y_3)$};
+  \fill (P3) circle (1.5pt) node[below right, font=\scriptsize, magenta!90!black] {$(x_3, y_3)$};
+\end{tikzpicture}
+\end{center}
+
+As the figure suggests, $\nabla g(x)$ is perpendicular to the constraint set $M := g^{-1}\{0\}$. To find extrema along $M$, we basically only care about the tangential part of $\nabla f$. We can then find a multiplier $\lambda$ to \qt{erase} the perpendicular component of $\nabla f(x_0)$. We do this by forming the \newterm{Lagrangian}
+(\germanterm{Lagrange-Funktion}):
+\[
+\begin{aligned}
+L : U \times \mathbb{R}^k &\to \mathbb{R} \\
+(x,\lambda) &\mapsto f(x) - \lambda\cdot g(x) = f(x) - \lambda_1g_1(x) - \dots - \lambda_kg_k(x)
+\end{aligned}
+\]
+We then find local extrema by forcing $\nabla L(x,\lambda) = 0$, i.e.
+\[\underbrace{\frac{\partial L}{\partial x_i} = 0 \ \ \forall i = 1,\dots,n}_{\nabla f(x) - \lambda\cdot\nabla g(x) = 0} \qquad \text{and} \qquad \underbrace{\frac{\partial L}{\partial \lambda_j} = 0 \ \ \forall j = 1,\dots,k}_{g_j(x) = 0}\]
+
+% Generator: Claude Opus 5 (Medium)
+\begin{remark}[Why the Lagrangian is built this way]
+\label{rem:why_the_lagrangian}
+The construction can look like a trick pulled out of nowhere. It is not: $L$ is assembled
+precisely so that setting \emph{one} gradient to zero encodes \emph{both} halves of the problem
+at once.
+
+Read the two underbraces. Differentiating in the $x_i$ reproduces the geometric condition ---
+$\nabla f$ parallel to the $\nabla g_j$, i.e.\ no tangential component left. Differentiating in
+$\lambda_j$ returns $g_j(x)=0$, the constraint itself, because $\lambda_j$ appears in $L$ only
+in the term $-\lambda_jg_j(x)$, linearly. So the multipliers are not auxiliary clutter: they are
+exactly the bookkeeping that lets a \emph{constrained} problem in $n$ variables be written as an
+\emph{unconstrained} critical-point problem in $n+k$ variables, which is the one kind of problem
+we already know how to solve (\cref{prop:extremum_implies_critical}).
+
+That also explains the minus sign, which is arbitrary: writing $f + \lambda\cdot g$ merely flips
+the sign of every $\lambda_j$ and changes nothing. And it explains why $\lambda$ is discarded at
+the end --- it is scaffolding, not part of the answer.
+
+\begin{ainote}
+Though $\lambda$ is not meaningless. In applications it is the \newterm{shadow price}
+(\germanterm{Schattenpreis}): if the constraint is relaxed from $g=0$ to $g=c$, the optimal value
+changes at rate $\lambda$ to first order, $\tfrac{d}{dc}f_{\text{opt}}(c) = \lambda$. This is
+where the name comes from in economics, and it is why $\lambda$ carries units. Not needed for
+this course, but it is the usual answer to \qt{what \emph{is} $\lambda$?}
+\end{ainote}
+\end{remark}
+
+% Source: Corsin Nick/Class Notes/Week 5.pdf, pp. 5--6
+\begin{exercise}[Extrema of $xyz$ on the unit ball]
+\label{ex:xyz_on_ball}
+Find the local extrema of
+\[f : K \to \mathbb{R}, \quad (x,y,z) \mapsto xyz, \qquad K = \{(x,y,z) \in \mathbb{R}^3 : x^2+y^2+z^2 \leq 1\}.\]
+\end{exercise}
+
+% Kept inline: solved directly in Corsin Nick/Class Notes/Week 5.pdf, pp. 5--6.
+\begin{exercisesolution}[Proof of \cref{ex:xyz_on_ball}]
+We first find the \textbf{interior critical points}:
+\[\nabla f(x,y,z) = (yz,\ xz,\ xy) \overset{!}{=} 0 \implies x = y = 0 \ \text{ or } \ x = z = 0 \ \text{ or } \ y = z = 0.\]
+Then we look for local extrema \textbf{on the boundary}. We need to find the local extrema of
+$f|_{g^{-1}\{0\}}$, where $g : \mathbb{R}^3\to\mathbb{R}$ is given by $g(x) = |x|^2 - 1$.
+
+The Lagrangian is
+\[L(x,y,z,\lambda) := f(x,y,z) - \lambda g(x,y,z) = xyz - \lambda(x^2+y^2+z^2-1),\]
+giving the system of equations
+\[
+\begin{aligned}
+\frac{\partial L}{\partial x} &= yz - 2\lambda x = 0, & \frac{\partial L}{\partial \lambda} &= 1 - (x^2+y^2+z^2) = 0. \\
+\frac{\partial L}{\partial y} &= xz - 2\lambda y = 0, \\
+\frac{\partial L}{\partial z} &= xy - 2\lambda z = 0,
+\end{aligned}
+\]
+We then have
+\begin{equation*}
+2\lambda = \frac{yz}{x} = \frac{xz}{y} = \frac{xy}{z} \tag{$*$}
+\end{equation*}
+\[\implies \underbrace{y^2z^2 = x^2z^2}_{y^2 = x^2} = \underbrace{x^2y^2}_{y^2 = z^2} \qquad \text{(if any coordinate is 0, so are the others)}\]
+\[\implies x^2 = y^2 = z^2.\]
+Then $x^2+y^2+z^2 = 1 \implies 3x^2 = 1 \implies x = \pm\frac{1}{\sqrt{3}}$, giving
+\textbf{8 solutions}:
+\[(x,y,z) \in \left\{\tfrac{1}{\sqrt{3}}(\alpha,\beta,\gamma) : \alpha,\beta,\gamma \in \{\pm 1\}\right\}\]
+plus the solutions $\{(x_1,x_2,x_3) \in K : x_i = x_j = 0,\ i \neq j\}$.
+
+\textbf{To justify division by $z$, $x$ or $y$ in $(*)$:} if $z = 0$, then
+$-\lambda x = -\lambda y = xy = 0$, giving $x = 0$ or $y = 0$, and $\lambda = 0$, since
+$x = y = z = 0$ does not satisfy $x^2+y^2+z^2 = 1$. Then, since $\lambda = 0$,
+$\nabla f(x,y,z) = 0$ and we have already found that point in the first step. Similarly for
+$y = 0$ or $x = 0$.
+
+% Generator: Claude Opus 5 (Medium) --- Corsin's solution stops at the candidate list. The
+% exercise asks for the local extrema, so the classification step is completed here.
+\textbf{Classifying the candidates.} The work so far produced candidates, not answers
+(\cref{prop:extremum_implies_critical} and the warning after it). Since $K$ is compact and $f$
+is continuous, $f$ does attain a global maximum and minimum on $K$, so it is enough to evaluate.
+
+At a boundary candidate $\tfrac{1}{\sqrt3}(\alpha,\beta,\gamma)$ with
+$\alpha,\beta,\gamma \in \{\pm1\}$,
+\[f\Big(\tfrac{1}{\sqrt3}(\alpha,\beta,\gamma)\Big)
+  = \frac{\alpha\beta\gamma}{3\sqrt3},\]
+so the value depends only on the sign $\alpha\beta\gamma$. Four of the eight points have
+$\alpha\beta\gamma = +1$ and give the maximal value $\tfrac{1}{3\sqrt3}$; the other four have
+$\alpha\beta\gamma = -1$ and give $-\tfrac{1}{3\sqrt3}$. On the coordinate axes found in the
+first step, $f \equiv 0$.
+
+Hence $f$ attains its \textbf{global maximum} $\tfrac{1}{3\sqrt3}$ at the four points with an
+even number of minus signs, and its \textbf{global minimum} $-\tfrac{1}{3\sqrt3}$ at the four
+with an odd number. The interior candidates are \textbf{not extrema at all}: at any point of a
+coordinate axis $f=0$, yet every neighbourhood contains points where $xyz>0$ and points where
+$xyz<0$ --- flip the sign of one coordinate. They are the three-variable analogue of a saddle.
+\end{exercisesolution}
+
+\begin{ainote}
+Corsin writes $g(x) = |x| - 1$ for the constraint above, but the Lagrangian uses
+$x^2+y^2+z^2-1$, i.e.\ $|x|^2-1$. Both cut out the same sphere; the squared version is the one
+actually differentiated, so it is used throughout.
+\end{ainote}
+
+% Source: Corsin Nick/Class Notes/Week 5.pdf, p. 6
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.4]
+  % Sphere
+  \draw[blue!80!black, thick] (0,0) circle (1.4);
+  \draw[blue!80!black, dashed] (1.4,0) arc (0:180:1.4 and 0.45);
+  \draw[blue!80!black] (-1.4,0) arc (180:360:1.4 and 0.45);
+
+  % Axes
+  \draw[green!60!black, thick, ->] (-1.6,0) -- (1.6,0) node[right, font=\footnotesize] {$x$};
+  \draw[green!60!black, thick, ->] (0,-1.6) -- (0,1.6) node[above, font=\footnotesize] {$z$};
+  \draw[green!60!black, thick, ->] (0.8,-1.0) -- (-0.8,1.0) node[above left, font=\footnotesize] {$y$};
+
+  % Inscribed cube vertices (+-1/sqrt(3), +-1/sqrt(3), +-1/sqrt(3))
+  \coordinate (A1) at (-0.6, -0.5);
+  \coordinate (A2) at (0.6, -0.5);
+  \coordinate (A3) at (0.8, 0.2);
+  \coordinate (A4) at (-0.4, 0.2);
+
+  \coordinate (B1) at (-0.6, 0.7);
+  \coordinate (B2) at (0.6, 0.7);
+  \coordinate (B3) at (0.8, 1.4);
+  \coordinate (B4) at (-0.4, 1.4);
+
+  % Cube edges
+  \draw[red!80!black, thick, dotted] (A1)--(A2)--(A3)--(A4)--cycle;
+  \draw[red!80!black, thick, dotted] (B1)--(B2)--(B3)--(B4)--cycle;
+  \draw[red!80!black, thick, dotted] (A1)--(B1) (A2)--(B2) (A3)--(B3) (A4)--(B4);
+
+  % Vertex dots
+  \foreach \p in {A1,A2,A3,A4,B1,B2,B3,B4} {
+    \fill[red!80!black] (\p) circle (1.8pt);
+  }
+  \node[below, font=\small] at (0,-1.7) {8 critical points $\tfrac{1}{\sqrt{3}}(\pm 1, \pm 1, \pm 1)$ on $S^2$};
+\end{tikzpicture}
+\end{center}
+
+% Originally: content/week-05.tex, end of the chapter
+
+\begin{aiexercise}[Extrema on a Circle via Lagrange Multipliers]
+\label{ex:ai_lagrange_circle}
+% Generator: Gemini 3.6 Flash (Medium)
+Find the maximum and minimum values of $f(x,y) := x + 2y$ subject to the constraint $g(x,y) := x^2 + y^2 - 5 = 0$.
+\end{aiexercise}
+
+
+% --- exercises relocated here from the dissolved sheets ---
+
+% Originally: content/week-05.tex, \exercisesheet{5}, problem 5.2
+% Source: exercises/Ex5_Analysis2_eng.pdf
+
+\begin{exercise}[5.2 --- Lagrange multipliers \textnormal{(important)}]
+\label{ex:5.2}
+Consider the ball $U := \{(x,y,z) : x^2+y^2+z^2 < 1\}$ and the function
+\[f(x,y,z) := 1 - x^2 - y^2 + 4x.\]
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Motivate rigorously why $f$ attains its absolute maximum and minimum in $\overline{U}$.
+  \item Find all the critical points of $f$ which lie in the interior of $U$. Say whether
+    $\sup_U f$ (or $\inf_U f$) is attained at some point in $U$.
+  \item Say whether $\max_{\partial U} f$ and $\min_{\partial U}$ exist.
+  \item With the method of Lagrange multipliers, find the possible critical points for the
+    constrained problem $\max\{f(x,y,z) : (x,y,z) \in \partial U\}$, and same for min.
+  \item Among all the points you have found, clarify at which points the maximum/minimum of $f$
+    is attained.
+\end{enumerate}
+\end{exercise}
+
+% Originally: content/week-06.tex, \exercisesheet{6}, problem 6.10
+% Source: exercises/Ex6_Analysis2_eng.pdf
+
+\begin{exercise}[6.10 --- Lagrange multipliers \textnormal{(important)}]
+\label{ex:6.10}
+Consider the function $f(x,y,z) = 3x-y+2z$ and the set
+\[M = \{(x,y,z) \in \mathbb{R}^3 \mid x^2+y^2+z^2 = 1,\ x+y = 0\}.\]
+Determine the extrema of $f$ on $M$ and their nature.
+\end{exercise}
+
+% Originally: content/week-06.tex, \exercisesheet{6}, problem 6.11
+% Source: exercises/Ex6_Analysis2_eng.pdf
+
+\begin{exercise}[6.11 --- Closest point on a hyperbolic paraboloid \textnormal{(important)}]
+\label{ex:6.11}
+Find the points on the submanifold
+\[M = \{(x,y,z) \in \mathbb{R}^3 : z = x^2-y^2\}\]
+that are closest to the point $(0,0,1)$.
+\end{exercise}

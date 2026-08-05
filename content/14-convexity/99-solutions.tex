@@ -1,0 +1,44 @@
+% Originally: the \section{Solutions} of content/week-06.tex
+
+\section{Solutions}
+\label{sec:convexity_solutions}
+
+\begin{exercisesolution}[Solution to \cref{ex:6.7}]
+% Generator: Claude Sonnet 5 (Medium)
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{False.} Let $f(x) := \max\{x_1, \tfrac12\}^4$ on $U := B_1 \subset \mathbb{R}^n$.
+    The inner function $x \mapsto \max\{x_1,\tfrac12\}$ is convex and takes values in
+    $[\tfrac12,\infty)$, and $t \mapsto t^4$ is convex and increasing there. A convex
+    increasing function composed with a convex function is convex, so $f$ is convex. For all $x \in U$ with $x_1 \leq \tfrac12$,
+    $f(x) = (\tfrac12)^4$ identically, so $f$ has a (non-strict) local maximum at $x=0$, yet
+    $\nabla f$ does not vanish once $x_1 > \tfrac12$.
+
+    \begin{remark}
+    Worth noting: $x=0$ here is simultaneously a (non-strict) local \emph{minimum} too, since $f$
+    is locally constant on the whole region $\{x_1 \leq \tfrac12\} \cap U$. This is exactly why
+    the counterexample doesn't contradict \textbf{(b)}: $x=0$ is not a \emph{global} maximum of
+    $f$ on $U$ (as $f$ grows without bound as $x_1 \to 1$), so \textbf{(b)}'s stronger hypothesis
+    simply isn't triggered.
+    \end{remark}
+  \item \textbf{True.} Since $z$ is a local maximum, $\nabla f(z) = 0$
+    (\cref{prop:extremum_implies_critical}). Convexity gives $f(x) \geq f(z) + \nabla f(z)\cdot(x-z)
+    = f(z)$ for all $x \in U$; but $z$ being a global maximum also gives $f(x) \leq f(z)$ for all
+    $x \in U$. Hence $f \equiv f(z)$ on $U$, so $\nabla f \equiv 0$ in $U$.
+  \item \textbf{True.} Fix $x, y \in U$ and $t \in [0,1]$. Convexity of each $f_n$ gives
+    $f_n(tx+(1-t)y) \leq tf_n(x) + (1-t)f_n(y)$ for every $n$; letting $n \to \infty$ (with
+    $x,y,t$ fixed) and using pointwise convergence yields the same inequality for $f$. Since
+    $x,y,t$ were arbitrary, $f$ is convex.
+  \item \textbf{False.} A convex function lies above its tangent plane, so from the Taylor data at
+    $0$, any such $f$ would satisfy $f(x) \geq 1-2x_1$ for all $x \in \mathbb{R}^n$. Combined with
+    $f(x) = 1-2x_1+x_2^3+O(|x|^4)$, this forces $x_2^3 \geq -M|x|^4$ near $0$ for some $M>0$,
+    which fails along $x = (0,-r,0,\dots,0)$ as $r \downarrow 0$ (left side $\sim -r^3$, right
+    side $\sim -Mr^4$, and $-r^3 < -Mr^4$ for small $r$). Contradiction, so no such convex $f$
+    exists.
+  \item \textbf{True.} Simply take $f(x) := 1-2x_1+x_2^4$ itself (with the $O(|x|^4)$ remainder
+    identically zero): it is convex, being a sum of the affine (hence convex) term $1-2x_1$ and
+    the convex term $x_2^4$.
+  \item \textbf{False.} A convex set is always path-connected, since for any two points the
+    straight segment joining them lies inside the set by definition of convexity; path-connected
+    sets are connected.
+\end{enumerate}
+\end{exercisesolution}

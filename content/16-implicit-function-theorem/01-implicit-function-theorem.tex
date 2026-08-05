@@ -1,0 +1,283 @@
+% Originally: content/week-06.tex, \section{The implicit function theorem} (Corsin Week 6)
+
+% Source: Corsin Nick/Class Notes/Week 6.pdf, pp. 10--12
+\section{The implicit function theorem}
+\label{sec:implicit_function_theorem}
+
+\begin{theorem}[Implicit function theorem]
+\label{thm:implicit_function_theorem}
+Let $1 \leq n-d < n$, let $f \in C^k(\mathbb{R}^d\times\mathbb{R}^{n-d}, \mathbb{R}^{n-d})$ (or an
+open subset of $\mathbb{R}^d\times\mathbb{R}^{n-d}$), and suppose $f(x_0,y_0) = 0$ for some
+$(x_0,y_0) \in \mathbb{R}^d\times\mathbb{R}^{n-d}$ such that the differential $D_yf(x_0,y_0)$ of
+$y \mapsto f(x_0,y)$ at $y_0$ is bijective (so $\Jac_yf(x_0,y_0)$ is invertible). Then there exist
+balls $B_r(x_0) \subseteq \mathbb{R}^d$ and $B_s(y_0) \subseteq \mathbb{R}^{n-d}$ and
+$g \in C^k(B_r(x_0), B_s(y_0))$ such that, for all $(x,y) \in B_r(x_0)\times B_s(y_0)$,
+\[f(x,y) = 0 \iff y = g(x).\]
+Furthermore,
+\[\Jac g(x) = -\big(\Jac_yf(x,g(x))\big)^{-1}\Jac_xf(x,g(x)).\]
+\end{theorem}
+
+% Sonnet 5 (Medium)
+In words: the equation $f(x,y)=0$ ties $x$ and $y$ together without telling us what $y$ is. The
+theorem says that near a point where the tie is \emph{non-degenerate in $y$}, the equation can be
+untangled --- there is an honest function $g$ producing the right $y$ for each nearby $x$, it is
+as smooth as $f$ was, and its derivative is computable without ever writing $g$ down.
+
+Three things are worth reading off the statement before the pictures.
+\begin{itemize}
+  \item \textbf{Which variables get solved for is a choice.} Splitting the $n$ coordinates into
+    $d$ \qt{free} ones and $n-d$ \qt{solved} ones is ours to make; the theorem only demands that
+    the block $\Jac_yf$ belonging to the solved variables be invertible. Choose a different
+    split and a different block has to be invertible.
+  \item \textbf{The conclusion is an equivalence, not just an inclusion.} Inside the box,
+    $f(x,y)=0 \iff y=g(x)$. So $g$ does not merely produce \emph{some} solutions: within the
+    box there are no others.
+  \item \textbf{Nothing is claimed globally.} The level set $\{f(x,y)=0\}$ is a graph over $x$
+    only near the chosen point --- \cref{sec:submanifolds} will call such a set a
+    submanifold, and this local-graph property is exactly what that definition abstracts.
+\end{itemize}
+
+% Supplement: Sascha Brack/Class Notes/Week_06_Notes_Friday.pdf, pp. 3--5
+\begin{example}[A concrete example in $\mathbb{R}^2$]
+\label{ex:implicit_function_circle}
+Consider $f : \mathbb{R}^2 \to \mathbb{R}$ defined by $f(x,y) := x^2 + y^2 - 1$.
+Here $n=2$ and $d=1$, so $x \in \mathbb{R}$ and $y \in \mathbb{R}$. We want to see whether we can write $y$ locally as a function of $x$, i.e., find $g(x)$ such that $f(x,g(x)) = 0$.
+
+First, let us find a point $(x_0,y_0)$ where $f(x_0,y_0) = 0$. We guess $f(0,1) = 0^2+1^2-1 = 0$, so $(0,1)$ works.
+Next, we check whether the $y$-derivative $\Jac_y f(0,1)$ is invertible. Since $y$ is 1-dimensional, this is just the partial derivative $\partial_y f(0,1)$:
+\[\partial_y f(0,1) = \partial_y(x^2+y^2-1)\big|_{(0,1)} = 2y\big|_{y=1} = 2 \neq 0.\]
+Since it is non-zero, it is invertible as a $1\times 1$ matrix.
+The theorem then guarantees that for small $r, s > 0$, there exists $g : B_r(0) \to B_s(1)$ such that for all $(x,y) \in B_r(0)\times B_s(1)$,
+\[f(x,y) = 0 \iff y = g(x).\]
+Since $f \in C^\infty(\mathbb{R}^2)$, we also have $g \in C^\infty(B_r(0))$.
+Moreover, we can compute $g'(x) = \Jac g(x)$ using the formula:
+\[g'(x) = - \big(\partial_y f(x,g(x))\big)^{-1} \partial_x f(x,g(x)) = - (2g(x))^{-1} (2x) = -\frac{x}{g(x)}.\]
+(Indeed, since $y=g(x) = \sqrt{1-x^2}$ near $(0,1)$, its derivative is exactly $-x/\sqrt{1-x^2}$.)
+\end{example}
+
+\begin{remark}[Why $\Jac g$ has this form]
+The formula is just implicit differentiation, done in blocks. By construction $g$ satisfies
+$f(x,g(x)) \equiv 0$ for every $x \in B_r(x_0)$: the left-hand side is identically zero as a
+function of $x$, so its derivative is too. Differentiating with the chain rule
+(\cref{thm:chain_rule}), and remembering that $x$ enters both directly and through $g$,
+\[0 = \underbrace{D_xf(x,g(x))}_{\text{direct}} + \underbrace{D_yf(x,g(x))\cdot Dg(x)}_{\text{through } g},\]
+and since $D_yf(x,g(x))$ is invertible near $(x_0,y_0)$ we may move it to the other side:
+\[Dg(x) = -\big(D_yf(x,g(x))\big)^{-1} D_xf(x,g(x)),\]
+which is the formula in \cref{thm:implicit_function_theorem}.
+
+Read it as an exchange rate. Nudging $x$ changes $f$ by $D_xf$; to keep the equation satisfied,
+$y$ must move by whatever compensates, and $\big(D_yf\big)^{-1}$ converts \qt{how much $f$ moved}
+back into \qt{how far $y$ must travel}. The minus sign is the compensation. This is also why
+invertibility of $D_yf$ is the hypothesis: if $D_yf$ were singular, some change in $f$ could not
+be absorbed by moving $y$ at all, and there would be nothing for $g$ to do.
+\end{remark}
+
+\begin{ainote}
+Corsin remarks in his own notes that ``the geometrical meaning of this one eludes me, sorry''.
+The exchange-rate reading above and the two figures below are this document's attempt at the
+geometry he was after; the algebra itself is his chain-rule derivation.
+\end{ainote}
+
+% Sonnet 5 (Medium) --- FIG-W06-04, replacing the original arrow diagram.
+% The hypothesis "D_y f invertible" is a statement about the DIRECTION of the level set at
+% the point, so the figure shows the level set and its tangent, not an abstract arrow.
+\subsubsection*{What the hypothesis means}
+
+The condition on $D_yf(x_0,y_0)$ is a statement about the \emph{direction} in which the level
+set $\{f=0\}$ runs at the point. Moving off $(x_0,y_0)$ straight up, in the $y$-direction alone,
+changes $f$ to first order by $D_yf(x_0,y_0)$. If that map is invertible, no vertical motion
+leaves $f$ unchanged, so the level set cannot run vertically at $(x_0,y_0)$ --- and a curve that
+is not vertical is locally a graph over $x$. If instead $D_yf(x_0,y_0)=0$, the level set is free
+to turn vertical, and above a single $x$ there may sit two values of $y$, or none.
+
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.05]
+  % --- Left panel: D_y f invertible, level set transverse to the vertical ---
+  \begin{scope}
+    \draw[green!60!black, thick, ->] (-0.3,0) -- (3.5,0) node[right, font=\small] {$x$};
+    \draw[orange!90!black, thick, ->] (0,-0.3) -- (0,3.2) node[above, font=\small] {$y$};
+
+    \draw[blue!80!black, very thick, domain=0.35:3.1, samples=60, smooth]
+      plot ({\x}, {1.55 + 0.55*(\x-1.6) - 0.16*(\x-1.6)*(\x-1.6)});
+    \node[blue!80!black, font=\scriptsize, below right] at (2.75,1.95) {$\{f=0\}$};
+
+    \coordinate (P) at (1.6,1.55);
+    \draw[dotted, gray] (1.6,0) -- (P) -- (0,1.55);
+    \node[below, font=\scriptsize] at (1.6,-0.05) {$x_0$};
+    \node[left, font=\scriptsize] at (-0.05,1.55) {$y_0$};
+    \fill (P) circle (1.7pt);
+
+    % vertical probe: moving in y alone leaves the level set
+    \draw[red!80!black, very thick, ->] (P) -- ++(0,0.85);
+    \node[red!80!black, font=\scriptsize, align=center] at (1.6,2.78)
+      {move in $y$ only:\\ $f$ changes};
+
+    \node[font=\scriptsize, align=center] at (1.55,-0.85)
+      {$D_yf(x_0,y_0)$ invertible\\ \textbf{solvable for $y$}};
+  \end{scope}
+
+  % --- Right panel: D_y f = 0, level set vertical, no graph over x ---
+  \begin{scope}[shift={(5.4,0)}]
+    \draw[green!60!black, thick, ->] (-0.3,0) -- (3.5,0) node[right, font=\small] {$x$};
+    \draw[orange!90!black, thick, ->] (0,-0.3) -- (0,3.2) node[above, font=\small] {$y$};
+
+    \draw[blue!80!black, very thick, domain=0.35:2.75, samples=60, smooth]
+      plot ({1.6 - 1.05*(\x-1.55)*(\x-1.55)}, {\x});
+    \node[blue!80!black, font=\scriptsize, right] at (0.30,0.38) {$\{f=0\}$};
+
+    \coordinate (Q) at (1.6,1.55);
+    \draw[dotted, gray] (1.6,0) -- (Q) -- (0,1.55);
+    \node[below, font=\scriptsize] at (1.6,-0.05) {$x_0$};
+    \node[left, font=\scriptsize] at (-0.05,1.55) {$y_0$};
+    \fill (Q) circle (1.7pt);
+
+    \draw[red!80!black, very thick, ->] (Q) -- ++(0,0.85);
+    \node[red!80!black, font=\scriptsize, align=center] at (1.75,2.95)
+      {move in $y$ only: $f$ unchanged to first order};
+
+    % two y's over one x, just left of x_0; none just right of it
+    \draw[gray, dashed] (1.15,0) -- (1.15,2.75);
+    \fill[orange!90!black] (1.15,0.89) circle (1.6pt);
+    \fill[orange!90!black] (1.15,2.21) circle (1.6pt);
+    \node[orange!90!black, font=\scriptsize, align=center] at (0.62,1.55)
+      {two $y$'s\\ here};
+    \draw[gray, dashed] (2.15,0) -- (2.15,2.75);
+    \node[orange!90!black, font=\scriptsize, align=center] at (2.75,1.15)
+      {none\\ here};
+
+    \node[font=\scriptsize, align=center] at (1.55,-0.85)
+      {$D_yf(x_0,y_0)=0$\\ \textbf{not solvable for $y$}};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+% Sonnet 5 (Medium) --- FIG-W06-05, replacing the original box-and-arrow diagram.
+\subsubsection*{What the conclusion gives}
+
+The theorem does not say the whole level set is a graph --- only that it is one \emph{inside a
+small enough box}. On $B_r(x_0)\times B_s(y_0)$ the two descriptions coincide exactly: the
+zero set of $f$ and the graph of $g$ are the same set. Outside the box the level set may do
+anything at all, including doubling back or carrying further branches, and that is precisely
+why the statement is local.
+
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.2]
+  \draw[green!60!black, thick, ->] (-0.4,0) -- (5.3,0) node[right, font=\small] {$x \in \mathbb{R}^d$};
+  \draw[orange!90!black, thick, ->] (0,-0.4) -- (0,3.4) node[above, font=\small] {$y \in \mathbb{R}^{n-d}$};
+
+  % Level set: inside the box a clean graph; outside it doubles back and branches.
+  \draw[gray!55, very thick, smooth]
+    plot coordinates {(0.45,2.95) (0.8,2.35) (1.1,1.98) (1.4,1.751)};
+  \draw[gray!55, very thick, smooth]
+    plot coordinates {(3.6,1.531) (4.05,1.33) (4.35,0.78) (4.15,0.28)};
+  \node[gray!55!black, font=\scriptsize, right] at (4.45,0.80) {further branches};
+
+  % The box, then the graph redrawn on top so it reads as the box's content.
+  \draw[green!60!black, thick, fill=green!7] (1.4,0.9) rectangle (3.6,2.4);
+  \draw[blue!80!black, very thick, domain=1.4:3.6, samples=60, smooth]
+    plot ({\x}, {1.72 - 0.30*(\x-1.5) + 0.10*(\x-1.5)*(\x-1.5)});
+
+  \coordinate (P) at (2.5,1.52);
+  \fill (P) circle (1.7pt) node[above left, font=\scriptsize] {$(x_0,y_0)$};
+
+  % Box extents.
+  \draw[green!60!black, <->] (1.4,0.62) -- node[below, font=\scriptsize] {$B_r(x_0)$} (3.6,0.62);
+  \draw[orange!90!black, <->] (1.13,0.9) -- node[left, font=\scriptsize] {$B_s(y_0)$} (1.13,2.4);
+  \draw[dotted, gray] (2.5,0) -- (P);
+  \node[below, font=\scriptsize] at (2.5,-0.05) {$x_0$};
+
+  \node[blue!80!black, font=\scriptsize, right, align=left] at (3.72,2.55)
+    {inside the box:\\ $f(x,y)=0 \iff y=g(x)$};
+  \draw[blue!80!black, thin, ->] (3.72,2.35) -- (3.05,1.62);
+\end{tikzpicture}
+\end{center}
+
+\begin{example}[The circle $S^1$]
+The circle $S^1 = \{(x,y) \in \mathbb{R}^2 : x^2+y^2-1=0\}$ is the level set at $0$ of
+$F(x,y) := x^2+y^2-1$, i.e., $S^1 = F^{-1}\{0\}$. Locally, there are explicit functions
+\[x \mapsto \pm\sqrt{1-x^2} = y(x),\]
+defined on open intervals around $x_0$ whenever $y(x_0)\neq0$. And indeed,
+\[D_yF(x,y) = \frac{\partial F}{\partial y} = 2y\]
+is bijective whenever $y \neq 0$, so the implicit function theorem holds there.
+
+\begin{remark}[The circle realizes both panels]
+The circle exhibits both cases of the figure above, and it is worth checking them against each
+other.
+
+At a point with $y_0 \neq 0$ --- say $(0,1)$ --- we have $D_yF = 2y_0 \neq 0$, the circle meets
+that point at a non-vertical angle, and near it the circle really is the graph
+$y = \sqrt{1-x^2}$. That is the left panel.
+
+At $\bar x = 1$, where $y = 0$, we get $D_yF(1,0) = 0$. The circle is \emph{vertical} there, and
+no graph $y(x)$ can exist around it: for $x$ slightly less than $1$ there are two points of the
+circle above $x$, namely $\pm\sqrt{1-x^2}$, and for $x$ slightly greater than $1$ there are none.
+That is the right panel exactly --- two $y$'s on one side, none on the other.
+
+Note what has \emph{not} gone wrong at $\bar x = 1$: the circle is a perfectly smooth curve
+there, with no corner and no break. What fails is only the attempt to describe it as a graph
+\emph{over $x$}. Swap the roles of the two variables and everything works again, since
+$D_xF(1,0) = 2 \neq 0$: near $(1,0)$ the circle is the graph $x = \sqrt{1-y^2}$ of a function
+of $y$. This is the \qt{which variables get solved for is a choice} point above, in its
+smallest possible instance.
+\end{remark}
+\end{example}
+
+% Sonnet 5 (Medium) --- FIG-W06-06, drawn from the page image seen while transcribing
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.3]
+  \draw[->] (-1.6,0) -- (1.9,0) node[right, font=\small] {$x$};
+  \draw[->] (0,-1.6) -- (0,1.6) node[above, font=\small] {$y$};
+  \draw[green!60!black, thick] (0,0) circle (1);
+
+  \draw[red!80!black, dashed, thick, domain=-0.9:0.9, samples=40, smooth]
+    plot ({\x}, {sqrt(1-\x*\x)}) node[right, font=\scriptsize] {$y=\sqrt{1-x^2}$};
+
+  \coordinate (X0) at (0.4,0);
+  \draw[dotted, gray] (X0) -- (0.4,0.917);
+  \node[below, font=\scriptsize] at (X0) {$x_0$};
+
+  \fill[red!80!black] (1,0) circle (1.5pt) node[below right, font=\scriptsize] {$\bar x$};
+  \node[red!80!black, font=\scriptsize, below right, align=left] at (1.0,-0.5)
+    {not possible\\around $y=0$};
+
+  \draw[->, thick] (2.6,-1.0) -- (2.6,1.3) node[above, font=\small] {$\mathbb{R}$};
+  \fill (2.6,0) circle (1.5pt) node[right, font=\small] {$0$};
+  \draw[->, thick, blue!80!black] (1.15,0.6).. controls (2.0,1.0).. (2.6,0)
+    node[midway, above, font=\small] {$F$};
+\end{tikzpicture}
+\end{center}
+
+\begin{example}[An implicit quintic]
+Let $G(x,y) := y^5+y^3+y+x$, and consider its level set at $0$,
+$G^{-1}\{0\} = \{(x,y)\in\mathbb{R}^2 : G(x,y)=0\}$. Clearly $(0,0)\in G^{-1}\{0\}$, since
+$G(0,0)=0^5+0^3+0+0=0$. Now both
+\[\partial_xG(0,0)=1\neq0, \qquad \partial_yG(0,0)=\big[5y^4+3y^2+1\big]_{y=0}=1\neq0,\]
+so by the implicit function theorem there are open intervals (balls) $(-r,r)$, $(-s,s)$ and
+functions
+\[(-r,r)\to(-s,s), \quad y\mapsto x(y) = -y^5-y^3-y,\]
+\[(-s,s)\to(-r,r), \quad x\mapsto y(x),\]
+satisfying
+\[y^5+y^3+y+x(y)=0, \qquad y(x)^5+y(x)^3+y(x)+x=0.\]
+
+\begin{remark}
+As Galois and Abel showed, no closed-form expression for $y(x)$ in radicals exists in general,
+since $y^5+y^3+y+x=0$ is a genuine quintic in $y$. Nevertheless, the implicit function theorem
+guarantees that $y(x)$ exists (and is $C^\infty$, since $G$ is a polynomial), and it can be
+computed and plotted numerically.
+\end{remark}
+\end{example}
+
+% Sonnet 5 (Medium) --- FIG-W06-07, drawn from the page image seen while transcribing
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=0.62]
+  \draw[->] (-11,0) -- (11,0) node[right, font=\small] {$x$};
+  \draw[->] (0,-2.0) -- (0,2.0) node[above, font=\small] {$y(x)$};
+  \foreach \x in {-10,-7.5,-5,-2.5,2.5,5,7.5,10}
+    \draw (\x,0.08) -- (\x,-0.08) node[below, font=\tiny] {$\x$};
+  \foreach \y in {-1.5,-1.0,-0.5,0.5,1.0,1.5}
+    \draw (0.15,\y) -- (-0.15,\y) node[left, font=\tiny] {$\y$};
+
+  \draw[blue!80!black, thick, variable=\t, domain=-1.42:1.42, samples=120, smooth]
+    plot ({-\t*\t*\t*\t*\t - \t*\t*\t - \t}, {\t});
+\end{tikzpicture}
+\end{center}

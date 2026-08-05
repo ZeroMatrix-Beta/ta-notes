@@ -304,3 +304,59 @@ f(x_0+th) &= f(x_0) + t\left.\frac{d}{dt}\right|_{t=0}f(x_0+th) + \frac{t^2}{2}\
 \]
 Setting $t = 1$ gives the result.
 \end{exercisesolution}
+
+
+% --- exercises relocated here from the dissolved sheets ---
+
+% Originally: content/week-05.tex, \exercisesheet{5}, problem 5.3
+% Source: exercises/Ex5_Analysis2_eng.pdf
+
+\begin{exercise}[5.3 --- Multiple choice (Landau notation) \textnormal{(important)}]
+\label{ex:5.3}
+Mark all and only the statements which are true.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item As $|x| \to 0$, if $f(x) = x_2x_1^2 + O(x_1^2)$, then $f(x) = O(|x|^2)$.
+  \item As $x \to 0$, if $f(x) = x_2x_1^2 + O(x_1^3)$, then $f(x) = O(x_1^3)$.
+  \item As $|x| \to 0$, if $f(x) = x_2x_1 + O(|x|^2)$, then $f$ is differentiable at $x = 0$.
+  \item As $x \to 0$, if $f(x) = x_2x_1 + O(|x|^2)$, then $f$ is twice differentiable around
+    $x = 0$.
+  \item As $|x| \to 0$, if $f(x) = x_2x_1 + O(|x|^3)$, then $f$ is twice differentiable around
+    $x = 0$ and $\partial_{11}f(0) = 0$.
+\end{enumerate}
+\textit{Official hint:} revise \textit{Corollary 10.45}.
+\end{exercise}
+
+% Originally: content/exercise-sheets/week-05.tex, problem 5.5 --- never previously built
+% Source: exercises/Ex5_Analysis2_eng.pdf
+
+\begin{exercise}[5.5 --- Multiple choice (cost of a Taylor expansion) \textnormal{(optional)}]
+\label{ex:5.5}
+Assume $g \in C^\infty(\mathbb{R})$ and $f \in C^\infty(\mathbb{R}^n)$ is such that
+$$f(x) = x_1 + x_2x_1 + O(|x|^4) \quad \text{as } x \to 0.$$
+We want to compute the Taylor expansion of $(g\circ f)$ at $x = 0$ of the highest possible order
+with the information we have. We can ask for the value $g^{(k)}(t)$ for arbitrary
+$k \in \mathbb{N}$, $t \in \mathbb{R}$, but we have to pay 5 CHF each time.
+
+For a general $g$, which is the degree of the best (i.e.\ highest-order) Taylor polynomial we can
+compute? How expensive will it be to compute it?
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item degree 3 and 20 CHF
+  \item degree 2 and 15 CHF
+  \item degree 2 and 10 CHF
+  \item degree 3 and 15 CHF
+\end{enumerate}
+\end{exercise}
+
+% Originally: content/exercise-sheets/week-05.tex, problem 5.6 --- never previously built
+% Source: exercises/Ex5_Analysis2_eng.pdf
+
+\begin{exercise}[5.6 --- Polynomials \textnormal{(optional --- ``interesting, but irrelevant for the course'')}]
+\label{ex:5.6}
+Let $P, Q \in \mathbb{R}[x_1,\dots,x_n]$ be polynomials of $n$ variables; assume that there are
+positive numbers $M, \sigma$ such that
+$$|P(x) - Q(x)| \leq M|x|^\sigma \quad \text{for all } |x| \leq 1.$$
+Show that $P$ and $Q$ have the same coefficients of order smaller than $\sigma$. That is, if we
+write $P(X) = \sum_{\alpha\in\mathbb{N}^n} a_\alpha X^\alpha$,
+$Q(X) = \sum_{\alpha\in\mathbb{N}^n} b_\alpha X^\alpha$, then $a_\alpha = b_\alpha$ for all
+$|\alpha| < \sigma$.
+\end{exercise}

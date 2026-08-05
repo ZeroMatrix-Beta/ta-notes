@@ -1,0 +1,117 @@
+% Originally: content/week-05.tex, \section{Optimization} (Corsin Week 5)
+
+% Source: Corsin Nick/Class Notes/Week 5.pdf, p. 2
+\section{Optimization}
+\label{sec:optimization}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+  \draw[very thick] (0, 1) .. controls (1, 3) and (2, -1) .. (3, 0)
+                    .. controls (4, 1) and (4.5, 4) .. (5, 3.5)
+                    .. controls (5.5, 3) and (6, 0.5) .. (6.5, 0.5);
+                    
+  \node[above, font=\footnotesize] at (0.8, 2.1) {local max};
+  \draw[->, thick, shorten >= 2pt] (0.8, 2.1) -- (0.65, 1.85);
+  
+  \node[below, font=\footnotesize] at (2.2, -0.6) {global min};
+  \draw[->, thick, shorten >= 2pt] (2.2, -0.6) -- (1.9, -0.3);
+  
+  \node[above, font=\footnotesize] at (4.6, 4.1) {global max};
+  \draw[->, thick, shorten >= 2pt] (4.6, 4.1) -- (4.65, 3.8);
+  
+  \node[below, font=\footnotesize] at (6.2, 0.1) {local min};
+  \draw[->, thick, shorten >= 2pt] (6.2, 0.1) -- (6.3, 0.45);
+\end{tikzpicture}
+\end{center}
+
+\begin{definition}[Local extrema and critical points]
+\label{def:local_extrema_critical_points}
+\begin{itemize}
+  \item \newterm{Local minimum} (\germanterm{lokales Minimum}) of
+    $f : U \subseteq \mathbb{R}^n \to \mathbb{R}$: $f$ has a local minimum at $x_0 \in U$ if
+    \[\exists\,\varepsilon > 0 \text{ such that } \forall x \in B_\varepsilon(x_0)\cap U : f(x) \geq f(x_0).\]
+  \item \textbf{Local maxima} are defined analogously with $f(x) \leq f(x_0)$.
+  \item The extremum is \textbf{strict} if the inequality is strict for $x \neq x_0$:
+    $f(x) > f(x_0)$ for a strict minimum, $f(x) < f(x_0)$ for a strict maximum.
+  \item A \newterm{critical point} (\germanterm{kritischer Punkt}) of $f \in C^1(U,\mathbb{R})$,
+    $U \subseteq \mathbb{R}^n$ open, is a point $x_0 \in U$ where $\nabla f(x_0) = 0$.
+\end{itemize}
+\end{definition}
+
+\begin{proposition}[Local extremum $\implies$ critical point]
+\label{prop:extremum_implies_critical}
+If $f \in C^1(U,\mathbb{R})$ and $x_0 \in \operatorname{int}(U)$ is a local extremum, then
+$\nabla f(x_0) = 0$.
+\end{proposition}
+
+% Generator: Claude Opus 5 (Medium) --- Corsin states this without proof; the one-variable
+% reduction is two lines and is the argument every later Lagrange computation leans on.
+\begin{proof}
+Fix a direction $v \in \mathbb{R}^n$ and consider the one-variable function
+$\varphi(t) := f(x_0 + tv)$, defined for $|t|$ small enough that $x_0 + tv$ stays in $U$ --- this
+is where $x_0 \in \operatorname{int}(U)$ is used, and it is the only place. If $f$ has a local
+extremum at $x_0$, then $\varphi$ has one at the \emph{interior} point $t=0$, so by the
+one-variable result from Analysis I, $\varphi'(0) = 0$. By the chain rule along a path
+(\cref{sec:chain_rule_along_path}),
+\[0 = \varphi'(0) = \langle \nabla f(x_0), v\rangle.\]
+Since $v$ was arbitrary, $\nabla f(x_0)$ is orthogonal to every vector of $\mathbb{R}^n$,
+including itself: $\langle\nabla f(x_0),\nabla f(x_0)\rangle = |\nabla f(x_0)|^2 = 0$, hence
+$\nabla f(x_0) = 0$.
+\end{proof}
+
+\begin{remark}[Intuition, and two standing warnings]
+The proof says: at an interior extremum every direction is a \qt{flat} direction, and the only
+vector orthogonal to everything is the zero vector,
+\[\langle\nabla f(x_0), v\rangle = 0 \text{ for all } v \in \mathbb{R}^n
+  \iff \nabla f(x_0) = 0.\]
+Two things this proposition does \textbf{not} say, both of which the rest of the chapter is
+built around.
+\begin{itemize}
+  \item \textbf{The converse is false.} A critical point need not be an extremum:
+    $f(x,y) := x^2-y^2$ has $\nabla f(0,0)=0$ but a saddle there, and even in one variable
+    $f(x) := x^3$ has $f'(0)=0$ with no extremum. Critical points are \emph{candidates};
+    separating them is exactly what \cref{thm:hessian_test} is for.
+  \item \textbf{Interiority is essential.} On $U := [0,1]$ the function $f(x) := x$ attains both
+    its minimum and its maximum, at $x=0$ and $x=1$, and $f' \equiv 1$ never vanishes. The
+    hypothesis $x_0 \in \operatorname{int}(U)$ is what fails. This is why every optimization over
+    a closed region in this chapter is done in two steps --- interior critical points first, then
+    the boundary separately, the latter being what Lagrange multipliers handle.
+\end{itemize}
+\end{remark}
+
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.3]
+  % Grid on xy-plane
+  \begin{scope}[x={(0.866cm,-0.3cm)}, y={(0.5cm,0.4cm)}]
+    % Plane axes
+    \draw[thick, ->] (-1.5,-1.5) -- (2.2,-1.5) node[right] {$x$};
+    \draw[thick, ->] (-1.5,-1.5) -- (-1.5,2.2) node[above] {$y$};
+    \draw[gray!40, thin] (-1.5,-0.5) -- (1.8,-0.5);
+    \draw[gray!40, thin] (-1.5,0.5) -- (1.8,0.5);
+    \draw[gray!40, thin] (-1.5,1.5) -- (1.8,1.5);
+    \draw[gray!40, thin] (-0.5,-1.5) -- (-0.5,1.8);
+    \draw[gray!40, thin] (0.5,-1.5) -- (0.5,1.8);
+    \draw[gray!40, thin] (1.5,-1.5) -- (1.5,1.8);
+    % Projected level set
+    \draw[purple, thick] (0,0) circle (1.0);
+    \fill[green!60!black] (0.707,-0.707) circle (2pt) node[below right, font=\tiny] {minimum};
+    \draw[orange!90!black, thick, ->] (0.707,-0.707) -- (0.1,-0.707) node[below, font=\tiny] {gradient};
+  \end{scope}
+
+  % Paraboloid surface
+  \draw[blue!80!black, thick] (0,0.8) ellipse (1.3 and 0.5);
+  \draw[blue!80!black, thick] (-1.3,0.8).. controls (-1.0,-0.6) and (1.0,-0.6).. (1.3,0.8);
+  \draw[purple, thick, dashed] (0,0.1) ellipse (0.85 and 0.32);
+
+  % Connecting dotted line & steepest ascent arrow
+  \draw[orange!90!black, thick, dotted] (0.55,-0.55) -- (0.55,0.1);
+  \draw[red, thick, ->] (0.55,0.1).. controls (0.75,0.3).. (0.95,0.75) node[above left, font=\tiny] {steepest ascent};
+  \node[blue!80!black, right] at (1.3,0.8) {$f(x,y)$};
+  \node[purple, right, font=\tiny] at (0.85,0.1) {level sets};
+\end{tikzpicture}
+\end{center}
+
+% Sonnet 5 (Medium)
+Unconstrained extrema are found by \cref{prop:extremum_implies_critical}. We now ask the same
+question when $x$ is restricted to a lower-dimensional constraint set, where the gradient
+condition $\nabla f(x_0) = 0$ is generally too strong to hold anywhere.

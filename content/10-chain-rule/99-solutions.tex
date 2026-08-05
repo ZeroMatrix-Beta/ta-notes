@@ -44,3 +44,144 @@ The gradient of $f(x,y)$ is $\nabla f(x,y) = (2xy, x^2)\transp$. Evaluating at $
 D_v f(1,2) = \nabla f(1,2) \cdot v = \begin{pmatrix} 4 \\ 1 \end{pmatrix} \cdot \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\ 1 \end{pmatrix} = \frac{4 + 1}{\sqrt{2}} = \frac{5}{\sqrt{2}}.
 \]
 \end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:5.1}]
+% Generator: Claude Sonnet 5 (Medium)
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Since $e^{-x^2-y^2} > 0$ everywhere, the gradient of $f(x,y) = xy^2e^{-x^2-y^2}$ vanishes
+    exactly where its two factors below vanish:
+    \[
+    \partial_x f = y^2(1-2x^2)e^{-x^2-y^2}, \qquad \partial_y f = 2xy(1-y^2)e^{-x^2-y^2}.
+    \]
+    \textbf{If $y=0$:} both partials vanish for every $x$ (indeed $f(x,0) \equiv 0$), so the
+    entire line $\{(x,0) : x \in \mathbb{R}\}$ consists of critical points.
+    \textbf{If $y \neq 0$:} $\partial_x f = 0$ forces $x = \pm\tfrac{1}{\sqrt2}$, and since then
+    $x \neq 0$, $\partial_y f = 0$ forces $y = \pm 1$. This gives the four additional critical
+    points $\big(\pm\tfrac{1}{\sqrt2}, \pm 1\big)$.
+  \item A directional derivative $\partial_v g(x,y) = \nabla g(x,y)\cdot v$ is always
+    \textbf{linear} in $v$. The prescribed expression
+    $2\cos(x^2y)xv_2 + \cos(x^2y)v_1^2 y$ contains a $v_1^2$ term with coefficient
+    $y\cos(x^2y)$, which is not identically zero (e.g.\ at $(x,y)=(0,1)$ it equals $1$). Hence
+    the expression is not linear in $v$ at every point, so \textbf{no such $g \in C^1(\mathbb{R}^2)$
+    can exist}.
+\end{enumerate}
+\end{exercisesolution}
+
+% Originally: new. Problems 5.4 and 5.7 sat in content/exercise-sheets/week-05.tex, which was
+% never \input by anything, so neither had reached the built document or carried a solution.
+\begin{exercisesolution}[Solution to \cref{ex:5.4}]
+% Generator: Claude Opus 5 (High)
+Throughout, $v$ is the direction and $x$ the base point. Where $f$ is differentiable the answer is
+just $\partial_v f(x) = \langle\nabla f(x), v\rangle$; the interest is in the points where it is
+not, which is what the second half of each part is asking about.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item On $\mathbb{R}^2\setminus\{x_2=0\}$ both functions are smooth, so
+    \[\partial_v\!\left(\frac{x_1}{x_2}\right) = \frac{v_1}{x_2} - \frac{x_1v_2}{x_2^2},
+      \qquad
+      \partial_v\!\left(e^{-x_1/x_2}\right)
+        = -e^{-x_1/x_2}\left(\frac{v_1}{x_2} - \frac{x_1v_2}{x_2^2}\right).\]
+    Neither extends continuously across $\{x_2 = 0\}$. For $x_1/x_2$, fix $x_1 = 1$ and let
+    $x_2 \to 0^{\pm}$: the values run off to $\pm\infty$. For $e^{-x_1/x_2}$ the failure is more
+    interesting, since the function is \emph{bounded} on one side: with $x_1 = 1$ fixed,
+    $x_2 \to 0^+$ sends $-1/x_2 \to -\infty$ and the value to $0$, while $x_2 \to 0^-$ sends it
+    to $+\infty$. A limit existing from one side is not enough.
+  \item The first function is smooth on all of $\mathbb{R}^2$, with
+    \[\partial_v\!\left(e^{x_1x_2}\sin(x_1{+}x_2^2)\right)
+      = e^{x_1x_2}\Big[\big(x_2\sin(x_1{+}x_2^2) + \cos(x_1{+}x_2^2)\big)v_1
+        + \big(x_1\sin(x_1{+}x_2^2) + 2x_2\cos(x_1{+}x_2^2)\big)v_2\Big],\]
+    and nothing needs extending. The other three are the point of the exercise, and they separate
+    three different behaviours at the origin.
+    \begin{itemize}
+      \item $\dfrac{x_1^2}{x_1^2+x_2^2}$ is homogeneous of degree $0$, with
+        \[\partial_v f(x) = \frac{2x_1x_2\,(x_2v_1 - x_1v_2)}{(x_1^2+x_2^2)^2}.\]
+        It has \textbf{no continuous extension}: it equals $1$ on $\{x_2 = 0\}$ and $0$ on
+        $\{x_1 = 0\}$.
+      \item $\dfrac{x_1^2x_2}{x_1^2+x_2^2}$ \textbf{does} extend continuously by $f(0):=0$, since
+        $x_1^2 \leq x_1^2+x_2^2$ gives $|f| \leq |x_2|$. It is not differentiable there:
+        \[\partial_vf(0) = \lim_{t\to0}\frac{f(tv)}{t}
+          = \lim_{t\to0}\frac{t^3v_1^2v_2}{t^3(v_1^2+v_2^2)} = \frac{v_1^2v_2}{v_1^2+v_2^2},\]
+        which exists in every direction and is \emph{not linear} in $v$.
+      \item $\dfrac{x_1^2x_2}{x_1^2+x_2^4}$ also satisfies $|f| \leq |x_2|$, so it too extends
+        continuously by $0$. Here
+        \[\partial_vf(0) = \lim_{t\to0}\frac{t^3v_1^2v_2}{t^3\,(v_1^2 + t^2v_2^4)}
+          = \begin{cases} v_2 & v_1 \neq 0,\\ 0 & v_1 = 0,\end{cases}\]
+        which is not even continuous in $v$, let alone linear. Again continuous, not
+        differentiable.
+    \end{itemize}
+    All three are instances of \cref{ex:all_directional_derivatives_exist}: every directional
+    derivative can exist without the map $v \mapsto \partial_vf(0)$ being linear, and linearity
+    is exactly what differentiability demands.
+  \item Here $x \in \mathbb{R}^n\setminus\{0\}$ for the first four, $e \in \mathbb{R}^n$ and
+    $g \in C^1(\mathbb{R})$:
+    \[\partial_v|x| = \frac{\langle x,v\rangle}{|x|}, \qquad
+      \partial_v|x|^\alpha = \alpha\,|x|^{\alpha-2}\langle x,v\rangle, \qquad
+      \partial_v\,g(|x|) = g'(|x|)\,\frac{\langle x,v\rangle}{|x|},\]
+    \[\partial_v\!\left(\frac{x}{|x|}\right)
+        = \frac{1}{|x|}\left(v - \frac{\langle x,v\rangle}{|x|^2}\,x\right), \qquad
+      \partial_v\,(x\cdot e) = \langle e,v\rangle, \qquad
+      \partial_v\,g(x\cdot e) = g'(\langle x,e\rangle)\,\langle e,v\rangle.\]
+    The fourth is worth reading geometrically: $x/|x|$ records only a direction, so moving $x$
+    along itself changes nothing --- and indeed the bracket is exactly $v$ with its component
+    along $x$ removed.
+  \item For matrix arguments the cleanest route is the one Corsin's hint suggests: expand
+    $f(x+tv)$ in powers of $t$ and read off the coefficient of $t$. The first three maps are
+    linear, hence their own derivatives:
+    \[\partial_v(ax) = av, \qquad \partial_v(x\transp) = v\transp, \qquad
+      \partial_v \Tr(x) = \Tr(v).\]
+    For the rest, $(x+tv)^2 = x^2 + t(xv+vx) + t^2v^2$ and
+    $(x+tv)^3 = x^3 + t(x^2v + xvx + vx^2) + O(t^2)$, so
+    \[\partial_v(x^2) = xv + vx, \qquad \partial_v(x^3) = x^2v + xvx + vx^2, \qquad
+      \partial_v\Tr(x^2) = \Tr(xv+vx) = 2\Tr(xv),\]
+    the last using cyclicity of the trace. Note that $\partial_v(x^2) \neq 2xv$: matrices do not
+    commute, and the familiar one-variable answer is precisely what fails.
+  \item \textbf{(*)} Differentiate the identity $(x+tv)(x+tv)^{-1} = \id$ at $t=0$. The product
+    rule gives $v\,x^{-1} + x\,\partial_v(x^{-1}) = 0$, hence
+    \[\partial_v(x^{-1}) = -\,x^{-1}v\,x^{-1}.\]
+    Writing $x^{-2} = x^{-1}x^{-1}$ and applying the product rule again,
+    \[\partial_v(x^{-2}) = -\,x^{-1}v\,x^{-2} \;-\; x^{-2}v\,x^{-1}.\]
+    Both reduce to the scalar formulas $-v/x^2$ and $-2v/x^3$ when $n=1$; for $n>1$ the two terms
+    genuinely differ and cannot be combined.
+\end{enumerate}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:5.7}]
+% Generator: Claude Opus 5 (High)
+Write $\theta(t) := \omega t + a(t)$ for the longitude actually occupied in space and
+$\varphi(t) := b(t)$ for the latitude, so that
+\[r(t) = R\big(\cos\varphi\cos\theta,\ \cos\varphi\sin\theta,\ \sin\varphi\big).\]
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item The computation is far shorter in the moving orthonormal frame
+    \[e_r := (\cos\varphi\cos\theta,\ \cos\varphi\sin\theta,\ \sin\varphi), \qquad
+      e_\varphi := (-\sin\varphi\cos\theta,\ -\sin\varphi\sin\theta,\ \cos\varphi), \qquad
+      e_\theta := (-\sin\theta,\ \cos\theta,\ 0),\]
+    in which $r = R\,e_r$. Differentiating the three frame vectors by the chain rule gives
+    \[\dot e_r = \varphi'\,e_\varphi + \theta'\cos\varphi\;e_\theta, \qquad
+      \dot e_\varphi = -\varphi'\,e_r - \theta'\sin\varphi\;e_\theta, \qquad
+      \dot e_\theta = \theta'\big({-}\cos\varphi\,e_r + \sin\varphi\,e_\varphi\big).\]
+    Hence $r' = R\big(\varphi'\,e_\varphi + \theta'\cos\varphi\,e_\theta\big)$, and
+    differentiating once more and collecting the three components,
+    \begin{align*}
+      r''(t) = R\Big[&-\big(\varphi'^2 + \theta'^2\cos^2\varphi\big)\,e_r \\
+        &+ \big(\varphi'' + \theta'^2\sin\varphi\cos\varphi\big)\,e_\varphi \\
+        &+ \big(\theta''\cos\varphi - 2\,\theta'\varphi'\sin\varphi\big)\,e_\theta\Big].
+    \end{align*}
+    The first component is the centripetal term; the other two are tangential.
+  \item Substituting $\varphi = b$, $\theta' = \omega + a'$ and $\theta'' = a''$, the assumption
+    $r''(t) = \lambda(t)\,r(t) = \lambda(t)R\,e_r$ says precisely that the $e_\varphi$ and
+    $e_\theta$ components vanish --- the frame is orthonormal, so there is no cancellation
+    between them to hope for. That is
+    \[b'' + \sin b\cos b\,(\omega+a')^2 = 0, \qquad
+      \cos b\;a'' - 2\sin b\,(\omega+a')\,b' = 0,\]
+    which is the claim. Away from the poles $\cos b \neq 0$, so dividing the second equation by
+    $\cos b$ gives
+    \[a'' - 2\tan b\,(\omega+a')\,b' = 0.\]
+\end{enumerate}
+
+\begin{ainote}
+Two features are worth noticing. First, $\omega$ enters only through the combination
+$\omega + a'$, the \emph{absolute} angular velocity --- which is what one would hope: the
+equations cannot distinguish a car driving east on a still Earth from a parked car on a rotating
+one. Second, the factor $2$ in the $e_\theta$ equation is the Coriolis term; it is the same
+$2\theta'\varphi'$ that appears in the acceleration in polar coordinates one dimension lower.
+\end{ainote}
+\end{exercisesolution}

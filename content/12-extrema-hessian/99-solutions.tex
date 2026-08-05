@@ -1,0 +1,144 @@
+% Originally: the \section{Solutions} of content/week-05.tex and content/week-06.tex
+
+\section{Solutions}
+\label{sec:extrema_solutions}
+
+\begin{exercisesolution}[Proof of \cref{ex:ai_extrema_triangle}]
+% Generator: Gemini 3.6 Flash (Medium)
+Since $T$ is compact and $f$ is continuous, global extrema exist by the extreme value theorem
+(\cref{item:extreme_value_theorem}).
+\begin{itemize}
+  \item \textbf{Interior of $T$:} Critical points satisfy $\nabla f(x,y) = (y,x)\transp = (0,0)\transp \implies (x,y) = (0,0)$, which lies on the boundary. Thus, there are no critical points in $\operatorname{int}(T)$.
+  \item \textbf{Boundary of $T$:}
+    \begin{itemize}
+      \item Along the leg $x = 0$ ($0 \le y \le 2$), $f(0,y) = 0$.
+      \item Along the leg $y = 0$ ($0 \le x \le 2$), $f(x,0) = 0$.
+      \item Along the hypotenuse $x+y = 2$ ($0 \le x \le 2$), substitute $y = 2-x$:
+        \[
+        h(x) := x(2-x) = 2x - x^2 \implies h'(x) = 2 - 2x = 0 \implies x = 1.
+        \]
+        This gives candidate point $(1,1)$ with $f(1,1) = 1$. The endpoints $(2,0)$ and $(0,2)$ yield $f = 0$.
+    \end{itemize}
+\end{itemize}
+Comparing values, the \textbf{global maximum} is $1$ at $(1,1)$, and the \textbf{global minimum} is $0$, attained everywhere on the coordinate axes legs of $T$.
+\end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:6.2}]
+% Generator: Claude Sonnet 5 (Medium)
+By the spectral theorem, since $M$ is symmetric there exists an orthogonal matrix $O$
+(so $OO\transp = \id$, hence $\det O = \pm 1$) and $\lambda_1, \lambda_2 \in \mathbb{R}$ such that
+\[OMO\transp = \begin{pmatrix} \lambda_1 & 0 \\ 0 & \lambda_2 \end{pmatrix}.\]
+Using $\det(AB) = \det(A)\det(B)$ and $\Tr(AB) = \Tr(BA)$,
+\[\det M = \det(OMO\transp) = \lambda_1\lambda_2, \qquad \Tr M = \Tr(MO\transp O) = \Tr(OMO\transp) = \lambda_1 + \lambda_2.\]
+So $\det M$ and $\Tr M$ are exactly the product and sum of the eigenvalues, and the four cases
+follow immediately:
+\begin{itemize}
+  \item $\det M > 0$: $\lambda_1, \lambda_2$ have the same sign. If additionally $\Tr M > 0$,
+    both are positive, so $M$ is \textbf{positive definite}; if $\Tr M < 0$, both are negative,
+    so $M$ is \textbf{negative definite}.
+  \item $\det M < 0$: $\lambda_1, \lambda_2$ have opposite signs, so $M$ is \textbf{indefinite}.
+  \item $\det M = 0$: one of $\lambda_1, \lambda_2$ is zero, so $M$ is \textbf{degenerate}.
+\end{itemize}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:6.8}]
+% Generator: Claude Sonnet 5 (Medium)
+None of \textbf{(a)}--\textbf{(c)} hold in general:
+\begin{itemize}
+  \item \textbf{(a) False:} $f \equiv 0$ has $\Hess f(x_0) = 0$ positive semidefinite at every
+    $x_0$, but $x_0$ is not a \emph{strict} local minimum (every nearby value equals $f(x_0)$).
+  \item \textbf{(b) False:} $f(x) = x_1^3$ at $x_0 = 0$ has $\Hess f(0) = 0$ (positive
+    semidefinite), but $f$ takes negative values arbitrarily close to $0$, so $x_0$ is not a
+    local minimum at all.
+  \item \textbf{(c) False:} $f(x) = -x_1^4$ at $x_0 = 0$ has $\Hess f(0) = 0$ (positive
+    semidefinite, vacuously, since it is the zero matrix), yet $x_0$ \emph{is} a (strict) local
+    maximum of $f$.
+\end{itemize}
+Since \textbf{(a)}--\textbf{(c)} all fail, \textbf{(d) is the correct answer}: none of the above
+statements necessarily hold.
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:6.9}]
+% Generator: Claude Sonnet 5 (Medium)
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item With $g(x,y) := x^2+y^2-1$, the Lagrangian is $L(x,y,\lambda) := f(x,y) - \lambda g(x,y)$,
+    giving the system
+    \[0 = \partial_x L = 2x(2-\lambda) - 1, \qquad 0 = \partial_y L = 2y(2-2\lambda), \qquad 0 = \partial_\lambda L = -(x^2+y^2-1).\]
+    From the middle equation, either $y = 0$ or $\lambda = 1$.
+
+    \textbf{If $y = 0$:} then $x^2 = 1$, so $x = \pm 1$, giving the points $(1,0)$ and $(-1,0)$
+    with $f(1,0) = 1$ and $f(-1,0) = 3$.
+
+    \textbf{If $\lambda = 1$:} the first equation gives $2x(1) = 1$, i.e.\ $x = \tfrac12$, and the
+    constraint gives $y = \pm\tfrac{\sqrt3}{2}$, with $f\big(\tfrac12,\pm\tfrac{\sqrt3}{2}\big) =
+    \tfrac12 + \tfrac34 - \tfrac12 = \tfrac34$.
+
+    Comparing all four values, $f$ attains a \textbf{global maximum} at $(-1,0)$ (value $3$) and
+    \textbf{global minima} at $\big(\tfrac12,\pm\tfrac{\sqrt3}{2}\big)$ (value $\tfrac34$); $(1,0)$
+    is a local (non-global) extremum with value $1$.
+  \end{enumerate}
+\end{exercisesolution}
+
+\begin{ainote}
+The official solution lists $(1,0)$ alongside $(-1,0)$ as \qt{local extrema} from the Lagrange
+system, then only mentions it again implicitly by omission from the final global-extrema summary
+--- worth flagging explicitly: \textbf{Lagrange's condition finds all \emph{critical} points of
+$f|_{S^1}$, not automatically the global extrema}. Here $(1,0)$ is a genuine local maximum along
+the circle (value $1$) that is simply not the largest one; only comparing all candidate values
+at the end distinguishes it from the global maximum at $(-1,0)$ (value $3$).
+\end{ainote}
+
+\begin{exercisesolution}[Solution to \cref{ex:6.9}, continued]
+% Generator: Claude Sonnet 5 (Medium)
+\begin{enumerate}[label=\textbf{(\alph*)}, start=2]
+  \item Having handled the boundary $S^1 = \partial D$ in \textbf{(a)}, we look for interior
+    critical points: $Df(x,y) = (4x-1, 2y) = 0$ gives $(x,y) = \big(\tfrac14, 0\big) \in
+    \operatorname{int}(D)$. The Hessian $\Hess f = \left(\begin{smallmatrix} 4 & 0 \\ 0 & 2\end{smallmatrix}\right)$ is
+    positive definite, so this is a local minimum, with value $f\big(\tfrac14,0\big) =
+    \tfrac18 - \tfrac14 = -\tfrac18$. Since $-\tfrac18$ is smaller than every boundary value found
+    in \textbf{(a)}, $f$ on $D$ attains a \textbf{global minimum} at $\big(\tfrac14,0\big)$ and a
+    \textbf{global maximum} at $(-1,0)$.
+\end{enumerate}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:6.12}]
+% Generator: Claude Sonnet 5 (Medium)
+Writing $r^2 := x^2+y^2$, the gradient is
+\[\nabla f(x,y) = \big(2x(a-ax^2-by^2),\ 2y(b-ax^2-by^2)\big)e^{-r^2}.\]
+
+\textbf{Case $a=b=0$:} $f \equiv 0$, so every point of $\mathbb{R}^2$ is critical, and (being the
+constant function) each is simultaneously a global maximum and minimum.
+
+\textbf{Case $a=0, b\neq 0$ (and symmetrically $a \neq 0, b=0$):} the gradient equations reduce to
+$-2xby^2=0$ and $2by(1-y^2)=0$, whose common solutions are the entire line $\{(x,0): x\in
+\mathbb{R}\}$ together with the two points $(0,\pm1)$. On the critical line the Hessian is
+singular (degenerate, as expected since a whole line is critical); at $(0,\pm1)$,
+$\Hess f(0,\pm1) = \operatorname{diag}(-2b,-4b)\,e^{-1}$, giving \textbf{minima} if $b<0$ and
+\textbf{maxima} if $b>0$. The case $a\neq0,b=0$ is symmetric, with critical line $\{(0,y)\}$ and
+extra points $(\pm1,0)$: minima if $a<0$, maxima if $a>0$.
+
+\textbf{Case $a,b \neq 0$, $a \neq b$:} setting $x=0$ or $y=0$ in the gradient equations gives the
+five critical points $(0,0)$, $(0,\pm1)$, $(\pm1,0)$ (checking $x,y\neq0$ simultaneously forces
+$a=b$, excluded here). The Hessians are
+\begin{align*}
+\Hess f(0,0) &= \begin{pmatrix}2a&0\\0&2b\end{pmatrix}, \\
+\Hess f(0,\pm1) &= e^{-1}\begin{pmatrix}2(a-b)&0\\0&-4b\end{pmatrix}, \\
+\Hess f(\pm1,0) &= e^{-1}\begin{pmatrix}-4a&0\\0&2(b-a)\end{pmatrix}.
+\end{align*}
+Reading off signs for each ordering of $a,b$ against $0$:
+\begin{itemize}
+  \item $a>b>0$: min at $(0,0)$, saddle at $(0,\pm1)$, max at $(\pm1,0)$.
+  \item $b>a>0$: min at $(0,0)$, max at $(0,\pm1)$, saddle at $(\pm1,0)$.
+  \item $a>0>b$: saddle at $(0,0)$, min at $(0,\pm1)$, max at $(\pm1,0)$.
+  \item $b>0>a$: saddle at $(0,0)$, max at $(0,\pm1)$, min at $(\pm1,0)$.
+  \item $0>a>b$: max at $(0,0)$, min at $(0,\pm1)$, saddle at $(\pm1,0)$.
+  \item $0>b>a$: max at $(0,0)$, saddle at $(0,\pm1)$, min at $(\pm1,0)$.
+\end{itemize}
+
+\textbf{Case $a=b\neq0$:} beyond $(0,0)$, $(0,\pm1)$, $(\pm1,0)$, setting $x,y\neq0$ now gives
+$a-ax^2-ay^2=0$, that is, $x^2+y^2=1$, so the entire unit circle is critical. On that circle,
+\[\Hess f(x,y) = -4a\,e^{-1}\begin{pmatrix} x^2 & xy \\ xy & y^2 \end{pmatrix},\]
+whose determinant is $16a^2e^{-2}(x^2y^2 - x^2y^2) = 0$. The Hessian is therefore degenerate
+(\cref{def:sign_symmetric_matrix}) at every such point, and the test is inconclusive --- as it
+must be, since a whole curve of critical points cannot consist of isolated extrema.
+\end{exercisesolution}

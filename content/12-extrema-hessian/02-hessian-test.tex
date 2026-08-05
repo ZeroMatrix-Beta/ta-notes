@@ -1,0 +1,394 @@
+% Originally: content/week-05.tex, \section{The Hessian test} (Corsin Week 5)
+
+% Source: Corsin Nick/Class Notes/Week 5.pdf, p. 7
+\section{The Hessian test}
+\label{sec:hessian_test}
+
+% Sonnet 5 (Medium): "Hessian" was already introduced in \cref{rem:second_order_taylor_hessian}
+% (\cref{ch:taylor}); referencing it here instead of re-introducing the term with \newterm.
+The \textbf{Hessian} (\cref{rem:second_order_taylor_hessian}) of $f \in C^2(U,\mathbb{R})$,
+$U \subseteq \mathbb{R}^n$, is given by
+\[\Hess f(x) = (\partial_i\partial_j f)_{i,j=1,\dots,n}\]
+with respect to the standard basis of $\mathbb{R}^n$. By \newterm{Schwarz's lemma}
+(\germanterm{Satz von Schwarz}), stated as \cref{thm:schwarz_mixed_partials},
+$\Hess f(x)$ is symmetric.
+
+% Supplement: Lukas Krause/Week 5 March 16-20 Notes Lukas Krause.pdf, pp. 2--3
+\begin{ainote}
+Symmetry of the Hessian is the hypothesis every statement in this section rests on --- the
+spectral theorem in \cref{rem:diagonalizing_hessian}, the eigenvalue criteria, the Hurwitz
+minors --- and neither Corsin nor \cref{thm:schwarz_mixed_partials} proves it. Lukas Krause's notes give a
+complete proof, and unusually he leaves his \emph{failed} first attempt in place, with the
+comment that it is instructive to see why the obvious calculation does not work. Both are
+reproduced below, because the failure is genuinely the more informative half.
+\end{ainote}
+
+\begin{proof}[Proof of \cref{thm:schwarz_mixed_partials}]
+It suffices to treat $m=1$ (apply the result to each component), $i<j$ (there is nothing to
+prove when $i=j$), and $n=2$ with $i=1$, $j=2$ (freeze all the other variables). So let
+$f \in C^2$ near $(x,y)$ and write $\partial_1,\partial_2$ for the two partial derivatives.
+
+\textit{The attempt that fails.} Unwinding both mixed derivatives as iterated limits gives
+\[\partial_2\partial_1f(x,y)
+  = \lim_{h_2\to0}\lim_{h_1\to0}
+    \frac{f(x+h_1,y+h_2) - f(x+h_1,y) - f(x,y+h_2) + f(x,y)}{h_1h_2},\]
+and one would like to apply the mean value theorem in each variable and be done. The obstruction
+is that the two intermediate points the mean value theorem returns depend on $h_1$ and $h_2$
+\emph{separately} and need not agree, so forcing them together leaves a stray factor
+$h_2/h_1$, which blows up when $h_1 \to 0$ at fixed $h_2$. The symmetric-looking expression
+above is not enough on its own; one has to keep the two increments coupled.
+
+\textit{The proof.} Couple them by fixing a single $h \neq 0$ and setting
+\[F(h) := f(x+h,y+h) - f(x+h,y) - \big(f(x,y+h) - f(x,y)\big),\]
+which is the second difference of $f$ over a square of side $h$, and
+$\varphi(t) := f(x+th, y+h) - f(x+th, y)$, so that $F(h) = \varphi(1)-\varphi(0)$. The mean
+value theorem gives $\xi_1 \in (0,1)$ with
+\[F(h) = \varphi'(\xi_1) = h\,\partial_1f(x+\xi_1h,\ y+h) - h\,\partial_1f(x+\xi_1h,\ y).\]
+Now apply the mean value theorem a second time, to $\psi(t) := \partial_1f(x+\xi_1h,\ y+th)$ ---
+legitimate precisely because $f \in C^2$, so $\partial_1 f$ is itself continuously
+differentiable in the second variable. Since $F(h) = h\big(\psi(1)-\psi(0)\big)$, there is
+$\xi_2 \in (0,1)$ with
+\[F(h) = h\,\psi'(\xi_2) = h^2\,\partial_2\partial_1f(x+\xi_1h,\ y+\xi_2h).\]
+Grouping the four terms of $F(h)$ the other way --- first and third together, second and fourth
+together --- runs the identical argument with the roles of the variables exchanged and produces
+$\tilde\xi_1,\tilde\xi_2 \in (0,1)$ with
+$F(h) = h^2\,\partial_1\partial_2f(x+\tilde\xi_1h,\ y+\tilde\xi_2h)$. Dividing both expressions
+by $h^2 \neq 0$,
+\[\partial_2\partial_1f(x+\xi_1h,\ y+\xi_2h)
+  \ =\ \partial_1\partial_2f(x+\tilde\xi_1h,\ y+\tilde\xi_2h).\]
+All four numbers $\xi_1,\xi_2,\tilde\xi_1,\tilde\xi_2$ lie in $(0,1)$ --- bounded, though they
+depend on $h$ --- so both arguments converge to $(x,y)$ as $h \to 0$. Continuity of the mixed
+second partials (again $f \in C^2$) lets us pass to the limit on both sides, giving
+$\partial_2\partial_1f(x,y) = \partial_1\partial_2f(x,y)$.
+\end{proof}
+
+\begin{remark}[What the failed attempt shows]
+\label{rem:why_schwarz_needs_care}
+The two attempts differ in exactly one respect: the failed one lets $h_1$ and $h_2$ go to zero
+\emph{independently}, the successful one ties them together as a single $h$ and only takes a
+limit at the very end. That is why the second difference $F(h)$ over a \emph{square} is the
+right object --- it is symmetric in the two variables by construction, so the two groupings of
+its four terms compute the two mixed partials, and the symmetry of the answer is inherited from
+the symmetry of the square rather than proved by force.
+
+It also locates precisely where continuity is used: twice, once to apply the mean value theorem
+to $\partial_1f$ and once to pass to the limit at the end. Drop it and the conclusion genuinely
+fails --- see \cref{rem:schwarz_needs_c2} for the standard counterexample, which is
+also the function Lukas sets as an exercise alongside this proof.
+\end{remark}
+
+\begin{definition}[Sign of a symmetric matrix]
+\label{def:sign_symmetric_matrix}
+A symmetric matrix $A \in \mathbb{R}^{n\times n}$ is:
+\begin{itemize}
+  \item \newterm{positive definite} (\germanterm{positiv definit}) if $v\transp Av > 0$ for all
+    $v \in \mathbb{R}^n\setminus\{0\}$;
+  \item \newterm{negative definite} (\germanterm{negativ definit}) if $v\transp Av < 0$ for all
+    $v \in \mathbb{R}^n\setminus\{0\}$;
+  \item \textbf{indefinite} if there exist $v, u \in \mathbb{R}^n\setminus\{0\}$ such that
+    $v\transp Av > 0$ and $u\transp Au < 0$;
+  \item \textbf{degenerate} (\germanterm{entartet}) if there exists
+    $v \in \mathbb{R}^n\setminus\{0\}$ such that $Av = 0$; equivalently, if $\det A = 0$, or
+    if $0$ is an eigenvalue of $A$.
+\end{itemize}
+\end{definition}
+
+\begin{ainote}
+Corsin defines degenerate as \qt{there exists $v \neq 0$ with $v\transp Av = 0$}. That
+condition is much weaker than intended: if $A$ is indefinite, with $v\transp Av > 0$ and
+$u\transp Au < 0$, then $t \mapsto (tv+(1-t)u)\transp A(tv+(1-t)u)$ is continuous and changes
+sign, so it vanishes at some $w \neq 0$ --- making \emph{every} indefinite matrix degenerate,
+and the third bullet of \cref{thm:hessian_test} vacuous. The intended notion is a nontrivial
+kernel ($\det A = 0$), which is also what \cref{ex:6.2} states. Corrected above.
+
+\end{ainote}
+
+% Supplement: Sascha Brack/Class Notes/Week_05_Notes_Friday.pdf, pp. 3--4
+\begin{remark}[Linear algebra interlude: diagonalizing the Hessian]
+\label{rem:diagonalizing_hessian}
+Since the Hessian $\Hess f(x_0)$ is a symmetric matrix, it is diagonalizable over $\mathbb{R}$ by the spectral theorem. There exist $n$ real eigenvalues $\lambda_1, \dots, \lambda_n \in \mathbb{R}$ and a corresponding orthonormal basis of eigenvectors $v_1, \dots, v_n \in \mathbb{R}^n$ such that $\Hess f(x_0) v_i = \lambda_i v_i$ for all $i$.
+
+Every vector $x \in \mathbb{R}^n$ can be written in this basis as $x = \sum_{i=1}^n a_i v_i$ with $a_i \in \mathbb{R}$. Applying the Hessian yields:
+\[
+  \Hess f(x_0) x = \Hess f(x_0) \sum_{i=1}^n a_i v_i = \sum_{i=1}^n a_i \Hess f(x_0) v_i = \sum_{i=1}^n \lambda_i a_i v_i.
+\]
+In this eigenbasis, the Hessian matrix becomes diagonal. Consequently, the quadratic form evaluates to $x\transp \Hess f(x_0) x = \sum_{i=1}^n \lambda_i a_i^2$, which immediately links the definiteness of the Hessian to the signs of its eigenvalues.
+\end{remark}
+
+\begin{theorem}[The Hessian test]
+\label{thm:hessian_test}
+If $f \in C^2(U,\mathbb{R})$ has a critical point $x_0 \in \operatorname{int}(U)$, then:
+\begin{itemize}
+  \item $\Hess f(x_0)$ \textbf{positive definite} $\Rightarrow$ local \textbf{min} at $x_0$;
+  \item $\Hess f(x_0)$ \textbf{negative definite} $\Rightarrow$ local \textbf{max} at $x_0$;
+  \item $\Hess f(x_0)$ \textbf{indefinite} $\Rightarrow$ \newterm{saddle point}
+    (\germanterm{Sattelpunkt}) at $x_0$.
+\end{itemize}
+If $\Hess f(x_0)$ is degenerate but not indefinite --- that is, positive or negative
+semidefinite with $0$ an eigenvalue --- the test gives \textbf{no information}, and all three
+behaviours are possible.
+\end{theorem}
+
+\begin{ainote}
+Corsin's third bullet reads \qt{indefinite and not degenerate}. With degeneracy corrected to
+$\det A = 0$ the extra hypothesis is unnecessary: indefiniteness alone already forces a saddle,
+since directions $v$ with $v\transp\Hess f(x_0)v > 0$ and $u$ with $u\transp\Hess f(x_0)u < 0$
+make $t\mapsto f(x_0+tv)$ increase and $t\mapsto f(x_0+tu)$ decrease away from $x_0$. Dropped
+above, and the genuinely inconclusive case --- semidefinite \emph{and} degenerate --- stated
+explicitly instead, since that is the one students actually run into
+(\cref{ex:6.8} is exactly this trap).
+\end{ainote}
+
+% Moved here from the Lagrange-multiplier section (review item D2): it uses the Hessian,
+% "indefinite" and the eigenvalue criterion, none of which were available at its former
+% position 260 lines earlier.
+\begin{aiexample}[Classifying saddle points via the Hessian]
+\label{ex:ai_saddle_via_hessian}
+% Generator: Gemini 3.6 Flash (Medium)
+Consider $f(x,y) := x^2-y^2$ on $\mathbb{R}^2$. The gradient
+$\nabla f(x,y) = (2x,\,-2y)\transp$ vanishes at $(0,0)$, and the Hessian is constant:
+\[
+\Hess f(0,0) = \begin{pmatrix} 2 & 0 \\ 0 & -2 \end{pmatrix}.
+\]
+Its eigenvalues are $\lambda_1 = 2 > 0$ and $\lambda_2 = -2 < 0$, so $\Hess f(0,0)$ is
+indefinite and $(0,0)$ is a saddle point by \cref{thm:hessian_test} --- the model case the word
+\qt{saddle} is named after, since $f$ rises along the $x$-axis and falls along the $y$-axis.
+\end{aiexample}
+
+\begin{remark}[Mnemonic]
+positive $= \smile \dots$ min; negative $= \frown \dots$ max; indefinite $=$ saddle.
+\end{remark}
+
+\begin{center}
+% Generator: Claude Opus 5 (High) --- FIG-W05-01: the three conclusive cases of
+% \cref{thm:hessian_test}, drawn as the model quadratic each one is.
+% Left:  x^2 + y^2, Hess = diag(2,2), both eigenvalues > 0 -- a bowl.
+% Mid:  -x^2 - y^2, Hess = diag(-2,-2), both < 0 -- a dome.
+% Right: x^2 - y^2, Hess = diag(2,-2), opposite signs -- a saddle (\cref{ex:ai_saddle_via_hessian}).
+% In each panel the two coloured curves are the profiles along the two eigendirections; the
+% signs of the eigenvalues are exactly the up/down curvature of those two profiles.
+\begin{tikzpicture}[>=Latex, scale=1.0]
+
+  % ---------- positive definite: bowl ----------
+  \begin{scope}
+    \draw[gray!55] (-1.5,0) -- (1.5,0);
+    \draw[green!50!black, very thick, domain=-1.25:1.25, samples=60, smooth]
+      plot (\x, {0.62*\x*\x});
+    \draw[orange!90!black, very thick, domain=-1.25:1.25, samples=60, smooth]
+      plot (\x, {0.30*\x*\x});
+    \fill (0,0) circle (1.5pt);
+    \node[font=\scriptsize, anchor=south west] at (0.06,0.02) {$x_0$};
+    % Caption baseline shared with the other two panels so the row reads straight.
+    \node[font=\small, align=center, anchor=north] at (0,-1.15)
+      {\textbf{positive definite}\\ $\lambda_1,\lambda_2>0$\\ local \textbf{min}};
+  \end{scope}
+
+  % ---------- negative definite: dome ----------
+  \begin{scope}[shift={(4.2,0)}]
+    \draw[gray!55] (-1.5,0) -- (1.5,0);
+    \draw[green!50!black, very thick, domain=-1.25:1.25, samples=60, smooth]
+      plot (\x, {-0.62*\x*\x});
+    \draw[orange!90!black, very thick, domain=-1.25:1.25, samples=60, smooth]
+      plot (\x, {-0.30*\x*\x});
+    \fill (0,0) circle (1.5pt);
+    \node[font=\scriptsize, anchor=south west] at (0.06,0.06) {$x_0$};
+    \node[font=\small, align=center, anchor=north] at (0,-1.15)
+      {\textbf{negative definite}\\ $\lambda_1,\lambda_2<0$\\ local \textbf{max}};
+  \end{scope}
+
+  % ---------- indefinite: saddle ----------
+  \begin{scope}[shift={(8.4,0)}]
+    \draw[gray!55] (-1.5,0) -- (1.5,0);
+    \draw[green!50!black, very thick, domain=-1.25:1.25, samples=60, smooth]
+      plot (\x, {0.62*\x*\x});
+    \draw[orange!90!black, very thick, domain=-1.25:1.25, samples=60, smooth]
+      plot (\x, {-0.62*\x*\x});
+    \fill (0,0) circle (1.5pt);
+    \node[font=\scriptsize, anchor=south west] at (0.08,0.04) {$x_0$};
+    \node[green!50!black, font=\scriptsize, anchor=west] at (1.28,0.90) {up};
+    \node[orange!90!black, font=\scriptsize, anchor=west] at (1.28,-0.90) {down};
+    \node[font=\small, align=center, anchor=north] at (0,-1.15)
+      {\textbf{indefinite}\\ opposite signs\\ \textbf{saddle}};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+% Generator: Claude Opus 5 (High)
+The picture is the whole theorem. By \cref{rem:diagonalizing_hessian} the second-order Taylor
+term is $\tfrac12\sum_i\lambda_ia_i^2$ in the eigenbasis, so along the $i$-th eigendirection $f$
+behaves like the parabola $\tfrac12\lambda_it^2$: it curves \emph{up} when $\lambda_i>0$ and
+\emph{down} when $\lambda_i<0$. All up gives a minimum, all down a maximum, and one of each
+gives a saddle --- there is a direction of ascent and a direction of descent through the same
+point, so it is neither. And when some $\lambda_i = 0$ that direction is \emph{flat} to second
+order, the quadratic term says nothing about it, and the test must fall silent --- which is
+exactly the degenerate case, illustrated by $x^4+y^4$ against $x^4-y^4$ above.
+
+\begin{ainote}
+The regularity in \cref{thm:hessian_test} is stated by Corsin as $C^3$; the test needs only
+$C^2$ (which is what the Hessian's definition assumes). Relaxed to $C^2$ above.
+\end{ainote}
+
+\begin{aiexample}[Inconclusive Hessian Test at a Degenerate Critical Point]
+% Generator: Gemini 3.6 Flash (Medium)
+Consider $f(x,y) := x^4 + y^4$ and $g(x,y) := x^4 - y^4$ at the critical point $(0,0)$.
+\begin{itemize}
+  \item For both functions, all second-order partial derivatives at $(0,0)$ vanish, so $\Hess f(0,0) = \Hess g(0,0) = \left(\begin{smallmatrix} 0 & 0 \\ 0 & 0 \end{smallmatrix}\right)$.
+  \item The Hessian test is \textbf{inconclusive} since $\det \Hess = 0$.
+  \item However, direct inspection reveals that $f(x,y) \geq 0 = f(0,0)$ for all $(x,y)$, so $(0,0)$ is a strict local minimum for $f$, whereas $g(x,0) > 0$ and $g(0,y) < 0$ for non-zero $x,y$, so $(0,0)$ is a saddle point for $g$.
+\end{itemize}
+\end{aiexample}
+
+% Source: Corsin Nick/Class Notes/Week 5.pdf, pp. 8--9
+\subsection{How do I determine positive/negative definiteness?}
+
+Let $A \in \mathbb{R}^{n\times n}$ be symmetric with eigenvalues $\lambda_1,\dots,\lambda_n$.
+Note: $\det(A) = \lambda_1\cdots\lambda_n$ and $\Tr(A) = \lambda_1+\dots+\lambda_n$.
+
+\textbf{For $n = 2$:}
+\begin{itemize}
+  \item $\det(A) = \lambda_1\lambda_2 < 0 \implies$ \textbf{indefinite}
+  \item $\det(A) > 0$, $\Tr(A) > 0 \implies$ \textbf{positive definite}
+  \item $\det(A) > 0$, $\Tr(A) < 0 \implies$ \textbf{negative definite}
+\end{itemize}
+
+\textbf{For $n \geq 3$:}
+\begin{itemize}
+  \item Solve the characteristic equation $\det(A - \lambda\id) = 0$ for $\lambda$ and check all
+    eigenvalues.
+  \item \newterm{Hurwitz criterion} (\germanterm{Hurwitz-Kriterium}): for
+    \[A = \begin{pmatrix} a_{11} & a_{12} & \cdots & a_{1n} \\ a_{21} & \ddots & & \vdots \\ \vdots & & \ddots & \\ a_{n1} & \cdots & & a_{nn}\end{pmatrix}\]
+    define the leading principal minors
+    \[A_1 = \det(a_{11}), \quad A_2 = \det\begin{pmatrix} a_{11} & a_{12} \\ a_{21} & a_{22}\end{pmatrix}, \quad \dots, \quad A_n = \det(A).\]
+    Then:
+    \begin{itemize}
+      \item $A_1 > 0$, $A_2 > 0$, $A_3 > 0$, \ldots\ if and only if the matrix is \textbf{positive definite}
+      \item $A_1 < 0$, $A_2 > 0$, $A_3 < 0$, \ldots\ if and only if the matrix is \textbf{negative definite}
+      \item \textbf{indefinite} if neither $A_1 \geq 0, A_2 \geq 0, \dots$ nor
+        $A_1 \leq 0, A_2 \geq 0, A_3 \leq 0, \dots$
+    \end{itemize}
+\end{itemize}
+
+\begin{ainote}
+Corsin writes the characteristic equation as ``$A - \lambda\id = 0$'', omitting the determinant.
+Corrected above.
+\end{ainote}
+
+% Source: Corsin Nick/Class Notes/Week 5.pdf, pp. 9--10
+\begin{example}[Definiteness calculations]
+\begin{center}
+\begin{tabular}{lll}
+\textbf{Matrix} & \textbf{Computation} & \textbf{Conclusion} \\
+\hline
+$\left(\begin{smallmatrix}2&2\\2&5\end{smallmatrix}\right)$ & $\det = 6 > 0$, $\Tr = 7 > 0$ & positive definite \\
+$\left(\begin{smallmatrix}-4&2\\2&-4\end{smallmatrix}\right)$ & $\det = 12 > 0$, $\Tr = -8 < 0$ & negative definite \\
+$\left(\begin{smallmatrix}4&2\\2&-4\end{smallmatrix}\right)$ & $\det = -20 < 0$ & indefinite \\
+$\left(\begin{smallmatrix}-5&0&0\\0&-4&-2\\0&-2&-4\end{smallmatrix}\right)$ & $A_1 = -5 < 0$, $A_2 = 20 > 0$, $A_3 = -60 < 0$ & negative definite \\
+$\left(\begin{smallmatrix}-1&0&-4\\0&2&-2\\-4&-2&22\end{smallmatrix}\right)$ & $A_1 = -1 < 0$, $A_2 = -2 < 0$, $A_3 = -72 < 0$ & indefinite \\
+\end{tabular}
+\end{center}
+\end{example}
+
+% Source: Corsin Nick/Class Notes/Week 5.pdf, pp. 10--11
+\begin{exercise}[Critical values of $x^3 - y^3 + 3\alpha xy$]
+\label{ex:cubic_saddle_family}
+Find the critical values of
+\[f_\alpha : \mathbb{R}^2 \to \mathbb{R}, \qquad (x,y) \mapsto x^3 - y^3 + 3\alpha xy\]
+for $\alpha \in \mathbb{R}\setminus\{0\}$ and determine min/max/saddle points.
+\end{exercise}
+
+% Kept inline: solved directly in Corsin Nick/Class Notes/Week 5.pdf, pp. 10--11.
+\begin{exercisesolution}[Solution to \cref{ex:cubic_saddle_family}]
+\[
+\begin{aligned}
+\frac{\partial f_\alpha}{\partial x} &= 3x^2 + 3\alpha y \overset{!}{=} 0 &&\implies y = -\frac{x^2}{\alpha} \\
+\frac{\partial f_\alpha}{\partial y} &= -3y^2 + 3\alpha x \overset{!}{=} 0 &&\implies -\frac{x^4}{\alpha^2} + \alpha x = 0
+\end{aligned}
+\]
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item $x = y = 0$
+  \item $x \neq 0 \implies x^3 = \alpha^3 \implies x = \alpha$, $y = -\alpha$
+\end{enumerate}
+So, we have critical points $(0,0)$ and $(\alpha, -\alpha)$.
+
+Compute the Hessian:
+\[\begin{pmatrix} \partial_x^2 f & \partial_x\partial_y f \\ \partial_x\partial_y f & \partial_y^2 f\end{pmatrix} = \begin{pmatrix} 6x & 3\alpha \\ 3\alpha & -6y \end{pmatrix} = \Hess f(x,y)\]
+\[\Hess f(0,0) = \begin{pmatrix} 0 & 3\alpha \\ 3\alpha & 0\end{pmatrix}, \qquad \det = -9\alpha^2 < 0 \implies \text{indefinite}\]
+\begin{align*}
+\Hess f(\alpha,-\alpha) &= \begin{pmatrix} 6\alpha & 3\alpha \\ 3\alpha & 6\alpha\end{pmatrix}
+  = 3\alpha\begin{pmatrix} 2 & 1 \\ 1 & 2\end{pmatrix}, \\
+\det &= 27\alpha^2 > 0, \qquad \Tr = 12\alpha.
+\end{align*}
+For $\alpha > 0$ this is positive definite; for $\alpha < 0$ it is negative definite. So:
+\begin{itemize}
+  \item $(0,0) \longrightarrow$ \textbf{saddle point}
+  \item $(\alpha,-\alpha) \longrightarrow$ \textbf{local minimum} for $\alpha > 0$; \textbf{local
+    maximum} for $\alpha < 0$
+\end{itemize}
+\end{exercisesolution}
+
+% Originally: content/week-05.tex, end of the chapter
+
+\begin{aiexercise}[Global Extrema on a Compact Triangle]
+\label{ex:ai_extrema_triangle}
+% Generator: Gemini 3.6 Flash (Medium)
+Find the global maximum and minimum values of $f(x,y) := xy$ on the compact triangular region $T := \{(x,y) \in \mathbb{R}^2 \mid x \ge 0, y \ge 0, x+y \le 2\}$.
+\end{aiexercise}
+
+
+% --- exercises relocated here from the dissolved sheets ---
+
+% Originally: content/week-06.tex, \exercisesheet{6}, problem 6.2
+% Source: exercises/Ex6_Analysis2_eng.pdf
+
+\begin{exercise}[6.2 --- The signature of a $2\times 2$ matrix \textnormal{(important)}]
+\label{ex:6.2}
+Despite the definition, it is not necessary to compute the eigenvalues of a matrix to find its
+signature. Prove that for a symmetric $2\times 2$ matrix $M$ we have the following simple rule to
+determine the signature in terms of $\det M$ and $\Tr M$:
+\begin{itemize}
+  \item If $\det M > 0$, $\Tr M > 0$ then $M$ is positive definite,
+  \item If $\det M > 0$, $\Tr M < 0$ then $M$ is negative definite,
+  \item If $\det M < 0$ then $M$ is indefinite,
+  \item If $\det M = 0$, then $M$ is degenerate.
+\end{itemize}
+\end{exercise}
+
+% Originally: content/week-06.tex, \exercisesheet{6}, problem 6.8
+% Source: exercises/Ex6_Analysis2_eng.pdf
+
+\begin{exercise}[6.8 --- Multiple choice \textnormal{(important)}]
+\label{ex:6.8}
+The Hessian matrix of $f \in C^2(\mathbb{R}^n)$ is positive semidefinite at a critical point $x_0$
+of $f$, i.e.,
+\[\langle v, \Hess f(x_0) v\rangle \geq 0 \quad \text{for all } v \in \mathbb{R}^n.\]
+Which of the following statements necessarily hold? (There may be more than one).
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $x_0$ is a strict local minimum of $f$.
+  \item $x_0$ is a local minimum of $f$.
+  \item $x_0$ is not a local maximum of $f$.
+  \item None of the above statements.
+\end{enumerate}
+\end{exercise}
+
+% Originally: content/week-06.tex, \exercisesheet{6}, problem 6.9
+% Source: exercises/Ex6_Analysis2_eng.pdf
+
+\begin{exercise}[6.9 --- Minimization \textnormal{(important)}]
+\label{ex:6.9}
+The function $f : \mathbb{R}^2 \to \mathbb{R}$ is given by $f(x,y) = 2x^2+y^2-x$. Determine the
+extrema of $f$ on\dots
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \dots the unit circle $S^1 = \{(x,y) \in \mathbb{R}^2 \mid x^2+y^2 = 1\}$;
+  \item \dots the closed unit disk $D = \{(x,y) \in \mathbb{R}^2 \mid x^2+y^2 \leq 1\}$.
+\end{enumerate}
+\end{exercise}
+
+% Originally: content/week-06.tex, \exercisesheet{6}, problem 6.12
+% Source: exercises/Ex6_Analysis2_eng.pdf
+
+\begin{exercise}[6.12 --- Critical points \textnormal{(important)}]
+\label{ex:6.12}
+Let $f : \mathbb{R}^2 \to \mathbb{R}$ be the function $f(x,y) = (ax^2+by^2)e^{-x^2-y^2}$ with real
+parameters $a, b \in \mathbb{R}$. Find all critical points and determine their nature with the
+Hessian test, depending on $a, b$.
+\end{exercise}

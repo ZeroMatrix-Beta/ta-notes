@@ -1,0 +1,141 @@
+% Originally: content/week-06.tex, \section{The inverse function theorem} (Corsin Week 6)
+
+% Source: Corsin Nick/Class Notes/Week 6.pdf, pp. 8--9
+\section{The inverse function theorem}
+\label{sec:inverse_function_theorem}
+
+\begin{theorem}[Inverse function theorem]
+\label{thm:inverse_function_theorem}
+Let $U \subseteq \mathbb{R}^n$ be open, let $f \in C^k(U,\mathbb{R}^n)$, and let $x_0 \in U$ be
+such that $Df_{x_0}$ is invertible. Then there exists an open neighbourhood $U_0 \subseteq U$ of
+$x_0$ such that
+\[f|_{U_0} : U_0 \to f(U_0)\]
+is a $C^k$-\newterm{diffeomorphism} (\germanterm{Diffeomorphismus}) and
+\[D\big(f|_{U_0}^{-1}\big)_{f(x)} = D\big(f|_{U_0}\big)_x^{-1} \quad \text{for all } x \in U_0.\]
+\end{theorem}
+
+% Supplement: Sascha Brack/Class Notes/Week_06_Notes_Friday.pdf, p. 2
+\begin{remark}[Checking for a global diffeomorphism]
+\label{rem:global_diffeomorphism_check}
+To verify that a map $f \in C^k(U, V)$ between open sets is a global $C^k$-diffeomorphism, it is best to check the following two conditions:
+\begin{enumerate}
+  \item \textbf{Global bijectivity:} Check that $f$ is bijective. This assures that a global inverse $f^{-1} : V \to U$ exists, and any local inverse will coincide with it.
+  \item \textbf{Local diffeomorphism everywhere:} Check that the differential $Df_x$ (or $\Jac f(x)$) is invertible at every point $x \in U$. By the inverse function theorem, this ensures $f$ is a local $C^k$-diffeomorphism everywhere.
+\end{enumerate}
+If both conditions hold, the global inverse $f^{-1}$ inherits the $C^k$ regularity of the local inverses, making $f$ a global $C^k$-diffeomorphism.
+\end{remark}
+
+% Supplement: Sascha Brack/Class Notes/Week_06_Notes_Monday.pdf, p. 4
+\begin{example}[Polar and spherical coordinates]
+\label{ex:polar_spherical_coordinates}
+The most important examples of diffeomorphisms are transformations between coordinate systems. For instance, the map assigning polar coordinates to Cartesian coordinates on $\mathbb{R}^2 \setminus ( (-\infty, 0] \times \{0\} )$, and similarly for spherical coordinates on $\mathbb{R}^3$, are global $C^\infty$-diffeomorphisms onto their images.
+\end{example}
+
+\begin{question}
+\begin{enumerate}[label=\textbf{Q\arabic*.}]
+  \item If $f : \mathbb{R}^n \to \mathbb{R}^n$ is $C^k$ and a \newterm{homeomorphism}
+    (\germanterm{Hom\"oomorphismus}) --- that is, bijective with continuous inverse --- is it
+    necessarily a $C^k$-diffeomorphism?
+  \item If $f \in C^\infty(U,\mathbb{R}^n)$ has an everywhere invertible differential, i.e.,
+    $Df_x$ is invertible for all $x \in U$ with $U \subseteq \mathbb{R}^n$ open, then $f$ is a
+    $C^\infty$-diffeomorphism onto its image. True or false?
+\end{enumerate}
+\end{question}
+
+\begin{answer}
+\begin{enumerate}[label=\textbf{A\arabic*.}]
+  \item \textbf{False.} Consider $f : \mathbb{R} \to \mathbb{R}$, $x \mapsto x^3$. Then
+    $f^{-1} : \mathbb{R} \to \mathbb{R}$, $x \mapsto \sqrt[3]{x}$, is not continuously
+    differentiable at $0 \in \mathbb{R}$.
+  \item \textbf{False.} Consider
+    \[\cos|_{\mathbb{R}\setminus\pi\mathbb{Z}} : \mathbb{R}\setminus\pi\mathbb{Z} \to (-1,1), \qquad x \mapsto \cos(x).\]
+    For any $x \in \mathbb{R}\setminus\pi\mathbb{Z}$, $\cos'(x) = -\sin(x) \neq 0$, so the
+    differential is everywhere invertible, but the cosine is not injective on this domain, so it
+    fails to be a diffeomorphism onto its image.
+\end{enumerate}
+\end{answer}
+
+\begin{ainote}
+Corsin illustrates \textbf{A2} with a second sketch: one $C^\infty$ curve carrying all three
+possibilities at once. The figure below reproduces it, with the three regions labelled by
+\emph{which hypothesis of the inverse function theorem fails}.
+\end{ainote}
+
+% Sonnet 5 (Medium) --- FIG-W06-03, drawn from the page image seen while transcribing.
+% The first region must have a genuinely HORIZONTAL tangent (f'=0) -- drawn as an explicit
+% cubic 1.95 + 0.15(x-2.15)^3, which is strictly increasing yet has f'(2.15) = 0. A merely
+% shallow slope would not do: where f' != 0 the IFT applies and f IS a local diffeomorphism.
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.05]
+  \draw[->] (-0.3,0) -- (8.4,0) node[right, font=\small] {$x$};
+  \draw[->] (0,-0.3) -- (0,5.6) node[above, font=\small] {$y$};
+
+  % Region 1: strictly increasing, but with f'(2.15) = 0 (an x^3-type inflection).
+  \draw[blue!80!black, thick, domain=0.25:3.1, samples=60, smooth]
+    plot ({\x}, {1.95 + 0.15*(\x-2.15)*(\x-2.15)*(\x-2.15)});
+  % Regions 2 and 3: a hump (three preimages), then a strictly monotone stretch.
+  \draw[blue!80!black, thick] plot[smooth] coordinates {
+    (3.1,2.079) (3.5,2.40) (4.0,2.62) (4.5,2.45) (4.95,2.20)
+    (5.4,2.50) (6.1,3.20) (6.9,4.00) (7.6,4.70)};
+
+  % Region 1 marker: the horizontal tangent itself.
+  \draw[red!80!black, dashed, thick] (1.45,1.95) -- (2.85,1.95);
+  \fill[red!80!black] (2.15,1.95) circle (1.7pt);
+  \draw (2.15,0.05) -- (2.15,-0.05) node[below, font=\scriptsize] {$x_0$};
+  \node[red!80!black, font=\scriptsize, align=center] (LabFlat) at (1.15,3.9)
+    {$f'(x_0)=0$:\\ injective, but $f^{-1}$\\ not differentiable};
+  \draw[red!80!black, thin, ->] (LabFlat) -- (2.10,2.10);
+
+  % Region 2 marker: one value, three preimages.
+  \draw[orange!90!black, dashed, thick] (3.2,2.35) -- (5.65,2.35);
+  \fill[orange!90!black] (3.45,2.35) circle (1.5pt);
+  \fill[orange!90!black] (4.61,2.35) circle (1.5pt);
+  \fill[orange!90!black] (5.24,2.35) circle (1.5pt);
+  \node[orange!90!black, font=\scriptsize, align=center] (LabHump) at (4.4,1.15)
+    {not injective:\\ one value, three preimages};
+  \draw[orange!90!black, thin, ->] (LabHump) -- (4.55,2.24);
+
+  % Region 3 marker: the IFT applies.
+  \node[green!60!black, font=\scriptsize, align=center] (LabIFT) at (5.75,4.75)
+    {$f'\neq0$ and injective:\\ diffeomorphism by the IFT};
+  \draw[green!60!black, thin, ->] (LabIFT) -- (6.85,4.00);
+\end{tikzpicture}
+\end{center}
+
+Reading the three regions left to right makes the two answers above concrete.
+
+\begin{itemize}
+  \item At $x_0$ the curve is still \emph{strictly increasing}, so $f$ is injective there and
+    $f^{-1}$ exists --- but the tangent is horizontal, so the tangent to $f^{-1}$ at $f(x_0)$ is
+    \emph{vertical} and $f^{-1}$ fails to be differentiable. Invertible, yet not a
+    diffeomorphism: this is exactly $x \mapsto x^3$ from \textbf{A1}, and it is why
+    \Cref{thm:inverse_function_theorem} assumes $Df_{x_0}$ invertible rather than merely
+    assuming $f$ bijective.
+  \item On the hump, $f' \neq 0$ at every individual point, so $f$ \emph{is} a local
+    diffeomorphism near each of them --- yet one value has three preimages, so $f$ is not
+    globally injective. This is \textbf{A2}: an everywhere-invertible differential buys locality
+    and nothing more.
+  \item On the final stretch both hypotheses hold, and the inverse function theorem delivers a
+    genuine $C^\infty$-diffeomorphism onto the image.
+\end{itemize}
+
+% Sonnet 5 (Medium) --- FIG-W06-02, drawn from the page image seen while transcribing
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.1]
+  \draw[->] (-0.3,0) -- (7.3,0) node[right, font=\small] {$x$};
+  \draw[->] (0,-1.6) -- (0,1.6) node[above, font=\small] {$y$};
+  \draw (0,1) -- (-0.05,1) node[left, font=\footnotesize] {$1$};
+  \draw (0,-1) -- (-0.05,-1) node[left, font=\footnotesize] {$-1$};
+
+  \draw[blue!80!black, thick, domain=0:7, samples=120, smooth]
+    plot ({\x}, {cos(\x r)}) node[right, font=\small] {$\cos(x)$};
+
+  \draw[red!80!black, dashed, thick] (0,0.4) -- (7,0.4);
+  \node[red!80!black, font=\scriptsize, right] at (7,0.4) {not injective};
+\end{tikzpicture}
+\end{center}
+
+% Sonnet 5 (Medium)
+The inverse function theorem asks when $f(x)=y$ can be solved for $x$ as a function of $y$. The
+implicit function theorem generalizes this: it asks when an equation $f(x,y)=0$ can be solved for
+\emph{some} of the variables in terms of the others, without $f$ itself being invertible.

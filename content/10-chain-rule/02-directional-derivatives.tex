@@ -111,7 +111,62 @@ Two lessons worth keeping.
   \item \textbf{Watch whether $v \mapsto \partial_vf(x_0)$ is linear.} If $f$ were differentiable
     we would need $\partial_vf(0,0) = DF_0(v)$, a \emph{linear} function of $v$; but $a^2/b$ is
     not linear in $(a,b)$. That failure alone rules out differentiability, without any mention of
-    continuity --- and it is precisely the test that settles \cref{ex:5.1}\textbf{(b)} on the
-    \cref{ex:5.3}.
+    continuity --- and it is precisely the test that settles \cref{ex:5.1}\textbf{(b)} below.
 \end{itemize}
 \end{aiexample}
+
+
+% --- exercises relocated here from the dissolved sheets ---
+
+% Originally: content/week-05.tex, \exercisesheet{5}, problem 5.1
+% Source: exercises/Ex5_Analysis2_eng.pdf
+
+\begin{exercise}[5.1 --- Derivatives \textnormal{(important)}]
+\label{ex:5.1}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Consider $f(x,y) := xy^2e^{-x^2-y^2}$ for $(x,y) \in \mathbb{R}^2$. Find all the critical
+    points of $f$, that is all the points where the gradient of $f$ vanishes. (The point will be
+    given if and only if all the numerical values you find are correct\ldots\ so check your
+    computations twice.)
+  \item We want to find a function $g \in C^1(\mathbb{R}^2)$ with the following directional
+    derivative:
+    \[\partial_v g(x,y) = 2\cos(x^2y)xv_2 + \cos(x^2y)v_1^2y \quad \text{for all } (x,y) \text{ and } (v_1,v_2) \in \mathbb{R}^2.\]
+    Give an explicit example of such a function $g$ or prove that a function with these
+    properties cannot exist.
+\end{enumerate}
+\end{exercise}
+
+\begin{remark}
+Corsin's hint --- \textit{recall the linearity of the differential} --- is the whole of
+\Cref{ex:5.1}(b): a directional derivative must be \textbf{linear} in $v$, and $v_1^2$ is not.
+\end{remark}
+
+% Originally: content/exercise-sheets/week-05.tex, problem 5.4 --- never previously built
+% Source: exercises/Ex5_Analysis2_eng.pdf
+
+\begin{exercise}[5.4 --- Computation of derivatives \textnormal{(semi-important)}]
+\label{ex:5.4}
+For each of the following functions compute the directional derivative in the general direction
+$v$ at a general point $x$, that is $\partial_v f(x)$, where applicable.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item $x_1/x_2$, $e^{-x_1/x_2}$ for $x \in \mathbb{R}^2\setminus\{x_2 = 0\}$. (Also: can they be
+    extended continuously or differentiably across $\{x_2 = 0\}$?)
+  \item $e^{x_1x_2}\sin(x_1+x_2^2)$, $\dfrac{x_1^2}{x_1^2+x_2^2}$,
+    $\dfrac{x_1^2x_2}{x_1^2+x_2^2}$, $\dfrac{x_1^2x_2}{x_1^2+x_2^4}$ for
+    $x \in \mathbb{R}^2\setminus\{0\}$. (Also: can they be extended continuously or
+    differentiably across the origin?)
+  \item $|x|$, $|x|^\alpha$, $x/|x|$, $g(|x|)$, $x\cdot e$, $g(x\cdot e)$, for
+    $\alpha \in \mathbb{R}$, $e \in \mathbb{R}^n$ and $g \in C^1(\mathbb{R})$.
+  \item $ax$, $x\transp$, $\Tr(x)$, $x^2$, $x^3$, $\Tr(x^2)$ for $x, a \in \mathbb{R}^{n\times n}$.
+  \item \textbf{(*)} $x^{-1}$, $x^{-2}$ for $x \in \mathbb{R}^{n\times n}$ with $\det x \neq 0$.
+\end{enumerate}
+\textit{Official hints:} to prove that a function \textbf{is} differentiable at 0 you have two
+tools --- the definition of differentiability, and the sufficient condition of
+\textit{Theorem 10.16}. To prove that a function \textbf{is not} differentiable at 0 you have
+two tools --- show that the necessary condition of \textit{Proposition 10.14} does not hold, or
+show that for some $C^1$ curve $\gamma : (-\delta,\delta)\to\mathbb{R}^n$ the function
+$(f\circ\gamma)(t)$ is \textbf{not} differentiable at $t = 0$ (simpler, as you study a function of
+one variable). \textbf{5.4.3} --- these functions are $C^\infty$, so compute them on $x+tv$ and
+find an expansion in powers of $t$; by \textit{Corollary 10.45} it must be the Taylor polynomial,
+from which the derivatives can be read off. For example $(x+tv)^2 = x^2 + (xv+vx)t + O(t^2)$.
+\end{exercise}

@@ -118,3 +118,31 @@ Let $u \in C^1(\mathbb{R}^n)$ and $\nu \in \mathbb{R}^n$. Show that
 \textbf{4.6.3} --- consider the domain $U := \{(x,y) : x^2 < y < x^2+1\}$ and the function
 \[u(x,y) := \begin{cases} \max\{0, y-2\}^2 & \text{if } x \geq 0, \\ 0 & \text{if } x \leq 0.\end{cases}\]
 \end{exercise}
+
+% Originally: content/exercise-sheets/week-05.tex, problem 5.7 --- never previously built
+% Source: exercises/Ex5_Analysis2_eng.pdf
+
+\begin{exercise}[5.7 --- Chain rule for a curve, or: a car on Earth \textnormal{(optional --- ``interesting for physicists'')}]
+\label{ex:5.7}
+Let $R > 0$ and $\omega \in \mathbb{R}$ be constants. Let
+$\sigma : I \subset \mathbb{R}\to\mathbb{R}^2$, $\sigma(t) = (a(t), b(t))$, which we interpret as
+a curve in a ``map'' representing the longitude and latitude of a car at time $t$.
+
+Define the ``rotating'' spherical coordinates $F : \mathbb{R}^2\times\mathbb{R}\to\mathbb{R}^3$,
+$$F((x,y),t) = \big(R\cos y\cos(\omega t + x),\ R\cos y\sin(\omega t + x),\ R\sin y\big),$$
+representing what a point on the map looks like on Earth from a satellite (thus we consider the
+Earth as a rotating sphere with speed given by $\omega$, and we forget about translation around
+the Sun) at time $t$.
+
+Consider $r : \mathbb{R}\to\mathbb{R}^3$, $r(t) = F(\sigma(t), t)$, which is the position of the
+car at time $t$.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Compute the acceleration $r''(t)$ using the chain rule.
+  \item Assume that the acceleration is always proportional to the radial vector $r(t)$, i.e.\
+    $r''(t) = \lambda(t)\,r(t)$ for some scalar function $\lambda(t)$. Show that $a$ and $b$
+    satisfy
+    $$b'' + \sin b\cos b\,(\omega+a')^2 = 0, \qquad \cos b\,a'' - 2\sin b\,(\omega+a')b' = 0.$$
+    Equivalently, away from the poles ($\cos b \neq 0$),
+    $$a'' - 2\tan b\,(\omega+a')\,b' = 0.$$
+\end{enumerate}
+\end{exercise}

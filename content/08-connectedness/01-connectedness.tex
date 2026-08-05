@@ -22,34 +22,55 @@ which is why one should remember the definition of \textit{disconnected}. Intuit
 means: \qt{the space cannot be separated by open sets.}
 
 \begin{center}
+% Generator: Claude Opus 5 (High) --- redrawn. Two things were wrong with the previous
+% version. (1) Every $U_i$ label sat directly on a curve --- on the dashed boundary in the
+% left panel, on the blob outline in the right --- so all four were unreadable. They are now
+% outside their region with a thin leader. (2) The right panel's whole point is that the two
+% open sets fail to cover $X$, and it made that point with a 0.14-unit double arrow carrying
+% a \tiny "gap" label: at print size an orange smudge, and the gap itself invisible. The gap
+% is now a visible strip, with a marked point $p$ of $X$ lying in neither $U_1$ nor $U_2$.
 \begin{tikzpicture}[scale=1.0]
-  % Left panel: Disconnected
+  % ---------------- Left panel: Disconnected ----------------
   \begin{scope}[shift={(0,0)}]
     \draw[thick] plot[smooth cycle, tension=0.7] coordinates {(-1.5,-0.8) (-1.8,0.6) (-0.8,1.2) (-0.6,-0.2)};
     \draw[thick] plot[smooth cycle, tension=0.7] coordinates {(0.4,-0.6) (0.2,0.8) (1.2,1.0) (1.0,-0.4)};
 
     \draw[blue!80!black, thick, dashed] plot[smooth cycle, tension=0.7] coordinates {(-1.7,-1.0) (-2.0,0.8) (-0.6,1.4) (-0.4,-0.4)};
-    \node[blue!80!black] at (-1.2,1.2) {$U_1$};
+    \node[blue!80!black] (dL) at (-2.15,1.55) {$U_1$};
+    \draw[blue!80!black, thin] (dL) -- (-1.55,1.18);
 
     \draw[blue!80!black, thick, dashed] plot[smooth cycle, tension=0.7] coordinates {(0.2,-0.8) (0.0,1.0) (1.4,1.2) (1.2,-0.6)};
-    \node[blue!80!black] at (0.8,1.0) {$U_2$};
+    \node[blue!80!black] (dR) at (1.75,1.5) {$U_2$};
+    \draw[blue!80!black, thin] (dR) -- (1.25,1.18);
 
-    \node[below, font=\small] at (-0.3,-1.3) {\textbf{Disconnected}};
+    \node[below, font=\small, align=center] at (-0.3,-1.35)
+      {\textbf{Disconnected}\\[-1pt]{\footnotesize $X \subseteq U_1 \cup U_2$, and $U_1 \cap U_2 = \emptyset$}};
   \end{scope}
 
-  % Right panel: Connected
-  \begin{scope}[shift={(5.0,0)}]
+  % ---------------- Right panel: Connected ----------------
+  % The two dashed regions stop short of one another --- U_1 at x = -0.05, U_2 at x = 0.45 ---
+  % leaving a visible vertical strip of X covered by neither. The point p sits in that strip,
+  % inside the blob (at x = 0.2 the blob runs from y = -0.95 up to the notch at y = 0.6).
+  \begin{scope}[shift={(5.2,0)}]
     \draw[thick] plot[smooth cycle, tension=0.7] coordinates {(-1.4,-0.6) (-1.6,1.2) (0.2,0.6) (1.2,1.0) (1.0,-0.8) (-0.2,-1.0)};
 
-    \draw[blue!80!black, thick, dashed] (-1.7,-0.8).. controls (-1.9,1.4) and (0.0,1.0).. (0.1,0.2).. controls (0.0,-0.8) and (-0.5,-1.2).. (-1.7,-0.8);
-    \node[blue!80!black] at (-1.2,1.1) {$U_1$};
+    \draw[blue!80!black, thick, dashed]
+      (-1.75,-0.75).. controls (-2.05,1.5) and (-0.35,1.2).. (-0.05,0.30)
+      .. controls (-0.18,-0.65) and (-0.65,-1.30).. (-1.75,-0.75);
+    \node[blue!80!black] (cL) at (-2.15,1.55) {$U_1$};
+    \draw[blue!80!black, thin] (cL) -- (-1.6,1.25);
 
-    \draw[blue!80!black, thick, dashed] (1.3,-0.9).. controls (1.5,1.2) and (-0.1,0.8).. (0.2,0.0).. controls (0.1,-0.7) and (0.6,-1.1).. (1.3,-0.9);
-    \node[blue!80!black] at (1.0,0.9) {$U_2$};
+    \draw[blue!80!black, thick, dashed]
+      (1.35,-0.95).. controls (1.62,1.3) and (0.32,1.05).. (0.45,0.12)
+      .. controls (0.33,-0.72) and (0.72,-1.22).. (1.35,-0.95);
+    \node[blue!80!black] (cR) at (1.75,1.5) {$U_2$};
+    \draw[blue!80!black, thin] (cR) -- (1.28,1.15);
 
-    \draw[orange!90!black, <->, thick] (0.1,0.2) -- node[above, font=\tiny] {gap} (0.2,0.0);
+    \fill[orange!90!black] (0.2,-0.2) circle (2.2pt);
+    \node[orange!90!black, font=\small, right=2pt] at (0.2,-0.2) {$p$};
 
-    \node[below, font=\small] at (0,-1.3) {\textbf{Connected}};
+    \node[below, font=\small, align=center] at (0,-1.35)
+      {\textbf{Connected}\\[-1pt]{\footnotesize $p \in X$ lies in neither: no separation}};
   \end{scope}
 \end{tikzpicture}
 \end{center}

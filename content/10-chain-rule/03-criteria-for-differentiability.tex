@@ -53,16 +53,18 @@ one-directional:
   \node[font=\scriptsize, green!45!black, right] at (0.15,2.15) {formula $(*)$};
   \node[font=\scriptsize, green!45!black, right] at (0.15,0.65) {take $v = e_i$};
 
-  % the reverse arrows, all false
-  \draw[nimp] (df.west) to[out=160, in=200, looseness=1.6] (c1.west);
-  \draw[nimp] (dir.west) to[out=160, in=200, looseness=1.6] (df.west);
-  \draw[nimp] (par.west) to[out=160, in=200, looseness=1.6] (dir.west);
-  \node[font=\scriptsize, red!75!black, align=right, anchor=east] at (-2.6,3.7)
-    {\textbf{no:} \cref{ex:differentiable_not_c1}};
-  \node[font=\scriptsize, red!75!black, align=right, anchor=east] at (-2.6,2.15)
-    {\textbf{no:} \cref{ex:all_directional_derivatives_exist}};
-  \node[font=\scriptsize, red!75!black, align=right, anchor=east] at (-2.6,0.65)
-    {\textbf{no:} \cref{ex:partial_derivatives_not_continuous}};
+  % The reverse arrows, all false. Each carries its counterexample as a midway node on the
+  % arc itself, filled white so it interrupts the dashed line cleanly. Previously the three
+  % labels were free-standing nodes anchored at x = -2.6 while the arcs bulged out past
+  % x = -3, so every arrow was drawn straight through its own label.
+  \tikzset{noLbl/.style={midway, font=\scriptsize, red!75!black, align=right,
+                         fill=white, inner sep=1.5pt}}
+  \draw[nimp] (df.west)  to[out=160, in=200, looseness=1.7]
+    node[noLbl] {\textbf{no:} \cref{ex:differentiable_not_c1}} (c1.west);
+  \draw[nimp] (dir.west) to[out=160, in=200, looseness=1.7]
+    node[noLbl] {\textbf{no:} \cref{ex:all_directional_derivatives_exist}} (df.west);
+  \draw[nimp] (par.west) to[out=160, in=200, looseness=1.7]
+    node[noLbl] {\textbf{no:} \cref{ex:partial_derivatives_not_continuous}} (dir.west);
 \end{tikzpicture}
 \end{center}
 

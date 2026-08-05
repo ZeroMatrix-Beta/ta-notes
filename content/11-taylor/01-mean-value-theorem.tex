@@ -45,10 +45,119 @@ $\xi$ at all. Geometrically this is entirely reasonable: a walker who returns to
 point must have had zero \emph{average} velocity, but need never have stood still. In one
 dimension \qt{returning} forces a turning point; in two it does not.
 
-What survives for vector-valued $f$ is the \emph{mean value inequality},
-$|f(x+h)-f(x)| \leq \sup_{t\in[0,1]}\lVert Df_{x+th}\rVert\,|h|$, which is what one actually
-uses in practice.
+What survives for vector-valued $f$ is the \newterm{mean value inequality} (\germanterm{Mittelwertsatz-Ungleichung}), which replaces exact equality by a sharp upper bound controlling the displacement in terms of the maximum derivative along the line segment.
 \end{importantremark}
+
+% Source: Diego Torres Tejeda/Notes - 09.03 - Diego Torres Tejeda.pdf, p. 9
+% Generator: Gemini 3.6 Flash (High)
+\begin{theorem}[Mean value inequality]
+\label{thm:mean_value_inequality}
+Let $U \subseteq \mathbb{R}^n$ be open, $x \in U$, and $h \in \mathbb{R}^n$ such that the line segment $[x, x+h] := \{x + th \mid t \in [0,1]\}$ lies entirely in $U$. If $F : U \to \mathbb{R}^m$ is differentiable at every point of $[x, x+h]$, then
+\[
+\|F(x+h) - F(x)\| \leq \left( \sup_{t \in [0,1]} \|DF_{x+th}\|_{\mathrm{op}} \right) \|h\|,
+\]
+where $\|DF_z\|_{\mathrm{op}} := \sup_{\|v\|\leq 1} \|DF_z(v)\|$ is the operator norm of the linear map $DF_z$.
+\end{theorem}
+
+\begin{proof}
+Set $y := F(x+h) - F(x) \in \mathbb{R}^m$. If $y = 0$, the inequality holds trivially. Assuming $y \neq 0$, let $u := \frac{y}{\|y\|}$, so that $\|u\| = 1$ and $\langle u, y \rangle = \|y\|$.
+
+Define the auxiliary scalar function $\varphi : [0,1] \to \mathbb{R}$ by
+\[
+\varphi(t) := \langle u, F(x+th) \rangle.
+\]
+By the chain rule along a path (\cref{sec:chain_rule_along_path}), $\varphi$ is continuous on $[0,1]$ and differentiable on $(0,1)$ with derivative $\varphi'(t) = \langle u, DF_{x+th}(h) \rangle$. Applying the scalar Mean Value Theorem (\cref{thm:mean_value_theorem}) to $\varphi$ on $[0,1]$, there exists some $t_0 \in (0,1)$ such that $\varphi(1) - \varphi(0) = \varphi'(t_0)$, which expands to
+\[
+\|F(x+h) - F(x)\| = \langle u, F(x+h) - F(x) \rangle = \langle u, DF_{x+t_0 h}(h) \rangle.
+\]
+Applying the Cauchy--Schwarz inequality and the definition of the operator norm, we obtain
+\[
+\|F(x+h) - F(x)\| \leq \|u\| \, \|DF_{x+t_0 h}(h)\| \leq 1 \cdot \|DF_{x+t_0 h}\|_{\mathrm{op}} \, \|h\| \leq \left( \sup_{t \in [0,1]} \|DF_{x+th}\|_{\mathrm{op}} \right) \|h\|,
+\]
+\end{proof}
+
+\begin{center}
+% Generator: Gemini 3.6 Flash (High) --- FIG-MVI: Geometric visualization of the Mean Value Inequality
+\begin{tikzpicture}[>=Latex, scale=1.0]
+
+  % ---------- Left Scope: Domain U in R^n ----------
+  \begin{scope}[shift={(0,0)}]
+    % Domain boundary
+    \draw[blue!60!black, thick, fill=blue!5] plot[smooth cycle, tension=0.7] coordinates
+      {(-0.4,-0.5) (-0.6,1.8) (2.2,2.2) (2.8,0.2) (1.8,-0.8)};
+    \node[blue!80!black, font=\small] at (0.0,1.9) {$U \subseteq \mathbb{R}^n$};
+
+    % Line segment [x, x+h]
+    \coordinate (X) at (0.3, 0.4);
+    \coordinate (XH) at (2.2, 1.3);
+    \coordinate (XI) at (1.25, 0.85); % x + t0 h
+
+    \draw[thick, orange!90!black] (X) -- (XH);
+    \fill[red!80!black] (X) circle (1.8pt) node[below left, font=\footnotesize] {$x$};
+    \fill[red!80!black] (XH) circle (1.8pt) node[above right, font=\footnotesize] {$x+h$};
+    \fill[green!55!black] (XI) circle (1.8pt) node[below right, font=\footnotesize] {$\xi = x+t_0 h$};
+
+    % Direction vector h
+    \draw[->, thick, orange!90!black] (X) -- (XH) node[midway, above, font=\scriptsize] {$h$};
+  \end{scope}
+
+  % ---------- Mapping Arrow ----------
+  \draw[->, very thick, purple!80!black] (2.9, 1.1) to[bend left=20] node[above, font=\small] {$F$} (4.6, 1.1);
+
+  % ---------- Right Scope: Target Space R^m ----------
+  \begin{scope}[shift={(5.2,0)}]
+    % Image curve gamma(t) = F(x+th)
+    \draw[purple!80!black, thick, domain=0:1, samples=40, smooth]
+      plot ({0.3 + 1.8*\x + 0.4*sin(\x*180)}, {0.2 + 1.2*\x + 0.5*sin(\x*180)});
+
+    \coordinate (FX) at (0.3, 0.2);
+    \coordinate (FXH) at (2.1, 1.4);
+    \coordinate (FXI) at (1.45, 1.25); % F(xi)
+
+    \fill[red!80!black] (FX) circle (1.8pt) node[below left, font=\footnotesize] {$F(x)$};
+    \fill[red!80!black] (FXH) circle (1.8pt) node[above right, font=\footnotesize] {$F(x+h)$};
+    \fill[green!55!black] (FXI) circle (1.8pt) node[above left, font=\footnotesize] {$F(\xi)$};
+
+    % Displacement vector F(x+h) - F(x)
+    \draw[->, very thick, red!80!black] (FX) -- (FXH) node[midway, below right, font=\footnotesize] {$F(x+h)-F(x)$};
+
+    % Tangent vector DF_xi(h) at F(xi)
+    \draw[->, very thick, green!55!black] (FXI) -- ++(0.95, 0.6) node[above, font=\footnotesize] {$DF_{\xi}(h)$};
+
+    % Unit dual vector direction u
+    \draw[->, dashed, gray!70!black] (FX) -- ++(2.4, 1.6) node[right, font=\scriptsize] {$u = \frac{y}{\|y\|}$};
+  \end{scope}
+
+\end{tikzpicture}
+\end{center}
+
+\begin{remark}[Global Lipschitz bound on convex domains]
+\label{rem:mvi_lipschitz_bound}
+As Diego Torres Tejeda emphasizes in his notes, \Cref{thm:mean_value_inequality} is the principal multivariable tool for establishing Lipschitz continuity. If $U \subseteq \mathbb{R}^n$ is \emph{convex} and $F : U \to \mathbb{R}^m$ is differentiable with $\|DF_z\|_{\mathrm{op}} \leq M$ for all $z \in U$, then for any pair $x, y \in U$, the line segment $[x, y]$ lies in $U$, so
+\[
+\|F(y) - F(x)\| \leq M \|y - x\|.
+\]
+Thus $F$ is $M$-Lipschitz continuous on $U$.
+\end{remark}
+
+\begin{example}[Computing a Lipschitz constant via the Mean Value Inequality]
+\label{ex:mvi_lipschitz_example}
+Consider the vector field $F : \mathbb{R}^2 \to \mathbb{R}^2$ defined by $F(x,y) := (\sin(x+y), \cos(x-y))\transp$. We use the Mean Value Inequality to find an explicit Lipschitz constant for $F$ on $\mathbb{R}^2$.
+
+The Jacobi matrix of $F$ at $(x,y)$ is
+\[
+\Jac F(x,y) = \begin{pmatrix} \cos(x+y) & \cos(x+y) \\ -\sin(x-y) & \sin(x-y) \end{pmatrix}.
+\]
+For any vector $v = (v_1, v_2)\transp \in \mathbb{R}^2$, the squared norm of $\Jac F(x,y) v$ is
+\[
+\|\Jac F(x,y) v\|^2 = \cos^2(x+y)(v_1+v_2)^2 + \sin^2(x-y)(v_1-v_2)^2.
+\]
+Since $\cos^2(x+y) \leq 1$ and $\sin^2(x-y) \leq 1$, we estimate:
+\[
+\|\Jac F(x,y) v\|^2 \leq (v_1+v_2)^2 + (v_1-v_2)^2 = (v_1^2 + 2v_1v_2 + v_2^2) + (v_1^2 - 2v_1v_2 + v_2^2) = 2(v_1^2 + v_2^2) = 2\|v\|^2.
+\]
+Taking square roots gives $\|\Jac F(x,y) v\| \leq \sqrt{2}\|v\|$, so $\|DF_{(x,y)}\|_{\mathrm{op}} \leq \sqrt{2}$ for all $(x,y) \in \mathbb{R}^2$. Since $\mathbb{R}^2$ is convex, \Cref{rem:mvi_lipschitz_bound} implies that $F$ is $\sqrt{2}$-Lipschitz continuous on $\mathbb{R}^2$.
+\end{example}
 
 \begin{center}
 % Generator: Claude Opus 5 (High) --- FIG-W04-06: the scalar theorem and its vector-valued

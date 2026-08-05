@@ -57,6 +57,26 @@ We determine $T_{e_3}S^2_+$, where $e_3 = (0,0,1)$:
 So $T_{e_3}S^2_+ = T_{e_3}S^2 = \operatorname{span}\{e_1,e_2\} = \mathbb{R}^2\times\{0\}$.
 \end{example}
 
+% Source: Diego Torres Tejeda/Notes - 13.04 - Diego Torres Tejeda.pdf, p. 2
+% Generator: Gemini 3.6 Flash (High)
+\begin{example}[Tangent space to the 2-Torus]
+\label{ex:torus_tangent_space}
+Consider the 2-torus $\mathbb{T}^2 \subset \mathbb{R}^3$ parametrized by $\phi(t,\theta) : \mathbb{R}^2 \to \mathbb{R}^3$,
+\[
+\phi(t,\theta) := \begin{pmatrix} (R_1 + R_2 \cos\theta)\cos t \\ (R_1 + R_2 \cos\theta)\sin t \\ R_2 \sin\theta \end{pmatrix},
+\]
+where $R_1 > R_2 > 0$ are the major and minor radii. The partial derivatives of $\phi$ with respect to the angles $t$ and $\theta$ yield two linearly independent column vectors:
+\[
+\frac{\partial \phi}{\partial t} = \begin{pmatrix} -(R_1 + R_2\cos\theta)\sin t \\ (R_1 + R_2\cos\theta)\cos t \\ 0 \end{pmatrix}, \qquad
+\frac{\partial \phi}{\partial \theta} = \begin{pmatrix} -R_2\sin\theta\cos t \\ -R_2\sin\theta\sin t \\ R_2\cos\theta \end{pmatrix}.
+\]
+By \cref{def:tangent_space}, at any point $p = \phi(t,\theta) \in \mathbb{T}^2$, the tangent space is the two-dimensional vector subspace
+\[
+T_p \mathbb{T}^2 = \operatorname{span}\left\{ \frac{\partial \phi}{\partial t}(t,\theta), \; \frac{\partial \phi}{\partial \theta}(t,\theta) \right\}.
+\]
+In particular, at the outer point $p_0 := (R_1+R_2, 0, 0)\transp$ (where $t = 0, \theta = 0$), we obtain $\frac{\partial \phi}{\partial t}(0,0) = (0, R_1+R_2, 0)\transp$ and $\frac{\partial \phi}{\partial \theta}(0,0) = (0, 0, R_2)\transp$, so $T_{p_0}\mathbb{T}^2 = \{0\} \times \mathbb{R}^2$.
+\end{example}
+
 % Sonnet 5 (Medium) --- FIG-W07-05
 \begin{center}
 \begin{tikzpicture}[scale=1.1]

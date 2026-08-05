@@ -1,0 +1,221 @@
+% Originally: the \section{Solutions} of content/week-02.tex and content/week-03.tex
+
+\section{Solutions}
+\label{sec:continuity_solutions}
+
+\begin{exercisesolution}[Solution to \cref{ex:2.6}]
+% Generator: Claude Opus 5 (High)
+\textbf{$d$ is $1$-Lipschitz with respect to $d_2$.} Let $x = (x_1,x_2)$ and $y = (y_1,y_2)$ be
+points of $X\times X$. Applying the triangle inequality in $X$ twice,
+\[d(x_1,x_2) \ \leq\ d(x_1,y_1) + d(y_1,y_2) + d(y_2,x_2),\]
+so $d(x_1,x_2) - d(y_1,y_2) \leq d(x_1,y_1) + d(x_2,y_2) = d_2(x,y)$. Exchanging the roles of
+$x$ and $y$ bounds the opposite difference in the same way, hence
+\[\big|d(x_1,x_2) - d(y_1,y_2)\big| \ \leq\ d_2(x,y),\]
+which is $1$-Lipschitz continuity (\cref{def:lipschitz_continuous}) and therefore continuity
+(\cref{rem:continuity_hierarchy}).
+
+\textbf{For $d_1$ and $d_3$: yes, still Lipschitz --- only the constant changes.} By
+\cref{ex:2.5} part 2 we have $d_2 \leq 2d_1$ and $d_2 \leq \sqrt2\,d_3$, so
+\[\big|d(x_1,x_2)-d(y_1,y_2)\big| \leq 2\,d_1(x,y)
+  \qquad\text{and}\qquad
+  \big|d(x_1,x_2)-d(y_1,y_2)\big| \leq \sqrt2\,d_3(x,y).\]
+This is a general principle rather than a computation: \textbf{Lipschitz continuity survives
+passage to an equivalent metric}, with the constant multiplied by the comparison factor.
+Continuity survives too, being topological, and by \cref{ex:2.5} the three product metrics
+induce the same topology.
+
+\begin{ainote}
+The constant $2$ for $d_1$ is sharp, so $d$ is genuinely \emph{not} $1$-Lipschitz with respect
+to $d_1$. Take $X = \mathbb{R}$ with $x := (0,0)$ and $y := (-1,1)$: then $d(x_1,x_2) = 0$ and
+$d(y_1,y_2) = 2$, while $d_1(x,y) = \max\{1,1\} = 1$, so the difference equals
+$2 = 2\,d_1(x,y)$. Worth noticing, since the problem asks only whether $d$ is Lipschitz for
+$d_1$ and $d_3$, and it is easy to answer \qt{yes, with the same constant} without checking.
+\end{ainote}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:2.7}]
+% Generator: Claude Opus 5 (High)
+All three arguments are short; the point of giving more than one is to see how differently the
+same fact reads through the three definitions of \cref{def:continuous}.
+
+\textbf{Topological (\cref{def:continuous}\textbf{(c)}).} This is the shortest, because
+preimages compose. Let $W \subseteq Z$ be open. Then
+\[(g\circ f)^{-1}(W) = f^{-1}\big(g^{-1}(W)\big),\]
+and $g^{-1}(W)$ is open in $Y$ by continuity of $g$, so its preimage under $f$ is open in $X$ by
+continuity of $f$. Hence $g\circ f$ is continuous.
+
+\textbf{Sequential (\cref{def:continuous}\textbf{(b)}).} Let $x_n \to x$ in $X$. Continuity of
+$f$ gives $f(x_n) \to f(x)$ in $Y$, and continuity of $g$ applied to \emph{that} sequence gives
+$g(f(x_n)) \to g(f(x))$ in $Z$.
+
+\textbf{$\varepsilon$--$\delta$ (\cref{def:continuous}\textbf{(a)}).} Fix $x_0 \in X$ and
+$\varepsilon > 0$. Continuity of $g$ at $f(x_0)$ supplies $\eta > 0$ such that
+$d_Y(f(x_0),y) < \eta$ implies $d_Z\big(g(f(x_0)),g(y)\big) < \varepsilon$. Continuity of $f$ at
+$x_0$, applied to \emph{that} $\eta$, supplies $\delta > 0$ such that $d_X(x_0,x) < \delta$
+implies $d_Y(f(x_0),f(x)) < \eta$. Chaining the two, $d_X(x_0,x) < \delta$ implies
+$d_Z\big((g\circ f)(x_0),(g\circ f)(x)\big) < \varepsilon$.
+
+\begin{remark}[Why the topological proof is the short one]
+The three arguments have the same shape --- apply the hypothesis for $g$ first, then feed the
+result to $f$ --- but only the topological version needs no quantifiers at all, because the set
+identity $(g\circ f)^{-1} = f^{-1}\circ g^{-1}$ does the bookkeeping the other two proofs carry
+out by hand. This is a fair advertisement for \cref{def:continuous}\textbf{(c)}, which can look
+like the least intuitive of the three on first meeting: it is the formulation in which
+composition is trivial, and that is exactly why general topology takes it as \emph{the}
+definition.
+\end{remark}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:ai_continuity_classification}]
+% Generator: Claude Sonnet 5 (Medium)
+\begin{itemize}
+  \item $\sqrt{x}$ on $[0,\infty)$: \textbf{uniformly continuous, not Lipschitz.} Uniform
+    continuity follows from continuity on $[0,1]$ (compact, \cref{item:uniform_continuity_compact})
+    together with $\tfrac12$-Lipschitz behaviour on $[1,\infty)$ (since $|\sqrt x - \sqrt y| \leq
+    \tfrac12|x-y|$ there by the mean value theorem, as $|(\sqrt{\cdot})'| = \tfrac{1}{2\sqrt x}
+    \leq \tfrac12$ for $x \geq 1$). Not Lipschitz near $0$: for $x_n :=
+    1/n^2 \to 0$, $\dfrac{|\sqrt{x_n}-\sqrt0|}{|x_n-0|} = n \to \infty$, so no global $L$ works.
+  \item $1/x$ on $(0,1)$: \textbf{continuous, neither uniformly nor Lipschitz continuous.} For
+    $x_n := 1/n$, $y_n := 1/(2n)$, $|x_n-y_n| \to 0$ but $|1/x_n - 1/y_n| = n \to \infty$, so no
+    uniform $\delta(\varepsilon)$ (and hence no Lipschitz constant) can work near $0$.
+  \item $\sgn(x)$ on $(-1,1)$: \textbf{none of the three} --- discontinuous at $0$.
+  \item $|x|^{3/2}$ on $(-1,1)$: \textbf{Lipschitz, hence also uniformly continuous and
+    continuous.} $|x|^{3/2}$ is $C^1$ on $(-1,1)\setminus\{0\}$ with $\big|\tfrac{d}{dx}|x|^{3/2}\big|
+    = \tfrac32|x|^{1/2} \leq \tfrac32$, and the bound extends across $0$ by direct estimation, so
+    $L := \tfrac32$ works globally.
+\end{itemize}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:3.1}]
+% Generator: Claude Opus 5 (High)
+Both parts ask for a map with no fixed point, and each defeats one hypothesis of
+\cref{thm:banach_fixed_point} while keeping the other --- which is exactly what
+\cref{rem:banach_hypotheses} predicts must be possible.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Take $f(x) := \tfrac{x+1}{2}$. It maps $[0,1)$ into $[\tfrac12,1) \subseteq [0,1)$, and
+    $|f(x)-f(y)| = \tfrac12|x-y|$, so it is $\tfrac12$-Lipschitz. A fixed point would satisfy
+    $x = \tfrac{x+1}{2}$, i.e.\ $x = 1$, which is not in $[0,1)$. \textbf{What fails is
+    completeness:} $[0,1)$ is not a complete metric space, the iterates
+    $x_{n+1} = f(x_n)$ march towards the missing endpoint $1$, and \cref{thm:banach_fixed_point}
+    does not apply.
+  \item Take the translation $f(x) := x + (1,0)$. It is an isometry, since
+    $\|f(x)-f(x')\| = \|x-x'\|$ exactly, and $f(x) = x$ would force $(1,0) = 0$. \textbf{What
+    fails is the strict contraction:} an isometry has Lipschitz constant $L = 1$, not $L < 1$,
+    and $\mathbb{R}^2$ is perfectly complete. Together with part \textbf{(a)} this shows neither
+    hypothesis of the fixed point theorem can be dropped.
+\end{enumerate}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:3.2}]
+% Generator: Claude Opus 5 (High)
+\textbf{No continuous extension exists for $xy/(x^2+y^2)$.} Suppose $f$ were continuous on
+$\mathbb{R}^2$ and agreed with $xy/(x^2+y^2)$ off the origin. Approach the origin along two
+different lines:
+\[f\!\left(\tfrac1k,\tfrac1k\right) = \frac{1/k^2}{2/k^2} = \frac12,
+  \qquad\qquad
+  f\!\left(\tfrac1k,0\right) = 0 \quad\text{for every } k.\]
+Both sequences tend to $(0,0)$, so continuity would force
+$f(0,0) = \tfrac12$ and $f(0,0) = 0$ simultaneously. Hence no such $f$ exists. (This is the same
+function, and the same argument, as \cref{ex:partial_derivatives_not_continuous},
+where it reappears to show that the existence of both partial derivatives implies nothing.)
+
+\textbf{Exactly one continuous extension exists for $xy/\sqrt{x^2+y^2}$.} Write
+$(x,y) = (r\cos\theta, r\sin\theta)$ with $r > 0$. Then
+\[g(x,y) = \frac{r^2\cos\theta\sin\theta}{r} = r\cos\theta\sin\theta,
+  \qquad\text{so}\qquad |g(x,y)| \leq \frac r2 = \frac{\lVert(x,y)\rVert}{2}.\]
+The bound is uniform in $\theta$, so $g(x,y) \to 0$ as $(x,y) \to (0,0)$, and setting
+$g(0,0) := 0$ produces a continuous function on all of $\mathbb{R}^2$.
+
+\textit{Uniqueness} is the part worth spelling out, and it needs no computation at all: the value
+at the origin is \emph{forced}. Since $(0,0)$ lies in the closure of
+$\mathbb{R}^2\setminus\{(0,0)\}$, any two continuous extensions agree on a dense subset of
+$\mathbb{R}^2$, and two continuous functions agreeing on a dense set agree everywhere --- take a
+sequence from the dense set converging to the point in question and apply
+\cref{def:continuous}\textbf{(b)} to both. So the extension is unique whenever it exists, which
+is also why the first half of the problem had only to exhibit \emph{two} conflicting limits.
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:3.6}]
+% Generator: Claude Opus 5 (High)
+\textbf{(a), (c) and (d) are true; only (b) is false.}
+
+\textbf{(a) True.} Addition is Lipschitz, hence uniformly continuous
+(\cref{rem:continuity_hierarchy}):
+\[\big|(x+y)-(x'+y')\big| \leq |x-x'| + |y-y'| \leq \sqrt2\,\big\lVert(x,y)-(x',y')\big\rVert,\]
+the last step by Cauchy--Schwarz. So $\delta := \varepsilon/\sqrt2$ works everywhere at once.
+
+\textbf{(b) False.} Multiplication is continuous but not uniformly so on the unbounded domain
+$\mathbb{R}^2$. Take
+\[p_k := \left(k,\ \tfrac1k\right), \qquad q_k := \left(k,\ 0\right).\]
+Then $\lVert p_k - q_k\rVert = \tfrac1k \to 0$, while the values are $k \cdot \tfrac1k = 1$ and
+$0$, a constant gap of $1$. So no $\delta$ can work for $\varepsilon < 1$. The failure is exactly
+the one described in \cref{rem:continuity_vs_uniform_continuity}: the function steepens without
+bound as one runs off to infinity, so the local $\delta$ shrinks without a positive floor.
+
+\textbf{(c) and (d) True,} and both for free: $[0,1]^2$ is closed and bounded, hence
+\textbf{compact} by \cref{thm:heine_borel}, and a continuous function on a compact metric space
+is automatically uniformly continuous by
+\cref{prop:compact_implies_uniformly_continuous} (Corsin's third reason to care about
+compactness, \cref{item:uniform_continuity_compact}). No estimate is needed for either.
+
+\begin{remark}
+The pair \textbf{(b)} versus \textbf{(d)} is the whole lesson: the \emph{same} function $xy$ is
+uniformly continuous on $[0,1]^2$ and not on $\mathbb{R}^2$. Uniform continuity is therefore not
+a property of a formula but of a formula \emph{together with its domain}, and compactness of the
+domain is what removes the room to run off to a bad point.
+\end{remark}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:3.11}]
+% Generator: Claude Opus 5 (High)
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item \textbf{($\Leftarrow$) A modulus of continuity forces uniform continuity.} Suppose
+    $d_Y(f(x),f(y)) \leq \omega(d_X(x,y))$ for all $x,y$, with $\omega$ as in the statement. Let
+    $\varepsilon > 0$. Since $\omega(t) \to 0$ as $t \downarrow 0$, there is $\delta > 0$ with
+    $\omega(\delta) < \varepsilon$. If $d_X(x,y) < \delta$ then, $\omega$ being nondecreasing,
+    \[d_Y\big(f(x),f(y)\big) \leq \omega\big(d_X(x,y)\big) \leq \omega(\delta) < \varepsilon.\]
+    The $\delta$ did not depend on $x$ or $y$, which is precisely
+    \cref{def:uniformly_continuous}.
+
+    \textbf{($\Rightarrow$) Uniform continuity produces one.} Following the official hint, define
+    the \newterm{modulus of continuity of $f$} as its worst oscillation at scale $t$:
+    \[\omega_f(t) := \sup\big\{\,d_Y(f(x),f(y))\ :\ x,y \in X,\ d_X(x,y) \leq t\,\big\}
+      \ \in\ [0,\infty].\]
+    It has all three required properties. $\omega_f(0) = 0$, because $d_X(x,y) \leq 0$ forces
+    $x=y$ by definiteness and then $d_Y(f(x),f(y)) = 0$. It is nondecreasing, because enlarging
+    $t$ enlarges the set over which the supremum is taken. And $\omega_f(t) \to 0$ as
+    $t \downarrow 0$: given $\varepsilon > 0$, uniform continuity supplies $\delta > 0$ with
+    $d_X(x,y) < \delta \Rightarrow d_Y(f(x),f(y)) < \varepsilon$, so every $t < \delta$ has
+    $\omega_f(t) \leq \varepsilon$. Finally $f$ has modulus $\omega_f$ by construction, since
+    $d_Y(f(x),f(y))$ is one of the numbers the supremum defining $\omega_f(d_X(x,y))$ ranges
+    over.
+  \item \textbf{(Bonus 1) On an interval, $\omega_f$ is already subadditive.} Let
+    $t_1,t_2 \geq 0$ and take any $x,y \in X$ with $|x-y| \leq t_1+t_2$. Choose an intermediate
+    point $z$ on the segment from $x$ to $y$ as follows: if $|x-y| \leq t_1$ put $z := y$;
+    otherwise let $z$ be the point of that segment at distance exactly $t_1$ from $x$, so that
+    $|z-y| = |x-y| - t_1 \leq t_2$. Either way $z \in X$, because $X$ is an interval and $z$ lies
+    between $x$ and $y$, and $|x-z| \leq t_1$, $|z-y| \leq t_2$. The triangle inequality in $Y$
+    now gives
+    \[d_Y\big(f(x),f(y)\big) \ \leq\ d_Y\big(f(x),f(z)\big) + d_Y\big(f(z),f(y)\big)
+      \ \leq\ \omega_f(t_1) + \omega_f(t_2).\]
+    Taking the supremum over all admissible $x,y$ yields
+    $\omega_f(t_1+t_2) \leq \omega_f(t_1) + \omega_f(t_2)$.
+  \item \textbf{(Bonus 2) Convexity is exactly what the argument needed.} Repeat part 2 verbatim
+    with $|x-y|$ replaced by $\lVert x-y\rVert$: the only property of an interval that was used
+    is that the segment from $x$ to $y$ lies inside $X$, and that is the definition of convexity.
+    The intermediate point is $z := x + \min\{t_1,\lVert x-y\rVert\}\,\frac{y-x}{\lVert
+    y-x\rVert}$ for $x \neq y$, which lies on the segment and satisfies the same two estimates.
+\end{enumerate}
+
+\begin{remark}[Why the value $+\infty$ has to be allowed]
+The official remark accompanying this problem gives the reason, and it is worth restating: on
+$X = \mathbb{Z} \subseteq \mathbb{R}$ the map $f(n) := n^2$ is uniformly continuous for the
+trivial reason that any two distinct points are at distance at least $1$ --- take
+$\delta := \tfrac12$ and the implication holds vacuously. Yet
+$|f(n+1)-f(n)| = 2n+1$ is unbounded, so $\omega_f(1) = +\infty$. Parts 2 and 3 rule this out by
+hypothesis rather than by luck: on a convex set the intermediate-point construction lets a large
+displacement be broken into many small ones, so $\omega_f(t) \leq \lceil t/s\rceil\,\omega_f(s)$
+is finite as soon as some $\omega_f(s)$ is. A space like $\mathbb{Z}$ has no intermediate points
+to subdivide with.
+\end{remark}
+\end{exercisesolution}

@@ -1,0 +1,262 @@
+% Originally: the \section{Solutions} of content/week-02.tex and content/week-03.tex
+
+\section{Solutions}
+\label{sec:metric_spaces_solutions}
+
+\begin{ainote}[How the solutions in this document were produced]
+Where a tutor solves a problem in their own notes, that solution is kept \emph{inline}, directly
+after the statement, mirroring how they present it --- each such case carries a
+\texttt{\% Kept inline} comment naming the source page. Everything else is collected in a
+\emph{Solutions} section like this one at the end of the chapter that hosts the problem. Those
+were worked independently and only then checked against the official
+\texttt{exercises/SolN\_Analysis2\_eng.pdf}; wherever the comparison turned up anything worth
+flagging, it is flagged in an AI-Note next to the solution.
+\end{ainote}
+
+\begin{exercisesolution}[Proof of \cref{ex:ai_metric_equivalence}]
+% Generator: Gemini 3.6 Flash (Medium)
+For any $x = (x_1, x_2) \in \mathbb{R}^2$, we have $\max\{|x_1|, |x_2|\} \leq |x_1| + |x_2|$, giving $d_3(x,0) \leq d_1(x,0)$. Conversely, since $|x_1| \leq \max\{|x_1|, |x_2|\}$ and $|x_2| \leq \max\{|x_1|, |x_2|\}$, summing these yields $|x_1| + |x_2| \leq 2 \max\{|x_1|, |x_2|\}$, i.e., $d_1(x,0) \leq 2 \, d_3(x,0)$. Both bounds are sharp: equality on the left holds for $x=(1,0)$, and equality on the right holds for $x=(1,1)$.
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:2.1}]
+% Generator: Claude Opus 5 (High)
+Throughout, non-negativity and symmetry are immediate in every part and are not belaboured; the
+interest is in \textbf{definiteness} and the \textbf{triangle inequality}.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item \textbf{Yes.} Boundedness of $f$ and $g$ makes the supremum finite, so $d$ really maps
+    into $\mathbb{R}$. Definiteness: $d(f,g)=0$ forces $|f(x)-g(x)| = 0$ for every $x$, i.e.\
+    $f=g$. For the triangle inequality, estimate pointwise and only then take the supremum:
+    \[|f(x)-h(x)| \leq |f(x)-g(x)| + |g(x)-h(x)| \leq d(f,g) + d(g,h) \quad \text{for all } x,\]
+    so the right-hand side is an upper bound for $|f-h|$ and hence dominates $d(f,h)$. This is
+    \cref{ex:sup_metric_is_metric} verbatim, with $[0,1]$ replaced by an arbitrary set $X$ and
+    continuity replaced by boundedness --- note that it was boundedness, not continuity, that
+    the argument there actually used.
+  \item \textbf{Yes.} Let $\varphi(x) := 1/x$, an injective map $\mathbb{Q}_+ \to \mathbb{Q}_+$,
+    and observe that $d(x,y) = |\varphi(x)-\varphi(y)|$. Symmetry and the triangle inequality
+    are inherited from $|\cdot|$ without any work, and definiteness is exactly injectivity of
+    $\varphi$: from $d(x,y)=0$ we get $1/x = 1/y$, hence $x=y$. This is the same pullback
+    construction as \cref{ex:completeness_not_topological}, and the same warning applies ---
+    pulling a metric back along an injection \emph{always} produces a metric, which is why the
+    interesting question about such a $d$ is never whether it is one, but whether it is
+    complete.
+  \item \textbf{No} --- the triangle inequality fails. Ignore the second coordinate, as the
+    official hint suggests, and take three collinear points $x := (0,0)$, $y := (1,0)$ and
+    $z := (2,0)$:
+    \[d(x,z) = 2^2 = 4 \quad > \quad d(x,y) + d(y,z) = 1 + 1 = 2.\]
+    Squaring produces the same failure as in
+    \cref{ex:metric_axioms_are_needed}\textbf{(c)}: a function growing faster than linearly
+    makes one long step more expensive than two short ones.
+  \item \textbf{Yes.} A sum of two metrics acting on separate coordinates is a metric, so
+    everything reduces to the first coordinate, where the claim is that
+    $(s,t) \mapsto |s-t|^{1/2}$ satisfies the triangle inequality on $\mathbb{R}$. That follows
+    from \textbf{subadditivity of the square root}, $\sqrt{a+b} \leq \sqrt a + \sqrt b$ for
+    $a,b \geq 0$, which holds because squaring the right-hand side gives
+    $a+b+2\sqrt{ab} \geq a+b$. Hence
+    \[|x_1-z_1|^{1/2} \leq \big(|x_1-y_1| + |y_1-z_1|\big)^{1/2}
+      \leq |x_1-y_1|^{1/2} + |y_1-z_1|^{1/2}.\]
+    Contrast this with part 3: $\sqrt{\cdot}$ is concave and vanishes at $0$, hence subadditive,
+    while $(\cdot)^2$ is convex, hence super-additive. That single distinction settles both
+    parts.
+  \item \textbf{Yes.} Write $A := X-Y$. Then
+    \[\Tr(A\transp A) = \sum_{i=1}^n (A\transp A)_{ii} = \sum_{i,j=1}^n A_{ji}^2,\]
+    so $d(X,Y)$ is nothing but the Euclidean distance between $X$ and $Y$ regarded as vectors of
+    $\mathbb{R}^{n^2}$, and it is a metric by
+    \cref{prop:induced_norm_and_metric}\textbf{(b)}. The associated norm is the
+    \newterm{Frobenius norm} (\germanterm{Frobeniusnorm}), also called the Hilbert--Schmidt norm.
+  \item \textbf{No} --- and here it is \textbf{definiteness} that fails, not the triangle
+    inequality. Following the hint, suppose $A := X-Y$ is \emph{anti-symmetric},
+    $A\transp = -A$. For any $v$ the number $v\transp Av$ is a $1\times1$ matrix, hence equal to
+    its own transpose:
+    \[v\transp A v = (v\transp A v)\transp = v\transp A\transp v = -\,v\transp A v,\]
+    so $v\transp Av = 0$ for \emph{every} $v$. Taking $n=2$ with
+    \[X := \begin{pmatrix} 0 & 1 \\ -1 & 0\end{pmatrix}, \qquad
+      Y := \begin{pmatrix} 0 & 0 \\ 0 & 0\end{pmatrix}\]
+    gives $X \neq Y$ but $d(X,Y) = 0$. Every other axiom does hold, so $d$ is a
+    \newterm{pseudo-metric} (\germanterm{Pseudometrik}): it cannot separate two matrices
+    differing by an anti-symmetric one. Equivalently, it restricts to a genuine metric on the
+    symmetric matrices.
+  \item \textbf{Yes.} Three things need checking, and the first is the one that is easy to skip.
+
+    \textit{Well defined.} Replacing $x$ by $x+(m,n)$ and $y$ by $y+(m',n')$ shifts $x-y$ by the
+    integer vector $(m-m',\,n-n')$, which merely re-indexes the infimum. So $d([x],[y])$ does
+    not depend on the representatives chosen.
+
+    \textit{The infimum is a minimum.} Only finitely many integer vectors $(k,h)$ satisfy
+    $\lVert x-y+(k,h)\rVert \leq \lVert x-y\rVert$, because $\mathbb{Z}^2$ is discrete; the
+    infimum is therefore taken over a finite non-empty set of candidates and is attained. This
+    is what the official hint asks you to settle first, and it is what makes the next step
+    legitimate.
+
+    \textit{Definiteness.} If $d([x],[y]) = 0$ then, the minimum being attained,
+    $x-y+(k,h) = 0$ for some integers $k,h$, that is $x \sim y$ and $[x] = [y]$. Note exactly
+    where \qt{the infimum is a minimum} was needed: an infimum equal to $0$ but not attained
+    would say nothing at all.
+
+    \textit{Triangle inequality.} Choose minimisers $(k_1,h_1)$ for the pair $(x,y)$ and
+    $(k_2,h_2)$ for $(y,z)$. Their sum is a legitimate candidate for the pair $(x,z)$, so
+    \begin{align*}
+      d([x],[z]) &\leq \big\lVert x-z+(k_1{+}k_2,\ h_1{+}h_2)\big\rVert \\
+      &= \big\lVert \big(x-y+(k_1,h_1)\big) + \big(y-z+(k_2,h_2)\big)\big\rVert \\
+      &\leq d([x],[y]) + d([y],[z]).
+    \end{align*}
+\end{enumerate}
+\end{exercisesolution}
+
+\begin{ainote}
+Parts 3, 4 and 6 are the ones worth revisiting, because each breaks (or rescues) a different
+axiom and together they cover every way the definition can fail. Part 3 kills the triangle
+inequality by growing too fast; part 4 rescues it by growing slowly enough; part 6 satisfies the
+triangle inequality perfectly and fails on definiteness instead. Read alongside
+\cref{ex:metric_axioms_are_needed}, they make the case that the three axioms are genuinely
+independent.
+\end{ainote}
+
+\begin{exercisesolution}[Solution to \cref{ex:2.5}]
+% Generator: Claude Opus 5 (High)
+Write $s := d_X(x,x')$ and $t := d_Y(y,y')$ throughout, so that the three candidates are
+$d_1 = \max\{s,t\}$, $d_2 = s+t$ and $d_3 = \sqrt{s^2+t^2}$ --- that is, the supremum, Manhattan
+and standard metrics of \cref{ex:metric_examples} applied to the pair $(s,t)$. Almost everything
+below is that one observation.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item \textbf{All three are metrics.} Each vanishes exactly when $s = t = 0$, i.e.\ when
+    $x=x'$ and $y=y'$, which is definiteness; symmetry is inherited from $d_X$ and $d_Y$. For
+    the triangle inequality, set
+    \[a := \big(d_X(x,x'),\,d_Y(y,y')\big), \quad
+      b := \big(d_X(x',x''),\,d_Y(y',y'')\big), \quad
+      c := \big(d_X(x,x''),\,d_Y(y,y'')\big),\]
+    all lying in $[0,\infty)^2$. The triangle inequalities in $X$ and in $Y$ say precisely that
+    $c \leq a+b$ \emph{componentwise}. Each of $\max$, the sum and $\lVert\cdot\rVert_2$ is
+    monotone on $[0,\infty)^2$ and subadditive, so
+    \[N(c) \ \leq\ N(a+b) \ \leq\ N(a) + N(b)\]
+    for $N \in \{\max,\ \textstyle\sum,\ \lVert\cdot\rVert_2\}$ --- which is the required
+    inequality in all three cases at once.
+  \item \textbf{Equivalence.} For all $s,t \geq 0$,
+    \[\max\{s,t\} \ \leq\ \sqrt{s^2+t^2} \ \leq\ s+t \ \leq\ 2\max\{s,t\},\]
+    i.e.\ $d_1 \leq d_3 \leq d_2 \leq 2d_1$; the middle inequality holds because
+    $(s+t)^2 = s^2+t^2+2st \geq s^2+t^2$. Hence $C := 2$ satisfies the chain in the statement:
+    $d_1 \leq 2d_2$, then $2d_2 \leq 4d_3$ (since $d_2 \leq \sqrt2\,d_3$ by Cauchy--Schwarz,
+    and $\sqrt2 \leq 2$), and finally $4d_3 \leq 8d_1$ (since $d_3 \leq \sqrt2\,d_1$).
+  \item \textbf{Convergence is coordinatewise.} From part 2,
+    \[\max\big\{d_X(x_n,x),\ d_Y(y_n,y)\big\}
+      \ \leq\ d_3\big((x_n,y_n),(x,y)\big)
+      \ \leq\ d_X(x_n,x) + d_Y(y_n,y).\]
+    If the middle term tends to $0$, the left inequality forces both coordinates to converge; if
+    both coordinates converge, the right inequality forces the middle term to $0$. This is
+    \cref{prop:Rn_coordinatewise_complete}\textbf{(a)} with $n = 2$ and the two factors allowed
+    to be arbitrary metric spaces. By part 2 the same conclusion holds for $d_1$ and $d_2$,
+    since equivalent metrics have the same convergent sequences.
+\end{enumerate}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:3.7}]
+% Generator: Claude Opus 5 (High)
+This is \cref{thm:cauchy_schwarz}, proved in \cref{sec:cauchy_schwarz} above by expanding
+$\lVert u - \pi_v(u)\rVert^2 \geq 0$, including the equality case. A second, independent proof
+--- minimising $\lambda \mapsto \lVert v-\lambda w\rVert^2$ --- is
+\cref{prop:cauchy_schwarz_geometric_proof} in Week 2. \Cref{rem:two_proofs_cauchy_schwarz}
+explains why the two are the same computation approached from opposite ends.
+
+\begin{remark}[A third route: the discriminant]
+The official solution gives a third proof, worth recording because it is the one that
+generalises most mechanically. By definiteness, the quadratic polynomial
+\[\lambda \ \longmapsto\ \langle \lambda v + w,\ \lambda v + w\rangle
+  = \lambda^2\langle v,v\rangle + 2\lambda\langle v,w\rangle + \langle w,w\rangle\]
+is non-negative for every real $\lambda$. A real quadratic with positive leading coefficient is
+non-negative exactly when its discriminant is $\leq 0$, i.e.
+\[\big(2\langle v,w\rangle\big)^2 - 4\langle v,v\rangle\langle w,w\rangle \leq 0,\]
+which rearranges to the inequality. Equality forces the discriminant to vanish, so the
+polynomial has a real root $\lambda_0$, and definiteness turns
+$\langle \lambda_0 v + w, \lambda_0 v + w\rangle = 0$ into $\lambda_0 v + w = 0$ --- the linear
+dependence. Note that this is the previous proof with the geometry stripped out: $\lambda_0$ is
+again the projection coefficient, now arriving as a root rather than as a minimiser.
+\end{remark}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:3.8}]
+% Generator: Claude Opus 5 (High)
+This is \cref{prop:induced_norm_and_metric}\textbf{(a)}, proved in Week 2 immediately after
+\cref{prop:cauchy_schwarz_geometric_proof} --- which is exactly the input the triangle inequality
+needs, and the reason the two problems appear adjacently on this sheet. In one line: expanding
+$\lVert u+v\rVert^2 = \lVert u\rVert^2 + 2\langle u,v\rangle + \lVert v\rVert^2$ and bounding the
+middle term by $2\lVert u\rVert\lVert v\rVert$ turns the right-hand side into
+$(\lVert u\rVert + \lVert v\rVert)^2$.
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:3.9}]
+% Generator: Claude Opus 5 (High)
+Write $e_1,\dots,e_n$ for the standard basis and $|\cdot|$ for the Euclidean norm.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Expand $x = \sum_{i=1}^n x_ie_i$ and use the triangle inequality and homogeneity of $f$
+    (\cref{def:norm}):
+    \[f(x) \ \leq\ \sum_{i=1}^n f(x_ie_i) \ =\ \sum_{i=1}^n |x_i|\,f(e_i)
+      \ \leq\ \Big(\max_i f(e_i)\Big)\sum_{i=1}^n|x_i|
+      \ \leq\ \Big(\max_i f(e_i)\Big)\sqrt n\,|x|,\]
+    the last step by Cauchy--Schwarz applied to $(|x_1|,\dots,|x_n|)$ and $(1,\dots,1)$. So
+    $C_1 := \sqrt n \max_i f(e_i)$ works, and $C_1 > 0$ because $e_i \neq 0$ forces
+    $f(e_i) > 0$ by definiteness.
+  \item The reverse triangle inequality for $f$ --- namely $f(x) \leq f(y) + f(x-y)$ and its
+    mirror image, giving $|f(x)-f(y)| \leq f(x-y)$ --- combines with part 1 to yield
+    \[|f(x)-f(y)| \ \leq\ f(x-y) \ \leq\ C_1|x-y|.\]
+    So $f$ is $C_1$-Lipschitz with respect to the \emph{Euclidean} distance
+    (\cref{def:lipschitz_continuous}), hence continuous (\cref{rem:continuity_hierarchy}). Note
+    which distance is which here: the claim is continuity of $f$ as a function on the metric
+    space $(\mathbb{R}^n, |\cdot|)$, and part 1 is what makes that meaningful.
+  \item The unit sphere $S := \{x : |x| = 1\}$ is closed (preimage of $\{1\}$ under the
+    continuous $|\cdot|$) and bounded, hence \textbf{compact} by \cref{thm:heine_borel}. By part
+    2 the function $f$ is continuous on $S$, so it attains a minimum there
+    (\cref{item:extreme_value_theorem}), say $c_2 := f(x_0)$ with $|x_0| = 1$. Since $x_0 \neq 0$,
+    definiteness gives $c_2 = f(x_0) > 0$.
+  \item For $x \neq 0$ the vector $x/|x|$ lies in $S$, so $f(x/|x|) \geq c_2$, and homogeneity
+    gives
+    \[f(x) = |x|\,f\!\left(\frac{x}{|x|}\right) \ \geq\ c_2\,|x|.\]
+    For $x = 0$ both sides vanish. Together with part 1, $c_2|x| \leq f(x) \leq C_1|x|$.
+  \item Apply parts 1 and 4 to both norms: $c_2|x| \leq f(x) \leq C_1|x|$ and
+    $\tilde c_2|x| \leq \tilde f(x) \leq \tilde C_1|x|$, all four constants positive. Then
+    \[\tilde f(x) \ \leq\ \tilde C_1|x| \ \leq\ \frac{\tilde C_1}{c_2}\,f(x),
+      \qquad\qquad
+      \tilde f(x) \ \geq\ \tilde c_2|x| \ \geq\ \frac{\tilde c_2}{C_1}\,f(x),\]
+    so $C := \max\big\{\tilde C_1/c_2,\ C_1/\tilde c_2\big\}$ satisfies
+    $C^{-1}f \leq \tilde f \leq Cf$. Equivalence of norms is thus an equivalence relation, and
+    the Euclidean norm serves as the common reference point.
+\end{enumerate}
+
+\begin{remark}[Where finite dimension is indispensable]
+\label{rem:norm_equivalence_needs_finite_dimension}
+The result is false in infinite dimensions, and the proof shows exactly which step breaks: part 1
+expands $x$ in a \emph{finite} basis and part 3 uses compactness of the unit sphere. In an
+infinite-di\-men\-sional normed space the closed unit ball is never compact, and one can write
+down inequivalent norms --- for instance $\lVert\cdot\rVert_\infty$ and
+$\int_0^1|\cdot|$ on $C^0([0,1])$, where a tall thin spike has supremum norm $1$ and integral
+norm arbitrarily small. Every appearance of \qt{all norms on $\mathbb{R}^n$ are equivalent} later
+in the course silently uses $n < \infty$.
+\end{remark}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:3.10}]
+% Generator: Claude Opus 5 (High)
+Write $\Psi^i \in \mathbb{R}^n$ for the $i$-th \emph{row} of $\Psi$ and
+$\Phi_j \in \mathbb{R}^n$ for the $j$-th \emph{column} of $\Phi$, so that by the definition of
+matrix multiplication
+\[(\Psi\Phi)_{ij} = \langle \Psi^i,\ \Phi_j\rangle.\]
+Cauchy--Schwarz (\cref{thm:cauchy_schwarz}) applied to this pair of vectors of $\mathbb{R}^n$
+gives $\big|(\Psi\Phi)_{ij}\big|^2 \leq \lVert\Psi^i\rVert^2\,\lVert\Phi_j\rVert^2$. Summing over
+all entries and factorising the resulting double sum,
+\[\lVert\Psi\Phi\rVert^2
+  = \sum_{i=1}^m\sum_{j=1}^d \big|(\Psi\Phi)_{ij}\big|^2
+  \ \leq\ \sum_{i=1}^m\sum_{j=1}^d \lVert\Psi^i\rVert^2\lVert\Phi_j\rVert^2
+  = \left(\sum_{i=1}^m\lVert\Psi^i\rVert^2\right)\left(\sum_{j=1}^d\lVert\Phi_j\rVert^2\right)
+  = \lVert\Psi\rVert^2\,\lVert\Phi\rVert^2,\]
+using that the Hilbert--Schmidt norm squared is the sum of the squares of all entries --- read
+row by row for $\Psi$ and column by column for $\Phi$. Taking square roots gives
+$\lVert\Psi\Phi\rVert \leq \lVert\Psi\rVert\lVert\Phi\rVert$.
+
+\begin{ainote}
+The Hilbert--Schmidt norm is the same object as the Frobenius norm met in
+\cref{ex:2.1} part 5 on the previous sheet, where it was shown to be the Euclidean norm of the
+matrix read as a vector of $\mathbb{R}^{n^2}$. The inequality just proved says that this norm is
+\newterm{submultiplicative} (\germanterm{submultiplikativ}), which is exactly the property that
+makes it useful for estimating compositions of linear maps --- and it is what will let
+$\lVert Df\rVert$ be handled like an absolute value in the mean value inequality of Week 4
+(\cref{rem:mvt_fails_vector_valued}).
+\end{ainote}
+\end{exercisesolution}

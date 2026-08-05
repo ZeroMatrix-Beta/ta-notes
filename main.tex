@@ -838,8 +838,19 @@
 \part{Foundations}
 \input{content/01-prerequisites/00-chapter.tex}
 
-\input{content/week-02.tex}
-\input{content/week-03.tex}
+% Chapter order follows the dependency chain, which is also Corsin's own teaching order:
+% metrics -> open/closed sets -> sequences -> continuity -> completeness -> compactness ->
+% connectedness. Completeness sits after continuity because a contraction is defined as a
+% Lipschitz map with constant < 1.
+\part{Metric Spaces and Topology}
+\input{content/02-metric-normed-inner-product/00-chapter.tex}
+\input{content/03-open-and-closed-sets/00-chapter.tex}
+\input{content/04-sequences/00-chapter.tex}
+\input{content/05-continuity/00-chapter.tex}
+\input{content/06-completeness/00-chapter.tex}
+\input{content/07-compactness/00-chapter.tex}
+\input{content/08-connectedness/00-chapter.tex}
+
 \input{content/week-04.tex}
 \input{content/week-05.tex}
 \input{content/week-06.tex}

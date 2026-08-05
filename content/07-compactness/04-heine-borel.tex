@@ -1,0 +1,189 @@
+% Originally: content/week-03.tex, \section{Compactness --- continued} (Corsin Week 3, Monday)
+
+% Corsin taught this a week after the definition, and opened it as "Compactness --- continued"
+% with a back-pointer. In a topic chapter the two sit together, so the heading names its content
+% and the \continuedfrom pointer is gone.
+\section{Heine--Borel}
+\label{sec:heine_borel}
+
+\begin{theorem}[Heine--Borel]
+\label{thm:heine_borel}
+A subset $K \subseteq \mathbb{R}^n$ equipped with the \textbf{standard metric} is
+\textbf{compact} if and only if it is \newterm{closed} and \newterm{bounded}
+(\germanterm{beschr\"ankt}).
+\end{theorem}
+
+\begin{ainote}
+Neither Corsin nor this document proves \cref{thm:heine_borel}; it is proved in the lecture, and
+the full argument is longer than anything else in these two chapters. It is worth knowing what
+goes into it, though, since every ingredient has already appeared:
+\begin{itemize}
+  \item \textbf{($\Rightarrow$)} is short and general. A compact metric space is bounded and
+    complete (\cref{lem:sequentially_compact_totally_bounded},
+    \cref{ex:compact_finite_complete}), and a complete subset of the complete space
+    $\mathbb{R}^n$ is closed (\cref{rem:complete_vs_closed}).
+  \item \textbf{($\Leftarrow$)} is where the real content sits, and it is exactly
+    \textbf{Bolzano--Weierstrass}: a bounded sequence in $\mathbb{R}^n$ has a convergent
+    subsequence, obtained by bisecting a box $n$ times over, or by extracting coordinatewise
+    (\cref{prop:Rn_coordinatewise_complete}) $n$ times in succession. Closedness then puts the
+    limit back inside $K$, giving sequential compactness, which is compactness by
+    \cref{thm:sequential_topological_compactness_equivalence}.
+\end{itemize}
+The reason the theorem is special to $\mathbb{R}^n$ with the standard metric is that both steps
+use the completeness of $\mathbb{R}$ and the finiteness of the dimension.
+\Cref{ex:heine_borel_fails} below shows how thoroughly it fails otherwise.
+\end{ainote}
+
+% Supplement: Sascha Brack/Class Notes/Week_02_Notes_Friday_Updated.pdf, p. 7
+\begin{example}[Compactness via Heine-Borel and continuity]
+\label{ex:compactness_heine_borel_examples}
+Consider the following subsets and determine whether they are compact under the standard Euclidean metric:
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{Is $\mathbb{N} \subset \mathbb{R}$ compact?} No. While it is closed in $\mathbb{R}$, it is not bounded. By Heine-Borel, it cannot be compact.
+  \item \textbf{Is $[0,1] \times [0,1] \subset \mathbb{R}^2$ complete?} Yes. The square $[0,1]^2$ is closed and bounded in $\mathbb{R}^2$, hence compact by Heine-Borel. As every compact metric space is complete (\cref{ex:compact_finite_complete}), it is complete.
+  \item Let $f: \mathbb{R} \to \mathbb{R}^3, x \mapsto (\sin x, \cos x, 1)$. \textbf{Is $f([0,\pi/2])$ compact in $\mathbb{R}^3$?} Yes. We do not need to show this manually using sequences or open covers. Since the domain $[0,\pi/2]$ is compact in $\mathbb{R}$ (closed and bounded) and the function $f$ is continuous, its image $f([0,\pi/2])$ is compact in $\mathbb{R}^3$ (by \cref{item:continuity_preserves_compact}).
+\end{enumerate}
+\end{example}
+
+% Supplement: Sascha Brack/Class Notes/Week_03_Notes_Monday.pdf, p. 3
+\begin{exercise}[Topological properties of various subsets]
+\label{ex:topological_properties_table}
+Decide whether the following subsets are open, closed, compact, or complete (under the standard Euclidean metric):
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $[0,1] \subseteq \mathbb{R}$
+  \item $\mathbb{Q} \subseteq \mathbb{R}$
+  \item $B_1(0) \subseteq \mathbb{R}^3$
+  \item $B_1(0) \cap B_1(1) \subseteq \mathbb{R}^2$
+  \item $\{0\} \cup \{1/n \mid n \in \mathbb{N}_{\ge 1}\} \subseteq \mathbb{R}$
+  \item $\bigcup_{n=1}^\infty B_{1/n}(n) \subseteq \mathbb{R}$
+  \item $(-\infty, 1] \subseteq \mathbb{R}$
+  \item $f([0,1])$ where $f : \mathbb{R} \to \mathbb{R}^n$ is continuous
+  \item $f^{-1}([0,1])$ where $f : \mathbb{R}^n \to \mathbb{R}$ is continuous
+  \item $f^{-1}((0,1))$ where $f : \mathbb{R}^n \to \mathbb{R}$ is continuous
+  \item $S := \operatorname{span}\{(1,0,0)\transp, (3,1,0)\transp\} \subseteq \mathbb{R}^3$
+  \item $\{x \in \mathbb{R}^3 \mid \exists s \in S \text{ s.t.\ } d(x, s) < 1\}$ for a subset $S \subseteq \mathbb{R}^3$
+\end{enumerate}
+\end{exercise}
+
+\begin{exercisesolution}[Proof of \cref{ex:topological_properties_table}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $[0,1] \subseteq \mathbb{R}$: \textbf{Closed}, \textbf{compact}, \textbf{complete}. (Not open).
+  \item $\mathbb{Q} \subseteq \mathbb{R}$: \textbf{None}. It is neither open nor closed, not bounded (so not compact), and not complete.
+  \item $B_1(0) \subseteq \mathbb{R}^3$: \textbf{Open}.
+  \item $B_1(0) \cap B_1(1) \subseteq \mathbb{R}^2$: \textbf{Open} (finite intersection of open sets).
+  \item $\{0\} \cup \{1/n \mid n \in \mathbb{N}_{\ge 1}\} \subseteq \mathbb{R}$: \textbf{Closed}, \textbf{compact}, \textbf{complete} (bounded and contains its only limit point $0$).
+  \item $\bigcup_{n=1}^\infty B_{1/n}(n) \subseteq \mathbb{R}$: \textbf{Open} (arbitrary union of open sets).
+  \item $(-\infty, 1] \subseteq \mathbb{R}$: \textbf{Closed}, \textbf{complete}.
+  \item $f([0,1])$: \textbf{Closed}, \textbf{compact}, \textbf{complete} (continuous image of a compact set).
+  \item $f^{-1}([0,1])$: \textbf{Closed}, \textbf{complete} (continuous preimage of a closed set).
+  \item $f^{-1}((0,1))$: \textbf{Open} (continuous preimage of an open set).
+  \item $S := \operatorname{span}\{(1,0,0)\transp, (3,1,0)\transp\} \subseteq \mathbb{R}^3$: \textbf{Closed}, \textbf{complete} (it is a $2$-dimensional subspace, hence closed in $\mathbb{R}^3$).
+  \item $\{x \in \mathbb{R}^3 \mid \exists s \in S \text{ s.t.\ } d(x, s) < 1\}$: \textbf{Open}. This set is equivalently written as $\{x \in \mathbb{R}^3 \mid d(x, S) < 1\}$ or $\bigcup_{s \in S} B_1(s)$, which is an arbitrary union of open balls.
+\end{enumerate}
+\end{exercisesolution}
+
+This captures our intuition of a \qt{compact} set. We will briefly show that Heine--Borel is
+\textbf{false} for $\mathbb{R}^n$ with an \textbf{arbitrary metric}.
+
+\begin{exercise}[Heine--Borel fails for arbitrary metrics]
+\label{ex:heine_borel_fails}
+Let $(X,d)$ be a metric space.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textit{(Optional)} Show that $\tilde d(x,y) := \dfrac{d(x,y)}{1 + d(x,y)}$ is a metric on
+    $X$.
+  \item Show that, if $U \subseteq X$ is open with respect to $d$, then $U$ is open with respect
+    to $\tilde d$.
+  \item Show that, for $X = \mathbb{R}^n$, $d(x,y) = \dfrac{|x-y|}{1+|x-y|}$,
+    $\mathbb{N} \subseteq X$ is closed and bounded but not compact.
+\end{enumerate}
+\end{exercise}
+
+\begin{ainote}
+Part \textbf{(c)} above sets $X = \mathbb{R}^n$ but then works with $\mathbb{N} \subseteq X$ and $|x-y|$,
+which only parses for $n = 1$.
+\end{ainote}
+
+\begin{aiexample}[Open Cover of $(0,1)$ with No Finite Subcover]
+% Generator: Gemini 3.6 Flash (Medium)
+Consider the open interval $X = (0,1)$ under the standard Euclidean metric. The family of open sets
+\[
+U_n := \left(\frac{1}{n}, 1\right) \quad \text{for } n \in \mathbb{N}_{\ge 2}
+\]
+forms an open cover of $(0,1)$ because for any $x \in (0,1)$, there exists $n \in \mathbb{N}$ with $1/n < x$. However, any finite subcollection $\{U_{n_1}, \dots, U_{n_k}\}$ has a maximum index $N := \max\{n_1, \dots, n_k\}$, so its union is $U_N = (1/N, 1)$, which fails to cover points in $(0, 1/N]$. Thus $(0,1)$ is bounded but not compact.
+\end{aiexample}
+
+% Kept inline: solved directly in Corsin Nick/Class Notes/Week 3.pdf, pp. 1--2.
+\begin{exercisesolution}[Proof of \cref{ex:heine_borel_fails}]
+\textbf{(a)} Non-negativity, definiteness and symmetry are inherited directly from the
+corresponding properties of $d$, since $t \mapsto \tfrac{t}{1+t}$ is non-negative on
+$[0,\infty)$ and vanishes only at $t=0$.
+
+\textit{Triangle inequality.} We want to show
+\[
+\frac{d(x,y)}{1+d(x,y)} \leq \frac{d(x,z)}{1+d(x,z)} + \frac{d(z,y)}{1+d(z,y)}.
+\]
+Denote $d(x,y) = d_1$, $d(x,z) = d_2$, $d(z,y) = d_3$ and multiply out:
+\[
+\begin{aligned}
+&d_1(1+d_2)(1+d_3) \leq d_2(1+d_1)(1+d_3) + d_3(1+d_1)(1+d_2) \\
+\iff\ & (d_1 + d_1d_2)(1+d_3) \leq (d_2 + d_2d_1)(1+d_3) + (d_3 + d_1d_3)(1+d_2) \\
+\iff\ & d_1 + d_1d_3 + d_1d_2d_3 + d_1d_2 \leq d_2 + d_3d_2 + d_2d_1d_3 + d_2d_1 \\
+& \qquad\qquad\qquad\qquad\qquad\quad + d_3 + d_3d_2 + d_1d_3 + d_1d_3d_2 \\
+\iff\ & d_1 \leq d_2 + 2d_2d_3 + d_3 + d_1d_2d_3 \\
+\Longleftarrow\ & 0 \leq 2d_2d_3 + d_1d_2d_3 \quad \text{together with } d_1 \leq d_2+d_3
+  \text{ (the triangle inequality for } d\text{)}
+\end{aligned}
+\]
+which is true by non-negativity.
+
+\textbf{(b)} Let $U \subseteq X$ be open. Then, given $x \in U$, we find $r > 0$ such that
+$B_r(x) := \{y \in X : d(x,y) < r\} \subseteq U$. Let $\varepsilon := \dfrac{r}{1+r}$. Then
+$\tilde B_\varepsilon(x) \subseteq B_r(x) \subseteq U$, where
+$\tilde B_\varepsilon(x) := \{y \in X : \tilde d(x,y) < \varepsilon\}$.
+
+\textbf{(c)} Note that for all $x, y \in \mathbb{R}$, $\dfrac{|x-y|}{1+|x-y|} < 1$. So
+$\mathbb{N} \subseteq B_1(0)$, thus it is \textbf{bounded} with respect to this metric. Also,
+$\mathbb{N}$ is \textbf{closed}, as follows from \textbf{(b)}. But $x_n = n$ defines a sequence in
+$\mathbb{N}$ with no convergent subsequence, thus $\mathbb{N}$ is \textbf{not compact}.
+\end{exercisesolution}
+
+\begin{ainote}
+The cancellation in the derivation above originally contained a stray $d_2d_1d_2$ where the
+expansion gives $d_2d_1d_3$; the cancelled terms and the conclusion $0 \leq 2d_2d_3 + d_1d_2d_3$
+are unaffected. Re-derived cleanly above.
+\end{ainote}
+
+% Generator: Claude Opus 5 (Medium)
+\begin{remark}[The moral: boundedness is not a topological property]
+\label{rem:boundedness_not_topological}
+It is worth saying out loud what \cref{ex:heine_borel_fails} has just demonstrated, because the
+three parts are more striking together than separately.
+
+Part \textbf{(b)} shows that $d$ and $\tilde d$ have the \emph{same open sets}. (Only one
+direction is asked for, but the converse follows the same way: given
+$\tilde B_\varepsilon(x)$, the choice $r := \tfrac{\varepsilon}{1-\varepsilon}$ gives
+$B_r(x) \subseteq \tilde B_\varepsilon(x)$.) Two metrics with the same open sets have the same
+convergent sequences, the same continuous functions, and --- crucially --- the same
+\textbf{compact} sets, since compactness is defined purely by open covers
+(\cref{def:compact_metric_space}).
+
+Part \textbf{(c)} shows that they do \emph{not} have the same bounded sets. Indeed
+$\tilde d < 1$ always, so under $\tilde d$ \emph{every} subset of \emph{every} metric space is
+bounded --- the notion collapses entirely.
+
+Putting those together: \textbf{compactness is topological, boundedness is not.} Boundedness is
+a property of the chosen metric, not of the open sets it generates, so no theorem of the form
+\qt{compact if and only if closed and bounded} can hold for a general metric. That is precisely why
+\Cref{thm:heine_borel} carries the hypothesis \textbf{standard metric}, and it is not a
+technicality to be skimmed --- it is the entire content of the hypothesis.
+
+\begin{ainote}
+The right general replacement is already available: compact if and only if complete \emph{and}
+\newterm{totally bounded} (\cref{def:totally_bounded}, \cref{rem:compact_iff_complete_totally_bounded}).
+Total boundedness is the notion boundedness was trying and failing to be, and $\mathbb{N}$ under
+$\tilde d$ separates them cleanly: for $\varepsilon < \tfrac12$ the ball
+$\tilde B_\varepsilon(n)$ contains no integer but $n$ itself, so no finite family of
+$\varepsilon$-balls covers $\mathbb{N}$. Bounded, not totally bounded --- and that is exactly
+the gap through which compactness escapes.
+\end{ainote}
+\end{remark}

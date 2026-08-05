@@ -1,0 +1,175 @@
+% Originally: content/week-02.tex, \section{Continuity} (Corsin Week 2, Friday)
+
+% Source: Corsin Nick/Class Notes/Week 2.pdf, pp. 1--13
+\section{Continuity}
+\label{sec:continuity}
+
+\begin{definition}[Continuous map]
+\label{def:continuous}
+For $(X, d_X)$ and $(Y, d_Y)$ metric spaces, a function $f : X \to Y$ is called \newterm{continuous}
+(\germanterm{stetig}) if one of the following equivalent conditions holds:
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{($\varepsilon$--$\delta$):} $\forall x_0 \in X, \varepsilon > 0 \ \exists \delta > 0$ such that for all $x \in X$:
+    \[d(x_0, x) < \delta \implies d(f(x_0), f(x)) < \varepsilon\]
+  \item \textbf{(Sequentially continuous):} for any sequence $(x_n)_{n=0}^{\infty}$ in $X$ with
+    limit $x \in X$, $\lim_{n\to\infty} f(x_n) = f(x)$ (and the limit exists).
+  \item \textbf{(Topological):} for all $U \subseteq Y$ open, $f^{-1}(U) \subseteq X$ is open
+    (\cref{def:open_closed}).
+\end{enumerate}
+\end{definition}
+
+\begin{ainote}
+Corsin writes $d(x_0,x) < \varepsilon$ in the ($\varepsilon$--$\delta$) hypothesis above, which
+must read $\delta$ --- otherwise the quantified $\delta$ is never used. A slip of the pen;
+corrected in \cref{def:continuous}.
+\end{ainote}
+
+% Generator: Claude Opus 5 (High) --- \cref{def:continuous} asserts the equivalence of three
+% conditions without proving it; the cycle is short and uses only results already available.
+\begin{proposition}[The three definitions of continuity agree]
+\label{prop:continuity_equivalences}
+The conditions \textbf{(a)}, \textbf{(b)} and \textbf{(c)} of \cref{def:continuous} are
+equivalent, so \cref{def:continuous} is well posed.
+\end{proposition}
+
+\begin{proof}
+We prove the cycle
+$\text{\textbf{(a)}} \Rightarrow \text{\textbf{(b)}} \Rightarrow \text{\textbf{(c)}}
+\Rightarrow \text{\textbf{(a)}}$.
+
+\textbf{(a) $\Rightarrow$ (b).} Let $x_n \to x$ and let $\varepsilon>0$. Pick $\delta>0$ as in
+\textbf{(a)} for the point $x$, then $N$ with $d_X(x_n,x)<\delta$ for $n \geq N$. For those $n$,
+$d_Y(f(x_n),f(x)) < \varepsilon$, so $f(x_n) \to f(x)$.
+
+\textbf{(b) $\Rightarrow$ (c).} Let $U \subseteq Y$ be open and suppose $f^{-1}(U)$ were not.
+By the shrinking-ball construction (\cref{rem:shrinking_ball_trick}) there are
+$x \in f^{-1}(U)$ and points $x_n \in B_{1/n}(x)$ with $x_n \notin f^{-1}(U)$. Then $x_n \to x$,
+so $f(x_n) \to f(x) \in U$ by \textbf{(b)}, and since $U$ is open,
+\cref{prop:open_closed_via_sequences}\textbf{(a)} forces $f(x_n) \in U$ for large $n$ ---
+i.e.\ $x_n \in f^{-1}(U)$, a contradiction.
+
+\textbf{(c) $\Rightarrow$ (a).} Fix $x_0 \in X$ and $\varepsilon>0$. The ball
+$B_\varepsilon(f(x_0)) \subseteq Y$ is open (\cref{ex:ai_open_balls_are_open}), so
+$f^{-1}\big(B_\varepsilon(f(x_0))\big)$ is open by \textbf{(c)} and contains $x_0$. Hence there
+is $\delta>0$ with $B_\delta(x_0) \subseteq f^{-1}\big(B_\varepsilon(f(x_0))\big)$, which says
+precisely that $d_X(x_0,x)<\delta$ implies $d_Y(f(x_0),f(x))<\varepsilon$.
+\end{proof}
+
+\begin{remark}[Which of the three to reach for]
+Condition \textbf{(c)} is the only one that never mentions the metric, which is why it --- and
+not the $\varepsilon$--$\delta$ formulation --- is what survives into general topology
+(\cref{sec:structured_spaces}). Condition \textbf{(b)} is usually the fastest way to prove a
+function is \emph{dis}continuous, since a single badly chosen sequence suffices; this is exactly
+how \cref{ex:partial_derivatives_not_continuous} works. Condition \textbf{(a)} is the
+one to use when a quantitative modulus is wanted, as in
+\cref{def:uniformly_continuous} immediately below.
+\end{remark}
+
+% Sonnet 5 (Medium)
+\begin{definition}[Uniform continuity]
+\label{def:uniformly_continuous}
+For $(X,d_X)$ and $(Y,d_Y)$ metric spaces, a function $f : X \to Y$ is \newterm{uniformly
+continuous} (\germanterm{gleichm\"assig stetig}) if
+\[\forall \varepsilon > 0 \ \exists \delta > 0 \ \forall x, x' \in X : \quad d_X(x,x') < \delta \ \text{ implies } \ d_Y(f(x),f(x')) < \varepsilon.\]
+\end{definition}
+
+\begin{importantremark}[Where the quantifiers sit]
+\label{rem:continuity_vs_uniform_continuity}
+Compare \cref{def:continuous} \textbf{(a)} with \cref{def:uniformly_continuous}: the
+\emph{formulas} differ only in the order of two quantifiers, and that order is the whole
+content.
+\begin{itemize}
+  \item \textbf{Continuity:} $\forall x_0\ \forall\varepsilon\ \exists\delta$. The point $x_0$
+    is chosen \emph{before} $\delta$, so $\delta$ may depend on it --- a different $\delta$ is
+    allowed at every point.
+  \item \textbf{Uniform continuity:} $\forall\varepsilon\ \exists\delta\ \forall x$. Now
+    $\delta$ is chosen \emph{before} seeing the point, so one and the same $\delta$ must work
+    everywhere at once.
+\end{itemize}
+Uniform continuity is therefore strictly stronger. The standard witness is
+$f(x) := 1/x$ on $(0,1)$: it is continuous, but near $0$ the graph steepens without bound, so
+the $\delta$ that works at $x_0 = \tfrac12$ is hopeless at $x_0 = \tfrac{1}{1000}$, and no
+single $\delta$ survives. \Cref{prop:compact_implies_uniformly_continuous} below says that on a
+\emph{compact} space this can never happen --- the gap between the two notions closes exactly
+when there is no room to run off to a bad point.
+\end{importantremark}
+
+\begin{example}[$f(x) = x^2$]
+Let $f : \mathbb{R} \to \mathbb{R}, x \mapsto x^2$. Let $a < b \in \mathbb{R}$. Then
+\begin{itemize}
+  \item for $a < 0 < b$: $\quad f^{-1}((a,b)) = (-\sqrt{b}, \sqrt{b})$, which is open.
+  \item for $a < b < 0$: $\quad f^{-1}((a,b)) = \emptyset$.
+  \item for $0 < a < b$: $\quad f^{-1}((a,b)) = (-\sqrt{b}, -\sqrt{a}) \cup (\sqrt{a}, \sqrt{b})$.
+\end{itemize}
+\textit{Why is it enough to check only these cases?} Hint:
+$f^{-1}(U_1 \cup U_2) = f^{-1}(U_1) \cup f^{-1}(U_2)$.
+\end{example}
+
+\begin{question}
+Let $(X, d_X)$ and $(Y, d_Y)$ be metric spaces, where $d_Y$ is the discrete metric. Is
+\emph{every} function $f : (X,d_X) \to (Y,d_Y)$ continuous?
+\end{question}
+
+\begin{answer}
+\textbf{No.} For example, take the spaces $X = Y = \mathbb{R}$, $d_X$ the standard metric, and
+$f = \id : X \to Y, z \mapsto z$. Then $\{0\} \subseteq Y$ is open, but
+$\{0\} = \id^{-1}(\{0\})$ is not open in $(X, d_X)$.
+\end{answer}
+
+\begin{question}
+And what if the roles are reversed --- $d_X$ the discrete metric, $d_Y$ arbitrary?
+\end{question}
+
+\begin{answer}
+\textbf{Any} subset of $X$ is open; therefore, $f^{-1}(U)$ is open for any open $U \subseteq Y$. So
+every such $f$ is continuous.
+\end{answer}
+
+% The old chapter continued from here into "Completeness"; that topic is now
+% \cref{ch:completeness}, whose opening paragraph carries this transition.
+
+
+% --- exercises relocated here from the dissolved sheets ---
+
+% Originally: content/exercise-sheets/week-02.tex, problem 2.6
+% Source: exercises/Ex2_Analysis2_eng.pdf, p. 1
+
+\begin{exercise}[2.6 --- Continuity of the distance]
+\label{ex:2.6}
+Let $(X,d)$ be a metric space, and endow $X \times X$ with the product distance
+$d_2(x,y) := d(x_1,y_1) + d(x_2,y_2)$. Show that the distance function
+$d : X \times X \to \mathbb{R}$ is continuous with respect to $d_2$ and, more precisely, that it
+is 1-Lipschitz. Is $d$ also continuous with respect to the distance
+$d_1(x,y) := \max\{d(x_1,y_1), d(x_2,y_2)\}$? Is $d$ also Lipschitz continuous with respect to the
+distance $d_3(x,y) := \sqrt{d(x_1,y_1)^2 + d(x_2,y_2)^2}$? (Notation consistent with
+\cref{ex:2.5}.)
+\end{exercise}
+
+% Originally: content/exercise-sheets/week-02.tex, problem 2.7
+% Source: exercises/Ex2_Analysis2_eng.pdf, p. 1
+
+\begin{exercise}[2.7 --- Continuity of the composition]
+\label{ex:2.7}
+Let $X, Y, Z$ be metric spaces and let $f : X \to Y$, $g : Y \to Z$ be continuous functions. Show
+that $g \circ f : X \to Z$ is continuous using at least two of the three equivalent definitions of
+continuity seen in class.
+\end{exercise}
+
+\begin{remark}
+The three equivalent definitions of continuity referenced in \cref{ex:2.7} are exactly the ones
+stated in \cref{sec:continuity} below (\(\varepsilon\)--\(\delta\), sequential, topological).
+\end{remark}
+
+% Originally: content/exercise-sheets/week-03.tex, problem 3.2
+% Source: exercises/Ex3_Analysis2_eng.pdf
+
+\begin{exercise}[3.2 --- Problems at the origin]
+\label{ex:3.2}
+Show that there is no continuous function $f : \mathbb{R}^2 \to \mathbb{R}$ such that
+$f(x,y) = xy/(x^2+y^2)$ for all $(x,y) \neq (0,0)$. On the other hand, show that there is exactly
+one continuous function $g : \mathbb{R}^2 \to \mathbb{R}$ such that
+$g(x,y) = xy/\sqrt{x^2+y^2}$ for all $(x,y) \neq (0,0)$.
+
+\textit{Official hint:} if a function is continuous at $0$ and $x_k \to 0$ and $y_k \to 0$, then
+$f(x_k)$ and $f(y_k)$ must converge to the same value.
+\end{exercise}

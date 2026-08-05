@@ -1,0 +1,241 @@
+% Originally: content/week-03.tex, \section{Cauchy--Schwarz} (Corsin Week 3, Friday)
+
+\section{Cauchy--Schwarz}
+\label{sec:cauchy_schwarz}
+
+\subsection{Inner products and norms --- recap}
+\label{sec:inner_products_recap}
+
+% Transition: Claude Opus 5 (High)
+Corsin opens his Friday session by recalling the two definitions, which this chapter has already
+stated in \cref{sec:structured_spaces} --- where the hierarchy of structured spaces was drawn and
+where the first supplements needed them. Rather than repeat them, here is what to have in mind:
+\begin{itemize}
+  \item An \emph{inner product} (\cref{def:inner_product}) is \textbf{bilinear},
+    \textbf{symmetric} and \textbf{definite}. It measures length \emph{and} angle.
+  \item A \emph{norm} (\cref{def:norm}) is \textbf{definite}, \textbf{homogeneous} and
+    satisfies the \textbf{triangle inequality}. It measures length only.
+  \item Each induces the next --- $\|v\| := \sqrt{\langle v,v\rangle}$ and
+    $d(x,y) := \|x-y\|$ --- and neither implication reverses
+    (\cref{prop:induced_norm_and_metric}, \cref{rem:norm_not_from_inner_product}).
+\end{itemize}
+What this section adds is the \emph{geometry}: why $\langle x,y\rangle$ deserves to be read as an
+angle at all, and the resulting second proof of Cauchy--Schwarz.
+
+\subsection{Geometric meaning of the inner product}
+
+In $\mathbb{R}^2$, the following identity holds:
+\[
+\langle x,y\rangle := x_1y_1 + x_2y_2 = \|x\|\|y\|\cos\theta
+\]
+where $\theta$ is the angle between $x, y \in \mathbb{R}^2$.
+
+To see this, conveniently choose our basis vectors such that $x = (x_1, 0)$, $y = (y_1, y_2)$.
+
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.1]
+  \begin{scope}[shift={(0,0)}]
+    \draw[->] (-0.3,0) -- (2.2,0);
+    \draw[->] (0,-0.3) -- (0,2.2);
+    \draw[blue!80!black, thick, ->] (0,0) -- (1.5,0.6) node[right] {$x$};
+    \draw[orange!90!black, thick, ->] (0,0) -- (0.8,1.8) node[above] {$y$};
+    \draw[purple, thick] (0.5,0.2) arc (21.8:66.0:0.5);
+    \node[purple, font=\footnotesize] at (0.7,0.45) {$\theta$};
+  \end{scope}
+
+  \draw[->, thick] (2.4,1.0).. controls (2.8,1.3).. (3.3,1.0) node[midway, above, red, font=\tiny] {\shortstack{change of basis\\(rotation)}};
+
+  % Same lengths and same angle as the left panel -- a rotation preserves both.
+  % Left:  |x| = 1.616 at 21.80 deg, |y| = 1.970 at 66.04 deg, so theta = 44.24 deg.
+  % Right: x rotated onto the axis at (1.616, 0), y at 44.24 deg with |y| unchanged.
+  \begin{scope}[shift={(3.8,0)}]
+    \draw[->] (-0.3,0) -- (2.5,0);
+    \draw[->] (0,-0.3) -- (0,2.2);
+    \draw[blue!80!black, thick, ->] (0,0) -- (1.616,0) node[below] {$x$};
+    \draw[orange!90!black, thick, ->] (0,0) -- (1.411,1.375) node[above right] {$y$};
+    \draw[dotted, gray] (1.411,1.375) -- (1.411,0);
+    \draw[purple, thick] (0.5,0) arc (0:44.24:0.5);
+    \node[purple, font=\footnotesize] at (0.72,0.22) {$\theta$};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+Then
+\[
+\langle x,y\rangle = x_1y_1 = x_1\|y\|\cos\theta = \|x\|\|y\|\cos\theta.
+\]
+
+For more rigour, you will show in Linalg that the rotations in $\mathbb{R}^2$ are given by
+matrices $R$ satisfying $\langle Rx, Ry\rangle = \langle x,y\rangle$.
+
+In a general inner product space $V$, this becomes the \textbf{definition} of the angle $\theta$.
+It then makes sense to define the \newterm{projection onto $v$}, $\pi_v$:
+\[
+\pi_v(u) := \frac{\langle u,v\rangle}{\|v\|^2}\,v = \|u\|\cos\theta\,\frac{v}{\|v\|}.
+\]
+
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.2]
+  \draw[->] (-0.3,0) -- (3.5,0);
+  \draw[->] (0,-0.3) -- (0,2.5);
+
+  \draw[orange!90!black, thick, ->] (0,0) -- (3.2,0.8) node[right] {$v$};
+  \draw[blue!80!black, thick, ->] (0,0) -- (1.2,2.0) node[above left] {$u$};
+
+  \coordinate (P) at (1.60, 0.40);
+  \coordinate (U) at (1.2, 2.0);
+
+  \draw[purple!80!black, thick, dashed] (U) -- (P);
+  \fill[purple!80!black] (P) circle (2pt) node[below right, font=\small] {$\pi_v(u)$};
+
+  \draw[green!60!black, thick] (0.5,0.125) arc (14:59:0.5);
+  \node[green!60!black, font=\small] at (0.6,0.3) {$\theta$};
+\end{tikzpicture}
+\end{center}
+
+In words, $\pi_v(u)$ is the part of $u$ which points along $v$. In particular,
+\[
+\|\pi_v(u)\| = \|u\|\,|\cos\theta| = \frac{|\langle u,v\rangle|}{\|v\|}.
+\]
+In this sense, Cauchy--Schwarz says something very obvious --- see the picture above:
+\[
+\frac{|\langle u,v\rangle|}{\|v\|} \leq \|u\| \iff \|\pi_v(u)\| \leq \|u\| \iff \|u\|\,|\cos\theta| \leq \|u\|.
+\]
+
+\begin{remark}[Hint for the proof of Cauchy--Schwarz]
+\label{rem:proof_hint_cauchy_schwarz}
+Use definiteness and expand the term
+\[
+\langle u - \pi_v(u),\ u - \pi_v(u)\rangle = \dots
+\]
+where $u - \pi_v(u)$ is the \textbf{perpendicular part} of $u$ to $v$.
+\end{remark}
+
+% Sonnet 5 (Medium)
+\subsection{The Cauchy--Schwarz inequality}
+
+\begin{ainote}
+Corsin's own notes stop at the hint above (\cref{rem:proof_hint_cauchy_schwarz}) and never state
+the inequality itself as a formal result --- somewhat notable, since it names the section. Filled
+in below, carrying out exactly the hinted computation.
+\end{ainote}
+
+\begin{theorem}[Cauchy--Schwarz inequality]
+\label{thm:cauchy_schwarz}
+Let $V$ be an inner product space (\cref{def:inner_product}) with induced norm
+$\|\cdot\| := \sqrt{\langle\cdot,\cdot\rangle}$ (\cref{def:norm}). Then for all $u,v \in V$,
+\[|\langle u,v\rangle| \leq \|u\|\,\|v\|,\]
+with equality if and only if $u,v$ are linearly dependent.
+\end{theorem}
+
+\begin{proof}
+If $v = 0$, both sides vanish and the claim holds trivially, so assume $v \neq 0$. Following
+\Cref{rem:proof_hint_cauchy_schwarz}, definiteness (\cref{def:inner_product}) gives
+\[0 \leq \langle u-\pi_v(u),\ u-\pi_v(u)\rangle = \langle u,u\rangle - 2\langle u,\pi_v(u)\rangle + \langle \pi_v(u),\pi_v(u)\rangle.\]
+Using $\pi_v(u) = \tfrac{\langle u,v\rangle}{\|v\|^2}v$ and bilinearity,
+\[\langle u,\pi_v(u)\rangle = \frac{\langle u,v\rangle^2}{\|v\|^2}, \qquad \langle \pi_v(u),\pi_v(u)\rangle = \frac{\langle u,v\rangle^2}{\|v\|^4}\langle v,v\rangle = \frac{\langle u,v\rangle^2}{\|v\|^2}.\]
+Substituting,
+\[0 \leq \|u\|^2 - \frac{2\langle u,v\rangle^2}{\|v\|^2} + \frac{\langle u,v\rangle^2}{\|v\|^2} = \|u\|^2 - \frac{\langle u,v\rangle^2}{\|v\|^2},\]
+which rearranges to $\langle u,v\rangle^2 \leq \|u\|^2\|v\|^2$, i.e., $|\langle u,v\rangle| \leq \|u\|\|v\|$. Equality holds
+if and only if $u - \pi_v(u) = 0$ by definiteness, i.e., $u$ is a scalar multiple of $v$.
+\end{proof}
+
+% Generator: Claude Opus 5 (High)
+\begin{remark}[The same proof twice]
+\label{rem:two_proofs_cauchy_schwarz}
+This is the second proof of Cauchy--Schwarz in these notes;
+\cref{prop:cauchy_schwarz_geometric_proof} gave another, following Diego Torres
+Tejeda. They look different --- one minimises the quadratic
+$f(\lambda) := \|v-\lambda w\|^2$ over $\lambda$, the other expands
+$\|u-\pi_v(u)\|^2 \geq 0$ --- but the minimiser found there is
+$\lambda_0 = \tfrac{\langle v,w\rangle}{\|w\|^2}$, which is exactly the coefficient defining
+$\pi_w(v)$. So the first proof \emph{derives} the projection by optimisation and the second
+\emph{postulates} it and checks it works. Keeping both is worthwhile precisely because the pair
+shows where the projection comes from: it is not a lucky guess, it is the closest point of the
+line to $v$.
+\end{remark}
+
+
+% --- exercises relocated here from the dissolved sheets ---
+
+% Originally: content/exercise-sheets/week-03.tex, problem 3.7
+% Source: exercises/Ex3_Analysis2_eng.pdf
+
+\begin{exercise}[3.7 --- Cauchy--Schwarz]
+\label{ex:3.7}
+Let $V$ be a vector space over $\mathbb{R}$, let $\langle\cdot,\cdot\rangle$ be an inner product
+on $V$, and let $\|\cdot\| : V \to \mathbb{R}$ be given by $\|v\| = \sqrt{\langle v,v\rangle}$.
+Then the inequality
+\begin{equation*}
+|\langle v,w\rangle| \leq \|v\|\|w\| \tag{1}
+\end{equation*}
+holds for all $v, w \in V$. Furthermore, equality in (1) holds if and only if $v$ and $w$ are
+linearly dependent.
+\end{exercise}
+
+\begin{remark}
+Corsin devotes the whole second half of Friday (\cref{sec:cauchy_schwarz}) to this problem,
+including the geometric reading and an explicit proof hint.
+\end{remark}
+
+% Originally: content/exercise-sheets/week-03.tex, problem 3.8
+% Source: exercises/Ex3_Analysis2_eng.pdf
+
+\begin{exercise}[3.8 --- Inner product and norm]
+\label{ex:3.8}
+Let $V$ be a vector space over $\mathbb{R}$, let $\langle -,-\rangle$ be an inner product on $V$.
+The map defined by
+$$\|\cdot\| : V \to \mathbb{R}, \qquad \|v\| = \sqrt{\langle v,v\rangle}$$
+satisfies the triangular inequality and is a norm.
+\end{exercise}
+
+% Originally: content/exercise-sheets/week-03.tex, problem 3.9
+% Source: exercises/Ex3_Analysis2_eng.pdf
+
+\begin{exercise}[3.9 --- All norms are equivalent in $\mathbb{R}^n$]
+\label{ex:3.9}
+Let $|\cdot|$ denote the standard Euclidean norm in $\mathbb{R}^n$ and let
+$f : \mathbb{R}^n \to [0,\infty)$ be another norm (that is, a function satisfying the properties
+of \textit{Definition 9.89}).
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Expressing $x$ in a basis and using the ``abstract'' properties that $f$ must have, show
+    that there is a constant $C_1 > 0$ such that $f(x) \leq C_1|x|$ for all $x \in \mathbb{R}^n$.
+  \item Show that $f$ is continuous in $\mathbb{R}^n$ (with respect to the standard distance of
+    $\mathbb{R}^n$!).
+  \item Show that there is a number $c_2 > 0$ such that $f(x) \geq c_2$ for all $|x| = 1$.
+  \item Conclude that $f(x) \geq c_2|x|$ for all $x \in \mathbb{R}^n$.
+  \item Show that if $\tilde f$ is yet another norm, then there is $C > 0$ such that
+    $C^{-1}f(x) \leq \tilde f(x) \leq Cf(x)$ for all $x \in \mathbb{R}^n$.
+\end{enumerate}
+\textit{Official hints:} \textbf{3.9.2} --- recall that from the definition it follows that
+$|f(x) - f(y)| \leq f(x-y)$, and that Lipschitz functions are always continuous. \textbf{3.9.3}
+--- apply the Weierstrass theorem to $f$ on $S := \{x \in \mathbb{R}^n : |x| = 1\}$ and use that
+$f$, being a norm, is nondegenerate. \textbf{3.9.5} --- if $f$ is equivalent to $|\cdot|$ and
+$\tilde f$ is equivalent to $|\cdot|$, it follows by transitivity that $f$ is equivalent to
+$\tilde f$.
+\end{exercise}
+
+\begin{remark}
+Hint 3.9.3 is exactly Corsin's reason \#2 for caring about compactness
+(\cref{sec:why_compactness_matters}) --- the Weierstrass/extreme value theorem on the compact unit
+sphere.
+\end{remark}
+
+% Originally: content/exercise-sheets/week-03.tex, problem 3.10
+% Source: exercises/Ex3_Analysis2_eng.pdf
+
+\begin{exercise}[3.10 --- Hilbert--Schmidt norm of the composition]
+\label{ex:3.10}
+Take two linear functions $\varphi : \mathbb{R}^d \to \mathbb{R}^n$ and
+$\psi : \mathbb{R}^n \to \mathbb{R}^m$, and denote with $\Phi$, $\Psi$ the matrices that represent
+them in the canonical bases. Recall that the linear map
+$\psi \circ \varphi : \mathbb{R}^d \to \mathbb{R}^m$ is represented in these bases by the matrix
+$\Psi \cdot \Phi$. Show that
+$$\|\Psi \cdot \Phi\| \leq \|\Psi\|\|\Phi\|,$$
+where $\|\cdot\|$ is the Hilbert--Schmidt norm of a matrix (see \textit{Definition 9.96} in the
+notes).
+
+\textit{Official hint:} recall that $\|M\|^2$ is the sum of the squares of the entries of $M$.
+Notice that $(\Psi\cdot\Phi)^i_j$ ($i$-th row, $j$-th column) is the scalar product of $\Psi^i$
+and $\Phi_j$, which are vectors of $\mathbb{R}^n$. Apply Cauchy--Schwarz to each of them.
+\end{exercise}

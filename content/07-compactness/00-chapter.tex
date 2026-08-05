@@ -1,0 +1,31 @@
+% ============================================================
+% Chapter 6 --- Compactness
+% Originally: content/week-02.tex, \section{Compactness} (Corsin Week 2, Friday)
+%           + content/week-03.tex, \section{Compactness --- continued} and
+%             \subsection{Why do we care about compactness?} (Corsin Week 3, Monday)
+%
+% These were one topic split across two teaching weeks, joined in the old files by a
+% \section{Compactness --- continued} heading and a \continuedfrom back-pointer. Both are
+% gone: the material is continuous here, so nothing needs to point backwards.
+% ============================================================
+\chapter{Compactness}
+\label{ch:compactness}
+
+% Transition: Claude Opus 5 (Medium)
+Compactness is the least self-explanatory definition in this part, so it is worth saying in
+advance what it is \emph{for}. Finite sets are easy to handle: one can take a maximum, choose a
+smallest radius, check finitely many cases. Infinite sets are not. Compactness is the property
+that lets an infinite space be treated as if it were finite --- not because it is small, but
+because every attempt to spread it out over infinitely many open pieces collapses back to
+finitely many.
+
+The chapter defines compactness by open covers, proves it equivalent to sequential compactness,
+records the Heine--Borel theorem for $\mathbb{R}^n$ and how badly it fails elsewhere, and closes
+with the three payoffs that make the definition worth having.
+
+\input{content/07-compactness/01-open-covers.tex}
+\input{content/07-compactness/02-compact-subsets.tex}
+\input{content/07-compactness/03-sequential-vs-topological.tex}
+\input{content/07-compactness/04-heine-borel.tex}
+\input{content/07-compactness/05-why-compactness-matters.tex}
+\input{content/07-compactness/99-solutions.tex}

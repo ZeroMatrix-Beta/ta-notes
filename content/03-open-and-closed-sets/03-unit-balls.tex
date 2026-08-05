@@ -1,0 +1,144 @@
+% Originally: content/week-02.tex, the Friday warm-up following \subsection{Sequences and convergence}
+% Corsin used this to reopen the topic on the Friday; it needs \cref{def:open_ball}, so it is
+% placed here, after the open/closed material, rather than where the week happened to put it.
+\section{Unit balls of the three standard metrics}
+\label{sec:unit_balls}
+
+\begin{warmup}
+What is the shape of $B_1(0) \subseteq \mathbb{R}^2$ with the supremum metric? With the Manhattan
+metric?
+\end{warmup}
+
+\begin{answer}
+Supremum: the axis-aligned \textbf{open square} $(-1,1)^2$. Manhattan: the \textbf{open diamond}
+$\{|x_1|+|x_2| < 1\}$. In both cases the strict inequality in \cref{def:open_ball} matters: the
+points $(\pm 1,0)$ and $(0,\pm 1)$ sit on the boundary and are \emph{not} in the ball --- they
+are the corners of the diamond and the edge midpoints of the square, drawn hollow below.
+\end{answer}
+
+
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.2]
+  \begin{scope}[shift={(0,0)}]
+    \draw[->] (-1.5,0) -- (1.5,0) node[right] {$x_1$};
+    \draw[->] (0,-1.5) -- (0,1.5) node[above] {$x_2$};
+    \draw[blue!80!black, thick, dashed, fill=blue!10] (-1,-1) rectangle (1,1);
+    % Hollow: (1,0) and (0,1) have d_3 = 1, so they are NOT in the open ball B_1(0).
+    \draw[orange!90!black, thick, fill=white] (1,0) circle (2pt);
+    \node[orange!90!black, above right, font=\footnotesize] at (1,0) {$(1,0)$};
+    \draw[orange!90!black, thick, fill=white] (0,1) circle (2pt);
+    \node[orange!90!black, above right, font=\footnotesize] at (0,1) {$(0,1)$};
+    \node[below, font=\small, align=center] at (0,-1.6)
+      {Supremum metric $d_3$:\\ open square $(-1,1)^2$};
+  \end{scope}
+
+  \begin{scope}[shift={(4.4,0)}]
+    \draw[->] (-1.5,0) -- (1.5,0) node[right] {$x_1$};
+    \draw[->] (0,-1.5) -- (0,1.5) node[above] {$x_2$};
+    \draw[blue!80!black, thick, dashed, fill=blue!10] (1,0) -- (0,1) -- (-1,0) -- (0,-1) -- cycle;
+    % Same here: d_1((1,0),0) = 1, so the corners are boundary points, not elements.
+    \draw[orange!90!black, thick, fill=white] (1,0) circle (2pt);
+    \node[orange!90!black, above right, font=\footnotesize] at (1,0) {$(1,0)$};
+    \draw[orange!90!black, thick, fill=white] (0,1) circle (2pt);
+    \node[orange!90!black, above right, font=\footnotesize] at (0,1) {$(0,1)$};
+    \node[below, font=\small, align=center] at (0,-1.6)
+      {Manhattan metric $d_1$:\\ open diamond};
+  \end{scope}
+
+  \begin{scope}[shift={(8.8,0)}]
+    \draw[->] (-1.5,0) -- (1.5,0) node[right] {$x_1$};
+    \draw[->] (0,-1.5) -- (0,1.5) node[above] {$x_2$};
+    \draw[blue!80!black, thick, dashed, fill=blue!10] (0,0) circle (1);
+    \draw[orange!90!black, thick, fill=white] (1,0) circle (2pt);
+    \node[orange!90!black, above right, font=\footnotesize] at (1,0) {$(1,0)$};
+    \draw[orange!90!black, thick, fill=white] (0,1) circle (2pt);
+    \node[orange!90!black, above right, font=\footnotesize] at (0,1) {$(0,1)$};
+    \node[below, font=\small, align=center] at (0,-1.6)
+      {Standard metric $d_2$:\\ open disk};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+% Generator: Claude Opus 5 (High)
+\begin{remark}[The unit ball remembers which metric it came from]
+\label{rem:unit_balls_distinguish_metrics}
+Three metrics, three unmistakably different unit balls: the square for $d_3$, the disk for
+$d_2$, the diamond for $d_1$. This is the quickest way to tell the three apart, and it also
+makes \cref{ex:ai_metric_equivalence} visible --- the inclusions
+\[B^{d_1}_1(0) \ \subseteq\ B^{d_2}_1(0) \ \subseteq\ B^{d_3}_1(0)\]
+are precisely the inequalities $d_3 \leq d_2 \leq d_1$ read backwards: the larger the metric,
+the harder it is to be within distance $1$, hence the smaller the ball. The same family,
+continued to all $p \geq 1$, is sketched in \cref{ex:4.3}\textbf{.1}, where the square
+reappears as the limiting case $p \to \infty$.
+
+None of this changes which sets are open, incidentally --- all three metrics have the same open
+sets, as \cref{ex:ai_metric_equivalence} shows. The balls look different; the topology does not
+notice.
+\end{remark}
+
+
+
+% Originally: content/week-02.tex, end of \section{Compactness}
+
+\begin{aiexercise}[Boundary of the Open Unit Disk]
+\label{ex:ai_disk_boundary}
+% Generator: Gemini 3.6 Flash (Medium)
+Let $D := \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 < 1\}$ be the open unit disk in $\mathbb{R}^2$. Show that the boundary of $D$ is the unit circle $\partial D = \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 = 1\}$.
+\end{aiexercise}
+
+
+
+% --- exercises relocated here from the dissolved sheet 2 ---
+
+% Originally: content/exercise-sheets/week-02.tex, problem 2.2
+% Source: exercises/Ex2_Analysis2_eng.pdf, p. 1
+
+\begin{exercise}[2.2 --- Multiple choice (closure)]
+\label{ex:2.2}
+Let $(X,d)$ be a metric space, and $Y_1, Y_2 \subset X$ subsets. Select all the statements below
+that are necessarily true.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $\overline{Y_1 \cup Y_2} = \overline{Y_1} \cup \overline{Y_2}$
+  \item $\overline{Y_1} \cap \overline{Y_2} \subset \overline{Y_1 \cap Y_2}$
+  \item $\overline{Y_1 \cap Y_2} \subset \overline{Y_1} \cap \overline{Y_2}$
+  \item $\overline{Y_1 \cap Y_2} = \overline{Y_1} \cap \overline{Y_2}$
+\end{enumerate}
+\textit{Official hints:} \textbf{(b)} --- compare with \cref{ex:2.1}.3. \textbf{(d)} --- play
+with a set of three points (a triangle).
+\end{exercise}
+
+% Originally: content/exercise-sheets/week-02.tex, problem 2.3
+% Source: exercises/Ex2_Analysis2_eng.pdf, p. 1
+
+\begin{exercise}[2.3 --- Multiple choice (distance from a set)]
+\label{ex:2.3}
+Let $(X,d)$ be a metric space, and $A \subset X$ a non-empty subset. We define the function
+``distance from $A$'' as
+$$d(\cdot, A) : X \to [0,\infty), \qquad d(x,A) := \inf_{a \in A} d(x,a).$$
+Select all the statements below that are necessarily true.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item If $A$ is closed and $x \in A^c$, then $d(x,A) > 0$.
+  \item The set $M := \{x \in X : d(x,A) \geq 1\}$ is closed in $X$.
+  \item For $x, y \in X$, $d(x,A) \leq d(x,y) + d(y,A)$ holds.
+  \item If $A^\circ$ is non-empty and $x \in X$, then $d(x,A) = d(x, A^\circ)$.
+\end{enumerate}
+\textit{Official hint:} first convince yourself with a drawing that the name of this function is
+appropriate; then use the characterization of open/closed sets with sequences.
+\end{exercise}
+
+% Originally: content/exercise-sheets/week-02.tex, problem 2.4
+% Source: exercises/Ex2_Analysis2_eng.pdf, p. 1
+
+\begin{exercise}[2.4 --- Boundary, Interior etc.]
+\label{ex:2.4}
+Determine the interior, closure, and boundary of the following subsets $Y$ of $\mathbb{R}$, for
+the standard topology on $\mathbb{R}$. No need to justify the answer.
+\begin{center}
+\begin{tabular}{ll ll}
+(1) & $Y = [0,1]$ & (2) & $Y = \mathbb{Q}$ \\
+(3) & $Y = \emptyset$ & (4) & $Y = (0,1)$ \\
+(5) & $Y = [-1,1) \setminus \{0\}$ & (6) & $Y = [0,\infty)$ \\
+(7) & $Y = \{0\}$ & (8) & $Y = \left\{\tfrac{1}{n} \mid n \in \mathbb{N}\setminus\{0\}\right\}$
+\end{tabular}
+\end{center}
+\end{exercise}

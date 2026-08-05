@@ -1,0 +1,104 @@
+% Originally: the \section{Solutions} of content/week-02.tex and content/week-03.tex
+
+\section{Solutions}
+\label{sec:completeness_solutions}
+
+\begin{exercisesolution}[Solution to \cref{ex:completeness_not_topological}]
+% Generator: Claude Opus 5 (Medium)
+Write $\varphi : (0,1] \to [1,\infty)$, $\varphi(x) := 1/x$. It is a bijection, and by
+construction $d(x,y) = |\varphi(x)-\varphi(y)|$ --- so $d$ is nothing but the Euclidean metric
+of $[1,\infty)$ transported back to $(0,1]$ along $\varphi$. Every part follows from that.
+
+\textbf{(a)} Symmetry and the triangle inequality are inherited from $|\cdot|$ directly. For
+definiteness, $d(x,y)=0$ forces $\varphi(x)=\varphi(y)$, and $\varphi$ is injective, so $x=y$.
+
+\textbf{(b)} The sequence $x_n := \tfrac1n$ lies in $(0,1]$ and is Cauchy for
+$d_{\text{eucl}}$, being Cauchy in $\mathbb{R}$. Its limit in $\mathbb{R}$ is $0 \notin X$, and
+limits in $\mathbb{R}$ are unique (\cref{prop:uniqueness_of_limits}), so it has no limit in $X$.
+
+\textbf{(c)} Let $(x_n)$ be $d$-Cauchy. Then $\big(\varphi(x_n)\big)$ is Cauchy in $\mathbb{R}$,
+hence converges to some $\ell \in \mathbb{R}$. Since $\varphi(x_n) \geq 1$ for every $n$, also
+$\ell \geq 1$; in particular $\ell \neq 0$, so $x := 1/\ell$ lies in $(0,1]$. Then
+\[d(x_n,x) = \big|\varphi(x_n) - \varphi(x)\big| = \big|\varphi(x_n)-\ell\big| \longrightarrow 0,\]
+so $x_n \to x$ in $(X,d)$. Note where the boundedness of $X$ entered: it is what forces
+$\ell \geq 1$ rather than merely $\ell \geq 0$.
+
+\textbf{(d)} $\varphi$ and $\varphi^{-1}(t) = 1/t$ are continuous, so $\varphi$ is a
+homeomorphism. A set is $d$-open exactly when its $\varphi$-image is open in $[1,\infty)$,
+exactly when it is $d_{\text{eucl}}$-open. Concretely, the same two-sided-ball argument as in
+\Cref{ex:heine_borel_fails}\textbf{(b)} works: on $(0,1]$ one has
+$|x-y| \leq d(x,y) \leq \tfrac{1}{x y}\,|x-y|$ with $\tfrac{1}{xy}$ locally bounded.
+
+\begin{remark}
+So $d_{\text{eucl}}$ and $d$ have the \emph{same open sets}, the same convergent sequences, the
+same continuous functions and the same compact sets --- and yet one is complete and the other is
+not. \textbf{Completeness is a property of the metric, not of the topology it generates.}
+
+This completes a trio worth holding together, all three proved by the same device of comparing
+two metrics that induce one topology:
+\begin{itemize}
+  \item \textbf{Compactness is topological} --- it is defined by open covers alone
+    (\cref{def:compact_metric_space}), so it cannot distinguish two metrics with the same open
+    sets.
+  \item \textbf{Boundedness is not} --- \cref{rem:boundedness_not_topological}.
+  \item \textbf{Completeness is not} --- this exercise.
+\end{itemize}
+Which is exactly why \qt{compact if and only if closed and bounded} needs the standard metric, and why
+the correct general replacement is \qt{complete and totally bounded}
+(\cref{rem:compact_iff_complete_totally_bounded}) --- both of its ingredients are
+non-topological, and only their combination is.
+\end{remark}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:ai_contraction_cos}]
+% Generator: Gemini 3.6 Flash (Medium)
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item By the Mean Value Theorem, for any $x, y \in [0,1]$, there exists $\xi \in (0,1)$ such that $|f(x) - f(y)| = |f'(\xi)| |x-y| = \frac{1}{2}\sin(\xi) |x-y|$. Since $\sin(x)$ is strictly increasing on $[0,1]$, $\sup_{\xi \in [0,1]} \frac{1}{2}\sin(\xi) = \frac{1}{2}\sin(1) \approx 0.4207 < 1$. Thus $f$ is a contraction (\cref{def:contraction_mapping}) with $L = \frac{1}{2}\sin(1) < 1$.
+  \item Since $[0,1]$ equipped with the Euclidean metric is a complete metric space (\cref{def:complete_metric_space}) and $f([0,1]) \subseteq [0,1]$, \cref{thm:banach_fixed_point} guarantees the existence and uniqueness of a fixed point $x^* \in [0,1]$ satisfying $f(x^*) = x^*$.
+\end{enumerate}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:3.5}]
+% Generator: Claude Opus 5 (High)
+\textbf{(a), (c) and (e) are true; (b) and (d) are false.}
+
+\textbf{(a) True} --- this is the classic illustration of \cref{thm:banach_fixed_point}. The map
+of Zurich lying on the desk defines a function from the (compact, hence complete) region of the
+city depicted onto a smaller region of the desk, and that function is a similarity: a rotation
+and translation composed with a scaling by the map's ratio $L < 1$. It is therefore a contraction
+of a complete metric space into itself, and has exactly one fixed point --- one spot on the map
+lying directly above the point of the city it represents.
+
+\textbf{(b) False.} The hypothesis says nothing about $f$ mapping its domain into itself, and the
+codomain $[0,2]$ is strictly larger than the domain $[0,1]$. Take
+\[f(x) := \tfrac{x}{2} + \tfrac32, \qquad f : [0,1] \to [\tfrac32,2] \subseteq [0,2],\]
+which is $\tfrac12$-Lipschitz. A fixed point would need $x = \tfrac x2 + \tfrac32$, i.e.\ $x=3$,
+which is not in $[0,1]$.
+
+\textbf{(c) True.} Now the inclusion runs the right way: $f$ maps $[0,2]$ into
+$[0,1] \subseteq [0,2]$, so $f$ is a self-map of the complete space $[0,2]$
+(closed and bounded in $\mathbb{R}$, hence compact, hence complete by
+\cref{ex:compact_finite_complete}), and it is a contraction with $L = \tfrac12 < 1$.
+\Cref{thm:banach_fixed_point} applies directly.
+
+\textbf{(d) False,} and this is the instructive one: the domain is \emph{disconnected}, and the
+condition $|f'| < 1$ is purely local, so it cannot see across the gap. Define
+\[f(x) := \begin{cases} \tfrac52 & x \in [0,1], \\ \tfrac12 & x \in [2,3].\end{cases}\]
+Then $f$ is continuously differentiable with $f' \equiv 0$, it maps
+$[0,1]\cup[2,3]$ into itself, and it has no fixed point --- each of the two pieces is sent into
+the \emph{other} one. Compare the local-to-global reading of
+\cref{rem:local_to_global}: a pointwise derivative bound upgrades to a global contraction only
+along paths that stay inside the domain, and here there are none.
+
+\textbf{(e) True,} but \emph{not} by the fixed point theorem --- and that is the point of the
+star. The hypothesis $|f'(x)| < 1$ gives no uniform $L < 1$, since the supremum of $|f'|$ may
+well equal $1$, so \cref{thm:banach_fixed_point} is unavailable. Existence follows from the
+intermediate value theorem instead. Put $g(x) := f(x) - x$, which is continuous on $[0,1]$. Since
+$f$ takes values in $[0,1]$,
+\[g(0) = f(0) \geq 0 \qquad\text{and}\qquad g(1) = f(1) - 1 \leq 0,\]
+so $g$ vanishes somewhere in $[0,1]$ by \cref{cor:intermediate_value_theorem}, and that zero is
+a fixed point of $f$. Note that the derivative hypothesis was never used: \emph{every} continuous
+self-map of $[0,1]$ has a fixed point. What $|f'| < 1$ buys is \textbf{uniqueness}, by the same
+two-line argument as in the proof of uniqueness for \cref{thm:banach_fixed_point} combined with
+the mean value theorem.
+\end{exercisesolution}

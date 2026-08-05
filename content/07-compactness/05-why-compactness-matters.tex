@@ -1,0 +1,188 @@
+% Originally: content/week-03.tex, \subsection{Why do we care about compactness?}
+
+\section{Why compactness matters}
+\label{sec:why_compactness_matters}
+
+% Sonnet 5 (Medium): added \label on each item so these three facts (heavily cited by name in
+% later chapters, e.g. the extreme value theorem) can be \cref-ed instead of just named in prose.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \label{item:continuity_preserves_compact}
+    \textbf{Preserved by continuous functions:} $X$, $Y$ metric spaces, $K \subseteq X$
+    compact, $f : X \to Y$ continuous. Then $f(K) \subseteq Y$ is compact.
+  \item \label{item:extreme_value_theorem}
+    \textbf{Weierstrass theorem / Extreme value theorem:} $X$ metric space,
+    $K \subseteq X$ compact, $f : K \to \mathbb{R}$ continuous. Then $f$ attains its maximum and
+    minimum in $K$. In particular, $f$ is bounded --- proved as
+    \cref{lem:sequential_compactness_extreme_values}.
+  \item \label{item:uniform_continuity_compact}
+    \textbf{Uniform continuity:} $X$, $Y$ metric spaces, $f : X \to Y$ continuous. If $X$ is
+    compact, then $f$ is uniformly continuous (\cref{def:uniformly_continuous}) ---
+    proved as \cref{prop:compact_implies_uniformly_continuous}, via the Lebesgue number
+    of the cover $\{f^{-1}(B_{\varepsilon/2}(y))\}_{y}$.
+\end{enumerate}
+
+% Sonnet 5 (Medium): illustrates item (b), the extreme value theorem.
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.2]
+  \draw[->] (-0.3,0) -- (3.5,0) node[right] {$x$};
+  \draw[->] (0,-0.3) -- (0,2.8) node[above] {$y$};
+
+  \draw[green!60!black, thick] plot[smooth, tension=0.8] coordinates {(0.3,0.8) (0.9,2.3) (2.1,0.4) (3.0,1.8)};
+
+  \draw (0.3,0.05) -- (0.3,-0.05) node[below] {$a$};
+  \draw (0.9,0.05) -- (0.9,-0.05) node[below] {$c$};
+  \draw (2.1,0.05) -- (2.1,-0.05) node[below] {$d$};
+  \draw (3.0,0.05) -- (3.0,-0.05) node[below] {$b$};
+
+  \draw[dashed, red!80!black] (0,2.3) node[left, font=\small] {$f(c)$} -- (0.9,2.3) -- (0.9,0);
+  \fill[red!80!black] (0.9,2.3) circle (2pt);
+
+  \draw[dashed, blue!80!black] (0,0.4) node[left, font=\small] {$f(d)$} -- (2.1,0.4) -- (2.1,0);
+  \fill[blue!80!black] (2.1,0.4) circle (2pt);
+
+  \node[below, font=\small, align=center] at (1.7,-0.55)
+    {\textbf{(b)} on the compact $K=[a,b]$, $f$ attains its maximum at $c$ and its minimum at $d$};
+\end{tikzpicture}
+\end{center}
+
+Both extrema are attained \emph{inside} $K$ --- that is the content of \textbf{(b)}, and it is
+exactly what fails on a non-compact domain: on the open interval $(a,b)$ the same $f$ may
+approach a supremum it never reaches.
+
+% Quelle: Diego Torres Tejeda/Notes - 02.03 - Diego Torres Tejeda.pdf, pp. 8--10
+\begin{remark}[What compactness and connectedness are \emph{for}: local to global]
+\label{rem:local_to_global}
+The three facts above look like a list of unrelated services compactness happens to provide.
+Diego Torres Tejeda's notes give the idea that unifies them, and it is worth having early
+because it also explains why connectedness sits in the same chapter.
+
+\textbf{Local-to-global arguments} are a recurring theme across mathematics. It is often easy to
+check a property \emph{locally} --- on some ball $B_\varepsilon(x)$ around each point --- and
+what one actually wants is the property \emph{globally}, on all of $X$. Compactness and
+connectedness are the two hypotheses that license that jump. Schematically, a local-to-global
+statement reads:
+\begin{quote}
+\itshape
+If for every $x \in X$ there is $\varepsilon>0$ such that $B_\varepsilon(x)$ has property $P$,
+then $X$ has property $P$.
+\end{quote}
+Each of the two hypotheses powers its own version, and the proofs are three lines each.
+
+\textbf{Connectedness turns \qt{locally constant} into \qt{constant}.} Let $(X,d)$ be connected
+and $f : X \to \mathbb{R}$ locally constant. Every level set $f^{-1}(a)$ is then open. Fix
+$a \in f(X)$ and split
+\[X = \underbrace{f^{-1}(a)}_{=:U} \ \sqcup \underbrace{\bigcup_{b \neq a}f^{-1}(b)}_{=:V},\]
+a disjoint union of two open sets. Since $U \neq \emptyset$, connectedness forces $V=\emptyset$,
+i.e.\ $f \equiv a$.
+
+\textbf{Compactness turns \qt{locally bounded} into \qt{bounded}.} Let $X$ be compact and
+suppose each $x$ has an open $U_x \ni x$ on which $f$ is bounded. The $\{U_x\}_{x\in X}$ cover
+$X$, so finitely many suffice, say $U_1,\dots,U_n$, and then
+\[\sup_{x \in X}|f(x)| \;=\; \max_{1\leq i\leq n}\ \sup_{x \in U_i}|f(x)| \;<\; \infty,\]
+because a \emph{maximum of finitely many} finite numbers is finite. Taking $f$ continuous ---
+which is locally bounded, since $|f|<|f(x)|+1$ near each $x$ --- recovers the boundedness half
+of \cref{item:extreme_value_theorem}.
+
+Read this way the two proofs are the same proof twice, with different notions of \qt{finitely
+many}: connectedness says a partition into two open pieces must be trivial, compactness says a
+cover can be taken finite. Both convert local information into global. Every application in
+\Cref{item:continuity_preserves_compact,item:extreme_value_theorem,item:uniform_continuity_compact}
+is an instance --- uniform continuity most visibly, where the whole difficulty is that the
+$\delta$ from continuity is local and one needs a single global one
+(\cref{rem:continuity_vs_uniform_continuity}).
+\end{remark}
+
+\begin{ainote}
+The exercise below overlaps heavily with \cref{ex:topological_properties_table} above --- both
+are Sascha Brack's, from two different files (his Week 2 Friday and Week 3 Monday notes), and
+he evidently reused the self-test. Both are kept, because deciding that one of them is redundant
+is a judgement about his notes rather than about this transcription, and the second version does
+add three things: the explicit \textbf{?} answers where the data is insufficient, the trap in
+the final item (two \emph{parallel} spanning vectors), and the four-column table format of the
+solution, which is where the lesson actually lands. Read
+\cref{ex:topological_properties_table} as the warm-up and this one as the real test.
+\end{ainote}
+
+% Supplement: Sascha Brack/Class Notes/Week_02_Notes_Friday_Updated.pdf, p. 8
+\begin{exercise}[Classify these sets]
+\label{ex:classification_table}
+Sascha Brack sets this as a self-test at the end of his compactness lecture, and it is the
+fastest way to find out whether the four notions have actually separated in your head. For each
+subset of $\mathbb{R}^n$ (standard metric), decide whether it is \textbf{open}, \textbf{closed},
+\textbf{compact}, \textbf{complete}. Throughout, $f$ denotes a continuous function and
+\textbf{?} means \qt{not decidable from the information given}.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item $[0,1] \subseteq \mathbb{R}$
+  \item $\mathbb{Q} \subseteq \mathbb{R}$
+  \item $B_1(0) \subseteq \mathbb{R}^3$
+  \item $\left\{\tfrac1n : n \geq 1\right\} \subseteq \mathbb{R}$, and separately
+    $\{0\} \cup \left\{\tfrac1n : n \geq 1\right\}$
+  \item $\bigcup_{n\geq1}B_{1/n}(n) \subseteq \mathbb{R}$
+  \item $(-\infty,1] \subseteq \mathbb{R}$
+  \item $f([0,1])$, \quad $f^{-1}([0,1])$, \quad $f^{-1}\big((0,1)\big)$
+  \item $S := \operatorname{span}\!\left\{\begin{pmatrix}1\\0\end{pmatrix},
+    \begin{pmatrix}3\\0\end{pmatrix}\right\} \subseteq \mathbb{R}^2$
+\end{enumerate}
+\end{exercise}
+
+% Quelle: Diego Torres Tejeda/Notes - 16.03 - Diego Torres Tejeda.pdf, p. 1 -- Sonnet 5 (Medium)
+\begin{remark}[What continuous maps do and do not preserve]
+Diego's exercise-class notes collect \cref{item:continuity_preserves_compact} and the analogous
+fact for connectedness (\cref{thm:continuity_preserves_connected}) into one table, together with
+the dual statement for preimages, and a caution worth stating explicitly:
+\begin{center}
+\begin{tabular}{lll}
+& \textbf{Preserved by $f^{-1}$} & \textbf{Preserved by $f$} \\
+\hline
+open & yes (\cref{def:continuous}) & not in general \\
+closed & yes & not in general \\
+compact & not in general & yes (\cref{item:continuity_preserves_compact}) \\
+connected & not in general & yes (\cref{thm:continuity_preserves_connected}) \\
+\end{tabular}
+\end{center}
+\textbf{Caution:} completeness and boundedness are \emph{not} topological properties, so they
+are not preserved by continuous maps or their inverses in general --- e.g.\ $\tan :
+(-\tfrac\pi2,\tfrac\pi2) \to \mathbb{R}$ is a continuous bijection from a bounded set onto an
+unbounded one.
+\end{remark}
+
+
+% --- exercises relocated here from the dissolved sheet 3 ---
+
+% Originally: content/exercise-sheets/week-03.tex, problem 3.3
+% Source: exercises/Ex3_Analysis2_eng.pdf
+
+\begin{exercise}[3.3 --- Open, closed, complete and compact]
+\label{ex:3.3}
+For each of the following subsets of $\mathbb{R}^N$ say whether they are open / closed / none /
+compact (with respect to the standard Euclidean structure). Try to prove your assertions
+``efficiently''.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item $E_1 := \{x \in \mathbb{R}^3 : 0 < x_2 \leq 2\}$
+  \item $E_2 := \{x \in \mathbb{R}^n : \sin(\|x\|) \geq \tfrac{1}{4}\}$
+  \item $E_3 := \bigcup_{n \geq 1}\{x \in \mathbb{R}^3 : x_1^4 - \tfrac{1}{n}x_3^2 - x_2^2 > \tfrac{1}{n},\ x_1 + x_2 < 6\}$
+  \item $E_4 := \{(x,y) \in (\mathbb{R}^n \times \mathbb{R}^n) : x \cdot y > \tfrac{1}{2}\|x\|\|y\|\}$
+  \item $E_5 := \{X \in \mathbb{R}^{n\times n} : \text{the matrix } X \text{ is invertible}\}$
+  \item $E_6 := \{X \in \mathbb{R}^{n\times n} : \text{the matrix } X \text{ is symmetric}\}$
+  \item $E_7 := \{X \in \mathbb{R}^{n\times n} : \text{the entries of } X \text{ are either } 0 \text{ or } 1\}$
+  \item $E_8 := \{x \in \mathbb{R}^n : |x_i| \leq 6 \text{ for all } 1 \leq i \leq n\}$
+  \item $E_9 := E_8 \times E_3 \subset \mathbb{R}^{n+3}$
+  \item $E_{10} := E_2 \cap E_8 \subset \mathbb{R}^n$
+\end{enumerate}
+\end{exercise}
+
+% Originally: content/exercise-sheets/week-03.tex, problem 3.4
+% Source: exercises/Ex3_Analysis2_eng.pdf
+
+\begin{exercise}[3.4 --- Multiple choice (open, complete, compact)]
+\label{ex:3.4}
+Select all the statements below that are true.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item A nonempty open strict subset of $\mathbb{R}^n$ cannot be compact.
+  \item A nonempty open strict subset of $\mathbb{R}^n$ cannot be complete.
+  \item A complete subset of $\mathbb{R}^n$ contains all its accumulation points.
+  \item Countable union of complete subsets of $\mathbb{R}^n$ is complete.
+  \item A subset is closed in $\mathbb{R}^n$ if and only if it is complete as a metric space
+    itself (with the distance inherited from $\mathbb{R}^n$).
+\end{enumerate}
+\end{exercise}

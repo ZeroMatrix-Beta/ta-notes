@@ -1,0 +1,98 @@
+% Originally: content/week-03.tex, \subsection{Contraction mappings and the Banach fixed point theorem}
+
+% Sonnet 5 (Medium)
+\section{Contraction mappings and the Banach fixed point theorem}
+\label{sec:banach_fixed_point}
+
+\begin{ainote}
+Not in Corsin's own notes either, but needed to justify the appeal to the \qt{Banach Fixed
+Point Theorem} in the solution to \cref{ex:ai_contraction_cos} below --- and a standard companion
+to completeness (\cref{def:complete_metric_space}), which is why it sits in this chapter.
+\end{ainote}
+
+\begin{definition}[Contraction mapping]
+\label{def:contraction_mapping}
+Let $(X,d)$ be a metric space. A map $f : X \to X$ is a \newterm{contraction}
+(\germanterm{Kontraktion}) if it is Lipschitz continuous (\cref{def:lipschitz_continuous}) with
+some Lipschitz constant $L \in [0,1)$, i.e.,
+\[d(f(x),f(y)) \leq L \cdot d(x,y) \quad \text{for all } x,y \in X.\]
+\end{definition}
+
+\begin{theorem}[Banach fixed point theorem]
+\label{thm:banach_fixed_point}
+Let $(X,d)$ be a nonempty complete metric space (\cref{def:complete_metric_space}) and let
+$f : X \to X$ be a contraction (\cref{def:contraction_mapping}). Then $f$ has a unique
+\newterm{fixed point} (\germanterm{Fixpunkt}) $x^* \in X$, i.e., $f(x^*) = x^*$; moreover, for any
+$x_0 \in X$, the iterates $x_{n+1} := f(x_n)$ converge to $x^*$.
+\end{theorem}
+
+% Supplement: Sascha Brack/Class Notes/Week_02_Notes_Monday_Updated.pdf, p. 13
+\begin{proof}[Proof idea]
+The core idea is to create a Cauchy sequence by repeatedly applying the contraction mapping $f$.
+Fix an arbitrary starting point $x_0 \in X$, and define the sequence by $x_{n+1} := f(x_n)$ for all $n \geq 0$.
+Comparing consecutive terms gives:
+\[
+d(x_{n+1}, x_n) = d(f(x_n), f(x_{n-1})) \leq \lambda \cdot d(x_n, x_{n-1}).
+\]
+Iterating this inequality yields $d(x_{n+1}, x_n) \leq \lambda^n d(x_1, x_0)$. Since $\lambda < 1$, one can use the triangle inequality and the geometric series to show that the distance between any two terms $x_m$ and $x_n$ (for $m > n$) becomes arbitrarily small as $n \to \infty$. Thus, the sequence is Cauchy.
+Because $X$ is a complete metric space, this sequence converges to some limit $x^* \in X$. Since contraction mappings are continuous, one can pass the limit inside the function to conclude $f(x^*) = x^*$.
+\end{proof}
+
+% Generator: Claude Opus 5 (High) --- Sascha's proof idea establishes existence only; uniqueness
+% is two lines and is half of what the theorem claims.
+\begin{proof}[Uniqueness of the fixed point]
+Suppose $f(x) = x$ and $f(y) = y$. Then
+\[d(x,y) = d\big(f(x),f(y)\big) \leq L\,d(x,y),\]
+so $(1-L)\,d(x,y) \leq 0$. Since $L<1$ we have $1-L>0$, forcing $d(x,y) \leq 0$ and hence
+$d(x,y)=0$, i.e.\ $x=y$.
+\end{proof}
+
+\begin{remark}[Where each hypothesis is used]
+\label{rem:banach_hypotheses}
+Both hypotheses of \cref{thm:banach_fixed_point} are indispensable, and each fails in a
+different way.
+\begin{itemize}
+  \item \textbf{Completeness} is what supplies the limit. On the incomplete space
+    $X := (0,1]$, the map $f(x) := x/2$ is a contraction with $L=\tfrac12$ and has no fixed
+    point in $X$ --- the iterates march towards $0$, which is missing.
+  \item \textbf{$L<1$ strictly} is what forces the iterates together. The map
+    $f(x) := x + \tfrac{1}{1+e^{x}}$ on the complete space $\mathbb{R}$ satisfies the strict
+    inequality $|f(x)-f(y)| < |x-y|$ for $x \neq y$, yet has no fixed point, since
+    $f(x)>x$ everywhere. A supremum of $1$ that is never attained is still not good enough.
+\end{itemize}
+The uniqueness proof above shows the second point cleanly: the whole argument is the division by
+$1-L$, which is exactly what $L=1$ forbids.
+\end{remark}
+
+\begin{aiexercise}[{Contraction Mapping on $[0,1]$}]
+\label{ex:ai_contraction_cos}
+% Generator: Gemini 3.6 Flash (Medium)
+Let $f \colon [0,1] \to [0,1]$ be defined by $f(x) := \frac{1}{2}\cos(x)$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Show that $f$ is a contraction mapping (\cref{def:contraction_mapping}) with Lipschitz
+    constant $L = \frac{1}{2}\sin(1) < 1$.
+  \item Deduce, using \cref{thm:banach_fixed_point}, that $f$ has a unique fixed point
+    $x^* \in [0,1]$.
+\end{enumerate}
+\end{aiexercise}
+
+
+% --- exercise relocated here from the dissolved sheet 3 ---
+
+% Originally: content/exercise-sheets/week-03.tex, problem 3.5
+% Source: exercises/Ex3_Analysis2_eng.pdf
+
+\begin{exercise}[3.5 --- Multiple choice (fixed points)]
+\label{ex:3.5}
+Select all the statements below that are true.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item If you spread a map of Zurich on your desk, then one point of the desk will coincide with
+    its representation on the map (in an ideal world).
+  \item If $f : [0,1] \to [0,2]$ is $\tfrac{1}{2}$-Lipschitz, then $f$ has a fixed point.
+  \item If $f : [0,2] \to [0,1]$ is $\tfrac{1}{2}$-Lipschitz, then $f$ has a fixed point.
+  \item If $f : [0,1] \cup [2,3] \to [0,1] \cup [2,3]$ is continuously differentiable with
+    $|f'(x)| < 1$ for all $x \in [0,1]\cup[2,3]$, then it has a fixed point.
+  \item \textbf{(*)} If $f : [0,1] \to [0,1]$ is differentiable with $|f'(x)| < 1$ for all
+    $x \in (0,1)$, then it has a fixed point.
+\end{enumerate}
+\end{exercise}

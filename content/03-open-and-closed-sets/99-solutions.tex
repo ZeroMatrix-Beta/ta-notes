@@ -1,0 +1,141 @@
+% Originally: the \section{Solutions} of content/week-02.tex
+
+\section{Solutions}
+\label{sec:open_closed_solutions}
+
+\begin{exercisesolution}[Proof of \cref{ex:ai_open_balls_are_open}]
+% Generator: Claude Opus 5 (Medium)
+Let $y \in B_r(x)$, so $d(y,x) < r$, and set $\varepsilon := r - d(y,x) > 0$. We claim that
+$B_\varepsilon(y) \subseteq B_r(x)$, which is exactly what \cref{def:open_closed} requires.
+
+Let $z \in B_\varepsilon(y)$, so $d(z,y) < \varepsilon$. By the triangle inequality
+(\cref{def:metric_space}),
+\[d(z,x) \leq d(z,y) + d(y,x) < \varepsilon + d(y,x) = \big(r-d(y,x)\big) + d(y,x) = r,\]
+so $z \in B_r(x)$. Since $y \in B_r(x)$ was arbitrary, $B_r(x)$ is open.
+
+\begin{remark}
+The entire content is the choice $\varepsilon := r - d(y,x)$: the radius left over after
+travelling from the centre out to $y$. Note that it shrinks to $0$ as $y$ approaches the edge of
+the ball, so no \emph{single} $\varepsilon$ works for every $y$ at once. That is the same
+\qt{the constant depends on the point} phenomenon which separates continuity from uniform
+continuity in \cref{rem:continuity_vs_uniform_continuity}, met here for the first time.
+\end{remark}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:ai_disk_boundary}]
+% Generator: Gemini 3.6 Flash (Medium)
+Since $D$ is open, its interior is $\operatorname{int}(D) = D$. The closure of $D$ is $\overline{D} = \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 \leq 1\}$. By \cref{def:interior_closure_boundary}, the boundary is:
+\begin{align*}
+\partial D &= \overline{D} \setminus \operatorname{int}(D) \\
+&= \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 \leq 1\} \setminus \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 < 1\} \\
+&= \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 = 1\}.
+\end{align*}
+\end{exercisesolution}
+
+% ===========================================================================
+% Official sheet 2 (2.1--2.7). Derived independently, then checked against
+% exercises/Sol2_Analysis2_eng.pdf.
+% ===========================================================================
+
+\begin{exercisesolution}[Solution to \cref{ex:2.2}]
+% Generator: Claude Opus 5 (High)
+\textbf{(a) and (c) are necessarily true; (b) and (d) are not.}
+
+\textbf{(a) True.} Both inclusions come from general properties of the closure. Since
+$Y_i \subseteq Y_1 \cup Y_2$ and the closure is monotone,
+$\overline{Y_i} \subseteq \overline{Y_1\cup Y_2}$ for $i=1,2$, which gives \qt{$\supseteq$}.
+Conversely $\overline{Y_1}\cup\overline{Y_2}$ is a \emph{finite} union of closed sets, hence
+closed (\cref{prop:open_closed_operations}\textbf{(c)}), and it contains $Y_1\cup Y_2$; since
+$\overline{Y_1\cup Y_2}$ is the smallest closed set containing $Y_1 \cup Y_2$
+(\cref{def:interior_closure_boundary}), \qt{$\subseteq$} follows.
+
+\textbf{(c) True,} and it is the easy half: $Y_1\cap Y_2 \subseteq Y_i$ gives
+$\overline{Y_1\cap Y_2} \subseteq \overline{Y_i}$ for each $i$ by monotonicity, hence
+$\overline{Y_1\cap Y_2} \subseteq \overline{Y_1}\cap\overline{Y_2}$.
+
+\textbf{(b) False,} and therefore \textbf{(d) False} as well, (d) being (b) and (c) combined. In
+$\mathbb{R}$ take
+\[Y_1 := (0,1), \qquad Y_2 := (1,2).\]
+Then $\overline{Y_1}\cap\overline{Y_2} = [0,1]\cap[1,2] = \{1\}$, whereas
+$Y_1\cap Y_2 = \emptyset$ and so $\overline{Y_1\cap Y_2} = \emptyset$. The two sets meet only in
+the limit, and the closure of the intersection cannot see a point belonging to neither set.
+
+\begin{remark}[Where finiteness enters, again]
+Part \textbf{(a)} is false for infinite unions, for exactly the reason given in
+\cref{rem:finiteness_is_necessary}. Taking $Y_q := \{q\}$ for each $q \in \mathbb{Q}$,
+\[\bigcup_{q\in\mathbb{Q}}\overline{Y_q} = \mathbb{Q}
+  \qquad\text{but}\qquad
+  \overline{\bigcup_{q\in\mathbb{Q}}Y_q} = \overline{\mathbb{Q}} = \mathbb{R}.\]
+So the honest statement is: the closure commutes with \emph{finite} unions, and only
+one-directionally with intersections. That is the same asymmetry that runs through the whole of
+\cref{prop:open_closed_operations}.
+\end{remark}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:2.3}]
+% Generator: Claude Opus 5 (High)
+\textbf{(a), (b) and (c) are necessarily true; (d) is not.} It is efficient to prove
+\textbf{(c)} first, since \textbf{(b)} then follows from it.
+
+\textbf{(c) True.} Fix $x,y \in X$. For every $a \in A$ the triangle inequality gives
+$d(x,a) \leq d(x,y) + d(y,a)$, and the left-hand side is bounded below by $d(x,A)$, so
+\[d(x,A) \leq d(x,y) + d(y,a) \qquad\text{for every } a \in A.\]
+Taking the infimum over $a$ on the right yields $d(x,A) \leq d(x,y) + d(y,A)$. Exchanging $x$
+and $y$ and combining,
+\[\big|d(x,A) - d(y,A)\big| \leq d(x,y),\]
+so $d(\cdot,A)$ is \textbf{$1$-Lipschitz} (\cref{def:lipschitz_continuous}), in particular
+continuous --- which is what the remaining parts use.
+
+\textbf{(a) True.} If $A$ is closed then $A^c$ is open, so for $x \in A^c$ there is $r>0$ with
+$B_r(x) \subseteq A^c$. No point of $A$ lies in that ball, i.e.\ $d(x,a) \geq r$ for every
+$a \in A$, and taking the infimum gives $d(x,A) \geq r > 0$.
+
+\textbf{(b) True.} By \textbf{(c)} the function $d(\cdot,A)$ is continuous, and
+$M = d(\cdot,A)^{-1}\big([1,\infty)\big)$ is the preimage of a closed set under a continuous
+map, hence closed (\cref{def:continuous}\textbf{(c)}, applied to complements).
+
+\textbf{(d) False.} In $\mathbb{R}$ take $A := [0,1]\cup\{2\}$, whose interior
+$A^\circ = (0,1)$ is non-empty as required. At the point $x := 2$,
+\[d(x,A) = 0 \quad\text{(because } 2 \in A\text{)}, \qquad\qquad
+  d(x,A^\circ) = \inf_{a\in(0,1)}|2-a| = 1.\]
+The isolated point $2$ of $A$ contributes to $d(\cdot,A)$ but is invisible to $A^\circ$. The
+hypothesis \qt{$A^\circ$ is non-empty} is far too weak, because it constrains $A$ nowhere near
+$x$; the statement would become true under a hypothesis such as $A = \overline{A^\circ}$.
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:2.4}]
+% Generator: Claude Opus 5 (High)
+All with respect to the standard metric on $\mathbb{R}$, using
+\cref{def:interior_closure_boundary}.
+\begin{center}
+\begin{tabular}{@{}c l l l l@{}}
+& \textbf{$Y$} & \textbf{$\operatorname{int}(Y)$} & \textbf{$\overline{Y}$} & \textbf{$\partial Y$} \\
+\hline
+(1) & $[0,1]$ & $(0,1)$ & $[0,1]$ & $\{0,1\}$ \\
+(2) & $\mathbb{Q}$ & $\emptyset$ & $\mathbb{R}$ & $\mathbb{R}$ \\
+(3) & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ \\
+(4) & $(0,1)$ & $(0,1)$ & $[0,1]$ & $\{0,1\}$ \\
+(5) & $[-1,1)\setminus\{0\}$ & $(-1,0)\cup(0,1)$ & $[-1,1]$ & $\{-1,0,1\}$ \\
+(6) & $[0,\infty)$ & $(0,\infty)$ & $[0,\infty)$ & $\{0\}$ \\
+(7) & $\{0\}$ & $\emptyset$ & $\{0\}$ & $\{0\}$ \\
+(8) & $\left\{\tfrac1n : n \geq 1\right\}$ & $\emptyset$ &
+  $\left\{\tfrac1n : n \geq 1\right\}\cup\{0\}$ &
+  $\left\{\tfrac1n : n \geq 1\right\}\cup\{0\}$ \\
+\end{tabular}
+\end{center}
+
+Three rows repay a second look.
+\begin{itemize}
+  \item \textbf{(1) versus (4).} The closed interval and the open interval have the same
+    interior, the same closure and the same boundary. These three operations simply cannot
+    distinguish a set from any other set squeezed between its interior and its closure.
+  \item \textbf{(5).} Removing the single point $0$ from $[-1,1)$ adds $0$ to the boundary
+    without changing the closure: a removed interior point becomes a boundary point. Note also
+    that $1 \in \partial Y$ although $1 \notin Y$, while $-1 \in \partial Y$ and $-1 \in Y$ ---
+    the boundary is indifferent to membership.
+  \item \textbf{(2) and (8).} Both have empty interior, so $\partial Y = \overline{Y}$: once a
+    set has no interior, the boundary swallows the entire closure. That is the general reason
+    for $\partial\mathbb{Q} = \mathbb{R}$ in
+    \cref{ex:interior_closure_boundary_more}\textbf{(c)}, and not an accident of $\mathbb{Q}$.
+\end{itemize}
+\end{exercisesolution}

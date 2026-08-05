@@ -1,0 +1,178 @@
+% Originally: the \section{Solutions} of content/week-03.tex
+
+\section{Solutions}
+\label{sec:compactness_solutions}
+
+\begin{exercisesolution}[Solution to \cref{ex:classification_table}]
+% Generator: Claude Opus 5 (Medium)
+\begin{center}
+\begin{tabular}{@{}l cccc@{}}
+\textbf{Set} & \textbf{open} & \textbf{closed} & \textbf{compact} & \textbf{complete} \\
+\hline
+$[0,1]$ & $\times$ & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
+$\mathbb{Q}$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+$B_1(0) \subseteq \mathbb{R}^3$ & $\checkmark$ & $\times$ & $\times$ & $\times$ \\
+$\left\{\tfrac1n\right\}$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+$\{0\}\cup\left\{\tfrac1n\right\}$ & $\times$ & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
+$\bigcup_{n\geq1}B_{1/n}(n)$ & $\checkmark$ & $\times$ & $\times$ & $\times$ \\
+$(-\infty,1]$ & $\times$ & $\checkmark$ & $\times$ & $\checkmark$ \\
+$f([0,1])$ & $\times$ & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
+$f^{-1}([0,1])$ & \textbf{?} & $\checkmark$ & \textbf{?} & $\checkmark$ \\
+$f^{-1}\big((0,1)\big)$ & $\checkmark$ & \textbf{?} & \textbf{?} & \textbf{?} \\
+$S = \operatorname{span}\{(1,0),(3,0)\}$ & $\times$ & $\checkmark$ & $\times$ & $\checkmark$ \\
+\end{tabular}
+\end{center}
+
+The rows that carry the lesson:
+
+\textbf{$\left\{\tfrac1n\right\}$ versus $\{0\}\cup\left\{\tfrac1n\right\}$.} Adding the single
+point $0$ changes all four answers. Without it the set misses its own limit point, so it is not
+closed, and the Cauchy sequence $\tfrac1n$ has nowhere to converge inside the set. With it, the
+set is closed and bounded, hence compact by \cref{thm:heine_borel}.
+
+\textbf{$\bigcup_{n\geq1}B_{1/n}(n)$.} Open as a union of open sets
+(\cref{item:arbitrary_union_open}); not closed, since each endpoint $n\pm\tfrac1n$ is a limit
+point outside the set; unbounded, so certainly not compact.
+
+\textbf{$S$ is a trap.} The two spanning vectors are parallel, so $S$ is not $\mathbb{R}^2$ but
+the $x$-axis --- a line: closed, unbounded, not compact.
+
+\textbf{The $f$ rows show exactly how far continuity gets you.} Preimages behave: $f^{-1}$ of a
+closed set is closed, of an open set is open (\cref{def:continuous}). Images do not --- only
+compactness transfers forward (\cref{item:continuity_preserves_compact}), which is why
+$f([0,1])$ is compact but $f^{-1}([0,1])$ need not be: take $f \equiv 0$, giving
+$f^{-1}([0,1]) = \mathbb{R}^n$. That same $f$ makes $f^{-1}([0,1])$ open, while $f = \id$ makes
+it $[0,1]$, which is not --- hence \textbf{?}. And $f([0,1])$ is never open: it is compact,
+hence closed and bounded, and a non-empty proper subset of $\mathbb{R}^m$ cannot be both open
+and closed, since $\mathbb{R}^m$ is connected (\cref{def:connectedness}).
+
+\begin{ainote}
+The punchline is the last two columns: \textbf{they are identical}. That is not a coincidence of
+this list --- inside a \emph{complete} ambient space, a subset is complete exactly when it is
+closed (\cref{rem:complete_vs_closed}), and $\mathbb{R}^n$ is complete. Build the same table
+inside $\mathbb{Q}$ instead and the columns come apart immediately.
+\end{ainote}
+\end{exercisesolution}
+
+\begin{ainote}
+Only the \texttt{aiexercise} problems below have solutions in this section: Corsin's own
+exercises in this chapter (\cref{ex:heine_borel_fails,ex:connectedness_tf}) are solved inline,
+immediately after their statement, mirroring how he presents them in his own notes (see the
+\qt{Kept inline} comments above each).
+\end{ainote}
+
+\begin{exercisesolution}[Solution to \cref{ex:3.3}]
+% Generator: Claude Opus 5 (High)
+The efficient route is to write each set as a preimage of an open or closed set under a
+continuous map, and then read openness or closedness off \cref{def:continuous}\textbf{(c)}
+rather than chasing balls. Compactness is then Heine--Borel (\cref{thm:heine_borel}): closed
+\emph{and} bounded.
+\begin{center}
+\begin{tabular}{@{}c l c c c@{}}
+& \textbf{Set} & \textbf{open} & \textbf{closed} & \textbf{compact} \\
+\hline
+1 & $E_1 = \{0 < x_2 \leq 2\} \subseteq \mathbb{R}^3$ & $\times$ & $\times$ & $\times$ \\
+2 & $E_2 = \{\sin\lVert x\rVert \geq \tfrac14\}$ & $\times$ & $\checkmark$ & $\times$ \\
+3 & $E_3$ (union of open sets) & $\checkmark$ & $\times$ & $\times$ \\
+4 & $E_4 = \{x\cdot y > \tfrac12\lVert x\rVert\lVert y\rVert\}$ & $\checkmark$ & $\times$ & $\times$ \\
+5 & $E_5 = \{X \text{ invertible}\}$ & $\checkmark$ & $\times$ & $\times$ \\
+6 & $E_6 = \{X \text{ symmetric}\}$ & $\times$ & $\checkmark$ & $\times$ \\
+7 & $E_7 = \{X \text{ with entries } 0,1\}$ & $\times$ & $\checkmark$ & $\checkmark$ \\
+8 & $E_8 = [-6,6]^n$ & $\times$ & $\checkmark$ & $\checkmark$ \\
+9 & $E_9 = E_8 \times E_3$ & $\times$ & $\times$ & $\times$ \\
+10 & $E_{10} = E_2 \cap E_8$ & $\times$ & $\checkmark$ & $\checkmark$ \\
+\end{tabular}
+\end{center}
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Half-open in the $x_2$ direction, so \textbf{neither}: no ball around a point with
+    $x_2 = 2$ stays inside, and the sequence $(0,\tfrac1k,0) \to 0 \notin E_1$ shows it is not
+    closed. Unbounded, hence not compact.
+  \item \textbf{Closed:} $E_2 = h^{-1}\big([\tfrac14,\infty)\big)$ for the continuous
+    $h(x) := \sin(\lVert x\rVert)$. Not open, since a point with $\sin\lVert x\rVert = \tfrac14$
+    has points of $E_2^c$ arbitrarily close. Not compact: $\sin$ is periodic, so $E_2$ contains
+    infinitely many concentric annuli and is unbounded.
+  \item \textbf{Open:} each set in the union is defined by two \emph{strict} inequalities between
+    continuous functions, hence open, and an arbitrary union of open sets is open
+    (\cref{item:arbitrary_union_open}). It is non-empty (take $x = (2,0,0)$ and $n=1$) and
+    unbounded (take $x = (-M,0,0)$ for large $M$), so it is not compact; and a non-empty proper
+    open subset of the connected space $\mathbb{R}^3$ cannot also be closed
+    (\cref{def:connectedness}).
+  \item \textbf{Open:} $E_4 = F^{-1}\big((0,\infty)\big)$ for the continuous
+    $F(x,y) := x\cdot y - \tfrac12\lVert x\rVert\lVert y\rVert$. Unbounded (scale any element),
+    hence not compact, and not closed by the connectedness argument of part 3. Geometrically
+    $E_4$ is the set of pairs enclosing an angle strictly less than $60^\circ$
+    (\cref{rem:inner_product_angle_geometry}).
+  \item \textbf{Open:} $E_5 = \det^{-1}\big(\mathbb{R}\setminus\{0\}\big)$ and $\det$ is a
+    polynomial in the entries, hence continuous. Unbounded, so not compact.
+  \item \textbf{Closed:} $E_6$ is the solution set of the linear equations $X_{ij} - X_{ji} = 0$,
+    i.e.\ the preimage of the closed set $\{0\}$ under a continuous (indeed linear) map. Being a
+    linear subspace it is unbounded, hence not compact, and for $n \geq 2$ it is a proper
+    subspace, hence has empty interior and is not open.
+  \item \textbf{Closed and compact:} $E_7$ is \emph{finite}, with $2^{n^2}$ elements. Finite sets
+    are compact (\cref{ex:compact_finite_complete}\textbf{(a)}) and closed. Not open, since no
+    ball around a matrix of $0$s and $1$s consists only of such matrices.
+  \item \textbf{Closed and compact:} $E_8 = [-6,6]^n$ is closed (a finite intersection of the
+    closed sets $\{|x_i| \leq 6\}$) and bounded, so \cref{thm:heine_borel} applies. Not open:
+    no ball around a point with some $|x_i| = 6$ fits inside.
+  \item \textbf{Neither, and not compact.} For non-empty $A, B$, the product $A \times B$ is open
+    exactly when both factors are, closed exactly when both are, and compact exactly when both
+    are. Here $E_8$ is not open and $E_3$ is neither closed nor compact, so $E_9$ fails all
+    three.
+
+    \begin{ainote}
+    The official solution opens this part with \qt{Since $E_8$ is unbounded so is $E_9$}. That
+    is a slip: $E_8 = [-6,6]^n$ is bounded --- it is $E_3$ that is unbounded, as the official
+    solution itself established two parts earlier. The conclusion (that $E_9$ is not compact) is
+    correct; only the reason is misattributed.
+    \end{ainote}
+  \item \textbf{Closed and compact:} an intersection of the closed set $E_2$ with the closed
+    set $E_8$ is closed (\cref{prop:open_closed_operations}\textbf{(c)}), and it is bounded
+    because $E_8$ is. Heine--Borel again. Alternatively, quote
+    \cref{prop:closed_subset_of_compact}: a closed subset of the compact $E_8$ is compact.
+\end{enumerate}
+
+\begin{remark}[The efficient method, extracted]
+Nine of the ten sets were settled without producing a single $\varepsilon$. The recipe is:
+\emph{strict} inequalities between continuous functions give open sets, \emph{weak} ones give
+closed sets, and mixing the two gives neither. Compactness then reduces to checking boundedness,
+by Heine--Borel. This is what the problem means by proving assertions \qt{efficiently}, and it is
+the practical payoff of \cref{def:continuous}\textbf{(c)} over the $\varepsilon$--$\delta$
+formulation.
+\end{remark}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:3.4}]
+% Generator: Claude Opus 5 (High)
+\textbf{(a), (b), (c) and (e) are true; (d) is false.}
+
+The engine behind \textbf{(a)}, \textbf{(b)}, \textbf{(c)} and \textbf{(e)} is a single fact,
+\cref{rem:complete_vs_closed}: inside a \emph{complete} ambient space --- and $\mathbb{R}^n$ is
+complete by \cref{prop:Rn_coordinatewise_complete} --- a subset is complete if and only if it is
+closed.
+
+\textbf{(a) True.} A compact subset of $\mathbb{R}^n$ is closed and bounded
+(\cref{thm:heine_borel}). If it were also open and non-empty, it would be a non-empty
+\emph{clopen} proper subset of $\mathbb{R}^n$, which is impossible because $\mathbb{R}^n$ is
+connected --- it is path-connected (any two points are joined by a segment), hence connected by
+\cref{lem:path_connected_implies_connected}.
+
+\textbf{(b) True,} by the same argument: complete $\Rightarrow$ closed, and non-empty, open,
+closed and proper is again impossible in the connected space $\mathbb{R}^n$.
+
+\textbf{(c) True.} Complete $\Rightarrow$ closed, and a closed set contains all its accumulation
+points --- if $x$ is an accumulation point of $A$ then some sequence in $A$ converges to $x$,
+and \cref{prop:open_closed_via_sequences}\textbf{(b)} puts $x$ in $A$.
+
+\textbf{(d) False.} Every singleton $\{q\}$ is complete (its only Cauchy sequences are
+eventually constant), yet
+\[\mathbb{Q} = \bigcup_{q \in \mathbb{Q}}\{q\}\]
+is a countable union of complete sets which is famously \emph{not} complete
+(\cref{rem:complete_vs_closed}). Equivalently, in terms of closedness: a countable union of
+closed sets need not be closed, exactly as in \cref{rem:finiteness_is_necessary}.
+
+\textbf{(e) True} --- this is \cref{rem:complete_vs_closed} stated for the ambient space
+$\mathbb{R}^n$, and it is worth stressing that the \qt{if} direction is where completeness of the
+ambient space is used. Inside $\mathbb{Q}$ instead of $\mathbb{R}$ the statement collapses:
+$\mathbb{Q}$ is closed in itself but not complete.
+\end{exercisesolution}

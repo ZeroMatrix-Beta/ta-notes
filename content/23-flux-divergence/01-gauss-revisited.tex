@@ -4,10 +4,14 @@
 \section{Gauss' theorem revisited: the case \texorpdfstring{$n=1$}{n=1}, and a direct proof
 for a square}
 \label{sec:gauss_intuition}
-\continuedfrom{sec:flux_divergence_theorem}
+% Corsin taught this a week after the divergence theorem, so the source carried a
+% \continuedfrom{sec:flux_divergence_theorem} back-pointer. Here the section comes first, as
+% motivation, and the pointer would have run forwards; it is gone, and the sentence below
+% already \cref's the theorem it previews.
 
 % Source: Corsin Nick/Class Notes/Week 11.pdf, p. 2
-Gauss' theorem (\cref{thm:gauss_divergence}) is, in a precise sense, a higher-dimensional
+Gauss' theorem (\cref{thm:gauss_divergence}), proved in \cref{sec:flux_divergence_theorem}
+below, is, in a precise sense, a higher-dimensional
 fundamental theorem of calculus: it trades a derivative integrated over a region for the
 original quantity evaluated on the region's boundary. Setting $n=1$ makes the analogy
 literal. Let $f \in C^1([a,b])$, viewed as a (one-dimensional) vector field. Since $\divg f =

@@ -40,6 +40,21 @@ you want to reorder sections, replace a proof with a slicker one, or cut an exam
 redundant — that is a *transcription-level* decision. Reopen the PDF, or leave it alone and note
 it inline in an `ainote`.
 
+> **One authorised exception, already spent: the week → topic restructure.**
+> This document was reorganised once, on the user's explicit instruction, from one chapter per
+> teaching week into topic chapters (see *Document skeleton* below). That move reordered material
+> across the whole tree, which the rule above would otherwise forbid. It was a deliberate,
+> one-time, user-directed change, and it is **finished** — the rule is back in force.
+>
+> What the restructure did *not* do is change mathematics. Within a topic the order of results,
+> the proofs and the examples are exactly the tutor's; only the containers moved. Two topics were
+> re-joined that a week boundary had cut in half (compactness, inner products), and every file
+> records where it came from in an `% Originally:` comment at the top.
+>
+> **Do not undo it, and do not treat it as licence for more reordering.** If you find yourself
+> wanting to move a block between chapters, that is a transcription-level decision like any
+> other: reopen the PDF or leave it alone.
+
 ## 2. THE EDITORIAL LAYER (Style)
 
 You are authorized to improve the prose and apply the established "House Style" to make the document feel consistent and professional, while retaining the author's original voice.
@@ -198,8 +213,8 @@ Do **not** trust TikZ source. Build, render the page (`pdftoppm -png -r 95 -f N 
 *look*. Several figures in this document asserted things their own coordinates contradicted: a
 chord whose endpoints were not on the curve, "tangent" lines tangent to nothing, an open cover
 that did not cover, marked points sitting where the curve was at its minimum. Where a figure
-encodes a computation, check the arithmetic in a comment above it (see `week-06.tex`
-FIG-W06-03 for the pattern).
+encodes a computation, check the arithmetic in a comment above it (see FIG-W06-03, now in
+`content/14-convexity/`, for the pattern).
 
 ## GRAMMAR AND PROSE STYLE
 
@@ -347,7 +362,7 @@ FIG-W06-03 for the pattern).
   one. To see every claim boundary in a file at once:
 
   ```bash
-  grep -nE '^% (Source|Quelle|Supplement|Generator|Transition):' content/week-04.tex
+  grep -rnE '^% (Source|Quelle|Supplement|Generator|Transition|Originally):' content/10-chain-rule/
   ```
 
   Read that output as a list of ranges: every transcribed block must sit inside a range naming
@@ -378,9 +393,10 @@ FIG-W06-03 for the pattern).
   * **If there is no source solution to mirror** — e.g. the exercise is quoted verbatim from the
     official problem sheet and the tutor only gives a hint/priority marker rather than a worked
     solution, or the exercise is an `aiexercise`/`aiexample` invented for these notes — collect
-    its solution into a single dedicated `\section{Solutions}` (or `\section*{Solutions}`) at the
-    **end of the chapter (week)**, after all other content, ordered to match the order the
-    exercises first appear in the chapter.
+    its solution into the chapter's `99-solutions.tex`, which holds a single
+    `\section{Solutions}` at the **end of the chapter**, after all other content, ordered to
+    match the order the exercises first appear in the chapter. A solution always lives in the
+    chapter that hosts its exercise — never in a different one.
   * **Every `exercise` in a chapter must have a corresponding `exercisesolution`** somewhere
     (inline or in the end-of-chapter section per the rule above) — this includes exercises
     quoted verbatim from the official problem sheet. When the tutor left no worked solution and
@@ -518,7 +534,7 @@ Each environment has a precise semantic role. Using the wrong one is a style err
     (Hilbert, the Wiener Kreis, Cantor) plus three categories — why a hypothesis is essential,
     proof ideas, appreciation of a technique — that are ordinary `remark`s. Only the first is
     genuinely homeless, and Grundstrukturen is full of it because logic and set theory *are*
-    philosophical. Analysis II has almost none (the Galois/Abel note in `week-06.tex` is about
+    philosophical. Analysis II has almost none (the Galois/Abel note in `content/14-convexity/` is about
     the only instance in eight weeks), so the box would stand near-empty and the other three
     categories would drift into it. Use a **titled** remark instead —
     `\begin{remark}[Why this hypothesis is there]` — which buys the same skimmability with no
@@ -603,7 +619,7 @@ Each environment has a precise semantic role. Using the wrong one is a style err
 * **`aiexercise`** (AI-Exercise) — for AI-generated practice problems created to reinforce the surrounding material.
   - **Difficulty:** Maximum **medium difficulty** (pedagogical, clarifying core concepts).
   - **Generator Comment:** Must contain a LaTeX comment naming the model that wrote it, `% Generator: <model> (<effort>)` -- e.g. `% Generator: Gemini 3.6 Flash (Medium)` or `% Generator: Claude Opus 5 (Medium)` -- directly inside the environment.
-  - **Mandatory Solution:** Every `aiexercise` MUST have a corresponding complete worked solution in the solutions section at the end of the chapter/week.
+  - **Mandatory Solution:** Every `aiexercise` MUST have a corresponding complete worked solution in the chapter's `99-solutions.tex`.
 
 ## PROJECT CONTEXT — ANALYSIS II
 
@@ -616,22 +632,29 @@ Correct work order:
 
 | # | Step | Reads PDFs? |
 |---|---|---|
-| 2 | Typeset Corsin — weeks 2–13 + ODE appendix directly into `content/*.tex` | **yes, heavily** |
+| 2 | Typeset Corsin — all 13 weeks + ODE appendix, into the topic chapter each belongs to | **yes, heavily** |
 | 3 | Build & Verify: `latexmk` until `main.pdf` compiles clean | no |
 | 4 | TikZ figures | Group B only |
 | 5 | *Optional:* supplements from other tutors | yes — **not before step 3** |
 
+Steps 2 and 3 are **done**: every week of Corsin's notes has been typeset and the document
+compiles clean. New material now gets pasted into the topic chapter it belongs to, not appended
+to a week.
+
 ### The five things that matter
 
-1. **Corsin Nick is the blueprint.** His notes define the document structure
-   (one chapter per week). Everyone else is mined for gaps only. Complete Corsin FIRST!
+1. **Corsin Nick is the blueprint.** His notes define which results appear and how they are
+   proved. Everyone else is mined for gaps only. (They no longer define the document's
+   *structure* — chapters are topics now — but they remain the mathematical blueprint.)
 2. **Merge by topic, never by date — and never by the other tutor's week number either.**
-   The ultimate authority for topic→week is
-   `content/week-NN.tex` itself (grep for the section label).
+   The ultimate authority for topic→chapter is `content/` itself: grep for the section label,
+   or read the chapter list in `main.tex`.
 
-   The trap is subtler than dates. **A file named `Week_03_...pdf` is not the source for our
-   `week-03.tex`.** Tutors run their own schedule, repeat material across sessions, and split
-   topics differently from Corsin. Observed directly:
+   The trap is subtler than dates, and the restructure removed only half of it. Week numbers no
+   longer name our files, but a tutor's own file names still carry them, and **a file named
+   `Week_03_...pdf` is not about our third chapter, or about any one chapter.** Tutors run their
+   own schedule, repeat material across sessions, and split topics differently from Corsin.
+   Observed directly:
    - Sascha Brack's `Week_03_Notes_Monday.pdf` and `Week_03_Notes_Friday.pdf` both consist of
      material belonging to **our Week 2** (compactness corollaries, Heine–Borel, connectedness,
      normed and inner-product spaces) plus a preview of **our Week 4** (differentiability, the
@@ -647,8 +670,10 @@ Correct work order:
    particular week's topic, and file each piece where the topic lives. **(b)** Heavy repetition
    between a tutor's own files is normal — do not assume a file is new material because it
    carries a different week number. Skim for what is *added*.
-3. **Direct LaTeX with Fine Provenance.** Typeset directly into `content/week-NN.tex`
-   with precise `% Source: Corsin Nick/Class Notes/Week N.pdf, p. M` comments on every section.
+3. **Direct LaTeX with Fine Provenance.** Typeset directly into the right section file under
+   `content/NN-topic/`, with precise `% Source: Corsin Nick/Class Notes/Week N.pdf, p. M`
+   comments on every section. Source comments still name the tutor's week — that is where the
+   material came from, and it does not change because our chapters were reorganised.
 4. **Never silently correct a source.** Flag it inline with `\begin{ainote}`; log it in
    an inline `ainote`.
 5. **Source folders are read-only.** The 17 tutor folders and `exercises/`
@@ -710,7 +735,7 @@ Each week opens with the official problem sheet (`exercises/ExN_Analysis2_eng.pd
 
 - ⚠️ **Standing decision: do NOT mine the other TAs' exercise-sheet hint files.** This applies
   to `Sascha Brack/Ex Sheet Hints/` and `Simon Kamps/SerieNNHints.pdf`. It was tried once, for
-  sheet 8 (see `content/week-08.tex`, the *"A second TA's priorities, and his hints"* block and
+  sheet 8 (see `content/19-jordan-measure/` and `content/appendix-d-problem-sheets.tex`, and
   the two per-exercise hints) — that material stays, but **do not add more of it**. The files
   are annotated copies of the official sheet rather than independent notes, so the yield is
   cross-TA priority agreement plus short margin hints, which is not worth the reading cost or
@@ -731,7 +756,8 @@ the \newterm{implicit function theorem} (\germanterm{Satz über implizite Funkti
 
 `\germanterm{...}` is defined at `main.tex:174`. Only on first introduction — never
 repeated. Canonical German wording comes from **Jérôme Paschoud**’s topic-named files.
-Every term pair also goes into `content/appendix-b-glossary.tex`.
+Every term pair also goes into `content/appendix-b-glossary.tex`, whose third column is the
+**chapter** of first introduction (a letter there means an appendix).
 (An earlier two-stage pipeline wrote these into Markdown transcripts first; that stage was
 dropped -- there is no `transcript/` directory. Write the LaTeX form directly.)
 
@@ -756,66 +782,69 @@ All generic rules in this file apply. Additional project-specific conventions:
   `\dist`, `\diam`, `\supp`, `\vol`, `\divg`, `\curl`, `\Jac`, `\Hess`,
   `\grad`, `\rank`, `\id`, `\Img`, `\sgn`, `\Tr`, `\GL`, `\transp`.
 
-### Document skeleton — SETTLED
+### Document skeleton — SETTLED (restructured; this replaces the week-based skeleton)
 
-**Chapter = week. Section = topic (the navigable level). Day = a styled marker, not a section.**
+**Part = thematic block. Chapter = topic. Section = one file. Day and week = gone.**
 
+The document used to be one chapter per teaching week. It is now organised by content: seven
+`\part`s over 26 topic chapters, each chapter a directory, each section its own file. The point
+of the change was that a week is an accident of the timetable — compactness was split across two
+of them and stitched back together with a back-pointer — whereas a chapter you can name is
+something a reader can look up.
 
-```latex
-\chapter{Week 2 --- Metric Spaces, Topology \& Continuity}  % chapter no. = week no.
-
-\exercisesheet{2}          % \section*, listed in TOC
-\session{Monday}           % styled rule; NOT a sectioning command
-\section{Metric spaces}    % -> 2.a
-  \subsection{Examples}    % unnumbered (secnumdepth = 1)
-\section{Open sets}        % -> 2.b
-\session{Friday}
-\section{Continuity}       % -> 2.c
+```
+content/
+  07-compactness/
+    00-chapter.tex      <- \chapter + \label + a short intro + nothing but \input lines
+    01-open-covers.tex
+    02-compact-subsets.tex
+    03-sequential-vs-topological.tex
+    04-heine-borel.tex
+    05-why-compactness-matters.tex
+    99-solutions.tex    <- the chapter's single \section{Solutions}
 ```
 
-Do **not** make `\session{...}` a `\section` — it must not consume a section letter
-or disturb theorem numbering. Theorems land as `2.b.1`, anchored to a topic.
+`main.tex` holds the `\part` lines and one `\input` of each `00-chapter.tex`, in order. **To add
+a chapter:** make the directory, write `00-chapter.tex`, add the `\input`. **To add material to
+an existing chapter:** drop a new `NN-*.tex` beside its siblings and add one `\input` line to
+that chapter's stub. Nothing else has to be touched — that is the whole reason for the layout.
+
+**Numbering.** Directory prefixes are ordering only; the real chapter number comes from the
+`\input` order in `main.tex`. `\part` deliberately does **not** reset `\thechapter`, so chapter
+numbers — and therefore theorem numbers, which are built from them — run continuously 1–26.
+
+**Every file carries its provenance.** The first line of each is an `% Originally:` comment
+naming the old week file and section it came from; the `% Source:` comments beneath are the
+tutor's own, unchanged, and still cite his week-numbered PDFs. Those two kinds of comment answer
+different questions — where this text used to sit in *our* document, and where it came from in
+*his* notes — and both are worth keeping.
 
 **Heading Styles & Suffixes:**
 * **Colors:**
+  - Part Title: `ThemePurple` (`PartTitleText`), number in `OliveGreen` (`PartNumberText`)
   - Section Title: `MidnightBlue` (`SecTitleColor`)
   - Subsection Title: `MidnightBlue` (`SubSecTitleColor`)
   - Subsubsection Title: `TextBoldColor` (`SubSubSecTitleColor`)
   - Green `(...)` Suffix: `OliveGreen` (`SecNumberColor`)
 * **Suffix Format:** All numbered headings carry a green suffix:
-  - `\section{...}` -> `Title (Section 2.a)`
-  - `\subsection{...}` -> `Title (Subsection 2.a.1)`
-  - `\subsubsection{...}` -> `Title (Subsubsection 2.a.1.1)`
+  - `\chapter{...}` -> `Title (Chapter 7)`, and `(Appendix C)` after `\appendix`
+  - `\section{...}` -> `Title (Section 7.a)`
+  - `\subsection{...}` -> `Title (Subsection 7.a.1)`
 
-**Preamble macros:**
+**Avoid a chapter that is one section repeating the chapter's own title.** If a chapter has
+exactly one section and they share a name, either split the section or let the chapter absorb it.
 
-```latex
-% Monday/Friday session marker — NOT a sectioning command.
-\newcommand{\session}[1]{%
-  \par\addvspace{2.5ex}%
-  \noindent{\sffamily\bfseries\color{ThemeWeekNumber}#1}%
-  \hspace{0.75em}\textcolor{HeaderFooterLine}{\leaders\hrule height 0.5pt\hfill}%
-  \par\addvspace{1.2ex}\noindent\ignorespaces}
+**Retired macros — do not reinstate.** `\session{Monday}`, `\exercisesheet{N}` and
+`\continuedfrom{label}` all existed to prop up the week structure and are gone from `main.tex`.
+There is no day to mark, the problem sheets are dissolved, and no topic is split across a
+boundary that would need a back-pointer.
 
-% Problem sheet heading — unnumbered but listed in TOC.
-\newcommand{\exercisesheet}[1]{%
-  \section*{Exercise sheet #1}%
-  \addcontentsline{toc}{section}{Exercise sheet #1}%
-  \markright{Exercise sheet #1}}
+**Problem sheets are dissolved.** Each problem sits with the material it tests, so a single
+sheet's problems can be spread over several chapters, and its solution is in that chapter's
+`99-solutions.tex`. `content/appendix-d-problem-sheets.tex` restores the sheet view: one table
+per sheet, with Corsin's priority markings and his own comments, and a column pointing at the
+section that now hosts each problem. **When you transcribe a new problem, add it to that table.**
 
-% Back-pointer for topics that span weeks.
-\newcommand{\continuedfrom}[1]{%
-  \par\noindent{\small\itshape\color{TextMetaNote}Continued from \cref{#1}.}%
-  \par\addvspace{1ex}}
-```
-
-**Topics that span weeks** — mirror Corsin’s own heading style:
-
-```latex
-\section{Compactness --- continued}
-\label{sec:compactness_continued}
-\continuedfrom{sec:compactness}
-```
-
-**File naming:** `content/week-02.tex` etc., one file per week. Chapter number = week number.
-There is no `transcript/` stage -- typeset straight into `content/`.
+**File naming:** `content/NN-topic-slug/NN-section-slug.tex`, with `00-chapter.tex` for the stub
+and `99-solutions.tex` for the solutions. There is no `transcript/` stage and no
+`content/exercise-sheets/` directory -- typeset straight into the section file.

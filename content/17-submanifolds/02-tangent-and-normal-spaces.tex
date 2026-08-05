@@ -173,12 +173,17 @@ The tangent space $T_{\Phi(\theta,\varphi)} S^2$ is spanned by the partial deriv
 \partial_\varphi \Phi(\theta,\varphi) = \begin{pmatrix} -\sin\theta\sin\varphi \\ \sin\theta\cos\varphi \\ 0 \end{pmatrix}.
 \]
 A normal vector is given by their cross product:
-\[
+% Split across three lines: as one display this overflowed the text block by 70pt, which the
+% house style forbids for chains of matrix blocks.
+\begin{align*}
 \vec{n} = \partial_\theta \Phi \times \partial_\varphi \Phi
-= \begin{pmatrix} \cos\theta\cos\varphi \\ \cos\theta\sin\varphi \\ -\sin\theta \end{pmatrix} \times \begin{pmatrix} -\sin\theta\sin\varphi \\ \sin\theta\cos\varphi \\ 0 \end{pmatrix}
-= \begin{pmatrix} \sin^2\theta\cos\varphi \\ \sin^2\theta\sin\varphi \\ \sin\theta\cos\theta\cos^2\varphi + \sin\theta\cos\theta\sin^2\varphi \end{pmatrix}
-= \sin\theta \begin{pmatrix} \sin\theta\cos\varphi \\ \sin\theta\sin\varphi \\ \cos\theta \end{pmatrix}.
-\]
+  &= \begin{pmatrix} \cos\theta\cos\varphi \\ \cos\theta\sin\varphi \\ -\sin\theta \end{pmatrix}
+     \times
+     \begin{pmatrix} -\sin\theta\sin\varphi \\ \sin\theta\cos\varphi \\ 0 \end{pmatrix} \\
+  &= \begin{pmatrix} \sin^2\theta\cos\varphi \\ \sin^2\theta\sin\varphi \\
+       \sin\theta\cos\theta\cos^2\varphi + \sin\theta\cos\theta\sin^2\varphi \end{pmatrix} \\
+  &= \sin\theta \begin{pmatrix} \sin\theta\cos\varphi \\ \sin\theta\sin\varphi \\ \cos\theta \end{pmatrix}.
+\end{align*}
 Its length is $|\vec{n}| = \sin\theta$ (since $\sin\theta > 0$ for $\theta \in (0,\pi)$).
 The unit normal vector is therefore
 \[

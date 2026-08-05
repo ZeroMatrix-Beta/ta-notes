@@ -123,7 +123,10 @@
 % --- EMPHASIS STYLE OVERRIDE ---
 \DeclareTextFontCommand{\emph}{\sffamily\bfseries\color{TextEmphColor}}
 \RenewDocumentCommand{\textbf}{m}{{\sffamily\bfseries\color{TextBoldColor}#1}}
-\setlist[enumerate]{font=\color{EnumerateBullet}\colorlet{TextBoldColor}{EnumerateBullet}\bfseries}
+% NB: no \setlist[enumerate] here. There used to be one setting `font=...', but the fuller
+% \setlist[enumerate] in the LIST FORMATTING block below sets `font=' again and, enumitem
+% keys being last-wins, silently overrode it. It was dead configuration that looked live.
+% The surviving declaration is the one place to change enumerate styling.
 
 % ==========================================
 % HYPERLINKS & CLEVEREF  (hyperref must come before cleveref)
@@ -222,7 +225,7 @@
 {}                           % Empty standard label
 {0ex}                        % Separation
 % #1 is the title. Suffix is \large (smaller) and un-bolded
-{#1 {\large\mdseries\color{ChapNumberText}(Chapter \thechapter)}}
+{#1 {\large\mdseries\color{ChapNumberText}(\chaptername\ \thechapter)}}
 [{\color{ChapLine}\rule{\textwidth}{0.8pt}}]
 
 \titleformat{name=\chapter,numberless}[block]
@@ -345,10 +348,10 @@
   ref=(\alph*)
 }
 
-\setlist[description]{
-  style=unboxed,
-  labelsep=0.333em plus 0.167em minus 0.111em
-}
+% No \setlist[description]: the `description' environment is forbidden by this project's
+% house style (use itemize with the name bolded inline instead), and nothing in content/
+% uses it. Configuring an environment that must never appear only invited someone to
+% reach for it.
 
 % Abstände bei geschachtelten Listen 
 \setlist[itemize,2]{topsep=0pt, itemsep=0pt, parsep=0pt}
@@ -379,14 +382,17 @@
 
 \theoremstyle{purplethm}
 
-% NB: deliberately NOT \newtheorem{theorem}{Theorem}[section].
-% Each content file hard-codes its own \thetheorem prefix so that the printed
-% numbers stay synchronised with Prof. Biran's handwritten notes, where one
-% source part (e.g. `25.isometries.v03') may be typeset here as several
-% \section's. An automatic per-section reset therefore restarted the counter in
-% the middle of a source part and printed e.g. "25.a.1" three times. The counter
-% now resets per chapter only; a file that opens a new source part resets it
-% explicitly with \setcounter{theorem}{0}.
+% NB: deliberately NOT \newtheorem{theorem}{Theorem}[section]. The counter resets per
+% *chapter* (see \@addtoreset below) and the printed number is built by hand in
+% \thetheorem, which appends the section letter. An automatic per-section reset would
+% restart the arabic part inside a chapter and print e.g. "6.a.1", "6.b.1", "6.c.1"
+% instead of a single run 6.a.1 ... 6.c.17.
+%
+% This comment used to say that each content file hard-codes its own \thetheorem prefix to
+% stay in step with "Prof. Biran's handwritten notes". That was imported wholesale from a
+% different repository (a linear-algebra project) and never described this document: no
+% file here overrides \thetheorem, and none should -- doing so would nail a wrong chapter
+% number into a topic that has since moved chapters more than once.
 \newtheorem{theorem}{Theorem}
 
 % The decoupled theorem display format: Chapter.letter.Number
@@ -644,26 +650,22 @@
 }
 
 % ==========================================
-% WEEK/TOPIC SKELETON MACROS (chapter = week, section = topic; see gemini.md, Document skeleton)
+% RETIRED: the week-skeleton macros
 % ==========================================
-% Monday/Friday class marker. Deliberately NOT a sectioning command: it must not
-% consume a section letter, disturb theorem numbering, or enter the TOC.
-\newcommand{\session}[1]{%
-  \par\addvspace{2.5ex}%
-  \noindent{\sffamily\bfseries\color{ThemeWeekNumber}#1}%
-  \hspace{0.75em}\textcolor{HeaderFooterLine}{\leaders\hrule height 0.5pt\hfill}%
-  \par\addvspace{1.2ex}\noindent\ignorespaces}
-
-% The week's problem sheet. Unnumbered so it does not consume a section letter
-% (theorem numbers stay tied to topics), but listed in the TOC so it is findable.
-\newcommand{\exercisesheet}[1]{%
-  \section*{Exercise sheet #1}%
-  \addcontentsline{toc}{section}{Exercise sheet #1}%
-  \markright{Exercise sheet #1}}
-
-% A topic carried over from the previous week.
-\newcommand{\continuedfrom}[1]{%
-  \par\noindent{\small\itshape\color{TextMetaNote}Continued from \cref{#1}.}\par\addvspace{1ex}}
+% This document used to be organised one chapter per teaching week, and carried three
+% macros to support that: \session{Monday/Friday} (a styled day marker), \exercisesheet{N}
+% (an unnumbered heading opening the week's problem sheet), and \continuedfrom{label}
+% (a back-pointer for a topic split across two weeks).
+%
+% All three are gone, together with the structure that needed them. Chapters are topics
+% now, so there is no day to mark; the problem sheets are dissolved, each problem sitting
+% with the material it tests (see content/appendix-d-problem-sheets.tex, which restores the
+% sheet view); and a topic no longer gets cut in half by a week boundary, so nothing needs
+% to point backwards. The \continuedfrom on compactness is the case that made the argument:
+% \section{Compactness --- continued} and its pointer both vanished the moment weeks 2 and 3
+% were merged into \cref{ch:compactness}.
+%
+% Do not reinstate these without reinstating the week structure -- see gemini.md.
 
 % ==========================================
 % FIGURE STUB (placeholder box until the dedicated TikZ pass, step 5)
@@ -763,6 +765,20 @@
 }
 
 % What goes into the marks.
+% LaTeX's \appendix switches \thechapter to letters and sets \@chapapp, but leaves
+% \chaptername alone -- so the heading, the TOC entry and the running header all announced
+% "Chapter A --- Ordinary Differential Equations". Renaming \chaptername inside \appendix
+% fixes the heading and the header, since both now ask for it by name rather than spelling
+% "Chapter" out.
+%
+% The TOC needs the second line as well. \tableofcontents typesets the .toc file at the very
+% front of the document, long before \appendix is ever executed, so at that moment
+% \chaptername is still "Chapter". Writing the redefinition *into* the .toc makes the switch
+% happen at the right position in the list instead.
+\appto\appendix{%
+  \addtocontents{toc}{\protect\renewcommand{\protect\chaptername}{\protect\appendixname}}%
+  \renewcommand{\chaptername}{\appendixname}}
+
 \renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter\ \ ---\ \ #1}{}}
 \renewcommand{\sectionmark}[1]{%
   \markright{\thesection\ \ ---\ \ #1}%

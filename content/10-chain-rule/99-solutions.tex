@@ -86,9 +86,11 @@ not, which is what the second half of each part is asking about.
     $x_2 \to 0^+$ sends $-1/x_2 \to -\infty$ and the value to $0$, while $x_2 \to 0^-$ sends it
     to $+\infty$. A limit existing from one side is not enough.
   \item The first function is smooth on all of $\mathbb{R}^2$, with
-    \[\partial_v\!\left(e^{x_1x_2}\sin(x_1{+}x_2^2)\right)
-      = e^{x_1x_2}\Big[\big(x_2\sin(x_1{+}x_2^2) + \cos(x_1{+}x_2^2)\big)v_1
-        + \big(x_1\sin(x_1{+}x_2^2) + 2x_2\cos(x_1{+}x_2^2)\big)v_2\Big],\]
+    \begin{align*}
+      \partial_v\!\left(e^{x_1x_2}\sin(x_1{+}x_2^2)\right)
+        &= e^{x_1x_2}\big(x_2\sin(x_1{+}x_2^2) + \cos(x_1{+}x_2^2)\big)\,v_1 \\
+        &\quad + e^{x_1x_2}\big(x_1\sin(x_1{+}x_2^2) + 2x_2\cos(x_1{+}x_2^2)\big)\,v_2,
+    \end{align*}
     and nothing needs extending. The other three are the point of the exercise, and they separate
     three different behaviours at the origin.
     \begin{itemize}
@@ -151,9 +153,11 @@ $\varphi(t) := b(t)$ for the latitude, so that
 \[r(t) = R\big(\cos\varphi\cos\theta,\ \cos\varphi\sin\theta,\ \sin\varphi\big).\]
 \begin{enumerate}[label=\textbf{\arabic*.}]
   \item The computation is far shorter in the moving orthonormal frame
-    \[e_r := (\cos\varphi\cos\theta,\ \cos\varphi\sin\theta,\ \sin\varphi), \qquad
-      e_\varphi := (-\sin\varphi\cos\theta,\ -\sin\varphi\sin\theta,\ \cos\varphi), \qquad
-      e_\theta := (-\sin\theta,\ \cos\theta,\ 0),\]
+    \begin{align*}
+      e_r      &:= (\cos\varphi\cos\theta,\ \cos\varphi\sin\theta,\ \sin\varphi), \\
+      e_\varphi&:= (-\sin\varphi\cos\theta,\ -\sin\varphi\sin\theta,\ \cos\varphi), \\
+      e_\theta &:= (-\sin\theta,\ \cos\theta,\ 0),
+    \end{align*}
     in which $r = R\,e_r$. Differentiating the three frame vectors by the chain rule gives
     \[\dot e_r = \varphi'\,e_\varphi + \theta'\cos\varphi\;e_\theta, \qquad
       \dot e_\varphi = -\varphi'\,e_r - \theta'\sin\varphi\;e_\theta, \qquad

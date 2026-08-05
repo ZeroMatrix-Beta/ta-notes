@@ -1,0 +1,272 @@
+% Originally: content/week-07.tex, \section{Submanifolds} (Corsin Week 7)
+
+% Source: Corsin Nick/Class Notes/Week 7.pdf, p. 2
+\section{Submanifolds}
+\label{sec:submanifolds}
+
+Recall that a \newterm{$C^k$-diffeomorphism} (\cref{thm:inverse_function_theorem}) is a $C^k$
+bijective function whose inverse is also $C^k$.
+
+\begin{definition}[Submanifold]
+\label{def:submanifold}
+$M^m \subseteq \mathbb{R}^n$ is a $C^k$, $m$-dimensional \newterm{submanifold}
+(\germanterm{Untermannigfaltigkeit}) of $\mathbb{R}^n$ if for any point $p \in M$ there are an
+open neighbourhood $U \subseteq \mathbb{R}^n$ of $p$, an open neighbourhood $V \subseteq
+\mathbb{R}^n$ of $0$, and a $C^k$-diffeomorphism $\Phi : U \to V$ with $\Phi(p) = 0$ (a
+\newterm{submanifold chart}) such that
+\[\Phi(U \cap M) = (\mathbb{R}^m\times\{0\}) \cap V = \{x \in V : x_{m+1}=\dots=x_n=0\}.\]
+\end{definition}
+
+% Sonnet 5 (Medium) --- FIG-W07-01
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.0]
+  % Left panel: the curved submanifold M with a chart neighbourhood U around p
+  \begin{scope}[shift={(0,0)}]
+    \draw[blue!70!black, thick] plot[smooth] coordinates
+      {(-1.6,-0.4) (-0.9,0.5) (0.0,0.1) (0.9,0.7) (1.7,-0.1)};
+    \node[blue!70!black, font=\small] at (1.9,-0.4) {$M$};
+    \draw[orange!90!black, thick, dashed] (0.0,0.35) ellipse (0.85 and 0.75);
+    \node[orange!90!black, font=\small] at (0.0,1.25) {$U$};
+    \fill (0.0,0.1) circle (1.5pt) node[below, font=\small] {$p$};
+    \node[below, font=\small] at (0,-1.3) {$\mathbb{R}^n$};
+  \end{scope}
+
+  \draw[->, thick] (2.5,0) -- (3.7,0) node[midway, above, font=\small] {$\Phi$};
+
+  % Right panel: the flattened image, R^m x {0} as a horizontal line inside V
+  \begin{scope}[shift={(4.4,0)}]
+    \draw[orange!90!black, thick] (-1.1,-0.9) rectangle (1.9,1.1);
+    \node[orange!90!black, font=\small] at (0.4,1.35) {$V$};
+    \draw[green!60!black, thick, ->] (-1.05,0) -- (1.85,0)
+      node[right, font=\scriptsize] {$\mathbb{R}^m\times\{0\}$};
+    \fill (0,0) circle (1.5pt) node[below, font=\small] {$0 = \Phi(p)$};
+    \node[below, font=\small] at (0.4,-1.3) {$\mathbb{R}^n$};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+\begin{ainote}
+Finding such a chart directly can be very difficult. Corsin notes it is often easier to use one of
+the following equivalent representations instead: the \textbf{implicit} representation (regular
+value theorem, below) or the \textbf{explicit/graphical} representation (local parametrization
+theorem, below).
+\end{ainote}
+
+\subsection{The regular value theorem}
+
+\begin{theorem}[Regular value theorem]
+\label{thm:regular_value_theorem}
+Suppose $U \subseteq \mathbb{R}^n$ is open, $F \in C^k(U,\mathbb{R}^\ell)$, and $y \in F(U)$. If
+\[DF_x : \mathbb{R}^n \to \mathbb{R}^\ell\]
+is surjective (i.e., $\Jac F(x)$ has full rank) for all $x \in F^{-1}\{y\} = \{\bar x \in U :
+F(\bar x) = y\}$, then $F^{-1}\{y\}$ is a $C^k$ submanifold of dimension $n-\ell$.
+\end{theorem}
+
+% Sonnet 5 (Medium)
+\begin{importantremark}[Full rank means two opposite things]
+\label{rem:full_rank_two_meanings}
+\qt{Full rank} is decided by the \textbf{shape} of the matrix, and the two representations of a
+submanifold sit on opposite sides of it:
+\begin{itemize}
+  \item An \textbf{implicit} description $F : \mathbb{R}^n \to \mathbb{R}^\ell$ cuts $M$ out by
+    $\ell$ equations, so $\Jac F$ is \textbf{wide} ($\ell \times n$ with $\ell \leq n$). Full
+    rank $=\ell$ means $DF_x$ is \textbf{surjective} --- the $\ell$ constraints are independent,
+    each one genuinely cutting a dimension. Here $\dim M = n - \ell$.
+  \item A \textbf{parametrization} $f : \mathbb{R}^m \to \mathbb{R}^n$ sweeps $M$ out by $m$
+    parameters, so $\Jac f$ is \textbf{tall} ($n \times m$ with $m \leq n$). Full rank $=m$
+    means $Df_x$ is \textbf{injective} --- the $m$ parameters move in independent directions,
+    none of them wasted. Here $\dim M = m$.
+\end{itemize}
+Same phrase, opposite condition. A wide matrix is never injective and a tall one is never
+surjective, so there is no ambiguity in practice --- but it is worth checking which side you are
+on before writing down what \qt{full rank} is supposed to give you.
+\end{importantremark}
+
+% Source: Corsin Nick/Class Notes/Week 7.pdf, p. 2
+\begin{example}[Circle of radius $R$]
+Let $F : \mathbb{R}^2 \to \mathbb{R}$, $(x,y) \mapsto x^2+y^2$. Then
+\[\Jac F(x,y) = (2x,\ 2y)\]
+has full rank --- here $\ell = 1$, so by \cref{rem:full_rank_two_meanings} full rank means
+$DF_{(x,y)} : \mathbb{R}^2 \to \mathbb{R}$ is \textbf{surjective}, i.e.\ simply that the row
+$(2x,2y)$ is nonzero --- if $x \neq 0$ or $y \neq 0$, that is,
+for all $(x,y) \in \mathbb{R}^2\setminus\{0\}$. For $R>0$, $(0,0) \notin F^{-1}\{R^2\}$, so
+\[F^{-1}\{R^2\} = \{(x,y) \in \mathbb{R}^2 : x^2+y^2=R^2\}\]
+is a submanifold of dimension $2-1=1$ by \cref{thm:regular_value_theorem}. Similarly,
+$\{x \in \mathbb{R}^n : |x|^2=R^2\}$ is a submanifold of dimension $n-1$ for $n \geq 1$ (the
+\newterm{$n$-sphere} of radius $R$).
+\end{example}
+
+% Sonnet 5 (Medium) --- FIG-W07-02
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.1]
+  \draw[->] (-1.7,0) -- (1.7,0) node[right, font=\small] {$x$};
+  \draw[->] (0,-1.7) -- (0,1.7) node[above, font=\small] {$y$};
+  \draw[blue!70!black, thick] (0,0) circle (1.3);
+  \node[blue!70!black, font=\small] at (1.05,1.05) {$F^{-1}\{R^2\}$};
+  \coordinate (Q) at (0.92,0.92);
+  \fill (Q) circle (1.5pt);
+  \draw[orange!90!black, thick, ->] (Q) -- ++(0.55,0.55)
+    node[above right, font=\scriptsize] {$\nabla F(x,y) = (2x,2y)$};
+\end{tikzpicture}
+\end{center}
+
+% Generator: Claude Opus 5 (Medium)
+\begin{aiexample}[A set that is \emph{not} a submanifold, and how to prove it]
+\label{ex:cross_not_submanifold}
+The regular value theorem is a one-way street: if $DF_x$ is surjective everywhere on the level
+set, we get a submanifold. When it is not, we get \emph{no information} --- the level set may
+still be a submanifold, or it may not. It is worth seeing a case where it is not.
+
+Let $F(x,y) := xy$ and consider $C := F^{-1}\{0\}$, the union of the two coordinate axes.
+Here $\Jac F(x,y) = (y,\ x)$, which is nonzero --- hence surjective --- at every point of $C$
+\emph{except} the origin. So \cref{thm:regular_value_theorem} does apply on
+$C \setminus \{(0,0)\}$, telling us that the four open half-axes are $1$-dimensional
+submanifolds, and says nothing at the origin.
+
+And at the origin $C$ genuinely fails to be a submanifold. The argument is a connectedness trick
+worth remembering, since it is the standard way to prove a negative here.
+
+Suppose $C$ were a $1$-dimensional submanifold. By \cref{def:submanifold} there would be a
+neighbourhood $U$ of the origin and a diffeomorphism $\Phi : U \to V$ carrying $C \cap U$ onto a
+piece of a \emph{line}, $(\mathbb{R}\times\{0\})\cap V$. Now delete the centre point from each
+side and count connected components (\cref{def:connectedness}):
+\begin{itemize}
+  \item Removing a point from a small piece of a line leaves \textbf{two} pieces.
+  \item Removing the origin from $C \cap U$ leaves \textbf{four} pieces --- one along each
+    half-axis.
+\end{itemize}
+But $\Phi$ is a homeomorphism, and homeomorphisms preserve the number of connected components
+(\cref{thm:continuity_preserves_connected}, applied to $\Phi$ and to $\Phi^{-1}$). Four cannot
+equal two, so no such $\Phi$ exists and $C$ is not a submanifold.
+
+\begin{remark}
+The moral is that submanifolds are forbidden from having \emph{crossings, corners or cusps}: near
+each of its points a submanifold must look like a flat piece of $\mathbb{R}^m$, and a crossing
+does not. Compare \cref{ex:constraint_qualification_fails} in Week 5, where the constraint set
+$\{y^2=x^3\}$ had a cusp at exactly the point where $\nabla g$ vanished --- the same phenomenon,
+seen through the Lagrange multiplier lens one chapter earlier.
+\end{remark}
+\end{aiexample}
+
+% Source: Corsin Nick/Class Notes/Week 7.pdf, p. 4
+\subsubsection{Connection to Lagrange multipliers}
+
+\begin{remark}[Constraint sets are submanifolds]
+Recall the Lagrangian from \cref{prop:constrained_optimization}: when optimizing $f|_M$ for
+$f \in C^k(\mathbb{R}^n,\mathbb{R})$, where $g_1,\dots,g_k : U \to \mathbb{R}$,
+\[M := \{x \in \mathbb{R}^n : g_1(x)=\dots=g_k(x)=0\}, \qquad (\nabla g_1,\dots,\nabla g_k) \text{ linearly independent for all } x \in M\]
+(hence $k \leq n$). This means precisely that, for $g : \mathbb{R}^n \to \mathbb{R}^k$,
+$x \mapsto (g_1(x),\dots,g_k(x))$, the Jacobian
+\[\Jac g(x) = \begin{pmatrix} \nabla g_1(x) \longrightarrow \\ \vdots \\ \nabla g_k(x) \longrightarrow \end{pmatrix}\]
+has full rank. Therefore, $M = g^{-1}\{0\}$ is an $(n-k)$-dimensional submanifold by the regular
+value theorem: the constraint sets of Week 5's Lagrange-multiplier problems were submanifolds all
+along.
+\end{remark}
+
+% Source: Corsin Nick/Class Notes/Week 7.pdf, p. 5
+\subsection{The local parametrization theorem}
+
+\begin{theorem}[Local parametrization]
+\label{thm:local_parametrization}
+Let $M \subseteq \mathbb{R}^n$. Then $M$ is a $C^k$ submanifold with $\dim M = m$ if and only if
+for every $p \in M$ there exist an open neighbourhood $V$ of $p$, an open set $U \subseteq
+\mathbb{R}^m$, and a $C^k$ map $f : U \to V \cap M$ such that
+\begin{itemize}
+  \item $Df_x : \mathbb{R}^m \to \mathbb{R}^n$ is injective for all $x \in U$;
+  \item $f$ is a homeomorphism (bijective, continuous, with continuous inverse $f^{-1}$).
+\end{itemize}
+\end{theorem}
+
+% Generator: Claude Opus 5 (Medium)
+\begin{remark}[Three descriptions, and which one to reach for]
+\label{rem:three_submanifold_descriptions}
+There are now three ways to certify that $M$ is an $m$-dimensional submanifold, and they are
+equivalent --- but they are not equally convenient, and choosing badly is what makes these
+exercises feel hard.
+
+\begin{itemize}
+  \item \textbf{Chart} (\cref{def:submanifold}) --- the definition. Straighten $M$ out with a
+    diffeomorphism. Essentially, the first $m$ coordinates of the chart (the non-vanishing ones) define the $m$-dimensional submanifold. Almost never used directly for a concrete $M$: producing $\Phi$ by hand is
+    painful. Its role is theoretical, and it is what the other two are proved from.
+  \item \textbf{Implicit / regular value} (\cref{thm:regular_value_theorem}) --- use when $M$
+    arrives as \emph{equations}: $\{x^2+y^2=R^2\}$, $\{g_1=\dots=g_k=0\}$. This relies on the same underlying idea as the chart definition, but defining the diffeomorphisms implicitly. Check a rank
+    condition on $\Jac F$ and you are done, with no parametrization ever written. This is
+    normally the cheapest route.
+  \item \textbf{Parametrization} (\cref{thm:local_parametrization}) --- use when $M$ arrives as
+    a \emph{picture you can sweep out}: a graph, a surface of revolution, a curve given by a
+    formula in a parameter. This is often the most intuitive approach, explicitly building the submanifold using parameters. Also the one to use when you subsequently need the tangent space,
+    since $\partial_1f,\dots,\partial_mf$ hand you a basis directly
+    (\cref{def:tangent_space}).
+\end{itemize}
+
+The rough rule: \textbf{equations $\to$ regular value theorem; a formula with parameters $\to$
+local parametrization.} A graph $\{(x,f(x))\}$ satisfies both, which is why graphs are the
+easiest case of all.
+
+Two cautions carried over from \cref{rem:full_rank_two_meanings}. \qt{Full rank} means
+\emph{surjective} in the first case and \emph{injective} in the second --- the shape of the
+matrix decides. And neither theorem yields a negative: if the rank condition fails, you have
+learned nothing, and must argue separately (see \cref{ex:cross_not_submanifold}).
+\end{remark}
+
+\begin{example}[The $n$-parabola]
+Let $P := \{(x,t) \in \mathbb{R}^n\times\mathbb{R} : t=|x|^2\}$. One could use the regular value
+theorem, but instead take
+\[f : \mathbb{R}^n \to \mathbb{R}^n\times\mathbb{R}, \qquad x \mapsto (x,|x|^2).\]
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item The Jacobian matrix has full rank:
+\[ \Jac f(x) = \begin{pmatrix} \id_{n\times n} \\ 2x\transp \end{pmatrix} \]
+    $n$ at every $x$ --- a tall matrix now, so by \cref{rem:full_rank_two_meanings} this means
+    $Df_x$ is \textbf{injective}, which is clear from the $\id_{n\times n}$ block alone.
+  \item $f$ is bijective onto $P$ and continuous, with inverse $\pi : f(U) \to \mathbb{R}^n$,
+    $(x,t) \mapsto x$ (the canonical projection), which is also continuous.
+  \item $f(\mathbb{R}^n) = P$.
+\end{enumerate}
+So $P$ is an $n$-dimensional submanifold by \cref{thm:local_parametrization}.
+
+\begin{remark}
+The graphical representation of a submanifold (as the graph of a function, here $x \mapsto |x|^2$)
+is therefore a common, and equivalent, special case of a local parametrization: it is always
+injective on its domain by construction, and its inverse is simply the projection forgetting the
+last coordinate.
+\end{remark}
+\end{example}
+
+% Sonnet 5 (Medium) --- FIG-W07-03
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.1]
+  \draw[->] (-1.9,0) -- (1.9,0) node[right, font=\small] {$x$};
+  \draw[->] (0,-0.3) -- (0,2.7) node[above, font=\small] {$t$};
+  \draw[blue!70!black, thick, domain=-1.6:1.6, samples=60, smooth]
+    plot ({\x}, {\x*\x}) node[above right, font=\small] {$P = \{(x,t) : t=|x|^2\}$};
+\end{tikzpicture}
+\end{center}
+
+% Source: Corsin Nick/Class Notes/Week 7.pdf, p. 6
+\subsubsection{An alternative optimization technique}
+
+\begin{remark}[Parametrized optimization, revisiting \cref{ex:6.9}]
+Local parametrizations give a second route to constrained-extremum problems, alongside Lagrange
+multipliers: parametrize the constraint set and optimize the resulting unconstrained function of
+fewer variables. Corsin illustrates this by revisiting $f(x,y) := 2x^2+y^2-x$ on
+$S^1 = \{(x,y)\in\mathbb{R}^2 : x^2+y^2=1\}$ --- exactly \cref{ex:6.9}\textbf{(a)}, which was
+solved there via Lagrange multipliers.
+
+Parametrize $S^1$ by $(x(\theta),y(\theta)) := (\cos\theta,\sin\theta)$. Then
+\[f(\theta) := f(x(\theta),y(\theta)) = 2\cos^2\theta+\sin^2\theta-\cos\theta = \cos^2\theta-\cos\theta+1,\]
+using $\sin^2\theta = 1-\cos^2\theta$. Differentiating,
+\[f'(\theta) = -2\cos\theta\sin\theta+\sin\theta \overset{!}{=} 0.\]
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item $\sin\theta = 0 \implies \theta_1 \in \{0,\pi\}$.
+  \item $\sin\theta \neq 0 \implies -2\cos\theta+1=0 \implies \cos\theta = \tfrac12 \implies
+    \theta_2 \in \{\tfrac{\pi}{3},\tfrac{5\pi}{3}\}$.
+\end{enumerate}
+So, the extrema are at $(\cos\theta_1,\sin\theta_1) = (\pm1,0)$ and
+$(\cos\theta_2,\sin\theta_2) = \big(\tfrac12,\pm\tfrac{\sqrt3}{2}\big)$ --- exactly the four points
+found via Lagrange multipliers in the solution to \cref{ex:6.9}\textbf{(a)}, confirming the two
+methods agree.
+\end{remark}
+
+% Sonnet 5 (Medium)
+Having two equivalent ways to recognize and parametrize a submanifold, we turn to studying its
+local linear structure: the tangent and normal spaces at a point.

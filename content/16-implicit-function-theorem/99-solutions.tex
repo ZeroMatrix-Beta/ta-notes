@@ -1,0 +1,29 @@
+% Originally: content/week-07.tex, \section{Solutions}
+
+\section{Solutions}
+\label{sec:imft_solutions}
+
+\begin{exercisesolution}[Solution to \cref{ex:7.5}]
+% Generator: Claude Sonnet 5 (Medium)
+Write the system as $F(x,y,z,u,v) = 0$ for $F : \mathbb{R}^5 \to \mathbb{R}^2$,
+\[F(x,y,z,u,v) := \begin{pmatrix} xy^5+yu^5+zv^5-1 \\ x^5y+y^5u+z^5v-1 \end{pmatrix}.\]
+The differential is
+\[\Jac F(x,y,z,u,v) = \begin{pmatrix} y^5 & 5xy^4+u^5 & v^5 & 5yu^4 & 5zv^4 \\ 5x^4y & x^5+5y^4u & 5z^4v & y^5 & z^5 \end{pmatrix},\]
+so at the base point,
+\[\Jac F(0,1,1,1,0) = \begin{pmatrix} 1 & 1 & 0 & 5 & 0 \\ 0 & 5 & 0 & 1 & 1 \end{pmatrix}.\]
+By the implicit function theorem applied with $(x,y,z)$ as the free variables and $(u,v)$ as the
+variables to solve for, we need the submatrix of partial derivatives with respect to $u,v$ to be
+invertible; this is
+\[D_{(u,v)}F(0,1,1,1,0) = \begin{pmatrix} 5 & 0 \\ 1 & 1\end{pmatrix}, \qquad \det = 5 \neq 0,\]
+so the implicit function theorem applies, and the system is indeed solvable for $u,v$ as
+$C^\infty$ functions of $(x,y,z)$ near $(0,1,1)$. Writing $G(x,y,z) := (u(x,y,z),v(x,y,z))$, the
+theorem gives
+\begin{align*}
+\Jac G(0,1,1)
+  &= -\begin{pmatrix}5&0\\1&1\end{pmatrix}^{-1}\begin{pmatrix}1&1&0\\0&5&0\end{pmatrix} \\
+  &= -\frac15\begin{pmatrix}1&0\\-1&5\end{pmatrix}\begin{pmatrix}1&1&0\\0&5&0\end{pmatrix} \\
+  &= -\frac15\begin{pmatrix}1&1&0\\-1&24&0\end{pmatrix}.
+\end{align*}
+So $D_{(0,1,1)}u = -\tfrac15\left(\begin{smallmatrix}1&1&0\end{smallmatrix}\right)$ and
+$D_{(0,1,1)}v = -\tfrac15\left(\begin{smallmatrix}-1&24&0\end{smallmatrix}\right)$.
+\end{exercisesolution}

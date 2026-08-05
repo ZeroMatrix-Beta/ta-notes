@@ -1,0 +1,24 @@
+% Originally: content/week-07.tex, \section{Solutions}
+
+\section{Solutions}
+\label{sec:ift_solutions}
+
+\begin{exercisesolution}[Solution to \cref{ex:7.1}]
+% Generator: Claude Sonnet 5 (Medium)
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item First build a diffeomorphism $\mathbb{R} \to (0,1)$: the function
+    \[\psi : \mathbb{R} \to (0,1), \qquad \psi(t) := \frac12+\frac1\pi\arctan(t)\]
+    is $C^\infty$, strictly increasing (since $\arctan' > 0$), and bijective onto $(0,1)$ (as
+    $\arctan$ is bijective onto $(-\tfrac\pi2,\tfrac\pi2)$), with $C^\infty$ inverse
+    $\psi^{-1}(s) = \tan\big(\pi(s-\tfrac12)\big)$. Applying $\psi$ in each coordinate gives the
+    diffeomorphism
+    \[\phi : \mathbb{R}^2 \to (0,1)\times(0,1), \qquad \phi(x,y) := \Big(\frac12+\frac1\pi\arctan(x),\ \frac12+\frac1\pi\arctan(y)\Big).\]
+  \item \textbf{No.} $f$ is a $C^\infty$ bijection of $\mathbb{R}$ with $f^{-1}(x) =
+    \sqrt[5]{x}$, but $f'(0) = 5\cdot0^4 = 0$. If $f$ were a diffeomorphism, then by the
+    chain rule applied to $f^{-1}\circ f = \id$,
+    \[1 = (f^{-1})'(f(x))\cdot f'(x) \quad \text{for all } x,\]
+    which is impossible at $x=0$ since $f'(0)=0$. Equivalently, $(f^{-1})'(x) =
+    \tfrac15x^{-4/5} \to \infty$ as $x \to 0$, so $f^{-1}$ is not even differentiable at $0$,
+    let alone continuously so.
+\end{enumerate}
+\end{exercisesolution}

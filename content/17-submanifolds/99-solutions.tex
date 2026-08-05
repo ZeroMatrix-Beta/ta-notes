@@ -1,0 +1,45 @@
+% Originally: content/week-07.tex, \section{Solutions}
+
+\section{Solutions}
+\label{sec:submanifolds_solutions}
+
+\begin{ainote}
+Corsin's Week 7 notes cover only the theory (submanifolds, the regular value and local
+parametrization theorems, tangent and normal spaces), with no page working out any of the
+official-sheet exercises, so all solutions below are original. Each has been checked against
+\texttt{exercises/Sol7\_Analysis2\_eng.pdf}; no divergence from the official solutions was found.
+\end{ainote}
+
+\begin{exercisesolution}[Solution to \cref{ex:7.6}]
+% Generator: Claude Sonnet 5 (Medium)
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Fixing $\theta_0,\varphi_0$, the image of $r \mapsto \Phi(r,\theta_0,\varphi_0)$ is the
+    radial half-line through the point $p_0 := (\sin\theta_0\cos\varphi_0,
+    \sin\theta_0\sin\varphi_0, \cos\theta_0)$ on the unit sphere, i.e., $\{rp_0 : r \in
+    (0,\infty)\}$. Fixing $r_0,\varphi_0$, the image of $\theta \mapsto \Phi(r_0,\theta,\varphi_0)$
+    is a semicircle of radius $r_0$ from the north pole to the south pole (excluding the poles),
+    at longitude $\varphi_0$. Fixing $r_0,\theta_0$, the image of $\varphi \mapsto
+    \Phi(r_0,\theta_0,\varphi)$ is a circle of latitude of radius $r_0\sin\theta_0$ at height
+    $r_0\cos\theta_0$ (excluding the point at $\varphi = \pm\pi$).
+  \item For each fixed $r$, the image sweeps out the sphere of radius $r$ minus the half-plane
+    at $\varphi = \pm\pi$ (the \emph{anti}-meridian --- the prime meridian is $\varphi = 0$);
+    overall,
+    \[\operatorname{im}(\Phi) = \mathbb{R}^3\setminus\big((-\infty,0]\times\{0\}\times\mathbb{R}\big).\]
+  \item Computing,
+    \[D_{(r,\theta,\varphi)}\Phi = \begin{pmatrix} \sin\theta\cos\varphi & r\cos\theta\cos\varphi & -r\sin\theta\sin\varphi \\ \sin\theta\sin\varphi & r\cos\theta\sin\varphi & r\sin\theta\cos\varphi \\ \cos\theta & -r\sin\theta & 0 \end{pmatrix},\]
+    hence, expanding along the last row,
+    \[\begin{aligned}
+    \det(D_{(r,\theta,\varphi)}\Phi) &= r^2\sin\theta\cos^2\theta\cos^2\varphi+r^2\sin^3\theta\sin^2\varphi+r^2\sin\theta\cos^2\theta\sin^2\varphi+r^2\sin^3\theta\cos^2\varphi \\
+    &= r^2\big(\sin\theta\cos^2\theta+\sin^3\theta\big) = r^2\sin\theta.
+    \end{aligned}\]
+  \item Since $r \in (0,\infty)$ and $\theta \in (0,\pi)$, $r^2\sin\theta$ is never $0$, so
+    $\Jac\Phi(r,\theta,\varphi)$ is everywhere invertible and $\Phi$ is a local diffeomorphism by
+    \Cref{thm:inverse_function_theorem}. To see it is a \textbf{global} diffeomorphism onto its
+    image, it remains to check $\Phi$ is injective: if $\Phi(r_1,\theta_1,\varphi_1) =
+    \Phi(r_2,\theta_2,\varphi_2)$, then $r_1=r_2$ follows by taking the norm of both sides; since
+    $\cos : (0,\pi) \to (-1,1)$ is injective, the third coordinate gives $\theta_1=\theta_2$;
+    finally $(\cos\varphi,\sin\varphi)$ with $\varphi \in (-\pi,\pi)$ determines a unique point on
+    the unit circle, so $\varphi_1=\varphi_2$. Hence $\Phi$ is injective, and (being a local
+    diffeomorphism everywhere on its domain) a diffeomorphism onto its image.
+\end{enumerate}
+\end{exercisesolution}

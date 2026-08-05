@@ -1,0 +1,242 @@
+% ============================================================
+% Appendix --- Mid-semester repetition quiz
+% Originally: content/week-08.tex, \section{Repetition quiz} (Corsin Week 8).
+% It reviews the whole differential-topology half of the course rather than any one
+% topic, so under a topic structure it belongs to no chapter and is collected here.
+% ============================================================
+\chapter{Mid-Semester Repetition Quiz}
+\label{ch:repetition_quiz}
+
+% Transition: Claude Opus 5 (Medium)
+Corsin devoted the first half of one exercise class to a quiz revisiting everything up to this
+point --- differentiability, the chain rule, extrema, the implicit function theorem,
+submanifolds. It ranges across \crefrange{ch:prerequisites}{ch:submanifolds} and belongs to no
+single chapter, so it is collected here, where it also serves as a self-test before the
+integration half of the course.
+
+% Source: Corsin Nick/Class Notes/Week 8.pdf, p. 2
+\section{The quiz}
+\label{sec:repetition_quiz}
+
+\begin{ainote}
+Corsin credits the questions to Prof.\ Serra and Prof.\ Lang, and ran them from a shared Kahoot
+at the mid-semester repetition session. On his pages, \textcolor{green!60!black}{green} marks the
+\emph{correct} statement and \textcolor{red!80!black}{red} an \emph{incorrect} one; that colouring
+is rendered below as explicit \textbf{True}/\textbf{False} verdicts.
+\end{ainote}
+
+\begin{question}
+\label{q:quiz_q1}
+Let $U := \{(x,y) \in \mathbb{R}^2 : 1 \leq x^2+y^2 \leq 4\}$ and
+$f(x,y) := \sin(xy) - y^4$. Which of the following holds?
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $f(U) = [a,b]$ for some $a < b$.
+  \item $f(U)$ is disconnected and closed with two connected components.
+\end{enumerate}
+\end{question}
+
+\begin{answer}
+\textbf{(a) is true, (b) is false.} $U$ is compact and connected and $f$ is continuous, so
+$f(U) \subseteq \mathbb{R}$ is compact (\cref{item:continuity_preserves_compact}) and connected
+(\cref{thm:continuity_preserves_connected}). The connected subsets of $\mathbb{R}$ are exactly
+the intervals, and a compact one is closed and bounded, so $f(U) = [a,b]$.
+\end{answer}
+
+\begin{ainote}
+Worth noting how little computation this needs: $f$ is never evaluated. The annulus $U$ is
+connected --- it is \emph{not} simply connected, but that is a different property and irrelevant
+here --- and the two preservation theorems do the rest. Recognising that a question
+is asking about preserved properties rather than about values is most of the work.
+\end{ainote}
+
+\begin{question}
+\label{q:quiz_q2}
+Let $X \subseteq \mathbb{R}^2$ with $X \neq \mathbb{R}^2$ and $X \neq \emptyset$. If $X$ is
+complete, is it closed?
+\end{question}
+
+\begin{answer}
+\textbf{True.} Let $(a_n)_{n=0}^\infty$ be a convergent sequence with elements in $X$. Then
+$(a_n)$ is Cauchy, and by completeness it has a limit point in $X$. So $X$ is sequentially
+closed, hence closed (\cref{prop:open_closed_via_sequences}).
+\end{answer}
+
+\begin{ainote}
+The limit is taken in $\mathbb{R}^2$, and completeness of $X$ is what forces it back into $X$.
+The converse also holds here, but only because the ambient space $\mathbb{R}^2$ is itself
+complete: a closed subset of a complete space is complete. In a non-complete ambient space
+closedness gives nothing --- $\mathbb{Q}$ is closed in $\mathbb{Q}$ and not complete.
+\end{ainote}
+
+% Source: Corsin Nick/Class Notes/Week 8.pdf, p. 3
+\begin{question}
+\label{q:quiz_q3}
+Let $X \subseteq \mathbb{R}^2$ as above. If $X$ is not open, is it closed?
+\end{question}
+
+\begin{answer}
+\textbf{False.}
+\end{answer}
+
+% Generator: Claude Opus 5 (Medium) --- Corsin gives the verdict without a counterexample.
+\begin{ainote}
+Corsin marks this false but gives no counterexample; the half-open square
+$X := [0,1] \times (0,1)$ from \cref{sec:open_closed_sets} is one, being neither open
+nor closed. \qt{Open} and \qt{closed} are not opposites and not exhaustive: $\emptyset$ and
+$\mathbb{R}^2$ are both, most sets are neither, and the excluded values
+$X \neq \emptyset,\ X \neq \mathbb{R}^2$ in the hypothesis are there precisely to rule out the
+two clopen cases.
+\end{ainote}
+
+\begin{question}
+\label{q:quiz_q4}
+Let
+\[f(x,y,z) := \frac{xy^2}{x^2+y^2+z^2} \quad \text{for } (x,y,z) \neq 0, \qquad f(0,0,0) := 0.\]
+Is $f \in C^1(\mathbb{R}^3)$?
+\end{question}
+
+\begin{answer}
+\textbf{False.} We compute
+\[\partial_xf = \frac{y^2}{x^2+y^2+z^2} - 2\,\frac{x^2y^2}{(x^2+y^2+z^2)^2}.\]
+In spherical coordinates $x = r\sin\theta\cos\varphi$, $y = r\sin\theta\sin\varphi$,
+$z = r\cos\theta$, every power of $r$ cancels:
+\[\partial_xf = \sin^2\theta\sin^2\varphi - 2\sin^4\theta\cos^2\varphi\sin^2\varphi.\]
+The limit $\lim_{r\to0}\partial_xf(r,\theta,\varphi)$ is therefore ill-defined --- it depends on
+the direction $(\theta,\varphi)$ along which the origin is approached --- and $\partial_xf$ is
+not sequentially continuous at $0$.
+\end{answer}
+
+\begin{ainote}
+The cancellation of $r$ is the whole argument, and it is worth naming the reason: $\partial_xf$
+is \newterm{homogeneous of degree $0$}, so it is constant along each ray from the origin and
+takes a different constant on different rays. Compare
+\Cref{ex:all_directional_derivatives_exist}, where the same trick --- restrict to a
+ray, watch the parameter cancel --- exposed a function whose directional derivatives all existed
+without it being differentiable.
+\end{ainote}
+
+% Source: Corsin Nick/Class Notes/Week 8.pdf, pp. 3--4
+\begin{question}
+\label{q:quiz_q5}
+Let $f \in C^\infty(\mathbb{R}^3)$ and $\alpha \in \mathbb{R}$ be such that
+\[\nabla f(0) = (0,0,0), \qquad
+\Hess f(0) = \begin{pmatrix} 1 & \alpha & 0 \\ \alpha & 2 & 0 \\ 0 & 0 & 1\end{pmatrix}.\]
+Which of the following is \textbf{false}?
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item For all $\alpha \in \mathbb{R}$, $0$ is not a local maximum point of $f$.
+  \item For $\alpha > \sqrt2$, $0$ is a saddle point.
+  \item For $\alpha \neq \pm\sqrt2$, $\nabla f : \mathbb{R}^3 \to \mathbb{R}^3$ is a local
+    diffeomorphism around $0$.
+  \item For $\alpha < \sqrt2$, $0$ is a local minimum point of $f$.
+\end{enumerate}
+\end{question}
+
+\begin{answer}
+\textbf{(d) is the false one.}
+
+\textbf{(a) is true,} since $1 > 0$ is clearly an eigenvalue of $\Hess f(0)$ for any choice of
+$\alpha$ (the third standard basis vector is an eigenvector), so $\Hess f(0)$ is never negative
+semidefinite and $0$ can never be a local maximum.
+
+\textbf{(b) is true.} Let $\lambda_1,\lambda_2,\lambda_3 = 1$ be the eigenvalues of
+$\Hess f(0)$. Then
+\[\lambda_1\lambda_2 = \det\big(\Hess f(0)\big) = 2-\alpha^2 < 0 \quad \text{for } \alpha > \sqrt2,\]
+so $\Hess f(0)$ has both positive and negative eigenvalues, making it indefinite, and $0$ is a
+saddle point by \cref{thm:hessian_test}.
+
+\textbf{(c) is true.} For these values $\det(\Hess f(0)) \neq 0$, and therefore the inverse
+function theorem (\cref{thm:inverse_function_theorem}) applies. Note that
+$\Hess f(0) = D(\nabla f)_0$: the Hessian of $f$ \emph{is} the differential of the gradient map.
+
+\textbf{(d) is false,} because the same reasoning as in \textbf{(b)} gives that for
+$\alpha < -\sqrt2 < \sqrt2$ we again have $2-\alpha^2 < 0$, so $0$ is a saddle point of $f$, not
+a local minimum. The statement is true only on $-\sqrt2 < \alpha < \sqrt2$.
+\end{answer}
+
+\begin{ainote}
+Corsin's third bullet reads \qt{for $\alpha \neq \sqrt2$}, but $\det(\Hess f(0)) = 2-\alpha^2$
+vanishes at $\alpha = -\sqrt2$ as well, so it must read $\alpha \neq \pm\sqrt2$; typeset with
+$\pm$ above. The oversight is a conspicuous one here, since the \emph{next} bullet is false for
+exactly the reason the third one omits --- the quiz is built around the missing negative root.
+
+\end{ainote}
+
+% Source: Corsin Nick/Class Notes/Week 8.pdf, p. 5
+\begin{question}
+\label{q:quiz_q6}
+Let $V := \{(x,y) \in \mathbb{R}^2 : y^4+y^2 = x^3+x\}$. Decide:
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $V$ is a graph over $y$ in a neighbourhood of $(0,0)$.
+  \item $V$ is a graph over $x$ in a neighbourhood of $(0,0)$.
+\end{enumerate}
+\end{question}
+
+\begin{answer}
+\textbf{(a) True.} Notice that $V = f^{-1}\{0\}$ for $f(x,y) := y^4+y^2-x^3-x$. Then
+\[\Jac f(x,y) = (\partial_xf,\ \partial_yf) = (-3x^2-1,\ 4y^3+2y), \qquad \Jac f(0,0) = (-1,\ 0).\]
+Since $\partial_xf(0,0) = -1 \neq 0$, the implicit function theorem
+(\cref{thm:implicit_function_theorem}) applies with $x$ as the variable to solve for: in a
+neighbourhood of $(0,0)$,
+\[(x,y) \in V \iff f(x,y) = 0 \iff x = x(y).\]
+The theorem does \textbf{not} apply for $y$, since $\partial_yf(0,0) = 0$.
+
+\textbf{(b) False.} Solving the defining equation for $y^2$ by the quadratic formula gives
+\[y^2 = -\tfrac12 + \sqrt{\tfrac14 + x^3 + x},\]
+which has no solution for $x \in (-\varepsilon,0)$: there $x^3+x < 0$, so the square root is
+smaller than $\tfrac12$ and the right-hand side is negative, while $y^2 \geq 0$. So $V$ contains
+no points at all just to the left of the origin, and cannot be a graph over $x$ there.
+\end{answer}
+
+\begin{ainote}
+The two parts are settled by different means, and the asymmetry is the point. Part \textbf{(a)}
+is decided by \emph{checking a derivative}; part \textbf{(b)} needs an \emph{explicit
+computation} showing the set is empty on one side. That is because the implicit function theorem
+yields no negative results: failure of its hypothesis proves nothing on its own, exactly as
+discussed after \cref{thm:implicit_function_theorem}.
+\end{ainote}
+
+% Source: Corsin Nick/Class Notes/Week 8.pdf, p. 6
+\begin{question}
+\label{q:quiz_q7}
+Let $\gamma : I \to \mathbb{R}^2$ be injective and smooth, with $I$ an open interval. Is
+$\gamma(I)$ then a smooth submanifold of $\mathbb{R}^2$?
+\end{question}
+
+\begin{answer}
+\textbf{False.} Consider
+\[\gamma : (0,2\pi) \to \mathbb{R}^2, \qquad t \mapsto \big(\sin t,\ \sin 2t\big),\]
+whose image is a \newterm{figure eight} (\germanterm{Lemniskate}). This $\gamma$ is injective and
+smooth, but there is no graphical representation of $\operatorname{im}(\gamma)$ around $(0,0)$.
+\end{answer}
+
+% Sonnet 5 (Medium) --- FIG-W08-01, redrawn from the plot on the source page.
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.45]
+  \draw[->] (-1.35,0) -- (1.35,0) node[right, font=\scriptsize] {$x$};
+  \draw[->] (0,-1.25) -- (0,1.25) node[above, font=\scriptsize] {$y$};
+  \draw[blue!80!black, thick, variable=\t, domain=0:6.2832, samples=200, smooth]
+    plot ({sin(\t r)}, {sin(2*\t r)});
+  \draw[red!80!black, thick, dashed] (0,0) circle (0.33);
+  \node[red!80!black, font=\scriptsize, right] at (0.52,0.34) {problem!};
+  \draw[red!80!black, thin, ->] (0.50,0.30) -- (0.20,0.13);
+\end{tikzpicture}
+\end{center}
+
+\begin{ainote}
+Two things are worth extracting. First, how injectivity survives a self-crossing at all: the two
+parameter ends $t \to 0^+$ and $t \to 2\pi^-$ both send $\gamma(t) \to (0,0)$, but neither
+\emph{attains} it, so the image passes through the origin only once --- via $t = \pi$ --- while
+being approached from two further directions.
+
+Second, this locates precisely which hypothesis of \cref{thm:local_parametrization} fails. It is
+not injectivity, and not injectivity of $D\gamma_t$; it is the requirement that the
+parametrization be a \textbf{homeomorphism} onto its image. Here $\gamma^{-1}$ is discontinuous
+at $(0,0)$: points of the image arbitrarily close to the origin have parameters near $0$ and near
+$2\pi$, far apart in $I$. That the resulting set is not a submanifold can then be confirmed by
+the component count of \cref{ex:cross_not_submanifold} --- deleting the crossing point leaves
+four pieces, while deleting a point from an interval leaves two.
+\end{ainote}
+
+% Sonnet 5 (Medium)
+The quiz ends here, and with it the differential-topology half of the course. The rest of the
+week starts integration in several variables.

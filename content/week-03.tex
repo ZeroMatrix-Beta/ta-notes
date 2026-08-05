@@ -649,6 +649,17 @@ stated intersection $\{(\pm 1, 0)\}$ confirms. Corrected here.
 \section{Path connectedness}
 \label{sec:path_connectedness}
 
+% Transition: Claude Opus 5 (High)
+\Cref{def:connectedness} defines connectedness negatively --- a space is connected when it
+\emph{cannot} be split --- which is why proofs about it run by contradiction. That is
+mathematically convenient and intuitively unsatisfying: it says nothing about what holds a
+connected space together. Path connectedness is the positive version, and it says the obvious
+thing: any two points can be joined by a curve inside the space. It implies connectedness
+(\cref{lem:path_connected_implies_connected}), the two agree on open subsets of $\mathbb{R}^n$
+(\cref{prop:open_euclidean_connected_path_connected}), and they come apart in general --- the
+topologist's sine curve at the end of this section being the standard witness.
+
+% Source: Corsin Nick/Class Notes/Week 3.pdf, pp. 1--14
 \begin{definition}[Path]
 \label{def:path}
 Let $(X,d)$ be a metric space. A continuous function $\gamma : [0,1] \to X$, where $[0,1]$
@@ -842,6 +853,16 @@ structure (\cref{sec:structured_spaces}) that lets us talk about angles, not jus
 \label{sec:cauchy_schwarz}
 
 \subsection{Inner products and norms}
+
+% Transition: Claude Opus 5 (High)
+The two definitions below are the formal content of the hierarchy sketched in
+\cref{sec:structured_spaces}, read from the inside out. A metric measures \emph{distance between
+points} and needs no algebra at all --- which is why \cref{sec:metric_spaces} could work on the
+sphere and on spaces of functions. A norm measures the \emph{length of a vector}, so it
+presupposes that vectors can be added and scaled. An inner product measures \emph{length and
+angle together}, and is the richest of the three. Each notion induces the one outside it, and
+neither implication reverses (\cref{prop:induced_norm_and_metric},
+\cref{rem:norm_not_from_inner_product}).
 
 \begin{definition}[Inner product / scalar product]
 \label{def:inner_product}

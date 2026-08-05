@@ -29,6 +29,18 @@ Note that the last arrow points \textbf{one way only}. The first two lines say t
 the third is a strictly weaker consequence, and recovering differentiability from it is exactly
 what fails in several variables --- see \cref{ex:partial_derivatives_not_continuous} below.
 
+% Transition: Claude Opus 5 (High)
+It is worth pausing on why the definition had to be restated rather than merely copied. The
+one-variable derivative is defined as a \emph{quotient}, and that is precisely what does not
+survive: for $h \in \mathbb{R}^n$ with $n \geq 2$ the expression
+$\big(F(x_0+h)-F(x_0)\big)/h$ is meaningless, because one cannot divide by a vector. The first
+line above is the version that does survive, and it is the one to remember: \textbf{$F$ is
+differentiable at $x_0$ if it is approximated near $x_0$ by an affine map, to an error smaller
+than $|h|$.} Everything in this chapter --- the Jacobian, the chain rule, Taylor expansions ---
+is bookkeeping for that single idea, and the reason the derivative becomes a \emph{linear map}
+rather than a number is simply that a linear map is what an approximation in $n$ variables looks
+like.
+
 \begin{ainote}
 Corsin's middle line reads
 $\lim_{h\to0}\frac{F(x_0+h)-F(x_0)}{|h|} = DF_{x_0}\!\left(\frac{h}{|h|}\right)$, inside a chain
@@ -41,6 +53,8 @@ distinction is not pedantic: it is the entire content of
 \Cref{rem:directional_derivative_caveat}.
 \end{ainote}
 
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 2
+% (Re-cited: the paragraph and AI-Note above are additions, not transcription.)
 \begin{definition}[Differentiability]
 \label{def:differentiable}
 We say that $F : \mathbb{R}^n \to \mathbb{R}^m$ is \newterm{differentiable}
@@ -162,9 +176,25 @@ step 3 of \cref{rem:differentiability_recipe} insists on \qt{uniformly in $\thet
 \end{tikzcd}
 \end{center}
 
-% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 4
 \subsection{Examples}
 
+% Transition: Claude Opus 5 (High)
+The three examples that follow are the three shapes the Jacobian takes, and it is worth naming
+them, because the layout of the matrix changes completely between them while the underlying
+object --- the linear map $DF_{x_0}$ --- does not.
+\begin{itemize}
+  \item \textbf{A curve} ($n=1$, $m$ arbitrary): one column, so $\Jac\gamma(t)$ is a
+    \emph{column vector}, the velocity.
+  \item \textbf{A scalar field} ($n$ arbitrary, $m=1$): one row, so $\Jac f(x)$ is a
+    \emph{row vector} --- the transposed gradient, $(\nabla f)\transp$.
+  \item \textbf{A vector field} (both $>1$): the full $m \times n$ matrix, whose columns are the
+    partial derivatives and whose rows are the gradients of the components.
+\end{itemize}
+The gradient being a row and the velocity a column is not a convention to memorise: it follows
+from \qt{$m$ rows, $n$ columns} and nothing else. Confusing the two is the commonest source of
+shape errors when the chain rule is applied later in this chapter.
+
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 4
 \begin{example}[Derivative of a curve]
 \[\gamma : \mathbb{R}\to\mathbb{R}^2, \qquad t \mapsto \begin{pmatrix}\cos t \\ \sin t\end{pmatrix}\]
 What is $\gamma'(\tfrac{\pi}{4}) := D\gamma_{\pi/4}$?

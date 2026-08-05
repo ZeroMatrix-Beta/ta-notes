@@ -182,6 +182,16 @@ once you know what it is keeping out.
 
 \subsection{Examples}
 
+% Transition: Claude Opus 5 (High)
+Three axioms are few enough that a great many things qualify as metrics, and the point of the
+list below is exactly that breadth. Two of the examples are not what one would draw on a
+blackboard as \qt{distance}: the discrete metric measures nothing but \qt{same or different},
+and the supremum metric measures the distance between two \emph{functions}. Both are legitimate,
+and it is worth letting them stretch the intuition now --- the second, in particular, is the
+setting in which uniform convergence turns out to be an ordinary case of
+\cref{def:convergent_sequence} (\cref{ex:uniform_convergence}).
+
+% Source: Corsin Nick/Class Notes/Week 2.pdf, pp. 1--13
 \begin{example}[Standard metrics on $\mathbb{R}^n$]
 \label{ex:metric_examples}
 \begin{enumerate}[label=\textbf{(\alph*)}]
@@ -560,6 +570,16 @@ Applying \cref{def:interior_closure_boundary} to various sets:
 
 \subsection{Sequences and convergence}
 
+% Transition: Claude Opus 5 (High)
+Open and closed sets describe a space statically: which points sit comfortably inside a set and
+which sit on its edge. Sequences describe the same thing dynamically, by asking where a moving
+point ends up. The two descriptions turn out to be equivalent
+(\cref{prop:open_closed_via_sequences}), and having both is what makes metric spaces pleasant to
+work in --- one is easier to verify, the other easier to apply. Note that the definition below
+is word for word the one from \emph{Analysis I}, with $|x_n - x|$ replaced by $d(x_n,x)$; this
+is the pattern for the whole chapter.
+
+% Source: Corsin Nick/Class Notes/Week 2.pdf, pp. 1--13
 \begin{definition}[Convergent sequence]
 \label{def:convergent_sequence}
 A \newterm{sequence} $(x_n)_{n=0}^{\infty}$ in a metric space $(X,d)$ is a function
@@ -1177,11 +1197,36 @@ next (\cref{thm:sequential_compactness}, \cref{sec:compactness_continued}).
 \section{Compactness}
 \label{sec:compactness}
 
+% Transition: Claude Opus 5 (High)
+Compactness is the least self-explanatory definition in this chapter, so it is worth saying in
+advance what it is \emph{for}. Finite sets are easy to handle: one can take a maximum, choose a
+smallest radius, check finitely many cases. Infinite sets are not. Compactness is the property
+that lets an infinite space be treated as if it were finite --- not because it is small, but
+because every attempt to spread it out over infinitely many open pieces collapses back to
+finitely many. \Cref{sec:compactness_continued} in Week 3 collects the three payoffs
+(continuous images, attained extrema, uniform continuity); the definition below is what buys
+them.
+
 \begin{definition}[Compact metric space]
 \label{def:compact_metric_space}
 A metric space $(X,d)$ is \newterm{compact} (\germanterm{kompakt}) if every open cover
 (by sets open in the sense of \cref{def:open_closed}) has a finite subcover.
 \end{definition}
+
+\begin{notation}[Open covers]
+\label{not:open_cover}
+An \newterm{open cover} (\germanterm{offene \"Uberdeckung}) of $X$ is a family
+$\{U_i\}_{i \in I}$ of open sets with $X = \bigcup_{i\in I}U_i$; the index set $I$ is allowed to
+be arbitrary, in particular uncountable. A \newterm{subcover} is a subfamily
+$\{U_i\}_{i \in J}$, $J \subseteq I$, that still covers $X$, and it is \emph{finite} when $J$
+is. The order of quantifiers is what carries the content: \emph{every} cover must admit
+\emph{some} finite subcover. Exhibiting one cover with a finite subcover proves nothing --- any
+space has the cover $\{X\}$ --- whereas exhibiting one cover \emph{without} a finite subcover
+disproves compactness outright, which is how \cref{ex:heine_borel_fails} and the
+open-interval example in Week 3 both work.
+\end{notation}
+
+% Source: Corsin Nick/Class Notes/Week 2.pdf, pp. 1--13
 
 \begin{theorem}[Sequential compactness]
 \label{thm:sequential_compactness}

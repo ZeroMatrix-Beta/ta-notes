@@ -1,0 +1,66 @@
+% Originally: content/week-09.tex, \section{Solutions}
+
+\section{Solutions}
+\label{sec:gram_determinant_solutions}
+
+\begin{exercisesolution}[Solution to \cref{ex:9.1}]
+\label{ex:solution_9.1}
+% Generator: Claude Sonnet 5 (Medium)
+Following the official hint rather than Corsin's --- see the \texttt{ainote} above --- we use
+cylindrical coordinates $(x,y,z) = (r\cos\theta,r\sin\theta,z)$, under which $x^2+y^2=r^2$.
+The two bounding surfaces become $r^2+z^2=8$ and $z = r^2/2$; intersecting them,
+\[z^2+2z-8 = 0 \quad\Longrightarrow\quad z = 2 \text{ or } z=-4,\]
+and since $z=r^2/2\geq0$ on the paraboloid, the surfaces meet at $z=2$, $r=2$. For
+$r \in (0,2)$ the paraboloid $z=r^2/2$ lies below the upper half of the sphere
+$z=\sqrt{8-r^2}$, so
+\[B = \left\{(r,\theta,z) : 0<r<2,\ 0<\theta<2\pi,\ \tfrac12r^2 < z < \sqrt{8-r^2}\right\}.\]
+Hence, with $dx\,dy\,dz = r\,dr\,d\theta\,dz$,
+\[
+\begin{aligned}
+\vol(B) &= \int_0^{2\pi}\!\!\int_0^2 r\left(\sqrt{8-r^2} - \frac{r^2}{2}\right)dr\,d\theta
+  = 2\pi\int_0^2 \left(r\sqrt{8-r^2} - \frac{r^3}{2}\right)dr.
+\end{aligned}
+\]
+For the first term, substitute $u = 8-r^2$, $du=-2r\,dr$:
+\[\int_0^2 r\sqrt{8-r^2}\,dr = \left[-\frac{u^{3/2}}{3}\right]_{u=8}^{u=4}
+  = \frac{8^{3/2}-4^{3/2}}{3} = \frac{16\sqrt2-8}{3}.\]
+For the second, $\int_0^2 \tfrac12 r^3\,dr = \tfrac12\cdot\tfrac{16}{4} = 2$. So
+\[\vol(B) = 2\pi\left(\frac{16\sqrt2-8}{3} - 2\right) = 2\pi\cdot\frac{16\sqrt2-14}{3}
+  = \boxed{\ \frac{4\pi}{3}\big(8\sqrt2-7\big)\ }.\]
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:9.2}]
+% Generator: Claude Sonnet 5 (Medium)
+\textbf{Part 1.} By Fubini (\cref{thm:fubini}),
+\[\iint_D (x^3+3x^2y+y^3)\,dx\,dy = \int_0^2\int_0^1 (x^3+3x^2y+y^3)\,dy\,dx
+  = \int_0^2\left(x^3+\frac32x^2+\frac14\right)dx.\]
+The last integral is $\left[\tfrac{x^4}{4}+\tfrac{x^3}{2}+\tfrac{x}{4}\right]_0^2 = 4+4+\tfrac12
+= \boxed{\ \tfrac{17}{2}\ }$.
+
+\textbf{Part 2.} Using Corsin's parametrization $D=\{0\leq x\leq y\leq\pi\}$,
+\[\iint_D x\cos(x+y)\,dx\,dy = \int_0^\pi\int_x^\pi x\cos(x+y)\,dy\,dx
+  = \int_0^\pi x\big[\sin(x+y)\big]_{y=x}^{y=\pi}\,dx.\]
+Since $\sin(x+\pi) = -\sin x$, the bracket equals $-\sin x - \sin(2x)$, so
+\[\iint_D x\cos(x+y)\,dx\,dy = -\int_0^\pi x\sin x\,dx - \int_0^\pi x\sin(2x)\,dx.\]
+Integrating by parts, $\int_0^\pi x\sin x\,dx = [-x\cos x+\sin x]_0^\pi = \pi$, and
+$\int_0^\pi x\sin(2x)\,dx = \left[-\tfrac{x}{2}\cos(2x)+\tfrac14\sin(2x)\right]_0^\pi
+= -\tfrac\pi2$. Hence
+\[\iint_D x\cos(x+y)\,dx\,dy = -\pi - \left(-\frac\pi2\right) = \boxed{\ -\frac\pi2\ }.\]
+
+\textbf{Part 3.} Here $D = \{1<x<2,\ 1<y<3-x\}$, so
+\[\iint_D \frac{1}{(x+y)^3}\,dx\,dy = \int_1^2\int_1^{3-x} (x+y)^{-3}\,dy\,dx
+  = \int_1^2 \left[-\frac12(x+y)^{-2}\right]_{y=1}^{y=3-x}dx.\]
+Since $x+(3-x)=3$, the bracket is $-\tfrac12\big(3^{-2}-(x+1)^{-2}\big)
+= \tfrac12(x+1)^{-2} - \tfrac1{18}$, and
+\[\int_1^2\left(\frac{1}{2(x+1)^2}-\frac1{18}\right)dx
+  = \left[-\frac{1}{2(x+1)}\right]_1^2 - \frac1{18}
+  = \left(-\frac16+\frac14\right) - \frac1{18} = \frac1{12}-\frac1{18}
+  = \boxed{\ \frac1{36}\ }.\]
+\end{exercisesolution}
+
+\begin{ainote}
+All three parts of \cref{ex:9.2} and \cref{ex:9.1} were worked out independently before
+consulting \texttt{Sol9\_Analysis2\_eng.pdf}; all four answers ($\tfrac{4\pi}{3}(8\sqrt2-7)$,
+$\tfrac{17}{2}$, $-\tfrac\pi2$, $\tfrac1{36}$) match the official solution exactly, so no
+divergence to record.
+\end{ainote}

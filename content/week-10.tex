@@ -151,6 +151,105 @@ then $\mathbb{R}^{n+1}\setminus M$ has exactly two connected components, an
 \newterm{inside} and an \newterm{outside}.
 \end{theorem}
 
+% Supplement: Sascha Brack/Class Notes/Week_10_Notes_Monday.pdf, pp. 8--11
+\section{Vector calculus operators}
+\label{sec:vector_calculus_operators}
+
+\begin{definition}[Vector field]
+\label{def:vector_field}
+Let $U \subseteq \mathbb{R}^n$ be open. A \newterm{$C^k$ vector field} (\germanterm{Vektorfeld}) is a function $F : U \to \mathbb{R}^n$ of class $C^k(U,\mathbb{R}^n)$.
+The scalar functions $F_1, \dots, F_n$ in $F(x) = (F_1(x), \dots, F_n(x))\transp$ are called the \newterm{components}.
+\end{definition}
+
+\begin{definition}[Gradient]
+\label{def:gradient_vector_field}
+Let $f : U \to \mathbb{R}$ be a function of class $C^k$ on an open set $U \subseteq \mathbb{R}^n$. The \newterm{gradient} of $f$ is the $C^{k-1}$ vector field
+\[\operatorname{grad} f(x) = \nabla f(x) := \begin{pmatrix} \partial_1 f(x) \\ \vdots \\ \partial_n f(x) \end{pmatrix}.\]
+\end{definition}
+
+\begin{definition}[Divergence]
+\label{def:divergence}
+For a $C^1$ vector field $F : U \to \mathbb{R}^n$, the \newterm{divergence} is the scalar function
+\[\divg F(x) := \sum_{i=1}^n \partial_i F_i(x).\]
+In 3D, physicists write this as $\vec{\nabla} \cdot \vec{F}(x) = \partial_1 F_1(x) + \partial_2 F_2(x) + \partial_3 F_3(x)$.
+\end{definition}
+
+\begin{ainote}
+Intuitively, $\divg F(x)$ tells us how much flow of $F$ is generated at $x$. If $\divg F(x) = 0$, then the total generated flow is zero.
+If $\divg F(x) > 0$, then $x$ is a \newterm{source} (\germanterm{Quelle}), meaning more flow is generated than removed.
+If $\divg F(x) < 0$, then $x$ is a \newterm{sink} (\germanterm{Senke}), meaning more flow is removed than generated.
+
+% Supplement: Sascha Brack/Class Notes/Week_10_Notes_Monday.pdf, p. 9
+\begin{center}
+\begin{tikzpicture}[scale=1]
+  \node[circle, fill=blue!50, inner sep=1.5pt, label=above:{\small Sink ($\divg F < 0$)}] (sink) at (0,0) {};
+  \foreach \angle in {0,45,...,315} {
+    \draw[blue, thick, <-] (sink) -- ++(\angle:0.8);
+  }
+  
+  \node[circle, fill=red!50, inner sep=1.5pt, label=above:{\small Source ($\divg F > 0$)}] (source) at (4,0) {};
+  \foreach \angle in {0,45,...,315} {
+    \draw[red, thick, ->] (source) -- ++(\angle:0.8);
+  }
+\end{tikzpicture}
+\end{center}
+\end{ainote}
+
+\begin{definition}[Rotation/Curl]
+\label{def:rotation}
+Let $F$ be a $C^k$ vector field on an open set $U \subseteq \mathbb{R}^3$. The \newterm{rotation} or \newterm{curl} of $F$ is the $C^{k-1}$ vector field
+\[\curl F(x) := \begin{pmatrix} \partial_2 F_3(x) - \partial_3 F_2(x) \\ \partial_3 F_1(x) - \partial_1 F_3(x) \\ \partial_1 F_2(x) - \partial_2 F_1(x) \end{pmatrix}.\]
+Physicists write $\curl F(x) = \vec{\nabla} \times \vec{F}(x)$.
+In $\mathbb{R}^2$, the rotation of a vector field $F = (F_1, F_2)\transp$ is the scalar function $\curl F(x) := \partial_1 F_2(x) - \partial_2 F_1(x)$.
+\end{definition}
+
+\begin{ainote}
+Intuitively, $\curl F(x)$ tells us how much the field tends to rotate around $x$. If $\curl F(x) \neq 0$, a small wheel centered at $x$ would rotate.
+
+% Supplement: Sascha Brack/Class Notes/Week_10_Notes_Monday.pdf, p. 10
+\begin{center}
+\begin{tikzpicture}[scale=1]
+  % Rotates
+  \draw[thick, ->] (0, 0.4) -- (1.5, 0.4);
+  \draw[thick, ->] (0, 0) -- (1.0, 0);
+  \draw[thick, ->] (0, -0.4) -- (0.5, -0.4);
+  \node[blue, font=\small] at (0.75, -0.8) {rotates};
+  \draw[blue, thick, ->] (0.55,-0.6) arc (-90:90:0.2);
+  
+  % Does not rotate
+  \draw[thick, ->] (3, 0.4) -- (4.5, 0.4);
+  \draw[thick, ->] (3, 0) -- (4.5, 0);
+  \draw[thick, ->] (3, -0.4) -- (4.5, -0.4);
+  \node[blue, font=\small] at (3.75, -0.8) {does not rotate};
+  \draw[blue, thick, ->] (3.75,-0.6) -- (3.75,-0.2);
+\end{tikzpicture}
+\end{center}
+\end{ainote}
+
+\begin{example}[Computing vector calculus operators]
+\label{ex:compute_operators}
+Given $\phi : \mathbb{R}^3 \to \mathbb{R}$, $\phi(x,y,z) := x^2 + y^2 + z^2 e^{-xy}$.
+Let us compute the gradient, the divergence of the gradient, and the rotation of the gradient.
+\begin{itemize}
+    \item \textbf{Gradient:}
+    \[\nabla \phi(x,y,z) = \begin{pmatrix} 2x - yz^2 e^{-xy} \\ 2y - xz^2 e^{-xy} \\ 2z e^{-xy} \end{pmatrix}.\]
+    
+    \item \textbf{Divergence of the gradient} (denoted $\divg(\nabla \phi)$ or $\Delta \phi$):
+    \begin{align*}
+    \divg(\nabla \phi) &= \partial_x(2x - yz^2 e^{-xy}) + \partial_y(2y - xz^2 e^{-xy}) + \partial_z(2z e^{-xy}) \\
+    &= (2 + y^2 z^2 e^{-xy}) + (2 + x^2 z^2 e^{-xy}) + (2 e^{-xy}) \\
+    &= 4 + (x^2 z^2 + y^2 z^2 + 2) e^{-xy}.
+    \end{align*}
+    
+    \item \textbf{Rotation of the gradient} ($\curl(\nabla \phi)$):
+    \begin{align*}
+    \curl(\nabla \phi) &= \begin{pmatrix} \partial_y(2z e^{-xy}) - \partial_z(2y - xz^2 e^{-xy}) \\ \partial_z(2x - yz^2 e^{-xy}) - \partial_x(2z e^{-xy}) \\ \partial_x(2y - xz^2 e^{-xy}) - \partial_y(2x - yz^2 e^{-xy}) \end{pmatrix} \\
+    &= \begin{pmatrix} -2xz e^{-xy} - (-2xz e^{-xy}) \\ -2yz e^{-xy} - (-2yz e^{-xy}) \\ -z^2 e^{-xy} - (-z^2 e^{-xy}) \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}.
+    \end{align*}
+    This is not a coincidence: for any $C^2$ function $f$, $\curl(\nabla f) = 0$ by Schwarz's theorem.
+\end{itemize}
+\end{example}
+
 \section{Flux and the divergence theorem}
 \label{sec:flux_divergence_theorem}
 
@@ -251,6 +350,41 @@ Corsin dates the theorem to Lagrange (discovered 1762) and Ostrogradsky (proven 
 adds, next to the physics form, an unusually enthusiastic \qt{how cool is this!} --- a volume
 integral of a derivative reduced to a boundary integral of the original field, the same shape
 as the fundamental theorem of calculus.
+
+% Supplement: Sascha Brack/Class Notes/Week_10_Notes_Monday.pdf, p. 13
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+  % Domain Omega
+  \draw[ultra thick] (0,0) ellipse (2cm and 1.5cm);
+  \node at (-1.5,-1) {$\Omega$};
+  \node[right] at (2,-0.5) {$\partial\Omega$};
+  
+  % Internal sources (red)
+  \foreach \x/\y in {-0.5/0.5, 0.8/-0.2, 0/ -0.6, -1/-0.3} {
+    \fill[red] (\x,\y) circle (1.5pt);
+    \foreach \angle in {0,72,...,288} {
+      \draw[red, thick, ->] (\x,\y) -- ++(\angle:0.3);
+    }
+  }
+  
+  % Internal sinks (blue)
+  \foreach \x/\y in {1/0.6, 0.2/0.8, -0.2/-1.1, 1.2/-0.8} {
+    \fill[blue] (\x,\y) circle (1.5pt);
+    \foreach \angle in {0,72,...,288} {
+      \draw[blue, thick, <-] (\x,\y) -- ++(\angle:0.3);
+    }
+  }
+  
+  % Boundary flux
+  \foreach \angle in {0,45,90,135,180,225,270} {
+    \draw[red, thick, ->] ({2*cos(\angle)},{1.5*sin(\angle)}) -- ++(\angle:0.4);
+  }
+  % some blue inward arrows
+  \foreach \angle in {30,150,315} {
+    \draw[blue, thick, <-] ({2*cos(\angle)},{1.5*sin(\angle)}) -- ++(\angle:0.4);
+  }
+\end{tikzpicture}
+\end{center}
 \end{ainote}
 
 \begin{example}[Recomputing \cref{ex:flux_unit_sphere} via the divergence theorem]
@@ -277,6 +411,21 @@ already used in \cref{ex:paraboloid_patch_area} of Week 9. This is the theorem's
 practical use --- not conceptual elegance, but that $\divg F$ is often far simpler than $F$
 restricted to a curved boundary.
 \end{ainote}
+
+% Supplement: Sascha Brack/Class Notes/Week_10_Notes_Monday.pdf, p. 14
+\begin{example}[Computing flux using the divergence theorem]
+\label{ex:flux_divergence_cube}
+Let $\Omega := [-1,1]^3 \subset \mathbb{R}^3$ and $F(x,y,z) := (x^2, y^2, z^2)\transp$.
+We compute the flux of $F$ out of $\Omega$ using the divergence theorem.
+First, we find the divergence of $F$:
+\[\divg F(x,y,z) = \partial_x(x^2) + \partial_y(y^2) + \partial_z(z^2) = 2x + 2y + 2z.\]
+Then, integrating over $\Omega$:
+\begin{align*}
+\int_{\partial\Omega} \langle F(p),\ \nu(p)\rangle \mathop{d\text{vol}}_2(p) &= \int_\Omega \divg F(x,y,z) \mathop{d\text{vol}}_3(x,y,z) \\
+&= \int_{-1}^1 \int_{-1}^1 \int_{-1}^1 (2x + 2y + 2z) \,dx\,dy\,dz.
+\end{align*}
+By symmetry, the integral of $2x$ over $[-1,1]$ is $0$, and similarly for $y$ and $z$. Therefore, the total flux is $0$.
+\end{example}
 
 % Source: Corsin Nick/Class Notes/Week 10.pdf, p. 12
 Gauss' theorem is also a powerful tool in physics. For example, the volume $V$ of water in a

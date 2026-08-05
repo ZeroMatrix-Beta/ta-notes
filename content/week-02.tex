@@ -124,6 +124,33 @@ This allows us to formally define the \newterm{angle} $\Theta(x,y) \in [0,\pi]$ 
 \Theta(x,y) := \arccos\left(\frac{\langle x, y\rangle}{\|x\|\,\|y\|}\right).
 \]
 Geometrically, when $\|x\| = \|y\| = 1$, the inner product $\langle x, y\rangle$ represents the signed length of the orthogonal projection of $y$ onto the direction of $x$.
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=2.5]
+  % Define vectors x and y
+  \coordinate (O) at (0,0);
+  \coordinate (X) at (1,0);
+  \coordinate (Y) at ({cos(50)},{sin(50)});
+  \coordinate (P) at ({cos(50)},0);
+
+  % Axes
+  \draw[->] (-0.2,0) -- (1.4,0);
+  \draw[->] (0,-0.2) -- (0,1.2);
+
+  % Draw projection
+  \draw[dashed, blue!80] (Y) -- (P);
+  \draw[blue, thick, ->] (O) -- (P) node[midway, below] {\footnotesize $\langle x, y \rangle x$};
+
+  % Draw vectors
+  \draw[blue, thick, ->] (O) -- (X) node[below] {$x$};
+  \draw[blue, thick, ->] (O) -- (Y) node[left] {$y$};
+
+  % Annotation
+  \node[anchor=west, text width=6cm] at (1.5, 0.6) {
+    \small If $\|x\| = \|y\| = 1$, then $\langle x, y \rangle$ gives the length of $y$ in the $x$ direction.\\[1ex]
+    Visually: $\langle x, y \rangle \le 1$.
+  };
+\end{tikzpicture}
+\end{center}
 \end{remark}
 
 % Quelle: Diego Torres Tejeda/Notes - 09.03 - Diego Torres Tejeda.pdf, pp. 1--2
@@ -491,6 +518,40 @@ And we call $A \subseteq X$ \newterm{closed} (\germanterm{abgeschlossen}) if and
 $X \setminus A$ is open.
 \end{definition}
 
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+  % Open Ball
+  \draw[dashed, thick] (0,0) circle (1.2);
+  \fill (0,0) circle (1.5pt) node[below] {$x$};
+  \node[anchor=west] at (0.8, 1.2) {\footnotesize ``boundary'' not included};
+  \node[below] at (0, -1.5) {\textbf{Open Ball}};
+
+  % Open set
+  \begin{scope}[xshift=4cm]
+    \draw[dashed, thick, fill=blue!5] 
+      plot[smooth cycle, tension=0.7] coordinates {(-1,-0.5) (-0.5,1) (1,0.5) (0.5,-1)};
+    \fill (-0.2,0.2) circle (1pt);
+    \draw[dashed, blue!80] (-0.2,0.2) circle (0.3);
+    \fill (0.5,-0.3) circle (1pt);
+    \draw[dashed, blue!80] (0.5,-0.3) circle (0.2);
+    \fill (-0.6,-0.1) circle (1pt);
+    \draw[dashed, blue!80] (-0.6,-0.1) circle (0.15);
+    \node[right, font=\bfseries] at (1, 0.5) {open};
+    \node[below] at (0, -1.5) {\textbf{Open Set}};
+  \end{scope}
+
+  % Not Open set (Closed / boundary included)
+  \begin{scope}[xshift=8cm]
+    \draw[very thick, fill=gray!10] 
+      plot[smooth cycle, tension=0.7] coordinates {(-1,-0.5) (-0.5,1) (0.5,0.8) (1,-0.2) (0,-1)};
+    \fill (1,-0.2) circle (1.5pt);
+    \draw[dashed, purple!80] (1,-0.2) circle (0.4);
+    \node[purple, right] at (1.4, -0.2) {\footnotesize doesn't work $\Rightarrow$ not open};
+    \node[below] at (0, -1.5) {\textbf{Not Open (e.g., closed)}};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
 % Supplement: Sascha Brack/Class Notes/Week_02_Notes_Friday_Updated.pdf, p. 1
 \begin{proposition}[How open and closed sets combine]
 \label{prop:open_closed_operations}
@@ -673,6 +734,30 @@ $x : \mathbb{N} \to X$. We say that $(x_n)_{n=0}^{\infty}$ \newterm{converges} t
 \[\forall \varepsilon > 0 \ \exists N \in \mathbb{N} \text{ such that } d(x_n, x) < \varepsilon \quad \forall n \geq N.\]
 \end{definition}
 
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+  % Axes
+  \draw[->, thick] (-0.2, 0) -- (3, 0);
+  \draw[->, thick] (0, -0.2) -- (0, 2);
+  \node[anchor=south west] at (0, 2) {$\mathbb{R}^2$};
+
+  % Sequence points
+  \fill (0.5, 0.4) circle (1.5pt) node[below] {$x_1$};
+  \fill (1.0, 1.5) circle (1.5pt) node[left] {$x_2$};
+  \fill (1.8, 1.7) circle (1.5pt) node[above] {$x_3$};
+  \fill (2.2, 0.5) circle (1.5pt) node[below] {$x_4$};
+  \fill (2.6, 1.0) circle (1.5pt) node[right] {$x_5$};
+  \node at (2.4, 1.6) {etc.};
+  
+  % Path
+  \draw[->, purple, dashed, thick] (0.6, 0.5) to[bend left=20] (0.9, 1.4);
+  \draw[->, purple, dashed, thick] (1.1, 1.6) to[bend left=20] (1.7, 1.7);
+  \draw[->, purple, dashed, thick] (1.8, 1.5) to[bend right=20] (2.1, 0.6);
+  \draw[->, purple, dashed, thick] (2.3, 0.6) to[bend right=20] (2.5, 0.9);
+  \draw[->, purple, dotted, thick] (2.6, 1.1) to[bend left=20] (2.4, 1.5);
+\end{tikzpicture}
+\end{center}
+
 % Supplement: Sascha Brack/Class Notes/Week_02_Notes_Monday_Updated.pdf, p. 7
 \begin{example}[A convergent sequence in $\mathbb{R}^3$]
 \label{ex:convergent_sequence_R3}
@@ -691,6 +776,25 @@ $x \in X$ and $x' \in X$, then $x = x'$.
 \end{proposition}
 
 \begin{proof}
+\begin{center}
+\begin{tikzpicture}
+  \fill (0,0) circle (1.5pt) node[left] {$x$};
+  \draw[green!60!black, dashed, thick] (0,0) circle (1);
+  \node[green!60!black, above left] at (0.8, 0.8) {$\varepsilon$};
+  
+  \fill (2,0) circle (1.5pt) node[right] {$y$};
+  
+  \fill[purple] (0.5,0.2) circle (1pt) node[below] {\tiny $x_n$};
+  \fill[purple] (0.3,-0.4) circle (1pt);
+  \fill[purple] (-0.2,0.5) circle (1pt);
+  \fill[purple] (-0.4,-0.2) circle (1pt);
+  \fill[purple] (0.1,0.1) circle (1pt);
+  
+  \node[anchor=west, text width=6cm] at (3, 0) {
+    \small Proof idea: Let $\varepsilon > 0$. Since $x_n \to x$, for large $n$, $d(x_n, x) < \varepsilon$. For $\varepsilon$ small enough, $y$ will be outside the green circle $\bigcirc$ so the $x_n$ will never get closer to $y$.
+  };
+\end{tikzpicture}
+\end{center}
 Fix $\varepsilon > 0$. By \cref{def:convergent_sequence}, there exist $N, N' \in \mathbb{N}$ such
 that $d(x_n,x) < \varepsilon/2$ for all $n \geq N$ and $d(x_n,x') < \varepsilon/2$ for all
 $n \geq N'$. For any $n \geq \max\{N,N'\}$, the triangle inequality (\cref{def:metric_space})
@@ -1488,6 +1592,38 @@ $N := \max\{N_{x_1},\dots,N_{x_m}\}$, every $x_n$ with $n \geq N$ then avoids
 $B_{\varepsilon_{x_1}}(x_1) \cup \dots \cup B_{\varepsilon_{x_m}}(x_m) = X$ --- absurd. So $X$ is
 sequentially compact.
 
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+  % Space K
+  \draw[very thick, fill=gray!10] plot[smooth cycle, tension=0.7] coordinates {(-1.5, -0.5) (-1.8, 0.5) (-0.5, 1) (1.2, 0.8) (1.8, 0.2) (1.2, -0.8) (0, -1)};
+  
+  % Sequence points and path
+  \fill[purple] (-1.2, 0.2) circle (1pt) node[left] {\tiny $x_1$};
+  \fill[purple] (-0.8, -0.6) circle (1pt) node[below] {\tiny $x_2$};
+  \fill[purple] (0.2, 0.6) circle (1pt) node[above] {\tiny $x_3$};
+  \fill[purple] (1.0, -0.5) circle (1pt) node[right] {\tiny $x_4$};
+  \draw[->, purple, dashed] (-1.2, 0.2) to[bend right=15] (-0.8, -0.6);
+  \draw[->, purple, dashed] (-0.8, -0.6) to[bend left=15] (0.2, 0.6);
+  \draw[->, purple, dashed] (0.2, 0.6) to[bend right=15] (1.0, -0.5);
+  
+  % Accumulation point
+  \fill[green!60!black] (0.8, 0.2) circle (1.5pt) node[above right] {\small $x$};
+  \draw[green!60!black, dashed, thick] (0.8, 0.2) circle (0.35);
+  
+  % Subsequence converging
+  \fill[purple] (0.6, -0.2) circle (1pt);
+  \fill[purple] (0.9, 0) circle (1pt);
+  \fill[purple] (0.7, 0.3) circle (1pt);
+  \draw[->, purple, dotted, thick] (1.0, -0.5) to[bend left=10] (0.6, -0.2);
+  \draw[->, purple, dotted, thick] (0.6, -0.2) to[bend right=10] (0.9, 0);
+  \draw[->, purple, dotted, thick] (0.9, 0) to[bend left=10] (0.7, 0.3);
+  \draw[->, purple, dotted, thick] (0.7, 0.3) -- (0.78, 0.22);
+  
+  \node[green!60!black, anchor=west] at (1.3, 0.4) {\footnotesize accumulation point};
+  \node[purple, anchor=west] at (1.3, 0.1) {\footnotesize subsequence $x_{n_k} \to x$};
+\end{tikzpicture}
+\end{center}
+
 \textbf{($\Rightarrow$)} Suppose $X$ is sequentially compact and let $\{U_i\}_{i\in I}$ be an open
 cover; we may assume no single $U_i$ equals $X$ (else $\{U_i\}$ is itself a finite subcover).
 Define
@@ -1574,6 +1710,22 @@ Let $\mathcal{U}$ be an open cover of $A$. Since $A$ is closed, $X\setminus A$ i
 is an open cover of $K$ --- it covers $A$ by assumption and everything outside $A$ by the added
 set. Compactness of $K$ gives a finite subcover
 $U_{1},\dots,U_{m} \in \mathcal{U}'$ of $K$, hence of $A$.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+  % Compact set K
+  \draw[very thick] plot[smooth cycle, tension=0.7] coordinates {(-1.5, -1) (-2, 0.5) (0, 1.2) (2, 0.5) (1.5, -1.2)};
+  \node[above left, font=\large] at (-1.8, 0.5) {$K$};
+  
+  % Closed set A
+  \draw[thick, fill=gray!20] (0, 0.5) -- (-0.6, 0) -- (0, -0.5) -- (0.6, 0) -- cycle;
+  \node[font=\large] at (0, 0) {$A$};
+  
+  % Open cover V
+  \draw[dashed, blue] (-1, 0.8) rectangle (1.2, -0.8);
+  \node[blue, right] at (1.2, 0.5) {$\mathcal{V}$ covers $K$, so also $A$};
+\end{tikzpicture}
+\end{center}
 
 Now simply discard $X\setminus A$ from that list if it occurs: it contains no point of $A$, so
 the remaining sets still cover $A$. They all belong to $\mathcal{U}$, and there are finitely

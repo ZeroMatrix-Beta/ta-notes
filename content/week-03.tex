@@ -524,6 +524,22 @@ Since $\sqrt{2} \notin \mathbb{Q}$, we have $U \cup V = \mathbb{Q}$ and $U \cap 
 \begin{example}[A disconnected set in $\mathbb{R}^2$]
 Let $X := ([0,1] \times [0,1]) \cup ([2,3] \times \{1\}) \subseteq \mathbb{R}^2$. Is $X$ connected?
 No. Let $U := \{(x,y) \in X \mid x < 1.5\}$ and $V := \{(x,y) \in X \mid x > 1.5\}$. We can write these as $U = X \cap \{(x,y) \in \mathbb{R}^2 \mid x < 1.5\}$ and $V = X \cap \{(x,y) \in \mathbb{R}^2 \mid x > 1.5\}$. Both $U$ and $V$ are open in the subspace topology of $X$ because they are intersections of $X$ with open half-planes in $\mathbb{R}^2$. Furthermore, $X = U \cup V$, and $U, V$ are disjoint and non-empty. Thus, $X$ is disconnected.
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+  \draw[->, thick] (-0.2,0) -- (3.5,0);
+  \draw[->, thick] (0,-0.2) -- (0,1.5);
+  
+  \draw[very thick, fill=purple!20, pattern=north east lines, pattern color=purple] (0,0) rectangle (1,1);
+  \draw[very thick, purple] (2,1) -- (3,1);
+  \node[purple, left] at (-0.1, 0.5) {$X$};
+  
+  \draw[green!60!black, dashed] (0.5, 0.5) circle (0.8);
+  \node[green!60!black] at (1.2, 0.6) {$U$};
+  
+  \draw[green!60!black, dashed] (2.5, 1) ellipse (0.7 and 0.3);
+  \node[green!60!black] at (2.5, 1.4) {$V$};
+\end{tikzpicture}
+\end{center}
 \end{example}
 
 \begin{theorem}[Continuous functions preserve connectedness]
@@ -673,6 +689,21 @@ can replace $[0,1]$ by $[a,b]$ for $a < b$.
 A metric space $X$ (or subset thereof) is \newterm{path-connected}
 (\germanterm{wegzusammenh\"angend}) if for all $x, y \in X$ there exists a path
 (\cref{def:path}) $\gamma : [0,1] \to X$ with $\gamma(0) = x$, $\gamma(1) = y$.
+\begin{center}
+\begin{tikzpicture}
+  \draw[very thick, fill=gray!10] plot[smooth cycle, tension=0.7] coordinates {(-2, -1) (-2.5, 0.5) (-1, 1.5) (1.5, 1) (2.5, -0.5) (1, -1.5)};
+  \node[font=\large] at (2, 0.8) {$X$};
+  
+  \fill (-1.5, -0.2) circle (1.5pt) node[below] {$x$};
+  \fill (1.8, -0.1) circle (1.5pt) node[below] {$y$};
+  
+  \draw[blue, thick, ->] (-1.5, -0.2) .. controls (-1, 1) and (1, -1) .. (1.8, -0.1);
+  
+  \node[blue, above] at (-1.5, -0.2) {$\gamma(0)$};
+  \node[blue, above] at (1.8, -0.1) {$\gamma(1)$};
+  \node[blue, below] at (0, -0.1) {$\gamma([0,1])$};
+\end{tikzpicture}
+\end{center}
 \end{definition}
 
 \begin{lemma}[Path-connected implies connected]

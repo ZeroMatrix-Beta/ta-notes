@@ -226,6 +226,23 @@ is a $C^k$-\newterm{diffeomorphism} (\germanterm{Diffeomorphismus}) and
 \[D\big(f|_{U_0}^{-1}\big)_{f(x)} = D\big(f|_{U_0}\big)_x^{-1} \quad \text{for all } x \in U_0.\]
 \end{theorem}
 
+% Supplement: Sascha Brack/Class Notes/Week_06_Notes_Friday.pdf, p. 2
+\begin{remark}[Checking for a global diffeomorphism]
+\label{rem:global_diffeomorphism_check}
+To verify that a map $f \in C^k(U, V)$ between open sets is a global $C^k$-diffeomorphism, it is best to check the following two conditions:
+\begin{enumerate}
+  \item \textbf{Global bijectivity:} Check that $f$ is bijective. This assures that a global inverse $f^{-1} : V \to U$ exists, and any local inverse will coincide with it.
+  \item \textbf{Local diffeomorphism everywhere:} Check that the differential $Df_x$ (or $\Jac f(x)$) is invertible at every point $x \in U$. By the inverse function theorem, this ensures $f$ is a local $C^k$-diffeomorphism everywhere.
+\end{enumerate}
+If both conditions hold, the global inverse $f^{-1}$ inherits the $C^k$ regularity of the local inverses, making $f$ a global $C^k$-diffeomorphism.
+\end{remark}
+
+% Supplement: Sascha Brack/Class Notes/Week_06_Notes_Monday.pdf, p. 4
+\begin{example}[Polar and spherical coordinates]
+\label{ex:polar_spherical_coordinates}
+The most important examples of diffeomorphisms are transformations between coordinate systems. For instance, the map assigning polar coordinates to Cartesian coordinates on $\mathbb{R}^2 \setminus ( (-\infty, 0] \times \{0\} )$, and similarly for spherical coordinates on $\mathbb{R}^3$, are global $C^\infty$-diffeomorphisms onto their images.
+\end{example}
+
 \begin{question}
 \begin{enumerate}[label=\textbf{Q\arabic*.}]
   \item If $f : \mathbb{R}^n \to \mathbb{R}^n$ is $C^k$ and a \newterm{homeomorphism}
@@ -371,6 +388,24 @@ Three things are worth reading off the statement before the pictures.
     only near the chosen point --- \cref{sec:submanifolds} in Week 7 will call such a set a
     submanifold, and this local-graph property is exactly what that definition abstracts.
 \end{itemize}
+
+% Supplement: Sascha Brack/Class Notes/Week_06_Notes_Friday.pdf, pp. 3--5
+\begin{example}[A concrete example in $\mathbb{R}^2$]
+\label{ex:implicit_function_circle}
+Consider $f : \mathbb{R}^2 \to \mathbb{R}$ defined by $f(x,y) := x^2 + y^2 - 1$.
+Here $n=2$ and $d=1$, so $x \in \mathbb{R}$ and $y \in \mathbb{R}$. We want to see whether we can write $y$ locally as a function of $x$, i.e., find $g(x)$ such that $f(x,g(x)) = 0$.
+
+First, let us find a point $(x_0,y_0)$ where $f(x_0,y_0) = 0$. We guess $f(0,1) = 0^2+1^2-1 = 0$, so $(0,1)$ works.
+Next, we check whether the $y$-derivative $\Jac_y f(0,1)$ is invertible. Since $y$ is 1-dimensional, this is just the partial derivative $\partial_y f(0,1)$:
+\[\partial_y f(0,1) = \partial_y(x^2+y^2-1)\big|_{(0,1)} = 2y\big|_{y=1} = 2 \neq 0.\]
+Since it is non-zero, it is invertible as a $1\times 1$ matrix.
+The theorem then guarantees that for small $r, s > 0$, there exists $g : B_r(0) \to B_s(1)$ such that for all $(x,y) \in B_r(0)\times B_s(1)$,
+\[f(x,y) = 0 \iff y = g(x).\]
+Since $f \in C^\infty(\mathbb{R}^2)$, we also have $g \in C^\infty(B_r(0))$.
+Moreover, we can compute $g'(x) = \Jac g(x)$ using the formula:
+\[g'(x) = - \big(\partial_y f(x,g(x))\big)^{-1} \partial_x f(x,g(x)) = - (2g(x))^{-1} (2x) = -\frac{x}{g(x)}.\]
+(Indeed, since $y=g(x) = \sqrt{1-x^2}$ near $(0,1)$, its derivative is exactly $-x/\sqrt{1-x^2}$.)
+\end{example}
 
 \begin{remark}[Why $\Jac g$ has this form]
 The formula is just implicit differentiation, done in blocks. By construction $g$ satisfies

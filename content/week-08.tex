@@ -241,6 +241,59 @@ week starts integration in several variables.
 \section{Multivariate integration}
 \label{sec:multivariate_integration}
 
+% Supplement: Sascha Brack/Class Notes/Week_08_Notes_Monday.pdf, pp. 5--7
+\subsection{Jordan measure and the Riemann integral}
+The rigorous definition of the multidimensional integral relies on the \newterm{Jordan measure} (\germanterm{Jordan-Maß}). The intuition, as presented in Sascha Brack's notes, involves \qt{dyadic cubes} (pixels) that approximate a region from the inside and outside.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+  % first grid
+  \draw[gray, dotted] (0,0) grid (4,2);
+  \draw[very thick, blue!80!black] (0,0) rectangle (2,2);
+  \node[below, font=\scriptsize] at (1,0) {dyadic cube, side length $1=2^{-0}$};
+  
+  \begin{scope}[shift={(6,0)}]
+    \draw[gray, dotted, step=0.5] (0,0) grid (4,2);
+    \draw[very thick, blue!80!black] (0,0) rectangle (0.5,0.5);
+    \draw[very thick, blue!80!black] (1,0.5) rectangle (1.5,1.0);
+    \draw[very thick, blue!80!black] (2,0) rectangle (2.5,0.5);
+    \draw[very thick, blue!80!black] (2.5,0) rectangle (3.0,0.5);
+    \draw[very thick, blue!80!black] (3,1.5) rectangle (3.5,2.0);
+    \node[below, font=\scriptsize, align=center] at (2,-0.2) {dyadic set\\(union of same size cubes)};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+Similar to the 1D Riemann integral, we approximate the volume of a set $E \subseteq \mathbb{R}^n$ using an outer sequence of dyadic sets $G_i \supseteq E$ and an inner sequence $F_i \subseteq E$. If the limits of their volumes coincide as the pixel size $2^{-p} \to 0$, $E$ is \newterm{Jordan measurable}.
+
+Furthermore, the multidimensional integral of a non-negative function $f : A \to \mathbb{R}$ is exactly the $(n+1)$-dimensional Jordan measure (volume) of its hypograph $\Gamma_A(f)$:
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+  % axes
+  \draw[->, thick] (0,0,0) -- (3,0,0) node[right] {$y$};
+  \draw[->, thick] (0,0,0) -- (0,2.5,0) node[above] {$z = f(x,y)$};
+  \draw[->, thick] (0,0,0) -- (0,0,3) node[below left] {$x$};
+  
+  % base domain A
+  \draw[thick, dashed, fill=yellow!20] (0.5,0,0.5) -- (2.5,0,0.5) -- (2.0,0,2.5) -- (0.2,0,2.0) -- cycle;
+  \node[font=\small] at (1.5, 0, 1.5) {$A$};
+  
+  % top surface graph(f)
+  \draw[thick, fill=yellow!40, opacity=0.8] (0.5,1.2,0.5) .. controls (1.5,1.8,0.5) .. (2.5,1.5,0.5)
+    -- (2.0,0.8,2.5) .. controls (1.0,1.2,2.5) .. (0.2,1.0,2.0) -- cycle;
+  \node[font=\small] at (1.5, 1.4, 1.5) {$\Gamma_A(f)$};
+  
+  % vertical lines
+  \draw[dashed] (0.5,0,0.5) -- (0.5,1.2,0.5);
+  \draw[dashed] (2.5,0,0.5) -- (2.5,1.5,0.5);
+  \draw[dashed] (2.0,0,2.5) -- (2.0,0.8,2.5);
+  \draw[dashed] (0.2,0,2.0) -- (0.2,1.0,2.0);
+  
+  \node[right, font=\small, align=center] at (2.5, 0.7, 0.5) {volume is\\$\int_A f$};
+\end{tikzpicture}
+\end{center}
+
 \subsection{Change of variables}
 \label{sec:change_of_variables}
 
@@ -266,6 +319,50 @@ statement with $\Phi$ pushed to the other side, which is why the determinant app
 or $\Phi^{-1}$ that you can write down --- in \cref{ex:change_of_variables_domain} below it is
 $\Phi$, so the dividing form is the one that saves work.
 \end{ainote}
+
+% Supplement: Sascha Brack/Class Notes/Week_08_Notes_Friday.pdf, pp. 2--3
+\begin{example}[Change of variables on a diamond]
+\label{ex:change_of_variables_diamond}
+Compute $I := \int_E e^{x+y}(x-y) \mathop{d\text{vol}}(x,y)$, where $E$ is the region bounded by the lines $y=x$, $y=-x+2$, $y=x-2$, and $y=-x$.
+
+Writing out the inequalities, $E = \{ y \leq x \} \cap \{ y \leq -x+2 \} \cap \{ y \geq -x \} \cap \{ y \geq x-2 \}$.
+Rearranging these gives $0 \leq x-y \leq 2$ and $0 \leq x+y \leq 2$.
+This suggests the substitution $u := x+y$ and $v := x-y$. The new domain is the square $V = [0,2] \times [0,2]$.
+The inverse map is $\Phi^{-1}(u,v) = (x,y) = \big(\frac{u+v}{2}, \frac{u-v}{2}\big)$.
+Its Jacobian matrix is $\Jac\Phi^{-1}(u,v) = \begin{pmatrix} 1/2 & 1/2 \\ 1/2 & -1/2 \end{pmatrix}$, so $\big|\det\Jac\Phi^{-1}\big| = \big|-\frac{1}{4} - \frac{1}{4}\big| = \frac{1}{2}$.
+By the change of variables formula:
+\[I = \int_0^2 \int_0^2 e^u v \left|\det\Jac\Phi^{-1}\right| \,du\,dv = \frac{1}{2} \int_0^2 \int_0^2 e^u v \,du\,dv = \frac{1}{2} \left[ e^u \right]_0^2 \left[ \frac{v^2}{2} \right]_0^2 = \frac{1}{2} (e^2-1) \cdot 2 = e^2-1.\]
+\end{example}
+
+\begin{example}[Improper integral via polar coordinates]
+\label{ex:improper_integral_polar}
+Compute $\int_{\mathbb{R}^2} \frac{1}{(1+x^2+y^2)^2} \mathop{d\text{vol}}(x,y)$.
+This integral is improper because the domain is unbounded. Since the integrand is non-negative and continuous, its Riemann improper integral is well-defined, and we can compute it using polar coordinates $x = r\cos\theta, y = r\sin\theta$.
+The Jacobian determinant is $r$. The domain $\mathbb{R}^2$ corresponds to $r \in [0, \infty)$ and $\theta \in [0, 2\pi)$.
+\[
+\int_{\mathbb{R}^2} \frac{1}{(1+x^2+y^2)^2} \,dx\,dy
+= \int_0^{2\pi} \int_0^\infty \frac{r}{(1+r^2)^2} \,dr\,d\theta.
+\]
+Substituting $u = r^2$, $du = 2r\,dr$, the inner integral is $\frac{1}{2} \int_0^\infty \frac{1}{(1+u)^2} \,du = \frac{1}{2} \left[ \frac{-1}{1+u} \right]_0^\infty = \frac{1}{2}$.
+The outer integral then gives $\frac{1}{2} \int_0^{2\pi} d\theta = \pi$.
+\end{example}
+
+% Supplement: Sascha Brack/Class Notes/Week_08_Notes_Monday.pdf, pp. 8--9
+\begin{example}[Volume of a sphere]
+\label{ex:volume_sphere}
+Let $A := \{(x,y,z) \in \mathbb{R}^3 : x^2+y^2+z^2 \leq 1\}$ be the unit ball. Given that $A$ is Jordan measurable, its volume is $\mu(A) = \int_A 1 \mathop{d\text{vol}}(x,y,z)$.
+We can compute this using spherical coordinates:
+\[\Phi(r,\theta,\varphi) = \begin{pmatrix} r\sin\theta\cos\varphi \\ r\sin\theta\sin\varphi \\ r\cos\theta \end{pmatrix}.\]
+Up to a Jordan null set (which does not change the volume), the domain $A$ corresponds to the box $V = (0,1) \times (0,\pi) \times (-\pi,\pi)$.
+The Jacobian determinant is $\det\Jac\Phi(r,\theta,\varphi) = r^2\sin\theta$, which is positive on this domain.
+Applying the change of variables formula and Fubini's theorem (which allows slicing up the integral):
+\begin{align*}
+\mu(A) &= \int_{\Phi^{-1}(A)} \big|\det\Jac\Phi(r,\theta,\varphi)\big| \,dr\,d\theta\,d\varphi \\
+&= \int_{-\pi}^\pi \int_0^\pi \int_0^1 r^2\sin\theta \,dr\,d\theta\,d\varphi \\
+&= \left(\int_{-\pi}^\pi d\varphi\right) \left(\int_0^\pi \sin\theta \,d\theta\right) \left(\int_0^1 r^2 \,dr\right) \\
+&= (2\pi) \cdot (2) \cdot \left(\frac{1}{3}\right) = \frac{4\pi}{3}.
+\end{align*}
+\end{example}
 
 % Source: Corsin Nick/Class Notes/Week 8.pdf, p. 7
 \subsection{Fubini's theorem}
@@ -307,6 +404,36 @@ The example is well chosen: integrating $x^{y+1}$ in $y$ first would mean integr
 exponential in the exponent, which is far worse. Fubini's real use is that you may pick the
 easier order, and here only one of the two is comfortable.
 \end{ainote}
+
+% Supplement: Sascha Brack/Class Notes/Week_08_Notes_Friday.pdf, pp. 4--5
+\begin{example}[Changing the order of integration]
+\label{ex:change_order_integration}
+Consider the iterated integral $\int_0^2 \int_{y^2}^{2\sqrt{2y}} f(x,y) \,dx\,dy$. Let us rewrite it with the integration order reversed (first $y$, then $x$).
+
+The region is defined by $0 \leq y \leq 2$ and $y^2 \leq x \leq 2\sqrt{2y}$.
+Notice that for $y \in [0,2]$, the lower bound is $x \geq 0$ and the upper bound is $x \leq 2\sqrt{4} = 4$, so $x$ ranges from $0$ to $4$.
+We now solve the inequalities for $y$:
+$x \leq 2\sqrt{2y} \implies x^2 \leq 8y \implies y \geq \frac{1}{8}x^2$.
+$x \geq y^2 \implies y \leq \sqrt{x}$ (since $x,y \geq 0$).
+Thus, the new bounds are $0 \leq x \leq 4$ and $\frac{1}{8}x^2 \leq y \leq \sqrt{x}$. The reversed integral is:
+\[\int_0^4 \int_{\frac{1}{8}x^2}^{\sqrt{x}} f(x,y) \,dy\,dx.\]
+\end{example}
+
+\begin{example}[Surface parametrization and Fubini]
+\label{ex:surface_parametrization_integral}
+Let $f(u,v) := (u\cos v, u\sin v, u^2)\transp \in \mathbb{R}^3$ for $(u,v) \in \mathbb{R}^2$. Write the third coordinate $z(u,v)$ as a function of the first two, $\tilde{z}(x,y)$, and compute $\int_0^y \int_0^x \tilde{z}(x',y') \,dx'\,dy'$.
+
+We have $x(u,v) = u\cos v$ and $y(u,v) = u\sin v$. Then $x^2 + y^2 = u^2\cos^2 v + u^2\sin^2 v = u^2 = z(u,v)$.
+So we define $\tilde{z}(x,y) := x^2 + y^2$.
+The integral is:
+\begin{align}
+\int_0^y \int_0^x (x'^2 + y'^2) \,dx'\,dy'
+&= \int_0^y \left[ \frac{x'^3}{3} + x'y'^2 \right]_{x'=0}^{x'=x} \,dy' \nonumber \\
+&= \int_0^y \left( \frac{x^3}{3} + x y'^2 \right) \,dy' \nonumber \\
+&= \left[ \frac{x^3 y'}{3} + x \frac{y'^3}{3} \right]_{y'=0}^{y'=y} \nonumber \\
+&= \frac{xy}{3}(x^2 + y^2). \label{eq:surface_integral_result}
+\end{align}
+\end{example}
 
 % Source: Corsin Nick/Class Notes/Week 8.pdf, pp. 8--10
 \begin{example}[A domain that Fubini alone cannot handle]

@@ -944,6 +944,29 @@ mixed partials everywhere, but they are not continuous at the origin, so
 knowing that it \emph{could}.
 \end{remark}
 
+% Supplement: Sascha Brack/Class Notes/Week_05_Notes_Monday.pdf, p. 7
+\begin{exercise}[Applying Schwarz's theorem]
+\label{ex:schwarz_application}
+Let $f : \mathbb{R}^2 \to \mathbb{R}$ be defined by
+\[f(x,y) := x^2 e^{y^2} + e^{-x^2} \sin\left(e^{x^2} \left(x^5 + 3x^2 + 100x + \frac{1}{2+\sin(x)}\right)\right).\]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Show that $f \in C^2(\mathbb{R}^2, \mathbb{R})$.
+  \item Compute $\partial_2 \partial_1 f(x,y)$. (Make it as easy as possible for yourself.)
+\end{enumerate}
+\end{exercise}
+
+\begin{exercisesolution}[\cref{ex:schwarz_application}]
+\textbf{(a)} Every term in $f$ is a composition of $C^2$ functions (polynomials, exponentials, sine), and the denominator $2+\sin(x)$ is bounded away from zero. Thus $f$ is $C^2$.
+
+\textbf{(b)} Since $f \in C^2$, by Schwarz's theorem (\cref{thm:schwarz_mixed_partials}) we have $\partial_2 \partial_1 f = \partial_1 \partial_2 f$.
+Computing $\partial_1$ of the second term would be tedious. However, notice that the second term depends only on $x$, so its derivative with respect to $y$ is $0$.
+Thus, we first compute $\partial_2 f$:
+\[\partial_2 f(x,y) = x^2 (2y e^{y^2}) + 0 = 2x^2 y e^{y^2}.\]
+Then we compute $\partial_1$ of this result:
+\[\partial_1 \partial_2 f(x,y) = \partial_1 (2x^2 y e^{y^2}) = 4xy e^{y^2}.\]
+By Schwarz's theorem, $\partial_2 \partial_1 f(x,y) = 4xy e^{y^2}$.
+\end{exercisesolution}
+
 % Source: Corsin Nick/Class Notes/Week 4.pdf, pp. 9--10
 \begin{exercise}[Maximal Taylor expansion in $\mathbb{R}^2$]
 \label{ex:taylor_maximal_expansion}
@@ -1054,6 +1077,25 @@ The substitution and multiplication rules we used in Analysis 1 still apply:
 \end{aligned}
 \]
 \end{exercisesolution}
+
+% Supplement: Sascha Brack/Class Notes/Week_05_Notes_Monday.pdf, pp. 9--11
+\begin{example}[More Taylor expansions via Analysis 1]
+\label{ex:more_taylor_via_analysis1}
+The substitution and multiplication rules from Analysis 1 often make expansions much faster than using the formula directly, provided the expansion is around $(0,0)$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Expand $f(x,y) := \cos(x)e^y$ up to second order around $(0,0)$:
+  \[f(x,y) = \left(1 - \frac{x^2}{2} + o(|(x,y)|^2)\right)\left(1 + y + \frac{y^2}{2} + o(|(x,y)|^2)\right) = 1 + y - \frac{1}{2}x^2 + \frac{1}{2}y^2 + o(|(x,y)|^2).\]
+  \item Expand $f(x,y) := \cos(x+y^2)$ up to second order around $(0,0)$. Setting $z := x+y^2$:
+  \[\cos(z) = 1 - \frac{z^2}{2} + o(|z|^2) \implies \cos(x+y^2) = 1 - \frac{(x+y^2)^2}{2} + o(|(x,y)|^2) = 1 - \frac{1}{2}x^2 + o(|(x,y)|^2),\]
+  where terms like $xy^2$ and $y^4$ are absorbed into $o(|(x,y)|^2)$ since their total degree is strictly greater than $2$.
+  \item Expand $f(x,y) := \sqrt{y} e^{\sqrt{x}}$ to first order around $(1,1)$. Here the formula is better since the expansion point is not the origin.
+  We have $f(1,1) = e$.
+  $\partial_1 f(x,y) = \sqrt{y} e^{\sqrt{x}} \frac{1}{2\sqrt{x}} \implies \partial_1 f(1,1) = \frac{e}{2}$.
+  $\partial_2 f(x,y) = \frac{1}{2\sqrt{y}} e^{\sqrt{x}} \implies \partial_2 f(1,1) = \frac{e}{2}$.
+  Writing $h = (h_1,h_2) = (x-1, y-1)$:
+  \[f(1+h_1, 1+h_2) = f(1,1) + \partial_1 f(1,1)h_1 + \partial_2 f(1,1)h_2 + o(|h|) = e + \frac{e}{2}h_1 + \frac{e}{2}h_2 + o(|h|).\]
+\end{enumerate}
+\end{example}
 
 % Sonnet 5 (Medium)
 \subsection{Second-order form and the Hessian}

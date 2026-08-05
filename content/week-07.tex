@@ -192,15 +192,15 @@ exercises feel hard.
 
 \begin{itemize}
   \item \textbf{Chart} (\cref{def:submanifold}) --- the definition. Straighten $M$ out with a
-    diffeomorphism. Almost never used directly for a concrete $M$: producing $\Phi$ by hand is
+    diffeomorphism. Essentially, the first $m$ coordinates of the chart (the non-vanishing ones) define the $m$-dimensional submanifold. Almost never used directly for a concrete $M$: producing $\Phi$ by hand is
     painful. Its role is theoretical, and it is what the other two are proved from.
   \item \textbf{Implicit / regular value} (\cref{thm:regular_value_theorem}) --- use when $M$
-    arrives as \emph{equations}: $\{x^2+y^2=R^2\}$, $\{g_1=\dots=g_k=0\}$. Check a rank
+    arrives as \emph{equations}: $\{x^2+y^2=R^2\}$, $\{g_1=\dots=g_k=0\}$. This relies on the same underlying idea as the chart definition, but defining the diffeomorphisms implicitly. Check a rank
     condition on $\Jac F$ and you are done, with no parametrization ever written. This is
     normally the cheapest route.
   \item \textbf{Parametrization} (\cref{thm:local_parametrization}) --- use when $M$ arrives as
     a \emph{picture you can sweep out}: a graph, a surface of revolution, a curve given by a
-    formula in a parameter. Also the one to use when you subsequently need the tangent space,
+    formula in a parameter. This is often the most intuitive approach, explicitly building the submanifold using parameters. Also the one to use when you subsequently need the tangent space,
     since $\partial_1f,\dots,\partial_mf$ hand you a basis directly
     (\cref{def:tangent_space}).
 \end{itemize}
@@ -434,6 +434,34 @@ Represent $S^2$ implicitly: $S^2 = F^{-1}\{1\} = \{(x,y,z)\in\mathbb{R}^3 : F(x,
 $F(x,y,z) = x^2+y^2+z^2$. We determine $N_{e_3}S^2$:
 \[\nabla F(0,0,1) = (2x,2y,2z)\big|_{(x,y,z)=(0,0,1)} = 2e_3.\]
 So $N_{e_3}S^2 = \operatorname{span}\{e_3\} = \{0\}\times\mathbb{R}$.
+\end{example}
+
+% Supplement: Sascha Brack/Class Notes/Week_08_Notes_Monday.pdf, pp. 3--4
+\begin{example}[Tangent and normal vectors via parametrization]
+\label{ex:tangent_normal_parametrized_sphere}
+For a parametrized surface $f : V \to \mathbb{R}^3$, the tangent space at $p = f(x)$ is $T_pM = \operatorname{span}\{\partial_1 f(x), \partial_2 f(x)\}$. A normal vector can be found via the cross product: $\vec{n} = \partial_1 f(x) \times \partial_2 f(x)$.
+
+Let us apply this to the sphere $S^2$ using spherical coordinates:
+\[\Phi(\theta,\varphi) = \begin{pmatrix} \sin\theta\cos\varphi \\ \sin\theta\sin\varphi \\ \cos\theta \end{pmatrix}, \qquad (\theta,\varphi) \in (0,\pi) \times (-\pi,\pi).\]
+(Note that the image of $\Phi$ is the unit sphere minus a \qt{thin slice} --- the boundary where $\varphi = \pm\pi$ and the poles where $\theta \in \{0,\pi\}$.)
+The tangent space $T_{\Phi(\theta,\varphi)} S^2$ is spanned by the partial derivatives:
+\[
+\partial_\theta \Phi(\theta,\varphi) = \begin{pmatrix} \cos\theta\cos\varphi \\ \cos\theta\sin\varphi \\ -\sin\theta \end{pmatrix}, \qquad
+\partial_\varphi \Phi(\theta,\varphi) = \begin{pmatrix} -\sin\theta\sin\varphi \\ \sin\theta\cos\varphi \\ 0 \end{pmatrix}.
+\]
+A normal vector is given by their cross product:
+\[
+\vec{n} = \partial_\theta \Phi \times \partial_\varphi \Phi
+= \begin{pmatrix} \cos\theta\cos\varphi \\ \cos\theta\sin\varphi \\ -\sin\theta \end{pmatrix} \times \begin{pmatrix} -\sin\theta\sin\varphi \\ \sin\theta\cos\varphi \\ 0 \end{pmatrix}
+= \begin{pmatrix} \sin^2\theta\cos\varphi \\ \sin^2\theta\sin\varphi \\ \sin\theta\cos\theta\cos^2\varphi + \sin\theta\cos\theta\sin^2\varphi \end{pmatrix}
+= \sin\theta \begin{pmatrix} \sin\theta\cos\varphi \\ \sin\theta\sin\varphi \\ \cos\theta \end{pmatrix}.
+\]
+Its length is $|\vec{n}| = \sin\theta$ (since $\sin\theta > 0$ for $\theta \in (0,\pi)$).
+The unit normal vector is therefore
+\[
+\nu(\theta,\varphi) := \frac{\vec{n}}{|\vec{n}|} = \begin{pmatrix} \sin\theta\cos\varphi \\ \sin\theta\sin\varphi \\ \cos\theta \end{pmatrix} = \Phi(\theta,\varphi).
+\]
+This confirms that the outward normal vector at a point on the unit sphere is precisely the position vector of that point.
 \end{example}
 
 % Sonnet 5 (Medium) --- FIG-W07-06

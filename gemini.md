@@ -55,6 +55,7 @@ You are authorized to improve the prose and apply the established "House Style" 
 * **Environment:** You are working directly within the repository structure. Always reference
   existing definitions in the project's preamble or `.cls` files before suggesting new commands.
   If you introduce packages that are not already in use, be clear about that.
+* **Tool Usage:** Always use the `grep_search` tool instead of running `grep` or `findstr` via terminal commands. Terminal string matching utilities often fail or exhibit cross-platform quirks (especially on Windows), whereas `grep_search` is more robust and predictable for exploring the workspace.
 
 ## MATHEMATICAL NOTATION (THE HOUSE STYLE)
 
@@ -101,6 +102,7 @@ You are authorized to improve the prose and apply the established "House Style" 
 
 * **Delimiters:** Use `\left(` and `\right)` (and other auto-sizing delimiters like `\left[` / `\right]`) primarily in displayed equations `\[ ... \]`. This ensures delimiters match the height of the content. In inline math `$ ... $`, standard delimiters are generally preferred to maintain consistent line height, unless the content is exceptionally tall (e.g., a fraction).
 * **General Linear Group:** Always use the macro `\GL` for the general linear group (e.g., `\GL_n(K)` or `\GL(n, K)`). This renders as `\operatorname{GL}`.
+* **Curl / Rotation:** Always use the macro `\curl` for the curl/rotation of a vector field. Do NOT use `\rot`, as it is not defined and will break compilation.
 * **Sub-part Labels:** Always use alphabetical numbering for sub-parts, items, and cases (e.g., `\textbf{(a)}`, `\textbf{(b)}`). Do NOT use numerical labels like `(1), 2)`. This applies to proof sections, lists, and TikZ nodes. **Important:** Do NOT hardcode custom labels using `\item[...]` — this applies to **both** `itemize` and `enumerate`, with no exceptions. Instead, set `\begin{enumerate}[label=\textbf{(\alph*)}]` on the environment itself and use plain `\item`; for `itemize`, use plain `\item` and put any name/label as `\textbf{name:}` at the start of the item's text. **Proof Sub-parts:** Do NOT write `Proof of (a):` or use `\item[...]`. Write sub-part proof headers using `\begin{enumerate}[label=\textbf{(\alph*)}]` with plain `\item`, or write `\textbf{(a)}` directly in prose. When referencing a specific sub-part or custom enumerate label in prose, maintain the bold formatting (e.g., "statement \textbf{(d)}", "from \textbf{(K4)}"). If a theorem/proposition statement uses an `enumerate` environment to list sub-claims/points, any proof that proves those individual points must also structure its proof using an identical `enumerate` environment matching those points.
 * **Labels:** Use descriptive, human-readable slugs for labels instead of numbering schemes. For example, use `\label{prop:unique_solution_criterion}` instead of `\label{prop:17.d.4}`. If possible (i.e. available), always place the original handwritten note label as a comment directly above the new descriptive label (e.g., `% prop:17.d.4`). This avoids duplicates and makes the LaTeX source much easier to navigate. **Placement:** Always place the `\label{...}` immediately after the `\begin{...}` statement (e.g., right after `\begin{theorem}`), rather than at the end of the environment.
 * **Theorem Numbering — do NOT set it per file in this project.** The scheme is
@@ -169,14 +171,8 @@ You are authorized to improve the prose and apply the established "House Style" 
   * **GOOD:** `\end{ainote}`  `\end{remark}`  `\end{aiexample}`
 
   Cheap detector, worth running after any batch of edits:
-
-  ```bash
-  grep -nE '\\(begin|end)\{[a-z*]+[>)\]]' content/*.tex     # malformed closers
-  for f in content/week-0*.tex; do \
-    echo "$f $(grep -c 'begin{ainote}' $f) $(grep -c 'end{ainote}' $f)"; done
-  ```
-
-  If the two counts differ, that file has the bug. Do this **before** reading the log.
+  Use your `grep_search` tool with `IsRegex=true` and Query `\\(begin|end)\{[a-z*]+[>)\]]` to find malformed closers.
+  If you suspect unmatched `ainote` environments, use `grep_search` for `begin{ainote}` and `end{ainote}` and compare the counts for the file you edited. Do this **before** reading the log.
 * **`\textbf{...}` inside `$$...$$` errors** with *"Command \sffamily invalid in math mode"*.
   The sans-serif theorem fonts leak into math mode. Use `\text{\textbf{(1)}}` (mathtools is
   loaded) or `\mathbf`.
@@ -189,10 +185,12 @@ You are authorized to improve the prose and apply the established "House Style" 
   replacement, `\\qt` collapses to `qt`, and in the *pattern* `\d`, `\p`, `\l`, `\C` are read as
   regex classes, not literal `\dots`, `\pi`, `\leq`, `\Crefname`. This has silently corrupted
   nine `\qt{}` and one `\leq` into `qt{}` and `eq` — which **typeset without erroring**, so a
-  clean build does not prove the edit was safe. Prefer the `Edit` tool. If you must use perl,
-  verify afterwards with `grep -nE '(^|[^\\])qt\{'` and similar.
+  clean build does not prove the edit was safe. Prefer the `multi_replace_file_content` tool. If you must use perl,
+  verify afterwards using the `grep_search` tool with `IsRegex=true` and Query `(^|[^\\])qt\{` and similar.
 * **`main.pdf` is often locked** by an open viewer; `latexmk` then dies with
   *"I can't write on file"*. Build with `-jobname=check` to a throwaway name instead.
+* **`hyperref` warnings about `Token not allowed in a PDF string`**.
+  This happens when math commands (like superscripts `^`, subscripts `_`, or specific symbols) appear in chapter or section titles, which hyperref tries to use for PDF bookmarks. Fix this by wrapping the math in `\texorpdfstring{math}{text}`. For example, `\texorpdfstring{$\mathbb{R}^n$}{Rn}` instead of `\texorpdfstring{$\mathbb{R}^n$}{R^n}`. The second argument must be plain ASCII text without any math formatting.
 
 ## Verifying figures
 

@@ -1,0 +1,120 @@
+% Source: Sascha Brack/Class Notes/Week_12_Notes_Friday.pdf, pp. 2--5
+\chapter{Ordinary Differential Equations}
+\label{ch:odes}
+
+\begin{ainote}
+This appendix compiles the material on Ordinary Differential Equations (ODEs). During the semester, this topic was covered in supplementary sessions.
+\end{ainote}
+
+\section{Turning an \texorpdfstring{$n$}{n}-th order ODE into an \texorpdfstring{$n \times n$}{n x n} system}
+\label{sec:nth_order_to_system}
+
+Given an $n$-th order linear ODE, we can rewrite it as a first-order problem in higher dimensions.
+Consider the example equation:
+\[y(t) + y'(t) + 2y''(t) = f(t).\]
+We define $u_1 := y$, which gives:
+\[u_1 + u_1' + 2u_1'' = f.\]
+Letting $u_2 := u_1'$, we can rewrite the second derivative as $u_1'' = u_2'$. The system becomes:
+\begin{align*}
+    u_1 + u_2 + 2u_2' &= f \\
+    u_2 &= u_1'.
+\end{align*}
+Solving for the derivatives $u_1'$ and $u_2'$, we get:
+\begin{align*}
+    u_1' &= u_2 \\
+    u_2' &= -\frac{1}{2}u_1 - \frac{1}{2}u_2 + \frac{1}{2}f.
+\end{align*}
+In matrix notation, this is:
+\[\begin{pmatrix} u_1' \\ u_2' \end{pmatrix} = \begin{pmatrix} 0 & 1 \\ -1/2 & -1/2 \end{pmatrix} \begin{pmatrix} u_1 \\ u_2 \end{pmatrix} + \begin{pmatrix} 0 \\ f/2 \end{pmatrix},\]
+or more compactly,
+\[u'(t) = A u(t) + F(t).\]
+This reduction to a first-order system can be done with any $n$-th order ODE. We therefore focus on solving systems of the form $u'(t) = A u(t) + F(t)$.
+
+\section{Solving linear systems of ODEs}
+\label{sec:solving_linear_systems_odes}
+
+\subsection{Diagonalizable matrices}
+We first look at the homogeneous case where $F \equiv 0$, so $u'(t) = A u(t)$.
+Suppose the matrix $A$ is diagonalizable, meaning we can write $A = P D P^{-1}$ where $D$ is a diagonal matrix and $P$ is invertible:
+\[D = \begin{pmatrix} \lambda_1 & & 0 \\ & \ddots & \\ 0 & & \lambda_n \end{pmatrix}.\]
+Then we have:
+\begin{align*}
+    u'(t) &= A u(t) \\
+    \iff u'(t) &= P D P^{-1} u(t) \\
+    \iff P^{-1} u'(t) &= D P^{-1} u(t) \\
+    \iff (P^{-1} u(t))' &= D (P^{-1} u(t)).
+\end{align*}
+By defining a new variable $v(t) := P^{-1} u(t)$, the system uncouples:
+\[v'(t) = D v(t) \iff \begin{pmatrix} v_1'(t) \\ \vdots \\ v_n'(t) \end{pmatrix} = \begin{pmatrix} \lambda_1 & & 0 \\ & \ddots & \\ 0 & & \lambda_n \end{pmatrix} \begin{pmatrix} v_1(t) \\ \vdots \\ v_n(t) \end{pmatrix}.\]
+This yields $n$ independent $1$-dimensional equations $v_i'(t) = \lambda_i v_i(t)$, which have the solutions:
+\[v_i(t) = C_i e^{\lambda_i t} \quad \text{for } i \in \{1,\dots,n\}.\]
+The solution to the original system is then recovered by $u(t) = P v(t)$. By diagonalizing, we were able to uncouple the $n \times n$ system and solve the scalar equations without a problem.
+
+\subsection{Non-diagonalizable matrices}
+What if $A$ is not diagonalizable? Then we have to use the Jordan Normal Form: $A = P J P^{-1}$.
+Following the same substitution $v(t) = P^{-1}u(t)$, we obtain $v'(t) = J v(t)$.
+We now focus on each Jordan block in $J$. For a block with eigenvalue $\lambda_i$, the system looks like:
+\[\begin{pmatrix} v_j'(t) \\ \vdots \\ v_{j+d}'(t) \end{pmatrix} = \begin{pmatrix} \lambda_i & 1 & & \\ & \lambda_i & \ddots & \\ & & \ddots & 1 \\ & & & \lambda_i \end{pmatrix} \begin{pmatrix} v_j(t) \\ \vdots \\ v_{j+d}(t) \end{pmatrix}.\]
+This translates to the equations:
+\begin{align*}
+    v_j'(t) &= \lambda_i v_j(t) + v_{j+1}(t) \\
+    &\vdots \\
+    v_{j+d}'(t) &= \lambda_i v_{j+d}(t).
+\end{align*}
+We first solve for $v_{j+d}(t)$ from the last equation. Then we plug it into the preceding equation to find $v_{j+d-1}(t)$, and continue this process upwards.
+
+Since this back-substitution can be time-consuming, it is useful to use matrix exponentials. For a system $u'(t) = A u(t)$, the formal solution is:
+\[u(t) = e^{tA} u_0,\]
+where $u_0$ is given by the initial conditions. Evaluating the matrix exponential $e^{tA}$ provides a direct way to solve the system.
+
+\begin{example}[Solving a $2 \times 2$ system using matrix exponentials]
+\label{ex:ode_matrix_exponential}
+Consider the system given by
+\begin{align*}
+    u_1(t) + 2u_2(t) &= u_1'(t) \\
+    2u_1(t) + u_2(t) &= u_2'(t).
+\end{align*}
+This can be written as $u'(t) = A u(t)$ with $A = \begin{pmatrix} 1 & 2 \\ 2 & 1 \end{pmatrix}$.
+The eigenvalues of $A$ are found via $\det(A - \lambda I) = (1-\lambda)^2 - 4 = 0$, giving $\lambda_1 = 3$ and $\lambda_2 = -1$.
+The corresponding eigenvectors are $w_1 = (1, 1)\transp$ and $w_2 = (1, -1)\transp$.
+Since $A$ is diagonalizable, we have $A = P D P^{-1}$ with $P = \begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}$ and $D = \begin{pmatrix} 3 & 0 \\ 0 & -1 \end{pmatrix}$.
+The general solution is then given by:
+\[u(t) = \sum_{i=1}^2 C_i e^{\lambda_i t} w_i = C_1 e^{3t} \begin{pmatrix} 1 \\ 1 \end{pmatrix} + C_2 e^{-t} \begin{pmatrix} 1 \\ -1 \end{pmatrix}.\]
+
+Now consider a non-diagonalizable example where the system is already in Jordan normal form, $u'(t) = J u(t)$ with $J = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$.
+Using the matrix exponential, the solution is $u(t) = e^{tJ} u(0)$.
+We can split $J = D + N$ where $D = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$ is diagonal and $N = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}$ is nilpotent ($N^2 = 0$).
+Since $D$ and $N$ commute, $e^{tJ} = e^{tD} e^{tN}$.
+We calculate:
+\[e^{tD} = \begin{pmatrix} e^t & 0 \\ 0 & e^t \end{pmatrix}, \qquad e^{tN} = I + tN = \begin{pmatrix} 1 & t \\ 0 & 1 \end{pmatrix}.\]
+Multiplying these gives:
+\[e^{tJ} = \begin{pmatrix} e^t & t e^t \\ 0 & e^t \end{pmatrix}.\]
+Thus, the solution is $u_1(t) = e^t u_1(0) + t e^t u_2(0)$ and $u_2(t) = e^t u_2(0)$.
+\end{example}
+
+\section{Inhomogeneous linear ODEs}
+\label{sec:inhomogeneous_odes}
+
+Given the $n$-th order linear inhomogeneous ODE
+\[Ly(x) = b(x), \qquad \text{where } L = \sum_{k=0}^n a_k \frac{d^k}{dx^k},\]
+the general solution is always of the form
+\[y(x) = y_{\text{hom}}(x) + y_{\text{part}}(x).\]
+
+The homogeneous solution $y_{\text{hom}}(x)$ fulfills $Ly_{\text{hom}}(x) = 0$, or $\sum_{k=0}^n a_k y_{\text{hom}}^{(k)}(x) = 0$. This is solved using the general Ansatz $y_{\text{hom}}(x) = C e^{rx}$, which leads to the characteristic equation:
+\[\sum_{k=0}^n a_k C r^k e^{rx} = 0 \implies \sum_{k=0}^n a_k r^k = 0,\]
+yielding roots $r_1, \dots, r_n$ (assuming they are all distinct).
+
+The particular solution $y_{\text{part}}(x)$ solves $Ly_{\text{part}}(x) = b(x)$ and is found using a fitting Ansatz, often an educated guess based on the form of $b(x)$ (e.g., if $b(x)$ is a constant, consider a constant or polynomial Ansatz).
+
+\subsection{Duhamel's Principle}
+\label{sec:duhamels_principle}
+
+For a system of inhomogeneous linear ODEs $u'(t) = A u(t) + f(t)$, the solution can be constructed by combining the homogeneous solution and a particular solution obtained via Duhamel's principle:
+\[u(t) = \underbrace{e^{At} u(0)}_{\text{homogeneous solution}} + \underbrace{\int_0^t e^{(t-s)A} f(s) \,ds}_{\text{inhomogeneous part}}.\]
+This elegantly generalizes the $1$-dimensional case where the solution to $u'(t) = a u(t) + f(t)$ is given by $u(t) = e^{at} u(0) + \int_0^t e^{a(t-s)} f(s) \,ds$.
+
+\section{The Cauchy--Lipschitz / Picard--Lindelöf theorem}
+\label{sec:cauchy_lipschitz}
+
+The Cauchy--Lipschitz theorem (also known as the Picard--Lindelöf theorem) guarantees the existence and uniqueness of solutions to first-order initial value problems, provided the right-hand side is Lipschitz continuous with respect to the state variable.
+For an equation of the form $y'(x) = F(x, y(x))$, one first puts the differential equation in normal form to determine if the theorem applies, which requires checking the properties of $F$.

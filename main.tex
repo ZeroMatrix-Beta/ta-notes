@@ -826,8 +826,18 @@
 \hypersetup{linkcolor=LinkColor} % restore after the per-level TOC link colours
 \cleardoublepage
 
-% Include content
-\input{content/week-01.tex}
+% ==========================================
+% CONTENT
+% ==========================================
+% The document is organised by topic, not by teaching week. Each chapter lives in its own
+% directory under content/ as a thin 00-chapter.tex stub (\chapter + intro + \input lines)
+% plus one file per \section. Every moved file records its provenance in an
+% "% Originally:" comment at the top; the "% Source:" comments are unchanged.
+% Chapters still carrying a week-NN.tex name have not been migrated yet.
+
+\part{Foundations}
+\input{content/01-prerequisites/00-chapter.tex}
+
 \input{content/week-02.tex}
 \input{content/week-03.tex}
 \input{content/week-04.tex}

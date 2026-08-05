@@ -1,0 +1,85 @@
+% Originally: content/week-01.tex, \section{Young's inequality}
+% Authored for these notes around the statement of problem 1.4; no tutor's notes cover it.
+\section{Young's inequality}
+\label{sec:youngs_inequality}
+
+The following inequality is not part of the lecture's main line of development, but it is the
+cleanest route to comparing different norms on $\mathbb{R}^n$ (see \cref{sec:cauchy_schwarz}) and to
+the Hölder-type estimates that show up (e.g., when comparing $L^p$-type metrics). It is worth proving
+once and citing from then on.
+
+\begin{proposition}[Young's inequality]
+\label{prop:youngs_inequality}
+% Source: exercises/Ex1_Analysis2_eng.pdf, Problem 1.4
+Let $a, b > 0$ and let $p, q > 1$ satisfy $\tfrac{1}{p} + \tfrac{1}{q} = 1$. Then
+\[
+  ab \leq \frac{a^p}{p} + \frac{b^q}{q}.
+\]
+\end{proposition}
+
+\begin{remark}
+The case $p = q = 2$ recovers the familiar inequality $ab \leq \tfrac{a^2}{2} + \tfrac{b^2}{2}$,
+which is just a rewriting of $(a-b)^2 \geq 0$.
+\end{remark}
+
+\begin{proof}
+Fix $t > 0$ and define $g(t) := \tfrac{t}{p} + \tfrac{1}{q} - t^{1/p}$. We first show that
+$g(t) \geq 0$ for all $t > 0$, with equality only at $t = 1$. Differentiating,
+\[
+  g'(t) = \frac{1}{p}\left(1 - t^{-(p-1)/p}\right),
+\]
+which is negative for $t \in (0,1)$ and positive for $t > 1$, so $g$ has a global minimum at
+$t = 1$. Since $g(1) = \tfrac{1}{p} + \tfrac{1}{q} - 1 = 0$, this proves that
+\[
+  t^{1/p} \leq \frac{t}{p} + \frac{1}{q} \qquad \text{for all } t > 0.
+\]
+Now fix $a, b > 0$ and apply this with $t := a^p / b^q$. Multiplying both sides by $b^q$ gives
+\[
+  \left(\frac{a^p}{b^q}\right)^{1/p} b^q \leq \frac{a^p}{p} + \frac{b^q}{q},
+\]
+and since $\left(\tfrac{a^p}{b^q}\right)^{1/p} b^q = a\, b^{q - q/p} = a\,b^{q(1 - 1/p)} = a\,b$
+using $\tfrac{1}{q} = 1 - \tfrac{1}{p}$, this is exactly $ab \leq \tfrac{a^p}{p} + \tfrac{b^q}{q}$.
+\end{proof}
+
+% Generator: Claude Opus 5 (High)
+\begin{remark}[From Young to Hölder]
+\label{rem:young_to_hoelder}
+The exercise sheet also asks for the vector version
+\begin{equation}
+\label{eq:young_vector}
+  \langle a,b\rangle \leq \frac{\|a\|_p^p}{p} + \frac{\|b\|_q^q}{q}, \qquad a,b \in \mathbb{R}^n,
+\end{equation}
+where $\|x\|_p := \left(\sum_i |x_i|^p\right)^{1/p}$. This is \emph{not} yet Hölder's inequality:
+it is the scalar case applied coordinatewise and summed (see the solution of \cref{ex:1.4}
+below), and the right-hand side is a sum of $p$-th and $q$-th powers rather than the product
+$\|a\|_p\|b\|_q$. The step from one to the other is a normalisation, and it is worth seeing
+once, because the same trick recurs whenever an inequality is homogeneous.
+
+Assume $a,b \neq 0$ and apply \eqref{eq:young_vector} to the rescaled vectors
+$a/\|a\|_p$ and $b/\|b\|_q$, each of which has $p$- resp.\ $q$-norm equal to $1$:
+\[
+  \frac{\langle a,b\rangle}{\|a\|_p\,\|b\|_q} \ \leq\ \frac{1}{p} + \frac{1}{q} \ =\ 1,
+\]
+which is exactly \newterm{Hölder's inequality} (\germanterm{Höldersche Ungleichung})
+$\langle a,b\rangle \leq \|a\|_p\|b\|_q$. The conjugacy condition
+$\tfrac1p+\tfrac1q=1$, which so far looked like an arbitrary bookkeeping device, is what makes
+the two constants add up to exactly $1$ here.
+
+This is also a first hint of why $p$-norms other than $p=2$ are worth naming:
+\Cref{sec:cauchy_schwarz} only treats $p = q = 2$, where Hölder's inequality is
+Cauchy--Schwarz, but the same machinery bounds $\langle a, b\rangle$ for every conjugate pair
+$(p,q)$.
+\end{remark}
+
+% Source: exercises/Ex1_Analysis2_eng.pdf, p. 2
+\begin{exercise}[1.4 --- Young's inequality]
+\label{ex:1.4}
+Let $a,b > 0$, and let $p,q>1$ with $\tfrac{1}{p}+\tfrac{1}{q}=1$. Prove that
+$ab \leq \tfrac{a^p}{p} + \tfrac{b^q}{q}$.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Prove that for all $t>0$, $t^{1/p} \leq \tfrac{t}{p} + \tfrac{1}{q}$.
+  \item Multiply the inequality by $b^q$ and choose an appropriate value of $t$ to conclude.
+\end{enumerate}
+\textbf{A bonus:} show that $\langle a,b\rangle \leq \tfrac{\|a\|_p^p}{p} + \tfrac{\|b\|_q^q}{q}$
+for all $a,b \in \mathbb{R}^n$.
+\end{exercise}

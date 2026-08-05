@@ -1,0 +1,60 @@
+% Originally: content/week-01.tex, \section{Visualizing sets in R^2 and R^3}
+% Authored for these notes; no single source. The remark at the end of the section draws on
+% several tutors' opening-week slides (the live Desmos 3D / GeoGebra demonstrations).
+\section{Visualizing sets in \texorpdfstring{$\mathbb{R}^2$}{R2} and \texorpdfstring{$\mathbb{R}^3$}{R3}}
+\label{sec:visualizing_sets}
+
+Much of the geometric intuition for this course --- open sets, level sets, submanifolds --- rests
+on a skill that has nothing to do with any theorem: reading a set-builder description and
+producing an accurate picture, or going the other way. Two techniques are worth naming
+explicitly, both used repeatedly in the solutions below.
+
+\begin{itemize}
+  \item \textbf{Slicing.} To sketch a set $S \subseteq \mathbb{R}^3$ defined by an equation
+    involving $z$, fix $z = t$ and sketch the resulting planar slice $S \cap \{z = t\}$ as $t$
+    varies. Stacking the slices gives the full picture.
+  \item \textbf{Level sets.} If a set is defined by $f(x,y) = t$ for a fixed $t$, first work out
+    the level sets $\{f = t\}$ of $f$ for varying $t$; many natural functions (e.g.
+    $f(x,y) = \max\{|x|,|y|\}$, whose level sets are squares, or $f(x,y) = \sqrt{x^2+y^2}$, whose
+    level sets are circles) have level sets that are easy to name, which turns a 3D sketch into a
+    stack of named 2D shapes.
+\end{itemize}
+
+Both techniques are applied to \cref{ex:1.2,ex:1.3} below, and worked out in
+\cref{sec:prerequisites_solutions}.
+
+\begin{remark}
+Several tutors' slides (e.g.\ those using Desmos 3D or GeoGebra to plot these sets live) note that
+students commonly guess the wrong growth rate for sets like
+$\{(x,y,z) : z = \sqrt{1+x^2+y^2}\}$, sketching a cone instead of a hyperboloid-like bowl that
+steepens towards slope $1$; the slicing technique above makes the mistake visible immediately, since the slice
+at height $t$ only exists for $t \geq 1$ and has radius $\sqrt{t^2-1}$, not $t$.
+\end{remark}
+
+% Source: exercises/Ex1_Analysis2_eng.pdf, p. 1
+\begin{exercise}[1.2 --- From equations to drawings]
+\label{ex:1.2}
+Sketch the following subsets of $\mathbb{R}^2$, $\mathbb{R}^3$.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item $A := \{(x,y) : x^2+y^2 < 1,\ y \geq x^2\}$
+  \item $B := \{(x,y) : y^2 = x^3 - x\}$
+  \item $C := \{(x,y) : \tfrac{\pi}{6} < \arctan(y/x) < \tfrac{\pi}{3},\ 0 < x < y\}$
+  \item $D := \{(x,y,z) : \sqrt{x^2+y^2} = 1-z,\ 0 < z < 1\}$
+  \item $E := \{(x,y,z) : z = \sqrt{1+x^2+y^2}\}$
+  \item $F := \{(x,y,z) : z = \max\{|x|,|y|\}\}$
+\end{enumerate}
+\end{exercise}
+
+% Source: exercises/Ex1_Analysis2_eng.pdf, p. 1
+\begin{exercise}[1.3 --- From drawings to equations]
+\label{ex:1.3}
+Express in terms of functions and equations the following sets.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item The coordinates of a point in the plane that goes endlessly back and forth from the
+    origin to the point $(-1,1)$.
+  \item A planar domain with two holes in it.
+  \item A bi-dimensional disk sitting inside the plane $\{x+y+z=0\}$ in $\mathbb{R}^3$.
+  \item A Pac-Man shaped domain in the plane.
+  \item A pyramid, whose base is a square, sitting in $\mathbb{R}^3$.
+\end{enumerate}
+\end{exercise}

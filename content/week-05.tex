@@ -23,7 +23,8 @@ continuously from optimization through Lagrange multipliers to the Hessian test.
     $f : U \subseteq \mathbb{R}^n \to \mathbb{R}$: $f$ has a local minimum at $x_0 \in U$ if
     \[\exists\,\varepsilon > 0 \text{ such that } \forall x \in B_\varepsilon(x_0)\cap U : f(x) \geq f(x_0).\]
   \item \textbf{Local maxima} are defined analogously with $f(x) \leq f(x_0)$.
-  \item \textbf{Strict} min/max $\iff f(x) > f(x_0)$ / $f(x) < f(x_0)$.
+  \item The extremum is \textbf{strict} if the inequality is strict for $x \neq x_0$:
+    $f(x) > f(x_0)$ for a strict minimum, $f(x) < f(x_0)$ for a strict maximum.
   \item A \newterm{critical point} (\germanterm{kritischer Punkt}) of $f \in C^1(U,\mathbb{R})$,
     $U \subseteq \mathbb{R}^n$ open, is a point $x_0 \in U$ where $\nabla f(x_0) = 0$.
 \end{itemize}
@@ -396,7 +397,72 @@ The \textbf{Hessian} (\cref{rem:second_order_taylor_hessian}) of $f \in C^2(U,\m
 $U \subseteq \mathbb{R}^n$, is given by
 \[\Hess f(x) = (\partial_i\partial_j f)_{i,j=1,\dots,n}\]
 with respect to the standard basis of $\mathbb{R}^n$. By \newterm{Schwarz's lemma}
-(\germanterm{Satz von Schwarz}), $\Hess f(x)$ is symmetric.
+(\germanterm{Satz von Schwarz}), stated as \cref{thm:schwarz_mixed_partials} in Week 4,
+$\Hess f(x)$ is symmetric.
+
+% Supplement: Lukas Krause/Week 5 March 16-20 Notes Lukas Krause.pdf, pp. 2--3
+\begin{ainote}
+Symmetry of the Hessian is the hypothesis every statement in this section rests on --- the
+spectral theorem in \cref{rem:diagonalizing_hessian}, the eigenvalue criteria, the Hurwitz
+minors --- and neither Corsin nor the Week 4 statement proves it. Lukas Krause's notes give a
+complete proof, and unusually he leaves his \emph{failed} first attempt in place, with the
+comment that it is instructive to see why the obvious calculation does not work. Both are
+reproduced below, because the failure is genuinely the more informative half.
+\end{ainote}
+
+\begin{proof}[Proof of \cref{thm:schwarz_mixed_partials}]
+It suffices to treat $m=1$ (apply the result to each component), $i<j$ (there is nothing to
+prove when $i=j$), and $n=2$ with $i=1$, $j=2$ (freeze all the other variables). So let
+$f \in C^2$ near $(x,y)$ and write $\partial_1,\partial_2$ for the two partial derivatives.
+
+\textit{The attempt that fails.} Unwinding both mixed derivatives as iterated limits gives
+\[\partial_2\partial_1f(x,y)
+  = \lim_{h_2\to0}\lim_{h_1\to0}
+    \frac{f(x+h_1,y+h_2) - f(x+h_1,y) - f(x,y+h_2) + f(x,y)}{h_1h_2},\]
+and one would like to apply the mean value theorem in each variable and be done. The obstruction
+is that the two intermediate points the mean value theorem returns depend on $h_1$ and $h_2$
+\emph{separately} and need not agree, so forcing them together leaves a stray factor
+$h_2/h_1$, which blows up when $h_1 \to 0$ at fixed $h_2$. The symmetric-looking expression
+above is not enough on its own; one has to keep the two increments coupled.
+
+\textit{The proof.} Couple them by fixing a single $h \neq 0$ and setting
+\[F(h) := f(x+h,y+h) - f(x+h,y) - \big(f(x,y+h) - f(x,y)\big),\]
+which is the second difference of $f$ over a square of side $h$, and
+$\varphi(t) := f(x+th, y+h) - f(x+th, y)$, so that $F(h) = \varphi(1)-\varphi(0)$. The mean
+value theorem gives $\xi_1 \in (0,1)$ with
+\[F(h) = \varphi'(\xi_1) = h\,\partial_1f(x+\xi_1h,\ y+h) - h\,\partial_1f(x+\xi_1h,\ y).\]
+Now apply the mean value theorem a second time, to $\psi(t) := \partial_1f(x+\xi_1h,\ y+th)$ ---
+legitimate precisely because $f \in C^2$, so $\partial_1 f$ is itself continuously
+differentiable in the second variable. Since $F(h) = h\big(\psi(1)-\psi(0)\big)$, there is
+$\xi_2 \in (0,1)$ with
+\[F(h) = h\,\psi'(\xi_2) = h^2\,\partial_2\partial_1f(x+\xi_1h,\ y+\xi_2h).\]
+Grouping the four terms of $F(h)$ the other way --- first and third together, second and fourth
+together --- runs the identical argument with the roles of the variables exchanged and produces
+$\tilde\xi_1,\tilde\xi_2 \in (0,1)$ with
+$F(h) = h^2\,\partial_1\partial_2f(x+\tilde\xi_1h,\ y+\tilde\xi_2h)$. Dividing both expressions
+by $h^2 \neq 0$,
+\[\partial_2\partial_1f(x+\xi_1h,\ y+\xi_2h)
+  \ =\ \partial_1\partial_2f(x+\tilde\xi_1h,\ y+\tilde\xi_2h).\]
+All four numbers $\xi_1,\xi_2,\tilde\xi_1,\tilde\xi_2$ lie in $(0,1)$ --- bounded, though they
+depend on $h$ --- so both arguments converge to $(x,y)$ as $h \to 0$. Continuity of the mixed
+second partials (again $f \in C^2$) lets us pass to the limit on both sides, giving
+$\partial_2\partial_1f(x,y) = \partial_1\partial_2f(x,y)$.
+\end{proof}
+
+\begin{remark}[What the failed attempt shows]
+\label{rem:why_schwarz_needs_care}
+The two attempts differ in exactly one respect: the failed one lets $h_1$ and $h_2$ go to zero
+\emph{independently}, the successful one ties them together as a single $h$ and only takes a
+limit at the very end. That is why the second difference $F(h)$ over a \emph{square} is the
+right object --- it is symmetric in the two variables by construction, so the two groupings of
+its four terms compute the two mixed partials, and the symmetry of the answer is inherited from
+the symmetry of the square rather than proved by force.
+
+It also locates precisely where continuity is used: twice, once to apply the mean value theorem
+to $\partial_1f$ and once to pass to the limit at the end. Drop it and the conclusion genuinely
+fails --- see \cref{rem:schwarz_needs_c2} in Week 4 for the standard counterexample, which is
+also the function Lukas sets as an exercise alongside this proof.
+\end{remark}
 
 \begin{definition}[Sign of a symmetric matrix]
 \label{def:sign_symmetric_matrix}
@@ -423,6 +489,18 @@ and the third bullet of \cref{thm:hessian_test} vacuous. The intended notion is 
 kernel ($\det A = 0$), which is also what \cref{ex:6.2} in Week 6 states. Corrected above.
 
 \end{ainote}
+
+% Supplement: Sascha Brack/Class Notes/Week_05_Notes_Friday.pdf, pp. 3--4
+\begin{remark}[Linear algebra interlude: diagonalizing the Hessian]
+\label{rem:diagonalizing_hessian}
+Since the Hessian $\Hess f(x_0)$ is a symmetric matrix, it is diagonalizable over $\mathbb{R}$ by the spectral theorem. There exist $n$ real eigenvalues $\lambda_1, \dots, \lambda_n \in \mathbb{R}$ and a corresponding orthonormal basis of eigenvectors $v_1, \dots, v_n \in \mathbb{R}^n$ such that $\Hess f(x_0) v_i = \lambda_i v_i$ for all $i$.
+
+Every vector $x \in \mathbb{R}^n$ can be written in this basis as $x = \sum_{i=1}^n a_i v_i$ with $a_i \in \mathbb{R}$. Applying the Hessian yields:
+\[
+  \Hess f(x_0) x = \Hess f(x_0) \sum_{i=1}^n a_i v_i = \sum_{i=1}^n a_i \Hess f(x_0) v_i = \sum_{i=1}^n \lambda_i a_i v_i.
+\]
+In this eigenbasis, the Hessian matrix becomes diagonal. Consequently, the quadratic form evaluates to $x\transp \Hess f(x_0) x = \sum_{i=1}^n \lambda_i a_i^2$, which immediately links the definiteness of the Hessian to the signs of its eigenvalues.
+\end{remark}
 
 \begin{theorem}[The Hessian test]
 \label{thm:hessian_test}
@@ -467,6 +545,70 @@ indefinite and $(0,0)$ is a saddle point by \cref{thm:hessian_test} --- the mode
 \begin{remark}[Mnemonic]
 positive $= \smile \dots$ min; negative $= \frown \dots$ max; indefinite $=$ saddle.
 \end{remark}
+
+\begin{center}
+% Generator: Claude Opus 5 (High) --- FIG-W05-01: the three conclusive cases of
+% \cref{thm:hessian_test}, drawn as the model quadratic each one is.
+% Left:  x^2 + y^2, Hess = diag(2,2), both eigenvalues > 0 -- a bowl.
+% Mid:  -x^2 - y^2, Hess = diag(-2,-2), both < 0 -- a dome.
+% Right: x^2 - y^2, Hess = diag(2,-2), opposite signs -- a saddle (\cref{ex:ai_saddle_via_hessian}).
+% In each panel the two coloured curves are the profiles along the two eigendirections; the
+% signs of the eigenvalues are exactly the up/down curvature of those two profiles.
+\begin{tikzpicture}[>=Latex, scale=1.0]
+
+  % ---------- positive definite: bowl ----------
+  \begin{scope}
+    \draw[gray!55] (-1.5,0) -- (1.5,0);
+    \draw[green!50!black, very thick, domain=-1.25:1.25, samples=60, smooth]
+      plot (\x, {0.62*\x*\x});
+    \draw[orange!90!black, very thick, domain=-1.25:1.25, samples=60, smooth]
+      plot (\x, {0.30*\x*\x});
+    \fill (0,0) circle (1.5pt);
+    \node[font=\scriptsize, anchor=south west] at (0.06,0.02) {$x_0$};
+    % Caption baseline shared with the other two panels so the row reads straight.
+    \node[font=\small, align=center, anchor=north] at (0,-1.15)
+      {\textbf{positive definite}\\ $\lambda_1,\lambda_2>0$\\ local \textbf{min}};
+  \end{scope}
+
+  % ---------- negative definite: dome ----------
+  \begin{scope}[shift={(4.2,0)}]
+    \draw[gray!55] (-1.5,0) -- (1.5,0);
+    \draw[green!50!black, very thick, domain=-1.25:1.25, samples=60, smooth]
+      plot (\x, {-0.62*\x*\x});
+    \draw[orange!90!black, very thick, domain=-1.25:1.25, samples=60, smooth]
+      plot (\x, {-0.30*\x*\x});
+    \fill (0,0) circle (1.5pt);
+    \node[font=\scriptsize, anchor=south west] at (0.06,0.06) {$x_0$};
+    \node[font=\small, align=center, anchor=north] at (0,-1.15)
+      {\textbf{negative definite}\\ $\lambda_1,\lambda_2<0$\\ local \textbf{max}};
+  \end{scope}
+
+  % ---------- indefinite: saddle ----------
+  \begin{scope}[shift={(8.4,0)}]
+    \draw[gray!55] (-1.5,0) -- (1.5,0);
+    \draw[green!50!black, very thick, domain=-1.25:1.25, samples=60, smooth]
+      plot (\x, {0.62*\x*\x});
+    \draw[orange!90!black, very thick, domain=-1.25:1.25, samples=60, smooth]
+      plot (\x, {-0.62*\x*\x});
+    \fill (0,0) circle (1.5pt);
+    \node[font=\scriptsize, anchor=south west] at (0.08,0.04) {$x_0$};
+    \node[green!50!black, font=\scriptsize, anchor=west] at (1.28,0.90) {up};
+    \node[orange!90!black, font=\scriptsize, anchor=west] at (1.28,-0.90) {down};
+    \node[font=\small, align=center, anchor=north] at (0,-1.15)
+      {\textbf{indefinite}\\ opposite signs\\ \textbf{saddle}};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+% Generator: Claude Opus 5 (High)
+The picture is the whole theorem. By \cref{rem:diagonalizing_hessian} the second-order Taylor
+term is $\tfrac12\sum_i\lambda_ia_i^2$ in the eigenbasis, so along the $i$-th eigendirection $f$
+behaves like the parabola $\tfrac12\lambda_it^2$: it curves \emph{up} when $\lambda_i>0$ and
+\emph{down} when $\lambda_i<0$. All up gives a minimum, all down a maximum, and one of each
+gives a saddle --- there is a direction of ascent and a direction of descent through the same
+point, so it is neither. And when some $\lambda_i = 0$ that direction is \emph{flat} to second
+order, the quadratic term says nothing about it, and the test must fall silent --- which is
+exactly the degenerate case, illustrated by $x^4+y^4$ against $x^4-y^4$ above.
 
 \begin{ainote}
 The regularity in \cref{thm:hessian_test} is stated by Corsin as $C^3$; the test needs only

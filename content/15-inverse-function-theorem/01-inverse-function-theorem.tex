@@ -14,6 +14,61 @@ is a $C^k$-\newterm{diffeomorphism} (\germanterm{Diffeomorphismus}) and
 \[D\big(f|_{U_0}^{-1}\big)_{f(x)} = D\big(f|_{U_0}\big)_x^{-1} \quad \text{for all } x \in U_0.\]
 \end{theorem}
 
+% Source: Lukas Krause/Week 7 March 30-April 3 Notes Lukas Krause.pdf, pp. 1--2
+% Generator: Gemini 3.6 Flash (High)
+\begin{ainote}[Visual intuition for the inverse function theorem]
+\label{note:inverse_function_theorem_intuition}
+Lukas Krause provides a helpful geometric perspective on why invertibility of the differential $Df_{x_0}$ is the precise condition needed for $f^{-1}$ to be smooth.
+
+In one variable, consider $f : \mathbb{R} \to \mathbb{R}$, $x \mapsto x^3$. The inverse $f^{-1}(y) = y^{1/3}$ exists everywhere, yet it fails to be differentiable at $y = 0$. Geometrically, the graph of $f^{-1}$ is obtained by reflecting the graph of $f$ across the line $y = x$. The horizontal tangent line of $f$ at $x = 0$ (where $f'(0) = 0$) flips into a vertical tangent line for $f^{-1}$ at $y = 0$, causing the derivative of the inverse to blow up.
+
+In multivariable calculus, for a map $F : U \subseteq \mathbb{R}^n \to \mathbb{R}^n$, the tangent space to the graph of $F$ at $(x_0, F(x_0))$ is the affine subspace
+\[
+\big\{(x_0 + v, \; F(x_0) + DF_{x_0}(v)) \mid v \in \mathbb{R}^n\big\} \subseteq \mathbb{R}^n \times \mathbb{R}^n.
+\]
+A \qt{horizontal} direction (a non-zero input displacement producing zero output change) corresponds to a non-zero vector $v \in \mathbb{R}^n$ such that $DF_{x_0}(v) = 0$. To eliminate vertical tangents after inversion, we must require $DF_{x_0}$ to be injective. Since $F$ maps between spaces of the same dimension $n$, injectivity of $DF_{x_0}$ is equivalent to its invertibility.
+\end{ainote}
+
+% Source: Lukas Krause/Week 7 March 30-April 3 Notes Lukas Krause.pdf, pp. 1--2
+% Generator: Gemini 3.6 Flash (High)
+\begin{lemma}[Lipschitz perturbations of the identity]
+\label{lem:lipschitz_perturbation_identity}
+Let $U \subseteq \mathbb{R}^n$ be open, and let $F : U \to \mathbb{R}^n$ be a map of the form
+\[
+F(x) := x + \phi(x),
+\]
+where $\phi : U \to \mathbb{R}^n$ is a $\lambda$-Lipschitz function with constant $\lambda \in (0,1)$. Then:
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item For every open ball $B_r(x) \subseteq U$, the image $F(B_r(x))$ satisfies the inclusions
+    \[
+    B_{(1-\lambda)r}(F(x)) \;\subseteq\; F(B_r(x)) \;\subseteq\; B_{(1+\lambda)r}(F(x)).
+    \]
+    In particular, $F(U) \subseteq \mathbb{R}^n$ is an open set.
+  \item $F : U \to F(U)$ is injective, and its inverse $F^{-1} : F(U) \to U$ is $\frac{1}{1-\lambda}$-Lipschitz continuous.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Fix $y_0 \in B_{(1-\lambda)r}(F(x))$. We seek a point $x_0 \in B_r(x)$ satisfying $F(x_0) = y_0$, which is equivalent to the fixed-point equation $x_0 = y_0 - \phi(x_0)$.
+  Define $g : \overline{B_r(x)} \to \mathbb{R}^n$ by $g(z) := y_0 - \phi(z)$. For any $z_1, z_2 \in \overline{B_r(x)}$,
+  \[
+  \|g(z_1) - g(z_2)\| = \|\phi(z_1) - \phi(z_2)\| \leq \lambda \|z_1 - z_2\|,
+  \]
+  so $g$ is a $\lambda$-contraction. Next, we verify that $g$ maps $\overline{B_r(x)}$ into itself:
+  \[
+  \|g(z) - x\| \leq \|g(z) - g(x)\| + \|g(x) - x\| \leq \lambda \|z - x\| + \|y_0 - F(x)\| < \lambda r + (1-\lambda)r = r.
+  \]
+  Thus $g(\overline{B_r(x)}) \subseteq B_r(x) \subseteq \overline{B_r(x)}$. Since $\overline{B_r(x)}$ is complete, the Banach fixed-point theorem (\cref{thm:banach_fixed_point}) yields a unique point $x_0 \in B_r(x)$ with $g(x_0) = x_0$, i.e.\ $F(x_0) = y_0$. This proves $B_{(1-\lambda)r}(F(x)) \subseteq F(B_r(x))$. The outer inclusion follows directly from $\|F(y) - F(x)\| \leq \|y - x\| + \|\phi(y) - \phi(x)\| < (1+\lambda)r$.
+
+  \item For any $x_1, x_2 \in U$, applying the reverse triangle inequality gives
+  \[
+  \|F(x_1) - F(x_2)\| = \|(x_1 - x_2) + (\phi(x_1) - \phi(x_2))\| \geq \|x_1 - x_2\| - \|\phi(x_1) - \phi(x_2)\| \geq (1-\lambda)\|x_1 - x_2\|.
+  \]
+  Hence $F(x_1) = F(x_2) \implies x_1 = x_2$, so $F$ is injective. Setting $y_1 := F(x_1)$ and $y_2 := F(x_2)$, this bound rewrites as $\|F^{-1}(y_1) - F^{-1}(y_2)\| \leq \frac{1}{1-\lambda} \|y_1 - y_2\|$, establishing that $F^{-1}$ is $\frac{1}{1-\lambda}$-Lipschitz continuous.
+\end{enumerate}
+\end{proof}
+
 % Supplement: Sascha Brack/Class Notes/Week_06_Notes_Friday.pdf, p. 2
 \begin{remark}[Checking for a global diffeomorphism]
 \label{rem:global_diffeomorphism_check}

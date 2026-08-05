@@ -39,6 +39,39 @@ motivating reparametrization-invariance calculation precise: $\int_L \omega$ doe
 not depend on the parametrization $\phi$ chosen, only on $L$ and its orientation.
 \end{ainote}
 
+% Source: Lukas Krause/Week 12 May 4-May 8 Notes Lukas Krause.pdf, p. 1
+% Generator: Gemini 3.6 Flash (High)
+\begin{ainote}[Integrating over non-graphical submanifolds via partitions of unity]
+\label{note:partitions_of_unity_motivation}
+Lukas Krause notes that when a submanifold $\mathcal{M} \subseteq \mathbb{R}^n$ cannot be covered by a single local parametrization chart (for instance, a sphere $S^2$ or a compact manifold with boundary), one cannot directly evaluate $\int_{\mathcal{M}} \omega$ using a single coordinate domain $U$. 
+
+The solution is to decompose any continuous function $f$ on $\mathcal{M}$ into a sum of functions $f = \sum_{l=1}^N \eta_l f$, each supported inside a single coordinate chart domain $U_l$. Integrating each term $\eta_l f$ separately and summing the results yields the total integral over $\mathcal{M}$. The key technical tool for this decomposition is a \newterm{smooth partition of unity} (\germanterm{glatte Zerlegung der Eins}).
+\end{ainote}
+
+% Source: Lukas Krause/Week 12 May 4-May 8 Notes Lukas Krause.pdf, p. 1
+% Generator: Gemini 3.6 Flash (High)
+\begin{definition}[Standard smooth bump function]
+\label{def:smooth_bump_function}
+The canonical $C^\infty$ \newterm{bump function} (\germanterm{H\"ockerfunktion}) $\psi : \mathbb{R}^n \to \mathbb{R}$ supported on the unit ball $B_1(0)$ is defined by
+\[
+\psi(x) := \begin{cases} \exp\!\left(-\dfrac{1}{1 - \|x\|^2}\right) & \text{if } \|x\| < 1, \\[1.5ex] 0 & \text{if } \|x\| \geq 1. \end{cases}
+\]
+Since all higher derivatives of $t \mapsto \exp(-1/(1-t))$ approach $0$ faster than any polynomial as $t \to 1^-$, $\psi \in C^\infty(\mathbb{R}^n)$ with $\operatorname{supp}(\psi) = \overline{B_1(0)}$.
+\end{definition}
+
+% Source: Lukas Krause/Week 12 May 4-May 8 Notes Lukas Krause.pdf, p. 1
+% Generator: Gemini 3.6 Flash (High)
+\begin{proposition}[Existence of a smooth partition of unity subordinate to a finite cover]
+\label{prop:partition_of_unity_finite}
+Let $K \subseteq \mathbb{R}^n$ be compact, and let $\{B_{r_l}(p_l)\}_{l=1}^N$ be a finite open cover of $K$. Then there exist an open set $U \supset K$ and $N+1$ non-negative smooth functions $\eta_1, \dots, \eta_N, \tilde{\eta} \in C^\infty(\mathbb{R}^n, [0,1])$ such that:
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $\tilde{\eta}(x) + \sum_{l=1}^N \eta_l(x) = 1$ for all $x \in \mathbb{R}^n$;
+  \item $\operatorname{supp}(\eta_l) \subseteq B_{r_l}(p_l)$ for each $l \in \{1, \dots, N\}$;
+  \item $\operatorname{supp}(\tilde{\eta}) \subseteq \mathbb{R}^n \setminus U$.
+\end{enumerate}
+In particular, on the neighborhood $U$ of $K$, $\tilde{\eta} \equiv 0$ so that $\sum_{l=1}^N \eta_l(x) = 1$.
+\end{proposition}
+
 
 % --- exercises relocated here from the dissolved sheets ---
 

@@ -34,6 +34,25 @@ use the completeness of $\mathbb{R}$ and the finiteness of the dimension.
 \Cref{ex:heine_borel_fails} below shows how thoroughly it fails otherwise.
 \end{ainote}
 
+% Source: Lukas Krause/Week 3 March 2-6 Notes Lukas Krause.pdf, p. 2
+% Generator: Gemini 3.6 Flash (High)
+\begin{proposition}[Topologically compact subsets of $\mathbb{R}^n$ are bounded]
+\label{prop:topologically_compact_is_bounded}
+If a subset $S \subseteq \mathbb{R}^n$ is topologically compact, then $S$ is bounded.
+\end{proposition}
+
+\begin{proof}
+Consider the collection of open balls $\mathcal{U} := \{B_k(0) \mid k \in \mathbb{N}_{\ge 1}\}$ centered at the origin. Since every point $x \in \mathbb{R}^n$ has $\|x\| < k$ for some large integer $k$, $\mathcal{U}$ forms an open cover of $\mathbb{R}^n$, and hence an open cover of $S$:
+\[
+S \;\subseteq\; \mathbb{R}^n \;=\; \bigcup_{k=1}^\infty B_k(0).
+\]
+By topological compactness of $S$, there exists a finite subcover $\{B_{k_1}(0), B_{k_2}(0), \dots, B_{k_m}(0)\}$. Setting $K := \max\{k_1, k_2, \dots, k_m\}$, we obtain
+\[
+S \;\subseteq\; \bigcup_{j=1}^m B_{k_j}(0) \;=\; B_K(0).
+\]
+Therefore, $S$ is contained in the ball of radius $K$ centered at the origin, which means $S$ is bounded.
+\end{proof}
+
 % Supplement: Sascha Brack/Class Notes/Week_02_Notes_Friday_Updated.pdf, p. 7
 \begin{example}[Compactness via Heine-Borel and continuity]
 \label{ex:compactness_heine_borel_examples}

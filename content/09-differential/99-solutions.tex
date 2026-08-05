@@ -1,0 +1,20 @@
+% Originally: content/week-04.tex, \section{Solutions}
+
+\section{Solutions}
+\label{sec:differential_solutions}
+
+\begin{exercisesolution}[Solution to \cref{ex:4.1}]
+% Generator: Claude Sonnet 5 (Medium)
+Write $u(x,y) = x^{\sin(y)} = e^{\sin(y)\ln x}$ for $x > 0$. Differentiating with the chain rule:
+\[
+\partial_x u = \sin(y)\,x^{\sin(y)-1}, \qquad \partial_y u = \cos(y)\ln(x)\,x^{\sin(y)} = \cos(y)\ln(x)\,e^{\sin(y)\ln x}.
+\]
+\end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:ai_differential_linearization}]
+% Generator: Gemini 3.6 Flash (Medium)
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Partial derivatives are $\frac{\partial f}{\partial x} = 2xy + y\cos(xy)$ and $\frac{\partial f}{\partial y} = x^2 + x\cos(xy)$. Evaluating at $(1,0)$ yields $\frac{\partial f}{\partial x}(1,0) = 0$ and $\frac{\partial f}{\partial y}(1,0) = 1 + 1 = 2$. Thus $\nabla f(1,0) = (0, 2)\transp$, and the total differential $Df(1,0) \colon \mathbb{R}^2 \to \mathbb{R}$ is $Df(1,0)(h_1, h_2) = 2h_2$.
+  \item Since $f(1,0) = 0$, the linearization at $(1,0)$ is $L(x,y) = f(1,0) + Df(1,0)(x-1, y-0) = 0 + 0(x-1) + 2y = 2y$.
+\end{enumerate}
+\end{exercisesolution}

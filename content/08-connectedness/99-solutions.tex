@@ -32,3 +32,15 @@ the two to \emph{use}.
 % Official sheet 3 (3.1--3.11). Derived independently, then checked against
 % exercises/Sol3_Analysis2_eng.pdf.
 % ===========================================================================
+
+\begin{exercisesolution}[Proof of \cref{ex:4.2}]
+% Generator: Claude Sonnet 5 (Medium)
+Consider the map
+\[
+\varphi : U \to \mathbb{R}^n \times \mathbb{R}^m, \qquad x \mapsto (x, f(x)).
+\]
+Since $f \in C^1(U,\mathbb{R}^m)$ is in particular continuous, and the identity on $U$ is
+continuous, $\varphi$ is continuous. By definition $\Gamma_f = \varphi(U)$. Since $U$ is connected
+and $\varphi$ is continuous, \cref{thm:continuity_preserves_connected} gives that $\varphi(U) =
+\Gamma_f$ is connected.
+\end{exercisesolution}

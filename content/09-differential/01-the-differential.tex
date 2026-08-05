@@ -1,0 +1,93 @@
+% Originally: content/week-04.tex, \section{The differential} (Corsin Week 4, Monday)
+
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 2
+\section{The differential}
+\label{sec:the_differential}
+
+For $f : \mathbb{R}\to\mathbb{R}$ differentiable at $x_0 \in \mathbb{R}$:
+\[f(x_0+h) = f(x_0) + f'(x_0)h + o(h)\]
+\[\Updownarrow\]
+\[\lim_{h\to 0}\frac{f(x_0+h)-f(x_0)}{h} = f'(x_0)\]
+\[\Updownarrow\]
+\[\lim_{h\to 0}\left|\frac{f(x_0+h)-f(x_0)-f'(x_0)h}{h}\right| = 0\]
+
+For $F : \mathbb{R}^n \to \mathbb{R}^m$ differentiable at $x_0 \in \mathbb{R}^n$:
+\[F(x_0+h) = F(x_0) + \underbrace{DF_{x_0}(h)}_{\text{linear map}} + o(|h|)\]
+\[\Updownarrow\]
+\[\lim_{h\to 0}\frac{|F(x_0+h)-F(x_0)-DF_{x_0}(h)|}{|h|} = 0\]
+\[\Downarrow\]
+\[\lim_{s\to 0}\frac{F(x_0+sv)-F(x_0)}{s} = DF_{x_0}(v) = \partial_vF(x_0) \quad \text{for each fixed } v \in \mathbb{R}^n\]
+\[\text{(the \newterm{directional derivative} of } F \text{ at } x_0 \text{ in direction } v\text{)}\]
+
+Note that the last arrow points \textbf{one way only}. The first two lines say the same thing;
+the third is a strictly weaker consequence, and recovering differentiability from it is exactly
+what fails in several variables --- see \cref{ex:partial_derivatives_not_continuous} below.
+
+% Transition: Claude Opus 5 (High)
+It is worth pausing on why the definition had to be restated rather than merely copied. The
+one-variable derivative is defined as a \emph{quotient}, and that is precisely what does not
+survive: for $h \in \mathbb{R}^n$ with $n \geq 2$ the expression
+$\big(F(x_0+h)-F(x_0)\big)/h$ is meaningless, because one cannot divide by a vector. The first
+line above is the version that does survive, and it is the one to remember: \textbf{$F$ is
+differentiable at $x_0$ if it is approximated near $x_0$ by an affine map, to an error smaller
+than $|h|$.} Everything in this chapter --- the Jacobian, the chain rule, Taylor expansions ---
+is bookkeeping for that single idea, and the reason the derivative becomes a \emph{linear map}
+rather than a number is simply that a linear map is what an approximation in $n$ variables looks
+like.
+
+\begin{ainote}
+Corsin's middle line reads
+$\lim_{h\to0}\frac{F(x_0+h)-F(x_0)}{|h|} = DF_{x_0}\!\left(\frac{h}{|h|}\right)$, inside a chain
+of $\Updownarrow$. As written that limit does not exist: $h$ is being sent to $0$ on the left
+while still appearing on the right, and the quotient genuinely depends on the direction of
+approach. The intended statement is the one typeset above --- fix a direction $v$ first, then
+let the scalar $s \to 0$ --- and it is only an \emph{implication}, not an equivalence. The
+distinction is not pedantic: it is the entire content of
+\Cref{ex:partial_derivatives_not_continuous} and of
+\Cref{rem:directional_derivative_caveat}.
+\end{ainote}
+
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 2
+% (Re-cited: the paragraph and AI-Note above are additions, not transcription.)
+\begin{definition}[Differentiability]
+\label{def:differentiable}
+We say that $F : \mathbb{R}^n \to \mathbb{R}^m$ is \newterm{differentiable}
+(\germanterm{differenzierbar}) at $x_0$ if a linear map $DF_{x_0}$ as above exists, where
+$x_0, h \in \mathbb{R}^n$. The same definition applies verbatim to $F : U \to \mathbb{R}^m$
+for any open subset $U \subseteq \mathbb{R}^n$, and we use it in that generality throughout.
+\end{definition}
+
+% Sonnet 5 (Medium)
+\begin{remark}
+The linear map $DF_{x_0}$ in \cref{def:differentiable}, when it exists, is automatically unique:
+if $L_1, L_2$ both satisfy the defining limit, then
+$(L_1-L_2)(h)/|h| \to 0$ as $h \to 0$ along every direction, which forces the linear map
+$L_1 - L_2$ to vanish identically. Concretely: write $L := L_1-L_2$ and suppose $L(h) \neq 0$
+for some $h$. Along the ray $th$, $t > 0$, linearity gives
+\[\frac{|L(th)|}{|th|} = \frac{t\,|L(h)|}{t\,|h|} = \frac{|L(h)|}{|h|} \neq 0,\]
+a nonzero \emph{constant} --- so the quotient cannot tend to $0$ as $t \to 0$. Hence $L(h)=0$
+for every $h$. This
+is the multivariable analogue of the uniqueness-of-limits argument from
+\Cref{prop:uniqueness_of_limits}.
+\end{remark}
+
+\begin{proposition}[Differentiability implies continuity]
+\label{prop:differentiable_implies_continuous}
+If $F : U \to \mathbb{R}^m$, $U \subseteq \mathbb{R}^n$ open, is differentiable
+(\cref{def:differentiable}) at $x_0 \in U$, then $F$ is continuous at $x_0$.
+\end{proposition}
+
+\begin{proof}
+By \cref{def:differentiable}, $F(x_0+h) - F(x_0) = DF_{x_0}(h) + o(|h|)$ as $h \to 0$. Since
+$DF_{x_0}$ is linear on the finite-di\-men\-sional space $\mathbb{R}^n$, it is bounded, i.e.\ there
+exists $C \geq 0$ with $|DF_{x_0}(h)| \leq C|h|$ for all $h$. Hence
+\[|F(x_0+h) - F(x_0)| \leq |DF_{x_0}(h)| + o(|h|) \leq C|h| + o(|h|) \xrightarrow{h\to 0} 0,\]
+so $F(x_0+h) \to F(x_0)$ as $h \to 0$, i.e.\ $F$ is continuous at $x_0$.
+\end{proof}
+
+\begin{remark}
+The converse fails: continuity does not imply differentiability, exactly as in one variable
+(e.g.\ $x \mapsto |x|$ at $0$). \Cref{ex:partial_derivatives_not_continuous} below shows the
+gap is even wider in several variables --- \emph{all} partial derivatives can exist at a point
+without $F$ even being continuous there, let alone differentiable.
+\end{remark}

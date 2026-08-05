@@ -1,0 +1,97 @@
+% ============================================================
+% Appendix --- Problem sheet index
+%
+% This appendix exists because the restructure dissolved the official problem sheets: each
+% problem now sits with the material it tests, so a sheet's problems can be spread over
+% several chapters. The tables below put the sheet view back, and they are also where
+% Corsin's colour-coded "Recommended exercises" pages are preserved --- those were
+% per-sheet artefacts with nowhere else to live once the \exercisesheet{N} headings went.
+%
+% Built up during the migration, one sheet per stage.
+% ============================================================
+\chapter{Problem Sheet Index}
+\label{ch:sheet_index}
+
+% Transition: Claude Opus 5 (Medium)
+The problem sheets are not reproduced as blocks anywhere in this document. Every problem is
+quoted verbatim from the official sheet and placed next to the material it tests, with its
+solution in the \emph{Solutions} section of the chapter that hosts it. That is the right
+arrangement for reading the notes and the wrong one for answering \qt{what is on sheet 7?}, so
+this appendix restores the sheet view.
+
+All statements are quoted from \texttt{exercises/ExN\_Analysis2\_eng.pdf}; attribution:
+Prof.\ Joaquim Serra, D-MATH, ETH Z\"urich.
+
+\begin{notation}[Corsin's colour key]
+\label{not:corsin_priority_key}
+From sheet 4 onwards Corsin opens each file with a colour-coded \textit{Recommended exercises}
+page. The key, as given there: blue \textbf{= important}, orange \textbf{= semi-important},
+red \textbf{= optional}. The official sheets additionally mark harder problems with \textbf{(*)}.
+Each problem carries its tag in its own title throughout this document; the tables below collect
+them, together with Corsin's own comments.
+\end{notation}
+
+\begin{ainote}
+Sheets 1--3 have no priority page --- Corsin's \textit{Recommended exercises} pages start with
+sheet 4 --- so no problem on them is singled out, and all of them are reproduced and solved.
+\end{ainote}
+
+\section{Sheets 1--3}
+\label{sec:sheet_index_1_3}
+
+\begin{center}
+\begin{tabular}{@{}l l l@{}}
+\textbf{Problem} & \textbf{Topic} & \textbf{Now in} \\
+\hline
+1.1 & Recap questions          & \cref{sec:analysis1_recap} \\
+1.2 & From equations to drawings & \cref{sec:visualizing_sets} \\
+1.3 & From drawings to equations & \cref{sec:visualizing_sets} \\
+1.4 & Young's inequality       & \cref{sec:youngs_inequality} \\[4pt]
+2.1 & Metric spaces            & \cref{sec:metric_spaces} \\
+2.2 & Multiple choice (closure) & \cref{sec:unit_balls} \\
+2.3 & Multiple choice (distance from a set) & \cref{sec:unit_balls} \\
+2.4 & Boundary, interior       & \cref{sec:unit_balls} \\
+2.5 & Product of metric spaces & \cref{sec:metric_spaces} \\
+2.6 & Continuity of the distance & \cref{sec:continuity} \\
+2.7 & Continuity of the composition & \cref{sec:continuity} \\[4pt]
+3.1 & Lipschitz or not         & \cref{sec:lipschitz_continuity} \\
+3.2 & Problems at the origin   & \cref{sec:continuity} \\
+3.3 & Open, closed, complete and compact & \cref{sec:why_compactness_matters} \\
+3.4 & Multiple choice (open, complete, compact) & \cref{sec:why_compactness_matters} \\
+3.5 & Multiple choice (fixed points) & \cref{sec:banach_fixed_point} \\
+3.6 & Multiple choice (uniform continuity) & \cref{sec:lipschitz_continuity} \\
+3.7 & Cauchy--Schwarz          & \cref{sec:cauchy_schwarz} \\
+3.8 & Inner product and norm   & \cref{sec:cauchy_schwarz} \\
+3.9 & All norms are equivalent & \cref{sec:cauchy_schwarz} \\
+3.10 & Hilbert--Schmidt norm   & \cref{sec:cauchy_schwarz} \\
+3.11 & (*) Uniform continuity and moduli & \cref{sec:lipschitz_continuity} \\
+\end{tabular}
+\end{center}
+
+\section{Sheet 4}
+\label{sec:sheet_index_4}
+
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 1
+% Corsin's "Recommended exercises" page, preserved here: it was a per-sheet artefact and had
+% nowhere else to go once the \exercisesheet{4} heading was dissolved.
+\begin{center}
+\begin{tabular}{@{}l p{0.22\linewidth} p{0.34\linewidth} l@{}}
+\textbf{Problem} & \textbf{Priority} & \textbf{Corsin's note} & \textbf{Now in} \\
+\hline
+4.1 & important & ``Use the chain rule'' & \cref{sec:jacobi_matrix} \\[3pt]
+4.2 & important & ``Recall that path connected implies connected'' & \cref{sec:path_connectedness} \\[3pt]
+4.3 & semi-important --- parts 1, 2, 3, 5; \textbf{parts 4 and 6 important} &
+  ``For 3., use Cauchy--Schwarz in $\mathbb{R}^n$ applied to convenient vectors.'' &
+  \cref{sec:cauchy_schwarz} \\[3pt]
+4.4 & optional & --- & \cref{sec:cauchy_schwarz} \\[3pt]
+4.5 & optional & --- & \cref{sec:mean_value_theorem} \\[3pt]
+4.6 & important --- parts 1, 2, 3 & --- & \cref{sec:chain_rule_along_path} \\
+\end{tabular}
+\end{center}
+
+\begin{ainote}
+Problems \textbf{4.4} and \textbf{4.5} appear in this document for the first time. They had been
+transcribed into \texttt{content/exercise-sheets/week-04.tex}, but that file was never
+\texttt{\textbackslash input} by anything, so neither problem had ever reached the built PDF and
+neither carried a solution. Both are now placed and solved.
+\end{ainote}

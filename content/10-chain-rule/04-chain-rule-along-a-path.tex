@@ -1,0 +1,120 @@
+% Originally: content/week-04.tex, \section{The chain rule along a path} (Corsin Week 4, Friday)
+
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 8
+\section{The chain rule along a path}
+\label{sec:chain_rule_along_path}
+
+An important special case of the chain rule is that of a composition of a scalar field with a
+path. Suppose $f : \mathbb{R}^n \supseteq U \to \mathbb{R}$ and
+$\gamma : [0,1]\to\mathbb{R}^n$ are a $C^1$ \newterm{scalar field} (\germanterm{Skalarfeld}) and
+path, respectively. Then
+\[
+\begin{aligned}
+D(f\circ\gamma)(t) &= Df(\gamma(t))\cdot D\gamma(t) \\
+&= \langle \nabla f(\gamma(t)),\ \gamma'(t)\rangle \\
+&= \sum_{i=1}^{n} \frac{\partial f}{\partial \gamma_i}\frac{\partial \gamma_i}{\partial t}
+\end{aligned}
+\]
+where $\gamma = (\gamma_1,\dots,\gamma_n)$ and
+$\dfrac{\partial f}{\partial \gamma_i} := \partial_i f(\gamma(t))$.
+
+This operation is so common in physics that it has its own notation: for $f$ as above, we look at
+each coordinate as a function of \textbf{time} and differentiate:
+\[\frac{d}{dt}f(x_1,\dots,x_n) := Df(x_1(t),\dots,x_n(t)) = \sum_{i=1}^{n}\frac{\partial f}{\partial x_i}\frac{\partial x_i}{\partial t}.\]
+
+% Generator: Claude Opus 5 (High)
+The middle line, $D(f\circ\gamma)(t) = \langle\nabla f(\gamma(t)),\gamma'(t)\rangle$, is worth
+dwelling on, because it is the formula that gives the gradient its meaning. It says the rate at
+which $f$ changes along a path depends on the velocity only through its inner product with
+$\nabla f$ --- so by Cauchy--Schwarz (\cref{thm:cauchy_schwarz}) the change is fastest when
+$\gamma'$ points along $\nabla f$, and zero when $\gamma'$ is perpendicular to it. Two standard
+facts fall straight out:
+
+\begin{itemize}
+  \item \textbf{$\nabla f$ points in the direction of steepest ascent}, with
+    $|\nabla f|$ the rate of ascent in that direction.
+  \item \textbf{$\nabla f$ is perpendicular to the level sets of $f$.} If $\gamma$ stays inside
+    a level set $\{f = c\}$, then $f\circ\gamma$ is constant, so
+    $\langle\nabla f(\gamma(t)),\gamma'(t)\rangle = 0$ for every $t$ --- and $\gamma'$ runs
+    through the directions tangent to the level set.
+\end{itemize}
+
+\begin{center}
+% Generator: Claude Opus 5 (High) --- FIG-W04-04: level sets of f(x,y) = x^2 + 2y^2, a path
+% crossing them, and the decomposition of gamma' at one point.
+% Level sets are the ellipses x^2 + 2y^2 = c, i.e. semi-axes sqrt(c) and sqrt(c/2).
+% At P = (1.10, 0.55): grad f = (2x, 4y) = (2.20, 2.20), i.e. the 45-degree direction,
+% which is indeed normal to the ellipse there (the ellipse tangent has slope -x/(2y) = -1).
+\begin{tikzpicture}[>=Latex, scale=1.5]
+  \draw[->] (-2.35,0) -- (2.5,0) node[right, font=\footnotesize] {$x$};
+  \draw[->] (0,-1.75) -- (0,1.95) node[above, font=\footnotesize] {$y$};
+
+  % Three level sets of x^2 + 2y^2. The middle one, c = 2.142, is chosen to pass through the
+  % marked point P = (1.10, 0.6826): 1.10^2 + 2*0.6826^2 = 1.21 + 0.932 = 2.142.
+  \foreach \c in {0.9, 2.142, 4.0}{
+    \draw[gray!70, thin] (0,0) ellipse ({sqrt(\c)} and {sqrt(\c/2)});
+  }
+  % Kept in the upper LEFT: the gradient arrow and its label occupy the upper right.
+  \node[gray!75!black, font=\scriptsize, anchor=west] at (-2.25,1.45) {level sets $\{f=c\}$};
+
+  % a path crossing the level sets
+  \draw[blue!75!black, thick, domain=0.15:2.05, samples=60, smooth]
+    plot (\x, {0.28 + 0.30*\x + 0.06*\x*\x});
+  \node[blue!75!black, font=\scriptsize, anchor=south east] at (0.55,0.42) {$\gamma$};
+
+  % the point P on the middle ellipse (c = 1.815) and on the path:
+  % path at x = 1.10 gives y = 0.28 + 0.33 + 0.0726 = 0.6826 -- adjust c to match the point.
+  \coordinate (P) at (1.10,0.6826);
+  \fill[black] (P) circle (0.8pt);
+  \node[font=\scriptsize, below right] at (1.13,0.63) {$\gamma(t)$};
+
+  % gradient of f at P: (2x, 4y) = (2.20, 2.73), normalised and scaled to length 0.62
+  \draw[red!80!black, very thick, ->] (P) -- ++(0.39,0.48)
+    node[anchor=south west, font=\scriptsize] {$\nabla f$};
+  % velocity: gamma'(x) = 0.30 + 0.12x = 0.432, direction (1, 0.432), scaled
+  \draw[blue!75!black, very thick, ->] (P) -- ++(0.57,0.246)
+    node[anchor=north west, font=\scriptsize] {$\gamma'$};
+
+  \node[font=\scriptsize, align=center, anchor=north] at (0,-1.85)
+    {$\dfrac{d}{dt}f(\gamma(t)) = \langle \nabla f, \gamma'\rangle$: only the component of
+     $\gamma'$ along $\nabla f$ contributes,\\
+     so $f$ is constant along a level set and grows fastest along $\nabla f$};
+\end{tikzpicture}
+\end{center}
+
+% Sonnet 5 (Medium)
+
+
+% --- exercises relocated here from the dissolved sheet 4 ---
+
+% Originally: content/week-04.tex, end of the chapter
+
+\begin{aiexercise}[Directional Derivative along a Unit Vector]
+\label{ex:ai_directional_derivative}
+% Generator: Gemini 3.6 Flash (Medium)
+Let $f(x,y) := x^2 y$ defined on $\mathbb{R}^2$. Compute the directional derivative $D_v f(1,2)$ of $f$ at the point $(1,2)$ along the unit vector $v := \frac{1}{\sqrt{2}}(1,1)\transp$.
+\end{aiexercise}
+
+% Originally: content/week-04.tex, \exercisesheet{4}
+% Source: exercises/Ex4_Analysis2_eng.pdf
+
+\begin{exercise}[4.6 --- A directional derivative vanishes \textnormal{(important)}]
+\label{ex:4.6}
+Let $u \in C^1(\mathbb{R}^n)$ and $\nu \in \mathbb{R}^n$. Show that
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item If $\partial_1 u \equiv 0$ then ``$u$ does not depend on $x_1$''; more rigorously: there
+    exists a unique function $v \in C^1(\mathbb{R}^{n-1})$ such that
+    \begin{equation*}
+    u(x_1,\dots,x_n) = v(x_2,\dots,x_n) \quad \text{for all } x \in \mathbb{R}^n. \tag{2}
+    \end{equation*}
+  \item If $\partial_\nu u \equiv 0$ and $\nu\cdot e_1 \neq 0$ then ``$u$ is a function of $n-1$
+    variables''; more rigorously: there exists a unique function $w \in C^1(\mathbb{R}^{n-1})$
+    such that
+    \[u(x_1,\dots,x_n) = w\!\left(x_2 - \frac{x_1\nu_2}{\nu_1}, \dots, x_n - \frac{x_1\nu_n}{\nu_1}\right) \quad \text{for all } x \in \mathbb{R}^n.\]
+  \item \textbf{(*)} What can we conclude if we assume only that $\partial_1 u = 0$ in an open
+    connected subset $U \subset \mathbb{R}^n$?
+\end{enumerate}
+\textit{Official hints:} \textbf{4.6.2} --- apply the mean value theorem to $u(x + t\nu)$.
+\textbf{4.6.3} --- consider the domain $U := \{(x,y) : x^2 < y < x^2+1\}$ and the function
+\[u(x,y) := \begin{cases} \max\{0, y-2\}^2 & \text{if } x \geq 0, \\ 0 & \text{if } x \leq 0.\end{cases}\]
+\end{exercise}

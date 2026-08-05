@@ -260,3 +260,181 @@ $\lVert Df\rVert$ be handled like an absolute value in the mean value inequality
 (\cref{rem:mvt_fails_vector_valued}).
 \end{ainote}
 \end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:4.3}]
+% Generator: Claude Sonnet 5 (Medium)
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item For $n=2$, $\{x : |x|_1 \leq 1\}$ is the diamond with vertices $(\pm 1, 0)$, $(0,\pm 1)$;
+    $\{x : |x|_2 \leq 1\}$ is the Euclidean unit disc; $\{x : |x|_{10} \leq 1\}$ is a curve close
+    to the square $[-1,1]^2$, with rounded corners that flatten as $p$ grows. All three contain
+    the four points $(\pm1,0)$, $(0,\pm1)$ --- since $|e_i|_p = 1$ for every $p$ --- and they
+    increase with $p$, which is the geometric content of part 2.
+    \begin{center}
+    % Generator: Claude Opus 5 (High) --- FIG-W04-01: the p-balls for p = 1, 2, 10, plus the
+    % limiting square. Plotted parametrically from |x|_p = 1 in the first quadrant,
+    % x = (cos t)^{2/p}, y = (sin t)^{2/p} for t in [0, pi/2], mirrored into the other three
+    % quadrants by symmetry. Check: t = pi/4 gives x = y = 2^{-1/p}, so the "corner" of the
+    % p-ball sits at distance 2^{1/2 - 1/p} from the origin -- 0.71 for p=1 (the diamond edge
+    % midpoint), 1 for p=2, and 1.32 for p=10, correctly approaching the corner (1,1) of the
+    % square, whose distance is sqrt2 = 1.41.
+    \begin{tikzpicture}[>=Latex, scale=1.9]
+      \draw[->] (-1.45,0) -- (1.5,0) node[right, font=\footnotesize] {$x_1$};
+      \draw[->] (0,-1.45) -- (0,1.5) node[above, font=\footnotesize] {$x_2$};
+
+      % p = infinity: the limiting square, drawn faintly for reference
+      \draw[gray!55, dashed] (-1,-1) rectangle (1,1);
+      % p = 1: the diamond
+      \draw[purple, thick] (1,0) -- (0,1) -- (-1,0) -- (0,-1) -- cycle;
+      % p = 2: the circle
+      \draw[blue!75!black, thick] (0,0) circle (1);
+      % p = 10, one quadrant at a time (x = (cos t)^{1/5}, y = (sin t)^{1/5})
+      \foreach \sx/\sy in {1/1,-1/1,-1/-1,1/-1}{
+        \draw[orange!90!black, thick, domain=0:90, samples=90, smooth]
+          plot ({\sx*pow(cos(\x),0.2)}, {\sy*pow(sin(\x),0.2)});
+      }
+
+      % The four points shared by every p-ball, since |e_i|_p = 1 for all p.
+      \fill (1,0) circle (0.7pt);
+      \fill (0,1) circle (0.7pt);
+      \fill (-1,0) circle (0.7pt);
+      \fill (0,-1) circle (0.7pt);
+
+      % Legend, placed clear of the curves rather than labelling them inline: along the
+      % 45-degree ray the four boundaries sit at radii 0.71, 1, 1.32 and 1.41, which is too
+      % little separation for inline labels to be legible.
+      % Raised clear of the $x_1$ axis label, which sits at (1.55, 0).
+      \begin{scope}[shift={(1.62,1.38)}]
+        \draw[purple, thick] (0,0) -- (0.30,0);
+        \node[font=\scriptsize, anchor=west] at (0.36,0) {$p=1$};
+        \draw[blue!75!black, thick] (0,-0.30) -- (0.30,-0.30);
+        \node[font=\scriptsize, anchor=west] at (0.36,-0.30) {$p=2$};
+        \draw[orange!90!black, thick] (0,-0.60) -- (0.30,-0.60);
+        \node[font=\scriptsize, anchor=west] at (0.36,-0.60) {$p=10$};
+        \draw[gray!55, dashed] (0,-0.90) -- (0.30,-0.90);
+        \node[font=\scriptsize, anchor=west] at (0.36,-0.90) {$p=\infty$};
+      \end{scope}
+    \end{tikzpicture}
+    \end{center}
+    % Generator: Claude Sonnet 5 (Medium) --- the solution continues below; only the figure
+    % above is an addition.
+  \item Let $M := \max_i |x_i|$. Then
+    \[
+    M \leq |x|_p = M\Big(\sum_{i=1}^{n}\Big(\frac{|x_i|}{M}\Big)^p\Big)^{1/p} \leq M\,n^{1/p}.
+    \]
+    Since $n^{1/p} \to 1$ as $p \to \infty$, the squeeze theorem gives $|x|_\infty = \lim_{p\to\infty}|x|_p = M = \max_i |x_i|$.
+  \item Set $u_i := a_i^{p/2}$ and $v_i := a_i^{(p-2)/2}b_i$, so that $u_iv_i = a_i^{p-1}b_i$,
+    $u_i^2 = a_i^p$, and $v_i^2 = a_i^{p-2}b_i^2$. Cauchy--Schwarz in $\mathbb{R}^n$ gives
+    \[
+    \Big(\sum_{i=1}^n a_i^{p-1}b_i\Big)^2 = \Big(\sum_{i=1}^n u_iv_i\Big)^2 \leq \Big(\sum_{i=1}^n u_i^2\Big)\Big(\sum_{i=1}^n v_i^2\Big) = \Big(\sum_{i=1}^n a_i^p\Big)\Big(\sum_{i=1}^n a_i^{p-2}b_i^2\Big).
+    \]
+  \item Fix $x, y$ with all coordinates strictly positive, let $d := x - y$, and write
+    $z(t) := tx+(1-t)y = y + td$, so $z_i(t) > 0$ for all $t \in [0,1]$. Let $g(t) := f(t)^p =
+    \sum_i z_i(t)^p$, so $f = g^{1/p}$. Since $z_i'(t) = d_i$,
+    \[
+    g'(t) = p\sum_i z_i(t)^{p-1}d_i.
+    \]
+    Differentiating $f = g^{1/p}$ twice and simplifying,
+    \[
+    f''(t) = (p-1)\,g(t)^{1/p-2}\left[g(t)\sum_i z_i(t)^{p-2}d_i^2 - \Big(\sum_i z_i(t)^{p-1}d_i\Big)^2\right].
+    \]
+    Applying the inequality of the previous point with $a_i = z_i(t) > 0$ and $b_i = d_i$ (any
+    sign is allowed, since the inequality only uses $b_i^2$ on the right and squares the left)
+    shows the bracket is $\geq 0$. Since $g(t) > 0$ and $p \geq 1$, we get $f''(t) \geq 0$ for
+    $p > 1$ (for $p=1$, $f$ is affine in $t$ and hence convex). Thus $f$ is convex on $[0,1]$.
+  \item Convexity of $f$ at $t = \tfrac12$ gives $f(\tfrac12) \leq \tfrac12(f(0)+f(1))$, i.e.
+    \[
+    \Big|\frac{x+y}{2}\Big|_p \leq \frac{|x|_p + |y|_p}{2} \quad \Longrightarrow \quad |x+y|_p \leq |x|_p + |y|_p
+    \]
+    for $x, y$ with strictly positive coordinates. For general $x, y \in \mathbb{R}^n$, write
+    $\hat x := (|x_1|,\dots,|x_n|)$, $\hat y := (|y_1|,\dots,|y_n|)$; these have non-negative
+    coordinates (the strictly positive case above extends to this case by continuity), and
+    $|x+y|_p \leq |\hat x + \hat y|_p \leq |\hat x|_p + |\hat y|_p = |x|_p + |y|_p$.
+  \item For $p \in (0,1)$, the triangle inequality fails, so $|\cdot|_p$ is not a norm: taking
+    $x = e_1$, $y = e_2$ gives $|x|_p = |y|_p = 1$ but $|x+y|_p = 2^{1/p} > 2 = |x|_p+|y|_p$.
+\end{enumerate}
+\end{exercisesolution}
+
+% Originally: new. Problem 4.4 was transcribed into content/exercise-sheets/week-04.tex but
+% that file was never \input by anything, so the problem had never appeared in the built
+% document and carried no solution.
+\begin{exercisesolution}[Solution to \cref{ex:4.4}]
+% Generator: Claude Opus 5 (High)
+Throughout write $S(t) := \sum_{i=1}^n x_i^t$, so that
+$\mu_t(x) = \big(S(t)/n\big)^{1/t}$ for $t \neq 0$, and set
+\[g(t) := \log \mu_t(x) = \frac{h(t)}{t}, \qquad h(t) := \log\frac{S(t)}{n}.\]
+Note $h(0) = \log(n/n) = 0$; this single fact does most of the work below.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Let $M := \max_i x_i$ and $m := \min_i x_i$, and let $k$ be the number of indices
+    attaining $M$. Factoring out the largest term,
+    \[\mu_t(x) = M\left(\frac{1}{n}\sum_{i=1}^n\Big(\frac{x_i}{M}\Big)^{t}\right)^{1/t},\]
+    and as $t \to +\infty$ the bracket tends to $k/n$, whose $t$-th root tends to $1$. Hence
+    $\mu_{+\infty}(x) = M = \max_i x_i$. Replacing $t$ by $-t$ turns the maximum into the
+    minimum, so $\mu_{-\infty}(x) = m = \min_i x_i$.
+
+    For $t \to 0$ the exponent and the logarithm both degenerate, which is exactly the
+    $\tfrac00$ that $g = h/t$ resolves: $h$ is differentiable with $h(0) = 0$, so
+    \[\lim_{t\to0} g(t) = h'(0) = \frac{S'(0)}{S(0)} = \frac{1}{n}\sum_{i=1}^n \log x_i,\]
+    using $S'(t) = \sum_i x_i^t\log x_i$ and $S(0) = n$. Exponentiating,
+    \[\mu_0(x) = \big(x_1x_2\cdots x_n\big)^{1/n},\]
+    the \newterm{geometric mean} (\germanterm{geometrisches Mittel}).
+  \item The inequality is Jensen applied to $\varphi(s) := s\log s$, which is convex on
+    $(0,\infty)$ because $\varphi''(s) = 1/s > 0$. With the uniform weights $\tfrac1n$,
+    \[\frac{1}{n}\sum_{i=1}^n a_i\log a_i \ \geq\ \varphi\!\left(\frac{1}{n}\sum_{i=1}^n a_i\right)
+      = \frac{A}{n}\log\frac{A}{n}, \qquad A := a_1 + \dots + a_n.\]
+    Multiplying by $n/A > 0$ gives exactly
+    \[\sum_{i=1}^n \frac{a_i\log a_i}{a_1+\dots+a_n} \ \geq\ \log\!\left(\frac{a_1+\dots+a_n}{n}\right).\]
+  \item \textit{Continuity.} On $\mathbb{R}\setminus\{0\}$, $g = h/t$ is a quotient of smooth
+    functions with non-vanishing denominator. At $t = 0$ the value $g(0) := h'(0)$ computed in
+    part 1 is precisely the limit, so $g$ --- and hence $f = e^{g}$ --- is continuous everywhere.
+
+    \textit{Monotonicity.} Differentiating $g = h/t$ for $t \neq 0$,
+    \[t^2 g'(t) = t\,h'(t) - h(t) = \frac{t\,S'(t)}{S(t)} - \log\frac{S(t)}{n}.\]
+    Now substitute $a_i := x_i^{\,t}$. Then $\log a_i = t\log x_i$, so
+    $t\,S'(t) = \sum_i a_i\log a_i$ and $S(t) = \sum_i a_i$, and the displayed quantity becomes
+    \[\sum_{i=1}^n\frac{a_i\log a_i}{a_1+\dots+a_n} \ -\ \log\!\left(\frac{a_1+\dots+a_n}{n}\right)
+      \ \geq\ 0\]
+    by part 2. Hence $g' \geq 0$ on $t \neq 0$, and by continuity $g$ is non-decreasing on all of
+    $\mathbb{R}$; so is $f = e^{g}$.
+
+    This is why part 2 was placed where it is: it is not a separate exercise but the derivative
+    computation of part 3 in disguise.
+  \item Both inequalities are instances of $\mu_s(x) \leq \mu_t(x)$ for $s \leq t$, i.e.\ of
+    part 3.
+    \begin{itemize}
+      \item \textbf{Arithmetic--geometric:} $\mu_0(x) \leq \mu_1(x)$ reads
+        $(x_1\cdots x_n)^{1/n} \leq \tfrac{1}{n}(x_1+\dots+x_n)$; multiplying by $n$ gives
+        $n(x_1x_2\cdots x_n)^{1/n} \leq x_1 + \dots + x_n$.
+      \item \textbf{Arithmetic--quadratic:} $\mu_1(x) \leq \mu_2(x)$ reads
+        $\tfrac1n\sum_i x_i \leq \big(\tfrac1n\sum_i x_i^2\big)^{1/2}$. Both sides are positive,
+        so squaring preserves the inequality:
+        $\tfrac{1}{n^2}\big(\sum_i x_i\big)^2 \leq \tfrac1n\sum_i x_i^2$, and multiplying by
+        $n^2$ gives $(x_1+\dots+x_n)^2 \leq n(x_1^2+\dots+x_n^2)$.
+    \end{itemize}
+  \item \textbf{(*) Yes} --- and considerably more than $C^1$. Each $x_i^{\,t} = e^{t\log x_i}$ is
+    real-analytic in $t$, hence so is $S$, and $S > 0$ everywhere, so $h = \log(S/n)$ is
+    real-analytic too. Because $h(0) = 0$, the quotient $h(t)/t$ has a \emph{removable}
+    singularity at the origin: writing $h(t) = \sum_{k\geq1}c_kt^k$ gives
+    $g(t) = \sum_{k\geq1}c_kt^{k-1}$, a convergent power series near $0$. So $g$, and therefore
+    $f = e^{g}$, is real-analytic on all of $\mathbb{R}$ --- in particular $C^\infty$, so
+    certainly $C^1$.
+
+    The value at the origin is worth recording. From $g(t) = h'(0) + \tfrac12 h''(0)t + O(t^2)$,
+    \[f'(0) = f(0)\,g'(0) = \mu_0(x)\cdot\tfrac12 h''(0)
+      = \mu_0(x)\cdot\frac12\left(\frac{1}{n}\sum_{i=1}^n(\log x_i)^2
+        - \Big(\frac1n\sum_{i=1}^n\log x_i\Big)^{\!2}\right),\]
+    using $h'' = (S''S - (S')^2)/S^2$ at $t=0$ with $S(0)=n$, $S'(0)=\sum_i\log x_i$ and
+    $S''(0)=\sum_i(\log x_i)^2$. The bracket is the variance of the numbers $\log x_i$, so
+    $f'(0) \geq 0$, with equality exactly when all $x_i$ agree --- in which case $\mu_t(x)$ is
+    that common value for every $t$ and $f$ is constant.
+\end{enumerate}
+\end{exercisesolution}
+
+\begin{ainote}
+The official hint for 4.4.2 routes through the concavity of $\log$ together with
+Cauchy--Schwarz. The solution above instead applies Jensen once to $\varphi(s) = s\log s$, which
+is convex; the two arrive at the same inequality, and the second makes visible why 4.4.2 and
+4.4.3 are the same statement --- substituting $a_i := x_i^{\,t}$ turns the inequality of part 2
+into the sign of $g'(t)$ in part 3. That is worth seeing, because the monotonicity of the power
+means is the whole point of the problem and the classical AM--GM inequality falls out of it as
+the single comparison $\mu_0 \leq \mu_1$.
+\end{ainote}

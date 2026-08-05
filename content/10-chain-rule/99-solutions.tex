@@ -1,0 +1,46 @@
+% Originally: content/week-04.tex, \section{Solutions}
+
+\section{Solutions}
+\label{sec:chain_rule_solutions}
+
+\begin{exercisesolution}[Solution to \cref{ex:4.6}]
+% Generator: Claude Sonnet 5 (Medium)
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Define $v(x_2,\dots,x_n) := u(0,x_2,\dots,x_n)$, which is $C^1$ as the restriction of $u$
+    to the hyperplane $x_1 = 0$. For fixed $(x_2,\dots,x_n)$, the function
+    $t \mapsto u(t,x_2,\dots,x_n)$ has derivative $\partial_1 u \equiv 0$ everywhere, hence is
+    constant in $t$; evaluating at $t=0$ gives $u(x_1,\dots,x_n) = u(0,x_2,\dots,x_n) =
+    v(x_2,\dots,x_n)$ for all $x_1$. Uniqueness: if some $\tilde v$ also satisfies
+    $u(x) = \tilde v(x_2,\dots,x_n)$, then setting $x_1 = 0$ gives $\tilde v = v$.
+  \item Since $\nu\cdot e_1 = \nu_1 \neq 0$, consider the invertible linear change of coordinates
+    $y_i := x_i - \dfrac{x_1\nu_i}{\nu_1}$ for $i = 2,\dots,n$, together with $x_1$ itself.
+    Moving $x_1$ by $t$ while holding $y_2,\dots,y_n$ fixed forces $x_i$ to move by
+    $t\nu_i/\nu_1$, i.e.\ moves $x$ in the direction $\tfrac{1}{\nu_1}\nu$. By the hint, applying
+    the mean value theorem to $u(x+t\nu)$ shows $t \mapsto u(x+t\nu)$ is constant since
+    $\partial_\nu u \equiv 0$; consequently $u$, expressed in the coordinates $(x_1, y_2,\dots,
+    y_n)$, has vanishing $x_1$-derivative and is therefore (by part 1) independent of $x_1$ in
+    these coordinates. Hence, there is a (unique, by the same argument as in part 1) function
+    $w \in C^1(\mathbb{R}^{n-1})$ with
+    \[
+    u(x_1,\dots,x_n) = w\!\left(x_2 - \frac{x_1\nu_2}{\nu_1},\dots,x_n - \frac{x_1\nu_n}{\nu_1}\right).
+    \]
+  \item In general, only \textbf{locally}: on any open subset where every fiber
+    $\{x_1 : (x_1,x_2,\dots,x_n) \in U\}$ (for fixed $(x_2,\dots,x_n)$) is connected, the same
+    argument as in part 1 shows $u$ is locally of the form $v(x_2,\dots,x_n)$. But this need not
+    hold \textbf{globally} on all of $U$, even though $U$ itself is connected: with
+    $U := \{(x,y) : x^2 < y < x^2+1\}$ and $u(x,y) := \max\{0,y-2\}^2$ for $x \geq 0$, $u := 0$
+    for $x \leq 0$, one checks $\partial_1 u \equiv 0$ throughout $U$ (near $x=0$ both branches
+    agree, since $y < 2$ there), yet $u$ is not globally independent of $x$: for $y > 2$, the
+    fiber of $U$ over $y$ splits into two disconnected intervals (one with $x>0$, one with
+    $x<0$), and $u$ takes different values on each. So, connectedness of $U$ alone does not
+    suffice; what is needed is connectedness of each vertical fiber of $U$.
+\end{enumerate}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:ai_directional_derivative}]
+% Generator: Gemini 3.6 Flash (Medium)
+The gradient of $f(x,y)$ is $\nabla f(x,y) = (2xy, x^2)\transp$. Evaluating at $(1,2)$ gives $\nabla f(1,2) = (4,1)\transp$. Since $f$ is continuously differentiable ($C^\infty$), the directional derivative along the unit vector $v$ is given by the inner product:
+\[
+D_v f(1,2) = \nabla f(1,2) \cdot v = \begin{pmatrix} 4 \\ 1 \end{pmatrix} \cdot \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\ 1 \end{pmatrix} = \frac{4 + 1}{\sqrt{2}} = \frac{5}{\sqrt{2}}.
+\]
+\end{exercisesolution}

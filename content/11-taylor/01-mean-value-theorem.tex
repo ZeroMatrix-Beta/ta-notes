@@ -1,0 +1,156 @@
+% Originally: content/week-04.tex, \subsection{The mean value theorem} --- promoted to a section
+
+% Quelle: Diego Torres Tejeda/Notes - 09.03 - Diego Torres Tejeda.pdf, p. 8
+\section{The mean value theorem}
+\label{sec:mean_value_theorem}
+
+\begin{ainote}
+The mean value theorem is used twice in this chapter --- in the official hint to
+\Cref{ex:4.6} and in its solution --- but Corsin never states it. Diego Torres Tejeda's notes
+state it, together with the warning that follows, which is what \cref{ex:4.6} actually turns on.
+\end{ainote}
+
+\begin{theorem}[Mean value theorem]
+\label{thm:mean_value_theorem}
+Let $f : U \to \mathbb{R}$ be differentiable, $x \in U$ and $h \in \mathbb{R}^n$ with
+$x+th \in U$ for all $t \in [0,1]$. Then there is $t_0 \in (0,1)$ such that, writing
+$\xi := x+t_0h$,
+\[f(x+h)-f(x) = \partial_hf(\xi).\]
+\end{theorem}
+
+\begin{proof}
+Apply the one-variable mean value theorem to $\varphi(t) := f(x+th)$ on $[0,1]$, which is
+differentiable with $\varphi'(t) = \partial_hf(x+th)$ by the chain rule along a path
+(\cref{sec:chain_rule_along_path}). It gives $t_0 \in (0,1)$ with
+$\varphi(1)-\varphi(0) = \varphi'(t_0)$, which is the claim.
+\end{proof}
+
+\begin{importantremark}[It fails for vector-valued $f$]
+\label{rem:mvt_fails_vector_valued}
+The hypothesis \qt{$f : U \to \mathbb{R}$} is essential --- \textbf{the theorem is false the
+moment the target is $\mathbb{R}^m$ with $m \geq 2$}, and this is exactly what
+\cref{ex:4.5} below probes.
+% Corrected: this pointed at \cref{ex:4.6}, which applies the *scalar* theorem to $u(x+t\nu)$
+% and never leaves $\mathbb{R}$. The problem that probes the vector-valued failure is 4.5 ---
+% which was not in the built document when the sentence was written.
+
+Applying the scalar result to each component $f_1,\dots,f_m$ separately does produce points
+$\xi_1,\dots,\xi_m$ with
+\[f(x+h)-f(x) = \begin{pmatrix}\partial_hf_1(\xi_1) \\ \vdots \\ \partial_hf_m(\xi_m)\end{pmatrix},\]
+but the $\xi_i$ are \emph{different points} in general, and no single $\xi$ need work for all
+components at once. The standard witness is the \emph{circle}
+$\gamma(t) := (\cos t, \sin t)$ on $[0,2\pi]$: here $\gamma(2\pi)-\gamma(0) = 0$, while
+$\gamma'(t) = (-\sin t,\cos t)$ has $|\gamma'(t)| = 1$ and so never vanishes --- there is no
+$\xi$ at all. Geometrically this is entirely reasonable: a walker who returns to the starting
+point must have had zero \emph{average} velocity, but need never have stood still. In one
+dimension \qt{returning} forces a turning point; in two it does not.
+
+What survives for vector-valued $f$ is the \emph{mean value inequality},
+$|f(x+h)-f(x)| \leq \sup_{t\in[0,1]}\lVert Df_{x+th}\rVert\,|h|$, which is what one actually
+uses in practice.
+\end{importantremark}
+
+\begin{center}
+% Generator: Claude Opus 5 (High) --- FIG-W04-06: the scalar theorem and its vector-valued
+% failure, side by side.
+% Left: f(x) = 0.35 + 1.5x - 0.55x^2 on [0.15, 2.4]. Chord slope between a=0.15 and b=2.4 is
+% f'(xi) with f'(x) = 1.5 - 1.1x, and (f(b)-f(a))/(b-a) = 1.5 - 1.1*(a+b)/2 = 1.5 - 1.4025
+% = 0.0975, so xi = (1.5 - 0.0975)/1.1 = 1.275 -- the midpoint (a+b)/2, as it must be for a
+% parabola. Marked there.
+% Right: the circle t -> (cos t, sin t); start = end, yet the velocity has length 1 throughout.
+\begin{tikzpicture}[>=Latex, scale=1.0]
+
+  % ---------- Left: the scalar mean value theorem ----------
+  \begin{scope}
+    \draw[->] (-0.2,0) -- (3.0,0) node[right, font=\footnotesize] {$x$};
+    \draw[->] (0,-0.2) -- (0,2.5) node[above, font=\footnotesize] {$y$};
+
+    \draw[blue!75!black, thick, domain=0.15:2.55, samples=70, smooth]
+      plot (\x, {0.35 + 1.5*\x - 0.55*\x*\x});
+
+    % Chord from a = 0.35 (y = 0.8076) to b = 2.4 (y = 0.7820); slope -0.0125.
+    % For a parabola the mean value point is the midpoint, xi = (0.35+2.4)/2 = 1.375,
+    % where f = 1.3727 and f' = 1.5 - 1.1*1.375 = -0.0125 -- equal to the chord slope.
+    \draw[red!80!black, thick] (0.35,0.8076) -- (2.4,0.7820);
+    \fill (0.35,0.8076) circle (1.2pt) node[below, font=\scriptsize] {$x$};
+    \fill (2.4,0.7820) circle (1.2pt) node[below right, font=\scriptsize] {$x+h$};
+
+    \draw[green!50!black, thick] (0.70,1.3811) -- (2.05,1.3643);
+    \fill[green!50!black] (1.375,1.3727) circle (1.4pt);
+    \node[green!50!black, font=\scriptsize, above] at (1.375,1.44) {$\xi$};
+
+    \node[font=\scriptsize, align=center, anchor=north] at (1.4,-0.42)
+      {\textbf{scalar $f$:} some $\xi$ has\\ tangent parallel to the chord};
+  \end{scope}
+
+  % ---------- Right: the vector-valued failure ----------
+  \begin{scope}[shift={(5.6,1.15)}]
+    \draw[->] (-1.5,0) -- (1.55,0) node[above right, font=\footnotesize] {$x$};
+    \draw[->] (0,-1.5) -- (0,1.6) node[above, font=\footnotesize] {$y$};
+
+    \draw[blue!75!black, thick] (0,0) circle (1);
+    \fill[red!80!black] (1,0) circle (1.6pt);
+    % Label placed below the axis: the velocity arrow at t = 0 points straight up from (1,0),
+    % and the x-axis label sits just above the axis, so both sides are occupied.
+    \draw[red!80!black, thin] (1,0) -- (1.18,-0.55);
+    \node[red!80!black, font=\scriptsize, anchor=north west] at (1.10,-0.52)
+      {$\gamma(0)=\gamma(2\pi)$};
+
+    % velocity vectors, always of length 1, never zero
+    \foreach \a in {0,72,144,216,288}{
+      \draw[green!50!black, very thick, ->]
+        ({cos(\a)},{sin(\a)}) -- ++({-0.52*sin(\a)},{0.52*cos(\a)});
+    }
+    \node[green!50!black, font=\scriptsize, anchor=east] at (-1.1,0.95)
+      {$|\gamma'|=1$};
+
+    \node[font=\scriptsize, align=center, anchor=north] at (0,-1.57)
+      {\textbf{vector-valued $\gamma$:} $\gamma(2\pi)-\gamma(0)=0$,\\ yet $\gamma'$ never
+       vanishes --- no $\xi$ exists};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 7
+\begin{exercise}[Differential of $A \mapsto A\transp A$]
+\label{ex:transpose_diff}
+We identify the inner product space of real-valued matrices $\mathbb{R}^{n\times n}$ with inner
+product
+\[\langle A, B\rangle = \sum_{i,j=1}^{n} A_{ij}B_{ij} = \Tr(A\transp B)\]
+for $A, B \in \mathbb{R}^{n\times n}$, with the euclidean space
+$\mathbb{R}^{n^2}\cong\mathbb{R}^{n\times n}$, with the standard inner product. Then, consider
+the function
+\[F : \mathbb{R}^{n\times n}\to\mathbb{R}^{n\times n}, \qquad A \mapsto A\transp A.\]
+Compute the differential at the identity matrix $\id \in \mathbb{R}^{n\times n}$ applied to
+$X \in \mathbb{R}^{n\times n}$:
+\[DF_{\id}(X) = \partial_X F(\id).\]
+\end{exercise}
+
+% Kept inline: solved directly in Corsin Nick/Class Notes/Week 4.pdf, p. 7.
+\begin{exercisesolution}[\cref{ex:transpose_diff}]
+We use $(*)$:
+\[
+\begin{aligned}
+DF_{\id}(X) &= \left.\frac{d}{ds}\right|_{s=0} F(\id+sX) \\
+&= \left.\frac{d}{ds}\,(\id+sX)\transp(\id+sX)\right|_{s=0} \\
+&= \left.\frac{d}{ds}\left[\id + s(X\transp+X) + s^2X\transp X\right]\right|_{s=0} \\
+&= X\transp + X
+\end{aligned}
+\]
+\end{exercisesolution}
+
+
+% --- exercise relocated here from the dissolved sheet 4 ---
+
+% Originally: content/exercise-sheets/week-04.tex, problem 4.5 --- never previously built
+% Source: exercises/Ex4_Analysis2_eng.pdf
+
+\begin{exercise}[4.5 --- Mean value for vector-valued functions \textnormal{(optional)}]
+\label{ex:4.5}
+Let $f \in C^1(\mathbb{R},\mathbb{R}^m)$ for $m > 1$. Is it true that there is $t \in [0,1]$ such
+that
+$$f(1) - f(0) = Df_t(1) = \begin{pmatrix} f_1'(t) \\ \vdots \\ f_m'(t) \end{pmatrix}?$$
+Prove it or provide a counterexample.
+
+\textit{Official hint:} try $f(t) = (\sin(2\pi t), \cos(2\pi t))$.
+\end{exercise}

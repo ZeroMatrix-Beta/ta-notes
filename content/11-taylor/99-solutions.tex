@@ -1,0 +1,32 @@
+% Originally: new. Problem 4.5 was transcribed into content/exercise-sheets/week-04.tex but
+% that file was never \input by anything, so the problem had never appeared in the built
+% document and carried no solution.
+\section{Solutions}
+\label{sec:taylor_solutions}
+
+\begin{exercisesolution}[Solution to \cref{ex:4.5}]
+% Generator: Claude Opus 5 (High)
+\textbf{No} --- and the official hint's function is the cleanest witness. Take
+\[f(t) := \big(\sin(2\pi t),\ \cos(2\pi t)\big), \qquad f \in C^1(\mathbb{R},\mathbb{R}^2).\]
+Then $f(1) = (0,1) = f(0)$, so the left-hand side is
+\[f(1) - f(0) = (0,0).\]
+On the other hand $f'(t) = 2\pi\big(\cos(2\pi t),\ -\sin(2\pi t)\big)$, whose norm is
+\[\lVert f'(t)\rVert = 2\pi\sqrt{\cos^2(2\pi t) + \sin^2(2\pi t)} = 2\pi \neq 0
+  \qquad \text{for every } t.\]
+So $f'(t)$ never equals $(0,0)$, and no $t \in [0,1]$ can satisfy the claimed identity.
+
+The reason is the one given in \cref{rem:mvt_fails_vector_valued}: applying the scalar mean value
+theorem componentwise produces one intermediate point \emph{per component},
+\[f_1(1)-f_1(0) = f_1'(\xi_1), \qquad f_2(1)-f_2(0) = f_2'(\xi_2),\]
+and nothing forces $\xi_1 = \xi_2$. Here $\xi_1 = \tfrac14$ and $\xi_2 = \tfrac12$ work
+componentwise --- both components do vanish, just not at the same time.
+
+\begin{ainote}
+Note what does \emph{not} fail. The \emph{mean value inequality}
+$\lVert f(1)-f(0)\rVert \leq \sup_{t \in [0,1]}\lVert f'(t)\rVert$ holds here as
+$0 \leq 2\pi$, comfortably. That inequality is what survives into $\mathbb{R}^m$ and what every
+later estimate in this document actually uses; the \emph{equality} is a one-dimensional accident.
+Geometrically the counterexample is a walker going once round a circle: they return to the start,
+so the total displacement is zero, but they never once stand still.
+\end{ainote}
+\end{exercisesolution}

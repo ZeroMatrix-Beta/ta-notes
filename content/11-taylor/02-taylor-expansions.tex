@@ -1,0 +1,306 @@
+% Originally: content/week-04.tex, \section{Taylor expansions} (Corsin Week 4, Friday)
+
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 9
+\section{Taylor expansions}
+\label{sec:taylor_expansions}
+
+% Sonnet 5 (Medium)
+\subsection{The general formula}
+
+In the lecture, you have seen the following formula. For
+$f \in C^k(U \subseteq \mathbb{R}^n, \mathbb{R})$, $\bar x \in U$:
+\[f(\bar x + h) = \sum_{|\alpha| = 0}^{k} \partial^\alpha f(\bar x)\,\frac{h^\alpha}{\alpha!} + o(|h|^k)\]
+where $\alpha$ is a \newterm{multi-index} (\germanterm{Multiindex}) in $\mathbb{N}^n$.
+
+In practice, we never use this formula directly, but it is worth unpacking once (e.g., as in \cref{ex:taylor_maximal_expansion}).
+
+% Generator: Claude Opus 5 (High) --- the multi-index notation above is only well defined
+% because mixed partials commute; the fact is used twice below (in the expansion and in
+% \cref{rem:second_order_taylor_hessian}) but stated nowhere in the source notes.
+\begin{ainote}
+Before unpacking it, one hypothesis hidden in the notation deserves to be made explicit. Writing
+$\partial^\alpha$ for a multi-index $\alpha$ presumes that it does not matter \emph{in which
+order} the derivatives are taken --- otherwise $\partial^{(1,1)}$ would be ambiguous between
+$\partial_1\partial_2$ and $\partial_2\partial_1$. That this is legitimate is a theorem, stated
+next; neither Corsin's notes nor the working formula below mention it, yet both depend on it.
+\end{ainote}
+
+\begin{theorem}[Schwarz / Clairaut --- mixed partial derivatives commute]
+\label{thm:schwarz_mixed_partials}
+Let $U \subseteq \mathbb{R}^n$ be open and $f \in C^2(U,\mathbb{R})$. Then for all
+$i,j \in \{1,\dots,n\}$ and all $x \in U$,
+\[\partial_i\partial_j f(x) = \partial_j\partial_i f(x).\]
+More generally, for $f \in C^k(U,\mathbb{R})$ any $k$ partial derivatives may be permuted
+freely, so $\partial^\alpha f$ depends only on the multi-index $\alpha$ and not on the order of
+differentiation. In particular the Hessian $\Hess f(x)$ of
+\cref{rem:second_order_taylor_hessian} is a \textbf{symmetric} matrix.
+\end{theorem}
+
+\begin{remark}[The hypothesis is not decoration]
+\label{rem:schwarz_needs_c2}
+Continuity of the second derivatives is genuinely needed. The standard counterexample is
+\[f(x,y) := \begin{cases} xy\,\dfrac{x^2-y^2}{x^2+y^2} & (x,y)\neq(0,0), \\[1ex]
+  0 & (x,y)=(0,0),\end{cases}\]
+for which a direct computation from the definition gives
+$\partial_1\partial_2 f(0,0) = 1$ but $\partial_2\partial_1 f(0,0) = -1$. This $f$ has both
+mixed partials everywhere, but they are not continuous at the origin, so
+\cref{thm:schwarz_mixed_partials} does not apply --- and indeed fails. Since everything in
+\cref{sec:taylor_expansions} assumes $f \in C^k$, the issue never arises here; it is worth
+knowing that it \emph{could}.
+\end{remark}
+
+% Supplement: Sascha Brack/Class Notes/Week_05_Notes_Monday.pdf, p. 7
+\begin{exercise}[Applying Schwarz's theorem]
+\label{ex:schwarz_application}
+Let $f : \mathbb{R}^2 \to \mathbb{R}$ be defined by
+\[f(x,y) := x^2 e^{y^2} + e^{-x^2} \sin\left(e^{x^2} \left(x^5 + 3x^2 + 100x + \frac{1}{2+\sin(x)}\right)\right).\]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Show that $f \in C^2(\mathbb{R}^2, \mathbb{R})$.
+  \item Compute $\partial_2 \partial_1 f(x,y)$. (Make it as easy as possible for yourself.)
+\end{enumerate}
+\end{exercise}
+
+\begin{exercisesolution}[\cref{ex:schwarz_application}]
+\textbf{(a)} Every term in $f$ is a composition of $C^2$ functions (polynomials, exponentials, sine), and the denominator $2+\sin(x)$ is bounded away from zero. Thus $f$ is $C^2$.
+
+\textbf{(b)} Since $f \in C^2$, by Schwarz's theorem (\cref{thm:schwarz_mixed_partials}) we have $\partial_2 \partial_1 f = \partial_1 \partial_2 f$.
+Computing $\partial_1$ of the second term would be tedious. However, notice that the second term depends only on $x$, so its derivative with respect to $y$ is $0$.
+Thus, we first compute $\partial_2 f$:
+\[\partial_2 f(x,y) = x^2 (2y e^{y^2}) + 0 = 2x^2 y e^{y^2}.\]
+Then we compute $\partial_1$ of this result:
+\[\partial_1 \partial_2 f(x,y) = \partial_1 (2x^2 y e^{y^2}) = 4xy e^{y^2}.\]
+By Schwarz's theorem, $\partial_2 \partial_1 f(x,y) = 4xy e^{y^2}$.
+\end{exercisesolution}
+
+% Source: Corsin Nick/Class Notes/Week 4.pdf, pp. 9--10
+\begin{exercise}[Maximal Taylor expansion in $\mathbb{R}^2$]
+\label{ex:taylor_maximal_expansion}
+Let $f \in C^3(\mathbb{R}^2,\mathbb{R})$. Write out the maximal Taylor approximation.
+\end{exercise}
+
+% Kept inline: solved directly in Corsin Nick/Class Notes/Week 4.pdf, pp. 9--10.
+\begin{exercisesolution}[\cref{ex:taylor_maximal_expansion}]
+The multi-indices are:
+\begin{itemize}
+  \item $|\alpha| = 0$: $\alpha = (0,0)$
+  \item $|\beta| = 1$: $\beta_1 = (1,0)$, $\beta_2 = (0,1)$
+  \item $|\gamma| = 2$: $\gamma_1 = (1,1)$, $\gamma_2 = (2,0)$, $\gamma_3 = (0,2)$
+  \item $|\delta| = 3$: $\delta_1 = (3,0)$, $\delta_2 = (2,1)$, $\delta_3 = (1,2)$, $\delta_4 = (0,3)$
+\end{itemize}
+Recall that
+\[\partial^\alpha = \partial_1^{\alpha_1}\partial_2^{\alpha_2}\cdots\partial_n^{\alpha_n}, \qquad \text{e.g.\ } \partial^{\delta_2} = \partial^{(2,1)} = \partial_1^2\partial_2,\]
+and
+\[\alpha! = \alpha_1!\cdots\alpha_n!, \qquad \text{e.g.\ } \gamma_2! = (2,0)! = 2\cdot 1 = 2.\]
+So:
+\[
+\begin{aligned}
+f(\bar x + h) = &\ f(\bar x) && (\alpha) \\
+&+ \partial_1 f(\bar x)h_1 + \partial_2 f(\bar x)h_2 && (\beta_1, \beta_2)\\
+&+ \partial_1\partial_2 f(\bar x)h_1h_2 + \partial_1^2 f(\bar x)\frac{h_1^2}{2} + \partial_2^2 f(\bar x)\frac{h_2^2}{2} && (\gamma_1, \gamma_2, \gamma_3)\\
+&+ \partial_1^3 f(\bar x)\frac{h_1^3}{6} + \partial_1^2\partial_2 f(\bar x)\frac{h_1^2h_2}{2} && (\delta_1, \delta_2)\\
+&+ \partial_1\partial_2^2 f(\bar x)\frac{h_1h_2^2}{2} + \partial_2^3 f(\bar x)\frac{h_2^3}{6} && (\delta_3, \delta_4)\\
+&+ o(|h|^3)
+\end{aligned}
+\]
+\end{exercisesolution}
+
+\begin{ainote}
+Corsin writes the recall line as
+$\partial^\alpha = \partial_{\alpha_1}\partial_{\alpha_2}\cdots\partial_{\alpha_n}$ with the
+example $\partial^{(2,1)} = \partial_2\partial_1$. Read literally that is the wrong object --- a
+multi-index $\alpha$ records \textit{how many times} each $\partial_i$ is applied, so
+$\partial^{(2,1)} = \partial_1^2\partial_2$. His own expansion above uses
+$\partial_1^2\partial_2 f(\bar x)\,\tfrac{h_1^2h_2}{2}$ for $\delta_2$, confirming the intended
+meaning. Corrected above.
+\end{ainote}
+
+% Sonnet 5 (Medium)
+\subsection{The working formula}
+
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 11
+We can rewrite this as
+\[f(\bar x + h) = \sum_{\ell=0}^{k}\frac{1}{\ell!}\big(h_1\partial_1 + h_2\partial_2\big)^\ell f(\bar x).\]
+
+\begin{theorem}[Taylor working formula]
+\label{thm:taylor_working_formula}
+For $f \in C^k(U \subseteq \mathbb{R}^n, \mathbb{R})$ with $\bar x + th \in U$ for all
+$t \in [0,1]$:
+\[f(\bar x + h) = \sum_{\ell=0}^{k}\frac{1}{\ell!}\left(\sum_{m=1}^{n} h_m\partial_m\right)^{\!\ell} f(\bar x) + o(|h|^k)\]
+\end{theorem}
+
+\begin{ainote}
+Both sums in \cref{thm:taylor_working_formula} are written with lower limit $\ell = 1$ (resp.\
+starting index) in the source. The $\ell = 0$ term is $f(\bar x)$ itself, which the explicit
+expansion above does include, so the lower limit must be $0$. Corrected above; compare the
+$|\alpha| = 0$ line of \cref{ex:taylor_maximal_expansion}, which is the same term written in
+multi-index form.
+\end{ainote}
+
+% Supplement: Toby Lane/class-document.pdf, §3.4.4
+\begin{remark}[Two ways to weight the same expansion]
+\Cref{ex:taylor_maximal_expansion} above and \cref{thm:taylor_working_formula} look like they
+disagree on how heavily mixed partial derivatives are weighted --- e.g.\ the coefficient of
+$h_1^2h_2$ is $\tfrac12$ in the explicit multi-index expansion, but expanding the working formula
+$\tfrac{1}{\ell!}(h_1\partial_1+h_2\partial_2)^\ell$ by the multinomial theorem produces a
+coefficient $\tfrac{\ell!}{\alpha!} \cdot \tfrac{1}{\ell!} = \tfrac{1}{\alpha!}$ for the term
+$h^\alpha\partial^\alpha f$, which for $\alpha = (2,1)$ (so $\ell = |\alpha| = 3$) is
+$\tfrac{1}{2!\,1!} = \tfrac12$ as well --- they agree, but for two different reasons. The working
+formula's $\tfrac{1}{\ell!}$ weights \emph{all} $\ell$-fold products of partials \emph{globally},
+including repeated ones like $\partial_1\partial_2$ appearing in more than one order in the
+multinomial expansion of $(h_1\partial_1+h_2\partial_2)^\ell$; by Schwarz's lemma (equality of
+mixed partial derivatives, valid here since $f \in C^k$) those repeats collapse onto the
+same $\partial^\alpha$, and it is exactly this collapsing --- a multinomial coefficient
+$\ell!/\alpha!$ of them --- that turns the global $1/\ell!$ into the per-term $1/\alpha!$ seen in
+\Cref{ex:taylor_maximal_expansion}. In short: $1/\ell!$ weights \emph{paths} through the mixed
+partial derivatives, while $1/\alpha!$ weights the \emph{distinct} derivatives themselves once
+those paths are identified with each other.
+\end{remark}
+
+% Sonnet 5 (Medium)
+\subsection{A worked example}
+
+% Source: Corsin Nick/Class Notes/Week 4.pdf, pp. 11--12
+\begin{exercise}[Taylor expansion of $(x+y^2)e^{-x^2-y^2}$]
+\label{ex:taylor_explicit_example}
+Compute the Taylor expansion of
+\[f : \mathbb{R}^2\to\mathbb{R}, \qquad (x,y) \mapsto (x+y^2)e^{-x^2-y^2}\]
+around $(0,0)$ up to third order.
+\end{exercise}
+
+% Kept inline: solved directly in Corsin Nick/Class Notes/Week 4.pdf, pp. 11--12.
+\begin{exercisesolution}[\cref{ex:taylor_explicit_example}, cumbersome solution]
+Calculate all partial derivatives up to third order and use the definition. (Please never do
+this.)
+\end{exercisesolution}
+
+\begin{exercisesolution}[\cref{ex:taylor_explicit_example}, the easy solution]
+The substitution and multiplication rules we used in Analysis 1 still apply:
+\[
+\begin{aligned}
+(x+y^2)e^{-x^2-y^2} &= (x+y^2)\left(1 - x^2 - y^2 + o(|x^2+y^2|)\right) \\
+&= x + y^2 - x^3 - xy^2 + o\!\left(|(x,y)|^3\right)
+\end{aligned}
+\]
+\end{exercisesolution}
+
+% Supplement: Sascha Brack/Class Notes/Week_05_Notes_Monday.pdf, pp. 9--11
+\begin{example}[More Taylor expansions via Analysis 1]
+\label{ex:more_taylor_via_analysis1}
+The substitution and multiplication rules from Analysis 1 often make expansions much faster than using the formula directly, provided the expansion is around $(0,0)$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Expand $f(x,y) := \cos(x)e^y$ up to second order around $(0,0)$:
+  \[f(x,y) = \left(1 - \frac{x^2}{2} + o(|(x,y)|^2)\right)\left(1 + y + \frac{y^2}{2} + o(|(x,y)|^2)\right) = 1 + y - \frac{1}{2}x^2 + \frac{1}{2}y^2 + o(|(x,y)|^2).\]
+  \item Expand $f(x,y) := \cos(x+y^2)$ up to second order around $(0,0)$. Setting $z := x+y^2$:
+  \[\cos(z) = 1 - \frac{z^2}{2} + o(|z|^2) \implies \cos(x+y^2) = 1 - \frac{(x+y^2)^2}{2} + o(|(x,y)|^2) = 1 - \frac{1}{2}x^2 + o(|(x,y)|^2),\]
+  where terms like $xy^2$ and $y^4$ are absorbed into $o(|(x,y)|^2)$ since their total degree is strictly greater than $2$.
+  \item Expand $f(x,y) := \sqrt{y} e^{\sqrt{x}}$ to first order around $(1,1)$. Here the formula is better since the expansion point is not the origin.
+  We have $f(1,1) = e$.
+  $\partial_1 f(x,y) = \sqrt{y} e^{\sqrt{x}} \frac{1}{2\sqrt{x}} \implies \partial_1 f(1,1) = \frac{e}{2}$.
+  $\partial_2 f(x,y) = \frac{1}{2\sqrt{y}} e^{\sqrt{x}} \implies \partial_2 f(1,1) = \frac{e}{2}$.
+  Writing $h = (h_1,h_2) = (x-1, y-1)$:
+  \[f(1+h_1, 1+h_2) = f(1,1) + \partial_1 f(1,1)h_1 + \partial_2 f(1,1)h_2 + o(|h|) = e + \frac{e}{2}h_1 + \frac{e}{2}h_2 + o(|h|).\]
+\end{enumerate}
+\end{example}
+
+% Sonnet 5 (Medium)
+\subsection{Second-order form and the Hessian}
+
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 12
+\begin{remark}[Second-order Taylor formula with Hessian]
+\label{rem:second_order_taylor_hessian}
+The second-order Taylor approximation of $f \in C^2(\mathbb{R}^n,\mathbb{R})$ around
+$x_0 \in \mathbb{R}^n$ can be expressed compactly as
+\[f(x_0+x) = f(x_0) + \nabla f(x_0)\cdot x + \tfrac{1}{2}x\transp \cdot \Hess f(x_0)\cdot x + o(|x|^2)\]
+where
+\[\Hess f(x_0) = \big(\partial_i\partial_j f(x_0)\big)_{i,j=1,\dots,n}\]
+is the \newterm{Hessian matrix} (\germanterm{Hesse-Matrix}) of $f$.
+\end{remark}
+
+% Generator: Claude Opus 5 (High)
+This is the form the rest of the course actually uses, and it is worth reading term by term as
+a sequence of ever-better approximations to $f$ near $x_0$:
+\begin{itemize}
+  \item the \textbf{constant} term $f(x_0)$ --- the crudest guess, exact only at $x_0$;
+  \item the \textbf{linear} term $\nabla f(x_0)\cdot x$ --- the tangent plane, i.e.\ exactly
+    the differential of \cref{def:differentiable};
+  \item the \textbf{quadratic} term $\tfrac12 x\transp\Hess f(x_0)\,x$ --- the first term that
+    sees curvature, and the one that decides in \cref{sec:hessian_test} whether a critical point is a minimum, a
+    maximum, or a saddle.
+\end{itemize}
+By \cref{thm:schwarz_mixed_partials} the Hessian is symmetric, which is what makes that
+last decision a question about the \emph{signs of its eigenvalues} rather than anything harder.
+
+\begin{center}
+% Generator: Claude Opus 5 (High) --- FIG-W04-05: the three approximations, in one variable,
+% where they can actually be drawn. f(x) = 1 + 0.55x - 0.5x^2 + 0.28x^3 about x_0 = 0, so
+% f(0) = 1, f'(0) = 0.55, f''(0) = -1: constant 1, tangent 1 + 0.55x, parabola 1 + 0.55x - 0.5x^2.
+\begin{tikzpicture}[>=Latex, scale=1.25]
+  \draw[->] (-1.7,0) -- (2.1,0) node[right, font=\footnotesize] {$x$};
+  \draw[->] (0,-0.3) -- (0,2.6) node[above, font=\footnotesize] {$y$};
+  \draw (0,0.05) -- (0,-0.05) node[below, font=\scriptsize] {$x_0$};
+
+  % order 0
+  \draw[gray!70, thick, dashed] (-1.6,1) -- (2.0,1);
+  \node[gray!70!black, font=\scriptsize, anchor=west] at (2.02,1.0) {order $0$};
+
+  % order 1: tangent
+  \draw[green!50!black, thick, domain=-1.6:2.0, samples=2]
+    plot (\x, {1 + 0.55*\x});
+  \node[green!50!black, font=\scriptsize, anchor=west] at (2.02,2.1) {order $1$};
+
+  % order 2: parabola
+  \draw[orange!90!black, thick, domain=-1.3:1.85, samples=60, smooth]
+    plot (\x, {1 + 0.55*\x - 0.5*\x*\x});
+  \node[orange!90!black, font=\scriptsize, anchor=west] at (1.88,0.40) {order $2$};
+
+  % the function itself
+  \draw[blue!75!black, very thick, domain=-1.35:1.75, samples=90, smooth]
+    plot (\x, {1 + 0.55*\x - 0.5*\x*\x + 0.28*\x*\x*\x});
+  \node[blue!75!black, font=\scriptsize, anchor=south east] at (-0.85,1.05) {$f$};
+
+  \fill (0,1) circle (1.1pt);
+
+  \node[font=\scriptsize, align=center, anchor=north] at (0.3,-0.62)
+    {each order matches one more derivative at $x_0$,\\
+     and the error drops from $O(|x|)$ to $O(|x|^2)$ to $O(|x|^3)$};
+\end{tikzpicture}
+\end{center}
+
+In several variables the same picture holds with \qt{tangent line} replaced by \emph{tangent
+plane} and \qt{parabola} by a paraboloid, bowl-shaped or saddle-shaped according to the
+signs of the eigenvalues of $\Hess f(x_0)$ --- which is exactly the classification carried out
+in \cref{sec:hessian_test}.
+
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 12
+% (Re-cited: the reading of the three terms and the figure above are additions.)
+\begin{question}
+For $f \in C^k(U, \mathbb{R})$, do the Taylor expansions of $t \mapsto f(x_0+th)$ in $t$ and of
+$(th) \mapsto f(x_0+th)$ in $(th)$ around $0$ coincide?
+\end{question}
+
+\begin{answer}
+\textbf{Yes.} This is, in fact, how we prove the multi-dimensional Taylor approximation, and why
+we need the assumption $x_0 + th \in U$ for all $t \in [0,1]$.
+\end{answer}
+
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 13
+\begin{exercise}[Proof of second-order Taylor formula]
+\label{ex:hessian_taylor_proof}
+Prove the formula from above:
+\[f(x_0+h) = f(x_0) + \nabla f(x_0)h + \tfrac{1}{2}h\transp \Hess f(x_0)h + \dots\]
+for $f \in C^k(U,\mathbb{R})$ with $x_0 + th \in U$ for all $t \in [0,1]$.
+\end{exercise}
+
+% Kept inline: solved directly in Corsin Nick/Class Notes/Week 4.pdf, p. 13.
+\begin{exercisesolution}[Proof of \cref{ex:hessian_taylor_proof}]
+We expand $t \mapsto f(x_0+th)$ in $t$:
+\[
+\begin{aligned}
+f(x_0+th) &= f(x_0) + t\left.\frac{d}{dt}\right|_{t=0}f(x_0+th) + \frac{t^2}{2}\left.\frac{d^2}{dt^2}\right|_{t=0}f(x_0+th) + o(|th|^2) \\
+&= f(x_0) + t\sum_{i=1}^{n}\partial_i f(x_0)h_i + \frac{t^2}{2}\frac{d}{dt}\left.\sum_{i=1}^{n}\partial_i f(x_0+th)h_i\right|_{t=0} + o(|h|^2) \\
+&= f(x_0) + t\nabla f(x_0)h + \frac{t^2}{2}\sum_{i,j=1}^{n}\partial_i\partial_j f(x_0)h_ih_j + o(|th|^2) \\
+&= f(x_0) + t\nabla f(x_0)h + \frac{t^2}{2}h\transp \Hess f(x_0)h + o(|th|^2)
+\end{aligned}
+\]
+Setting $t = 1$ gives the result.
+\end{exercisesolution}

@@ -1,0 +1,107 @@
+% Originally: content/week-04.tex, \section{Chain rule} (Corsin Week 4, Monday)
+
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 5
+\section{Chain rule}
+\label{sec:chain_rule}
+
+\begin{theorem}[Chain rule]
+\label{thm:chain_rule}
+The \newterm{chain rule} (\germanterm{Kettenregel}) states: for
+$f : U \subseteq \mathbb{R}^n \to \mathbb{R}^m$, $g : V \subseteq \mathbb{R}^m \to \mathbb{R}^d$
+differentiable, it holds:
+\[D(g\circ f)(x) = Dg(f(x))\,Df(x).\]
+The same identity holds for the corresponding Jacobi matrices, where the composition on the
+right becomes an ordinary matrix product.
+\end{theorem}
+
+% Generator: Claude Opus 5 (High)
+\begin{ainote}
+Corsin states the chain rule without proof, as does the lecture at this point. The one-line
+reason it is true is worth carrying, though: differentiability says $f$ and $g$ are each well
+approximated by a linear map near the relevant point, and composing two approximations composes
+the linear maps, with the error terms of the two compositions still $o(|h|)$. Making that
+precise is the whole proof, and it is the same argument as in one variable.
+\end{ainote}
+
+% Supplement: Sascha Brack/Class Notes/Week_04_Notes_Friday_Updated.pdf, pp. 7--10
+\begin{remark}[The chain rule as a sum over paths]
+\label{rem:chain_rule_paths}
+Stated as $D(g\circ f) = Dg\cdot Df$ the rule is compact but, as Sascha Brack puts it in his
+notes, \qt{pretty abstract} --- it says nothing about \emph{why} a sum appears when you write
+it out in coordinates. His device is to draw the variables as a graph and read the formula off
+it.
+
+Write $x \in \mathbb{R}^n \xmapsto{\ f\ } y \in \mathbb{R}^m \xmapsto{\ g\ } z \in \mathbb{R}^k$
+and join each variable to those it feeds into. Then $x_i$ influences $z_j$ only by first moving
+some intermediate $y_\ell$, and the contribution of that route is the product of the two rates
+along it. Summing over the routes gives the chain rule:
+
+% Sonnet 5 (Medium) --- FIG-W04-03, after the variable graph on Sascha Brack's p. 10.
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.0]
+  \node (xi) at (0,2.4) {$x_i$};
+  \node (y1) at (-2.2,1.1) {$y_1$};
+  \node (y2) at (-0.7,1.1) {$y_2$};
+  \node (yd) at (0.75,1.1) {$\cdots$};
+  \node (ym) at (2.2,1.1) {$y_m$};
+  \node (zj) at (0,-0.2) {$z_j$};
+
+  \foreach \t in {y1,y2,ym}{\draw[->, blue!70!black] (xi) -- (\t);}
+  \foreach \s in {y1,y2,ym}{\draw[->, orange!90!black] (\s) -- (zj);}
+
+  \node[blue!70!black, font=\scriptsize, above left] at (-1.25,1.75)
+    {$\dfrac{\partial y_\ell}{\partial x_i}$};
+  \node[orange!90!black, font=\scriptsize, below left] at (-1.25,0.55)
+    {$\dfrac{\partial z_j}{\partial y_\ell}$};
+\end{tikzpicture}
+\end{center}
+
+\[\frac{\partial z_j}{\partial x_i}
+  \;=\; \sum_{\ell=1}^{m}
+  \underbrace{\frac{\partial z_j}{\partial y_\ell}}_{(\Jac g)_{j\ell}}
+  \underbrace{\frac{\partial y_\ell}{\partial x_i}}_{(\Jac f)_{\ell i}}
+  \;=\; \big(\Jac g(f(x))\,\Jac f(x)\big)_{ji}.\]
+
+The right-hand equality is just the definition of matrix multiplication --- which is the point:
+\textbf{matrix multiplication is a sum over paths}, and the chain rule looks like a product of
+matrices precisely because composing functions composes those graphs. Sascha's summary is that
+computing $\partial z_j/\partial x_i$ this way is nothing more than \qt{computing single
+components of the chain rule}.
+
+The reading is worth having because it makes the coordinate form reconstructible instead of
+memorised: count the intermediate variables, one term each, each term a product of two factors,
+and the index that is summed over is the one belonging to the middle layer. It is also the
+form in which the rule is actually used in physics --- compare
+\Cref{sec:chain_rule_along_path}, which is this picture with a single intermediate layer
+$\gamma_1,\dots,\gamma_n$ and a single source variable $t$.
+\end{remark}
+
+\begin{aiexample}[Chain Rule for Vector Fields]
+% Generator: Gemini 3.6 Flash (Medium)
+Let $f(u,v) := u^2 + v^2$ and let $g(r,\theta) := (r\cos\theta, r\sin\theta)\transp$. The composite function is $(f \circ g)(r,\theta) = r^2\cos^2\theta + r^2\sin^2\theta = r^2$.
+By the multi-variable Chain Rule, the Jacobian matrix of $f \circ g$ satisfies:
+\[
+D(f \circ g)(r,\theta) = Df(g(r,\theta)) \cdot Dg(r,\theta) = \begin{pmatrix} 2r\cos\theta & 2r\sin\theta \end{pmatrix} \begin{pmatrix} \cos\theta & -r\sin\theta \\ \sin\theta & r\cos\theta \end{pmatrix} = \begin{pmatrix} 2r & 0 \end{pmatrix},
+\]
+which matches the direct calculation $\frac{\partial}{\partial r}(r^2) = 2r$ and $\frac{\partial}{\partial \theta}(r^2) = 0$.
+\end{aiexample}
+
+% Source: Corsin Nick/Class Notes/Week 4.pdf, pp. 5--6
+\begin{exercise}[Jacobian of a composite map]
+\label{ex:chain_rule_computation}
+Compute $\Jac(g\circ f)$ for
+\[f : \mathbb{R}^3\to\mathbb{R}^2,\ x \mapsto (x_1x_2,\ x_2+x_3), \qquad g : \mathbb{R}^2\to\mathbb{R}^2,\ x \mapsto (e^{x_1},\ x_1x_2).\]
+\end{exercise}
+
+% Kept inline: solved directly in Corsin Nick/Class Notes/Week 4.pdf, pp. 5--6.
+\begin{exercisesolution}[\cref{ex:chain_rule_computation}]
+We have
+\[\Jac f(x) = \begin{pmatrix} x_2 & x_1 & 0 \\ 0 & 1 & 1\end{pmatrix}, \qquad \Jac g(x) = \begin{pmatrix} e^{x_1} & 0 \\ x_2 & x_1 \end{pmatrix}.\]
+So:
+\[
+\begin{aligned}
+\Jac(g\circ f) &= \begin{pmatrix} e^{x_1x_2} & 0 \\ x_2+x_3 & x_1x_2\end{pmatrix}\begin{pmatrix} x_2 & x_1 & 0 \\ 0 & 1 & 1\end{pmatrix} \\
+&= \begin{pmatrix} x_2e^{x_1x_2} & x_1e^{x_1x_2} & 0 \\ x_2^2 + x_2x_3 & 2x_1x_2 + x_1x_3 & x_1x_2 \end{pmatrix}
+\end{aligned}
+\]
+\end{exercisesolution}

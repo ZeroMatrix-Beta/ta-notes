@@ -239,3 +239,63 @@ notes).
 Notice that $(\Psi\cdot\Phi)^i_j$ ($i$-th row, $j$-th column) is the scalar product of $\Psi^i$
 and $\Phi_j$, which are vectors of $\mathbb{R}^n$. Apply Cauchy--Schwarz to each of them.
 \end{exercise}
+
+% Originally: content/week-04.tex, \exercisesheet{4}
+% Source: exercises/Ex4_Analysis2_eng.pdf
+
+\begin{exercise}[4.3 --- $p$-norms \textnormal{(semi-important; parts 4 and 6 important)}]
+\label{ex:4.3}
+For $p \geq 1$ and $x \in \mathbb{R}^n$ define the \textbf{$p$-norm} of $x$ as
+\[|x|_p := \Big(\sum_{i=1}^{n} |x_i|^p\Big)^{1/p}.\]
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item For $n = 2$ and $p = 1, 2, 10$ sketch the sets $\{x \in \mathbb{R}^2 : |x|_p \leq 1\}$.
+  \item For a given $x \in \mathbb{R}^n$, compute the limit
+    $|x|_\infty := \lim_{p\to\infty}|x|_p$.
+  \item Using an appropriate inequality that you have seen in class, prove that
+    \[\Big(\sum_{i=1}^{n} a_i^{p-1}b_i\Big)^2 \leq \Big(\sum_{i=1}^{n}a_i^p\Big)\Big(\sum_{i=1}^{n}a_i^{p-2}b_i^2\Big),\]
+    whenever $a_i, b_i$ are $n$-tuples of positive numbers.
+  \item Fix $x, y \in \mathbb{R}^n$ and consider the function $f : [0,1] \to \mathbb{R}$ defined
+    as
+    \begin{equation*}
+    f(t) := |tx + (1-t)y|_p = \Big(\sum_{i=1}^{n}|tx_i + (1-t)y_i|^p\Big)^{1/p}. \tag{1}
+    \end{equation*}
+    Show that $f$ is convex. You may assume that the coordinates of $x$ and $y$ are all strictly
+    positive and use the inequality of the previous point.
+  \item Deduce from the previous point that the triangular inequality holds, i.e.\
+    $|x+y|_p \leq |x|_p + |y|_p$ for all $x,y \in \mathbb{R}^n$.
+  \item What happens for $p \in (0,1)$?
+\end{enumerate}
+\textit{Official hints:} \textbf{4.3.3} --- use Cauchy--Schwarz and the fact that
+$a_i^{p-1}b_i = a_i^{p/2}\cdot a_i^{(p-2)/2}b_i$. \textbf{4.3.4} --- show that $f''(t) \geq 0$; it
+is not the simplest derivative, but if you get it right the inequality in 4.3.3 will be just what
+you need. \textbf{4.3.5} --- write the convexity inequality between $x$, $y$ and the middle point
+$(x+y)/2$. To get the general case from the one with positive coordinates, observe that for
+$x \in \mathbb{R}^n$, denoting $\hat x := (|x_1|,\dots,|x_n|)$, we have
+$|x+y|_p \leq |\hat x + \hat y|_p$ and $|\hat x|_p = |x|_p$ for all $x,y \in \mathbb{R}^n$.
+\end{exercise}
+
+% Originally: content/exercise-sheets/week-04.tex, problem 4.4 --- never previously built
+% Source: exercises/Ex4_Analysis2_eng.pdf
+
+\begin{exercise}[4.4 --- $p$-means \textnormal{(optional)}]
+\label{ex:4.4}
+For $x \in \mathbb{R}^n$ with positive coordinates and $p \neq 0$ define the \textbf{$p$-mean} as
+$$\mu_p(x) := \left(\frac{x_1^p + \dots + x_n^p}{n}\right)^{1/p}.$$
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Compute the limits $p \to \pm\infty$, $p \to 0$ and define accordingly
+    $\mu_{-\infty}(x)$, $\mu_0(x)$, $\mu_{+\infty}(x)$.
+  \item For any $n$-tuple of numbers $a_i > 0$ show that
+    $$\sum_{i=1}^{n} \frac{a_i\log(a_i)}{a_1 + \dots + a_n} \geq \log\left(\frac{a_1 \dots + a_n}{n}\right).$$
+  \item For a fixed $x$, show that the function $f : \mathbb{R}\to\mathbb{R}$, given by
+    $f(t) := \mu_t(x)$, is continuous and increasing.
+  \item Prove the Arithmetic--Geometric inequality and Arithmetic--Quadratic inequality:
+    $$n(x_1x_2\cdots x_n)^{1/n} \leq x_1 + \dots + x_n, \qquad (x_1+\dots+x_n)^2 \leq n(x_1^2+\dots+x_n^2).$$
+  \item \textbf{(*)} Is $f$ continuously differentiable in the whole $\mathbb{R}$?
+\end{enumerate}
+\textit{Official hints:} \textbf{4.4.2} --- combine the concavity of $\log(\cdot)$ and the
+Cauchy--Schwarz inequality; use the generalisation of the concavity inequality: for any concave
+$f : \mathbb{R}\to\mathbb{R}$,
+$f(\lambda_1x_1 + \dots + \lambda_nx_n) \geq \lambda_1f(x_1)+\dots+\lambda_nf(x_n)$ for all
+$x_i \in \mathbb{R}$, $0 \leq \lambda_i \leq 1$ with $\lambda_1+\dots+\lambda_n = 1$.
+\textbf{4.4.3} --- it might be more convenient to work with $\log f(t)$.
+\end{exercise}

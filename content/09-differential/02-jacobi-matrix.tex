@@ -1,0 +1,231 @@
+% Originally: content/week-04.tex, \section{The Jacobi matrix} (Corsin Week 4, Monday)
+
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 3
+\section{The Jacobi matrix}
+\label{sec:jacobi_matrix}
+
+Since $DF_{x_0} : \mathbb{R}^n \to \mathbb{R}^m$ (\cref{def:differentiable}) is a linear map, there is a \textbf{1--1
+correspondence with a matrix once a basis is fixed}! In the standard basis of $\mathbb{R}^n$,
+$(e_1,\dots,e_n)$, this is the \newterm{Jacobi matrix} (\germanterm{Jacobi-Matrix}):
+\[DF_x \;\cong\; \Jac F(x) = \begin{pmatrix} \dfrac{\partial F_1}{\partial x_1} & \cdots & \dfrac{\partial F_1}{\partial x_n} \\[1ex] \vdots & \ddots & \vdots \\[1ex] \dfrac{\partial F_m}{\partial x_1} & \cdots & \dfrac{\partial F_m}{\partial x_n}\end{pmatrix}\]
+($m$ rows, $n$ columns), where we wrote $F(x) = (F_1, \dots, F_m)\transp$ and
+\[\frac{\partial F}{\partial x_i} =: \partial_i F(x)\]
+is the \newterm{$i$-th partial derivative} (\germanterm{partielle Ableitung}) at $x$:
+\[\partial_i F(x) = \lim_{s\to 0}\frac{F(x+se_i)-F(x)}{s}.\]
+This defines a function $\partial_i F : U \to \mathbb{R}^m$. If $F$ is differentiable, then
+\[\partial_i F(x) = DF_x(e_i).\]
+
+\begin{importantremark}
+The partial derivatives can exist even if $F : U \to \mathbb{R}^m$ is not differentiable (recall \cref{ex:partial_derivatives_not_continuous})!
+\end{importantremark}
+
+% Sonnet 5 (Medium)
+\begin{aiexample}[All partial derivatives exist, yet $f$ is not even continuous]
+\label{ex:partial_derivatives_not_continuous}
+% Generator: Claude Sonnet 5 (Medium)
+Let $f : \mathbb{R}^2 \to \mathbb{R}$ be defined by
+\[f(x,y) := \begin{cases} \dfrac{xy}{x^2+y^2} & (x,y) \neq (0,0), \\ 0 & (x,y) = (0,0). \end{cases}\]
+Along each axis, $f$ vanishes identically ($f(x,0) = f(0,y) = 0$), so both partial derivatives at
+the origin exist and equal $0$:
+\[\partial_x f(0,0) = \lim_{s\to 0}\frac{f(s,0)-f(0,0)}{s} = 0, \qquad \partial_y f(0,0) = 0.\]
+Yet $f$ is not even continuous at $(0,0)$: along the diagonal $y=x$, $f(x,x) = \tfrac{x^2}{2x^2} =
+\tfrac12$ for all $x \neq 0$, so $f(x,x) \to \tfrac12 \neq 0 = f(0,0)$ as $x \to 0$. By
+\Cref{prop:differentiable_implies_continuous}, $f$ is therefore not differentiable at $(0,0)$,
+even though both partial derivatives exist there.
+\end{aiexample}
+
+% Supplement: Sascha Brack/Class Notes/Week_03_Notes_Monday.pdf, p. 7
+\begin{remark}[The same expression, squared, behaves completely differently]
+\label{rem:continuity_contrast_pair}
+Sascha Brack pairs the function above with one that looks almost identical, as a test of whether
+you can tell them apart:
+\[f_1(x,y) := \frac{xy}{x^2+y^2}, \qquad\qquad f_2(x,y) := \frac{x^2y^2}{x^2+y^2},\]
+both extended by $0$ at the origin. Substituting $x = r\cos\theta$, $y = r\sin\theta$ settles
+both at once:
+\[f_1 = \frac{r^2\cos\theta\sin\theta}{r^2} = \cos\theta\sin\theta,
+\qquad\qquad
+f_2 = \frac{r^4\cos^2\theta\sin^2\theta}{r^2} = r^2\cos^2\theta\sin^2\theta.\]
+In $f_1$ every $r$ cancels: the function is constant along each ray and takes a different
+constant on different rays, so no limit exists and $f_1$ is discontinuous at the origin. In
+$f_2$ a factor $r^2$ survives, and since $|\cos^2\theta\sin^2\theta| \leq 1$ we get
+$|f_2| \leq r^2 \to 0$ \emph{uniformly in $\theta$} --- so $f_2$ is continuous at the origin.
+
+The pair is worth doing once because it shows what the polar substitution is actually testing.
+The question is never \qt{does the expression go to zero along each fixed ray?} --- $f_1$ does
+not even do that --- but \textbf{does the $\theta$-dependence get killed by a positive power of
+$r$?} If the $r$'s cancel completely, the direction survives into the limit and there is none.
+This is the same test used in \cref{q:week08_q4} on the repetition quiz, and the reason
+step 3 of \cref{rem:differentiability_recipe} insists on \qt{uniformly in $\theta$}.
+\end{remark}
+
+% Sonnet 5 (Medium)
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.0]
+  \draw[->] (-1.6,0) -- (1.6,0) node[right, font=\small] {$x$};
+  \draw[->] (0,-1.6) -- (0,1.6) node[above, font=\small] {$y$};
+  \draw[orange!90!black, thick, ->] (0,0) -- (1.3,0) node[below right, font=\scriptsize] {$f\equiv0$};
+  \draw[orange!90!black, thick, ->] (0,0) -- (0,1.3) node[above left, font=\scriptsize] {$f\equiv0$};
+  \draw[purple, thick, ->] (0,0) -- (1.1,1.1) node[above right, font=\scriptsize] {$f\equiv\tfrac12$};
+\end{tikzpicture}
+\end{center}
+
+% Supplement: Sascha Brack/Class Notes/Week_04_Notes_Monday_Updated.pdf, p. 4
+\begin{center}
+\begin{tikzcd}[row sep=3.5em, column sep=1.5em]
+  & \begin{tabular}{c}\textbf{Differentiable}\\($Df_{x_0}$ exists)\end{tabular} \arrow[dl, Rightarrow] \arrow[dr, Rightarrow] & \\
+  \begin{tabular}{c}\textbf{Partial derivatives}\\exist\end{tabular} & & \begin{tabular}{c}\textbf{Directional derivatives}\\exist\end{tabular} \\
+  \begin{tabular}{c}\textbf{Partial derivatives}\\exist\\and are continuous\end{tabular} \arrow[u, Rightarrow] \arrow[uur, Rightarrow] \arrow[rr, Leftrightarrow] & & \begin{tabular}{c}\textbf{Directional derivatives}\\exist\\and are continuous\end{tabular} \arrow[u, Rightarrow] \arrow[uul, Rightarrow]
+\end{tikzcd}
+\end{center}
+
+\subsection{Examples}
+
+% Transition: Claude Opus 5 (High)
+The three examples that follow are the three shapes the Jacobian takes, and it is worth naming
+them, because the layout of the matrix changes completely between them while the underlying
+object --- the linear map $DF_{x_0}$ --- does not.
+\begin{itemize}
+  \item \textbf{A curve} ($n=1$, $m$ arbitrary): one column, so $\Jac\gamma(t)$ is a
+    \emph{column vector}, the velocity.
+  \item \textbf{A scalar field} ($n$ arbitrary, $m=1$): one row, so $\Jac f(x)$ is a
+    \emph{row vector} --- the transposed gradient, $(\nabla f)\transp$.
+  \item \textbf{A vector field} (both $>1$): the full $m \times n$ matrix, whose columns are the
+    partial derivatives and whose rows are the gradients of the components.
+\end{itemize}
+The gradient being a row and the velocity a column is not a convention to memorise: it follows
+from \qt{$m$ rows, $n$ columns} and nothing else. Confusing the two is the commonest source of
+shape errors when the chain rule is applied later in this chapter.
+
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 4
+\begin{example}[Derivative of a curve]
+\[\gamma : \mathbb{R}\to\mathbb{R}^2, \qquad t \mapsto \begin{pmatrix}\cos t \\ \sin t\end{pmatrix}\]
+What is $\gamma'(\tfrac{\pi}{4}) := D\gamma_{\pi/4}$?
+\[\gamma'\!\left(\tfrac{\pi}{4}\right) = \begin{pmatrix}\partial_t\gamma_1(\pi/4) \\ \partial_t\gamma_2(\pi/4)\end{pmatrix} = \begin{pmatrix}-1/\sqrt{2} \\ 1/\sqrt{2}\end{pmatrix}\]
+\end{example}
+
+\begin{aiexample}[Jacobian Matrix of Polar Coordinates]
+% Generator: Gemini 3.6 Flash (Medium)
+Let $f \colon (0,\infty) \times (0,2\pi) \to \mathbb{R}^2$ be the polar coordinate map $f(r,\theta) := (r\cos\theta, r\sin\theta)\transp$. The Jacobian matrix $\Jac f(r,\theta)$ is:
+\[
+\Jac f(r,\theta) = \begin{pmatrix} \dfrac{\partial f_1}{\partial r} & \dfrac{\partial f_1}{\partial \theta} \\[1ex] \dfrac{\partial f_2}{\partial r} & \dfrac{\partial f_2}{\partial \theta} \end{pmatrix} = \begin{pmatrix} \cos\theta & -r\sin\theta \\ \sin\theta & r\cos\theta \end{pmatrix}.
+\]
+Its determinant is $\det \Jac f(r,\theta) = r\cos^2\theta + r\sin^2\theta = r > 0$.
+\end{aiexample}
+
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.3]
+  \draw[->] (-1.4,0) -- (1.4,0) node[right] {$x$};
+  \draw[->] (0,-1.4) -- (0,1.4) node[above] {$y$};
+  \draw[thick] (0,0) circle (1.0);
+  \coordinate (P) at (0.707, 0.707);
+  \draw[dotted, orange!90!black, thick] (0,0) -- (P);
+  \fill[orange!90!black] (P) circle (2pt) node[above right, font=\footnotesize] {$\gamma(\pi/4)$};
+  \draw[orange!90!black, ultra thick, ->] (P) -- ++(-0.6, 0.6) node[above left, font=\small] {$\gamma'(\pi/4)$};
+\end{tikzpicture}
+\end{center}
+
+This vector is the \textbf{velocity of the curve} (\germanterm{Geschwindigkeit}) at
+$t = \tfrac{\pi}{4}$; its length $|\gamma'(t)|$ is the \textbf{speed}. We get that
+\[\gamma\!\left(\tfrac{\pi}{4}+h\right) = \frac{1}{\sqrt{2}}\begin{pmatrix}1\\1\end{pmatrix} + \frac{h}{\sqrt{2}}\begin{pmatrix}-1\\1\end{pmatrix} + o(|h|).\]
+
+\begin{ainote}
+Corsin calls $\gamma'(\tfrac{\pi}{4})$ the \qt{speed} of the curve. Strictly, $\gamma'(t)$ is the
+\emph{velocity} --- a vector, carrying both a direction and a magnitude --- while the speed is
+the scalar $|\gamma'(t)|$, here $|(-1,1)|/\sqrt2 = 1$. Since the display below uses the vector,
+the distinction matters; corrected above.
+\end{ainote}
+
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 4
+From this example, we see that the \textbf{column} vectors of the Jacobian are the partial
+derivatives:
+\[\Jac F(x) = \left(\frac{\partial F}{\partial x_1}\ \Big|\ \cdots\ \Big|\ \frac{\partial F}{\partial x_n}\right)\]
+and therefore, in the canonical basis, with $v := (v_1,\dots,v_n)\transp$:
+\[\partial_v F(x) = DF_x(v) = \Jac F(x)\,v = \sum_{i=1}^{n} v_i\,\frac{\partial F}{\partial x_i}.\]
+
+% Source: Corsin Nick/Class Notes/Week 4.pdf, p. 5
+\begin{example}[Scalar field gradient]
+\[f : \mathbb{R}^3\to\mathbb{R}, \qquad (x,y,z) \mapsto 2x^2 + y^2 + 3z^2 - 2xyz\]
+What is $\Jac f(x,y,z)$?
+\[\Jac f(x,y,z) = (4x - 2yz,\ 2y - 2xz,\ 6z - 2xy) = \left(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, \frac{\partial f}{\partial z}\right) = (\nabla f)\transp\]
+\end{example}
+
+% Supplement: Sascha Brack/Class Notes/Week_04_Notes_Friday_Updated.pdf, p. 3
+\begin{example}[Jacobian matrix of a vector field]
+\label{ex:jacobian_vector_field}
+Consider $f : \mathbb{R}^2 \to \mathbb{R}^3$ defined by
+\[f(x,y) := \begin{pmatrix} x^2+y^2 \\ 2xy \\ e^x\sin(y) \end{pmatrix}.\]
+The partial derivatives with respect to $x$ and $y$ are the column vectors:
+\[\partial_1 f(x,y) = \begin{pmatrix} 2x \\ 2y \\ e^x\sin(y) \end{pmatrix}, \qquad \partial_2 f(x,y) = \begin{pmatrix} 2y \\ 2x \\ e^x\cos(y) \end{pmatrix}.\]
+Because these partial derivatives exist everywhere and are continuous, $f$ is differentiable on all of $\mathbb{R}^2$. The differential $Df_{(x_0,y_0)}$ is represented by the $3 \times 2$ Jacobian matrix:
+\[\Jac f(x_0,y_0) = \begin{pmatrix} 2x_0 & 2y_0 \\ 2y_0 & 2x_0 \\ e^{x_0}\sin(y_0) & e^{x_0}\cos(y_0) \end{pmatrix}.\]
+\end{example}
+
+From this, we see that the \textbf{rows} of the Jacobian are the \newterm{gradients}
+(\germanterm{Gradient}):
+\[\Jac F(x) = \begin{pmatrix} \nabla F_1 \\ \hline \vdots \\ \hline \nabla F_m \end{pmatrix}\]
+
+\begin{ainote}
+Corsin's sentence reads ``the columns of the Jacobian are the gradients'', but the displayed
+matrix stacks $\nabla F_1, \dots, \nabla F_m$ as rows --- which is the correct statement, and
+consistent with $(\nabla f)\transp$ just above. Corrected to ``rows''.
+\end{ainote}
+
+% Supplement: Sascha Brack/Class Notes/Week_04_Notes_Monday_Updated.pdf, pp. 10--11
+\begin{example}[A function that is differentiable but not $C^1$]
+\label{ex:differentiable_not_c1}
+Let $f : \mathbb{R}^2 \to \mathbb{R}$ be defined by
+\[
+f(x,y) := \begin{cases}
+  (x^2+y^2)\sin\left(\dfrac{1}{\sqrt{x^2+y^2}}\right), & \text{if } (x,y) \neq (0,0), \\
+  0, & \text{if } (x,y) = (0,0).
+\end{cases}
+\]
+We claim that $f$ is differentiable at $(0,0)$ with $Df_{(0,0)} = (0, 0)$, but the partial derivatives are not continuous at $(0,0)$. 
+
+\textbf{Step 1: Differentiability at $(0,0)$.} We use the definition of the differential. Let $L = (0, 0)$. We need to show that
+\[
+  \lim_{h \to (0,0)} \frac{f(h_1, h_2) - f(0,0) - L\begin{pmatrix}h_1\\h_2\end{pmatrix}}{\|h\|} = 0.
+\]
+Plugging in the definitions and changing to polar coordinates $(h_1, h_2) = (r\cos\theta, r\sin\theta)$ with $r = \|h\| = \sqrt{h_1^2+h_2^2}$:
+\[
+  \lim_{r \to 0} \frac{r^2 \sin(1/r) - 0 - 0}{r} = \lim_{r \to 0} r \sin(1/r) = 0.
+\]
+The sine term is bounded between $-1$ and $1$, so the limit evaluates to $0$. Thus, $f$ is differentiable at $(0,0)$ and $Df_{(0,0)} = (0, 0)$, which implies $\partial_1 f(0,0) = 0$ and $\partial_2 f(0,0) = 0$.
+
+\textbf{Step 2: Discontinuity of partial derivatives.} Let us compute $\partial_1 f(x,y)$ for $(x,y) \neq (0,0)$. Using the product and chain rules:
+\[
+  \partial_1 f(x,y) = 2x \sin\left(\frac{1}{\sqrt{x^2+y^2}}\right) - \frac{x}{\sqrt{x^2+y^2}} \cos\left(\frac{1}{\sqrt{x^2+y^2}}\right).
+\]
+Let us choose a sequence $(x_n, y_n) := (\frac{1}{n}, 0)$ which converges to $(0,0)$ as $n \to \infty$. Then
+\[
+  \lim_{n \to \infty} \partial_1 f\left(\frac{1}{n}, 0\right) = \lim_{n \to \infty} \left[ \frac{2}{n} \sin(n) - \cos(n) \right].
+\]
+The first term vanishes, but $\lim_{n \to \infty} \cos(n)$ does not exist. Thus, $\partial_1 f$ is not continuous at $(0,0)$, and so $f$ is not continuously differentiable ($C^1$) at $(0,0)$. (By symmetry, the same holds for $\partial_2 f$).
+\end{example}
+
+% Sonnet 5 (Medium)
+
+
+% --- exercises relocated here from the dissolved sheet 4 ---
+
+% Originally: content/week-04.tex, end of the chapter
+
+\begin{aiexercise}[Differential and Linearization at $(1,0)$]
+\label{ex:ai_differential_linearization}
+% Generator: Gemini 3.6 Flash (Medium)
+Let $f(x,y) := x^2 y + \sin(xy)$ defined on $\mathbb{R}^2$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Compute the gradient $\nabla f(x,y)$ and the total differential $Df(1,0)$.
+  \item Find the linear approximation $L(x,y)$ of $f$ around the point $(1,0)$.
+\end{enumerate}
+\end{aiexercise}
+
+% Originally: content/week-04.tex, \exercisesheet{4}
+% Source: exercises/Ex4_Analysis2_eng.pdf
+
+\begin{exercise}[4.1 --- Derivative computation \textnormal{(important)}]
+\label{ex:4.1}
+Consider the function $u : (x,y) \mapsto x^{\sin(y)}$, defined for
+$(x,y) \in (0,\infty)\times\mathbb{R} \subset \mathbb{R}^2$. Compute $\partial_x u$ and
+$\partial_y u$.
+\end{exercise}

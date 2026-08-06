@@ -174,3 +174,22 @@ Consider the following subsets of $\mathbb{R}$ with the standard metric:
     becomes a union of open intervals, which is open.
 \end{enumerate}
 \end{example}
+
+% Quelle: Jérôme Paschoud/Notizen/Woche 2.1 Metrische Räume.pdf, p. 5
+\begin{exercise}[Relative openness]
+\label{ex:relative_openness_subsets}
+Let $X := (\{0\} \times \mathbb{R}) \cup (0,1)^2$ be equipped with the subspace metric from $\mathbb{R}^2$. Consider the following subsets of $X$:
+\begin{align*}
+  A &:= \{(x,y) \in \mathbb{R}^2 \mid x = 0, y \in (2,3)\} \\
+  B &:= \left\{(x,y) \in \mathbb{R}^2 \ \middle|\ \left(x - \tfrac12\right)^2 + \left(y - \tfrac12\right)^2 < \tfrac{1}{16}\right\}
+\end{align*}
+Are $A$ and $B$ open with respect to $X$? Are they open with respect to $\mathbb{R}^2$?
+\end{exercise}
+
+% Generator: Gemini 3.6 Pro
+\begin{exercisesolution}[Proof of \cref{ex:relative_openness_subsets}]
+\begin{itemize}
+  \item $A$ is \textbf{open with respect to $X$}, but \textbf{not open with respect to $\mathbb{R}^2$}. It is open in $X$ because $A = X \cap U$ where $U = (-\varepsilon, \varepsilon) \times (2,3)$ is an open set in $\mathbb{R}^2$. It is not open in $\mathbb{R}^2$ because any open ball around a point in $A$ will contain points with $x \neq 0$, which are not in $A$.
+  \item $B$ is \textbf{open with respect to both $X$ and $\mathbb{R}^2$}. $B$ is exactly the open ball $B_{1/4}((\tfrac12, \tfrac12))$ in $\mathbb{R}^2$, which is open in $\mathbb{R}^2$. Since $B \subseteq (0,1)^2 \subset X$, we have $B = X \cap B$, so $B$ is also open relative to $X$.
+\end{itemize}
+\end{exercisesolution}

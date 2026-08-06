@@ -173,3 +173,31 @@ $g(x,y) = xy/\sqrt{x^2+y^2}$ for all $(x,y) \neq (0,0)$.
 \textit{Official hint:} if a function is continuous at $0$ and $x_k \to 0$ and $y_k \to 0$, then
 $f(x_k)$ and $f(y_k)$ must converge to the same value.
 \end{exercise}
+
+% Quelle: Jérôme Paschoud/Notizen/Woche 2.2 Topologie und Stetigkeit.pdf, p. 2
+\begin{exercise}[Distance to a point is continuous]
+\label{ex:distance_to_point_continuous}
+Let $(X, d)$ be a metric space and fix $a \in X$. Show that the function $f : X \to [0,\infty)$ defined by $f(x) := d(x, a)$ is continuous.
+\end{exercise}
+
+% Generator: Gemini 3.6 Pro
+\begin{exercisesolution}[Proof of \cref{ex:distance_to_point_continuous}]
+We use $\varepsilon$--$\delta$ continuity. Let $x \in X$ and $\varepsilon > 0$. We need to find $\delta > 0$ such that for all $x' \in X$ with $d(x, x') < \delta$, we have $|f(x) - f(x')| < \varepsilon$.
+Using the reverse triangle inequality, we have
+\[|f(x) - f(x')| = |d(x, a) - d(x', a)| \leq d(x, x').\]
+Therefore, we can simply choose $\delta := \varepsilon$. Then $d(x, x') < \delta$ directly implies $|f(x) - f(x')| < \varepsilon$, meaning $f$ is continuous at $x$. Since $x$ was arbitrary, $f$ is continuous everywhere.
+\end{exercisesolution}
+
+% Quelle: Jérôme Paschoud/Notizen/Woche 2.2 Topologie und Stetigkeit.pdf, p. 3
+\begin{exercise}[Evaluation map is continuous]
+\label{ex:evaluation_map_continuous}
+Let $X := C^0([0,1])$ equipped with the supremum metric $d(f,g) := \sup_{t \in [0,1]} |f(t) - g(t)|$. Define the function $F : X \to \mathbb{R}$ by $F(f) := f(0)$. Show that $F$ is continuous.
+\end{exercise}
+
+% Generator: Gemini 3.6 Pro
+\begin{exercisesolution}[Proof of \cref{ex:evaluation_map_continuous}]
+Let $f \in X$ and $\varepsilon > 0$. Choose $\delta := \varepsilon$. If $g \in X$ satisfies $d(f, g) < \delta$, then by the definition of the supremum metric, we have $|f(t) - g(t)| < \delta$ for all $t \in [0,1]$.
+In particular, for $t = 0$, we get
+\[|F(f) - F(g)| = |f(0) - g(0)| \leq \sup_{t \in [0,1]} |f(t) - g(t)| = d(f, g) < \delta = \varepsilon.\]
+Thus $F$ is continuous at $f$. Since $f$ was arbitrary, $F$ is continuous on all of $X$.
+\end{exercisesolution}

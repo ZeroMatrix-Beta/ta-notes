@@ -281,3 +281,31 @@ Let $(X,d)$ be a metric space.
 Corsin writes $n_k > k$ above; for a subsequence the standing fact is $n_k \geq k$. Immaterial to
 the argument.
 \end{ainote}
+
+% Source: Jérôme Paschoud/Notizen/Woche 3.1 Banach und Kompaktheit.pdf, p. 3
+% Generator: Gemini 3.6 Flash (High)
+\begin{exercise}[Compactness of a convergent sequence]
+\label{ex:convergent_sequence_compact}
+Let $(X,d)$ be a metric space. Let $(x_n)_{n=0}^\infty$ be a sequence such that $x_n \to \bar{x}$. Prove that the set
+\[E := \{x_n \mid n \in \mathbb{N}\} \cup \{\bar{x}\}\]
+is compact.
+\end{exercise}
+
+\begin{exercisesolution}[Proof of \cref{ex:convergent_sequence_compact}]
+Using topological compactness: Let $\{U_i\}_{i \in I}$ be an open cover of $E$. Since $\bar{x} \in E$, there exists some $i_* \in I$ such that $\bar{x} \in U_{i_*}$. Because $U_{i_*}$ is open and $x_n \to \bar{x}$, there exists $N \in \mathbb{N}$ such that $x_n \in U_{i_*}$ for all $n \geq N$. For the remaining finitely many points $x_0, \dots, x_{N-1}$, we can pick sets $U_{i_0}, \dots, U_{i_{N-1}}$ from the cover containing each of them. Then $\{U_{i_*}, U_{i_0}, \dots, U_{i_{N-1}}\}$ is a finite subcover of $E$.
+
+Using sequential compactness: Let $(y_k)_{k=0}^\infty$ be a sequence in $E$. If $(y_k)$ takes values in a finite subset of $E$, it has a constant (hence convergent) subsequence. Otherwise, it takes infinitely many distinct values from $E$, which means it must contain a subsequence of $(x_n)$ progressing towards $\bar{x}$. In either case, it contains a convergent subsequence with limit in $E$. Thus $E$ is sequentially compact, hence compact.
+\end{exercisesolution}
+
+% Source: Jérôme Paschoud/Notizen/Woche 3.1 Banach und Kompaktheit.pdf, pp. 3, 6
+% Generator: Gemini 3.6 Flash (High)
+\begin{exercise}[Compactness of a finite set grid]
+\label{ex:finite_set_compact}
+Let 
+\[X := \big\{ (x,y) \in \mathbb{R}^2 \mid x,y \in \mathbb{Z} \wedge |x|,|y| \leq 3 \big\}.\]
+Show that $X$ is compact.
+\end{exercise}
+
+\begin{exercisesolution}[Proof of \cref{ex:finite_set_compact}]
+The set $X$ contains exactly $7 \times 7 = 49$ points, so it is finite. By \cref{ex:compact_finite_complete}, every finite subset of a metric space is compact. Alternatively, using sequential compactness (as hinted in the notes), any sequence in $X$ must take at least one value infinitely often (by the pigeonhole principle), thus it contains a constant, hence convergent, subsequence.
+\end{exercisesolution}

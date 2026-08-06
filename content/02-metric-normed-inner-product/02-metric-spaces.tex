@@ -220,6 +220,31 @@ Adding the inequalities, we obtain for all $x \in [0,1]$:
 \end{align*}
 \end{exercisesolution}
 
+% Quelle: Jérôme Paschoud/Notizen/Woche 2.1 Metrische Räume.pdf, p. 2
+\begin{exercise}[$L^1$-metric]
+\label{ex:integral_metric_is_metric}
+Let $X := C^0([0,1], \mathbb{R})$ be the set of continuous functions $[0,1] \to \mathbb{R}$.
+For $f,g \in X$, define
+\[d(f,g) := \int_0^1 \lvert f(t)-g(t)\rvert\,dt.\]
+Is $(X,d)$ a metric space? Provide a proof.
+\end{exercise}
+
+% Generator: Gemini 3.6 Pro
+\begin{exercisesolution}[Proof of \cref{ex:integral_metric_is_metric}]
+Yes, it is a metric space. We verify the three axioms of a metric:
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{Definiteness:} Clearly $d(f,g) \geq 0$ since the integrand $\lvert f(t)-g(t)\rvert$ is non-negative. If $f = g$, then $d(f,f) = \int_0^1 0\,dt = 0$. Conversely, suppose $d(f,g) = 0$. Since $\lvert f-g\rvert$ is a continuous, non-negative function, its integral over $[0,1]$ can only be zero if the integrand is identically zero. Thus $f(t) = g(t)$ for all $t \in [0,1]$, which means $f = g$.
+  \item \textbf{Symmetry:} $d(f,g) = \int_0^1 \lvert f(t)-g(t)\rvert\,dt = \int_0^1 \lvert g(t)-f(t)\rvert\,dt = d(g,f)$.
+  \item \textbf{Triangle inequality:} Let $f, g, h \in X$. The triangle inequality for real numbers yields $\lvert f(t)-h(t)\rvert \leq \lvert f(t)-g(t)\rvert + \lvert g(t)-h(t)\rvert$ for all $t \in [0,1]$. Integrating both sides, we obtain:
+  \begin{align*}
+  d(f,h) &= \int_0^1 \lvert f(t)-h(t)\rvert\,dt \\
+  &\leq \int_0^1 \left(\lvert f(t)-g(t)\rvert + \lvert g(t)-h(t)\rvert\right)\,dt \\
+  &= \int_0^1 \lvert f(t)-g(t)\rvert\,dt + \int_0^1 \lvert g(t)-h(t)\rvert\,dt \\
+  &= d(f,g) + d(g,h).
+  \end{align*}
+\end{enumerate}
+\end{exercisesolution}
+
 % The old chapter closed here with a transition into "Open and closed sets"; that topic is now
 % \cref{ch:open_closed}, whose own opening paragraph says the same thing, so the bridge is gone.
 

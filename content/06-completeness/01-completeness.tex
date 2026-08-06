@@ -57,6 +57,7 @@ does, which is exactly the phenomenon behind the $\varepsilon$-net argument in
   \item Any \textbf{non-closed} subset $U \subseteq \mathbb{R}^n$ (standard metric) and the
     rationals $\mathbb{Q}$ are \textbf{not complete}.
   \item $\big(C^0([0,1]), \sup_{x \in [0,1]}|\cdot|\big)$ is \textbf{complete} (Zorich, p.\ 22).
+  \item Every set $X$ equipped with the \textbf{discrete metric} is \textbf{complete} (e.g., the finite grid $X := \{(x,y) \in \mathbb{Z}^2 \mid \lvert x\rvert, \lvert y\rvert \leq 3\}$). In such a space, every Cauchy sequence is eventually constant, hence convergent.
 \end{itemize}
 \end{example}
 
@@ -72,8 +73,10 @@ Completeness asks nothing about an ambient space --- only whether the Cauchy seq
 space converge \emph{within it}. So:
 \begin{itemize}
   \item $\mathbb{Q}$ is \textbf{closed in $\mathbb{Q}$} --- every space is closed in itself
-    (\cref{ex:X_empty_clopen}) --- and yet \textbf{not complete}: the sequence
-    $1,\,1.4,\,1.41,\,1.414,\dots$ is Cauchy in $\mathbb{Q}$ and converges to nothing there.
+    (\cref{ex:X_empty_clopen}) --- and yet \textbf{not complete}: the decimal approximations
+    $1,\,1.4,\,1.41,\,1.414,\dots$ form a Cauchy sequence in $\mathbb{Q}$ that converges to nothing there.
+    (Alternatively, the sequence defined recursively by $x_0 := 1$ and $x_{n+1} := \frac{x_n}{2} + \frac{1}{x_n}$
+    is Cauchy in $\mathbb{Q}$, but its limit $\sqrt{2}$ is not in $\mathbb{Q}$.)
   \item $(0,1)$ is \textbf{not closed in $\mathbb{R}$} and also not complete, which is the
     second bullet's case --- but the two failures have different causes, and the first does not
     imply the second in general.

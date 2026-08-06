@@ -97,3 +97,18 @@ Applying \cref{def:interior_closure_boundary} to various sets:
   \item Let $\Omega := \mathbb{Q} \subset \mathbb{R}$. Then $\operatorname{int}(\Omega) = \emptyset$ (every open interval contains irrationals), $\overline{\Omega} = \mathbb{R}$ (every open interval contains rationals, so every real number is a closure point), and $\partial\Omega = \mathbb{R} \setminus \emptyset = \mathbb{R}$.
 \end{enumerate}
 \end{example}
+
+% Quelle: Jérôme Paschoud/Notizen/Woche 2.1 Metrische Räume.pdf, p. 6
+\begin{exercise}[Interior, closure, and boundary of a mixed set]
+\label{ex:interior_closure_boundary_mixed}
+Let $E := (\{0\} \times \mathbb{R}) \cup (0,1)^2 \subset \mathbb{R}^2$. Find the interior $\operatorname{int}(E)$, the closure $\overline{E}$, and the boundary $\partial E$ with respect to the standard metric on $\mathbb{R}^2$.
+\end{exercise}
+
+% Generator: Gemini 3.6 Pro
+\begin{exercisesolution}[Proof of \cref{ex:interior_closure_boundary_mixed}]
+\begin{itemize}
+  \item \textbf{Interior:} $\operatorname{int}(E) = (0,1)^2$. The line $\{0\} \times \mathbb{R}$ contains no 2D open balls, so it contributes nothing to the interior. The open square $(0,1)^2$ is already open in $\mathbb{R}^2$.
+  \item \textbf{Closure:} $\overline{E} = (\{0\} \times \mathbb{R}) \cup [0,1]^2$. The line $\{0\} \times \mathbb{R}$ is closed. The closure of the open square is the closed square $[0,1]^2$. The closure of a finite union is the union of the closures.
+  \item \textbf{Boundary:} $\partial E = \overline{E} \setminus \operatorname{int}(E) = (\{0\} \times \mathbb{R}) \cup \big([0,1]^2 \setminus (0,1)^2\big)$. The second term is the perimeter of the square.
+\end{itemize}
+\end{exercisesolution}

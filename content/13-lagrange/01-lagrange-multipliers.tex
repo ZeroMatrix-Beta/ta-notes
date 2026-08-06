@@ -281,6 +281,54 @@ $x^2+y^2+z^2-1$, i.e.\ $|x|^2-1$. Both cut out the same sphere; the squared vers
 actually differentiated, so it is used throughout.
 \end{ainote}
 
+% Source: Jérôme Paschoud/Notizen/Woche 5.2 Optimierung I.pdf, p. 3
+% Generator: Gemini 3.6 Flash (High)
+\begin{exercise}[Extrema on a circle]
+\label{ex:extrema_on_circle}
+Find the maximum and minimum of $f(x,y) = xy$ under the condition that $(x,y)$ lies on the circle with radius $\sqrt{2}$. (cf.\ Michaels Bsp 7.2.3)
+\end{exercise}
+
+\begin{exercisesolution}[\cref{ex:extrema_on_circle}]
+We want to optimize $f(x,y) = xy$ subject to the constraint $g(x,y) = x^2+y^2-2 = 0$.
+The Lagrangian is
+\[L(x,y,\lambda) := f(x,y) - \lambda g(x,y) = xy - \lambda(x^2+y^2-2).\]
+Setting the gradient of $L$ to zero yields the system:
+\begin{align*}
+  \partial_x L &= y - 2\lambda x = 0 \\
+  \partial_y L &= x - 2\lambda y = 0 \\
+  \partial_\lambda L &= 2 - (x^2+y^2) = 0.
+\end{align*}
+From the first two equations, $y = 2\lambda x$ and $x = 2\lambda y$. Substituting the second into the first gives $y = 4\lambda^2 y$, or $y(1-4\lambda^2) = 0$.
+If $y=0$, then $x=0$, which contradicts $x^2+y^2=2$. Hence $y \neq 0$ and $4\lambda^2 = 1 \implies \lambda = \pm 1/2$.
+If $\lambda = 1/2$, then $y = x$. The constraint gives $2x^2 = 2 \implies x = \pm 1$, giving points $(1,1)$ and $(-1,-1)$. At these points, $f(\pm 1, \pm 1) = 1$.
+If $\lambda = -1/2$, then $y = -x$. The constraint gives $2x^2 = 2 \implies x = \pm 1$, giving points $(1,-1)$ and $(-1,1)$. At these points, $f(\pm 1, \mp 1) = -1$.
+Since the circle is compact, these must be the global extrema. The maximum is $1$ and the minimum is $-1$.
+\end{exercisesolution}
+
+% Source: Jérôme Paschoud/Notizen/Woche 5.2 Optimierung I.pdf, p. 3
+% Generator: Gemini 3.6 Flash (High)
+\begin{exercise}[Largest rectangle in an ellipse]
+\label{ex:largest_rectangle_ellipse}
+Given an ellipse $E = \left\{(x,y) \in \mathbb{R}^2 \mid \frac{x^2}{A^2} + \frac{y^2}{B^2} = 1\right\}$, find the rectangle (with sides parallel to the axes) whose vertices lie on $E$ and has the largest area. (cf.\ Michaels Bsp 7.2.7)
+\end{exercise}
+
+\begin{exercisesolution}[\cref{ex:largest_rectangle_ellipse}]
+Let the vertices of the rectangle in the four quadrants be $(\pm x, \pm y)$ with $x, y \geq 0$. The area of the rectangle is $f(x,y) = 4xy$.
+We maximize $f(x,y)$ subject to the constraint $g(x,y) = \frac{x^2}{A^2} + \frac{y^2}{B^2} - 1 = 0$ in the region $x > 0, y > 0$.
+The Lagrangian is
+\[L(x,y,\lambda) := 4xy - \lambda\left(\frac{x^2}{A^2} + \frac{y^2}{B^2} - 1\right).\]
+The critical point equations are:
+\begin{align*}
+  \partial_x L &= 4y - \frac{2\lambda x}{A^2} = 0 \implies \lambda = \frac{2yA^2}{x} \\
+  \partial_y L &= 4x - \frac{2\lambda y}{B^2} = 0 \implies \lambda = \frac{2xB^2}{y} \\
+  \partial_\lambda L &= 1 - \frac{x^2}{A^2} - \frac{y^2}{B^2} = 0.
+\end{align*}
+Equating the expressions for $\lambda$ yields $\frac{2yA^2}{x} = \frac{2xB^2}{y} \implies y^2 A^2 = x^2 B^2$, or $\frac{x^2}{A^2} = \frac{y^2}{B^2}$.
+Substituting this into the constraint gives $2\frac{x^2}{A^2} = 1 \implies x = \frac{A}{\sqrt{2}}$.
+Similarly, $y = \frac{B}{\sqrt{2}}$.
+The maximal area is $f\left(\frac{A}{\sqrt{2}}, \frac{B}{\sqrt{2}}\right) = 4 \cdot \frac{A}{\sqrt{2}} \cdot \frac{B}{\sqrt{2}} = 2AB$.
+\end{exercisesolution}
+
 % Source: Corsin Nick/Class Notes/Week 5.pdf, p. 6
 \begin{center}
 \begin{tikzpicture}[>=Latex, scale=1.4]

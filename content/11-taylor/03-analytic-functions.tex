@@ -1,0 +1,24 @@
+% Source: Jérôme Paschoud/Notizen/Woche 5.1 Taylor.pdf, p. 5
+% Generator: Gemini 3.6 Flash (High)
+\section{Analytic functions}
+\label{sec:analytic_functions}
+
+Just as in one variable, we can ask when a smooth function is exactly equal to its Taylor series. This requires a bound on the growth of its derivatives.
+
+\begin{definition}[Analytic estimates]
+\label{def:analytic_estimates}
+Let $U \subseteq \mathbb{R}^n$ be open. A smooth function $f \in C^\infty(U, \mathbb{R})$ satisfies \newterm{analytic estimates} if for every $x_0 \in U$, there exist $\rho > 0$ and $C > 0$ such that for all multi-indices $\alpha \in \mathbb{N}^n$,
+\[ \max_{x \in B_\rho(x_0)} |\partial^\alpha f(x)| \leq C |\alpha|! \left(n\rho\right)^{-|\alpha|}. \]
+Such functions are called \newterm{real analytic}.
+\end{definition}
+
+\begin{theorem}[Convergence of the Taylor series]
+\label{thm:convergence_taylor_series}
+If $f \in C^\infty(U, \mathbb{R})$ satisfies analytic estimates, then its Taylor series converges to $f(x)$ near $x_0$. That is, for all $h \in B_\rho(0)$,
+\[ f(x_0+h) = \sum_{k=0}^\infty \sum_{|\alpha|=k} \frac{\partial^\alpha f(x_0)}{\alpha!} h^\alpha. \]
+\end{theorem}
+
+\begin{example}[An analytic function]
+\label{ex:analytic_function_sin_xy}
+The function $f(x,y) = \sin(xy)$ satisfies the analytic estimates everywhere, and is therefore equal to its Taylor series.
+\end{example}

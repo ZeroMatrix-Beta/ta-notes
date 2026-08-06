@@ -285,6 +285,92 @@ computed and plotted numerically.
 
 % --- exercise relocated here from the dissolved sheet 7 ---
 
+% Source: Jérôme Paschoud/Notizen/Woche 7.1 Satz über implizite Funktionen.pdf, p. 5
+% Generator: Gemini 3.6 Flash (High)
+\begin{exercise}[Implicitly defined functions from a system]
+\label{ex:implicit_system_yz_of_x}
+Show that one can solve the system of equations
+\[
+\begin{cases}
+-2x^2 + y^2 + z^2 = 0 \\
+x^2 + e^{y-1} - 2y = 0
+\end{cases}
+\]
+for $y, z$ as functions of $x$ (i.e.\ $y(x), z(x)$) close enough to the point $(1,1,1)$. Calculate $\begin{pmatrix} y'(1) \\ z'(1) \end{pmatrix}$. (cf.\ Michaels Bsp 8.3.5)
+\end{exercise}
+
+\begin{exercisesolution}[\cref{ex:implicit_system_yz_of_x}]
+Let $F(x,y,z) = \begin{pmatrix} -2x^2 + y^2 + z^2 \\ x^2 + e^{y-1} - 2y \end{pmatrix}$. We have $F(1,1,1) = \begin{pmatrix} -2+1+1 \\ 1+1-2 \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}$.
+The Jacobian of $F$ with respect to $(y,z)$ is
+\[
+D_{y,z} F(x,y,z) = \begin{pmatrix} \partial_y F_1 & \partial_z F_1 \\ \partial_y F_2 & \partial_z F_2 \end{pmatrix} = \begin{pmatrix} 2y & 2z \\ e^{y-1} - 2 & 0 \end{pmatrix}.
+\]
+At $(x,y,z) = (1,1,1)$, we have
+\[
+D_{y,z} F(1,1,1) = \begin{pmatrix} 2 & 2 \\ e^0 - 2 & 0 \end{pmatrix} = \begin{pmatrix} 2 & 2 \\ -1 & 0 \end{pmatrix}.
+\]
+The determinant is $\det(D_{y,z} F(1,1,1)) = 2(0) - 2(-1) = 2 \neq 0$. Thus the matrix is invertible, and by the Implicit Function Theorem, there exist functions $y(x), z(x)$ solving the system in a neighbourhood of $x=1$ such that $y(1)=1$ and $z(1)=1$.
+
+To find the derivatives at $x=1$, we use the formula
+\[
+\begin{pmatrix} y'(1) \\ z'(1) \end{pmatrix} = - (D_{y,z} F(1,1,1))^{-1} D_x F(1,1,1).
+\]
+We calculate $D_x F(x,y,z) = \begin{pmatrix} -4x \\ 2x \end{pmatrix}$, so $D_x F(1,1,1) = \begin{pmatrix} -4 \\ 2 \end{pmatrix}$.
+The inverse of $D_{y,z} F(1,1,1)$ is
+\[
+\begin{pmatrix} 2 & 2 \\ -1 & 0 \end{pmatrix}^{-1} = \frac{1}{2} \begin{pmatrix} 0 & -2 \\ 1 & 2 \end{pmatrix}.
+\]
+Then
+\[
+\begin{pmatrix} y'(1) \\ z'(1) \end{pmatrix} = - \frac{1}{2} \begin{pmatrix} 0 & -2 \\ 1 & 2 \end{pmatrix} \begin{pmatrix} -4 \\ 2 \end{pmatrix} = - \frac{1}{2} \begin{pmatrix} -4 \\ 0 \end{pmatrix} = \begin{pmatrix} 2 \\ 0 \end{pmatrix}.
+\]
+Therefore, $y'(1) = 2$ and $z'(1) = 0$.
+\end{exercisesolution}
+
+% Source: Jérôme Paschoud/Notizen/Woche 7.1 Satz über implizite Funktionen.pdf, p. 6
+% Generator: Gemini 3.6 Flash (High)
+\begin{exercise}[Implicit solving in different variables]
+\label{ex:implicit_xyz_equation}
+Consider the equation $xyz - yz^4 + x^2y = 2$ near the point $(0,-2,1)$. Can one solve this equation for:
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $x$?
+  \item $y$?
+  \item $z$?
+\end{enumerate}
+Calculate the derivative of the solution at the given point, if possible. (cf.\ Michaels Bsp 8.3.3)
+\end{exercise}
+
+\begin{exercisesolution}[\cref{ex:implicit_xyz_equation}]
+Let $F(x,y,z) = xyz - yz^4 + x^2y - 2$. At the point $P = (0,-2,1)$, we have $F(0,-2,1) = 0 - (-2)(1) + 0 - 2 = 0$.
+We compute the partial derivatives of $F$:
+\begin{align*}
+\partial_x F(x,y,z) &= yz + 2xy \\
+\partial_y F(x,y,z) &= xz - z^4 + x^2 \\
+\partial_z F(x,y,z) &= xy - 4yz^3
+\end{align*}
+Evaluating at $P = (0,-2,1)$:
+\begin{align*}
+\partial_x F(0,-2,1) &= (-2)(1) + 0 = -2 \neq 0 \\
+\partial_y F(0,-2,1) &= 0 - 1 + 0 = -1 \neq 0 \\
+\partial_z F(0,-2,1) &= 0 - 4(-2)(1) = 8 \neq 0
+\end{align*}
+
+\textbf{(a)} Since $\partial_x F(P) = -2 \neq 0$, the Implicit Function Theorem guarantees we can solve for $x = x(y,z)$ locally. The derivative (gradient) is
+\[
+\nabla x(y,z) \Big|_{(-2,1)} = \begin{pmatrix} \partial_y x \\ \partial_z x \end{pmatrix} = -\frac{1}{\partial_x F(P)} \begin{pmatrix} \partial_y F(P) \\ \partial_z F(P) \end{pmatrix} = -\frac{1}{-2} \begin{pmatrix} -1 \\ 8 \end{pmatrix} = \begin{pmatrix} -1/2 \\ 4 \end{pmatrix}.
+\]
+
+\textbf{(b)} Since $\partial_y F(P) = -1 \neq 0$, we can solve for $y = y(x,z)$ locally. The derivative is
+\[
+\nabla y(x,z) \Big|_{(0,1)} = \begin{pmatrix} \partial_x y \\ \partial_z y \end{pmatrix} = -\frac{1}{\partial_y F(P)} \begin{pmatrix} \partial_x F(P) \\ \partial_z F(P) \end{pmatrix} = -\frac{1}{-1} \begin{pmatrix} -2 \\ 8 \end{pmatrix} = \begin{pmatrix} -2 \\ 8 \end{pmatrix}.
+\]
+
+\textbf{(c)} Since $\partial_z F(P) = 8 \neq 0$, we can solve for $z = z(x,y)$ locally. The derivative is
+\[
+\nabla z(x,y) \Big|_{(0,-2)} = \begin{pmatrix} \partial_x z \\ \partial_y z \end{pmatrix} = -\frac{1}{\partial_z F(P)} \begin{pmatrix} \partial_x F(P) \\ \partial_y F(P) \end{pmatrix} = -\frac{1}{8} \begin{pmatrix} -2 \\ -1 \end{pmatrix} = \begin{pmatrix} 1/4 \\ 1/8 \end{pmatrix}.
+\]
+\end{exercisesolution}
+
 % Originally: content/week-07.tex, \exercisesheet{7}, problem 7.5
 % Source: exercises/Ex7_Analysis2_eng.pdf
 

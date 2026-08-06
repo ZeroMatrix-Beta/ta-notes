@@ -126,3 +126,44 @@ So:
 \end{aligned}
 \]
 \end{exercisesolution}
+
+% Source: Jérôme Paschoud/Notizen/Woche 4.2 Kettenregel.pdf, p. 1
+\begin{exercise}[Computing differentials with and without the chain rule]
+\label{ex:chain_rule_computation_paschoud}
+Let $f: \mathbb{R}^2 \to \mathbb{R}^3$ and $g: \mathbb{R}^3 \to \mathbb{R}$ be defined by
+\[f(x,y) := \begin{pmatrix} x+y \\ x-y \\ x^2+y^2-1 \end{pmatrix}, \qquad g(x,y,z) := x^2+y^2+z^2.\]
+Compute the differential $D(g \circ f)$ in two ways:
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item By directly computing the composition $g \circ f$ and then differentiating.
+  \item By computing $Df$ and $Dg$ and using the chain rule.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercisesolution}[\cref{ex:chain_rule_computation_paschoud}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{Directly:} First compute $g(f(x,y))$:
+    \begin{align*}
+    (g \circ f)(x,y) &= (x+y)^2 + (x-y)^2 + (x^2+y^2-1)^2 \\
+    &= (x^2+2xy+y^2) + (x^2-2xy+y^2) + (x^4+y^4+1+2x^2y^2-2x^2-2y^2) \\
+    &= 2x^2 + 2y^2 + x^4 + y^4 + 1 + 2x^2y^2 - 2x^2 - 2y^2 \\
+    &= x^4 + y^4 + 2x^2y^2 + 1 \\
+    &= (x^2+y^2)^2 + 1.
+    \end{align*}
+    Now differentiate this scalar function with respect to $x$ and $y$:
+    \[D(g \circ f)(x,y) = \begin{pmatrix} 2(x^2+y^2)\cdot 2x & 2(x^2+y^2)\cdot 2y \end{pmatrix} = \begin{pmatrix} 4x(x^2+y^2) & 4y(x^2+y^2) \end{pmatrix}.\]
+
+  \item \textbf{Via chain rule:} Compute the differentials of $f$ and $g$ individually.
+    \[Df(x,y) = \begin{pmatrix} 1 & 1 \\ 1 & -1 \\ 2x & 2y \end{pmatrix}, \qquad Dg(u,v,w) = \begin{pmatrix} 2u & 2v & 2w \end{pmatrix}.\]
+    Evaluate $Dg$ at $f(x,y)$:
+    \[Dg(f(x,y)) = \begin{pmatrix} 2(x+y) & 2(x-y) & 2(x^2+y^2-1) \end{pmatrix}.\]
+    Multiply the matrices:
+    \begin{align*}
+    D(g \circ f)(x,y) &= Dg(f(x,y)) Df(x,y) \\
+    &= \begin{pmatrix} 2(x+y) & 2(x-y) & 2(x^2+y^2-1) \end{pmatrix} \begin{pmatrix} 1 & 1 \\ 1 & -1 \\ 2x & 2y \end{pmatrix} \\
+    &= \begin{pmatrix} 2(x+y) + 2(x-y) + 4x(x^2+y^2-1) & 2(x+y) - 2(x-y) + 4y(x^2+y^2-1) \end{pmatrix} \\
+    &= \begin{pmatrix} 4x + 4x^3+4xy^2-4x & 4y + 4x^2y+4y^3-4y \end{pmatrix} \\
+    &= \begin{pmatrix} 4x(x^2+y^2) & 4y(x^2+y^2) \end{pmatrix}.
+    \end{align*}
+    Both methods yield the same result.
+\end{enumerate}
+\end{exercisesolution}

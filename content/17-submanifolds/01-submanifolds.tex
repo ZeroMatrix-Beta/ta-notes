@@ -268,6 +268,54 @@ found via Lagrange multipliers in the solution to \cref{ex:6.9}\textbf{(a)}, con
 methods agree.
 \end{remark}
 
+% Source: Jérôme Paschoud/Notizen/Woche 7.2 Untermannigfaltigkeiten.pdf, p. 4
+% Generator: Gemini 3.6 Flash (High)
+\begin{exercise}[Dimension of a submanifold]
+\label{ex:dimension_submanifold_system}
+Show that $M := \{(x,y,z) \in \mathbb{R}^3 \mid 2x+z=1, x^2+y^2-z^2=1\}$ is a submanifold of $\mathbb{R}^3$. What is its dimension? (cf.\ Michaels Bsp 9.1.2 d)
+\end{exercise}
+
+\begin{exercisesolution}[\cref{ex:dimension_submanifold_system}]
+Let $F(x,y,z) = \begin{pmatrix} 2x+z-1 \\ x^2+y^2-z^2-1 \end{pmatrix}$. Then $M = F^{-1}\{0\}$.
+We compute the Jacobian matrix of $F$:
+\[ \Jac F(x,y,z) = \begin{pmatrix} 2 & 0 & 1 \\ 2x & 2y & -2z \end{pmatrix}. \]
+We need to check that $\rank(\Jac F(x,y,z)) = 2$ for all $(x,y,z) \in M$.
+The rank is less than 2 if and only if all $2 \times 2$ subdeterminants are zero:
+\begin{align*}
+\det \begin{pmatrix} 2 & 0 \\ 2x & 2y \end{pmatrix} &= 4y = 0 \implies y = 0 \\
+\det \begin{pmatrix} 2 & 1 \\ 2x & -2z \end{pmatrix} &= -4z - 2x = 0 \implies x = -2z \\
+\det \begin{pmatrix} 0 & 1 \\ 2y & -2z \end{pmatrix} &= -2y = 0 \implies y = 0.
+\end{align*}
+So the rank is not maximal only when $y=0$ and $x=-2z$.
+Let's check if such a point can belong to $M$. Substituting $x=-2z$ into the first equation of $M$ gives $2(-2z) + z = -3z = 1 \implies z = -1/3$.
+Then $x = 2/3$. Thus the point is $(2/3, 0, -1/3)$.
+Now check the second equation of $M$: $(2/3)^2 + 0^2 - (-1/3)^2 = 4/9 - 1/9 = 3/9 = 1/3 \neq 1$.
+Therefore, this point is not in $M$.
+Since $\Jac F(x,y,z)$ has maximal rank 2 for all $(x,y,z) \in M$, $M$ is a submanifold of $\mathbb{R}^3$.
+Its dimension is $n - k = 3 - 2 = 1$.
+\end{exercisesolution}
+
+% Source: Jérôme Paschoud/Notizen/Woche 7.2 Untermannigfaltigkeiten.pdf, p. 4
+% Generator: Gemini 3.6 Flash (High)
+\begin{exercise}[Submanifold of matrices]
+\label{ex:submanifold_matrices_rank1}
+Show that $M := \{ A \in \operatorname{Mat}_{2\times 2}(\mathbb{R}) \mid \rank(A) = 1 \}$ is a submanifold of $\operatorname{Mat}_{2\times 2}(\mathbb{R})$. What is the dimension of $M$?
+\end{exercise}
+
+\begin{exercisesolution}[\cref{ex:submanifold_matrices_rank1}]
+Let $A = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$. The condition $\rank(A) \leq 1$ is equivalent to $\det(A) = ad - bc = 0$.
+The condition $\rank(A) = 1$ means $\det(A) = 0$ but $A \neq 0$.
+So $M$ is the zero set of $F : \mathbb{R}^4 \setminus \{0\} \to \mathbb{R}$, $F(a,b,c,d) = ad - bc$.
+The space $\operatorname{Mat}_{2\times 2}(\mathbb{R})$ is isomorphic to $\mathbb{R}^4$.
+The Jacobian of $F$ is
+\[ \Jac F(a,b,c,d) = \begin{pmatrix} \partial_a F & \partial_b F & \partial_c F & \partial_d F \end{pmatrix} = \begin{pmatrix} d & -c & -a & b \end{pmatrix}. \]
+For $\Jac F$ to not have maximal rank (which is 1), we must have $d = 0$, $c = 0$, $a = 0$, and $b = 0$, which means $A = 0$.
+But the zero matrix is excluded from $M$ because its rank is 0, not 1.
+Thus $\Jac F(A) \neq 0$ for all $A \in M$. By the regular value theorem, $M$ is a submanifold.
+The ambient dimension is $4$ and the number of independent constraints is $1$.
+So the dimension of $M$ is $4 - 1 = 3$.
+\end{exercisesolution}
+
 % Sonnet 5 (Medium)
 Having two equivalent ways to recognize and parametrize a submanifold, we turn to studying its
 local linear structure: the tangent and normal spaces at a point.

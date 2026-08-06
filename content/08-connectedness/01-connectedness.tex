@@ -268,3 +268,20 @@ stated intersection $\{(\pm 1, 0)\}$ confirms. Corrected here.
   \fill[purple] (1,0) circle (2pt) node[above right, font=\footnotesize] {$(1,0)$};
 \end{tikzpicture}
 \end{center}
+
+% Source: Jérôme Paschoud/Notizen/Woche 3.2 Zusammenhängende Mengen.pdf, p. 3
+% Generator: Gemini 3.6 Flash (High)
+\begin{remark}[Summary of topological properties under continuous maps]
+\label{rem:summary_continuous_maps}
+Let $X,Y$ be metric spaces and $f: X \to Y$ a continuous function. The following table summarizes which topological properties of a subset $A \subseteq X$ or $B \subseteq Y$ are necessarily preserved under images $f(A)$ and preimages $f^{-1}(B)$.
+
+\begin{center}
+\begin{tabular}{@{}l c c@{}}
+If $A$ or $B$ is \dots & Then $f^{-1}(B)$ is \dots & Then $f(A)$ is \dots \\
+open & \textbf{open} & (not necessarily) \\
+closed & \textbf{closed} & (not necessarily) \\
+compact & (not necessarily) & \textbf{compact} \\
+connected & (not necessarily) & \textbf{connected}
+\end{tabular}
+\end{center}
+\end{remark}

@@ -360,3 +360,81 @@ write $P(X) = \sum_{\alpha\in\mathbb{N}^n} a_\alpha X^\alpha$,
 $Q(X) = \sum_{\alpha\in\mathbb{N}^n} b_\alpha X^\alpha$, then $a_\alpha = b_\alpha$ for all
 $|\alpha| < \sigma$.
 \end{exercise}
+
+% Source: Jérôme Paschoud/Notizen/Woche 5.1 Taylor.pdf, p. 3
+% Generator: Gemini 3.6 Flash (High)
+\begin{exercise}[Evaluating partial derivatives using multi-index notation]
+\label{ex:multi_index_evaluation}
+Let $f(x,y,z) := x^3+2y+e^{2x}\cos(z)$. Calculate the partial derivative $\partial^\alpha f$ for the multi-index $\alpha = (2,0,1)$.
+\end{exercise}
+
+\begin{exercisesolution}[\cref{ex:multi_index_evaluation}]
+The multi-index $\alpha = (2,0,1)$ corresponds to differentiating twice with respect to $x$, zero times with respect to $y$, and once with respect to $z$. Since $f$ is smooth, the order of differentiation does not matter.
+\begin{align*}
+\partial_x f &= 3x^2 + 2e^{2x}\cos(z) \\
+\partial_{xx} f &= 6x + 4e^{2x}\cos(z) \\
+\partial_{xxz} f &= -4e^{2x}\sin(z).
+\end{align*}
+Hence $\partial^{(2,0,1)} f(x,y,z) = -4e^{2x}\sin(z)$.
+\end{exercisesolution}
+
+% Source: Jérôme Paschoud/Notizen/Woche 5.1 Taylor.pdf, pp. 3--4
+% Generator: Gemini 3.6 Flash (High)
+\begin{exercise}[Taylor expansion of $\sin(xy)$]
+\label{ex:taylor_expansion_sin_xy}
+Compute the Taylor expansion of $f(x,y) := \sin(xy)$ to order $3$ around $(0,0)$. 
+\end{exercise}
+
+\begin{exercisesolution}[\cref{ex:taylor_expansion_sin_xy}]
+We can solve this in two ways:
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{Using the general formula:}
+    We list the multi-indices $\alpha$ with $|\alpha| \leq 3$ and compute the partial derivatives at $(0,0)$:
+    \begin{itemize}
+      \item $|\alpha|=0$: $f(0,0) = \sin(0) = 0$.
+      \item $|\alpha|=1$: $\partial_x f = y\cos(xy) \implies 0$. $\partial_y f = x\cos(xy) \implies 0$.
+      \item $|\alpha|=2$: $\partial_{xx} f = -y^2\sin(xy) \implies 0$. $\partial_{yy} f = -x^2\sin(xy) \implies 0$. $\partial_{xy} f = \cos(xy) - xy\sin(xy) \implies 1$.
+      \item $|\alpha|=3$: $\partial_{xxx} f = -y^3\cos(xy) \implies 0$. $\partial_{yyy} f = -x^3\cos(xy) \implies 0$. $\partial_{xxy} f = -2y\sin(xy) - xy^2\cos(xy) \implies 0$. $\partial_{xyy} f = -2x\sin(xy) - x^2y\cos(xy) \implies 0$.
+    \end{itemize}
+    The only non-zero term is $\partial^{(1,1)} f(0,0) = 1$. The corresponding factor in the formula is $\frac{1}{\alpha!}h^\alpha = \frac{1}{(1!)(1!)}xy = xy$. Thus,
+    \[f(x,y) = xy + o(|(x,y)|^3).\]
+  \item \textbf{Using 1D expansions (the clever way):}
+    We know that $\sin(t) = t - \frac{t^3}{6} + O(t^5)$ as $t \to 0$. Substituting $t = xy$ yields
+    \[\sin(xy) = xy - \frac{(xy)^3}{6} + O((xy)^5) = xy + o(|(x,y)|^3).\]
+\end{enumerate}
+\end{exercisesolution}
+
+% Source: Jérôme Paschoud/Notizen/Woche 5.1 Taylor.pdf, p. 4
+% Generator: Gemini 3.6 Flash (High)
+\begin{exercise}[Taylor expansion of $\sqrt{1+x+y^2}$]
+\label{ex:taylor_expansion_sqrt_1_plus_x_plus_y2}
+Compute the Taylor expansion of $f(x,y) := \sqrt{1+x+y^2}$ to order $2$ around $(0,0)$.
+\end{exercise}
+
+\begin{exercisesolution}[\cref{ex:taylor_expansion_sqrt_1_plus_x_plus_y2}]
+Using the 1D expansion $\sqrt{1+t} = 1 + \frac{1}{2}t - \frac{1}{8}t^2 + O(t^3)$ with $t = x+y^2$, we obtain:
+\begin{align*}
+\sqrt{1+x+y^2} &= 1 + \frac{1}{2}(x+y^2) - \frac{1}{8}(x+y^2)^2 + O(|(x,y)|^3) \\
+&= 1 + \frac{1}{2}x + \frac{1}{2}y^2 - \frac{1}{8}(x^2+2xy^2+y^4) + o(|(x,y)|^2) \\
+&= 1 + \frac{1}{2}x - \frac{1}{8}x^2 + \frac{1}{2}y^2 + o(|(x,y)|^2).
+\end{align*}
+\end{exercisesolution}
+
+% Source: Jérôme Paschoud/Notizen/Woche 5.1 Taylor.pdf, p. 4
+% Generator: Gemini 3.6 Flash (High)
+\begin{exercise}[Taylor expansion of $\frac{\cos x}{1-y^2}$]
+\label{ex:taylor_expansion_cos_over_1_minus_y2}
+Compute the Taylor expansion of $f(x,y) := \frac{\cos x}{1-y^2}$ to order $4$ around $(0,0)$.
+\end{exercise}
+
+\begin{exercisesolution}[\cref{ex:taylor_expansion_cos_over_1_minus_y2}]
+We multiply the 1D expansions for $\cos x$ and $\frac{1}{1-y^2}$.
+As $x \to 0$, $\cos x = 1 - \frac{x^2}{2} + \frac{x^4}{24} + O(x^6)$.
+As $y \to 0$, $\frac{1}{1-y^2} = 1 + y^2 + y^4 + O(y^6)$.
+Multiplying these together and keeping terms up to order $4$:
+\begin{align*}
+\frac{\cos x}{1-y^2} &= \left(1 - \frac{x^2}{2} + \frac{x^4}{24} + O(x^6)\right)\left(1 + y^2 + y^4 + O(y^6)\right) \\
+&= 1 + y^2 + y^4 - \frac{x^2}{2} - \frac{x^2y^2}{2} + \frac{x^4}{24} + o(|(x,y)|^4) \\
+&= 1 - \frac{1}{2}x^2 + y^2 + \frac{1}{24}x^4 - \frac{1}{2}x^2y^2 + y^4 + o(|(x,y)|^4).
+\end{align*}
+\end{exercisesolution}

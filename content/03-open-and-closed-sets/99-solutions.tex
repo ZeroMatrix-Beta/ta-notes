@@ -139,3 +139,51 @@ Three rows repay a second look.
     \cref{ex:interior_closure_boundary_more}\textbf{(c)}, and not an accident of $\mathbb{Q}$.
 \end{itemize}
 \end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:open_closed_self_test}]
+% Generator: Claude Opus 5 (High)
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{Closed.} The complement is $(-\infty,0)$, which is open, so $[0,\infty)$ is
+    closed by \cref{def:open_closed}. It is not open: every ball $B_\varepsilon(0)$ contains
+    negative numbers.
+  \item \textbf{Neither.} Not open, since every ball around a rational contains irrationals.
+    Not closed, since $\sqrt2$ is a limit of rationals without lying in $\mathbb{Q}$; indeed
+    $\overline{\mathbb{Q}} = \mathbb{R}$.
+  \item \textbf{Neither.} The map $x \mapsto x - \lfloor x\rfloor$ is the fractional part, whose
+    range is exactly $[0,1)$. This is not open ($0$ has no ball inside it) and not closed
+    ($1$ is a limit point that is missing) --- the two defects sit at the two ends.
+  \item \textbf{Neither.} Multiplying by $2^{-p}$ turns the condition into a union of closed
+    blocks,
+    \[S = \bigcup_{p\geq0}\big[2^{-p},\,2^{-p+1}\big]
+        = [1,2] \cup \big[\tfrac12,1\big] \cup \big[\tfrac14,\tfrac12\big] \cup \cdots
+        = (0,2],\]
+    since consecutive blocks share an endpoint and their left ends decrease to $0$. Now $(0,2]$
+    is not open (no ball around $2$ fits) and not closed ($0$ is a missing limit point).
+  \item \textbf{Open} --- and this is the point of putting \textbf{(d)} next to it. The same
+    computation with open blocks gives
+    \[T = \bigcup_{p\geq0}\big(2^{-p},\,2^{-p+1}\big)
+        = (0,2)\setminus\big\{1,\tfrac12,\tfrac14,\dots\big\},\]
+    because now the shared endpoints $2^{-k}$ are excluded by \emph{both} neighbouring blocks
+    and so belong to neither. An arbitrary union of open sets is open
+    (\cref{prop:open_closed_operations}), so $T$ is open. It is not closed: $0$ and each
+    removed point $2^{-k}$ are limit points of $T$ outside $T$.
+
+    The lesson is that the union in \textbf{(d)} was closed-looking but glued into a half-open
+    interval, whereas the union in \textbf{(e)} punctures itself at every join. Being a union
+    of closed sets buys nothing; being a union of open sets buys everything.
+  \item \textbf{Closed.} Compute one step before doing anything else:
+    $x_1 = \tfrac12(1 + 1^2) = 1 = x_0$, so the recursion is stationary and $x_n = 1$ for every
+    $n$. The set is therefore $\{1\}$, a single point, which is closed (finite sets are closed)
+    and not open.
+  \item \textbf{Not known.} The trivial zeros of $\zeta$ are $-2,-4,-6,\dots$, contributing
+    the real parts $\{-2,-4,-6,\dots\}$; the non-trivial zeros all lie in the critical strip
+    $0 < \Rea(c) < 1$. If the Riemann hypothesis holds, every non-trivial zero has
+    $\Rea(c) = \tfrac12$, so the set is
+    \[\{\tfrac12\} \cup \{-2n : n \geq 1\},\]
+    which is closed: its points are isolated and the only way to escape is towards $-\infty$,
+    which is not a real accumulation point. If the Riemann hypothesis fails, the real parts of
+    the off-line zeros are not understood well enough to say. So this entry is a joke with a
+    sharp edge --- it is a perfectly well-posed question about a perfectly explicit set, and
+    nobody can currently answer it.
+\end{enumerate}
+\end{exercisesolution}

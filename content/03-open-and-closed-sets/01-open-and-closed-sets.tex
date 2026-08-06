@@ -95,7 +95,7 @@ $X \setminus A$ is open.
   \end{scope}
 
   % Not Open set (Closed / boundary included)
-  \begin{scope}[xshift=8cm]
+  \begin{scope}[xshift=7cm]
     \draw[very thick, fill=gray!10] 
       plot[smooth cycle, tension=0.7] coordinates {(-1,-0.5) (-0.5,1) (0.5,0.8) (1,-0.2) (0,-1)};
     \fill (1,-0.2) circle (1.5pt);
@@ -174,6 +174,29 @@ Consider the following subsets of $\mathbb{R}$ with the standard metric:
     becomes a union of open intervals, which is open.
 \end{enumerate}
 \end{example}
+
+% Supplement: Linus Lüchinger/Slides/Slides-02-23.pdf, slide 20
+% Linus's self-test list. The three entries Sascha already works above (N, {1/n},
+% {1/n} u {0}) are dropped; what remains is the part that is not already answered.
+\begin{exercise}[A longer self-test]
+\label{ex:open_closed_self_test}
+Linus sets the following list as a self-test at the end of his first session. Each subset of
+$\mathbb{R}$ carries the standard metric; decide for each whether it is \textbf{open},
+\textbf{closed}, \textbf{both}, or \textbf{neither}.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $[0,\infty)$
+  \item $\mathbb{Q}$
+  \item $\{x - \lfloor x \rfloor : x \in \mathbb{R}\}$
+  \item $S := \{x \in \mathbb{R} : x\cdot 2^p \in [1,2] \text{ for some integer } p \geq 0\}$
+  \item $T := \{x \in \mathbb{R} : x\cdot 2^p \in (1,2) \text{ for some integer } p \geq 0\}$
+  \item $\{x_n : n \in \mathbb{N}\}$, where $x_0 := 1$ and
+    $x_n := \tfrac12\big(x_{n-1} + x_{n-1}^2\big)$
+  \item $\{\Rea(c) : c \in \mathbb{C},\ \zeta(c) = 0\}$, where $\zeta$ is the Riemann zeta
+    function
+\end{enumerate}
+Compare \textbf{(d)} with \textbf{(e)} before reading the solution: the two differ only in one
+bracket.
+\end{exercise}
 
 % Quelle: Jérôme Paschoud/Notizen/Woche 2.1 Metrische Räume.pdf, p. 5
 \begin{exercise}[Relative openness]

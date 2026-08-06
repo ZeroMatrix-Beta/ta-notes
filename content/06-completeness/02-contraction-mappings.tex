@@ -76,6 +76,28 @@ Let $f \colon [0,1] \to [0,1]$ be defined by $f(x) := \frac{1}{2}\cos(x)$.
 \end{enumerate}
 \end{aiexercise}
 
+% Supplement: Linus Lüchinger/Slides/Slides-03-02.pdf, slide 16;
+%             Linus Lüchinger/Slides/Slides-03-05.pdf, slide 3
+\begin{exercise}[Does the fixed-point theorem apply?]
+\label{ex:bfpt_applicability_table}
+\cref{rem:banach_hypotheses} shows that each hypothesis is needed by exhibiting one failure
+apiece. Linus drills the same point the other way round, as a checklist: for each row below,
+decide whether \cref{thm:banach_fixed_point} \emph{applies} to $T : X \to X$, and separately
+determine the set of fixed points of $T$ in $X$. The two questions have different answers more
+often than one expects.
+\begin{center}
+\begin{tabular}{lll}
+\textbf{$T(x)$} & \textbf{$X$} & \textbf{Applies? / fixed points} \\
+\hline
+$\sin(x)$ & $\mathbb{R}$ & \\
+$\tfrac{9}{10}\cos(x)$ & $\mathbb{R}$ & \\
+$x^2$ & $\mathbb{R}$ & \\
+$\tfrac12x^2$ & $(-1,1)$ & \\
+$\tfrac12\big(x + \tfrac2x\big)$ & $\mathbb{Q}\cap(1,2)$ &
+\end{tabular}
+\end{center}
+\end{exercise}
+
 
 % --- exercise relocated here from the dissolved sheet 3 ---
 

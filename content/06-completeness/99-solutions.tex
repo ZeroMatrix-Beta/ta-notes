@@ -102,3 +102,56 @@ self-map of $[0,1]$ has a fixed point. What $|f'| < 1$ buys is \textbf{uniquenes
 two-line argument as in the proof of uniqueness for \cref{thm:banach_fixed_point} combined with
 the mean value theorem.
 \end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:bfpt_applicability_table}]
+% Generator: Claude Opus 5 (High)
+Recall that \cref{thm:banach_fixed_point} needs three things at once: $X$ complete, $T$ mapping
+$X$ into $X$, and a Lipschitz constant $\lambda < 1$ that is \emph{actually attained as a bound},
+not merely approached.
+\begin{itemize}
+  \item \textbf{$T(x) = \sin(x)$ on $\mathbb{R}$. Does not apply; fixed points $\{0\}$.}
+    $\mathbb{R}$ is complete and $T$ maps it into itself, but
+    $\lambda = \sup_{x}\lvert\cos x\rvert = 1$, attained at $x=0$. So the theorem is unavailable.
+    A fixed point exists all the same: $\sin x = x$ holds at $x=0$ and nowhere else, since
+    $\lvert\sin x\rvert < \lvert x\rvert$ for $x \neq 0$. This is the first lesson --- the
+    theorem is \emph{sufficient}, never necessary.
+  \item \textbf{$T(x) = \tfrac{9}{10}\cos(x)$ on $\mathbb{R}$. Applies; one fixed point.}
+    Here $\lvert T'(x)\rvert = \tfrac{9}{10}\lvert\sin x\rvert \leq \tfrac{9}{10} < 1$, so by the
+    mean value theorem $T$ is a $\tfrac{9}{10}$-contraction; $\mathbb{R}$ is complete and
+    $T(\mathbb{R}) \subseteq [-\tfrac9{10},\tfrac9{10}] \subseteq \mathbb{R}$. All three
+    hypotheses hold, so there is exactly one fixed point. It has no closed form; iterating from
+    any starting value gives $x^* \approx 0.693$.
+  \item \textbf{$T(x) = x^2$ on $\mathbb{R}$. Does not apply; fixed points $\{0,1\}$.}
+    $T$ is not Lipschitz at all on $\mathbb{R}$, since $T'(x) = 2x$ is unbounded. That it cannot
+    apply is visible without any computation: $x^2 = x$ has the two solutions $0$ and $1$, and
+    the theorem asserts \emph{uniqueness}, so any set of hypotheses implying it must fail here.
+  \item \textbf{$T(x) = \tfrac12x^2$ on $(-1,1)$. Does not apply; fixed points $\{0\}$.}
+    Two hypotheses fail together. The domain $(-1,1)$ is not complete, and
+    $\lambda = \sup_{\lvert x\rvert<1}\lvert T'(x)\rvert = \sup\lvert x\rvert = 1$ --- not
+    attained, but a supremum of $1$ is still not $<1$, exactly the trap of
+    \cref{rem:banach_hypotheses}. The map does send $(-1,1)$ into $[0,\tfrac12) \subseteq
+    (-1,1)$. Solving $\tfrac12x^2 = x$ gives $x \in \{0,2\}$, of which only $0$ lies in the
+    domain, so a unique fixed point exists regardless.
+  \item \textbf{$T(x) = \tfrac12\big(x+\tfrac2x\big)$ on $\mathbb{Q}\cap(1,2)$. Does not apply;
+    \emph{no} fixed points.} This row is the interesting one, and it is the Babylonian iteration
+    for $\sqrt2$. Everything works except completeness:
+    \begin{itemize}
+      \item $T'(x) = \tfrac12 - \tfrac1{x^2}$, so on $(1,2)$ we have
+        $-\tfrac12 \leq T'(x) \leq \tfrac14$ and hence $\lambda = \tfrac12 < 1$: a genuine
+        contraction.
+      \item $T$ maps $X$ into $X$: it sends rationals to rationals, and on $(1,2)$ its minimum
+        is $T(\sqrt2) = \sqrt2 \approx 1.414$ while $T(1) = T(2) = \tfrac32$, so
+        $T\big((1,2)\big) \subseteq [\sqrt2,\tfrac32] \subseteq (1,2)$.
+      \item But $\mathbb{Q}\cap(1,2)$ is \textbf{not complete}.
+    \end{itemize}
+    And there is indeed no fixed point: $x = \tfrac12(x+\tfrac2x)$ forces $x^2 = 2$, so
+    $x = \sqrt2 \notin \mathbb{Q}$. The iterates are the familiar rational approximations
+    $\tfrac32, \tfrac{17}{12}, \tfrac{577}{408}, \dots$ --- a Cauchy sequence in $X$ converging
+    to a point that $X$ does not contain.
+
+    This is worth contrasting with \cref{rem:banach_hypotheses}, where completeness failed on
+    $(0,1]$ with the missing point sitting at an endpoint one is already suspicious of. Here the
+    domain is an interval of rationals, the hole is invisible, and the contraction is a
+    thoroughly practical algorithm. Completeness is not a technicality.
+\end{itemize}
+\end{exercisesolution}

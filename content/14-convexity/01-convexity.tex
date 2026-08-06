@@ -88,6 +88,26 @@ and every eigenvalue is $2>0$, so $\Hess p(x)$ is positive definite (hence posit
 for every $x$, and $p$ is convex by \cref{prop:convexity_characterizations}.
 \end{example}
 
+% Supplement: Linus Lüchinger/Slides/Slides-03-23.pdf, slide 17;
+%             Linus Lüchinger/Slides/Slides-03-26.pdf, slides 3--4
+% Linus's list also contains ||x||^2, which is the preceding example; dropped here.
+\begin{exercise}[Convex or not?]
+\label{ex:convex_or_not}
+Decide which of the following are convex, and prove it. Linus's advice is worth following:
+attempt each one \emph{without} plotting it, since that is the situation in an exam. To show a
+function \emph{is} convex, computing the Hessian and checking
+\cref{prop:convexity_characterizations}\textbf{(b)} is usually quickest; to show one is
+\emph{not}, it is usually fastest to exhibit a single triple $x, y, t$ violating the defining
+inequality.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $f : [0,\infty)^2 \to \mathbb{R}$, $f(x,y) := xy$.
+  \item $f : \mathbb{R}^2 \to \mathbb{R}$, $f(x,y) := x^2+xy+y^2$.
+  \item $f : [0,\pi]^2 \to \mathbb{R}$, $f(x,y) := \cos(x)\cos(y)$.
+  \item If $g, h : \mathbb{R} \to \mathbb{R}$ are convex, is $(x,y) \mapsto g(x)h(y)$ necessarily
+    convex?
+\end{enumerate}
+\end{exercise}
+
 % Sonnet 5 (Medium)
 \subsection{Proof of the characterizations}
 

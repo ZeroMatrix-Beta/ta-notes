@@ -176,3 +176,31 @@ $\mathbb{R}^n$, and it is worth stressing that the \qt{if} direction is where co
 ambient space is used. Inside $\mathbb{Q}$ instead of $\mathbb{R}$ the statement collapses:
 $\mathbb{Q}$ is closed in itself but not complete.
 \end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:uniform_lipschitz_family}]
+% Generator: Claude Opus 5 (High)
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item By the mean value theorem, for any $x,y \in [0,1]$ there is $\xi$ between them with
+    \[\lvert f_k(x)-f_k(y)\rvert = \lvert f_k'(\xi)\rvert\,\lvert x-y\rvert \leq \lvert x-y\rvert,\]
+    so every $f_k$ is $1$-Lipschitz \emph{with the same constant}. Given $\varepsilon>0$, the
+    choice $\delta := \varepsilon$ then satisfies \cref{def:equicontinuous} for every $k$ and
+    every pair $x,y$ at once. A uniformly Lipschitz family is always equicontinuous, and this is
+    by far the most common way the hypothesis is verified in practice.
+  \item Apply the same bound with $y := 0$ and use $f_k(0)=0$:
+    \[\lvert f_k(x)\rvert = \lvert f_k(x)-f_k(0)\rvert \leq \lvert x\rvert \leq 1
+      \quad\text{for all } x \in [0,1],\]
+    so $\lVert f_k\rVert_\infty \leq 1$ for every $k$. Note that the normalisation $f_k(0)=0$ is
+    doing real work: without it the family $f_k :\equiv k$ satisfies the derivative bound and is
+    unbounded.
+  \item Both hypotheses of \cref{thm:ascoli_arzela} hold on the compact set $[0,1]$, so some
+    subsequence converges uniformly to a continuous limit.
+
+    Replacing the uniform bound by mere differentiability destroys this, and
+    \cref{ex:bounded_no_convergent_subsequence} is already the counterexample: $f_k(x) := x^k$
+    is $C^1$ on $[0,1]$ with $f_k(0)=0$, so it satisfies every hypothesis \emph{except} the
+    uniform one --- its derivative $f_k'(x) = kx^{k-1}$ has $\lVert f_k'\rVert_\infty = k$,
+    growing without bound. And we saw that no subsequence of $(x^k)$ converges. What matters is
+    therefore not that each $f_k$ is well behaved, but that they are well behaved \emph{by a
+    common margin}.
+\end{enumerate}
+\end{exercisesolution}

@@ -246,6 +246,67 @@ Let $f(x,y) := x^2 y + \sin(xy)$ defined on $\mathbb{R}^2$.
 \end{enumerate}
 \end{aiexercise}
 
+% Quelle: Linus Lüchinger/Slides/Slides-03-19.pdf, slides 9--11
+% Generator: Claude Opus 5 (High)
+\subsection{Differentiating with respect to a matrix}
+\label{sec:differentiating_wrt_matrix}
+
+Nothing in \cref{def:differentiable} requires the domain to be $\mathbb{R}^n$ with $n$ small, or
+even to be written as a column of numbers. A function of an $n\times m$ matrix is a function of
+$nm$ real variables, and its partial derivatives $\partial f/\partial A_{ij}$ are defined exactly
+as before --- vary one entry, freeze the rest.
+
+\begin{ainote}[Why this is worth a subsection]
+Taking derivatives with respect to a matrix argument can look like a formal exercise with no
+purpose. Linus spends part of a session arguing the opposite, and the argument is worth
+recording: \textbf{it is how neural networks are trained.} The parameters of such a network are
+matrices; the function being minimised sends those matrices to a single number measuring how
+badly the network fits the data; and training consists of computing the gradient with respect
+to those matrices and stepping a little way against it, because $-\nabla f$ points in the
+direction of steepest decrease. Every step of that loop is the material of this chapter.
+\end{ainote}
+
+The simplest instance is already worth doing by hand, and it is exactly linear regression.
+
+% Generator: Claude Opus 5 (High)
+\begin{aiexample}[The gradient of a least-squares fit]
+\label{ex:least_squares_matrix_gradient}
+Fix data matrices $X \in \mathbb{R}^{m\times k}$ (the $k$ inputs, each a column in
+$\mathbb{R}^m$) and $Y \in \mathbb{R}^{n\times k}$ (the $k$ desired outputs). The model applies
+an unknown matrix $A \in \mathbb{R}^{n\times m}$ and adds an unknown offset
+$b \in \mathbb{R}^n$ to every column, so its total error is
+\[f(A,b) := \big\lVert \underbrace{AX + b\mathbf{1}\transp - Y}_{=:\,R} \big\rVert^2,
+  \qquad \mathbf{1} := (1,\dots,1)\transp \in \mathbb{R}^k,\]
+where $\lVert\cdot\rVert$ is the Hilbert--Schmidt norm of \cref{sec:structured_spaces}, so that
+$f(A,b) = \sum_{p,q} R_{pq}^2$ is the total squared error over all $k$ data points. Writing out
+one entry of the residual,
+\[R_{pq} = \sum_{s=1}^{m} A_{ps}X_{sq} + b_p - Y_{pq},\]
+so that $\partial R_{pq}/\partial A_{ij} = \delta_{pi}X_{jq}$ and
+$\partial R_{pq}/\partial b_i = \delta_{pi}$. The chain rule then gives
+\begin{align}
+  \frac{\partial f}{\partial A_{ij}} &= 2\sum_{p,q} R_{pq}\,\delta_{pi}X_{jq}
+    = 2\sum_{q} R_{iq}X_{jq} = 2\big(RX\transp\big)_{ij}, \nonumber \\
+  \frac{\partial f}{\partial b_i} &= 2\sum_{p,q} R_{pq}\,\delta_{pi}
+    = 2\sum_{q} R_{iq} = 2\big(R\mathbf{1}\big)_i. \nonumber
+\end{align}
+Collecting the entries back into arrays of the same shape as the variables,
+\[\nabla_{\!A} f = 2\big(AX + b\mathbf{1}\transp - Y\big)X\transp, \qquad
+  \nabla_{\!b} f = 2\big(AX + b\mathbf{1}\transp - Y\big)\mathbf{1}.\]
+The gradient with respect to $b$ is twice the vector of row sums of the residual, and the
+gradient with respect to $A$ is the residual correlated against the inputs --- both entirely
+explicit, and both computed by nothing beyond partial differentiation and the chain rule.
+\end{aiexample}
+
+\begin{ainote}[A notational caution]
+Linus flags one point that trips people up. Since $f$ above has domain
+$\mathbb{R}^{n\times m}\times\mathbb{R}^n$ of dimension $nm+n$, its Jacobian is formally a
+$1\times(nm+n)$ row, and $\partial_v f(A,b) = \Jac f(A,b)\,v$ would require flattening the matrix
+direction $v$ into a column of length $nm$. That flattening is pure bookkeeping and is almost
+never performed: one keeps $\nabla_{\!A}f$ shaped like $A$, as above. The identity
+$\partial_vf = \Jac f\cdot v$ of \cref{sec:jacobi_matrix} still holds --- it is just being read
+in a reshaped coordinate system.
+\end{ainote}
+
 % Originally: content/week-04.tex, \exercisesheet{4}
 % Source: exercises/Ex4_Analysis2_eng.pdf
 

@@ -136,6 +136,66 @@ $|\alpha| = 0$ line of \cref{ex:taylor_maximal_expansion}, which is the same ter
 multi-index form.
 \end{ainote}
 
+% Quelle: Linus Lüchinger/Slides/Slides-03-16.pdf, slide 12;
+%         Linus Lüchinger/Slides/Slides-03-19.pdf, slides 4--6
+% Generator: Claude Opus 5 (High)
+\begin{corollary}[A polynomial that fits to order $k$ \emph{is} the Taylor polynomial]
+\label{cor:taylor_expansion_unique}
+Let $U \subseteq \mathbb{R}^n$ be open, $x_0 \in U$, $f \in C^{k+1}(U)$, and let $P$ be a
+polynomial of degree at most $k$ with
+\[\lvert f(x_0+h) - P(h)\rvert = o\big(\lvert h\rvert^{k}\big) \qquad \text{as } h \to 0.\]
+Then $\partial^\alpha f(x_0) = \partial^\alpha P(0)$ for every multi-index with
+$\lvert\alpha\rvert \leq k$. Equivalently, $P$ is \emph{the} Taylor polynomial of $f$ of degree
+$k$ at $x_0$.
+\end{corollary}
+
+\begin{proof}
+By \cref{thm:taylor_working_formula}, the Taylor polynomial $T$ of degree $k$ also satisfies
+$\lvert f(x_0+h)-T(h)\rvert = o(\lvert h\rvert^k)$. Subtracting, the polynomial $Q := P-T$ has
+degree at most $k$ and satisfies $\lvert Q(h)\rvert = o(\lvert h\rvert^k)$. Suppose
+$Q \not\equiv 0$ and let $d \leq k$ be the degree of its lowest non-vanishing homogeneous part
+$Q_d$. Choosing $v$ with $Q_d(v) \neq 0$ and restricting to the ray $h := tv$,
+\[Q(tv) = t^dQ_d(v) + O(t^{d+1}), \qquad\text{so}\qquad
+  \frac{\lvert Q(tv)\rvert}{t^{k}} \sim \lvert Q_d(v)\rvert\, t^{d-k} \not\to 0\]
+as $t \downarrow 0$, since $d \leq k$. That contradicts $\lvert Q(h)\rvert = o(\lvert h\rvert^k)$,
+so $Q \equiv 0$ and $P = T$.
+\end{proof}
+
+\begin{remark}[Reading derivatives off an asymptotic expansion]
+\label{rem:reading_derivatives_off_expansions}
+This is more useful than it looks, because it runs \emph{backwards}. Normally one computes
+derivatives in order to produce an expansion; the corollary says that an expansion, however it
+was obtained, hands back the derivatives. Given
+\[f(x_0+h) = c + a\transp h + \tfrac12 h\transp Bh + o(\lvert h\rvert^2)\]
+one may read off $f(x_0) = c$, $\nabla f(x_0) = a$ and $\Hess f(x_0) = B$ without differentiating
+anything --- the same move by which \cref{def:differentiable} recognises a differential from an
+$o(\lvert h\rvert)$ estimate, now carried to higher order. It is the standard route to a Hessian
+for functions built out of known series.
+
+Two cautions on the bookkeeping, both of which the exercise below turns on. The estimate must be
+$o(\lvert h\rvert^{k})$, not $O(\lvert h\rvert^{k})$: an $O(\lvert h\rvert^{k})$ error can
+contain a genuine degree-$k$ term and so corrupts the order-$k$ coefficients, leaving only the
+derivatives of order $< k$ determined. And the expansion determines derivatives only up to
+order $k$ --- nothing beyond.
+\end{remark}
+
+% Supplement: Linus Lüchinger/Slides/Slides-03-19.pdf, slide 6
+\begin{exercise}[What does an expansion actually tell you?]
+\label{ex:reading_off_expansions}
+For each of the following, state precisely which values of $f$ and of its derivatives at the
+indicated point are determined by the given information, and which are not.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $f : \mathbb{R}^3 \to \mathbb{R}$ with
+    $f(x_1,x_2,x_3) - x_1x_2 \in O\big(\lvert x\rvert\big)$, at $x = 0$.
+  \item $f : \mathbb{R}^2 \to \mathbb{R}$ with
+    $f(1+x_1,\,-1+x_2) - 2 - x_1 \in o\big(\lvert x\rvert\big)$, at $(1,-1)$.
+  \item $f : \mathbb{R}^2 \to \mathbb{R}$ with
+    $f(-1+x_1,\,x_2) + 2 - 2x_1x_2 + 2x_2^2 - 3x_2^3 \in o\big(\lvert x\rvert^3\big)$,
+    at $(-1,0)$.
+\end{enumerate}
+Assume in each case that $f$ is as smooth as the relevant statement requires.
+\end{exercise}
+
 % Supplement: Toby Lane/class-document.pdf, §3.4.4
 \begin{remark}[Two ways to weight the same expansion]
 \Cref{ex:taylor_maximal_expansion} above and \cref{thm:taylor_working_formula} look like they

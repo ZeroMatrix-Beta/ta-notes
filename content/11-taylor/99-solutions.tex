@@ -4,6 +4,53 @@
 \section{Solutions}
 \label{sec:taylor_solutions}
 
+\begin{exercisesolution}[Solution to \cref{ex:reading_off_expansions}]
+% Generator: Claude Opus 5 (High)
+Throughout, the tool is \cref{cor:taylor_expansion_unique}: an $o(\lvert h\rvert^{k})$ fit by a
+polynomial of degree $\leq k$ pins down every derivative of order $\leq k$, and nothing beyond.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{Only $f(0)=0$.} The hypothesis is an $O$, not an $o$, so the corollary does not
+    apply at any order --- and that is the entire point of the item. Setting $x=0$ in
+    $\lvert f(x)-x_1x_2\rvert \leq C\lvert x\rvert$ gives $\lvert f(0)\rvert \leq 0$, so
+    $f(0)=0$. Nothing else is determined: both
+    \[f(x) := x_1x_2 \qquad\text{and}\qquad g(x) := x_1x_2 + 5x_1\]
+    satisfy the hypothesis, yet $\nabla f(0) = (0,0)$ while $\nabla g(0) = (5,0)$. An
+    $O(\lvert x\rvert)$ remainder is free to hide a whole linear term, so not even the first
+    derivatives survive.
+
+    Note also that the visible $x_1x_2$ is a red herring: it is $O(\lvert x\rvert^2)$, hence
+    already absorbed by the stated error, and contributes nothing.
+  \item \textbf{Value and first derivatives; nothing further.} Put $x_0 := (1,-1)$ and
+    $h := (x_1,x_2)$. The hypothesis reads $f(x_0+h) = 2 + h_1 + o(\lvert h\rvert)$, and
+    $P(h) := 2 + h_1$ has degree $1$, so by \cref{cor:taylor_expansion_unique} with $k=1$ it
+    \emph{is} the first-order Taylor polynomial:
+    \[f(1,-1) = 2, \qquad \partial_1f(1,-1) = 1, \qquad \partial_2f(1,-1) = 0.\]
+    Equivalently $\nabla f(1,-1) = (1,0)\transp$. Second derivatives are not determined: adding
+    any quadratic to $f$ preserves the hypothesis.
+  \item \textbf{Everything up to third order.} Put $x_0 := (-1,0)$. Rearranging,
+    \[f(x_0+h) = \underbrace{-2 + 2h_1h_2 - 2h_2^2 + 3h_2^3}_{=:\,P(h)} + o\big(\lvert h\rvert^3\big),\]
+    with $\deg P = 3$, so $P$ is the third-order Taylor polynomial and every derivative of order
+    $\leq 3$ can be read off.
+
+    \textbf{Order $0$ and $1$.} $f(-1,0) = -2$, and $P$ has no linear part, so
+    $\nabla f(-1,0) = (0,0)\transp$ --- the point is critical.
+
+    \textbf{Order $2$.} The quadratic part of a Taylor expansion is
+    $\tfrac12 h\transp\Hess f(x_0)h$, so
+    $\tfrac12h\transp \Hess f(-1,0)\,h = 2h_1h_2 - 2h_2^2$. Comparing coefficients in
+    $h\transp Hh = H_{11}h_1^2 + 2H_{12}h_1h_2 + H_{22}h_2^2 = 4h_1h_2 - 4h_2^2$ gives
+    \[\Hess f(-1,0) = \begin{pmatrix} 0 & 2 \\ 2 & -4\end{pmatrix}.\]
+    Its determinant is $-4 < 0$, so the Hessian is indefinite and, by \cref{thm:hessian_test},
+    the critical point $(-1,0)$ is a \textbf{saddle} --- settled without ever differentiating
+    $f$.
+
+    \textbf{Order $3$.} A third-order term is $\partial^\alpha f(x_0)\,h^\alpha/\alpha!$. The only
+    cubic monomial present is $h_2^3$, with $\alpha = (0,3)$ and $\alpha! = 6$, so
+    $\partial_2^3f(-1,0)/6 = 3$, giving $\partial_2^3f(-1,0) = 18$; every other third derivative
+    vanishes. Fourth-order derivatives are not determined.
+\end{enumerate}
+\end{exercisesolution}
+
 \begin{exercisesolution}[Solution to \cref{ex:4.5}]
 % Generator: Claude Opus 5 (High)
 \textbf{No} --- and the official hint's function is the cleanest witness. Take

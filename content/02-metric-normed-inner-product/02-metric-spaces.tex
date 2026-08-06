@@ -299,6 +299,62 @@ each axis: $t \mapsto t^{1/m}$ is concave for $m \geq 1$ and convex for $m \in (
 \end{tikzpicture}
 \end{center}
 
+% Quelle: Linus Lüchinger/Slides/Slides-02-23.pdf, slide 12
+% Generator: Claude Opus 5 (High)
+\begin{example}[The British Rail metric]
+\label{ex:british_rail_metric}
+Let $(X,\lVert\cdot\rVert)$ be a normed space and define
+\[d(x,y) := \begin{cases} 0, & x = y, \\ \lVert x\rVert + \lVert y\rVert, & x \neq y.\end{cases}\]
+The name records the joke that to travel between any two towns you must change trains in London:
+every journey is routed through the origin, and its cost is the distance in plus the distance
+out.
+
+This is a metric. Definiteness holds by construction and symmetry is evident. For the triangle
+inequality, take $x \neq z$, so $d(x,z) = \lVert x\rVert + \lVert z\rVert$. If $y$ equals $x$ or
+$z$ then one of the two terms on the right vanishes and the other \emph{is} $d(x,z)$, so the
+inequality holds with equality; otherwise
+\[d(x,y) + d(y,z) = \lVert x\rVert + 2\lVert y\rVert + \lVert z\rVert
+  \geq \lVert x\rVert + \lVert z\rVert = d(x,z).\]
+
+\begin{remark}[The topology it generates]
+This metric is not induced by any norm, and the quickest way to see that something strange is
+happening is to look at small balls. For $x \neq 0$ and any radius $r \leq \lVert x\rVert$, a
+point $y \neq x$ has $d(y,x) = \lVert x\rVert + \lVert y\rVert \geq \lVert x\rVert \geq r$, so
+\[B_r(x) = \{x\}.\]
+Every non-zero point is therefore \textbf{isolated}, and $\{x\}$ is open. The origin is the sole
+exception: $d(y,0) = \lVert y\rVert$ for $y \neq 0$, so $B_r(0)$ is the ordinary ball of radius
+$r$. The space is thus discrete everywhere except at one point, where it looks entirely normal
+--- which is a useful shape to keep in mind whenever a proof seems to be using more about a
+metric space than the three axioms actually give.
+\end{remark}
+\end{example}
+
+% Quelle: Linus Lüchinger/Slides/Slides-03-02.pdf, slide 6
+% Generator: Claude Opus 5 (High)
+\begin{remark}[Naming points and their components]
+\label{rem:naming_points_and_components}
+A practical point, which Linus reports as the single most common source of avoidable errors in
+submitted solutions. Once a proof involves several points, each with several components, two
+independent naming decisions have to be made, and mixing the two conventions is what causes the
+damage:
+\begin{itemize}
+  \item \textbf{Subscripts for components}, different letters or primes for points:
+    $x = (x_1,x_2)$ and $y = (y_1,y_2)$, or $x = (x_1,x_2)$ and $x' = (x_1',x_2')$.
+  \item \textbf{Subscripts for points}, letters for components: $(x_1,y_1)$ and $(x_2,y_2)$.
+\end{itemize}
+Either is internally consistent, and the recommendation is the first: reserve subscripts for
+components, and distinguish points by $x, y, z$ or by $x, x', x''$. When many points are needed
+at once, index them as $x_k$ and write $x_{k,i}$ for the $i$-th component of the $k$-th point.
+For a single point of $\mathbb{R}^2$ or $\mathbb{R}^3$, plain $(x,y)$ or $(x,y,z)$ is of course
+fine.
+
+The reason this matters more here than in \emph{Analysis I} is that the product metrics of
+\cref{ex:2.5} and the continuity proofs that follow genuinely need both indices at once, so an
+expression such as $d(x_1,y_1) + d(x_2,y_2)$ is ambiguous until the convention is fixed --- it
+means quite different things under the two readings.
+\end{remark}
+
+% Source: Corsin Nick/Class Notes/Week 2.pdf, pp. 1--13
 \begin{exercise}[Supremum metric]
 \label{ex:sup_metric_is_metric}
 Show that the supremum metric from \cref{ex:metric_examples} \textbf{(c)} is a metric.

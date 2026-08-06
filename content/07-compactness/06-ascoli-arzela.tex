@@ -1,0 +1,171 @@
+% Originally: new section (no predecessor in the week-based skeleton).
+% Quelle: Linus Lüchinger/Slides/Slides-05-28.pdf, slides 2--3.
+
+\section{Compactness in spaces of functions: Ascoli--Arzelà}
+\label{sec:ascoli_arzela}
+
+% Supplement: Linus Lüchinger/Slides/Slides-05-28.pdf, slides 2--3
+\begin{ainote}
+Corsin's notes stop at \cref{thm:heine_borel}, which settles compactness in $\mathbb{R}^n$ and
+says nothing about spaces of \emph{functions}. Linus devotes his final session to the missing
+theorem (Theorem 15.47 of the lecture notes), presenting it as \qt{the Bolzano--Weierstrass
+theorem, one level up}. It is worth having here for a concrete reason: it is the compactness
+input that \cref{rem:peano_vs_picard} appeals to without naming, when it says Peano's theorem
+extracts a convergent subsequence from a family of approximate solutions.
+\end{ainote}
+
+\subsection{The space of continuous functions on a compact set}
+
+\begin{definition}[Supremum norm on $C(K,\mathbb{R}^m)$]
+\label{def:sup_norm_function_space}
+Let $K \subseteq \mathbb{R}^n$ be compact. Write $C(K,\mathbb{R}^m)$ for the set of continuous
+maps $f : K \to \mathbb{R}^m$, a real vector space under pointwise operations, and equip it with
+the \newterm{supremum norm} (\germanterm{Supremumsnorm})
+\[\lVert f\rVert_\infty := \sup_{x \in K} \lvert f(x)\rvert.\]
+\end{definition}
+
+The supremum is finite because $\lvert f\rvert$ is continuous on a compact set, hence bounded
+(\cref{sec:why_compactness_matters}) --- the same point already made for the supremum metric in
+\cref{ex:sup_metric_is_metric}. Convergence in this norm is exactly \emph{uniform} convergence.
+
+\begin{proposition}[$C(K,\mathbb{R}^m)$ is complete]
+\label{prop:function_space_complete}
+For $K \subseteq \mathbb{R}^n$ compact, $\big(C(K,\mathbb{R}^m), \lVert\cdot\rVert_\infty\big)$
+is a complete normed vector space.
+\end{proposition}
+
+\begin{proof}
+Let $(f_k)_{k\in\mathbb{N}}$ be Cauchy for $\lVert\cdot\rVert_\infty$. For each fixed $x \in K$
+we have $\lvert f_k(x)-f_\ell(x)\rvert \leq \lVert f_k-f_\ell\rVert_\infty$, so $(f_k(x))_k$ is
+Cauchy in $\mathbb{R}^m$ and converges, by completeness of $\mathbb{R}^m$, to a limit we call
+$f(x)$. This defines a function $f : K \to \mathbb{R}^m$.
+
+The convergence is uniform. Given $\varepsilon>0$ choose $N$ with
+$\lVert f_k-f_\ell\rVert_\infty < \varepsilon$ for $k,\ell \geq N$; fixing $k \geq N$ and letting
+$\ell \to \infty$ in $\lvert f_k(x)-f_\ell(x)\rvert < \varepsilon$ gives
+$\lvert f_k(x)-f(x)\rvert \leq \varepsilon$ for \emph{every} $x$, i.e.\
+$\lVert f_k - f\rVert_\infty \leq \varepsilon$.
+
+Finally $f$ is continuous, being a uniform limit of continuous functions --- the standard
+$\varepsilon/3$ argument from \emph{Analysis I}. Hence $f \in C(K,\mathbb{R}^m)$ and
+$f_k \to f$ in the norm.
+\end{proof}
+
+\subsection{Why Bolzano--Weierstrass fails one level up}
+
+In $\mathbb{R}^n$, bounded sequences have convergent subsequences. The naive transfer of that
+statement to $C(K,\mathbb{R}^m)$ is \textbf{false}, and it is worth seeing exactly how.
+
+% Generator: Claude Opus 5 (High)
+\begin{aiexample}[A bounded sequence of functions with no convergent subsequence]
+\label{ex:bounded_no_convergent_subsequence}
+Take $K := [0,1]$, $m := 1$ and $f_k(x) := x^k$. Every $f_k$ is continuous with
+$\lVert f_k\rVert_\infty = 1$, so the sequence is bounded --- indeed it lies on the unit sphere.
+
+Yet no subsequence converges in $C([0,1])$. Pointwise,
+\[f_k(x) \longrightarrow g(x) := \begin{cases} 0, & 0 \leq x < 1, \\ 1, & x = 1,\end{cases}\]
+and the same holds for every subsequence. If some $f_{k_j}$ converged uniformly to a limit
+$f \in C([0,1])$, then it would converge pointwise to $f$ as well, forcing $f = g$; but $g$ is
+not continuous. So no subsequence can converge.
+
+\begin{remark}[The diagnosis]
+Boundedness was never the issue. What goes wrong is that the $f_k$ become arbitrarily
+\emph{steep} near $x=1$: to keep $\lvert f_k(x)-f_k(y)\rvert$ below a fixed $\varepsilon$ there,
+one needs $\lvert x-y\rvert$ smaller and smaller as $k$ grows. Each individual $f_k$ is
+uniformly continuous (\cref{def:uniformly_continuous}) --- it is continuous on a compact
+interval --- but there is no single $\delta$ that works for all of them at once. Ruling that out
+is precisely what the next definition does.
+\end{remark}
+\end{aiexample}
+
+\subsection{Equicontinuity, and the theorem}
+
+\begin{definition}[Equicontinuity]
+\label{def:equicontinuous}
+A family $(f_k)_{k\in\mathbb{N}}$ in $C(K,\mathbb{R}^m)$ is \newterm{equicontinuous}
+(\germanterm{gleichgradig stetig}) if
+\[\forall \varepsilon>0\ \ \exists \delta>0\ \ \forall k \in \mathbb{N}\ \ \forall x,y \in K :
+  \quad \lvert x-y\rvert < \delta \implies \lvert f_k(x)-f_k(y)\rvert < \varepsilon.\]
+\end{definition}
+
+\begin{remark}[Reading the quantifiers]
+\label{rem:equicontinuity_quantifiers}
+Compare the three conditions, which differ only in what $\delta$ is allowed to depend on:
+\begin{itemize}
+  \item \textbf{Continuity} of one $f$: $\delta$ may depend on $\varepsilon$ \emph{and on the
+    point} $x$.
+  \item \textbf{Uniform continuity} of one $f$: $\delta$ may depend on $\varepsilon$ only ---
+    one $\delta$ for all points.
+  \item \textbf{Equicontinuity} of a family: $\delta$ may depend on $\varepsilon$ only --- one
+    $\delta$ for all points \emph{and all members of the family}.
+\end{itemize}
+So equicontinuity is uniform continuity made uniform in one further variable, the index. Each
+$x^k$ of \cref{ex:bounded_no_convergent_subsequence} is uniformly continuous, and the family is
+not equicontinuous; that is the whole gap.
+\end{remark}
+
+% Quelle: Linus Lüchinger/Slides/Slides-05-28.pdf, slide 3
+\begin{theorem}[Ascoli--Arzelà]
+\label{thm:ascoli_arzela}
+Let $K \subseteq \mathbb{R}^n$ be compact and let $(f_k)_{k\in\mathbb{N}}$ be a sequence in
+$C(K,\mathbb{R}^m)$ that is
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{bounded}: $\sup_k \lVert f_k\rVert_\infty < \infty$; and
+  \item \textbf{equicontinuous} in the sense of \cref{def:equicontinuous}.
+\end{enumerate}
+Then $(f_k)$ has a subsequence converging uniformly to some $f \in C(K,\mathbb{R}^m)$.
+\end{theorem}
+
+\begin{ainote}
+Linus states the theorem without proof, remarking that it is \qt{mostly just used in proofs}.
+The sketch below is included because the mechanism --- a diagonal argument --- explains why
+\emph{both} hypotheses are needed, which the statement alone does not. The details are omitted.
+\end{ainote}
+
+\begin{remark}[Proof sketch: the diagonal argument]
+\label{rem:ascoli_diagonal_sketch}
+Fix a countable dense subset $D = \{q_1,q_2,\dots\} \subseteq K$ (the points of $K$ with rational
+coordinates will do).
+
+\textbf{Step 1 --- converge on $D$, using boundedness.} The values $(f_k(q_1))_k$ form a bounded
+sequence in $\mathbb{R}^m$, so by Bolzano--Weierstrass some subsequence converges at $q_1$. Pass
+to a further subsequence converging also at $q_2$, then at $q_3$, and so on. Each refinement is
+legitimate but no single one handles all of $D$; taking the \emph{diagonal} sequence --- the
+$j$-th member of the $j$-th subsequence --- produces one subsequence converging at every point
+of $D$ simultaneously.
+
+\textbf{Step 2 --- upgrade to uniform convergence, using equicontinuity.} Convergence on a dense
+set says nothing on its own about the rest of $K$; a sequence can converge at every rational and
+oscillate wildly in between. Equicontinuity forbids that: given $\varepsilon$, pick the $\delta$
+it supplies, cover the compact $K$ by finitely many balls of radius $\delta$ centred at points
+of $D$, and control any $x$ by the nearby dense point. This makes the diagonal subsequence
+uniformly Cauchy, hence convergent by \cref{prop:function_space_complete}.
+\end{remark}
+
+\begin{remark}[Where each hypothesis does its work]
+The two hypotheses are not interchangeable, and the sketch shows which does what:
+\textbf{boundedness} is what lets Bolzano--Weierstrass run at each individual point, and
+\textbf{equicontinuity} is what converts pointwise control on a dense set into uniform control
+everywhere. Delete the second and \cref{ex:bounded_no_convergent_subsequence} is a
+counterexample; delete the first and the constant sequences $f_k \equiv k$ are equicontinuous
+(they are all constant, so any $\delta$ works) with no convergent subsequence at all.
+\end{remark}
+
+% Generator: Claude Opus 5 (High)
+\begin{aiexercise}[A uniform derivative bound gives compactness]
+\label{ex:uniform_lipschitz_family}
+Let $(f_k)_{k\in\mathbb{N}}$ be a sequence in $C^1([0,1],\mathbb{R})$ with
+\[\lvert f_k'(x)\rvert \leq 1 \quad \text{for all } x \in [0,1] \text{ and all } k,
+  \qquad\text{and}\qquad f_k(0) = 0 \text{ for all } k.\]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Show that the family is equicontinuous.
+  \item Show that it is bounded in $\lVert\cdot\rVert_\infty$.
+  \item Conclude that some subsequence converges uniformly, and explain why the argument would
+    break down if the bound $\lvert f_k'\rvert \leq 1$ were replaced by \qt{each $f_k$ is
+    differentiable}.
+\end{enumerate}
+\end{aiexercise}
+
+% Transition: Claude Opus 5 (High)
+That closes the account of compactness. What follows returns to $\mathbb{R}^n$ and to
+differentiation, where compactness reappears as a hypothesis rather than a subject.

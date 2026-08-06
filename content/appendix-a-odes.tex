@@ -314,6 +314,51 @@ Note also where the two theorems get their machinery. Picard--Lindelöf is a fix
 --- it runs the Banach fixed-point theorem (\cref{thm:banach_fixed_point}) on the integral
 operator, and the Lipschitz constant is precisely what makes that operator a contraction. Peano
 has no contraction to work with and instead argues by compactness, extracting a convergent
-subsequence from a family of approximate solutions. That is also why it gives no uniqueness: a
-compactness argument produces \emph{a} limit, never \emph{the} limit.
+subsequence from a family of approximate solutions --- and the theorem licensing that extraction
+is Ascoli--Arzelà (\cref{thm:ascoli_arzela}), whose equicontinuity hypothesis is supplied by the
+bound $\lvert F\rvert \leq C$: it makes all the approximate solutions Lipschitz with the same
+constant $C$. That is also why it gives no uniqueness: a compactness argument produces \emph{a}
+limit, never \emph{the} limit.
+\end{remark}
+
+% Quelle: Linus Lüchinger/Slides/Slides-05-28.pdf, slide 5
+% Generator: Claude Opus 5 (High)
+\subsection{Dependence on the initial condition}
+\label{sec:dependence_on_initial_conditions}
+
+Picard--Lindelöf produces, for each starting point, one solution. In applications one rarely has
+the starting point exactly: it is measured, and therefore wrong by a little. So the question is
+not only whether a solution exists but whether it \emph{moves continuously} when the initial
+condition is perturbed --- and, more sharply, whether it is differentiable in that data.
+
+Write $u(t;x_0)$ for the value at time $t$ of the solution of
+\[u' = F(t,u), \qquad u(0) = x_0,\]
+so that $u(\,\cdot\,;x_0)$ is the trajectory through $x_0$ and $u(t;\,\cdot\,)$ records where
+each starting point has been carried by time $t$.
+
+\begin{theorem}[Differentiability in the initial condition]
+\label{thm:differentiability_initial_conditions}
+Let $\Omega \subseteq \mathbb{R}\times\mathbb{R}^n$ be open and convex and let
+$F : \Omega \to \mathbb{R}^n$ be continuous and $C^1$ in its spatial variable. Then
+$x_0 \mapsto u(t;x_0)$ is continuously differentiable, on the set of $x_0$ for which the solution
+exists up to time $t$.
+\end{theorem}
+
+\begin{remark}[Why this is more than a technicality]
+The hypothesis is barely stronger than the one Picard--Lindelöf already needs --- $C^1$ in space
+rather than locally Lipschitz in space --- and the conclusion is what makes the whole subject
+usable. It says the \emph{flow} $x_0 \mapsto u(t;x_0)$ is a $C^1$ map, so the trajectories of an
+ODE do not merely exist individually but fit together smoothly into a family. Two consequences
+worth naming:
+\begin{itemize}
+  \item \textbf{Errors stay controlled.} A measurement error $\varepsilon$ in $x_0$ produces an
+    error in $u(t;x_0)$ that is $O(\varepsilon)$ for fixed $t$, rather than something
+    uncontrolled. The constant does typically grow with $t$ --- differentiability at each fixed
+    time is not a statement about long-run stability, and chaotic systems are exactly the ones
+    where that constant grows fast.
+  \item \textbf{The derivative itself solves an ODE.} Differentiating $u' = F(t,u)$ in $x_0$
+    gives that $J(t) := \partial u(t;x_0)/\partial x_0$ satisfies the linear system
+    $J' = \Jac_uF(t,u(t;x_0))\,J$ with $J(0) = \id_n$, the \newterm{variational equation}. So the
+    sensitivity is computable without ever solving the original equation twice.
+\end{itemize}
 \end{remark}

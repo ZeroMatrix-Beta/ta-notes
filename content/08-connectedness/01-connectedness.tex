@@ -6,15 +6,17 @@
 \begin{definition}[Connected and disconnected metric spaces]
 \label{def:connectedness}
 A metric space $(X,d)$ is \newterm{disconnected} (\germanterm{unzusammenh\"angend}) if there
-exist $U_1, U_2 \subseteq X$ subsets which are
+exist subsets $U_1, U_2 \subseteq X$ which are
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item \textbf{open},
-  \item \textbf{non-empty}, $U_1 \neq \emptyset \neq U_2$,
+  \item \textbf{non-empty}, $U_1 \neq \emptyset$ and $U_2 \neq \emptyset$,
   \item \textbf{disjoint}, $U_1 \cap U_2 = \emptyset$,
 \end{enumerate}
 such that $X = U_1 \cup U_2$. Similarly, for a subset $A \subseteq X$, it is disconnected if it is
-disconnected as a metric space with the induced metric $d|_{A \times A}$. \newterm{Connected}
-(\germanterm{zusammenh\"angend}) is the negation of disconnected.
+disconnected as a metric space with the induced metric $d|_{A \times A}$.
+
+If no such pair $U_1, U_2$ exists, $X$ is \newterm{connected}
+(\germanterm{zusammenh\"angend}) --- that is, connected is the negation of disconnected.
 \end{definition}
 
 Typically, proving that a set or metric space is connected is done \textbf{by contradiction},

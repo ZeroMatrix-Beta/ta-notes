@@ -1,0 +1,300 @@
+% Originally: new section (no predecessor in the week-based skeleton).
+% Quelle: Linus Lüchinger/Slides/Slides-03-30.pdf, slides 12--13 (examples and
+%         non-examples), 16, 23, 26 (one surface in three representations);
+%         Linus Lüchinger/Slides/Slides-04-30.pdf, slide 7 (tangent-field test).
+
+\section{Recognising a submanifold in practice}
+\label{sec:recognising_submanifolds}
+
+% Supplement: Linus Lüchinger/Slides/Slides-03-30.pdf, slides 16, 23, 26
+\begin{ainote}
+\cref{rem:three_submanifold_descriptions} lists the three descriptions and says which to reach
+for, but Corsin's notes never run a single surface through all three, and they give no worked
+example of a set that \emph{fails} to be a submanifold beyond the crossing in
+\cref{ex:cross_not_submanifold}. Linus devotes most of one session to exactly these two gaps, and
+this section follows his treatment.
+\end{ainote}
+
+\subsection{One surface, three descriptions}
+
+% Supplement: Linus Lüchinger/Slides/Slides-03-30.pdf, slides 16, 23, 26
+The three characterisations of a submanifold are easiest to keep apart when they are applied to
+the same object at the same point. Take the open upper half-sphere
+\[\mathbb{S}^2_+ := \{(x,y,z) \in \mathbb{R}^3 : x^2+y^2+z^2 = 1,\ z > 0\},\]
+a $2$-dimensional submanifold of $\mathbb{R}^3$, and throughout fix the point
+\[p := \Big(0,\ \tfrac{1}{\sqrt2},\ \tfrac{1}{\sqrt2}\Big) \in \mathbb{S}^2_+.\]
+
+\begin{example}[The upper half-sphere, three ways]
+\label{ex:half_sphere_three_ways}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{Implicit.} Put $F(x,y,z) := x^2+y^2+z^2-1$ on the open set
+    $U := \{z>0\}$. Then $\mathbb{S}^2_+ = F^{-1}\{0\}$ and
+    \[\nabla F(x,y,z) = (2x,\ 2y,\ 2z), \qquad \nabla F(p) = (0,\ \sqrt2,\ \sqrt2) \neq 0,\]
+    so $\Jac F$ has full rank $\ell = 1$ everywhere on $U$ (indeed $2z > 0$ already forces the
+    row to be nonzero). \cref{thm:regular_value_theorem} gives a submanifold of dimension
+    $3-1 = 2$.
+  \item \textbf{Graph.} Over the open unit disc $V := \{(x,y) : x^2+y^2 < 1\}$ put
+    $f(x,y) := \sqrt{1-x^2-y^2}$. Then $\mathbb{S}^2_+ = \{(x,y,f(x,y)) : (x,y) \in V\}$ is the
+    graph of $f$, and $f(0,1/\sqrt2) = \sqrt{1-1/2} = 1/\sqrt2$ recovers the third coordinate of
+    $p$. Here the half-sphere is globally a graph, which is exactly why the \emph{upper half} is
+    a friendlier example than the whole sphere.
+  \item \textbf{Parametrization.} With $W := (0,\pi/2) \times (0,2\pi)$ and
+    \[\phi(\theta,\psi) := (\sin\theta\cos\psi,\ \sin\theta\sin\psi,\ \cos\theta),\]
+    we get $p = \phi(\pi/4,\ \pi/2)$. The Jacobian
+    \[\Jac\phi(\theta,\psi) = \begin{pmatrix}
+        \cos\theta\cos\psi & -\sin\theta\sin\psi \\
+        \cos\theta\sin\psi & \sin\theta\cos\psi \\
+        -\sin\theta & 0
+      \end{pmatrix}\]
+    is tall ($3\times2$), and full rank $=2$ means $D\phi$ is \emph{injective}
+    (\cref{rem:full_rank_two_meanings}): the bottom row forces the first column to be nonzero
+    whenever $\sin\theta \neq 0$, and the second column is then independent of it because
+    $\sin\theta \neq 0$ makes $(-\sin\theta\sin\psi,\ \sin\theta\cos\psi)$ nonzero. On $W$ we
+    have $\theta \in (0,\pi/2)$, so $\sin\theta > 0$ throughout.
+\end{enumerate}
+\end{example}
+
+% Generator: Claude Opus 5 (High) --- FIG-17-04
+% Geometry check. Screen projection of a 3D point (X,Y,Z) is (Y - 0.5X, Z - 0.3X), then
+% scaled by the sphere radius R = 1.25. The marked point is p = (0, 1/sqrt2, 1/sqrt2),
+% which has X = 0, so it projects to R*(0.7071, 0.7071) = (0.884, 0.884) -- a point at
+% screen distance sqrt(0.884^2 + 0.884^2) = 1.250 = R from the origin, i.e. exactly on the
+% dome's silhouette circle, at 45 degrees. That is why the dot sits ON the arc in all three
+% panels, and why the gradient arrow leaves it along the outward radial direction (45 deg):
+% nabla F(p) = (0, sqrt2, sqrt2) is radial, and radial directions in the y-z plane are
+% undistorted by this projection.
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=0.95,
+    dome/.style={blue!65!black, thick},
+    equator/.style={blue!45!black, thin},
+    panellabel/.style={font=\small, align=center}]
+
+  \def\R{1.25}
+  % All three captions sit on the SAME baseline y = -2.75, below every drawn element.
+  \def\capy{-2.75}
+  % --- reusable dome: outline arc + equator ellipse (back dashed, front solid) ---
+  \newcommand{\halfsphere}{%
+    \draw[dome] (-\R,0) arc[start angle=180, end angle=0, radius=\R];
+    \draw[equator, dashed] (-\R,0) arc[start angle=180, end angle=0,
+        x radius=\R, y radius={0.40*\R}];
+    \draw[equator] (\R,0) arc[start angle=0, end angle=-180,
+        x radius=\R, y radius={0.40*\R}];
+  }
+
+  % ============ Panel (a): implicit ============
+  \begin{scope}[shift={(0,0)}]
+    \halfsphere
+    \coordinate (pa) at (0.884,0.884);
+    \fill[black] (pa) circle (1.6pt);
+    \node[font=\scriptsize, below left=-1pt and 0pt] at (pa) {$p$};
+    \draw[orange!90!black, very thick, ->] (pa) -- ++(0.60,0.60);
+    \node[orange!90!black, font=\scriptsize, above] at (1.30,1.46) {$\nabla F(p)$};
+    \node[panellabel] at (0,\capy) {\textbf{(a)} implicit\\[1pt]
+      {\footnotesize$\mathbb{S}^2_+ = F^{-1}\{0\}$}};
+  \end{scope}
+
+  % ============ Panel (b): graph ============
+  \begin{scope}[shift={(4.6,0)}]
+    \halfsphere
+    \coordinate (pb) at (0.884,0.884);
+    % The disc V, drawn detached below the dome so the drop line stays readable.
+    \draw[green!45!black, thick, fill=green!12] (0,-1.30) ellipse ({\R} and {0.40*\R});
+    \node[green!45!black, font=\scriptsize] at (-1.62,-1.30) {$V$};
+    \fill[black] (pb) circle (1.6pt);
+    \node[font=\scriptsize, below left=-1pt and 0pt] at (pb) {$p$};
+    % Drop line from p to its shadow. p has (x,y) = (0, 1/sqrt2), whose screen abscissa is
+    % R*0.7071 = 0.884 -- strictly inside the disc, since |(0,1/sqrt2)| = 0.707 < 1.
+    \draw[gray, dashed] (0.884,0.884) -- (0.884,-1.30);
+    \fill[green!45!black] (0.884,-1.30) circle (1.4pt);
+    \node[font=\scriptsize, below right=-1pt and -2pt] at (0.884,-1.42) {$(x,y)$};
+    \node[panellabel] at (0,\capy) {\textbf{(b)} graph\\[1pt]
+      {\footnotesize$z = \sqrt{1-x^2-y^2}$}};
+  \end{scope}
+
+  % ============ Panel (c): parametrization ============
+  \begin{scope}[shift={(9.2,0)}]
+    \halfsphere
+    \coordinate (pc) at (0.884,0.884);
+    \fill[black] (pc) circle (1.6pt);
+    \node[font=\scriptsize, below left=-1pt and 0pt] at (pc) {$p$};
+    % Parameter rectangle W, drawn detached below the dome.
+    \draw[orange!90!black, thick, fill=orange!12] (-1.15,-1.75) rectangle (0.15,-0.95);
+    \node[orange!90!black, font=\scriptsize] at (-1.50,-1.35) {$W$};
+    \fill[orange!90!black] (-0.50,-1.35) circle (1.4pt);
+    \node[font=\scriptsize, below right=-1pt and -4pt] at (-0.50,-1.86)
+      {$(\tfrac{\pi}{4},\tfrac{\pi}{2})$};
+    \draw[->, thick, orange!90!black] (0.30,-1.15) to[out=15, in=255] (0.82,0.70);
+    \node[orange!90!black, font=\scriptsize] at (1.15,-0.45) {$\phi$};
+    \node[panellabel] at (0,\capy) {\textbf{(c)} parametrization\\[1pt]
+      {\footnotesize$p = \phi(\tfrac{\pi}{4},\tfrac{\pi}{2})$}};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+% Generator: Claude Opus 5 (High)
+\begin{remark}[Why all three theorems are stated \emph{locally}]
+\label{rem:why_submanifolds_are_local}
+The half-sphere is unusually obliging: one graph and one parametrization cover all of it. That is
+not the general situation, and each description fails to globalise for its own reason.
+\begin{itemize}
+  \item \textbf{A parametrization need not be global.} The circle $\mathbb{S}^1$ is a
+    $1$-dimensional submanifold, yet no single parametrization covers it. Suppose
+    $\gamma : I \to \mathbb{S}^1$ were a homeomorphism from an open interval, as
+    \cref{thm:local_parametrization} demands. Delete one point from each side: $I \setminus \{t\}$
+    falls into \emph{two} pieces, while $\mathbb{S}^1 \setminus \{\gamma(t)\}$ is still an arc, so
+    \emph{one} piece. A homeomorphism preserves the number of connected components
+    (\cref{thm:continuity_preserves_connected}), so no such $\gamma$ exists --- the same counting
+    argument as in \cref{ex:cross_not_submanifold}, run in the opposite direction. Two overlapping
+    arcs do cover the circle, and two is the minimum.
+  \item \textbf{An implicit description need not be global either.} The Möbius strip is a
+    $2$-dimensional submanifold of $\mathbb{R}^3$, but it is not $g^{-1}\{0\}$ for any single
+    $g$ with $\nabla g \neq 0$: such a $g$ would supply a globally consistent normal direction
+    $\nabla g/\lvert\nabla g\rvert$, and the Möbius strip has none
+    (\cref{sec:orientable_manifolds}).
+\end{itemize}
+Requiring the descriptions only near each point costs nothing --- being a submanifold is itself a
+local condition --- and buys all the examples that matter.
+\end{remark}
+
+\subsection{A gallery of non-examples}
+
+% Supplement: Linus Lüchinger/Slides/Slides-03-30.pdf, slides 12--13
+Linus prefaces the formal definitions with a list of sets that are \emph{not} submanifolds, which
+is worth reproducing because each entry fails for a different reason. Being a $d$-dimensional
+submanifold means looking, near every one of its points, like a flat piece of $\mathbb{R}^d$ ---
+and there are several distinct ways to violate that.
+
+\begin{itemize}
+  \item \textbf{The figure eight} $\{(x,y) : y^2 = x^2 - x^4\}$ --- a \emph{crossing}. Away from
+    the origin it is a perfectly good curve; at the origin four branches meet. This is the same
+    failure as \cref{ex:cross_not_submanifold}, and the same connectedness count settles it.
+  \item \textbf{The lollipop} --- a circle with a segment attached, or any \qt{line sticking out
+    of a sphere}. Here the trouble is not a crossing but a \emph{change of dimension} at the
+    junction: near the attachment point the set is neither $1$- nor $2$-dimensional.
+  \item \textbf{The closed square} $[0,1]^2 \subseteq \mathbb{R}^2$ --- a \emph{boundary}. Its
+    interior is a fine $2$-dimensional submanifold, but no neighbourhood of a corner or edge
+    point looks like an open piece of $\mathbb{R}^2$, because points of $[0,1]^2$ near an edge
+    fill only a half-plane. (Sets like this are the subject of
+    \cref{sec:submanifolds_with_boundary}; a submanifold \emph{with boundary} is a genuinely
+    weaker notion, not a submanifold that happens to have edges.)
+  \item \textbf{$\mathbb{Q}^n \subseteq \mathbb{R}^n$} --- \emph{no dimension at all}. It is not
+    $0$-dimensional, since a $0$-dimensional submanifold is a set of isolated points and no
+    rational point is isolated; and it is not $n$-dimensional, since it contains no open ball.
+\end{itemize}
+
+% Generator: Claude Opus 5 (High) --- FIG-17-05
+% Geometry check. Panel (a) is the lemniscate y^2 = x^2 - x^4, parametrized as
+% (cos t, sin t cos t) for t in [0, 2pi); at t = pi/2 and t = 3pi/2 the curve passes through
+% (0,0), which is why the self-crossing is at the origin and nowhere else. Panel (b): the
+% circle has centre (-0.45,0) radius 0.62, so its rightmost point is (0.17, 0); the stick
+% runs from (0.17,0) to (1.15,0), i.e. it starts exactly ON the circle -- the junction dot
+% is at (0.17,0). Panel (c): the square is [0,1]^2 scaled to side 1.3; the marked edge point
+% (0.65, 0) is the midpoint of the bottom edge, and the half-disc above it is the part of a
+% small ball that actually lies in the square.
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.15,
+    bad/.style={red!80!black},
+    leader/.style={gray!70, very thin}]
+  % All captions share the baseline y = -1.70; all annotations sit at y = -1.10,
+  % clear of every drawn curve (the lemniscate reaches only |y| = 0.625).
+  \def\capy{-1.70}
+  \def\anny{-1.10}
+
+  % ---- (a) figure eight: (x,y) = 1.25*(cos t, sin t cos t), which satisfies
+  %      y^2 = x^2 - x^4 after undoing the scale. It passes through the origin
+  %      exactly twice, at t = pi/2 and t = 3pi/2.
+  \begin{scope}[shift={(0,0)}]
+    \draw[blue!70!black, thick, domain=0:360, samples=200, smooth, variable=\t]
+      plot ({1.25*cos(\t)}, {1.25*sin(\t)*cos(\t)});
+    \fill[bad] (0,0) circle (1.8pt);
+    \draw[leader] (0,\anny+0.16) -- (0,-0.14);
+    \node[bad, font=\scriptsize] at (0,\anny) {crossing};
+    \node[font=\small] at (0,\capy) {\textbf{(a)} figure eight};
+  \end{scope}
+
+  % ---- (b) lollipop: circle centred (-0.50,0) of radius 0.62, so its rightmost
+  %      point is (0.12,0); the stick runs from there to (1.25,0), so the junction
+  %      dot at (0.12,0) really does lie on both pieces.
+  \begin{scope}[shift={(4.0,0)}]
+    \draw[blue!70!black, thick] (-0.50,0) circle (0.62);
+    \draw[blue!70!black, thick] (0.12,0) -- (1.25,0);
+    \fill[bad] (0.12,0) circle (1.8pt);
+    \draw[leader] (0.42,\anny+0.16) -- (0.16,-0.10);
+    \node[bad, font=\scriptsize] at (0.42,\anny) {junction};
+    \node[font=\small] at (0.30,\capy) {\textbf{(b)} lollipop};
+  \end{scope}
+
+  % ---- (c) closed square: [0,1]^2 drawn with side 1.3. The marked point is the
+  %      midpoint of the bottom edge; the orange region is the part of a small ball
+  %      about it that actually lies in the square -- the upper half only.
+  \begin{scope}[shift={(7.9,0)}]
+    \fill[blue!10] (0,-0.65) rectangle (1.3,0.65);
+    \draw[blue!70!black, thick] (0,-0.65) rectangle (1.3,0.65);
+    \fill[orange!30] (0.65,-0.65) -- ++(0.42,0)
+      arc[start angle=0, end angle=180, radius=0.42] -- cycle;
+    \draw[orange!90!black, thick] (0.65-0.42,-0.65)
+      arc[start angle=180, end angle=0, radius=0.42];
+    \fill[bad] (0.65,-0.65) circle (1.8pt);
+    \draw[leader] (0.65,\anny+0.16) -- (0.65,-0.75);
+    \node[bad, font=\scriptsize] at (0.65,\anny) {only half a ball};
+    \node[font=\small] at (0.65,\capy) {\textbf{(c)} closed square};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Proving a negative: the tangent field test}
+
+% Supplement: Linus Lüchinger/Slides/Slides-04-30.pdf, slide 7
+\cref{ex:cross_not_submanifold} disproved a submanifold claim by counting connected components
+after deleting a point. That argument is sharp but narrow: it needs the bad point to disconnect
+the set. Linus gives a second, complementary criterion, which catches cases the counting argument
+misses.
+
+\begin{proposition}[Continuous tangent field along a curve]
+\label{prop:continuous_tangent_field}
+Let $M \subseteq \mathbb{R}^n$ be a $1$-dimensional $C^1$ submanifold. Then every point of $M$
+has a neighbourhood on which there is a continuous map $T$ assigning to each $q$ a nonzero vector
+$T(q) \in T_qM$.
+\end{proposition}
+
+\begin{proof}
+Fix $p \in M$. By \cref{thm:local_parametrization} there are an open interval $I \subseteq
+\mathbb{R}$, a neighbourhood $V$ of $p$ in $\mathbb{R}^n$, and a $C^1$ homeomorphism
+$\gamma : I \to V \cap M$ with $D\gamma_t$ injective for every $t$. Injectivity of a linear map
+$\mathbb{R} \to \mathbb{R}^n$ says exactly that $\gamma'(t) \neq 0$. Set
+\[T(q) := \gamma'\big(\gamma^{-1}(q)\big), \qquad q \in V \cap M.\]
+This is nonzero by the above, lies in $T_qM$ by \cref{prop:tangent_space_via_curves}, and is
+continuous as a composition of the continuous maps $\gamma^{-1}$ and $\gamma'$.
+\end{proof}
+
+The test is used in contrapositive form: \textbf{if no continuous nonvanishing tangent field
+exists near a point, the set is not a $1$-dimensional submanifold there.}
+
+% Generator: Claude Opus 5 (High)
+\begin{aiexample}[The lollipop, disproved by tangent fields]
+\label{ex:lollipop_tangent_field}
+Let $L$ be the lollipop of the gallery above and let $q$ be its junction point. Deleting $q$
+leaves \emph{three} pieces where a curve would leave two, so the counting argument of
+\cref{ex:cross_not_submanifold} already applies. But it is instructive to see the tangent-field
+test reach the same verdict, since it localises the contradiction differently.
+
+Suppose $L$ were a $1$-dimensional submanifold near $q$, and let $T$ be the tangent field
+supplied by \cref{prop:continuous_tangent_field}. Approach $q$ along the stick: the tangent
+direction there is constant, so $T$ tends to a vector along the stick. Approach $q$ along the
+circle instead: the circle meets the stick at a right angle at $q$, so $T$ tends to a vector
+perpendicular to the stick. A continuous map cannot have two different limits at the same point,
+so no such $T$ exists.
+
+\begin{remark}[When to reach for which]
+Both tests disprove the same statement, and neither subsumes the other.
+Counting components is the tool when the offending point \emph{separates} the set, and it needs
+no differentiability. The tangent-field test is the tool when the set stays connected but the
+direction of travel jumps --- a cusp such as $\{y^2 = x^3\}$ at the origin is the standard case,
+where removing the origin leaves the expected two pieces and only the tangent direction gives the
+failure away.
+\end{remark}
+\end{aiexample}
+
+% Transition: Claude Opus 5 (High)
+Every argument in this section leaned on knowing which vectors point \emph{along} $M$ at a given
+point. The next section makes that space of directions an object in its own right.

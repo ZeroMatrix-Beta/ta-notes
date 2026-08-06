@@ -138,6 +138,20 @@ $f$ is defined on all of $\eta$'s image), so by the chain rule,
 \end{tikzpicture}
 \end{center}
 
+% Source: Jérôme Paschoud/Notizen/Woche 8.1 Tangentialräume und Jordan Mass.pdf, p. 1
+% Generator: Gemini 3.1 Pro (High)
+\begin{remark}[Four representations of the tangent space]
+\label{rem:four_representations_tangent_space}
+Depending on how a $m$-dimensional submanifold $M \subseteq \mathbb{R}^n$ is locally described near $p$, its tangent space $T_pM$ can be computed algebraically in four equivalent ways:
+\begin{itemize}
+  \item \textbf{Diffeomorphism} (from the definition, $\Psi(p)=0$): $T_pM = (D\Psi_p)^{-1}(\mathbb{R}^m \times \{0\})$.
+  \item \textbf{Implicit representation} ($M = F^{-1}\{0\}$): $T_pM = \ker(DF_p)$.
+  \item \textbf{Parametric representation} (local parametrization $g$ with $g(q)=p$): $T_pM = Dg_q(\mathbb{R}^m)$.
+  \item \textbf{Graph representation} (graph of $h$, $p=(z, h(z))$): $T_pM = \{(w, Dh_z(w)) \mid w \in \mathbb{R}^m\}$.
+\end{itemize}
+These algebraic descriptions are all equivalent to the geometric description via velocities of curves (\cref{prop:tangent_space_via_curves}).
+\end{remark}
+
 \subsection{Normal space}
 
 % Source: Corsin Nick/Class Notes/Week 7.pdf, pp. 9--10

@@ -67,6 +67,17 @@ Since this back-substitution can be time-consuming, it is useful to use matrix e
 \[u(t) = e^{tA} u_0,\]
 where $u_0$ is given by the initial conditions. Evaluating the matrix exponential $e^{tA}$ provides a direct way to solve the system.
 
+% Source: Jérôme Paschoud/Notizen/Woche 14.2 DGL und Picard Lindelof.pdf, p. 2
+% Generator: Gemini 3.1 Pro (High)
+\begin{remark}[Calculating the matrix exponential in practice]
+When computing $\exp(A) = I + \sum_{m=1}^\infty \frac{A^m}{m!}$, the most common strategies are:
+\begin{enumerate}
+  \item \textbf{Look for a pattern:} Sometimes $A^2 = A$, or $A^3 = 2A$, or $A$ is nilpotent ($A^n = 0$ for $n \geq k$). In these cases, the infinite series can be simplified directly.
+  \item \textbf{Diagonalization:} If $A$ is diagonalizable ($A = B D B^{-1}$), then $\exp(A) = B \exp(D) B^{-1}$, where $\exp(D)$ is the diagonal matrix of exponentials.
+  \item \textbf{Jordan Normal Form (JNF):} If $A$ is not diagonalizable, one can use the JNF, though this is often more tedious and less frequently required.
+\end{enumerate}
+\end{remark}
+
 \begin{example}[Solving a $2 \times 2$ system using matrix exponentials]
 \label{ex:ode_matrix_exponential}
 Consider the system given by
@@ -92,6 +103,30 @@ Multiplying these gives:
 Thus, the solution is $u_1(t) = e^t u_1(0) + t e^t u_2(0)$ and $u_2(t) = e^t u_2(0)$.
 \end{example}
 
+% Source: Jérôme Paschoud/Notizen/Woche 13.2 DGL.pdf, p. 2
+\begin{example}[Solving an initial value problem]
+\label{ex:ode_ivp_system}
+Consider the initial value problem (Michael's Bsp.\ 23.1.4):
+\begin{align*}
+    y_1' &= 3y_1 - 2y_2, \\
+    y_2' &= -y_1 + 2y_2,
+\end{align*}
+with initial conditions $y_1(0) = 1$ and $y_2(0) = 0$.
+The system is $y' = A y$ with $A = \begin{pmatrix} 3 & -2 \\ -1 & 2 \end{pmatrix}$. We find the eigenvalues:
+\[\det(A - \lambda I) = (3-\lambda)(2-\lambda) - 2 = \lambda^2 - 5\lambda + 4 = (\lambda - 4)(\lambda - 1) = 0.\]
+The eigenvalues are $\lambda_1 = 4$ and $\lambda_2 = 1$. The corresponding eigenvectors are:
+For $\lambda_1 = 4$: $\begin{pmatrix} -1 & -2 \\ -1 & -2 \end{pmatrix} v = 0 \implies v_1 = \begin{pmatrix} -2 \\ 1 \end{pmatrix}$.
+For $\lambda_2 = 1$: $\begin{pmatrix} 2 & -2 \\ -1 & 1 \end{pmatrix} v = 0 \implies v_2 = \begin{pmatrix} 1 \\ 1 \end{pmatrix}$.
+The general solution is $y(t) = C_1 e^{4t} \begin{pmatrix} -2 \\ 1 \end{pmatrix} + C_2 e^{t} \begin{pmatrix} 1 \\ 1 \end{pmatrix}$.
+Using the initial conditions $y(0) = \begin{pmatrix} 1 \\ 0 \end{pmatrix}$:
+\begin{align*}
+    -2C_1 + C_2 &= 1 \\
+    C_1 + C_2 &= 0 \implies C_2 = -C_1.
+\end{align*}
+Substituting this gives $-3C_1 = 1$, so $C_1 = -1/3$ and $C_2 = 1/3$. The particular solution is:
+\[y(t) = -\frac{1}{3} e^{4t} \begin{pmatrix} -2 \\ 1 \end{pmatrix} + \frac{1}{3} e^{t} \begin{pmatrix} 1 \\ 1 \end{pmatrix} = \frac{1}{3} \begin{pmatrix} 2e^{4t} + e^t \\ -e^{4t} + e^t \end{pmatrix}.\]
+\end{example}
+
 \section{Inhomogeneous linear ODEs}
 \label{sec:inhomogeneous_odes}
 
@@ -104,7 +139,50 @@ The homogeneous solution $y_{\text{hom}}(x)$ fulfills $Ly_{\text{hom}}(x) = 0$, 
 \[\sum_{k=0}^n a_k C r^k e^{rx} = 0 \implies \sum_{k=0}^n a_k r^k = 0,\]
 yielding roots $r_1, \dots, r_n$ (assuming they are all distinct).
 
-The particular solution $y_{\text{part}}(x)$ solves $Ly_{\text{part}}(x) = b(x)$ and is found using a fitting Ansatz, often an educated guess based on the form of $b(x)$ (e.g., if $b(x)$ is a constant, consider a constant or polynomial Ansatz).
+The particular solution $y_{\text{part}}(x)$ solves $Ly_{\text{part}}(x) = b(x)$ and is found using a fitting Ansatz, often an \qt{educated guess} based on the form of the inhomogeneous term $b(x)$.
+
+% Source: Jérôme Paschoud/Notizen/Woche 14.2 DGL und Picard Lindelof.pdf, p. 1
+% Generator: Gemini 3.1 Pro (High)
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{ll}
+    \toprule
+    \textbf{Inhomogeneous Term} $b(x)$ & \textbf{Ansatz for} $y_{\text{part}}(x)$ \\
+    \midrule
+    $\sum_{i=0}^m b_i x^i$ & $\sum_{i=0}^m A_i x^i$ \\
+    $e^{\alpha x} \sum_{i=0}^m b_i x^i$ & $e^{\alpha x} \sum_{i=0}^m A_i x^i$ \\
+    $\sin(\omega x) \sum_{i=0}^m b_i x^i + \cos(\omega x) \sum_{i=0}^m c_i x^i$ & $\sin(\omega x) \sum_{i=0}^m A_i x^i + \cos(\omega x) \sum_{i=0}^m B_i x^i$ \\
+    $\sinh(\omega x) \sum_{i=0}^m b_i x^i + \cosh(\omega x) \sum_{i=0}^m c_i x^i$ & $\sinh(\omega x) \sum_{i=0}^m A_i x^i + \cosh(\omega x) \sum_{i=0}^m B_i x^i$ \\
+    $e^{\alpha x} \sin(\omega x) \sum_{i=0}^m b_i x^i + e^{\alpha x} \cos(\omega x) \sum_{i=0}^m c_i x^i$ & $e^{\alpha x} \sin(\omega x) \sum_{i=0}^m A_i x^i + e^{\alpha x} \cos(\omega x) \sum_{i=0}^m B_i x^i$ \\
+    \bottomrule
+  \end{tabular}
+  \caption{Standard Ansätze for solving inhomogeneous linear ODEs. \textbf{Special case:} If a part of the chosen function for $y_{\text{part}}(x)$ is already present in the solution of the homogeneous problem, the Ansatz is additionally multiplied by $x$.}
+  \label{tab:ode_ansatz}
+\end{table}
+
+% Source: Jérôme Paschoud/Notizen/Woche 13.2 DGL.pdf, p. 1
+\begin{example}[Solving an inhomogeneous linear ODE]
+\label{ex:ode_inhomogeneous}
+Consider the second-order ODE (Michael's Bsp.\ 24.2.1):
+\[y'' - 4y' + 13y = x e^x.\]
+First, we solve the homogeneous problem $y'' - 4y' + 13y = 0$. The characteristic polynomial is $\lambda^2 - 4\lambda + 13 = 0$, with roots:
+\[\lambda_{1,2} = \frac{4 \pm \sqrt{16 - 52}}{2} = 2 \pm 3i.\]
+The homogeneous solution is therefore:
+\[y_{\text{hom}}(x) = e^{2x} \big(C_1 \cos(3x) + C_2 \sin(3x)\big).\]
+Next, we find a particular solution for the inhomogeneous term $b(x) = x e^x$. According to \cref{tab:ode_ansatz}, we use the Ansatz $y_{\text{part}}(x) = (Ax + B)e^x$. Since $\lambda = 1$ is not a root of the characteristic polynomial, we do not need to multiply by an extra factor of $x$. We compute the derivatives:
+\begin{align*}
+    y_{\text{part}}'(x) &= A e^x + (Ax + B)e^x = (Ax + A + B)e^x, \\
+    y_{\text{part}}''(x) &= A e^x + (Ax + A + B)e^x = (Ax + 2A + B)e^x.
+\end{align*}
+Plugging these into the original ODE yields:
+\begin{align*}
+    (Ax + 2A + B)e^x - 4(Ax + A + B)e^x + 13(Ax + B)e^x &= x e^x \\
+    \big((A - 4A + 13A)x + (2A + B - 4A - 4B + 13B)\big)e^x &= x e^x \\
+    (10Ax - 2A + 10B)e^x &= x e^x.
+\end{align*}
+Comparing coefficients, we get $10A = 1 \implies A = \frac{1}{10}$, and $-2A + 10B = 0 \implies 10B = \frac{2}{10} \implies B = \frac{1}{50}$.
+The particular solution is $y_{\text{part}}(x) = \left(\frac{1}{10}x + \frac{1}{50}\right)e^x$. The general solution is then $y(x) = y_{\text{hom}}(x) + y_{\text{part}}(x)$.
+\end{example}
 
 \subsection{Duhamel's Principle}
 \label{sec:duhamels_principle}
@@ -118,6 +196,96 @@ This elegantly generalizes the $1$-dimensional case where the solution to $u'(t)
 
 The Cauchy--Lipschitz theorem (also known as the Picard--Lindelöf theorem) guarantees the existence and uniqueness of solutions to first-order initial value problems, provided the right-hand side is Lipschitz continuous with respect to the state variable.
 For an equation of the form $y'(x) = F(x, y(x))$, one first puts the differential equation in normal form to determine if the theorem applies, which requires checking the properties of $F$.
+
+% Source: Jérôme Paschoud/Notizen/Woche 14.2 DGL und Picard Lindelof.pdf, p. 3
+% Generator: Gemini 3.1 Pro (High)
+\begin{theorem}[Picard--Lindelöf, local existence and uniqueness]
+\label{thm:picard_lindeloef_local}
+Let $U \subseteq \mathbb{R} \times \mathbb{R}^n$ be an open set, $(t_0, x_0) \in U$, and $F: U \to \mathbb{R}^n$ be continuous. If $F$ is locally Lipschitz continuous in $x$, i.e.,
+\begin{align*}
+\forall (t_1, x_1) \in U \;\; &\exists \varepsilon > 0, L \geq 0 \;\; \text{such that} \\
+&\forall (t, x_2), (t, x_3) \in B_\varepsilon(t_1, x_1) \cap U, \;\; \lVert F(t, x_2) - F(t, x_3) \rVert \leq L \lVert x_2 - x_3 \rVert,
+\end{align*}
+then there exists an interval $(a, b) \subseteq \mathbb{R}$ with $t_0 \in (a, b)$ such that a differentiable function $u: (a, b) \to \mathbb{R}^n$ exists which satisfies $(t, u(t)) \in U$ for all $t \in (a, b)$, and $u$ is a solution to the initial value problem:
+\[
+\begin{cases}
+  u'(t) = F(t, u(t)) \\
+  u(t_0) = x_0.
+\end{cases}
+\]
+Furthermore, for any other solution $v: (\tilde{a}, \tilde{b}) \to \mathbb{R}^n$ of the same initial value problem, we have $(\tilde{a}, \tilde{b}) \subseteq (a, b)$ and $u|_{(\tilde{a}, \tilde{b})} = v$. As $t \to a$ or $t \to b$, the limit $\lim_{t \to a} (t, u(t))$ (respectively $\lim_{t \to b} (t, u(t))$) either does not exist or does not lie in $U$.
+\end{theorem}
+
+% Source: Jérôme Paschoud/Notizen/Woche 14.2 DGL und Picard Lindelof.pdf, p. 3
+% Generator: Gemini 3.1 Pro (High)
+A simplified, highly practical formulation is the following:
+\begin{corollary}[Picard--Lindelöf, simplified version]
+\label{cor:picard_lindeloef_simplified}
+Let $I \subseteq \mathbb{R}$ be a compact interval, $\Omega \subseteq \mathbb{R}^n$ an open interval (or open set), $(t_0, y_0) \in I \times \Omega$, and $f: I \times \Omega \to \mathbb{R}^n$ continuous. Suppose $f$ satisfies the Lipschitz condition
+\[
+\lVert f(t, y_1) - f(t, y_2) \rVert \leq L \lVert y_1 - y_2 \rVert \qquad \forall t \in I \text{ and } \forall y_1, y_2 \in \Omega.
+\]
+Then there exists a $\delta > 0$ such that the initial value problem $u' = f(t, u)$ with $u(t_0) = y_0$ has a unique solution $u: I \cap [t_0-\delta, t_0+\delta] \to \mathbb{R}^n$.
+If $\Omega = \mathbb{R}^n$, one can choose the domain to be the entire interval $I$.
+\end{corollary}
+
+% Source: Jérôme Paschoud/Notizen/Woche 14.2 DGL und Picard Lindelof.pdf, p. 4
+% Generator: Gemini 3.1 Pro (High)
+\begin{example}[Applying Picard--Lindelöf]
+\label{ex:picard_lindeloef_application}
+Let $I = [0, \infty)$ and $\Omega = [0, \infty)$. Consider the function $f: I \times \Omega \to \mathbb{R}$ given by $f(t, y) = \frac{y}{1+t^2}$. We want to prove that the differential equation $u'(t) - \frac{u(t)}{1+t^2} = 0$ has a unique solution for $u: (0, \infty) \to \mathbb{R}$.
+
+We rewrite the ODE as $u'(t) = f(t, u(t))$. To apply the Picard--Lindelöf theorem, we check if $f$ satisfies the Lipschitz condition in $y$:
+\[
+\lvert f(t, y_1) - f(t, y_2) \rvert = \left\lvert \frac{y_1}{1+t^2} - \frac{y_2}{1+t^2} \right\rvert = \frac{1}{1+t^2} \lvert y_1 - y_2 \rvert \leq 1 \cdot \lvert y_1 - y_2 \rvert.
+\]
+Since $\frac{1}{1+t^2} \leq 1$ for all $t \in [0, \infty)$, the function $f$ is Lipschitz continuous in $y$ with Lipschitz constant $L=1$. Thus, by Picard--Lindelöf, the ODE possesses a unique solution.
+\end{example}
+
+% Quelle: Linus Lüchinger/Slides/Slides-05-21.pdf, slide 5
+% Generator: Claude Opus 5 (High)
+\subsection{Picard iteration}
+\label{sec:picard_iteration}
+
+The proof of \cref{thm:picard_lindeloef_local} is a Banach fixed-point argument
+(\cref{thm:banach_fixed_point}), and fixed-point arguments are \emph{constructive}: the sequence
+of approximations built along the way converges to the solution. So Picard--Lindelöf does not
+merely assert that a solution exists --- it hands over a procedure for computing one.
+
+The starting point is that an initial value problem can be rewritten as an integral equation.
+Integrating $y'(s) = F(s,y(s))$ from $t_0$ to $t$ and using $y(t_0) = u_0$,
+\[y'(t) = F(t,y(t)),\quad y(t_0) = u_0
+  \qquad\Longleftrightarrow\qquad
+  y(t) = u_0 + \int_{t_0}^{t} F\big(s,y(s)\big)\,ds.\]
+The right-hand side exhibits $y$ as a fixed point of the operator sending a function to
+$u_0 + \int_{t_0}^{\cdot}F(s,\cdot)\,ds$, and the Lipschitz hypothesis is exactly what makes that
+operator a contraction on a small enough time interval.
+
+\begin{definition}[Picard iteration]
+\label{def:picard_iteration}
+Starting from the constant function $y_0(t) :\equiv u_0$, the \newterm{Picard iteration}
+(\germanterm{Picard-Iteration}) is the sequence
+\[y_n(t) := u_0 + \int_{t_0}^{t} F\big(s,\,y_{n-1}(s)\big)\,ds, \qquad n \geq 1.\]
+\end{definition}
+
+Under the hypotheses of \cref{thm:picard_lindeloef_local}, $(y_n)_{n\in\mathbb{N}}$ converges
+uniformly to the exact solution on every compact subinterval of the maximal interval of
+existence.
+
+% Generator: Claude Opus 5 (High)
+\begin{aiexample}[Picard iteration recovers a known solution]
+\label{ex:picard_iteration_exponential}
+Take $y' = y$ with $y(0) = 1$, so $F(t,y) = y$, $t_0 = 0$ and $u_0 = 1$. Then $y_0 \equiv 1$ and
+\begin{align*}
+  y_1(t) &= 1 + \int_0^t 1\,ds = 1+t, \\
+  y_2(t) &= 1 + \int_0^t (1+s)\,ds = 1+t+\tfrac{t^2}{2}, \\
+  y_3(t) &= 1 + \int_0^t \Big(1+s+\tfrac{s^2}{2}\Big)ds = 1+t+\tfrac{t^2}{2}+\tfrac{t^3}{6}.
+\end{align*}
+An induction gives $y_n(t) = \sum_{k=0}^{n} t^k/k!$, the $n$-th partial sum of the exponential
+series. The iteration converges to $e^t$, which is indeed the solution --- and, pleasingly, it
+reconstructs the Taylor series of $e^t$ one term per step, since each integration raises the
+degree by exactly one.
+\end{aiexample}
 
 % Generator: Claude Opus 5 (High) --- what survives when the Lipschitz hypothesis is dropped.
 % Included because the natural student question after Picard--Lindelöf is whether Lipschitz is

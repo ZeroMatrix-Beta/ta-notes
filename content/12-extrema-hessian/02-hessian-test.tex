@@ -139,6 +139,41 @@ explicitly instead, since that is the one students actually run into
 (\cref{ex:6.8} is exactly this trap).
 \end{ainote}
 
+% Quelle: Linus Lüchinger/Slides/Slides-03-23.pdf, slides 10--11
+% Generator: Claude Opus 5 (High)
+\begin{remark}[Why positive definite means minimum]
+\label{rem:hessian_test_intuition}
+The statement is easy to memorise and easy to find unmotivated: it is not obvious what a
+condition on $v\transp \Hess f(x_0) v$ has to do with $f$ going up. The following two-step
+reading, which recovers the one-dimensional test as the case $n=1$, makes the connection direct.
+
+\textbf{Step one: the Hessian moves the gradient.} The entries of $\Hess f$ are derivatives of
+the entries of $\nabla f$, so the Hessian is to $\nabla f$ what $\nabla f$ is to $f$. Applying
+the linear approximation to $\nabla f$ at the critical point, where $\nabla f(x_0) = 0$,
+\[\nabla f(x_0+v) \approx \underbrace{\nabla f(x_0)}_{=\,0} + \Hess f(x_0)\,v = \Hess f(x_0)\,v.\]
+So once we step off $x_0$ in the direction $v$, the gradient we find there is approximately
+$\Hess f(x_0)v$.
+
+\textbf{Step two: the gradient moves $f$.} The gradient measures the rate of change of $f$, so
+travelling the displacement $v$ against a gradient of $\Hess f(x_0)v$ changes $f$ by roughly the
+inner product of the two,
+\[f(x_0+v) - f(x_0) \;\approx\; \tfrac12\,v\transp \Hess f(x_0)\,v,\]
+the factor $\tfrac12$ appearing because the gradient grows linearly from $0$ along the way, so
+its average over the step is half its final value. This is of course the second-order Taylor
+expansion of \cref{rem:second_order_taylor_hessian} with the first-order term deleted by
+criticality; the point of the derivation is that it explains \emph{why} that expansion has the
+form it does.
+
+Now the theorem reads itself. If $\Hess f(x_0)$ is positive definite, then
+$v\transp \Hess f(x_0) v > 0$ for every $v \neq 0$, so $f$ increases in \emph{every} direction
+away from $x_0$ --- a strict local minimum. Negative definite reverses every inequality. And
+indefinite means some directions give a positive value and others a negative one, so $f$ rises
+along some and falls along others: a saddle. The degenerate-but-not-indefinite case is
+inconclusive for a reason now visible --- along an eigenvector with eigenvalue $0$ the quadratic
+term vanishes entirely, so the approximation says nothing and the behaviour is decided by terms
+this expansion has discarded.
+\end{remark}
+
 % Moved here from the Lagrange-multiplier section (review item D2): it uses the Hessian,
 % "indefinite" and the eigenvalue criterion, none of which were available at its former
 % position 260 lines earlier.

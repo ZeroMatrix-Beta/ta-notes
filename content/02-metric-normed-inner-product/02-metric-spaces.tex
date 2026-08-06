@@ -149,6 +149,94 @@ a metric only for $m \geq 1$: for $m \in (0,1)$ the triangle inequality fails, a
 $|x+y|_m = 2^{1/m} > 2 = |x|_m+|y|_m$. Written as stated above.
 \end{ainote}
 
+% Quelle: Linus Lüchinger/Slides/Slides-02-26.pdf, slide 4
+% Generator: Claude Opus 5 (High)
+\begin{proposition}[Concave reshaping preserves the triangle inequality]
+\label{prop:concave_reshaping_metric}
+Let $(X,d)$ be a metric space and let $h : [0,\infty) \to [0,\infty)$ satisfy
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $h(0) = 0$ and $h(t) > 0$ for $t > 0$;
+  \item $h$ is non-decreasing;
+  \item $h$ is concave.
+\end{enumerate}
+Then $h \circ d$ is again a metric on $X$.
+\end{proposition}
+
+\begin{proof}
+Definiteness is \textbf{(a)} together with definiteness of $d$, and symmetry is inherited from
+$d$ directly. Only the triangle inequality needs an argument, and the key step is that
+\textbf{(a)} and \textbf{(c)} together force $h$ to be \newterm{subadditive}: $h(a+b) \leq h(a) +
+h(b)$ for all $a,b \geq 0$. Indeed, for $a,b>0$ concavity applied to the convex combination
+writing $a$ as a blend of $a+b$ and $0$ gives
+\[h(a) = h\!\left(\tfrac{a}{a+b}(a+b) + \tfrac{b}{a+b}\cdot 0\right)
+  \geq \tfrac{a}{a+b}h(a+b) + \tfrac{b}{a+b}\underbrace{h(0)}_{=\,0} = \tfrac{a}{a+b}h(a+b),\]
+and symmetrically $h(b) \geq \tfrac{b}{a+b}h(a+b)$. Adding the two gives $h(a)+h(b) \geq h(a+b)$.
+Now, for $x,y,z \in X$, monotonicity \textbf{(b)} applied to the triangle inequality for $d$ and
+then subadditivity give
+\[h(d(x,z)) \leq h\big(d(x,y)+d(y,z)\big) \leq h(d(x,y)) + h(d(y,z)). \qedhere\]
+\end{proof}
+
+\begin{remark}[Concave is safe, convex is not]
+\label{rem:concave_vs_convex_distance}
+This gives a quick reflex for the standard exercise \qt{is this a metric?} when the candidate has
+the form $h(\lvert x-y\rvert)$ on $\mathbb{R}$: \textbf{sketch $h$ and look at its curvature.}
+A concave $h$ bends \emph{towards} the axis, so distances grow ever more slowly and long jumps
+become relatively cheap --- exactly the direction the triangle inequality wants. A convex $h$
+does the opposite, making one long jump more expensive than two short ones, which is precisely
+what the triangle inequality forbids.
+
+The two textbook cases sit on either side.
+\begin{itemize}
+  \item $h(t) := \log(1+t)$ is increasing and concave with $h(0)=0$, so
+    $d(x,y) := \log(1+\lvert x-y\rvert)$ \textbf{is} a metric on $\mathbb{R}$ by
+    \cref{prop:concave_reshaping_metric}.
+  \item $h(t) := e^{t}-1$ is increasing with $h(0)=0$ but \emph{convex}, and
+    $d(x,y) := e^{\lvert x-y\rvert}-1$ is \textbf{not} a metric: taking $x=0$, $y=1$, $z=2$,
+    \[d(0,2) = e^2-1 \approx 6.389 \quad>\quad 2(e-1) \approx 3.437 = d(0,1)+d(1,2).\]
+\end{itemize}
+The heuristic is one-directional, and worth stating carefully: concavity \emph{guarantees} a
+metric, whereas convexity only \emph{suggests} failure --- it is not a proof, and a convex $h$
+must still be refuted by an explicit triple, as above. The reason the $m$-metrics of the
+preceding \cref{ex:metric_examples} split at $m=1$ is the same phenomenon seen along
+each axis: $t \mapsto t^{1/m}$ is concave for $m \geq 1$ and convex for $m \in (0,1)$.
+\end{remark}
+
+% Generator: Claude Opus 5 (High) --- FIG-02-04
+% Geometry check. Both panels show h on [0,2] with the chord from (0,h(0)) to (2,h(2)).
+% Left: h(t) = log(1+t), so h(2) = log 3 = 1.0986; the chord is the segment from (0,0) to
+% (2,1.0986), and concavity means the CURVE lies above it -- at t=1, h(1) = 0.693 versus
+% chord value 0.549, so the curve is indeed higher. Right: h(t) = e^t - 1, so h(2) =
+% e^2 - 1 = 6.389; drawn at vertical scale 1/4 so the panel height is 1.60. At t = 1,
+% h(1) = 1.718 (scaled 0.430) versus chord value 3.195 (scaled 0.799) -- curve below chord,
+% as convexity requires.
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.0]
+  % ---------- concave: h(t) = log(1+t) ----------
+  \begin{scope}
+    \draw[->] (0,0) -- (2.5,0) node[right, font=\scriptsize] {$t$};
+    \draw[->] (0,0) -- (0,1.9) node[above, font=\scriptsize] {$h$};
+    \draw[green!50!black, thick, domain=0:2, samples=60, smooth]
+      plot ({\x}, {ln(1+\x)});
+    \draw[gray, dashed] (0,0) -- (2,1.0986);
+    \node[green!50!black, font=\scriptsize, right] at (2.02,1.16) {$\log(1+t)$};
+    \node[font=\scriptsize, align=center, green!50!black] at (1.05,-0.55)
+      {concave: curve \emph{above} chord\\[-1pt]$\Rightarrow$ subadditive $\Rightarrow$ metric};
+  \end{scope}
+  % ---------- convex: h(t) = e^t - 1, vertical scale 1/4 ----------
+  \begin{scope}[shift={(5.2,0)}]
+    \draw[->] (0,0) -- (2.5,0) node[right, font=\scriptsize] {$t$};
+    \draw[->] (0,0) -- (0,1.9) node[above, font=\scriptsize] {$h$};
+    \draw[red!70!black, thick, domain=0:2, samples=60, smooth]
+      plot ({\x}, {0.25*(exp(\x)-1)});
+    \draw[gray, dashed] (0,0) -- (2,1.5973);
+    \node[red!70!black, font=\scriptsize, above left] at (1.98,1.62) {$e^{t}-1$};
+    \node[font=\scriptsize, align=center, red!70!black] at (1.05,-0.55)
+      {convex: curve \emph{below} chord\\[-1pt]$\Rightarrow$ triangle inequality fails};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+% Source: Corsin Nick/Class Notes/Week 2.pdf, pp. 1--13
 \begin{example}[continued]
 \begin{enumerate}[label=\textbf{(\alph*)}, start=3]
   \item Let $X := C^0([0,1], \mathbb{R})$ be the set of continuous functions $[0,1] \to \mathbb{R}$.
@@ -169,34 +257,44 @@ $|x+y|_m = 2^{1/m} > 2 = |x|_m+|y|_m$. Written as stated above.
 \end{enumerate}
 \end{example}
 
+% Repaired: the arc was drawn with to[out=55,in=230], whose Bezier midpoint falls at
+% (-0.067, 0.163) -- essentially on the straight chord's midpoint (-0.05, 0.15). The two
+% curves therefore coincided to within a line width, so the right-hand panel showed no
+% contrast at all, and both labels sat on top of the curves and on each other. The arc now
+% uses bend left=40, whose midpoint is displaced about 0.30 perpendicular to the chord,
+% and both labels have moved outside the sphere with leader lines.
 \begin{center}
-\begin{tikzpicture}[scale=1.1]
+\begin{tikzpicture}[scale=1.1, >=Latex,
+    leader/.style={gray!70, very thin}]
   \begin{scope}[shift={(0,0)}]
     \draw[thick] (0,0) circle (1.4);
     \draw[dashed, gray] (1.4,0) arc (0:180:1.4 and 0.45);
     \draw[gray] (-1.4,0) arc (180:360:1.4 and 0.45);
     \coordinate (x1) at (-0.4,-0.6);
     \coordinate (y1) at (0.3,0.9);
-    \draw[blue!80!black, thick] (x1) to[out=55, in=230] (y1);
-    \fill[red!80!black] (x1) circle (2pt) node[left] {$x$};
-    \fill[red!80!black] (y1) circle (2pt) node[right] {$y$};
-    \node[blue!80!black, font=\footnotesize] at (-0.3,0.3) {$d(x,y)$};
-    \node[below, font=\small] at (0,-1.5) {Distance on sphere};
+    \draw[blue!80!black, thick] (x1) to[bend left=40] (y1);
+    \fill[red!80!black] (x1) circle (2pt) node[below left, font=\small] {$x$};
+    \fill[red!80!black] (y1) circle (2pt) node[right, font=\small] {$y$};
+    \draw[leader] (-1.62,1.02) -- (-0.32,0.28);
+    \node[blue!80!black, font=\footnotesize, left] at (-1.60,1.06) {$d(x,y)$};
+    \node[below, font=\small] at (0,-1.55) {Distance on sphere};
   \end{scope}
 
-  \begin{scope}[shift={(4.5,0)}]
+  \begin{scope}[shift={(5.2,0)}]
     \draw[thick] (0,0) circle (1.4);
     \draw[dashed, gray] (1.4,0) arc (0:180:1.4 and 0.45);
     \draw[gray] (-1.4,0) arc (180:360:1.4 and 0.45);
     \coordinate (x2) at (-0.4,-0.6);
     \coordinate (y2) at (0.3,0.9);
-    \draw[blue!80!black, thick] (x2) to[out=55, in=230] (y2);
+    \draw[blue!80!black, thick] (x2) to[bend left=40] (y2);
     \draw[orange!90!black, thick, dashed] (x2) -- (y2);
-    \fill[red!80!black] (x2) circle (2pt) node[left] {$x$};
-    \fill[red!80!black] (y2) circle (2pt) node[right] {$y$};
-    \node[blue!80!black, font=\tiny] at (-0.6,0.3) {sphere arc};
-    \node[orange!90!black, font=\tiny] at (0.2,0.0) {Euclidean chord};
-    \node[below, font=\small] at (0,-1.5) {Sphere arc vs.\ Euclidean chord};
+    \fill[red!80!black] (x2) circle (2pt) node[below left, font=\small] {$x$};
+    \fill[red!80!black] (y2) circle (2pt) node[right, font=\small] {$y$};
+    \draw[leader] (-1.62,1.02) -- (-0.32,0.28);
+    \node[blue!80!black, font=\scriptsize, left] at (-1.60,1.06) {sphere arc};
+    \draw[leader] (1.22,-0.92) -- (-0.02,0.12);
+    \node[orange!90!black, font=\scriptsize, right] at (1.20,-0.96) {Euclidean chord};
+    \node[below, font=\small] at (0,-1.55) {Sphere arc vs.\ Euclidean chord};
   \end{scope}
 \end{tikzpicture}
 \end{center}

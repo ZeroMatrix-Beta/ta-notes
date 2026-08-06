@@ -27,6 +27,23 @@ The rigorous definition of the multidimensional integral relies on the \newterm{
 \end{tikzpicture}
 \end{center}
 
+% Generator: Claude Opus 5 (High) --- the notion was used throughout this chapter and in
+% \cref{ch:change_of_variables} but had no numbered definition to point at.
+\begin{definition}[Dyadic cube and dyadic set]
+\label{def:dyadic_set}
+For $p \in \mathbb{N}$ and $a \in \mathbb{Z}^n$, the \newterm{dyadic cube}
+(\germanterm{dyadischer Würfel}) of generation $p$ at $a$ is
+\[Q_p(a) := 2^{-p}\big(a + [0,1)^n\big),\]
+a half-open cube of side length $2^{-p}$. A \newterm{dyadic set} (\germanterm{dyadische Menge})
+is a finite union $E = \bigcup_{\ell=1}^N Q_p(a(\ell))$ of distinct dyadic cubes \emph{of one
+common generation} $p$, and its volume is
+\[\mu(E) := 2^{-pn}N.\]
+\end{definition}
+
+The requirement that all cubes share a generation is not cosmetic: it is what separates the
+Jordan theory from the Lebesgue theory, as \cref{rem:jordan_vs_lebesgue_sizes} makes precise.
+
+% Supplement: Sascha Brack/Class Notes/Week_08_Notes_Monday.pdf, pp. 5--7
 Similar to the 1D Riemann integral, we approximate the volume of a set $E \subseteq \mathbb{R}^n$ using an outer sequence of dyadic sets $G_i \supseteq E$ and an inner sequence $F_i \subseteq E$. If the limits of their volumes coincide as the pixel size $2^{-p} \to 0$, $E$ is \newterm{Jordan measurable}.
 
 Furthermore, the multidimensional integral of a non-negative function $f : A \to \mathbb{R}$ is exactly the $(n+1)$-dimensional Jordan measure (volume) of its hypograph $\Gamma_A(f)$:
@@ -56,6 +73,44 @@ Furthermore, the multidimensional integral of a non-negative function $f : A \to
   \node[right, font=\small, align=center] at (2.5, 0.7, 0.5) {volume is\\$\int_A f$};
 \end{tikzpicture}
 \end{center}
+
+% Source: Jérôme Paschoud/Notizen/Woche 8.2 Riemann-Integral.pdf, p. 1
+% Generator: Gemini 3.1 Pro (High)
+\begin{definition}[Riemann integral in $\mathbb{R}^n$]
+\label{def:riemann_integral_rn}
+Let $A \subseteq \mathbb{R}^n$ and $f: A \to \mathbb{R}$. Analogous to Analysis I, the integral is defined via dyadic step functions (\germanterm{dyadische Treppenfunktionen}). The lower and upper integrals are defined as
+\begin{align*}
+  \underline{\int}_A f &:= \sup \left\{ \int_A g \;\middle|\; g: \mathbb{R}^n \to \mathbb{R} \text{ dyadic step function with } g \leq f \right\}, \\
+  \overline{\int}_A f &:= \inf \left\{ \int_A h \;\middle|\; h: \mathbb{R}^n \to \mathbb{R} \text{ dyadic step function with } h \geq f \right\}.
+\end{align*}
+The function $f$ is \newterm{Riemann integrable} if $\underline{\int}_A f = \overline{\int}_A f$. In this case, their common value is denoted by $\int_A f$.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+  % axes
+  \draw[->, gray] (0,0,0) -- (3.5,0,0) node[right, text=black] {$y$};
+  \draw[->, gray] (0,0,0) -- (0,2.5,0) node[above, text=black] {$z = g(x,y)$};
+  \draw[->, gray] (0,0,0) -- (0,0,3.5) node[below left, text=black] {$x$};
+  
+  % Base squares
+  \draw[gray, dashed] (0.5,0,0.5) grid (2.5,0,2.5);
+  
+  % Column 1
+  \draw[thick, blue!80!black, fill=blue!10, opacity=0.8] (0.5,0,1.5) -- (0.5,1.2,1.5) -- (1.5,1.2,1.5) -- (1.5,0,1.5) -- cycle;
+  \draw[thick, blue!80!black, fill=blue!20, opacity=0.8] (1.5,0,1.5) -- (1.5,1.2,1.5) -- (1.5,1.2,2.5) -- (1.5,0,2.5) -- cycle;
+  \draw[thick, blue!80!black, fill=blue!30, opacity=0.8] (0.5,1.2,1.5) -- (1.5,1.2,1.5) -- (1.5,1.2,2.5) -- (0.5,1.2,2.5) -- cycle;
+  
+  % Column 2
+  \draw[thick, red!80!black, fill=red!10, opacity=0.8] (1.5,0,0.5) -- (1.5,0.8,0.5) -- (2.5,0.8,0.5) -- (2.5,0,0.5) -- cycle;
+  \draw[thick, red!80!black, fill=red!20, opacity=0.8] (2.5,0,0.5) -- (2.5,0.8,0.5) -- (2.5,0.8,1.5) -- (2.5,0,1.5) -- cycle;
+  \draw[thick, red!80!black, fill=red!30, opacity=0.8] (1.5,0.8,0.5) -- (2.5,0.8,0.5) -- (2.5,0.8,1.5) -- (1.5,0.8,1.5) -- cycle;
+
+  \node[font=\small, align=left] at (5, 1, 1) {Integral of a\\dyadic step function:\\sum of column volumes};
+\end{tikzpicture}
+\end{center}
+
+This integral satisfies all the \qt{good} properties from the one-dimensional case, such as linearity. Moreover, if $E \subseteq \mathbb{R}^n$ is Jordan measurable and $f: \overline{E} \to [0, \infty)$ is continuous, then $f$ is Riemann integrable on $E$.
+\end{definition}
 
 % Source: Diego Torres Tejeda/Notes - 17.04 - Diego Torres Tejeda.pdf, p. 1
 % Generator: Gemini 3.6 Flash (High)
@@ -100,6 +155,62 @@ U := \bigcup_{k=1}^\infty B_{2^{-(k+2)}}(q_k) \;\cap\; (0,1).
 \]
 Since $\mathbb{Q} \cap [0,1]$ is dense in $[0,1]$, the closure of $U$ is $\overline{U} = [0,1]$. If $U$ were Jordan measurable, its measure would satisfy $\mu(U) = \mu(\overline{U}) = 1$. However, any finite union of intervals covering a dyadic inner approximation of $U$ has measure bounded by $\sum_{k=1}^\infty 2 \cdot 2^{-(k+2)} = \frac{1}{2}$. Thus $\mu_{\mathrm{in}}(U) \leq \frac{1}{2} < 1 = \mu_{\mathrm{out}}(U)$, showing that $U$ is \textbf{not} Jordan measurable. Its boundary $\partial U = [0,1] \setminus U$ is a \qt{fat} boundary of positive outer measure.
 \end{example}
+
+% Source: Jérôme Paschoud/Notizen/Woche 8.1 Tangentialräume und Jordan Mass.pdf, p. 3
+% Generator: Gemini 3.1 Pro (High)
+\begin{proposition}[Algebra of Jordan measurable sets]
+\label{prop:algebra_jordan_measurable}
+If $E, F \subset \mathbb{R}^n$ are Jordan measurable, then their union $E \cup F$, intersection $E \cap F$, and differences $E \setminus F$, $F \setminus E$ are also Jordan measurable.
+Furthermore, if $E \cap F = \emptyset$ (or if they only intersect in a Jordan null set), then
+\[
+\mu(E \cup F) = \mu(E) + \mu(F).
+\]
+\end{proposition}
+
+% Source: Jérôme Paschoud/Notizen/Woche 8.1 Tangentialräume und Jordan Mass.pdf, p. 4
+% Generator: Gemini 3.1 Pro (High)
+\begin{remark}[Lebesgue null vs.\ Jordan null]
+\label{rem:lebesgue_vs_jordan_null}
+A set $E \subset \mathbb{R}^n$ is \newterm{Lebesgue null} if for every $\varepsilon > 0$, there exist \emph{countably} many dyadic cubes $Q_i$ covering $E$ with $\sum \mu(Q_i) < \varepsilon$. For a \newterm{Jordan null} set, the cover must be formed by \emph{finitely} many cubes (which implicitly requires $E$ to be bounded).
+Because a countable cover is allowed, the set $\mathbb{Q} \cap [0,1]$ is Lebesgue null. However, it is not Jordan null (in fact, it is not even Jordan measurable, as seen in \cref{ex:non_jordan_measurable_open_set}), since any finite union of intervals covering it must also cover its closure $[0,1]$, thus having measure at least $1$.
+\end{remark}
+
+% Quelle: Linus Lüchinger/Slides/Slides-04-16.pdf, slide 6
+% Generator: Claude Opus 5 (High)
+\begin{remark}[The relaxation is really about \emph{sizes}, not just counts]
+\label{rem:jordan_vs_lebesgue_sizes}
+Stating the difference as \qt{finitely many} against \qt{countably many} is correct but hides
+where the extra power actually comes from. A Jordan cover is a \emph{dyadic set}, and every cube
+in a dyadic set of generation $p$ has the same side length $2^{-p}$
+(\cref{def:dyadic_set}). So the two conditions really read:
+\begin{itemize}
+  \item \textbf{Jordan null:} for each $\varepsilon>0$, cover $E$ by cubes that all have
+    \emph{one common side length}, of total volume $<\varepsilon$. Finiteness is then automatic:
+    only finitely many cubes of a fixed size fit into a bounded region.
+  \item \textbf{Lebesgue null:} for each $\varepsilon>0$, cover $E$ by cubes of \emph{whatever
+    side lengths you like}, of total volume $<\varepsilon$. Allowing the sizes to vary is exactly
+    what lets the cover be infinite while the total volume stays finite.
+\end{itemize}
+The two relaxations are therefore one relaxation. It is permission to shrink the cubes as you go
+that buys the countable cover, and it is the countable cover that makes the notions differ.
+
+$\mathbb{N} \subseteq \mathbb{R}$ shows this in its purest form. Cover the integer $k$ by an
+interval of length $\varepsilon\,2^{-k-1}$; the total length is $\varepsilon$, so $\mathbb{N}$ is
+Lebesgue null. No Jordan cover can do this: cubes of one fixed length $2^{-p}$ need at least one
+cube per integer, infinitely many of them, of infinite total length. (Indeed $\mathbb{N}$ is
+unbounded, so it is not Jordan measurable at all.) The point is that the geometric series is
+available only when the sizes may vary.
+\end{remark}
+
+% Source: Jérôme Paschoud/Notizen/Woche 8.1 Tangentialräume und Jordan Mass.pdf, p. 4
+% Generator: Gemini 3.1 Pro (High)
+\begin{theorem}[Linear transformations of Jordan measurable sets]
+\label{thm:jordan_measure_linear_transformation}
+Let $L: \mathbb{R}^n \to \mathbb{R}^n$ be a linear, invertible map. If $E \subset \mathbb{R}^n$ is Jordan measurable, then the image $L(E)$ is also Jordan measurable, and its measure scales by the absolute value of the determinant of $L$:
+\[
+\mu(L(E)) = |\det L| \, \mu(E).
+\]
+\end{theorem}
 
 
 % --- exercises relocated here from the dissolved sheet 8 ---

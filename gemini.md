@@ -142,6 +142,28 @@ You are authorized to improve the prose and apply the established "House Style" 
       \end{align}
       ```
 
+  * **Overfull `\hbox` / Too Long Formulas:** Never let long formulas overflow the page margins (producing `Overfull \hbox` warnings). Break long equations using `align` (or `align*`) or `split` inside `equation`. Align multiline equations on logical relations (like `=`) or mathematical operators (like `+` or `-`).
+    * **BAD Example (Single-line overflow):**
+
+      ```latex
+      \begin{equation}
+          \int_A f(x,y,z) \,dx\,dy\,dz = \int_0^1 \int_0^{1-x} \int_0^{1-x-y} (x^2 + y^2 + z^2 + 2xy + 2xz + 2yz) \,dz\,dy\,dx = \frac{1}{20}
+      \end{equation}
+      ```
+
+    * **GOOD Example (Structured multi-line alignment):**
+
+      ```latex
+      \begin{align}
+          \int_A f(x,y,z) \,dx\,dy\,dz &= \int_0^1 \int_0^{1-x} \int_0^{1-x-y} (x^2 + y^2 + z^2 \nonumber \\
+          &\qquad + 2xy + 2xz + 2yz) \,dz\,dy\,dx \nonumber \\
+          &= \frac{1}{20}.
+      \end{align}
+      ```
+
+    * **Inline Fractions & Delimiters:** Avoid using `\frac` inside inline math `$ ... $`, especially with `\left ... \right` delimiters, as it stretches the line height and often causes `Overfull \hbox` or `Underfull \hbox`. Use inline fractions like `x/y` and standard size braces `{ ... }` instead.
+    * **TikZ Pictures:** If a `\begin{tikzpicture}` overflows the page width (producing an `Overfull \hbox`), check the `xshift` of scopes or manually scale it down, rather than ignoring the warning.
+
 * **Delimiters:** Use `\left(` and `\right)` (and other auto-sizing delimiters like `\left[` / `\right]`) primarily in displayed equations `\[ ... \]`. This ensures delimiters match the height of the content. In inline math `$ ... $`, standard delimiters are generally preferred to maintain consistent line height, unless the content is exceptionally tall (e.g., a fraction).
 * **General Linear Group:** Always use the macro `\GL` for the general linear group (e.g., `\GL_n(K)` or `\GL(n, K)`). This renders as `\operatorname{GL}`.
 * **Curl / Rotation:** Always use the macro `\curl` for the curl/rotation of a vector field. Do NOT use `\rot`, as it is not defined and will break compilation.
@@ -202,6 +224,7 @@ You are authorized to improve the prose and apply the established "House Style" 
 
 ## Build traps in this preamble (each has cost a broken build at least once)
 
+* **Float specifier `[h]` warnings:** Never use `[h]` alone for floats (like `table` or `figure`), as LaTeX will warn (`LaTeX: 'h' float specifier changed to 'ht'`) and change it. Always use `[ht]` or `[htbp]` to give LaTeX enough flexibility.
 * **`\end{ainote>` — closing an environment with `>` instead of `}`.** Every model working on
   this file has made this one, repeatedly, and it is the single most common break. The error
   message does not point at it; you get *"Paragraph ended before \end was complete"* plus
@@ -229,6 +252,46 @@ You are authorized to improve the prose and apply the established "House Style" 
   nine `\qt{}` and one `\leq` into `qt{}` and `eq` — which **typeset without erroring**, so a
   clean build does not prove the edit was safe. Prefer the `multi_replace_file_content` tool. If you must use perl,
   verify afterwards using the `grep_search` tool with `IsRegex=true` and Query `(^|[^\\])qt\{` and similar.
+* ⚠️ **Do not route `.tex` content, or backslash patterns, through the Bash tool at all.**
+  The shell layer consumes one level of backslash *before the command runs*, so this corrupts
+  writes **and** silently breaks the greps you would use to check them. It is the perl hazard
+  above arriving by a route that does not look like a substitution.
+
+  **On the way in.** Appending with a heredoc collapsed every `\\` to a single `\`:
+
+  ```latex
+  \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}     % written
+  \begin{pmatrix} 0 & 1 \  1 & 0 \end{pmatrix}     % landed on disk
+  ```
+
+  Quoting the delimiter did **not** prevent it — `<<'EOF'` was used and the collapse happened
+  anyway — and it is not specific to `cat`: a `python - <<'PY'` heredoc written to *repair* the
+  damage was mangled identically on its own way in, `\b` becoming a literal backspace so that
+  `\begin` arrived as `␈egin`, and the repair script failed its own assertion.
+
+  **On the way out.** The same layer eats the pattern, so verification quietly lies. Checking
+  the repair with
+
+  ```bash
+  grep -cF '\\' 99-solutions.tex      # intended: count lines holding a row separator
+  ```
+
+  reported **59** on a file containing exactly **4** — because `'\\'` reached `grep` as a single
+  backslash and matched every line with any control sequence at all. A detector that fails open
+  is worse than none.
+
+  **Why it bites here specifically.** Only backslash-doubled sequences are touched, so
+  ninety-nine lines in a hundred survive and the diff looks clean at a glance. But `\\` is
+  exactly what `pmatrix` rows, `align` breaks and `tabular` rows are built from, so the damage
+  lands squarely on display math and tables. Nor is it reliably loud: in a `pmatrix` it raised
+  *"Undefined control sequence"* and was caught in one build, but inside a `tabular` a collapsed
+  `\\` merely **merges two rows** and typesets without erroring — the same "a clean build does
+  not prove the edit was safe" trap the perl entry describes.
+
+  **What to do instead.** Write with the `Write`/`Edit` tools, which write bytes literally, and
+  verify with the `grep_search`/`Grep` tool, whose pattern is passed as a parameter and never
+  sees a shell. On the file above, `Grep` with pattern `\\\\` correctly returns the four
+  matrix-row lines that `grep -cF` could not find.
 * **`main.pdf` is often locked** by an open viewer; `latexmk` then dies with
   *"I can't write on file"*. Build with `-jobname=check` to a throwaway name instead.
 * **`hyperref` warnings about `Token not allowed in a PDF string`**.

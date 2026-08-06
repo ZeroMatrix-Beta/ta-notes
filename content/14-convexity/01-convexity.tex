@@ -201,6 +201,27 @@ The picture records both halves of \textbf{(b)} at once: each tangent line lies 
 \emph{below} the graph --- which is the inequality $f(y)-f(x) \geq Df_x(y-x)$ read along the
 segment --- and the slope grows from $s$ to $t$, which is $f'_{x,y}$ increasing.
 
+% Generator: Claude Opus 5 (High) --- part \textbf{(c)} of the exercise above says a critical
+% point of a convex function is a global minimum. It is worth pairing that with the fact that
+% convexity does not produce a critical point in the first place.
+\begin{example}[Convex, bounded below, and yet no minimum]
+\label{ex:convex_function_unattained_infimum}
+\Cref{ex:convexity_characterizations}\textbf{(c)} guarantees that \emph{if} a convex function has
+a critical point, that point is a global minimum. It does not guarantee that one exists. Take
+\[f : \mathbb{R}^2 \to \mathbb{R}, \qquad f(x_1,x_2) := e^{x_1+x_2}.\]
+Its Hessian is
+\[\Hess f(x_1,x_2) = e^{x_1+x_2}\begin{pmatrix} 1 & 1 \\ 1 & 1\end{pmatrix},\]
+so for every $v \in \mathbb{R}^2$ we get
+$v\transp\Hess f(x)\,v = e^{x_1+x_2}(v_1+v_2)^2 \geq 0$; the Hessian is positive semidefinite
+everywhere and $f$ is convex by \cref{prop:convexity_characterizations}. But $f > 0$ everywhere,
+while along the ray $(-t,-t)$ we have $f(-t,-t) = e^{-2t} \to 0$ as $t \to \infty$. Hence
+$\inf_{\mathbb{R}^2}f = 0$ and the infimum is attained nowhere.
+
+What fails is not convexity but compactness: the sublevel sets $\{f \leq c\}$ are unbounded, so
+the extreme value theorem (\cref{lem:sequential_compactness_extreme_values}) has nothing to act
+on. Convexity organises the minima a function has; it does not manufacture one.
+\end{example}
+
 % Sonnet 5 (Medium)
 We now change subject entirely: from convexity to the question of when a map is locally
 invertible --- the tool that makes the implicit function theorem, and later submanifolds

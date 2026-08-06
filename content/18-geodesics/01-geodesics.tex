@@ -37,7 +37,9 @@ and $\lambda = \lvert x\rvert$.
 \begin{proof}
 Let $g \in C^\infty([0,1],\mathbb{R}^n)$ with $g(0)=g(1)=0$, and define, for $\varepsilon \in
 \mathbb{R}$, the family of paths $c_\varepsilon(t) := c(t) + \varepsilon g(t)$, so that
-$c_0 = c$.
+$c_0 = c$. The boundary conditions on $g$ are what keep the whole family admissible:
+$c_\varepsilon(0) = c(0) = 0$ and $c_\varepsilon(1) = c(1) = x$ for every $\varepsilon$, so each
+$c_\varepsilon$ is a competitor in $\mathcal{A}$ and not merely a nearby curve.
 
 % Sonnet 5 (Medium) --- FIG-W10-02
 \begin{center}
@@ -80,8 +82,11 @@ Recalling $\lvert c'\rvert \equiv \lambda$ and using
 \end{aligned}
 \]
 where the boundary term vanished since $g(0)=g(1)=0$. Since $g$ is arbitrary, it follows that
-$c''(t) \equiv 0$, and together with $c(0)=0$, $c(1)=x$ this gives $c(t)=xt$ and $\lambda =
-\lvert x\rvert$.
+$c''(t) \equiv 0$ --- this last step is the \newterm{fundamental lemma of the calculus of
+variations}: a continuous function integrating to zero against \emph{every} smooth $g$ vanishing
+at the endpoints must itself vanish, since otherwise one could choose $g$ to be a bump
+concentrated where $c''$ has a fixed sign and make the integral non-zero. Together with
+$c(0)=0$ and $c(1)=x$ this gives $c(t)=xt$ and $\lambda = \lvert x\rvert$.
 \end{proof}
 
 \begin{ainote}

@@ -80,6 +80,29 @@ To verify that a map $f \in C^k(U, V)$ between open sets is a global $C^k$-diffe
 If both conditions hold, the global inverse $f^{-1}$ inherits the $C^k$ regularity of the local inverses, making $f$ a global $C^k$-diffeomorphism.
 \end{remark}
 
+% Generator: Claude Opus 5 (High) --- the standard witness that condition 1 of
+% \cref{rem:global_diffeomorphism_check} really is a separate hypothesis, and the example
+% \cref{ex:7.1} part 2 is asking about.
+\begin{example}[Invertible everywhere, injective nowhere near globally]
+\label{ex:local_invertible_not_globally_injective}
+The second condition of \cref{rem:global_diffeomorphism_check} does not imply the first. Let
+\[f : \mathbb{R}^2 \to \mathbb{R}^2, \qquad
+  f(x,y) := \begin{pmatrix} e^x\cos y \\ e^x\sin y \end{pmatrix},\]
+which is the complex exponential written in real coordinates. Its Jacobian is
+\[\Jac f(x,y) = \begin{pmatrix} e^x\cos y & -e^x\sin y \\ e^x\sin y & e^x\cos y\end{pmatrix},
+  \qquad \det\Jac f(x,y) = e^{2x}(\cos^2y+\sin^2y) = e^{2x} > 0,\]
+so $\Jac f$ is invertible at \emph{every} point and $f$ is a local $C^\infty$-diffeomorphism
+everywhere by \cref{thm:inverse_function_theorem}. Yet $f(x,y+2\pi) = f(x,y)$ for all $(x,y)$, so
+$f$ is not injective --- indeed every value in its image is attained infinitely often, and $f$ is
+a global diffeomorphism on no neighbourhood of any horizontal strip of height $2\pi$ or more.
+
+Restricting the codomain does not help either: $f$ misses the origin and nothing else, so
+$f : \mathbb{R}^2 \to \mathbb{R}^2\setminus\{0\}$ is surjective but still not injective. What
+\emph{does} work is restricting the domain, for instance to
+$\mathbb{R} \times (-\pi,\pi)$, on which $f$ is the polar-coordinate diffeomorphism of
+\cref{ex:polar_spherical_coordinates} in disguise.
+\end{example}
+
 % Supplement: Sascha Brack/Class Notes/Week_06_Notes_Monday.pdf, p. 4
 \begin{example}[Polar and spherical coordinates]
 \label{ex:polar_spherical_coordinates}

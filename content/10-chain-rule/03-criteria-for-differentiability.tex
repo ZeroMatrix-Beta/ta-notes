@@ -89,6 +89,34 @@ counterexamples belong:
 The three counterexamples are not variations on one theme; they fail at three different
 heights, which is precisely why the chain has three separate links.
 
+% Generator: Claude Opus 5 (High) --- sharpens the middle link. The chain above only records
+% that all directional derivatives fail to give differentiability; this example shows the gap
+% is wider still, since differentiability implies continuity (\cref{prop:differentiable_implies_continuous})
+% and this function is not even that.
+\begin{example}[All directional derivatives exist, yet $f$ is not continuous]
+\label{ex:directional_derivatives_exist_not_continuous}
+Let $f : \mathbb{R}^2 \to \mathbb{R}$ be given by
+\[f(x,y) := \frac{x^2y}{x^4+y^2} \quad \text{for } (x,y) \neq (0,0), \qquad f(0,0) := 0.\]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{Every directional derivative exists at the origin.} Fix $v = (a,b) \neq (0,0)$.
+    If $b = 0$ then $f(ta,0) = 0$ for every $t$, so $\partial_vf(0,0) = 0$. If $b \neq 0$, then
+    \[\frac{f(ta,tb) - f(0,0)}{t}
+      = \frac{1}{t}\cdot\frac{t^3a^2b}{t^4a^4+t^2b^2}
+      = \frac{a^2b}{t^2a^4+b^2} \ \xrightarrow{\ t\to0\ }\ \frac{a^2}{b}.\]
+    So $\partial_vf(0,0)$ exists for every direction, with value $a^2/b$ when $b \neq 0$ and $0$
+    when $b = 0$. Note that this is emphatically \emph{not} linear in $v$, which already rules
+    out differentiability by formula $(*)$.
+  \item \textbf{But $f$ is not continuous at the origin.} Approach along the parabola $y = x^2$
+    rather than along a line: for $x \neq 0$,
+    \[f(x,x^2) = \frac{x^2\cdot x^2}{x^4+x^4} = \frac12,\]
+    so $f(x,x^2) \to \tfrac12 \neq 0 = f(0,0)$ as $x \to 0$. Hence
+    $\lim_{(x,y)\to(0,0)}f(x,y)$ does not exist.
+\end{enumerate}
+The moral is that straight lines are not enough to detect a limit in two variables: every line
+through the origin sees a well-behaved function, and the bad behaviour hides on a curve that no
+line is tangent to.
+\end{example}
+
 % Supplement: Sascha Brack/Class Notes/Week_04_Notes_Monday_Updated.pdf, p. 5
 \begin{remark}[A recipe for checking differentiability at a point]
 \label{rem:differentiability_recipe}

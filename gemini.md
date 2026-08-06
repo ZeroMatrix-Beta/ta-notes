@@ -64,6 +64,33 @@ You are authorized to improve the prose and apply the established "House Style" 
 
 * Transform lecture shorthand like "iff" into the full phrase "if and only if" in prose.
 * Expand "s.t." to "such that" and "w.r.t." to "with respect to".
+* **`i.e.` and `e.g.` follow the bracket rule — they are NOT on the expansion list above.**
+  Inside parentheses or brackets, keep the abbreviation: a parenthetical is already an aside,
+  and `(i.e.\ ...)` / `(e.g.\ ...)` keep it short instead of nesting a second clause inside the
+  first. In running prose outside brackets, write it out ("that is,", "for example,",
+  "for instance,") — or better, recast the sentence so no gloss is needed.
+
+  * **GOOD:** `contracted to a point within $U$ (i.e.\ any two paths with the same endpoints are homotopic)`
+  * **GOOD:** `a dense set (i.e.\ $\overline D = [0,1]$)`
+  * **BAD:** `a dense set (that is, $\overline D = [0,1]$)`
+  * **GOOD:** `Symmetry: $d(x,y) = d(y,x)$, that is, $x$ has the same distance to $y$ as $y$ to $x$.`
+  * **BAD:** `Symmetry: $d(x,y) = d(y,x)$, i.e., $x$ has the same distance to $y$ as $y$ to $x$.`
+
+  Note the spacing: inside brackets use `i.e.\ ` (backslash-space) before text, or `i.e., `
+  before a clause — never a bare `i.e. `, whose period TeX reads as end-of-sentence and
+  over-spaces.
+
+  This rule applies to **typeset text only**. LaTeX comments (`% ...`) and TikZ node labels are
+  out of scope: comments are never typeset, and figure labels need the shortest form that fits.
+  Leave both exactly as they are.
+* ⚠️ **Never apply any of these expansions with a blind search-and-replace over `content/`.**
+  A pass on 2026-08-06 ran a Python `re.sub` across every `.tex` file and had to be reverted
+  wholesale (the diff is kept at `scratch/gemini-pass-2026-08-06.patch`).
+  It rewrote LaTeX comments and TikZ node text, produced `that is,:` and `no such $d$ exists, so`
+  where the surrounding punctuation no longer fit, and split a math span across a line break
+  (`--- e.g.\ $\tan :` became `--- for example, $\tan :$`), which put `\tfrac` in text mode and
+  broke the build. This is the same hazard the perl warning under *Build traps* describes; the
+  language does not matter. Edit the occurrences individually, reading each sentence.
 
 ## CONTEXT AND WORKSPACE
 

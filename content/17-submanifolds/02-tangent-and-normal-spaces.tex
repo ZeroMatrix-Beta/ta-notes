@@ -179,6 +179,32 @@ $F(x,y,z) = x^2+y^2+z^2$. We determine $N_{e_3}S^2$:
 So $N_{e_3}S^2 = \operatorname{span}\{e_3\} = \{0\}\times\mathbb{R}$.
 \end{example}
 
+% Generator: Claude Opus 5 (High) --- the example above is the $n=3$, $F = \lvert x\rvert^2$
+% instance of a general fact worth stating once, since it is what makes the Lagrange condition
+% of \cref{prop:constrained_optimization} geometric rather than algebraic.
+\begin{proposition}[The gradient is normal to the level set]
+\label{prop:gradient_orthogonality_level_sets}
+Let $U \subseteq \mathbb{R}^n$ be open, $g \in C^1(U,\mathbb{R})$, and let
+$S := \{x \in U : g(x) = c\}$ for some $c \in \mathbb{R}$. If $\nabla g(x_0) \neq 0$ at a point
+$x_0 \in S$, then near $x_0$ the set $S$ is an $(n-1)$-dimensional submanifold and
+\[N_{x_0}S = \operatorname{span}\{\nabla g(x_0)\}.\]
+In particular the normal space is a \emph{line}, and the affine \emph{tangent} hyperplane to $S$
+at $x_0$ is $\{x \in \mathbb{R}^n : \langle x - x_0,\ \nabla g(x_0)\rangle = 0\}$.
+\end{proposition}
+
+\begin{proof}
+That $S$ is a submanifold of dimension $n-1$ near $x_0$ is \cref{thm:regular_value_theorem},
+since $\nabla g(x_0) \neq 0$ says exactly that $Dg_{x_0} : \mathbb{R}^n \to \mathbb{R}$ is
+surjective. For the normal space, let $v \in T_{x_0}S$ and pick a $C^1$ curve
+$\gamma : (-\varepsilon,\varepsilon) \to S$ with $\gamma(0) = x_0$ and $\gamma'(0) = v$. Then
+$g \circ \gamma \equiv c$, so differentiating at $t=0$ with the chain rule along a path
+(\cref{sec:chain_rule_along_path}) gives
+\[0 = \frac{d}{dt}\Big|_{t=0}g(\gamma(t)) = \big\langle \nabla g(x_0),\ v\big\rangle.\]
+Hence $\nabla g(x_0) \perp T_{x_0}S$, that is,
+$\operatorname{span}\{\nabla g(x_0)\} \subseteq N_{x_0}S$. Both are subspaces of dimension
+$n - \dim T_{x_0}S = n-(n-1) = 1$, so they are equal.
+\end{proof}
+
 % Supplement: Sascha Brack/Class Notes/Week_08_Notes_Monday.pdf, pp. 3--4
 \begin{example}[Tangent and normal vectors via parametrization]
 \label{ex:tangent_normal_parametrized_sphere}

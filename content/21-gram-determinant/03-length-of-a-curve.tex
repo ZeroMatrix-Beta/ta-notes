@@ -59,6 +59,40 @@ The length is:
 \[\int_{-\pi/2}^{\pi/2} 5\cos\theta \,d\theta = 5\big[\sin\theta\big]_{-\pi/2}^{\pi/2} = 5(1 - (-1)) = 10.\]
 \end{example}
 
+% Generator: Claude Opus 5 (High) --- the one-variable arc-length formula, recovered as the
+% $d=1$ case of the Gram determinant, so that the familiar formula is visibly a special case
+% rather than a separate rule.
+\begin{proposition}[Length of a graph]
+\label{prop:graph_arc_length}
+Let $f \in C^1([a,b],\mathbb{R})$. The graph
+$\Gamma_f := \{(x,f(x)) : x \in [a,b]\} \subseteq \mathbb{R}^2$ has length
+\[\vol_1(\Gamma_f) = \int_a^b \sqrt{1+f'(x)^2}\,dx.\]
+\end{proposition}
+
+\begin{proof}
+Parametrize by $\phi(t) := (t, f(t))\transp$ on $[a,b]$, which is injective and $C^1$ with
+$\phi'(t) = (1, f'(t))\transp \neq 0$. The Gram determinant of the single tangent vector is
+\[\sqrt{\det\big(\Jac\phi(t)\transp\Jac\phi(t)\big)} = \lVert\phi'(t)\rVert
+  = \sqrt{1+f'(t)^2},\]
+and integrating over $[a,b]$ is the definition of $\vol_1$.
+\end{proof}
+
+% Generator: Claude Opus 5 (High)
+\begin{example}[A quarter of an astroid]
+\label{ex:astroid_arc_length}
+Let $\gamma(t) := (\cos^3t,\ \sin^3t)\transp$ for $t \in [0,\tfrac\pi2]$. Then
+\[\gamma'(t) = \begin{pmatrix} -3\cos^2t\,\sin t \\ 3\sin^2t\,\cos t\end{pmatrix},\]
+so, using $\cos t \geq 0$ and $\sin t \geq 0$ on this interval,
+\[\lVert\gamma'(t)\rVert = 3\cos t\,\sin t\sqrt{\cos^2t+\sin^2t} = 3\cos t\,\sin t
+  = \tfrac32\sin(2t).\]
+The length is therefore
+\[\int_0^{\pi/2}\tfrac32\sin(2t)\,dt = \Big[-\tfrac34\cos(2t)\Big]_0^{\pi/2}
+  = -\tfrac34\big((-1)-1\big) = \tfrac32.\]
+Note that $\gamma'(0) = \gamma'(\tfrac\pi2) = 0$: the astroid has cusps at its endpoints, so this
+is a curve whose parametrization fails the immersion condition exactly at the two boundary
+points. The length integral is unaffected, since two points contribute nothing to it.
+\end{example}
+
 % Supplement: Sascha Brack/Class Notes/Week_09_Notes_Friday.pdf, p. 6
 \begin{example}[Spiral length]
 \label{ex:spiral_length}

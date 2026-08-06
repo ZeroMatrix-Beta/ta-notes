@@ -118,3 +118,34 @@ This elegantly generalizes the $1$-dimensional case where the solution to $u'(t)
 
 The Cauchy--Lipschitz theorem (also known as the Picard--Lindelöf theorem) guarantees the existence and uniqueness of solutions to first-order initial value problems, provided the right-hand side is Lipschitz continuous with respect to the state variable.
 For an equation of the form $y'(x) = F(x, y(x))$, one first puts the differential equation in normal form to determine if the theorem applies, which requires checking the properties of $F$.
+
+% Generator: Claude Opus 5 (High) --- what survives when the Lipschitz hypothesis is dropped.
+% Included because the natural student question after Picard--Lindelöf is whether Lipschitz is
+% needed for existence or only for uniqueness, and the answer is a clean "only for uniqueness".
+\begin{theorem}[Peano existence theorem]
+\label{thm:peano_existence_theorem}
+Let $I := [t_0-a,\ t_0+a] \subseteq \mathbb{R}$ and $B := \overline{B_b(x_0)} \subseteq
+\mathbb{R}^n$, and let $f : I \times B \to \mathbb{R}^n$ be \emph{continuous} --- no Lipschitz
+condition in $x$ is assumed. Put $M := \max_{I\times B}\lVert f\rVert$, which is finite by
+compactness, and $h := \min\{a,\ b/M\}$. Then the initial value problem
+\[\dot x(t) = f\big(t, x(t)\big), \qquad x(t_0) = x_0\]
+has at least one $C^1$ solution $x : [t_0-h,\ t_0+h] \to B$.
+\end{theorem}
+
+\begin{remark}[Peano versus Picard--Lindelöf]
+\label{rem:peano_vs_picard}
+Dropping the Lipschitz hypothesis costs exactly uniqueness and nothing else. The standard witness
+is $\dot x = \sqrt{\lvert x\rvert}$ with $x(0) = 0$: the right-hand side is continuous everywhere
+but not Lipschitz at $x = 0$, since $\sqrt{s}/s \to \infty$ as $s \downarrow 0$. Both
+\[x(t) \equiv 0 \qquad\text{and}\qquad x(t) = \tfrac14t^2 \ \ (t \geq 0)\]
+solve it, as do the infinitely many solutions that wait at $0$ until an arbitrary time $\tau > 0$
+and only then take off along $\tfrac14(t-\tau)^2$. Peano's theorem still applies and still
+delivers a solution; it simply cannot say which one.
+
+Note also where the two theorems get their machinery. Picard--Lindelöf is a fixed-point argument
+--- it runs the Banach fixed-point theorem (\cref{thm:banach_fixed_point}) on the integral
+operator, and the Lipschitz constant is precisely what makes that operator a contraction. Peano
+has no contraction to work with and instead argues by compactness, extracting a convergent
+subsequence from a family of approximate solutions. That is also why it gives no uniqueness: a
+compactness argument produces \emph{a} limit, never \emph{the} limit.
+\end{remark}

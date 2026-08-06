@@ -76,6 +76,27 @@ form in which the rule is actually used in physics --- compare
 $\gamma_1,\dots,\gamma_n$ and a single source variable $t$.
 \end{remark}
 
+% Generator: Claude Opus 5 (High) --- not in any source read so far; added because it is the
+% cleanest one-line payoff of the chain rule along a path and is quoted constantly in physics.
+\begin{theorem}[Euler's homogeneous function theorem]
+\label{thm:eulers_homogeneous_function_theorem}
+Let $f \in C^1(\mathbb{R}^n\setminus\{0\},\mathbb{R})$ be \newterm{positively homogeneous of
+degree $k$} for some $k \in \mathbb{R}$, meaning that
+\[f(tx) = t^kf(x) \qquad \text{for all } x \in \mathbb{R}^n\setminus\{0\} \text{ and all } t>0.\]
+Then $\langle x, \nabla f(x)\rangle = k\,f(x)$ for all $x \in \mathbb{R}^n\setminus\{0\}$.
+\end{theorem}
+
+\begin{proof}
+Fix $x \neq 0$ and read both sides of the homogeneity identity as functions of $t>0$ alone. The
+left-hand side is $f$ composed with the path $\gamma(t) := tx$, whose velocity is
+$\gamma'(t) = x$, so the chain rule along a path (\cref{sec:chain_rule_along_path}) gives
+\[\frac{d}{dt}f(tx) = \big\langle \nabla f(tx),\ x\big\rangle.\]
+On the right-hand side $f(x)$ is a constant in $t$, and therefore
+$\frac{d}{dt}\big(t^kf(x)\big) = kt^{k-1}f(x)$. The two derivatives agree for every $t>0$;
+evaluating at $t=1$ leaves $\langle \nabla f(x), x\rangle = k f(x)$, which is the claim by
+symmetry of the inner product.
+\end{proof}
+
 \begin{aiexample}[Chain Rule for Vector Fields]
 % Generator: Gemini 3.6 Flash (Medium)
 Let $f(u,v) := u^2 + v^2$ and let $g(r,\theta) := (r\cos\theta, r\sin\theta)\transp$. The composite function is $(f \circ g)(r,\theta) = r^2\cos^2\theta + r^2\sin^2\theta = r^2$.

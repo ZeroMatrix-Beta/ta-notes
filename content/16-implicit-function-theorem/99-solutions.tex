@@ -7,6 +7,9 @@
 % Generator: Claude Sonnet 5 (Medium)
 Write the system as $F(x,y,z,u,v) = 0$ for $F : \mathbb{R}^5 \to \mathbb{R}^2$,
 \[F(x,y,z,u,v) := \begin{pmatrix} xy^5+yu^5+zv^5-1 \\ x^5y+y^5u+z^5v-1 \end{pmatrix}.\]
+The base point does lie on the level set, which the theorem requires before anything else:
+\[F(0,1,1,1,0) = \begin{pmatrix} 0 + 1 + 0 - 1 \\ 0 + 1 + 0 - 1\end{pmatrix}
+  = \begin{pmatrix} 0 \\ 0\end{pmatrix}.\]
 The differential is
 \[\Jac F(x,y,z,u,v) = \begin{pmatrix} y^5 & 5xy^4+u^5 & v^5 & 5yu^4 & 5zv^4 \\ 5x^4y & x^5+5y^4u & 5z^4v & y^5 & z^5 \end{pmatrix},\]
 so at the base point,

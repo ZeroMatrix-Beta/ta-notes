@@ -133,6 +133,24 @@ independence assumption on $(\nabla g_1,\dots,\nabla g_k)$ fails and $\lambda_0 
 forced, e.g.\ if $x_0$ is itself a critical point of the constraint map $g$.
 \end{remark}
 
+% Generator: Claude Opus 5 (High)
+\begin{remark}[What the multiplier itself measures]
+\label{rem:lagrange_multiplier_sensitivity}
+So far $\lambda$ has been bookkeeping --- a number produced by the method and then discarded once
+the candidate points are found. It carries information of its own. Consider the constrained
+problem with the constraint level left free,
+\[m(c) := \min\{f(x) : g(x) = c\},\]
+and suppose the minimiser $x^*(c)$ depends differentiably on $c$. Differentiating
+$g(x^*(c)) = c$ gives $\langle \nabla g(x^*(c)), (x^*)'(c)\rangle = 1$, while the Lagrange
+condition $\nabla f = \lambda\nabla g$ at $x^*(c)$ turns the chain rule for $m$ into
+\[m'(c) = \big\langle \nabla f(x^*(c)),\ (x^*)'(c)\big\rangle
+        = \lambda\big\langle \nabla g(x^*(c)),\ (x^*)'(c)\big\rangle = \lambda.\]
+So $\lambda$ is the rate at which the optimal value responds to relaxing the constraint by one
+unit --- in economics this reading is standard enough to have its own name, the
+\qt{shadow price} of the constraint. A large $\lvert\lambda\rvert$ says the constraint is
+expensive; $\lambda = 0$ says it is not binding at all.
+\end{remark}
+
 % Source: Corsin Nick/Class Notes/Week 5.pdf, pp. 4--5
 % Supplement: Sascha Brack/Class Notes/Week_05_Notes_Friday.pdf, p. 5
 \begin{center}
@@ -299,6 +317,62 @@ actually differentiated, so it is used throughout.
   \node[below, font=\small] at (0,-1.7) {8 critical points $\tfrac{1}{\sqrt{3}}(\pm 1, \pm 1, \pm 1)$ on $S^2$};
 \end{tikzpicture}
 \end{center}
+
+% Generator: Claude Opus 5 (High) --- not in Corsin's notes; included because it is the one
+% place in the course where an analytic tool repays a debt to linear algebra, and because the
+% Rayleigh-quotient argument is a genuine use of \cref{prop:constrained_optimization} with more
+% than one constraint.
+\begin{theorem}[Spectral theorem, via constrained optimization]
+\label{thm:spectral_theorem_optimization}
+Every symmetric $A \in \mathbb{R}^{n\times n}$ admits an orthonormal basis
+$\{v_1,\dots,v_n\}$ of $\mathbb{R}^n$ consisting of eigenvectors of $A$, with real eigenvalues.
+\end{theorem}
+
+\begin{proof}
+Let $f(x) := \langle x, Ax\rangle$, a polynomial and hence continuous, and let
+$g(x) := \lvert x\rvert^2 - 1$, so that the unit sphere is $S^{n-1} = g^{-1}\{0\}$. Since $A$ is
+symmetric, $\nabla f(x) = 2Ax$; also $\nabla g(x) = 2x$.
+
+We construct the $v_j$ one at a time. Suppose $v_1,\dots,v_k$ are already orthonormal
+eigenvectors of $A$, with eigenvalues $\lambda_1,\dots,\lambda_k$ (for $k=0$ there is nothing to
+suppose). Put
+\[K_k := S^{n-1} \cap \{x : \langle x,v_j\rangle = 0 \text{ for } j=1,\dots,k\},\]
+the unit sphere of the orthogonal complement of $\operatorname{span}\{v_1,\dots,v_k\}$. This is
+closed and bounded, hence compact by \cref{thm:heine_borel}, and non-empty as long as $k<n$, so
+$f$ attains a maximum on it at some $v_{k+1} \in K_k$.
+
+The constraints active at $v_{k+1}$ are $g$ together with the $k$ linear functions
+$h_j(x) := \langle x,v_j\rangle$, whose gradients are $\nabla g(v_{k+1}) = 2v_{k+1}$ and
+$\nabla h_j(v_{k+1}) = v_j$. These $k+1$ vectors are orthogonal and non-zero, hence linearly
+independent, so \cref{prop:constrained_optimization} applies and yields multipliers with
+\[2Av_{k+1} = 2\lambda_{k+1}v_{k+1} + \sum_{j=1}^{k}\mu_jv_j.\]
+Pair both sides with $v_i$ for a fixed $i \leq k$. On the right, $\langle v_{k+1},v_i\rangle = 0$
+and $\langle v_j,v_i\rangle = \delta_{ji}$, leaving $\mu_i$. On the left, symmetry of $A$ moves it
+across the inner product,
+\[\langle Av_{k+1}, v_i\rangle = \langle v_{k+1}, Av_i\rangle
+  = \lambda_i\langle v_{k+1},v_i\rangle = 0,\]
+using that $v_i$ is already an eigenvector. Hence $\mu_i = 0$ for every $i \leq k$, and the
+displayed identity collapses to $Av_{k+1} = \lambda_{k+1}v_{k+1}$. So $v_{k+1}$ is a unit
+eigenvector orthogonal to all its predecessors, and after $n$ steps the $v_j$ form the required
+basis. Each eigenvalue is real because $\lambda_j = \langle v_j, Av_j\rangle$ is a real number by
+construction.
+\end{proof}
+
+% Generator: Claude Opus 5 (High)
+\begin{corollary}[Extreme eigenvalues as Rayleigh quotients]
+\label{cor:courant_fischer_extreme}
+For symmetric $A \in \mathbb{R}^{n\times n}$,
+\[\lambda_{\min}(A) = \min_{x \in S^{n-1}}\langle x,Ax\rangle, \qquad
+  \lambda_{\max}(A) = \max_{x \in S^{n-1}}\langle x,Ax\rangle.\]
+\end{corollary}
+
+\begin{proof}
+Write $x \in S^{n-1}$ in the orthonormal eigenbasis of \cref{thm:spectral_theorem_optimization}
+as $x = \sum_j c_jv_j$ with $\sum_j c_j^2 = 1$. Then
+$\langle x,Ax\rangle = \sum_j \lambda_jc_j^2$ is a convex combination of the eigenvalues, so it
+lies between $\lambda_{\min}$ and $\lambda_{\max}$; both bounds are attained by taking $x$ to be
+the corresponding eigenvector.
+\end{proof}
 
 % Originally: content/week-05.tex, end of the chapter
 

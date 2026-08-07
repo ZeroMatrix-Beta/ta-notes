@@ -115,6 +115,39 @@ Every vector $x \in \mathbb{R}^n$ can be written in this basis as $x = \sum_{i=1
 In this eigenbasis, the Hessian matrix becomes diagonal. Consequently, the quadratic form evaluates to $x\transp \Hess f(x_0) x = \sum_{i=1}^n \lambda_i a_i^2$, which immediately links the definiteness of the Hessian to the signs of its eigenvalues.
 \end{remark}
 
+% Supplement: Analysis_II_Script_v1.pdf, p. 69
+\begin{exercise}[Polarisation formula]
+\label{ex:polarisation_formula}
+Let $f : \mathbb{R}^n \to \mathbb{R}$ be smooth. Prove that the map
+\[\mathbb{R}^n \ni e \ \longmapsto\ \left.\frac{d^2}{dt^2}\right|_{t=0} f(te) = e\transp \Hess f(0)\,e\]
+determines all the second partial derivatives $\partial_i\partial_jf(0)$.
+\end{exercise}
+
+\begin{exercisesolution}[Proof of \cref{ex:polarisation_formula}]
+% Generator: Claude Sonnet 5 (Medium)
+By the chain rule, $\tfrac{d}{dt}f(te) = \sum_i \partial_if(te)e_i$, and differentiating again,
+\[\left.\frac{d^2}{dt^2}\right|_{t=0}f(te) = \sum_{i,j}\partial_i\partial_jf(0)\,e_ie_j
+  = e\transp\Hess f(0)\,e =: Q(e),\]
+which is the displayed identity, with $Q$ a quadratic form in $e$.
+
+Taking $e := e_i$, the $i$-th standard basis vector, gives $Q(e_i) = \partial_i^2f(0)$: the
+diagonal entries directly. For the off-diagonal entries, expand
+\[Q(e_i+e_j) = (e_i+e_j)\transp\Hess f(0)(e_i+e_j)
+  = Q(e_i) + 2\,\partial_i\partial_jf(0) + Q(e_j),\]
+using symmetry of $\Hess f(0)$ (\cref{thm:schwarz_mixed_partials}) to combine the two mixed
+terms into one. Solving,
+\[\partial_i\partial_jf(0) = \tfrac12\big(Q(e_i+e_j) - Q(e_i) - Q(e_j)\big),\]
+so every entry of $\Hess f(0)$ is recovered from $Q$ alone.
+\end{exercisesolution}
+
+\begin{remark}
+This is the same phenomenon as recovering an inner product from its induced norm via the
+parallelogram-style polarisation identity: a symmetric bilinear form is determined by its
+values on the diagonal. Here it says a single-variable computation --- differentiating
+$t\mapsto f(te)$ twice at $t=0$, for every direction $e$ --- already contains everything the
+full Hessian matrix does.
+\end{remark}
+
 \begin{theorem}[The Hessian test]
 \label{thm:hessian_test}
 If $f \in C^2(U,\mathbb{R})$ has a critical point $x_0 \in \operatorname{int}(U)$, then:
@@ -136,7 +169,10 @@ since directions $v$ with $v\transp\Hess f(x_0)v > 0$ and $u$ with $u\transp\Hes
 make $t\mapsto f(x_0+tv)$ increase and $t\mapsto f(x_0+tu)$ decrease away from $x_0$. Dropped
 above, and the genuinely inconclusive case --- semidefinite \emph{and} degenerate --- stated
 explicitly instead, since that is the one students actually run into
-(\cref{ex:6.8} is exactly this trap).
+(\cref{ex:6.8} is exactly this trap). The official script carries the identical redundant
+hypothesis (its Prop.\ 11.15(3): \qt{indefinite and non-degenerate}), so this is not a slip
+specific to Corsin's notes --- both sources state the theorem with one clause more than it
+needs.
 \end{ainote}
 
 % Quelle: Linus Lüchinger/Slides/Slides-03-23.pdf, slides 10--11
@@ -260,7 +296,11 @@ exactly the degenerate case, illustrated by $x^4+y^4$ against $x^4-y^4$ above.
 
 \begin{ainote}
 The regularity in \cref{thm:hessian_test} is stated by Corsin as $C^3$; the test needs only
-$C^2$ (which is what the Hessian's definition assumes). Relaxed to $C^2$ above.
+$C^2$ (which is what the Hessian's definition assumes). Relaxed to $C^2$ above. This is not just
+Corsin's own habit --- the official script's Prop.\ 11.15 independently requires $f \in C^3$ too,
+and its proof indeed only uses the second-order Taylor expansion (with an $o(\lvert h\rvert^2)$
+remainder), which needs nothing beyond $C^2$. Ours is both the weaker hypothesis and the
+standard statement of this theorem.
 \end{ainote}
 
 \begin{aiexample}[Inconclusive Hessian Test at a Degenerate Critical Point]
@@ -272,6 +312,17 @@ Consider $f(x,y) := x^4 + y^4$ and $g(x,y) := x^4 - y^4$ at the critical point $
   \item However, direct inspection reveals that $f(x,y) \geq 0 = f(0,0)$ for all $(x,y)$, so $(0,0)$ is a strict local minimum for $f$, whereas $g(x,0) > 0$ and $g(0,y) < 0$ for non-zero $x,y$, so $(0,0)$ is a saddle point for $g$.
 \end{itemize}
 \end{aiexample}
+
+% Supplement: Analysis_II_Script_v1.pdf, p. 71
+\begin{remark}
+Script Exercise 11.16 makes the same point with a two-parameter family:
+$f_{a,b}(x,y) := ax^4+by^4$ has $\Hess f_{a,b}(0,0)$ equal to the zero matrix \emph{regardless of
+$a,b$}, yet the behaviour at $0$ ranges over every possible case as $a,b$ vary --- $a,b>0$
+recovers the strict minimum of $f$ above ($a=b=1$), $a,b<0$ gives a strict maximum, and opposite
+signs recover the saddle of $g$ above ($a=1,\,b=-1$). It is the sharpest available statement of
+\qt{degenerate $\Rightarrow$ no information}: the identical (zero) Hessian is compatible with
+every possible outcome, depending only on quartic terms the second-order test cannot see.
+\end{remark}
 
 % Source: Corsin Nick/Class Notes/Week 5.pdf, pp. 8--9
 \subsection{How do I determine positive/negative definiteness?}
@@ -321,6 +372,23 @@ $\left(\begin{smallmatrix}-5&0&0\\0&-4&-2\\0&-2&-4\end{smallmatrix}\right)$ & $A
 $\left(\begin{smallmatrix}-1&0&-4\\0&2&-2\\-4&-2&22\end{smallmatrix}\right)$ & $A_1 = -1 < 0$, $A_2 = -2 < 0$, $A_3 = -72 < 0$ & indefinite \\
 \end{tabular}
 \end{center}
+\end{example}
+
+% Supplement: Analysis_II_Script_v1.pdf, p. 71
+\begin{example}[A two-parameter family running through all four Hessian cases]
+\label{ex:two_parameter_hessian_family}
+Let $a,b \in \mathbb{R}$ and $f(x,y) := x\sin(y) + ax^2 + by^2$. Then $Df(0,0) = (0,0)$, and
+\[\Hess f(0,0) = \begin{pmatrix} 2a & 1 \\ 1 & 2b \end{pmatrix}, \qquad \det\Hess f(0,0) = 4ab-1.\]
+Using the determinant/trace rule above:
+\begin{itemize}
+  \item If $a>0$ and $4ab-1>0$: positive definite, so $(0,0)$ is a local minimum.
+  \item If $a<0$ and $4ab-1>0$: negative definite, so $(0,0)$ is a local maximum.
+  \item If $4ab-1<0$: indefinite, so $(0,0)$ is a saddle point.
+  \item If $4ab-1=0$: degenerate, and the test says nothing.
+\end{itemize}
+Unlike the fixed examples above, a single formula with two free parameters realises every
+outcome of \cref{thm:hessian_test} at once, simply by moving $(a,b)$ across the curve $4ab=1$ in
+parameter space.
 \end{example}
 
 % Source: Corsin Nick/Class Notes/Week 5.pdf, pp. 10--11

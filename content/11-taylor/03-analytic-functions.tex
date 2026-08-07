@@ -22,3 +22,46 @@ If $f \in C^\infty(U, \mathbb{R})$ satisfies analytic estimates, then its Taylor
 \label{ex:analytic_function_sin_xy}
 The function $f(x,y) = \sin(xy)$ satisfies the analytic estimates everywhere, and is therefore equal to its Taylor series.
 \end{example}
+
+% Supplement: Analysis_II_Script_v1.pdf, p. 61
+\begin{corollary}[Unique continuation principle]
+\label{cor:unique_continuation}
+Let $U \subseteq \mathbb{R}^n$ be connected and open, and let $f,g$ be real analytic on $U$
+(\cref{def:analytic_estimates}). If $\partial^\alpha f(x_0) = \partial^\alpha g(x_0)$ for every
+multi-index $\alpha$ at some single point $x_0 \in U$, then $f = g$ on all of $U$. In
+particular, if $f$ and $g$ agree on a non-empty open subset $V \subseteq U$, they must agree on
+all of $U$.
+\end{corollary}
+
+\begin{proof}
+Let $U' := \{x \in U : \partial^\alpha f(x) = \partial^\alpha g(x) \text{ for all } \alpha \in
+\mathbb{N}^n\}$; by hypothesis $x_0 \in U'$, so $U'$ is non-empty. Each $\partial^\alpha(f-g)$ is
+continuous, so
+\[U \setminus U' = \bigcup_{\alpha \in \mathbb{N}^n} \big(\partial^\alpha(f-g)\big)^{-1}\big((-\infty,0)\cup(0,\infty)\big)\]
+is a union of open sets, hence open. To see $U'$ is also open, let $x \in U'$; since $f$ and $g$
+are analytic at $x$, \cref{thm:convergence_taylor_series} gives $\rho>0$ (the smaller of the two
+radii for $f$ and $g$ at $x$) such that both are equal to their Taylor series on $B_\rho(x)$; but
+those Taylor series agree term by term, since $x \in U'$, so $f=g$ on all of $B_\rho(x)$, giving
+$\partial^\alpha f = \partial^\alpha g$ throughout $B_\rho(x)$ (differentiate the identity
+$f\equiv g$ there) and hence $B_\rho(x) \subseteq U'$.
+
+So $U'$ and $U\setminus U'$ are both open, $U'$ is non-empty, and $U$ is connected --- forcing
+$U \setminus U' = \emptyset$, i.e.\ $U' = U$. In particular $f = g$ on all of $U$ (the case
+$\alpha = 0$).
+
+For the last statement, if $f=g$ on a non-empty open $V \subseteq U$, pick any $x_0 \in V$: then
+$\partial^\alpha f(x_0) = \partial^\alpha g(x_0)$ for every $\alpha$ (differentiating the
+identity $f \equiv g$ near $x_0$), so the first statement applies.
+\end{proof}
+
+\begin{remark}
+This is the payoff that makes real-analyticity worth having beyond $C^\infty$: an analytic
+function is determined, on its \emph{entire} connected domain, by its behaviour arbitrarily close
+to a single point --- knowing every derivative at one $x_0$ (or just agreeing with another
+analytic function on a tiny open patch) pins down the function everywhere. This is dramatically
+false for merely $C^\infty$ functions: the standard bump function
+$\varphi(x) := e^{-1/x^2}$ for $x>0$, $\varphi(x):=0$ for $x\leq0$, has $\partial^\alpha
+\varphi(0) = 0$ for every $\alpha$, agreeing to all orders with the zero function at $0$, yet
+$\varphi \not\equiv 0$ on any neighbourhood of $0$ --- exactly the failure
+\cref{cor:unique_continuation} rules out for analytic functions.
+\end{remark}

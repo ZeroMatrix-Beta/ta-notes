@@ -272,7 +272,7 @@ Highest value first. Each is one session, and each is self-contained.
    **Done in full, 2026-08-07 — see §8.**
 2. **Chapters 11–14** (script §§10.2–11). Gaps `Cor 10.41` (unique continuation) and
    `Prop 11.26` (Jensen), divergences **D2** and **D3**, and the strongest examples in the
-   script (11.16, 11.17, 10.35).
+   script (11.16, 11.17, 10.35). **Done in full, 2026-08-07 — see §8.**
 3. **`appendix-a-odes.tex`** (script §15). Grönwall is a real gap; the three autonomous
    systems and the resonance example are the best-drawn examples in the whole script.
 4. **Chapters 22–26** (script §14). Archimedes, the three-paths example, and the Stokes/Gauss
@@ -357,7 +357,29 @@ already-present interval-only IVT.
 
 Build verified clean throughout (latest: 263 pages, no errors, no undefined references).
 
-* **Session 2** (chapters 11–14): entirely open — see §7 item 2.
+### Session 2 (chapters 11–14) — DONE, 2026-08-07
+
+Cor 10.41 (`cor:unique_continuation`, ch 11, with the bump-function remark on why analyticity —
+not just $C^\infty$ — is needed) and Prop 11.26 (`prop:jensen_inequality`, ch 14, cross-linked
+to the silent use of Jensen already in ch 2's `ex:4.4` solution). D2 and D3 both turned out to
+already have partial `ainote`s in place (D2 at `02-hessian-test.tex` on the $C^3$-vs-$C^2$
+regularity, D3 implicitly in the Gram-determinant section) — both enriched with the script
+citation and, for D3, the E4 write-up of the script's own inconsistency (undefined $d$, $LL\transp$
+vs $L\transp L$). Ex 10.36 landed as two new sub-exercises (`exp(arctan(x-y))`,
+`1/(1-x^2-y^2)`) completing an already-present partial match (`sin(xy)` and
+`sqrt(1+x+y^2)` were already there) rather than duplicating it. Ex 11.14 (polarisation formula,
+`ex:polarisation_formula`) and Ex 11.22 (antipodal points maximise sphere distance,
+`ex:antipodal_max_distance`) taken directly. Ex 11.16 turned out to already be present in
+substance (`x^4+y^4` vs `x^4-y^4`); enriched with a remark generalising to the script's
+`ax^4+by^4` family. Ex 11.17 (two-parameter family through all four Hessian cases) taken
+directly. Ex 11.18 and Ex 11.25 were **already fully present** — Ex 11.18 is verbatim
+`ex:cubic_saddle_family` (Corsin's own exercise happens to be the same one the script sets), and
+Ex 11.25 is exactly parts (b) and (c) of the already-transcribed `ex:convexity_characterizations`
+— no new content needed for either.
+
+Build verified clean: 268 pages, no errors, no undefined references.
+
+* **Session 3** (`appendix-a-odes.tex`): entirely open — see §7 item 3.
 * **Session 3** (`appendix-a-odes.tex`): entirely open — see §7 item 3.
 * **Session 4** (chapters 22–26): entirely open — see §7 item 4.
 * **Session 5** (chapters 19–21): entirely open — see §7 item 5.

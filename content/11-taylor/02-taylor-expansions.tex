@@ -480,6 +480,45 @@ Using the 1D expansion $\sqrt{1+t} = 1 + \frac{1}{2}t - \frac{1}{8}t^2 + O(t^3)$
 \end{align*}
 \end{exercisesolution}
 
+% Supplement: Analysis_II_Script_v1.pdf, p. 59
+\begin{exercise}[Taylor expansion of $\exp(\arctan(x-y))$]
+\label{ex:taylor_expansion_exp_arctan}
+Compute the Taylor expansion of $f(x,y) := \exp(\arctan(x-y))$ to order $2$ around $(0,0)$.
+\end{exercise}
+
+\begin{exercisesolution}[\cref{ex:taylor_expansion_exp_arctan}]
+% Generator: Claude Sonnet 5 (Medium)
+Write $s := x-y$, itself of order $|h|$. Since $\arctan$ is odd, $\arctan(t) = t + O(t^3)$, so
+\[\arctan(s) = s + O(|h|^3) = s + o(|h|^2).\]
+Since $\exp$ is smooth and bounded near $0$, an $o(|h|^2)$ correction inside $\exp$ contributes
+only an $o(|h|^2)$ correction to the output --- so to order $2$, $\exp(\arctan(s))$ and
+$\exp(s)$ agree:
+\[\exp(\arctan(x-y)) = \exp(x-y) + o(|(x,y)|^2).\]
+Now $\exp(s) = 1+s+\tfrac12s^2+O(s^3)$ with $s^2 = x^2-2xy+y^2$, so
+\[\exp(\arctan(x-y)) = 1 + x - y + \tfrac12x^2 - xy + \tfrac12y^2 + o(|(x,y)|^2).\]
+\end{exercisesolution}
+
+% Supplement: Analysis_II_Script_v1.pdf, p. 59
+\begin{exercise}[Taylor expansion of $1/(1-x^2-y^2)$]
+\label{ex:taylor_expansion_one_over_1_minus_x2_y2}
+Compute the Taylor expansion of $f(x,y) := \dfrac{1}{1-x^2-y^2}$ to order $2$ around $(0,0)$.
+\end{exercise}
+
+\begin{exercisesolution}[\cref{ex:taylor_expansion_one_over_1_minus_x2_y2}]
+% Generator: Claude Sonnet 5 (Medium)
+Using $\tfrac{1}{1-t} = 1+t+O(t^2)$ with $t := x^2+y^2$, itself already $O(|h|^2)$, so
+$t^2 = O(|h|^4) = o(|h|^2)$:
+\[\frac{1}{1-x^2-y^2} = 1 + (x^2+y^2) + o(|(x,y)|^2).\]
+\end{exercisesolution}
+
+\begin{remark}
+Together with \cref{ex:taylor_expansion_sin_xy,ex:taylor_expansion_sqrt_1_plus_x_plus_y2} above,
+these two exercises are exactly script Exercise 10.36 --- \qt{compute the Taylor polynomials up
+to the quadratic order of $\sin(xy)$, $\sqrt{1+x+y^2}$, $\exp(\arctan(x-y))$,
+$1/(1-x^2-y^2)$ --- don't use the general formula!} All four are worked by the same \qt{1D
+substitution} technique this section uses throughout.
+\end{remark}
+
 % Source: Jérôme Paschoud/Notizen/Woche 5.1 Taylor.pdf, p. 4
 % Generator: Gemini 3.6 Flash (High)
 \begin{exercise}[Taylor expansion of $\frac{\cos x}{1-y^2}$]

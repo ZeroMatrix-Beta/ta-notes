@@ -221,6 +221,38 @@ The picture records both halves of \textbf{(b)} at once: each tangent line lies 
 \emph{below} the graph --- which is the inequality $f(y)-f(x) \geq Df_x(y-x)$ read along the
 segment --- and the slope grows from $s$ to $t$, which is $f'_{x,y}$ increasing.
 
+% Supplement: Analysis_II_Script_v1.pdf, p. 75
+\begin{proposition}[Jensen's inequality]
+\label{prop:jensen_inequality}
+Let $U \subseteq \mathbb{R}^n$ be open and convex and $f : U \to \mathbb{R}$ convex. Then for
+every finite collection of points $x_1,\dots,x_N \in U$ and weights $w_1,\dots,w_N \in (0,1)$
+with $\sum_{i=1}^N w_i = 1$,
+\[f\Big(\sum_{i=1}^N w_ix_i\Big) \ \leq\ \sum_{i=1}^N w_if(x_i).\]
+\end{proposition}
+
+\begin{proof}
+Let $z := \sum_i w_ix_i \in U$ ($U$ is convex, so this weighted average lies in $U$). By
+\cref{ex:convexity_characterizations}\textbf{(b)} (valid already for $f \in C^1$), applied to the
+pair $(z,x_i)$ for each $i$,
+\[f(x_i) - f(z) \geq Df_z(x_i-z), \qquad i=1,\dots,N.\]
+Multiply the $i$-th inequality by $w_i>0$ and sum over $i$:
+\[\sum_i w_if(x_i) - f(z) = \sum_i w_i\big(f(x_i)-f(z)\big)
+  \geq Df_z\Big(\sum_i w_i(x_i-z)\Big) = Df_z\Big(\sum_iw_ix_i - z\Big) = Df_z(0) = 0,\]
+using $\sum_iw_i=1$ to pull $f(z)$ out on the left and $\sum_iw_ix_i=z$ in the last step.
+Rearranging gives $f(z) \leq \sum_iw_if(x_i)$, which is the claim. (For $f$ merely convex,
+without $C^1$ regularity, the same computation goes through with
+\cref{ex:convexity_characterizations}\textbf{(b)} replaced by the general subgradient
+inequality, which holds for any convex function on an open set.)
+\end{proof}
+
+\begin{remark}
+The case $N=2$ is exactly \cref{def:convex_set_function} itself: Jensen's inequality is the
+statement that convexity, defined only for a two-point average, automatically extends to any
+finite weighted average. It is used silently in the solution to \cref{ex:4.4}
+(\cref{ch:metric_spaces}), applied to $\varphi(s):=s\log s$ --- stated here explicitly for the
+first time.
+\end{remark}
+
 % Generator: Claude Opus 5 (High) --- part \textbf{(c)} of the exercise above says a critical
 % point of a convex function is a global minimum. It is worth pairing that with the fact that
 % convexity does not produce a critical point in the first place.

@@ -238,7 +238,7 @@ The Jacobian matrix of $F$ at $x$ is
 \[ DF(x) = \begin{pmatrix} \partial_{x_1} f(x) & \partial_{x_2} f(x) & \dots & \partial_{x_n} f(x) \\ 0 & 1 & \dots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \dots & 1 \end{pmatrix}. \]
 Its determinant is $\det DF(x) = \partial_{x_1} f(x)$.
 At $x = x_0$, we have $\det DF(x_0) = \partial_{x_1} f(x_0) \neq 0$. Thus, $DF_{x_0}$ is invertible.
-By the Inverse Function Theorem (\cref{thm:inverse_function}), there exist open neighbourhoods $V_0 \subseteq U$ of $x_0$ and $W_0 \subseteq \mathbb{R}^n$ of $F(x_0)$ such that $F|_{V_0} : V_0 \to W_0$ is a diffeomorphism, and in particular, $F(V_0) = W_0$ is open in $\mathbb{R}^n$.
+By the Inverse Function Theorem (\cref{thm:inverse_function_theorem}), there exist open neighbourhoods $V_0 \subseteq U$ of $x_0$ and $W_0 \subseteq \mathbb{R}^n$ of $F(x_0)$ such that $F|_{V_0} : V_0 \to W_0$ is a diffeomorphism, and in particular, $F(V_0) = W_0$ is open in $\mathbb{R}^n$.
 
 Let $\pi_1 : \mathbb{R}^n \to \mathbb{R}$, $(y_1, \dots, y_n) \mapsto y_1$ be the projection onto the first coordinate. Projections are open mappings.
 Notice that $f = \pi_1 \circ F$. Therefore, $f(V_0) = \pi_1(F(V_0)) = \pi_1(W_0)$ is open in $\mathbb{R}$.

@@ -3,6 +3,14 @@
 Which of the 16 non-Corsin tutors' notes have been read and mined into `content/`.
 Corsin Nick is the blueprint, transcribed chapter-by-chapter, so he is not tracked here.
 
+> **The official script is tracked separately — see `script-coverage.md`.**
+> `Analysis_II_Script_v1.pdf` (Joaquim Serra, 207 pp.) is not a tutor's notes and is not mined
+> the same way: it is the authority our theorems are *checked against*, plus a reservoir of
+> exercises and examples. A thin survey pass over all 207 pages is complete (2026-08-06);
+> `script-coverage.md` holds the theorem-by-theorem comparison, the exercise and example
+> shortlists, the divergences from our document, and nine errors found in the script itself.
+> No `.tex` has been written from it yet.
+
 Route any supplement by **topic**, never by the tutor's own week number or file date — their
 weeks do not line up with ours. See the merge rule in `gemini.md`.
 

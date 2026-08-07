@@ -86,6 +86,22 @@ $\|\cdot\| : V \to [0,\infty)$ satisfying, for all $u, v \in V$ and $\alpha \in 
 \end{enumerate}
 \end{definition}
 
+% Source: Jérôme Paschoud/Notizen/Woche 4.1 Normen, das Differential.pdf, p. 1
+% Generator: Gemini 3.1 Pro (High)
+\begin{example}[Hilbert--Schmidt norm on matrix spaces]
+\label{ex:hilbert_schmidt_norm}
+A very important example of a norm on the space of real $n \times m$ matrices $\mathbb{R}^{n \times m}$ is the \newterm{Hilbert--Schmidt norm} (also known as the Frobenius norm). It is defined by
+\[
+\|M\|_2 := \sqrt{\operatorname{Tr}(M\transp M)},
+\]
+where $\operatorname{Tr}$ denotes the trace of a matrix.
+For a $2 \times 3$ matrix $M = \left(\begin{smallmatrix} a & b & c \\ d & e & f \end{smallmatrix}\right)$, we have
+\[
+M\transp M = \begin{pmatrix} a & d \\ b & e \\ c & f \end{pmatrix} \begin{pmatrix} a & b & c \\ d & e & f \end{pmatrix} = \begin{pmatrix} a^2+d^2 & * & * \\ * & b^2+e^2 & * \\ * & * & c^2+f^2 \end{pmatrix}.
+\]
+The trace is the sum of the diagonal elements, so $\|M\|_2 = \sqrt{a^2+b^2+c^2+d^2+e^2+f^2}$, which shows that this norm simply corresponds to the standard Euclidean norm of the matrix entries viewed as a vector in $\mathbb{R}^{6}$ (or generally $\mathbb{R}^{nm}$). The inner product inducing this norm is $\langle A, B \rangle := \operatorname{Tr}(A\transp B)$.
+\end{example}
+
 % Transition: Claude Opus 5 (High)
 Comparing the three lists of axioms is already informative. A norm has exactly the three
 properties a metric has, restated for a single vector instead of a pair of points, plus

@@ -1,0 +1,22 @@
+% Originally: content/week-10.tex (Corsin Week 10 / Jérôme Paschoud Week 10)
+
+\section{Integration over submanifolds}
+\label{sec:integration_over_submanifolds}
+
+% Source: Jérôme Paschoud/Notizen/Woche 10.1 Integrale über UMF.pdf, p. 3
+% Generator: Gemini 3.6 Flash (High)
+While \cref{sec:volume_embedded_surfaces} explains how to compute the $d$-volume of a parametrized submanifold, it requires the entire relevant portion of the surface to be covered by a single parametrization $\phi$. For more complicated submanifolds $M \subseteq \mathbb{R}^n$, we need to integrate scalar functions $f : M \to \mathbb{R}$ globally. 
+
+To achieve this, we cover the $m$-dimensional submanifold $M$ with the images of local parametrizations $\Phi_l : V_l \to \mathbb{R}^n$, called an \newterm{atlas}. By employing a smooth \newterm{partition of unity} $\eta_l \in C_c^\infty(\mathbb{R}^n, [0,1])$ (see \cref{note:partitions_of_unity_motivation} and \cref{prop:partition_of_unity_finite} for a rigorous construction) subordinate to this cover, we ensure that:
+\begin{enumerate}[label=\textbf{\arabic*.}]
+    \item $\sum_{l=1}^N \eta_l \equiv 1$ on $M$,
+    \item $\operatorname{supp}(\eta_l) \subset \operatorname{Im}(\Phi_l)$.
+\end{enumerate}
+
+\begin{definition}[Integral of a scalar function over a submanifold]
+\label{def:integral_scalar_submanifold}
+Given an $m$-dimensional submanifold $M \subseteq \mathbb{R}^n$, an atlas of local parametrizations $\Phi_l : V_l \to \mathbb{R}^n$, and a subordinate partition of unity $\{\eta_l\}$, the integral of a function $f : M \to \mathbb{R}$ over $M$ is defined as:
+\[\int_M f \mathop{d\text{vol}}_m := \sum_{l=1}^N \int_{V_l} f(\Phi_l(x)) \eta_l(\Phi_l(x)) \sqrt{\det(\Jac\Phi_l\transp(x) \Jac\Phi_l(x))} \,dx.\]
+\end{definition}
+
+This definition pieces together the local integrals (weighted by $\eta_l$) to compute the global integral over the entire submanifold, generalizing the volume integral from \cref{def:d_volume_parametrized_submanifold}.

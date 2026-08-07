@@ -36,3 +36,21 @@ $(\phi\circ\Psi)^*\omega$ for the two sides of that calculation makes it read as
 applied to $\phi^*\omega$ and the fact that pullback along a composition is the composition of
 pullbacks.
 \end{ainote}
+
+% Source: Jérôme Paschoud/Notizen/Woche 12.1 Differentialformen.pdf, p. 7
+\begin{example}[Computing a pullback]
+\label{ex:computing_pullback}
+Let $\omega = x_3 \,dx_3 + x_1 x_2 \,dx_2$ be a $1$-form on $\mathbb{R}^3$.
+Consider the map $F : \mathbb{R}^2 \to \mathbb{R}^3$ given by
+\[F(u,v) = \begin{pmatrix} u+v \\ e^u \\ u^2 - v \end{pmatrix}.\]
+We want to compute the pullback $F^*\omega$, which will be a $1$-form on $\mathbb{R}^2$.
+Using the properties of the pullback, we have:
+\begin{align*}
+F^*\omega &= F^*(x_3 \,dx_3 + x_1 x_2 \,dx_2) \\
+&= F^*(x_3) F^*(dx_3) + F^*(x_1 x_2) F^*(dx_2) \\
+&= (x_3 \circ F) d(F^*(x_3)) + (x_1 x_2 \circ F) d(F^*(x_2)) \\
+&= (u^2 - v) d(u^2 - v) + (u+v)e^u d(e^u) \\
+&= (u^2 - v)(2u \,du - dv) + (u+v)e^u (e^u \,du) \\
+&= \big(2u(u^2 - v) + (u+v)e^{2u}\big) \,du - (u^2 - v) \,dv.
+\end{align*}
+\end{example}

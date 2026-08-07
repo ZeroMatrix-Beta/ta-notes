@@ -177,6 +177,24 @@ Then, integrating over $\Omega$:
 By symmetry, the integral of $2x$ over $[-1,1]$ is $0$, and similarly for $y$ and $z$. Therefore, the total flux is $0$.
 \end{example}
 
+% Source: Jérôme Paschoud/Notizen/Woche 10.2 Divergenzsatz.pdf
+\begin{example}[Flux out of a cylinder]
+\label{ex:divergence_cylinder}
+Let $\Omega := \{(x,y,z) \in \mathbb{R}^3 \mid x^2 + y^2 \leq R^2,\ 0 \leq z \leq H\}$ be a cylinder of radius $R$ and height $H$. Consider the vector field $F(x,y,z) := (x^3 + \sin(z), y^3 + xz, z^3 + xy)\transp$.
+We compute the outward flux of $F$ through $\partial\Omega$ using the divergence theorem.
+First, we compute the divergence of $F$:
+\[\divg F(x,y,z) = 3x^2 + 3y^2 + 3z^2 = 3(x^2 + y^2 + z^2).\]
+By the divergence theorem, the flux is the integral of the divergence over $\Omega$. We compute this using cylindrical coordinates $(r, \theta, z)$:
+\begin{align*}
+\int_{\partial\Omega} \langle F(p),\ \nu(p)\rangle \mathop{d\text{vol}}_2(p) &= \int_\Omega 3(x^2 + y^2 + z^2) \mathop{d\text{vol}}_3(x,y,z) \\
+&= \int_0^H \int_0^{2\pi} \int_0^R 3(r^2 + z^2) r \,dr\,d\theta\,dz \\
+&= 2\pi \int_0^H \left[ \frac{3}{4}r^4 + \frac{3}{2}r^2 z^2 \right]_0^R \,dz \\
+&= 2\pi \int_0^H \left( \frac{3}{4}R^4 + \frac{3}{2}R^2 z^2 \right) \,dz \\
+&= 2\pi \left[ \frac{3}{4}R^4 z + \frac{1}{2}R^2 z^3 \right]_0^H \\
+&= 2\pi \left( \frac{3}{4}R^4 H + \frac{1}{2}R^2 H^3 \right) = \frac{\pi}{2}R^2 H (3R^2 + 2H^2).
+\end{align*}
+\end{example}
+
 % Source: Corsin Nick/Class Notes/Week 10.pdf, p. 12
 Gauss' theorem is also a powerful tool in physics. For example, the volume $V$ of water in a
 moving fluid with velocity $\vec v$ passing through a surface element $d\vec A$ in time

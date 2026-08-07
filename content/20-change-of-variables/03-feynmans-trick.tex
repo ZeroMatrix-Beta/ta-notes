@@ -67,6 +67,24 @@ so bringing it to the left-hand side,
 \]
 \end{example}
 
+% Source: Jérôme Paschoud/Notizen/Woche 9.1 Variablenwechsel.pdf, p. 4
+% Generator: Gemini 3.1 Pro (High)
+\begin{example}[Dirichlet integral via Feynman's trick]
+\label{ex:feynman_dirichlet_integral}
+Consider the integral $\int_0^\infty \frac{\sin x}{x} \,dx$. We can evaluate it by introducing a damping factor $e^{-tx}$ and defining
+\[I(t) := \int_0^\infty e^{-tx} \frac{\sin x}{x} \,dx \qquad \text{for } t > 0.\]
+Differentiating under the integral sign with respect to $t$ (which is justified since the integrand and its derivative decay rapidly for $t>0$):
+\[I'(t) = \int_0^\infty \frac{\partial}{\partial t} \left( e^{-tx} \frac{\sin x}{x} \right) \,dx = \int_0^\infty -x e^{-tx} \frac{\sin x}{x} \,dx = -\int_0^\infty e^{-tx} \sin x \,dx.\]
+This standard integral can be evaluated using integration by parts twice, or by using Euler's formula $e^{ix} = \cos x + i\sin x$ and noting that $e^{-tx}\sin x = \operatorname{Im}(e^{(-t+i)x})$:
+\[\int_0^\infty e^{(-t+i)x} \,dx = \left[ \frac{e^{(-t+i)x}}{-t+i} \right]_0^\infty = 0 - \frac{1}{-t+i} = \frac{t+i}{t^2+1}.\]
+Taking the imaginary part gives $\int_0^\infty e^{-tx} \sin x \,dx = \frac{1}{t^2+1}$. Thus,
+\[I'(t) = -\frac{1}{t^2+1} \implies I(t) = -\arctan(t) + C.\]
+Since $\lim_{t \to \infty} I(t) = 0$, we must have $C = \lim_{t \to \infty} \arctan(t) = \frac{\pi}{2}$.
+Therefore, $I(t) = \frac{\pi}{2} - \arctan(t)$.
+The original integral corresponds to the limit as $t \to 0^+$ (which requires an extra justification step usually provided by Abel's theorem, but we formally take the limit):
+\[\int_0^\infty \frac{\sin x}{x} \,dx = \lim_{t \to 0^+} \left( \frac{\pi}{2} - \arctan(t) \right) = \frac{\pi}{2}.\]
+\end{example}
+
 \begin{ainote}
 Corsin's final integration writes the $\alpha$-term as
 $\tfrac{\pi}{2}\cdot\tfrac{\alpha}{1+\alpha^2}$, integrating to $\tfrac{\pi}{4}\log(1+\alpha^2)$.

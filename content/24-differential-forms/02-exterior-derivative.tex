@@ -113,7 +113,16 @@ with exterior derivative
   $\omega_{\nabla\times F}^2 = \langle\nabla\times F,\cdot\times\cdot\rangle = \det(\nabla
   \times F\mid\cdot\mid\cdot)$: the exterior derivative of the $1$-form associated to $F$ is
   the $2$-form associated to $\curl F$.
-  \end{enumerate}
+
+% Source: Jérôme Paschoud/Notizen/Woche 12.1 Differentialformen.pdf, p. 6
+  \item Let $\omega = x_3 \,dx_3 + x_1 x_2 \,dx_2$ be a $1$-form on $\mathbb{R}^3$. Let us compute its exterior derivative using the rules:
+  \begin{align*}
+  d\omega &= d(x_3) \wedge dx_3 + d(x_1 x_2) \wedge dx_2 \\
+  &= dx_3 \wedge dx_3 + (x_2 \,dx_1 + x_1 \,dx_2) \wedge dx_2 \\
+  &= 0 + x_2 \,dx_1 \wedge dx_2 + x_1 \underbrace{dx_2 \wedge dx_2}_{=0} \\
+  &= x_2 \,dx_1 \wedge dx_2.
+  \end{align*}
+\end{enumerate}
 \end{example}
 
 \begin{ainote}

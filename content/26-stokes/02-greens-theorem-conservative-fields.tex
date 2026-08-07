@@ -7,6 +7,17 @@
 Green's theorem, conservative vector fields, and path integrals were also discussed in the Monday session. 
 \end{ainote}
 
+\subsection{Line integrals (Wegintegrale)}
+
+\begin{definition}[Work / Line integral]
+\label{def:line_integral}
+Let $U \subseteq \mathbb{R}^n$ be an open set, $F : U \to \mathbb{R}^n$ a continuous vector field, and $\gamma : [a,b] \to U$ a piecewise $C^1$ path. We define the \newterm{work} (or \newterm{line integral}) of $F$ along $\gamma$ as
+\[\int_\gamma F \cdot d\gamma := \int_a^b F(\gamma(t)) \cdot \gamma'(t) \,dt.\]
+The work measures how much the vector field \qt{pushes} along the path.
+\end{definition}
+
+\subsection{Green's theorem}
+
 \begin{theorem}[Green's Theorem]
 \label{thm:greens_theorem}
 Let $F : U \to \mathbb{R}^2$ be a continuously differentiable vector field on an open set $U \subseteq \mathbb{R}^2$. Then, for any compact $C^1$ domain $\Omega \subseteq U$,
@@ -69,6 +80,38 @@ Since $\tau(\varphi(t)) \,dL = \varphi'(t) \,dt$ along the parametrization, we c
 This turns the area computation into a single 1D integral in $t$.
 \end{example}
 
+\begin{example}[Line integral via Green's theorem]
+\label{ex:line_integral_greens}
+We want to compute the work of $F(x,y) := (0, xy^2)\transp$ along the ellipse $\gamma$ given by $x^2 + (y/2)^2 = 1$, oriented counter-clockwise. (This is Michael's Bsp.\ 18.1.1(b)).
+Let $\Omega = \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2/4 \leq 1\}$. By Green's theorem,
+\[\int_\gamma F \cdot d\gamma = \int_{\partial\Omega} F \cdot \tau \,dL = \int_\Omega \curl F \mathop{d\text{vol}}_2.\]
+We have $\curl F = \partial_x(xy^2) - \partial_y(0) = y^2$. We compute the double integral using modified polar coordinates $x = r \cos \theta$, $y = 2r \sin \theta$ with Jacobian $2r$:
+\[\int_\Omega y^2 \mathop{d\text{vol}}_2 = \int_0^{2\pi} \int_0^1 (2r \sin\theta)^2 (2r) \,dr\,d\theta = 8 \int_0^{2\pi} \sin^2\theta \,d\theta \int_0^1 r^3 \,dr = 8 (\pi) \left(\frac{1}{4}\right) = 2\pi.\]
+\end{example}
+
+\begin{example}[Line integral of a curl-free field]
+\label{ex:curl_free_greens}
+Let $\Omega$ be the unit disk $B_1(0) \subseteq \mathbb{R}^2$ and $F(x,y) := (xy^2, x^2y)\transp$. We compute $\int_{\partial\Omega} F \cdot \tau \,dL$ (Michael's Bsp.\ 20.2.1).
+By Green's theorem, we need to integrate the curl of $F$ over $\Omega$:
+\[\curl F = \partial_x(x^2y) - \partial_y(xy^2) = 2xy - 2xy = 0.\]
+Thus, the integral is simply $\int_\Omega 0 \mathop{d\text{vol}}_2 = 0$.
+\end{example}
+
+\begin{example}[2D Divergence theorem]
+\label{ex:2d_divergence_theorem}
+Green's theorem can also be viewed as a 2D version of the divergence theorem. Consider the vector field $F(x,y) := (x - y^2, y - x^2)\transp$. We want to compute the outward flux of $F$ through the curve $\gamma$ given by the graph of $y = \cos x$ for $x \in [-\pi/2, \pi/2]$ (Michael's Bsp.\ 19.6.2).
+
+We can close the curve by adding the segment $\sigma$ on the $x$-axis from $\pi/2$ to $-\pi/2$, forming a closed region $\Omega$ (the area under the cosine bump). By the 2D divergence theorem:
+\[\int_{\gamma} F \cdot \nu \,dL + \int_{\sigma} F \cdot \nu \,dL = \int_\Omega \divg F \mathop{d\text{vol}}_2.\]
+The divergence is $\divg F = \partial_x(x-y^2) + \partial_y(y-x^2) = 1 + 1 = 2$.
+The integral of the divergence is $2 \vol_2(\Omega) = 2 \int_{-\pi/2}^{\pi/2} \cos x \,dx = 2(2) = 4$.
+For the segment $\sigma(x) = (x, 0)$ from $\pi/2$ to $-\pi/2$, the outward normal from $\Omega$ is $\nu = (0, -1)\transp$. The flux through $\sigma$ is:
+\[\int_{\sigma} F \cdot \nu \,dL = \int_{-\pi/2}^{\pi/2} \begin{pmatrix} x \\ -x^2 \end{pmatrix} \cdot \begin{pmatrix} 0 \\ -1 \end{pmatrix} \,dx = \int_{-\pi/2}^{\pi/2} x^2 \,dx = \left[ \frac{x^3}{3} \right]_{-\pi/2}^{\pi/2} = \frac{\pi^3}{12}.\]
+Therefore, the flux through $\gamma$ is $4 - \frac{\pi^3}{12}$.
+\end{example}
+
+\subsection{Conservative vector fields}
+
 \begin{definition}[Conservative vector field]
 \label{def:conservative_field}
 Given a $C^k$ vector field $F$ on an open set $U \subseteq \mathbb{R}^n$, we call it \newterm{conservative} if there exists a scalar field $f : U \to \mathbb{R}$ of class $C^{k+1}$ such that $F \equiv \nabla f$. The function $f$ is called a \newterm{potential} for $F$.
@@ -83,6 +126,13 @@ Let $U \subseteq \mathbb{R}^n$ be open, and let $F$ be a $C^1$ conservative vect
 Let $f$ be a potential such that $F = \nabla f = (\partial_1 f, \dots, \partial_n f)\transp$. Then by Schwarz's theorem (symmetry of second derivatives),
 \[\partial_j F_k = \partial_j(\partial_k f) = \partial_j\partial_k f = \partial_k\partial_j f = \partial_k(\partial_j f) = \partial_k F_j.\qedhere\]
 \end{proof}
+
+\begin{example}[A non-conservative field]
+\label{ex:non_conservative_field}
+Not every vector field is conservative. For example, a frictional force is not conservative. Mathematically, consider $F : \mathbb{R}^3 \to \mathbb{R}^3$ given by $F(x,y,z) := (xz-y, x^2+z^3, 3xz^3 - xy)\transp$. If $F$ were conservative, it would have to satisfy the integrability conditions (\cref{lem:integrability_conditions}). But
+\[\partial_x F_2 = 2x \quad \text{and} \quad \partial_y F_1 = -1.\]
+Since they are not equal, $F$ cannot be conservative.
+\end{example}
 
 \begin{proposition}[Work along a path as difference of potential]
 \label{prop:work_difference_potential}
@@ -105,4 +155,19 @@ First, we show that $F$ is conservative by finding a potential $f$ such that $\n
 
 Now, let $\Gamma$ be a closed path on the boundary $\partial U$ of the domain, starting and ending at $\gamma(0) = \gamma(1) = (0,0)\transp$. By \cref{prop:work_difference_potential}, the line integral around this closed loop is simply the difference in potential at the endpoints:
 \[\oint_\Gamma F \cdot d\gamma = f(\gamma(1)) - f(\gamma(0)) = f(0,0) - f(0,0) = 0.\]
+\end{example}
+
+\begin{example}[Line integral of a conservative field via potential]
+\label{ex:line_integral_potential}
+Consider the vector field $F(x,y) := (10x^4 - 2xy^3, -3x^2y^2)\transp$ and a path $\gamma$ connecting $(0,0)$ to $(2,1)$, for instance, the curve defined by $x^4 - 6xy^3 = 4y^2$ (Michael's Bsp.\ 18.2.7).
+
+Since $F$ is defined on all of $\mathbb{R}^2$ and satisfies $\partial_y F_1 = -6xy^2 = \partial_x F_2$, it is conservative. We find a potential $f(x,y)$ by integration:
+\begin{align*}
+\partial_x f &= 10x^4 - 2xy^3 \implies f(x,y) = 2x^5 - x^2y^3 + c(y), \\
+\partial_y f &= -3x^2y^2 + c'(y).
+\end{align*}
+Equating this with $F_2 = -3x^2y^2$, we get $c'(y) = 0$, so we can choose $c(y) = 0$. The potential is $f(x,y) = 2x^5 - x^2y^3$.
+By \cref{prop:work_difference_potential}, the work along $\gamma$ is path-independent and given by:
+\[\int_\gamma F \cdot d\gamma = f(2,1) - f(0,0) = (2(32) - 4(1)) - 0 = 60.\]
+Notice that the equation of the curve $x^4 - 6xy^3 = 4y^2$ was irrelevant, as long as it connects the two endpoints!
 \end{example}

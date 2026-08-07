@@ -105,6 +105,22 @@ Let $f : \mathbb{R} \to \mathbb{R}, x \mapsto x^2$. Let $a < b \in \mathbb{R}$. 
 $f^{-1}(U_1 \cup U_2) = f^{-1}(U_1) \cup f^{-1}(U_2)$.
 \end{example}
 
+% Source: Jérôme Paschoud/Notizen/Woche 4.1 Normen, das Differential.pdf, p. 2
+% Generator: Gemini 3.1 Pro (High)
+\begin{example}[Limits in $\mathbb{R}^2$ depend on the path]
+\label{ex:limits_in_r2}
+When computing limits in $\mathbb{R}^n$, one must ensure that the limit exists and is identical along \emph{all} possible paths approaching the point. For example, consider the function $f: \mathbb{R}^2 \setminus \{(0,0)\} \to \mathbb{R}$ given by $f(x,y) = \frac{x^2}{x^2+y^2}$.
+If we approach the origin along the $x$-axis (setting $y=0$ first), we get
+\[
+\lim_{x \to 0} f(x, 0) = \lim_{x \to 0} \frac{x^2}{x^2} = 1.
+\]
+However, if we approach along the $y$-axis (setting $x=0$ first), we get
+\[
+\lim_{y \to 0} f(0, y) = \lim_{y \to 0} \frac{0}{y^2} = 0.
+\]
+Since these limits disagree, $\lim_{(x,y) \to (0,0)} f(x,y)$ does not exist. A robust method to check limits at the origin uniformly across all directions is to switch to \newterm{polar coordinates} ($x = r\cos\varphi, y = r\sin\varphi$). If the limit as $r \to 0$ is independent of $\varphi$, then the function converges. (This is explored further in \cref{ex:3.2}).
+\end{example}
+
 \begin{question}
 Let $(X, d_X)$ and $(Y, d_Y)$ be metric spaces, where $d_Y$ is the discrete metric. Is
 \emph{every} function $f : (X,d_X) \to (Y,d_Y)$ continuous?

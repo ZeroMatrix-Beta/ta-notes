@@ -22,6 +22,30 @@ continuity in \cref{rem:continuity_vs_uniform_continuity}, met here for the firs
 \end{remark}
 \end{exercisesolution}
 
+\begin{exercisesolution}[Proof of \cref{ex:closure_boundary_of_ball}]
+% Generator: Claude Sonnet 5 (Medium)
+Write $C := \{y \in \mathbb{R}^n : d(x,y) \leq r\}$ for the target set.
+
+\textbf{$\overline{B_r(x)} \subseteq C$.} $C$ is closed (it is $d(x,\cdot)^{-1}([0,r])$, the
+preimage of a closed set under the continuous map $d(x,\cdot)$) and contains $B_r(x)$, and the
+closure is the \emph{smallest} closed set containing $B_r(x)$
+(\cref{def:interior_closure_boundary}).
+
+\textbf{$C \subseteq \overline{B_r(x)}$.} Let $y \in C$, so $d(x,y) \leq r$; we must show every
+ball $B_\varepsilon(y)$ meets $B_r(x)$. If $d(x,y) < r$ then $y \in B_r(x)$ itself, so this is
+immediate. If $d(x,y) = r$, consider the points $z_t := x + t(y-x)$ for $t \in (0,1)$, which lie
+on the segment from $x$ to $y$: since $\mathbb{R}^n$ has a vector space structure (unlike a
+general metric space, where this argument would not make sense),
+$d(x,z_t) = t\,d(x,y) = tr < r$, so $z_t \in B_r(x)$, and $d(z_t,y) = (1-t)d(x,y) = (1-t)r \to 0$
+as $t \to 1$. So every ball around $y$ eventually contains some $z_t$, hence meets $B_r(x)$, and
+$y \in \overline{B_r(x)}$.
+
+For the boundary, $\operatorname{int}(B_r(x)) = B_r(x)$ since $B_r(x)$ is itself open
+(\cref{ex:ai_open_balls_are_open}), so
+\[\partial B_r(x) = \overline{B_r(x)} \setminus \operatorname{int}(B_r(x))
+  = C \setminus B_r(x) = \{y \in \mathbb{R}^n : d(x,y) = r\}. \qedhere\]
+\end{exercisesolution}
+
 \begin{exercisesolution}[Proof of \cref{ex:ai_disk_boundary}]
 % Generator: Gemini 3.6 Flash (Medium)
 Since $D$ is open, its interior is $\operatorname{int}(D) = D$. The closure of $D$ is $\overline{D} = \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 \leq 1\}$. By \cref{def:interior_closure_boundary}, the boundary is:

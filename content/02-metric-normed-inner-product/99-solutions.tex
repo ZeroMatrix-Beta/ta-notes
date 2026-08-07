@@ -13,6 +13,31 @@ were worked independently and only then checked against the official
 flagging, it is flagged in an AI-Note next to the solution.
 \end{ainote}
 
+\begin{exercisesolution}[Proof of \cref{ex:polygon_inequality}]
+% Generator: Claude Sonnet 5 (Medium)
+For $N=3$ this is the triangle inequality itself. For the inductive step, assume the claim
+holds for some $N \geq 3$ and let $x_1,\dots,x_{N+1} \in X$. Applying the triangle inequality to
+the triple $(x_1,x_N,x_{N+1})$ and then the inductive hypothesis to $x_1,\dots,x_N$,
+\[d(x_1,x_{N+1}) \ \leq\ d(x_1,x_N) + d(x_N,x_{N+1})
+  \ \leq\ \sum_{i=1}^{N-1}d(x_i,x_{i+1}) + d(x_N,x_{N+1})
+  \ =\ \sum_{i=1}^{N}d(x_i,x_{i+1}),\]
+which is the claim for $N+1$.
+\end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:reshaping_same_convergence}]
+% Generator: Claude Sonnet 5 (Medium)
+Suppose $x_n \to x$ with respect to $d$, so $d(x_n,x) \to 0$. Concave functions on $[0,\infty)$
+are continuous, so in particular $h$ is continuous at $0$; since $h(0)=0$, this gives
+$h(d(x_n,x)) \to 0$, i.e.\ $x_n \to x$ with respect to $h \circ d$.
+
+Conversely, suppose $x_n \to x$ with respect to $h \circ d$. Fix $\varepsilon > 0$; by hypothesis
+\textbf{(a)} of \cref{prop:concave_reshaping_metric}, $\delta := h(\varepsilon) > 0$. Choose $N$
+such that $h(d(x_n,x)) < \delta$ for all $n \geq N$. If $d(x_n,x) \geq \varepsilon$ held for some
+such $n$, monotonicity \textbf{(b)} would give $h(d(x_n,x)) \geq h(\varepsilon) = \delta$, a
+contradiction. So $d(x_n,x) < \varepsilon$ for all $n \geq N$, i.e.\ $x_n \to x$ with respect to
+$d$.
+\end{exercisesolution}
+
 \begin{exercisesolution}[Proof of \cref{ex:ai_metric_equivalence}]
 % Generator: Gemini 3.6 Flash (Medium)
 For any $x = (x_1, x_2) \in \mathbb{R}^2$, we have $\max\{|x_1|, |x_2|\} \leq |x_1| + |x_2|$, giving $d_3(x,0) \leq d_1(x,0)$. Conversely, since $|x_1| \leq \max\{|x_1|, |x_2|\}$ and $|x_2| \leq \max\{|x_1|, |x_2|\}$, summing these yields $|x_1| + |x_2| \leq 2 \max\{|x_1|, |x_2|\}$, i.e., $d_1(x,0) \leq 2 \, d_3(x,0)$. Both bounds are sharp: equality on the left holds for $x=(1,0)$, and equality on the right holds for $x=(1,1)$.
@@ -230,6 +255,21 @@ $\int_0^1|\cdot|$ on $C^0([0,1])$, where a tall thin spike has supremum norm $1$
 norm arbitrarily small. Every appearance of \qt{all norms on $\mathbb{R}^n$ are equivalent} later
 in the course silently uses $n < \infty$.
 \end{remark}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:polynomials_infinite_dimensional}]
+% Generator: Claude Sonnet 5 (Medium)
+The monomials $\mathcal{B} := \{1,x,x^2,x^3,\dots\}$ form a basis: every polynomial is by
+definition a \emph{finite} linear combination $\sum_{k=0}^n a_kx^k$ of them, so $\mathcal{B}$
+spans $\mathbb{R}[x]$; and $\sum_{k=0}^n a_kx^k = 0$ as a polynomial forces every coefficient
+$a_k = 0$ (a nonzero polynomial of degree $n$ has at most $n$ roots, so it cannot vanish
+identically on all of $\mathbb{R}$), so $\mathcal{B}$ is linearly independent.
+
+To see $\mathbb{R}[x]$ is infinite-dimensional, suppose for contradiction it had finite
+dimension $d$. Then $1,x,\dots,x^d$ --- a set of $d+1$ vectors of $\mathbb{R}[x]$ --- would have
+to be linearly dependent, since any $d+1$ vectors in a $d$-dimensional space are. But they are
+linearly independent by the argument above (restricted to $n \leq d$): a contradiction. So no
+finite basis exists, and the (necessarily infinite) $\mathcal{B}$ above is one.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:3.10}]

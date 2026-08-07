@@ -42,6 +42,14 @@ correct, but the gloss omits the ``non-''. Corrected in the prose above.
 \end{tikzpicture}
 \end{center}
 
+% Supplement: Analysis_II_Script_v1.pdf, p. 5
+\begin{exercise}[Polygon inequality]
+\label{ex:polygon_inequality}
+Let $(X,d)$ be a metric space and $N \geq 3$. Prove, by induction on $N$, that
+\[d(x_1,x_N) \leq \sum_{i=1}^{N-1} d(x_i,x_{i+1})\]
+for all $x_1,\dots,x_N \in X$.
+\end{exercise}
+
 % Generator: Claude Opus 5 (Medium)
 \begin{aiexample}[Each axiom rules out something, and none is redundant]
 \label{ex:metric_axioms_are_needed}
@@ -135,6 +143,17 @@ Note that $d_1$ is the \textbf{sum} of the two legs and $d_3$ the \textbf{larger
 neither is a single leg on its own. Only $d_2$ is the straight-line distance you would draw by
 reflex.
 
+% Supplement: Analysis_II_Script_v1.pdf, p. 6
+\begin{remark}[Why $d_1$ is the \qt{Manhattan} metric]
+The official script motivates the name explicitly: in a grid of streets running only
+north--south and east--west --- as in much of Manhattan --- a taxi cannot cut across a block
+diagonally. To travel from $x=(x_1,x_2)$ to $y=(y_1,y_2)$ it moves horizontally from $x$ to
+$(y_1,x_2)$ and then vertically to $y$ (or the two legs in the other order), covering exactly
+$|x_1-y_1|+|x_2-y_2| = d_1(x,y)$ either way. This is precisely the orange path in the figure
+above.
+\end{remark}
+
+% Source: Corsin Nick/Class Notes/Week 2.pdf, pp. 1--13
 In general,
 \[
 d(x,y) := \sqrt[m]{\sum_{k=1}^{n} (x_k - y_k)^m}
@@ -236,6 +255,14 @@ each axis: $t \mapsto t^{1/m}$ is concave for $m \geq 1$ and convex for $m \in (
 \end{tikzpicture}
 \end{center}
 
+% Supplement: Analysis_II_Script_v1.pdf, p. 7
+\begin{exercise}[Reshaping a metric does not change its convergent sequences]
+\label{ex:reshaping_same_convergence}
+In the setting of \cref{prop:concave_reshaping_metric}, show that a sequence $(x_n)_n$ in $X$
+converges to $x$ with respect to $d$ if and only if it converges to $x$ with respect to
+$h \circ d$.
+\end{exercise}
+
 % Source: Corsin Nick/Class Notes/Week 2.pdf, pp. 1--13
 \begin{example}[continued]
 \begin{enumerate}[label=\textbf{(\alph*)}, start=3]
@@ -298,6 +325,26 @@ each axis: $t \mapsto t^{1/m}$ is concave for $m \geq 1$ and convex for $m \in (
   \end{scope}
 \end{tikzpicture}
 \end{center}
+
+% Supplement: Analysis_II_Script_v1.pdf, p. 6
+\begin{remark}[Two metrics on the sphere, made explicit]
+\label{rem:sphere_two_metrics}
+The two pictures above compare two different metrics that $S^2$ inherits or acquires, and it is
+worth writing both down. Restricting the ambient Euclidean metric of $\mathbb{R}^3$ gives the
+\newterm{chord metric}
+\[d_0(x,y) := \|x-y\|, \qquad x,y \in S^2,\]
+the orange dashed segment in the right-hand panel; since $\|x\|=\|y\|=1$, expanding
+$\|x-y\|^2 = \langle x-y,x-y\rangle$ gives the closed form
+$d_0(x,y) = \sqrt{2-2\langle x,y\rangle}$. The geodesic metric described above --- arc length
+along a great circle, the solid blue curve in both panels --- is instead
+\[d_1(x,y) := \arccos\big(\langle x,y\rangle\big) \in [0,\pi].\]
+Both are genuine metrics on $S^2$ (\cref{ex:metric_examples}\textbf{(d)} already noted $d_0$;
+$d_1$ measures the same distance a great-circle flight would fly). They disagree as soon as
+$x \neq y$: the chord always cuts inside the sphere, so $d_0(x,y) \leq d_1(x,y)$, with equality
+only in the limit $y \to x$. This is the sharpest instance in the chapter of a general warning
+--- a subset inherits a metric from its ambient space, but that inherited metric need not be the
+one a geometer studying the subset \emph{intrinsically} would choose.
+\end{remark}
 
 % Quelle: Linus Lüchinger/Slides/Slides-02-23.pdf, slide 12
 % Generator: Claude Opus 5 (High)

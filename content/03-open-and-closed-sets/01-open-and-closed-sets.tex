@@ -106,6 +106,18 @@ $X \setminus A$ is open.
 \end{tikzpicture}
 \end{center}
 
+% Supplement: Analysis_II_Script_v1.pdf, p. 14
+\begin{example}[Clopen sets other than $X$ and $\emptyset$]
+\label{ex:clopen_nontrivial}
+\Cref{ex:X_empty_clopen} shows $X$ and $\emptyset$ are always clopen, but nothing in
+\cref{def:open_closed} forces these to be the \emph{only} clopen subsets of $X$. Take
+$X := (0,1)\cup(2,3) \subset \mathbb{R}$ with the standard metric: both $(0,1)$ and $(2,3)$ are
+clopen \emph{in $X$}. Each is open in $\mathbb{R}$, hence open in $X$; and each is the complement
+in $X$ of the other, so each is also closed in $X$. Whether a space has clopen subsets besides
+$X$ and $\emptyset$ turns out to be exactly the question \cref{ch:connectedness} is organised
+around --- a space with none is called \newterm{connected}.
+\end{example}
+
 % Supplement: Sascha Brack/Class Notes/Week_02_Notes_Friday_Updated.pdf, p. 1
 \begin{proposition}[How open and closed sets combine]
 \label{prop:open_closed_operations}

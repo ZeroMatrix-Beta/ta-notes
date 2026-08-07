@@ -265,6 +265,9 @@ Highest value first. Each is one session, and each is self-contained.
 1. **Chapters 2–8** (script §9, printed pp. 3–37). The largest single block of takeable
    exercises — 8 of the 11 "take first" items live here — plus divergence **D1** to fix and
    gaps **Cor 9.50**, **Lemma 9.70**, **Def 9.15**.
+   **Partially done, see §8 — chapters 2–3 finished 2026-08-07; chapters 4–8 (Cor 9.50,
+   Lemma 9.70, Def 9.15, D1 fix, and the remaining take-first/take-second exercises) still
+   open.**
 2. **Chapters 11–14** (script §§10.2–11). Gaps `Cor 10.41` (unique continuation) and
    `Prop 11.26` (Jensen), divergences **D2** and **D3**, and the strongest examples in the
    script (11.16, 11.17, 10.35).
@@ -274,3 +277,60 @@ Highest value first. Each is one session, and each is self-contained.
    double-computation exercises — plus errors **E5** and **E6** to flag.
 5. **Chapters 19–21** (script §13). Lowest yield: our measure-theory chapters already track the
    script closely, and most of what remains is machinery we deliberately build differently.
+
+---
+
+## 8. Progress log
+
+Kept so a future session (or a future pass in this one) can resume without re-deriving what's
+already done. Update this section, don't just delete finished lines — the "not yet started"
+list at the bottom is the actual todo.
+
+### Done — 2026-08-07
+
+* **D4** (script's `|x|`-for-Euclidean / `‖·‖`-for-non-standard convention, Remark 9.94 p. 31,
+  verified on the rendered page) — `ainote` in
+  [`02-metric-normed-inner-product/01-structured-spaces.tex`](content/02-metric-normed-inner-product/01-structured-spaces.tex),
+  right after `def:norm`.
+* **Ex 9.33–9.35 skip reason** (user-requested, not originally in this file's own todo) —
+  `ainote` in
+  [`06-completeness/01-completeness.tex`](content/06-completeness/01-completeness.tex), right
+  after `def:complete_metric_space`, explaining the dependency on script §9.1.4 and pointing at
+  §6 above.
+* **Chapter 2 (`02-metric-normed-inner-product/`) — done in full:**
+  Ex 9.5 (polygon inequality, `ex:polygon_inequality`), Ex 9.18 (convergence survives concave
+  reshaping, `ex:reshaping_same_convergence`, companion to the already-present
+  `prop:concave_reshaping_metric` = Ex 9.8), Ex 9.11 (Manhattan street-grid story, as a
+  `remark`), Ex 9.13 (the sphere's chord metric $d_0$ vs.\ geodesic metric $d_1$ made explicit,
+  `rem:sphere_two_metrics`), Ex 9.103 ($\mathbb{R}[x]$ infinite-dimensional,
+  `ex:polynomials_infinite_dimensional`, placed next to `ex:3.9`/norm equivalence). All four
+  exercises have solutions in the chapter's `99-solutions.tex`, in document order.
+* **Chapter 3 (`03-open-and-closed-sets/`) — done in full:**
+  Example 9.38 (clopen sets other than $X,\emptyset$ on $(0,1)\cup(2,3)$,
+  `ex:clopen_nontrivial`, forward-references `ch:connectedness`) and Ex 9.46 (closure/boundary
+  of a general ball in $\mathbb{R}^n$, `ex:closure_boundary_of_ball`, generalising the $r=1$
+  case already in `ex:interior_closure_boundary_more`\textbf{(b)}), with the latter's solution
+  in `99-solutions.tex`.
+* Build verified clean (`latexmk -jobname=check`, 255 pages, no errors) after every change
+  above. One real bug was caught and fixed in the process: an exercise title
+  `[$\mathbb{R}[x]$ is infinite-dimensional]` broke LaTeX's optional-argument bracket matching
+  (the literal `[x]` inside closed the `\begin{exercise}[...]` argument early) — fixed by
+  brace-protecting to `\mathbb{R}{[}x{]}`. Worth remembering for any future title containing a
+  literal `[` or `]` in math.
+
+### Not yet started (in priority order — see §7)
+
+* **Chapters 4–8**, finishing session 1: Cor 9.50 (→ ch 4, `04-sequences/`), Lemma 9.70 nesting
+  principle (→ ch 7, `07-compactness/01-open-covers.tex`), Def 9.15 "eventually" vocabulary
+  (→ ch 4), **D1** fix (`02-compact-subsets.tex:8` — retitle `[9.63, ...]` to
+  `[Definition 9.62, ...]` and add the missing third "complete + totally bounded" bullet; exact
+  wording already transcribed above, in this session's transcript, from PDF p. 22), **E2**
+  ainote near the Weierstrass/extreme-value statement in ch 7 (script Cor 9.79 says
+  $\bar x \in X$, should be $\bar x \in K$ — verified on the rendered page). Remaining take-first
+  exercises: Ex 9.56 (ch 5), Ex 9.76 (ch 6), Ex 9.60 (ch 6), Ex 9.26 (ch 6), Ex 9.81 (ch 8),
+  Ex 9.68 (ch 7). Remaining take-second: Ex 9.85 (ch 8). Remaining examples: Ex 9.65 (ch 7,
+  $\mathbb{Q}\cap[0,\sqrt2]$ not compact).
+* **Session 2** (chapters 11–14): entirely open — see §7 item 2.
+* **Session 3** (`appendix-a-odes.tex`): entirely open — see §7 item 3.
+* **Session 4** (chapters 22–26): entirely open — see §7 item 4.
+* **Session 5** (chapters 19–21): entirely open — see §7 item 5.

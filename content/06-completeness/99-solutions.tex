@@ -4,7 +4,7 @@
 \label{sec:completeness_solutions}
 
 \begin{exercisesolution}[Proof of \cref{ex:cauchy_elementary_facts}]
-% Generator: Claude Sonnet 5 (Medium)
+% Generator: Claude Sonnet 5 (High)
 \textbf{(a) Bounded.} Take $\varepsilon=1$: there is $N$ with $d(x_n,x_m)<1$ for all
 $n,m\geq N$; in particular $d(x_n,x_N)<1$ for $n\geq N$. Setting
 $M := \max\{d(x_0,x_N),\dots,d(x_{N-1},x_N),\,1\}$, the triangle inequality gives
@@ -71,7 +71,7 @@ non-topological, and only their combination is.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:completion_well_defined}]
-% Generator: Claude Sonnet 5 (Medium)
+% Generator: Claude Sonnet 5 (High)
 \textbf{$\sim$ is an equivalence relation on $\mathcal{C}_X$.} Reflexivity is
 $d(x_n,x_n) = 0 \to 0$. Symmetry is symmetry of $d$. For transitivity, if
 $(x_n)\sim(y_n)$ and $(y_n)\sim(z_n)$, the triangle inequality gives
@@ -103,7 +103,7 @@ $d(x,y)$ itself; and this identity makes $\iota$ injective, since $d(x,y)=0 \iff
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:completion_is_complete}]
-% Generator: Claude Sonnet 5 (Medium)
+% Generator: Claude Sonnet 5 (High)
 Let $(\xi_m)_{m=0}^\infty$ be Cauchy in $\overline X$, with $\xi_m = [(x_{m,n})_{n=0}^\infty]$ for
 some Cauchy sequence $(x_{m,n})_n$ in $X$ representing $\xi_m$. Replacing $(x_{m,n})_n$ by a tail
 of itself if necessary --- a Cauchy sequence and any of its tails represent the same class, since
@@ -138,7 +138,7 @@ $\overline X$, as required.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:completion_universal_property}]
-% Generator: Claude Sonnet 5 (Medium)
+% Generator: Claude Sonnet 5 (High)
 \textbf{Construction.} For $\overline x = [(x_n)_n] \in \overline X$, the sequence $(f(x_n))_n$
 is Cauchy in $Y$, since $d_Y(f(x_n),f(x_m)) = d(x_n,x_m) \to 0$ as $(x_n)_n$ is Cauchy in $X$.
 As $Y$ is complete, $f(x_n) \to y$ for a unique $y \in Y$
@@ -170,7 +170,7 @@ arbitrary, $g = \overline f$.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:banach_hypotheses_sharp}]
-% Generator: Claude Sonnet 5 (Medium)
+% Generator: Claude Sonnet 5 (High)
 \textbf{(a)} This is \cref{rem:banach_hypotheses}'s first bullet: $X := (0,1]$ is not complete,
 and $T(x) := x/2$ is a $\tfrac12$-contraction on $X$ with iterates marching towards the missing
 point $0$, hence no fixed point in $X$.

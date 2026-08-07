@@ -487,7 +487,7 @@ Compute the Taylor expansion of $f(x,y) := \exp(\arctan(x-y))$ to order $2$ arou
 \end{exercise}
 
 \begin{exercisesolution}[\cref{ex:taylor_expansion_exp_arctan}]
-% Generator: Claude Sonnet 5 (Medium)
+% Generator: Claude Sonnet 5 (High)
 Write $s := x-y$, itself of order $|h|$. Since $\arctan$ is odd, $\arctan(t) = t + O(t^3)$, so
 \[\arctan(s) = s + O(|h|^3) = s + o(|h|^2).\]
 Since $\exp$ is smooth and bounded near $0$, an $o(|h|^2)$ correction inside $\exp$ contributes
@@ -505,7 +505,7 @@ Compute the Taylor expansion of $f(x,y) := \dfrac{1}{1-x^2-y^2}$ to order $2$ ar
 \end{exercise}
 
 \begin{exercisesolution}[\cref{ex:taylor_expansion_one_over_1_minus_x2_y2}]
-% Generator: Claude Sonnet 5 (Medium)
+% Generator: Claude Sonnet 5 (High)
 Using $\tfrac{1}{1-t} = 1+t+O(t^2)$ with $t := x^2+y^2$, itself already $O(|h|^2)$, so
 $t^2 = O(|h|^4) = o(|h|^2)$:
 \[\frac{1}{1-x^2-y^2} = 1 + (x^2+y^2) + o(|(x,y)|^2).\]

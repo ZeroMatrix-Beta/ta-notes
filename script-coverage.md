@@ -275,6 +275,7 @@ Highest value first. Each is one session, and each is self-contained.
    script (11.16, 11.17, 10.35). **Done in full, 2026-08-07 — see §8.**
 3. **`appendix-a-odes.tex`** (script §15). Grönwall is a real gap; the three autonomous
    systems and the resonance example are the best-drawn examples in the whole script.
+   **Done in full, 2026-08-07 — see §8.**
 4. **Chapters 22–26** (script §14). Archimedes, the three-paths example, and the Stokes/Gauss
    double-computation exercises — plus errors **E5** and **E6** to flag.
 5. **Chapters 19–21** (script §13). Lowest yield: our measure-theory chapters already track the
@@ -379,7 +380,29 @@ Ex 11.25 is exactly parts (b) and (c) of the already-transcribed `ex:convexity_c
 
 Build verified clean: 268 pages, no errors, no undefined references.
 
-* **Session 3** (`appendix-a-odes.tex`): entirely open — see §7 item 3.
-* **Session 3** (`appendix-a-odes.tex`): entirely open — see §7 item 3.
+### Session 3 (`appendix-a-odes.tex`) — DONE, 2026-08-07
+
+Grönwall's inequality (`lem:gronwall`), the real gap, added as a lemma with proof next to
+Picard--Lindelöf, plus a remark connecting it to the \qt{zero in, zero out} uniqueness argument
+for linear ODEs. Ex 15.17 (three linear ODEs, `ex:three_linear_odes`) taken directly — part 3
+required flagging what looks like a genuine sign error in the script's own integrating-factor
+hint (`u:=e^{H(t)}y(t)` should be `u:=e^{-H(t)}y(t)`; verified by direct computation, not just
+suspected). Ex 15.37 (`ex:c1_implies_locally_lipschitz`) taken directly, bridging $C^1$-in-space
+to the locally-Lipschitz hypothesis Picard--Lindelöf actually needs. Ex 15.15 (pure resonance,
+`ex:pure_resonance`) and Ex 15.27--15.29 (the three autonomous-system phase portraits: pure
+rotation, rotating spiral, and the nonlinear limit-cycle system solved via polar coordinates)
+all taken directly, each with a hand-checked TikZ phase portrait (the first spiral attempt
+overflowed PGF's dimension limit by treating the plot parameter as radians when TikZ's `cos`/
+`sin` read it as degrees — fixed by recalibrating the growth-rate constant per degree, then
+enlarging the plot once the fixed version rendered too small to read).
+
+Also fixed, while double-checking this session's own `% Generator:` comments per user
+correction: 17 tags across 8 files incorrectly read \qt{Claude Sonnet 5 (Medium)} instead of
+\qt{(High)} — corrected individually (not a blanket find-replace, since several files already
+contained genuine, unrelated \qt{(Medium)} tags from earlier sessions that needed to stay as
+they were).
+
+Build verified clean: 272 pages, no errors, no undefined references.
+
 * **Session 4** (chapters 22–26): entirely open — see §7 item 4.
 * **Session 5** (chapters 19–21): entirely open — see §7 item 5.

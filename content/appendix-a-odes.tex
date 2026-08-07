@@ -127,6 +127,101 @@ Substituting this gives $-3C_1 = 1$, so $C_1 = -1/3$ and $C_2 = 1/3$. The partic
 \[y(t) = -\frac{1}{3} e^{4t} \begin{pmatrix} -2 \\ 1 \end{pmatrix} + \frac{1}{3} e^{t} \begin{pmatrix} 1 \\ 1 \end{pmatrix} = \frac{1}{3} \begin{pmatrix} 2e^{4t} + e^t \\ -e^{4t} + e^t \end{pmatrix}.\]
 \end{example}
 
+\subsection{Autonomous systems and phase portraits}
+\label{sec:autonomous_systems_examples}
+
+% Transition: Claude Sonnet 5 (High)
+A system $u'(t) = F(u(t))$ in which $F$ does not depend on $t$ explicitly is called
+\newterm{autonomous} (\germanterm{autonom}). Its flow can then be pictured directly as a vector
+field on the state space, independent of time: at each point $x$, the arrow $F(x)$ shows the
+instantaneous velocity of the trajectory passing through $x$. The three examples below --- two
+linear, one not --- are the standard pictures.
+
+% Supplement: Analysis_II_Script_v1.pdf, p. 182
+\begin{example}[A pure rotation]
+\label{ex:autonomous_rotation}
+The system $u_1'=-u_2$, $u_2'=u_1$ is $u'=Au$ with $A = \left(\begin{smallmatrix}0&-1\\1&0\end{smallmatrix}\right)$. The unique solution with $u(0)=x_0$ is
+\[u(t) = e^{tA}x_0 = \begin{pmatrix}\cos t & -\sin t\\ \sin t & \cos t\end{pmatrix}x_0,\]
+a rigid rotation of $x_0$ around the origin at unit angular speed: $F$ is the velocity field of a
+fluid rotating rigidly counterclockwise, and every trajectory is a circle centred at the origin.
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.1]
+  \draw[gray!50, thick] (0,0) circle (1.4);
+  \draw[red!80!black, thick, ->] (1.4,0) arc (0:290:1.4);
+  \fill (1.4,0) circle (1.5pt) node[right, font=\footnotesize] {$x_0$};
+  \foreach \a in {0,45,...,315} {
+    \draw[blue!60!black, ->] ({1.4*cos(\a)},{1.4*sin(\a)})
+      -- ++({-0.35*sin(\a)},{0.35*cos(\a)});
+  }
+  \node[below, font=\small] at (0,-1.7) {$u(t) = e^{tA}x_0$, circular trajectories};
+\end{tikzpicture}
+\end{center}
+\end{example}
+
+% Supplement: Analysis_II_Script_v1.pdf, p. 183
+\begin{example}[A rotating spiral]
+\label{ex:autonomous_spiral}
+The system $u_1'=u_1-u_2$, $u_2'=u_1+u_2$ is $u'=Au$ with
+$A = \left(\begin{smallmatrix}1&-1\\1&1\end{smallmatrix}\right) = \id + B$, where
+$B := \left(\begin{smallmatrix}0&-1\\1&0\end{smallmatrix}\right)$ is the generator of
+\cref{ex:autonomous_rotation}. Since $\id$ and $B$ commute, $e^{tA}=e^{t\id}e^{tB}$, so
+\[u(t) = e^{tA}x_0 = e^t\begin{pmatrix}\cos t & -\sin t\\ \sin t & \cos t\end{pmatrix}x_0:\]
+the same rotation as before, now with an exponentially growing radius --- an outward spiral.
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+  \draw[->] (-2.0,0) -- (2.0,0);
+  \draw[->] (0,-1.8) -- (0,1.8);
+  % \x runs in degrees (TikZ convention), so the growth-rate constant is calibrated per
+  % degree: exp(0.0022*720) = 4.95, giving a clearly visible outward spiral over two full
+  % turns while keeping the plotted radius safely below PGF's dimension limit.
+  \draw[red!80!black, very thick, ->, domain=0:720, samples=150, smooth]
+    plot ({0.3*exp(0.0022*\x)*cos(\x)}, {0.3*exp(0.0022*\x)*sin(\x)});
+  \fill (0.3,0) circle (1.8pt) node[below right, font=\footnotesize] {$x_0$};
+  \node[below, font=\small] at (0,-2.1)
+    {$u(t)=e^{tA}x_0$: rotation combined with $e^t$ growth};
+\end{tikzpicture}
+\end{center}
+\end{example}
+
+% Supplement: Analysis_II_Script_v1.pdf, pp. 184--185
+\begin{example}[A nonlinear system with a limit cycle]
+\label{ex:autonomous_limit_cycle}
+Consider the nonlinear autonomous system
+\[u' = u-v-(u^2+v^2)u, \qquad v' = u+v-(u^2+v^2)v,\]
+with initial value $(u(0),v(0))=(x_0,y_0)$. If $(x_0,y_0)=(0,0)$, the constant function
+$(u,v)\equiv(0,0)$ is a solution, and \cref{thm:picard_lindeloef_local} (the right-hand side is
+$C^1$, \cref{ex:c1_implies_locally_lipschitz}) shows it is the \emph{only} one.
+
+For $(x_0,y_0) \neq (0,0)$, switch to polar coordinates $u=r\cos\varphi$, $v=r\sin\varphi$ with
+$r^2=u^2+v^2$. Differentiating $r^2=u^2+v^2$ and substituting the system,
+\[(r^2)' = 2uu'+2vv' = 2\big(u^2-uv-(u^2+v^2)u^2\big) + 2\big(uv+v^2-(u^2+v^2)v^2\big)
+  = 2(r^2-r^4),\]
+so, since $(r^2)'=2rr'$, the radius satisfies the autonomous scalar equation
+\[r' = r-r^3, \qquad r(0)=\sqrt{x_0^2+y_0^2}.\]
+Separating variables and solving gives $r(t) = \exp(t)/\sqrt{A+\exp(2t)}$ for
+$A := 1/(x_0^2+y_0^2)-1 \in (-1,\infty)$, and $r(t) \to 1$ as $t \to \infty$
+\emph{regardless of the initial value} --- the circle $r=1$ is a \newterm{limit cycle}
+(\germanterm{Grenzzykel}), attracting every trajectory except the equilibrium at the origin. A
+short computation with the angle ($u\varphi'=u-r^2u$ from the system, matched against $u'$, and
+symmetrically for $v$) gives $\varphi'\equiv1$ away from the origin, so the motion is a steady
+rotation combined with the radial approach to $r=1$: trajectories starting outside the unit
+circle spiral in, and those starting inside spiral out, both converging to the same circular
+orbit.
+\begin{center}
+\begin{tikzpicture}[scale=1.3]
+  \draw[gray!60, thick, dashed] (0,0) circle (1);
+  \node[gray!60!black, font=\footnotesize] at (0.75,0.75) {$r=1$};
+  \draw[red!80!black, thick, ->, domain=0:620, samples=140, smooth]
+    plot ({(1+0.55*exp(-0.012*\x))*cos(\x)}, {(1+0.55*exp(-0.012*\x))*sin(\x)});
+  \draw[blue!70!black, thick, ->, domain=0:620, samples=140, smooth]
+    plot ({(1-0.75*exp(-0.012*\x))*cos(\x)}, {(1-0.75*exp(-0.012*\x))*sin(\x)});
+  \node[below, font=\small, align=center] at (0,-1.85)
+    {qualitative sketch: outside (red) spirals in, inside (blue) spirals out,\\
+     both approaching the limit cycle $r=1$};
+\end{tikzpicture}
+\end{center}
+\end{example}
+
 \section{Inhomogeneous linear ODEs}
 \label{sec:inhomogeneous_odes}
 
@@ -183,6 +278,88 @@ Plugging these into the original ODE yields:
 Comparing coefficients, we get $10A = 1 \implies A = \frac{1}{10}$, and $-2A + 10B = 0 \implies 10B = \frac{2}{10} \implies B = \frac{1}{50}$.
 The particular solution is $y_{\text{part}}(x) = \left(\frac{1}{10}x + \frac{1}{50}\right)e^x$. The general solution is then $y(x) = y_{\text{hom}}(x) + y_{\text{part}}(x)$.
 \end{example}
+
+% Supplement: Analysis_II_Script_v1.pdf, p. 177
+\begin{exercise}[Three linear ODEs]
+\label{ex:three_linear_odes}
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Determine the general solution on $I=\mathbb{R}$ of $y''-4y'+4y=\sin t$.
+  \item Determine the solution on $I=\mathbb{R}$ of the initial value problem
+    $y''-y=t$, $y(0)=1$, $y'(0)=3$.
+  \item Find a solution on $I=(0,\infty)$ of the initial value problem
+    $y'-\big(\tfrac4t+1\big)y=t^4$, $y(1)=1$.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercisesolution}[Proof of \cref{ex:three_linear_odes}]
+% Generator: Claude Sonnet 5 (High)
+\textbf{1.} The characteristic polynomial $r^2-4r+4=(r-2)^2$ has the double root $r=2$, so
+$y_{\mathrm{hom}}(t) = (C_1+C_2t)e^{2t}$. For the particular solution, try
+$y_{\mathrm{part}}(t) := A\sin t+B\cos t$ (\cref{tab:ode_ansatz}, with $\omega=1$ not a root of
+the characteristic polynomial, so no extra factor of $t$ is needed). Substituting,
+\[y_{\mathrm{part}}''-4y_{\mathrm{part}}'+4y_{\mathrm{part}}
+  = (3A+4B)\sin t + (3B-4A)\cos t \overset{!}{=} \sin t,\]
+so $3A+4B=1$ and $-4A+3B=0$, giving $B=\tfrac43A$ and then $A=\tfrac{3}{25}$, $B=\tfrac{4}{25}$.
+The general solution is
+\[y(t) = (C_1+C_2t)e^{2t} + \tfrac{3}{25}\sin t + \tfrac{4}{25}\cos t.\]
+
+\textbf{2.} The characteristic polynomial $r^2-1$ has roots $r=\pm1$, so
+$y_{\mathrm{hom}}(t) = C_1e^t+C_2e^{-t}$. Since $r=0$ is not a root, try
+$y_{\mathrm{part}}(t) := At+B$; then $y_{\mathrm{part}}''-y_{\mathrm{part}} = -At-B
+\overset{!}{=} t$ gives $A=-1$, $B=0$, so $y_{\mathrm{part}}(t) = -t$. The general solution is
+$y(t) = C_1e^t+C_2e^{-t}-t$, with $y'(t) = C_1e^t-C_2e^{-t}-1$. The initial conditions give
+$C_1+C_2=1$ and $C_1-C_2=4$, so $C_1=\tfrac52$, $C_2=-\tfrac32$, and
+\[y(t) = \tfrac52e^t - \tfrac32e^{-t} - t.\]
+
+\textbf{3.} This is a first-order linear ODE, $y'+p(t)y=t^4$ with
+$p(t) := -\big(\tfrac4t+1\big)$, so the standard integrating factor is
+$\mu(t) := \exp\!\big(\int p(t)\,dt\big) = \exp\big(-4\ln t - t\big) = t^{-4}e^{-t}$.
+
+\begin{ainote}
+The script's own hint suggests $u(t):=e^{H(t)}y(t)$ with $H'(t)=\tfrac4t+1$ --- a \emph{positive}
+exponent. Checking it directly: $u' = e^H(H'y+y')$, and substituting $y'=H'y+t^4$ (from the ODE)
+gives $u' = e^H(2H'y+t^4)$, which still contains $y$ --- the substitution does not decouple. The
+sign must be negative, $u(t) := e^{-H(t)}y(t) = t^{-4}e^{-t}y(t)$: then
+$u' = e^{-H}(y'-H'y) = e^{-H}\big(y'-(\tfrac4t+1)y\big) = e^{-H}t^4$ directly from the ODE, which
+\emph{does} decouple. Used below.
+\end{ainote}
+
+So with $u(t) := t^{-4}e^{-t}y(t)$,
+\[u'(t) = t^{-4}e^{-t}t^4 = e^{-t} \qquad\Longrightarrow\qquad u(t) = -e^{-t}+C\]
+for a constant $C$. Hence $y(t) = t^4e^t\big(C-e^{-t}\big) = Ct^4e^t - t^4$. The initial
+condition $y(1)=1$ gives $Ce-1=1$, i.e.\ $C = 2/e$, so
+\[y(t) = 2t^4e^{t-1} - t^4, \qquad t \in (0,\infty).\]
+\end{exercisesolution}
+
+% Supplement: Analysis_II_Script_v1.pdf, pp. 175--177
+\begin{example}[Pure resonance of a pumped harmonic oscillator]
+\label{ex:pure_resonance}
+Consider the forced harmonic oscillator $y : [0,\infty) \to \mathbb{R}$,
+\[y''(t) + ky(t) = \sin(\omega t) \quad \text{for } t>0, \qquad y(0)=y'(0)=0,\]
+with $k>0$. The homogeneous equation $z''+kz=0$ has general solution
+$z(t) = C_1\cos(\sqrt kt)+C_2\sin(\sqrt kt)$. For $\omega \neq \sqrt k$, the Ansatz
+$y_{\mathrm{part}}(t) := A\sin(\omega t)+B\cos(\omega t)$ gives, on substitution,
+$A(k-\omega^2)=1$ and $B(k-\omega^2)=0$, so $B=0$ and $A = 1/(k-\omega^2)$, giving
+$y_{\mathrm{part}}(t) = \sin(\omega t)/(k-\omega^2)$. Imposing $y(0)=y'(0)=0$ on the general
+solution $y=z+y_{\mathrm{part}}$ fixes $C_1=0$ and $C_2 = -\omega/\big(\sqrt k(k-\omega^2)\big)$,
+giving the complete solution, for $\omega \neq \sqrt k$,
+\[y(t) = \frac{1}{\sqrt k+\omega}\left(\frac{\sin(\sqrt kt)}{\sqrt k} -
+  \frac{\sin(\sqrt kt)-\sin(\omega t)}{\sqrt k-\omega}\right).\]
+Taking the limit $\omega \to \sqrt k$ (\newterm{resonance}: the forcing frequency matches the
+system's natural frequency) gives
+\[y(t) = \frac{1}{2\sqrt k}\left(\frac{\sin(\sqrt kt)}{\sqrt k} - t\cos(\sqrt kt)\right).\]
+The term $t\cos(\sqrt kt)$ shows the amplitude of the oscillation now grows \emph{linearly} in
+$t$, without bound --- the phenomenon behind bridges failing under marching troops and (per
+popular-science lore, not verified here) opera singers shattering glasses.
+\end{example}
+
+\begin{remark}
+This is the concrete instance of the \qt{special case} noted in the caption of
+\cref{tab:ode_ansatz}: the naive Ansatz $A\sin(\omega t)+B\cos(\omega t)$ fails exactly when
+$\omega=\sqrt k$, because $\sin(\sqrt kt)$ and $\cos(\sqrt kt)$ already solve the homogeneous
+equation, and the fix is the same one the table prescribes --- multiply the Ansatz by $t$, which
+is visibly what appears in the limiting solution above.
+\end{remark}
 
 \subsection{Duhamel's Principle}
 \label{sec:duhamels_principle}
@@ -241,6 +418,73 @@ We rewrite the ODE as $u'(t) = f(t, u(t))$. To apply the Picard--Lindelöf theor
 \]
 Since $\frac{1}{1+t^2} \leq 1$ for all $t \in [0, \infty)$, the function $f$ is Lipschitz continuous in $y$ with Lipschitz constant $L=1$. Thus, by Picard--Lindelöf, the ODE possesses a unique solution.
 \end{example}
+
+% Supplement: Analysis_II_Script_v1.pdf, p. 192
+\begin{exercise}[$C^1$ in space implies locally Lipschitz]
+\label{ex:c1_implies_locally_lipschitz}
+Let $U \subseteq \mathbb{R}\times\mathbb{R}^n$ be open and $F : U \to \mathbb{R}^n$ be
+continuous, such that the partial derivatives $\partial_{x_k}F$ for $k \in \{1,\dots,n\}$ exist
+and are continuous on $U$. Show that $F$ is locally Lipschitz in $x$ and thus satisfies the
+hypotheses of \cref{thm:picard_lindeloef_local}.
+\end{exercise}
+
+\begin{exercisesolution}[Proof of \cref{ex:c1_implies_locally_lipschitz}]
+% Generator: Claude Sonnet 5 (High)
+Fix $(t_1,x_1) \in U$. Since $U$ is open, choose $\varepsilon>0$ with the closed ball
+$\overline{B_\varepsilon(t_1,x_1)} \subseteq U$; this closed ball is compact. Each
+$\partial_{x_k}F$ is continuous, hence bounded on this compact set, say by $M_k$; set
+$L := \sum_{k=1}^n M_k$.
+
+For $(t,x_2),(t,x_3) \in B_\varepsilon(t_1,x_1)$, the straight segment
+$s\mapsto x_3+s(x_2-x_3)$, $s\in[0,1]$, stays inside the ball (which is convex), so
+$g(s) := F(t,\,x_3+s(x_2-x_3))$ is differentiable on $[0,1]$ with
+$g'(s) = \sum_{k=1}^n \partial_{x_k}F(t,x_3+s(x_2-x_3))\,(x_2-x_3)_k$ by the chain rule. Hence
+\[\lVert F(t,x_2)-F(t,x_3)\rVert = \lVert g(1)-g(0)\rVert
+  = \left\lVert\int_0^1 g'(s)\,ds\right\rVert
+  \leq \int_0^1 \sum_{k=1}^n \lvert\partial_{x_k}F(t,x_3+s(x_2-x_3))\rvert\,\lvert(x_2-x_3)_k\rvert\,ds\]
+\[\leq \sum_{k=1}^n M_k\,\lvert(x_2-x_3)_k\rvert
+  \leq \Big(\sum_{k=1}^n M_k\Big)\lVert x_2-x_3\rVert = L\lVert x_2-x_3\rVert,\]
+using $\lvert(x_2-x_3)_k\rvert \leq \lVert x_2-x_3\rVert$ in the last step. So $F$ is
+$L$-Lipschitz in $x$ on $B_\varepsilon(t_1,x_1)\cap U$, and since $(t_1,x_1) \in U$ was
+arbitrary, $F$ is locally Lipschitz in $x$.
+\end{exercisesolution}
+
+\begin{remark}
+This is the standard shortcut for checking the hypothesis of
+\cref{thm:picard_lindeloef_local} in practice: one essentially never verifies the Lipschitz
+estimate by hand, but instead checks that $F$ is $C^1$ in the spatial variables --- exactly the
+regularity most vector fields one writes down already have.
+\end{remark}
+
+% Supplement: Analysis_II_Script_v1.pdf, p. 173
+\begin{lemma}[Grönwall's inequality]
+\label{lem:gronwall}
+Let $u \in C^1([a,b])$ satisfy $u'(t) \leq \beta(t)u(t)$ for all $t \in [a,b]$, where
+$\beta \in C^0([a,b])$. Then
+\[u(t) \ \leq\ u(a)\exp\!\left(\int_a^t\beta(s)\,ds\right) \qquad \text{for all } t \in [a,b].\]
+\end{lemma}
+
+\begin{proof}
+Let $v(t) := \exp\big(\int_a^t\beta(s)\,ds\big) > 0$, so $v'(t) = \beta(t)v(t)$, and set
+$f(t) := u(t)/v(t) \in C^1([a,b])$. Then
+\[f'(t) = \frac{u'(t)v(t)-u(t)v'(t)}{v(t)^2}
+  \leq \frac{\beta(t)u(t)v(t) - u(t)\beta(t)v(t)}{v(t)^2} = 0,\]
+using the hypothesis $u'(t) \leq \beta(t)u(t)$ in the numerator. So $f$ is decreasing on $[a,b]$,
+giving $u(t)/v(t) = f(t) \leq f(a) = u(a)/v(a) = u(a)$, i.e.\ $u(t) \leq u(a)v(t)$, which is the
+claim.
+\end{proof}
+
+\begin{remark}[What Grönwall is for]
+Grönwall's inequality is the standard tool for turning a \emph{differential} bound into an
+\emph{integral} one. The official script uses it to give a clean uniqueness proof for linear
+ODEs: if $z$ solves an order-$m$ linear equation $Lz=0$, the quantity
+$u(t) := z(t)^2+z'(t)^2+\dots+z^{(m-1)}(t)^2$ satisfies a bound $u'(t) \leq Cu(t)$ for a constant
+$C$ depending only on the coefficients of $L$, and Grönwall with $u(t_0)=0$ (zero initial data)
+forces $u\equiv0$, hence $z\equiv0$ --- the \qt{zero in, zero out} principle behind uniqueness
+for linear ODEs. The same device, run on $u(t):=\lVert v_1(t)-v_2(t)\rVert^2$ for two solutions
+$v_1,v_2$ of a Lipschitz system agreeing at one time, gives an alternative route to the
+uniqueness half of \cref{thm:picard_lindeloef_local}.
+\end{remark}
 
 % Quelle: Linus Lüchinger/Slides/Slides-05-21.pdf, slide 5
 % Generator: Claude Opus 5 (High)

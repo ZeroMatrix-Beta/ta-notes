@@ -203,6 +203,36 @@ variables is unavoidable. But it explains where the radial power comes from, whi
 determinant computation does not.
 \end{remark}
 
+% Supplement: Analysis_II_Script_v1.pdf, pp. 113--114
+\begin{remark}[Reference: the standard coordinate Jacobians]
+\label{rem:coordinate_jacobians_table}
+The polar, cylindrical and spherical substitutions recur throughout this chapter and the next
+several; collected here in one place, with $r \geq 0$ throughout and each parametrizing its
+target domain up to a Jordan null set:
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Coordinates} & \textbf{Transformation} & $\lvert\det\Jac\Phi\rvert$ \\
+\midrule
+Polar ($\mathbb{R}^2$) &
+  $\Phi(r,\varphi) = (r\cos\varphi,\ r\sin\varphi)$ & $r$ \\
+Cylindrical ($\mathbb{R}^3$) &
+  $\Phi(r,\varphi,z) = (r\cos\varphi,\ r\sin\varphi,\ z)$ & $r$ \\
+Spherical ($\mathbb{R}^3$) &
+  $\Phi(r,\theta,\varphi) = (r\sin\theta\cos\varphi,\ r\sin\theta\sin\varphi,\ r\cos\theta)$
+  & $r^2\sin\theta$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+The angular ranges are $\varphi \in (-\pi,\pi)$ throughout, and $\theta \in (0,\pi)$
+(\newterm{colatitude}, measured from the positive $z$-axis) for the spherical case. Cylindrical
+coordinates are just polar coordinates in the first two variables, carried along unchanged in
+$z$ --- which is exactly why the Jacobian is the same $r$ as the planar case: the extra $dz$
+contributes a factor of $1$. Spherical coordinates are used already in
+\cref{ex:volume_sphere} above; cylindrical coordinates are the natural choice whenever a region
+has rotational symmetry about an axis without being a ball, e.g.\ a solid cylinder or cone.
+\end{remark}
+
 % Source: Jérôme Paschoud/Notizen/Woche 9.1 Variablenwechsel.pdf, p. 2
 % Generator: Gemini 3.1 Pro (High)
 \begin{example}[Volume of an ellipse]

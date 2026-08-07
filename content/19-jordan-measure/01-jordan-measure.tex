@@ -40,6 +40,43 @@ common generation} $p$, and its volume is
 \[\mu(E) := 2^{-pn}N.\]
 \end{definition}
 
+% Supplement: Analysis_II_Script_v1.pdf, p. 91
+\begin{exercise}[Inclusion--exclusion for dyadic sets]
+\label{ex:inclusion_exclusion_dyadic}
+Show that, for two dyadic sets $E_1,E_2$,
+\[\mu(E_1\cup E_2) = \mu(E_1)+\mu(E_2)-\mu(E_1\cap E_2).\]
+Show more generally that, for dyadic sets $E_1,\dots,E_N$, the measure of their union is given
+by the principle of inclusion--exclusion,
+\[\mu\Big(\bigcup_{i=1}^N E_i\Big)
+  = \sum_{k=1}^N(-1)^{k+1}\bigg(\sum_{1\leq i_1<i_2<\dots<i_k\leq N}
+    \mu(E_{i_1}\cap E_{i_2}\cap\dots\cap E_{i_k})\bigg).\]
+\end{exercise}
+
+\begin{exercisesolution}[Proof of \cref{ex:inclusion_exclusion_dyadic}]
+% Generator: Claude Sonnet 5 (High)
+Any finite collection of dyadic sets can be refined to a common generation $p$ without changing
+any of their measures (splitting a cube of generation $p$ into $2^n$ cubes of generation $p+1$
+replaces one term of $\mu(E) := 2^{-pn}N$ by $2^n$ terms of size $2^{-(p+1)n}$, which sum to the
+same value) --- so we may assume $E_1,\dots,E_N$ all consist of cubes of one common generation
+$p$. Each such cube $Q$ then either lies in none of the $E_i$, or in exactly the $E_i$ indexed
+by some non-empty $J \subseteq \{1,\dots,N\}$, and $Q$ contributes $2^{-pn}$ to
+$\mu(E_{i_1}\cap\dots\cap E_{i_k})$ exactly when $\{i_1,\dots,i_k\}\subseteq J$.
+
+\textbf{Two sets.} If $Q$ lies in neither $E_1$ nor $E_2$, it contributes $0$ to both sides. If
+it lies in exactly one, it contributes $2^{-pn}$ to $\mu(E_1)+\mu(E_2)$ and to
+$\mu(E_1\cup E_2)$, and $0$ to $\mu(E_1\cap E_2)$: both sides agree. If it lies in both, it
+contributes $2^{-pn}$ to $\mu(E_1\cup E_2)$, and on the right
+$2\cdot2^{-pn}-2^{-pn}=2^{-pn}$: both sides agree again.
+
+\textbf{$N$ sets.} It suffices to check the identity cube by cube. A cube $Q$ lying in exactly
+the sets indexed by $J\neq\emptyset$, $|J|=:m\geq1$, contributes $2^{-pn}$ to the left side (it
+lies in the union). On the right, for each $k$ it contributes $2^{-pn}$ once for every
+$k$-element subset of $J$, of which there are $\binom{m}{k}$, so the total contribution is
+\[2^{-pn}\sum_{k=1}^m(-1)^{k+1}\binom{m}{k} = 2^{-pn}\Big(1-\sum_{k=0}^m(-1)^k\binom{m}{k}\Big)
+  = 2^{-pn}\big(1-(1-1)^m\big) = 2^{-pn},\]
+using the binomial theorem and $m\geq1$. Both sides agree cube by cube, hence in total.
+\end{exercisesolution}
+
 The requirement that all cubes share a generation is not cosmetic: it is what separates the
 Jordan theory from the Lebesgue theory, as \cref{rem:jordan_vs_lebesgue_sizes} makes precise.
 

@@ -10,13 +10,17 @@ This is a *different kind of source* from the 17 tutor folders. It is not a blue
 transcribe — Corsin Nick remains that — it is the **authority to check our theorems against**,
 plus a well-stocked reservoir of exercises and examples.
 
-**Status: thin survey pass complete, no `.tex` written yet.** This file is the output. It
-records the theorem-by-theorem comparison and shortlists what is worth taking, so the actual
-enrichment can be done chapter by chapter without re-reading 207 pages.
+**Status: all five enrichment sessions complete (2026-08-07).** This file began as a survey; §8
+is now a full progress log covering all of it. Every divergence (D1–D4), every gap, and every
+"take first"/"take second" exercise and example listed below has been transcribed into
+`content/`, checked against a rendered page of the script, and build-verified. See §8 for the
+session-by-session record, including the handful of items that turned out to already exist
+under a different label and were confirmed rather than duplicated.
 
 **Decision taken 2026-08-06 (user):** *enrich existing sections only*. Topics the script
 covers and we have no section for do **not** get new sections — see
-[§6](#6-script-only-topics-deliberately-not-given-sections).
+[§6](#6-script-only-topics-deliberately-not-given-sections). **Reversed once, 2026-08-07, for
+the completion-of-a-metric-space construction** (script §9.1.3) — see §8's session-1 entry.
 
 ## Practical notes
 
@@ -281,6 +285,7 @@ Highest value first. Each is one session, and each is self-contained.
    **Done in full, 2026-08-07 — see §8.**
 5. **Chapters 19–21** (script §13). Lowest yield: our measure-theory chapters already track the
    script closely, and most of what remains is machinery we deliberately build differently.
+   **Done in full, 2026-08-07 — see §8.**
 
 ---
 
@@ -426,4 +431,17 @@ there was nothing to flag.
 
 Build verified clean: 276 pages, no errors, no undefined references.
 
-* **Session 5** (chapters 19–21): entirely open — see §7 item 5.
+### Session 5 (chapters 19–21) — DONE, 2026-08-07
+
+The lightest of the five sessions, as the survey itself predicted: D3, D4 and Ex 9.103 (the
+other items originally scoped here) were already finished in earlier sessions. Two items
+remained. Ex 13.6 (inclusion--exclusion for dyadic sets, `ex:inclusion_exclusion_dyadic`) added
+to ch 19 right after `def:dyadic_set`, proved cube-by-cube via the binomial theorem for the
+general $N$-set case. The spherical/cylindrical/polar Jacobian reference table
+(`rem:coordinate_jacobians_table`) added to ch 20 right after the existing shells remark,
+collecting the three coordinate systems and their Jacobians ($r$, $r$, $r^2\sin\theta$) in one
+place — cylindrical coordinates had no dedicated treatment anywhere in the document before this.
+
+Build verified clean: 278 pages, no errors, no undefined references.
+
+**All five sessions of script-coverage.md are now complete.**

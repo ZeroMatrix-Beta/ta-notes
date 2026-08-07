@@ -221,6 +221,18 @@
 
 \titlespacing*{\part}{0pt}{*4}{*3}
 
+% Since \chapter exists in this class, titlesec's compat layer classifies \part as
+% its "page" class (\titleclass{\part}{page}), whose implementation \ttl@page@ii
+% issues a \newpage right after the title block -- that ejected a fresh page before
+% any following text could appear, swallowing the part-intro prose paragraphs below
+% onto their own near-empty page. Drop that forced break so the prose shares the
+% title page; \chapter's own \clearpage still starts the next chapter fresh.
+% (Document is oneside/non-openright, so the twoside/openright blank-page branch
+% a few lines later in \ttl@page@ii never fires and is unaffected.)
+\makeatletter
+\patchcmd{\ttl@page@ii}{\newpage}{}{}{\ClassWarning{report}{Could not patch \string\ttl@page@ii}}
+\makeatother
+
 % 1. Custom Chapter Format: Title (chapter X)
 \titleformat{name=\chapter}[block]  % [block] forces it onto a single line
 {\normalfont\sffamily\Large\bfseries\color{ChapTitleText}}  % Main style
@@ -854,6 +866,14 @@
 % Chapters still carrying a week-NN.tex name have not been migrated yet.
 
 \part{Foundations}
+
+% Generator: Claude Sonnet 5 (High) --- part-level framing prose, new content, not tied to any
+% tutor source.
+This short part collects what the rest of the course leans on from \emph{Analysis I}, together
+with a few habits of visualization used throughout: how to picture sets and functions of several
+variables, and Young's inequality, whose role stays invisible until norms and inner products
+enter in the next part.
+
 \input{content/01-prerequisites/00-chapter.tex}
 
 % Chapter order follows the dependency chain, which is also Corsin's own teaching order:
@@ -861,6 +881,15 @@
 % connectedness. Completeness sits after continuity because a contraction is defined as a
 % Lipschitz map with constant < 1.
 \part{Metric Spaces and Topology}
+
+% Generator: Claude Sonnet 5 (High) --- part-level framing prose, new content.
+Ordinary calculus on $\mathbb{R}^n$ depends on very little about $\mathbb{R}^n$ itself --- only
+that it carries a notion of distance. This part abstracts that notion into a metric space and
+develops the topological vocabulary (open, closed, compact, connected) needed to make sense of
+convergence and continuity in a setting general enough to include function spaces alongside
+$\mathbb{R}^n$. Completeness and compactness, in particular, are the two finiteness-type
+properties that almost every existence argument later in the course quietly leans on.
+
 \input{content/02-metric-normed-inner-product/00-chapter.tex}
 \input{content/03-open-and-closed-sets/00-chapter.tex}
 \input{content/04-sequences/00-chapter.tex}
@@ -870,27 +899,69 @@
 \input{content/08-connectedness/00-chapter.tex}
 
 \part{Differential Calculus}
+
+% Generator: Claude Sonnet 5 (High) --- part-level framing prose, new content.
+With a topology in hand, this part extends differentiation from one variable to several: the
+differential as a linear approximation, the chain rule along paths and through compositions, and
+Taylor's theorem as the systematic way to improve that approximation order by order. Almost
+everything from here on --- optimization, the inverse and implicit function theorems, vector
+calculus --- is built on the single definition of differentiability given at the start of it.
+
 \input{content/09-differential/00-chapter.tex}
 \input{content/10-chain-rule/00-chapter.tex}
 \input{content/11-taylor/00-chapter.tex}
 
 \part{Optimization and Convexity}
+
+% Generator: Claude Sonnet 5 (High) --- part-level framing prose, new content.
+Differentiability turns the search for extrema into algebra: unconstrained critical points are
+found by setting a gradient to zero, and classified by the sign of a Hessian. This part builds
+that machinery, extends it to extrema constrained to a level set via Lagrange multipliers, and
+closes with convexity --- the one hypothesis under which a critical point is automatically a
+\emph{global} extremum, not merely a candidate that still needs checking.
+
 \input{content/12-extrema-hessian/00-chapter.tex}
 \input{content/13-lagrange/00-chapter.tex}
 \input{content/14-convexity/00-chapter.tex}
 
 \part{Inverse and Implicit Functions; Submanifolds}
+
+% Generator: Claude Sonnet 5 (High) --- part-level framing prose, new content.
+Two questions drive this part: when can an equation be solved locally for one variable in terms
+of the others (the implicit function theorem), and when is a map locally invertible (its close
+relative, the inverse function theorem)? Both answers hinge on the same linear-algebra
+hypothesis --- invertibility of a Jacobian --- and both feed directly into the definition of a
+submanifold: a set that locally looks like $\mathbb{R}^m$ sitting inside $\mathbb{R}^n$, which is
+exactly the kind of object the rest of the course learns to integrate over.
+
 \input{content/15-inverse-function-theorem/00-chapter.tex}
 \input{content/16-implicit-function-theorem/00-chapter.tex}
 \input{content/17-submanifolds/00-chapter.tex}
 \input{content/18-geodesics/00-chapter.tex}
 
 \part{Integration}
+
+% Generator: Claude Sonnet 5 (High) --- part-level framing prose, new content.
+Having spent several parts differentiating, the course now turns to integration in several
+variables. Jordan measure gives a rigorous notion of volume; the change of variables formula
+generalizes substitution; and the Gram determinant measures how much a parametrization distorts
+area or volume --- the tool that makes integrating over a curved submanifold, rather than a flat
+region of $\mathbb{R}^n$, meaningful.
+
 \input{content/19-jordan-measure/00-chapter.tex}
 \input{content/20-change-of-variables/00-chapter.tex}
 \input{content/21-gram-determinant/00-chapter.tex}
 
 \part{Vector Calculus and Differential Forms}
+
+% Generator: Claude Sonnet 5 (High) --- part-level framing prose, new content.
+The course closes by giving the classical vector operators --- gradient, divergence, curl --- and
+the classical integral theorems --- Green, the divergence theorem, Stokes --- a single unifying
+language: differential forms and the exterior derivative. Every theorem in this part turns out to
+be the same identity, $\int_M d\omega = \int_{\partial M}\omega$, stated once and specialized
+several different ways --- the payoff for the topological, differential and integration
+machinery built across the whole document.
+
 \input{content/22-vector-calculus/00-chapter.tex}
 \input{content/23-flux-divergence/00-chapter.tex}
 \input{content/24-differential-forms/00-chapter.tex}

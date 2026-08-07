@@ -110,6 +110,24 @@ For the segment $\sigma(x) = (x, 0)$ from $\pi/2$ to $-\pi/2$, the outward norma
 Therefore, the flux through $\gamma$ is $4 - \frac{\pi^3}{12}$.
 \end{example}
 
+% Supplement: Analysis_II_Script_v1.pdf, p. 152
+\begin{example}[The work of a field can depend on the path]
+\label{ex:path_dependence_three_paths}
+Let $F(x,y) := (-y,x)\transp$, and let $\gamma_0,\gamma_1,\gamma_2 : [0,1] \to \mathbb{R}^2$ be
+the three paths from $(0,0)$ to $(1,1)$ given by $\gamma_0(t) := (t,t)$ (the diagonal), and
+\[\gamma_1(t) := \begin{cases}(2t,0) & t\in[0,\tfrac12]\\ (1,2t{-}1) & t\in[\tfrac12,1]\end{cases}
+  \qquad
+  \gamma_2(t) := \begin{cases}(0,2t) & t\in[0,\tfrac12]\\ (2t{-}1,1) & t\in[\tfrac12,1]\end{cases}\]
+(right-then-up, and up-then-right, along the sides of the unit square). Direct computation
+gives three different answers:
+\[\int_{\gamma_0}F\cdot d\gamma_0 = \int_0^1\langle(-t,t),(1,1)\rangle\,dt = 0, \qquad
+  \int_{\gamma_1}F\cdot d\gamma_1 = 1, \qquad \int_{\gamma_2}F\cdot d\gamma_2 = -1.\]
+Moving \emph{perpendicular} to $F$ costs no work, moving \emph{with} $F$ does positive work, and
+moving \emph{against} $F$ does negative work --- and since the three paths share endpoints but
+disagree on the work done, $F$ cannot be conservative (\cref{def:conservative_field} below):
+\Cref{prop:work_difference_potential} would otherwise force all three integrals to agree.
+\end{example}
+
 \subsection{Conservative vector fields}
 
 \begin{definition}[Conservative vector field]
@@ -171,3 +189,48 @@ By \cref{prop:work_difference_potential}, the work along $\gamma$ is path-indepe
 \[\int_\gamma F \cdot d\gamma = f(2,1) - f(0,0) = (2(32) - 4(1)) - 0 = 60.\]
 Notice that the equation of the curve $x^4 - 6xy^3 = 4y^2$ was irrelevant, as long as it connects the two endpoints!
 \end{example}
+
+% Supplement: Analysis_II_Script_v1.pdf, p. 156
+\begin{exercise}[Which $\alpha$ makes this field conservative?]
+\label{ex:find_alpha_conservative}
+For which $\alpha \in \mathbb{R}$ is the vector field
+$F(x,y) := (\alpha xe^y,\ (y+1+x^2)e^y)\transp$ conservative? Find a potential for that value of
+$\alpha$.
+\end{exercise}
+
+\begin{exercisesolution}[Proof of \cref{ex:find_alpha_conservative}]
+% Generator: Claude Sonnet 5 (High)
+By \cref{lem:integrability_conditions}, a necessary condition is
+$\partial_yF_1 = \partial_xF_2$, i.e.\ $\alpha xe^y = 2xe^y$ for all $(x,y)$, forcing
+$\alpha = 2$. (This is also sufficient, since $F$ is $C^1$ on all of $\mathbb{R}^2$, which is
+simply connected, so a potential exists.) With $\alpha=2$,
+$F(x,y) = (2xe^y,\ (y+1+x^2)e^y)\transp$; integrating $\partial_xf=2xe^y$ gives
+$f(x,y) = x^2e^y+c(y)$, and matching $\partial_yf = x^2e^y+c'(y)$ against
+$F_2=(x^2+y+1)e^y$ gives $c'(y)=(y+1)e^y$, so $c(y) = ye^y$ (check:
+$\tfrac{d}{dy}(ye^y)=e^y+ye^y=(y+1)e^y$). A potential is $f(x,y) = x^2e^y+ye^y$.
+\end{exercisesolution}
+
+% Supplement: Analysis_II_Script_v1.pdf, p. 164
+\begin{exercise}[Choosing parameters for an irrotational field]
+\label{ex:choose_parameters_irrotational}
+Determine real parameters $\alpha,\beta,\gamma$ such that the vector field
+\[F(x,y,z) := (x+2y+\alpha z,\ \beta x-3y-z,\ 4x+\gamma y+2z)\]
+on $\mathbb{R}^3$ becomes irrotational, i.e.\ $\curl(F)=0$. Determine, after choosing these
+parameters, a potential for $F$.
+\end{exercise}
+
+\begin{exercisesolution}[Proof of \cref{ex:choose_parameters_irrotational}]
+% Generator: Claude Sonnet 5 (High)
+Setting $\curl F = 0$ componentwise (\cref{def:rotation}):
+\[\partial_yF_3-\partial_zF_2 = \gamma-(-1) \overset{!}{=} 0, \qquad
+  \partial_zF_1-\partial_xF_3 = \alpha-4 \overset{!}{=} 0, \qquad
+  \partial_xF_2-\partial_yF_1 = \beta-2 \overset{!}{=} 0,\]
+giving $\gamma=-1$, $\alpha=4$, $\beta=2$, so
+$F(x,y,z) = (x+2y+4z,\ 2x-3y-z,\ 4x-y+2z)$. This $F$ is $C^1$ on the simply connected
+$\mathbb{R}^3$ and curl-free, hence conservative (the $3$-dimensional case of
+\cref{cor:potentials_simply_connected}). Integrating $\partial_xf = x+2y+4z$ gives
+$f = \tfrac12x^2+2xy+4xz+c(y,z)$; matching $\partial_yf = 2x+c_y$ against $F_2=2x-3y-z$ gives
+$c_y=-3y-z$, so $c = -\tfrac32y^2-yz+d(z)$; matching
+$\partial_zf = 4x-y+d'(z)$ against $F_3=4x-y+2z$ gives $d'(z)=2z$, so $d(z)=z^2$. A potential is
+\[f(x,y,z) = \tfrac12x^2+2xy+4xz-\tfrac32y^2-yz+z^2.\]
+\end{exercisesolution}

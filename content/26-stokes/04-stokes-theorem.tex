@@ -112,3 +112,83 @@ The line integral is:
 \end{align*}
 Thus, $\int_H \curl(F) \cdot \nu \,d\vol_2 = \pi$.
 \end{example}
+
+% Supplement: Analysis_II_Script_v1.pdf, p. 163
+\begin{exercise}[Flux through a cylinder, direct and via Stokes]
+\label{ex:cylinder_flux_direct_and_stokes}
+Let $F(x,y,z) := (yz,x^2,1)\transp$ on $\mathbb{R}^3$, and let $M$ be the lateral surface of the
+cylinder $M := \{(x,y,z) : x^2+y^2=1,\ 0<z<1\}$, with the outward-pointing normal
+$\nu(x,y,z)=(x,y,0)$. Compute $\int_M\curl(F)\cdot\nu\,d\vol_2$ directly, and again using
+Stokes' theorem.
+\end{exercise}
+
+\begin{exercisesolution}[Proof of \cref{ex:cylinder_flux_direct_and_stokes}]
+% Generator: Claude Sonnet 5 (High)
+First, $\curl(F) = (\partial_yF_3-\partial_zF_2,\ \partial_zF_1-\partial_xF_3,\
+\partial_xF_2-\partial_yF_1) = (0,\ y,\ 2x-z)$.
+
+\textbf{Directly.} Parametrize $M$ by $\phi(\theta,z) := (\cos\theta,\sin\theta,z)$,
+$(\theta,z)\in[0,2\pi)\times(0,1)$; then
+$\partial_\theta\phi\times\partial_z\phi = (\cos\theta,\sin\theta,0) = \nu(\phi(\theta,z))$,
+already a unit vector, so $d\vol_2 = d\theta\,dz$. Then
+$\curl(F)(\phi(\theta,z)) = (0,\sin\theta,2\cos\theta-z)$, and
+\[\int_M\curl(F)\cdot\nu\,d\vol_2 = \int_0^1\!\int_0^{2\pi}
+  \big\langle(0,\sin\theta,2\cos\theta-z),(\cos\theta,\sin\theta,0)\big\rangle\,d\theta\,dz
+  = \int_0^1\!\int_0^{2\pi}\sin^2\theta\,d\theta\,dz = \pi.\]
+
+\textbf{Via Stokes.} The boundary $\partial M$ consists of the two circles $z=0$ and $z=1$; the
+orientation induced by the outward normal $\nu$ (right-hand rule) traverses the \emph{bottom}
+circle ($z=0$) with $\theta$ increasing and the \emph{top} circle ($z=1$) with $\theta$
+\emph{decreasing} --- the parameter rectangle $[0,2\pi]\times[0,1]$ has $z=0$ as part of its
+positively-oriented boundary traversed left to right and $z=1$ traversed right to left, and the
+two vertical edges $\theta=0,2\pi$ cancel since they are the same curve in $M$. With
+$\gamma_0(\theta):=(\cos\theta,\sin\theta,0)$ and $\gamma_1(\theta):=(\cos\theta,\sin\theta,1)$,
+both for $\theta\in[0,2\pi]$,
+\[F(\gamma_0(\theta)) = (0,\cos^2\theta,1), \qquad F(\gamma_1(\theta)) = (\sin\theta,\cos^2\theta,1),\]
+and $\gamma_0'(\theta)=\gamma_1'(\theta)=(-\sin\theta,\cos\theta,0)$, so
+\[\int_0^{2\pi} F(\gamma_0(\theta))\cdot\gamma_0'(\theta)\,d\theta = \int_0^{2\pi}\cos^3\theta\,d\theta = 0,\]
+\[\int_0^{2\pi} F(\gamma_1(\theta))\cdot\gamma_1'(\theta)\,d\theta
+  = \int_0^{2\pi}\big({-}\sin^2\theta+\cos^3\theta\big)\,d\theta = -\pi.\]
+The bottom circle is traversed with $\theta$ increasing (contributing $+0$) and the top circle
+with $\theta$ \emph{decreasing} (contributing $-({-}\pi) = \pi$), so
+$\int_{\partial M}F\cdot\tau\,d\vol_1 = 0+\pi = \pi$, agreeing with the direct computation.
+\end{exercisesolution}
+
+% Supplement: Analysis_II_Script_v1.pdf, p. 163
+\begin{exercise}[Flux through a spherical cap, via Stokes and via Gauss]
+\label{ex:spherical_cap_flux_stokes_gauss}
+Let $0<h<1$ and let $S := \{(x,y,z)\in S^2 : z>-h\}$ be the part of the unit sphere above
+height $-h$. Consider $F(x,y,z) := (-y,x,0)\transp$. Calculate the flux
+$\int_S\curl(F)\cdot\nu\,d\vol_2$ (outward normal) directly, once using Stokes' theorem, and
+once using the divergence theorem.
+\end{exercise}
+
+\begin{exercisesolution}[Proof of \cref{ex:spherical_cap_flux_stokes_gauss}]
+% Generator: Claude Sonnet 5 (High)
+Here $\curl(F) = (0,0,2)$, a constant field, and on $S^2$ the outward normal is
+$\nu(x,y,z)=(x,y,z)$ itself, so $\langle\curl(F),\nu\rangle = 2z$.
+
+\textbf{Directly.} Using colatitude $\varphi\in[0,\arccos(-h)]$ (so $z=\cos\varphi>-h$) and
+$d\vol_2=\sin\varphi\,d\varphi\,d\theta$,
+\[\int_S 2z\,d\vol_2 = \int_0^{2\pi}\!\int_0^{\arccos(-h)} 2\cos\varphi\sin\varphi\,d\varphi\,d\theta
+  = 2\pi\Big[{-}\tfrac12\cos(2\varphi)\Big]_0^{\arccos(-h)} = 2\pi(1-h^2),\]
+using $\cos(2\arccos(-h)) = 2h^2-1$.
+
+\textbf{Via Stokes.} $\partial S$ is the circle $x^2+y^2=1-h^2$, $z=-h$, of radius
+$r:=\sqrt{1-h^2}$, oriented (right-hand rule, outward normal) by
+$\gamma(\theta) := (r\cos\theta,r\sin\theta,-h)$, $\theta\in[0,2\pi]$. Then
+$\gamma'(\theta) = (-r\sin\theta,r\cos\theta,0)$ and $F(\gamma(\theta)) =
+(-r\sin\theta,r\cos\theta,0)$, so
+\[\int_{\partial S}F\cdot d\gamma = \int_0^{2\pi}\big(r^2\sin^2\theta+r^2\cos^2\theta\big)\,d\theta
+  = 2\pi r^2 = 2\pi(1-h^2),\]
+agreeing with the direct computation.
+
+\textbf{Via Gauss.} Since $\divg(\curl F)\equiv0$ (\cref{ex:curl_grad_div_curl_zero}), the flux
+of $\curl(F)$ through any surface with boundary $\partial S$ is the same. Replace $S$ by the
+flat disk $D := \{x^2+y^2\leq1-h^2,\ z=-h\}$, with upward normal $(0,0,1)$: $S\cup(-D)$
+(the cap together with the disk, reversed) bounds the solid cap $\Omega$, and the divergence
+theorem gives $\int_S\curl(F)\cdot\nu\,d\vol_2 - \int_D\curl(F)\cdot(0,0,1)\,d\vol_2 =
+\int_\Omega\divg(\curl F)\,d\vol_3 = 0$. Since $\langle\curl F,(0,0,1)\rangle\equiv2$,
+\[\int_S\curl(F)\cdot\nu\,d\vol_2 = \int_D 2\,d\vol_2 = 2\cdot\vol_2(D) = 2\pi(1-h^2),\]
+the area of a disk of radius $\sqrt{1-h^2}$ times $2$ --- again the same answer.
+\end{exercisesolution}

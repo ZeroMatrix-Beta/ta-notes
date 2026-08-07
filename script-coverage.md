@@ -278,6 +278,7 @@ Highest value first. Each is one session, and each is self-contained.
    **Done in full, 2026-08-07 — see §8.**
 4. **Chapters 22–26** (script §14). Archimedes, the three-paths example, and the Stokes/Gauss
    double-computation exercises — plus errors **E5** and **E6** to flag.
+   **Done in full, 2026-08-07 — see §8.**
 5. **Chapters 19–21** (script §13). Lowest yield: our measure-theory chapters already track the
    script closely, and most of what remains is machinery we deliberately build differently.
 
@@ -404,5 +405,25 @@ they were).
 
 Build verified clean: 272 pages, no errors, no undefined references.
 
-* **Session 4** (chapters 22–26): entirely open — see §7 item 4.
+### Session 4 (chapters 22–26) — DONE, 2026-08-07
+
+Ex 14.16 (Archimedes' principle, `ex:archimedes_principle`) taken directly into ch 23. Ex 14.56
+(`curl∘grad=0`, `div∘curl=0`, `ex:curl_grad_div_curl_zero`) taken into ch 22, formalising what
+was previously only an informal aside in `ex:compute_operators`; paired with E6
+(`prop:curl_product_rule`, the correct product rule for curl, since the script's own Ex 14.61
+states it without the `φ·curl(F)` term). Ch 26: Ex 14.36 (three-paths path-dependence example,
+`ex:path_dependence_three_paths`), Ex 14.39 (the vortex field witnessing that integrability
+needs simple connectedness, `ex:vortex_field_not_conservative`, confirmed genuinely new after
+checking — the existing `ex:non_conservative_field` uses a different field that fails
+integrability outright), Ex 14.46 and Ex 14.58 (finding parameters that make a field
+conservative/irrotational plus its potential, `ex:find_alpha_conservative` and
+`ex:choose_parameters_irrotational`), and Ex 14.57/14.59 (flux computed both directly and via
+Stokes, the second also via Gauss, `ex:cylinder_flux_direct_and_stokes` and
+`ex:spherical_cap_flux_stokes_gauss`) all taken directly. E5 (Remark 14.52's cross-product typo)
+checked and found moot: this document's own normal-vector formula
+(`23-flux-divergence/02-...tex:30`) was already stated correctly, independent of the script, so
+there was nothing to flag.
+
+Build verified clean: 276 pages, no errors, no undefined references.
+
 * **Session 5** (chapters 19–21): entirely open — see §7 item 5.

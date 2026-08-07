@@ -195,6 +195,28 @@ By the divergence theorem, the flux is the integral of the divergence over $\Ome
 \end{align*}
 \end{example}
 
+% Supplement: Analysis_II_Script_v1.pdf, p. 145
+\begin{example}[Archimedes' principle]
+\label{ex:archimedes_principle}
+A solid $\Omega \subset \mathbb{R}^3$ (a bounded $C^1$ domain) is fully submerged in water, with
+the coordinates chosen so that $x_3=0$ is the water's surface. At depth $-x_3$ the water
+pressure is $P(x) := -\rho gx_3$, where $\rho$ is the density of water and $g$ the gravitational
+acceleration. The force the water exerts on a surface element near $q \in \partial\Omega$ is
+proportional to the pressure and points inward, along $-\nu(q)$, so the total buoyant force is
+\[\vec F := -\int_{\partial\Omega}P\,\nu\,dS.\]
+Substituting the pressure and applying the divergence theorem to each component,
+\[F_i = \int_{\partial\Omega}\rho gx_3\nu_i\,dS
+  = \rho g\int_{\partial\Omega}\langle x_3e_i,\nu\rangle\,dS
+  = \rho g\int_\Omega\divg(x_3e_i)\,dV.\]
+Since $\divg(x_3e_i) = \partial_i x_3$ equals $1$ if $i=3$ and $0$ otherwise, this gives
+$F_1=F_2=0$ and
+\[F_3 = \rho g\int_\Omega 1\,dV = \rho g\,\vol_3(\Omega).\]
+The buoyant force is vertical, with magnitude $\rho g\vol_3(\Omega)$ --- exactly the weight of
+the water displaced by $\Omega$, confirming Archimedes' principle. The divergence theorem
+converts a surface integral of an unknown, position-dependent pressure into a volume integral
+that only sees the shape of $\Omega$ through its volume.
+\end{example}
+
 % Source: Corsin Nick/Class Notes/Week 10.pdf, p. 12
 Gauss' theorem is also a powerful tool in physics. For example, the volume $V$ of water in a
 moving fluid with velocity $\vec v$ passing through a surface element $d\vec A$ in time

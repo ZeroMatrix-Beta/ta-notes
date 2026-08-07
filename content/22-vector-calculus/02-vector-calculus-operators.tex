@@ -98,6 +98,65 @@ Let us compute the gradient, the divergence of the gradient, and the rotation of
 \end{itemize}
 \end{example}
 
+% Supplement: Analysis_II_Script_v1.pdf, p. 163
+\begin{exercise}[$\curl\circ\grad=0$ and $\divg\circ\curl=0$]
+\label{ex:curl_grad_div_curl_zero}
+Let $f$ be a twice continuously differentiable function and $F$ a twice continuously
+differentiable vector field on an open set $U \subseteq \mathbb{R}^3$. Show that
+\[\curl(\grad f) = 0 \qquad\text{and}\qquad \divg(\curl F) = 0.\]
+\end{exercise}
+
+\begin{exercisesolution}[Proof of \cref{ex:curl_grad_div_curl_zero}]
+% Generator: Claude Sonnet 5 (High)
+Both identities follow from Schwarz's theorem (\cref{thm:schwarz_mixed_partials}), which
+applies since $f,F \in C^2$.
+
+\textbf{$\curl(\grad f)=0$.} The first component of $\curl(\grad f)$ is
+$\partial_2(\partial_3f) - \partial_3(\partial_2f) = 0$ by Schwarz, and the other two
+components vanish the same way, cyclically permuting the indices. This is exactly
+\cref{ex:compute_operators}'s observation above, now stated and proved in general.
+
+\textbf{$\divg(\curl F)=0$.}
+\[\divg(\curl F) = \partial_1(\partial_2F_3-\partial_3F_2) + \partial_2(\partial_3F_1-\partial_1F_3)
+  + \partial_3(\partial_1F_2-\partial_2F_1),\]
+and every one of the six terms cancels against another by Schwarz: $\partial_1\partial_2F_3$
+cancels $-\partial_2\partial_1F_3$, $-\partial_1\partial_3F_2$ cancels
+$\partial_3\partial_1F_2$, and $\partial_2\partial_3F_1$ cancels $-\partial_3\partial_2F_1$.
+\end{exercisesolution}
+
+\begin{remark}
+This is the classical-vector-calculus shadow of \qt{$d^2=0$}
+(\cref{thm:exterior_derivative}\textbf{(2)}, \cref{ch:differential_forms}): $\grad$, $\curl$ and
+$\divg$ are exactly the $0$-, $1$- and $2$-form incarnations of the exterior derivative in
+$\mathbb{R}^3$ (\cref{ex:exterior_derivative_gradient_curl}), and both identities above are the
+single fact $d\circ d=0$ read off once in each degree.
+\end{remark}
+
+% Supplement: Analysis_II_Script_v1.pdf, p. 164
+\begin{proposition}[Product rule for the curl]
+\label{prop:curl_product_rule}
+Let $U \subseteq \mathbb{R}^3$ be open, $F : U \to \mathbb{R}^3$ a $C^1$ vector field, and
+$\varphi : U \to \mathbb{R}$ a $C^1$ function. Then
+\[\curl(\varphi F) = \varphi\,\curl(F) + (\grad\varphi)\times F.\]
+\end{proposition}
+
+\begin{proof}
+By the product rule applied componentwise, e.g.\ for the first component,
+\[\partial_2(\varphi F_3) - \partial_3(\varphi F_2)
+  = \varphi(\partial_2F_3-\partial_3F_2) + (\partial_2\varphi)F_3 - (\partial_3\varphi)F_2,\]
+and the first term is $\varphi\,\curl(F)$'s first component, the last two are
+$((\grad\varphi)\times F)$'s first component. The other two components follow identically,
+cyclically permuting the indices.
+\end{proof}
+
+\begin{ainote}
+The official script sets this identity as an exercise (Ex.\ 14.61) but states it without the
+first term, as $\curl(\varphi F) = (\grad\varphi)\times F$ --- which is false in general: taking
+$\varphi\equiv1$ would force $\curl F \equiv 0$ for every $F$. The missing term is exactly
+$\varphi\,\curl(F)$, restored above. (The script's exercise also names the vector field $f$ in
+its statement and $F$ in its conclusion, as though the two were interchangeable.)
+\end{ainote}
+
 
 % --- exercises relocated here from the dissolved sheets ---
 

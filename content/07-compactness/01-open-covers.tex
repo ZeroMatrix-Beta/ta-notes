@@ -66,4 +66,39 @@ boundedness) are available.
 \end{tikzpicture}
 \end{center}
 
+% Supplement: Analysis_II_Script_v1.pdf, p. 24
+\begin{lemma}[Nesting principle]
+\label{lem:nesting_principle}
+Let $X$ be a metric space. A subset $K \subseteq X$ is topologically compact
+(\cref{item:top_compact_def963}) if and only if it has the following property: for every
+collection $\mathcal{A} = \{A_i\}_{i\in I}$ of closed subsets of $X$, if every intersection of
+finitely many sets in $\mathcal{A}$ meets $K$, then $K \cap \bigcap_{i\in I}A_i$ is non-empty.
+\end{lemma}
+
+\begin{proof}
+\textbf{($\Rightarrow$)} Let $K$ be compact and let $\mathcal{A}$ be a collection of closed
+subsets of $X$ with $K \cap \bigcap_{i\in I}A_i = \emptyset$. The complements
+$\mathcal{U} := \{X \setminus A_i : i \in I\}$ then form an open cover of $K$, so compactness
+gives a finite subcover $K \subseteq (X\setminus A_{i_1}) \cup \dots \cup (X\setminus A_{i_n})$,
+i.e.\ $K \cap A_{i_1} \cap \dots \cap A_{i_n} = \emptyset$: some finite subcollection already
+fails to meet $K$.
+
+\textbf{($\Leftarrow$)} Let $K$ have the nesting property and let $\mathcal{U}$ be an open cover
+of $K$. The complements $\mathcal{A} := \{X\setminus U : U \in \mathcal{U}\}$ form a collection
+of closed sets with $K \cap \bigcap_{U\in\mathcal{U}}(X\setminus U) = K \setminus
+\bigcup_{U\in\mathcal{U}}U = \emptyset$, since $\mathcal{U}$ covers $K$. By the contrapositive of
+the nesting property, some finite subcollection $X\setminus U_1,\dots,X\setminus U_n$ already has
+$K \cap (X\setminus U_1)\cap\dots\cap(X\setminus U_n) = \emptyset$, i.e.\
+$K \subseteq U_1 \cup \dots \cup U_n$: a finite subcover.
+\end{proof}
+
+\begin{remark}
+The nesting principle is \cref{def:compact_metric_space} read through De Morgan's laws --- open
+covers become closed families, unions become intersections, \qt{some finite piece already
+covers} becomes \qt{some finite piece already misses}. It earns its own name because closed
+sets, not open ones, are the natural language for several later arguments (nested closed sets of
+shrinking size, in particular), where phrasing compactness this way saves a complementation step
+every time.
+\end{remark}
+
 % Sonnet 5 (Medium)

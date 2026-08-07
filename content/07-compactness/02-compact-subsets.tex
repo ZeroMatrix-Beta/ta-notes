@@ -5,7 +5,7 @@
 A subset $K$ of a metric space $(X,d)$ is compact if the metric space $(K, d|_{K \times K})$ is
 compact (\cref{def:compact_metric_space}). This is equivalent to the definition in the script:
 
-\begin{definition}[9.63, quoted from the official lecture notes]
+\begin{definition}[Definition 9.62, quoted from the official lecture notes]
 \label{def:sequential_topological_compactness}
 Let $(X,d)$ be a metric space. A subset $K \subset X$ is called \textbf{compact} if one of the
 following equivalent conditions hold:
@@ -16,8 +16,23 @@ following equivalent conditions hold:
   \item \label{item:top_compact_def963}
     $K$ is \textbf{topologically compact}: every family of open sets
     (\cref{def:open_closed}) $\{U_i\}_{i \in I}$ that cover $K$, has a finite subcover.
+  \item \label{item:complete_totally_bounded_def963}
+    $K$ is \textbf{complete} (every Cauchy sequence contained in $K$ has a limit in $K$) and
+    \textbf{totally bounded} (\cref{def:totally_bounded}): for every $r>0$ there exist finitely
+    many $x_1,\dots,x_n \in K$ such that the balls $B_r(x_1),\dots,B_r(x_n)$ cover $K$.
 \end{enumerate}
 \end{definition}
+
+\begin{ainote}
+Corsin's own citation of this definition (matching the numbering in an earlier printing of the
+script) reads \qt{9.63} and quotes only the first two of the three equivalent conditions above;
+in the current script (v1, 10 July 2024) this is \textbf{Definition 9.62}, and \emph{9.63} is
+instead the unnumbered remark explaining why condition \textbf{(b)} is called \qt{topological}.
+Corrected above, with the third condition restored. Nothing downstream was ever missing
+mathematically --- this document already proves the three-way equivalence at
+\cref{thm:sequential_topological_compactness_equivalence} and has totally-boundedness at
+\cref{def:totally_bounded} --- the citation was simply under-quoting its own source.
+\end{ainote}
 
 \begin{center}
 \begin{tikzpicture}[scale=1.1]

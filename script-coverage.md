@@ -178,8 +178,12 @@ exercises are unmarked for difficulty, so the ratings are mine. Every one of the
 
 ### Deliberately skipped
 
-* **Ex 9.33–9.35** (completion of a metric space) — depends on §9.1.4, which we have no section
-  for. See §6.
+* ~~**Ex 9.33–9.35** (completion of a metric space) — depends on §9.1.4, which we have no
+  section for. See §6.~~ **Reversed 2026-08-07 (user).** Taken after all — see §8. The
+  dependency was on §9.1.3 (Def 9.32, the general completion construction), not §9.1.4 (the
+  ℝ-from-ℚ specialisation, still skipped); the general construction is itself marked \qt{extra
+  material} by the script but is now transcribed as
+  `content/06-completeness/02-completion-of-a-metric-space.tex`.
 * **Ex 14.24–14.30** (rotation number, Jordan curve theorem) — a six-exercise chain building to
   a proof of the Jordan curve theorem. Individually meaningless, collectively a whole section.
   We already state Jordan–Brouwer at `22-vector-calculus/01-bounded-c1-domains.tex:29`. See §6.
@@ -197,7 +201,7 @@ exercises are unmarked for difficulty, so the ratings are mine. Every one of the
 | **Ex 9.13** | 7 | The sphere carries **two** natural metrics: the restricted Euclidean chord distance and the geodesic arc `d₁(x,y) = R·arccos(⟨x,y⟩/R²)`. The best possible motivation for "a subset inherits a metric, but not necessarily the one you want". | 2 |
 | **Ex 9.11** | 6 | The Manhattan metric, with the actual street-grid explanation. We have `d₁` (per `gemini.md`, keeping Corsin's indices) — **check whether the motivating story is there**; if not, the prose is worth lifting. | 2 |
 | **9.38** | 14 | `X = (0,1) ∪ (2,3)` has clopen sets other than `∅` and `X`, previewing connectedness. Two sentences, and it makes "clopen" concrete before ch. 8 needs it. | 3 |
-| **Ex 9.65** | 21 | `ℚ ∩ [0,√2]` is not compact, via the cover `(ℚ∩[0,√2)) ∪ ⋃_{p>√2}(ℚ∩(p,√2])`. The irrationality of `√2` is doing the work — a much better example than `(0,1]`. | 7 |
+| **Ex 9.65** | 22 | `ℚ ∩ [0,2]` is not compact, via the cover `(ℚ∩[0,√2)) ∪ ⋃_{p∈ℚ,p>√2}(ℚ∩(p,2])` (corrected 2026-08-07 — verified on the rendered page; the set is `[0,2]`, not `[0,√2]`, and the union runs to `2`, not `√2`). The irrationality of `√2` is doing the work — a much better example than `(0,1]`. | 7 |
 | **Ex 10.21** | 48 | *"How to use the chain rule in practice"*: rename `g`'s variables `u,v`, tabulate the partials, substitute back. A three-step recipe, and the script ends by admitting the chain rule is not more economical here than differentiating directly — honest, and pedagogically the right note. | 10 |
 | **Ex 10.35** | 59 | Degree-2 Taylor of `√(1+x−y²)` by substituting `t = x−y²` into the known 1-D series, then discarding `O(r³)` terms. The worked companion to Ex 10.36. | 11 |
 | **Ex 11.17** | 71 | `f(x,y) = x sin(y) + ax² + by²` with `det H = 4ab−1`: a two-parameter family running through all four Hessian cases. | 12 |
@@ -311,6 +315,22 @@ list at the bottom is the actual todo.
   of a general ball in $\mathbb{R}^n$, `ex:closure_boundary_of_ball`, generalising the $r=1$
   case already in `ex:interior_closure_boundary_more`\textbf{(b)}), with the latter's solution
   in `99-solutions.tex`.
+* **D1** fixed — `07-compactness/02-compact-subsets.tex`: retitled `[9.63, ...]` to
+  `[Definition 9.62, ...]` and restored the missing third \qt{complete + totally bounded}
+  condition, with an `ainote` explaining the discrepancy.
+* **Lemma 9.70** (nesting principle) — added as `lem:nesting_principle` in
+  `07-compactness/01-open-covers.tex`, with the script's proof (both directions) and a remark
+  connecting it to `def:compact_metric_space` via De Morgan.
+* **New section, reversing the 2026-08-06 \qt{enrich existing sections only} decision for this
+  one topic (user instruction, 2026-08-07):** completion of a metric space (script Def 9.32,
+  Ex 9.33–9.35), transcribed in full as a new
+  `content/06-completeness/02-completion-of-a-metric-space.tex`, with all three exercises
+  solved in `99-solutions.tex`. `content/06-completeness/03-contraction-mappings.tex` is the
+  old `02-contraction-mappings.tex`, renumbered to make room (git-tracked rename, no content
+  change). The chapter-level `ainote` explaining the skip (in `01-completeness.tex`) is updated
+  accordingly. The script's own $\mathbb{R}$-from-$\mathbb{Q}$ specialisation (§9.1.4) is
+  \emph{still} not built — it remains explicitly out of scope, pointing at the sibling
+  \emph{Grundstrukturen} project, per the unchanged §6 entry above.
 * Build verified clean (`latexmk -jobname=check`, 255 pages, no errors) after every change
   above. One real bug was caught and fixed in the process: an exercise title
   `[$\mathbb{R}[x]$ is infinite-dimensional]` broke LaTeX's optional-argument bracket matching
@@ -320,16 +340,16 @@ list at the bottom is the actual todo.
 
 ### Not yet started (in priority order — see §7)
 
-* **Chapters 4–8**, finishing session 1: Cor 9.50 (→ ch 4, `04-sequences/`), Lemma 9.70 nesting
-  principle (→ ch 7, `07-compactness/01-open-covers.tex`), Def 9.15 "eventually" vocabulary
-  (→ ch 4), **D1** fix (`02-compact-subsets.tex:8` — retitle `[9.63, ...]` to
-  `[Definition 9.62, ...]` and add the missing third "complete + totally bounded" bullet; exact
-  wording already transcribed above, in this session's transcript, from PDF p. 22), **E2**
-  ainote near the Weierstrass/extreme-value statement in ch 7 (script Cor 9.79 says
-  $\bar x \in X$, should be $\bar x \in K$ — verified on the rendered page). Remaining take-first
-  exercises: Ex 9.56 (ch 5), Ex 9.76 (ch 6), Ex 9.60 (ch 6), Ex 9.26 (ch 6), Ex 9.81 (ch 8),
-  Ex 9.68 (ch 7). Remaining take-second: Ex 9.85 (ch 8). Remaining examples: Ex 9.65 (ch 7,
-  $\mathbb{Q}\cap[0,\sqrt2]$ not compact).
+* **Chapters 4–8**, finishing session 1: Cor 9.50 (→ ch 4, `04-sequences/`), Def 9.15
+  "eventually" vocabulary (→ ch 4), **E2** ainote near the Weierstrass/extreme-value statement
+  in ch 7 (script Cor 9.79 says $\bar x \in X$, should be $\bar x \in K$ — verified on the
+  rendered page). Remaining take-first exercises: Ex 9.56 (ch 5), Ex 9.76 (ch 6), Ex 9.60
+  (ch 6), Ex 9.26 (ch 6), Ex 9.81 (ch 8), Ex 9.68 (ch 7). Remaining take-second: Ex 9.85 (ch 8).
+  Remaining examples: Ex 9.65 (ch 7) — **note the coverage table above mis-states this one**:
+  the script's actual set is $\mathbb{Q}\cap[0,2]$ covered by
+  $(\mathbb{Q}\cap[0,\sqrt2))\cup\bigcup_{p\in\mathbb{Q},p>\sqrt2}(\mathbb{Q}\cap(p,2])$, not
+  $\mathbb{Q}\cap[0,\sqrt2]$ — verified on the rendered page (PDF p. 26), use the corrected set
+  when this is taken.
 * **Session 2** (chapters 11–14): entirely open — see §7 item 2.
 * **Session 3** (`appendix-a-odes.tex`): entirely open — see §7 item 3.
 * **Session 4** (chapters 22–26): entirely open — see §7 item 4.

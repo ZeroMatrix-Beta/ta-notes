@@ -1,0 +1,70 @@
+% Supplement: Analysis_II_Script_v1.pdf, pp. 11--13
+\section{The completion of a metric space}
+\label{sec:completion_of_a_metric_space}
+
+\begin{ainote}
+This section has no counterpart in Corsin's notes and is transcribed directly from the official
+script (\S9.1.3, printed pp. 11--13), rather than enriching an existing tutor passage the way the
+rest of this document's supplements do. The reason to include it despite that: it is the
+construction that makes sense of \qt{$\mathbb{Q}$ is not complete, but $\mathbb{R}$ is} in
+general --- every incomplete metric space embeds isometrically, and densely, into a complete one
+--- and script Exercises 9.33--9.35 walking through it are short, self-contained, and otherwise
+exactly the kind of material this chapter collects. What is \emph{not} included is the script's
+own use of this construction to build $\mathbb{R}$ from $\mathbb{Q}$ (\S9.1.4): that material is
+marked \qt{extra; cf.\ Grundstrukturen} by the script itself and belongs to the sibling
+\emph{Grundstrukturen} project.
+\end{ainote}
+
+\begin{definition}[Completion of a metric space]
+\label{def:completion_of_metric_space}
+Let $(X,d)$ be a metric space. Write $\mathcal{C}_X$ for the set of all Cauchy sequences in $X$,
+and define an equivalence relation on $\mathcal{C}_X$ by
+\[(x_n)_{n=0}^\infty \sim (y_n)_{n=0}^\infty \quad :\Longleftrightarrow\quad \lim_{n\to\infty}d(x_n,y_n) = 0.\]
+The quotient set $\overline X := \mathcal{C}_X/{\sim}$, equipped with the map
+\[\overline d\big([(x_n)_{n=0}^\infty],\,[(y_n)_{n=0}^\infty]\big) := \lim_{n\to\infty}d(x_n,y_n),\]
+is called the \newterm{completion} (\germanterm{Vervollst\"andigung}) of $(X,d)$. The injection
+$\iota : X \to \overline X$ sending $x$ to the class of the constant sequence $(x,x,x,\dots)$ is
+called the \newterm{canonical embedding}. For all $x,y \in X$,
+\[d(x,y) = \overline d\big(\iota(x),\iota(y)\big),\]
+which in particular shows $\iota$ is injective.
+\end{definition}
+
+% Supplement: Analysis_II_Script_v1.pdf, p. 11
+\begin{exercise}[Well-definedness of the completion]
+\label{ex:completion_well_defined}
+Show that the objects introduced in \cref{def:completion_of_metric_space} are well defined. In
+particular, verify that $\overline d$ is indeed a metric on $\overline X$.
+\end{exercise}
+
+% Supplement: Analysis_II_Script_v1.pdf, p. 11
+\begin{exercise}[The completion is complete]
+\label{ex:completion_is_complete}
+As the name suggests, the completion $(\overline X,\overline d)$ of a metric space is complete,
+meaning every Cauchy sequence in $\overline X$ converges. A sequence in $\overline X$ is
+essentially a sequence of sequences, i.e.\
+$\big[(x_{m,n})_{n=0}^\infty\big]_{m=0}^\infty$. Show that $\big[(x_{n,n})_{n=0}^\infty\big]$ is a
+limit of this sequence.
+\end{exercise}
+
+% Supplement: Analysis_II_Script_v1.pdf, p. 11
+\begin{exercise}[Universal property of the completion]
+\label{ex:completion_universal_property}
+Let $(X,d)$ be a metric space with completion $(\overline X,\overline d)$. Let $(Y,d_Y)$ be a
+complete metric space, and let $f : X \to Y$ be a function such that
+\[d(x,y) = d_Y\big(f(x),f(y)\big) \qquad \text{for all } x,y \in X.\]
+Show that there exists a unique function $\overline f : \overline X \to Y$ such that
+$f = \overline f \circ \iota_X$ and
+\[\overline d(\overline x,\overline y) = d_Y\big(\overline f(\overline x),\overline f(\overline y)\big)
+  \qquad \text{for all } \overline x,\overline y \in \overline X.\]
+This can be interpreted as: \qt{$\overline X$ is the \emph{smallest} complete metric space
+containing $X$.}
+\end{exercise}
+
+\begin{remark}
+\Cref{ex:completion_universal_property} is what makes \qt{the} completion well-posed rather than
+just \qt{a} completion: any other complete space that $X$ embeds into isometrically receives a
+unique isometric copy of $\overline X$ as well, via $\overline f$. This is the same
+uniqueness-up-to-isomorphism pattern behind \qt{the} real numbers as \qt{the} complete ordered
+field --- which is exactly how the script uses this construction in $\S9.1.4$, taking
+$X = \mathbb{Q}$.
+\end{remark}

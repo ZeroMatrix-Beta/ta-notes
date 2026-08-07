@@ -40,6 +40,35 @@ every $\varepsilon > 0$ there exist finitely many points $x_1,\dots,x_n \in X$ s
 \[X = \bigcup_{k=1}^{n} B_\varepsilon(x_k).\]
 \end{definition}
 
+% Supplement: Analysis_II_Script_v1.pdf, p. 22
+\begin{exercise}[Totally bounded is strictly stronger than bounded]
+\label{ex:totally_bounded_implies_bounded}
+Let $X$ be a metric space. Show that if $X$ is totally bounded, then it is bounded, i.e.\
+$\sup_{x,x'\in X}d(x,x') < \infty$. Find an example of a bounded metric space that is
+\emph{not} totally bounded.
+\end{exercise}
+
+\begin{exercisesolution}[Proof of \cref{ex:totally_bounded_implies_bounded}]
+% Generator: Claude Sonnet 5 (Medium)
+\textbf{Totally bounded $\Rightarrow$ bounded.} Apply \cref{def:totally_bounded} with
+$\varepsilon := 1$: there are $x_1,\dots,x_n$ with $X = \bigcup_{k=1}^n B_1(x_k)$. Let
+$M := \max_{i,j}d(x_i,x_j)$ (finite, a maximum over finitely many pairs). For any
+$x,x' \in X$, choose $i,j$ with $x \in B_1(x_i)$, $x' \in B_1(x_j)$; the triangle inequality
+gives $d(x,x') \leq d(x,x_i)+d(x_i,x_j)+d(x_j,x') < 1+M+1$, so $X$ is bounded.
+
+\textbf{Not conversely.} Let $X$ be any infinite set with the discrete metric. Then
+$\sup_{x,x'}d(x,x') = 1 < \infty$, so $X$ is bounded. But $X$ is not totally bounded: for
+$\varepsilon := \tfrac12$, every ball $B_{1/2}(x) = \{x\}$ (\cref{def:open_ball}), so no
+\emph{finite} union of such balls can cover the infinite set $X$.
+\end{exercisesolution}
+
+\begin{remark}
+This is the same asymmetry \cref{lem:sequentially_compact_totally_bounded} proves in one
+direction only: sequential compactness forces \emph{both} boundedness and total boundedness, and
+this exercise shows the two are genuinely different hypotheses --- total boundedness is the
+strictly stronger, and in general infinite-dimensional, condition.
+\end{remark}
+
 \begin{lemma}[Sequential compactness gives (total) boundedness]
 \label{lem:sequentially_compact_totally_bounded}
 Let $(X,d)$ be sequentially compact. Then $X$ is bounded and totally bounded

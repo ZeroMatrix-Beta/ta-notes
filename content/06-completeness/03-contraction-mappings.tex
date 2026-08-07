@@ -64,6 +64,31 @@ The uniqueness proof above shows the second point cleanly: the whole argument is
 $1-L$, which is exactly what $L=1$ forbids.
 \end{remark}
 
+% Supplement: Analysis_II_Script_v1.pdf, p. 20
+\begin{exercise}[Both hypotheses of Banach's theorem are sharp]
+\label{ex:banach_hypotheses_sharp}
+Find examples for:
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item A Lipschitz contraction $T : X \to X$ on a non-complete metric space $X$ that has no
+    fixed point.
+  \item A complete metric space $(X,d)$ and an \newterm{isometry} (a mapping $T : X \to X$ with
+    $d(T(x_1),T(x_2)) = d(x_1,x_2)$ for all $x_1,x_2$) that has no fixed point.
+\end{enumerate}
+\end{exercise}
+
+\begin{remark}
+Part \textbf{(b)} sharpens \cref{rem:banach_hypotheses}'s second bullet: that example already
+showed a Lipschitz constant of exactly $1$ can defeat the theorem, but its map $T$ was not an
+isometry ($|T(x)-T(y)| < |x-y|$ strictly, just with no uniform gap). An isometry is the most
+rigid failure imaginable --- it does not even shrink distances a little --- and it \emph{still}
+need not have a fixed point, even on a complete space. Note that unboundedness is doing real
+work in the counterexample: on a \emph{compact} space, an isometry into itself is automatically
+surjective, but even that is not enough to force a fixed point --- an irrational rotation of the
+circle $S^1$ (compact, and an isometry) has none either. Fixed points of isometries are a
+genuinely separate question from \cref{thm:banach_fixed_point}, not one it settles as a special
+case.
+\end{remark}
+
 \begin{aiexercise}[{Contraction Mapping on $[0,1]$}]
 \label{ex:ai_contraction_cos}
 % Generator: Gemini 3.6 Flash (Medium)

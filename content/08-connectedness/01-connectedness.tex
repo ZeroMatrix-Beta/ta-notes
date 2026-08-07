@@ -187,6 +187,28 @@ than about $f$. It is used in the topologist's sine curve
 (\cpageref{ex:topologists_sine_curve}) below.
 \end{ainote}
 
+% Supplement: Analysis_II_Script_v1.pdf, p. 29
+\begin{corollary}[Intermediate value theorem on a connected space]
+\label{cor:ivt_general_connected}
+Let $X$ be a connected metric space and $f : X \to \mathbb{R}$ continuous. For any $a,b \in X$
+and any $y \in \mathbb{R}$ between $f(a)$ and $f(b)$, there exists $x \in X$ with $f(x) = y$.
+\end{corollary}
+
+\begin{proof}
+Word for word \cref{cor:intermediate_value_theorem}'s proof, with $X$ in place of $[a,b]$: $X$
+is connected by hypothesis (rather than by \cref{prop:intervals_connected}), so $f(X)$ is
+connected by \cref{thm:continuity_preserves_connected}, hence an interval by
+\cref{prop:intervals_connected}; an interval containing $f(a)$ and $f(b)$ contains everything
+between them.
+\end{proof}
+
+\begin{remark}
+\Cref{cor:intermediate_value_theorem} is the special case $X = [a,b]$. Stating the general
+version separately is worth doing once: it makes clear that connectedness, not any special
+property of an interval, is what the intermediate value theorem actually needs --- exactly the
+moral of \cref{rem:intervals_are_the_base_case}.
+\end{remark}
+
 % Supplement: Sascha Brack/Class Notes/Week_03_Notes_Monday.pdf, p. 4
 \begin{corollary}[Linear maps preserve the unit cube]
 \label{cor:linear_maps_unit_cube}
@@ -268,6 +290,42 @@ stated intersection $\{(\pm 1, 0)\}$ confirms. Corrected here.
   \fill[purple] (1,0) circle (2pt) node[above right, font=\footnotesize] {$(1,0)$};
 \end{tikzpicture}
 \end{center}
+
+% Supplement: Analysis_II_Script_v1.pdf, p. 28
+\begin{corollary}[Arbitrary unions of connected sets through a common point]
+\label{cor:union_connected_common_point}
+Let $(X,d)$ be a metric space, $p \in X$, and $\{V_i\}_{i\in I}$ a family of connected subsets of
+$X$ with $p \in V_i$ for every $i \in I$. Then $\bigcup_{i\in I}V_i$ is connected.
+\end{corollary}
+
+\begin{proof}
+Suppose $\bigcup_i V_i \subseteq U_1 \cup U_2$ with $U_1,U_2$ open and disjoint, and say
+$p \in U_1$. For each $i$, the argument of \cref{ex:connectedness_tf}\textbf{(a)} applies to
+$V_i$ alone: it meets $U_1$ (at $p$) and is connected, so it cannot also meet $U_2$, i.e.\
+$V_i \subseteq U_1$. This holds for every $i \in I$, so $\bigcup_i V_i \subseteq U_1$, and $U_2$
+cannot meet $\bigcup_i V_i$: no separation of the union exists.
+\end{proof}
+
+\begin{definition}[Connected component]
+\label{def:connected_component}
+Let $(X,d)$ be a metric space and $x \in X$. The \newterm{connected component}
+(\germanterm{Zusammenhangskomponente}) of $x$ is
+\[C_x := \bigcup\{V \subseteq X : V \text{ connected and } x \in V\},\]
+the union of all connected subsets of $X$ containing $x$.
+\end{definition}
+
+\begin{remark}
+By \cref{cor:union_connected_common_point} (with $I$ indexing \emph{all} connected sets
+containing $x$, and common point $p := x$), $C_x$ is itself connected --- it is the
+\emph{largest} connected subset of $X$ containing $x$, since it contains every connected set
+that does. Two connected components are either equal or disjoint: if $C_x \cap C_y \neq
+\emptyset$, pick $p$ in the intersection; then $C_x \cup C_y$ is connected
+(\cref{cor:union_connected_common_point} again, common point $p$) and contains both $x$ and $y$,
+so maximality of $C_x$ and $C_y$ forces $C_x \cup C_y \subseteq C_x$ and
+$C_x \cup C_y \subseteq C_y$, i.e.\ $C_x = C_y$. Hence the connected components partition $X$ into
+disjoint pieces --- the connectedness analogue of how an equivalence relation partitions a set
+into equivalence classes.
+\end{remark}
 
 % Source: Jérôme Paschoud/Notizen/Woche 3.2 Zusammenhängende Mengen.pdf, p. 3
 % Generator: Gemini 3.6 Flash (High)

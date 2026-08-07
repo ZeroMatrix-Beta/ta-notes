@@ -14,6 +14,14 @@
     $K \subseteq X$ compact, $f : K \to \mathbb{R}$ continuous. Then $f$ attains its maximum and
     minimum in $K$. In particular, $f$ is bounded --- proved as
     \cref{lem:sequential_compactness_extreme_values}.
+    \begin{ainote}
+    The official script's statement of this theorem (Cor.\ 9.79) writes the conclusion as
+    \qt{there exist $\bar x \in X$ such that $f(\bar x) = \sup_K f$}, with $\bar x$ ranging over
+    the whole ambient space $X$ rather than over $K$; the proof given there repeats the slip,
+    writing $f^{-1}(\sup f(X))$ where it must mean $f^{-1}(\sup f(K))$. As stated, the claim is
+    false as soon as $f$ is unbounded off $K$: e.g.\ $K:=\{0\}\subset X:=\mathbb{R}$,
+    $f(x):=x$. The maximiser $\bar x$ must be sought in $K$, as in the statement above.
+    \end{ainote}
   \item \label{item:uniform_continuity_compact}
     \textbf{Uniform continuity:} $X$, $Y$ metric spaces, $f : X \to Y$ continuous. If $X$ is
     compact, then $f$ is uniformly continuous (\cref{def:uniformly_continuous}) ---

@@ -177,6 +177,18 @@ ambient space is used. Inside $\mathbb{Q}$ instead of $\mathbb{R}$ the statement
 $\mathbb{Q}$ is closed in itself but not complete.
 \end{exercisesolution}
 
+\begin{ainote}
+Part \textbf{(b)} is also script Exercise 9.76, which the script proves without invoking
+connectedness at all --- worth recording as a second route, since it is more elementary. Fix
+$x \in U$ and $y \notin U$, and let $\gamma(t) := x+t(y-x)$, $t\in[0,1]$, be the segment between
+them. The point $\gamma(t_*)$ with $t_* := \sup\{t\in[0,1] : \gamma(t)\in U\}$ cannot lie in $U$
+(openness of $U$ would let $t_*$ be pushed further out), yet is a limit of points
+$\gamma(t_k) \in U$ with $t_k \nearrow t_*$ --- a convergent, hence Cauchy, sequence in $U$ whose
+limit escapes $U$. This avoids \cref{lem:path_connected_implies_connected} entirely, at the cost
+of only working in $\mathbb{R}^n$ (the segment needs the vector space structure), whereas the
+connectedness proof above generalises to any connected, locally connected ambient space.
+\end{ainote}
+
 \begin{exercisesolution}[Solution to \cref{ex:uniform_lipschitz_family}]
 % Generator: Claude Opus 5 (High)
 \begin{enumerate}[label=\textbf{(\alph*)}]

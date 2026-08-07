@@ -44,6 +44,18 @@ $x : \mathbb{N} \to X$. We say that $(x_n)_{n=0}^{\infty}$ \newterm{converges} t
 \end{tikzpicture}
 \end{center}
 
+% Supplement: Analysis_II_Script_v1.pdf, p. 7
+\begin{notation}[\qt{Eventually}]
+\label{not:eventually}
+Let $(x_n)_{n\geq0}$ be a sequence in a set $X$ and let $\mathcal{P}$ be a property that a point
+of $X$ may or may not have. One says $x_n$ satisfies $\mathcal{P}$ \newterm{eventually}
+(\germanterm{schlie\ss lich}) if there exists $N \in \mathbb{N}$ such that $\mathcal{P}(x_n)$
+holds for all $n \geq N$ --- equivalently, if $\mathcal{P}(x_n)$ fails for at most finitely many
+$n$. In this vocabulary, \cref{def:convergent_sequence} reads: $(x_n)_n$ converges to $x$ if, for
+every $\varepsilon>0$, $x_n$ eventually lies in $B_\varepsilon(x)$. The same compression applies
+throughout the rest of this chapter and the next three.
+\end{notation}
+
 % Supplement: Sascha Brack/Class Notes/Week_02_Notes_Monday_Updated.pdf, p. 7
 \begin{example}[A convergent sequence in $\mathbb{R}^3$]
 \label{ex:convergent_sequence_R3}
@@ -163,6 +175,50 @@ statement about balls to a statement about sequences, and it is exactly what mak
 one usually proves closedness by the sequence criterion and openness by the ball criterion.
 Note that it needs the radii $\tfrac1n$ to shrink to $0$, which is where the metric enters;
 in a general topological space the equivalence can fail.
+\end{remark}
+
+% Supplement: Analysis_II_Script_v1.pdf, p. 17
+\begin{lemma}[Convergence is a topological notion]
+\label{lem:convergence_is_topological}
+Let $(X,d)$ be a metric space. A sequence $(x_n)_n$ in $X$ converges to $x$ if and only if, for
+every open set $U \ni x$, $(x_n)_n$ eventually (\cref{not:eventually}) lies in $U$.
+\end{lemma}
+
+\begin{proof}
+If $x_n \to x$ and $U \ni x$ is open, some $\varepsilon>0$ has $B_\varepsilon(x)\subseteq U$
+(\cref{def:open_closed}), and $x_n$ eventually lies in $B_\varepsilon(x)$
+(\cref{def:convergent_sequence}), hence in $U$. Conversely, taking $U := B_\varepsilon(x)$ itself
+for each $\varepsilon>0$ recovers exactly \cref{def:convergent_sequence}.
+\end{proof}
+
+% Supplement: Analysis_II_Script_v1.pdf, p. 17
+\begin{corollary}[Two metrics with the same topology have the same convergent sequences]
+\label{cor:same_topology_same_convergence}
+Let $X$ be a set endowed with two metrics $d_1$ and $d_2$. Then $(X,d_1)$ and $(X,d_2)$ have the
+same convergent sequences if and only if the topologies they generate coincide.
+\end{corollary}
+
+\begin{proof}
+By \cref{lem:convergence_is_topological}, whether $x_n \to x$ depends only on the collection of
+open sets, i.e.\ only on the topology $d_1$ or $d_2$ generates --- so equal topologies give equal
+convergent sequences.
+
+For the converse, suppose $U \subseteq X$ is open with respect to $d_1$ but not with respect to
+$d_2$; we exhibit a sequence distinguishing the two. Since $U$ is not $d_2$-open, some $x \in U$
+has, for every $k \geq 0$, a point $x_k \in B^{d_2}_{2^{-k}}(x) \setminus U$. Then $x_k \to x$
+with respect to $d_2$ (\cref{def:convergent_sequence}, since $2^{-k}\to0$), so by hypothesis also
+$x_k \to x$ with respect to $d_1$. But $U$ is $d_1$-open and contains $x$, so
+\cref{lem:convergence_is_topological} forces $(x_k)_k$ to eventually lie in $U$ --- contradicting
+$x_k \notin U$ for every $k$. So every $d_1$-open set is $d_2$-open, and by symmetry the two
+topologies coincide.
+\end{proof}
+
+\begin{remark}
+This is the precise sense in which \qt{only the topology matters, not the metric itself} for
+convergence: two visibly different metrics --- even one bounded and one not --- generate the same
+convergent sequences exactly when they generate the same open sets, with no need to compare them
+directly. \Cref{ex:2.5}\textbf{.2}'s three product metrics are one instance of this; so is
+\cref{prop:concave_reshaping_metric} together with \cref{ex:reshaping_same_convergence}.
 \end{remark}
 
 % Source: Corsin Nick/Class Notes/Week 2.pdf, pp. 1--13

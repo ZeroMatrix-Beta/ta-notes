@@ -12,6 +12,26 @@ $(X,d)$ is a \newterm{complete metric space} (\germanterm{vollst\"andiger metris
 every Cauchy sequence in $X$ converges with respect to $d$.
 \end{definition}
 
+% Supplement: Analysis_II_Script_v1.pdf, p. 10
+\begin{exercise}[Elementary facts about Cauchy sequences]
+\label{ex:cauchy_elementary_facts}
+Let $(X,d)$ be a metric space and $(x_n)_{n=0}^\infty$ a sequence in $X$. Prove:
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Every Cauchy sequence is bounded (meaning $\{d(x_n,x_0) : n\geq0\} \subset \mathbb{R}$ is
+    a bounded set).
+  \item Every convergent sequence is Cauchy.
+  \item A Cauchy sequence converges if and only if it has a convergent subsequence.
+\end{enumerate}
+\end{exercise}
+
+\begin{remark}
+Part \textbf{(c)} is the standard route to proving completeness of a space \emph{without}
+guessing the limit in advance: instead of constructing a candidate limit directly, one only has
+to extract \emph{some} convergent subsequence, and \textbf{(c)} upgrades that to convergence of
+the whole sequence. This is exactly the shape of the argument used throughout
+\cref{ch:compactness}.
+\end{remark}
+
 \begin{ainote}
 The official course script (\S9.1.4, \qt{The reals as the completion of $\mathbb{Q}$}) develops
 the converse construction: given \emph{any} incomplete metric space $(X,d)$, one builds a
@@ -111,7 +131,15 @@ the reduction used in \cref{def:sequential_topological_compactness}.
 \end{ainote}
 \end{remark}
 
-% Quelle: Diego Torres Tejeda/Notes - 06.03 - Diego Torres Tejeda.pdf, p. 2
+\begin{remark}
+The second bullet of \cref{rem:complete_vs_closed}'s example --- $(0,1) \subset \mathbb{R}$ is
+open and not complete --- is not a quirk of that particular interval: script Exercise 9.76 asks
+for exactly this in general, and the fact is already in this document as
+\cref{ex:3.4}\textbf{(b)} below --- \emph{every} proper, non-empty open subset of $\mathbb{R}^n$
+fails to be complete, for the same underlying reason. That solution gives the topological proof
+via connectedness; an ainote there records the script's more elementary, connectedness-free
+alternative.
+\end{remark}
 \begin{exercise}[Completeness is not a topological property]
 \label{ex:completeness_not_topological}
 Corsin does not address whether completeness survives a change of metric; Diego Torres Tejeda

@@ -3,6 +3,26 @@
 \section{Solutions}
 \label{sec:completeness_solutions}
 
+\begin{exercisesolution}[Proof of \cref{ex:cauchy_elementary_facts}]
+% Generator: Claude Sonnet 5 (Medium)
+\textbf{(a) Bounded.} Take $\varepsilon=1$: there is $N$ with $d(x_n,x_m)<1$ for all
+$n,m\geq N$; in particular $d(x_n,x_N)<1$ for $n\geq N$. Setting
+$M := \max\{d(x_0,x_N),\dots,d(x_{N-1},x_N),\,1\}$, the triangle inequality gives
+$d(x_n,x_0) \leq d(x_n,x_N)+d(x_N,x_0) \leq 1+M$ for every $n$, so $(x_n)_n \subseteq B_{1+M}(x_0)$.
+
+\textbf{(b) Convergent $\Rightarrow$ Cauchy.} If $x_n \to x$, fix $\varepsilon>0$ and choose $N$
+with $d(x_n,x)<\varepsilon/2$ for $n\geq N$. Then for $n,m\geq N$,
+$d(x_n,x_m) \leq d(x_n,x)+d(x,x_m) < \varepsilon$.
+
+\textbf{(c) Cauchy + convergent subsequence $\Rightarrow$ convergent.} Let $(x_n)$ be Cauchy and
+$x_{n_k} \to x$. The \qt{only if} direction is part \textbf{(b)} applied to the whole sequence.
+For \qt{if}: fix $\varepsilon>0$. Cauchyness gives $N$ with $d(x_n,x_m)<\varepsilon/2$ for
+$n,m\geq N$; convergence of the subsequence gives $K$ with $d(x_{n_k},x)<\varepsilon/2$ for
+$k\geq K$. Since $n_k \to \infty$, pick $k\geq K$ with $n_k \geq N$. Then for every $n\geq N$,
+\[d(x_n,x) \leq d(x_n,x_{n_k}) + d(x_{n_k},x) < \tfrac{\varepsilon}{2}+\tfrac{\varepsilon}{2} = \varepsilon,\]
+so $x_n \to x$.
+\end{exercisesolution}
+
 \begin{exercisesolution}[Solution to \cref{ex:completeness_not_topological}]
 % Generator: Claude Opus 5 (Medium)
 Write $\varphi : (0,1] \to [1,\infty)$, $\varphi(x) := 1/x$. It is a bijection, and by
@@ -147,6 +167,19 @@ $n\to\infty$, since $(x_n)_n$ is Cauchy. By continuity of $g$ and $f = g\circ\io
 \[g(\overline x) = \lim_n g(\iota_X(x_n)) = \lim_n f(x_n) = \overline f(\overline x),\]
 using uniqueness of limits in $Y$ once more for the last equality. As $\overline x$ was
 arbitrary, $g = \overline f$.
+\end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:banach_hypotheses_sharp}]
+% Generator: Claude Sonnet 5 (Medium)
+\textbf{(a)} This is \cref{rem:banach_hypotheses}'s first bullet: $X := (0,1]$ is not complete,
+and $T(x) := x/2$ is a $\tfrac12$-contraction on $X$ with iterates marching towards the missing
+point $0$, hence no fixed point in $X$.
+
+\textbf{(b)} Take $X := \mathbb{R}$ (complete, \cref{prop:Rn_coordinatewise_complete}) with the
+translation $T(x) := x+1$. Then $d(T(x),T(y)) = |(x+1)-(y+1)| = |x-y| = d(x,y)$, so $T$ is an
+isometry --- in particular Lipschitz with constant $L=1$, \emph{not} $<1$, so this does not
+contradict \cref{thm:banach_fixed_point}. A fixed point would need $x+1=x$, which is impossible;
+so $T$ has none.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:ai_contraction_cos}]

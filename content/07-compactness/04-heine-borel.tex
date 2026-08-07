@@ -131,6 +131,25 @@ U_n := \left(\frac{1}{n}, 1\right) \quad \text{for } n \in \mathbb{N}_{\ge 2}
 forms an open cover of $(0,1)$ because for any $x \in (0,1)$, there exists $n \in \mathbb{N}$ with $1/n < x$. However, any finite subcollection $\{U_{n_1}, \dots, U_{n_k}\}$ has a maximum index $N := \max\{n_1, \dots, n_k\}$, so its union is $U_N = (1/N, 1)$, which fails to cover points in $(0, 1/N]$. Thus $(0,1)$ is bounded but not compact.
 \end{aiexample}
 
+% Supplement: Analysis_II_Script_v1.pdf, p. 22
+\begin{example}[Heine--Borel needs $\mathbb{R}^n$ itself, not just the standard-looking metric]
+\label{ex:rationals_not_compact}
+$\mathbb{Q} \cap [0,2]$, with the metric inherited from the standard metric on $\mathbb{R}$, is
+closed and bounded \emph{as a subset of $\mathbb{Q}$} --- yet it is not compact. The family
+\[\mathbb{Q}\cap[0,2] \ =\ \big(\mathbb{Q}\cap[0,\sqrt2)\big) \ \cup\!\!
+  \bigcup_{p\in\mathbb{Q},\,p>\sqrt2}\!\big(\mathbb{Q}\cap(p,2]\big)\]
+is an open cover of $\mathbb{Q}\cap[0,2]$ (each set is the trace of an open subset of
+$\mathbb{R}$, hence open in the subspace $\mathbb{Q}\cap[0,2]$): every rational in $[0,2]$ is
+either $<\sqrt2$ or $>\sqrt2$, since $\sqrt2 \notin \mathbb{Q}$. Any finite subcover uses only
+finitely many of the sets $\mathbb{Q}\cap(p,2]$, hence has a largest such $p$, call it
+$p_{\max}$, and then misses every rational in $(\sqrt2,\,p_{\max}]$ --- of which there are
+infinitely many. This is sharper than \cref{ex:compactness_heine_borel_examples}\textbf{(a)}'s
+$\mathbb{N}$: there, compactness fails because the set is unbounded; here it fails on a closed
+\emph{and} bounded set, purely because the ambient space $\mathbb{Q}$ is not $\mathbb{R}^n$ ---
+the irrationality of $\sqrt2$ is doing all the work, by leaving a \qt{hole} exactly where the
+cover would need to close up.
+\end{example}
+
 % Kept inline: solved directly in Corsin Nick/Class Notes/Week 3.pdf, pp. 1--2.
 \begin{exercisesolution}[Proof of \cref{ex:heine_borel_fails}]
 \textbf{(a)} Non-negativity, definiteness and symmetry are inherited directly from the

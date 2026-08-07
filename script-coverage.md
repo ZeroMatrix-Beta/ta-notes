@@ -269,9 +269,7 @@ Highest value first. Each is one session, and each is self-contained.
 1. **Chapters 2–8** (script §9, printed pp. 3–37). The largest single block of takeable
    exercises — 8 of the 11 "take first" items live here — plus divergence **D1** to fix and
    gaps **Cor 9.50**, **Lemma 9.70**, **Def 9.15**.
-   **Partially done, see §8 — chapters 2–3 finished 2026-08-07; chapters 4–8 (Cor 9.50,
-   Lemma 9.70, Def 9.15, D1 fix, and the remaining take-first/take-second exercises) still
-   open.**
+   **Done in full, 2026-08-07 — see §8.**
 2. **Chapters 11–14** (script §§10.2–11). Gaps `Cor 10.41` (unique continuation) and
    `Prop 11.26` (Jensen), divergences **D2** and **D3**, and the strongest examples in the
    script (11.16, 11.17, 10.35).
@@ -338,18 +336,27 @@ list at the bottom is the actual todo.
   brace-protecting to `\mathbb{R}{[}x{]}`. Worth remembering for any future title containing a
   literal `[` or `]` in math.
 
-### Not yet started (in priority order — see §7)
+### Session 1 (chapters 2–8) — DONE, 2026-08-07
 
-* **Chapters 4–8**, finishing session 1: Cor 9.50 (→ ch 4, `04-sequences/`), Def 9.15
-  "eventually" vocabulary (→ ch 4), **E2** ainote near the Weierstrass/extreme-value statement
-  in ch 7 (script Cor 9.79 says $\bar x \in X$, should be $\bar x \in K$ — verified on the
-  rendered page). Remaining take-first exercises: Ex 9.56 (ch 5), Ex 9.76 (ch 6), Ex 9.60
-  (ch 6), Ex 9.26 (ch 6), Ex 9.81 (ch 8), Ex 9.68 (ch 7). Remaining take-second: Ex 9.85 (ch 8).
-  Remaining examples: Ex 9.65 (ch 7) — **note the coverage table above mis-states this one**:
-  the script's actual set is $\mathbb{Q}\cap[0,2]$ covered by
-  $(\mathbb{Q}\cap[0,\sqrt2))\cup\bigcup_{p\in\mathbb{Q},p>\sqrt2}(\mathbb{Q}\cap(p,2])$, not
-  $\mathbb{Q}\cap[0,\sqrt2]$ — verified on the rendered page (PDF p. 26), use the corrected set
-  when this is taken.
+All items finished. Cor 9.50 (`cor:same_topology_same_convergence`, ch 4, with a supporting
+`lem:convergence_is_topological`) and Def 9.15 "eventually" (`not:eventually`, ch 4). E2 ainote
+added next to `item:extreme_value_theorem` in ch 7. Ex 9.56 landed as
+`cor:closed_iff_zero_of_distance` in ch 5 (kept short — it mostly restates already-transcribed
+`ex:2.3` and `ex:distance_to_point_continuous`, adding only the missing \qt{iff} direction, to
+avoid the kind of duplication `supplements.md` warns about). Ex 9.76 turned out to duplicate
+`ex:3.4`\textbf{(b)} (already in ch 7) in substance; resolved by cross-referencing from ch 6
+instead of re-proving, with the script's more elementary segment-based proof added as a bonus
+`ainote` on `ex:3.4`'s solution. Ex 9.60 (`ex:banach_hypotheses_sharp`, ch 6) and Ex 9.26
+(`ex:cauchy_elementary_facts`, ch 6) taken directly. Ex 9.68
+(`ex:totally_bounded_implies_bounded`, ch 7) and Ex 9.65 (`ex:rationals_not_compact`, ch 7,
+using the corrected $\mathbb{Q}\cap[0,2]$ set noted in §3 above) taken directly. Ex 9.81 generalised
+beyond the pairwise case already present as `ex:connectedness_tf`\textbf{(a)}: added
+`cor:union_connected_common_point` (arbitrary unions) and `def:connected_component` (ch 8). Ex
+9.85 added as `cor:ivt_general_connected` (ch 8), the connected-space generalisation of the
+already-present interval-only IVT.
+
+Build verified clean throughout (latest: 263 pages, no errors, no undefined references).
+
 * **Session 2** (chapters 11–14): entirely open — see §7 item 2.
 * **Session 3** (`appendix-a-odes.tex`): entirely open — see §7 item 3.
 * **Session 4** (chapters 22–26): entirely open — see §7 item 4.

@@ -204,6 +204,36 @@ Using the reverse triangle inequality, we have
 Therefore, we can simply choose $\delta := \varepsilon$. Then $d(x, x') < \delta$ directly implies $|f(x) - f(x')| < \varepsilon$, meaning $f$ is continuous at $x$. Since $x$ was arbitrary, $f$ is continuous everywhere.
 \end{exercisesolution}
 
+% Supplement: Analysis_II_Script_v1.pdf, p. 19
+\begin{corollary}[Closed sets are exactly the zero sets of a distance function]
+\label{cor:closed_iff_zero_of_distance}
+Let $(X,d)$ be a metric space and $\emptyset \neq E \subseteq X$. The function
+$f_E(x) := d(x,E) = \inf_{z\in E}d(x,z)$ is $1$-Lipschitz --- this is \cref{ex:2.3}\textbf{(c)},
+proved there by the same reverse-triangle-inequality argument as
+\cref{ex:distance_to_point_continuous} above --- and
+\[E \text{ is closed} \quad\Longleftrightarrow\quad E = \{x \in X : f_E(x) = 0\}.\]
+\end{corollary}
+
+\begin{proof}
+The inclusion $E \subseteq \{f_E = 0\}$ always holds, since $z \in E$ gives
+$f_E(z) \leq d(z,z) = 0$. So only the reverse inclusion carries content, and it is exactly where
+closedness is needed.
+
+\textbf{($\Rightarrow$)} Let $E$ be closed and $f_E(x) = 0$. By definition of the infimum, choose
+$z_n \in E$ with $d(x,z_n) \to 0$; then $z_n \to x$, and closedness of $E$ gives $x \in E$
+(\cref{prop:open_closed_via_sequences}\textbf{(b)}).
+
+\textbf{($\Leftarrow$)} Suppose $E = \{f_E = 0\}$ and let $(z_n)$ be a sequence in $E$ with
+$z_n \to x$. Then $f_E(x) \leq d(x,z_n) \to 0$, so $f_E(x) = 0$, i.e.\ $x \in E$ by hypothesis.
+\Cref{prop:open_closed_via_sequences}\textbf{(b)} then gives that $E$ is closed.
+\end{proof}
+
+\begin{remark}
+This sharpens \cref{ex:2.3}\textbf{(a)}, which showed only one direction ($E$ closed
+$\Rightarrow$ $f_E > 0$ off $E$) for a general subset. It is exactly closedness, and nothing
+weaker, that lets $f_E$ detect membership in $E$ by vanishing.
+\end{remark}
+
 % Quelle: Jérôme Paschoud/Notizen/Woche 2.2 Topologie und Stetigkeit.pdf, p. 3
 \begin{exercise}[Evaluation map is continuous]
 \label{ex:evaluation_map_continuous}

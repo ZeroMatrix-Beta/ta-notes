@@ -114,6 +114,32 @@ with exterior derivative
   \times F\mid\cdot\mid\cdot)$: the exterior derivative of the $1$-form associated to $F$ is
   the $2$-form associated to $\curl F$.
 
+  % Generator: Claude Sonnet 5 (High) --- new content: the analogous fact for the divergence,
+  % completing the grad/curl/div trio as the 0-, 1- and (n-1)-form faces of $d$, using the
+  % $(n-1)$-form $\omega_F^{n-1}$ already introduced in \cref{sec:differential_forms} (example
+  % item 3) rather than redefining it. Used below in
+  % \cref{rem:one_theorem_four_costumes} to place the divergence theorem alongside Green,
+  % classical Stokes and the FTC as instances of the single general Stokes theorem.
+  \item Recall the $(n-1)$-form $\omega_F^{n-1} =
+  \sum_{i=1}^n(-1)^{i-1}F^i\,dx^1\wedge\cdots\wedge\widehat{dx^i}\wedge\cdots\wedge dx^n$ from
+  \cref{sec:differential_forms} (example item 3), with $\widehat{dx^i}$ denoting an omitted
+  factor. In $d(F^i\,dx^1\wedge\cdots\widehat{dx^i}\cdots\wedge dx^n) =
+  dF^i\wedge dx^1\wedge\cdots\widehat{dx^i}\cdots\wedge dx^n$, only the $\partial_iF^i\,dx^i$
+  summand of $dF^i = \sum_j\partial_jF^i\,dx^j$ survives --- every $j\neq i$ repeats a factor
+  already present, killing the wedge by antisymmetry --- so
+  \[d\omega_F^{n-1} = \sum_{i=1}^n(-1)^{i-1}\partial_iF^i\;dx^i\wedge dx^1\wedge\cdots\wedge
+    \widehat{dx^i}\wedge\cdots\wedge dx^n.\]
+  Moving $dx^i$ past the $i-1$ factors $dx^1,\dots,dx^{i-1}$ ahead of it, into its natural
+  position, costs another sign of $(-1)^{i-1}$, cancelling the one already there:
+  \[dx^i\wedge dx^1\wedge\cdots\wedge\widehat{dx^i}\wedge\cdots\wedge dx^n
+    = (-1)^{i-1}\,dx^1\wedge\cdots\wedge dx^n
+    \quad\Longrightarrow\quad
+    d\omega_F^{n-1} = \sum_{i=1}^n\partial_iF^i\;dx^1\wedge\cdots\wedge dx^n
+    = (\divg F)\,dx^1\wedge\cdots\wedge dx^n.\]
+  So the exterior derivative of $\omega_F^{n-1}$ is $\divg F$ times the volume form ---
+  completing the pattern of items 1 and 2 above: $\grad$, $\curl$ and $\divg$ are exactly the
+  $0$-, $1$- and $(n-1)$-form faces of the single operator $d$.
+
 % Source: Jérôme Paschoud/Notizen/Woche 12.1 Differentialformen.pdf, p. 6
   \item Let $\omega = x_3 \,dx_3 + x_1 x_2 \,dx_2$ be a $1$-form on $\mathbb{R}^3$. Let us compute its exterior derivative using the rules:
   \begin{align*}

@@ -136,6 +136,50 @@ $|\alpha| = 0$ line of \cref{ex:taylor_maximal_expansion}, which is the same ter
 multi-index form.
 \end{ainote}
 
+% Generator: Claude Sonnet 5 (High) --- new content: \cref{thm:taylor_working_formula} only
+% gives the asymptotic (Peano) remainder $o(|h|^k)$. The exact (Lagrange) remainder is genuinely
+% different information --- an equality valid for that specific $h$, not just eventually small
+% --- and was not stated anywhere in this document.
+\begin{theorem}[Taylor's theorem with Lagrange remainder]
+\label{thm:taylor_lagrange_remainder}
+Let $U \subseteq \mathbb{R}^n$ be open, $f \in C^{k+1}(U,\mathbb{R})$, $\bar x \in U$, and
+$h \in \mathbb{R}^n$ with $\bar x+th \in U$ for all $t \in [0,1]$. Then there exists
+$\theta \in (0,1)$ such that
+\[f(\bar x+h) = \sum_{\ell=0}^{k}\frac{1}{\ell!}\Big(\sum_{m=1}^n h_m\partial_m\Big)^{\!\ell}
+  f(\bar x)
+  \ +\ \frac{1}{(k+1)!}\Big(\sum_{m=1}^n h_m\partial_m\Big)^{\!k+1}f(\bar x+\theta h).\]
+Equivalently, in multi-index notation,
+\[f(\bar x+h) = \sum_{|\alpha|\leq k}\partial^\alpha f(\bar x)\,\frac{h^\alpha}{\alpha!}
+  \ +\ \sum_{|\alpha|=k+1}\partial^\alpha f(\bar x+\theta h)\,\frac{h^\alpha}{\alpha!}.\]
+\end{theorem}
+
+\begin{proof}
+Let $\varphi(t) := f(\bar x+th)$ for $t \in [0,1]$, well defined and $C^{k+1}$ since $f \in
+C^{k+1}$ and the segment $\bar x+th$ stays in $U$. By induction on $\ell$ via the chain rule ---
+exactly the computation underlying \cref{thm:taylor_working_formula} itself ---
+\[\varphi^{(\ell)}(t) = \Big(\sum_{m=1}^n h_m\partial_m\Big)^{\!\ell}f(\bar x+th)
+  \qquad \text{for } 0 \leq \ell \leq k+1.\]
+Apply the one-variable Taylor theorem with Lagrange remainder (\emph{Analysis I}) to $\varphi$
+on $[0,1]$: there is $\theta \in (0,1)$ with
+\[\varphi(1) = \sum_{\ell=0}^k\frac{\varphi^{(\ell)}(0)}{\ell!} + \frac{\varphi^{(k+1)}(\theta)}{(k+1)!}.\]
+Substituting $\varphi(1) = f(\bar x+h)$, $\varphi^{(\ell)}(0) = \big(\sum_mh_m\partial_m\big)^\ell
+f(\bar x)$, and $\varphi^{(k+1)}(\theta) = \big(\sum_mh_m\partial_m\big)^{k+1}f(\bar x+\theta h)$
+gives the working-formula version. The multi-index version follows by expanding
+$\big(\sum_mh_m\partial_m\big)^\ell$ via the multinomial theorem, exactly as in
+\cref{ex:taylor_maximal_expansion}.
+\end{proof}
+
+\begin{remark}
+Unlike \cref{thm:taylor_working_formula}'s $o(|h|^k)$ remainder, this is an \emph{exact}
+equality for the specific $h$ in question, not merely a statement about what happens as
+$h \to 0$ --- genuinely different information, and what is needed whenever a hard, uniform error
+bound is wanted rather than an asymptotic one (e.g.\ bounding $|f(\bar x+h) - T_k(h)|$ over an
+entire region at once, given a bound on the $(k{+}1)$-th derivatives there). The price is that
+$\theta$ depends on $\bar x$, $h$ \emph{and} $k$ together, and is almost never computable in
+practice --- which is exactly why the rest of this chapter uses the asymptotic form for actually
+computing expansions, and reserves this one for error estimates.
+\end{remark}
+
 % Quelle: Linus Lüchinger/Slides/Slides-03-16.pdf, slide 12;
 %         Linus Lüchinger/Slides/Slides-03-19.pdf, slides 4--6
 % Generator: Claude Opus 5 (High)

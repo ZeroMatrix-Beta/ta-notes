@@ -305,6 +305,115 @@ If $\lambda = -1/2$, then $y = -x$. The constraint gives $2x^2 = 2 \implies x = 
 Since the circle is compact, these must be the global extrema. The maximum is $1$ and the minimum is $-1$.
 \end{exercisesolution}
 
+% Generator: Claude Sonnet 5 (High) --- new content: a second-order test for constrained
+% extrema was never given anywhere in this document, only the unconstrained Hessian test
+% (\cref{thm:hessian_test}) and the first-order Lagrange condition
+% (\cref{prop:constrained_optimization}) that only locates \emph{candidates}. This fills that
+% gap using exactly the two tools already available: the Lagrangian and the unconstrained
+% Hessian test, applied after restricting to the constraint's tangent space.
+\begin{theorem}[Second-order sufficient conditions for constrained extrema]
+\label{thm:second_order_lagrange_test}
+Let $U \subseteq \mathbb{R}^n$ be open, $f \in C^2(U,\mathbb{R})$, $g = (g_1,\dots,g_k) \in
+C^2(U,\mathbb{R}^k)$, and suppose $x_0 \in g^{-1}\{0\}$ satisfies:
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $\nabla g_1(x_0),\dots,\nabla g_k(x_0)$ are linearly independent, and
+  \item $\nabla f(x_0) = \sum_{j=1}^k\lambda_j\nabla g_j(x_0)$ for some $\lambda \in
+    \mathbb{R}^k$ (a Lagrange critical point, as furnished by
+    \cref{prop:constrained_optimization}).
+\end{enumerate}
+Write $L(x,\lambda) := f(x) - \sum_{j=1}^k\lambda_jg_j(x)$ for the Lagrangian, and let
+\[T_{x_0} := \{v \in \mathbb{R}^n : Dg(x_0)v = 0\}\]
+be the tangent space of the constraint set $g^{-1}\{0\}$ at $x_0$ (a $(n-k)$-dimensional
+subspace, by \textbf{(a)}). Then:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+  \item If $v\transp\Hess_xL(x_0,\lambda)v > 0$ for all $v \in T_{x_0}\setminus\{0\}$, then
+    $x_0$ is a \textbf{strict local minimum} of $f|_{g^{-1}\{0\}}$.
+  \item If $v\transp\Hess_xL(x_0,\lambda)v < 0$ for all $v \in T_{x_0}\setminus\{0\}$, then
+    $x_0$ is a \textbf{strict local maximum} of $f|_{g^{-1}\{0\}}$.
+  \item If $v\transp\Hess_xL(x_0,\lambda)v$ takes both signs on $T_{x_0}\setminus\{0\}$, then
+    $x_0$ is \textbf{not} a local extremum of $f|_{g^{-1}\{0\}}$.
+\end{enumerate}
+Here $\Hess_xL(x_0,\lambda)$ denotes the Hessian of $L(\cdot,\lambda)$ in the $x$-variable
+alone, evaluated at $x_0$.
+\end{theorem}
+
+\begin{proof}
+By \textbf{(a)} and the implicit function theorem (\cref{thm:implicit_function_theorem}), after
+relabelling coordinates so that the $k\times k$ block $\partial g/\partial(x_{n-k+1},\dots,x_n)$
+is invertible at $x_0$, there is an open $V \subseteq \mathbb{R}^{n-k}$ and a $C^2$ map
+$\varphi : V \to g^{-1}\{0\}$ with $\varphi(0) = x_0$, solving the constraint locally, such that
+$D\varphi(0) : \mathbb{R}^{n-k} \to T_{x_0}$ is an isomorphism (this is the standard local
+parametrization of the submanifold $g^{-1}\{0\}$; see also
+\cref{thm:regular_value_theorem} for why it is one).
+
+Since $g(\varphi(t)) \equiv 0$ on $V$, the terms $-\lambda_jg_j(\varphi(t))$ vanish identically,
+so
+\[h(t) := f(\varphi(t)) = L(\varphi(t),\lambda) \qquad \text{for all } t \in V.\]
+By the chain rule, $Dh(0) = D_xL(x_0,\lambda)\,D\varphi(0) = 0$, since
+$D_xL(x_0,\lambda) = \nabla f(x_0)\transp - \sum_j\lambda_j\nabla g_j(x_0)\transp = 0$ by
+hypothesis \textbf{(b)}: so $h$ has a critical point at $0$, i.e.\ $f|_{g^{-1}\{0\}}$ has a
+critical point at $x_0$, consistently with \textbf{(b)}.
+
+Differentiating a second time, for $w \in \mathbb{R}^{n-k}$,
+\[\Hess h(0)[w,w] = \big(D\varphi(0)w\big)\transp\Hess_xL(x_0,\lambda)\big(D\varphi(0)w\big)
+  \ +\ D_xL(x_0,\lambda)\cdot D^2\varphi(0)[w,w],\]
+and the second term vanishes because $D_xL(x_0,\lambda)=0$, regardless of what
+$D^2\varphi(0)$ is --- the same cancellation that already made $Dh(0)=0$. So, writing
+$v := D\varphi(0)w$, which ranges over all of $T_{x_0}$ as $w$ ranges over $\mathbb{R}^{n-k}$
+(since $D\varphi(0)$ is an isomorphism onto $T_{x_0}$),
+\[\Hess h(0)[w,w] = v\transp\Hess_xL(x_0,\lambda)v.\]
+So $\Hess_xL(x_0,\lambda)$ being positive definite on $T_{x_0}$ is exactly $\Hess h(0)$ being
+positive definite, and the unconstrained Hessian test (\cref{thm:hessian_test}, applied to $h$
+on the open set $V \subseteq \mathbb{R}^{n-k}$) gives a strict local minimum of $h$ at $0$ ---
+which, since $\varphi$ is a local homeomorphism from $V$ onto a neighbourhood of $x_0$ in
+$g^{-1}\{0\}$, is exactly a strict local minimum of $f|_{g^{-1}\{0\}}$ at $x_0$. This proves
+\textbf{(1)}; \textbf{(2)} is identical with every inequality reversed. For \textbf{(3)}, if the
+quadratic form takes both signs on $T_{x_0}$, then $\Hess h(0)$ is indefinite, so $h$ increases
+along one direction through $0 \in V$ and decreases along another (\cref{thm:hessian_test}
+again), and transporting those two directions through $\varphi$ shows $f|_{g^{-1}\{0\}}$ does
+the same near $x_0$.
+\end{proof}
+
+\begin{remark}
+This is exactly \cref{thm:hessian_test} run on the Lagrangian instead of on $f$ itself, with the
+Hessian test's ordinary $\mathbb{R}^n$ replaced by the tangent space $T_{x_0}$ --- which is
+also why $L$, not $f$, is the right function to differentiate: only $L$ has a genuine critical
+point at $x_0$ (in the full, unrestricted sense), since $f$ itself typically does not. In
+practice \textbf{(1)}--\textbf{(3)} are checked by picking any basis $v_1,\dots,v_{n-k}$ of
+$T_{x_0}$ (e.g.\ a basis of $\ker Dg(x_0)$) and testing the definiteness of the
+$(n-k)\times(n-k)$ matrix $\big(v_i\transp\Hess_xL(x_0,\lambda)v_j\big)_{i,j}$ with
+\cref{thm:hessian_test}, or with the determinant/trace recipe from
+\cref{sec:hessian_test} --- there is no need to construct $\varphi$ explicitly, which was only
+a proof device.
+\end{remark}
+
+% Generator: Claude Sonnet 5 (High)
+\begin{example}[The circle example, revisited with the second-order test]
+\label{ex:second_order_test_on_circle}
+Apply \cref{thm:second_order_lagrange_test} to \cref{ex:extrema_on_circle}
+($f(x,y)=xy$ on $g(x,y):=x^2+y^2-2=0$) to see \emph{why} $(1,1)$ is a maximum and $(1,-1)$ a
+minimum, without appealing to compactness. Here
+\[\Hess_xL(x,y,\lambda) = \Hess f - \lambda\Hess g
+  = \begin{pmatrix}0&1\\1&0\end{pmatrix} - \lambda\begin{pmatrix}2&0\\0&2\end{pmatrix}
+  = \begin{pmatrix}-2\lambda&1\\1&-2\lambda\end{pmatrix},\]
+which is indefinite (eigenvalues $-2\lambda\pm1$, of opposite sign whenever $|\lambda|<\tfrac12$)
+or degenerate (at $\lambda=\pm\tfrac12$, exactly the values that occur here) on all of
+$\mathbb{R}^2$ --- the unconstrained Hessian test would say nothing. But restricted to the
+$1$-dimensional tangent space it is a different story.
+
+At $(1,1)$, $\lambda=\tfrac12$: $\Hess_xL = \left(\begin{smallmatrix}-1&1\\1&-1\end{smallmatrix}\right)$, and $T_{(1,1)} = \ker\begin{pmatrix}2&2\end{pmatrix} = \operatorname{span}\{(1,-1)\}$. For $v=(1,-1)$,
+\[v\transp\Hess_xL\,v = \begin{pmatrix}1&-1\end{pmatrix}\begin{pmatrix}-1&1\\1&-1\end{pmatrix}\begin{pmatrix}1\\-1\end{pmatrix} = \begin{pmatrix}1&-1\end{pmatrix}\begin{pmatrix}-2\\2\end{pmatrix} = -4 < 0,\]
+negative definite on $T_{(1,1)}$: a strict local maximum, matching $f(1,1)=1$.
+
+At $(1,-1)$, $\lambda=-\tfrac12$: $\Hess_xL = \left(\begin{smallmatrix}1&1\\1&1\end{smallmatrix}\right)$, and $T_{(1,-1)} = \ker\begin{pmatrix}2&-2\end{pmatrix} = \operatorname{span}\{(1,1)\}$. For $v=(1,1)$,
+\[v\transp\Hess_xL\,v = \begin{pmatrix}1&1\end{pmatrix}\begin{pmatrix}1&1\\1&1\end{pmatrix}\begin{pmatrix}1\\1\end{pmatrix} = \begin{pmatrix}1&1\end{pmatrix}\begin{pmatrix}2\\2\end{pmatrix} = 4 > 0,\]
+positive definite on $T_{(1,-1)}$: a strict local minimum, matching $f(1,-1)=-1$. The same
+computation at $(-1,-1)$ and $(-1,1)$ (by symmetry $f(-x,-y)=f(x,y)$) reproduces the same two
+conclusions. This is the sharpest illustration available of the theorem's point: the
+\emph{unrestricted} Hessian of $L$ is degenerate at both critical points, yet restricting to the
+$1$-dimensional tangent space resolves it completely in both cases.
+\end{example}
+
 % Source: Jérôme Paschoud/Notizen/Woche 5.2 Optimierung I.pdf, p. 3
 % Generator: Gemini 3.6 Flash (High)
 \begin{exercise}[Largest rectangle in an ellipse]

@@ -192,3 +192,48 @@ theorem gives $\int_S\curl(F)\cdot\nu\,d\vol_2 - \int_D\curl(F)\cdot(0,0,1)\,d\v
 \[\int_S\curl(F)\cdot\nu\,d\vol_2 = \int_D 2\,d\vol_2 = 2\cdot\vol_2(D) = 2\pi(1-h^2),\]
 the area of a disk of radius $\sqrt{1-h^2}$ times $2$ --- again the same answer.
 \end{exercisesolution}
+
+% Generator: Claude Sonnet 5 (High) --- new content, tying together four theorems this document
+% proves separately (FTC-via-Gauss in \cref{sec:gauss_intuition}, Green in
+% \cref{sec:green_theorem_proof}, classical Stokes in \cref{sec:stokes_in_r3}, and the
+% divergence theorem in \cref{sec:flux_divergence_theorem}) as one theorem, stated once, here.
+\begin{remark}[One theorem, four costumes]
+\label{rem:one_theorem_four_costumes}
+Every integral theorem proved in this part of the course is the single identity
+$\int_M d\omega = \int_{\partial M}\omega$ of \cref{thm:stokes_general}, for a different choice
+of the dimension $m$ of $M$ and the degree of $\omega$. Collected in one place:
+\begin{center}
+\begin{tabular}{@{}lllll@{}}
+\toprule
+\textbf{Theorem} & $M$ & $m$ & $\omega$ & $d\omega$ \\
+\midrule
+Fundamental theorem of calculus &
+  $[a,b]\subset\mathbb{R}$ & $1$ & $f$ (a $0$-form) & $f'\,dx$ \\
+Green's theorem (\cref{thm:green_theorem}) &
+  $\Omega\subseteq\mathbb{R}^2$ & $2$ & $P\,dx+Q\,dy$ & $(\partial_xQ-\partial_yP)\,dx\wedge dy$ \\
+Classical Stokes (\cref{thm:stokes_classical}) &
+  surface $S\subset\mathbb{R}^3$ & $2$ & $\omega_F$ & $\omega_{\curl F}^2$ \\
+Divergence theorem (\cref{thm:gauss_divergence}) &
+  $\Omega\subseteq\mathbb{R}^n$ & $n$ & $\omega_F^{n-1}$ & $(\divg F)\,dx^1\wedge\cdots\wedge dx^n$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+Each row's $\int_M d\omega = \int_{\partial M}\omega$ reads off as exactly that row's theorem.
+The top row is \cref{sec:gauss_intuition}'s $n=1$ computation seen from the other side: there,
+$f$ played the role of a $1$-dimensional vector field and the identity was reached via the
+divergence theorem; here $f$ is instead a $0$-form and the same identity is the $m=1$ case of
+\cref{thm:stokes_general} directly --- two routes to the same fact, matching
+\cref{ex:exterior_derivative_gradient_curl}'s remark that $df = \langle\nabla f,\cdot\rangle$ is
+exactly the shape that makes this specialization work. The bottom row uses
+$d\omega_F^{n-1} = (\divg F)\,dx^1\wedge\cdots\wedge dx^n$
+(\cref{ex:exterior_derivative_gradient_curl}, item 3) together with the identification of
+$\int_{\partial\Omega}\omega_F^{n-1}$ with the flux $\int_{\partial\Omega}\langle
+F,\nu\rangle\,d\vol_{n-1}$ already noted in \cref{ch:pullbacks}.
+
+The pattern is worth stating in words, because it is easy to lose under the notation: a
+$k$-dimensional derivative measured \emph{inside} a region always equals the corresponding
+$(k{-}1)$-dimensional quantity measured on its \emph{boundary}. Differentiation and taking a
+boundary are, in this precise sense, the same operation viewed from two sides --- which is also
+exactly the content of $d^2=0$ (\cref{thm:exterior_derivative}\textbf{(3)}): a boundary has no
+boundary, just as $d\omega$ has no further exterior derivative to take that isn't already zero.
+\end{remark}

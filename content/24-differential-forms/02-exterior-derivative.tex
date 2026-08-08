@@ -133,11 +133,13 @@ with exterior derivative
     \widehat{dx^i}\wedge\cdots\wedge dx^n.\]
   Moving $dx^i$ past the $i-1$ factors $dx^1,\dots,dx^{i-1}$ ahead of it, into its natural
   position, costs another sign of $(-1)^{i-1}$, cancelling the one already there:
-  \[dx^i\wedge dx^1\wedge\cdots\wedge\widehat{dx^i}\wedge\cdots\wedge dx^n
-    = (-1)^{i-1}\,dx^1\wedge\cdots\wedge dx^n
-    \quad\Longrightarrow\quad
-    d\omega_F^{n-1} = \sum_{i=1}^n\partial_iF^i\;dx^1\wedge\cdots\wedge dx^n
-    = (\divg F)\,dx^1\wedge\cdots\wedge dx^n.\]
+  \begin{align*}
+    dx^i\wedge dx^1\wedge\cdots\wedge\widehat{dx^i}\wedge\cdots\wedge dx^n
+      &= (-1)^{i-1}\,dx^1\wedge\cdots\wedge dx^n \\
+    \Longrightarrow\quad
+      d\omega_F^{n-1} &= \sum_{i=1}^n\partial_iF^i\;dx^1\wedge\cdots\wedge dx^n
+      = (\divg F)\,dx^1\wedge\cdots\wedge dx^n.
+  \end{align*}
   So the exterior derivative of $\omega_F^{n-1}$ is $\divg F$ times the volume form ---
   completing the pattern of items 1 and 2 above: $\grad$, $\curl$ and $\divg$ are exactly the
   $0$-, $1$- and $(n-1)$-form faces of the single operator $d$.

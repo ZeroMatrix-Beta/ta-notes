@@ -236,8 +236,10 @@ Let $z := \sum_i w_ix_i \in U$ ($U$ is convex, so this weighted average lies in 
 pair $(z,x_i)$ for each $i$,
 \[f(x_i) - f(z) \geq Df_z(x_i-z), \qquad i=1,\dots,N.\]
 Multiply the $i$-th inequality by $w_i>0$ and sum over $i$:
-\[\sum_i w_if(x_i) - f(z) = \sum_i w_i\big(f(x_i)-f(z)\big)
-  \geq Df_z\Big(\sum_i w_i(x_i-z)\Big) = Df_z\Big(\sum_iw_ix_i - z\Big) = Df_z(0) = 0,\]
+\begin{align*}
+\sum_i w_if(x_i) - f(z) &= \sum_i w_i\big(f(x_i)-f(z)\big) \\
+  &\geq Df_z\Big(\sum_i w_i(x_i-z)\Big) = Df_z\Big(\sum_iw_ix_i - z\Big) = Df_z(0) = 0,
+\end{align*}
 using $\sum_iw_i=1$ to pull $f(z)$ out on the left and $\sum_iw_ix_i=z$ in the last step.
 Rearranging gives $f(z) \leq \sum_iw_if(x_i)$, which is the claim. (For $f$ merely convex,
 without $C^1$ regularity, the same computation goes through with

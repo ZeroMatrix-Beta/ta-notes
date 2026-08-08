@@ -82,7 +82,8 @@ This turns the area computation into a single 1D integral in $t$.
 
 \begin{example}[Line integral via Green's theorem]
 \label{ex:line_integral_greens}
-We want to compute the work of $F(x,y) := (0, xy^2)\transp$ along the ellipse $\gamma$ given by $x^2 + (y/2)^2 = 1$, oriented counter-clockwise. (This is Michael's Bsp.\ 18.1.1(b)).
+% Michael's Bsp. 18.1.1(b)
+We want to compute the work of $F(x,y) := (0, xy^2)\transp$ along the ellipse $\gamma$ given by $x^2 + (y/2)^2 = 1$, oriented counter-clockwise.
 Let $\Omega = \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2/4 \leq 1\}$. By Green's theorem,
 \[\int_\gamma F \cdot d\gamma = \int_{\partial\Omega} F \cdot \tau \,dL = \int_\Omega \curl F \mathop{d\text{vol}}_2.\]
 We have $\curl F = \partial_x(xy^2) - \partial_y(0) = y^2$. We compute the double integral using modified polar coordinates $x = r \cos \theta$, $y = 2r \sin \theta$ with Jacobian $2r$:
@@ -91,7 +92,8 @@ We have $\curl F = \partial_x(xy^2) - \partial_y(0) = y^2$. We compute the doubl
 
 \begin{example}[Line integral of a curl-free field]
 \label{ex:curl_free_greens}
-Let $\Omega$ be the unit disk $B_1(0) \subseteq \mathbb{R}^2$ and $F(x,y) := (xy^2, x^2y)\transp$. We compute $\int_{\partial\Omega} F \cdot \tau \,dL$ (Michael's Bsp.\ 20.2.1).
+% Michael's Bsp. 20.2.1
+Let $\Omega$ be the unit disk $B_1(0) \subseteq \mathbb{R}^2$ and $F(x,y) := (xy^2, x^2y)\transp$. We compute $\int_{\partial\Omega} F \cdot \tau \,dL$.
 By Green's theorem, we need to integrate the curl of $F$ over $\Omega$:
 \[\curl F = \partial_x(x^2y) - \partial_y(xy^2) = 2xy - 2xy = 0.\]
 Thus, the integral is simply $\int_\Omega 0 \mathop{d\text{vol}}_2 = 0$.
@@ -99,7 +101,8 @@ Thus, the integral is simply $\int_\Omega 0 \mathop{d\text{vol}}_2 = 0$.
 
 \begin{example}[2D Divergence theorem]
 \label{ex:2d_divergence_theorem}
-Green's theorem can also be viewed as a 2D version of the divergence theorem. Consider the vector field $F(x,y) := (x - y^2, y - x^2)\transp$. We want to compute the outward flux of $F$ through the curve $\gamma$ given by the graph of $y = \cos x$ for $x \in [-\pi/2, \pi/2]$ (Michael's Bsp.\ 19.6.2).
+% Michael's Bsp. 19.6.2
+Green's theorem can also be viewed as a 2D version of the divergence theorem. Consider the vector field $F(x,y) := (x - y^2, y - x^2)\transp$. We want to compute the outward flux of $F$ through the curve $\gamma$ given by the graph of $y = \cos x$ for $x \in [-\pi/2, \pi/2]$.
 
 We can close the curve by adding the segment $\sigma$ on the $x$-axis from $\pi/2$ to $-\pi/2$, forming a closed region $\Omega$ (the area under the cosine bump). By the 2D divergence theorem:
 \[\int_{\gamma} F \cdot \nu \,dL + \int_{\sigma} F \cdot \nu \,dL = \int_\Omega \divg F \mathop{d\text{vol}}_2.\]
@@ -177,7 +180,8 @@ Now, let $\Gamma$ be a closed path on the boundary $\partial U$ of the domain, s
 
 \begin{example}[Line integral of a conservative field via potential]
 \label{ex:line_integral_potential}
-Consider the vector field $F(x,y) := (10x^4 - 2xy^3, -3x^2y^2)\transp$ and a path $\gamma$ connecting $(0,0)$ to $(2,1)$, for instance, the curve defined by $x^4 - 6xy^3 = 4y^2$ (Michael's Bsp.\ 18.2.7).
+% Michael's Bsp. 18.2.7
+Consider the vector field $F(x,y) := (10x^4 - 2xy^3, -3x^2y^2)\transp$ and a path $\gamma$ connecting $(0,0)$ to $(2,1)$, for instance, the curve defined by $x^4 - 6xy^3 = 4y^2$.
 
 Since $F$ is defined on all of $\mathbb{R}^2$ and satisfies $\partial_y F_1 = -6xy^2 = \partial_x F_2$, it is conservative. We find a potential $f(x,y)$ by integration:
 \begin{align*}

@@ -106,7 +106,8 @@ Thus, the solution is $u_1(t) = e^t u_1(0) + t e^t u_2(0)$ and $u_2(t) = e^t u_2
 % Source: Jérôme Paschoud/Notizen/Woche 13.2 DGL.pdf, p. 2
 \begin{example}[Solving an initial value problem]
 \label{ex:ode_ivp_system}
-Consider the initial value problem (Michael's Bsp.\ 23.1.4):
+% Michael's Bsp. 23.1.4
+Consider the initial value problem:
 \begin{align*}
     y_1' &= 3y_1 - 2y_2, \\
     y_2' &= -y_1 + 2y_2,
@@ -258,7 +259,8 @@ The particular solution $y_{\text{part}}(x)$ solves $Ly_{\text{part}}(x) = b(x)$
 % Source: Jérôme Paschoud/Notizen/Woche 13.2 DGL.pdf, p. 1
 \begin{example}[Solving an inhomogeneous linear ODE]
 \label{ex:ode_inhomogeneous}
-Consider the second-order ODE (Michael's Bsp.\ 24.2.1):
+% Michael's Bsp. 24.2.1
+Consider the second-order ODE:
 \[y'' - 4y' + 13y = x e^x.\]
 First, we solve the homogeneous problem $y'' - 4y' + 13y = 0$. The characteristic polynomial is $\lambda^2 - 4\lambda + 13 = 0$, with roots:
 \[\lambda_{1,2} = \frac{4 \pm \sqrt{16 - 52}}{2} = 2 \pm 3i.\]
@@ -439,11 +441,14 @@ For $(t,x_2),(t,x_3) \in B_\varepsilon(t_1,x_1)$, the straight segment
 $s\mapsto x_3+s(x_2-x_3)$, $s\in[0,1]$, stays inside the ball (which is convex), so
 $g(s) := F(t,\,x_3+s(x_2-x_3))$ is differentiable on $[0,1]$ with
 $g'(s) = \sum_{k=1}^n \partial_{x_k}F(t,x_3+s(x_2-x_3))\,(x_2-x_3)_k$ by the chain rule. Hence
-\[\lVert F(t,x_2)-F(t,x_3)\rVert = \lVert g(1)-g(0)\rVert
-  = \left\lVert\int_0^1 g'(s)\,ds\right\rVert
-  \leq \int_0^1 \sum_{k=1}^n \lvert\partial_{x_k}F(t,x_3+s(x_2-x_3))\rvert\,\lvert(x_2-x_3)_k\rvert\,ds\]
-\[\leq \sum_{k=1}^n M_k\,\lvert(x_2-x_3)_k\rvert
-  \leq \Big(\sum_{k=1}^n M_k\Big)\lVert x_2-x_3\rVert = L\lVert x_2-x_3\rVert,\]
+\begin{align*}
+\lVert F(t,x_2)-F(t,x_3)\rVert &= \lVert g(1)-g(0)\rVert
+  = \left\lVert\int_0^1 g'(s)\,ds\right\rVert \\
+  &\leq \int_0^1 \sum_{k=1}^n \lvert\partial_{x_k}F(t,x_3+s(x_2-x_3))\rvert
+    \,\lvert(x_2-x_3)_k\rvert\,ds \\
+  &\leq \sum_{k=1}^n M_k\,\lvert(x_2-x_3)_k\rvert
+  \leq \Big(\sum_{k=1}^n M_k\Big)\lVert x_2-x_3\rVert = L\lVert x_2-x_3\rVert,
+\end{align*}
 using $\lvert(x_2-x_3)_k\rvert \leq \lVert x_2-x_3\rVert$ in the last step. So $F$ is
 $L$-Lipschitz in $x$ on $B_\varepsilon(t_1,x_1)\cap U$, and since $(t_1,x_1) \in U$ was
 arbitrary, $F$ is locally Lipschitz in $x$.

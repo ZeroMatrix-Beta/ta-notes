@@ -99,7 +99,8 @@ The orientation of $\partial M$ is chosen such that when traversing $\partial M$
 
 \begin{example}[Stokes' theorem on a hemisphere]
 \label{ex:stokes_hemisphere_linear_field}
-Let $F(x,y,z) := (z, x, y)\transp$. We want to compute the flux of the curl of $F$ through the upper hemisphere $H := \{(x,y,z) \in \mathbb{R}^3 \mid x^2 + y^2 + z^2 = 1,\ z \geq 0\}$ (Michael's Bsp.\ 20.1.2).
+% Michael's Bsp. 20.1.2
+Let $F(x,y,z) := (z, x, y)\transp$. We want to compute the flux of the curl of $F$ through the upper hemisphere $H := \{(x,y,z) \in \mathbb{R}^3 \mid x^2 + y^2 + z^2 = 1,\ z \geq 0\}$.
 
 First, the curl of $F$ is:
 \[\curl(F) = \begin{pmatrix} \partial_y F_3 - \partial_z F_2 \\ \partial_z F_1 - \partial_x F_3 \\ \partial_x F_2 - \partial_y F_1 \end{pmatrix} = \begin{pmatrix} 1 - 0 \\ 1 - 0 \\ 1 - 0 \end{pmatrix} = \begin{pmatrix} 1 \\ 1 \\ 1 \end{pmatrix}.\]
@@ -203,18 +204,19 @@ Every integral theorem proved in this part of the course is the single identity
 $\int_M d\omega = \int_{\partial M}\omega$ of \cref{thm:stokes_general}, for a different choice
 of the dimension $m$ of $M$ and the degree of $\omega$. Collected in one place:
 \begin{center}
+\small
 \begin{tabular}{@{}lllll@{}}
 \toprule
 \textbf{Theorem} & $M$ & $m$ & $\omega$ & $d\omega$ \\
 \midrule
-Fundamental theorem of calculus &
-  $[a,b]\subset\mathbb{R}$ & $1$ & $f$ (a $0$-form) & $f'\,dx$ \\
-Green's theorem (\cref{thm:green_theorem}) &
-  $\Omega\subseteq\mathbb{R}^2$ & $2$ & $P\,dx+Q\,dy$ & $(\partial_xQ-\partial_yP)\,dx\wedge dy$ \\
+FTC &
+  $[a,b]\subset\mathbb{R}$ & $1$ & $f$ ($0$-form) & $f'\,dx$ \\
+Green (\cref{thm:green_theorem}) &
+  $\Omega\subseteq\mathbb{R}^2$ & $2$ & $P\,dx+Q\,dy$ & $(\partial_xQ{-}\partial_yP)\,dx\!\wedge\! dy$ \\
 Classical Stokes (\cref{thm:stokes_classical}) &
   surface $S\subset\mathbb{R}^3$ & $2$ & $\omega_F$ & $\omega_{\curl F}^2$ \\
-Divergence theorem (\cref{thm:gauss_divergence}) &
-  $\Omega\subseteq\mathbb{R}^n$ & $n$ & $\omega_F^{n-1}$ & $(\divg F)\,dx^1\wedge\cdots\wedge dx^n$ \\
+Divergence (\cref{thm:gauss_divergence}) &
+  $\Omega\subseteq\mathbb{R}^n$ & $n$ & $\omega_F^{n-1}$ & $(\divg F)\,dx^1\!\wedge\!\cdots\!\wedge\! dx^n$ \\
 \bottomrule
 \end{tabular}
 \end{center}

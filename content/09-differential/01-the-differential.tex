@@ -70,6 +70,43 @@ is the multivariable analogue of the uniqueness-of-limits argument from
 \Cref{prop:uniqueness_of_limits}.
 \end{remark}
 
+% Supplement: lec_notes.pdf, p. 37 (Lemma 10.9)
+% Generator: Claude Opus 5 (High) --- used silently throughout the document (every time a
+% Jacobian's rows are read off as the gradients of the components, and in the proof of the
+% sufficient condition for differentiability, which reduces to m = 1) but never stated.
+\begin{lemma}[Differentiability is componentwise]
+\label{lem:differentiability_componentwise}
+Let $U \subseteq \mathbb{R}^n$ be open, $F : U \to \mathbb{R}^m$, and write
+$F = (F_1,\dots,F_m)$ for its components $F_j : U \to \mathbb{R}$. Then $F$ is differentiable at
+$x \in U$ if and only if every $F_j$ is, and in that case
+\[\big(DF_x(v)\big)_j = D(F_j)_x(v) \qquad \text{for all } v \in \mathbb{R}^n \text{ and } 1 \leq j \leq m.\]
+\end{lemma}
+
+\begin{proof}
+Both directions come from the same observation: a vector in $\mathbb{R}^m$ is $o(|h|)$ exactly
+when each of its $m$ components is, since
+$\max_j|w_j| \leq |w| \leq \sqrt{m}\max_j|w_j|$.
+
+If each $F_j$ is differentiable at $x$ with differential $L_j$, assemble
+$L(v) := (L_1(v),\dots,L_m(v))$, which is linear. The remainder of $F$ at $x$ has $j$-th component
+the remainder of $F_j$, each of which is $o(|h|)$, hence so is the vector. Conversely, if $F$ is
+differentiable with differential $L$, then composing with the $j$-th coordinate projection, which
+is linear and $1$-Lipschitz, shows $F_j$ is differentiable with differential $v \mapsto L(v)_j$.
+\end{proof}
+
+\begin{remark}[What this buys, and what it does not]
+\label{rem:componentwise_scope}
+This is the licence to reduce to $m = 1$, and it is used in exactly that way twice below: the
+rows of the Jacobi matrix are the gradients of the components (\cref{sec:jacobi_matrix}), and the
+proof that continuous partial derivatives suffice
+(\cref{thm:continuous_partials_imply_differentiable}) treats a scalar function only.
+
+It does \emph{not} say anything about the other index. Differentiability in $n$ variables does
+not reduce to differentiability in each variable separately: that is precisely the failure
+\cref{ex:partial_derivatives_not_continuous} exhibits. The target $\mathbb{R}^m$ splits; the
+source $\mathbb{R}^n$ does not.
+\end{remark}
+
 \begin{proposition}[Differentiability implies continuity]
 \label{prop:differentiable_implies_continuous}
 If $F : U \to \mathbb{R}^m$, $U \subseteq \mathbb{R}^n$ open, is differentiable

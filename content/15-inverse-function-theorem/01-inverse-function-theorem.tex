@@ -74,16 +74,17 @@ where $\phi : U \to \mathbb{R}^n$ is a $\lambda$-Lipschitz function with constan
 % referred to again anywhere in the document, and the theorem it exists to prove carries no
 % proof here either. This says how the two fit together.
 %
-% ⚠️ TO CHECK AGAINST THE SOURCES, not yet done: whether Corsin's Week 6.pdf (pp. 8--9) or
-% Analysis_II_Script_v1.pdf carries a proof of the inverse function theorem worth transcribing.
-% If one does, transcribe it and cut this note down to a pointer. Do NOT assert in the typeset
-% text that "the course does not prove this" until someone has opened those files -- the claim
-% below is deliberately only about what is in THIS document, which is what was verified.
-% Logged in project-state.md.
+% The "TO CHECK AGAINST THE SOURCES" note that stood here is resolved: lec_notes.pdf proves the
+% inverse function theorem in full (Theorem 12.5, printed pp. 77--79), and by exactly the route
+% sketched below -- Lemma 12.1 there is our lem:lipschitz_perturbation_identity, and the proof
+% normalises f to L^{-1} o f and checks it is a small Lipschitz perturbation of the identity.
+% The proof is not transcribed here: it is two pages, and the sketch below carries the idea.
+% Supplement: lec_notes.pdf, pp. 75--79 (Lemma 12.1, Theorem 12.5)
 \begin{ainote}[Where this lemma is used]
 \Cref{thm:inverse_function_theorem} is stated above without proof, and the lemma just proved is
 the engine of the standard proof of it. Without that connection the lemma arrives, is proved,
-and is never used again, so it is worth seeing how the two fit together.
+and is never used again, so it is worth seeing how the two fit together. The lecture notes do
+give the full proof, and it runs along exactly these lines (Theorem 12.5, p.\ 77).
 
 Assume $x_0 = 0$ and $f(x_0) = 0$, which costs nothing, and replace $f$ by $Df_0^{-1}\circ f$,
 which is legitimate because $Df_0$ is invertible by hypothesis and which makes $Df_0 = \id$.

@@ -10,7 +10,7 @@ The \textbf{Hessian} (\cref{rem:second_order_taylor_hessian}) of $f \in C^2(U,\m
 $U \subseteq \mathbb{R}^n$, is given by
 \[\Hess f(x) = (\partial_i\partial_j f)_{i,j=1,\dots,n}\]
 with respect to the standard basis of $\mathbb{R}^n$. By \newterm{Schwarz's lemma}
-(\germanterm{Satz von Schwarz}), stated as \cref{thm:schwarz_mixed_partials},
+\germanfor{Satz von Schwarz}, stated as \cref{thm:schwarz_mixed_partials},
 $\Hess f(x)$ is symmetric.
 
 % Supplement: Lukas Krause/Week 5 March 16-20 Notes Lukas Krause.pdf, pp. 2--3
@@ -81,13 +81,13 @@ fails. \Cref{rem:schwarz_needs_c2} gives the standard counterexample.
 \label{def:sign_symmetric_matrix}
 A symmetric matrix $A \in \mathbb{R}^{n\times n}$ is:
 \begin{itemize}
-  \item \newterm{positive definite} (\germanterm{positiv definit}) if $v\transp Av > 0$ for all
+  \item \newterm{positive definite} \germanfor{positiv definit} if $v\transp Av > 0$ for all
     $v \in \mathbb{R}^n\setminus\{0\}$;
-  \item \newterm{negative definite} (\germanterm{negativ definit}) if $v\transp Av < 0$ for all
+  \item \newterm{negative definite} \germanfor{negativ definit} if $v\transp Av < 0$ for all
     $v \in \mathbb{R}^n\setminus\{0\}$;
   \item \textbf{indefinite} if there exist $v, u \in \mathbb{R}^n\setminus\{0\}$ such that
     $v\transp Av > 0$ and $u\transp Au < 0$;
-  \item \textbf{degenerate} (\germanterm{entartet}) if there exists
+  \item \textbf{degenerate} \germanfor{entartet} if there exists
     $v \in \mathbb{R}^n\setminus\{0\}$ such that $Av = 0$; equivalently, if $\det A = 0$, or
     if $0$ is an eigenvalue of $A$.
 \end{itemize}
@@ -154,7 +154,7 @@ If $f \in C^2(U,\mathbb{R})$ has a critical point $x_0 \in \operatorname{int}(U)
   \item $\Hess f(x_0)$ \textbf{positive definite} $\Rightarrow$ local \textbf{min} at $x_0$;
   \item $\Hess f(x_0)$ \textbf{negative definite} $\Rightarrow$ local \textbf{max} at $x_0$;
   \item $\Hess f(x_0)$ \textbf{indefinite} $\Rightarrow$ \newterm{saddle point}
-    (\germanterm{Sattelpunkt}) at $x_0$.
+    \germanfor{Sattelpunkt} at $x_0$.
 \end{itemize}
 If $\Hess f(x_0)$ is degenerate but not indefinite (i.e.\ positive or negative semidefinite with
 $0$ an eigenvalue), the test gives \textbf{no information}, and all three behaviours are
@@ -339,7 +339,7 @@ Note: $\det(A) = \lambda_1\cdots\lambda_n$ and $\Tr(A) = \lambda_1+\dots+\lambda
 \begin{itemize}
   \item Solve the characteristic equation $\det(A - \lambda\id) = 0$ for $\lambda$ and check all
     eigenvalues.
-  \item \newterm{Hurwitz criterion} (\germanterm{Hurwitz-Kriterium}): for
+  \item \newterm{Hurwitz criterion} \germanfor{Hurwitz-Kriterium}: for
     \[A = \begin{pmatrix} a_{11} & a_{12} & \cdots & a_{1n} \\ a_{21} & \ddots & & \vdots \\ \vdots & & \ddots & \\ a_{n1} & \cdots & & a_{nn}\end{pmatrix}\]
     define the leading principal minors
     \[A_1 = \det(a_{11}), \quad A_2 = \det\begin{pmatrix} a_{11} & a_{12} \\ a_{21} & a_{22}\end{pmatrix}, \quad \dots, \quad A_n = \det(A).\]

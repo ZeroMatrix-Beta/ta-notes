@@ -132,10 +132,10 @@ Substituting this gives $-3C_1 = 1$, so $C_1 = -1/3$ and $C_2 = 1/3$. The partic
 
 % Transition: Claude Sonnet 5 (High)
 A system $u'(t) = F(u(t))$ in which $F$ does not depend on $t$ explicitly is called
-\newterm{autonomous} (\germanterm{autonom}). Its flow can then be pictured directly as a vector
+\newterm{autonomous} \germanfor{autonom}. Its flow can then be pictured directly as a vector
 field on the state space, independent of time: at each point $x$, the arrow $F(x)$ shows the
-instantaneous velocity of the trajectory passing through $x$. The three examples below --- two
-linear, one not --- are the standard pictures.
+instantaneous velocity of the trajectory passing through $x$. The three examples below (two
+linear, one not) are the standard pictures.
 
 % Supplement: Analysis_II_Script_v1.pdf, p. 182
 \begin{example}[A pure rotation]
@@ -166,7 +166,8 @@ $A = \left(\begin{smallmatrix}1&-1\\1&1\end{smallmatrix}\right) = \id + B$, wher
 $B := \left(\begin{smallmatrix}0&-1\\1&0\end{smallmatrix}\right)$ is the generator of
 \cref{ex:autonomous_rotation}. Since $\id$ and $B$ commute, $e^{tA}=e^{t\id}e^{tB}$, so
 \[u(t) = e^{tA}x_0 = e^t\begin{pmatrix}\cos t & -\sin t\\ \sin t & \cos t\end{pmatrix}x_0:\]
-the same rotation as before, now with an exponentially growing radius --- an outward spiral.
+the same rotation as before, now with an exponentially growing radius. The trajectory is an
+outward spiral.
 \begin{center}
 \begin{tikzpicture}[scale=1.0]
   \draw[->] (-2.0,0) -- (2.0,0);
@@ -200,8 +201,8 @@ so, since $(r^2)'=2rr'$, the radius satisfies the autonomous scalar equation
 \[r' = r-r^3, \qquad r(0)=\sqrt{x_0^2+y_0^2}.\]
 Separating variables and solving gives $r(t) = \exp(t)/\sqrt{A+\exp(2t)}$ for
 $A := 1/(x_0^2+y_0^2)-1 \in (-1,\infty)$, and $r(t) \to 1$ as $t \to \infty$
-\emph{regardless of the initial value} --- the circle $r=1$ is a \newterm{limit cycle}
-(\germanterm{Grenzzykel}), attracting every trajectory except the equilibrium at the origin. A
+\emph{regardless of the initial value}. Therefore the circle $r=1$ is a \newterm{limit cycle}
+\germanfor{Grenzzykel}, attracting every trajectory except the equilibrium at the origin. A
 short computation with the angle ($u\varphi'=u-r^2u$ from the system, matched against $u'$, and
 symmetrically for $v$) gives $\varphi'\equiv1$ away from the origin, so the motion is a steady
 rotation combined with the radial approach to $r=1$: trajectories starting outside the unit
@@ -316,9 +317,10 @@ $p(t) := -\big(\tfrac4t+1\big)$, so the standard integrating factor is
 $\mu(t) := \exp\!\big(\int p(t)\,dt\big) = \exp\big(-4\ln t - t\big) = t^{-4}e^{-t}$.
 
 \begin{ainote}
-The script's own hint suggests $u(t):=e^{H(t)}y(t)$ with $H'(t)=\tfrac4t+1$ --- a \emph{positive}
-exponent. Checking it directly: $u' = e^H(H'y+y')$, and substituting $y'=H'y+t^4$ (from the ODE)
-gives $u' = e^H(2H'y+t^4)$, which still contains $y$ --- the substitution does not decouple. The
+The script's own hint suggests $u(t):=e^{H(t)}y(t)$ with $H'(t)=\tfrac4t+1$, giving a
+\emph{positive} exponent. Checking it directly, $u' = e^H(H'y+y')$, and substituting
+$y'=H'y+t^4$ (from the ODE) gives $u' = e^H(2H'y+t^4)$, which still contains $y$. The
+substitution therefore does not decouple. The
 sign must be negative, $u(t) := e^{-H(t)}y(t) = t^{-4}e^{-t}y(t)$: then
 $u' = e^{-H}(y'-H'y) = e^{-H}\big(y'-(\tfrac4t+1)y\big) = e^{-H}t^4$ directly from the ODE, which
 \emph{does} decouple. Used below.
@@ -349,16 +351,16 @@ Taking the limit $\omega \to \sqrt k$ (\newterm{resonance}: the forcing frequenc
 system's natural frequency) gives
 \[y(t) = \frac{1}{2\sqrt k}\left(\frac{\sin(\sqrt kt)}{\sqrt k} - t\cos(\sqrt kt)\right).\]
 The term $t\cos(\sqrt kt)$ shows the amplitude of the oscillation now grows \emph{linearly} in
-$t$, without bound --- the phenomenon behind bridges failing under marching troops and (per
-popular-science lore, not verified here) opera singers shattering glasses.
+$t$, without bound. This is the phenomenon behind bridges failing under marching troops and,
+per popular-science lore not verified here, opera singers shattering glasses.
 \end{example}
 
 \begin{remark}
 This is the concrete instance of the \qt{special case} noted in the caption of
 \cref{tab:ode_ansatz}: the naive Ansatz $A\sin(\omega t)+B\cos(\omega t)$ fails exactly when
 $\omega=\sqrt k$, because $\sin(\sqrt kt)$ and $\cos(\sqrt kt)$ already solve the homogeneous
-equation, and the fix is the same one the table prescribes --- multiply the Ansatz by $t$, which
-is visibly what appears in the limiting solution above.
+equation. The fix is the same one the table prescribes. Multiplying the Ansatz by $t$ is
+visibly what appears in the limiting solution above.
 \end{remark}
 
 \subsection{Duhamel's Principle}
@@ -452,8 +454,8 @@ arbitrary, $F$ is locally Lipschitz in $x$.
 \begin{remark}
 This is the standard shortcut for checking the hypothesis of
 \cref{thm:picard_lindeloef_local} in practice: one essentially never verifies the Lipschitz
-estimate by hand, but instead checks that $F$ is $C^1$ in the spatial variables --- exactly the
-regularity most vector fields one writes down already have.
+estimate by hand, but instead checks that $F$ is $C^1$ in the spatial variables. That is
+exactly the regularity most vector fields one writes down already have.
 \end{remark}
 
 % Supplement: Analysis_II_Script_v1.pdf, p. 173
@@ -480,8 +482,8 @@ Grönwall's inequality is the standard tool for turning a \emph{differential} bo
 ODEs: if $z$ solves an order-$m$ linear equation $Lz=0$, the quantity
 $u(t) := z(t)^2+z'(t)^2+\dots+z^{(m-1)}(t)^2$ satisfies a bound $u'(t) \leq Cu(t)$ for a constant
 $C$ depending only on the coefficients of $L$, and Grönwall with $u(t_0)=0$ (zero initial data)
-forces $u\equiv0$, hence $z\equiv0$ --- the \qt{zero in, zero out} principle behind uniqueness
-for linear ODEs. The same device, run on $u(t):=\lVert v_1(t)-v_2(t)\rVert^2$ for two solutions
+forces $u\equiv0$, hence $z\equiv0$. This is the \qt{zero in, zero out} principle behind
+uniqueness for linear ODEs. The same device, run on $u(t):=\lVert v_1(t)-v_2(t)\rVert^2$ for two solutions
 $v_1,v_2$ of a Lipschitz system agreeing at one time, gives an alternative route to the
 uniqueness half of \cref{thm:picard_lindeloef_local}.
 \end{remark}
@@ -494,7 +496,7 @@ uniqueness half of \cref{thm:picard_lindeloef_local}.
 The proof of \cref{thm:picard_lindeloef_local} is a Banach fixed-point argument
 (\cref{thm:banach_fixed_point}), and fixed-point arguments are \emph{constructive}: the sequence
 of approximations built along the way converges to the solution. So Picard--Lindelöf does not
-merely assert that a solution exists --- it hands over a procedure for computing one.
+merely assert that a solution exists. It hands over a procedure for computing one.
 
 The starting point is that an initial value problem can be rewritten as an integral equation.
 Integrating $y'(s) = F(s,y(s))$ from $t_0$ to $t$ and using $y(t_0) = u_0$,
@@ -508,7 +510,7 @@ operator a contraction on a small enough time interval.
 \begin{definition}[Picard iteration]
 \label{def:picard_iteration}
 Starting from the constant function $y_0(t) :\equiv u_0$, the \newterm{Picard iteration}
-(\germanterm{Picard-Iteration}) is the sequence
+\germanfor{Picard-Iteration} is the sequence
 \[y_n(t) := u_0 + \int_{t_0}^{t} F\big(s,\,y_{n-1}(s)\big)\,ds, \qquad n \geq 1.\]
 \end{definition}
 
@@ -526,7 +528,7 @@ Take $y' = y$ with $y(0) = 1$, so $F(t,y) = y$, $t_0 = 0$ and $u_0 = 1$. Then $y
   y_3(t) &= 1 + \int_0^t \Big(1+s+\tfrac{s^2}{2}\Big)ds = 1+t+\tfrac{t^2}{2}+\tfrac{t^3}{6}.
 \end{align*}
 An induction gives $y_n(t) = \sum_{k=0}^{n} t^k/k!$, the $n$-th partial sum of the exponential
-series. The iteration converges to $e^t$, which is indeed the solution --- and, pleasingly, it
+series. The iteration converges to $e^t$, which is indeed the solution. Pleasingly, it
 reconstructs the Taylor series of $e^t$ one term per step, since each integration raises the
 degree by exactly one.
 \end{aiexample}
@@ -537,8 +539,8 @@ degree by exactly one.
 \begin{theorem}[Peano existence theorem]
 \label{thm:peano_existence_theorem}
 Let $I := [t_0-a,\ t_0+a] \subseteq \mathbb{R}$ and $B := \overline{B_b(x_0)} \subseteq
-\mathbb{R}^n$, and let $f : I \times B \to \mathbb{R}^n$ be \emph{continuous} --- no Lipschitz
-condition in $x$ is assumed. Put $M := \max_{I\times B}\lVert f\rVert$, which is finite by
+\mathbb{R}^n$, and let $f : I \times B \to \mathbb{R}^n$ be \emph{continuous}, with no
+Lipschitz condition in $x$ assumed. Put $M := \max_{I\times B}\lVert f\rVert$, which is finite by
 compactness, and $h := \min\{a,\ b/M\}$. Then the initial value problem
 \[\dot x(t) = f\big(t, x(t)\big), \qquad x(t_0) = x_0\]
 has at least one $C^1$ solution $x : [t_0-h,\ t_0+h] \to B$.
@@ -554,11 +556,11 @@ solve it, as do the infinitely many solutions that wait at $0$ until an arbitrar
 and only then take off along $\tfrac14(t-\tau)^2$. Peano's theorem still applies and still
 delivers a solution; it simply cannot say which one.
 
-Note also where the two theorems get their machinery. Picard--Lindelöf is a fixed-point argument
---- it runs the Banach fixed-point theorem (\cref{thm:banach_fixed_point}) on the integral
+Note also where the two theorems get their machinery. Picard--Lindelöf is a fixed-point
+argument. It runs the Banach fixed-point theorem (\cref{thm:banach_fixed_point}) on the integral
 operator, and the Lipschitz constant is precisely what makes that operator a contraction. Peano
 has no contraction to work with and instead argues by compactness, extracting a convergent
-subsequence from a family of approximate solutions --- and the theorem licensing that extraction
+subsequence from a family of approximate solutions. The theorem licensing that extraction
 is Ascoli--Arzelà (\cref{thm:ascoli_arzela}), whose equicontinuity hypothesis is supplied by the
 bound $\lvert F\rvert \leq C$: it makes all the approximate solutions Lipschitz with the same
 constant $C$. That is also why it gives no uniqueness: a compactness argument produces \emph{a}
@@ -573,7 +575,7 @@ limit, never \emph{the} limit.
 Picard--Lindelöf produces, for each starting point, one solution. In applications one rarely has
 the starting point exactly: it is measured, and therefore wrong by a little. So the question is
 not only whether a solution exists but whether it \emph{moves continuously} when the initial
-condition is perturbed --- and, more sharply, whether it is differentiable in that data.
+condition is perturbed, and more sharply whether it is differentiable in that data.
 
 Write $u(t;x_0)$ for the value at time $t$ of the solution of
 \[u' = F(t,u), \qquad u(0) = x_0,\]
@@ -589,15 +591,15 @@ exists up to time $t$.
 \end{theorem}
 
 \begin{remark}[Why this is more than a technicality]
-The hypothesis is barely stronger than the one Picard--Lindelöf already needs --- $C^1$ in space
-rather than locally Lipschitz in space --- and the conclusion is what makes the whole subject
+The hypothesis is barely stronger than the one Picard--Lindelöf already needs ($C^1$ in space
+rather than locally Lipschitz in space), and the conclusion is what makes the whole subject
 usable. It says the \emph{flow} $x_0 \mapsto u(t;x_0)$ is a $C^1$ map, so the trajectories of an
 ODE do not merely exist individually but fit together smoothly into a family. Two consequences
 worth naming:
 \begin{itemize}
   \item \textbf{Errors stay controlled.} A measurement error $\varepsilon$ in $x_0$ produces an
     error in $u(t;x_0)$ that is $O(\varepsilon)$ for fixed $t$, rather than something
-    uncontrolled. The constant does typically grow with $t$ --- differentiability at each fixed
+    uncontrolled. The constant does typically grow with $t$. Differentiability at each fixed
     time is not a statement about long-run stability, and chaotic systems are exactly the ones
     where that constant grows fast.
   \item \textbf{The derivative itself solves an ODE.} Differentiating $u' = F(t,u)$ in $x_0$

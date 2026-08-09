@@ -84,7 +84,7 @@ interest is in \textbf{definiteness} and the \textbf{triangle inequality}.
     so $d(X,Y)$ is nothing but the Euclidean distance between $X$ and $Y$ regarded as vectors of
     $\mathbb{R}^{n^2}$, and it is a metric by
     \cref{prop:induced_norm_and_metric}\textbf{(b)}. The associated norm is the
-    \newterm{Frobenius norm} (\germanterm{Frobeniusnorm}), also called the Hilbert--Schmidt norm.
+    \newterm{Frobenius norm} \germanfor{Frobeniusnorm}, also called the Hilbert--Schmidt norm.
   \item \textbf{No}, and here it is \textbf{definiteness} that fails, not the triangle
     inequality. Following the hint, suppose $A := X-Y$ is \emph{anti-symmetric},
     $A\transp = -A$. For any $v$ the number $v\transp Av$ is a $1\times1$ matrix, hence equal to
@@ -94,7 +94,7 @@ interest is in \textbf{definiteness} and the \textbf{triangle inequality}.
     \[X := \begin{pmatrix} 0 & 1 \\ -1 & 0\end{pmatrix}, \qquad
       Y := \begin{pmatrix} 0 & 0 \\ 0 & 0\end{pmatrix}\]
     gives $X \neq Y$ but $d(X,Y) = 0$. Every other axiom does hold, so $d$ is a
-    \newterm{pseudo-metric} (\germanterm{Pseudometrik}): it cannot separate two matrices
+    \newterm{pseudo-metric} \germanfor{Pseudometrik}: it cannot separate two matrices
     differing by an anti-symmetric one. Equivalently, it restricts to a genuine metric on the
     symmetric matrices.
   \item \textbf{Yes.} Three things need checking, and the first is the one that is easy to skip.
@@ -294,7 +294,7 @@ $\lVert\Psi\Phi\rVert \leq \lVert\Psi\rVert\,\lVert\Phi\rVert$.
 The Hilbert--Schmidt norm is the same object as the Frobenius norm met in
 \cref{ex:2.1} part 5 on the previous sheet, where it was shown to be the Euclidean norm of the
 matrix read as a vector of $\mathbb{R}^{n^2}$. The inequality just proved says that this norm is
-\newterm{submultiplicative} (\germanterm{submultiplikativ}), which is exactly the property that
+\newterm{submultiplicative} \germanfor{submultiplikativ}, which is exactly the property that
 makes it useful for estimating compositions of linear maps. It is also what will later let
 $\lVert Df\rVert$ be handled like an absolute value in the mean value inequality
 (\cref{rem:mvt_fails_vector_valued}).
@@ -416,7 +416,7 @@ Note $h(0) = \log(n/n) = 0$; this single fact does most of the work below.
     \[\lim_{t\to0} g(t) = h'(0) = \frac{S'(0)}{S(0)} = \frac{1}{n}\sum_{i=1}^n \log x_i,\]
     using $S'(t) = \sum_i x_i^t\log x_i$ and $S(0) = n$. Exponentiating,
     \[\mu_0(x) = \big(x_1x_2\cdots x_n\big)^{1/n},\]
-    the \newterm{geometric mean} (\germanterm{geometrisches Mittel}).
+    the \newterm{geometric mean} \germanfor{geometrisches Mittel}.
   \item The inequality is Jensen applied to $\varphi(s) := s\log s$, which is convex on
     $(0,\infty)$ because $\varphi''(s) = 1/s > 0$. With the uniform weights $\tfrac1n$,
     \[\frac{1}{n}\sum_{i=1}^n a_i\log a_i \ \geq\ \varphi\!\left(\frac{1}{n}\sum_{i=1}^n a_i\right)

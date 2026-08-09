@@ -6,11 +6,11 @@
 
 Since $DF_{x_0} : \mathbb{R}^n \to \mathbb{R}^m$ (\cref{def:differentiable}) is a linear map, there is a \textbf{1--1
 correspondence with a matrix once a basis is fixed}! In the standard basis of $\mathbb{R}^n$,
-$(e_1,\dots,e_n)$, this is the \newterm{Jacobi matrix} (\germanterm{Jacobi-Matrix}):
+$(e_1,\dots,e_n)$, this is the \newterm{Jacobi matrix} \germanfor{Jacobi-Matrix}:
 \[DF_x \;\cong\; \Jac F(x) = \begin{pmatrix} \dfrac{\partial F_1}{\partial x_1} & \cdots & \dfrac{\partial F_1}{\partial x_n} \\[1ex] \vdots & \ddots & \vdots \\[1ex] \dfrac{\partial F_m}{\partial x_1} & \cdots & \dfrac{\partial F_m}{\partial x_n}\end{pmatrix}\]
 ($m$ rows, $n$ columns), where we wrote $F(x) = (F_1, \dots, F_m)\transp$ and
 \[\frac{\partial F}{\partial x_i} =: \partial_i F(x)\]
-is the \newterm{$i$-th partial derivative} (\germanterm{partielle Ableitung}) at $x$:
+is the \newterm{$i$-th partial derivative} \germanfor{partielle Ableitung} at $x$:
 \[\partial_i F(x) = \lim_{s\to 0}\frac{F(x+se_i)-F(x)}{s}.\]
 This defines a function $\partial_i F : U \to \mathbb{R}^m$. If $F$ is differentiable, then
 \[\partial_i F(x) = DF_x(e_i).\]
@@ -151,7 +151,7 @@ Its determinant is $\det \Jac f(r,\theta) = r\cos^2\theta + r\sin^2\theta = r > 
 \end{tikzpicture}
 \end{center}
 
-This vector is the \textbf{velocity of the curve} (\germanterm{Geschwindigkeit}) at
+This vector is the \textbf{velocity of the curve} \germanfor{Geschwindigkeit} at
 $t = \tfrac{\pi}{4}$; its length $|\gamma'(t)|$ is the \textbf{speed}. We get that
 \[\gamma\!\left(\tfrac{\pi}{4}+h\right) = \frac{1}{\sqrt{2}}\begin{pmatrix}1\\1\end{pmatrix} + \frac{h}{\sqrt{2}}\begin{pmatrix}-1\\1\end{pmatrix} + o(|h|).\]
 
@@ -188,7 +188,7 @@ Because these partial derivatives exist everywhere and are continuous, $f$ is di
 \end{example}
 
 From this, we see that the \textbf{rows} of the Jacobian are the \newterm{gradients}
-(\germanterm{Gradient}):
+\germanfor{Gradient}:
 \[\Jac F(x) = \begin{pmatrix} \nabla F_1 \\ \hline \vdots \\ \hline \nabla F_m \end{pmatrix}\]
 
 \begin{ainote}

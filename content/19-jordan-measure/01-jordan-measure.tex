@@ -6,7 +6,7 @@
 
 % Supplement: Sascha Brack/Class Notes/Week_08_Notes_Monday.pdf, pp. 5--7
 \subsection{Jordan measure and the Riemann integral}
-The rigorous definition of the multidimensional integral relies on the \newterm{Jordan measure} (\germanterm{Jordan-Maß}). The intuition, as presented in Sascha Brack's notes, involves \qt{dyadic cubes} (pixels) that approximate a region from the inside and outside.
+The rigorous definition of the multidimensional integral relies on the \newterm{Jordan measure} \germanfor{Jordan-Maß}. The intuition, as presented in Sascha Brack's notes, involves \qt{dyadic cubes} (pixels) that approximate a region from the inside and outside.
 
 \begin{center}
 \begin{tikzpicture}[scale=0.8]
@@ -32,9 +32,9 @@ The rigorous definition of the multidimensional integral relies on the \newterm{
 \begin{definition}[Dyadic cube and dyadic set]
 \label{def:dyadic_set}
 For $p \in \mathbb{N}$ and $a \in \mathbb{Z}^n$, the \newterm{dyadic cube}
-(\germanterm{dyadischer Würfel}) of generation $p$ at $a$ is
+\germanfor{dyadischer Würfel} of generation $p$ at $a$ is
 \[Q_p(a) := 2^{-p}\big(a + [0,1)^n\big),\]
-a half-open cube of side length $2^{-p}$. A \newterm{dyadic set} (\germanterm{dyadische Menge})
+a half-open cube of side length $2^{-p}$. A \newterm{dyadic set} \germanfor{dyadische Menge}
 is a finite union $E = \bigcup_{\ell=1}^N Q_p(a(\ell))$ of distinct dyadic cubes \emph{of one
 common generation} $p$, and its volume is
 \[\mu(E) := 2^{-pn}N.\]
@@ -115,7 +115,7 @@ Furthermore, the multidimensional integral of a non-negative function $f : A \to
 % Generator: Gemini 3.1 Pro (High)
 \begin{definition}[Riemann integral in $\mathbb{R}^n$]
 \label{def:riemann_integral_rn}
-Let $A \subseteq \mathbb{R}^n$ and $f: A \to \mathbb{R}$. Analogous to Analysis I, the integral is defined via dyadic step functions (\germanterm{dyadische Treppenfunktionen}). The lower and upper integrals are defined as
+Let $A \subseteq \mathbb{R}^n$ and $f: A \to \mathbb{R}$. Analogous to Analysis I, the integral is defined via dyadic step functions \germanfor{dyadische Treppenfunktionen}. The lower and upper integrals are defined as
 \begin{align*}
   \underline{\int}_A f &:= \sup \left\{ \int_A g \;\middle|\; g: \mathbb{R}^n \to \mathbb{R} \text{ dyadic step function with } g \leq f \right\}, \\
   \overline{\int}_A f &:= \inf \left\{ \int_A h \;\middle|\; h: \mathbb{R}^n \to \mathbb{R} \text{ dyadic step function with } h \geq f \right\}.

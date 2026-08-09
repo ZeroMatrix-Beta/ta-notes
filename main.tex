@@ -192,10 +192,17 @@
 
 % Custom commands for italicized terminology and "quotes".
 % \newterm    -> English quotes ``...''   (the default; this is an English text)
-% \germanterm -> German quotes  \glqq...\grqq  for German technical terms
+% \germanterm -> German quotes  \glqq...\grqq  for a German word MENTIONED in a sentence,
+%                where the word itself is the subject: \germanterm{Abschluss} is the closure.
+% \germanfor  -> the MIRRORING form, for giving the German of an English term just introduced:
+%                a \newterm{compact} set \germanfor{kompakte Menge}
+%                prints  a "compact" set (German: \glqq kompakte Menge\grqq).
+%                It carries its own parentheses, so do NOT wrap it in a literal pair --- that
+%                was the old \germanterm convention and it is what this macro replaces.
 \definecolor{QuoteRed}{HTML}{BD2400}
 \newcommand{\newterm}[1]{\textcolor{QuoteRed}{``}\textcolor{TextBoldColor}{\textit{#1}}\textcolor{QuoteRed}{''}}
 \newcommand{\germanterm}[1]{\textcolor{QuoteRed}{\glqq}\textcolor{TextBoldColor}{\textit{#1}}\textcolor{QuoteRed}{\grqq}}
+\newcommand{\germanfor}[1]{(German:\ \germanterm{#1})}
 \newcommand{\qt}[1]{\textit{\textcolor{QuoteRed}{``}#1\textcolor{QuoteRed}{''}}}
 \newcommand{\inlinemetanote}[1]{\textit{[\textcolor{TextMetaNote}{#1}]}}
 \newcommand{\hint}[1]{\textcolor{OliveGreen}{\textbf{Hint:}} #1}

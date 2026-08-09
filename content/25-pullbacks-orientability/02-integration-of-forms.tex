@@ -81,18 +81,18 @@ not depend on the parametrization $\phi$ chosen, only on $L$ and its orientation
 \label{note:partitions_of_unity_motivation}
 Lukas Krause notes that when a submanifold $\mathcal{M} \subseteq \mathbb{R}^n$ cannot be covered by a single local parametrization chart (for instance, a sphere $S^2$ or a compact manifold with boundary), one cannot directly evaluate $\int_{\mathcal{M}} \omega$ using a single coordinate domain $U$. 
 
-The solution is to decompose any continuous function $f$ on $\mathcal{M}$ into a sum of functions $f = \sum_{l=1}^N \eta_l f$, each supported inside a single coordinate chart domain $U_l$. Integrating each term $\eta_l f$ separately and summing the results yields the total integral over $\mathcal{M}$. The key technical tool for this decomposition is a \newterm{smooth partition of unity} (\germanterm{glatte Zerlegung der Eins}).
+The solution is to decompose any continuous function $f$ on $\mathcal{M}$ into a sum of functions $f = \sum_{l=1}^N \eta_l f$, each supported inside a single coordinate chart domain $U_l$. Integrating each term $\eta_l f$ separately and summing the results yields the total integral over $\mathcal{M}$. The key technical tool for this decomposition is a \newterm{smooth partition of unity} \germanfor{glatte Zerlegung der Eins}.
 \end{ainote}
 
 % Source: Jérôme Paschoud/Notizen/Woche 9.2 d-Volumen.pdf, p. 2
 % Generator: Gemini 3.1 Pro (High)
 \begin{definition}[Support of a function]
 \label{def:support_of_function}
-Let $U \subseteq \mathbb{R}^n$ be open and $f: U \to \mathbb{R}$ a continuous function. The \newterm{support} (\germanterm{Tr\"ager}) of $f$ is the closure of the set where $f$ is non-zero:
+Let $U \subseteq \mathbb{R}^n$ be open and $f: U \to \mathbb{R}$ a continuous function. The \newterm{support} \germanfor{Tr\"ager} of $f$ is the closure of the set where $f$ is non-zero:
 \[
 \operatorname{supp}(f) := \overline{\{x \in U \mid f(x) \neq 0\}}.
 \]
-If $\operatorname{supp}(f)$ is a bounded set (and $\operatorname{supp}(f) \subset U$), we say that $f$ is \newterm{compactly supported} (\germanterm{kompakt getragen}).
+If $\operatorname{supp}(f)$ is a bounded set (and $\operatorname{supp}(f) \subset U$), we say that $f$ is \newterm{compactly supported} \germanfor{kompakt getragen}.
 \end{definition}
 
 % Source: Jérôme Paschoud/Notizen/Woche 9.2 d-Volumen.pdf, p. 2
@@ -109,7 +109,7 @@ If $\operatorname{supp}(f)$ is a bounded set (and $\operatorname{supp}(f) \subse
 % Generator: Gemini 3.6 Flash (High)
 \begin{definition}[Standard smooth bump function]
 \label{def:smooth_bump_function}
-The canonical $C^\infty$ \newterm{bump function} (\germanterm{H\"ockerfunktion}) $\psi : \mathbb{R}^n \to \mathbb{R}$ supported on the unit ball $B_1(0)$ is defined by
+The canonical $C^\infty$ \newterm{bump function} \germanfor{H\"ockerfunktion} $\psi : \mathbb{R}^n \to \mathbb{R}$ supported on the unit ball $B_1(0)$ is defined by
 \[
 \psi(x) := \begin{cases} \exp\!\left(-\dfrac{1}{1 - \|x\|^2}\right) & \text{if } \|x\| < 1, \\[1.5ex] 0 & \text{if } \|x\| \geq 1. \end{cases}
 \]

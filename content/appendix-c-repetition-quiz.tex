@@ -9,7 +9,7 @@
 
 % Transition: Claude Opus 5 (Medium)
 Corsin devoted the first half of one exercise class to a quiz revisiting everything up to this
-point --- differentiability, the chain rule, extrema, the implicit function theorem,
+point: differentiability, the chain rule, extrema, the implicit function theorem,
 submanifolds. It ranges across \crefrange{ch:prerequisites}{ch:submanifolds} and belongs to no
 single chapter, so it is collected here, where it also serves as a self-test before the
 integration half of the course.
@@ -44,8 +44,8 @@ the intervals, and a compact one is closed and bounded, so $f(U) = [a,b]$.
 
 \begin{ainote}
 Worth noting how little computation this needs: $f$ is never evaluated. The annulus $U$ is
-connected --- it is \emph{not} simply connected, but that is a different property and irrelevant
-here --- and the two preservation theorems do the rest. Recognising that a question
+connected (it is \emph{not} simply connected, but that is a different property and irrelevant
+here), and the two preservation theorems do the rest. Recognising that a question
 is asking about preserved properties rather than about values is most of the work.
 \end{ainote}
 
@@ -65,7 +65,7 @@ closed, hence closed (\cref{prop:open_closed_via_sequences}).
 The limit is taken in $\mathbb{R}^2$, and completeness of $X$ is what forces it back into $X$.
 The converse also holds here, but only because the ambient space $\mathbb{R}^2$ is itself
 complete: a closed subset of a complete space is complete. In a non-complete ambient space
-closedness gives nothing --- $\mathbb{Q}$ is closed in $\mathbb{Q}$ and not complete.
+closedness gives nothing. Note that $\mathbb{Q}$ is closed in $\mathbb{Q}$ and not complete.
 \end{ainote}
 
 % Source: Corsin Nick/Class Notes/Week 8.pdf, p. 3
@@ -101,18 +101,18 @@ Is $f \in C^1(\mathbb{R}^3)$?
 In spherical coordinates $x = r\sin\theta\cos\varphi$, $y = r\sin\theta\sin\varphi$,
 $z = r\cos\theta$, every power of $r$ cancels:
 \[\partial_xf = \sin^2\theta\sin^2\varphi - 2\sin^4\theta\cos^2\varphi\sin^2\varphi.\]
-The limit $\lim_{r\to0}\partial_xf(r,\theta,\varphi)$ is therefore ill-defined --- it depends on
-the direction $(\theta,\varphi)$ along which the origin is approached --- and $\partial_xf$ is
-not sequentially continuous at $0$.
+The limit $\lim_{r\to0}\partial_xf(r,\theta,\varphi)$ is therefore ill-defined, since it depends
+on the direction $(\theta,\varphi)$ along which the origin is approached. Consequently
+$\partial_xf$ is not sequentially continuous at $0$.
 \end{answer}
 
 \begin{ainote}
 The cancellation of $r$ is the whole argument, and it is worth naming the reason: $\partial_xf$
 is \newterm{homogeneous of degree $0$}, so it is constant along each ray from the origin and
 takes a different constant on different rays. Compare
-\Cref{ex:all_directional_derivatives_exist}, where the same trick --- restrict to a
-ray, watch the parameter cancel --- exposed a function whose directional derivatives all existed
-without it being differentiable.
+\Cref{ex:all_directional_derivatives_exist}, where the same trick (restrict to a ray, watch the
+parameter cancel) exposed a function whose directional derivatives all existed without it being
+differentiable.
 \end{ainote}
 
 % Source: Corsin Nick/Class Notes/Week 8.pdf, pp. 3--4
@@ -157,7 +157,7 @@ a local minimum. The statement is true only on $-\sqrt2 < \alpha < \sqrt2$.
 Corsin's third bullet reads \qt{for $\alpha \neq \sqrt2$}, but $\det(\Hess f(0)) = 2-\alpha^2$
 vanishes at $\alpha = -\sqrt2$ as well, so it must read $\alpha \neq \pm\sqrt2$; typeset with
 $\pm$ above. The oversight is a conspicuous one here, since the \emph{next} bullet is false for
-exactly the reason the third one omits --- the quiz is built around the missing negative root.
+exactly the reason the third one omits. The quiz is built around the missing negative root.
 
 \end{ainote}
 
@@ -205,7 +205,7 @@ $\gamma(I)$ then a smooth submanifold of $\mathbb{R}^2$?
 \begin{answer}
 \textbf{False.} Consider
 \[\gamma : (0,2\pi) \to \mathbb{R}^2, \qquad t \mapsto \big(\sin t,\ \sin 2t\big),\]
-whose image is a \newterm{figure eight} (\germanterm{Lemniskate}). This $\gamma$ is injective and
+whose image is a \newterm{figure eight} \germanfor{Lemniskate}. This $\gamma$ is injective and
 smooth, but there is no graphical representation of $\operatorname{im}(\gamma)$ around $(0,0)$.
 \end{answer}
 
@@ -225,7 +225,7 @@ smooth, but there is no graphical representation of $\operatorname{im}(\gamma)$ 
 \begin{ainote}
 Two things are worth extracting. First, how injectivity survives a self-crossing at all: the two
 parameter ends $t \to 0^+$ and $t \to 2\pi^-$ both send $\gamma(t) \to (0,0)$, but neither
-\emph{attains} it, so the image passes through the origin only once --- via $t = \pi$ --- while
+\emph{attains} it, so the image passes through the origin only once (via $t = \pi$) while
 being approached from two further directions.
 
 Second, this locates precisely which hypothesis of \cref{thm:local_parametrization} fails. It is
@@ -233,7 +233,7 @@ not injectivity, and not injectivity of $D\gamma_t$; it is the requirement that 
 parametrization be a \textbf{homeomorphism} onto its image. Here $\gamma^{-1}$ is discontinuous
 at $(0,0)$: points of the image arbitrarily close to the origin have parameters near $0$ and near
 $2\pi$, far apart in $I$. That the resulting set is not a submanifold can then be confirmed by
-the component count of \cref{ex:cross_not_submanifold} --- deleting the crossing point leaves
+the component count of \cref{ex:cross_not_submanifold}. Deleting the crossing point leaves
 four pieces, while deleting a point from an interval leaves two.
 \end{ainote}
 

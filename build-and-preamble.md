@@ -129,6 +129,36 @@ that did not cover, marked points sitting where the curve was at its minimum. Wh
 encodes a computation, check the arithmetic in a comment above it (see FIG-W06-03, now in
 `content/14-convexity/`, for the pattern).
 
+The 2026-08-09 figure pass is the strongest evidence for this rule. In Part VII alone, four of
+the ten figures were wrong, and three of those were wrong *mathematically* rather than
+cosmetically: a frame drawn as a rotation where the accompanying note asserted a reflection
+(so it illustrated the case an orientable atlas **allows**); a point labelled $p \in \partial M$
+sitting half a unit inside the interior, with the tangent vector pointing across the region and
+the domain drawn on the wrong side of its own half-space boundary; and both shared-edge arrows
+in the Green's theorem cell picture reversed relative to their own cells. Not one of the four
+was visible in the source. The reversed arrows had survived several passes precisely because
+the pair still *looked* like it cancelled — cancellation was the conclusion, but which arrow
+belonged to which cell was the reason for it, and that was the part that was backwards.
+
+## The four standing `Overfull \hbox` warnings
+
+A clean build emits exactly four, and they have been present throughout. **Four is the baseline:
+if a build reports five, the new one is yours.** None is serious enough to have been worth
+rewriting the surrounding mathematics for.
+
+| Where | Page | Over by |
+|---|---|---|
+| `24-differential-forms/02-exterior-derivative.tex` | 241 | 101.24pt (the `dx \wedge \dots` chain) |
+| `26-stokes/04-stokes-theorem.tex` | 256 | 10.61pt |
+| `14-convexity/01-convexity.tex` | 163 | 4.62pt |
+| `appendix-a-odes.tex` | 268 | 1.20pt |
+
+⚠️ **Attribute these by page, not by guesswork.** A list in `project-state.md` had named
+`26-stokes/02` and omitted `14-convexity` entirely, and it went unchallenged for some time
+because the counts matched. The reliable method: find the `[NNN]` page marker nearest the
+warning in the `.log`, then read that page of the PDF. The bracketed file nesting in the log is
+not trustworthy on its own, because parentheses in ordinary text confuse the obvious parse.
+
 ## The preamble's environments and macros
 
 * Don't use

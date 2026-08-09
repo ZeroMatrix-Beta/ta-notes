@@ -401,58 +401,60 @@
 \makeatother
 
 % ==========================================
+% THEOREM CONFIGURATION% ==========================================
 % THEOREM CONFIGURATION
 % ==========================================
+% 1. Theorems, Lemmata, Propositions, Corollaries, Claims (\faGem)
 \newtheoremstyle{purplethm}%
 {\customenvspace}{\customenvspace}{\normalfont}{}{\color{EnvTheorem}\sffamily\bfseries}{:}{0.5em}%
-% NB: the space before the number lives in \thmnumber, not in \thmname -- otherwise
-% unnumbered environments (\newtheorem*) would emit a stray space before the note
-% or before the colon ("Remark  (...)", "Important remark :").
-{\thmname{\textcolor{EnvTheorem}{\sffamily\bfseries#1}}\thmnumber{\sffamily\bfseries\ #2}%
+{\textcolor{EnvTheorem}{\faGem}\hspace{0.4em}%
+ \thmname{\textcolor{EnvTheorem}{\sffamily\bfseries#1}}\thmnumber{\sffamily\bfseries\ #2}%
+ \thmnote{\ \textcolor{EnvTheorem}{\bfseries(}{\normalfont\sffamily\itshape#3}\textcolor{EnvTheorem}{\bfseries)}}}
+
+% 2. Definitions (\faBookOpen)
+\newtheoremstyle{defthm}%
+{\customenvspace}{\customenvspace}{\normalfont}{}{\color{EnvTheorem}\sffamily\bfseries}{:}{0.5em}%
+{\textcolor{EnvTheorem}{\faBookOpen}\hspace{0.4em}%
+ \thmname{\textcolor{EnvTheorem}{\sffamily\bfseries#1}}\thmnumber{\sffamily\bfseries\ #2}%
+ \thmnote{\ \textcolor{EnvTheorem}{\bfseries(}{\normalfont\sffamily\itshape#3}\textcolor{EnvTheorem}{\bfseries)}}}
+
+% 3. Questions & Answers (\faQuestionCircle)
+\newtheoremstyle{questionthm}%
+{\customenvspace}{\customenvspace}{\normalfont}{}{\color{MidnightBlue}\sffamily\bfseries}{:}{0.5em}%
+{\textcolor{MidnightBlue}{\faQuestionCircle}\hspace{0.4em}%
+ \thmname{\textcolor{MidnightBlue}{\sffamily\bfseries#1}}\thmnumber{\sffamily\bfseries\ #2}%
+ \thmnote{\ \textcolor{MidnightBlue}{\bfseries(}{\normalfont\sffamily\itshape#3}\textcolor{MidnightBlue}{\bfseries)}}}
+
+% 4. Remarks & Notes (\faInfoCircle)
+\newtheoremstyle{remarkthm}%
+{\customenvspace}{\customenvspace}{\normalfont}{}{\color{ThemeGreen}\sffamily\bfseries}{:}{0.5em}%
+{\textcolor{ThemeGreen}{\faInfoCircle}\hspace{0.4em}%
+ \thmname{\textcolor{ThemeGreen}{\sffamily\bfseries#1}}\thmnumber{\sffamily\bfseries\ #2}%
+ \thmnote{\ \textcolor{ThemeGreen}{\bfseries(}{\normalfont\sffamily\itshape#3}\textcolor{ThemeGreen}{\bfseries)}}}
+
+% 5. Examples & Exercises (\faLightbulb)
+\newtheoremstyle{examplethm}%
+{\customenvspace}{\customenvspace}{\normalfont}{}{\color{EnvTheorem}\sffamily\bfseries}{:}{0.5em}%
+{\textcolor{EnvTheorem}{\faLightbulb}\hspace{0.4em}%
+ \thmname{\textcolor{EnvTheorem}{\sffamily\bfseries#1}}\thmnumber{\sffamily\bfseries\ #2}%
  \thmnote{\ \textcolor{EnvTheorem}{\bfseries(}{\normalfont\sffamily\itshape#3}\textcolor{EnvTheorem}{\bfseries)}}}
 
 \theoremstyle{purplethm}
 
-% NB: deliberately NOT \newtheorem{theorem}{Theorem}[section]. The counter resets per
-% *chapter* (see \@addtoreset below) and the printed number is built by hand in
-% \thetheorem, which appends the section letter. An automatic per-section reset would
-% restart the arabic part inside a chapter and print e.g. "6.a.1", "6.b.1", "6.c.1"
-% instead of a single run 6.a.1 ... 6.c.17.
-%
-% This comment used to say that each content file hard-codes its own \thetheorem prefix to
-% stay in step with "Prof. Biran's handwritten notes". That was imported wholesale from a
-% different repository (a linear-algebra project) and never described this document: no
-% file here overrides \thetheorem, and none should -- doing so would nail a wrong chapter
-% number into a topic that has since moved chapters more than once.
 \newtheorem{theorem}{Theorem}
 
-% The decoupled theorem display format: Chapter.letter.Number
-% Robust against chapters that jump straight to \subsection (i.e. no \section at
-% all): in that case the section letter is simply omitted -> "Chapter.Number".
 \renewcommand{\thetheorem}{%
   \thechapter.\ifnum\value{section}>0 \alph{section}.\fi\arabic{theorem}}
 
-% hyperref builds its anchor names from \theH<counter>, NOT from \the<counter>.
-% Its default for a counter reset by `section' omits the chapter, so e.g. the
-% first theorem of every section of every chapter would claim the anchor
-% `theorem.<n>.1' -- the duplicates get dropped and \cref links silently jump to
-% the wrong environment. Mirroring the printed number keeps the anchors unique.
-% (\AtBeginDocument: hyperref installs its own defaults late, so a plain
-% \renewcommand here would simply be overwritten.)
 \makeatletter
 \AtBeginDocument{%
   \renewcommand{\theHtheorem}{\thechapter.\alph{section}.\arabic{theorem}}%
   \renewcommand{\theHequation}{\thechapter.\alph{section}.\arabic{equation}}%
-  % The aliased counters below need the same treatment, and must point at the
-  % *same* anchor as \theHtheorem -- they are one counter under many names.
   \@namedef{theHlemma}{\theHtheorem}%
   \@namedef{theHcorollary}{\theHtheorem}%
   \@namedef{theHdefinition}{\theHtheorem}%
   \@namedef{theHproposition}{\theHtheorem}%
   \@namedef{theHexercise}{\theHtheorem}%
-  % Sonnet 5 (Medium): every formerly-unnumbered environment below is now
-  % aliased to the theorem counter too (see "NUMBERED ENVIRONMENTS, continued"),
-  % so it needs the same anchor treatment as lemma/corollary/... above.
   \@namedef{theHclaim}{\theHtheorem}%
   \@namedef{theHnotation}{\theHtheorem}%
   \@namedef{theHremark}{\theHtheorem}%
@@ -464,16 +466,11 @@
   \@namedef{theHimportantremark}{\theHtheorem}%
   \@namedef{theHgoals}{\theHtheorem}%
   \@namedef{theHconclusion}{\theHtheorem}%
-  % (no theHainote needed: ainote has its OWN counter, reset per chapter, so \theainote
-  %  is already unique document-wide and hyperref's fallback to \theainote is correct.
-  %  The entries above exist only because those environments SHARE the theorem counter.)
   \@namedef{theHaiexample}{\theHtheorem}%
   \@namedef{theHaiexercise}{\theHtheorem}%
 }
 \makeatother
 
-% Reset the theorem counter at every chapter too, not only at every section --
-% otherwise a section-less chapter would keep counting from the previous one.
 \makeatletter
 \@addtoreset{theorem}{chapter}
 \makeatother
@@ -481,18 +478,7 @@
 \setcounter{MaxMatrixCols}{20}
 
 % --- NUMBERED ENVIRONMENTS ---
-% NB: deliberately NOT \newtheorem{lemma}[theorem]{Lemma}.
-% That form makes `lemma' share the *counter named* `theorem', and cleveref
-% derives a reference's type from the counter name -- so every \cref to a
-% lemma, corollary, definition or proposition printed "Theorem". Only 52 of the
-% ~290 numbered environments in this document are actually theorems, so almost
-% every cross-reference was mislabelled.
-%
-% aliascnt gives each environment a counter of its own name that is merely an
-% alias of `theorem'. The shared, continuous numbering is preserved exactly
-% (\thelemma expands to \thetheorem, dynamically, so the per-file
-% \renewcommand{\thetheorem} prefixes still apply), but cleveref can now tell
-% the environments apart.
+\theoremstyle{purplethm}
 \newaliascnt{lemma}{theorem}
 \newtheorem{lemma}[lemma]{Lemma}
 \aliascntresetthe{lemma}
@@ -501,35 +487,50 @@
 \newtheorem{corollary}[corollary]{Corollary}
 \aliascntresetthe{corollary}
 
-\newaliascnt{definition}{theorem}
-\newtheorem{definition}[definition]{Definition}
-\aliascntresetthe{definition}
-
 \newaliascnt{proposition}{theorem}
 \newtheorem{proposition}[proposition]{Proposition}
 \aliascntresetthe{proposition}
 
-\newaliascnt{exercise}{theorem}
-\newtheorem{exercise}[exercise]{Exercise}
-\aliascntresetthe{exercise}
-
-% --- NUMBERED ENVIRONMENTS, continued ---
-% Sonnet 5 (Medium): this project wants every environment numbered, so that
-% cleveref/\cref can identify and cross-reference every instance -- an
-% environment created with \newtheorem* has NO counter at all, so a \label
-% placed inside one is silently attributed to whatever ambient counter (e.g.
-% the enclosing subsection) was last stepped, producing wrong \cref output
-% (e.g. "Section 2.d.4" instead of "AI-Exercise 2.d.13"). Every environment
-% below therefore follows the same \newaliascnt pattern as lemma/corollary/
-% definition/proposition/exercise above, so it shares the single running
-% Chapter.Section.N sequence and cleveref can tell it apart by name. The
-% starred (theorem*, lemma*, ...) escape-hatch environments are removed
-% entirely, since they were unused (grep across content/*.tex) and are now
-% redundant with their numbered counterparts.
 \newaliascnt{claim}{theorem}
 \newtheorem{claim}[claim]{Claim}
 \aliascntresetthe{claim}
 
+\theoremstyle{defthm}
+\newaliascnt{definition}{theorem}
+\newtheorem{definition}[definition]{Definition}
+\aliascntresetthe{definition}
+
+\theoremstyle{examplethm}
+\newaliascnt{exercise}{theorem}
+\newtheorem{exercise}[exercise]{Exercise}
+\aliascntresetthe{exercise}
+
+\newaliascnt{example}{theorem}
+\newtheorem{example}[example]{Example}
+\aliascntresetthe{example}
+
+\newaliascnt{warmup}{theorem}
+\newtheorem{warmup}[warmup]{Warm up}
+\aliascntresetthe{warmup}
+
+\newaliascnt{aiexample}{theorem}
+\newtheorem{aiexample}[aiexample]{AI-Example}
+\aliascntresetthe{aiexample}
+
+\newaliascnt{aiexercise}{theorem}
+\newtheorem{aiexercise}[aiexercise]{AI-Exercise}
+\aliascntresetthe{aiexercise}
+
+\theoremstyle{questionthm}
+\newaliascnt{question}{theorem}
+\newtheorem{question}[question]{Question}
+\aliascntresetthe{question}
+
+\newaliascnt{answer}{theorem}
+\newtheorem{answer}[answer]{Answer}
+\aliascntresetthe{answer}
+
+\theoremstyle{remarkthm}
 \newaliascnt{notation}{theorem}
 \newtheorem{notation}[notation]{Notation}
 \aliascntresetthe{notation}
@@ -538,25 +539,9 @@
 \newtheorem{remark}[remark]{Remark}
 \aliascntresetthe{remark}
 
-\newaliascnt{example}{theorem}
-\newtheorem{example}[example]{Example}
-\aliascntresetthe{example}
-
 \newaliascnt{summary}{theorem}
 \newtheorem{summary}[summary]{Summary}
 \aliascntresetthe{summary}
-
-\newaliascnt{warmup}{theorem}
-\newtheorem{warmup}[warmup]{Warm up}
-\aliascntresetthe{warmup}
-
-\newaliascnt{question}{theorem}
-\newtheorem{question}[question]{Question}
-\aliascntresetthe{question}
-
-\newaliascnt{answer}{theorem}
-\newtheorem{answer}[answer]{Answer}
-\aliascntresetthe{answer}
 
 \newaliascnt{importantremark}{theorem}
 \newtheorem{importantremark}[importantremark]{Important remark}
@@ -572,36 +557,12 @@
 
 \newtheoremstyle{ainotethm}%
 {\customenvspace}{\customenvspace}{\normalfont}{}{\color{EnvAINote}\sffamily\bfseries}{:}{0.5em}%
-{\thmname{\textcolor{EnvAINote}{\sffamily\bfseries#1}}\thmnumber{\sffamily\bfseries\ #2}%
+{\textcolor{EnvAINote}{\faRobot}\hspace{0.4em}%
+ \thmname{\textcolor{EnvAINote}{\sffamily\bfseries#1}}\thmnumber{\sffamily\bfseries\ #2}%
  \thmnote{\ \textcolor{EnvAINote}{\bfseries(}{\normalfont\sffamily\itshape#3}\textcolor{EnvAINote}{\bfseries)}}}
 
 \theoremstyle{ainotethm}
-% ainote is the one environment with a counter OF ITS OWN, reset per chapter, rather
-% than an \newaliascnt alias of the shared theorem counter.
-%
-% It was unnumbered until 2026-08-09, so that a \label inside it was silently
-% misattributed by cleveref to the last-stepped ambient counter. The obvious repair --
-% aliasing it to the theorem counter like everything else -- had already been tried and
-% reverted, because 119 AI-Notes stepping the shared counter tore holes in the theorem
-% numbering (a Lemma 2.f.43 followed by a Definition 2.f.46, with two AI-Notes in
-% between). An independent counter is the repair that has neither problem: AI-Notes can
-% carry a \label and be \cref'd as "AI-Note 15.1", and the theorem numbers do not move.
-%
-% \theainote is \thechapter.\arabic{ainote}, unique document-wide (letters after
-% \appendix), so no \theHainote entry is required for hyperref.
-%
-% What did NOT change is what belongs in one: an AI-Note is editorial commentary about
-% the transcription, and the two tests in style.md still decide ainote vs remark vs a
-% plain % comment. Being able to reference one is not a reason to file content there.
 \newtheorem{ainote}{AI-Note}[chapter]
-
-\newaliascnt{aiexample}{theorem}
-\newtheorem{aiexample}[aiexample]{AI-Example}
-\aliascntresetthe{aiexample}
-
-\newaliascnt{aiexercise}{theorem}
-\newtheorem{aiexercise}[aiexercise]{AI-Exercise}
-\aliascntresetthe{aiexercise}
 \theoremstyle{purplethm}
 
 % ==========================================

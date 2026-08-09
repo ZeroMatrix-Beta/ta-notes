@@ -176,34 +176,40 @@ The cover of `Corsin Nick/Class Notes/Week 2.pdf` reads *"Class notes Week 1"*.
 
 | File | What it settles |
 |---|---|
-| `lec_notes.pdf` (project root) | **The current lecture notes.** FS 2026, 239 pp, dated 27 July 2026. The authority our theorems and notation are **checked against** — not a blueprint to transcribe. |
-| `Analysis_II_Script_v1.pdf` | The FS 2024 script, 207 pp. Superseded by the above; still cited by many `% Supplement:` comments, which are correct as history and were not rewritten. |
+| `lec_notes.pdf` (project root) | **The official lecture notes**, and the file to cite from now on. 239 pp, dated 27 July 2026. The authority our theorems and notation are **checked against** — not a blueprint to transcribe. |
 | `exercises/ExN_Analysis2_eng.pdf` | The official problem sheets — quoted verbatim, never paraphrased. |
 | `exercises/SolN_Analysis2_eng.pdf` | Official solutions, used only to **check** a solution you derived first. |
 
-### ⚠️ `lec_notes.pdf` is not the same document as `Analysis_II_Script_v1.pdf`
+### `Analysis_II_Script_v1.pdf` is the same document under its old name
 
-They are two years apart and differently numbered, so **a theorem number from one does not
-resolve in the other**. Both run chapters 9–15, which makes the mismatch easy to miss. Cite
-whichever file you actually opened, by name.
+Confirmed by the user, 2026-08-09. Fifty `% Supplement: Analysis_II_Script_v1.pdf` comments across
+27 files still carry the old name; they were left alone, and **they are not wrong**. Use
+`lec_notes.pdf` in anything you write.
 
-* **Page offset for `lec_notes.pdf`: printed page = PDF page − 5.** Cite the **printed** page.
+Do not assume an old citation's page number lands where you expect, though — the two names were
+not always used with the same page convention, and the file itself has been revised. If a page
+matters, open it.
+
+* **Page offset: printed page = PDF page − 5.** Cite the **printed** page.
 * Provenance comment: `% Supplement: lec_notes.pdf, p. 26`.
-* ⚠️ The `pdftotext` warning below applies to this file too. Render the page and read it.
+* ⚠️ The `pdftotext` warning below applies to this file. Render the page and read it.
 
-### The official script — surveyed and mined out
+### The lecture notes — surveyed twice, mined out
 
-*Analysis II: Several Variables*, Joaquim Serra, ETH FS 2024, 207 pp. It continues the
-Analysis I numbering, so its chapters run **9–15**, not 1–7. **Status: complete**, as of
-2026-08-07. Every divergence, gap, exercise and example the survey identified has been
-transcribed, checked against a rendered page, and build-verified.
+*Analysis II: Several Variables*, Joaquim Serra. It continues the Analysis I numbering, so its
+chapters run **9–15**, not 1–7.
 
-If you ever go back to it:
+**Two surveys, against two revisions of the same file, and this is where the page-number caveat
+above comes from:**
 
-* **Page offset: printed page = PDF page − 4.** Cite the **printed** page.
-* Provenance comment: `% Supplement: Analysis_II_Script_v1.pdf, p. 27`.
-* ⚠️ **Never quote a formula from the extracted text.** `pdftotext` eats `∂`, `≤`, `∇`, `∈` and
-  most Greek. Render the page and read it.
+| Date | Revision surveyed | Offset in force | Outcome |
+|---|---|---|---|
+| 2026-08-07 | 207 pp, as `Analysis_II_Script_v1.pdf` | printed = PDF − 4 | Every divergence, gap, exercise and example transcribed and build-verified. |
+| 2026-08-09 | 239 pp, as `lec_notes.pdf`, dated 27 July 2026 | printed = PDF − 5 | Norm convention adopted, notation audited, six missing statements added. See *Where the document stands*. |
+
+The file grew by 32 pages between the two, which is why an old citation's page can miss and why
+the offset changed. ⚠️ **Never quote a formula from the extracted text.** `pdftotext` eats `∂`,
+`≤`, `∇`, `∈` and most Greek. Render the page and read it.
 
 **Where we are ahead of the script — do not "fix" these by cutting them.** Differential forms
 (chs. 24–25: the script has four unproved paragraphs, we have a full treatment); geodesics
@@ -214,7 +220,10 @@ counterexample, where the script gives the `λ₀`-normalised form with no quali
 
 **Errors found in the script.** The serious two (E2, a false statement of Weierstrass; E6, a
 false `rot(φF)` identity set as an exercise) are handled with `ainote`s. These are cosmetic, and
-are recorded only so they are not copied if you touch the corresponding result:
+are recorded only so they are not copied if you touch the corresponding result. ⚠️ The pages
+below are from the 207-page revision and were **not** re-checked against the current 239-page
+one; the numbered results are what to search for, not the pages. Some may also have been fixed
+upstream since.
 
 | Where | Problem |
 |---|---|

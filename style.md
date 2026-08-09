@@ -723,13 +723,49 @@ All generic rules in this file apply. Additional project-specific conventions:
   interior `\operatorname{int}(A)`; boundary `\partial A`. Preserve Corsin’s
   emphasis (Week 2, p. 6) that `y \in X` in `B_r(x) := \{y \in X : d(y,x) < r\}`
   is the “important subtlety”.
-- **Norms.** `\|\cdot\|` (`\lVert...\rVert`), never `||...||`. Corsin’s metrics
-  `d_1` (Manhattan), `d_2` (standard Euclidean), `d_3` (supremum) — keep his
+- **Norms — single bars are Euclidean, double bars are everything else (2026-08-09).**
+  This is the lecture notes' own convention (`lec_notes.pdf`, remarks 9.92 and 9.94, printed
+  p. 26), adopted here on the user's instruction so that a reader can move between the two
+  documents without retranslating. The rule, stated without pipe characters because a `|` inside
+  a Markdown table splits the cell and an escaped `\|` renders as a *single* bar, which would make
+  this table say the opposite of what it means:
+
+  * **Single bars, `$|x|$`** — the **Euclidean** norm on `\mathbb{R}^n`, and therefore also
+    absolute value on `\mathbb{R}` and modulus on `\mathbb{C}`, which are the same thing.
+  * **Double bars, `$\lVert\cdot\rVert$`** (either spelling: `\lVert...\rVert` or the shorter
+    `\Vert`/`\|`, both typeset ‖·‖ — but never two literal `|` characters) — **any other** norm:
+    the `p`-norms, the supremum norm on `C(K,\mathbb{R}^m)`, the Hilbert–Schmidt norm, the
+    operator norm with subscript `\mathrm{op}`, and the abstract norm of a general normed space.
+
+  Chapter 2 is the standing exception, and only because its subject *is* the abstract normed
+  space: there the double bars cover the Euclidean case too, since naming a particular norm would
+  defeat the point. `ainote:norm_convention` in
+  `content/02-metric-normed-inner-product/01-structured-spaces.tex` states this for the reader —
+  keep the two in step if either changes.
+
+  ⚠️ The earlier revision of this rule said double bars uniformly for *every* norm, and said the
+  document "keeps that convention throughout". It never did: chapters 9–10 and 16–20 were
+  already written with `|h|`, and `10-chain-rule/03-criteria-for-differentiability.tex` used both
+  in a single displayed quotient. Mixed conventions are worse than either one, which is what made
+  this worth a document-wide pass.
+- Corsin’s metrics `d_1` (Manhattan), `d_2` (standard Euclidean), `d_3` (supremum) — keep his
   indices exactly.
 - **Derivatives.** `Df(x_0)` = total differential (linear map);
   `\Jac f(x_0)` = Jacobian matrix; `\nabla f(x_0)` = gradient;
   `\partial_i f` or `\frac{\partial f}{\partial x_i}` = partials;
   `D_v f` = directional derivative; `\Hess f` = Hessian.
+
+  **Checked against `lec_notes.pdf` on 2026-08-09.** The lecture notes write `Df_x = Df(x)` for
+  the differential and `Jf(x)` for the Jacobian matrix, and note that `Df(x)` is also used for
+  the matrix. Ours agree, and are stricter: `\Jac` is declared as `J`, so `\Jac f(x)` prints
+  `Jf(x)`, and we never let `Df` mean the matrix. The gradient is a **column**, `\nabla f =
+  (\Jac f)^T` (Definition 10.22, printed p. 39) — the same here. Two deliberate divergences,
+  both flagged for the reader where they first bite rather than fixed:
+
+  | Lecture notes | Here | Why we keep ours |
+  |---|---|---|
+  | `B(x,r)` | `B_r(x)` | Corsin's notation, and what all 26 chapters are written in. Flagged in `ainote:ball_notation`. |
+  | `Hf(x)`, or `D^2f(x)` | `\Hess f(x)` | A bare `H` next to a Hessian-free `H` elsewhere reads badly; `Hess` cannot be misread. |
 - **Function spaces.** `C^k(U, \mathbb{R}^m)`, `C^\infty`, `C^0([0,1], \mathbb{R})`.
 - **Sets.** Use `\subseteq` for inclusion and `\subsetneq` when strictness matters.
 - **Operators.** Use the declared macros, never raw `\mathrm{}`:

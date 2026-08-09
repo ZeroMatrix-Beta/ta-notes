@@ -336,9 +336,9 @@ $h \circ d$.
 The two pictures above compare two different metrics that $S^2$ inherits or acquires, and it is
 worth writing both down. Restricting the ambient Euclidean metric of $\mathbb{R}^3$ gives the
 \newterm{chord metric}
-\[d_0(x,y) := \|x-y\|, \qquad x,y \in S^2,\]
-the orange dashed segment in the right-hand panel; since $\|x\|=\|y\|=1$, expanding
-$\|x-y\|^2 = \langle x-y,x-y\rangle$ gives the closed form
+\[d_0(x,y) := |x-y|, \qquad x,y \in S^2,\]
+the orange dashed segment in the right-hand panel; since $|x|=|y|=1$, expanding
+$|x-y|^2 = \langle x-y,x-y\rangle$ gives the closed form
 $d_0(x,y) = \sqrt{2-2\langle x,y\rangle}$. The geodesic metric described above measures arc length
 along a great circle instead, and is the solid blue curve in both panels. It is given by
 \[d_1(x,y) := \arccos\big(\langle x,y\rangle\big) \in [0,\pi].\]
@@ -501,13 +501,13 @@ Which of the following pairs are metric spaces? Prove it or provide a counterexa
   \item $(\mathbb{R}^{n \times n}, d)$ with
     $d(X,Y) := \left(\Tr\{(X-Y)\transp(X-Y)\}\right)^{1/2}$.
   \item \textbf{(*)} $(\mathbb{R}^{n \times n}, d)$ with
-    $$d(X,Y) := \sup\{|v\transp(X-Y)v| : v \in \mathbb{R}^n, \|v\| = 1\},$$
+    $$d(X,Y) := \sup\{|v\transp(X-Y)v| : v \in \mathbb{R}^n, |v| = 1\},$$
     and $\mathbb{R}^{n\times n}$ denoting the set of square matrices.
   \item \textbf{(*)} $(\mathbb{R}^2/\mathbb{Z}^2, d)$ where the flat 2-dimensional torus
     $\mathbb{R}^2/\mathbb{Z}^2$ is the set of equivalence classes of pairs of real numbers under
     the equivalence relation
     $$x, y \in \mathbb{R}^2, \quad x \sim y \iff x_1 - y_1 \in \mathbb{Z},\ x_2 - y_2 \in \mathbb{Z},$$
-    and $d([x],[y]) := \inf_{k,h \in \mathbb{Z}} \|x - y + (k,h)\|$, with $\|\cdot\|$ denoting the
+    and $d([x],[y]) := \inf_{k,h \in \mathbb{Z}} |x - y + (k,h)|$, with $|\cdot|$ denoting the
     Euclidean distance and $[x] \in \mathbb{R}^2/\mathbb{Z}^2$ denoting the equivalence class of
     $x \in \mathbb{R}^2$.
 \end{enumerate}

@@ -111,7 +111,7 @@ If $\operatorname{supp}(f)$ is a bounded set (and $\operatorname{supp}(f) \subse
 \label{def:smooth_bump_function}
 The canonical $C^\infty$ \newterm{bump function} \germanfor{H\"ockerfunktion} $\psi : \mathbb{R}^n \to \mathbb{R}$ supported on the unit ball $B_1(0)$ is defined by
 \[
-\psi(x) := \begin{cases} \exp\!\left(-\dfrac{1}{1 - \|x\|^2}\right) & \text{if } \|x\| < 1, \\[1.5ex] 0 & \text{if } \|x\| \geq 1. \end{cases}
+\psi(x) := \begin{cases} \exp\!\left(-\dfrac{1}{1 - |x|^2}\right) & \text{if } |x| < 1, \\[1.5ex] 0 & \text{if } |x| \geq 1. \end{cases}
 \]
 Since all higher derivatives of $t \mapsto \exp(-1/(1-t))$ approach $0$ faster than any polynomial as $t \to 1^-$, $\psi \in C^\infty(\mathbb{R}^n)$ with $\operatorname{supp}(\psi) = \overline{B_1(0)}$.
 \end{definition}

@@ -86,17 +86,27 @@ $\|\cdot\| : V \to [0,\infty)$ satisfying, for all $u, v \in V$ and $\alpha \in 
 \end{enumerate}
 \end{definition}
 
-% Supplement: Analysis_II_Script_v1.pdf, p. 31
-\begin{ainote}
-The official script (Remark 9.94, p.\ 31 onward) adopts the opposite notational convention from
-this document: from that point on \emph{it} writes the Euclidean norm as $|x|$ and reserves
-$\|\cdot\|$ for non-standard norms. This document instead uses $\|\cdot\|$
-(\texttt{\textbackslash lVert}\ldots\texttt{\textbackslash rVert}) uniformly for every norm,
-Euclidean or not, per the house style, and keeps that convention throughout. Neither choice is
-more standard than the other; this note exists only to warn anyone cross-referencing the script
-directly that a bare $|\cdot|$ there and a bare $\|\cdot\|$ here can both denote \qt{the}
-Euclidean norm. The warning matters most in the script's chapters 13--14, where the $|\cdot|$
-convention is used densely.
+% Supplement: lec_notes.pdf, pp. 26--27 (remarks 9.92 and 9.94)
+\begin{ainote}[Which bars mean which norm]
+\label{ainote:norm_convention}
+From p.\ 26 onward the lecture notes fix a notational convention that is worth stating once,
+because it is used everywhere afterwards and never repeated: single bars $|x|$ denote the
+\emph{Euclidean} norm of $x \in \mathbb{R}^n$, and the double bars $\|\cdot\|$ are reserved for
+every \emph{other} norm. This document follows that convention. Concretely:
+\begin{itemize}
+  \item $|x|$ is the Euclidean norm on $\mathbb{R}^n$. Nothing is lost by overloading the
+    absolute-value bars, since for $n=1$ the Euclidean norm \emph{is} the absolute value, and
+    for $n = 2$ read through $\mathbb{R}^2 \cong \mathbb{C}$ it is the complex modulus. All
+    three agree wherever two of them are defined.
+  \item $\|\cdot\|$ is a norm that is not the Euclidean one, or a norm on a vector space that
+    carries no Euclidean structure to begin with: the $p$-norms $\|\cdot\|_p$, the supremum
+    norm $\|\cdot\|_\infty$, the Hilbert--Schmidt norm of \cref{ex:hilbert_schmidt_norm}, the
+    operator norm $\|\cdot\|_{\mathrm{op}}$, and the abstract $\|\cdot\|$ of
+    \cref{def:norm}.
+\end{itemize}
+The present chapter is the one place where double bars also cover the Euclidean case, and for
+the same reason: everything here is proved for an arbitrary normed space, so writing $|x|$ would
+assert a particular norm that is not meant.
 \end{ainote}
 
 % Source: Jérôme Paschoud/Notizen/Woche 4.1 Normen, das Differential.pdf, p. 1
@@ -123,6 +133,39 @@ norm is therefore nothing but the standard Euclidean norm of the matrix entries 
 vector in $\mathbb{R}^{6}$, or in general in $\mathbb{R}^{nm}$. The inner product inducing it is
 $\langle A, B \rangle := \Tr(A\transp B)$.
 \end{example}
+
+% Supplement: lec_notes.pdf, p. 28 (Lemma 9.97)
+% Generator: Claude Opus 5 (High) --- this is the reason the Hilbert-Schmidt norm is introduced
+% at all, and it was missing: the document had the definition, the submultiplicativity exercise
+% (ex:3.10) and several later uses of "|Df(x)v| <= (something)|v|", but never the one-line lemma
+% that licenses them.
+\begin{lemma}[The Hilbert--Schmidt norm bounds lengths]
+\label{lem:hilbert_schmidt_bounds_lengths}
+For every linear map $M : \mathbb{R}^n \to \mathbb{R}^m$,
+\[|My| \leq \|M\|_2\,|y| \qquad \text{for all } y \in \mathbb{R}^n.\]
+\end{lemma}
+
+\begin{proof}
+Write $y = \sum_{i=1}^n y_ie_i$ in the standard basis. By linearity and the triangle inequality,
+\[|My| = \Big|\sum_{i=1}^n y_i\,Me_i\Big| \leq \sum_{i=1}^n |y_i|\,|Me_i|,\]
+and Cauchy--Schwarz applied to the two vectors $(|y_i|)_i$ and $(|Me_i|)_i$ of $\mathbb{R}^n$
+bounds the right-hand side by
+\[\Big(\sum_{i=1}^n |y_i|^2\Big)^{1/2}\Big(\sum_{i=1}^n |Me_i|^2\Big)^{1/2} = |y|\,\|M\|_2,\]
+the last equality being the definition of the Hilbert--Schmidt norm read column by column.
+\end{proof}
+
+\begin{remark}[What this is for]
+\label{rem:why_hilbert_schmidt}
+This one inequality is the reason the Hilbert--Schmidt norm is worth introducing this early. It
+is what turns a statement about a \emph{matrix} into a statement about \emph{lengths}, and it is
+the step behind every later estimate of the form \qt{the image of a short vector is short}: the
+proof that a $C^1$ function with bounded derivative is Lipschitz
+(\cref{rem:mvi_lipschitz_bound}), the Lipschitz perturbation lemma driving the inverse function
+theorem (\cref{lem:lipschitz_perturbation_identity}), and the bound that makes a $C^1$ map send
+null sets to null sets in \cref{ch:jordan_measure}. Note that $\|M\|_2$ is not the smallest
+constant that works, since the operator norm is, but it is the one that can be read straight off
+the entries, which is usually what one wants.
+\end{remark}
 
 % Transition: Claude Opus 5 (High)
 Comparing the three lists of axioms is already informative. A norm has exactly the three

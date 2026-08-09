@@ -276,6 +276,37 @@ set. Note that the hypothesis \qt{closed} is essential, since $(0,1) \subseteq [
 a compact set without being compact.
 \end{remark}
 
+% Supplement: lec_notes.pdf, p. 21 (Corollary 9.71)
+% Generator: Claude Opus 5 (High) --- the converse of the proposition above, and the half of
+% Heine--Borel that costs nothing and holds in every metric space. The document had it only
+% inside \cref{thm:heine_borel}, where it looks like a fact about R^n, which it is not.
+\begin{proposition}[A compact subset is always closed]
+\label{prop:compact_implies_closed}
+Let $(X,d)$ be a metric space and $K \subseteq X$ compact. Then $K$ is closed in $X$.
+\end{proposition}
+
+\begin{proof}
+Let $(x_n) \subseteq K$ converge to some $x \in X$; by \cref{prop:open_closed_via_sequences} it
+suffices to show $x \in K$. Compactness gives a subsequence $x_{n_k} \to y$ with $y \in K$
+(\cref{thm:sequential_topological_compactness_equivalence}). But a subsequence of a convergent
+sequence converges to the same limit, so $y = x$ by uniqueness of limits
+(\cref{prop:uniqueness_of_limits}), and therefore $x \in K$.
+\end{proof}
+
+\begin{remark}[This is the cheap half of Heine--Borel]
+\label{rem:compact_closed_bounded_cheap_half}
+Together with \cref{lem:sequentially_compact_totally_bounded}, which gives boundedness, this
+proposition says that in \emph{every} metric space a compact set is closed and bounded. That
+direction is short and completely general, and it is the one \cref{thm:heine_borel} gets for
+free. What Heine--Borel adds, and what is special to $\mathbb{R}^n$, is the converse, and
+\cref{ex:heine_borel_fails} shows how badly the converse can fail elsewhere: there is a metric
+space with a closed bounded set that is not compact.
+
+The pairing with \cref{prop:closed_subset_of_compact} is worth noticing too. Compactness passes
+\emph{down} to closed subsets and \emph{up} to the property of being closed, so within a compact
+ambient space \qt{compact} and \qt{closed} are the same word.
+\end{remark}
+
 % Source: Corsin Nick/Class Notes/Week 2.pdf, p. 15
 \begin{exercise}[Compact sets are complete]
 \label{ex:compact_finite_complete}

@@ -54,19 +54,19 @@ where $\phi : U \to \mathbb{R}^n$ is a $\lambda$-Lipschitz function with constan
   \item Fix $y_0 \in B_{(1-\lambda)r}(F(x))$. We seek a point $x_0 \in B_r(x)$ satisfying $F(x_0) = y_0$, which is equivalent to the fixed-point equation $x_0 = y_0 - \phi(x_0)$.
   Define $g : \overline{B_r(x)} \to \mathbb{R}^n$ by $g(z) := y_0 - \phi(z)$. For any $z_1, z_2 \in \overline{B_r(x)}$,
   \[
-  \|g(z_1) - g(z_2)\| = \|\phi(z_1) - \phi(z_2)\| \leq \lambda \|z_1 - z_2\|,
+  |g(z_1) - g(z_2)| = |\phi(z_1) - \phi(z_2)| \leq \lambda |z_1 - z_2|,
   \]
   so $g$ is a $\lambda$-contraction. Next, we verify that $g$ maps $\overline{B_r(x)}$ into itself:
   \[
-  \|g(z) - x\| \leq \|g(z) - g(x)\| + \|g(x) - x\| \leq \lambda \|z - x\| + \|y_0 - F(x)\| < \lambda r + (1-\lambda)r = r.
+  |g(z) - x| \leq |g(z) - g(x)| + |g(x) - x| \leq \lambda |z - x| + |y_0 - F(x)| < \lambda r + (1-\lambda)r = r.
   \]
-  Thus $g(\overline{B_r(x)}) \subseteq B_r(x) \subseteq \overline{B_r(x)}$. Since $\overline{B_r(x)}$ is complete, the Banach fixed-point theorem (\cref{thm:banach_fixed_point}) yields a unique point $x_0 \in B_r(x)$ with $g(x_0) = x_0$, i.e.\ $F(x_0) = y_0$. This proves $B_{(1-\lambda)r}(F(x)) \subseteq F(B_r(x))$. The outer inclusion follows directly from $\|F(y) - F(x)\| \leq \|y - x\| + \|\phi(y) - \phi(x)\| < (1+\lambda)r$.
+  Thus $g(\overline{B_r(x)}) \subseteq B_r(x) \subseteq \overline{B_r(x)}$. Since $\overline{B_r(x)}$ is complete, the Banach fixed-point theorem (\cref{thm:banach_fixed_point}) yields a unique point $x_0 \in B_r(x)$ with $g(x_0) = x_0$, i.e.\ $F(x_0) = y_0$. This proves $B_{(1-\lambda)r}(F(x)) \subseteq F(B_r(x))$. The outer inclusion follows directly from $|F(y) - F(x)| \leq |y - x| + |\phi(y) - \phi(x)| < (1+\lambda)r$.
 
   \item For any $x_1, x_2 \in U$, applying the reverse triangle inequality gives
   \[
-  \|F(x_1) - F(x_2)\| = \|(x_1 - x_2) + (\phi(x_1) - \phi(x_2))\| \geq \|x_1 - x_2\| - \|\phi(x_1) - \phi(x_2)\| \geq (1-\lambda)\|x_1 - x_2\|.
+  |F(x_1) - F(x_2)| = |(x_1 - x_2) + (\phi(x_1) - \phi(x_2))| \geq |x_1 - x_2| - |\phi(x_1) - \phi(x_2)| \geq (1-\lambda)|x_1 - x_2|.
   \]
-  Hence $F(x_1) = F(x_2) \implies x_1 = x_2$, so $F$ is injective. Setting $y_1 := F(x_1)$ and $y_2 := F(x_2)$, this bound rewrites as $\|F^{-1}(y_1) - F^{-1}(y_2)\| \leq \frac{1}{1-\lambda} \|y_1 - y_2\|$, establishing that $F^{-1}$ is $\frac{1}{1-\lambda}$-Lipschitz continuous.
+  Hence $F(x_1) = F(x_2) \implies x_1 = x_2$, so $F$ is injective. Setting $y_1 := F(x_1)$ and $y_2 := F(x_2)$, this bound rewrites as $|F^{-1}(y_1) - F^{-1}(y_2)| \leq \frac{1}{1-\lambda} |y_1 - y_2|$, establishing that $F^{-1}$ is $\frac{1}{1-\lambda}$-Lipschitz continuous.
 \end{enumerate}
 \end{proof}
 
@@ -88,7 +88,7 @@ and is never used again, so it is worth seeing how the two fit together.
 Assume $x_0 = 0$ and $f(x_0) = 0$, which costs nothing, and replace $f$ by $Df_0^{-1}\circ f$,
 which is legitimate because $Df_0$ is invertible by hypothesis and which makes $Df_0 = \id$.
 Then $\phi(x) := f(x) - x$ satisfies $D\phi_0 = 0$. Since $D\phi$ is continuous, there is a ball
-around $0$ on which $\|D\phi\| \leq \lambda$ for any $\lambda \in (0,1)$ we like, and on a ball
+around $0$ on which $\|D\phi\|_{\mathrm{op}} \leq \lambda$ for any $\lambda \in (0,1)$ we like, and on a ball
 (a convex set) the mean value inequality upgrades that to $\phi$ being $\lambda$-Lipschitz. Now
 $f = \id + \phi$ is exactly the shape \cref{lem:lipschitz_perturbation_identity} handles, and the
 lemma returns, in one step, that $f$ is open and injective there with a Lipschitz inverse. Only

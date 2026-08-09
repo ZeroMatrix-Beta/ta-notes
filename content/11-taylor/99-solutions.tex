@@ -58,7 +58,7 @@ polynomial of degree $\leq k$ pins down every derivative of order $\leq k$, and 
 Then $f(1) = (0,1) = f(0)$, so the left-hand side is
 \[f(1) - f(0) = (0,0).\]
 On the other hand $f'(t) = 2\pi\big(\cos(2\pi t),\ -\sin(2\pi t)\big)$, whose norm is
-\[\lVert f'(t)\rVert = 2\pi\sqrt{\cos^2(2\pi t) + \sin^2(2\pi t)} = 2\pi \neq 0
+\[|f'(t)| = 2\pi\sqrt{\cos^2(2\pi t) + \sin^2(2\pi t)} = 2\pi \neq 0
   \qquad \text{for every } t.\]
 So $f'(t)$ never equals $(0,0)$, and no $t \in [0,1]$ can satisfy the claimed identity.
 
@@ -70,7 +70,7 @@ componentwise. Both components do vanish, just not at the same time.
 
 \begin{ainote}
 Note what does \emph{not} fail. The \emph{mean value inequality}
-$\lVert f(1)-f(0)\rVert \leq \sup_{t \in [0,1]}\lVert f'(t)\rVert$ holds here as
+$|f(1)-f(0)| \leq \sup_{t \in [0,1]}|f'(t)|$ holds here as
 $0 \leq 2\pi$, comfortably. That inequality is what survives into $\mathbb{R}^m$ and what every
 later estimate in this document actually uses; the \emph{equality} is a one-dimensional accident.
 Geometrically the counterexample is a walker going once round a circle: they return to the start,

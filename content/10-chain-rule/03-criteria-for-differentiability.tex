@@ -120,7 +120,7 @@ Sascha's notes distil the above into three steps, worth following in this order.
     can only be $L := \big(\partial_1F(x_0),\dots,\partial_nF(x_0)\big)$, since the partials are
     forced (\cref{sec:jacobi_matrix}).
   \item \textbf{Verify the candidate against the definition:}
-    \[\lim_{h\to0}\frac{\big|F(x_0+h)-F(x_0)-L(h)\big|}{\lVert h\rVert} \overset{?}{=} 0.\]
+    \[\lim_{h\to0}\frac{\big|F(x_0+h)-F(x_0)-L(h)\big|}{|h|} \overset{?}{=} 0.\]
     In $\mathbb{R}^2$, substituting $h = (r\cos\theta,\ r\sin\theta)$ and checking that the
     result tends to $0$ \emph{uniformly in $\theta$} is usually the quickest route. This is the
     same polar trick used in \cref{ex:all_directional_derivatives_exist} and, later, in
@@ -140,7 +140,7 @@ Let $f(x,y) := \frac{x^2 y}{x^2+y^2}$ for $(x,y) \neq (0,0)$ and $f(0,0) := 0$. 
     They exist, but to use \cref{thm:continuous_partials_imply_differentiable} we would have to compute them everywhere and show they are continuous at $(0,0)$, which is tedious and (as we will see) false. We proceed to step 2.
   \item \textbf{Guess the candidate:} The only possible differential is $L(h_1,h_2) = \partial_1 f(0,0)h_1 + \partial_2 f(0,0)h_2 = 0$.
   \item \textbf{Verify against the definition:} We check whether the following limit is zero:
-    \[\lim_{h\to 0} \frac{|f(h_1,h_2) - f(0,0) - L(h)|}{\lVert h\rVert} = \lim_{h\to 0} \frac{\frac{h_1^2 h_2}{h_1^2+h_2^2}}{\sqrt{h_1^2+h_2^2}} = \lim_{h\to 0} \frac{h_1^2 h_2}{(h_1^2+h_2^2)^{3/2}}.\]
+    \[\lim_{h\to 0} \frac{|f(h_1,h_2) - f(0,0) - L(h)|}{|h|} = \lim_{h\to 0} \frac{\frac{h_1^2 h_2}{h_1^2+h_2^2}}{\sqrt{h_1^2+h_2^2}} = \lim_{h\to 0} \frac{h_1^2 h_2}{(h_1^2+h_2^2)^{3/2}}.\]
     Passing to polar coordinates $h = (r\cos\theta, r\sin\theta)$, the expression becomes
     \[\frac{r^3\cos^2\theta\sin\theta}{r^3} = \cos^2\theta\sin\theta.\]
     This depends on the angle of approach $\theta$ (for instance, it is $0$ along the axes but $\frac{1}{2\sqrt{2}} \neq 0$ along $h_1=h_2$), so the limit as $r \to 0$ is not uniformly $0$. Hence $f$ is \textbf{not differentiable} at $(0,0)$.
@@ -160,7 +160,7 @@ Let $f(x,y) := \frac{x^2 y^2}{\sqrt{x^2+y^2}}$ for $(x,y) \neq (0,0)$ and $f(0,0
     As $r \to 0$, this tends to $0$ uniformly in $\theta$, so $\partial_1 f$ is continuous at $(0,0)$. The same holds for $\partial_2 f$. By \cref{thm:continuous_partials_imply_differentiable}, $f$ is differentiable at the origin.
   \item \textbf{Guess the candidate:} We already know $f$ is differentiable and $L = (0,0)$. But for practice, let's verify it with the definition directly.
   \item \textbf{Verify against the definition:} We check the limit
-    \[\lim_{h\to 0} \frac{|f(h_1,h_2) - f(0,0) - L(h)|}{\lVert h\rVert} = \lim_{h\to 0} \frac{\frac{h_1^2 h_2^2}{\sqrt{h_1^2+h_2^2}}}{\sqrt{h_1^2+h_2^2}} = \lim_{h\to 0} \frac{h_1^2 h_2^2}{h_1^2+h_2^2}.\]
+    \[\lim_{h\to 0} \frac{|f(h_1,h_2) - f(0,0) - L(h)|}{|h|} = \lim_{h\to 0} \frac{\frac{h_1^2 h_2^2}{\sqrt{h_1^2+h_2^2}}}{\sqrt{h_1^2+h_2^2}} = \lim_{h\to 0} \frac{h_1^2 h_2^2}{h_1^2+h_2^2}.\]
     In polar coordinates, this is $\frac{r^4\cos^2\theta\sin^2\theta}{r^2} = r^2\cos^2\theta\sin^2\theta$. As $r \to 0$, the limit is clearly $0$ uniformly in $\theta$, confirming $f$ is differentiable with $Df_0 = 0$.
 \end{enumerate}
 \end{example}

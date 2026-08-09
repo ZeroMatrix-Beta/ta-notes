@@ -108,7 +108,7 @@ For $m$ vectors $v_1,\dots,v_m \in \mathbb{R}^n$, the \newterm{area}/\newterm{le
 
 \begin{example}
 \label{ex:gram_m1_length}
-For $m=1$, $\sqrt{\det(v_1\transp v_1)} = \sqrt{\langle v_1,v_1\rangle} = \lVert v_1\rVert$,
+For $m=1$, $\sqrt{\det(v_1\transp v_1)} = \sqrt{\langle v_1,v_1\rangle} = |v_1|$,
 which is the length of $v_1$.
 \end{example}
 
@@ -118,7 +118,7 @@ which is the length of $v_1$.
 For $m=2$, $n=3$, we hope that the Gram determinant of
 \[M = \begin{pmatrix} x_1 & y_1 \\ x_2 & y_2 \\ x_3 & y_3 \end{pmatrix}\]
 gives the area of the parallelogram spanned by $x$ and $y$ in $\mathbb{R}^3$. If $\theta$ is
-the angle between $x$ and $y$, this should be $A = \lVert x\rVert\lVert y\rVert|\sin\theta|$.
+the angle between $x$ and $y$, this should be $A = |x|\,|y|\,|\sin\theta|$.
 
 % Sonnet 5 (Medium) --- FIG-W09-02
 \begin{center}
@@ -131,7 +131,7 @@ the angle between $x$ and $y$, this should be $A = \lVert x\rVert\lVert y\rVert|
   \draw[blue, thick, ->] (O) -- (X) node[above, font=\scriptsize] {$x$};
   \draw[purple, dotted, thick] (X) -- (XY) -- (Y);
   \draw[red, dotted, thick] (X) -- (2.6,0.36);
-  \node[red, font=\scriptsize, right] at (2.68,1.0) {$\|x\|\sin\theta$};
+  \node[red, font=\scriptsize, right] at (2.68,1.0) {$|x|\sin\theta$};
   \draw (0.55,0.075) arc (5:33:0.6);
   \node[font=\scriptsize] at (0.9,0.32) {$\theta$};
 \end{tikzpicture}
@@ -144,8 +144,8 @@ And indeed:
   &= \sqrt{\det\begin{pmatrix} \langle x,x\rangle & \langle x,y\rangle \\
     \langle x,y\rangle & \langle y,y\rangle\end{pmatrix}} \\
   &= \sqrt{\langle x,x\rangle\langle y,y\rangle - \langle x,y\rangle^2} \\
-  &= \sqrt{\lVert x\rVert^2\lVert y\rVert^2 - \lVert x\rVert^2\lVert y\rVert^2\cos^2\theta} \\
-  &= \lVert x\rVert\lVert y\rVert|\sin\theta| \qquad (=\ \lvert x\times y\rvert).
+  &= \sqrt{|x|^2|y|^2 - |x|^2|y|^2\cos^2\theta} \\
+  &= |x|\,|y|\,|\sin\theta| \qquad (=\ |x\times y|).
 \end{aligned}
 \]
 \end{example}

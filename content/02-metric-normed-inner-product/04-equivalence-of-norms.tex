@@ -1,0 +1,129 @@
+% Originally: new section, 2026-08-09. Not a move --- this material had no home in the document
+% before. Exercise 3.9 asked the reader to prove that all norms on R^n are equivalent, and the
+% solution in 99-solutions.tex proved it, but the statement itself was nowhere in the body, so
+% nothing could \cref it and the reader met the result only as homework.
+% Supplement: lec_notes.pdf, pp. 31--33 (Definition 9.105, Theorem 9.107, Corollary 9.109)
+% Generator: Claude Opus 5 (High)
+
+\section{Equivalence of norms}
+\label{sec:equivalence_of_norms}
+
+The previous sections put several norms on the same vector space: the Euclidean norm, the
+$p$-norms, the supremum norm. A natural worry follows. Convergence, openness, continuity and
+compactness were all defined from a metric, and on a normed space that metric came from the norm.
+So does changing the norm change which sequences converge and which sets are open?
+
+On $\mathbb{R}^n$ the answer is no, and the reason is worth isolating, because it is one of the
+few places in this course where finite-dimensionality is doing essential work.
+
+% Supplement: lec_notes.pdf, p. 31 (Definition 9.105)
+\begin{definition}[Equivalent norms]
+\label{def:equivalent_norms}
+Let $V$ be a vector space over $\mathbb{R}$ and let $\|\cdot\|_1$ and $\|\cdot\|_2$ be two norms
+on $V$. They are called \newterm{equivalent} \germanfor{äquivalent}, or \emph{comparable}, if
+there are constants $A, B > 0$ with
+\[\|v\|_1 \leq A\|v\|_2 \qquad\text{and}\qquad \|v\|_2 \leq B\|v\|_1 \qquad\text{for all } v \in V.\]
+\end{definition}
+
+\begin{remark}[Why two inequalities and not one]
+A single inequality $\|v\|_1 \leq A\|v\|_2$ says only that $\|\cdot\|_2$-convergence implies
+$\|\cdot\|_1$-convergence: it makes the first norm the coarser of the two. Equivalence is the
+two-sided statement, and it is exactly what is needed for the two norms to have the same null
+sequences, and hence the same convergent sequences, open sets and compact sets. That equivalence
+of norms really is an equivalence relation is part 5 of \cref{ex:3.9}.
+\end{remark}
+
+% Supplement: lec_notes.pdf, p. 32 (Example 9.106)
+\begin{example}[The $1$-norm against the maximum norm]
+\label{ex:one_norm_vs_max_norm}
+On $\mathbb{R}^n$,
+\[\|v\|_\infty \leq \|v\|_1 \qquad\text{and}\qquad \|v\|_1 \leq n\|v\|_\infty,\]
+so the two are equivalent with $A = 1$ and $B = n$. The left inequality holds because the largest
+$|v_i|$ is one of the terms of the sum $\sum_i|v_i|$; the right because each of the $n$ terms of
+that sum is at most $\max_i|v_i|$.
+
+The constant $n$ on the right is sharp, as $v = (1,1,\dots,1)$ shows, and it is the first sign of
+what goes wrong later: the constants in \cref{thm:all_norms_equivalent} are allowed to depend on
+the dimension, and there is no dimension to depend on in an infinite-dimensional space.
+\end{example}
+
+% Supplement: lec_notes.pdf, p. 32 (Theorem 9.107)
+\begin{theorem}[All norms on $\mathbb{R}^n$ are equivalent]
+\label{thm:all_norms_equivalent}
+Any two norms on $\mathbb{R}^n$ are equivalent in the sense of \cref{def:equivalent_norms}.
+\end{theorem}
+
+\begin{proof}
+This is \cref{ex:3.9}, whose five parts are exactly the five steps of the argument, and it is
+proved in full in the solutions to that exercise. In outline, with $|\cdot|$ the Euclidean norm
+and $f$ an arbitrary norm: expanding $x$ in the standard basis and applying the triangle
+inequality, homogeneity and Cauchy--Schwarz gives $f(x) \leq C_1|x|$; that bound makes $f$
+Lipschitz, hence continuous, for the Euclidean metric; Weierstrass then gives $f$ a positive
+minimum $c_2$ on the Euclidean unit sphere, which is compact by Heine--Borel
+(\cref{thm:heine_borel}); and homogeneity spreads that bound from the sphere to all of
+$\mathbb{R}^n$, giving $f(x) \geq c_2|x|$.
+\end{proof}
+
+\begin{remark}[Where each hypothesis is used]
+\label{rem:where_finite_dimension_enters}
+Both halves of the proof use finite-dimensionality, and they use it differently. The first
+inequality expands $x$ in a \emph{finite} basis, so the sum of $n$ terms it produces is a sum and
+not a series. The second applies Weierstrass on the unit sphere, which needs that sphere to be
+\emph{compact}, and by Heine--Borel it is, in $\mathbb{R}^n$ and nowhere else.
+\Cref{rem:norm_equivalence_needs_finite_dimension} exhibits the failure in
+$C^0([0,1],\mathbb{R})$, and \cref{ex:polynomials_infinite_dimensional} gives the algebraically
+simplest infinite-dimensional space to have in mind.
+\end{remark}
+
+% Supplement: lec_notes.pdf, p. 33 (9.108)
+\begin{corollary}[Any finite-dimensional real vector space]
+\label{cor:all_norms_equivalent_finite_dim}
+Let $V$ be a real vector space of finite dimension $n$. Then any two norms on $V$ are equivalent.
+\end{corollary}
+
+\begin{proof}
+Fix a basis $\mathcal{B} = \{e_1,\dots,e_n\}$ of $V$. The coordinate map
+$\iota_{\mathcal{B}} : \mathbb{R}^n \to V$, $(x_1,\dots,x_n) \mapsto x_1e_1+\dots+x_ne_n$, is a
+linear isomorphism, so a norm $\|\cdot\|$ on $V$ pulls back to the norm
+$x \mapsto \|\iota_{\mathcal{B}}(x)\|$ on $\mathbb{R}^n$, and the two-sided inequalities of
+\cref{def:equivalent_norms} are preserved in both directions under this identification. Applying
+\cref{thm:all_norms_equivalent} on $\mathbb{R}^n$ and transporting back gives the claim.
+\end{proof}
+
+% Supplement: lec_notes.pdf, p. 33 (Corollary 9.109)
+\begin{corollary}[All norms give the same topology]
+\label{cor:norms_same_topology}
+Topological properties of a subset $E \subseteq \mathbb{R}^n$ (openness, closedness, convergence
+of sequences, compactness, connectedness) do not depend on which norm was used to define the
+metric.
+\end{corollary}
+
+\begin{proof}
+Let $d_1, d_2$ be the metrics induced by two norms. By \cref{thm:all_norms_equivalent} there is a
+constant $C > 0$ with $C^{-1}d_1(x,y) \leq d_2(x,y) \leq Cd_1(x,y)$ for all $x,y$, since
+$d_i(x,y) = \|x-y\|_i$ and the norms are equivalent. Hence every $d_1$-ball contains a
+$d_2$-ball about the same centre and conversely, which by \cref{def:open_closed} makes a set open
+for $d_1$ exactly when it is open for $d_2$. The two metrics therefore generate the same
+topology, and every property defined purely in terms of the open sets agrees.
+\end{proof}
+
+\begin{ainote}[What this licenses, and what it does not]
+\label{ainote:norm_equivalence_scope}
+\Cref{cor:norms_same_topology} is the reason this document is free to say \qt{open}, \qt{compact}
+or \qt{convergent} in $\mathbb{R}^n$ without ever naming a norm, and it is worth knowing that the
+licence has been earned rather than assumed.
+
+Three things it does \emph{not} give you.
+\begin{itemize}
+  \item It is about \emph{topological} properties only. Metric quantities are not preserved:
+    the unit ball genuinely changes shape with the norm (see the three drawn in
+    \cref{sec:unit_balls}), distances change, and so do Lipschitz constants. A $1$-Lipschitz map
+    for one norm need not be $1$-Lipschitz for another, only Lipschitz with some other constant.
+  \item It says nothing in infinite dimensions, where the conclusion is false
+    (\cref{rem:where_finite_dimension_enters}).
+  \item It does not make the choice of norm irrelevant in practice. Estimates are still written
+    in whichever norm makes the constants come out cleanly, which is why the supremum norm is the
+    one used on $C(K,\mathbb{R}^m)$ in \cref{sec:ascoli_arzela} even though that space is
+    infinite-dimensional and the theorem above does not reach it.
+\end{itemize}
+\end{ainote}

@@ -383,7 +383,7 @@ For an equation of the form $y'(x) = F(x, y(x))$, one first puts the differentia
 Let $U \subseteq \mathbb{R} \times \mathbb{R}^n$ be an open set, $(t_0, x_0) \in U$, and $F: U \to \mathbb{R}^n$ be continuous. If $F$ is locally Lipschitz continuous in $x$, i.e.,
 \begin{align*}
 \forall (t_1, x_1) \in U \;\; &\exists \varepsilon > 0, L \geq 0 \;\; \text{such that} \\
-&\forall (t, x_2), (t, x_3) \in B_\varepsilon(t_1, x_1) \cap U, \;\; \lVert F(t, x_2) - F(t, x_3) \rVert \leq L \lVert x_2 - x_3 \rVert,
+&\forall (t, x_2), (t, x_3) \in B_\varepsilon(t_1, x_1) \cap U, \;\; |F(t, x_2) - F(t, x_3)| \leq L |x_2 - x_3|,
 \end{align*}
 then there exists an interval $(a, b) \subseteq \mathbb{R}$ with $t_0 \in (a, b)$ such that a differentiable function $u: (a, b) \to \mathbb{R}^n$ exists which satisfies $(t, u(t)) \in U$ for all $t \in (a, b)$, and $u$ is a solution to the initial value problem:
 \[
@@ -402,7 +402,7 @@ A simplified, highly practical formulation is the following:
 \label{cor:picard_lindeloef_simplified}
 Let $I \subseteq \mathbb{R}$ be a compact interval, $\Omega \subseteq \mathbb{R}^n$ an open interval (or open set), $(t_0, y_0) \in I \times \Omega$, and $f: I \times \Omega \to \mathbb{R}^n$ continuous. Suppose $f$ satisfies the Lipschitz condition
 \[
-\lVert f(t, y_1) - f(t, y_2) \rVert \leq L \lVert y_1 - y_2 \rVert \qquad \forall t \in I \text{ and } \forall y_1, y_2 \in \Omega.
+|f(t, y_1) - f(t, y_2)| \leq L |y_1 - y_2| \qquad \forall t \in I \text{ and } \forall y_1, y_2 \in \Omega.
 \]
 Then there exists a $\delta > 0$ such that the initial value problem $u' = f(t, u)$ with $u(t_0) = y_0$ has a unique solution $u: I \cap [t_0-\delta, t_0+\delta] \to \mathbb{R}^n$.
 If $\Omega = \mathbb{R}^n$, one can choose the domain to be the entire interval $I$.
@@ -441,12 +441,12 @@ For $(t,x_2),(t,x_3) \in B_\varepsilon(t_1,x_1)$, the straight segment
 $s\mapsto x_3+s(x_2-x_3)$, $s\in[0,1]$, stays inside the ball (which is convex), so
 $g(s) := F(t,\,x_3+s(x_2-x_3))$ is differentiable on $[0,1]$ with
 $g'(s) = \sum_{k=1}^n \partial_{x_k}F(t,x_3+s(x_2-x_3))\,(x_2-x_3)_k$ by the chain rule. Hence
-\[\lVert F(t,x_2)-F(t,x_3)\rVert = \lVert g(1)-g(0)\rVert
-  = \left\lVert\int_0^1 g'(s)\,ds\right\rVert
+\[|F(t,x_2)-F(t,x_3)| = |g(1)-g(0)|
+  = \left|\int_0^1 g'(s)\,ds\right|
   \leq \int_0^1 \sum_{k=1}^n \lvert\partial_{x_k}F(t,x_3+s(x_2-x_3))\rvert\,\lvert(x_2-x_3)_k\rvert\,ds\]
 \[\leq \sum_{k=1}^n M_k\,\lvert(x_2-x_3)_k\rvert
-  \leq \Big(\sum_{k=1}^n M_k\Big)\lVert x_2-x_3\rVert = L\lVert x_2-x_3\rVert,\]
-using $\lvert(x_2-x_3)_k\rvert \leq \lVert x_2-x_3\rVert$ in the last step. So $F$ is
+  \leq \Big(\sum_{k=1}^n M_k\Big)|x_2-x_3| = L|x_2-x_3|,\]
+using $\lvert(x_2-x_3)_k\rvert \leq |x_2-x_3|$ in the last step. So $F$ is
 $L$-Lipschitz in $x$ on $B_\varepsilon(t_1,x_1)\cap U$, and since $(t_1,x_1) \in U$ was
 arbitrary, $F$ is locally Lipschitz in $x$.
 \end{exercisesolution}
@@ -483,7 +483,7 @@ ODEs: if $z$ solves an order-$m$ linear equation $Lz=0$, the quantity
 $u(t) := z(t)^2+z'(t)^2+\dots+z^{(m-1)}(t)^2$ satisfies a bound $u'(t) \leq Cu(t)$ for a constant
 $C$ depending only on the coefficients of $L$, and Grönwall with $u(t_0)=0$ (zero initial data)
 forces $u\equiv0$, hence $z\equiv0$. This is the \qt{zero in, zero out} principle behind
-uniqueness for linear ODEs. The same device, run on $u(t):=\lVert v_1(t)-v_2(t)\rVert^2$ for two solutions
+uniqueness for linear ODEs. The same device, run on $u(t):=|v_1(t)-v_2(t)|^2$ for two solutions
 $v_1,v_2$ of a Lipschitz system agreeing at one time, gives an alternative route to the
 uniqueness half of \cref{thm:picard_lindeloef_local}.
 \end{remark}
@@ -540,7 +540,7 @@ degree by exactly one.
 \label{thm:peano_existence_theorem}
 Let $I := [t_0-a,\ t_0+a] \subseteq \mathbb{R}$ and $B := \overline{B_b(x_0)} \subseteq
 \mathbb{R}^n$, and let $f : I \times B \to \mathbb{R}^n$ be \emph{continuous}, with no
-Lipschitz condition in $x$ assumed. Put $M := \max_{I\times B}\lVert f\rVert$, which is finite by
+Lipschitz condition in $x$ assumed. Put $M := \max_{I\times B}|f|$, which is finite by
 compactness, and $h := \min\{a,\ b/M\}$. Then the initial value problem
 \[\dot x(t) = f\big(t, x(t)\big), \qquad x(t_0) = x_0\]
 has at least one $C^1$ solution $x : [t_0-h,\ t_0+h] \to B$.

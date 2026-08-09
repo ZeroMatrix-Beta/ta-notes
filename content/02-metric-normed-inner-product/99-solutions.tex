@@ -104,7 +104,7 @@ interest is in \textbf{definiteness} and the \textbf{triangle inequality}.
     not depend on the representatives chosen.
 
     \textit{The infimum is a minimum.} Only finitely many integer vectors $(k,h)$ satisfy
-    $\lVert x-y+(k,h)\rVert \leq \lVert x-y\rVert$, because $\mathbb{Z}^2$ is discrete; the
+    $|x-y+(k,h)| \leq |x-y|$, because $\mathbb{Z}^2$ is discrete; the
     infimum is therefore taken over a finite non-empty set of candidates and is attained. This
     is what the official hint asks you to settle first, and it is what makes the next step
     legitimate.
@@ -117,8 +117,8 @@ interest is in \textbf{definiteness} and the \textbf{triangle inequality}.
     \textit{Triangle inequality.} Choose minimisers $(k_1,h_1)$ for the pair $(x,y)$ and
     $(k_2,h_2)$ for $(y,z)$. Their sum is a legitimate candidate for the pair $(x,z)$, so
     \begin{align*}
-      d([x],[z]) &\leq \big\lVert x-z+(k_1{+}k_2,\ h_1{+}h_2)\big\rVert \\
-      &= \big\lVert \big(x-y+(k_1,h_1)\big) + \big(y-z+(k_2,h_2)\big)\big\rVert \\
+      d([x],[z]) &\leq \big|x-z+(k_1{+}k_2,\ h_1{+}h_2)\big| \\
+      &= \big|\big(x-y+(k_1,h_1)\big) + \big(y-z+(k_2,h_2)\big)\big| \\
       &\leq d([x],[y]) + d([y],[z]).
     \end{align*}
 \end{enumerate}

@@ -18,9 +18,19 @@ $y \in X$ is what makes openness relative to the space, and it is exactly what t
 misconception on \cref{rem:common_misconception} turns on.
 \end{importantremark}
 
-\begin{ainote}
-\Cref{def:open_ball} is stated for $r \in \mathbb{R}$ rather than $r > 0$. Harmless here, but
-loose.
+% Supplement: lec_notes.pdf, p. 11 (Definition 9.38)
+\begin{ainote}[Two things to know about this definition]
+\label{ainote:ball_notation}
+First, \cref{def:open_ball} is stated for $r \in \mathbb{R}$ rather than $r > 0$. Harmless here,
+but loose; the two degenerate cases are spelled out in the remark below.
+
+Second, and more likely to trip you up when reading alongside the lecture: \textbf{the lecture
+notes put the arguments the other way round}, writing $B(x,r)$ where this document writes
+$B_r(x)$ (Definition 9.38, p.\ 11). The two mean exactly the same set, centre $x$ and radius $r$;
+only the typography differs. This document keeps $B_r(x)$, because that is what Corsin's notes
+use and it is what every later chapter here is written in. The one thing to watch is that in the
+lecture's ordering the centre comes \emph{first}, so $B(0,1)$ and $B_1(0)$ are the same ball
+while $B(1,0)$ and $B_1(0)$ are not.
 \end{ainote}
 
 % Moved here from before \cref{def:open_ball} (review item D1): it uses $B_r(x)$,

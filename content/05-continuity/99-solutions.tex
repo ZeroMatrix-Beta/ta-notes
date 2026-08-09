@@ -101,7 +101,7 @@ Both parts ask for a map with no fixed point, and each defeats one hypothesis of
     $x_{n+1} = f(x_n)$ march towards the missing endpoint $1$, and \cref{thm:banach_fixed_point}
     does not apply.
   \item Take the translation $f(x) := x + (1,0)$. It is an isometry, since
-    $\|f(x)-f(x')\| = \|x-x'\|$ exactly, and $f(x) = x$ would force $(1,0) = 0$. \textbf{What
+    $|f(x)-f(x')| = |x-x'|$ exactly, and $f(x) = x$ would force $(1,0) = 0$. \textbf{What
     fails is the strict contraction:} an isometry has Lipschitz constant $L = 1$, not $L < 1$,
     and $\mathbb{R}^2$ is perfectly complete. Together with part \textbf{(a)} this shows neither
     hypothesis of the fixed point theorem can be dropped.
@@ -124,7 +124,7 @@ where it reappears to show that the existence of both partial derivatives implie
 \textbf{Exactly one continuous extension exists for $xy/\sqrt{x^2+y^2}$.} Write
 $(x,y) = (r\cos\theta, r\sin\theta)$ with $r > 0$. Then
 \[g(x,y) = \frac{r^2\cos\theta\sin\theta}{r} = r\cos\theta\sin\theta,
-  \qquad\text{so}\qquad |g(x,y)| \leq \frac r2 = \frac{\lVert(x,y)\rVert}{2}.\]
+  \qquad\text{so}\qquad |g(x,y)| \leq \frac r2 = \frac{|(x,y)|}{2}.\]
 The bound is uniform in $\theta$, so $g(x,y) \to 0$ as $(x,y) \to (0,0)$, and setting
 $g(0,0) := 0$ produces a continuous function on all of $\mathbb{R}^2$.
 
@@ -143,13 +143,13 @@ is also why the first half of the problem had only to exhibit \emph{two} conflic
 
 \textbf{(a) True.} Addition is Lipschitz, hence uniformly continuous
 (\cref{rem:continuity_hierarchy}):
-\[\big|(x+y)-(x'+y')\big| \leq |x-x'| + |y-y'| \leq \sqrt2\,\big\lVert(x,y)-(x',y')\big\rVert,\]
+\[\big|(x+y)-(x'+y')\big| \leq |x-x'| + |y-y'| \leq \sqrt2\,\big|(x,y)-(x',y')\big|,\]
 the last step by Cauchy--Schwarz. So $\delta := \varepsilon/\sqrt2$ works everywhere at once.
 
 \textbf{(b) False.} Multiplication is continuous but not uniformly so on the unbounded domain
 $\mathbb{R}^2$. Take
 \[p_k := \left(k,\ \tfrac1k\right), \qquad q_k := \left(k,\ 0\right).\]
-Then $\lVert p_k - q_k\rVert = \tfrac1k \to 0$, while the values are $k \cdot \tfrac1k = 1$ and
+Then $|p_k - q_k| = \tfrac1k \to 0$, while the values are $k \cdot \tfrac1k = 1$ and
 $0$, a constant gap of $1$. So no $\delta$ can work for $\varepsilon < 1$. The failure is exactly
 the one described in \cref{rem:continuity_vs_uniform_continuity}: the function steepens without
 bound as one runs off to infinity, so the local $\delta$ shrinks without a positive floor.
@@ -202,11 +202,12 @@ domain is what removes the room to run off to a bad point.
       \ \leq\ \omega_f(t_1) + \omega_f(t_2).\]
     Taking the supremum over all admissible $x,y$ yields
     $\omega_f(t_1+t_2) \leq \omega_f(t_1) + \omega_f(t_2)$.
-  \item \textbf{(Bonus 2) Convexity is exactly what the argument needed.} Repeat part 2 verbatim
-    with $|x-y|$ replaced by $\lVert x-y\rVert$: the only property of an interval that was used
-    is that the segment from $x$ to $y$ lies inside $X$, and that is the definition of convexity.
-    The intermediate point is $z := x + \min\{t_1,\lVert x-y\rVert\}\,\frac{y-x}{\lVert
-    y-x\rVert}$ for $x \neq y$, which lies on the segment and satisfies the same two estimates.
+  \item \textbf{(Bonus 2) Convexity is exactly what the argument needed.} Repeat part 2 verbatim,
+    now reading $|x-y|$ as the Euclidean norm on $\mathbb{R}^n$ rather than the absolute value on
+    $\mathbb{R}$: the only property of an interval that was used is that the segment from $x$ to
+    $y$ lies inside $X$, and that is the definition of convexity. The intermediate point is
+    $z := x + \min\{t_1,|x-y|\}\,\frac{y-x}{|y-x|}$ for $x \neq y$, which lies on the segment and
+    satisfies the same two estimates.
 \end{enumerate}
 
 \begin{remark}[Why the value $+\infty$ has to be allowed]

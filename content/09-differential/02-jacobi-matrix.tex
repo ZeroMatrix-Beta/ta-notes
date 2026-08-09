@@ -119,9 +119,12 @@ object, the linear map $DF_{x_0}$, does not.
   \item \textbf{A vector field} (both $>1$): the full $m \times n$ matrix, whose columns are the
     partial derivatives and whose rows are the gradients of the components.
 \end{itemize}
-The gradient being a row and the velocity a column is not a convention to memorise: it follows
-from \qt{$m$ rows, $n$ columns} and nothing else. Confusing the two is the commonest source of
-shape errors when the chain rule is applied later in this chapter.
+That the Jacobian of a scalar field is a row while the Jacobian of a curve is a column is not a
+convention to memorise: it follows from \qt{$m$ rows, $n$ columns} and nothing else. Note the
+transpose in the second bullet, which is the one place a real convention enters: the
+\emph{gradient} $\nabla f$ is a column vector, so it is $\Jac f = (\nabla f)\transp$ that is the
+row. Confusing the two is the commonest source of shape errors when the chain rule is applied
+later in this chapter.
 
 % Source: Corsin Nick/Class Notes/Week 4.pdf, p. 4
 \begin{example}[Derivative of a curve]
@@ -211,9 +214,9 @@ We claim that $f$ is differentiable at $(0,0)$ with $Df_{(0,0)} = (0, 0)$, but t
 
 \textbf{Step 1: Differentiability at $(0,0)$.} We use the definition of the differential. Let $L = (0, 0)$. We need to show that
 \[
-  \lim_{h \to (0,0)} \frac{f(h_1, h_2) - f(0,0) - L\begin{pmatrix}h_1\\h_2\end{pmatrix}}{\|h\|} = 0.
+  \lim_{h \to (0,0)} \frac{f(h_1, h_2) - f(0,0) - L\begin{pmatrix}h_1\\h_2\end{pmatrix}}{|h|} = 0.
 \]
-Plugging in the definitions and changing to polar coordinates $(h_1, h_2) = (r\cos\theta, r\sin\theta)$ with $r = \|h\| = \sqrt{h_1^2+h_2^2}$:
+Plugging in the definitions and changing to polar coordinates $(h_1, h_2) = (r\cos\theta, r\sin\theta)$ with $r = |h| = \sqrt{h_1^2+h_2^2}$:
 \[
   \lim_{r \to 0} \frac{r^2 \sin(1/r) - 0 - 0}{r} = \lim_{r \to 0} r \sin(1/r) = 0.
 \]

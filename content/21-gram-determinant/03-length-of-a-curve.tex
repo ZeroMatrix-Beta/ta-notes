@@ -70,7 +70,7 @@ $\Gamma_f := \{(x,f(x)) : x \in [a,b]\} \subseteq \mathbb{R}^2$ has length
 \begin{proof}
 Parametrize by $\phi(t) := (t, f(t))\transp$ on $[a,b]$, which is injective and $C^1$ with
 $\phi'(t) = (1, f'(t))\transp \neq 0$. The Gram determinant of the single tangent vector is
-\[\sqrt{\det\big(\Jac\phi(t)\transp\Jac\phi(t)\big)} = \lVert\phi'(t)\rVert
+\[\sqrt{\det\big(\Jac\phi(t)\transp\Jac\phi(t)\big)} = |\phi'(t)|
   = \sqrt{1+f'(t)^2},\]
 and integrating over $[a,b]$ is the definition of $\vol_1$.
 \end{proof}
@@ -81,7 +81,7 @@ and integrating over $[a,b]$ is the definition of $\vol_1$.
 Let $\gamma(t) := (\cos^3t,\ \sin^3t)\transp$ for $t \in [0,\tfrac\pi2]$. Then
 \[\gamma'(t) = \begin{pmatrix} -3\cos^2t\,\sin t \\ 3\sin^2t\,\cos t\end{pmatrix},\]
 so, using $\cos t \geq 0$ and $\sin t \geq 0$ on this interval,
-\[\lVert\gamma'(t)\rVert = 3\cos t\,\sin t\sqrt{\cos^2t+\sin^2t} = 3\cos t\,\sin t
+\[|\gamma'(t)| = 3\cos t\,\sin t\sqrt{\cos^2t+\sin^2t} = 3\cos t\,\sin t
   = \tfrac32\sin(2t).\]
 The length is therefore
 \[\int_0^{\pi/2}\tfrac32\sin(2t)\,dt = \Big[-\tfrac34\cos(2t)\Big]_0^{\pi/2}

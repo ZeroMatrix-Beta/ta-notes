@@ -69,7 +69,7 @@ Prove that the set $S^1 := \{ (x,y) \in \mathbb{R}^2 \mid x^2 + y^2 \leq 1 \}$ i
 \end{exercise}
 
 \begin{exercisesolution}[Proof of \cref{ex:disk_connected}]
-Instead of proving connectedness directly via open sets, we can show that $S^1$ is path-connected, which implies connectedness (\cref{lem:path_connected_implies_connected}). Given any two points $a, b \in S^1$, we can connect them via a straight line segment. The segment can be parameterized as $\gamma(t) := (1-t)a + tb$ for $t \in [0,1]$. Since $S^1$ (the unit disk in $\mathbb{R}^2$) is convex, for any $t \in [0,1]$ we have $\lVert \gamma(t) \rVert \leq (1-t)\lVert a \rVert + t \lVert b \rVert \leq 1-t + t = 1$, so the entire path lies in $S^1$. Because any two points can be connected by a continuous path within $S^1$, the set is path-connected, and therefore connected.
+Instead of proving connectedness directly via open sets, we can show that $S^1$ is path-connected, which implies connectedness (\cref{lem:path_connected_implies_connected}). Given any two points $a, b \in S^1$, we can connect them via a straight line segment. The segment can be parameterized as $\gamma(t) := (1-t)a + tb$ for $t \in [0,1]$. Since $S^1$ (the unit disk in $\mathbb{R}^2$) is convex, for any $t \in [0,1]$ we have $|\gamma(t)| \leq (1-t)|a| + t|b| \leq 1-t + t = 1$, so the entire path lies in $S^1$. Because any two points can be connected by a continuous path within $S^1$, the set is path-connected, and therefore connected.
 
 (Note: The standard notation for the unit disk is $D^2$ or $B_1(0)$, whereas $S^1$ usually denotes the boundary circle $\{x^2+y^2=1\}$, but we reproduce the notation $S^1$ here as it appears in the source notes.)
 \end{exercisesolution}

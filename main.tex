@@ -447,7 +447,9 @@
   \@namedef{theHimportantremark}{\theHtheorem}%
   \@namedef{theHgoals}{\theHtheorem}%
   \@namedef{theHconclusion}{\theHtheorem}%
-  % (no theHainote: ainote is unnumbered, see its \newtheorem* below)
+  % (no theHainote needed: ainote has its OWN counter, reset per chapter, so \theainote
+  %  is already unique document-wide and hyperref's fallback to \theainote is correct.
+  %  The entries above exist only because those environments SHARE the theorem counter.)
   \@namedef{theHaiexample}{\theHtheorem}%
   \@namedef{theHaiexercise}{\theHtheorem}%
 }
@@ -557,17 +559,24 @@
  \thmnote{\ \textcolor{EnvAINote}{\bfseries(}{\normalfont\sffamily\itshape#3}\textcolor{EnvAINote}{\bfseries)}}}
 
 \theoremstyle{ainotethm}
-% ainote is the ONE deliberately unnumbered environment in this document.
-% The project-wide "everything is numbered" rule exists because a \label inside an
-% unnumbered environment is silently misattributed by cleveref to the last-stepped
-% ambient counter. That hazard needs a \label to bite, and an ainote never carries
-% one: an AI-Note is editorial commentary about the transcription, never a result
-% anyone cites. Numbering them only inflated the shared theorem counter, so that
-% e.g. a Lemma 2.f.43 was followed by Definition 2.f.46 with two AI-Notes in
-% between. Consequently there is no \theHainote entry and no \crefname either.
-% If you ever need to \label one, it is content, not commentary -- make it a
-% remark (see the semantics section in gemini.md).
-\newtheorem*{ainote}{AI-Note}
+% ainote is the one environment with a counter OF ITS OWN, reset per chapter, rather
+% than an \newaliascnt alias of the shared theorem counter.
+%
+% It was unnumbered until 2026-08-09, so that a \label inside it was silently
+% misattributed by cleveref to the last-stepped ambient counter. The obvious repair --
+% aliasing it to the theorem counter like everything else -- had already been tried and
+% reverted, because 119 AI-Notes stepping the shared counter tore holes in the theorem
+% numbering (a Lemma 2.f.43 followed by a Definition 2.f.46, with two AI-Notes in
+% between). An independent counter is the repair that has neither problem: AI-Notes can
+% carry a \label and be \cref'd as "AI-Note 15.1", and the theorem numbers do not move.
+%
+% \theainote is \thechapter.\arabic{ainote}, unique document-wide (letters after
+% \appendix), so no \theHainote entry is required for hyperref.
+%
+% What did NOT change is what belongs in one: an AI-Note is editorial commentary about
+% the transcription, and the two tests in style.md still decide ainote vs remark vs a
+% plain % comment. Being able to reference one is not a reason to file content there.
+\newtheorem{ainote}{AI-Note}[chapter]
 
 \newaliascnt{aiexample}{theorem}
 \newtheorem{aiexample}[aiexample]{AI-Example}
@@ -631,8 +640,8 @@
 \Crefname{goals}{Goals}{Goals}
 \crefname{conclusion}{Conclusion}{Conclusions}
 \Crefname{conclusion}{Conclusion}{Conclusions}
-% No \crefname for ainote: it is unnumbered by design and carries no counter,
-% so it cannot (and should not) be cross-referenced. See the note at its \newtheorem*.
+\crefname{ainote}{AI-Note}{AI-Notes}
+\Crefname{ainote}{AI-Note}{AI-Notes}
 \crefname{aiexample}{AI-Example}{AI-Examples}
 \Crefname{aiexample}{AI-Example}{AI-Examples}
 \crefname{aiexercise}{AI-Exercise}{AI-Exercises}

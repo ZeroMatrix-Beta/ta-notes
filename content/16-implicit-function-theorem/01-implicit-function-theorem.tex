@@ -20,7 +20,7 @@ Furthermore,
 % Sonnet 5 (Medium)
 In words: the equation $f(x,y)=0$ ties $x$ and $y$ together without telling us what $y$ is. The
 theorem says that near a point where the tie is \emph{non-degenerate in $y$}, the equation can be
-untangled --- there is an honest function $g$ producing the right $y$ for each nearby $x$, it is
+untangled. There is then an honest function $g$ producing the right $y$ for each nearby $x$, it is
 as smooth as $f$ was, and its derivative is computable without ever writing $g$ down.
 
 Three things are worth reading off the statement before the pictures.
@@ -33,8 +33,8 @@ Three things are worth reading off the statement before the pictures.
     $f(x,y)=0 \iff y=g(x)$. So $g$ does not merely produce \emph{some} solutions: within the
     box there are no others.
   \item \textbf{Nothing is claimed globally.} The level set $\{f(x,y)=0\}$ is a graph over $x$
-    only near the chosen point --- \cref{sec:submanifolds} will call such a set a
-    submanifold, and this local-graph property is exactly what that definition abstracts.
+    only near the chosen point. \Cref{sec:submanifolds} will call such a set a submanifold, and
+    this local-graph property is exactly what that definition abstracts.
 \end{itemize}
 
 % Supplement: Sascha Brack/Class Notes/Week_06_Notes_Friday.pdf, pp. 3--5
@@ -73,9 +73,9 @@ be absorbed by moving $y$ at all, and there would be nothing for $g$ to do.
 \end{remark}
 
 \begin{ainote}
-Corsin remarks in his own notes that ``the geometrical meaning of this one eludes me, sorry''.
-The exchange-rate reading above and the two figures below are this document's attempt at the
-geometry he was after; the algebra itself is his chain-rule derivation.
+Corsin's own notes stop after the algebra, with the aside ``the geometrical meaning of this one
+eludes me, sorry''. The exchange-rate reading above and the two figures below are supplied here
+to fill that in. The chain-rule derivation itself is his.
 \end{ainote}
 
 % Sonnet 5 (Medium) --- FIG-W06-04, replacing the original arrow diagram.
@@ -86,8 +86,8 @@ geometry he was after; the algebra itself is his chain-rule derivation.
 The condition on $D_yf(x_0,y_0)$ is a statement about the \emph{direction} in which the level
 set $\{f=0\}$ runs at the point. Moving off $(x_0,y_0)$ straight up, in the $y$-direction alone,
 changes $f$ to first order by $D_yf(x_0,y_0)$. If that map is invertible, no vertical motion
-leaves $f$ unchanged, so the level set cannot run vertically at $(x_0,y_0)$ --- and a curve that
-is not vertical is locally a graph over $x$. If instead $D_yf(x_0,y_0)=0$, the level set is free
+leaves $f$ unchanged, so the level set cannot run vertically at $(x_0,y_0)$, and a curve that is
+not vertical is locally a graph over $x$. If instead $D_yf(x_0,y_0)=0$, the level set is free
 to turn vertical, and above a single $x$ there may sit two values of $y$, or none.
 
 \begin{center}
@@ -154,7 +154,7 @@ to turn vertical, and above a single $x$ there may sit two values of $y$, or non
 % Sonnet 5 (Medium) --- FIG-W06-05, replacing the original box-and-arrow diagram.
 \subsubsection*{What the conclusion gives}
 
-The theorem does not say the whole level set is a graph --- only that it is one \emph{inside a
+The theorem does not say the whole level set is a graph, only that it is one \emph{inside a
 small enough box}. On $B_r(x_0)\times B_s(y_0)$ the two descriptions coincide exactly: the
 zero set of $f$ and the graph of $g$ are the same set. Outside the box the level set may do
 anything at all, including doubling back or carrying further branches, and that is precisely
@@ -204,14 +204,14 @@ is bijective whenever $y \neq 0$, so the implicit function theorem holds there.
 The circle exhibits both cases of the figure above, and it is worth checking them against each
 other.
 
-At a point with $y_0 \neq 0$ --- say $(0,1)$ --- we have $D_yF = 2y_0 \neq 0$, the circle meets
-that point at a non-vertical angle, and near it the circle really is the graph
-$y = \sqrt{1-x^2}$. That is the left panel.
+At a point with $y_0 \neq 0$, say $(0,1)$, we have $D_yF = 2y_0 \neq 0$, the circle meets that
+point at a non-vertical angle, and near it the circle really is the graph $y = \sqrt{1-x^2}$.
+That is the left panel.
 
 At $\bar x = 1$, where $y = 0$, we get $D_yF(1,0) = 0$. The circle is \emph{vertical} there, and
 no graph $y(x)$ can exist around it: for $x$ slightly less than $1$ there are two points of the
 circle above $x$, namely $\pm\sqrt{1-x^2}$, and for $x$ slightly greater than $1$ there are none.
-That is the right panel exactly --- two $y$'s on one side, none on the other.
+That is the right panel exactly, with two $y$'s on one side and none on the other.
 
 Note what has \emph{not} gone wrong at $\bar x = 1$: the circle is a perfectly smooth curve
 there, with no corner and no break. What fails is only the attempt to describe it as a graph

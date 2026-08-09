@@ -54,9 +54,16 @@ it claims, fix it here rather than working around it.
   loaded) or `\mathbf`.
 * **`question` and `answer` take NO optional argument.** `\begin{question}[Some title]` fails
   with the same `\sffamily` error. Put the title in the body text instead.
-* **`ainote` is unnumbered (`\newtheorem*`) and must never carry a `\label`.** If you find
-  yourself wanting to `\cref` one, it is content, not commentary — make it a `remark`. See the
-  comment at its `\newtheorem*` in `main.tex`.
+* **`ainote` has its own counter and may be `\label`ed and `\cref`ed** (changed 2026-08-09; it
+  was `\newtheorem*` and unreferenceable before). It is declared
+  `\newtheorem{ainote}{AI-Note}[chapter]`, so it does **not** alias the shared theorem counter
+  and `\cref` prints `AI-Note 15.1`. Do not "fix" this back to `\newaliascnt{ainote}{theorem}`:
+  that variant was tried and reverted, because 119 AI-Notes stepping the shared counter tore
+  holes in the theorem numbering (a Lemma 2.f.43 followed by a Definition 2.f.46). The
+  independent counter is what avoids both that and the unnumbered-`\label` hazard.
+
+  Being referenceable is **not** a licence to file content in an `ainote` — the two tests in
+  `style.md` still decide `ainote` versus `remark` versus a plain `%` comment.
 * **Never bulk-edit `.tex` with `perl -pi -e 's/.../.../'` containing backslashes.** In the
   replacement, `\\qt` collapses to `qt`, and in the *pattern* `\d`, `\p`, `\l`, `\C` are read as
   regex classes, not literal `\dots`, `\pi`, `\leq`, `\Crefname`. This has silently corrupted
@@ -148,7 +155,7 @@ encodes a computation, check the arithmetic in a comment above it (see FIG-W06-0
 %   remark, exercise, example, summary, warmup, question, answer,
 %   importantremark, goals, conclusion, notation, ainote, aiexample, aiexercise
 %   theorem, lemma, corollary, definition, proposition, claim*
-\newtheorem*{ainote}{AI-Note}   % <- the ONE genuinely unnumbered environment
+\newtheorem{ainote}{AI-Note}[chapter]   % <- the ONE with a counter of its own
 \newenvironment{exercisesolution}[1][Solution]{%
   \begin{proof}[#1]%
 }{%
@@ -180,17 +187,22 @@ encodes a computation, check the arithmetic in a comment above it (see FIG-W06-0
   misattributed by `cleveref` to whatever ambient counter (e.g. the enclosing subsection) was
   last stepped — producing wrong `\cref` output that still looks plausible.
 
-  **The one exception is `ainote`, which IS `\newtheorem*` and unnumbered** (`main.tex:570`).
-  The hazard above needs a `\label` to bite, and an AI-Note never carries one: it is editorial
-  commentary about the transcription, not a result anyone cites. Numbering them only inflated
-  the shared theorem counter, so that a Lemma 2.f.43 was followed by a Definition 2.f.46 with
-  two AI-Notes in between. There is therefore no `\theHainote` entry and no `\crefname` for it
-  either.
+  **The one exception is `ainote`, which has a counter of its very own** rather than an alias of
+  the theorem counter: `\newtheorem{ainote}{AI-Note}[chapter]`. That is the third of three
+  arrangements this environment has had, and the only one with neither failure mode:
 
-  **Corollary of that exception:** if you find yourself wanting to `\label` an `ainote`, that is
-  the signal it is *content*, not commentary — convert it to a `remark` (see the semantics
-  semantics section of `style.md`). See `main.tex`'s theorem/`aliascnt`/`cleveref` block (roughly
-  lines 410–640) for the current list of environments and their `\crefname`s.
+  | Arrangement | What broke |
+  |---|---|
+  | `\newaliascnt{ainote}{theorem}` | 119 AI-Notes stepped the shared counter, so theorem numbers jumped (Lemma 2.f.43 → Definition 2.f.46). Reverted. |
+  | `\newtheorem*{ainote}` (unnumbered) | No counter, so a `\label` inside it was misattributed to the last-stepped ambient counter, and `\cref` printed a plausible-looking wrong number. Reverted 2026-08-09. |
+  | `\newtheorem{ainote}{AI-Note}[chapter]` | Current. Own counter, so `\label`/`\cref` work (`AI-Note 15.1`) and theorem numbers do not move. |
+
+  `\theainote` is `\thechapter.\arabic{ainote}`, already unique document-wide, so **no
+  `\theHainote` entry is needed** — the `\theH...` block exists only for the environments that
+  *share* the theorem counter. There is a `\crefname`/`\Crefname` pair.
+
+  See `main.tex`'s theorem/`aliascnt`/`cleveref` block (roughly lines 410–640) for the current
+  list of environments and their `\crefname`s.
 
 * **Math Operators**: Use the macros already declared in the project's preamble, never raw
   `\mathrm{}` or `\text{}` for an operator name. If a needed operator has no macro yet, propose
@@ -207,10 +219,12 @@ MiKTeX at `C:\Users\miche\AppData\Local\Programs\MiKTeX\miktex\bin\x64`.
 **Be careful with** the theorem / `aliascnt` / `cleveref` block at roughly `main.tex:410–640` —
 its comments document real bugs already solved (duplicate hyperref anchors, `cleveref` printing
 the wrong environment name for aliased counters). If you extend it, follow the existing pattern
-exactly: every environment in this project is numbered **except `ainote`** (an unnumbered
-environment has no counter, so a `\label` placed inside it gets silently misattributed to the
-last-stepped ambient counter, e.g. `\cref` printing "Section 2.d.4" instead of
-"AI-Exercise 2.d.26" — `ainote` is safe only because it never carries a `\label`).
+exactly: every environment in this project is numbered, and every one of them except `ainote`
+takes its number from the shared theorem counter. **Never leave a new environment unnumbered**,
+because an unnumbered environment has no counter, so a `\label` placed inside it gets silently
+misattributed to the last-stepped ambient counter, e.g. `\cref` printing "Section 2.d.4" instead
+of "AI-Exercise 2.d.26". `ainote` is the exception in the other direction: it has a counter, just
+not the shared one.
 Adding a new environment means: `\newaliascnt{name}{theorem}`,
 `\newtheorem{name}[name]{Display Name}`, `\aliascntresetthe{name}`, a `\theHname` entry in the
 `\AtBeginDocument` block, and a `\crefname`/`\Crefname` pair — mirroring `lemma`/`corollary`/etc.

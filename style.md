@@ -647,14 +647,40 @@ Each environment has a precise semantic role. Using the wrong one is a style err
     \end{remark}
     ```
 
-  Two reliable smells that an `ainote` is really a `remark`: it contains a `\newterm{...}`
-  (you are formally introducing terminology — that is content), or you want to `\cref` it
-  (AI-Notes are unnumbered and cannot be referenced). A note that states a theorem, gives a
-  counterexample, or explains a concept is a `remark`, however it came to be written.
+  A reliable smell that an `ainote` is really a `remark` is that it contains a `\newterm{...}`:
+  you are formally introducing terminology, and that is content. A note that states a theorem,
+  gives a counterexample, or explains a concept is a `remark`, however it came to be written.
+
+  ⚠️ **"I want to `\cref` it" is no longer one of those smells.** It used to be, because
+  AI-Notes were unnumbered. Since 2026-08-09 they carry their own per-chapter counter and
+  `\cref` prints `AI-Note 15.1` (see `build-and-preamble.md`). **Referenceability decides
+  nothing about which environment to use** — apply Test 1 and Test 2 exactly as before, and do
+  not move content into an `ainote` merely because you now can point at it.
 
   Conversely, do not over-correct in the other direction either. An `ainote` that flags a real
   error, or warns that a tutor's $\|\cdot\|_*$ means the operator norm, earns its box: deleting
   it loses information the reader needs. Test 2 removes *logistics*, not *warnings*.
+* ⚠️ **"The course does not prove this" belongs in an `ainote`, and only after you have looked.**
+  Added 2026-08-09 on the user's instruction. Two separate rules, and the second is the one that
+  bites:
+
+  **(1) Not body prose.** A sentence in the running text announcing what the lecture skipped
+  reads oddly, because it is about the course rather than about the mathematics, and the reader
+  meets it in the middle of an argument. Put it in an `ainote` next to the result. That is the
+  one category of "why is there no proof here" the two tests keep as reader-facing.
+
+  **(2) Do not assert it from your own document.** Grepping `content/` proves only that
+  *this document* has no proof. It proves nothing about Corsin's PDFs or
+  `Analysis_II_Script_v1.pdf`, and the script in particular does prove a great many results we
+  merely state. Either open the source and check, or write only the claim you actually verified.
+
+  * **BAD** (unverified, and it reads as fact): `Neither the course nor this document proves the
+    inverse function theorem.`
+  * **GOOD** (verified, and says exactly as much as was checked): `\Cref{thm:inverse_function_theorem}
+    is stated above without proof`, plus a `% ⚠️ TO CHECK AGAINST THE SOURCES` comment naming the
+    files someone should open, and a line in `project-state.md` so the check is tracked rather
+    than forgotten.
+
 * ⚠️ **The `ai*` prefix means "invented here", NOT "typeset by an AI".** Everything in this
   document is typeset by an AI, so that reading would make the prefix meaningless. What
   `aiexample` / `aiexercise` mark is **provenance**: the item does not exist in any source.

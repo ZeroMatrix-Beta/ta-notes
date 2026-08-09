@@ -16,10 +16,11 @@ is a $C^k$-\newterm{diffeomorphism} (\germanterm{Diffeomorphismus}) and
 
 % Source: Lukas Krause/Week 7 March 30-April 3 Notes Lukas Krause.pdf, pp. 1--2
 % Generator: Gemini 3.6 Flash (High)
-\begin{ainote}[Visual intuition for the inverse function theorem]
-\label{note:inverse_function_theorem_intuition}
-Lukas Krause provides a helpful geometric perspective on why invertibility of the differential $Df_{x_0}$ is the precise condition needed for $f^{-1}$ to be smooth.
-
+% Was an ainote until 2026-08-09. It is mathematics by Test 1 in style.md (it would be written
+% this way from scratch, with no source PDF in the room), so the attribution to Lukas belongs
+% in this comment and the geometry belongs in a remark.
+\begin{remark}[Why invertibility of $Df_{x_0}$ is the right hypothesis]
+\label{rem:inverse_function_theorem_intuition}
 In one variable, consider $f : \mathbb{R} \to \mathbb{R}$, $x \mapsto x^3$. The inverse $f^{-1}(y) = y^{1/3}$ exists everywhere, yet it fails to be differentiable at $y = 0$. Geometrically, the graph of $f^{-1}$ is obtained by reflecting the graph of $f$ across the line $y = x$. The horizontal tangent line of $f$ at $x = 0$ (where $f'(0) = 0$) flips into a vertical tangent line for $f^{-1}$ at $y = 0$, causing the derivative of the inverse to blow up.
 
 In multivariable calculus, for a map $F : U \subseteq \mathbb{R}^n \to \mathbb{R}^n$, the tangent space to the graph of $F$ at $(x_0, F(x_0))$ is the affine subspace
@@ -27,7 +28,7 @@ In multivariable calculus, for a map $F : U \subseteq \mathbb{R}^n \to \mathbb{R
 \big\{(x_0 + v, \; F(x_0) + DF_{x_0}(v)) \mid v \in \mathbb{R}^n\big\} \subseteq \mathbb{R}^n \times \mathbb{R}^n.
 \]
 A \qt{horizontal} direction (a non-zero input displacement producing zero output change) corresponds to a non-zero vector $v \in \mathbb{R}^n$ such that $DF_{x_0}(v) = 0$. To eliminate vertical tangents after inversion, we must require $DF_{x_0}$ to be injective. Since $F$ maps between spaces of the same dimension $n$, injectivity of $DF_{x_0}$ is equivalent to its invertibility.
-\end{ainote}
+\end{remark}
 
 % Source: Lukas Krause/Week 7 March 30-April 3 Notes Lukas Krause.pdf, pp. 1--2
 % Generator: Gemini 3.6 Flash (High)
@@ -69,6 +70,32 @@ where $\phi : U \to \mathbb{R}^n$ is a $\lambda$-Lipschitz function with constan
 \end{enumerate}
 \end{proof}
 
+% Generator: Claude Opus 5 (High) --- the lemma above was stated and proved and then never
+% referred to again anywhere in the document, and the theorem it exists to prove carries no
+% proof here either. This says how the two fit together.
+%
+% ⚠️ TO CHECK AGAINST THE SOURCES, not yet done: whether Corsin's Week 6.pdf (pp. 8--9) or
+% Analysis_II_Script_v1.pdf carries a proof of the inverse function theorem worth transcribing.
+% If one does, transcribe it and cut this note down to a pointer. Do NOT assert in the typeset
+% text that "the course does not prove this" until someone has opened those files -- the claim
+% below is deliberately only about what is in THIS document, which is what was verified.
+% Logged in project-state.md.
+\begin{ainote}[Where this lemma is used]
+\Cref{thm:inverse_function_theorem} is stated above without proof, and the lemma just proved is
+the engine of the standard proof of it. Without that connection the lemma arrives, is proved,
+and is never used again, so it is worth seeing how the two fit together.
+
+Assume $x_0 = 0$ and $f(x_0) = 0$, which costs nothing, and replace $f$ by $Df_0^{-1}\circ f$,
+which is legitimate because $Df_0$ is invertible by hypothesis and which makes $Df_0 = \id$.
+Then $\phi(x) := f(x) - x$ satisfies $D\phi_0 = 0$. Since $D\phi$ is continuous, there is a ball
+around $0$ on which $\|D\phi\| \leq \lambda$ for any $\lambda \in (0,1)$ we like, and on a ball
+(a convex set) the mean value inequality upgrades that to $\phi$ being $\lambda$-Lipschitz. Now
+$f = \id + \phi$ is exactly the shape \cref{lem:lipschitz_perturbation_identity} handles, and the
+lemma returns, in one step, that $f$ is open and injective there with a Lipschitz inverse. Only
+differentiability of $f^{-1}$ is then left, and it follows from the definition of the
+differential together with the Lipschitz bound.
+\end{ainote}
+
 % Supplement: Sascha Brack/Class Notes/Week_06_Notes_Friday.pdf, p. 2
 \begin{remark}[Checking for a global diffeomorphism]
 \label{rem:global_diffeomorphism_check}
@@ -93,8 +120,8 @@ which is the complex exponential written in real coordinates. Its Jacobian is
   \qquad \det\Jac f(x,y) = e^{2x}(\cos^2y+\sin^2y) = e^{2x} > 0,\]
 so $\Jac f$ is invertible at \emph{every} point and $f$ is a local $C^\infty$-diffeomorphism
 everywhere by \cref{thm:inverse_function_theorem}. Yet $f(x,y+2\pi) = f(x,y)$ for all $(x,y)$, so
-$f$ is not injective --- indeed every value in its image is attained infinitely often, and $f$ is
-a global diffeomorphism on no neighbourhood of any horizontal strip of height $2\pi$ or more.
+$f$ is not injective. Indeed, every value in its image is attained infinitely often, and $f$ is a
+global diffeomorphism on no horizontal strip of height $2\pi$ or more.
 
 Restricting the codomain does not help either: $f$ misses the origin and nothing else, so
 $f : \mathbb{R}^2 \to \mathbb{R}^2\setminus\{0\}$ is surjective but still not injective. What
@@ -112,7 +139,7 @@ The most important examples of diffeomorphisms are transformations between coord
 \begin{question}
 \begin{enumerate}[label=\textbf{Q\arabic*.}]
   \item If $f : \mathbb{R}^n \to \mathbb{R}^n$ is $C^k$ and a \newterm{homeomorphism}
-    (\germanterm{Hom\"oomorphismus}) --- that is, bijective with continuous inverse --- is it
+    (\germanterm{Hom\"oomorphismus}), that is, bijective with continuous inverse, is it
     necessarily a $C^k$-diffeomorphism?
   \item If $f \in C^\infty(U,\mathbb{R}^n)$ has an everywhere invertible differential, i.e.,
     $Df_x$ is invertible for all $x \in U$ with $U \subseteq \mathbb{R}^n$ open, then $f$ is a
@@ -133,11 +160,27 @@ The most important examples of diffeomorphisms are transformations between coord
 \end{enumerate}
 \end{answer}
 
-\begin{ainote}
-Corsin illustrates \textbf{A2} with a second sketch: one $C^\infty$ curve carrying all three
-possibilities at once. The figure below reproduces it, with the three regions labelled by
-\emph{which hypothesis of the inverse function theorem fails}.
-\end{ainote}
+% Sonnet 5 (Medium) --- FIG-W06-02, drawn from the page image seen while transcribing.
+% Moved up from below FIG-W06-03 on 2026-08-09: this is the sketch that illustrates A2
+% directly, and the prose under FIG-W06-03 calls that one the "second" sketch.
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.1]
+  \draw[->] (-0.3,0) -- (7.3,0) node[right, font=\small] {$x$};
+  \draw[->] (0,-1.6) -- (0,1.6) node[above, font=\small] {$y$};
+  \draw (0,1) -- (-0.05,1) node[left, font=\footnotesize] {$1$};
+  \draw (0,-1) -- (-0.05,-1) node[left, font=\footnotesize] {$-1$};
+
+  \draw[blue!80!black, thick, domain=0:7, samples=120, smooth]
+    plot ({\x}, {cos(\x r)}) node[right, font=\small] {$\cos(x)$};
+
+  \draw[red!80!black, dashed, thick] (0,0.4) -- (7,0.4);
+  \node[red!80!black, font=\scriptsize, right] at (7,0.4) {not injective};
+\end{tikzpicture}
+\end{center}
+
+% Corsin illustrates A2 with a second sketch as well: one C-infinity curve carrying all three
+% possibilities at once. FIG-W06-03 below reproduces it, with the three regions labelled by
+% which hypothesis of the inverse function theorem fails.
 
 % Sonnet 5 (Medium) --- FIG-W06-03, drawn from the page image seen while transcribing.
 % The first region must have a genuinely HORIZONTAL tangent (f'=0) -- drawn as an explicit
@@ -184,39 +227,24 @@ Reading the three regions left to right makes the two answers above concrete.
 
 \begin{itemize}
   \item At $x_0$ the curve is still \emph{strictly increasing}, so $f$ is injective there and
-    $f^{-1}$ exists --- but the tangent is horizontal, so the tangent to $f^{-1}$ at $f(x_0)$ is
-    \emph{vertical} and $f^{-1}$ fails to be differentiable. Invertible, yet not a
+    $f^{-1}$ exists. But the tangent is horizontal, so the tangent to $f^{-1}$ at $f(x_0)$ is
+    \emph{vertical}, and $f^{-1}$ fails to be differentiable. Invertible, yet not a
     diffeomorphism: this is exactly $x \mapsto x^3$ from \textbf{A1}, and it is why
     \Cref{thm:inverse_function_theorem} assumes $Df_{x_0}$ invertible rather than merely
     assuming $f$ bijective.
   \item On the hump, $f' \neq 0$ at every individual point, so $f$ \emph{is} a local
-    diffeomorphism near each of them --- yet one value has three preimages, so $f$ is not
-    globally injective. This is \textbf{A2}: an everywhere-invertible differential buys locality
-    and nothing more.
+    diffeomorphism near each of them. Yet one value has three preimages, so $f$ is not globally
+    injective. This is \textbf{A2}: an everywhere-invertible differential buys locality and
+    nothing more.
   \item On the final stretch both hypotheses hold, and the inverse function theorem delivers a
     genuine $C^\infty$-diffeomorphism onto the image.
 \end{itemize}
 
-% Sonnet 5 (Medium) --- FIG-W06-02, drawn from the page image seen while transcribing
-\begin{center}
-\begin{tikzpicture}[>=Latex, scale=1.1]
-  \draw[->] (-0.3,0) -- (7.3,0) node[right, font=\small] {$x$};
-  \draw[->] (0,-1.6) -- (0,1.6) node[above, font=\small] {$y$};
-  \draw (0,1) -- (-0.05,1) node[left, font=\footnotesize] {$1$};
-  \draw (0,-1) -- (-0.05,-1) node[left, font=\footnotesize] {$-1$};
-
-  \draw[blue!80!black, thick, domain=0:7, samples=120, smooth]
-    plot ({\x}, {cos(\x r)}) node[right, font=\small] {$\cos(x)$};
-
-  \draw[red!80!black, dashed, thick] (0,0.4) -- (7,0.4);
-  \node[red!80!black, font=\scriptsize, right] at (7,0.4) {not injective};
-\end{tikzpicture}
-\end{center}
-
-% Sonnet 5 (Medium)
-The inverse function theorem asks when $f(x)=y$ can be solved for $x$ as a function of $y$. The
-implicit function theorem generalizes this: it asks when an equation $f(x,y)=0$ can be solved for
-\emph{some} of the variables in terms of the others, without $f$ itself being invertible.
+% The paragraph that stood here ("The inverse function theorem asks when f(x)=y can be solved
+% for x ... the implicit function theorem generalizes this ...") was cut on 2026-08-09: it is
+% the opening of ch. 16's own chapter stub almost word for word, and it sat above the relocated
+% exercises rather than at the end of the chapter, so it announced the next chapter from the
+% middle of this one.
 
 
 % --- exercise relocated here from the dissolved sheet 7 ---

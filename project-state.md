@@ -28,6 +28,18 @@ Steps 1 and 2 are **done**: every week of Corsin's notes has been typeset and th
 compiles clean. New material now gets pasted into the topic chapter it belongs to, not appended
 to a week.
 
+## ⚠️ Settled 2026-08-09: AI-Notes are numbered and referenceable
+
+On the user's instruction, `ainote` stopped being `\newtheorem*` and now has **a counter of its
+own**, reset per chapter, so `\cref` prints `AI-Note 15.1`. It is deliberately **not** aliased to
+the shared theorem counter, because that arrangement had already been tried and reverted (119
+AI-Notes stepping it tore holes in the theorem numbering). See `build-and-preamble.md` for the
+three-arrangement table.
+
+⚠️ **This changed nothing about what belongs in one.** The two tests in `style.md` still decide
+`ainote` versus `remark` versus a plain `%` comment, and \qt{I want to `\cref` it} is no longer
+evidence of anything. Do not migrate content into AI-Notes just because it can now be pointed at.
+
 ## ⚠️ In progress: the 2026-08-09 prose revision
 
 A full prose revision is under way, against four new rules now in `style.md` (strict em-dash
@@ -72,7 +84,35 @@ theorem`), each with a short lead-in; a nested `ainote` inside `rem:why_the_lagr
 with `\newterm{shadow price}` moved to the surviving remark (the glossary entry already points at
 chapter 13, so nothing to change there).
 
-**Not yet done: chapters 15--26 and the four appendices.** Work chapter by chapter; do not
+**Part V (chapters 15--18) is done** as of 2026-08-09: **0** prose em-dashes left, build clean at
+285 pp (283 before the additions below) with the same 4 pre-existing `Overfull \hbox` warnings.
+The same restructure leftovers as in Part IV turned up again, which is now three parts running:
+
+* Another transition aimed at the chapter the **old week order** placed next
+  (`15-.../01-inverse-function-theorem.tex` announced the implicit function theorem from the
+  middle of its own chapter, in nearly the words of ch. 16's stub). Cut.
+* Another figure ~150 lines from what it illustrates: the $\cos$ sketch in ch. 15 sat *below*
+  FIG-W06-03, while the prose under FIG-W06-03 calls that one the \qt{second} sketch. Moved up.
+* Another stale cross-reference: `17-.../01-submanifolds.tex` said the cuspidal cubic was seen
+  \qt{one chapter earlier}, which was true of the week order and is four chapters out now.
+* An `ainote` carrying a `\label` (`15-.../01-...`), which was impossible to reference at the
+  time and is mathematics anyway. Now `rem:inverse_function_theorem_intuition`.
+
+**Content added** (the user's standing \qt{feel free to add stuff}):
+
+* `18-geodesics/02-geodesics-on-submanifolds.tex`, a **new section**. \Cref{sec:geodesics} opened
+  by promising that the same calculation works \qt{on a sphere or any other submanifold} and then
+  never did it. The new section states and sketches the geodesic equation $c'' \perp T_{c(t)}M$,
+  gives great circles versus circles of latitude on $S^2$, and sets an `aiexercise` on the
+  cylinder with its solution in the chapter's **new** `99-solutions.tex`. This is also what the
+  chapter was moved next to \cref{ch:submanifolds} for.
+* A remark in ch. 18 on why constant speed is assumed and why it costs nothing, since the
+  hypothesis is used twice in the computation and never commented on.
+* An `ainote` in ch. 15 connecting `lem:lipschitz_perturbation_identity` to the theorem it
+  exists to prove. **The lemma was stated, proved, and then never referred to again anywhere in
+  the document.**
+
+**Not yet done: chapters 19--26 and the four appendices.** Work chapter by chapter; do not
 batch-substitute, for the reasons in `style.md`.
 
 **Done out of order (user request): the dyadic step-function figure.** FIG-19-01 now sits inside
@@ -258,6 +298,23 @@ corresponding result:
 | Ex 10.21, p. 48 | In the `∂/∂x` line, `2e^{u+v}·0` should be `2e^{u+2v}·0`. Multiplied by zero, so answers are right. |
 | Thm 15.33, p. 188 | Hypothesis says `(f_k)` bounded in `C(K,ℝ)`, conclusion says `C(K,ℝᵐ)`. Ours uses `ℝᵐ` throughout and is consistent. |
 | Prop 11.24, p. 74 | Typed `f : C²(U)` for `f ∈ C²(U)`. |
+
+## Carried-over task: unproved results to check against the sources
+
+Opened 2026-08-09, on the user's point that \qt{the course skips this} is a claim, not prose, and
+should not be written until someone has opened the source. **Nothing here has been checked yet.**
+For each, open Corsin's PDF and `Analysis_II_Script_v1.pdf`; if a proof is there, transcribe it
+and cut the note down to a pointer.
+
+| Result | Where | What the text currently claims |
+|---|---|---|
+| Inverse function theorem | `15-.../01-inverse-function-theorem.tex`, `ainote` after `lem:lipschitz_perturbation_identity` | only that it is stated **in this document** without proof, which is what was verified. The `%` comment above it names the files to open. |
+| Ascoli--Arzelà | `07-.../06-ascoli-arzela.tex`, l. 121 | \qt{The course does not prove this theorem} --- asserted in **body prose**, unverified, and on both counts what the new `style.md` rule forbids. |
+| Sequential $=$ topological compactness | `07-.../03-sequential-vs-topological.tex`, l. 9 | \qt{The course states this equivalence but never proves it} --- same two faults. |
+
+The two chapter-7 entries were found by grep during the Part V pass and deliberately **not**
+fixed then, to avoid reopening a signed-off chapter mid-pass. They are small: move each into an
+`ainote` and soften it to what has actually been verified.
 
 ## Carried-over provenance task
 

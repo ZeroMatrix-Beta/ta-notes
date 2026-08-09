@@ -7,13 +7,11 @@
 \label{sec:recognising_submanifolds}
 
 % Supplement: Linus Lüchinger/Slides/Slides-03-30.pdf, slides 16, 23, 26
-\begin{ainote}
-\cref{rem:three_submanifold_descriptions} lists the three descriptions and says which to reach
-for, but Corsin's notes never run a single surface through all three, and they give no worked
-example of a set that \emph{fails} to be a submanifold beyond the crossing in
-\cref{ex:cross_not_submanifold}. Linus devotes most of one session to exactly these two gaps, and
-this section follows his treatment.
-\end{ainote}
+% Why this section exists at all: rem:three_submanifold_descriptions says which description to
+% reach for, but Corsin's notes never run one surface through all three, and give no worked
+% non-example beyond the crossing in ex:cross_not_submanifold. Linus spends most of one session
+% on exactly those two gaps, and this section follows his treatment. (Was an ainote until
+% 2026-08-09; it is source-mining logistics, which Test 2 in style.md sends to a % comment.)
 
 \subsection{One surface, three descriptions}
 
@@ -143,8 +141,8 @@ not the general situation, and each description fails to globalise for its own r
     \cref{thm:local_parametrization} demands. Delete one point from each side: $I \setminus \{t\}$
     falls into \emph{two} pieces, while $\mathbb{S}^1 \setminus \{\gamma(t)\}$ is still an arc, so
     \emph{one} piece. A homeomorphism preserves the number of connected components
-    (\cref{thm:continuity_preserves_connected}), so no such $\gamma$ exists --- the same counting
-    argument as in \cref{ex:cross_not_submanifold}, run in the opposite direction. Two overlapping
+    (\cref{thm:continuity_preserves_connected}), so no such $\gamma$ exists. That is the counting
+    argument of \cref{ex:cross_not_submanifold}, run in the opposite direction. Two overlapping
     arcs do cover the circle, and two is the minimum.
   \item \textbf{An implicit description need not be global either.} The Möbius strip is a
     $2$-dimensional submanifold of $\mathbb{R}^3$, but it is not $g^{-1}\{0\}$ for any single
@@ -152,8 +150,8 @@ not the general situation, and each description fails to globalise for its own r
     $\nabla g/\lvert\nabla g\rvert$, and the Möbius strip has none
     (\cref{sec:orientable_manifolds}).
 \end{itemize}
-Requiring the descriptions only near each point costs nothing --- being a submanifold is itself a
-local condition --- and buys all the examples that matter.
+Requiring the descriptions only near each point costs nothing, since being a submanifold is
+itself a local condition, and it buys all the examples that matter.
 \end{remark}
 
 \subsection{A gallery of non-examples}
@@ -161,25 +159,25 @@ local condition --- and buys all the examples that matter.
 % Supplement: Linus Lüchinger/Slides/Slides-03-30.pdf, slides 12--13
 Linus prefaces the formal definitions with a list of sets that are \emph{not} submanifolds, which
 is worth reproducing because each entry fails for a different reason. Being a $d$-dimensional
-submanifold means looking, near every one of its points, like a flat piece of $\mathbb{R}^d$ ---
-and there are several distinct ways to violate that.
+submanifold means looking, near every one of its points, like a flat piece of $\mathbb{R}^d$, and
+there are several distinct ways to violate that.
 
 \begin{itemize}
-  \item \textbf{The figure eight} $\{(x,y) : y^2 = x^2 - x^4\}$ --- a \emph{crossing}. Away from
-    the origin it is a perfectly good curve; at the origin four branches meet. This is the same
+  \item \textbf{The figure eight} $\{(x,y) : y^2 = x^2 - x^4\}$ has a \emph{crossing}. Away from
+    the origin it is a perfectly good curve. At the origin four branches meet. This is the same
     failure as \cref{ex:cross_not_submanifold}, and the same connectedness count settles it.
-  \item \textbf{The lollipop} --- a circle with a segment attached, or any \qt{line sticking out
+  \item \textbf{The lollipop} is a circle with a segment attached, or any \qt{line sticking out
     of a sphere}. Here the trouble is not a crossing but a \emph{change of dimension} at the
     junction: near the attachment point the set is neither $1$- nor $2$-dimensional.
-  \item \textbf{The closed square} $[0,1]^2 \subseteq \mathbb{R}^2$ --- a \emph{boundary}. Its
+  \item \textbf{The closed square} $[0,1]^2 \subseteq \mathbb{R}^2$ has a \emph{boundary}. Its
     interior is a fine $2$-dimensional submanifold, but no neighbourhood of a corner or edge
     point looks like an open piece of $\mathbb{R}^2$, because points of $[0,1]^2$ near an edge
     fill only a half-plane. (Sets like this are the subject of
     \cref{sec:submanifolds_with_boundary}; a submanifold \emph{with boundary} is a genuinely
     weaker notion, not a submanifold that happens to have edges.)
-  \item \textbf{$\mathbb{Q}^n \subseteq \mathbb{R}^n$} --- \emph{no dimension at all}. It is not
+  \item \textbf{$\mathbb{Q}^n \subseteq \mathbb{R}^n$} has \emph{no dimension at all}. It is not
     $0$-dimensional, since a $0$-dimensional submanifold is a set of isolated points and no
-    rational point is isolated; and it is not $n$-dimensional, since it contains no open ball.
+    rational point is isolated. And it is not $n$-dimensional, since it contains no open ball.
 \end{itemize}
 
 % Generator: Claude Opus 5 (High) --- FIG-17-05
@@ -289,7 +287,7 @@ so no such $T$ exists.
 Both tests disprove the same statement, and neither subsumes the other.
 Counting components is the tool when the offending point \emph{separates} the set, and it needs
 no differentiability. The tangent-field test is the tool when the set stays connected but the
-direction of travel jumps --- a cusp such as $\{y^2 = x^3\}$ at the origin is the standard case,
+direction of travel jumps. A cusp such as $\{y^2 = x^3\}$ at the origin is the standard case,
 where removing the origin leaves the expected two pieces and only the tangent direction gives the
 failure away.
 \end{remark}

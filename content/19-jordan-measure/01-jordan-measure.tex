@@ -57,7 +57,7 @@ by the principle of inclusion--exclusion,
 Any finite collection of dyadic sets can be refined to a common generation $p$ without changing
 any of their measures (splitting a cube of generation $p$ into $2^n$ cubes of generation $p+1$
 replaces one term of $\mu(E) := 2^{-pn}N$ by $2^n$ terms of size $2^{-(p+1)n}$, which sum to the
-same value) --- so we may assume $E_1,\dots,E_N$ all consist of cubes of one common generation
+same value). So, we may assume $E_1,\dots,E_N$ all consist of cubes of one common generation
 $p$. Each such cube $Q$ then either lies in none of the $E_i$, or in exactly the $E_i$ indexed
 by some non-empty $J \subseteq \{1,\dots,N\}$, and $Q$ contributes $2^{-pn}$ to
 $\mu(E_{i_1}\cap\dots\cap E_{i_k})$ exactly when $\{i_1,\dots,i_k\}\subseteq J$.
@@ -305,7 +305,7 @@ Because a countable cover is allowed, the set $\mathbb{Q} \cap [0,1]$ is Lebesgu
 Stating the difference as \qt{finitely many} against \qt{countably many} is correct but hides
 where the extra power actually comes from. A Jordan cover is a \emph{dyadic set}, and every cube
 in a dyadic set of generation $p$ has the same side length $2^{-p}$
-(\cref{def:dyadic_set}). So the two conditions really read:
+(\cref{def:dyadic_set}). So, the two conditions really read:
 \begin{itemize}
   \item \textbf{Jordan null:} for each $\varepsilon>0$, cover $E$ by cubes that all have
     \emph{one common side length}, of total volume $<\varepsilon$. Finiteness is then automatic:
@@ -354,15 +354,15 @@ Let $L: \mathbb{R}^n \to \mathbb{R}^n$ be a linear, invertible map. If $E \subse
   \item Let $X, Y \subset [0,1]$ such that $\mu_{out}(X) > 1/2$ and $\mu_{out}(Y) > 1/2$. Then
     $X \cap Y \neq \emptyset$.
 \end{enumerate}
-\textit{Official hint:} \textbf{8.2.5} --- $\mu_{out}$ can be positive and large on very sparse
+\textit{Official hint:} \textbf{8.2.5:} $\mu_{out}$ can be positive and large on very sparse
 sets\dots
 
 % Supplement: Sascha Brack/Ex Sheet Hints/Ex8_Analysis2_hints.pdf, p. 1
-\textit{Sascha Brack's hints:} a toolkit of sets worth testing every part against ---
+\textit{Sascha Brack's hints:} a toolkit of sets worth testing every part against, namely
 $\mathbb{Q}$, the irrationals $\mathbb{R}\setminus\mathbb{Q}$, $\mathbb{Q}\cap[0,1]$, and
 $(\mathbb{R}\setminus\mathbb{Q})\cap[0,1]$. For \textbf{8.2.3} specifically: monotonicity already
 gives $\mu_{out}(D) \leq \mu_{out}([0,1]) = 1$, so the work is showing
-$\mu_{out}(D) \geq 1$ --- essentially, that the \qt{smallest} dyadic set containing $D$ also
+$\mu_{out}(D) \geq 1$, essentially that the \qt{smallest} dyadic set containing $D$ also
 contains $[0,1]$.
 \end{exercise}
 

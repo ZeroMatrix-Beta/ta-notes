@@ -112,7 +112,33 @@ The same restructure leftovers as in Part IV turned up again, which is now three
   exists to prove. **The lemma was stated, proved, and then never referred to again anywhere in
   the document.**
 
-**Not yet done: chapters 19--26 and the four appendices.** Work chapter by chapter; do not
+**Part VI (chapters 19--21) is done** as of 2026-08-09: **0** prose em-dashes left, build clean
+at 285 pp with the same 4 pre-existing `Overfull \hbox` warnings. What it turned up:
+
+* ⚠️ **A `\label` inside an `exercisesolution`, which `\cref` was rendering as \qt{Section 21.e}.**
+  `exercisesolution` wraps `proof`, which has no counter, so this is exactly the silent
+  misattribution `build-and-preamble.md` warns about, and it looked plausible enough to survive
+  several passes. Now referenced with `\cpageref` (\qt{the solution on Page 221}), per the
+  documented workaround. A regex sweep of `content/` found **only this one**, so it is not
+  systemic --- but it is worth re-running the sweep after adding any labelled solution:
+  `\\begin\{exercisesolution\}(\[[^\]]*\])?\s*\n\s*\\label` in multiline mode.
+* **A spoiler above an exercise**, the third found so far: an `ainote` under \cref{ex:8.5} gave
+  away the transformed domain for part 3 and the curved constraint for part 2, i.e.\ two of the
+  three answers. Moved into `99-solutions.tex`, where the surviving half turned out to duplicate
+  an `ainote` already sitting beside the solution.
+* **Three stale chapter numbers in file headers** (chapters 19, 20 and 21 each announced
+  themselves as the previous number, left over from the restructure). These are comments only,
+  so nothing typeset was wrong.
+* Two AI-Notes that were production logistics by Test 2 (one recording that answers were
+  cross-checked against `Sol9_Analysis2_eng.pdf` and matched) are now `%` comments.
+
+**First real use of the new AI-Note numbering.** A solution in ch. 21 read \qt{see the
+\texttt{ainote} above}, leaking a LaTeX environment name into the typeset text because there was
+no way to reference one. It now reads \qt{(\cref{note:9.1_coordinates_mislabelled})}, printing
+\qt{AI-Note 21.5}. That is the shape of case the change was worth making for; it is not licence
+to start labelling AI-Notes generally.
+
+**Not yet done: chapters 22--26 and the four appendices.** Work chapter by chapter; do not
 batch-substitute, for the reasons in `style.md`.
 
 **Done out of order (user request): the dyadic step-function figure.** FIG-19-01 now sits inside

@@ -16,7 +16,7 @@ Let $x,y \in \mathbb{R}^2$. The area of the parallelogram $(0,x,x+y,y)$ is
 \end{proposition}
 
 \begin{proof}
-Assume w.l.o.g.\ that $x = x_1e_1$ --- we justify this reduction below. Then, writing
+Assume w.l.o.g.\ that $x = x_1e_1$, a reduction justified below. Then, writing
 $y = (y_1,y_2)\transp$,
 \[A = |x_1y_2| = \left|\det\begin{pmatrix} x_1 & y_1 \\ 0 & y_2 \end{pmatrix}\right|,\]
 directly from the base-times-height formula for a parallelogram with one side on the
@@ -43,7 +43,7 @@ $e_1$-axis.
 For the reduction, let $R \in \operatorname{O}(2)$ be any rotation carrying $x,y$ to a pair
 $Rx,Ry$ with $Rx$ along $e_1$; rotations preserve area, so
 \[A = \big|\det(Rx\mid Ry)\big| = \big|\det(R)\det(x\mid y)\big| = \big|\det(x\mid y)\big|,\]
-using $|\det R| = 1$ and multiplicativity of $\det$. So the \qt{w.l.o.g.} above was
+using $|\det R| = 1$ and multiplicativity of $\det$. So, the \qt{w.l.o.g.} above was
 justified: the formula $A=|\det(x\mid y)|$ holds for the rotated pair, and equals
 $|\det(x\mid y)|$ for the original one.
 \end{proof}
@@ -72,7 +72,7 @@ analogy to the determinant itself.
 \begin{ainote}
 Terminology diverges from the official script here, worth flagging since it is exactly the kind
 of thing that costs a mark in an exam. The script's Definition 13.55 calls $\sqrt{\det(L\transp
-L)}$ --- the square root, i.e.\ the \emph{volume} itself --- the \qt{Gram determinant}; this
+L)}$, the square root and so the \emph{volume} itself, the \qt{Gram determinant}. This
 document instead follows the more standard usage and calls the bare $\det(M\transp M)$ the Gram
 determinant, with the square root then giving the volume (\cref{def:volume_gram_determinant}
 below). Every downstream formula agrees regardless of which name is attached to which quantity,
@@ -83,8 +83,8 @@ introduces a linear map $L:\mathbb{R}^m\to\mathbb{R}^n$ with $m<n$, but then wri
 using an undefined $d$ (\qt{the $d\times d$ matrix $L\transp L$}) where the surrounding text
 means $m$; and the prose describes \qt{the determinant of the \dots matrix $LL\transp$} while the
 displayed formula correctly uses $L\transp L$. Only $L\transp L$ (size $m\times m$) is invertible
-for $m<n$ --- $LL\transp$ is $n\times n$ and singular --- so the displayed formula is the
-reliable half of the definition; the surrounding prose is not.
+for $m<n$, since $LL\transp$ is $n\times n$ and singular. The displayed formula is therefore the
+reliable half of the definition, and the surrounding prose is not.
 \end{ainote}
 
 \begin{ainote}
@@ -92,7 +92,7 @@ The point of restating $|\det M|$ this way is that the middle expression, $\det(
 M)$, still makes sense once $M \in \mathrm{Mat}_{n\times m}(\mathbb{R})$ is rectangular:
 $M\transp M \in \mathrm{Mat}_{m\times m}(\mathbb{R})$ is square even when $M$ is not, so its
 determinant is always defined, whereas $\det(M)$ itself is not. This is what lets the
-notion of \qt{volume spanned by vectors} survive dropping the requirement $m=n$ --- a set of
+notion of \qt{volume spanned by vectors} survive dropping the requirement $m=n$. A set of
 fewer than $n$ vectors in $\mathbb{R}^n$ still spans a lower-dimensional parallelotope, and
 that parallelotope still has an $m$-dimensional volume, even though no square matrix and no
 ordinary determinant is available to compute it with.
@@ -108,8 +108,8 @@ For $m$ vectors $v_1,\dots,v_m \in \mathbb{R}^n$, the \newterm{area}/\newterm{le
 
 \begin{example}
 \label{ex:gram_m1_length}
-For $m=1$, $\sqrt{\det(v_1\transp v_1)} = \sqrt{\langle v_1,v_1\rangle} = \lVert v_1\rVert$
---- the length of $v_1$.
+For $m=1$, $\sqrt{\det(v_1\transp v_1)} = \sqrt{\langle v_1,v_1\rangle} = \lVert v_1\rVert$,
+which is the length of $v_1$.
 \end{example}
 
 % Source: Corsin Nick/Class Notes/Week 9.pdf, p. 4

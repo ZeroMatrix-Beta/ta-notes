@@ -22,7 +22,7 @@ On the shape of the formula: it is often quoted the other way round, as
 $\int_{\Phi(A)} f = \int_A (f\circ\Phi)\,\lvert\det\Jac\Phi\rvert$. The version above is the same
 statement with $\Phi$ pushed to the other side, which is why the determinant appears
 \emph{divided} rather than multiplied. Which form is convenient depends on whether it is $\Phi$
-or $\Phi^{-1}$ that you can write down --- in \cref{ex:change_of_variables_domain} below it is
+or $\Phi^{-1}$ that you can write down. In \cref{ex:change_of_variables_domain} below it is
 $\Phi$, so the dividing form is the one that saves work.
 \end{ainote}
 
@@ -227,7 +227,7 @@ Spherical ($\mathbb{R}^3$) &
 The angular ranges are $\varphi \in (-\pi,\pi)$ throughout, and $\theta \in (0,\pi)$
 (\newterm{colatitude}, measured from the positive $z$-axis) for the spherical case. Cylindrical
 coordinates are just polar coordinates in the first two variables, carried along unchanged in
-$z$ --- which is exactly why the Jacobian is the same $r$ as the planar case: the extra $dz$
+$z$, which is exactly why the Jacobian is the same $r$ as in the planar case: the extra $dz$
 contributes a factor of $1$. Spherical coordinates are used already in
 \cref{ex:volume_sphere} above; cylindrical coordinates are the natural choice whenever a region
 has rotational symmetry about an axis without being a ball, e.g.\ a solid cylinder or cone.
@@ -313,18 +313,7 @@ a subset of $\mathbb{R}^3$ and the right-hand side carries three differentials, 
 read $dx\,dy\,dz$. Quoted verbatim above, as the sheet is a primary source.
 \end{ainote}
 
-% Generator: Claude Opus 5 (Medium)
-\begin{ainote}
-\Cref{ex:8.5} is the direct continuation of \cref{ex:change_of_variables_domain}, and the three
-parts are graded. Part 1 is polar coordinates, already computed in
-\cref{ex:polar_spherical_coordinates}. Part 3 is a
-\emph{linear} change of variables, so $\det\Jac$ is a constant and the transformed domain is
-literally the box $(0,1)\times(1,2)\times(-2,0)$ --- read straight off the three constraints.
-Part 2 is the interesting one: $1 < xy < 2$ becomes $1 < u < 2$ immediately, but the second
-constraint $x^2 < y < 2x^2$ does \emph{not} become a box, since $y = u/\sqrt v$ turns it into
-$v^{3/2} < u < 2v^{3/2}$. Straightening one constraint does not oblige the other to cooperate.
-
-Note also that the exercise deliberately stops before the integration: what is being drilled is
-finding $\lvert\det\Jac\rvert$ and the new domain, which is where both the marks and the
-mistakes are.
-\end{ainote}
+% An AI-Note stood here until 2026-08-09 announcing, above the exercise, that part 3's domain is
+% the box (0,1)x(1,2)x(-2,0) and that part 2's second constraint becomes v^{3/2} < u < 2v^{3/2}.
+% That is the answer to two of the three parts. Moved into 99-solutions.tex per the spoiler rule
+% in style.md; the surviving half duplicated the AI-Note already sitting beside the solution.

@@ -19,9 +19,9 @@ cannot finish, finish what you can and say so in your reply to the user.
 
 ## Where the document stands
 
-**Corsin Nick is fully typeset and the document builds clean at 286 pages**, with four
-`Overfull \hbox` warnings that have been present throughout; they are tabulated, with the method
-for attributing them correctly, in `build-and-preamble.md`. Every week of his notes sits in the
+**Corsin Nick is fully typeset and the document builds clean at 292 pages**, with three
+`Overfull \hbox` warnings; they are tabulated, with the method for attributing them correctly, in
+`build-and-preamble.md`. Every week of his notes sits in the
 topic chapter it belongs to. New material goes into the chapter it belongs to, never appended
 to a week.
 
@@ -30,6 +30,27 @@ against the em-dash policy and punctuation budget in `style.md`. Zero prose em-d
 `content/`. What still matches `---` there is exactly three things, all of them deliberate:
 LaTeX comments, `[11.5 --- Radial vector fields]` exercise separators and chapter/section title
 separators, and table cells where `---` means "no entry".
+
+**The 2026-08-09 pass against `lec_notes.pdf` is complete.** It did three things. It adopted the
+lecture notes' norm convention document-wide (single bars Euclidean, double bars everything else;
+see `style.md`, and `ainote:norm_convention` for the reader-facing statement). It checked the
+remaining notation, finding our derivative and gradient conventions already in agreement and two
+deliberate divergences worth keeping, both now flagged for the reader (`B_r(x)` against the
+lecture's `B(x,r)`; `\Hess` against `Hf`). And it added six statements the document was missing:
+equivalence of norms with its two corollaries (new section, ch. 2), the Hilbert–Schmidt length
+bound, componentwise differentiability, `C^1` implies locally Lipschitz, vanishing differential
+on a connected set, and compact implies closed.
+
+⚠️ It also **falsified two claims about the course** that were sitting in the typeset text: that
+the course never introduces Lipschitz continuity (Definition 9.55 does) and that it never states
+the mean value theorem (Theorem 10.28 is it). Both are corrected. This is the rule in `style.md`
+about not asserting what you have not opened, earning its keep a second time.
+
+Not everything in the notes was pulled in, deliberately: `C^k` closure under sums, products and
+compositions (Prop 10.36) is routine and unstated here; the entries in the *Enrich existing
+sections only* table below stay skipped. Proofs were not replicated where a statement plus a
+pointer does the work — the inverse function theorem is still unproved here, and now says so
+accurately.
 
 **All TikZ figures have been rendered and inspected.** That pass was worth more than expected:
 in Part VII alone, four of the ten figures were wrong, three of them mathematically rather than
@@ -155,9 +176,20 @@ The cover of `Corsin Nick/Class Notes/Week 2.pdf` reads *"Class notes Week 1"*.
 
 | File | What it settles |
 |---|---|
-| `Analysis_II_Script_v1.pdf` (project root) | The official course script. The authority our theorems are **checked against** — not a blueprint to transcribe. |
+| `lec_notes.pdf` (project root) | **The current lecture notes.** FS 2026, 239 pp, dated 27 July 2026. The authority our theorems and notation are **checked against** — not a blueprint to transcribe. |
+| `Analysis_II_Script_v1.pdf` | The FS 2024 script, 207 pp. Superseded by the above; still cited by many `% Supplement:` comments, which are correct as history and were not rewritten. |
 | `exercises/ExN_Analysis2_eng.pdf` | The official problem sheets — quoted verbatim, never paraphrased. |
 | `exercises/SolN_Analysis2_eng.pdf` | Official solutions, used only to **check** a solution you derived first. |
+
+### ⚠️ `lec_notes.pdf` is not the same document as `Analysis_II_Script_v1.pdf`
+
+They are two years apart and differently numbered, so **a theorem number from one does not
+resolve in the other**. Both run chapters 9–15, which makes the mismatch easy to miss. Cite
+whichever file you actually opened, by name.
+
+* **Page offset for `lec_notes.pdf`: printed page = PDF page − 5.** Cite the **printed** page.
+* Provenance comment: `% Supplement: lec_notes.pdf, p. 26`.
+* ⚠️ The `pdftotext` warning below applies to this file too. Render the page and read it.
 
 ### The official script — surveyed and mined out
 

@@ -140,18 +140,22 @@ was visible in the source. The reversed arrows had survived several passes preci
 the pair still *looked* like it cancelled — cancellation was the conclusion, but which arrow
 belonged to which cell was the reason for it, and that was the part that was backwards.
 
-## The four standing `Overfull \hbox` warnings
+## The three standing `Overfull \hbox` warnings
 
-A clean build emits exactly four, and they have been present throughout. **Four is the baseline:
-if a build reports five, the new one is yours.** None is serious enough to have been worth
-rewriting the surrounding mathematics for.
+A clean build emits exactly three. **Three is the baseline: if a build reports four, the new one
+is yours.** None is serious enough to have been worth rewriting the surrounding mathematics for.
 
-| Where | Page | Over by |
-|---|---|---|
-| `24-differential-forms/02-exterior-derivative.tex` | 241 | 101.24pt (the `dx \wedge \dots` chain) |
-| `26-stokes/04-stokes-theorem.tex` | 256 | 10.61pt |
-| `14-convexity/01-convexity.tex` | 163 | 4.62pt |
-| `appendix-a-odes.tex` | 268 | 1.20pt |
+| Where | Over by |
+|---|---|
+| `24-differential-forms/02-exterior-derivative.tex` | 101.24pt (the `dx \wedge \dots` chain) |
+| `26-stokes/04-stokes-theorem.tex` | 10.61pt |
+| `14-convexity/01-convexity.tex` | 4.62pt |
+
+It was **four** until 2026-08-09. The fourth, 1.20pt in `appendix-a-odes.tex`, disappeared on its
+own during the norm-convention pass: replacing `\lVert x_2-x_3\rVert` by `|x_2-x_3|` on the
+Picard–Lindelöf Lipschitz line shortened it enough to fit. Page numbers are deliberately no
+longer tabulated here, because they move whenever anything upstream is added; find the warning's
+nearest `[NNN]` marker in the `.log` instead.
 
 ⚠️ **Attribute these by page, not by guesswork.** A list in `project-state.md` had named
 `26-stokes/02` and omitted `14-convexity` entirely, and it went unchallenged for some time

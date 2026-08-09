@@ -14,7 +14,7 @@ $x$ and $y$ bounds the opposite difference in the same way, hence
 which is $1$-Lipschitz continuity (\cref{def:lipschitz_continuous}) and therefore continuity
 (\cref{rem:continuity_hierarchy}).
 
-\textbf{For $d_1$ and $d_3$: yes, still Lipschitz --- only the constant changes.} By
+\textbf{For $d_1$ and $d_3$: yes, still Lipschitz, but the constant changes.} By
 \cref{ex:2.5} part 2 we have $d_2 \leq 2d_1$ and $d_2 \leq \sqrt2\,d_3$, so
 \[\big|d(x_1,x_2)-d(y_1,y_2)\big| \leq 2\,d_1(x,y)
   \qquad\text{and}\qquad
@@ -24,13 +24,15 @@ passage to an equivalent metric}, with the constant multiplied by the comparison
 Continuity survives too, being topological, and by \cref{ex:2.5} the three product metrics
 induce the same topology.
 
-\begin{ainote}
+% Reclassified from ainote to remark: sharpness of the constant is mathematics.
+\begin{remark}[The constant $2$ cannot be improved]
 The constant $2$ for $d_1$ is sharp, so $d$ is genuinely \emph{not} $1$-Lipschitz with respect
-to $d_1$. Take $X = \mathbb{R}$ with $x := (0,0)$ and $y := (-1,1)$: then $d(x_1,x_2) = 0$ and
-$d(y_1,y_2) = 2$, while $d_1(x,y) = \max\{1,1\} = 1$, so the difference equals
-$2 = 2\,d_1(x,y)$. Worth noticing, since the problem asks only whether $d$ is Lipschitz for
-$d_1$ and $d_3$, and it is easy to answer \qt{yes, with the same constant} without checking.
-\end{ainote}
+to $d_1$. Take $X = \mathbb{R}$ with $x := (0,0)$ and $y := (-1,1)$. Then $d(x_1,x_2) = 0$ and
+$d(y_1,y_2) = 2$, while $d_1(x,y) = \max\{1,1\} = 1$, so the difference equals exactly
+$2 = 2\,d_1(x,y)$. This is worth checking, because the problem asks only \emph{whether} $d$ is
+Lipschitz for $d_1$ and $d_3$, and it is easy to answer \qt{yes, with the same constant} without
+noticing that the constant has in fact changed.
+\end{remark}
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution to \cref{ex:2.7}]
@@ -56,8 +58,8 @@ implies $d_Y(f(x_0),f(x)) < \eta$. Chaining the two, $d_X(x_0,x) < \delta$ impli
 $d_Z\big((g\circ f)(x_0),(g\circ f)(x)\big) < \varepsilon$.
 
 \begin{remark}[Why the topological proof is the short one]
-The three arguments have the same shape --- apply the hypothesis for $g$ first, then feed the
-result to $f$ --- but only the topological version needs no quantifiers at all, because the set
+All three arguments have the same shape, applying the hypothesis for $g$ first and then feeding
+the result to $f$. Only the topological version needs no quantifiers at all, because the set
 identity $(g\circ f)^{-1} = f^{-1}\circ g^{-1}$ does the bookkeeping the other two proofs carry
 out by hand. This is a fair advertisement for \cref{def:continuous}\textbf{(c)}, which can look
 like the least intuitive of the three on first meeting: it is the formulation in which
@@ -78,7 +80,7 @@ definition.
   \item $1/x$ on $(0,1)$: \textbf{continuous, neither uniformly nor Lipschitz continuous.} For
     $x_n := 1/n$, $y_n := 1/(2n)$, $|x_n-y_n| \to 0$ but $|1/x_n - 1/y_n| = n \to \infty$, so no
     uniform $\delta(\varepsilon)$ (and hence no Lipschitz constant) can work near $0$.
-  \item $\sgn(x)$ on $(-1,1)$: \textbf{none of the three} --- discontinuous at $0$.
+  \item $\sgn(x)$ on $(-1,1)$: \textbf{none of the three}, being discontinuous at $0$.
   \item $|x|^{3/2}$ on $(-1,1)$: \textbf{Lipschitz, hence also uniformly continuous and
     continuous.} $|x|^{3/2}$ is $C^1$ on $(-1,1)\setminus\{0\}$ with $\big|\tfrac{d}{dx}|x|^{3/2}\big|
     = \tfrac32|x|^{1/2} \leq \tfrac32$, and the bound extends across $0$ by direct estimation, so
@@ -89,7 +91,7 @@ definition.
 \begin{exercisesolution}[Solution to \cref{ex:3.1}]
 % Generator: Claude Opus 5 (High)
 Both parts ask for a map with no fixed point, and each defeats one hypothesis of
-\cref{thm:banach_fixed_point} while keeping the other --- which is exactly what
+\cref{thm:banach_fixed_point} while keeping the other, which is exactly what
 \cref{rem:banach_hypotheses} predicts must be possible.
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item Take $f(x) := \tfrac{x+1}{2}$. It maps $[0,1)$ into $[\tfrac12,1) \subseteq [0,1)$, and
@@ -129,8 +131,8 @@ $g(0,0) := 0$ produces a continuous function on all of $\mathbb{R}^2$.
 \textit{Uniqueness} is the part worth spelling out, and it needs no computation at all: the value
 at the origin is \emph{forced}. Since $(0,0)$ lies in the closure of
 $\mathbb{R}^2\setminus\{(0,0)\}$, any two continuous extensions agree on a dense subset of
-$\mathbb{R}^2$, and two continuous functions agreeing on a dense set agree everywhere --- take a
-sequence from the dense set converging to the point in question and apply
+$\mathbb{R}^2$, and two continuous functions agreeing on a dense set agree everywhere. To see the
+latter, take a sequence from the dense set converging to the point in question and apply
 \cref{def:continuous}\textbf{(b)} to both. So the extension is unique whenever it exists, which
 is also why the first half of the problem had only to exhibit \emph{two} conflicting limits.
 \end{exercisesolution}
@@ -210,8 +212,8 @@ domain is what removes the room to run off to a bad point.
 \begin{remark}[Why the value $+\infty$ has to be allowed]
 The official remark accompanying this problem gives the reason, and it is worth restating: on
 $X = \mathbb{Z} \subseteq \mathbb{R}$ the map $f(n) := n^2$ is uniformly continuous for the
-trivial reason that any two distinct points are at distance at least $1$ --- take
-$\delta := \tfrac12$ and the implication holds vacuously. Yet
+trivial reason that any two distinct points are at distance at least $1$. Take
+$\delta := \tfrac12$, and the implication holds vacuously. Yet
 $|f(n+1)-f(n)| = 2n+1$ is unbounded, so $\omega_f(1) = +\infty$. Parts 2 and 3 rule this out by
 hypothesis rather than by luck: on a convex set the intermediate-point construction lets a large
 displacement be broken into many small ones, so $\omega_f(t) \leq \lceil t/s\rceil\,\omega_f(s)$

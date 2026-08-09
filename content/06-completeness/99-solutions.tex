@@ -26,8 +26,8 @@ so $x_n \to x$.
 \begin{exercisesolution}[Solution to \cref{ex:completeness_not_topological}]
 % Generator: Claude Opus 5 (Medium)
 Write $\varphi : (0,1] \to [1,\infty)$, $\varphi(x) := 1/x$. It is a bijection, and by
-construction $d(x,y) = |\varphi(x)-\varphi(y)|$ --- so $d$ is nothing but the Euclidean metric
-of $[1,\infty)$ transported back to $(0,1]$ along $\varphi$. Every part follows from that.
+construction $d(x,y) = |\varphi(x)-\varphi(y)|$. Consequently, $d$ is nothing but the Euclidean
+metric of $[1,\infty)$ transported back to $(0,1]$ along $\varphi$. Every part follows from that.
 
 \textbf{(a)} Symmetry and the triangle inequality are inherited from $|\cdot|$ directly. For
 definiteness, $d(x,y)=0$ forces $\varphi(x)=\varphi(y)$, and $\varphi$ is injective, so $x=y$.
@@ -51,21 +51,21 @@ $|x-y| \leq d(x,y) \leq \tfrac{1}{x y}\,|x-y|$ with $\tfrac{1}{xy}$ locally boun
 
 \begin{remark}
 So $d_{\text{eucl}}$ and $d$ have the \emph{same open sets}, the same convergent sequences, the
-same continuous functions and the same compact sets --- and yet one is complete and the other is
+same continuous functions and the same compact sets, and yet one is complete and the other is
 not. \textbf{Completeness is a property of the metric, not of the topology it generates.}
 
 This completes a trio worth holding together, all three proved by the same device of comparing
 two metrics that induce one topology:
 \begin{itemize}
-  \item \textbf{Compactness is topological} --- it is defined by open covers alone
+  \item \textbf{Compactness is topological.} It is defined by open covers alone
     (\cref{def:compact_metric_space}), so it cannot distinguish two metrics with the same open
     sets.
-  \item \textbf{Boundedness is not} --- \cref{rem:boundedness_not_topological}.
-  \item \textbf{Completeness is not} --- this exercise.
+  \item \textbf{Boundedness is not:} see \cref{rem:boundedness_not_topological}.
+  \item \textbf{Completeness is not:} this exercise.
 \end{itemize}
-Which is exactly why \qt{compact if and only if closed and bounded} needs the standard metric, and why
-the correct general replacement is \qt{complete and totally bounded}
-(\cref{rem:compact_iff_complete_totally_bounded}) --- both of its ingredients are
+That is exactly why \qt{compact if and only if closed and bounded} needs the standard metric, and
+why the correct general replacement is \qt{complete and totally bounded}
+(\cref{rem:compact_iff_complete_totally_bounded}). Both ingredients of the replacement are
 non-topological, and only their combination is.
 \end{remark}
 \end{exercisesolution}
@@ -81,9 +81,9 @@ $0 \leq d(x_n,z_n) \leq d(x_n,y_n)+d(y_n,z_n) \to 0+0 = 0$, so $(x_n)\sim(z_n)$.
 $(x_n),(y_n) \in \mathcal{C}_X$, the reverse triangle inequality gives
 \[\big|d(x_n,y_n) - d(x_m,y_m)\big| \leq d(x_n,x_m) + d(y_n,y_m),\]
 and the right-hand side $\to 0$ as $n,m\to\infty$ since $(x_n)$ and $(y_n)$ are each Cauchy, so
-$\big(d(x_n,y_n)\big)_n$ is a Cauchy sequence of \emph{real numbers}, hence convergent --- this is
-the completeness axiom for $\mathbb{R}$ itself from \emph{Analysis I}, not an instance of
-\cref{def:complete_metric_space} being proved circularly. Second, the limit
+$\big(d(x_n,y_n)\big)_n$ is a Cauchy sequence of \emph{real numbers}, hence convergent. Note that
+this is the completeness axiom for $\mathbb{R}$ itself from \emph{Analysis I}, and not an instance
+of \cref{def:complete_metric_space} being proved circularly. Second, the limit
 does not depend on the choice of representative: if $(x_n)\sim(x_n')$ and $(y_n)\sim(y_n')$, the
 same reverse triangle inequality gives
 $\big|d(x_n,y_n)-d(x_n',y_n')\big| \leq d(x_n,x_n')+d(y_n,y_n') \to 0$, so the two limits agree.
@@ -106,8 +106,8 @@ $d(x,y)$ itself; and this identity makes $\iota$ injective, since $d(x,y)=0 \iff
 % Generator: Claude Sonnet 5 (High)
 Let $(\xi_m)_{m=0}^\infty$ be Cauchy in $\overline X$, with $\xi_m = [(x_{m,n})_{n=0}^\infty]$ for
 some Cauchy sequence $(x_{m,n})_n$ in $X$ representing $\xi_m$. Replacing $(x_{m,n})_n$ by a tail
-of itself if necessary --- a Cauchy sequence and any of its tails represent the same class, since
-they differ by only finitely many terms --- we may assume each representative is already
+of itself if necessary, which is harmless because a Cauchy sequence and any of its tails represent
+the same class, differing in only finitely many terms, we may assume each representative is already
 \newterm{regularized}:
 \[d(x_{m,n},x_{m,n'}) < \tfrac1m \qquad \text{for all } n,n' \geq 0.\]
 Set $y_m := x_{m,m}$, the diagonal sequence the exercise asks about. Letting $n'\to\infty$ in the
@@ -177,9 +177,9 @@ point $0$, hence no fixed point in $X$.
 
 \textbf{(b)} Take $X := \mathbb{R}$ (complete, \cref{prop:Rn_coordinatewise_complete}) with the
 translation $T(x) := x+1$. Then $d(T(x),T(y)) = |(x+1)-(y+1)| = |x-y| = d(x,y)$, so $T$ is an
-isometry --- in particular Lipschitz with constant $L=1$, \emph{not} $<1$, so this does not
-contradict \cref{thm:banach_fixed_point}. A fixed point would need $x+1=x$, which is impossible;
-so $T$ has none.
+isometry, and in particular Lipschitz with constant $L=1$ rather than $L<1$. Consequently, this
+does not contradict \cref{thm:banach_fixed_point}. A fixed point would need $x+1=x$, which is
+impossible, so $T$ has none.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:ai_contraction_cos}]
@@ -194,11 +194,11 @@ so $T$ has none.
 % Generator: Claude Opus 5 (High)
 \textbf{(a), (c) and (e) are true; (b) and (d) are false.}
 
-\textbf{(a) True} --- this is the classic illustration of \cref{thm:banach_fixed_point}. The map
+\textbf{(a) True,} and this is the classic illustration of \cref{thm:banach_fixed_point}. The map
 of Zurich lying on the desk defines a function from the (compact, hence complete) region of the
 city depicted onto a smaller region of the desk, and that function is a similarity: a rotation
 and translation composed with a scaling by the map's ratio $L < 1$. It is therefore a contraction
-of a complete metric space into itself, and has exactly one fixed point --- one spot on the map
+of a complete metric space into itself, and so has exactly one fixed point: one spot on the map
 lying directly above the point of the city it represents.
 
 \textbf{(b) False.} The hypothesis says nothing about $f$ mapping its domain into itself, and the
@@ -217,12 +217,12 @@ $[0,1] \subseteq [0,2]$, so $f$ is a self-map of the complete space $[0,2]$
 condition $|f'| < 1$ is purely local, so it cannot see across the gap. Define
 \[f(x) := \begin{cases} \tfrac52 & x \in [0,1], \\ \tfrac12 & x \in [2,3].\end{cases}\]
 Then $f$ is continuously differentiable with $f' \equiv 0$, it maps
-$[0,1]\cup[2,3]$ into itself, and it has no fixed point --- each of the two pieces is sent into
-the \emph{other} one. Compare the local-to-global reading of
+$[0,1]\cup[2,3]$ into itself, and it has no fixed point, because each of the two pieces is sent
+into the \emph{other} one. Compare the local-to-global reading of
 \cref{rem:local_to_global}: a pointwise derivative bound upgrades to a global contraction only
 along paths that stay inside the domain, and here there are none.
 
-\textbf{(e) True,} but \emph{not} by the fixed point theorem --- and that is the point of the
+\textbf{(e) True,} but \emph{not} by the fixed point theorem, and that is the point of the
 star. The hypothesis $|f'(x)| < 1$ gives no uniform $L < 1$, since the supremum of $|f'|$ may
 well equal $1$, so \cref{thm:banach_fixed_point} is unavailable. Existence follows from the
 intermediate value theorem instead. Put $g(x) := f(x) - x$, which is continuous on $[0,1]$. Since
@@ -245,8 +245,8 @@ not merely approached.
     $\mathbb{R}$ is complete and $T$ maps it into itself, but
     $\lambda = \sup_{x}\lvert\cos x\rvert = 1$, attained at $x=0$. So the theorem is unavailable.
     A fixed point exists all the same: $\sin x = x$ holds at $x=0$ and nowhere else, since
-    $\lvert\sin x\rvert < \lvert x\rvert$ for $x \neq 0$. This is the first lesson --- the
-    theorem is \emph{sufficient}, never necessary.
+    $\lvert\sin x\rvert < \lvert x\rvert$ for $x \neq 0$. This is the first lesson of the table:
+    the theorem is \emph{sufficient}, never necessary.
   \item \textbf{$T(x) = \tfrac{9}{10}\cos(x)$ on $\mathbb{R}$. Applies; one fixed point.}
     Here $\lvert T'(x)\rvert = \tfrac{9}{10}\lvert\sin x\rvert \leq \tfrac{9}{10} < 1$, so by the
     mean value theorem $T$ is a $\tfrac{9}{10}$-contraction; $\mathbb{R}$ is complete and
@@ -259,8 +259,8 @@ not merely approached.
     the theorem asserts \emph{uniqueness}, so any set of hypotheses implying it must fail here.
   \item \textbf{$T(x) = \tfrac12x^2$ on $(-1,1)$. Does not apply; fixed points $\{0\}$.}
     Two hypotheses fail together. The domain $(-1,1)$ is not complete, and
-    $\lambda = \sup_{\lvert x\rvert<1}\lvert T'(x)\rvert = \sup\lvert x\rvert = 1$ --- not
-    attained, but a supremum of $1$ is still not $<1$, exactly the trap of
+    $\lambda = \sup_{\lvert x\rvert<1}\lvert T'(x)\rvert = \sup\lvert x\rvert = 1$. This supremum
+    is not attained, but a supremum of $1$ is still not $<1$, which is exactly the trap of
     \cref{rem:banach_hypotheses}. The map does send $(-1,1)$ into $[0,\tfrac12) \subseteq
     (-1,1)$. Solving $\tfrac12x^2 = x$ gives $x \in \{0,2\}$, of which only $0$ lies in the
     domain, so a unique fixed point exists regardless.
@@ -278,8 +278,8 @@ not merely approached.
     \end{itemize}
     And there is indeed no fixed point: $x = \tfrac12(x+\tfrac2x)$ forces $x^2 = 2$, so
     $x = \sqrt2 \notin \mathbb{Q}$. The iterates are the familiar rational approximations
-    $\tfrac32, \tfrac{17}{12}, \tfrac{577}{408}, \dots$ --- a Cauchy sequence in $X$ converging
-    to a point that $X$ does not contain.
+    $\tfrac32, \tfrac{17}{12}, \tfrac{577}{408}, \dots$, which form a Cauchy sequence in $X$
+    converging to a point that $X$ does not contain.
 
     This is worth contrasting with \cref{rem:banach_hypotheses}, where completeness failed on
     $(0,1]$ with the missing point sitting at an endpoint one is already suspicious of. Here the

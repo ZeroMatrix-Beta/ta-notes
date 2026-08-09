@@ -2,15 +2,15 @@
 
 \subsection{Sequential and topological compactness agree}
 
+% Diego Torres Tejeda's supplementary note "Addendum - Sequential and Topological Compactness.pdf"
+% is the one typeset document among his materials, the rest being handwritten scans. Its proof is
+% adapted below into this project's notation and house style.
 \begin{ainote}
-Corsin (and \cref{def:sequential_topological_compactness}, quoting the official lecture notes)
-states this equivalence but never proves it, nor does he prove \cref{thm:sequential_compactness}
-above. Diego Torres Tejeda's supplementary note \texttt{Addendum - Sequential and Topological
-Compactness.pdf} --- the one typeset document among his materials, the rest being handwritten
-scans --- works out a complete, self-contained proof. Adapted below into this project's notation
-and house style; by the reduction already noted above (compactness of $K \subseteq X$ is
-compactness of the metric space $(K,d|_{K\times K})$), it suffices to treat a whole metric space
-$X$ rather than a subset $K$.
+The course states this equivalence but never proves it, and it does not prove
+\cref{thm:sequential_compactness} above either. A complete, self-contained proof is supplied here
+from a second tutor's addendum. By the reduction already noted above, compactness of
+$K \subseteq X$ being compactness of the metric space $(K,d|_{K\times K})$, it suffices to treat a
+whole metric space $X$ rather than a subset $K$.
 \end{ainote}
 
 \begin{lemma}[Continuous functions attain extrema on sequentially compact spaces]
@@ -29,8 +29,8 @@ $x$.
 
 \begin{remark}
 This is exactly the extreme value theorem (\cref{item:extreme_value_theorem}) proved from first
-principles, without presupposing \cref{thm:sequential_compactness} --- needed here since that
-theorem is precisely what we are about to prove.
+principles, without presupposing \cref{thm:sequential_compactness}. Avoiding that appeal is
+essential here, since that theorem is precisely what we are about to prove.
 \end{remark}
 
 \begin{definition}[Totally bounded]
@@ -65,8 +65,8 @@ $\varepsilon := \tfrac12$, every ball $B_{1/2}(x) = \{x\}$ (\cref{def:open_ball}
 \begin{remark}
 This is the same asymmetry \cref{lem:sequentially_compact_totally_bounded} proves in one
 direction only: sequential compactness forces \emph{both} boundedness and total boundedness, and
-this exercise shows the two are genuinely different hypotheses --- total boundedness is the
-strictly stronger, and in general infinite-dimensional, condition.
+this exercise shows the two are genuinely different hypotheses. Total boundedness is the strictly
+stronger of the two, and the gap opens up in infinite dimensions.
 \end{remark}
 
 \begin{lemma}[Sequential compactness gives (total) boundedness]
@@ -82,8 +82,8 @@ $X = B_{M+1}(x_0)$.
 
 \textbf{Totally bounded.} Fix $\varepsilon > 0$. Construct a sequence inductively: let
 $x_1 \in X$ be arbitrary, and, having chosen $x_1,\dots,x_n$, let
-$U_n := \bigcup_{k=1}^n B_\varepsilon(x_k)$; if $U_n = X$, stop --- we have the desired finite
-cover. Otherwise, pick $x_{n+1} \in X\setminus U_n$, so that $d(x_{n+1},x_k) \geq \varepsilon$ for
+$U_n := \bigcup_{k=1}^n B_\varepsilon(x_k)$. If $U_n = X$, stop, since we then have the desired
+finite cover. Otherwise pick $x_{n+1} \in X\setminus U_n$, so that $d(x_{n+1},x_k) \geq \varepsilon$ for
 all $k \leq n$. If this process never terminates, sequential compactness gives a convergent, hence
 Cauchy, subsequence $(x_{n_k})_k$; but $d(x_{n_k},x_{n_{k+1}}) \geq \varepsilon$ for all $k$
 contradicts the Cauchy property. So, the process must terminate after finitely many steps, giving
@@ -124,8 +124,8 @@ $B_{\varepsilon_x}(x) \cap \{x_n : n \geq N_x\} = \emptyset$. The balls
 $\{B_{\varepsilon_x}(x)\}_{x \in X}$ cover $X$, so topological compactness gives finitely many
 $x_1,\dots,x_m$ with $X = \bigcup_{k=1}^m B_{\varepsilon_{x_k}}(x_k)$. With
 $N := \max\{N_{x_1},\dots,N_{x_m}\}$, every $x_n$ with $n \geq N$ then avoids
-$B_{\varepsilon_{x_1}}(x_1) \cup \dots \cup B_{\varepsilon_{x_m}}(x_m) = X$ --- absurd. So $X$ is
-sequentially compact.
+$B_{\varepsilon_{x_1}}(x_1) \cup \dots \cup B_{\varepsilon_{x_m}}(x_m) = X$, which is absurd.
+Therefore, $X$ is sequentially compact.
 
 \begin{center}
 \begin{tikzpicture}[scale=1.5]
@@ -181,7 +181,7 @@ $B_{r(x)}(x) \subseteq U_i$ for some $i$, so $y \in U_i$, and the triangle inequ
 Halving, $r(y) = \tfrac12R(y) \geq \tfrac12\big(r(x)-d(x,y)\big)$, which also holds trivially
 when $d(x,y) \geq r(x)$ since $r(y) \geq 0$. By symmetry,
 \[|r(x)-r(y)| \leq \tfrac12\,d(x,y),\]
-so $r$ is $\tfrac12$-Lipschitz --- in particular continuous, which is all that is needed below.
+so $r$ is $\tfrac12$-Lipschitz, and in particular continuous, which is all that is needed below.
 
 By \cref{lem:sequential_compactness_extreme_values}, $r$ attains a minimum
 $\varepsilon := \min_{x\in X} r(x) > 0$ on $X$. Then $B_\varepsilon(x) \subseteq U_i$ for some $i$,
@@ -242,7 +242,7 @@ $A$ is compact.
 \begin{proof}
 Let $\mathcal{U}$ be an open cover of $A$. Since $A$ is closed, $X\setminus A$ is open, so
 \[\mathcal{U}' := \mathcal{U} \cup \{X\setminus A\}\]
-is an open cover of $K$ --- it covers $A$ by assumption and everything outside $A$ by the added
+is an open cover of $K$, covering $A$ by assumption and everything outside $A$ by the added
 set. Compactness of $K$ gives a finite subcover
 $U_{1},\dots,U_{m} \in \mathcal{U}'$ of $K$, hence of $A$.
 
@@ -267,12 +267,14 @@ the remaining sets still cover $A$. They all belong to $\mathcal{U}$, and there 
 many. As $\mathcal{U}$ was arbitrary, $A$ is compact.
 \end{proof}
 
-\begin{ainote}
-The trick --- \emph{enlarge the cover by the complement of the set you care about, then throw it
-away again} --- is the standard way to transfer compactness downward, and worth remembering: it
-reappears whenever one needs a compact subset of a compact set. Note the hypothesis \qt{closed}
-is essential: $(0,1) \subseteq [0,1]$ sits inside a compact set without being compact.
-\end{ainote}
+% Reclassified from ainote to remark: a proof technique worth naming is mathematics.
+\begin{remark}[Enlarge the cover, then discard the extra set]
+The trick just used is the standard way to transfer compactness downward, and it is worth
+remembering in the form \emph{enlarge the cover by the complement of the set you care about, then
+throw that complement away again}. It reappears whenever one needs a compact subset of a compact
+set. Note that the hypothesis \qt{closed} is essential, since $(0,1) \subseteq [0,1]$ sits inside
+a compact set without being compact.
+\end{remark}
 
 % Source: Corsin Nick/Class Notes/Week 2.pdf, p. 15
 \begin{exercise}[Compact sets are complete]

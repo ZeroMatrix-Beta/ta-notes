@@ -6,9 +6,9 @@
 Several of the definitions you will meet in the coming chapters are exactly the definitions you
 already know from \emph{Analysis I}, only stripped of their reliance on the real line. A
 \newterm{sequence} (\germanterm{Folge}) $(x_k)_{k \in \mathbb{N}}$ in a set $X$ converging to
-$x \in X$, a function being continuous at a point, a set being open or closed --- all of these
-notions carry over to $\mathbb{R}^n$ and, as \cref{sec:structured_spaces} will show, to much more
-general spaces than $\mathbb{R}^n$.
+$x \in X$, a function being continuous at a point, a set being open or closed: all of these
+notions carry over to $\mathbb{R}^n$ and, as \cref{sec:structured_spaces} will show, to spaces far
+more general than $\mathbb{R}^n$.
 
 What does \emph{not} carry over automatically is anything
 that relied on the \emph{order} of $\mathbb{R}$: there is no \qt{$\leq$} on $\mathbb{R}^n$ for
@@ -16,22 +16,16 @@ $n \geq 2$, so statements like the intermediate value theorem or \qt{every bound
 convergent subsequence} need new proofs, or new hypotheses, once we leave $\mathbb{R}$.
 
 \begin{remark}
-That last fact --- bounded does \emph{not} imply convergent, but bounded sequences in
-$\mathbb{R}^n$ do always have a convergent \emph{subsequence} --- is exactly the statement of the
-Bolzano--Weierstrass theorem, revisited via \cref{ex:1.1} below. It
-reappears as the Heine--Borel theorem once compactness is introduced in \cref{sec:compactness}.
+The second of those statements is worth stating carefully, because it is false as written and true
+after one word is changed. Bounded does not imply convergent. What is true is that a bounded
+sequence in $\mathbb{R}^n$ always has a convergent \emph{subsequence}, which is the
+Bolzano--Weierstrass theorem, revisited via \cref{ex:1.1} below. It reappears in a more general
+form as the Heine--Borel theorem once compactness is introduced in \cref{sec:compactness}.
 \end{remark}
 
-% Supplement: Linus Lüchinger/Slides/Slides-02-23.pdf
-\begin{ainote}
-Linus Lüchinger's first exercise-session slides collect the most common mistakes on the first
-problem sheet, whose problems are distributed through this chapter. Two are worth flagging before
-attempting \cref{ex:1.1}: on part 2, most students first guessed $f(x) = \log|x| + c$ for a single
-constant $c$ --- wrong, since the two constants on $(-\infty,0)$ and $(0,\infty)$ may genuinely
-differ (see \cref{sec:prerequisites_solutions}). On part 4, most students assumed a function with
-everywhere-positive second derivative cannot have a global maximum; it can, at the boundary of the
-domain.
-\end{ainote}
+% The common-mistakes note from Linus Lüchinger/Slides/Slides-02-23.pdf used to sit here, above
+% Exercise 1.1. It disclosed the answers to parts 2 and 4 before the reader had attempted them,
+% and now lives next to the solution in 99-solutions.tex. See the spoiler rule in style.md.
 
 % Source: exercises/Ex1_Analysis2_eng.pdf, p. 1
 \begin{exercise}[1.1 --- Recap Questions]

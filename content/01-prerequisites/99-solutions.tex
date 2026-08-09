@@ -2,12 +2,9 @@
 \section{Solutions}
 \label{sec:prerequisites_solutions}
 
-\begin{ainote}
-None of the tutors sampled for the first problem sheet left a full worked solution to transcribe
-(most of their opening-week material is session logistics or \qt{gotcha} summaries, not worked
-solutions); the solutions below are written for this document and cross-checked against the
-official \texttt{exercises/Sol1\_Analysis2\_eng.pdf}.
-\end{ainote}
+% No tutor sampled for sheet 1 left a full worked solution to transcribe; most of their
+% opening-week material is session logistics or "gotcha" summaries. The solutions below were
+% written for this document and cross-checked against exercises/Sol1_Analysis2_eng.pdf.
 
 \begin{exercisesolution}[Solution of \cref{ex:1.1}]
 % Generator: Claude Sonnet 5 (Medium)
@@ -38,7 +35,7 @@ official \texttt{exercises/Sol1\_Analysis2\_eng.pdf}.
   \item Yes: take $f(x) := e^{-x}$. Then $f''(x) = e^{-x} > 0$ for all $x$, yet $f$ attains its
     global maximum on $[0,\infty)$ at the boundary point $x=0$. Everywhere-positive second
     derivative (strict convexity) rules out an \emph{interior} local maximum, but says nothing
-    about the boundary of the domain --- exactly the gotcha flagged above.
+    whatever about the boundary of the domain.
   \item $\phi(Q)$ is the parallelogram spanned by $\phi(1,0)$ and $\phi(0,1)$, with vertices at
     $0$, $\phi(1,0)$, $\phi(0,1)$, and $\phi(1,0)+\phi(0,1)$. Two degenerate cases occur: if
     $\phi(1,0)$ and $\phi(0,1)$ are linearly dependent (parallel or one is zero) but not both
@@ -53,9 +50,23 @@ official \texttt{exercises/Sol1\_Analysis2\_eng.pdf}.
       \begin{pmatrix} 0&1&0&0 \\ 0&0&2&0 \\ 0&0&0&3 \\ 0&0&0&0 \end{pmatrix}.
     \]
     This matrix has rank $3$ (its three nonzero rows are independent), so by the rank--nullity
-    theorem the null space has dimension $4 - 3 = 1$ --- spanned by the constant polynomials.
+    theorem the null space has dimension $4 - 3 = 1$, and it is spanned by the constant
+    polynomials.
 \end{enumerate}
 \end{exercisesolution}
+
+% Supplement: Linus Lüchinger/Slides/Slides-02-23.pdf
+% Moved here from 01-from-analysis-i.tex, where it stood above the exercise and gave away
+% parts 2 and 4 before the reader had attempted them.
+\begin{remark}[The two parts most often answered wrongly]
+Linus Lüchinger's first exercise-session slides record where this sheet went wrong most often, and
+two of the parts above account for most of it. Part 2 was one: the single-constant answer
+$f(x) = \log\lvert x\rvert + c$ was the usual first guess, and it fails for the reason just given,
+namely that the domain falls apart into two intervals. Part 4 was the other: a function with
+everywhere positive second derivative was widely assumed to admit no global maximum at all, when
+in fact it may attain one at a boundary point. Both mistakes have the same shape. A hypothesis
+that controls the \emph{interior} of a domain was read as though it controlled the domain.
+\end{remark}
 
 \begin{exercisesolution}[Solution of \cref{ex:1.2}]
 % Generator: Claude Sonnet 5 (Medium)
@@ -136,10 +147,12 @@ official \texttt{exercises/Sol1\_Analysis2\_eng.pdf}.
     linearly from $1$ to $0$, so $D$ is the lateral surface of a right circular cone of height $1$
     over the unit circle, apex at $(0,0,1)$, base circle excluded (the inequalities are strict).
   \item Slicing at height $z=t$: the equation $\sqrt{1+x^2+y^2}=t$ has solutions only for
-    $t \geq 1$, with radius $\sqrt{t^2-1}$ (not $t$, per the gotcha in
-    \Cref{sec:visualizing_sets}). $E$ is thus a bowl-shaped surface of revolution, vertex at
-    $(0,0,1)$, obtained by rotating the curve $y = \sqrt{1+x^2}$ around the $z$-axis; it flattens
-    out to slope $\approx 1$ for large $x,y$, unlike a true cone.
+    $t \geq 1$, and the slice is then a circle of radius $\sqrt{t^2-1}$. Note that the radius is
+    $\sqrt{t^2-1}$ and not $t$; this is the single most common slip on this part, and it turns the
+    answer into a cone. $E$ is instead a bowl-shaped surface of revolution with vertex at
+    $(0,0,1)$, obtained by rotating the curve $y = \sqrt{1+x^2}$ about the $z$-axis. It approaches
+    slope $1$ for large $x,y$ without ever attaining it, which is exactly how it differs from the
+    cone $z = \sqrt{x^2+y^2}$ that it is so often mistaken for.
   \item The level sets $\{\max\{|x|,|y|\}=t\}$ are the boundaries of the squares $[-t,t]^2$.
     Stacking these square outlines at height $z=t$ as $t$ grows from $0$ upward sweeps out four
     flat triangular faces meeting at the apex $(0,0,0)$. So $F$ is an upward-opening
@@ -147,7 +160,7 @@ official \texttt{exercises/Sol1\_Analysis2\_eng.pdf}.
     circles of $\sqrt{x^2+y^2}$ replaced by the square level curves of $\max\{|x|,|y|\}$.
 \end{enumerate}
 
-Parts 4, 5 and 6 are the same construction three times --- stack the level sets --- and are
+Parts 4, 5 and 6 are the same construction carried out three times, stacking level sets, and are
 best compared side by side. In each panel the dotted curve is one intermediate level set:
 
 \begin{center}
@@ -266,12 +279,18 @@ translates directly into a set difference:
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution of \cref{ex:1.4}]
-% Generator: Claude Sonnet 5 (Medium)
+% Generator: Claude Sonnet 5 (Medium); display re-broken into align* by Claude Opus 5 (High).
 Parts 1 and 2 are exactly the proof of \cref{prop:youngs_inequality} above. For the bonus vector
-version, apply the scalar inequality coordinatewise with $a = |a_i|$, $b=|b_i|$ and sum over $i$:
-\[
-  \langle a,b\rangle \leq \sum_{i=1}^n |a_i||b_i| \leq \sum_{i=1}^n \left(\frac{|a_i|^p}{p} +
-  \frac{|b_i|^q}{q}\right) = \frac{1}{p}\sum_{i=1}^n |a_i|^p + \frac{1}{q}\sum_{i=1}^n |b_i|^q
-  = \frac{\|a\|_p^p}{p} + \frac{\|b\|_q^q}{q}.
-\]
+version, apply the scalar inequality coordinatewise, with $|a_i|$ in place of $a$ and $|b_i|$ in
+place of $b$, and sum over $i$:
+\begin{align*}
+  \langle a,b\rangle
+    &\ \leq\ \sum_{i=1}^n |a_i|\,|b_i|
+     \ \leq\ \sum_{i=1}^n \left(\frac{|a_i|^p}{p} + \frac{|b_i|^q}{q}\right) \\[0.4ex]
+    &\ =\ \frac{1}{p}\sum_{i=1}^n |a_i|^p + \frac{1}{q}\sum_{i=1}^n |b_i|^q
+     \ =\ \frac{\|a\|_p^p}{p} + \frac{\|b\|_q^q}{q}.
+\end{align*}
+Note that the two sums separate only because the right-hand side of Young's inequality is a
+\emph{sum} of powers rather than a product; this is precisely the feature that
+\cref{rem:young_to_hoelder} then removes by rescaling.
 \end{exercisesolution}

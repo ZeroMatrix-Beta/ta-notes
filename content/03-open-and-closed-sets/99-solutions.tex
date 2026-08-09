@@ -107,8 +107,8 @@ $d(x,a) \leq d(x,y) + d(y,a)$, and the left-hand side is bounded below by $d(x,A
 Taking the infimum over $a$ on the right yields $d(x,A) \leq d(x,y) + d(y,A)$. Exchanging $x$
 and $y$ and combining,
 \[\big|d(x,A) - d(y,A)\big| \leq d(x,y),\]
-so $d(\cdot,A)$ is \textbf{$1$-Lipschitz} (\cref{def:lipschitz_continuous}), in particular
-continuous --- which is what the remaining parts use.
+so $d(\cdot,A)$ is \textbf{$1$-Lipschitz} (\cref{def:lipschitz_continuous}), and in particular
+continuous. That is what the remaining parts use.
 
 \textbf{(a) True.} If $A$ is closed then $A^c$ is open, so for $x \in A^c$ there is $r>0$ with
 $B_r(x) \subseteq A^c$. No point of $A$ lies in that ball, i.e.\ $d(x,a) \geq r$ for every
@@ -155,8 +155,8 @@ Three rows repay a second look.
     distinguish a set from any other set squeezed between its interior and its closure.
   \item \textbf{(5).} Removing the single point $0$ from $[-1,1)$ adds $0$ to the boundary
     without changing the closure: a removed interior point becomes a boundary point. Note also
-    that $1 \in \partial Y$ although $1 \notin Y$, while $-1 \in \partial Y$ and $-1 \in Y$ ---
-    the boundary is indifferent to membership.
+    that $1 \in \partial Y$ although $1 \notin Y$, while $-1 \in \partial Y$ and $-1 \in Y$. The
+    boundary is indifferent to membership.
   \item \textbf{(2) and (8).} Both have empty interior, so $\partial Y = \overline{Y}$: once a
     set has no interior, the boundary swallows the entire closure. That is the general reason
     for $\partial\mathbb{Q} = \mathbb{R}$ in
@@ -175,7 +175,7 @@ Three rows repay a second look.
     $\overline{\mathbb{Q}} = \mathbb{R}$.
   \item \textbf{Neither.} The map $x \mapsto x - \lfloor x\rfloor$ is the fractional part, whose
     range is exactly $[0,1)$. This is not open ($0$ has no ball inside it) and not closed
-    ($1$ is a limit point that is missing) --- the two defects sit at the two ends.
+    ($1$ is a limit point that is missing). The two defects sit at the two ends.
   \item \textbf{Neither.} Multiplying by $2^{-p}$ turns the condition into a union of closed
     blocks,
     \[S = \bigcup_{p\geq0}\big[2^{-p},\,2^{-p+1}\big]
@@ -183,7 +183,7 @@ Three rows repay a second look.
         = (0,2],\]
     since consecutive blocks share an endpoint and their left ends decrease to $0$. Now $(0,2]$
     is not open (no ball around $2$ fits) and not closed ($0$ is a missing limit point).
-  \item \textbf{Open} --- and this is the point of putting \textbf{(d)} next to it. The same
+  \item \textbf{Open}, and this is the point of putting \textbf{(d)} next to it. The same
     computation with open blocks gives
     \[T = \bigcup_{p\geq0}\big(2^{-p},\,2^{-p+1}\big)
         = (0,2)\setminus\big\{1,\tfrac12,\tfrac14,\dots\big\},\]
@@ -207,7 +207,7 @@ Three rows repay a second look.
     which is closed: its points are isolated and the only way to escape is towards $-\infty$,
     which is not a real accumulation point. If the Riemann hypothesis fails, the real parts of
     the off-line zeros are not understood well enough to say. So this entry is a joke with a
-    sharp edge --- it is a perfectly well-posed question about a perfectly explicit set, and
-    nobody can currently answer it.
+    sharp edge. It is a perfectly well-posed question about a perfectly explicit set, and nobody
+    can currently answer it.
 \end{enumerate}
 \end{exercisesolution}

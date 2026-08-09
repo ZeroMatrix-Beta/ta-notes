@@ -26,17 +26,17 @@ each coordinate as a function of \textbf{time} and differentiate:
 The middle line, $D(f\circ\gamma)(t) = \langle\nabla f(\gamma(t)),\gamma'(t)\rangle$, is worth
 dwelling on, because it is the formula that gives the gradient its meaning. It says the rate at
 which $f$ changes along a path depends on the velocity only through its inner product with
-$\nabla f$ --- so by Cauchy--Schwarz (\cref{thm:cauchy_schwarz}) the change is fastest when
-$\gamma'$ points along $\nabla f$, and zero when $\gamma'$ is perpendicular to it. Two standard
-facts fall straight out:
+$\nabla f$. Consequently, by Cauchy--Schwarz (\cref{thm:cauchy_schwarz}), the change is fastest
+when $\gamma'$ points along $\nabla f$, and zero when $\gamma'$ is perpendicular to it. Two
+standard facts fall straight out:
 
 \begin{itemize}
   \item \textbf{$\nabla f$ points in the direction of steepest ascent}, with
     $|\nabla f|$ the rate of ascent in that direction.
   \item \textbf{$\nabla f$ is perpendicular to the level sets of $f$.} If $\gamma$ stays inside
     a level set $\{f = c\}$, then $f\circ\gamma$ is constant, so
-    $\langle\nabla f(\gamma(t)),\gamma'(t)\rangle = 0$ for every $t$ --- and $\gamma'$ runs
-    through the directions tangent to the level set.
+    $\langle\nabla f(\gamma(t)),\gamma'(t)\rangle = 0$ for every $t$, and $\gamma'$ runs through
+    the directions tangent to the level set.
 \end{itemize}
 
 \begin{center}
@@ -114,8 +114,8 @@ Let $u \in C^1(\mathbb{R}^n)$ and $\nu \in \mathbb{R}^n$. Show that
   \item \textbf{(*)} What can we conclude if we assume only that $\partial_1 u = 0$ in an open
     connected subset $U \subset \mathbb{R}^n$?
 \end{enumerate}
-\textit{Official hints:} \textbf{4.6.2} --- apply the mean value theorem to $u(x + t\nu)$.
-\textbf{4.6.3} --- consider the domain $U := \{(x,y) : x^2 < y < x^2+1\}$ and the function
+\textit{Official hints:} \textbf{4.6.2:} apply the mean value theorem to $u(x + t\nu)$.
+\textbf{4.6.3:} consider the domain $U := \{(x,y) : x^2 < y < x^2+1\}$ and the function
 \[u(x,y) := \begin{cases} \max\{0, y-2\}^2 & \text{if } x \geq 0, \\ 0 & \text{if } x \leq 0.\end{cases}\]
 \end{exercise}
 

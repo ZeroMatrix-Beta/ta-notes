@@ -3,20 +3,20 @@
 \section{Cauchy--Schwarz}
 \label{sec:cauchy_schwarz}
 
-\subsection{Inner products and norms --- recap}
+\subsection{Recap: inner products and norms}
 \label{sec:inner_products_recap}
 
 % Transition: Claude Opus 5 (High)
 Corsin opens his Friday session by recalling the two definitions, which this chapter has already
-stated in \cref{sec:structured_spaces} --- where the hierarchy of structured spaces was drawn and
+stated in \cref{sec:structured_spaces}, where the hierarchy of structured spaces was drawn and
 where the first supplements needed them. Rather than repeat them, here is what to have in mind:
 \begin{itemize}
   \item An \emph{inner product} (\cref{def:inner_product}) is \textbf{bilinear},
     \textbf{symmetric} and \textbf{definite}. It measures length \emph{and} angle.
   \item A \emph{norm} (\cref{def:norm}) is \textbf{definite}, \textbf{homogeneous} and
     satisfies the \textbf{triangle inequality}. It measures length only.
-  \item Each induces the next --- $\|v\| := \sqrt{\langle v,v\rangle}$ and
-    $d(x,y) := \|x-y\|$ --- and neither implication reverses
+  \item Each induces the next, via $\|v\| := \sqrt{\langle v,v\rangle}$ and
+    $d(x,y) := \|x-y\|$, and neither implication reverses
     (\cref{prop:induced_norm_and_metric}, \cref{rem:norm_not_from_inner_product}).
 \end{itemize}
 What this section adds is the \emph{geometry}: why $\langle x,y\rangle$ deserves to be read as an
@@ -97,7 +97,8 @@ In words, $\pi_v(u)$ is the part of $u$ which points along $v$. In particular,
 \[
 \|\pi_v(u)\| = \|u\|\,|\cos\theta| = \frac{|\langle u,v\rangle|}{\|v\|}.
 \]
-In this sense, Cauchy--Schwarz says something very obvious --- see the picture above:
+In this sense, Cauchy--Schwarz says something visually obvious. Reading the picture above, all
+three of the following are the same statement:
 \[
 \frac{|\langle u,v\rangle|}{\|v\|} \leq \|u\| \iff \|\pi_v(u)\| \leq \|u\| \iff \|u\|\,|\cos\theta| \leq \|u\|.
 \]
@@ -114,11 +115,9 @@ where $u - \pi_v(u)$ is the \textbf{perpendicular part} of $u$ to $v$.
 % Sonnet 5 (Medium)
 \subsection{The Cauchy--Schwarz inequality}
 
-\begin{ainote}
-Corsin's own notes stop at the hint above (\cref{rem:proof_hint_cauchy_schwarz}) and never state
-the inequality itself as a formal result --- somewhat notable, since it names the section. Filled
-in below, carrying out exactly the hinted computation.
-\end{ainote}
+% Corsin's own notes stop at the hint above (rem:proof_hint_cauchy_schwarz) and never state the
+% inequality itself as a formal result, which is notable given that it names the section. The
+% theorem below fills that in, carrying out exactly the computation he hints at.
 
 \begin{theorem}[Cauchy--Schwarz inequality]
 \label{thm:cauchy_schwarz}
@@ -131,13 +130,26 @@ with equality if and only if $u,v$ are linearly dependent.
 \begin{proof}
 If $v = 0$, both sides vanish and the claim holds trivially, so assume $v \neq 0$. Following
 \Cref{rem:proof_hint_cauchy_schwarz}, definiteness (\cref{def:inner_product}) gives
-\[0 \leq \langle u-\pi_v(u),\ u-\pi_v(u)\rangle = \langle u,u\rangle - 2\langle u,\pi_v(u)\rangle + \langle \pi_v(u),\pi_v(u)\rangle.\]
-Using $\pi_v(u) = \tfrac{\langle u,v\rangle}{\|v\|^2}v$ and bilinearity,
-\[\langle u,\pi_v(u)\rangle = \frac{\langle u,v\rangle^2}{\|v\|^2}, \qquad \langle \pi_v(u),\pi_v(u)\rangle = \frac{\langle u,v\rangle^2}{\|v\|^4}\langle v,v\rangle = \frac{\langle u,v\rangle^2}{\|v\|^2}.\]
-Substituting,
-\[0 \leq \|u\|^2 - \frac{2\langle u,v\rangle^2}{\|v\|^2} + \frac{\langle u,v\rangle^2}{\|v\|^2} = \|u\|^2 - \frac{\langle u,v\rangle^2}{\|v\|^2},\]
-which rearranges to $\langle u,v\rangle^2 \leq \|u\|^2\|v\|^2$, i.e., $|\langle u,v\rangle| \leq \|u\|\|v\|$. Equality holds
-if and only if $u - \pi_v(u) = 0$ by definiteness, i.e., $u$ is a scalar multiple of $v$.
+\[
+  0 \ \leq\ \langle u-\pi_v(u),\ u-\pi_v(u)\rangle
+    \ =\ \langle u,u\rangle - 2\langle u,\pi_v(u)\rangle + \langle \pi_v(u),\pi_v(u)\rangle.
+\]
+Using $\pi_v(u) = \tfrac{\langle u,v\rangle}{\|v\|^2}v$ and bilinearity, the two right-hand terms
+are
+\begin{align*}
+  \langle u,\pi_v(u)\rangle &= \frac{\langle u,v\rangle^2}{\|v\|^2}, \\[0.3ex]
+  \langle \pi_v(u),\pi_v(u)\rangle
+    &= \frac{\langle u,v\rangle^2}{\|v\|^4}\langle v,v\rangle
+     = \frac{\langle u,v\rangle^2}{\|v\|^2}.
+\end{align*}
+Note that the two are equal, so substituting them leaves a single copy behind:
+\[
+  0 \ \leq\ \|u\|^2 - \frac{2\langle u,v\rangle^2}{\|v\|^2} + \frac{\langle u,v\rangle^2}{\|v\|^2}
+    \ =\ \|u\|^2 - \frac{\langle u,v\rangle^2}{\|v\|^2}.
+\]
+This rearranges to $\langle u,v\rangle^2 \leq \|u\|^2\|v\|^2$, that is,
+$|\langle u,v\rangle| \leq \|u\|\,\|v\|$. By definiteness, equality holds if and only if
+$u - \pi_v(u) = 0$, which says precisely that $u$ is a scalar multiple of $v$.
 \end{proof}
 
 % Generator: Claude Opus 5 (High)
@@ -145,14 +157,14 @@ if and only if $u - \pi_v(u) = 0$ by definiteness, i.e., $u$ is a scalar multipl
 \label{rem:two_proofs_cauchy_schwarz}
 This is the second proof of Cauchy--Schwarz in these notes;
 \cref{prop:cauchy_schwarz_geometric_proof} gave another, following Diego Torres
-Tejeda. They look different --- one minimises the quadratic
-$f(\lambda) := \|v-\lambda w\|^2$ over $\lambda$, the other expands
-$\|u-\pi_v(u)\|^2 \geq 0$ --- but the minimiser found there is
+Tejeda. The two look different at first. One minimises the quadratic
+$f(\lambda) := \|v-\lambda w\|^2$ over $\lambda$, while the other expands
+$\|u-\pi_v(u)\|^2 \geq 0$. But the minimiser found in the first is
 $\lambda_0 = \tfrac{\langle v,w\rangle}{\|w\|^2}$, which is exactly the coefficient defining
-$\pi_w(v)$. So the first proof \emph{derives} the projection by optimisation and the second
-\emph{postulates} it and checks it works. Keeping both is worthwhile precisely because the pair
-shows where the projection comes from: it is not a lucky guess, it is the closest point of the
-line to $v$.
+$\pi_w(v)$. Consequently, the first proof \emph{derives} the projection by optimisation, and the
+second \emph{postulates} it and checks that it works. Keeping both is worthwhile precisely because
+the pair shows where the projection comes from. It is not a lucky guess, but the closest point of
+the line to $v$.
 \end{remark}
 
 
@@ -207,18 +219,18 @@ of \textit{Definition 9.89}).
   \item Show that if $\tilde f$ is yet another norm, then there is $C > 0$ such that
     $C^{-1}f(x) \leq \tilde f(x) \leq Cf(x)$ for all $x \in \mathbb{R}^n$.
 \end{enumerate}
-\textit{Official hints:} \textbf{3.9.2} --- recall that from the definition it follows that
-$|f(x) - f(y)| \leq f(x-y)$, and that Lipschitz functions are always continuous. \textbf{3.9.3}
---- apply the Weierstrass theorem to $f$ on $S := \{x \in \mathbb{R}^n : |x| = 1\}$ and use that
-$f$, being a norm, is nondegenerate. \textbf{3.9.5} --- if $f$ is equivalent to $|\cdot|$ and
+\textit{Official hints:} \textbf{3.9.2:} recall that from the definition it follows that
+$|f(x) - f(y)| \leq f(x-y)$, and that Lipschitz functions are always continuous.
+\textbf{3.9.3:} apply the Weierstrass theorem to $f$ on $S := \{x \in \mathbb{R}^n : |x| = 1\}$
+and use that $f$, being a norm, is nondegenerate. \textbf{3.9.5:} if $f$ is equivalent to $|\cdot|$ and
 $\tilde f$ is equivalent to $|\cdot|$, it follows by transitivity that $f$ is equivalent to
 $\tilde f$.
 \end{exercise}
 
 \begin{remark}
 Hint 3.9.3 is exactly Corsin's reason \#2 for caring about compactness
-(\cref{sec:why_compactness_matters}) --- the Weierstrass/extreme value theorem on the compact unit
-sphere.
+(\cref{sec:why_compactness_matters}), namely the Weierstrass extreme value theorem applied on the
+compact unit sphere.
 \end{remark}
 
 % Supplement: Analysis_II_Script_v1.pdf, p. 35
@@ -229,10 +241,10 @@ dimensional, and exhibit a basis.
 \end{exercise}
 
 \begin{remark}
-This is exactly the hypothesis \cref{ex:3.9} needs and cannot do without ---
-\cref{rem:norm_equivalence_needs_finite_dimension} already gave $C^0([0,1],\mathbb{R})$ as an
-infinite-dimensional space where norm equivalence fails; $\mathbb{R}[x]$ is the algebraically
-simplest such example, with an explicit basis and no analysis required at all.
+This is exactly the hypothesis \cref{ex:3.9} needs and cannot do without.
+\Cref{rem:norm_equivalence_needs_finite_dimension} already gave $C^0([0,1],\mathbb{R})$ as an
+infinite-dimensional space where norm equivalence fails. Note that $\mathbb{R}[x]$ is the
+algebraically simplest such example, with an explicit basis and no analysis required at all.
 \end{remark}
 
 % Originally: content/exercise-sheets/week-03.tex, problem 3.10
@@ -279,10 +291,10 @@ For $p \geq 1$ and $x \in \mathbb{R}^n$ define the \textbf{$p$-norm} of $x$ as
     $|x+y|_p \leq |x|_p + |y|_p$ for all $x,y \in \mathbb{R}^n$.
   \item What happens for $p \in (0,1)$?
 \end{enumerate}
-\textit{Official hints:} \textbf{4.3.3} --- use Cauchy--Schwarz and the fact that
-$a_i^{p-1}b_i = a_i^{p/2}\cdot a_i^{(p-2)/2}b_i$. \textbf{4.3.4} --- show that $f''(t) \geq 0$; it
+\textit{Official hints:} \textbf{4.3.3:} use Cauchy--Schwarz and the fact that
+$a_i^{p-1}b_i = a_i^{p/2}\cdot a_i^{(p-2)/2}b_i$. \textbf{4.3.4:} show that $f''(t) \geq 0$; it
 is not the simplest derivative, but if you get it right the inequality in 4.3.3 will be just what
-you need. \textbf{4.3.5} --- write the convexity inequality between $x$, $y$ and the middle point
+you need. \textbf{4.3.5:} write the convexity inequality between $x$, $y$ and the middle point
 $(x+y)/2$. To get the general case from the one with positive coordinates, observe that for
 $x \in \mathbb{R}^n$, denoting $\hat x := (|x_1|,\dots,|x_n|)$, we have
 $|x+y|_p \leq |\hat x + \hat y|_p$ and $|\hat x|_p = |x|_p$ for all $x,y \in \mathbb{R}^n$.
@@ -306,10 +318,10 @@ $$\mu_p(x) := \left(\frac{x_1^p + \dots + x_n^p}{n}\right)^{1/p}.$$
     $$n(x_1x_2\cdots x_n)^{1/n} \leq x_1 + \dots + x_n, \qquad (x_1+\dots+x_n)^2 \leq n(x_1^2+\dots+x_n^2).$$
   \item \textbf{(*)} Is $f$ continuously differentiable in the whole $\mathbb{R}$?
 \end{enumerate}
-\textit{Official hints:} \textbf{4.4.2} --- combine the concavity of $\log(\cdot)$ and the
+\textit{Official hints:} \textbf{4.4.2:} combine the concavity of $\log(\cdot)$ and the
 Cauchy--Schwarz inequality; use the generalisation of the concavity inequality: for any concave
 $f : \mathbb{R}\to\mathbb{R}$,
 $f(\lambda_1x_1 + \dots + \lambda_nx_n) \geq \lambda_1f(x_1)+\dots+\lambda_nf(x_n)$ for all
 $x_i \in \mathbb{R}$, $0 \leq \lambda_i \leq 1$ with $\lambda_1+\dots+\lambda_n = 1$.
-\textbf{4.4.3} --- it might be more convenient to work with $\log f(t)$.
+\textbf{4.4.3:} it might be more convenient to work with $\log f(t)$.
 \end{exercise}

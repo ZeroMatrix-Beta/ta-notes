@@ -6,12 +6,18 @@
 \chapter{The Differential and the Jacobi Matrix}
 \label{ch:differential}
 
-% Transition: Claude Opus 5 (Medium)
+% Transition: Claude Opus 5 (High)
 The previous part treated continuous functions as structure-preserving maps between metric
-spaces. This one asks for more: that a map be well approximated, near each point, by a
-\emph{linear} one. That is the differential, and this chapter sets out the hierarchy it sits in
---- Fréchet differentiability, Gâteaux derivatives, partial derivatives --- together with the
-matrix that represents it.
+spaces. This one asks for considerably more: that a map be well approximated, near each point, by
+a \emph{linear} one. That approximating linear map is the differential.
+
+Three notions compete for the name \qt{derivative} in several variables, and they are not
+equivalent. Partial derivatives ask only what happens along the coordinate axes, directional
+derivatives along an arbitrary straight line, and the differential asks for a linear map
+approximating $f$ from every direction at once. Only the last deserves to be called
+differentiability, and the gap between them is real: a function can have every partial derivative
+at a point and still fail to be continuous there. This chapter sets out that hierarchy and
+identifies the matrix representing the differential.
 
 \input{content/09-differential/01-the-differential.tex}
 \input{content/09-differential/02-jacobi-matrix.tex}

@@ -4,10 +4,11 @@
 \section{The mean value theorem}
 \label{sec:mean_value_theorem}
 
+% Diego Torres Tejeda's notes state the theorem together with the warning that follows.
 \begin{ainote}
-The mean value theorem is used twice in this chapter --- in the official hint to
-\Cref{ex:4.6} and in its solution --- but Corsin never states it. Diego Torres Tejeda's notes
-state it, together with the warning that follows, which is what \cref{ex:4.6} actually turns on.
+The mean value theorem is used twice in this chapter, in the official hint to \Cref{ex:4.6} and
+again in its solution, but the course never states it. It is therefore stated here, together with
+the warning that follows, which is what \cref{ex:4.6} actually turns on.
 \end{ainote}
 
 \begin{theorem}[Mean value theorem]
@@ -27,9 +28,9 @@ $\varphi(1)-\varphi(0) = \varphi'(t_0)$, which is the claim.
 
 \begin{importantremark}[It fails for vector-valued $f$]
 \label{rem:mvt_fails_vector_valued}
-The hypothesis \qt{$f : U \to \mathbb{R}$} is essential --- \textbf{the theorem is false the
-moment the target is $\mathbb{R}^m$ with $m \geq 2$}, and this is exactly what
-\cref{ex:4.5} below probes.
+The hypothesis \qt{$f : U \to \mathbb{R}$} is essential. \textbf{The theorem is false the moment
+the target is $\mathbb{R}^m$ with $m \geq 2$}, and this is exactly what \cref{ex:4.5} below
+probes.
 % Corrected: this pointed at \cref{ex:4.6}, which applies the *scalar* theorem to $u(x+t\nu)$
 % and never leaves $\mathbb{R}$. The problem that probes the vector-valued failure is 4.5 ---
 % which was not in the built document when the sentence was written.
@@ -40,7 +41,7 @@ $\xi_1,\dots,\xi_m$ with
 but the $\xi_i$ are \emph{different points} in general, and no single $\xi$ need work for all
 components at once. The standard witness is the \emph{circle}
 $\gamma(t) := (\cos t, \sin t)$ on $[0,2\pi]$: here $\gamma(2\pi)-\gamma(0) = 0$, while
-$\gamma'(t) = (-\sin t,\cos t)$ has $|\gamma'(t)| = 1$ and so never vanishes --- there is no
+$\gamma'(t) = (-\sin t,\cos t)$ has $|\gamma'(t)| = 1$ and so never vanishes. There is no such
 $\xi$ at all. Geometrically this is entirely reasonable: a walker who returns to the starting
 point must have had zero \emph{average} velocity, but need never have stood still. In one
 dimension \qt{returning} forces a turning point; in two it does not.
@@ -215,7 +216,7 @@ Taking square roots gives $\|\Jac F(x,y) v\| \leq \sqrt{2}\|v\|$, so $\|DF_{(x,y
 
     \node[font=\scriptsize, align=center, anchor=north] at (0,-1.57)
       {\textbf{vector-valued $\gamma$:} $\gamma(2\pi)-\gamma(0)=0$,\\ yet $\gamma'$ never
-       vanishes --- no $\xi$ exists};
+       vanishes, so no $\xi$ exists};
   \end{scope}
 \end{tikzpicture}
 \end{center}

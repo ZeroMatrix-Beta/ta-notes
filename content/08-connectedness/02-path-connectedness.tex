@@ -4,14 +4,16 @@
 \label{sec:path_connectedness}
 
 % Transition: Claude Opus 5 (High)
-\Cref{def:connectedness} defines connectedness negatively --- a space is connected when it
-\emph{cannot} be split --- which is why proofs about it run by contradiction. That is
-mathematically convenient and intuitively unsatisfying: it says nothing about what holds a
-connected space together. Path connectedness is the positive version, and it says the obvious
-thing: any two points can be joined by a curve inside the space. It implies connectedness
-(\cref{lem:path_connected_implies_connected}), the two agree on open subsets of $\mathbb{R}^n$
-(\cref{prop:open_euclidean_connected_path_connected}), and they come apart in general --- the
-topologist's sine curve at the end of this section being the standard witness.
+\Cref{def:connectedness} defines connectedness negatively. A space is connected when it
+\emph{cannot} be split, which is why proofs about it run by contradiction. That is mathematically
+convenient and intuitively unsatisfying, since it says nothing whatever about what holds a
+connected space together.
+
+Path connectedness is the positive version, and it says the obvious thing: any two points can be
+joined by a curve running inside the space. It implies connectedness
+(\cref{lem:path_connected_implies_connected}), and on open subsets of $\mathbb{R}^n$ the two
+notions agree (\cref{prop:open_euclidean_connected_path_connected}). In general they come apart,
+and the topologist's sine curve at the end of this section is the standard witness.
 
 % Source: Corsin Nick/Class Notes/Week 3.pdf, pp. 1--14
 \begin{definition}[Path]
@@ -99,8 +101,8 @@ $t \mapsto (1-t)x+ty$, which stays inside $B_r(x) \subseteq U$. Consequently:
 \begin{itemize}
   \item If $x \in A$, concatenating a path from $x_0$ to $x$ with that segment joins $x_0$ to
     any $y \in B_r(x)$, so $B_r(x) \subseteq A$ and $A$ is open.
-  \item If $x \notin A$, then no $y \in B_r(x)$ can lie in $A$ --- otherwise running the segment
-    backwards from $y$ to $x$ would join $x_0$ to $x$. So $B_r(x) \subseteq U\setminus A$ and
+  \item If $x \notin A$, then no $y \in B_r(x)$ can lie in $A$, since otherwise running the
+    segment backwards from $y$ to $x$ would join $x_0$ to $x$. So $B_r(x) \subseteq U\setminus A$ and
     $U\setminus A$ is open.
 \end{itemize}
 (Concatenation of two paths is again a path: traverse the first on $[0,\tfrac12]$ and the second
@@ -114,7 +116,7 @@ The implication \qt{connected $\Rightarrow$ path-connected} is \emph{false} with
 and the proof shows exactly why: the ball $B_r(x)$ around a point of $U$ was needed to supply
 the straight segment. For a set that is not open there may be points with no room around them at
 all, and the topologist's sine curve (\cref{ex:topologists_sine_curve}) below is precisely such
-a case --- the origin has no neighbourhood in $S$ that is a nice piece of curve.
+a case. There the origin has no neighbourhood in $S$ that is a nice piece of curve.
 \end{importantremark}
 
 % Source: Corsin Nick/Class Notes/Week 3.pdf, pp. 1--14
@@ -162,9 +164,9 @@ contradicting $V_2 \neq \emptyset$. So $G \subseteq V_2$, and therefore
 $V_1 = \{(0,0)\}$.
 
 But $V_1$ is open in $S$, so some ball $B_\varepsilon\big((0,0)\big) \cap S$ equals
-$\{(0,0)\}$ --- and that is false: for $t := \tfrac{1}{k\pi}$ with $k$ large, the point
-$(t,\sin(1/t)) = (t,0) \in G$ lies within $\varepsilon$ of the origin. Contradiction, so $S$ is
-connected.
+$\{(0,0)\}$, and that is false. For $t := \tfrac{1}{k\pi}$ with $k$ large, the point
+$(t,\sin(1/t)) = (t,0) \in G$ lies within $\varepsilon$ of the origin. This is the required
+contradiction, so $S$ is connected.
 \end{proof}
 
 \begin{proof}[$S$ is not path-connected]
@@ -194,7 +196,7 @@ such path exists.
 
 \begin{ainote}
 Corsin's argument produces the $a_n$ from the intermediate value theorem and then asserts
-$a_n \to 0$. That does not follow from the choice as stated --- the intermediate value theorem
+$a_n \to 0$. That does not follow from the choice as stated. The intermediate value theorem
 returns \emph{some} preimage, and nothing so far prevents all of them from sitting near $1$.
 The repair is the standard one and costs one sentence: apply the theorem on the shrinking
 intervals $[0,a_{n-1}]$ rather than on $[0,1]$ each time, which forces the $a_n$ down. Inserted

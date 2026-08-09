@@ -4,6 +4,12 @@
 \section{Optimization}
 \label{sec:optimization}
 
+% Generator: Claude Opus 5 (High) --- lead-in for the figure below, which had none.
+Four kinds of point on one graph, and telling them apart is the whole vocabulary of this section.
+Two of them are extreme only in comparison with their immediate neighbours, and two are extreme
+against the entire domain.
+
+% Source: Corsin Nick/Class Notes/Week 5.pdf, p. 2
 \begin{center}
 \begin{tikzpicture}[scale=1.2]
   \draw[very thick] (0, 1) .. controls (1, 3) and (2, -1) .. (3, 0)
@@ -48,8 +54,8 @@ $\nabla f(x_0) = 0$.
 % reduction is two lines and is the argument every later Lagrange computation leans on.
 \begin{proof}
 Fix a direction $v \in \mathbb{R}^n$ and consider the one-variable function
-$\varphi(t) := f(x_0 + tv)$, defined for $|t|$ small enough that $x_0 + tv$ stays in $U$ --- this
-is where $x_0 \in \operatorname{int}(U)$ is used, and it is the only place. If $f$ has a local
+$\varphi(t) := f(x_0 + tv)$, defined for $|t|$ small enough that $x_0 + tv$ stays in $U$. This is
+where $x_0 \in \operatorname{int}(U)$ is used, and it is the only place. If $f$ has a local
 extremum at $x_0$, then $\varphi$ has one at the \emph{interior} point $t=0$, so by the
 one-variable result from Analysis I, $\varphi'(0) = 0$. By the chain rule along a path
 (\cref{sec:chain_rule_along_path}),
@@ -74,11 +80,19 @@ built around.
   \item \textbf{Interiority is essential.} On $U := [0,1]$ the function $f(x) := x$ attains both
     its minimum and its maximum, at $x=0$ and $x=1$, and $f' \equiv 1$ never vanishes. The
     hypothesis $x_0 \in \operatorname{int}(U)$ is what fails. This is why every optimization over
-    a closed region in this chapter is done in two steps --- interior critical points first, then
-    the boundary separately, the latter being what Lagrange multipliers handle.
+    a closed region in this chapter is done in two steps. Interior critical points come first,
+    and the boundary is then treated separately, by the method of Lagrange multipliers.
 \end{itemize}
 \end{remark}
 
+% Generator: Claude Opus 5 (High) --- lead-in for the figure below, which had none.
+Geometrically, the proposition says that at an interior extremum the direction of steepest ascent
+ceases to exist. Anywhere else the gradient is a genuine non-zero vector, perpendicular to the
+level set of $f$ through the point and pointing the way $f$ grows fastest. That perpendicularity
+is worth remembering past this chapter, since it is the whole geometric content of the Lagrange
+condition in \cref{ch:lagrange}.
+
+% Source: Corsin Nick/Class Notes/Week 5.pdf, p. 2
 \begin{center}
 \begin{tikzpicture}[>=Latex, scale=1.3]
   % Grid on xy-plane
@@ -92,10 +106,14 @@ built around.
     \draw[gray!40, thin] (-0.5,-1.5) -- (-0.5,1.8);
     \draw[gray!40, thin] (0.5,-1.5) -- (0.5,1.8);
     \draw[gray!40, thin] (1.5,-1.5) -- (1.5,1.8);
-    % Projected level set
+    % Projected level set. The minimum of the paraboloid is at the CENTRE of the level circles,
+    % and the gradient at a point of a circular level set is RADIALLY OUTWARD (for |x|^2 it is
+    % 2x). Both were previously drawn wrong: the "minimum" label sat on the level circle and the
+    % arrow pointed in the -x direction.
     \draw[purple, thick] (0,0) circle (1.0);
-    \fill[green!60!black] (0.707,-0.707) circle (2pt) node[below right, font=\tiny] {minimum};
-    \draw[orange!90!black, thick, ->] (0.707,-0.707) -- (0.1,-0.707) node[below, font=\tiny] {gradient};
+    \fill[green!60!black] (0,0) circle (2pt) node[above, font=\tiny, yshift=1pt] {minimum};
+    \fill (0.707,-0.707) circle (1.5pt);
+    \draw[orange!90!black, thick, ->] (0.707,-0.707) -- (1.27,-1.27) node[below, font=\tiny] {gradient};
   \end{scope}
 
   % Paraboloid surface
@@ -111,7 +129,9 @@ built around.
 \end{tikzpicture}
 \end{center}
 
-% Sonnet 5 (Medium)
-Unconstrained extrema are found by \cref{prop:extremum_implies_critical}. We now ask the same
-question when $x$ is restricted to a lower-dimensional constraint set, where the gradient
-condition $\nabla f(x_0) = 0$ is generally too strong to hold anywhere.
+% Transition: Claude Opus 5 (High) --- the paragraph that stood here pointed forward to the
+% Lagrange condition, which the old week-based structure placed next; the next section is now the
+% Hessian test.
+So, the gradient produces a list of candidates and then falls silent. Which of them are minima,
+which are maxima, and which are neither? The first derivative cannot say, since it vanishes at
+all of them alike, so the question has to be put to the second.

@@ -63,12 +63,11 @@ positive semidefinite, and the two differ exactly on the degenerate matrices, wh
 $v\transp Av = 0$ is allowed for some $v \neq 0$.
 \end{definition}
 
-\begin{ainote}
-\Cref{def:semidefinite_matrix} is not in Corsin's notes. The terms are used freely from
-\Cref{prop:convexity_characterizations} and \cref{ex:6.8} onward but were never named when
-\Cref{def:sign_symmetric_matrix} is introduced later, so they are defined here instead of
-being left implicit.
-\end{ainote}
+% The semidefinite definition above is not in Corsin's notes: he uses the terms freely without
+% ever naming them. It is supplied here rather than left implicit. (An AI-Note said so in the
+% typeset text until 2026-08-09; it was editor-facing, and it had also gone stale, claiming that
+% def:sign_symmetric_matrix comes "later" -- true of the old week order, but that definition now
+% sits in chapter 12, i.e. earlier.)
 
 \begin{proposition}[Characterizations of convexity]
 \label{prop:convexity_characterizations}
@@ -167,16 +166,17 @@ Let $U \subseteq \mathbb{R}^n$ be open and convex.
     \begin{remark}
     The argument above only ever used differentiability of $f$, never twice-differentiability, so
     the equivalence in \textbf{(b)} already holds for $f \in C^1(U)$ with $U \subseteq
-    \mathbb{R}^n$ open and convex --- one order of regularity weaker than
+    \mathbb{R}^n$ open and convex, one order of regularity weaker than
     \Cref{prop:convexity_characterizations}, which is stated for $f \in C^2(U)$. This is exactly
     the fact used in \cref{ex:6.7}\textbf{(b)}.
     \end{remark}
   \item Since $f$ is convex and $x_0 \in U$ is a critical point, $Df_{x_0} = 0$, so \textbf{(b)}
     gives
     \[0 = Df_{x_0}(y-x_0) \leq f(y)-f(x_0) \quad \text{for all } y \in U,\]
-    i.e., $f(y) \geq f(x_0)$ for all $y \in U$. Hence $f$ has a minimum at $x_0$ --- in fact a
-    global minimum on $U$, sharpening \cref{prop:extremum_implies_critical} (which only guarantees
-    that critical points are the sole \emph{candidates} for extrema) in the convex case.
+    i.e., $f(y) \geq f(x_0)$ for all $y \in U$. Hence $f$ has a minimum at $x_0$, and in fact a
+    global minimum on $U$. In the convex case this sharpens
+    \cref{prop:extremum_implies_critical}, which on its own only guarantees that critical points
+    are the sole \emph{candidates} for extrema.
 \end{enumerate}
 \end{exercisesolution}
 
@@ -217,9 +217,9 @@ Let $U \subseteq \mathbb{R}^n$ be open and convex.
 \end{tikzpicture}
 \end{center}
 
-The picture records both halves of \textbf{(b)} at once: each tangent line lies weakly
-\emph{below} the graph --- which is the inequality $f(y)-f(x) \geq Df_x(y-x)$ read along the
-segment --- and the slope grows from $s$ to $t$, which is $f'_{x,y}$ increasing.
+The picture records both halves of \textbf{(b)} at once. Each tangent line lies weakly
+\emph{below} the graph, which is the inequality $f(y)-f(x) \geq Df_x(y-x)$ read along the
+segment, and the slope grows from $s$ to $t$, which is $f'_{x,y}$ increasing.
 
 % Supplement: Analysis_II_Script_v1.pdf, p. 75
 \begin{proposition}[Jensen's inequality]
@@ -249,8 +249,8 @@ inequality, which holds for any convex function on an open set.)
 The case $N=2$ is exactly \cref{def:convex_set_function} itself: Jensen's inequality is the
 statement that convexity, defined only for a two-point average, automatically extends to any
 finite weighted average. It is used silently in the solution to \cref{ex:4.4}
-(\cref{ch:metric_spaces}), applied to $\varphi(s):=s\log s$ --- stated here explicitly for the
-first time.
+(\cref{ch:metric_spaces}), applied to $\varphi(s):=s\log s$, and is stated explicitly here for
+the first time.
 \end{remark}
 
 % Generator: Claude Opus 5 (High) --- part \textbf{(c)} of the exercise above says a critical
@@ -264,20 +264,23 @@ a critical point, that point is a global minimum. It does not guarantee that one
 Its Hessian is
 \[\Hess f(x_1,x_2) = e^{x_1+x_2}\begin{pmatrix} 1 & 1 \\ 1 & 1\end{pmatrix},\]
 so for every $v \in \mathbb{R}^2$ we get
-$v\transp\Hess f(x)\,v = e^{x_1+x_2}(v_1+v_2)^2 \geq 0$; the Hessian is positive semidefinite
-everywhere and $f$ is convex by \cref{prop:convexity_characterizations}. But $f > 0$ everywhere,
+$v\transp\Hess f(x)\,v = e^{x_1+x_2}(v_1+v_2)^2 \geq 0$. The Hessian is positive semidefinite
+everywhere, so $f$ is convex by \cref{prop:convexity_characterizations}. But $f > 0$ everywhere,
 while along the ray $(-t,-t)$ we have $f(-t,-t) = e^{-2t} \to 0$ as $t \to \infty$. Hence
 $\inf_{\mathbb{R}^2}f = 0$ and the infimum is attained nowhere.
 
 What fails is not convexity but compactness: the sublevel sets $\{f \leq c\}$ are unbounded, so
 the extreme value theorem (\cref{lem:sequential_compactness_extreme_values}) has nothing to act
-on. Convexity organises the minima a function has; it does not manufacture one.
+on. Convexity organises the minima a function has. It does not manufacture one.
 \end{example}
 
-% Sonnet 5 (Medium)
-We now change subject entirely: from convexity to the question of when a map is locally
-invertible --- the tool that makes the implicit function theorem, and later submanifolds
-(\cref{sec:submanifolds}), possible.
+% Transition: Claude Opus 5 (High) --- the paragraph that stood here announced the inverse
+% function theorem, which the old week-based structure placed next; that job now belongs to the
+% opener of Part V. Replaced with a close to the convexity material itself.
+Convexity is worth the trouble because of what it removes. Under it there is no saddle to rule
+out, no degenerate case in which the second-order test falls silent, and no gap left between a
+local and a global minimum. What it does not remove is the need for a minimum to exist at all,
+which is the one thing \cref{ex:convex_function_unattained_infimum} was there to show.
 
 
 % --- exercises relocated here from the dissolved sheets ---

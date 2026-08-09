@@ -18,7 +18,7 @@ Formula $(*)$ describes a two-step recipe, and the picture below is worth carryi
 \textbf{Step one:} pick a direction $v$ and walk away from $x_0$ along the straight ray
 $s \mapsto x_0+sv$, ignoring the rest of the domain. \textbf{Step two:} record the values of $F$
 along that ray. What you get is an ordinary function of \emph{one} variable $s$, and
-$\partial_vF(x_0)$ is simply its derivative at $s=0$ --- an Analysis I object. The partial
+$\partial_vF(x_0)$ is simply its derivative at $s=0$, an \emph{Analysis I} object. The partial
 derivative $\partial_iF$ is the special case $v = e_i$: walk parallel to the $i$-th axis.
 
 \begin{center}
@@ -75,7 +75,7 @@ derivative $\partial_iF$ is the special case $v = e_i$: walk parallel to the $i$
 The right-hand panel is also the cleanest way to see what differentiability adds. Every direction
 produces \emph{some} slope; nothing so far forces those slopes to be related to one another. Being
 differentiable is precisely the demand that all of them are read off a \emph{single} linear map
-via $\partial_vF(x_0) = DF_{x_0}(v)$ --- so that knowing the $n$ partial derivatives already
+via $\partial_vF(x_0) = DF_{x_0}(v)$, so that knowing the $n$ partial derivatives already
 determines every other direction. \Cref{ex:all_directional_derivatives_exist} below is the
 cautionary case where all the slopes exist but no such linear map governs them.
 
@@ -111,7 +111,7 @@ Two lessons worth keeping.
   \item \textbf{Watch whether $v \mapsto \partial_vf(x_0)$ is linear.} If $f$ were differentiable
     we would need $\partial_vf(0,0) = DF_0(v)$, a \emph{linear} function of $v$; but $a^2/b$ is
     not linear in $(a,b)$. That failure alone rules out differentiability, without any mention of
-    continuity --- and it is precisely the test that settles \cref{ex:5.1}\textbf{(b)} below.
+    continuity, and it is precisely the test that settles \cref{ex:5.1}\textbf{(b)} below.
 \end{itemize}
 \end{aiexample}
 
@@ -137,7 +137,7 @@ Two lessons worth keeping.
 \end{exercise}
 
 \begin{remark}
-Corsin's hint --- \textit{recall the linearity of the differential} --- is the whole of
+Corsin's hint, \textit{recall the linearity of the differential}, is the whole of
 \Cref{ex:5.1}(b): a directional derivative must be \textbf{linear} in $v$, and $v_1^2$ is not.
 \end{remark}
 
@@ -161,12 +161,12 @@ $v$ at a general point $x$, that is $\partial_v f(x)$, where applicable.
   \item \textbf{(*)} $x^{-1}$, $x^{-2}$ for $x \in \mathbb{R}^{n\times n}$ with $\det x \neq 0$.
 \end{enumerate}
 \textit{Official hints:} to prove that a function \textbf{is} differentiable at 0 you have two
-tools --- the definition of differentiability, and the sufficient condition of
-\textit{Theorem 10.16}. To prove that a function \textbf{is not} differentiable at 0 you have
-two tools --- show that the necessary condition of \textit{Proposition 10.14} does not hold, or
+tools, namely the definition of differentiability and the sufficient condition of
+\textit{Theorem 10.16}. To prove that a function \textbf{is not} differentiable at 0 you again
+have two: show that the necessary condition of \textit{Proposition 10.14} does not hold, or
 show that for some $C^1$ curve $\gamma : (-\delta,\delta)\to\mathbb{R}^n$ the function
 $(f\circ\gamma)(t)$ is \textbf{not} differentiable at $t = 0$ (simpler, as you study a function of
-one variable). \textbf{5.4.3} --- these functions are $C^\infty$, so compute them on $x+tv$ and
+one variable). \textbf{5.4.3:} these functions are $C^\infty$, so compute them on $x+tv$ and
 find an expansion in powers of $t$; by \textit{Corollary 10.45} it must be the Taylor polynomial,
 from which the derivatives can be read off. For example $(x+tv)^2 = x^2 + (xv+vx)t + O(t^2)$.
 \end{exercise}

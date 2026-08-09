@@ -9,10 +9,11 @@
 % Transition: Claude Opus 5 (Medium)
 The previous chapter looked for extrema of $f$ on an open set, where the condition
 $\nabla f(x_0) = 0$ is available. Restrict $f$ to a lower-dimensional constraint set and that
-condition is generally too strong to hold anywhere; what replaces it is the requirement that
-$\nabla f$ be a linear combination of the gradients of the constraints. This chapter develops
-that criterion, the geometry behind it, and what goes wrong when the constraint gradients fail to
-be independent.
+condition is generally too strong to hold anywhere. What replaces it is the requirement that
+$\nabla f$ be a linear combination of the gradients of the constraints, which says geometrically
+that at a constrained extremum no direction \emph{along} the constraint set is left in which $f$
+still increases. The method carries one hypothesis on those gradients, and dropping it does not
+merely weaken the conclusion. It lets the method miss an extremum outright.
 
 \input{content/13-lagrange/01-lagrange-multipliers.tex}
 \input{content/13-lagrange/99-solutions.tex}

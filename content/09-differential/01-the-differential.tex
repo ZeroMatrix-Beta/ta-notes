@@ -21,7 +21,7 @@ For $F : \mathbb{R}^n \to \mathbb{R}^m$ differentiable at $x_0 \in \mathbb{R}^n$
 
 Note that the last arrow points \textbf{one way only}. The first two lines say the same thing;
 the third is a strictly weaker consequence, and recovering differentiability from it is exactly
-what fails in several variables --- see \cref{ex:partial_derivatives_not_continuous} below.
+what fails in several variables; see \cref{ex:partial_derivatives_not_continuous} below.
 
 % Transition: Claude Opus 5 (High)
 It is worth pausing on why the definition had to be restated rather than merely copied. The
@@ -30,19 +30,18 @@ survive: for $h \in \mathbb{R}^n$ with $n \geq 2$ the expression
 $\big(F(x_0+h)-F(x_0)\big)/h$ is meaningless, because one cannot divide by a vector. The first
 line above is the version that does survive, and it is the one to remember: \textbf{$F$ is
 differentiable at $x_0$ if it is approximated near $x_0$ by an affine map, to an error smaller
-than $|h|$.} Everything in this chapter --- the Jacobian, the chain rule, Taylor expansions ---
-is bookkeeping for that single idea, and the reason the derivative becomes a \emph{linear map}
-rather than a number is simply that a linear map is what an approximation in $n$ variables looks
-like.
+than $|h|$.} Everything that follows, the Jacobian, the chain rule and Taylor expansions alike,
+is bookkeeping for that single idea. The reason the derivative becomes a \emph{linear map} rather
+than a number is simply that a linear map is what an approximation in $n$ variables looks like.
 
 \begin{ainote}
 Corsin's middle line reads
 $\lim_{h\to0}\frac{F(x_0+h)-F(x_0)}{|h|} = DF_{x_0}\!\left(\frac{h}{|h|}\right)$, inside a chain
 of $\Updownarrow$. As written that limit does not exist: $h$ is being sent to $0$ on the left
 while still appearing on the right, and the quotient genuinely depends on the direction of
-approach. The intended statement is the one typeset above --- fix a direction $v$ first, then
-let the scalar $s \to 0$ --- and it is only an \emph{implication}, not an equivalence. The
-distinction is not pedantic: it is the entire content of
+approach. The intended statement is the one typeset above, in which a direction $v$ is fixed first
+and only then the scalar $s$ is sent to $0$, and it is only an \emph{implication}, not an
+equivalence. The distinction is not pedantic: it is the entire content of
 \Cref{ex:partial_derivatives_not_continuous} and of
 \Cref{rem:directional_derivative_caveat}.
 \end{ainote}
@@ -65,8 +64,8 @@ $(L_1-L_2)(h)/|h| \to 0$ as $h \to 0$ along every direction, which forces the li
 $L_1 - L_2$ to vanish identically. Concretely: write $L := L_1-L_2$ and suppose $L(h) \neq 0$
 for some $h$. Along the ray $th$, $t > 0$, linearity gives
 \[\frac{|L(th)|}{|th|} = \frac{t\,|L(h)|}{t\,|h|} = \frac{|L(h)|}{|h|} \neq 0,\]
-a nonzero \emph{constant} --- so the quotient cannot tend to $0$ as $t \to 0$. Hence $L(h)=0$
-for every $h$. This
+a nonzero \emph{constant}. Consequently, the quotient cannot tend to $0$ as $t \to 0$, and
+therefore $L(h)=0$ for every $h$. This
 is the multivariable analogue of the uniqueness-of-limits argument from
 \Cref{prop:uniqueness_of_limits}.
 \end{remark}
@@ -88,6 +87,6 @@ so $F(x_0+h) \to F(x_0)$ as $h \to 0$, i.e.\ $F$ is continuous at $x_0$.
 \begin{remark}
 The converse fails: continuity does not imply differentiability, exactly as in one variable
 (e.g.\ $x \mapsto |x|$ at $0$). \Cref{ex:partial_derivatives_not_continuous} below shows the
-gap is even wider in several variables --- \emph{all} partial derivatives can exist at a point
+gap is even wider in several variables, where \emph{all} partial derivatives can exist at a point
 without $F$ even being continuous there, let alone differentiable.
 \end{remark}

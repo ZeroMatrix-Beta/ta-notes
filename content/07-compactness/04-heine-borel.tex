@@ -135,19 +135,19 @@ forms an open cover of $(0,1)$ because for any $x \in (0,1)$, there exists $n \i
 \begin{example}[Heine--Borel needs $\mathbb{R}^n$ itself, not just the standard-looking metric]
 \label{ex:rationals_not_compact}
 $\mathbb{Q} \cap [0,2]$, with the metric inherited from the standard metric on $\mathbb{R}$, is
-closed and bounded \emph{as a subset of $\mathbb{Q}$} --- yet it is not compact. The family
+closed and bounded \emph{as a subset of $\mathbb{Q}$}, and yet it is not compact. The family
 \[\mathbb{Q}\cap[0,2] \ =\ \big(\mathbb{Q}\cap[0,\sqrt2)\big) \ \cup\!\!
   \bigcup_{p\in\mathbb{Q},\,p>\sqrt2}\!\big(\mathbb{Q}\cap(p,2]\big)\]
 is an open cover of $\mathbb{Q}\cap[0,2]$ (each set is the trace of an open subset of
 $\mathbb{R}$, hence open in the subspace $\mathbb{Q}\cap[0,2]$): every rational in $[0,2]$ is
 either $<\sqrt2$ or $>\sqrt2$, since $\sqrt2 \notin \mathbb{Q}$. Any finite subcover uses only
 finitely many of the sets $\mathbb{Q}\cap(p,2]$, hence has a largest such $p$, call it
-$p_{\max}$, and then misses every rational in $(\sqrt2,\,p_{\max}]$ --- of which there are
-infinitely many. This is sharper than \cref{ex:compactness_heine_borel_examples}\textbf{(a)}'s
-$\mathbb{N}$: there, compactness fails because the set is unbounded; here it fails on a closed
-\emph{and} bounded set, purely because the ambient space $\mathbb{Q}$ is not $\mathbb{R}^n$ ---
-the irrationality of $\sqrt2$ is doing all the work, by leaving a \qt{hole} exactly where the
-cover would need to close up.
+$p_{\max}$, and then misses every rational in $(\sqrt2,\,p_{\max}]$, of which there are infinitely
+many. This is sharper than \cref{ex:compactness_heine_borel_examples}\textbf{(a)}'s $\mathbb{N}$.
+There, compactness fails because the set is unbounded. Here it fails on a closed \emph{and}
+bounded set, purely because the ambient space $\mathbb{Q}$ is not $\mathbb{R}^n$. The
+irrationality of $\sqrt2$ is doing all the work, leaving a \qt{hole} exactly where the cover would
+need to close up.
 \end{example}
 
 % Kept inline: solved directly in Corsin Nick/Class Notes/Week 3.pdf, pp. 1--2.
@@ -201,27 +201,28 @@ Part \textbf{(b)} shows that $d$ and $\tilde d$ have the \emph{same open sets}. 
 direction is asked for, but the converse follows the same way: given
 $\tilde B_\varepsilon(x)$, the choice $r := \tfrac{\varepsilon}{1-\varepsilon}$ gives
 $B_r(x) \subseteq \tilde B_\varepsilon(x)$.) Two metrics with the same open sets have the same
-convergent sequences, the same continuous functions, and --- crucially --- the same
-\textbf{compact} sets, since compactness is defined purely by open covers
-(\cref{def:compact_metric_space}).
+convergent sequences, the same continuous functions, and, crucially, the same \textbf{compact}
+sets, since compactness is defined purely by open covers (\cref{def:compact_metric_space}).
 
 Part \textbf{(c)} shows that they do \emph{not} have the same bounded sets. Indeed
 $\tilde d < 1$ always, so under $\tilde d$ \emph{every} subset of \emph{every} metric space is
-bounded --- the notion collapses entirely.
+bounded. The notion collapses entirely.
 
 Putting those together: \textbf{compactness is topological, boundedness is not.} Boundedness is
 a property of the chosen metric, not of the open sets it generates, so no theorem of the form
 \qt{compact if and only if closed and bounded} can hold for a general metric. That is precisely why
-\Cref{thm:heine_borel} carries the hypothesis \textbf{standard metric}, and it is not a
-technicality to be skimmed --- it is the entire content of the hypothesis.
+\Cref{thm:heine_borel} carries the hypothesis \textbf{standard metric}. That hypothesis is not a
+technicality to be skimmed; it is the entire content of the theorem.
 
-\begin{ainote}
+% Reclassified from ainote to remark: it introduces terminology with \newterm and separates two
+% notions by an explicit example, so it is mathematics.
+\begin{remark}[What boundedness should have been]
 The right general replacement is already available: compact if and only if complete \emph{and}
-\newterm{totally bounded} (\cref{def:totally_bounded}, \cref{rem:compact_iff_complete_totally_bounded}).
-Total boundedness is the notion boundedness was trying and failing to be, and $\mathbb{N}$ under
-$\tilde d$ separates them cleanly: for $\varepsilon < \tfrac12$ the ball
-$\tilde B_\varepsilon(n)$ contains no integer but $n$ itself, so no finite family of
-$\varepsilon$-balls covers $\mathbb{N}$. Bounded, not totally bounded --- and that is exactly
-the gap through which compactness escapes.
-\end{ainote}
+\newterm{totally bounded} (\cref{def:totally_bounded},
+\cref{rem:compact_iff_complete_totally_bounded}). Total boundedness is the notion that boundedness
+was trying and failing to be, and $\mathbb{N}$ under $\tilde d$ separates the two cleanly. For
+$\varepsilon < \tfrac12$ the ball $\tilde B_\varepsilon(n)$ contains no integer other than $n$
+itself, so no finite family of $\varepsilon$-balls covers $\mathbb{N}$. The set is therefore
+bounded but not totally bounded, and that is exactly the gap through which compactness escapes.
+\end{remark}
 \end{remark}

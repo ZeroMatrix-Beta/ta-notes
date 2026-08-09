@@ -45,8 +45,9 @@ those Taylor series agree term by term, since $x \in U'$, so $f=g$ on all of $B_
 $\partial^\alpha f = \partial^\alpha g$ throughout $B_\rho(x)$ (differentiate the identity
 $f\equiv g$ there) and hence $B_\rho(x) \subseteq U'$.
 
-So $U'$ and $U\setminus U'$ are both open, $U'$ is non-empty, and $U$ is connected --- forcing
-$U \setminus U' = \emptyset$, i.e.\ $U' = U$. In particular $f = g$ on all of $U$ (the case
+So, $U'$ and $U\setminus U'$ are both open, $U'$ is non-empty, and $U$ is connected. Connectedness
+therefore forces $U \setminus U' = \emptyset$, that is, $U' = U$. In particular $f = g$ on all of
+$U$ (the case
 $\alpha = 0$).
 
 For the last statement, if $f=g$ on a non-empty open $V \subseteq U$, pick any $x_0 \in V$: then
@@ -57,11 +58,11 @@ identity $f \equiv g$ near $x_0$), so the first statement applies.
 \begin{remark}
 This is the payoff that makes real-analyticity worth having beyond $C^\infty$: an analytic
 function is determined, on its \emph{entire} connected domain, by its behaviour arbitrarily close
-to a single point --- knowing every derivative at one $x_0$ (or just agreeing with another
-analytic function on a tiny open patch) pins down the function everywhere. This is dramatically
+to a single point. Knowing every derivative at one $x_0$, or merely agreeing with another
+analytic function on a tiny open patch, pins the function down everywhere. This is dramatically
 false for merely $C^\infty$ functions: the standard bump function
 $\varphi(x) := e^{-1/x^2}$ for $x>0$, $\varphi(x):=0$ for $x\leq0$, has $\partial^\alpha
 \varphi(0) = 0$ for every $\alpha$, agreeing to all orders with the zero function at $0$, yet
-$\varphi \not\equiv 0$ on any neighbourhood of $0$ --- exactly the failure
+$\varphi \not\equiv 0$ on any neighbourhood of $0$. That is exactly the failure
 \cref{cor:unique_continuation} rules out for analytic functions.
 \end{remark}

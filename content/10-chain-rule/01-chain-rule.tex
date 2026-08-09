@@ -27,9 +27,9 @@ precise is the whole proof, and it is the same argument as in one variable.
 \begin{remark}[The chain rule as a sum over paths]
 \label{rem:chain_rule_paths}
 Stated as $D(g\circ f) = Dg\cdot Df$ the rule is compact but, as Sascha Brack puts it in his
-notes, \qt{pretty abstract} --- it says nothing about \emph{why} a sum appears when you write
-it out in coordinates. His device is to draw the variables as a graph and read the formula off
-it.
+notes, \qt{pretty abstract}. It says nothing about \emph{why} a sum appears when the rule is
+written out in coordinates. His device is to draw the variables as a graph and read the formula
+off it.
 
 Write $x \in \mathbb{R}^n \xmapsto{\ f\ } y \in \mathbb{R}^m \xmapsto{\ g\ } z \in \mathbb{R}^k$
 and join each variable to those it feeds into. Then $x_i$ influences $z_j$ only by first moving
@@ -62,8 +62,8 @@ along it. Summing over the routes gives the chain rule:
   \underbrace{\frac{\partial y_\ell}{\partial x_i}}_{(\Jac f)_{\ell i}}
   \;=\; \big(\Jac g(f(x))\,\Jac f(x)\big)_{ji}.\]
 
-The right-hand equality is just the definition of matrix multiplication --- which is the point:
-\textbf{matrix multiplication is a sum over paths}, and the chain rule looks like a product of
+The right-hand equality is just the definition of matrix multiplication, and that is precisely the
+point: \textbf{matrix multiplication is a sum over paths}, and the chain rule looks like a product of
 matrices precisely because composing functions composes those graphs. Sascha's summary is that
 computing $\partial z_j/\partial x_i$ this way is nothing more than \qt{computing single
 components of the chain rule}.
@@ -71,7 +71,7 @@ components of the chain rule}.
 The reading is worth having because it makes the coordinate form reconstructible instead of
 memorised: count the intermediate variables, one term each, each term a product of two factors,
 and the index that is summed over is the one belonging to the middle layer. It is also the
-form in which the rule is actually used in physics --- compare
+form in which the rule is actually used in physics. Compare
 \Cref{sec:chain_rule_along_path}, which is this picture with a single intermediate layer
 $\gamma_1,\dots,\gamma_n$ and a single source variable $t$.
 \end{remark}

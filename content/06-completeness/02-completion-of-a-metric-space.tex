@@ -2,18 +2,21 @@
 \section{The completion of a metric space}
 \label{sec:completion_of_a_metric_space}
 
-\begin{ainote}
-This section has no counterpart in Corsin's notes and is transcribed directly from the official
-script (\S9.1.3, printed pp. 11--13), rather than enriching an existing tutor passage the way the
-rest of this document's supplements do. The reason to include it despite that: it is the
-construction that makes sense of \qt{$\mathbb{Q}$ is not complete, but $\mathbb{R}$ is} in
-general --- every incomplete metric space embeds isometrically, and densely, into a complete one
---- and script Exercises 9.33--9.35 walking through it are short, self-contained, and otherwise
-exactly the kind of material this chapter collects. What is \emph{not} included is the script's
-own use of this construction to build $\mathbb{R}$ from $\mathbb{Q}$ (\S9.1.4): that material is
-marked \qt{extra; cf.\ Grundstrukturen} by the script itself and belongs to the sibling
-\emph{Grundstrukturen} project.
-\end{ainote}
+% This section has no counterpart in Corsin's notes. It is transcribed directly from the official
+% script (S9.1.3, printed pp. 11--13), rather than enriching an existing tutor passage the way the
+% rest of this document's supplements do. Included because script Exercises 9.33--9.35 walking
+% through the construction are short, self-contained, and exactly the kind of material this
+% chapter collects. Not included: the script's own use of the construction to build R from Q
+% (S9.1.4), which it marks "extra; cf. Grundstrukturen" and which belongs to the sibling project.
+% Transition: Claude Opus 5 (High)
+\Cref{rem:complete_vs_closed} left one question open. We know $\mathbb{Q}$ is not complete and
+$\mathbb{R}$ is, and that $\mathbb{R}$ is built to repair exactly that defect. Is the repair a
+one-off trick special to the reals, or can any incomplete space be fixed the same way?
+
+It can, and the construction below is the general answer. Every metric space embeds isometrically,
+and densely, into a complete one, obtained by taking the space of its own Cauchy sequences and
+declaring two of them equal when they ought to have the same limit. The reals from the rationals
+is then just the first instance.
 
 \begin{definition}[Completion of a metric space]
 \label{def:completion_of_metric_space}
@@ -65,6 +68,6 @@ containing $X$.}
 just \qt{a} completion: any other complete space that $X$ embeds into isometrically receives a
 unique isometric copy of $\overline X$ as well, via $\overline f$. This is the same
 uniqueness-up-to-isomorphism pattern behind \qt{the} real numbers as \qt{the} complete ordered
-field --- which is exactly how the script uses this construction in $\S9.1.4$, taking
+field, and it is exactly how the script uses this construction in $\S9.1.4$, taking
 $X = \mathbb{Q}$.
 \end{remark}

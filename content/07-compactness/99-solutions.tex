@@ -35,23 +35,24 @@ set is closed and bounded, hence compact by \cref{thm:heine_borel}.
 point outside the set; unbounded, so certainly not compact.
 
 \textbf{$S$ is a trap.} The two spanning vectors are parallel, so $S$ is not $\mathbb{R}^2$ but
-the $x$-axis --- a line: closed, unbounded, not compact.
+the $x$-axis, a line, which is closed, unbounded and not compact.
 
 \textbf{The $f$ rows show exactly how far continuity gets you.} Preimages behave: $f^{-1}$ of a
-closed set is closed, of an open set is open (\cref{def:continuous}). Images do not --- only
+closed set is closed, of an open set is open (\cref{def:continuous}). Images do not, and only
 compactness transfers forward (\cref{item:continuity_preserves_compact}), which is why
 $f([0,1])$ is compact but $f^{-1}([0,1])$ need not be: take $f \equiv 0$, giving
 $f^{-1}([0,1]) = \mathbb{R}^n$. That same $f$ makes $f^{-1}([0,1])$ open, while $f = \id$ makes
-it $[0,1]$, which is not --- hence \textbf{?}. And $f([0,1])$ is never open: it is compact,
+it $[0,1]$, which is not, hence the \textbf{?}. And $f([0,1])$ is never open: it is compact,
 hence closed and bounded, and a non-empty proper subset of $\mathbb{R}^m$ cannot be both open
 and closed, since $\mathbb{R}^m$ is connected (\cref{def:connectedness}).
 
-\begin{ainote}
-The punchline is the last two columns: \textbf{they are identical}. That is not a coincidence of
-this list --- inside a \emph{complete} ambient space, a subset is complete exactly when it is
-closed (\cref{rem:complete_vs_closed}), and $\mathbb{R}^n$ is complete. Build the same table
-inside $\mathbb{Q}$ instead and the columns come apart immediately.
-\end{ainote}
+% Reclassified from ainote to remark: an observation about the table's mathematical content.
+\begin{remark}[Why the last two columns agree]
+The punchline of the table is that its last two columns are \textbf{identical}. That is not a
+coincidence of this particular list. Inside a \emph{complete} ambient space a subset is complete
+exactly when it is closed (\cref{rem:complete_vs_closed}), and $\mathbb{R}^n$ is complete. Build
+the same table inside $\mathbb{Q}$ instead and the two columns come apart immediately.
+\end{remark}
 \end{exercisesolution}
 
 \begin{ainote}
@@ -122,7 +123,7 @@ rather than chasing balls. Compactness is then Heine--Borel (\cref{thm:heine_bor
 
     \begin{ainote}
     The official solution opens this part with \qt{Since $E_8$ is unbounded so is $E_9$}. That
-    is a slip: $E_8 = [-6,6]^n$ is bounded --- it is $E_3$ that is unbounded, as the official
+    is a slip, since $E_8 = [-6,6]^n$ is bounded. It is $E_3$ that is unbounded, as the official
     solution itself established two parts earlier. The conclusion (that $E_9$ is not compact) is
     correct; only the reason is misattributed.
     \end{ainote}
@@ -147,21 +148,21 @@ formulation.
 \textbf{(a), (b), (c) and (e) are true; (d) is false.}
 
 The engine behind \textbf{(a)}, \textbf{(b)}, \textbf{(c)} and \textbf{(e)} is a single fact,
-\cref{rem:complete_vs_closed}: inside a \emph{complete} ambient space --- and $\mathbb{R}^n$ is
-complete by \cref{prop:Rn_coordinatewise_complete} --- a subset is complete if and only if it is
-closed.
+\cref{rem:complete_vs_closed}: inside a \emph{complete} ambient space, a subset is complete if and
+only if it is closed. Here the ambient space is $\mathbb{R}^n$, which is complete by
+\cref{prop:Rn_coordinatewise_complete}.
 
 \textbf{(a) True.} A compact subset of $\mathbb{R}^n$ is closed and bounded
 (\cref{thm:heine_borel}). If it were also open and non-empty, it would be a non-empty
 \emph{clopen} proper subset of $\mathbb{R}^n$, which is impossible because $\mathbb{R}^n$ is
-connected --- it is path-connected (any two points are joined by a segment), hence connected by
-\cref{lem:path_connected_implies_connected}.
+connected. Indeed $\mathbb{R}^n$ is path-connected, any two points being joined by a segment, and
+hence connected by \cref{lem:path_connected_implies_connected}.
 
 \textbf{(b) True,} by the same argument: complete $\Rightarrow$ closed, and non-empty, open,
 closed and proper is again impossible in the connected space $\mathbb{R}^n$.
 
 \textbf{(c) True.} Complete $\Rightarrow$ closed, and a closed set contains all its accumulation
-points --- if $x$ is an accumulation point of $A$ then some sequence in $A$ converges to $x$,
+points. Indeed, if $x$ is an accumulation point of $A$ then some sequence in $A$ converges to $x$,
 and \cref{prop:open_closed_via_sequences}\textbf{(b)} puts $x$ in $A$.
 
 \textbf{(d) False.} Every singleton $\{q\}$ is complete (its only Cauchy sequences are
@@ -171,23 +172,26 @@ is a countable union of complete sets which is famously \emph{not} complete
 (\cref{rem:complete_vs_closed}). Equivalently, in terms of closedness: a countable union of
 closed sets need not be closed, exactly as in \cref{rem:finiteness_is_necessary}.
 
-\textbf{(e) True} --- this is \cref{rem:complete_vs_closed} stated for the ambient space
+\textbf{(e) True,} this being \cref{rem:complete_vs_closed} stated for the ambient space
 $\mathbb{R}^n$, and it is worth stressing that the \qt{if} direction is where completeness of the
 ambient space is used. Inside $\mathbb{Q}$ instead of $\mathbb{R}$ the statement collapses:
 $\mathbb{Q}$ is closed in itself but not complete.
 \end{exercisesolution}
 
-\begin{ainote}
-Part \textbf{(b)} is also script Exercise 9.76, which the script proves without invoking
-connectedness at all --- worth recording as a second route, since it is more elementary. Fix
-$x \in U$ and $y \notin U$, and let $\gamma(t) := x+t(y-x)$, $t\in[0,1]$, be the segment between
-them. The point $\gamma(t_*)$ with $t_* := \sup\{t\in[0,1] : \gamma(t)\in U\}$ cannot lie in $U$
-(openness of $U$ would let $t_*$ be pushed further out), yet is a limit of points
-$\gamma(t_k) \in U$ with $t_k \nearrow t_*$ --- a convergent, hence Cauchy, sequence in $U$ whose
-limit escapes $U$. This avoids \cref{lem:path_connected_implies_connected} entirely, at the cost
-of only working in $\mathbb{R}^n$ (the segment needs the vector space structure), whereas the
-connectedness proof above generalises to any connected, locally connected ambient space.
-\end{ainote}
+% Reclassified from ainote to remark: this is a second proof, which is content.
+\begin{remark}[A second route to \textbf{(b)}, avoiding connectedness]
+Part \textbf{(b)} is also script Exercise 9.76, and the script proves it without invoking
+connectedness at all. The argument is more elementary and worth recording. Fix $x \in U$ and
+$y \notin U$, and let $\gamma(t) := x+t(y-x)$, $t\in[0,1]$, be the segment between them. Put
+$t_* := \sup\{t\in[0,1] : \gamma(t)\in U\}$. The point $\gamma(t_*)$ cannot lie in $U$, since
+openness of $U$ would let $t_*$ be pushed further out, and yet it is a limit of points
+$\gamma(t_k) \in U$ with $t_k \nearrow t_*$. That is a convergent, hence Cauchy, sequence in $U$
+whose limit escapes $U$.
+
+This avoids \cref{lem:path_connected_implies_connected} entirely, at the cost of only working in
+$\mathbb{R}^n$, since the segment needs the vector space structure. The connectedness proof above
+generalises to any connected, locally connected ambient space.
+\end{remark}
 
 \begin{exercisesolution}[Solution to \cref{ex:uniform_lipschitz_family}]
 % Generator: Claude Opus 5 (High)
@@ -210,8 +214,8 @@ connectedness proof above generalises to any connected, locally connected ambien
     Replacing the uniform bound by mere differentiability destroys this, and
     \cref{ex:bounded_no_convergent_subsequence} is already the counterexample: $f_k(x) := x^k$
     is $C^1$ on $[0,1]$ with $f_k(0)=0$, so it satisfies every hypothesis \emph{except} the
-    uniform one --- its derivative $f_k'(x) = kx^{k-1}$ has $\lVert f_k'\rVert_\infty = k$,
-    growing without bound. And we saw that no subsequence of $(x^k)$ converges. What matters is
+    uniform one. Its derivative $f_k'(x) = kx^{k-1}$ has $\lVert f_k'\rVert_\infty = k$, which
+    grows without bound. And we saw that no subsequence of $(x^k)$ converges. What matters is
     therefore not that each $f_k$ is well behaved, but that they are well behaved \emph{by a
     common margin}.
 \end{enumerate}

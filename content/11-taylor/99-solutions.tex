@@ -10,7 +10,7 @@ Throughout, the tool is \cref{cor:taylor_expansion_unique}: an $o(\lvert h\rvert
 polynomial of degree $\leq k$ pins down every derivative of order $\leq k$, and nothing beyond.
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item \textbf{Only $f(0)=0$.} The hypothesis is an $O$, not an $o$, so the corollary does not
-    apply at any order --- and that is the entire point of the item. Setting $x=0$ in
+    apply at any order, and that is the entire point of the item. Setting $x=0$ in
     $\lvert f(x)-x_1x_2\rvert \leq C\lvert x\rvert$ gives $\lvert f(0)\rvert \leq 0$, so
     $f(0)=0$. Nothing else is determined: both
     \[f(x) := x_1x_2 \qquad\text{and}\qquad g(x) := x_1x_2 + 5x_1\]
@@ -33,7 +33,7 @@ polynomial of degree $\leq k$ pins down every derivative of order $\leq k$, and 
     $\leq 3$ can be read off.
 
     \textbf{Order $0$ and $1$.} $f(-1,0) = -2$, and $P$ has no linear part, so
-    $\nabla f(-1,0) = (0,0)\transp$ --- the point is critical.
+    $\nabla f(-1,0) = (0,0)\transp$, so the point is critical.
 
     \textbf{Order $2$.} The quadratic part of a Taylor expansion is
     $\tfrac12 h\transp\Hess f(x_0)h$, so
@@ -41,8 +41,8 @@ polynomial of degree $\leq k$ pins down every derivative of order $\leq k$, and 
     $h\transp Hh = H_{11}h_1^2 + 2H_{12}h_1h_2 + H_{22}h_2^2 = 4h_1h_2 - 4h_2^2$ gives
     \[\Hess f(-1,0) = \begin{pmatrix} 0 & 2 \\ 2 & -4\end{pmatrix}.\]
     Its determinant is $-4 < 0$, so the Hessian is indefinite and, by \cref{thm:hessian_test},
-    the critical point $(-1,0)$ is a \textbf{saddle} --- settled without ever differentiating
-    $f$.
+    the critical point $(-1,0)$ is a \textbf{saddle}. Note that this was settled without ever
+    differentiating $f$.
 
     \textbf{Order $3$.} A third-order term is $\partial^\alpha f(x_0)\,h^\alpha/\alpha!$. The only
     cubic monomial present is $h_2^3$, with $\alpha = (0,3)$ and $\alpha! = 6$, so
@@ -53,7 +53,7 @@ polynomial of degree $\leq k$ pins down every derivative of order $\leq k$, and 
 
 \begin{exercisesolution}[Solution to \cref{ex:4.5}]
 % Generator: Claude Opus 5 (High)
-\textbf{No} --- and the official hint's function is the cleanest witness. Take
+\textbf{No}, and the official hint's function is the cleanest witness. Take
 \[f(t) := \big(\sin(2\pi t),\ \cos(2\pi t)\big), \qquad f \in C^1(\mathbb{R},\mathbb{R}^2).\]
 Then $f(1) = (0,1) = f(0)$, so the left-hand side is
 \[f(1) - f(0) = (0,0).\]
@@ -66,7 +66,7 @@ The reason is the one given in \cref{rem:mvt_fails_vector_valued}: applying the 
 theorem componentwise produces one intermediate point \emph{per component},
 \[f_1(1)-f_1(0) = f_1'(\xi_1), \qquad f_2(1)-f_2(0) = f_2'(\xi_2),\]
 and nothing forces $\xi_1 = \xi_2$. Here $\xi_1 = \tfrac14$ and $\xi_2 = \tfrac12$ work
-componentwise --- both components do vanish, just not at the same time.
+componentwise. Both components do vanish, just not at the same time.
 
 \begin{ainote}
 Note what does \emph{not} fail. The \emph{mean value inequality}
@@ -109,7 +109,7 @@ can establish) versus \textbf{around}/in a whole neighbourhood of $x=0$ (which i
     $f(x) = x_2x_1 + O(|x|^3)$ only pins down the second-order Taylor data of $f$ \textbf{at} the
     point $x=0$ (by Corollary 10.45, this does give $f$ twice differentiable \emph{at} $0$ with
     $\partial_{11}f(0) = 0$), but it does not force twice differentiability in a whole
-    neighbourhood \textbf{around} $x=0$ --- without an a priori assumption like $f \in C^2$ near
+    neighbourhood \textbf{around} $x=0$. Without an a priori assumption such as $f \in C^2$ near
     $0$, one can cook up genuinely pathological examples, e.g.\
     $f(x) := x_1x_2 + |x|^4\sin(|x|^{-100})$, for which $\partial_1 f(x) \to \infty$ as
     $x \to 0$, so $\partial_1 f$ is not even continuous at $0$.
@@ -135,7 +135,7 @@ Concretely, truncating $f = x_1 + x_1x_2$ at order $3$ gives $f^2 = x_1^2 + 2x_1
 and $f^3 = x_1^3 + O(|x|^4)$, so
 \[(g\circ f)(x) = g(0) + g'(0)\big(x_1 + x_1x_2\big)
   + \frac{g''(0)}{2}\big(x_1^2 + 2x_1^2x_2\big) + \frac{g'''(0)}{6}\,x_1^3 + O(|x|^4).\]
-That uses the four values $g(0), g'(0), g''(0), g'''(0)$ --- four queries at 5 CHF each, so
+That uses the four values $g(0), g'(0), g''(0), g'''(0)$, so four queries at 5 CHF each, giving
 \textbf{20 CHF}. Options (b) and (c) under-pay and cannot reach degree 3; (d) claims degree 3 for
 three queries, which is one derivative short.
 \end{exercisesolution}
@@ -149,7 +149,7 @@ $c_\alpha = 0$ whenever $|\alpha| < \sigma$.
 Suppose not, and let
 \[d := \min\{\,|\alpha| \ :\ c_\alpha \neq 0\,\} < \sigma.\]
 Split $R = R_d + \widetilde R$, where $R_d := \sum_{|\alpha| = d}c_\alpha X^\alpha$ is the
-homogeneous part of degree $d$ --- non-zero by the choice of $d$ --- and $\widetilde R$ collects
+homogeneous part of degree $d$, non-zero by the choice of $d$, and $\widetilde R$ collects
 the terms of degree $> d$, so that $\widetilde R(tu) = O(t^{d+1})$ uniformly over unit vectors
 $u$.
 

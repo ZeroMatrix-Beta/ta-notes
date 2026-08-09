@@ -20,8 +20,8 @@ For $(X, d_X)$ and $(Y, d_Y)$ metric spaces, a function $f : X \to Y$ is called 
 
 \begin{ainote}
 Corsin writes $d(x_0,x) < \varepsilon$ in the ($\varepsilon$--$\delta$) hypothesis above, which
-must read $\delta$ --- otherwise the quantified $\delta$ is never used. A slip of the pen;
-corrected in \cref{def:continuous}.
+must read $\delta$, since otherwise the quantified $\delta$ is never used at all. This is a slip
+of the pen, and it is corrected in \cref{def:continuous}.
 \end{ainote}
 
 % Generator: Claude Opus 5 (High) --- \cref{def:continuous} asserts the equivalence of three
@@ -45,8 +45,8 @@ $d_Y(f(x_n),f(x)) < \varepsilon$, so $f(x_n) \to f(x)$.
 By the shrinking-ball construction (\cref{rem:shrinking_ball_trick}) there are
 $x \in f^{-1}(U)$ and points $x_n \in B_{1/n}(x)$ with $x_n \notin f^{-1}(U)$. Then $x_n \to x$,
 so $f(x_n) \to f(x) \in U$ by \textbf{(b)}, and since $U$ is open,
-\cref{prop:open_closed_via_sequences}\textbf{(a)} forces $f(x_n) \in U$ for large $n$ ---
-i.e.\ $x_n \in f^{-1}(U)$, a contradiction.
+\cref{prop:open_closed_via_sequences}\textbf{(a)} forces $f(x_n) \in U$ for large $n$. That is,
+$x_n \in f^{-1}(U)$, which is a contradiction.
 
 \textbf{(c) $\Rightarrow$ (a).} Fix $x_0 \in X$ and $\varepsilon>0$. The ball
 $B_\varepsilon(f(x_0)) \subseteq Y$ is open (\cref{ex:ai_open_balls_are_open}), so
@@ -56,8 +56,8 @@ precisely that $d_X(x_0,x)<\delta$ implies $d_Y(f(x_0),f(x))<\varepsilon$.
 \end{proof}
 
 \begin{remark}[Which of the three to reach for]
-Condition \textbf{(c)} is the only one that never mentions the metric, which is why it --- and
-not the $\varepsilon$--$\delta$ formulation --- is what survives into general topology
+Condition \textbf{(c)} is the only one that never mentions the metric. That is why it, and not the
+$\varepsilon$--$\delta$ formulation, is what survives into general topology
 (\cref{sec:structured_spaces}). Condition \textbf{(b)} is usually the fastest way to prove a
 function is \emph{dis}continuous, since a single badly chosen sequence suffices; this is exactly
 how \cref{ex:partial_derivatives_not_continuous} works. Condition \textbf{(a)} is the
@@ -80,7 +80,7 @@ Compare \cref{def:continuous} \textbf{(a)} with \cref{def:uniformly_continuous}:
 content.
 \begin{itemize}
   \item \textbf{Continuity:} $\forall x_0\ \forall\varepsilon\ \exists\delta$. The point $x_0$
-    is chosen \emph{before} $\delta$, so $\delta$ may depend on it --- a different $\delta$ is
+    is chosen \emph{before} $\delta$, so $\delta$ may depend on it, and a different $\delta$ is
     allowed at every point.
   \item \textbf{Uniform continuity:} $\forall\varepsilon\ \exists\delta\ \forall x$. Now
     $\delta$ is chosen \emph{before} seeing the point, so one and the same $\delta$ must work
@@ -90,8 +90,8 @@ Uniform continuity is therefore strictly stronger. The standard witness is
 $f(x) := 1/x$ on $(0,1)$: it is continuous, but near $0$ the graph steepens without bound, so
 the $\delta$ that works at $x_0 = \tfrac12$ is hopeless at $x_0 = \tfrac{1}{1000}$, and no
 single $\delta$ survives. \Cref{prop:compact_implies_uniformly_continuous} below says that on a
-\emph{compact} space this can never happen --- the gap between the two notions closes exactly
-when there is no room to run off to a bad point.
+\emph{compact} space this can never happen. The gap between the two notions closes exactly when
+there is no room left to run off towards a bad point.
 \end{importantremark}
 
 \begin{example}[$f(x) = x^2$]
@@ -133,7 +133,7 @@ $\{0\} = \id^{-1}(\{0\})$ is not open in $(X, d_X)$.
 \end{answer}
 
 \begin{question}
-And what if the roles are reversed --- $d_X$ the discrete metric, $d_Y$ arbitrary?
+And what if the roles are reversed, with $d_X$ the discrete metric and $d_Y$ arbitrary?
 \end{question}
 
 \begin{answer}
@@ -208,9 +208,9 @@ Therefore, we can simply choose $\delta := \varepsilon$. Then $d(x, x') < \delta
 \begin{corollary}[Closed sets are exactly the zero sets of a distance function]
 \label{cor:closed_iff_zero_of_distance}
 Let $(X,d)$ be a metric space and $\emptyset \neq E \subseteq X$. The function
-$f_E(x) := d(x,E) = \inf_{z\in E}d(x,z)$ is $1$-Lipschitz --- this is \cref{ex:2.3}\textbf{(c)},
+$f_E(x) := d(x,E) = \inf_{z\in E}d(x,z)$ is $1$-Lipschitz, which is \cref{ex:2.3}\textbf{(c)},
 proved there by the same reverse-triangle-inequality argument as
-\cref{ex:distance_to_point_continuous} above --- and
+\cref{ex:distance_to_point_continuous} above. Moreover,
 \[E \text{ is closed} \quad\Longleftrightarrow\quad E = \{x \in X : f_E(x) = 0\}.\]
 \end{corollary}
 

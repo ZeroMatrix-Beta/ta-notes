@@ -4,14 +4,10 @@
 \label{sec:compactness}
 
 % Transition: Claude Opus 5 (High)
-Compactness is the least self-explanatory definition in this chapter, so it is worth saying in
-advance what it is \emph{for}. Finite sets are easy to handle: one can take a maximum, choose a
-smallest radius, check finitely many cases. Infinite sets are not. Compactness is the property
-that lets an infinite space be treated as if it were finite --- not because it is small, but
-because every attempt to spread it out over infinitely many open pieces collapses back to
-finitely many. \Cref{sec:why_compactness_matters} collects the three payoffs
-(continuous images, attained extrema, uniform continuity); the definition below is what buys
-them.
+% This section used to repeat the chapter opener almost word for word. The motivation now lives
+% once, in 00-chapter.tex, and this lead-in does the different job of warning about quantifiers.
+The definition itself is one line long, and the difficulty is entirely in the order of its
+quantifiers. It is worth reading it twice before reading anything else.
 
 \begin{definition}[Compact metric space]
 \label{def:compact_metric_space}
@@ -26,10 +22,10 @@ $\{U_i\}_{i \in I}$ of open sets with $X = \bigcup_{i\in I}U_i$; the index set $
 be arbitrary, in particular uncountable. A \newterm{subcover} is a subfamily
 $\{U_i\}_{i \in J}$, $J \subseteq I$, that still covers $X$, and it is \emph{finite} when $J$
 is. The order of quantifiers is what carries the content: \emph{every} cover must admit
-\emph{some} finite subcover. Exhibiting one cover with a finite subcover proves nothing --- any
-space has the cover $\{X\}$ --- whereas exhibiting one cover \emph{without} a finite subcover
-disproves compactness outright, which is how \cref{ex:heine_borel_fails} and the
-open-interval example below both work.
+\emph{some} finite subcover. Note the asymmetry this produces. Exhibiting one cover with a finite
+subcover proves nothing at all, since every space has the one-element cover $\{X\}$. Exhibiting
+one cover \emph{without} a finite subcover, on the other hand, disproves compactness outright,
+and that is how \cref{ex:heine_borel_fails} and the open-interval example below both work.
 \end{notation}
 
 % Source: Corsin Nick/Class Notes/Week 2.pdf, pp. 1--13
@@ -93,8 +89,8 @@ $K \subseteq U_1 \cup \dots \cup U_n$: a finite subcover.
 \end{proof}
 
 \begin{remark}
-The nesting principle is \cref{def:compact_metric_space} read through De Morgan's laws --- open
-covers become closed families, unions become intersections, \qt{some finite piece already
+The nesting principle is \cref{def:compact_metric_space} read through De Morgan's laws. Open
+covers become closed families, unions become intersections, and \qt{some finite piece already
 covers} becomes \qt{some finite piece already misses}. It earns its own name because closed
 sets, not open ones, are the natural language for several later arguments (nested closed sets of
 shrinking size, in particular), where phrasing compactness this way saves a complementation step

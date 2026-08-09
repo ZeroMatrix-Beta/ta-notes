@@ -4,9 +4,9 @@
 \label{sec:youngs_inequality}
 
 The following inequality is not part of the lecture's main line of development, but it is the
-cleanest route to comparing different norms on $\mathbb{R}^n$ (see \cref{sec:cauchy_schwarz}) and to
-the Hölder-type estimates that show up (e.g., when comparing $L^p$-type metrics). It is worth proving
-once and citing from then on.
+cleanest route to comparing different norms on $\mathbb{R}^n$ (see \cref{sec:cauchy_schwarz}) and
+to the Hölder-type estimates that appear whenever two $L^p$-type quantities are played off against
+each other. It is worth proving once and citing from then on.
 
 \begin{proposition}[Young's inequality]
 \label{prop:youngs_inequality}
@@ -23,22 +23,34 @@ which is just a rewriting of $(a-b)^2 \geq 0$.
 \end{remark}
 
 \begin{proof}
-Fix $t > 0$ and define $g(t) := \tfrac{t}{p} + \tfrac{1}{q} - t^{1/p}$. We first show that
-$g(t) \geq 0$ for all $t > 0$, with equality only at $t = 1$. Differentiating,
+Fix conjugate exponents $p, q > 1$, and define $g : (0,\infty) \to \mathbb{R}$ by
+$g(t) := \tfrac{t}{p} + \tfrac{1}{q} - t^{1/p}$. We first show that $g \geq 0$, with equality only
+at $t = 1$. Differentiating,
 \[
-  g'(t) = \frac{1}{p}\left(1 - t^{-(p-1)/p}\right),
+  g'(t) = \frac{1}{p}\left(1 - t^{-(p-1)/p}\right).
 \]
-which is negative for $t \in (0,1)$ and positive for $t > 1$, so $g$ has a global minimum at
-$t = 1$. Since $g(1) = \tfrac{1}{p} + \tfrac{1}{q} - 1 = 0$, this proves that
-\[
+Since $p > 1$, the exponent $-(p-1)/p$ is negative, so $t^{-(p-1)/p} > 1$ for $t \in (0,1)$ and
+$t^{-(p-1)/p} < 1$ for $t > 1$. Hence $g' < 0$ on $(0,1)$ and $g' > 0$ on $(1,\infty)$, so $g$
+attains a global minimum at $t = 1$. As $g(1) = \tfrac{1}{p} + \tfrac{1}{q} - 1 = 0$, we obtain
+\begin{equation}
+\label{eq:young_scalar_key}
   t^{1/p} \leq \frac{t}{p} + \frac{1}{q} \qquad \text{for all } t > 0.
-\]
-Now fix $a, b > 0$ and apply this with $t := a^p / b^q$. Multiplying both sides by $b^q$ gives
+\end{equation}
+Now fix $a, b > 0$ and apply \eqref{eq:young_scalar_key} with $t := a^p / b^q$. Multiplying both
+sides by $b^q > 0$ gives
 \[
-  \left(\frac{a^p}{b^q}\right)^{1/p} b^q \leq \frac{a^p}{p} + \frac{b^q}{q},
+  \left(\frac{a^p}{b^q}\right)^{1/p} b^q \ \leq\ \frac{a^p}{p} + \frac{b^q}{q}.
 \]
-and since $\left(\tfrac{a^p}{b^q}\right)^{1/p} b^q = a\, b^{q - q/p} = a\,b^{q(1 - 1/p)} = a\,b$
-using $\tfrac{1}{q} = 1 - \tfrac{1}{p}$, this is exactly $ab \leq \tfrac{a^p}{p} + \tfrac{b^q}{q}$.
+It remains to identify the left-hand side, and this is where the conjugacy of $p$ and $q$ enters.
+Using $1 - \tfrac{1}{p} = \tfrac{1}{q}$,
+\[
+  \left(\frac{a^p}{b^q}\right)^{1/p} b^q
+    \ =\ a\,b^{-q/p}\,b^{q}
+    \ =\ a\,b^{\,q\left(1 - \frac{1}{p}\right)}
+    \ =\ a\,b^{\,q \cdot \frac{1}{q}}
+    \ =\ ab,
+\]
+which is exactly the asserted inequality.
 \end{proof}
 
 % Generator: Claude Opus 5 (High)

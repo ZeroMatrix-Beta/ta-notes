@@ -4,12 +4,13 @@
 \section{What \emph{does} imply differentiability}
 \label{sec:sufficient_condition_differentiability}
 
+% Sascha Brack's notes (Lecture 8) state the sufficient condition as his Theorem 2.9 and organise
+% the picture into a chain of implications; both are reproduced below.
 \begin{ainote}
-Corsin's notes give the definition and the warnings, but never state a \emph{sufficient}
-condition --- so far we have two counterexamples and no positive test. Sascha Brack's notes
-(Lecture 8) state one as Theorem 2.9 and organise the whole picture into a chain of
-implications; both are reproduced below, since without them the practical question
-\qt{how do I actually check differentiability?} is left unanswered.
+The course gives the definition of differentiability and the warnings that go with it, but never
+states a \emph{sufficient} condition, so up to this point we have two counterexamples and no
+positive test at all. The theorem below supplies one, from a second tutor's notes. Without it the
+practical question \qt{how do I actually check differentiability?} has no answer.
 \end{ainote}
 
 \begin{theorem}[Continuous partial derivatives suffice]
@@ -23,7 +24,7 @@ Such an $F$ is called \newterm{continuously differentiable}, written $F \in C^1(
 
 This is the theorem that makes the subject workable: in practice one almost never checks the
 definition directly. Compute the partials, observe that they are built from continuous pieces,
-and differentiability follows --- which is exactly why the course can write $f \in C^1$, $C^2$,
+and differentiability follows. That is exactly why the course can write $f \in C^1$, $C^2$ and
 $C^k$ so freely from here onward.
 
 Together with the two counterexamples, the whole landscape is a single chain, each link
@@ -82,9 +83,9 @@ one-directional:
 \end{tikzpicture}
 \end{center}
 
-Every downward arrow holds, and \textbf{not one of them reverses} --- each failure is witnessed
-by an example already in this chapter, so the diagram doubles as a map of where those
-counterexamples belong:
+Every downward arrow holds, and \textbf{not one of them reverses}. Each failure is witnessed by an
+example already in this chapter, so the diagram doubles as a map of where those counterexamples
+belong:
 \begin{itemize}
   \item \textbf{Differentiable $\not\Rightarrow$ $C^1$:} \cref{ex:differentiable_not_c1}, whose
     partial derivatives oscillate without limit at the origin even though the differential
@@ -99,8 +100,8 @@ counterexamples belong:
     direction $v = (a,b)$ with $ab \neq 0$,
     \[\frac{f(ta,tb)}{t} = \frac{1}{t}\cdot\frac{t^2ab}{t^2(a^2+b^2)}
       = \frac{ab}{t\,(a^2+b^2)} \ \xrightarrow{\ t \to 0\ }\ \pm\infty,\]
-    so $\partial_vf(0,0)$ exists only along the two axes --- the two directions the partial
-    derivatives happen to look at.
+    so $\partial_vf(0,0)$ exists only along the two axes, which are precisely the two directions
+    the partial derivatives happen to look at.
 \end{itemize}
 The three counterexamples are not variations on one theme; they fail at three different
 heights, which is precisely why the chain has three separate links.
@@ -113,15 +114,16 @@ Sascha's notes distil the above into three steps, worth following in this order.
   \item \textbf{Compute the partial derivatives $\partial_iF(x_0)$.} If one of them fails to
     exist, $F$ is not differentiable and you are done. If they all exist \emph{and are
     continuous near $x_0$}, $F$ \emph{is} differentiable by
-    \Cref{thm:continuous_partials_imply_differentiable} --- also done. Most exercises end here.
+    \Cref{thm:continuous_partials_imply_differentiable}, and you are done again. Most exercises
+    end here.
   \item \textbf{Otherwise, guess the candidate.} If $F$ is differentiable at all, the differential
     can only be $L := \big(\partial_1F(x_0),\dots,\partial_nF(x_0)\big)$, since the partials are
     forced (\cref{sec:jacobi_matrix}).
   \item \textbf{Verify the candidate against the definition:}
     \[\lim_{h\to0}\frac{\big|F(x_0+h)-F(x_0)-L(h)\big|}{\lVert h\rVert} \overset{?}{=} 0.\]
     In $\mathbb{R}^2$, substituting $h = (r\cos\theta,\ r\sin\theta)$ and checking that the
-    result tends to $0$ \emph{uniformly in $\theta$} is usually the quickest route --- the same
-    polar trick used in \cref{ex:all_directional_derivatives_exist} and, later, in
+    result tends to $0$ \emph{uniformly in $\theta$} is usually the quickest route. This is the
+    same polar trick used in \cref{ex:all_directional_derivatives_exist} and, later, in
     \Cref{q:quiz_q4}.
 \end{enumerate}
 Step 1 is the one students skip; it settles the overwhelming majority of cases without any

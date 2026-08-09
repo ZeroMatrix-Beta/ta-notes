@@ -9,12 +9,19 @@
 \chapter{The Chain Rule and Directional Derivatives}
 \label{ch:chain_rule}
 
-% Transition: Claude Opus 5 (Medium)
-Having encoded the differential as a matrix, we now ask how it interacts with composition of
-functions --- the single most useful computational tool in this part. The same machinery gives
-directional derivatives, and with them the standard trap of several-variable calculus: a function
-can have every directional derivative at a point and still fail to be differentiable, or even
-continuous, there. \Cref{sec:sufficient_condition_differentiability} states what does suffice.
+% Transition: Claude Opus 5 (High)
+Having encoded the differential as a matrix, we now ask how it interacts with composition. The
+answer is the chain rule, and in this setting it says something cleaner than its one-variable
+version does: the differential of a composition is the \emph{composition of the differentials},
+which is to say the product of their matrices. Reading it that way makes it a statement of linear
+algebra rather than a formula to be memorised, and explains where the sums of products in the
+coordinate form come from.
+
+The same machinery yields directional derivatives, and with them the standard trap of
+several-variable calculus. A function can possess every directional derivative at a point and
+still fail to be differentiable there, or even continuous.
+\Cref{sec:sufficient_condition_differentiability} says what does suffice, and it is the criterion
+used in practice for the rest of the course.
 
 \input{content/10-chain-rule/01-chain-rule.tex}
 \input{content/10-chain-rule/02-directional-derivatives.tex}

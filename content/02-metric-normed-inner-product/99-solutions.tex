@@ -3,15 +3,13 @@
 \section{Solutions}
 \label{sec:metric_spaces_solutions}
 
-\begin{ainote}[How the solutions in this document were produced]
-Where a tutor solves a problem in their own notes, that solution is kept \emph{inline}, directly
-after the statement, mirroring how they present it --- each such case carries a
-\texttt{\% Kept inline} comment naming the source page. Everything else is collected in a
-\emph{Solutions} section like this one at the end of the chapter that hosts the problem. Those
-were worked independently and only then checked against the official
-\texttt{exercises/SolN\_Analysis2\_eng.pdf}; wherever the comparison turned up anything worth
-flagging, it is flagged in an AI-Note next to the solution.
-\end{ainote}
+% How the solutions in this document were produced. Where a tutor solves a problem in their own
+% notes, that solution is kept INLINE, directly after the statement, mirroring how they present
+% it; each such case carries a "% Kept inline" comment naming the source page. Everything else is
+% collected in a Solutions section like this one, at the end of the chapter hosting the problem.
+% Those were worked independently and only then checked against the official
+% exercises/SolN_Analysis2_eng.pdf. Wherever the comparison turned up anything worth flagging, it
+% is flagged in an AI-Note next to the solution concerned.
 
 \begin{exercisesolution}[Proof of \cref{ex:polygon_inequality}]
 % Generator: Claude Sonnet 5 (High)
@@ -54,17 +52,16 @@ interest is in \textbf{definiteness} and the \textbf{triangle inequality}.
     \[|f(x)-h(x)| \leq |f(x)-g(x)| + |g(x)-h(x)| \leq d(f,g) + d(g,h) \quad \text{for all } x,\]
     so the right-hand side is an upper bound for $|f-h|$ and hence dominates $d(f,h)$. This is
     \cref{ex:sup_metric_is_metric} verbatim, with $[0,1]$ replaced by an arbitrary set $X$ and
-    continuity replaced by boundedness --- note that it was boundedness, not continuity, that
+    continuity replaced by boundedness. Note that it was boundedness, and not continuity, that
     the argument there actually used.
   \item \textbf{Yes.} Let $\varphi(x) := 1/x$, an injective map $\mathbb{Q}_+ \to \mathbb{Q}_+$,
     and observe that $d(x,y) = |\varphi(x)-\varphi(y)|$. Symmetry and the triangle inequality
     are inherited from $|\cdot|$ without any work, and definiteness is exactly injectivity of
     $\varphi$: from $d(x,y)=0$ we get $1/x = 1/y$, hence $x=y$. This is the same pullback
-    construction as \cref{ex:completeness_not_topological}, and the same warning applies ---
-    pulling a metric back along an injection \emph{always} produces a metric, which is why the
-    interesting question about such a $d$ is never whether it is one, but whether it is
-    complete.
-  \item \textbf{No} --- the triangle inequality fails. Ignore the second coordinate, as the
+    construction as \cref{ex:completeness_not_topological}, and the same warning applies. Pulling
+    a metric back along an injection \emph{always} produces a metric, which is why the interesting
+    question about such a $d$ is never whether it is one, but whether it is complete.
+  \item \textbf{No:} the triangle inequality fails. Ignore the second coordinate, as the
     official hint suggests, and take three collinear points $x := (0,0)$, $y := (1,0)$ and
     $z := (2,0)$:
     \[d(x,z) = 2^2 = 4 \quad > \quad d(x,y) + d(y,z) = 1 + 1 = 2.\]
@@ -88,7 +85,7 @@ interest is in \textbf{definiteness} and the \textbf{triangle inequality}.
     $\mathbb{R}^{n^2}$, and it is a metric by
     \cref{prop:induced_norm_and_metric}\textbf{(b)}. The associated norm is the
     \newterm{Frobenius norm} (\germanterm{Frobeniusnorm}), also called the Hilbert--Schmidt norm.
-  \item \textbf{No} --- and here it is \textbf{definiteness} that fails, not the triangle
+  \item \textbf{No}, and here it is \textbf{definiteness} that fails, not the triangle
     inequality. Following the hint, suppose $A := X-Y$ is \emph{anti-symmetric},
     $A\transp = -A$. For any $v$ the number $v\transp Av$ is a $1\times1$ matrix, hence equal to
     its own transpose:
@@ -139,9 +136,9 @@ independent.
 \begin{exercisesolution}[Solution to \cref{ex:2.5}]
 % Generator: Claude Opus 5 (High)
 Write $s := d_X(x,x')$ and $t := d_Y(y,y')$ throughout, so that the three candidates are
-$d_1 = \max\{s,t\}$, $d_2 = s+t$ and $d_3 = \sqrt{s^2+t^2}$ --- that is, the supremum, Manhattan
-and standard metrics of \cref{ex:metric_examples} applied to the pair $(s,t)$. Almost everything
-below is that one observation.
+$d_1 = \max\{s,t\}$, $d_2 = s+t$ and $d_3 = \sqrt{s^2+t^2}$. These are precisely the supremum,
+Manhattan and standard metrics of \cref{ex:metric_examples}, applied to the pair $(s,t)$. Almost
+everything below is that one observation.
 \begin{enumerate}[label=\textbf{\arabic*.}]
   \item \textbf{All three are metrics.} Each vanishes exactly when $s = t = 0$, i.e.\ when
     $x=x'$ and $y=y'$, which is definiteness; symmetry is inherited from $d_X$ and $d_Y$. For
@@ -153,8 +150,8 @@ below is that one observation.
     $c \leq a+b$ \emph{componentwise}. Each of $\max$, the sum and $\lVert\cdot\rVert_2$ is
     monotone on $[0,\infty)^2$ and subadditive, so
     \[N(c) \ \leq\ N(a+b) \ \leq\ N(a) + N(b)\]
-    for $N \in \{\max,\ \textstyle\sum,\ \lVert\cdot\rVert_2\}$ --- which is the required
-    inequality in all three cases at once.
+    for $N \in \{\max,\ \textstyle\sum,\ \lVert\cdot\rVert_2\}$, which is the required inequality
+    in all three cases at once.
   \item \textbf{Equivalence.} For all $s,t \geq 0$,
     \[\max\{s,t\} \ \leq\ \sqrt{s^2+t^2} \ \leq\ s+t \ \leq\ 2\max\{s,t\},\]
     i.e.\ $d_1 \leq d_3 \leq d_2 \leq 2d_1$; the middle inequality holds because
@@ -176,8 +173,8 @@ below is that one observation.
 \begin{exercisesolution}[Proof of \cref{ex:3.7}]
 % Generator: Claude Opus 5 (High)
 This is \cref{thm:cauchy_schwarz}, proved in \cref{sec:cauchy_schwarz} above by expanding
-$\lVert u - \pi_v(u)\rVert^2 \geq 0$, including the equality case. A second, independent proof
---- minimising $\lambda \mapsto \lVert v-\lambda w\rVert^2$ --- is
+$\lVert u - \pi_v(u)\rVert^2 \geq 0$, including the equality case. A second, independent proof, by
+minimising $\lambda \mapsto \lVert v-\lambda w\rVert^2$, is
 \cref{prop:cauchy_schwarz_geometric_proof}. \Cref{rem:two_proofs_cauchy_schwarz}
 explains why the two are the same computation approached from opposite ends.
 
@@ -191,19 +188,20 @@ non-negative exactly when its discriminant is $\leq 0$, i.e.
 \[\big(2\langle v,w\rangle\big)^2 - 4\langle v,v\rangle\langle w,w\rangle \leq 0,\]
 which rearranges to the inequality. Equality forces the discriminant to vanish, so the
 polynomial has a real root $\lambda_0$, and definiteness turns
-$\langle \lambda_0 v + w, \lambda_0 v + w\rangle = 0$ into $\lambda_0 v + w = 0$ --- the linear
-dependence. Note that this is the previous proof with the geometry stripped out: $\lambda_0$ is
-again the projection coefficient, now arriving as a root rather than as a minimiser.
+$\langle \lambda_0 v + w, \lambda_0 v + w\rangle = 0$ into $\lambda_0 v + w = 0$, which is the
+asserted linear dependence. Note that this is the previous proof with the geometry stripped out.
+Here $\lambda_0$ is again the projection coefficient, now arriving as a root rather than as a
+minimiser.
 \end{remark}
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:3.8}]
 % Generator: Claude Opus 5 (High)
 This is \cref{prop:induced_norm_and_metric}\textbf{(a)}, proved immediately after
-\cref{prop:cauchy_schwarz_geometric_proof} --- which is exactly the input the triangle inequality
-needs, and the reason the two problems appear adjacently on this sheet. In one line: expanding
+\cref{prop:cauchy_schwarz_geometric_proof}, which is exactly the input the triangle inequality
+needs and the reason the two problems appear adjacently on this sheet. In one line: expanding
 $\lVert u+v\rVert^2 = \lVert u\rVert^2 + 2\langle u,v\rangle + \lVert v\rVert^2$ and bounding the
-middle term by $2\lVert u\rVert\lVert v\rVert$ turns the right-hand side into
+middle term by $2\lVert u\rVert\,\lVert v\rVert$ turns the right-hand side into
 $(\lVert u\rVert + \lVert v\rVert)^2$.
 \end{exercisesolution}
 
@@ -219,8 +217,8 @@ Write $e_1,\dots,e_n$ for the standard basis and $|\cdot|$ for the Euclidean nor
     the last step by Cauchy--Schwarz applied to $(|x_1|,\dots,|x_n|)$ and $(1,\dots,1)$. So
     $C_1 := \sqrt n \max_i f(e_i)$ works, and $C_1 > 0$ because $e_i \neq 0$ forces
     $f(e_i) > 0$ by definiteness.
-  \item The reverse triangle inequality for $f$ --- namely $f(x) \leq f(y) + f(x-y)$ and its
-    mirror image, giving $|f(x)-f(y)| \leq f(x-y)$ --- combines with part 1 to yield
+  \item The reverse triangle inequality for $f$, namely $f(x) \leq f(y) + f(x-y)$ together with
+    its mirror image, gives $|f(x)-f(y)| \leq f(x-y)$. Combined with part 1 this yields
     \[|f(x)-f(y)| \ \leq\ f(x-y) \ \leq\ C_1|x-y|.\]
     So $f$ is $C_1$-Lipschitz with respect to the \emph{Euclidean} distance
     (\cref{def:lipschitz_continuous}), hence continuous (\cref{rem:continuity_hierarchy}). Note
@@ -250,7 +248,7 @@ Write $e_1,\dots,e_n$ for the standard basis and $|\cdot|$ for the Euclidean nor
 The result is false in infinite dimensions, and the proof shows exactly which step breaks: part 1
 expands $x$ in a \emph{finite} basis and part 3 uses compactness of the unit sphere. In an
 infinite-di\-men\-sional normed space the closed unit ball is never compact, and one can write
-down inequivalent norms --- for instance $\lVert\cdot\rVert_\infty$ and
+down inequivalent norms. Take for instance $\lVert\cdot\rVert_\infty$ and
 $\int_0^1|\cdot|$ on $C^0([0,1])$, where a tall thin spike has supremum norm $1$ and integral
 norm arbitrarily small. Every appearance of \qt{all norms on $\mathbb{R}^n$ are equivalent} later
 in the course silently uses $n < \infty$.
@@ -266,7 +264,7 @@ $a_k = 0$ (a nonzero polynomial of degree $n$ has at most $n$ roots, so it canno
 identically on all of $\mathbb{R}$), so $\mathcal{B}$ is linearly independent.
 
 To see $\mathbb{R}[x]$ is infinite-dimensional, suppose for contradiction it had finite
-dimension $d$. Then $1,x,\dots,x^d$ --- a set of $d+1$ vectors of $\mathbb{R}[x]$ --- would have
+dimension $d$. Then $1,x,\dots,x^d$, a set of $d+1$ vectors of $\mathbb{R}[x]$, would have
 to be linearly dependent, since any $d+1$ vectors in a $d$-dimensional space are. But they are
 linearly independent by the argument above (restricted to $n \leq d$): a contradiction. So no
 finite basis exists, and the (necessarily infinite) $\mathcal{B}$ above is one.
@@ -286,19 +284,21 @@ all entries and factorising the resulting double sum,
   \ \leq\ \sum_{i=1}^m\sum_{j=1}^d \lVert\Psi^i\rVert^2\lVert\Phi_j\rVert^2
   = \left(\sum_{i=1}^m\lVert\Psi^i\rVert^2\right)\left(\sum_{j=1}^d\lVert\Phi_j\rVert^2\right)
   = \lVert\Psi\rVert^2\,\lVert\Phi\rVert^2,\]
-using that the Hilbert--Schmidt norm squared is the sum of the squares of all entries --- read
+using that the Hilbert--Schmidt norm squared is the sum of the squares of all entries, read
 row by row for $\Psi$ and column by column for $\Phi$. Taking square roots gives
-$\lVert\Psi\Phi\rVert \leq \lVert\Psi\rVert\lVert\Phi\rVert$.
+$\lVert\Psi\Phi\rVert \leq \lVert\Psi\rVert\,\lVert\Phi\rVert$.
 
-\begin{ainote}
+% Reclassified from ainote to remark: it introduces terminology with \newterm and states a
+% property of the norm, so it is mathematics rather than commentary on the transcription.
+\begin{remark}[Submultiplicativity, and what it later buys]
 The Hilbert--Schmidt norm is the same object as the Frobenius norm met in
 \cref{ex:2.1} part 5 on the previous sheet, where it was shown to be the Euclidean norm of the
 matrix read as a vector of $\mathbb{R}^{n^2}$. The inequality just proved says that this norm is
 \newterm{submultiplicative} (\germanterm{submultiplikativ}), which is exactly the property that
-makes it useful for estimating compositions of linear maps --- and it is what will let
+makes it useful for estimating compositions of linear maps. It is also what will later let
 $\lVert Df\rVert$ be handled like an absolute value in the mean value inequality
 (\cref{rem:mvt_fails_vector_valued}).
-\end{ainote}
+\end{remark}
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution to \cref{ex:4.3}]
@@ -307,8 +307,8 @@ $\lVert Df\rVert$ be handled like an absolute value in the mean value inequality
   \item For $n=2$, $\{x : |x|_1 \leq 1\}$ is the diamond with vertices $(\pm 1, 0)$, $(0,\pm 1)$;
     $\{x : |x|_2 \leq 1\}$ is the Euclidean unit disc; $\{x : |x|_{10} \leq 1\}$ is a curve close
     to the square $[-1,1]^2$, with rounded corners that flatten as $p$ grows. All three contain
-    the four points $(\pm1,0)$, $(0,\pm1)$ --- since $|e_i|_p = 1$ for every $p$ --- and they
-    increase with $p$, which is the geometric content of part 2.
+    the four points $(\pm1,0)$, $(0,\pm1)$, since $|e_i|_p = 1$ for every $p$, and they increase
+    with $p$, which is the geometric content of part 2.
     \begin{center}
     % Generator: Claude Opus 5 (High) --- FIG-W04-01: the p-balls for p = 1, 2, 10, plus the
     % limiting square. Plotted parametrically from |x|_p = 1 in the first quadrant,
@@ -425,7 +425,7 @@ Note $h(0) = \log(n/n) = 0$; this single fact does most of the work below.
     \[\sum_{i=1}^n \frac{a_i\log a_i}{a_1+\dots+a_n} \ \geq\ \log\!\left(\frac{a_1+\dots+a_n}{n}\right).\]
   \item \textit{Continuity.} On $\mathbb{R}\setminus\{0\}$, $g = h/t$ is a quotient of smooth
     functions with non-vanishing denominator. At $t = 0$ the value $g(0) := h'(0)$ computed in
-    part 1 is precisely the limit, so $g$ --- and hence $f = e^{g}$ --- is continuous everywhere.
+    part 1 is precisely the limit, so $g$, and hence also $f = e^{g}$, is continuous everywhere.
 
     \textit{Monotonicity.} Differentiating $g = h/t$ for $t \neq 0$,
     \[t^2 g'(t) = t\,h'(t) - h(t) = \frac{t\,S'(t)}{S(t)} - \log\frac{S(t)}{n}.\]
@@ -450,12 +450,12 @@ Note $h(0) = \log(n/n) = 0$; this single fact does most of the work below.
         $\tfrac{1}{n^2}\big(\sum_i x_i\big)^2 \leq \tfrac1n\sum_i x_i^2$, and multiplying by
         $n^2$ gives $(x_1+\dots+x_n)^2 \leq n(x_1^2+\dots+x_n^2)$.
     \end{itemize}
-  \item \textbf{(*) Yes} --- and considerably more than $C^1$. Each $x_i^{\,t} = e^{t\log x_i}$ is
+  \item \textbf{(*) Yes}, and considerably more than $C^1$. Each $x_i^{\,t} = e^{t\log x_i}$ is
     real-analytic in $t$, hence so is $S$, and $S > 0$ everywhere, so $h = \log(S/n)$ is
     real-analytic too. Because $h(0) = 0$, the quotient $h(t)/t$ has a \emph{removable}
     singularity at the origin: writing $h(t) = \sum_{k\geq1}c_kt^k$ gives
     $g(t) = \sum_{k\geq1}c_kt^{k-1}$, a convergent power series near $0$. So $g$, and therefore
-    $f = e^{g}$, is real-analytic on all of $\mathbb{R}$ --- in particular $C^\infty$, so
+    $f = e^{g}$, is real-analytic on all of $\mathbb{R}$, in particular $C^\infty$, and so
     certainly $C^1$.
 
     The value at the origin is worth recording. From $g(t) = h'(0) + \tfrac12 h''(0)t + O(t^2)$,
@@ -464,18 +464,20 @@ Note $h(0) = \log(n/n) = 0$; this single fact does most of the work below.
         - \Big(\frac1n\sum_{i=1}^n\log x_i\Big)^{\!2}\right),\]
     using $h'' = (S''S - (S')^2)/S^2$ at $t=0$ with $S(0)=n$, $S'(0)=\sum_i\log x_i$ and
     $S''(0)=\sum_i(\log x_i)^2$. The bracket is the variance of the numbers $\log x_i$, so
-    $f'(0) \geq 0$, with equality exactly when all $x_i$ agree --- in which case $\mu_t(x)$ is
-    that common value for every $t$ and $f$ is constant.
+    $f'(0) \geq 0$, with equality exactly when all $x_i$ agree. In that case $\mu_t(x)$ is that
+    common value for every $t$, and $f$ is constant.
 \end{enumerate}
 \end{exercisesolution}
 
-\begin{ainote}
-Jensen's inequality, used above without being stated, is now available as
-\cref{prop:jensen_inequality} (\cref{ch:convexity}). The official hint for 4.4.2 routes through the concavity of $\log$ together with
-Cauchy--Schwarz. The solution above instead applies Jensen once to $\varphi(s) = s\log s$, which
-is convex; the two arrive at the same inequality, and the second makes visible why 4.4.2 and
-4.4.3 are the same statement --- substituting $a_i := x_i^{\,t}$ turns the inequality of part 2
-into the sign of $g'(t)$ in part 3. That is worth seeing, because the monotonicity of the power
-means is the whole point of the problem and the classical AM--GM inequality falls out of it as
-the single comparison $\mu_0 \leq \mu_1$.
-\end{ainote}
+% Reclassified from ainote to remark: the divergence from the official hint is a mathematical
+% observation about the structure of the problem, not a note about the transcription.
+\begin{remark}[Why parts 2 and 3 are one statement]
+Jensen's inequality, used above without being stated, is available as
+\cref{prop:jensen_inequality} (\cref{ch:convexity}). The official hint for 4.4.2 routes through
+the concavity of $\log$ together with Cauchy--Schwarz. The solution above instead applies Jensen
+once, to the convex function $\varphi(s) = s\log s$. Both arrive at the same inequality, but the
+second makes visible why 4.4.2 and 4.4.3 are really a single statement: substituting
+$a_i := x_i^{\,t}$ turns the inequality of part 2 into the sign of $g'(t)$ in part 3. That is
+worth seeing, because monotonicity of the power means is the whole point of the problem, and the
+classical AM--GM inequality falls out of it as the single comparison $\mu_0 \leq \mu_1$.
+\end{remark}

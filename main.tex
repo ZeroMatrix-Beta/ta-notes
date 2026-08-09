@@ -187,8 +187,9 @@
   \setlength{\belowdisplayshortskip}{0.8\customparskip plus 0.2ex minus 0.1ex}
 }
 
-% Macro for omitted content (kept for future use if needed)
-\newcommand{\omitted}[1]{\textcolor{red}{#1}}
+% RETIRED 2026-08-09: \omitted{...}, a red-text macro from a dead error-flagging convention.
+% It was marked "kept for future use if needed" and had zero uses in content/. Errors are
+% flagged in an `ainote`, which is the whole system; see style.md.
 
 % Custom commands for italicized terminology and "quotes".
 % \newterm    -> English quotes ``...''   (the default; this is an English text)
@@ -709,19 +710,11 @@
 %
 % Do not reinstate these without reinstating the week structure -- see gemini.md.
 
-% ==========================================
-% FIGURE STUB (placeholder box until the dedicated TikZ pass, step 5)
-% ==========================================
-% Usage: \begin{figurestub}{FIG-W02-01} description text \end{figurestub}
-% Renders the drawing spec inline so the document compiles now; a later pass
-% replaces each box with a real tikzpicture without touching content/*.tex prose.
-\newtcolorbox{figurestub}[1]{
-  enhanced, breakable, arc=2pt, boxrule=0.4pt,
-  colback=Gray!5, colframe=Gray!50!black,
-  fonttitle=\sffamily\bfseries\small,
-  coltitle=black, colbacktitle=Gray!20,
-  title={Figure stub --- #1}
-}
+% RETIRED 2026-08-09: \begin{figurestub}{FIG-W02-01} ... \end{figurestub}, a grey placeholder
+% box that carried a drawing spec until the figure behind it was drawn. Every figure is now
+% drawn and render-checked, the environment had zero uses left in content/, and leaving a
+% placeholder mechanism defined invites new placeholders. Do not reinstate it: a figure that
+% cannot be drawn yet does not go into the document at all.
 
 % --- MATH OPERATORS ---
 \newcommand{\M}{\mathcal{M}}

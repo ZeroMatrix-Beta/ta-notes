@@ -36,7 +36,8 @@ a style decision actually changes.
   Leave both exactly as they are.
 * ⚠️ **Never apply any of these expansions with a blind search-and-replace over `content/`.**
   A pass on 2026-08-06 ran a Python `re.sub` across every `.tex` file and had to be reverted
-  wholesale (the diff is kept at `scratch/gemini-pass-2026-08-06.patch`).
+  wholesale. (The diff was kept at `scratch/gemini-pass-2026-08-06.patch`; `scratch/` is
+  gitignored and is now empty, so the patch is gone. The account below is what survives of it.)
   It rewrote LaTeX comments and TikZ node text, produced `that is,:` and `no such $d$ exists, so`
   where the surrounding punctuation no longer fit, and split a math span across a line break
   (`--- e.g.\ $\tan :` became `--- for example, $\tan :$`), which put `\tfrac` in text mode and
@@ -364,19 +365,19 @@ does not help and thin in the places it does.
 * **Scope Syntax:** Always terminate `\end{scope}` cleanly with a closing brace `}`, never a trailing semicolon (e.g., avoid `\end{scope};`).
 * **Rotation and Transformation Syntax:** In TikZ scope transformations, always use spaces in rotation keys (e.g., `rotate around x=65`) or define explicit 3D coordinate system vectors (e.g., `x={(0.866cm,-0.3cm)}, y={(0.5cm,0.4cm)}`). Never write unspaced key strings like `rotatearound x`, which cause PGF key parsing errors.
 * **Environment Centering:** Wrap inline TikZ figures in standard `\begin{center} ... \end{center}` environments or floating `figure` environments.
-* **Figure Stubs — write specs, not pointers.** When a diagram cannot be drawn immediately,
-  the stub must be a self-sufficient *drawing specification* so that no one needs to reopen the
-  source PDF to reconstruct it. Capture: relative positions of all objects, which lines are
-  solid / dashed / dotted, arrow directions and what they connect, label text and placement,
-  panel layout, and roughly where curves bend or cross. Name any colours used by the author.
+* **Figure stubs are retired — draw the figure or leave it out.** The `figurestub` environment
+  was removed from the preamble on 2026-08-09, once every figure had been drawn and
+  render-checked and it had no uses left. A placeholder mechanism sitting in the preamble only
+  invites new placeholders, and a grey box promising a picture is worse for a reader than no
+  picture at all. **Do not reinstate it.**
 
-  - **Pointer (forces a re-read):** "blob $X$ covered by three dotted regions."
-  - **Spec (self-sufficient):** "kidney-shaped blob $X$; three overlapping dotted ellipses at
-    roughly 10, 2 and 6 o'clock, each crossing the boundary outward; labels $U_1$–$U_3$
-    outside the blob next to their ellipse; caption $U_1\cup U_2\cup U_3=X$."
-
-  A good spec costs nothing extra when the source is on screen and removes an entire
-  second pass over it later.
+  What that rule was really protecting is still worth keeping, in the one place it applies: when
+  you *are* drawing from a source page, describe the geometry to yourself in a comment above the
+  figure before writing coordinates — relative positions, which lines are solid / dashed /
+  dotted, arrow directions and what they connect, label placement, and where curves bend or
+  cross. That comment is what lets the next reader check the drawing without reopening the PDF,
+  and it is where the arithmetic check belongs (see *Verifying figures* in
+  `build-and-preamble.md`).
 
 ## OPERATIONAL DIRECTIVES
 
@@ -390,9 +391,10 @@ does not help and thin in the places it does.
 
   There is no separate register to update: **this project has no open-questions file, and no
   OQ numbering.** Earlier revisions of this file referred to both, and to flagging errors with
-  `\omitted{...}` or "a dark-red note" — all three are dead. `\omitted` is still defined in the
-  preamble, marked *"kept for future use if needed"*, but is used nowhere in `content/`; do not
-  reach for it. One mechanism, in one place, next to the mathematics it concerns.
+  `\omitted{...}` or "a dark-red note". All of them are dead, and `\omitted` was deleted from
+  the preamble on 2026-08-09 rather than left defined, since a macro kept *"for future use if
+  needed"* is an invitation to use it. One mechanism, in one place, next to the mathematics it
+  concerns.
 * **Illegible source text:** Mark as `⟨?word⟩` inline in the `.tex` and add an `ainote` saying
   what is unreadable and where. Never guess silently.
 * **Custom Sections:** You are allowed and encouraged to inject custom `\section`, `\subsection`,

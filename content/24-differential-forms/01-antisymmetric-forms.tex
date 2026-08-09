@@ -131,6 +131,132 @@ e_{i_1}^*\wedge\cdots\wedge e_{i_k}^*(v_1,\ldots,v_k) = \det\!\left(
 \]
 \end{example}
 
+% Generator: Claude Opus 5 (High) --- FIG-CH24-01. This chapter had no figures at all, and this
+% is the one picture the subject is built on: the determinant in the example above is a SHADOW
+% AREA, and saying so turns every later sign manipulation from bookkeeping into geometry.
+%
+% Arithmetic, checked (see "Verifying figures" in build-and-preamble.md):
+%   Axonometric projection used throughout: (a,b,c) |-> (-0.55a + b, -0.35a + c).
+%   v = (2, 1, 1.6)    |-> (-1.10 + 1.00, -0.70 + 1.60) = (-0.10,  0.90)
+%   w = (0.8, 2.2, 1.0)|-> (-0.44 + 2.20, -0.28 + 1.00) = ( 1.76,  0.72)
+%   v+w = (2.8,3.2,2.6)|-> (-1.54 + 3.20, -0.98 + 2.60) = ( 1.66,  1.62)
+%   Shadows (third coordinate set to 0):
+%   v' = (2,1,0)       |-> (-0.10, -0.70)
+%   w' = (0.8,2.2,0)   |-> ( 1.76, -0.28)
+%   v'+w'              |-> ( 1.66, -0.98)
+%   dx^1 ^ dx^2 (v,w) = det[[2, 0.8],[1, 2.2]] = 4.4 - 0.8 = +3.6, hence POSITIVELY oriented,
+%   which is why the arc in the shadow runs counterclockwise. The third coordinates 1.6 and 1.0
+%   are deliberately unequal and deliberately irrelevant: the whole point is that the shadow
+%   does not see them.
+%
+% w was (0.6, 2.4, 0.4) in the first draft. Rendered, it landed at (2.07, 0.19), i.e. all but ON
+% the drawn x_2 axis, so the picture asserted that w was a multiple of e_2 -- which is false and
+% would have made the shadow look like a trivial special case. Not visible in the source; caught
+% by looking at the page. Raising w's third coordinate to 1.0 lifts it clear of the axis.
+%   Arc centre = centroid of the shadow = (0.83, -0.49); an arc (-135:135:0.22) about that
+%   centre starts at (0.83, -0.49) + 0.22*(cos -135, sin -135) = (0.674, -0.646).
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.25]
+  % the x_1 x_2 coordinate plane, drawn as the patch [0,3.4] x [0,3.6]
+  \fill[gray!12] (0,0) -- (3.6,0) -- (1.73,-1.19) -- (-1.87,-1.19) -- cycle;
+  \draw[gray!45] (0,0) -- (3.6,0) -- (1.73,-1.19) -- (-1.87,-1.19) -- cycle;
+
+  % axes
+  \draw[->, gray!70!black] (0,0) -- (-1.87,-1.19) node[below left, font=\scriptsize] {$x_1$};
+  \draw[->, gray!70!black] (0,0) -- (3.6,0) node[right, font=\scriptsize] {$x_2$};
+  \draw[->, gray!70!black] (0,0) -- (0,2.6) node[above, font=\scriptsize] {$x_3$};
+
+  % the shadow parallelogram, in the plane
+  \fill[OliveGreen!30, opacity=0.85]
+    (0,0) -- (-0.10,-0.70) -- (1.66,-0.98) -- (1.76,-0.28) -- cycle;
+  \draw[OliveGreen!60!black, thick]
+    (0,0) -- (-0.10,-0.70) -- (1.66,-0.98) -- (1.76,-0.28) -- cycle;
+
+  % orientation of the shadow: v' then w' is counterclockwise, matching det = +3.6
+  \draw[OliveGreen!60!black, ->, thick] (0.674,-0.646) arc (-135:135:0.22);
+
+  % the actual parallelogram spanned by v and w, floating above
+  \fill[MidnightBlue!22, opacity=0.75]
+    (0,0) -- (-0.10,0.90) -- (1.66,1.62) -- (1.76,0.72) -- cycle;
+  \draw[MidnightBlue!70, thick]
+    (0,0) -- (-0.10,0.90) -- (1.66,1.62) -- (1.76,0.72) -- cycle;
+
+  % projection lines: each vertex drops straight down to its shadow
+  \draw[gray!60, dashed] (-0.10,0.90) -- (-0.10,-0.70);
+  \draw[gray!60, dashed] (1.76,0.72) -- (1.76,-0.28);
+  \draw[gray!60, dashed] (1.66,1.62) -- (1.66,-0.98);
+
+  % the two vectors
+  \draw[MidnightBlue, very thick, ->] (0,0) -- (-0.10,0.90) node[above left, font=\small] {$v$};
+  \draw[MidnightBlue, very thick, ->] (0,0) -- (1.76,0.72) node[below right, font=\small] {$w$};
+
+  \node[OliveGreen!50!black, font=\scriptsize, align=center] at (1.0,-1.52)
+    {shadow on the $x_1x_2$-plane,\\signed area $=dx^1\wedge dx^2(v,w)$};
+\end{tikzpicture}
+\end{center}
+
+\begin{importantremark}[A $k$-form measures shadows]
+\label{rem:forms_measure_shadows}
+The determinant in the example above is not a bookkeeping device. It is the \textbf{signed
+$k$-dimensional volume of the shadow} that the parallelepiped spanned by $v_1,\dots,v_k$ casts
+on the coordinate plane $x_{i_1}\cdots x_{i_k}$, obtained by deleting every other coordinate.
+Everything in this chapter follows from reading it that way.
+\begin{itemize}
+  \item \textbf{Why antisymmetric.} Swapping two vectors reverses the sense in which the shadow
+    is traversed, and a signed area that is not sensitive to that is not measuring orientation
+    at all. In particular $L(\dots,v,\dots,v,\dots) = 0$: a parallelepiped with a repeated edge
+    is flat, and casts a shadow of zero volume.
+  \item \textbf{Why $k$ can exceed neither $n$ nor the rank.} There is no $k$-dimensional
+    shadow to cast if the vectors span fewer than $k$ dimensions, which is
+    \cref{prop:k_form_basis_expansion}'s reason for discarding every repeated index.
+  \item \textbf{Why the coefficients are indexed by increasing tuples.} One shadow per
+    coordinate plane, and $i_1 < \dots < i_k$ names each plane once. A $k$-form on
+    $\mathbb{R}^n$ is a recipe for weighting the $\binom{n}{k}$ shadows and adding them up.
+\end{itemize}
+In the picture, $v$ and $w$ have different third coordinates and the shadow does not notice:
+$dx^1\wedge dx^2$ deletes $x_3$ before measuring anything.
+\end{importantremark}
+
+% Generator: Claude Opus 5 (High) --- FIG-CH24-02, the companion to the one above: the two
+% degenerate readings of the same shadow, which is where antisymmetry stops being an axiom.
+% Arithmetic: all three panels show the SAME shadow as the figure above, i.e. the plane figure
+% spanned by v' = (2,1) and w' = (0.8,2.2), drawn at scale 0.55, so v' sits at (1.10,0.55),
+% w' at (0.44,1.21) and v'+w' at (1.54,1.76). Keeping the vectors identical across the two
+% figures is deliberate: the reader can carry the number 3.6 from one to the other.
+%   Panel 1: det[[2,0.8],[1,2.2]] = 4.4 - 0.8 = +3.6, arc counterclockwise.
+%   Panel 2: columns swapped, det[[0.8,2],[2.2,1]] = 0.8 - 4.4 = -3.6, arc clockwise.
+%   Panel 3: w' replaced by 1.6*v' = (3.2,1.6) -> at scale 0.55, (1.76,0.88). Determinant
+%            det[[2,3.2],[1,1.6]] = 3.2 - 3.2 = 0; the parallelogram is a segment, drawn as one.
+\begin{center}
+\begin{tikzpicture}[>=Latex]
+  % ---------- Panel 1: v then w ----------
+  \begin{scope}
+    \fill[OliveGreen!30] (0,0) -- (1.10,0.55) -- (1.54,1.76) -- (0.44,1.21) -- cycle;
+    \draw[OliveGreen!60!black, thick] (0,0) -- (1.10,0.55) -- (1.54,1.76) -- (0.44,1.21) -- cycle;
+    \draw[OliveGreen!60!black, ->, thick] (0.95,0.75) arc (-30:200:0.3);
+    \draw[MidnightBlue, very thick, ->] (0,0) -- (1.10,0.55) node[below right, font=\scriptsize] {$v$};
+    \draw[MidnightBlue, very thick, ->] (0,0) -- (0.44,1.21) node[above left, font=\scriptsize] {$w$};
+    \node[font=\scriptsize, align=center] at (0.7,-0.55) {$dx^1\wedge dx^2(v,w)$\\$=+3.6$};
+  \end{scope}
+  % ---------- Panel 2: the same pair, swapped ----------
+  \begin{scope}[xshift=3.6cm]
+    \fill[OliveGreen!30] (0,0) -- (1.10,0.55) -- (1.54,1.76) -- (0.44,1.21) -- cycle;
+    \draw[OliveGreen!60!black, thick] (0,0) -- (1.10,0.55) -- (1.54,1.76) -- (0.44,1.21) -- cycle;
+    \draw[BrickRed, <-, thick] (0.95,0.75) arc (-30:200:0.3);
+    \draw[MidnightBlue, very thick, ->] (0,0) -- (1.10,0.55) node[below right, font=\scriptsize] {$v$};
+    \draw[MidnightBlue, very thick, ->] (0,0) -- (0.44,1.21) node[above left, font=\scriptsize] {$w$};
+    \node[font=\scriptsize, align=center] at (0.7,-0.55) {$dx^1\wedge dx^2(w,v)$\\$=-3.6$};
+  \end{scope}
+  % ---------- Panel 3: dependent vectors, flat shadow ----------
+  \begin{scope}[xshift=7.2cm]
+    \draw[OliveGreen!60!black, thick] (0,0) -- (1.76,0.88);
+    \draw[MidnightBlue, very thick, ->] (0,0) -- (1.10,0.55) node[below right, font=\scriptsize] {$v$};
+    \draw[MidnightBlue, very thick, ->] (0,0) -- (1.76,0.88) node[above left, font=\scriptsize] {$w$};
+    \node[font=\scriptsize, align=center] at (0.9,-0.55) {$w$ parallel to $v$\\$=0$};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
 % Source: Corsin Nick/Class Notes/Week 11.pdf, pp. 9--10
 \begin{proposition}[Every $k$-linear form is a combination of wedge products of covectors]
 \label{prop:k_form_basis_expansion}

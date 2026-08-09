@@ -161,4 +161,47 @@ dx=dy\wedge dy=dz\wedge dz=0$ kills exactly the three diagonal terms, and antisy
 ($dy\wedge dx=-dx\wedge dy$, and so on) pairs up the rest.
 \end{ainote}
 
+% Generator: Claude Opus 5 (High) --- FIG-CH24-03. The chapter opens by promising that grad,
+% curl and div are one operator satisfying one identity. Items 1-3 of the example above prove
+% it, one column at a time, and the result was never assembled anywhere. This is that assembly.
+% Every vertical arrow is an identification established earlier in this chapter, and each is
+% labelled with the place it was made, so the diagram is checkable rather than decorative.
+\begin{center}
+\begin{tikzcd}[row sep=3.4em, column sep=3.4em]
+  \Omega^0(U) \arrow[r, "d"]
+    & \Omega^1(U) \arrow[r, "d"]
+    & \Omega^2(U) \arrow[r, "d"]
+    & \Omega^3(U) \\
+  C^\infty(U) \arrow[r, "\grad"'] \arrow[u, "="]
+    & C^\infty(U,\mathbb{R}^3) \arrow[r, "\curl"'] \arrow[u, "F \mapsto \omega_F"]
+    & C^\infty(U,\mathbb{R}^3) \arrow[r, "\divg"'] \arrow[u, "F \mapsto \omega_F^2"]
+    & C^\infty(U) \arrow[u, "g \mapsto g\,dx\wedge dy\wedge dz"']
+\end{tikzcd}
+\end{center}
+
+\begin{importantremark}[One operator, one identity]
+\label{rem:one_theorem_four_costumes_forms}
+For $U \subseteq \mathbb{R}^3$ the diagram above commutes, and each square is one of the three
+computations just performed: the left square is item 1, the middle is item 2, the right is
+item 3. Read downward it says that the classical vector operators are $d$ in disguise, and that
+the disguise is nothing but the choice of which object to call a vector field.
+
+The payoff is the bottom row's two mysteries collapsing into one line of the top row. Property
+(3) of \cref{thm:exterior_derivative} is $d \circ d = 0$, a single statement about a single
+operator, and reading it through the two identifications gives
+\[\curl\grad = 0 \qquad\text{and}\qquad \divg\curl = 0.\]
+These are the same fact twice, seen from two rungs of the same ladder. That is the whole reason
+for the machinery: in $\mathbb{R}^3$ there happen to be two identities because there happen to be
+two interior rungs, and in $\mathbb{R}^n$ there are $n-1$ of them, none of which needs a separate
+proof.
+
+Two cautions the picture invites. The vertical arrows are \emph{not} canonical: $F \mapsto
+\omega_F$ uses the inner product and $F \mapsto \omega_F^2$ uses the determinant, so both depend
+on $\mathbb{R}^3$ carrying a metric and an orientation, which is exactly what a general manifold
+does not hand you for free. And the ladder is this short only because $n = 3$: $\Omega^4(U)$ on
+$\mathbb{R}^3$ is zero, since there is no fourth coordinate to build a shadow on
+(\cref{rem:forms_measure_shadows}), which is why $\divg$ is the last operator in the row and not
+because anyone chose to stop there.
+\end{importantremark}
+
 % Supplement: Sascha Brack/Class Notes/Week_11_Notes_Friday.pdf, pp. 2--4

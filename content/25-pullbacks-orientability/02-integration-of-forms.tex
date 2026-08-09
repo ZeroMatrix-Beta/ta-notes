@@ -4,8 +4,8 @@
 \label{sec:integration_of_forms}
 
 % Source: Corsin Nick/Class Notes/Week 12.pdf, p. 6
-If $\mathcal{M}$ is an $m$-dimensional submanifold of $\mathbb{R}^m$ --- i.e.\ simply an open
-set --- and $\omega \in \Omega^m(\mathcal{M})$ an $m$-form, then
+If $\mathcal{M}$ is an $m$-dimensional submanifold of $\mathbb{R}^m$ (i.e.\ simply an open set)
+and $\omega \in \Omega^m(\mathcal{M})$ is an $m$-form, then
 \[\int_{\mathcal{M}} \omega := \int_{\mathcal{M}} \omega_x(e_1,\ldots,e_m)\,dx;\]
 in particular, for $f \in C^\infty(\mathcal{M})$,
 \[\int_{\mathcal{M}} f\,dx^1\wedge\cdots\wedge dx^m = \int_{\mathcal{M}} f(x)\,dx,\]
@@ -59,7 +59,7 @@ The coefficient at $p$ is $3\cos(0) = 3$, and therefore
 \[\omega_p(v_1,v_2) = 3 \cdot \tfrac12 = \tfrac32.\]
 
 Two things are worth noticing. The second components of $v_1$ and $v_2$ never entered the
-computation --- a form built from $dx^1$ and $dx^3$ is simply blind to motion in the $x^2$
+computation, since a form built from $dx^1$ and $dx^3$ is blind to motion in the $x^2$
 direction, which is what makes it the natural thing to integrate over a surface in the
 $x^1x^3$-plane. And the answer is \emph{signed}: swapping $v_1$ and $v_2$ swaps the determinant's
 columns and returns $-\tfrac32$. That sign is exactly the orientation data of
@@ -69,9 +69,8 @@ well defined.
 
 \begin{ainote}
 Applying \cref{def:integral_of_form_over_submanifold} to $\omega_F^{n-1}$ or $\omega_F^2$ from
-\cref{ch:differential_forms} recovers exactly the flux integrals of \cref{ch:flux} --- those
-were, all along,
-integrals of forms in this sense. And \cref{def:pullback_of_forms} is what makes the
+\cref{ch:differential_forms} recovers exactly the flux integrals of \cref{ch:flux}. Those were,
+all along, integrals of forms in this sense. And \cref{def:pullback_of_forms} is what makes the
 motivating reparametrization-invariance calculation precise: $\int_L \omega$ does
 not depend on the parametrization $\phi$ chosen, only on $L$ and its orientation.
 \end{ainote}

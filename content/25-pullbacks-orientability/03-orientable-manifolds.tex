@@ -36,7 +36,7 @@ is chosen, $M$ is said to be \newterm{oriented}.
 \begin{ainote}
 Corsin marks the family $\{\phi_i\}$ itself with the margin note \qt{is called an Atlas} next
 to the covering condition, and the positivity condition with \qt{Atlas} again next to the
-determinant inequality --- i.e.\ he is flagging that \qt{atlas} names the family regardless of
+determinant inequality, flagging that \qt{atlas} names the family regardless of
 whether the determinant condition holds, while \qt{orientation} is the stronger notion once it
 does. This matches the definition's own wording above.
 \end{ainote}
@@ -47,6 +47,26 @@ coordinate frames $(\partial_1\phi,\partial_2\phi)$ and $(\partial_1\psi,\partia
 shared point disagree in handedness.
 
 % Sonnet 5 (Medium) --- FIG-W12-01
+% Revised 2026-08-09 (Opus 5, high). One correction and one clarification.
+%
+%   * THE CORRECTION. The figure drew a rotation where it needed a reflection, i.e. it
+%     illustrated the opposite of what the ainote below it asserts. With the frames based at
+%     (2.1,1.3), the old vectors were
+%         d1 phi = (1.2, 0.25),  d2 phi = (-0.4, 0.85):  cross = 1.02 + 0.10 = +1.12
+%         d1 psi = (-1.2,-0.25), d2 psi = (0.45,-0.95):  cross = 1.14 + 0.1125 = +1.2525
+%     Both cross products are POSITIVE, so both frames turned counterclockwise and the psi
+%     frame was just the phi frame rotated by 180 degrees --- a transition map of positive
+%     determinant, which is precisely the case an orientable atlas allows. d2 psi now points
+%     at 55 degrees instead, giving d2 psi = (0.55, 0.78) and
+%         cross = (-1.2)(0.78) - (-0.25)(0.55) = -0.936 + 0.1375 = -0.7985 < 0,
+%     so the psi frame turns clockwise, as the ainote says it does. 55 degrees was chosen to
+%     keep all four arrows apart: the directions are now 12, 115, 192 and 55 degrees, and the
+%     tip (2.65,2.08) still lies inside the patch.
+%   * THE CLARIFICATION. The two small frames on the right are drawn identically, which is
+%     correct and was previously unexplained: in each parameter domain the frame is the
+%     standard basis by definition, and the handedness mismatch appears only in the images.
+%     They are now labelled as the domains, so the repetition reads as the point rather than
+%     as an oversight.
 \begin{center}
 \begin{tikzpicture}[>=Latex, scale=1.0]
   \draw[green!50!black, thick] (0,0) .. controls (1.5,0.9) and (3.5,0.6) .. (5,1.2)
@@ -58,19 +78,21 @@ shared point disagree in handedness.
   \draw[blue!70!black, thick, ->] (2.1,1.3) -- (1.7,2.15) node[above, font=\scriptsize]
     {$\partial_2\phi$};
   \draw[red, thick, ->] (2.1,1.3) -- (0.9,1.05) node[left, font=\scriptsize] {$\partial_1\psi$};
-  \draw[red, thick, ->] (2.1,1.3) -- (2.55,0.35) node[below, font=\scriptsize] {$\partial_2\psi$};
+  \draw[red, thick, ->] (2.1,1.3) -- (2.65,2.08) node[right, font=\scriptsize] {$\partial_2\psi$};
   \node[font=\scriptsize] at (0.1,-0.35) {$\phi$};
   \node[font=\scriptsize] at (4.4,2.7) {$\psi$};
   \draw[blue!70!black, ->] (6.3,0.2) -- (7.3,0.2) node[right, font=\scriptsize] {$e_1$};
   \draw[blue!70!black, ->] (6.3,0.2) -- (6.3,1.2) node[above, font=\scriptsize] {$e_2$};
+  \node[blue!70!black, font=\scriptsize] at (6.8,-0.3) {domain of $\phi$};
   \draw[red, ->] (8.6,0.2) -- (9.6,0.2) node[right, font=\scriptsize] {$e_1$};
   \draw[red, ->] (8.6,0.2) -- (8.6,1.2) node[above, font=\scriptsize] {$e_2$};
+  \node[red, font=\scriptsize] at (9.1,-0.3) {domain of $\psi$};
 \end{tikzpicture}
 \end{center}
 
 \begin{ainote}
 At the shared point, $(\partial_1\phi,\partial_2\phi)$ turns counterclockwise while
-$(\partial_1\psi,\partial_2\psi)$ turns clockwise --- the two frames are mirror images of each
+$(\partial_1\psi,\partial_2\psi)$ turns clockwise, so the two frames are mirror images of each
 other. Corsin's caption: \qt{Here, $\det(D(\phi^{-1}\circ\psi)) < 0$!} This is exactly the atlas
 $\{\phi,\psi\}$ failing \cref{def:orientable_manifold}: it covers the patch, but its transition
 map has \emph{negative} Jacobian determinant there, so $\{\phi,\psi\}$ is an atlas but not an

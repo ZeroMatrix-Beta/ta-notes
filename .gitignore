@@ -40,6 +40,10 @@ exercises/
 *.pdf
 !docs/**/*.pdf
 
+# The built document is the deliverable, so it is tracked despite being an
+# artefact. Every other PDF at the root (chk*.pdf and friends) stays ignored.
+!main.pdf
+
 # Editor / OS
 .DS_Store
 Thumbs.db

@@ -6,7 +6,7 @@
 \begin{exercisesolution}[Solution of \cref{ex:12.3}]
 \textbf{1.} The domain is $\{(x,y,z) \in \mathbb{R}^3 : (x,y) \neq (0,0)\}$, i.e.\
 $\mathbb{R}^3$ with the $z$-axis removed. It is connected (path-connected: any two points can
-be joined by a path avoiding the axis), but not simply connected --- e.g.\ $\gamma_1$, which
+be joined by a path avoiding the axis), but not simply connected: $\gamma_1$, for instance, which
 winds once around the axis, cannot be contracted to a point without crossing it. (It is also
 not convex: the segment from $(-1,0,0)$ to $(1,0,0)$ leaves the domain.)
 
@@ -22,9 +22,8 @@ $x^2+y^2=1$, so $F(\gamma_1(t)) = (2\sin t,\,-2\cos t,\,0)$ and $\gamma_1'(t) = 
 \cos t,0)$, giving
 \[\int_{\gamma_1} F\cdot d\gamma_1 = \int_0^{2\pi} \big(2\sin t\cdot(-\sin t) + (-2\cos t)
   \cdot\cos t\big)\,dt = \int_0^{2\pi} -2\,dt = -4\pi.\]
-Since this is nonzero on a closed loop, $F$ is \textbf{not} conservative --- even though it is
-curl-free, its domain is not simply connected (part 1), so curl-free does not force
-conservative here.
+Since this is nonzero on a closed loop, $F$ is \textbf{not} conservative. It is curl-free, but
+its domain is not simply connected (part 1), so curl-free does not force conservative here.
 
 \textbf{3.} Let $S := \{(x,y,z) : \sqrt{x^2+y^2} = 1+z/2,\ 0\leq z\leq2\}$, the cone swept out
 by linearly interpolating the radius from $\gamma_1$ ($z=0$, radius $1$) to $\gamma_2$ ($z=2$,

@@ -6,10 +6,10 @@
 
 % Source: Corsin Nick/Class Notes/Week 13.pdf, pp. 6--7
 \begin{ainote}
-Corsin recaps \cref{thm:local_parametrization} verbatim --- for every $p \in M$, an
+Corsin recaps \cref{thm:local_parametrization} verbatim (for every $p \in M$, an
 open neighbourhood $V$ of $p$, an open set $U \subseteq \mathbb{R}^k$, and $\phi : U \to
 V\cap M$ that is smooth, has $D\phi_x$ injective for all $x \in U$, and is a homeomorphism onto
-$V\cap M$ --- before extending it to submanifolds with boundary below. Not repeated; see
+$V\cap M$) before extending it to submanifolds with boundary below. It is not repeated here; see
 \cref{sec:submanifolds}.
 \end{ainote}
 
@@ -27,24 +27,71 @@ the (closed) \newterm{left half-space}. If $p \in \partial M$ and $\phi : U \sub
 \end{definition}
 
 % Sonnet 5 (Medium) --- FIG-W13-01
+% Redrawn 2026-08-09 (Opus 5, high). The original was wrong in four independent ways, none of
+% them visible in the source and all four visible the moment it was rendered:
+%
+%   1. The point marked $p \in \partial M$ was not on any boundary. It sat at (0.9,0.55) while
+%      the dashed curve meant to be $\partial M$ passed through roughly (0.35,0.54), so the dot
+%      was about half a unit into the interior. The dashed curve also ran straight through the
+%      closed green blob and out the other side, so it read as a chord rather than as a boundary.
+%   2. $\partial_2\phi$ pointed into the interior. \Cref{def:induced_orientation} directly below
+%      requires $\{\partial_2\phi,\ldots,\partial_k\phi\}$ to be a basis of $T_p(\partial M)$,
+%      i.e. $\partial_2\phi$ must be TANGENT to $\partial M$. It was drawn at (0.85,0.2) from the
+%      base point, across the region.
+%   3. The domain sat on the wrong side of its own boundary. With $\mathcal{H}^2 = \{x_1\le0\}$
+%      as the definition above states, $U$ must lie to the LEFT of the line $x_1=0$ and $e_1$
+%      must point OUT of it. The rectangle spanned $x\in[7.1,8.4]$ with the dashed line
+%      $x_1=0$ on its left edge and $e_1$ pointing right INTO the rectangle, i.e. it drew
+%      $U \subseteq \{x_1 \ge 0\}$.
+%   4. The $\phi$ arrow pointed from the manifold to the domain. $\phi : U \to V \cap M$ goes
+%      the other way.
+%
+% The redraw fixes all four and is built so that the frame at $p$ is exact rather than
+% eyeballed. The left side of $\partial M$ is the cubic Bezier with control points
+% P0 = (0.5,-1.0), P1 = (0.05,-0.3), P2 = (0.05,0.3), P3 = (0.5,1.0), and at its midpoint
+%     B(1/2)  = (P0 + 3P1 + 3P2 + P3)/8 = (1.30/8, 0/8) = (0.1625, 0),
+%     B'(1/2) = (3/4)[(P1-P0) + 2(P2-P1) + (P3-P2)] = (3/4)(0, 2.6) = (0, 1.95),
+% so at $p = (0.1625, 0)$ the tangent to $\partial M$ is exactly vertical and the outward
+% normal is exactly $(-1,0)$. Hence $\partial_2\phi$ is drawn straight up (tangent to
+% $\partial M$, as the induced-orientation definition needs) and $\partial_1\phi$ straight
+% left (out of $M$, matching $e_1$ leaving $\mathcal{H}^2$), both exactly.
 \begin{center}
 \begin{tikzpicture}[>=Latex, scale=1.0]
-  \draw[green!50!black, thick] (0,0) .. controls (0.3,1.3) and (1.3,2.0) .. (2.6,1.9)
-    .. controls (3.9,1.8) and (4.6,1.0) .. (4.4,0.1) .. controls (3.5,-0.5) and (1.5,-0.6)
-    .. (0,0);
-  \fill (0.9,0.55) circle (1.1pt);
-  \draw[red, dashed, thick] (-0.05,-0.55) .. controls (0.4,0.0) and (0.5,1.1) .. (0.15,1.55);
-  \draw[red, thick, ->] (0.9,0.55) -- (1.75,0.75) node[right, font=\scriptsize] {$\partial_2\phi$};
-  \draw[red, thick, ->] (0.9,0.55) -- (0.55,1.3) node[above, font=\scriptsize] {$\partial_1\phi$};
-  \node[font=\scriptsize] at (0.6,-0.85) {$p \in \partial M$};
-  \draw[->] (5.3,0.7) -- (6.3,0.7) node[right, font=\scriptsize] {};
-  \node[font=\scriptsize] at (5.8,1.0) {$\phi$};
-  \draw[red, thick] (7.1,0.1) rectangle (8.4,1.4);
-  \draw[red, thick, dashed] (7.1,0.1) -- (7.1,1.4);
-  \draw[red, ->] (7.1,0.75) -- (7.7,0.75) node[right, font=\scriptsize] {$e_1$};
-  \draw[red, ->] (7.1,0.75) -- (7.1,1.25) node[above, font=\scriptsize] {$e_2$};
-  \node[font=\scriptsize] at (7.1,-0.15) {$0$};
-  \node[font=\scriptsize] at (7.75,-0.2) {$U \subseteq \mathcal{H}^2$};
+  % --- The submanifold with boundary. The whole outline IS \partial M. ---
+  \fill[green!8]
+    (0.5,-1.0) .. controls (0.05,-0.3) and (0.05,0.3) .. (0.5,1.0)
+    .. controls (1.6,1.75) and (3.4,1.7) .. (4.3,1.0)
+    .. controls (4.9,0.4) and (4.7,-0.5) .. (3.9,-0.95)
+    .. controls (2.8,-1.4) and (1.4,-1.4) .. (0.5,-1.0) -- cycle;
+  \draw[green!50!black, thick]
+    (0.5,-1.0) .. controls (0.05,-0.3) and (0.05,0.3) .. (0.5,1.0)
+    .. controls (1.6,1.75) and (3.4,1.7) .. (4.3,1.0)
+    .. controls (4.9,0.4) and (4.7,-0.5) .. (3.9,-0.95)
+    .. controls (2.8,-1.4) and (1.4,-1.4) .. (0.5,-1.0) -- cycle;
+  \node[green!50!black, font=\scriptsize] at (2.6,0.15) {$M$};
+  \node[green!50!black, font=\scriptsize] at (-0.55,-0.8) {$\partial M$};
+
+  % --- The frame at p, exact: tangent vertical, outward normal horizontal. ---
+  \fill (0.1625,0) circle (1.1pt);
+  \node[font=\scriptsize, below right, inner sep=2pt] at (0.1625,0) {$p$};
+  \draw[red, thick, ->] (0.1625,0) -- (-0.94,0) node[left, font=\scriptsize] {$\partial_1\phi$};
+  \draw[red, thick, ->] (0.1625,0) -- (0.1625,0.95) node[above, font=\scriptsize] {$\partial_2\phi$};
+
+  % --- phi maps the domain to the manifold, so the arrow points left. ---
+  \draw[->] (6.25,0.1) -- (5.15,0.1) node[midway, above, font=\scriptsize] {$\phi$};
+
+  % --- The domain, on the correct side of \partial\mathcal{H}^2. ---
+  \draw[red, thick] (8.0,-0.85) -- (8.0,1.2);
+  \node[red, font=\scriptsize, above] at (8.0,1.2) {$\partial\mathcal{H}^2$};
+  \fill[red!5] (6.7,-0.65) rectangle (8.0,0.65);
+  \draw[red, thick] (8.0,0.65) -- (6.7,0.65) -- (6.7,-0.65) -- (8.0,-0.65);
+  \node[font=\scriptsize] at (7.25,0.35) {$U$};
+  \node[font=\scriptsize] at (7.1,-1.05) {$U \subseteq \mathcal{H}^2$};
+  \fill (8.0,0) circle (1.1pt);
+  \draw[red, thick, ->] (8.0,0) -- (8.75,0)
+    node[above right, inner sep=1pt, font=\scriptsize] {$e_1$};
+  \draw[red, thick, ->] (8.0,0) -- (8.0,0.75) node[right, font=\scriptsize] {$e_2$};
+  \node[font=\scriptsize, below right, inner sep=2pt] at (8.05,-0.1) {$\phi^{-1}(p)$};
 \end{tikzpicture}
 \end{center}
 
@@ -76,36 +123,83 @@ so $D(\phi^{-1}\circ\psi) = \begin{pmatrix}-1&0\\0&-1\end{pmatrix}$ and $\det D(
 \cref{def:orientable_manifold}.
 
 But restricted to the line $\partial\mathcal{H}^2 = \{(x,\theta) : x=0\}$, $\phi$ and $\psi$
-parametrize \emph{opposite} boundary components of the cylinder --- $\phi(0,\cdot)$ traces the
-circle at $x=0$, $\psi(0,\cdot)$ the circle at $x=L$ --- and \cref{def:induced_orientation}
-gives them opposite rotational senses when both are drawn in the same $(y,z)$-view:
+parametrize \emph{opposite} boundary components of the cylinder. Here $\phi(0,\cdot)$ traces the
+circle at $x=0$ and $\psi(0,\cdot)$ the circle at $x=L$, and \cref{def:induced_orientation}
+gives them opposite rotational senses when both are drawn in the same $(y,z)$-view.
 
-% Sonnet 5 (Medium) --- FIG-W13-02
+% Generator: Claude Opus 5 (High) --- FIG-25-03, replacing FIG-W13-02.
+%
+% Why the old figure was replaced rather than patched. It drew the cylinder TWICE, once per
+% end, which defeats the only thing the example is about: a single consistently oriented
+% cylinder inducing opposite senses on its two rims cannot be compared across two pictures.
+% Its coordinates were also wrong in three places.
+%   * Both end circles sat at a CORNER of their rectangle, (0,2.4) and (11,2.4), instead of at
+%     the middle of the edge, y = 2.95.
+%   * Both were written `circle (0.55 and 0.55)`, i.e. an ellipse spelled as a circle, so the
+%     left rim was round while the right rim was drawn as `ellipse (0.35 and 0.55)`. The two
+%     ends of one cylinder had different shapes.
+%   * Neither orientation arc lay on the rim it labelled. The red arc starts at (-0.5,3.5) at
+%     angle 150 with radius 0.55, so its centre is (-0.5,3.5) - 0.55*(cos150,sin150)
+%     = (-0.024, 3.225); the orange one has centre (11.024, 2.675). The rim centres are
+%     (0,2.95) and (11,2.95).
+%
+% Geometry of the replacement, checked. Axis along screen x, rims at x = 0 and x = 6 drawn as
+% ellipses of x-radius 0.5 and y-radius 1.3. The sense of each arrow is read off the
+% parametrizations, not guessed:
+%   phi(0,t) = (0, r cos t, -r sin t): as t grows, (y,z) runs (r,0) -> (0,-r) -> (-r,0), i.e.
+%     CLOCKWISE in the (y,z)-view, so clockwise on screen (right -> bottom -> left -> top).
+%   psi(0,t) = (L, r cos t, r sin t): (y,z) runs (r,0) -> (0,r) -> (-r,0), COUNTERCLOCKWISE.
+% Hence the left arc runs through DECREASING angles (60 -> -240) and the right one through
+% INCREASING angles (-60 -> 240). Each sweeps 300 degrees, leaving a 60-degree gap so that the
+% arrowhead sits in clear space. Arc start points are centre + (0.5 cos A, 1.3 sin A):
+%   left  A =  60: (0 + 0.250,  1.126)      right A = -60: (6 + 0.250, -1.126)
 \begin{center}
-\begin{tikzpicture}[>=Latex, scale=0.95]
-  \draw[blue!70!black, thick] (0,2.4) rectangle (4.5,3.5);
-  \draw[blue!70!black, thick] (0,2.4) circle (0.55 and 0.55);
-  \draw[blue!70!black, thick] (4.5,2.95) ellipse (0.35 and 0.55);
-  \draw[red, thick, ->] (-0.5,3.5) arc (150:490:0.55);
-  \node[red, font=\scriptsize] at (-0.85,3.5) {$t\mapsto\phi(0,t)$};
-  \node[font=\scriptsize] at (0,1.7) {\textbf{left end} ($x=0$)};
+\begin{tikzpicture}[>=Latex, scale=1.0]
+  \def\rx{0.5}
+  \def\ry{1.3}
 
-  \draw[blue!70!black, thick] (6.5,2.4) rectangle (11,3.5);
-  \draw[blue!70!black, thick, dashed] (6.5,2.95) ellipse (0.35 and 0.55);
-  \draw[blue!70!black, thick] (11,2.4) circle (0.55 and 0.55);
-  \draw[orange, thick, ->] (11.5,2.4) arc (-30:330:0.55);
-  \node[orange, font=\scriptsize] at (11.9,3.5) {$t\mapsto\psi(0,t)$};
-  \node[font=\scriptsize] at (8.75,1.7) {\textbf{right end} ($x=L$)};
+  % --- the tube itself: two rims joined by the two silhouette lines ---
+  \draw[blue!70!black, thick] (0,\ry) -- (6,\ry);
+  \draw[blue!70!black, thick] (0,-\ry) -- (6,-\ry);
+  \draw[blue!70!black, thick] (0,0) ellipse ({\rx} and {\ry});
+  \draw[blue!70!black, thick] (6,0) ellipse ({\rx} and {\ry});
+  \node[blue!70!black, font=\small] at (3,0.42) {$C$};
+
+  % --- the axis, so the two ends can be told apart ---
+  \draw[gray!65, dashed, ->] (-1.5,0) -- (7.8,0)
+    node[right, font=\small, text=black] {$x$};
+  \node[font=\scriptsize, anchor=north] at (0,-\ry-0.10) {$x=0$};
+  \node[font=\scriptsize, anchor=north] at (6,-\ry-0.10) {$x=L$};
+
+  % --- induced orientation on the left rim: CLOCKWISE on screen ---
+  \draw[red!85!black, very thick, ->]
+    (0.250,1.126) arc[start angle=60, end angle=-240, x radius=\rx, y radius=\ry];
+  \node[red!85!black, font=\scriptsize, anchor=south east] at (-0.30,1.30)
+    {$t\mapsto\phi(0,t)$};
+
+  % --- induced orientation on the right rim: COUNTERCLOCKWISE on screen ---
+  \draw[orange!90!black, very thick, ->]
+    (6.250,-1.126) arc[start angle=-60, end angle=240, x radius=\rx, y radius=\ry];
+  % Kept clear of the "x = L" tick label, which sits at (6, -\ry - 0.10).
+  \node[orange!90!black, font=\scriptsize, anchor=west] at (6.72,-0.78)
+    {$t\mapsto\psi(0,t)$};
+
+  \node[font=\scriptsize, align=center, anchor=north] at (3,-\ry-0.62)
+    {one cylinder, both rims seen from the same side:\\
+     the two induced senses turn opposite ways};
 \end{tikzpicture}
 \end{center}
 
-\begin{ainote}
-This is not a contradiction, and Corsin does not present it as one: $\{\phi,\psi\}$ is a
-perfectly good orientation of $C$ as a whole (the overlap check above is what
-\cref{def:orientable_manifold} demands, and it passes). What the picture shows is that a
-\emph{consistently} oriented cylinder induces boundary orientations on its two ends that look
-like opposite rotational senses when both circles are drawn from the same external viewpoint
---- exactly the familiar fact, from the divergence theorem, that the outward normal at the two
-ends of a solid cylinder points in opposite $x$-directions. Induced orientation is doing its
-job correctly here, not failing.
-\end{ainote}
+% Corsin does not present this as a contradiction either; the resolution below is supplied here.
+\begin{remark}[Why the opposite senses are not a contradiction]
+\label{rem:cylinder_opposite_boundary_senses}
+Nothing has gone wrong. The pair $\{\phi,\psi\}$ is a perfectly good orientation of $C$ as a
+whole, since the overlap check above is exactly what \cref{def:orientable_manifold} demands and
+it passes. What the picture shows is that a \emph{consistently} oriented cylinder induces
+boundary orientations on its two ends that turn opposite ways when both circles are viewed from
+the same side.
+
+That is the familiar fact from the divergence theorem, in another costume: the outward normal at
+the two ends of a solid cylinder points in opposite $x$-directions. Induced orientation is doing
+its job here, not failing at it.
+\end{remark}

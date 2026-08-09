@@ -82,20 +82,28 @@
 \colorlet{EnvAINote}{GoldOrange}
 
 % --- Proofs ---
-\colorlet{ProofTint}{OliveGreen}
+\definecolor{ThemeGreen}{HTML}{008837}
+% \colorlet{ProofTint}{OliveGreen}
+\colorlet{ProofTint}{ThemeGreen}
 \colorlet{ProofQEDText}{ProofTint}
 \colorlet{ProofQEDBg}{white}
 
 % --- Running text ---
-\colorlet{TextEmphColor}{MidnightBlue}
-\colorlet{TextBoldColor}{Brown!80!black}   % Espresso brown
+% \colorlet{TextEmphColor}{MidnightBlue}
+\definecolor{EmphBlue}{HTML}{008CC8}
+\colorlet{TextEmphColor}{EmphBlue}
+% \colorlet{TextBoldColor}{Brown!80!black}   % Espresso brown
+\definecolor{TextBoldColor}{HTML}{A8651E}    % Warm Bronze Brown
 \colorlet{TextMetaNote}{Gray}
 \colorlet{LinkColor}{MidnightBlue}
 \colorlet{FileColor}{Magenta}
 
 % --- Lists ---
-\colorlet{ItemizeBullet}{BurntOrange}
-\colorlet{EnumerateBullet}{MidnightBlue}
+% \colorlet{ItemizeBullet}{BurntOrange}
+% \colorlet{EnumerateBullet}{MidnightBlue}
+\definecolor{ListAmber}{HTML}{BD2400}
+\colorlet{ItemizeBullet}{ListAmber}
+\colorlet{EnumerateBullet}{ListAmber}
 
 % --- Headings ---
 \colorlet{PartTitleText}{ThemePurple!95!black}
@@ -185,9 +193,10 @@
 % Custom commands for italicized terminology and "quotes".
 % \newterm    -> English quotes ``...''   (the default; this is an English text)
 % \germanterm -> German quotes  \glqq...\grqq  for German technical terms
-\newcommand{\newterm}[1]{\textcolor{BrickRed}{``}\textcolor{TextBoldColor}{\textit{#1}}\textcolor{BrickRed}{''}}
-\newcommand{\germanterm}[1]{\textcolor{BrickRed}{\glqq}\textcolor{TextBoldColor}{\textit{#1}}\textcolor{BrickRed}{\grqq}}
-\newcommand{\qt}[1]{\textit{\textcolor{BrickRed}{``}#1\textcolor{BrickRed}{''}}}
+\definecolor{QuoteRed}{HTML}{BD2400}
+\newcommand{\newterm}[1]{\textcolor{QuoteRed}{``}\textcolor{TextBoldColor}{\textit{#1}}\textcolor{QuoteRed}{''}}
+\newcommand{\germanterm}[1]{\textcolor{QuoteRed}{\glqq}\textcolor{TextBoldColor}{\textit{#1}}\textcolor{QuoteRed}{\grqq}}
+\newcommand{\qt}[1]{\textit{\textcolor{QuoteRed}{``}#1\textcolor{QuoteRed}{''}}}
 \newcommand{\inlinemetanote}[1]{\textit{[\textcolor{TextMetaNote}{#1}]}}
 \newcommand{\hint}[1]{\textcolor{OliveGreen}{\textbf{Hint:}} #1}
 
@@ -648,15 +657,18 @@
 \Crefname{aiexercise}{AI-Exercise}{AI-Exercises}
 
 % ==========================================
-% PROOF ENVIRONMENT (olive green, upright, standard text Q.E.D.)
+% PROOF ENVIRONMENT (with pen nib icon & shadowed Q.E.D. box)
 % ==========================================
-\newcommand{\qedbox}{\textcolor{ProofTint}{\sffamily\bfseries Q.E.D.}}
+\newcommand{\qedbox}{%
+  \tikz[baseline=(Q.base)]\node[draw=ProofTint, fill=ProofQEDBg, line width=1pt, rounded corners=2pt, inner xsep=4pt, inner ysep=2pt, font=\sffamily\bfseries\small, text=ProofQEDText, drop shadow={shadow xshift=0.5ex, shadow yshift=-0.5ex, fill=ProofTint, opacity=0.4}] (Q) {Q.E.D.};%
+}
 \renewcommand{\qedsymbol}{\qedbox}
 
 \makeatletter
 \renewenvironment{proof}[1][\proofname]{%
   \par\if@nobreak\vspace{-1ex}\else\addvspace{2.2ex plus 0.5ex minus 0.2ex}\fi
-  \noindent{\normalfont\sffamily\bfseries\color{ProofTint}#1:}%
+  \noindent\textcolor{ProofTint}{\faPenNib}\hspace{0.5em}%
+  {\normalfont\sffamily\bfseries\color{ProofTint}#1:}%
   \par\nobreak\vspace{0.8ex plus .1ex}\vspace{-\parskip}
   \@afterindentfalse\@afterheading
 }{%

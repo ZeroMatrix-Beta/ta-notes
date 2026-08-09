@@ -87,7 +87,7 @@ with tangent vectors $\tau_i := \partial_i\phi$ and exterior unit normal $\nu$, 
 and
 \[\int_{\partial\Omega} \omega_F = \int_{\partial\Omega} \langle F,\tau\rangle\,d\vol_1
   = \int_{\partial\Omega} \vec F\cdot d\vec s.\]
-By \cref{thm:stokes_general}, these are equal --- recovering \cref{thm:stokes_classical}.
+By \cref{thm:stokes_general}, these are equal, which recovers \cref{thm:stokes_classical}.
 
 % Source: Jérôme Paschoud/Notizen/Woche 13.1 Stokes.pdf, p. 4
 \begin{theorem}[Stokes' theorem in 3D]
@@ -139,7 +139,7 @@ $\curl(F)(\phi(\theta,z)) = (0,\sin\theta,2\cos\theta-z)$, and
 \textbf{Via Stokes.} The boundary $\partial M$ consists of the two circles $z=0$ and $z=1$; the
 orientation induced by the outward normal $\nu$ (right-hand rule) traverses the \emph{bottom}
 circle ($z=0$) with $\theta$ increasing and the \emph{top} circle ($z=1$) with $\theta$
-\emph{decreasing} --- the parameter rectangle $[0,2\pi]\times[0,1]$ has $z=0$ as part of its
+\emph{decreasing}. The parameter rectangle $[0,2\pi]\times[0,1]$ has $z=0$ as part of its
 positively-oriented boundary traversed left to right and $z=1$ traversed right to left, and the
 two vertical edges $\theta=0,2\pi$ cancel since they are the same curve in $M$. With
 $\gamma_0(\theta):=(\cos\theta,\sin\theta,0)$ and $\gamma_1(\theta):=(\cos\theta,\sin\theta,1)$,
@@ -190,7 +190,7 @@ flat disk $D := \{x^2+y^2\leq1-h^2,\ z=-h\}$, with upward normal $(0,0,1)$: $S\c
 theorem gives $\int_S\curl(F)\cdot\nu\,d\vol_2 - \int_D\curl(F)\cdot(0,0,1)\,d\vol_2 =
 \int_\Omega\divg(\curl F)\,d\vol_3 = 0$. Since $\langle\curl F,(0,0,1)\rangle\equiv2$,
 \[\int_S\curl(F)\cdot\nu\,d\vol_2 = \int_D 2\,d\vol_2 = 2\cdot\vol_2(D) = 2\pi(1-h^2),\]
-the area of a disk of radius $\sqrt{1-h^2}$ times $2$ --- again the same answer.
+the area of a disk of radius $\sqrt{1-h^2}$ times $2$, again the same answer.
 \end{exercisesolution}
 
 % Generator: Claude Sonnet 5 (High) --- new content, tying together four theorems this document
@@ -222,7 +222,7 @@ Each row's $\int_M d\omega = \int_{\partial M}\omega$ reads off as exactly that 
 The top row is \cref{sec:gauss_intuition}'s $n=1$ computation seen from the other side: there,
 $f$ played the role of a $1$-dimensional vector field and the identity was reached via the
 divergence theorem; here $f$ is instead a $0$-form and the same identity is the $m=1$ case of
-\cref{thm:stokes_general} directly --- two routes to the same fact, matching
+\cref{thm:stokes_general} directly. These are two routes to the same fact, matching
 \cref{ex:exterior_derivative_gradient_curl}'s remark that $df = \langle\nabla f,\cdot\rangle$ is
 exactly the shape that makes this specialization work. The bottom row uses
 $d\omega_F^{n-1} = (\divg F)\,dx^1\wedge\cdots\wedge dx^n$
@@ -233,7 +233,7 @@ F,\nu\rangle\,d\vol_{n-1}$ already noted in \cref{ch:pullbacks}.
 The pattern is worth stating in words, because it is easy to lose under the notation: a
 $k$-dimensional derivative measured \emph{inside} a region always equals the corresponding
 $(k{-}1)$-dimensional quantity measured on its \emph{boundary}. Differentiation and taking a
-boundary are, in this precise sense, the same operation viewed from two sides --- which is also
+boundary are, in this precise sense, the same operation viewed from two sides. That is also
 exactly the content of $d^2=0$ (\cref{thm:exterior_derivative}\textbf{(3)}): a boundary has no
 boundary, just as $d\omega$ has no further exterior derivative to take that isn't already zero.
 \end{remark}

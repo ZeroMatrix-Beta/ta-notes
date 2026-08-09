@@ -97,39 +97,49 @@ Let $\Omega \subseteq \mathbb{R}^n$ be a bounded $C^1$ domain and $F : \overline
 
 \begin{ainote}
 Corsin dates the theorem to Lagrange (discovered 1762) and Ostrogradsky (proven 1828), and
-adds, next to the physics form, an unusually enthusiastic \qt{how cool is this!} --- a volume
-integral of a derivative reduced to a boundary integral of the original field, the same shape
-as the fundamental theorem of calculus.
+adds, next to the physics form, an unusually enthusiastic \qt{how cool is this!} The remark is
+earned: a volume integral of a derivative is reduced to a boundary integral of the original
+field, which is the shape of the fundamental theorem of calculus.
 
 % Supplement: Sascha Brack/Class Notes/Week_10_Notes_Monday.pdf, p. 13
+% Revised 2026-08-09, two faults found by rendering it:
+%   * The label was placed at (-1.5,-1), which is ON the boundary, not inside it: the ellipse
+%     is x^2/4 + y^2/2.25 = 1, so at x = -1.5 it passes through y = -1.5*sqrt(1-2.25/4)
+%     = -0.992. The ultra-thick curve struck straight through the glyph. Moved to (-1.5,0.45),
+%     where the boundary is at |y| = 0.992, so the label sits well inside and clear of the
+%     nearest source at (-0.5,0.5), whose spokes reach only to x = -0.9.
+%   * The sinks were drawn `<-` from the centre outward, putting all five arrowheads on the
+%     centre dot, exactly the blob that spoiled the sink/source figure in \cref{ch:vector_calculus}.
+%     Sources and sinks now both run between radius 0.12 and 0.40, outward and inward
+%     respectively, so the two have the same footprint and differ only in direction.
 \begin{center}
-\begin{tikzpicture}[scale=1.5]
+\begin{tikzpicture}[>=Latex, scale=1.5]
   % Domain Omega
   \draw[ultra thick] (0,0) ellipse (2cm and 1.5cm);
-  \node at (-1.5,-1) {$\Omega$};
+  \node at (-1.5,0.45) {$\Omega$};
   \node[right] at (2,-0.5) {$\partial\Omega$};
-  
-  % Internal sources (red)
-  \foreach \x/\y in {-0.5/0.5, 0.8/-0.2, 0/ -0.6, -1/-0.3} {
+
+  % Internal sources (red): rays run OUTWARD, from radius 0.12 to 0.40.
+  \foreach \x/\y in {-0.5/0.5, 0.8/-0.2, 0/-0.6, -1/-0.3} {
     \fill[red] (\x,\y) circle (1.5pt);
     \foreach \angle in {0,72,...,288} {
-      \draw[red, thick, ->] (\x,\y) -- ++(\angle:0.3);
+      \draw[red, thick, ->] (\x,\y) ++(\angle:0.12) -- ++(\angle:0.28);
     }
   }
-  
-  % Internal sinks (blue)
+
+  % Internal sinks (blue): the same rays run INWARD, from radius 0.40 to 0.12.
   \foreach \x/\y in {1/0.6, 0.2/0.8, -0.2/-1.1, 1.2/-0.8} {
     \fill[blue] (\x,\y) circle (1.5pt);
     \foreach \angle in {0,72,...,288} {
-      \draw[blue, thick, <-] (\x,\y) -- ++(\angle:0.3);
+      \draw[blue, thick, ->] (\x,\y) ++(\angle:0.40) -- ++({\angle+180}:0.28);
     }
   }
-  
-  % Boundary flux
+
+  % Boundary flux: outward where the field leaves, inward where it enters. The `<-` form puts
+  % the head on the boundary point itself, so these do not blob.
   \foreach \angle in {0,45,90,135,180,225,270} {
     \draw[red, thick, ->] ({2*cos(\angle)},{1.5*sin(\angle)}) -- ++(\angle:0.4);
   }
-  % some blue inward arrows
   \foreach \angle in {30,150,315} {
     \draw[blue, thick, <-] ({2*cos(\angle)},{1.5*sin(\angle)}) -- ++(\angle:0.4);
   }
@@ -147,8 +157,8 @@ r\cos\theta$),
   = \int_0^1\!\!\int_0^{2\pi}\!\!\int_0^\pi \underbrace{\cos\theta\sin\theta}_{=\,\frac12\sin(2\theta),\
     \pi\text{-periodic}} r^3\,d\theta\,d\varphi\,dr = 0,
 \]
-since $\int_0^\pi \sin(2\theta)\,d\theta = 0$ --- confirming \cref{ex:flux_unit_sphere} with
-none of its cross-product bookkeeping.
+since $\int_0^\pi \sin(2\theta)\,d\theta = 0$. This confirms \cref{ex:flux_unit_sphere} with none
+of its cross-product bookkeeping.
 \end{example}
 
 \begin{ainote}
@@ -158,8 +168,8 @@ noting how much the two computations of the same flux differ in character: the d
 definition needs an explicit Gauss map, an orientation sanity check, and three cross terms
 in the integrand, while the divergence theorem needs only $\divg F$ and a coordinate change
 already used in \cref{ex:paraboloid_patch_area}. This is the theorem's main
-practical use --- not conceptual elegance, but that $\divg F$ is often far simpler than $F$
-restricted to a curved boundary.
+practical use, and it is not conceptual elegance but the plain fact that $\divg F$ is often far
+simpler than $F$ restricted to a curved boundary.
 \end{ainote}
 
 % Supplement: Sascha Brack/Class Notes/Week_10_Notes_Monday.pdf, p. 14
@@ -211,38 +221,72 @@ Substituting the pressure and applying the divergence theorem to each component,
 Since $\divg(x_3e_i) = \partial_i x_3$ equals $1$ if $i=3$ and $0$ otherwise, this gives
 $F_1=F_2=0$ and
 \[F_3 = \rho g\int_\Omega 1\,dV = \rho g\,\vol_3(\Omega).\]
-The buoyant force is vertical, with magnitude $\rho g\vol_3(\Omega)$ --- exactly the weight of
-the water displaced by $\Omega$, confirming Archimedes' principle. The divergence theorem
+The buoyant force is vertical, with magnitude $\rho g\vol_3(\Omega)$, which is exactly the weight
+of the water displaced by $\Omega$, confirming Archimedes' principle. The divergence theorem
 converts a surface integral of an unknown, position-dependent pressure into a volume integral
 that only sees the shape of $\Omega$ through its volume.
 \end{example}
 
 % Source: Corsin Nick/Class Notes/Week 10.pdf, p. 12
-Gauss' theorem is also a powerful tool in physics. For example, the volume $V$ of water in a
-moving fluid with velocity $\vec v$ passing through a surface element $d\vec A$ in time
-$\Delta t$ is
-\[V = \Delta t\,\vec v\cdot d\vec A\cdot\varrho \qquad (\varrho \text{ the density}),\]
-since a fluid column of length $L = \Delta t\,\lvert\vec v\rvert$ and cross-section $d\vec A$
-tilted at angle $\theta$ to $\vec v$ sweeps a volume $L\lvert d\vec A\rvert\cos\theta =
-\Delta t\,\vec v\cdot d\vec A$ through the surface element.
+Gauss' theorem is also a powerful tool in physics. Consider a fluid of density $\varrho$ moving
+with velocity $\vec v$, and a surface element $d\vec A$ whose normal makes an angle $\theta$
+with $\vec v$. The fluid crossing that element in time $\Delta t$ is exactly the fluid filling
+the column of slant length $L = \Delta t\,\lvert\vec v\rvert$ erected on it along $\vec v$, and
+that column stands at perpendicular height $L\cos\theta$. Its volume is therefore
+\[V = \lvert d\vec A\rvert\,L\cos\theta = \Delta t\,\vec v\cdot d\vec A,\]
+and the mass of fluid carried through the element is $\varrho V$.
 
-% Sonnet 5 (Medium) --- FIG-W10-03
+\begin{ainote}
+Corsin writes this as $V = \Delta t\,\vec v\cdot d\vec A\cdot\varrho$ and calls the result a
+volume. The right-hand side is a mass: $\Delta t\,\vec v\cdot d\vec A$ is already the volume
+swept, and the density only converts it. The two have been separated above, since the
+distinction is needed immediately. The integral below is of $\varrho\vec v$ and therefore
+measures mass per unit time, which is what the continuity equation balances against
+$\partial\varrho/\partial t$.
+\end{ainote}
+
+% Generator: Opus 5 (high) --- FIG-W10-03, a redraw. The Sonnet 5 original was wrong in four
+% ways, all of them visible only once rendered: it drew $\vec v$ twice in two different
+% directions (a horizontal stream and a tilted arrow); the tilted arrow's label collided with
+% the red one; it never drew the normal $d\vec A$ at all, so the $\theta$ arc sat between the
+% velocity and nothing; and it labelled the height $h = \lvert d\vec A\rvert\cos\theta$, which
+% is an area times a cosine.
+%
+% Geometry, all of it checked. The surface element is the segment (0,0)--(2,0); its normal
+% dA runs along +y; the velocity makes the angle theta = 40 degrees with that normal, i.e.
+% it runs at 50 degrees to the horizontal. The column swept in time Delta t is the element
+% translated by L*(cos 50, sin 50) with L = 1.9, that is by (1.221, 1.455). Its perpendicular
+% height is L*cos 40 = 1.455, which is exactly the y-extent of the parallelogram, so the h
+% dimension line on the left measures the true height rather than an eyeballed one.
 \begin{center}
-\begin{tikzpicture}[>=Latex, scale=1.1]
-  \draw[purple, thick] (0,0) -- (2.4,0) -- (3.1,1.3) -- (0.7,1.3) -- cycle;
-  \draw[red, thick] (2.4,0) -- (2.4,1.5);
-  \foreach \y in {0.15,0.45,0.75,1.05} {
-    \draw[orange, thick, ->] (-1.1,\y) -- (0.9+0.29*\y,\y);
-  }
-  \draw[orange, thick, ->] (1.55,0.65) -- (2.85,1.15) node[right, font=\scriptsize] {$\vec v$};
-  \draw[green!50!black] (2.2,0.55) arc (160:70:0.5);
-  \node[green!50!black, font=\scriptsize] at (2.15,0.85) {$\theta$};
-  \node[font=\scriptsize] at (-1.3,0.6) {$\vec v$};
-  \node[purple, font=\scriptsize] at (1.55,-0.25) {$L=\Delta t\lvert\vec v\rvert$};
-  \node[red, font=\scriptsize, right] at (2.55,0.75) {$h=\lvert d\vec A\rvert\cos\theta$};
+\begin{tikzpicture}[>=Latex, scale=1.15]
+  % The column swept through the element in time Delta t.
+  \fill[purple!7] (0,0) -- (2,0) -- (3.221,1.455) -- (1.221,1.455) -- cycle;
+  \draw[purple] (0,0) -- (1.221,1.455);
+  \draw[purple, dashed] (1.221,1.455) -- (3.221,1.455);
+
+  % The surface element itself, and the slant length of the column standing on it.
+  \draw[purple, ultra thick] (0,0) -- (2,0);
+  \node[purple, below, font=\scriptsize] at (1,-0.05) {$\lvert d\vec A\rvert$};
+  \path (0,0) -- (1.221,1.455)
+    node[midway, sloped, below, purple, font=\scriptsize] {$L=\Delta t\lvert\vec v\rvert$};
+
+  % The normal, and the velocity at angle theta to it.
+  \draw[blue, thick, ->] (2,0) -- (2,1.05) node[above, font=\scriptsize] {$d\vec A$};
+  \draw[orange!90!black, thick, ->] (2,0) -- (3.221,1.455)
+    node[right, font=\scriptsize] {$\Delta t\,\vec v$};
+  \draw[green!50!black] (2,0.66) arc (90:50:0.66);
+  \node[green!50!black, font=\scriptsize] at (2.17,0.42) {$\theta$};
+
+  % The perpendicular height, drawn at the parallelogram's true y-extent.
+  \draw[red!70!black, dashed] (-0.3,1.455) -- (1.221,1.455);
+  \draw[red!70!black, dashed] (-0.3,0) -- (0,0);
+  \draw[red!70!black, <->] (-0.3,0) -- (-0.3,1.455);
+  \node[red!70!black, left, font=\scriptsize] at (-0.38,0.73) {$h=L\cos\theta$};
 \end{tikzpicture}
 \end{center}
 
+% Source: Corsin Nick/Class Notes/Week 10.pdf, p. 12
 Therefore, the fluid flowing out of any bounded $C^1$ domain $\Omega$ per unit time is
 \[\int_{\partial\Omega} \varrho\vec v\cdot d\vec A = \int_\Omega \vec\nabla\cdot(\varrho
   \vec v)\,dx.\]

@@ -127,8 +127,8 @@ with exterior derivative
   \cref{sec:differential_forms} (example item 3), with $\widehat{dx^i}$ denoting an omitted
   factor. In $d(F^i\,dx^1\wedge\cdots\widehat{dx^i}\cdots\wedge dx^n) =
   dF^i\wedge dx^1\wedge\cdots\widehat{dx^i}\cdots\wedge dx^n$, only the $\partial_iF^i\,dx^i$
-  summand of $dF^i = \sum_j\partial_jF^i\,dx^j$ survives --- every $j\neq i$ repeats a factor
-  already present, killing the wedge by antisymmetry --- so
+  summand of $dF^i = \sum_j\partial_jF^i\,dx^j$ survives, since every $j\neq i$ repeats a factor
+  already present and so kills the wedge by antisymmetry. Therefore
   \[d\omega_F^{n-1} = \sum_{i=1}^n(-1)^{i-1}\partial_iF^i\;dx^i\wedge dx^1\wedge\cdots\wedge
     \widehat{dx^i}\wedge\cdots\wedge dx^n.\]
   Moving $dx^i$ past the $i-1$ factors $dx^1,\dots,dx^{i-1}$ ahead of it, into its natural
@@ -138,8 +138,8 @@ with exterior derivative
     \quad\Longrightarrow\quad
     d\omega_F^{n-1} = \sum_{i=1}^n\partial_iF^i\;dx^1\wedge\cdots\wedge dx^n
     = (\divg F)\,dx^1\wedge\cdots\wedge dx^n.\]
-  So the exterior derivative of $\omega_F^{n-1}$ is $\divg F$ times the volume form ---
-  completing the pattern of items 1 and 2 above: $\grad$, $\curl$ and $\divg$ are exactly the
+  So, the exterior derivative of $\omega_F^{n-1}$ is $\divg F$ times the volume form. That
+  completes the pattern of items 1 and 2 above: $\grad$, $\curl$ and $\divg$ are exactly the
   $0$-, $1$- and $(n-1)$-form faces of the single operator $d$.
 
 % Source: Jérôme Paschoud/Notizen/Woche 12.1 Differentialformen.pdf, p. 6
@@ -154,11 +154,11 @@ with exterior derivative
 \end{example}
 
 \begin{ainote}
-Corsin leaves the middle expansion of $d\omega$ --- nine terms, one for each pair
-$(dF^i,dx^j)$ --- fully written out before collecting the six that survive into the three
-coefficient pairs above; condensed here to the surviving terms directly, since $dx\wedge
-dx=dy\wedge dy=dz\wedge dz=0$ kills exactly the three diagonal terms and antisymmetry
-($dy\wedge dx=-dx\wedge dy$, etc.) pairs up the rest.
+Corsin writes the middle expansion of $d\omega$ out in full, all nine terms, one for each pair
+$(dF^i,dx^j)$, before collecting the six that survive into the three coefficient pairs above. It
+is condensed here to the surviving terms directly. Nothing is lost, since $dx\wedge
+dx=dy\wedge dy=dz\wedge dz=0$ kills exactly the three diagonal terms, and antisymmetry
+($dy\wedge dx=-dx\wedge dy$, and so on) pairs up the rest.
 \end{ainote}
 
 % Supplement: Sascha Brack/Class Notes/Week_11_Notes_Friday.pdf, pp. 2--4

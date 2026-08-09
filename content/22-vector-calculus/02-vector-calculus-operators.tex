@@ -28,17 +28,27 @@ If $\divg F(x) > 0$, then $x$ is a \newterm{source} (\germanterm{Quelle}), meani
 If $\divg F(x) < 0$, then $x$ is a \newterm{sink} (\germanterm{Senke}), meaning more flow is removed than generated.
 
 % Supplement: Sascha Brack/Class Notes/Week_10_Notes_Monday.pdf, p. 9
+% Revised 2026-08-09. Two faults in the drawing it replaces, both visible only once rendered:
+%   * Each caption was attached with `label=above:` to the node at the CENTRE of its star, so
+%     it was typeset on top of the arrows rather than clear of them. Both captions ran straight
+%     through their own diagram. They are now anchored below the whole figure.
+%   * The sink was drawn as `<-` from the centre outward, putting all eight arrowheads at one
+%     point; they overlapped into an unreadable blob. The rays now run inward and STOP at
+%     radius 0.30, so the eight heads land distinctly on a small circle.
+% The two stars are otherwise identical, which is the point: same rays, opposite direction.
 \begin{center}
-\begin{tikzpicture}[scale=1]
-  \node[circle, fill=blue!50, inner sep=1.5pt, label=above:{\small Sink ($\divg F < 0$)}] (sink) at (0,0) {};
-  \foreach \angle in {0,45,...,315} {
-    \draw[blue, thick, <-] (sink) -- ++(\angle:0.8);
-  }
-  
-  \node[circle, fill=red!50, inner sep=1.5pt, label=above:{\small Source ($\divg F > 0$)}] (source) at (4,0) {};
-  \foreach \angle in {0,45,...,315} {
-    \draw[red, thick, ->] (source) -- ++(\angle:0.8);
-  }
+\begin{tikzpicture}[>=Latex, scale=1]
+  \foreach \a in {0,45,...,315}
+    \draw[blue!80!black, thick, ->] (\a:1.0) -- (\a:0.30);
+  \fill[blue!60] (0,0) circle (2.2pt);
+  \node[font=\small, anchor=north] at (0,-1.32) {sink: $\divg F < 0$};
+
+  \begin{scope}[shift={(4.2,0)}]
+    \foreach \a in {0,45,...,315}
+      \draw[red!85!black, thick, ->] (\a:0.30) -- (\a:1.0);
+    \fill[red!70] (0,0) circle (2.2pt);
+    \node[font=\small, anchor=north] at (0,-1.32) {source: $\divg F > 0$};
+  \end{scope}
 \end{tikzpicture}
 \end{center}
 \end{ainote}
@@ -55,21 +65,42 @@ In $\mathbb{R}^2$, the rotation of a vector field $F = (F_1, F_2)\transp$ is the
 Intuitively, $\curl F(x)$ tells us how much the field tends to rotate around $x$. If $\curl F(x) \neq 0$, a small wheel centered at $x$ would rotate.
 
 % Supplement: Sascha Brack/Class Notes/Week_10_Notes_Monday.pdf, p. 10
+% Revised 2026-08-09, and one of the changes is a correction, not a cosmetic one.
+%
+%   * SENSE OF ROTATION. The shear field on the left is $F = (c + ky,\,0)$ with $k>0$, since the
+%     arrows get longer as $y$ increases. Then $\curl F = \partial_1F_2 - \partial_2F_1 = -k < 0$,
+%     so a paddle wheel turns CLOCKWISE: its top sits in faster rightward flow than its bottom.
+%     The old figure drew `arc (-90:90:0.2)`, which sweeps through increasing angles, i.e.
+%     COUNTERCLOCKWISE. The arc below runs 120 -> -150, decreasing, which is clockwise.
+%   * The old right-hand panel carried a vertical blue arrow from (3.75,-0.6) to (3.75,-0.2)
+%     that depicted nothing; it read as an arrow pointing at its own caption. Dropped.
+%   * Both indicators were floating next to the field rather than in it. Each panel now shows
+%     an actual paddle wheel sitting in the flow, drawn last so the arrows pass behind it.
 \begin{center}
-\begin{tikzpicture}[scale=1]
-  % Rotates
-  \draw[thick, ->] (0, 0.4) -- (1.5, 0.4);
-  \draw[thick, ->] (0, 0) -- (1.0, 0);
-  \draw[thick, ->] (0, -0.4) -- (0.5, -0.4);
-  \node[blue, font=\small] at (0.75, -0.8) {rotates};
-  \draw[blue, thick, ->] (0.55,-0.6) arc (-90:90:0.2);
-  
-  % Does not rotate
-  \draw[thick, ->] (3, 0.4) -- (4.5, 0.4);
-  \draw[thick, ->] (3, 0) -- (4.5, 0);
-  \draw[thick, ->] (3, -0.4) -- (4.5, -0.4);
-  \node[blue, font=\small] at (3.75, -0.8) {does not rotate};
-  \draw[blue, thick, ->] (3.75,-0.6) -- (3.75,-0.2);
+\begin{tikzpicture}[>=Latex, scale=1.0]
+  % ---- left: shear. Arrow length grows with y, so the wheel is spun clockwise. ----
+  \begin{scope}
+    \foreach \y/\len in {0.6/1.85, 0.3/1.55, 0/1.25, -0.3/0.95, -0.6/0.65}
+      \draw[gray!80!black, thick, ->] (0,\y) -- (\len,\y);
+    \fill[white] (0.95,0) circle (0.26);
+    \draw[blue!70!black, thick] (0.95,0) circle (0.26);
+    \foreach \a in {0,90,180,270}
+      \draw[blue!70!black, thick] (0.95,0) -- ++(\a:0.26);
+    \draw[blue!70!black, very thick, ->]
+      (0.95,0) ++(120:0.46) arc[start angle=120, end angle=-150, radius=0.46];
+    \node[blue!70!black, font=\small, anchor=north] at (0.95,-1.05) {rotates};
+  \end{scope}
+
+  % ---- right: uniform field, every arrow the same length, so no shear and no rotation ----
+  \begin{scope}[shift={(4.0,0)}]
+    \foreach \y in {0.6,0.3,0,-0.3,-0.6}
+      \draw[gray!80!black, thick, ->] (0,\y) -- (1.25,\y);
+    \fill[white] (0.95,0) circle (0.26);
+    \draw[blue!70!black, thick] (0.95,0) circle (0.26);
+    \foreach \a in {0,90,180,270}
+      \draw[blue!70!black, thick] (0.95,0) -- ++(\a:0.26);
+    \node[blue!70!black, font=\small, anchor=north] at (0.95,-1.05) {does not rotate};
+  \end{scope}
 \end{tikzpicture}
 \end{center}
 \end{ainote}
@@ -151,7 +182,7 @@ cyclically permuting the indices.
 
 \begin{ainote}
 The official script sets this identity as an exercise (Ex.\ 14.61) but states it without the
-first term, as $\curl(\varphi F) = (\grad\varphi)\times F$ --- which is false in general: taking
+first term, as $\curl(\varphi F) = (\grad\varphi)\times F$, which is false in general. Taking
 $\varphi\equiv1$ would force $\curl F \equiv 0$ for every $F$. The missing term is exactly
 $\varphi\,\curl(F)$, restored above. (The script's exercise also names the vector field $f$ in
 its statement and $F$ in its conclusion, as though the two were interchangeable.)

@@ -204,4 +204,33 @@ $\mathbb{R}^3$ is zero, since there is no fourth coordinate to build a shadow on
 because anyone chose to stop there.
 \end{importantremark}
 
+\begin{aiexercise}[The angle form is closed]
+% Generator: Claude Opus 5 (High)
+\label{ex:ai_angle_form_closed}
+On $U := \mathbb{R}^2\setminus\{0\}$ define the $1$-form
+\[\omega := \frac{-y\,dx + x\,dy}{x^2+y^2}.\]
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Show that $d\omega = 0$.
+  \item By part 1 and \cref{thm:exterior_derivative}, one might hope that $\omega = df$ for some
+    $f \in C^\infty(U)$. Compute $\int_\gamma \omega$ along the unit circle
+    $\gamma(t) := (\cos t, \sin t)$, $t \in [0,2\pi]$, and explain what this rules out.
+    \emph{Hint:} \cref{prop:work_difference_potential}, read through the identification
+    $F \leftrightarrow \omega_F$ of the diagram above.
+\end{enumerate}
+\end{aiexercise}
+
+\begin{aiexercise}[Exterior derivatives by hand]
+% Generator: Claude Opus 5 (High)
+\label{ex:ai_exterior_derivative_drill}
+Compute $d\omega$ for each of the following, on the largest domain where the expression makes
+sense.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item $\omega = xy\,dx + yz\,dy + zx\,dz$ on $\mathbb{R}^3$. Which vector field's curl have you
+    just computed?
+  \item $\omega = x_1x_2x_3\,dx_2\wedge dx_3$ on $\mathbb{R}^3$.
+  \item $\omega = f\,dg$, where $f,g \in C^\infty(\mathbb{R}^n)$. Express the answer using
+    $\wedge$ and deduce that $d(f\,dg + g\,df) = 0$.
+\end{enumerate}
+\end{aiexercise}
+
 % Supplement: Sascha Brack/Class Notes/Week_11_Notes_Friday.pdf, pp. 2--4

@@ -1,7 +1,9 @@
 # ---------------------------------------------------------------
 # Source material — 952 MB of PDFs. Read-only inputs, never edited,
-# and far too large for git. Keep them out; the transcripts in
-# transcript/ carry a page pointer back to every one of them.
+# and far too large for git. Keep them out; the % Source: and % Supplement:
+# comments in content/ carry a page pointer back to every one of them.
+# (This used to say the pointers live in transcript/. There is no transcript/
+# stage — see the document skeleton in project-state.md.)
 # ---------------------------------------------------------------
 Adrien Martelli/
 Corsin Nick/

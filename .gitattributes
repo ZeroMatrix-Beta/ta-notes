@@ -1,0 +1,28 @@
+# ---------------------------------------------------------------
+# Line endings
+# ---------------------------------------------------------------
+# Every text file is stored LF in the repository and checked out CRLF on
+# Windows. Without this, the storage form was whatever the file happened to
+# have when it was first added -- in practice CRLF -- and any editor that
+# wrote LF turned its next commit into a whole-file rewrite. main.tex did
+# exactly that on 2026-08-09: 987 insertions and 1026 deletions, of which 65
+# lines were real, which is enough noise to hide someone's actual change.
+*               text=auto eol=crlf
+
+# ---------------------------------------------------------------
+# Binaries -- never touch these
+# ---------------------------------------------------------------
+# main.pdf is tracked (see .gitignore), so a mistaken text conversion would
+# corrupt the deliverable. Git's auto-detection has caught it so far; saying
+# it outright removes the dependency on that.
+*.pdf           binary
+*.png           binary
+*.jpg           binary
+*.jpeg          binary
+*.gz            binary
+
+# ---------------------------------------------------------------
+# Diff behaviour
+# ---------------------------------------------------------------
+# Gives \chapter, \section and friends as hunk headers in git diff output.
+*.tex           diff=tex

@@ -206,7 +206,13 @@
 \newcommand{\germanfor}[1]{(German:\ \germanterm{#1})}
 \newcommand{\qt}[1]{\textit{\textcolor{QuoteRed}{``}#1\textcolor{QuoteRed}{''}}}
 \newcommand{\inlinemetanote}[1]{\textit{[\textcolor{TextMetaNote}{#1}]}}
-\newcommand{\hint}[1]{\textcolor{OliveGreen}{\textbf{Hint:}} #1}
+
+% RETIRED 2026-08-10: \hint{...}, an inline green "Hint:" run into the surrounding paragraph.
+% Superseded by \exhint further down, which sets the hint as its own indented block and takes
+% an optional label, so [Official hint] can distinguish a hint printed on the problem sheet
+% from one written here. \hint had a single call site; the ~19 other hints in content/ were
+% hand-rolled \textit{Official hint:} lines that never used it, which is the reason it went.
+% Do not reinstate: a second spelling of "Hint:" is exactly how that divergence started.
 
 % Redefine \bigbreak to ensure the following paragraph is not indented
 \let\oldbigbreak\bigbreak

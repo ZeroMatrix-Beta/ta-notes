@@ -219,12 +219,12 @@ of \textit{Definition 9.89}).
   \item Show that if $\tilde f$ is yet another norm, then there is $C > 0$ such that
     $C^{-1}f(x) \leq \tilde f(x) \leq Cf(x)$ for all $x \in \mathbb{R}^n$.
 \end{enumerate}
-\textit{Official hints:} \textbf{3.9.2:} recall that from the definition it follows that
+\exhint[Official hints]{\textbf{3.9.2:} recall that from the definition it follows that
 $|f(x) - f(y)| \leq f(x-y)$, and that Lipschitz functions are always continuous.
 \textbf{3.9.3:} apply the Weierstrass theorem to $f$ on $S := \{x \in \mathbb{R}^n : |x| = 1\}$
 and use that $f$, being a norm, is nondegenerate. \textbf{3.9.5:} if $f$ is equivalent to $|\cdot|$ and
 $\tilde f$ is equivalent to $|\cdot|$, it follows by transitivity that $f$ is equivalent to
-$\tilde f$.
+$\tilde f$.}
 \end{exercise}
 
 \begin{remark}
@@ -261,9 +261,9 @@ $$\|\Psi \cdot \Phi\| \leq \|\Psi\|\|\Phi\|,$$
 where $\|\cdot\|$ is the Hilbert--Schmidt norm of a matrix (see \textit{Definition 9.96} in the
 notes).
 
-\textit{Official hint:} recall that $\|M\|^2$ is the sum of the squares of the entries of $M$.
+\exhint[Official hint]{Recall that $\|M\|^2$ is the sum of the squares of the entries of $M$.
 Notice that $(\Psi\cdot\Phi)^i_j$ ($i$-th row, $j$-th column) is the scalar product of $\Psi^i$
-and $\Phi_j$, which are vectors of $\mathbb{R}^n$. Apply Cauchy--Schwarz to each of them.
+and $\Phi_j$, which are vectors of $\mathbb{R}^n$. Apply Cauchy--Schwarz to each of them.}
 \end{exercise}
 
 % Originally: content/week-04.tex, \exercisesheet{4}
@@ -291,13 +291,13 @@ For $p \geq 1$ and $x \in \mathbb{R}^n$ define the \textbf{$p$-norm} of $x$ as
     $|x+y|_p \leq |x|_p + |y|_p$ for all $x,y \in \mathbb{R}^n$.
   \item What happens for $p \in (0,1)$?
 \end{enumerate}
-\textit{Official hints:} \textbf{4.3.3:} use Cauchy--Schwarz and the fact that
+\exhint[Official hints]{\textbf{4.3.3:} use Cauchy--Schwarz and the fact that
 $a_i^{p-1}b_i = a_i^{p/2}\cdot a_i^{(p-2)/2}b_i$. \textbf{4.3.4:} show that $f''(t) \geq 0$; it
 is not the simplest derivative, but if you get it right the inequality in 4.3.3 will be just what
 you need. \textbf{4.3.5:} write the convexity inequality between $x$, $y$ and the middle point
 $(x+y)/2$. To get the general case from the one with positive coordinates, observe that for
 $x \in \mathbb{R}^n$, denoting $\hat x := (|x_1|,\dots,|x_n|)$, we have
-$|x+y|_p \leq |\hat x + \hat y|_p$ and $|\hat x|_p = |x|_p$ for all $x,y \in \mathbb{R}^n$.
+$|x+y|_p \leq |\hat x + \hat y|_p$ and $|\hat x|_p = |x|_p$ for all $x,y \in \mathbb{R}^n$.}
 \end{exercise}
 
 % Originally: content/exercise-sheets/week-04.tex, problem 4.4 --- never previously built
@@ -318,10 +318,10 @@ $$\mu_p(x) := \left(\frac{x_1^p + \dots + x_n^p}{n}\right)^{1/p}.$$
     $$n(x_1x_2\cdots x_n)^{1/n} \leq x_1 + \dots + x_n, \qquad (x_1+\dots+x_n)^2 \leq n(x_1^2+\dots+x_n^2).$$
   \item \textbf{(*)} Is $f$ continuously differentiable in the whole $\mathbb{R}$?
 \end{enumerate}
-\textit{Official hints:} \textbf{4.4.2:} combine the concavity of $\log(\cdot)$ and the
+\exhint[Official hints]{\textbf{4.4.2:} combine the concavity of $\log(\cdot)$ and the
 Cauchy--Schwarz inequality; use the generalisation of the concavity inequality: for any concave
 $f : \mathbb{R}\to\mathbb{R}$,
 $f(\lambda_1x_1 + \dots + \lambda_nx_n) \geq \lambda_1f(x_1)+\dots+\lambda_nf(x_n)$ for all
 $x_i \in \mathbb{R}$, $0 \leq \lambda_i \leq 1$ with $\lambda_1+\dots+\lambda_n = 1$.
-\textbf{4.4.3:} it might be more convenient to work with $\log f(t)$.
+\textbf{4.4.3:} it might be more convenient to work with $\log f(t)$.}
 \end{exercise}

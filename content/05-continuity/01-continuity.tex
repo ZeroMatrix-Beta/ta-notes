@@ -55,6 +55,64 @@ is $\delta>0$ with $B_\delta(x_0) \subseteq f^{-1}\big(B_\varepsilon(f(x_0))\big
 precisely that $d_X(x_0,x)<\delta$ implies $d_Y(f(x_0),f(x))<\varepsilon$.
 \end{proof}
 
+% Generator: Claude Opus 5 (High) --- FIG-05-01. The chapter defines continuity three ways and
+% had no picture at all; its only figure was the Lipschitz cone, two sections later.
+%
+% GEOMETRY. Nothing here is a computation, so there is no arithmetic to check; what matters is
+% that the drawing asserts only true things. Two deliberate choices:
+%   * The image of B_delta(x_0) is drawn as an irregular blob strictly INSIDE B_epsilon(f(x_0)),
+%     not as a disc and not filling it. Continuity says the image is contained in the target
+%     ball; it says nothing about the image being round, being centred, or exhausting the ball.
+%     A figure drawing f(B_delta) as a concentric disc would assert all three.
+%   * The blob touches neither the boundary of B_epsilon nor f(x_0)'s dot, since the inclusion
+%     is into the OPEN ball and f(x_0) is interior to the image, not on its edge.
+% The same picture reads condition (c) backwards: B_delta sits inside the preimage of the open
+% ball B_epsilon, which is the containment the proof of (c) => (a) produces.
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.0]
+  % ---- the source space ----
+  \draw[gray!55] plot[smooth cycle, tension=0.75] coordinates
+    {(-2.5,1.15) (-0.85,1.5) (0.15,0.55) (-0.35,-1.2) (-1.9,-1.45) (-2.95,-0.25)};
+  \node[gray!55!black, font=\small] at (-2.72,1.28) {$X$};
+  \fill[MidnightBlue!8] (-1.45,0.05) circle (0.62);
+  \draw[MidnightBlue!70, thick] (-1.45,0.05) circle (0.62);
+  \fill[MidnightBlue!70] (-1.45,0.05) circle (1.4pt);
+  \node[MidnightBlue!70, font=\scriptsize, anchor=north east] at (-1.5,-0.02) {$x_0$};
+  \node[MidnightBlue!70, font=\scriptsize, anchor=south] at (-1.45,0.70) {$B_\delta(x_0)$};
+
+  % ---- the map ----
+  \draw[->, thick] (0.55,0.05) -- (1.95,0.05) node[midway, above, font=\small] {$f$};
+
+  % ---- the target space ----
+  \draw[gray!55] plot[smooth cycle, tension=0.75] coordinates
+    {(2.6,1.3) (4.4,1.5) (5.5,0.4) (4.9,-1.3) (3.3,-1.5) (2.35,-0.3)};
+  \node[gray!55!black, font=\small] at (5.35,1.15) {$Y$};
+  \fill[BrickRed!7] (3.95,0.05) circle (0.78);
+  \draw[BrickRed!80, thick] (3.95,0.05) circle (0.78);
+  \node[BrickRed!80, font=\scriptsize, anchor=south] at (3.95,0.86)
+    {$B_\varepsilon(f(x_0))$};
+
+  % The image: irregular, strictly inside, not centred. All three are deliberate.
+  \fill[OliveGreen!14] plot[smooth cycle, tension=0.8] coordinates
+    {(3.72,0.42) (4.25,0.3) (4.38,-0.12) (3.95,-0.42) (3.55,-0.18)};
+  \draw[OliveGreen, thick] plot[smooth cycle, tension=0.8] coordinates
+    {(3.72,0.42) (4.25,0.3) (4.38,-0.12) (3.95,-0.42) (3.55,-0.18)};
+  \fill[BrickRed!80] (3.95,0.02) circle (1.4pt);
+  % Anchored below the dot and inside the blob. Anchored east it extended leftwards across the
+  % blob's own outline at x = 3.55, so the label sat half in and half out of the region it names.
+  \node[BrickRed!80, font=\scriptsize, anchor=north] at (3.95,-0.04) {$f(x_0)$};
+  \node[OliveGreen, font=\scriptsize, anchor=north west] at (4.35,-0.35)
+    {$f\big(B_\delta(x_0)\big)$};
+\end{tikzpicture}
+\end{center}
+
+Condition \textbf{(a)} is the statement that the green region fits inside the red ball, and that
+a $\delta$ making it fit can be found however small the red ball is made. Condition \textbf{(c)}
+is the same picture read from right to left: $B_\delta(x_0)$ lies inside
+$f^{-1}\big(B_\varepsilon(f(x_0))\big)$, which is exactly the containment produced in the
+\textbf{(c)} $\Rightarrow$ \textbf{(a)} step above. Note what the drawing does not claim: the
+image need not be round, need not be centred at $f(x_0)$, and need not fill the ball.
+
 \begin{remark}[Which of the three to reach for]
 Condition \textbf{(c)} is the only one that never mentions the metric. That is why it, and not the
 $\varepsilon$--$\delta$ formulation, is what survives into general topology

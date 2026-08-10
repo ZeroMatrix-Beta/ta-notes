@@ -148,3 +148,20 @@ Define an $n$-differential form $\omega$ on $U$ by $\omega = d\psi^1\wedge d\psi
   forms.
 \end{enumerate}
 \end{exercise}
+
+\begin{aiexercise}[Integrating $dx\wedge dy$ over a hemisphere]
+% Generator: Claude Opus 5 (High)
+\label{ex:ai_area_form_over_hemisphere}
+Let $D := \{(u,v) : u^2+v^2 < 1\}$ and let $S^+$ and $S^-$ be the open upper and lower halves of
+the unit sphere in $\mathbb{R}^3$, each oriented by the \emph{outward} normal. Consider the
+$2$-form $dx\wedge dy$ on $\mathbb{R}^3$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Parametrize $S^+$ as a graph, $\phi(u,v) := \big(u,\ v,\ \sqrt{1-u^2-v^2}\big)$ over
+    $D$. Compute $\phi^*(dx\wedge dy)$ and deduce $\int_{S^+} dx\wedge dy$.
+  \item Do the same for $S^-$ with $\psi(u,v) := \big(u,\ v,\ -\sqrt{1-u^2-v^2}\big)$. The
+    pullback is the same as in \textbf{(a)}, yet the answer is not. Which hypothesis of
+    \cref{def:integral_of_form_over_submanifold} accounts for the difference?
+  \item Deduce $\int_{S^2} dx\wedge dy$, and confirm the value a second time by writing
+    $dx\wedge dy = d(x\,dy)$ and applying \cref{thm:stokes_general}.
+\end{enumerate}
+\end{aiexercise}

@@ -37,3 +37,86 @@ diffeomorphism.
 \end{exercisesolution}
 
 % Verified: solved independently, both parts match Sol12, including pullback-invariance.
+
+\begin{exercisesolution}[Solution to \cref{ex:ai_pullback_area_form}]
+% Generator: Claude Opus 5 (High)
+\textbf{(a)} The pullback of a coordinate differential is the differential of the corresponding
+component, so from $x = r\cos\theta$ and $y = r\sin\theta$,
+\[\Phi^*(dx) = \cos\theta\,dr - r\sin\theta\,d\theta,
+  \qquad
+  \Phi^*(dy) = \sin\theta\,dr + r\cos\theta\,d\theta.\]
+Wedging, and using $dr\wedge dr = d\theta\wedge d\theta = 0$ together with
+$d\theta\wedge dr = -\,dr\wedge d\theta$,
+\[\Phi^*(dx\wedge dy)
+  = \big(\cos\theta\cdot r\cos\theta\big)\,dr\wedge d\theta
+    + \big(-r\sin\theta\cdot\sin\theta\big)\,d\theta\wedge dr
+  = r\big(\cos^2\theta + \sin^2\theta\big)\,dr\wedge d\theta
+  = r\,dr\wedge d\theta.\]
+The factor is exactly the $r$ tabulated for polar coordinates in
+\cref{rem:coordinate_jacobians_table}, obtained here without computing a determinant: the
+antisymmetry of the wedge did the cofactor expansion.
+
+\textbf{(b)} They measure different things, and the absolute value is the difference.
+\Cref{thm:change_of_variables} is a statement about \emph{volume}, which is unsigned: a region
+and its mirror image have the same area, so only $\lvert\det\Jac\Phi\rvert$ can appear. The
+pullback of a top-degree form is a statement about \emph{oriented} volume, which carries a sign,
+and it records $\det\Jac\Phi$ itself.
+
+The swap $\Phi(u_1,u_2) = (u_2,u_1)$ separates them. Its Jacobian is
+$\left(\begin{smallmatrix}0&1\\1&0\end{smallmatrix}\right)$ with determinant $-1$, so
+\[\Phi^*(dx\wedge dy) = du_2\wedge du_1 = -\,du_1\wedge du_2,\]
+while $\lvert\det\Jac\Phi\rvert = 1$ and the change of variables formula does not change at all.
+The form notices the reversal; the volume cannot.
+
+\textbf{(c)} \Cref{ex:12.9} concludes that $\int_U\psi^*\eta = \int_V\eta$, with no sign. Drop
+the hypothesis $\det > 0$ and take $\psi$ to be the swap above: the pullback acquires a factor
+$-1$, so the two integrals differ by a sign and the conclusion is false as stated. The honest
+statement without the hypothesis carries $\sgn(\det\Jac\psi)$.
+
+\Cref{thm:change_of_variables} is untroubled by the same map because it never claimed anything
+about orientation. This is the precise sense in which the positivity hypothesis in
+\cref{ex:12.9} is not a technical convenience: it is the price of upgrading an unsigned identity
+to a signed one.
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:ai_area_form_over_hemisphere}]
+% Generator: Claude Opus 5 (High)
+\textbf{(a)} Along $\phi$ the first two coordinates are the parameters themselves, $x = u$ and
+$y = v$, so $\phi^*(dx) = du$ and $\phi^*(dy) = dv$, giving
+\[\phi^*(dx\wedge dy) = du\wedge dv.\]
+The third coordinate never enters, which is the whole reason this integral is easy. It remains to
+check that $\phi$ induces the outward orientation: for a graph $z = g(u,v)$,
+\[\partial_u\phi\times\partial_v\phi = (-g_u,\ -g_v,\ 1),\]
+whose third component is $+1$, so the induced normal points \emph{upward}, and on the upper
+hemisphere upward is outward. Hence
+\[\int_{S^+} dx\wedge dy = \int_D du\wedge dv = \vol_2(D) = \pi.\]
+
+\textbf{(b)} The pullback computation is identical, since $\psi$ also has $x = u$ and $y = v$,
+so again $\psi^*(dx\wedge dy) = du\wedge dv$. But $\psi$ is still a graph, so its induced normal
+still points upward, and on the \emph{lower} hemisphere upward is \emph{inward}. So $\psi$ is
+orientation-reversing for the prescribed outward orientation, and
+\cref{def:integral_of_form_over_submanifold} requires a parametrization compatible with the
+chosen orientation. Correcting by the sign,
+\[\int_{S^-} dx\wedge dy = -\int_D du\wedge dv = -\pi.\]
+
+\textbf{(c)} The equator is a null set, so the two halves add:
+\[\int_{S^2} dx\wedge dy = \pi + (-\pi) = 0.\]
+For the second route, $d(x\,dy) = dx\wedge dy$, and $S^2$ is a compact orientable $2$-manifold
+with $\partial S^2 = \emptyset$, so \cref{thm:stokes_general} gives
+\[\int_{S^2} dx\wedge dy = \int_{S^2} d(x\,dy) = \int_{\partial S^2} x\,dy = 0.\]
+
+\begin{remark}[$dx\wedge dy$ measures the shadow]
+\label{rem:area_form_measures_the_shadow}
+Part \textbf{(a)} says something worth keeping: integrating $dx\wedge dy$ over an oriented
+surface in $\mathbb{R}^3$ returns the \emph{signed} area of its shadow on the $xy$-plane. The
+hemisphere has area $2\pi$, but its shadow is the unit disc, and $\pi$ is what the computation
+returns. A $2$-form does not measure surface area; the Gram determinant of
+\cref{ch:gram_determinant} does that, and the two answers differ by exactly the tilt of the
+surface.
+
+Read that way, part \textbf{(c)} is obvious before any computation. The sphere's two halves cast
+the same shadow, and a closed surface presents each patch of shadow once from above and once from
+below, so everything cancels. That is the geometric content of $\int_M d\omega = 0$ on a closed
+$M$, and \cref{q:quiz_q14} draws the other standard consequence from it.
+\end{remark}
+\end{exercisesolution}

@@ -71,6 +71,18 @@ official-sheet exercises, so all solutions below are original. Each has been che
     is a basis of $T_p M$; the two vectors are independent because their first two components
     already are, and there are two of them, matching $\dim T_p M = 2$.
 \end{enumerate}
+\begin{ainote}
+The official solution gives the basis $\left\{(2,-5,0)\transp,\ (1,0,-5)\transp\right\}$, which
+looks different from the one above but is not a disagreement: both are bases of the same plane
+$\ker(5,2,1)$, and each vector of either list satisfies $5v_1+2v_2+v_3 = 0$. \qt{Give a basis} has
+infinitely many correct answers, and no canonical one --- so when checking work against a master
+solution here, verify that each vector is annihilated by $\nabla F(p)$ and that the two are
+independent, rather than comparing entries. The two lists even share the vector $(1,0,-5)\transp$.
+The official solution also invokes the constant rank theorem via surjectivity of $D_xF$ where we
+cite the regular value theorem (\cref{thm:regular_value_theorem}); for a real-valued $F$ these say
+the same thing, since a linear map $\mathbb{R}^3 \to \mathbb{R}$ is surjective precisely when its
+gradient is non-zero.
+\end{ainote}
 \end{exercisesolution}
 
 

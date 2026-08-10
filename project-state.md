@@ -256,6 +256,23 @@ The cover of `Corsin Nick/Class Notes/Week 2.pdf` reads *"Class notes Week 1"*.
 | `lec_notes.pdf` (project root) | **The official lecture notes**, and the file to cite from now on. 239 pp, dated 27 July 2026. The authority our theorems and notation are **checked against** — not a blueprint to transcribe. |
 | `exercises/ExN_Analysis2_eng.pdf` | The official problem sheets — quoted verbatim, never paraphrased. |
 | `exercises/SolN_Analysis2_eng.pdf` | Official solutions, used only to **check** a solution you derived first. |
+| `old_exams/` | Past exams, gitignored like the rest of the PDFs. Four papers, and the naming misleads: `examHS24.pdf` is the exam **of 13 February 2025**, `examFS24.pdf` is **21 August 2024** (both Serra), `WS22_Prüfung.pdf` is **24 January 2022** and `fs2023/Prüfung.pdf` is **9 August 2021** (both Felder, Analysis I & II). Always cite the date, not the file name. |
+
+### Old-exam exercises: what has been checked against an official solution
+
+Twenty-five exercises have been mined from `old_exams/` (see the `% Extractor:` comments). Only the
+two Felder papers ship a solution key: `WS22_Lösung.pdf` and `fs2023/Lösung.pdf`. Cross-checked
+2026-08-10, ten exercises, **no mathematical disagreement** — every value matched, including
+$a_4=\pi^2$ and $f'''(1)=-16\pi^2$ in `ex:taylor_parametric_integral`, $\nabla f(x,0)=(0,(1+x^2)^{-1})$
+in `ex:implicit_function_arctan`, $f(p)=-\log n$ in `ex:entropy_simplex_minimum`, and the area $2$ in
+`ex:cubic_shear_area`. Three divergences were presentational and are recorded in `ainote`s next to
+the solutions: a sign in the official Taylor product formula, a different-but-equivalent tangent-space
+basis, and an \qt{$n \ge 1$} that should read $n \ge 2$. One gap of our own was closed
+(`ex:nearest_point_to_origin`\textbf{(d)} needed $\varepsilon \le \lvert P_0\rvert$ stated).
+
+⚠️ **The fifteen exercises from the two Serra papers have no official solution in the repository**
+and rest on independent derivation alone. If a key for either ever turns up, they are the ones to
+check --- `ex:poincare_geodesics_stokes` and `ex:third_order_linear_ode` first, being the longest.
 
 ### `Analysis_II_Script_v1.pdf` is the same document under its old name
 

@@ -216,7 +216,8 @@ $a_1 = a_2 = a_3 = 0$ and $a_4 = \pi^2$.
 \[f'(1+h) = 2(-2\pi h + O(h^2))(2\pi h + O(h^3)) = -8\pi^2 h^2 + O(h^3).\]
     This is strictly negative for all small $h \neq 0$, on \emph{both} sides. So $f$ is decreasing
     through $x = 1$ with a horizontal tangent: the point is \textbf{neither} a maximum nor a
-    minimum.
+    minimum. Reading the coefficients off the expansion gives $f''(1) = 0$ and
+    $f'''(1) = -16\pi^2$, which is the value the official solution reports.
 \end{enumerate}
 \begin{remark}
 The contrast between the two points is the whole content of part \textbf{(d)}. Both are critical,
@@ -224,6 +225,24 @@ and at both the second derivative vanishes, so the Hessian test says nothing at 
 the question is the \emph{order} of the first non-vanishing derivative: odd order at $x=1$ (no
 extremum), even order at $x=0$ (extremum, with the sign of the coefficient choosing which).
 \end{remark}
+\begin{remark}[A shortcut for the odd coefficients]
+The vanishing of $a_1$ and $a_3$ needs no computation at all. Substituting $s = -t$ shows
+$f(-x) = f(x)$, so $f$ is even, and the Taylor coefficients of an even function at $0$ vanish in
+every odd degree. This is the route the official solution takes, and it is worth preferring: it
+settles two of the four coefficients before a single derivative is computed.
+\end{remark}
+\begin{ainote}
+Cross-checked against the official solution, which agrees on every value: $a_1 = a_2 = a_3 = 0$,
+$a_4 = \pi^2$, $f^{(4)}(0) = 24\pi^2$, the two families $\pm\sqrt{n}$ and $\tfrac12\mathbb{Z}$ of
+critical points, and $f'''(1) = -16\pi^2$. One divergence is presentational, and is flagged here so
+that the two can be read side by side: the official solution displays the product formula as
+$2\sin(\pi(x^2+1))\sin(2\pi x)$, which is $-f'(x)$ rather than $f'(x)$, since
+$\sin(\pi(x^2+1)) = -\sin(\pi x^2)$. It comes from applying $2\sin a\sin b = \cos(a-b) - \cos(a+b)$
+to $\cos(\pi(x-1)^2) - \cos(\pi(x+1)^2)$, which is $f'$ with its two terms interchanged. The sign
+never surfaces in that solution's conclusions, because it uses the formula only to locate zeros and
+then classifies $x=0$ and $x=1$ from $f^{(4)}(0)$ and $f'''(1)$ instead. It would matter to anyone
+running a sign argument off the displayed identity, as the classification of $x=1$ above does.
+\end{ainote}
 \end{exercisesolution}
 
 

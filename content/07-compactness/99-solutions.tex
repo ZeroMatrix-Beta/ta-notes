@@ -278,14 +278,20 @@ generalises to any connected, locally connected ambient space.
 
   \item Let $P_0 \in A$ be a minimiser and put $m := \lvert P_0\rvert$, which is positive because
     $0 \notin A$. Suppose, for contradiction, that $P_0$ were an interior point of $A$, so that
-    $B_\varepsilon(P_0) \subseteq A$ for some $\varepsilon > 0$. Move from $P_0$ straight towards the
-    origin: the point
+    $B_\varepsilon(P_0) \subseteq A$ for some $\varepsilon > 0$. Note first that
+    $\varepsilon \le m$: otherwise $\lvert 0 - P_0\rvert = m < \varepsilon$ would put the origin
+    inside $B_\varepsilon(P_0) \subseteq A$, contrary to $0 \notin A$. Now move from $P_0$ straight
+    towards the origin: the point
 \[P_1 := \left(1 - \frac{\varepsilon}{2m}\right) P_0\]
     satisfies $\lvert P_1 - P_0\rvert = \frac{\varepsilon}{2m}\lvert P_0\rvert = \frac{\varepsilon}{2}
-    < \varepsilon$, so $P_1 \in A$, while
-    $\lvert P_1\rvert = m - \frac{\varepsilon}{2} < m$. This contradicts the minimality of
-    $\lvert P_0\rvert$. Therefore $P_0$ is not interior, and since $P_0 \in A \subseteq \overline{A}$
-    it must lie in $\partial A$.
+    < \varepsilon$, so $P_1 \in A$. Since $\varepsilon \le m$, the scalar $1 - \frac{\varepsilon}{2m}$
+    lies in $[\tfrac12, 1)$ and in particular is positive, so
+    $\lvert P_1\rvert = \left(1 - \frac{\varepsilon}{2m}\right)m = m - \frac{\varepsilon}{2} < m$.
+    This contradicts the minimality of $\lvert P_0\rvert$. Therefore $P_0$ is not interior, and since
+    $P_0 \in A \subseteq \overline{A}$ it must lie in $\partial A$.
+% Correction: Claude Opus 5 (High) --- the bound epsilon <= m was implicit in the first draft. It is
+% needed: without it the scalar could be negative and |P_1| would be epsilon/2 - m, not m -
+% epsilon/2. The official solution secures the same point by taking epsilon := min{epsilon', |P_0|}.
 \end{enumerate}
 \begin{remark}
 The four parts isolate four different hypotheses and show what each one buys: closedness gives

@@ -19,11 +19,25 @@ cannot finish, finish what you can and say so in your reply to the user.
 
 ## Where the document stands
 
-**Corsin Nick is fully typeset and the document builds clean at 292 pages**, with three
+**Corsin Nick is fully typeset and the document builds clean at 300 pages**, with three
 `Overfull \hbox` warnings; they are tabulated, with the method for attributing them correctly, in
 `build-and-preamble.md`. Every week of his notes sits in the
 topic chapter it belongs to. New material goes into the chapter it belongs to, never appended
 to a week.
+
+⚠️ **The tracked `main.pdf` is from the 292-page build** and predates the 2026-08-09/10 exercise
+and quiz work below. Source and PDF are eight pages apart; rebuild before trusting the committed
+PDF, and note the ~2 MB permanent blob that costs (see *Settled decisions*).
+
+**The exercise imbalance across the second half was measured and partly corrected (2026-08-09/10).**
+Chapters 2–16 averaged about seven exercises each, chapters 17–26 about two, while the worked-example
+count ran the other way. The cause is not neglect: sheets 1–3 have no priority page so all 22
+problems were transcribed, and from sheet 4 on only Corsin's blue and orange ones were. Rather than
+reopen that decision, the gap is being closed with authored `aiexercise`s. Done so far: four in
+ch. 24 (which had none at all, and now has its own `99-solutions.tex`), three in ch. 20 (a
+substitution read off the integrand, an order swap that is impossible one way, and Frullani's
+integral via Feynman's trick), two in ch. 23 (a divergence-theorem drill and one open surface that
+has to be capped). Chapters 18 and 22 remain the thinnest on both axes.
 
 **The 2026-08-09 prose revision is complete**, over all 26 chapters and all four appendices,
 against the em-dash policy and punctuation budget in `style.md`. Zero prose em-dashes remain in
@@ -112,6 +126,16 @@ about our own materials, say that instead: *"None of the transcribed notes prove
 is checkable from `content/`, whereas *"the course does not prove this theorem"* is not.
 
 ## Settled decisions
+
+**Appendix C holds two quizzes, and is titled accordingly (2026-08-10).** It was
+*Mid-Semester Repetition Quiz*, one section, seven questions from Corsin reaching only
+`ch:submanifolds`. It is now *Repetition Quizzes*: `sec:repetition_quiz` is Corsin's, unchanged,
+and `sec:repetition_quiz_integration` is seven authored questions covering
+`ch:jordan_measure`–`ch:stokes`, so the pair spans the document. The chapter and section labels
+did not change, and the only external `\cref` into the appendix (`q:quiz_q4`, from chs. 9 and 10)
+still resolves. The second quiz is authored, not transcribed: it carries `% Generator:` and says
+so to the reader in its opening `ainote`, since the first section credits its questions to
+Prof.\ Serra and Prof.\ Lang and the two must not be confused.
 
 **AI-Notes are numbered and referenceable (2026-08-09).** `ainote` has a counter of its own,
 reset per chapter, so `\cref` prints `AI-Note 15.1`. It is deliberately **not** aliased to the

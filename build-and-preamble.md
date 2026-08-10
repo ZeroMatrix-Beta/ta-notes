@@ -117,6 +117,13 @@ it claims, fix it here rather than working around it.
   environment title containing a bracket in math.
 * **`main.pdf` is often locked** by an open viewer; `latexmk` then dies with
   *"I can't write on file"*. Build with `-jobname=check` to a throwaway name instead.
+
+  ⚠️ **Closing the viewer is not enough on its own.** After the lock is released, `latexmk`
+  reports the *same* failure on the next run, because it has cached the failed state and will not
+  retry. This looks exactly like the file still being locked, and it is not: test with a shell
+  append, and if the file is writable, re-run with `-g` (force) to get a real build. Observed
+  2026-08-10, where two ordinary re-runs both exited 12 against a demonstrably writable
+  `main.pdf` and `-g` then produced all 310 pages first time.
 * **`hyperref` warnings about `Token not allowed in a PDF string`**.
   This happens when math commands (like superscripts `^`, subscripts `_`, or specific symbols) appear in chapter or section titles, which hyperref tries to use for PDF bookmarks. Fix this by wrapping the math in `\texorpdfstring{math}{text}`. For example, `\texorpdfstring{$\mathbb{R}^n$}{Rn}` instead of `\texorpdfstring{$\mathbb{R}^n$}{R^n}`. The second argument must be plain ASCII text without any math formatting.
 

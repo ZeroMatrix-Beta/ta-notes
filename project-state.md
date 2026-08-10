@@ -25,9 +25,14 @@ cannot finish, finish what you can and say so in your reply to the user.
 topic chapter it belongs to. New material goes into the chapter it belongs to, never appended
 to a week.
 
-⚠️ **The tracked `main.pdf` is from the 292-page build** and predates the 2026-08-09/10 exercise
-and quiz work below. Source and PDF are eight pages apart; rebuild before trusting the committed
-PDF, and note the ~2 MB permanent blob that costs (see *Settled decisions*).
+**The tracked `main.pdf` is current at 310 pages** (rebuilt 2026-08-10, on the user's
+instruction, after all of the work below). It was eighteen pages behind the source before that.
+
+⚠️ Note for the next rebuild: the first attempt hit the locked-file trap in
+`build-and-preamble.md`, `latexmk` dying with *"I can't write on file `main.pdf`"* because a
+viewer held it open. Once the viewer was closed, **`latexmk` still reported the same failure**
+until it was re-run with `-g`: it had cached the failed state and would not retry on its own.
+Reach for `-g` rather than assuming the file is still locked.
 
 **The exercise imbalance across the second half was measured and partly corrected (2026-08-09/10).**
 Chapters 2–16 averaged about seven exercises each, chapters 17–26 about two, while the worked-example
@@ -40,15 +45,28 @@ integral via Feynman's trick), two in ch. 23 (a divergence-theorem drill and one
 has to be capped), two in ch. 18 (the fundamental lemma of the calculus of variations, and the
 variation redone without the constant-speed hypothesis, both closing gaps the chapter's own
 remarks admit to), two in ch. 22 (a counterexample to the script's mis-stated curl product rule,
-and which of two fields is a gradient).
+and which of two fields is a gradient), two in ch. 25 (the pullback of the area form, and
+`dx∧dy` over the two hemispheres). **Every exercise in all 26 chapters has a solution**, audited
+2026-08-10; the count of `exercise` plus `aiexercise` matches the count of `exercisesolution` in
+every chapter directory.
 
 **Figure density was measured on 2026-08-10, and two of the thinnest chapters were addressed.**
 Ch. 18 had one figure in 300 lines and none for the equation the chapter exists to prove; it now
 has a two-panel sphere showing a great circle against a circle of latitude. Ch. 22 illustrated the
 divergence and the curl but not the gradient; it now has a contour picture carrying both readings
-of `\nabla f`. By lines per figure the remaining outliers are **ch. 26** (864 lines, 2 figures,
-14 worked examples, and the chapter where boundary orientation most wants a picture), **ch. 06**
-(778 lines, 1) and **ch. 05** (663 lines, 1).
+of `\nabla f`. The other three outliers were closed the same day: **ch. 26** had nothing in its
+main section while `thm:stokes_3d` stated its orientation convention in words, and now has the
+right-hand-rule figure plus `rem:right_hand_rule_as_cross_product`, which reduces "the surface is
+to the left" to `inward = ν × τ`; **ch. 05** defined continuity three ways with no picture and now
+has the ε–δ one; **ch. 06** had only the Banach iteration and now shows `1/n` drawn twice, in
+`[0,1]` and in `(0,1]`, differing only in whether the limit belongs to the space.
+
+⚠️ **Every figure drawn in this pass was wrong on the first attempt in a way the source did not
+show**, and rendering caught all of them: a normal-component arrow lying exactly on the radius
+line it was drawn beside, so the two collapsed; a great circle asserting `c''` is radial with no
+vector on it; three separate label collisions. This is the *Verifying figures* rule in
+`build-and-preamble.md` earning its keep for the second pass running. Never commit a TikZ figure
+you have not looked at.
 
 **The 2026-08-09 prose revision is complete**, over all 26 chapters and all four appendices,
 against the em-dash policy and punctuation budget in `style.md`. Zero prose em-dashes remain in

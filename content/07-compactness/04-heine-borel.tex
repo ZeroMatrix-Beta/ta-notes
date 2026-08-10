@@ -152,37 +152,38 @@ need to close up.
 
 % Kept inline: solved directly in Corsin Nick/Class Notes/Week 3.pdf, pp. 1--2.
 \begin{exercisesolution}[Proof of \cref{ex:heine_borel_fails}]
-\textbf{(a)} Non-negativity, definiteness and symmetry are inherited directly from the
-corresponding properties of $d$, since $t \mapsto \tfrac{t}{1+t}$ is non-negative on
-$[0,\infty)$ and vanishes only at $t=0$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Non-negativity, definiteness and symmetry are inherited directly from the
+    corresponding properties of $d$, since $t \mapsto \tfrac{t}{1+t}$ is non-negative on
+    $[0,\infty)$ and vanishes only at $t=0$.
 
-\textit{Triangle inequality.} We want to show
-\[
-\frac{d(x,y)}{1+d(x,y)} \leq \frac{d(x,z)}{1+d(x,z)} + \frac{d(z,y)}{1+d(z,y)}.
-\]
-Denote $d(x,y) = d_1$, $d(x,z) = d_2$, $d(z,y) = d_3$ and multiply out:
-\[
-\begin{aligned}
-&d_1(1+d_2)(1+d_3) \leq d_2(1+d_1)(1+d_3) + d_3(1+d_1)(1+d_2) \\
-\iff\ & (d_1 + d_1d_2)(1+d_3) \leq (d_2 + d_2d_1)(1+d_3) + (d_3 + d_1d_3)(1+d_2) \\
-\iff\ & d_1 + d_1d_3 + d_1d_2d_3 + d_1d_2 \leq d_2 + d_3d_2 + d_2d_1d_3 + d_2d_1 \\
-& \qquad\qquad\qquad\qquad\qquad\quad + d_3 + d_3d_2 + d_1d_3 + d_1d_3d_2 \\
-\iff\ & d_1 \leq d_2 + 2d_2d_3 + d_3 + d_1d_2d_3 \\
-\Longleftarrow\ & 0 \leq 2d_2d_3 + d_1d_2d_3 \quad \text{together with } d_1 \leq d_2+d_3
-  \text{ (the triangle inequality for } d\text{)}
-\end{aligned}
-\]
-which is true by non-negativity.
-
-\textbf{(b)} Let $U \subseteq X$ be open. Then, given $x \in U$, we find $r > 0$ such that
-$B_r(x) := \{y \in X : d(x,y) < r\} \subseteq U$. Let $\varepsilon := \dfrac{r}{1+r}$. Then
-$\tilde B_\varepsilon(x) \subseteq B_r(x) \subseteq U$, where
-$\tilde B_\varepsilon(x) := \{y \in X : \tilde d(x,y) < \varepsilon\}$.
-
-\textbf{(c)} Note that for all $x, y \in \mathbb{R}$, $\dfrac{|x-y|}{1+|x-y|} < 1$. So
-$\mathbb{N} \subseteq B_1(0)$, thus it is \textbf{bounded} with respect to this metric. Also,
-$\mathbb{N}$ is \textbf{closed}, as follows from \textbf{(b)}. But $x_n = n$ defines a sequence in
-$\mathbb{N}$ with no convergent subsequence, thus $\mathbb{N}$ is \textbf{not compact}.
+    \textit{Triangle inequality.} We want to show
+    \[
+    \frac{d(x,y)}{1+d(x,y)} \leq \frac{d(x,z)}{1+d(x,z)} + \frac{d(z,y)}{1+d(z,y)}.
+    \]
+    Denote $d(x,y) = d_1$, $d(x,z) = d_2$, $d(z,y) = d_3$ and multiply out:
+    \[
+    \begin{aligned}
+    &d_1(1+d_2)(1+d_3) \leq d_2(1+d_1)(1+d_3) + d_3(1+d_1)(1+d_2) \\
+    \iff\ & (d_1 + d_1d_2)(1+d_3) \leq (d_2 + d_2d_1)(1+d_3) + (d_3 + d_1d_3)(1+d_2) \\
+    \iff\ & d_1 + d_1d_3 + d_1d_2d_3 + d_1d_2 \leq d_2 + d_3d_2 + d_2d_1d_3 + d_2d_1 \\
+    & \qquad\qquad\qquad\qquad\qquad\quad + d_3 + d_3d_2 + d_1d_3 + d_1d_3d_2 \\
+    \iff\ & d_1 \leq d_2 + 2d_2d_3 + d_3 + d_1d_2d_3 \\
+    \Longleftarrow\ & 0 \leq 2d_2d_3 + d_1d_2d_3 \quad \text{together with } d_1 \leq d_2+d_3
+      \text{ (the triangle inequality for } d\text{)}
+    \end{aligned}
+    \]
+    which is true by non-negativity.
+  \item Let $U \subseteq X$ be open. Then, given $x \in U$, we find $r > 0$ such that
+    $B_r(x) := \{y \in X : d(x,y) < r\} \subseteq U$. Let $\varepsilon := \dfrac{r}{1+r}$. Then
+    $\tilde B_\varepsilon(x) \subseteq B_r(x) \subseteq U$, where
+    $\tilde B_\varepsilon(x) := \{y \in X : \tilde d(x,y) < \varepsilon\}$.
+  \item Note that for all $x, y \in \mathbb{R}$, $\dfrac{|x-y|}{1+|x-y|} < 1$. So
+    $\mathbb{N} \subseteq B_1(0)$, thus it is \textbf{bounded} with respect to this metric. Also,
+    $\mathbb{N}$ is \textbf{closed}, as follows from \textbf{(b)}. But $x_n = n$ defines a
+    sequence in $\mathbb{N}$ with no convergent subsequence, thus $\mathbb{N}$ is \textbf{not
+    compact}.
+\end{enumerate}
 \end{exercisesolution}
 
 \begin{ainote}

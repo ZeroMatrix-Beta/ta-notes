@@ -19,14 +19,14 @@ cannot finish, finish what you can and say so in your reply to the user.
 
 ## Where the document stands
 
-**Corsin Nick is fully typeset and the document builds clean at 300 pages**, with three
-`Overfull \hbox` warnings; they are tabulated, with the method for attributing them correctly, in
-`build-and-preamble.md`. Every week of his notes sits in the
-topic chapter it belongs to. New material goes into the chapter it belongs to, never appended
-to a week.
+**Corsin Nick is fully typeset and the document builds clean at 315 pages**, with **zero**
+`Overfull \hbox` warnings. The three that used to be tabulated as a standing baseline are gone;
+`build-and-preamble.md` records what happened to them and sets the baseline at zero. Every week
+of his notes sits in the topic chapter it belongs to. New material goes into the chapter it
+belongs to, never appended to a week.
 
-**The tracked `main.pdf` is current at 310 pages** (rebuilt 2026-08-10, on the user's
-instruction, after all of the work below). It was eighteen pages behind the source before that.
+**The tracked `main.pdf` is at 313 pages and is two pages behind the source** (source last built
+2026-08-10 at 315, after the `\exhint`/`\exinfo` work below). Rebuild it before the next handover.
 
 ⚠️ Note for the next rebuild: the first attempt hit the locked-file trap in
 `build-and-preamble.md`, `latexmk` dying with *"I can't write on file `main.pdf`"* because a
@@ -342,16 +342,22 @@ upstream since.
 Each sheet's problems sit with the material they test.
 
 - **Quote every problem statement verbatim.** Do not paraphrase; attribute the sheet.
-- **Tag each problem** with its priority from Corsin's *Recommended exercises* colour code:
+- **The title carries no sheet number.** `\begin{exercise}[Volume \textnormal{(important)}]`,
+  never `[9.1 --- Volume ...]`. The number goes in a closing `\exinfo` line instead; all 58 were
+  converted on 2026-08-10. See the `\exhint`/`\exinfo` entry in `style.md`.
+- **Tag each problem** with its priority from Corsin's *Recommended exercises* colour code. The
+  tag goes inside the title, wrapped in `\textnormal{}` so it does not inherit the title's
+  italics:
 
-  | Corsin's marker | Tag |
+  | Corsin's marker | Tag in the title |
   |---|---|
-  | blue ▨ | `**important**` |
-  | orange ▨ | `**semi-important**` |
-  | red ▨ | `**optional**` |
-  | official `(*)` | `**harder**` |
+  | blue ▨ | `\textnormal{(important)}` |
+  | orange ▨ | `\textnormal{(semi-important)}` |
+  | red ▨ | `\textnormal{(optional)}` |
+  | official `(*)` | `(*)` at the start of the title text |
 
-- Corsin's hint follows the statement, attributed and page-pointed.
+- Corsin's hint follows the statement as `\exhint[Corsin's hint]{...}`, page-pointed by a
+  `% Source:` comment. A hint printed on the sheet is `\exhint[Official hint]{...}`.
 - TAs' worked solutions are presented; `SolN_Analysis2_eng.pdf` is used to **check**.
 - **When you transcribe a new problem, add it to the table in
   `content/appendix-d-problem-sheets.tex`**, which restores the sheet view: one table per sheet,

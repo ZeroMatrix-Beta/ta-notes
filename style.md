@@ -124,7 +124,14 @@ a style decision actually changes.
   applied, not a competing rule.
 * **General Linear Group:** Always use the macro `\GL` for the general linear group (e.g., `\GL_n(K)` or `\GL(n, K)`). This renders as `\operatorname{GL}`.
 * **Curl / Rotation:** Always use the macro `\curl` for the curl/rotation of a vector field. Do NOT use `\rot`, as it is not defined and will break compilation.
-* **Sub-part Labels:** Always use alphabetical numbering for sub-parts, items, and cases (e.g., `\textbf{(a)}`, `\textbf{(b)}`). Do NOT use numerical labels like `(1), 2)`. This applies to proof sections, lists, and TikZ nodes. **Important:** Do NOT hardcode custom labels using `\item[...]` — this applies to **both** `itemize` and `enumerate`, with no exceptions. Instead, set `\begin{enumerate}[label=\textbf{(\alph*)}]` on the environment itself and use plain `\item`; for `itemize`, use plain `\item` and put any name/label as `\textbf{name:}` at the start of the item's text. **Proof Sub-parts:** Do NOT write `Proof of (a):` or use `\item[...]`. Write sub-part proof headers using `\begin{enumerate}[label=\textbf{(\alph*)}]` with plain `\item`, or write `\textbf{(a)}` directly in prose. When referencing a specific sub-part or custom enumerate label in prose, maintain the bold formatting (e.g., "statement \textbf{(d)}", "from \textbf{(K4)}"). If a theorem/proposition statement uses an `enumerate` environment to list sub-claims/points, any proof that proves those individual points must also structure its proof using an identical `enumerate` environment matching those points.
+* **Sub-part Labels:** Always use alphabetical numbering for sub-parts, items, and cases (e.g., `\textbf{(a)}`, `\textbf{(b)}`). Do NOT use numerical labels like `(1), 2)`. This applies to proof sections, lists, and TikZ nodes. **Important:** Do NOT hardcode custom labels using `\item[...]` — this applies to **both** `itemize` and `enumerate`, with no exceptions. Instead, set `\begin{enumerate}[label=\textbf{(\alph*)}]` on the environment itself and use plain `\item`; for `itemize`, use plain `\item` and put any name/label as `\textbf{name:}` at the start of the item's text. **Proof Sub-parts:** Do NOT write `Proof of (a):` or use `\item[...]`. Write sub-part proof headers using `\begin{enumerate}[label=\textbf{(\alph*)}]` with plain `\item`. When referencing a specific sub-part or custom enumerate label in prose, maintain the bold formatting (e.g., "statement \textbf{(d)}", "from \textbf{(K4)}").
+
+  **Mirroring is mandatory, and this is the rule most often broken.** If a statement lists its claims in an `enumerate`, the argument that discharges them must use an `enumerate` with the *same* labelling. This binds every statement environment (`theorem`, `proposition`, `lemma`, `corollary`, `claim`, **and `exercise`**) and every arguing environment (`proof` **and `exercisesolution`**) — a solution is a proof, and `99-solutions.tex` is where the violations accumulated: an audit on 2026-08-10 found 4 in theorem proofs and 26 in solution blocks.
+
+  * An earlier revision of this line also permitted writing "`\textbf{(a)}` directly in prose", which contradicted the sentence next to it and is what the 26 drifted through. That permission is withdrawn: a paragraph *opening* with `\textbf{(b)}` is the signature of the defect. Detect it with the `grep_search` tool, `IsRegex=true`, Query `^\\textbf\{\((b|c|d|2|3|4|ii|iii)\)\}`.
+  * Match the statement's own label style — `\arabic*` against an `(1)/(2)/(3)` statement, `\alph*` against an `(a)/(b)/(c)` one. Where a theorem enumerates its *hypotheses* under one scheme and its *claims* under another, mirror the claims.
+  * **Shared setup stays outside the list.** A reduction both parts rely on belongs in prose above the `enumerate`, not duplicated into each item nor forced into a first item that claims nothing.
+  * **An `enumerate` of hypotheses is not a list of claims.** Where a statement reads "let `h` satisfy (a), (b), (c), then ...", the proof cites those labels and proves one thing; it takes no `enumerate`. See `prop:concave_reshaping_metric`, which trips every audit and is correct as written.
 * **Labels:** Use descriptive, human-readable slugs for labels instead of numbering schemes. For example, use `\label{prop:unique_solution_criterion}` instead of `\label{prop:17.d.4}`. If possible (i.e. available), always place the original handwritten note label as a comment directly above the new descriptive label (e.g., `% prop:17.d.4`). This avoids duplicates and makes the LaTeX source much easier to navigate. **Placement:** Always place the `\label{...}` immediately after the `\begin{...}` statement (e.g., right after `\begin{theorem}`), rather than at the end of the environment.
 * **Cross-Referencing:** Use `\cref{...}` (from the `cleveref` package) for referencing sections, theorems, propositions, lemmas, and definitions. `\cref` automatically adds the appropriate label (like "Theorem 1"), so do not add manual prefixes. **Important:** If a sentence starts with a reference, use `\Cref{...}` instead so that the word is properly capitalized (e.g., "Theorem 1"). Use `\eqref{...}` exclusively for referencing equations (this automatically adds parentheses around the number).
 * **Lists with Descriptions — the `description` environment is FORBIDDEN.** For lists where
@@ -292,8 +299,48 @@ does not help and thin in the places it does.
   because a reader who has been told the answer cannot then find it.
 
   **Placement:** a genuine *hint* (of the kind the official sheet prints) may sit directly under
-  the statement, clearly marked as a hint. Anything that reveals the answer or names the wrong
-  answer goes into the chapter's `99-solutions.tex`, next to the solution it concerns.
+  the statement, clearly marked as a hint — use `\exhint`, below. Anything that reveals the
+  answer or names the wrong answer goes into the chapter's `99-solutions.tex`, next to the
+  solution it concerns.
+
+* **Trailing notes on a statement: `\exhint` and `\exinfo`.** Two blocks that hang off the *end*
+  of an exercise or example, inside the environment. Added 2026-08-10; defined in `main.tex`
+  next to `exercisesolution`, where the full comment lives.
+
+  ```latex
+  \begin{exercise}[Problems at the origin]
+    ... statement ...
+    \exhint[Official hint]{If a function is continuous at $0$ and $x_k \to 0$ ...}
+    \exinfo{This exercise is Problem 3.2 of Problem Sheet 3, Analysis II, Spring Semester 2026.}
+  \end{exercise}
+  ```
+
+  - **`\exinfo{...}` says where the problem came from.** This is why **no exercise title carries
+    a `N.M --- ` prefix any more** — all 58 were converted on 2026-08-10. A title names what the
+    problem is *about*; the sheet number is provenance and belongs in the Info line. Do not
+    reintroduce the prefix.
+  - **Write the provenance as a full sentence** ending in a period: "This exercise is Problem 4.3
+    of Problem Sheet 4, Analysis II, Spring Semester 2026.", "This example is taken from the
+    August 2019 exam, Problem 2.", "This example follows the Wikipedia article on the Cantor
+    set." A bare "Sheet 4, Ex. 4.3." is the terse catalogue reference this replaced.
+  - **`\exhint[Label]{...}`** takes an optional label, default `Hint`. Use `[Official hint]` for a
+    hint printed on the sheet, `[Corsin's hint]` / `[Sascha Brack's hints]` for one from a
+    tutor's notes. Capitalise the first word of the hint body — the label ends in a colon
+    supplied by the macro.
+  - **Order when both appear:** hint first, `\exinfo` last, closing the block.
+  - Use the `exerciseinfo` / `exercisehint` *environments* instead of the one-line macros when
+    the note carries a display or runs to several paragraphs.
+  - **Both are unnumbered and must never carry a `\label`.** They are formatting blocks inside an
+    already-numbered environment; the enclosing exercise is what gets referenced. This is a
+    deliberate exception to "never leave a new environment unnumbered" in
+    `build-and-preamble.md` — see the comment at the definition.
+  - ⚠️ **`\hint{...}` is RETIRED** (2026-08-10) and no longer defined. It set an inline green
+    "Hint:" run into the surrounding paragraph, and had a single call site while ~19 other hints
+    were hand-rolled `\textit{Official hint:}` lines that ignored it. Do not reinstate it; a
+    second spelling of "Hint:" is how that divergence started.
+  - **Genuinely inline hints stay inline.** A hint inside an `enumerate` item, or one closing a
+    sentence mid-example, is part of that sentence and must not become a block. Three such
+    remain by design.
 
   * **BAD** — sitting above `\cref{ex:1.1}`, disclosing parts 2 and 4:
     ```latex
@@ -451,14 +498,18 @@ does not help and thin in the places it does.
   % BAD -- now reads as though problem 8.2 came from Sascha's file
   % Supplement: Sascha Brack/Ex Sheet Hints/Ex8_Analysis2_hints.pdf
   \begin{ainote}...his priorities...\end{ainote}
-  \begin{exercise}[8.2 --- True or False]
+  \begin{exercise}[True or False \textnormal{(important)}]
 
   % GOOD
   % Supplement: Sascha Brack/Ex Sheet Hints/Ex8_Analysis2_hints.pdf
   \begin{ainote}...his priorities...\end{ainote}
   % Source: exercises/Ex8_Analysis2_eng.pdf, p. 1
-  \begin{exercise}[8.2 --- True or False]
+  \begin{exercise}[True or False \textnormal{(important)}]
   ```
+
+  (Both titles read `[8.2 --- True or False]` in an earlier revision of this file. The sheet
+  number now lives in an `\exinfo` line at the end of the statement — see the `\exhint`/`\exinfo`
+  entry above — so the example was updated rather than left teaching the retired form.)
 
   **Verify afterwards; do not rely on remembering.** After inserting, scroll *down* to the next
   transcribed block and ask whether the nearest provenance comment above it is still the right

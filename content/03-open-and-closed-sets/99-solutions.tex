@@ -101,30 +101,36 @@ one-directionally with intersections. That is the same asymmetry that runs throu
 \textbf{(a), (b) and (c) are necessarily true; (d) is not.} It is efficient to prove
 \textbf{(c)} first, since \textbf{(b)} then follows from it.
 
-\textbf{(c) True.} Fix $x,y \in X$. For every $a \in A$ the triangle inequality gives
-$d(x,a) \leq d(x,y) + d(y,a)$, and the left-hand side is bounded below by $d(x,A)$, so
-\[d(x,A) \leq d(x,y) + d(y,a) \qquad\text{for every } a \in A.\]
-Taking the infimum over $a$ on the right yields $d(x,A) \leq d(x,y) + d(y,A)$. Exchanging $x$
-and $y$ and combining,
-\[\big|d(x,A) - d(y,A)\big| \leq d(x,y),\]
-so $d(\cdot,A)$ is \textbf{$1$-Lipschitz} (\cref{def:lipschitz_continuous}), and in particular
-continuous. That is what the remaining parts use.
-
-\textbf{(a) True.} If $A$ is closed then $A^c$ is open, so for $x \in A^c$ there is $r>0$ with
-$B_r(x) \subseteq A^c$. No point of $A$ lies in that ball, i.e.\ $d(x,a) \geq r$ for every
-$a \in A$, and taking the infimum gives $d(x,A) \geq r > 0$.
-
-\textbf{(b) True.} By \textbf{(c)} the function $d(\cdot,A)$ is continuous, and
-$M = d(\cdot,A)^{-1}\big([1,\infty)\big)$ is the preimage of a closed set under a continuous
-map, hence closed (\cref{def:continuous}\textbf{(c)}, applied to complements).
-
-\textbf{(d) False.} In $\mathbb{R}$ take $A := [0,1]\cup\{2\}$, whose interior
-$A^\circ = (0,1)$ is non-empty as required. At the point $x := 2$,
-\[d(x,A) = 0 \quad\text{(because } 2 \in A\text{)}, \qquad\qquad
-  d(x,A^\circ) = \inf_{a\in(0,1)}|2-a| = 1.\]
-The isolated point $2$ of $A$ contributes to $d(\cdot,A)$ but is invisible to $A^\circ$. The
-hypothesis \qt{$A^\circ$ is non-empty} is far too weak, because it constrains $A$ nowhere near
-$x$; the statement would become true under a hypothesis such as $A = \overline{A^\circ}$.
+% The parts are discharged out of order, (c) before (a) and (b), for the reason given above.
+% \setcounter{enumi} drives the labels so that each item still prints its own letter; do NOT
+% "fix" this into sequential order, and do not reach for \item[...], which is forbidden.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \setcounter{enumi}{2}
+  \item \textbf{True.} Fix $x,y \in X$. For every $a \in A$ the triangle inequality gives
+    $d(x,a) \leq d(x,y) + d(y,a)$, and the left-hand side is bounded below by $d(x,A)$, so
+    \[d(x,A) \leq d(x,y) + d(y,a) \qquad\text{for every } a \in A.\]
+    Taking the infimum over $a$ on the right yields $d(x,A) \leq d(x,y) + d(y,A)$. Exchanging
+    $x$ and $y$ and combining,
+    \[\big|d(x,A) - d(y,A)\big| \leq d(x,y),\]
+    so $d(\cdot,A)$ is \textbf{$1$-Lipschitz} (\cref{def:lipschitz_continuous}), and in
+    particular continuous. That is what the remaining parts use.
+  \setcounter{enumi}{0}
+  \item \textbf{True.} If $A$ is closed then $A^c$ is open, so for $x \in A^c$ there is $r>0$
+    with $B_r(x) \subseteq A^c$. No point of $A$ lies in that ball, i.e.\ $d(x,a) \geq r$ for
+    every $a \in A$, and taking the infimum gives $d(x,A) \geq r > 0$.
+  \item \textbf{True.} By \textbf{(c)} the function $d(\cdot,A)$ is continuous, and
+    $M = d(\cdot,A)^{-1}\big([1,\infty)\big)$ is the preimage of a closed set under a continuous
+    map, hence closed (\cref{def:continuous}\textbf{(c)}, applied to complements).
+  \setcounter{enumi}{3}
+  \item \textbf{False.} In $\mathbb{R}$ take $A := [0,1]\cup\{2\}$, whose interior
+    $A^\circ = (0,1)$ is non-empty as required. At the point $x := 2$,
+    \[d(x,A) = 0 \quad\text{(because } 2 \in A\text{)}, \qquad\qquad
+      d(x,A^\circ) = \inf_{a\in(0,1)}|2-a| = 1.\]
+    The isolated point $2$ of $A$ contributes to $d(\cdot,A)$ but is invisible to $A^\circ$. The
+    hypothesis \qt{$A^\circ$ is non-empty} is far too weak, because it constrains $A$ nowhere
+    near $x$; the statement would become true under a hypothesis such as
+    $A = \overline{A^\circ}$.
+\end{enumerate}
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution to \cref{ex:2.4}]

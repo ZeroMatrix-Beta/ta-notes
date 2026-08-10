@@ -4,106 +4,110 @@
 \label{sec:pullbacks_solutions}
 
 \begin{exercisesolution}[Solution of \cref{ex:12.9}]
-\textbf{(a)} Writing each $d\psi^j$ in the coordinate basis, $d\psi^j = \sum_{i=1}^n
-\frac{\partial\psi^j}{\partial x^i}\,dx^i$, so
-\[\omega = \left(\sum_{i_1=1}^n \frac{\partial\psi^1}{\partial x^{i_1}}dx^{i_1}\right)\wedge
-  \cdots\wedge\left(\sum_{i_n=1}^n \frac{\partial\psi^n}{\partial x^{i_n}}dx^{i_n}\right)
-  = \sum_{i_1,\ldots,i_n} \frac{\partial\psi^1}{\partial x^{i_1}}\cdots
-  \frac{\partial\psi^n}{\partial x^{i_n}}\,dx^{i_1}\wedge\cdots\wedge dx^{i_n}\]
-by bilinearity of $\wedge$ (property (1) of \cref{def:wedge_product}). Any term with a
-repeated index vanishes, since $dx^i\wedge dx^i=0$ by antisymmetry, so only tuples
-$(i_1,\ldots,i_n) = (\sigma(1),\ldots,\sigma(n))$ for a permutation $\sigma \in S_n$
-contribute; using $dx^{\sigma(1)}\wedge\cdots\wedge dx^{\sigma(n)} = \sgn(\sigma)\,dx^1\wedge
-\cdots\wedge dx^n$,
-\[\omega = \left(\sum_{\sigma\in S_n} \sgn(\sigma)\,\frac{\partial\psi^1}{\partial
-  x^{\sigma(1)}}\cdots\frac{\partial\psi^n}{\partial x^{\sigma(n)}}\right) dx^1\wedge\cdots
-  \wedge dx^n.\]
-The coefficient is exactly the Leibniz expansion of $\det(D\psi)$, so
-\[\boxed{\ d\psi^1\wedge\cdots\wedge d\psi^n = \det(D\psi)\,dx^1\wedge\cdots\wedge dx^n.\ }\]
-
-\textbf{(b)} Let $\eta = f(y)\,dy^1\wedge\cdots\wedge dy^n$ be an $n$-form on $V$. Its
-pullback under $\psi$ is $\psi^*\eta = f(\psi(x))\,d\psi^1\wedge\cdots\wedge d\psi^n$, which by
-part (a) equals $f(\psi(x))\det(D\psi(x))\,dx^1\wedge\cdots\wedge dx^n$. By
-\cref{def:integral_of_form_over_submanifold} (applied with $U$ itself as the $n$-dimensional
-submanifold),
-\[\int_U \psi^*\eta = \int_U f(\psi(x))\det(D\psi(x))\,dx.\]
-Since $\det(D\psi) = \lvert\det(D\psi)\rvert>0$ by hypothesis, the right-hand side is exactly
-the ordinary change-of-variables formula, so
-\[\int_U \psi^*\eta = \int_U f(\psi(x))\,\lvert\det(D\psi(x))\rvert\,dx = \int_V f(y)\,dy
-  = \int_V \eta.\]
-Thus $\boxed{\int_U \psi^*\eta = \int_V \eta}$: the change-of-variables formula is exactly the
-statement that integration of forms is invariant under pullback by an orientation-preserving
-diffeomorphism.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Writing each $d\psi^j$ in the coordinate basis, $d\psi^j = \sum_{i=1}^n
+    \frac{\partial\psi^j}{\partial x^i}\,dx^i$, so
+    \[\omega = \left(\sum_{i_1=1}^n \frac{\partial\psi^1}{\partial x^{i_1}}dx^{i_1}\right)\wedge
+      \cdots\wedge\left(\sum_{i_n=1}^n \frac{\partial\psi^n}{\partial x^{i_n}}dx^{i_n}\right)
+      = \sum_{i_1,\ldots,i_n} \frac{\partial\psi^1}{\partial x^{i_1}}\cdots
+      \frac{\partial\psi^n}{\partial x^{i_n}}\,dx^{i_1}\wedge\cdots\wedge dx^{i_n}\]
+    by bilinearity of $\wedge$ (property (1) of \cref{def:wedge_product}). Any term with a
+    repeated index vanishes, since $dx^i\wedge dx^i=0$ by antisymmetry, so only tuples
+    $(i_1,\ldots,i_n) = (\sigma(1),\ldots,\sigma(n))$ for a permutation $\sigma \in S_n$
+    contribute; using $dx^{\sigma(1)}\wedge\cdots\wedge dx^{\sigma(n)} = \sgn(\sigma)\,dx^1\wedge
+    \cdots\wedge dx^n$,
+    \[\omega = \left(\sum_{\sigma\in S_n} \sgn(\sigma)\,\frac{\partial\psi^1}{\partial
+      x^{\sigma(1)}}\cdots\frac{\partial\psi^n}{\partial x^{\sigma(n)}}\right) dx^1\wedge\cdots
+      \wedge dx^n.\]
+    The coefficient is exactly the Leibniz expansion of $\det(D\psi)$, so
+    \[\boxed{\ d\psi^1\wedge\cdots\wedge d\psi^n = \det(D\psi)\,dx^1\wedge\cdots\wedge dx^n.\ }\]
+  \item Let $\eta = f(y)\,dy^1\wedge\cdots\wedge dy^n$ be an $n$-form on $V$. Its
+    pullback under $\psi$ is $\psi^*\eta = f(\psi(x))\,d\psi^1\wedge\cdots\wedge d\psi^n$, which
+    by part \textbf{(a)} equals $f(\psi(x))\det(D\psi(x))\,dx^1\wedge\cdots\wedge dx^n$. By
+    \cref{def:integral_of_form_over_submanifold} (applied with $U$ itself as the $n$-dimensional
+    submanifold),
+    \[\int_U \psi^*\eta = \int_U f(\psi(x))\det(D\psi(x))\,dx.\]
+    Since $\det(D\psi) = \lvert\det(D\psi)\rvert>0$ by hypothesis, the right-hand side is exactly
+    the ordinary change-of-variables formula, so
+    \[\int_U \psi^*\eta = \int_U f(\psi(x))\,\lvert\det(D\psi(x))\rvert\,dx = \int_V f(y)\,dy
+      = \int_V \eta.\]
+    Thus $\boxed{\int_U \psi^*\eta = \int_V \eta}$: the change-of-variables formula is exactly
+    the statement that integration of forms is invariant under pullback by an
+    orientation-preserving diffeomorphism.
+\end{enumerate}
 \end{exercisesolution}
 
 % Verified: solved independently, both parts match Sol12, including pullback-invariance.
 
 \begin{exercisesolution}[Solution to \cref{ex:ai_pullback_area_form}]
 % Generator: Claude Opus 5 (High)
-\textbf{(a)} The pullback of a coordinate differential is the differential of the corresponding
-component, so from $x = r\cos\theta$ and $y = r\sin\theta$,
-\[\Phi^*(dx) = \cos\theta\,dr - r\sin\theta\,d\theta,
-  \qquad
-  \Phi^*(dy) = \sin\theta\,dr + r\cos\theta\,d\theta.\]
-Wedging, and using $dr\wedge dr = d\theta\wedge d\theta = 0$ together with
-$d\theta\wedge dr = -\,dr\wedge d\theta$,
-\[\Phi^*(dx\wedge dy)
-  = \big(\cos\theta\cdot r\cos\theta\big)\,dr\wedge d\theta
-    + \big(-r\sin\theta\cdot\sin\theta\big)\,d\theta\wedge dr
-  = r\big(\cos^2\theta + \sin^2\theta\big)\,dr\wedge d\theta
-  = r\,dr\wedge d\theta.\]
-The factor is exactly the $r$ tabulated for polar coordinates in
-\cref{rem:coordinate_jacobians_table}, obtained here without computing a determinant: the
-antisymmetry of the wedge did the cofactor expansion.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item The pullback of a coordinate differential is the differential of the corresponding
+    component, so from $x = r\cos\theta$ and $y = r\sin\theta$,
+    \[\Phi^*(dx) = \cos\theta\,dr - r\sin\theta\,d\theta,
+      \qquad
+      \Phi^*(dy) = \sin\theta\,dr + r\cos\theta\,d\theta.\]
+    Wedging, and using $dr\wedge dr = d\theta\wedge d\theta = 0$ together with
+    $d\theta\wedge dr = -\,dr\wedge d\theta$,
+    % Split into align* when the enumerate indent made the one-line chain overfull by 7.68pt.
+    \begin{align*}
+      \Phi^*(dx\wedge dy)
+        &= \big(\cos\theta\cdot r\cos\theta\big)\,dr\wedge d\theta
+          + \big(-r\sin\theta\cdot\sin\theta\big)\,d\theta\wedge dr \\
+        &= r\big(\cos^2\theta + \sin^2\theta\big)\,dr\wedge d\theta
+         = r\,dr\wedge d\theta.
+    \end{align*}
+    The factor is exactly the $r$ tabulated for polar coordinates in
+    \cref{rem:coordinate_jacobians_table}, obtained here without computing a determinant: the
+    antisymmetry of the wedge did the cofactor expansion.
+  \item They measure different things, and the absolute value is the difference.
+    \Cref{thm:change_of_variables} is a statement about \emph{volume}, which is unsigned: a
+    region and its mirror image have the same area, so only $\lvert\det\Jac\Phi\rvert$ can
+    appear. The pullback of a top-degree form is a statement about \emph{oriented} volume, which
+    carries a sign, and it records $\det\Jac\Phi$ itself.
 
-\textbf{(b)} They measure different things, and the absolute value is the difference.
-\Cref{thm:change_of_variables} is a statement about \emph{volume}, which is unsigned: a region
-and its mirror image have the same area, so only $\lvert\det\Jac\Phi\rvert$ can appear. The
-pullback of a top-degree form is a statement about \emph{oriented} volume, which carries a sign,
-and it records $\det\Jac\Phi$ itself.
+    The swap $\Phi(u_1,u_2) = (u_2,u_1)$ separates them. Its Jacobian is
+    $\left(\begin{smallmatrix}0&1\\1&0\end{smallmatrix}\right)$ with determinant $-1$, so
+    \[\Phi^*(dx\wedge dy) = du_2\wedge du_1 = -\,du_1\wedge du_2,\]
+    while $\lvert\det\Jac\Phi\rvert = 1$ and the change of variables formula does not change at
+    all. The form notices the reversal; the volume cannot.
+  \item \Cref{ex:12.9} concludes that $\int_U\psi^*\eta = \int_V\eta$, with no sign. Drop
+    the hypothesis $\det > 0$ and take $\psi$ to be the swap above: the pullback acquires a
+    factor $-1$, so the two integrals differ by a sign and the conclusion is false as stated. The
+    honest statement without the hypothesis carries $\sgn(\det\Jac\psi)$.
 
-The swap $\Phi(u_1,u_2) = (u_2,u_1)$ separates them. Its Jacobian is
-$\left(\begin{smallmatrix}0&1\\1&0\end{smallmatrix}\right)$ with determinant $-1$, so
-\[\Phi^*(dx\wedge dy) = du_2\wedge du_1 = -\,du_1\wedge du_2,\]
-while $\lvert\det\Jac\Phi\rvert = 1$ and the change of variables formula does not change at all.
-The form notices the reversal; the volume cannot.
-
-\textbf{(c)} \Cref{ex:12.9} concludes that $\int_U\psi^*\eta = \int_V\eta$, with no sign. Drop
-the hypothesis $\det > 0$ and take $\psi$ to be the swap above: the pullback acquires a factor
-$-1$, so the two integrals differ by a sign and the conclusion is false as stated. The honest
-statement without the hypothesis carries $\sgn(\det\Jac\psi)$.
-
-\Cref{thm:change_of_variables} is untroubled by the same map because it never claimed anything
-about orientation. This is the precise sense in which the positivity hypothesis in
-\cref{ex:12.9} is not a technical convenience: it is the price of upgrading an unsigned identity
-to a signed one.
+    \Cref{thm:change_of_variables} is untroubled by the same map because it never claimed
+    anything about orientation. This is the precise sense in which the positivity hypothesis in
+    \cref{ex:12.9} is not a technical convenience: it is the price of upgrading an unsigned
+    identity to a signed one.
+\end{enumerate}
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution to \cref{ex:ai_area_form_over_hemisphere}]
 % Generator: Claude Opus 5 (High)
-\textbf{(a)} Along $\phi$ the first two coordinates are the parameters themselves, $x = u$ and
-$y = v$, so $\phi^*(dx) = du$ and $\phi^*(dy) = dv$, giving
-\[\phi^*(dx\wedge dy) = du\wedge dv.\]
-The third coordinate never enters, which is the whole reason this integral is easy. It remains to
-check that $\phi$ induces the outward orientation: for a graph $z = g(u,v)$,
-\[\partial_u\phi\times\partial_v\phi = (-g_u,\ -g_v,\ 1),\]
-whose third component is $+1$, so the induced normal points \emph{upward}, and on the upper
-hemisphere upward is outward. Hence
-\[\int_{S^+} dx\wedge dy = \int_D du\wedge dv = \vol_2(D) = \pi.\]
-
-\textbf{(b)} The pullback computation is identical, since $\psi$ also has $x = u$ and $y = v$,
-so again $\psi^*(dx\wedge dy) = du\wedge dv$. But $\psi$ is still a graph, so its induced normal
-still points upward, and on the \emph{lower} hemisphere upward is \emph{inward}. So $\psi$ is
-orientation-reversing for the prescribed outward orientation, and
-\cref{def:integral_of_form_over_submanifold} requires a parametrization compatible with the
-chosen orientation. Correcting by the sign,
-\[\int_{S^-} dx\wedge dy = -\int_D du\wedge dv = -\pi.\]
-
-\textbf{(c)} The equator is a null set, so the two halves add:
-\[\int_{S^2} dx\wedge dy = \pi + (-\pi) = 0.\]
-For the second route, $d(x\,dy) = dx\wedge dy$, and $S^2$ is a compact orientable $2$-manifold
-with $\partial S^2 = \emptyset$, so \cref{thm:stokes_general} gives
-\[\int_{S^2} dx\wedge dy = \int_{S^2} d(x\,dy) = \int_{\partial S^2} x\,dy = 0.\]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Along $\phi$ the first two coordinates are the parameters themselves, $x = u$ and
+    $y = v$, so $\phi^*(dx) = du$ and $\phi^*(dy) = dv$, giving
+    \[\phi^*(dx\wedge dy) = du\wedge dv.\]
+    The third coordinate never enters, which is the whole reason this integral is easy. It
+    remains to check that $\phi$ induces the outward orientation: for a graph $z = g(u,v)$,
+    \[\partial_u\phi\times\partial_v\phi = (-g_u,\ -g_v,\ 1),\]
+    whose third component is $+1$, so the induced normal points \emph{upward}, and on the upper
+    hemisphere upward is outward. Hence
+    \[\int_{S^+} dx\wedge dy = \int_D du\wedge dv = \vol_2(D) = \pi.\]
+  \item The pullback computation is identical, since $\psi$ also has $x = u$ and $y = v$,
+    so again $\psi^*(dx\wedge dy) = du\wedge dv$. But $\psi$ is still a graph, so its induced
+    normal still points upward, and on the \emph{lower} hemisphere upward is \emph{inward}. So
+    $\psi$ is orientation-reversing for the prescribed outward orientation, and
+    \cref{def:integral_of_form_over_submanifold} requires a parametrization compatible with the
+    chosen orientation. Correcting by the sign,
+    \[\int_{S^-} dx\wedge dy = -\int_D du\wedge dv = -\pi.\]
+  \item The equator is a null set, so the two halves add:
+    \[\int_{S^2} dx\wedge dy = \pi + (-\pi) = 0.\]
+    For the second route, $d(x\,dy) = dx\wedge dy$, and $S^2$ is a compact orientable $2$-manifold
+    with $\partial S^2 = \emptyset$, so \cref{thm:stokes_general} gives
+    \[\int_{S^2} dx\wedge dy = \int_{S^2} d(x\,dy) = \int_{\partial S^2} x\,dy = 0.\]
+\end{enumerate}
 
 \begin{remark}[$dx\wedge dy$ measures the shadow]
 \label{rem:area_form_measures_the_shadow}

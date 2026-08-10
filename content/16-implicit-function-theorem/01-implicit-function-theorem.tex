@@ -355,20 +355,32 @@ Evaluating at $P = (0,-2,1)$:
 \partial_z F(0,-2,1) &= 0 - 4(-2)(1) = 8 \neq 0
 \end{align*}
 
-\textbf{(a)} Since $\partial_x F(P) = -2 \neq 0$, the Implicit Function Theorem guarantees we can solve for $x = x(y,z)$ locally. The derivative (gradient) is
-\[
-\nabla x(y,z) \Big|_{(-2,1)} = \begin{pmatrix} \partial_y x \\ \partial_z x \end{pmatrix} = -\frac{1}{\partial_x F(P)} \begin{pmatrix} \partial_y F(P) \\ \partial_z F(P) \end{pmatrix} = -\frac{1}{-2} \begin{pmatrix} -1 \\ 8 \end{pmatrix} = \begin{pmatrix} -1/2 \\ 4 \end{pmatrix}.
-\]
-
-\textbf{(b)} Since $\partial_y F(P) = -1 \neq 0$, we can solve for $y = y(x,z)$ locally. The derivative is
-\[
-\nabla y(x,z) \Big|_{(0,1)} = \begin{pmatrix} \partial_x y \\ \partial_z y \end{pmatrix} = -\frac{1}{\partial_y F(P)} \begin{pmatrix} \partial_x F(P) \\ \partial_z F(P) \end{pmatrix} = -\frac{1}{-1} \begin{pmatrix} -2 \\ 8 \end{pmatrix} = \begin{pmatrix} -2 \\ 8 \end{pmatrix}.
-\]
-
-\textbf{(c)} Since $\partial_z F(P) = 8 \neq 0$, we can solve for $z = z(x,y)$ locally. The derivative is
-\[
-\nabla z(x,y) \Big|_{(0,-2)} = \begin{pmatrix} \partial_x z \\ \partial_y z \end{pmatrix} = -\frac{1}{\partial_z F(P)} \begin{pmatrix} \partial_x F(P) \\ \partial_y F(P) \end{pmatrix} = -\frac{1}{8} \begin{pmatrix} -2 \\ -1 \end{pmatrix} = \begin{pmatrix} 1/4 \\ 1/8 \end{pmatrix}.
-\]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Since $\partial_x F(P) = -2 \neq 0$, the Implicit Function Theorem guarantees we can
+    solve for $x = x(y,z)$ locally. The derivative (gradient) is
+    \[
+    \nabla x(y,z) \Big|_{(-2,1)} = \begin{pmatrix} \partial_y x \\ \partial_z x \end{pmatrix}
+      = -\frac{1}{\partial_x F(P)} \begin{pmatrix} \partial_y F(P) \\ \partial_z F(P)
+      \end{pmatrix} = -\frac{1}{-2} \begin{pmatrix} -1 \\ 8 \end{pmatrix}
+      = \begin{pmatrix} -1/2 \\ 4 \end{pmatrix}.
+    \]
+  \item Since $\partial_y F(P) = -1 \neq 0$, we can solve for $y = y(x,z)$ locally. The
+    derivative is
+    \[
+    \nabla y(x,z) \Big|_{(0,1)} = \begin{pmatrix} \partial_x y \\ \partial_z y \end{pmatrix}
+      = -\frac{1}{\partial_y F(P)} \begin{pmatrix} \partial_x F(P) \\ \partial_z F(P)
+      \end{pmatrix} = -\frac{1}{-1} \begin{pmatrix} -2 \\ 8 \end{pmatrix}
+      = \begin{pmatrix} -2 \\ 8 \end{pmatrix}.
+    \]
+  \item Since $\partial_z F(P) = 8 \neq 0$, we can solve for $z = z(x,y)$ locally. The
+    derivative is
+    \[
+    \nabla z(x,y) \Big|_{(0,-2)} = \begin{pmatrix} \partial_x z \\ \partial_y z \end{pmatrix}
+      = -\frac{1}{\partial_z F(P)} \begin{pmatrix} \partial_x F(P) \\ \partial_y F(P)
+      \end{pmatrix} = -\frac{1}{8} \begin{pmatrix} -2 \\ -1 \end{pmatrix}
+      = \begin{pmatrix} 1/4 \\ 1/8 \end{pmatrix}.
+    \]
+\end{enumerate}
 \end{exercisesolution}
 
 % Originally: content/week-07.tex, \exercisesheet{7}, problem 7.5

@@ -62,15 +62,18 @@ Let $f : \mathbb{R}^2 \to \mathbb{R}$ be defined by
 \end{exercise}
 
 \begin{exercisesolution}[\cref{ex:schwarz_application}]
-\textbf{(a)} Every term in $f$ is a composition of $C^2$ functions (polynomials, exponentials, sine), and the denominator $2+\sin(x)$ is bounded away from zero. Thus $f$ is $C^2$.
-
-\textbf{(b)} Since $f \in C^2$, by Schwarz's theorem (\cref{thm:schwarz_mixed_partials}) we have $\partial_2 \partial_1 f = \partial_1 \partial_2 f$.
-Computing $\partial_1$ of the second term would be tedious. However, notice that the second term depends only on $x$, so its derivative with respect to $y$ is $0$.
-Thus, we first compute $\partial_2 f$:
-\[\partial_2 f(x,y) = x^2 (2y e^{y^2}) + 0 = 2x^2 y e^{y^2}.\]
-Then we compute $\partial_1$ of this result:
-\[\partial_1 \partial_2 f(x,y) = \partial_1 (2x^2 y e^{y^2}) = 4xy e^{y^2}.\]
-By Schwarz's theorem, $\partial_2 \partial_1 f(x,y) = 4xy e^{y^2}$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Every term in $f$ is a composition of $C^2$ functions (polynomials, exponentials, sine),
+    and the denominator $2+\sin(x)$ is bounded away from zero. Thus $f$ is $C^2$.
+  \item Since $f \in C^2$, by Schwarz's theorem (\cref{thm:schwarz_mixed_partials}) we have
+    $\partial_2 \partial_1 f = \partial_1 \partial_2 f$. Computing $\partial_1$ of the second
+    term would be tedious. However, notice that the second term depends only on $x$, so its
+    derivative with respect to $y$ is $0$. Thus, we first compute $\partial_2 f$:
+    \[\partial_2 f(x,y) = x^2 (2y e^{y^2}) + 0 = 2x^2 y e^{y^2}.\]
+    Then we compute $\partial_1$ of this result:
+    \[\partial_1 \partial_2 f(x,y) = \partial_1 (2x^2 y e^{y^2}) = 4xy e^{y^2}.\]
+    By Schwarz's theorem, $\partial_2 \partial_1 f(x,y) = 4xy e^{y^2}$.
+\end{enumerate}
 \end{exercisesolution}
 
 % Source: Corsin Nick/Class Notes/Week 4.pdf, pp. 9--10

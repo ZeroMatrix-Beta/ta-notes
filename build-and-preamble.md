@@ -147,16 +147,27 @@ was visible in the source. The reversed arrows had survived several passes preci
 the pair still *looked* like it cancelled — cancellation was the conclusion, but which arrow
 belonged to which cell was the reason for it, and that was the part that was backwards.
 
-## The three standing `Overfull \hbox` warnings
+## `Overfull \hbox` warnings: the baseline is now ZERO
 
-A clean build emits exactly three. **Three is the baseline: if a build reports four, the new one
-is yours.** None is serious enough to have been worth rewriting the surrounding mathematics for.
+**A clean build emits none. Zero is the baseline: if a build reports one, it is yours.**
 
-| Where | Over by |
-|---|---|
-| `24-differential-forms/02-exterior-derivative.tex` | 101.24pt (the `dx \wedge \dots` chain) |
-| `26-stokes/04-stokes-theorem.tex` | 10.61pt |
-| `14-convexity/01-convexity.tex` | 4.62pt |
+This section used to tabulate three standing warnings as acceptable — 101.24pt in
+`24-differential-forms/02-exterior-derivative.tex` (the `dx \wedge \dots` chain), 10.61pt in
+`26-stokes/04-stokes-theorem.tex`, and 4.62pt in `14-convexity/01-convexity.tex`. All three are
+gone, incidentally rather than deliberately: the prose revision and the norm-convention pass
+rewrote the surrounding lines, and the widest of them was finally split into an `align*`.
+Verified 2026-08-10 against a full 315-page build.
+
+That makes the check sharper than it was, so use it: `Overfull` should return nothing at all.
+
+```powershell
+(Select-String -Path check.log -Pattern "Overfull" -SimpleMatch | Measure-Object).Count
+```
+
+⚠️ Do not read a small line count in `check.log` as a truncated log. MiKTeX writes very long
+lines here, so a complete 315-page run is only about 1700 lines and reaches `page.2` within the
+first thousand. Confirm completeness from the **tail** — a finished run ends with
+`Output written on check.pdf` followed by `PDF statistics:`.
 
 It was **four** until 2026-08-09. The fourth, 1.20pt in `appendix-a-odes.tex`, disappeared on its
 own during the norm-convention pass: replacing `\lVert x_2-x_3\rVert` by `|x_2-x_3|` on the
@@ -202,6 +213,18 @@ not trustworthy on its own, because parentheses in ordinary text confuse the obv
 }{%
   \end{proof}%
 }
+% Trailing notes on an exercise/example (added 2026-08-10; main.tex, just below
+% exercisesolution, carries the full comment). Both hang off the END of a statement,
+% inside the environment, and share one geometry via \exnoteopen: a centred block
+% indented \exnoteindent on each side, small italic, in a muted colour.
+%   \exinfo{...}          \faTag, TextMetaNote gray -- where the problem came from
+%   \exhint[Label]{...}   \faLightbulb[regular], HintTint -- how to start it
+% Deliberately UNNUMBERED, the one case the rule below does not reach: they are
+% formatting blocks inside an already-numbered environment and are never \cref
+% targets, so no \label ever goes inside one. See style.md for when to use each.
+% \hint{...} is RETIRED and no longer defined -- \exhint replaced it.
+\newenvironment{exerciseinfo}{\exnoteopen{TextMetaNote}{\faTag}{Info}}{\exnoteclose}
+\newenvironment{exercisehint}[1][Hint]{\exnoteopen{HintTint}{\faLightbulb[regular]}{#1}}{\exnoteclose}
 % \newterm  -> ENGLISH quotes (main.tex:188). \germanterm (main.tex:189) is the
 % \glqq...\grqq one. They are deliberately different -- the German-mirroring
 % convention in project-state.md depends on it. Do not collapse them.
@@ -269,4 +292,11 @@ not the shared one.
 Adding a new environment means: `\newaliascnt{name}{theorem}`,
 `\newtheorem{name}[name]{Display Name}`, `\aliascntresetthe{name}`, a `\theHname` entry in the
 `\AtBeginDocument` block, and a `\crefname`/`\Crefname` pair — mirroring `lemma`/`corollary`/etc.
+
+**The rule reaches theorem-like environments only.** `exerciseinfo` and `exercisehint` (added
+2026-08-10) are plain `\newenvironment` formatting blocks with no counter and no `\crefname`,
+and that is correct: the hazard above needs a `\label` to bite, and these always sit *inside* an
+already-numbered `exercise` or `example`, which is what a reader cites. Do not "fix" them by
+giving them counters. If you ever want to `\cref` one, that is the signal it should have been a
+`remark` — the same test as `ainote`.
 

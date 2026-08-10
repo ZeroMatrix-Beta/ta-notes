@@ -90,28 +90,29 @@ these two steps.
 
 \begin{exercisesolution}[Solution to \cref{ex:ai_gaussian_two_exhaustions}]
 % Generator: Claude Opus 5 (High)
-\textbf{(a)} Both families are nested and consist of compact sets whose boundaries are a circle
-and the four sides of a square respectively, each a Jordan null set, so both are Jordan
-measurable by \cref{thm:jordan_measurability_boundary_criterion}. For the covering condition,
-$\operatorname{int}(D_\ell) = B_\ell(0)$ and $\operatorname{int}(Q_\ell) = (-\ell,\ell)^2$, and
-every point of $\mathbb{R}^2$ lies in both once $\ell$ exceeds its distance from the origin.
-Hence $\bigcup_\ell\operatorname{int}(D_\ell) = \bigcup_\ell\operatorname{int}(Q_\ell) =
-\mathbb{R}^2$, and \cref{lem:improper_integral_as_limit} applies to each.
-
-\textbf{(b)} In polar coordinates, using \cref{thm:change_of_variables} with Jacobian $r$,
-\[\int_{D_\ell} e^{-(x^2+y^2)}\,dx\,dy = \int_0^{2\pi}\!\!\int_0^{\ell} e^{-r^2}\,r\,dr\,d\varphi
-  = 2\pi\left[-\frac{e^{-r^2}}{2}\right]_0^{\ell} = \pi\big(1 - e^{-\ell^2}\big)
-  \ \xrightarrow[\ell\to\infty]{}\ \pi.\]
-
-\textbf{(c)} On a square the integrand factorises, so \cref{thm:fubini} splits it:
-\[\int_{Q_\ell} e^{-(x^2+y^2)}\,dx\,dy
-  = \left(\int_{-\ell}^{\ell} e^{-x^2}dx\right)\left(\int_{-\ell}^{\ell} e^{-y^2}dy\right)
-  = \left(\int_{-\ell}^{\ell} e^{-x^2}dx\right)^{\!2}
-  \ \xrightarrow[\ell\to\infty]{}\ I^2.\]
-
-\textbf{(d)} Both limits compute the same number $\int_{\mathbb{R}^2}f$, by
-\cref{lem:improper_integral_as_limit}, so $I^2 = \pi$ and $I = \sqrt\pi$, the positive root since
-the integrand is positive.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Both families are nested and consist of compact sets whose boundaries are a circle
+    and the four sides of a square respectively, each a Jordan null set, so both are Jordan
+    measurable by \cref{thm:jordan_measurability_boundary_criterion}. For the covering condition,
+    $\operatorname{int}(D_\ell) = B_\ell(0)$ and $\operatorname{int}(Q_\ell) = (-\ell,\ell)^2$,
+    and every point of $\mathbb{R}^2$ lies in both once $\ell$ exceeds its distance from the
+    origin. Hence $\bigcup_\ell\operatorname{int}(D_\ell) =
+    \bigcup_\ell\operatorname{int}(Q_\ell) = \mathbb{R}^2$, and
+    \cref{lem:improper_integral_as_limit} applies to each.
+  \item In polar coordinates, using \cref{thm:change_of_variables} with Jacobian $r$,
+    \[\int_{D_\ell} e^{-(x^2+y^2)}\,dx\,dy
+      = \int_0^{2\pi}\!\!\int_0^{\ell} e^{-r^2}\,r\,dr\,d\varphi
+      = 2\pi\left[-\frac{e^{-r^2}}{2}\right]_0^{\ell} = \pi\big(1 - e^{-\ell^2}\big)
+      \ \xrightarrow[\ell\to\infty]{}\ \pi.\]
+  \item On a square the integrand factorises, so \cref{thm:fubini} splits it:
+    \[\int_{Q_\ell} e^{-(x^2+y^2)}\,dx\,dy
+      = \left(\int_{-\ell}^{\ell} e^{-x^2}dx\right)\left(\int_{-\ell}^{\ell} e^{-y^2}dy\right)
+      = \left(\int_{-\ell}^{\ell} e^{-x^2}dx\right)^{\!2}
+      \ \xrightarrow[\ell\to\infty]{}\ I^2.\]
+  \item Both limits compute the same number $\int_{\mathbb{R}^2}f$, by
+    \cref{lem:improper_integral_as_limit}, so $I^2 = \pi$ and $I = \sqrt\pi$, the positive root
+    since the integrand is positive.
+\end{enumerate}
 
 The step that collapses without $f \geq 0$ is the identification in \textbf{(d)}. Non-negativity
 is what makes $\ell \mapsto \int_{K_\ell}f$ monotone, and monotonicity is what forces every

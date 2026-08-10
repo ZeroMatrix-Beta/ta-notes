@@ -312,3 +312,23 @@ boundary are, in this precise sense, the same operation viewed from two sides. T
 exactly the content of $d^2=0$ (\cref{thm:exterior_derivative}\textbf{(3)}): a boundary has no
 boundary, just as $d\omega$ has no further exterior derivative to take that isn't already zero.
 \end{remark}
+
+% Source: old_exams/examFS24.pdf (21 August 2024), Problem 3, parts 1--2, p. 10
+% Extractor: Gemini 3.6 Flash (High)
+% Correction: Claude Opus 5 (High) --- \operatorname{rot} -> \curl and J\Phi -> \Jac\Phi per the
+% declared-macro rule; \iint -> \int, matching thm:green_theorem two pages above.
+\begin{exercise}[Curl identity and Green's formula area preservation]
+\label{ex:curl_identity_greens_formula}
+Let $\Omega \subseteq \mathbb{R}^2$ be a bounded $C^1$ domain, and let $\Phi = (\Phi_1, \Phi_2) \in C^2(\overline{\Omega}, \mathbb{R}^2)$ be a vector-valued mapping, not assumed to be a diffeomorphism.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Consider the vector field $V \in C^1(\overline{\Omega}, \mathbb{R}^2)$ defined by
+  \[V := (\Phi_1 \partial_1 \Phi_2, \Phi_1 \partial_2 \Phi_2)\transp = \Phi_1 \nabla \Phi_2.\]
+  Prove that $\curl V(x) = \det \Jac\Phi(x)$ for all $x \in \overline{\Omega}$.
+  \item Let $\Psi \in C^2(\overline{\Omega}, \mathbb{R}^2)$ be another mapping such that $\Phi(x) = \Psi(x)$ for all $x \in \partial \Omega$. Prove that
+  \[\int_\Omega \det \Jac\Phi(x) \, dx = \int_\Omega \det \Jac\Psi(x) \, dx.\]
+\end{enumerate}
+\exhint[Official hint]{Use Green's formula (i.e.\ 2D Stokes) on the plane.}
+\exinfo{This exercise is taken from the exam of 21 August 2024, Problem 3. The original continues
+with four further parts about $\Phi(\overline{B_1})$ when $\Phi$ fixes the unit circle.}
+\end{exercise}
+

@@ -44,3 +44,59 @@ continuous, $\varphi$ is continuous. By definition $\Gamma_f = \varphi(U)$. Sinc
 and $\varphi$ is continuous, \cref{thm:continuity_preserves_connected} gives that $\varphi(U) =
 \Gamma_f$ is connected.
 \end{exercisesolution}
+
+\begin{exercisesolution}[Solution of \cref{ex:closed_unbounded_not_simply_connected}]
+% Generator: Claude Opus 5 (High)
+Take the closed exterior of the unit disc,
+\[U := \{x \in \mathbb{R}^2 \mid \lvert x\rvert \ge 1\}.\]
+\begin{itemize}
+  \item \textbf{Closed:} $U$ is the preimage of the closed set $[1,\infty)$ under the continuous map
+    $x \mapsto \lvert x\rvert$.
+  \item \textbf{Unbounded:} it contains $(k,0)$ for every $k \in \mathbb{N}$.
+  \item \textbf{Connected:} it is in fact path-connected. Given $p,q \in U$, travel radially outwards
+    from $p$ to the circle of radius $R := \max\{\lvert p\rvert, \lvert q\rvert\}$, then along that
+    circle, then radially inwards to $q$. Every point on this path has norm between $1$ and $R$, so
+    the path stays in $U$.
+  \item \textbf{Not simply connected:} the loop $\gamma(t) := (2\cos 2\pi t,\, 2\sin 2\pi t)$ winds
+    once around the origin, and no loop with winding number $1$ about a point outside $U$ can be
+    contracted to a point within $U$. Contracting it would force the loop to sweep across the
+    removed open disc $\{\lvert x\rvert < 1\}$.
+\end{itemize}
+\begin{ainote}
+The exercise is really a test of whether the three notions have been kept apart. Closed-and-unbounded
+rules out the reflex answer of an annulus $\{1 \le \lvert x\rvert \le 2\}$, and \qt{connected but not
+simply connected} rules out a half-plane or all of $\mathbb{R}^2$. Deleting an \emph{open} disc
+rather than a point is what keeps the result closed while still puncturing it.
+\end{ainote}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:sphere_path_connected}]
+% Generator: Claude Opus 5 (High)
+Both directions are proved by looking at what $S^{n-1}$ actually is in the two cases.
+
+\textbf{The case $n = 1$.} Here $S^0 = \{x \in \mathbb{R} \mid x^2 = 1\} = \{-1, +1\}$, a two-point
+space. Suppose $\gamma : [0,1] \to S^0$ were a path with $\gamma(0) = -1$ and $\gamma(1) = 1$.
+Regarded as a map into $\mathbb{R}$, it is continuous on an interval, so by the intermediate value
+theorem it takes the value $0$ somewhere. But $0 \notin S^0$, a contradiction. Hence $S^0$ is not
+path-connected.
+
+\textbf{The case $n \ge 2$.} Fix $p, q \in S^{n-1}$, and suppose first that $q \neq -p$. Then the
+straight segment between them misses the origin: if $(1-t)p + tq = 0$ for some $t \in [0,1]$, taking
+norms gives $(1-t) = t$, so $t = \tfrac12$ and $p = -q$, which we excluded. We may therefore
+normalise the segment and set
+\[\gamma(t) := \frac{(1-t)p + tq}{\lvert (1-t)p + tq\rvert}, \qquad t \in [0,1].\]
+This is continuous, takes values in $S^{n-1}$, and satisfies $\gamma(0) = p$, $\gamma(1) = q$.
+
+It remains to handle $q = -p$, and this is exactly where $n \ge 2$ enters: the sphere $S^{n-1}$ then
+contains a point $r$ with $r \neq \pm p$. (For $n \ge 2$ the sphere is infinite --- pick any unit
+vector $v$ orthogonal to $p$, which exists because $p^\perp$ has dimension $n - 1 \ge 1$.) Neither
+$r$ nor $q$ is the antipode of the other's partner, so the previous construction gives a path from
+$p$ to $r$ and a path from $r$ to $q$; concatenating them joins $p$ to $q$. Hence $S^{n-1}$ is
+path-connected.
+\begin{remark}
+The construction in the main case is the radial projection of the segment, and it is the standard way
+to move around a sphere: it works verbatim on any $S^{n-1}$ and explains why the antipodal pair is
+the only obstruction. Note also that $n \ge 2$ is used only once, to produce a third point --- which
+is precisely what $S^0$ does not have.
+\end{remark}
+\end{exercisesolution}

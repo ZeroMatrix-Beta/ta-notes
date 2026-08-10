@@ -635,3 +635,31 @@ Find the points on the submanifold
 that are closest to the point $(0,0,1)$.
 \exinfo{This exercise is Problem 6.11 of Problem Sheet 6, Analysis II, Spring Semester 2026.}
 \end{exercise}
+
+% Source: old_exams/fs2023/Prüfung.pdf (9 August 2021), Teil B, Aufgabe 4, p. 16
+% Extractor: Gemini 3.6 Flash (High)
+% Correction: Claude Opus 5 (High) --- Flash cited "the January 2022 exam, Problem 4 of Part B".
+% Problem 4 of Part B of that exam is about harmonic numbers and the Gamma function; this problem is
+% Aufgabe 4 of Part B of the *August 2021* exam. The problem number was right, the exam was not.
+\begin{exercise}[Extrema of a linear form on an ellipsoid]
+\label{ex:lagrange_ellipsoid_linear}
+Let $a_1, a_2, a_3 > 0$ and let $b = (b_1, b_2, b_3)\transp \in \mathbb{R}^3 \setminus \{0\}$. Find the maximum and minimum values of the linear function $f(x) := b_1 x_1 + b_2 x_2 + b_3 x_3$ on the ellipsoid
+\[E := \left\{x \in \mathbb{R}^3 \ \middle|\ \frac{x_1^2}{a_1^2} + \frac{x_2^2}{a_2^2} + \frac{x_3^2}{a_3^2} = 1\right\},\]
+and determine the points of $E$ at which these extreme values are attained.
+\exinfo{This exercise is taken from the exam of 9 August 2021, Part B, Problem 4.}
+\end{exercise}
+
+% Source: old_exams/WS22_Prüfung.pdf (24 January 2022), Teil A, Frage 8, p. 9
+% Extractor: Claude Opus 5 (High)
+\begin{exercise}[Minimising entropy on the simplex]
+\label{ex:entropy_simplex_minimum}
+Let $n \ge 1$ and let $A := \{x \in (0,1]^n \mid x_1 + \dots + x_n = 1\}$. Consider
+\[f : A \to \mathbb{R}, \qquad f(x) := \sum_{i=1}^n x_i \log(x_i).\]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Show that $f$ has exactly one critical point $p$ in the interior of $A$, and determine
+    $f(p)$.
+  \item Prove that $f$ attains its minimum on $A$ at $p$.
+\end{enumerate}
+\exinfo{This exercise is taken from the exam of 24 January 2022, Part A, Problem 8.}
+\end{exercise}
+

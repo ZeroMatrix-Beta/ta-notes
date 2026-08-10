@@ -22,3 +22,51 @@
     let alone continuously so.
 \end{enumerate}
 \end{exercisesolution}
+
+\begin{exercisesolution}[Solution of \cref{ex:hessian_gradient_diffeomorphism}]
+% Generator: Claude Opus 5 (High)
+Write $H := \Hess f(0)$. Everything follows from its spectrum, so compute that first. The matrix is
+block diagonal, with the $1\times1$ block $(1)$ and the $2\times2$ block
+$\left(\begin{smallmatrix} 0 & 1 \\ 1 & 0\end{smallmatrix}\right)$, whose eigenvalues are $\pm 1$.
+Hence $H$ has eigenvalues $1, 1, -1$, and in particular $\det H = -1 \neq 0$: the critical point is
+non-degenerate, and $H$ is indefinite.
+
+Since $f$ is smooth with $f(0) = 0$ and $\nabla f(0) = 0$, Taylor's theorem gives
+\begin{equation}
+\label{eq:degenerate_critical_taylor}
+f(x) = \tfrac12 \langle Hx, x\rangle + o(\lvert x\rvert^2)
+     = \tfrac12 x_1^2 + x_2x_3 + o(\lvert x\rvert^2)
+     \qquad \text{as } x \to 0 .
+\end{equation}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{False.} Along the $x_1$-axis, \eqref{eq:degenerate_critical_taylor} gives
+    $f(t,0,0) = \tfrac12 t^2 + o(t^2) > 0 = f(0)$ for small $t \neq 0$, so $f$ takes values larger
+    than $f(0)$ arbitrarily close to the origin.
+  \item \textbf{True.} We have just seen a direction along which $f$ increases. In the plane
+    $x_1 = 0$ the quadratic part is $x_2x_3$, so along $x_2 = -x_3 = t$ it reads $-t^2$, and
+    $f(0,t,-t) = -t^2 + o(t^2) < 0 = f(0)$. Taking both values above and below $f(0)$ in every
+    neighbourhood of the origin is exactly what a saddle point does.
+  \item \textbf{False.} The quadratic form is correct only up to a change of coordinates, and the
+    statement is made in the original ones. By \eqref{eq:degenerate_critical_taylor} the second-order
+    part of $f$ is $\tfrac12 x_1^2 + x_2 x_3$, which is not $x_1^2 - x_2^2 - x_3^2$: evaluating both
+    at $(0,1,1)$ gives $1$ and $-2$. What \emph{is} true is that in suitable coordinates the form
+    becomes $\tfrac12(u_1^2 + u_2^2 - u_3^2)$, matching the eigenvalues $1,1,-1$ --- note in
+    passing that this has signature $(2,1)$, not the $(1,2)$ the stated expression suggests.
+  \item \textbf{True.} This is the same Taylor expansion read with a weaker conclusion: the
+    right-hand side of \eqref{eq:degenerate_critical_taylor} is bounded by a constant times
+    $\lvert x\rvert^2$ near $0$. Vanishing to first order at a point is precisely what $O(\lvert
+    x\rvert^2)$ records.
+  \item \textbf{True}, and this is where the chapter's theorem enters. The map $\nabla f$ is smooth,
+    being the gradient of a smooth function, and its Jacobian at the origin is
+    $\Jac(\nabla f)(0) = \Hess f(0) = H$, which we computed to be invertible. By the inverse function
+    theorem (\cref{thm:inverse_function_theorem}), $\nabla f$ is therefore a diffeomorphism from some
+    ball $B_\varepsilon(0)$ onto an open neighbourhood of $\nabla f(0) = 0$.
+\end{enumerate}
+\begin{remark}
+Item \textbf{(e)} is the useful one to remember: \qt{non-degenerate critical point} means exactly
+\qt{$\nabla f$ is a local diffeomorphism there}, so such points are isolated. Item \textbf{(c)} is
+the standard trap --- diagonalising the Hessian is a statement about \emph{some} coordinates, and
+carrying its conclusion back to the original ones without the change of variables is where the
+argument breaks.
+\end{remark}
+\end{exercisesolution}

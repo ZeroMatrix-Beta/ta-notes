@@ -176,3 +176,41 @@ $\lvert c'(t)\rvert > 0$ for every $t$.
     why is that unavoidable?
 \end{enumerate}
 \end{aiexercise}
+
+% Source: old_exams/examHS24.pdf (13 February 2025), Problem 3, parts 1--4, pp. 10--11
+% Extractor: Gemini 3.6 Flash (High)
+% Correction: Claude Opus 5 (High) --- three repairs against the source. (1) Parts (a) and (b) are
+% stated on a general convex U with a general weight g in the original; Flash specialised both to
+% the half-plane, which hides that the mechanism has nothing to do with 1/y. (2) The official hint
+% for (b) was dropped, which is what left Flash's own solution looking like it had a gap.
+% (3) Part (d) claimed *every* circle centred on {y=0}; only those through the origin are integral
+% curves of this particular F, so the claim did not follow from (b). Restored to the source's
+% circle: centre (a,0), radius a.
+\begin{exercise}[Geodesics of the Poincaré half-plane]
+\label{ex:poincare_geodesics_stokes}
+Let $U \subseteq \mathbb{R}^2$ be open and convex and let $g : U \to (0,\infty)$ be smooth. For a
+smooth curve $\gamma : [a,b] \to U$, define its weighted length by
+\[L_g(\gamma) := \int_a^b g(\gamma(t))\,\lvert\dot\gamma(t)\rvert \, dt.\]
+We say $\gamma$ is \newterm{of minimal length} if $L_g(\gamma) \le L_g(\sigma)$ for every smooth
+$\sigma : [c,d] \to U$ with $\sigma(c) = \gamma(a)$ and $\sigma(d) = \gamma(b)$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Show that $L_g(\gamma \circ \psi) = L_g(\gamma)$ for every smooth diffeomorphism
+    $\psi : [c,d] \to [a,b]$.
+  \item Let $F$ be a smooth vector field on $U$ with $\lvert F\rvert \equiv 1$ and $\curl(g F) = 0$.
+    Show that if $\gamma : [a,b] \to U$ satisfies $\dot\gamma(t) = F(\gamma(t))$ for all $t$, then
+    $\gamma$ is of minimal length.
+\end{enumerate}
+For the remaining parts, take $U := \{(x,y) \in \mathbb{R}^2 \mid y > 0\}$ and $g(x,y) := 1/y$.
+\begin{enumerate}[label=\textbf{(\alph*)}, resume]
+  \item For $F(x,y) := \frac{1}{x^2+y^2} \left(\begin{smallmatrix} 2xy \\ y^2-x^2 \end{smallmatrix}\right)$, verify that $\lvert F\rvert \equiv 1$ and $\curl(gF) = 0$.
+  \item Fix $a > 0$ and let $C$ be the circle of radius $a$ centred at $(a,0)$, so that
+    $(0,0) \in C$. Let $\gamma$ parametrise a piece of the upper half $C \cap U$, clockwise and by
+    arclength. Deduce that $\gamma$ is of minimal length.
+\end{enumerate}
+\exhint[Official hint]{For \textbf{(b)}, you may assume that the two curves meet only at their
+endpoints, that together they bound a domain, and that Stokes' theorem is valid on that domain.}
+\exinfo{This exercise is taken from the exam of 13 February 2025, Problem 3. The original closes
+with a bonus part: any two points of $U$ lie on a unique circle centred on $\{y=0\}$, and the arc
+joining them is the unique shortest curve between them.}
+\end{exercise}
+

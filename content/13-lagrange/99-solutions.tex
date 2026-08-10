@@ -81,3 +81,74 @@ giving $\big(\pm\tfrac{1}{\sqrt2},0,\tfrac12\big)$ with $d^2 = \tfrac12+0+\tfrac
 Comparing $d^2=1$ against $d^2=\tfrac34$, the \textbf{closest points} are
 $\big(\pm\tfrac{1}{\sqrt2},0,\tfrac12\big)$, at minimal distance $\tfrac{\sqrt3}{2}$.
 \end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:lagrange_ellipsoid_linear}]
+% Generator: Gemini 3.6 Flash (High)
+% Correction: Claude Opus 5 (High) --- ^T -> \transp; the \implies signs inside displays replaced by
+% prose per the logical-arrows rule; and "g := ... - 1 = 0" split, since it was naming g and
+% asserting a constraint in one breath.
+Write $S := a_1^2 b_1^2 + a_2^2 b_2^2 + a_3^2 b_3^2$, and define the constraint function
+\[g(x_1,x_2,x_3) := \frac{x_1^2}{a_1^2} + \frac{x_2^2}{a_2^2} + \frac{x_3^2}{a_3^2} - 1,\]
+so that $E = g^{-1}(0)$. This set is closed and bounded, hence compact, and $f$ is continuous, so
+$f$ does attain a maximum and a minimum on $E$; it remains to find them.
+
+The gradients are $\nabla f(x) = (b_1, b_2, b_3)\transp$ and $\nabla g(x) = \left(\frac{2x_1}{a_1^2}, \frac{2x_2}{a_2^2}, \frac{2x_3}{a_3^2}\right)\transp$.
+Since $0 \notin E$, we have $\nabla g \neq 0$ on $E$, so every extremum satisfies Lagrange's
+condition $\nabla f = \lambda \nabla g$ for some $\lambda$. Componentwise this reads
+$b_i = 2\lambda x_i / a_i^2$, and therefore
+\[x_i = \frac{a_i^2 b_i}{2\lambda}, \qquad i = 1,2,3.\]
+Here $\lambda \neq 0$, since $\lambda = 0$ would force $b = 0$. Substituting into the constraint,
+\[\sum_{i=1}^3 \frac{1}{a_i^2} \left(\frac{a_i^2 b_i}{2\lambda}\right)^2 = \frac{S}{4\lambda^2} = 1,\]
+which gives $2\lambda = \pm\sqrt{S}$. The two candidate points are therefore
+\[x^{\pm} = \pm \frac{\big(a_1^2 b_1,\; a_2^2 b_2,\; a_3^2 b_3\big)\transp}{\sqrt{S}},\]
+and evaluating $f$ at them,
+\[f(x^{\pm}) = \pm \frac{1}{\sqrt{S}}\sum_{i=1}^3 a_i^2 b_i^2 = \pm \frac{S}{\sqrt{S}} = \pm\sqrt{S}.\]
+Since the maximum and minimum both exist and must occur among these two points, the maximum value
+is $\sqrt{S}$, attained at $x^{+}$, and the minimum value is $-\sqrt{S}$, attained at $x^{-}$.
+\begin{remark}
+Substituting $u_i := x_i/a_i$ turns $f$ into $\langle u, (a_ib_i)_i\rangle$ on the unit sphere, where
+the answer is Cauchy--Schwarz: the extreme values of a linear form on the unit sphere are
+$\pm$ the norm of its coefficient vector, attained at $\pm$ the unit vector in that direction. The
+Lagrange computation above is that fact in disguise, with $\sqrt{S}$ the norm of $(a_ib_i)_i$.
+\end{remark}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:entropy_simplex_minimum}]
+% Generator: Claude Opus 5 (High)
+Throughout, write $g(x) := x_1 + \dots + x_n - 1$ for the constraint function, so that
+$A = g^{-1}(0) \cap (0,1]^n$, and note $\nabla g \equiv (1,\dots,1)\transp \neq 0$, so the Lagrange
+condition is available at every point.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item On the interior, where every $x_i > 0$, the function $t \mapsto t\log t$ is differentiable
+    and $\nabla f(x) = \big(\log(x_i) + 1\big)_{i=1}^n$. The Lagrange condition
+    $\nabla f(x) = \lambda \nabla g(x)$ reads
+\[\log(x_i) + 1 = \lambda \qquad \text{for every } i,\]
+    so all the $x_i$ share the common value $e^{\lambda - 1}$; call it $c$. The constraint
+    $\sum_i x_i = 1$ becomes $nc = 1$, forcing $c = 1/n$. Hence there is exactly one critical point,
+\[p = \left(\tfrac1n, \dots, \tfrac1n\right), \qquad
+  f(p) = \sum_{i=1}^n \tfrac1n \log\tfrac1n = \log\tfrac1n = -\log n .\]
+
+  \item Existence needs a compact set, and $A$ is not closed: points with some $x_i = 0$ are missing.
+    So pass to the closed standard simplex
+\[\Delta := \left\{x \in \mathbb{R}^n \;\middle|\; x_i \ge 0 \text{ for all } i, \ \textstyle\sum_i x_i = 1\right\},\]
+    which is closed and bounded, hence compact, and extend $f$ to it by setting $0\log 0 := 0$. This
+    extension is continuous, because $t \log t \to 0$ as $t \to 0^+$. Therefore $f$ attains a minimum
+    somewhere on $\Delta$.
+
+    Where? Suppose the minimum were attained at a point $x \in \Delta \setminus A$, so that exactly
+    $k$ of the coordinates are positive, with $1 \le k \le n-1$. On that face, $f$ is the same
+    expression in $k$ variables summing to $1$, and by part \textbf{(a)} applied with $k$ in place of
+    $n$ its smallest value there is $-\log k$. Since $k < n$ gives $-\log k > -\log n = f(p)$, and
+    $p \in \Delta$, such a point cannot be a minimiser. The minimum is therefore attained in the
+    interior, where by \textbf{(a)} the only candidate is $p$. Hence $\min_A f = f(p) = -\log n$.
+\end{enumerate}
+\begin{remark}
+The result is the discrete Gibbs inequality: among all probability vectors on $n$ outcomes, the
+uniform one has the least $\sum x_i\log x_i$, that is, the \emph{greatest} entropy $-\sum x_i \log
+x_i$, namely $\log n$. The mechanism is convexity: $\Hess f(x) = \diag(1/x_1,\dots,1/x_n)$ is
+positive definite on the interior, so $f$ is strictly convex there, and a strictly convex function on
+a convex set has at most one critical point --- which is why part \textbf{(a)} finds exactly one and
+part \textbf{(b)} can then simply rule out the boundary.
+\end{remark}
+\end{exercisesolution}
+

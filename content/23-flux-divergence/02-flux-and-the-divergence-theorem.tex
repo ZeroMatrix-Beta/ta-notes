@@ -355,3 +355,48 @@ $F(x,y,z) := (x,\,y,\,z)$.
     of $F$ through $S$.
 \end{enumerate}
 \end{aiexercise}
+
+% Source: old_exams/examHS24.pdf (13 February 2025), Kurzproblem 1, part 3, p. 8
+% Extractor: Gemini 3.6 Flash (High)
+% Correction: Claude Opus 5 (High) --- \operatorname{div} -> \divg and ^T -> \transp per the
+% declared-macro rule.
+\begin{exercise}[Gauss' law: outer flux of an inverse-square field across an ellipsoid]
+\label{ex:gauss_law_ellipsoid_flux}
+Let $a,b,c > 0$ and consider the solid ellipsoid
+\[U := \left\{(x,y,z) \in \mathbb{R}^3 \ \middle|\ \left(\frac{x}{a}\right)^2 + \left(\frac{y}{b}\right)^2 + \left(\frac{z}{c}\right)^2 \leq 1\right\},\]
+together with the electric point-charge field $E : \mathbb{R}^3 \setminus \{0\} \to \mathbb{R}^3$,
+\[E(x,y,z) := \frac{(x,y,z)\transp}{(x^2+y^2+z^2)^{3/2}}.\]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Verify that $\divg E(x,y,z) = 0$ for all $(x,y,z) \neq (0,0,0)$.
+  \item Compute the outer flux of $E$ through the boundary $\partial U$ of the ellipsoid.
+\end{enumerate}
+\exhint[Official hint]{In order to exploit the symmetries of the field $E$, consider the flow of $E$ across the boundary of the domain $U \setminus B_r(0)$, where $0 < r < \min\{a,b,c\}$.}
+\exinfo{This exercise is taken from the exam of 13 February 2025, Short Problem 1, part 3. Part
+\textbf{(a)} is added here as a step; the original asks only for the flux.}
+\end{exercise}
+
+% Source: old_exams/examHS24.pdf (13 February 2025), Kästchenaufgabe 3, p. 7
+% Extractor: Claude Opus 5 (High)
+\begin{exercise}[Tuning a parameter to prescribe a flux]
+\label{ex:tuning_alpha_prescribed_flux}
+Let $U \subseteq \mathbb{R}^2$ be a smooth bounded domain with $\vol_2(U) = 1$, and consider the
+vector field
+\[F_\alpha(x,y) := \big(3y^2 + \alpha x,\; 2x - y\big), \qquad \alpha \in \mathbb{R}.\]
+Determine the value of $\alpha$ for which the outer flux of $F_\alpha$ across $\partial U$ equals
+$1$.
+\exinfo{This exercise is taken from the exam of 13 February 2025, Box Problem 3, where only the
+final answer was graded.}
+\end{exercise}
+
+% Source: old_exams/fs2023/Prüfung.pdf (9 August 2021), Teil A, Frage 10, p. 11
+% Extractor: Claude Opus 5 (High)
+\begin{exercise}[A family of integrals that does not depend on its parameter]
+\label{ex:radial_weight_flux_independent}
+Let $B_1(0) = \{x \in \mathbb{R}^3 \mid \lvert x\rvert \le 1\}$ be the closed unit ball. Show that
+for every continuously differentiable vector field $v$ on $\mathbb{R}^3$, the quantity
+\[I_n := \int_{B_1(0)} \divg\Big(\big(x_1^2+x_2^2+x_3^2\big)^n\, v(x)\Big) \, d\vol_3(x)\]
+does not depend on $n$: that is, $I_n = I_m$ for all $n,m \in \mathbb{Z}_{\ge 0}$.
+\exinfo{This exercise is taken from the exam of 9 August 2021, Part A, Problem 10, which opens by
+asking for a statement of the divergence theorem on $B_1(0)$.}
+\end{exercise}
+

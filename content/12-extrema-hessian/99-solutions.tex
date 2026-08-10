@@ -180,3 +180,55 @@ be, since a whole curve of critical points cannot consist of isolated extrema.
     and it is exactly the freedom that \textbf{(b)} shows to be indispensable.
 \end{enumerate}
 \end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:hessian_parameterized_exp}]
+% Generator: Gemini 3.6 Flash (High)
+% Correction: Claude Opus 5 (High) --- Hf -> \Hess f, \text{Tr} -> \Tr, ^T -> \transp, and the
+% \implies signs standing in for verbs replaced by prose. The range argument in (c) also spelled
+% out: "by continuity" was doing a lot of unstated work, and it is the connectedness of R^2 plus
+% the intermediate value theorem that closes the gaps.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item The gradient of $f_\alpha$ is
+\[\nabla f_\alpha(x,y) = \begin{pmatrix} e^x(x^2 + \alpha y^2 + 2x) \\ 2\alpha y e^x \end{pmatrix},\]
+and we look for the points where it vanishes. Since $e^x > 0$ everywhere, the second component
+vanishes when $\alpha y = 0$, which splits the problem in two.
+\begin{itemize}
+  \item \textbf{If $\alpha = 0$:} the second component vanishes identically, and the first reduces
+    to $x^2 + 2x = 0$, so $x = 0$ or $x = -2$. The critical set is the pair of vertical lines
+    $\{(0,y) \mid y \in \mathbb{R}\}$ and $\{(-2,y) \mid y \in \mathbb{R}\}$.
+  \item \textbf{If $\alpha \neq 0$:} the second component forces $y = 0$, and the first then reads
+    $x^2 + 2x = 0$ again. The critical points are $(0,0)$ and $(-2,0)$.
+\end{itemize}
+
+  \item For $\alpha \neq 0$, differentiating once more gives
+\[\Hess f_\alpha(x,y) = e^x \begin{pmatrix} x^2+4x+2+\alpha y^2 & 2\alpha y \\ 2\alpha y & 2\alpha \end{pmatrix}.\]
+\begin{itemize}
+  \item \textbf{At $(0,0)$:} $\Hess f_\alpha(0,0) = \left(\begin{smallmatrix} 2 & 0 \\ 0 & 2\alpha \end{smallmatrix}\right)$, with determinant $4\alpha$. For $\alpha > 0$ the determinant is positive and $\Tr = 2+2\alpha > 0$, so the matrix is positive definite and $(0,0)$ is a strict local minimum. For $\alpha < 0$ the determinant is negative, so $(0,0)$ is a saddle point.
+  \item \textbf{At $(-2,0)$:} $\Hess f_\alpha(-2,0) = e^{-2}\left(\begin{smallmatrix} -2 & 0 \\ 0 & 2\alpha \end{smallmatrix}\right)$, with determinant $-4\alpha e^{-4}$. For $\alpha > 0$ this is negative, so $(-2,0)$ is a saddle point. For $\alpha < 0$ it is positive, and the entry $\partial_1^2 f_\alpha(-2,0) = -2e^{-2} < 0$ makes the matrix negative definite, so $(-2,0)$ is a strict local maximum.
+\end{itemize}
+Notice that the two critical points swap roles as $\alpha$ changes sign, and that neither test is
+inconclusive: $\det \Hess$ vanishes only at $\alpha = 0$, the case excluded here.
+
+  \item Each range is determined by exhibiting the extreme values and then filling in between by the
+    intermediate value theorem, which applies because $\mathbb{R}^2$ is connected and $f_\alpha$ is
+    continuous.
+\begin{itemize}
+  \item \textbf{If $\alpha > 0$:} both $x^2$ and $\alpha y^2$ are non-negative, so $f_\alpha \geq 0$,
+    with $f_\alpha(0,0) = 0$ attained. Along the $x$-axis, $f_\alpha(x,0) = x^2 e^x \to \infty$ as
+    $x \to \infty$, so values grow without bound. Hence $f_\alpha(\mathbb{R}^2) = [0,\infty)$.
+  \item \textbf{If $\alpha < 0$:} along the $x$-axis $f_\alpha(x,0) = x^2 e^x$ sweeps out
+    $[0,\infty)$ as above, while along the $y$-axis $f_\alpha(0,y) = \alpha y^2$ sweeps out
+    $(-\infty,0]$. Together these give $f_\alpha(\mathbb{R}^2) = \mathbb{R}$.
+  \item \textbf{If $\alpha = 0$:} $f_0(x,y) = x^2 e^x$ does not depend on $y$ and is non-negative,
+    with value $0$ at $x = 0$ and unbounded above. Hence $f_0(\mathbb{R}^2) = [0,\infty)$.
+\end{itemize}
+\end{enumerate}
+\begin{ainote}
+It is worth pausing on the $\alpha > 0$ case: $(0,0)$ is a strict local minimum \emph{and} the global
+minimum, but $(-2,0)$ is only a saddle, and $f_\alpha$ has no global maximum at all. Part
+\textbf{(c)} is not a corollary of part \textbf{(b)} --- the Hessian test is purely local, and
+reading a range off it is a standard way to go wrong.
+\end{ainote}
+\end{exercisesolution}
+
+

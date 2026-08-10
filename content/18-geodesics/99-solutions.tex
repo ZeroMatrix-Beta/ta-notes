@@ -120,3 +120,74 @@ distort areas or angles, and it is why \cref{ex:great_circles_geodesics} had to 
 computation instead.
 \end{remark}
 \end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:poincare_geodesics_stokes}]
+% Generator: Gemini 3.6 Flash (High)
+% Correction: Claude Opus 5 (High) --- (a) and (b) restated for general convex U and general g, and
+% (b) now cites the official hint rather than smuggling in "assuming they bound a domain". Part (d)
+% rewritten: Flash claimed every circle centred on {y=0} and justified it with "substituting
+% verifies", which it does not --- the radius is forced. \operatorname{rot} -> \curl throughout.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Let $\psi : [c,d] \to [a,b]$ be a diffeomorphism; assume first that it is
+    orientation-preserving, so $\psi' > 0$. Then $(\gamma \circ \psi)'(s) = \dot\gamma(\psi(s))
+    \psi'(s)$, and the substitution $t = \psi(s)$ gives
+\[L_g(\gamma \circ \psi) = \int_c^d g(\gamma(\psi(s)))\,\lvert\dot\gamma(\psi(s))\rvert\,\psi'(s) \, ds = \int_a^b g(\gamma(t))\,\lvert\dot\gamma(t)\rvert \, dt = L_g(\gamma).\]
+    If instead $\psi' < 0$, then $\lvert\psi'\rvert = -\psi'$ and the substitution also swaps the
+    limits of integration, so the two sign changes cancel and the value is unchanged.
+
+  \item Let $\sigma : [c,d] \to U$ be any competitor with $\sigma(c) = \gamma(a)$ and $\sigma(d) =
+    \gamma(b)$. By the hint we may assume $\gamma$ and $\sigma$ meet only at their endpoints and
+    together bound a domain $D \subseteq U$, on which Stokes' theorem applies. Since $\curl(gF) = 0$
+    on $U$,
+\[\int_{\partial D} gF \cdot \tau \, dL = \int_D \curl(gF) \, dx = 0,\]
+    and $\partial D$ consists of $\gamma$ and $\sigma$ traversed in opposite senses. Therefore the
+    two line integrals agree:
+\[\int_\gamma gF \cdot \tau \, dL = \int_\sigma gF \cdot \tau \, dL.\]
+    Now compare each side with the corresponding length. Along $\gamma$ we have $\dot\gamma = F(\gamma)$,
+    which has $\lvert\dot\gamma\rvert = 1$, so $gF \cdot \dot\gamma = g\lvert F\rvert^2 = g =
+    g\lvert\dot\gamma\rvert$, and the left-hand side is exactly $L_g(\gamma)$. Along $\sigma$, the
+    Cauchy--Schwarz inequality and $\lvert F\rvert = 1$ give the one-sided bound
+    $gF \cdot \dot\sigma \le g\lvert F\rvert\,\lvert\dot\sigma\rvert = g\lvert\dot\sigma\rvert$, so the
+    right-hand side is at most $L_g(\sigma)$. Combining, $L_g(\gamma) \le L_g(\sigma)$.
+
+  \item First the norm:
+\[\lvert F(x,y)\rvert^2 = \frac{4x^2y^2 + (y^2-x^2)^2}{(x^2+y^2)^2} = \frac{(x^2+y^2)^2}{(x^2+y^2)^2} = 1.\]
+Next, with $g = 1/y$,
+\[gF = \frac{1}{y(x^2+y^2)} \begin{pmatrix} 2xy \\ y^2-x^2 \end{pmatrix} = \begin{pmatrix} \dfrac{2x}{x^2+y^2} \\[2mm] \dfrac{y^2-x^2}{y(x^2+y^2)} \end{pmatrix},\]
+so that $\curl(gF) = \partial_x (gF)_2 - \partial_y (gF)_1$ is computed from the two derivatives
+\begin{itemize}
+  \item $\partial_x \left(\dfrac{y^2-x^2}{y(x^2+y^2)}\right)
+    = \dfrac{-2xy(x^2+y^2) - (y^2-x^2)\,2xy}{y^2(x^2+y^2)^2}
+    = \dfrac{-2xy\big[(x^2+y^2)+(y^2-x^2)\big]}{y^2(x^2+y^2)^2}
+    = \dfrac{-4xy^3}{y^2(x^2+y^2)^2}
+    = \dfrac{-4xy}{(x^2+y^2)^2}$,
+  \item $\partial_y \left(\dfrac{2x}{x^2+y^2}\right) = \dfrac{-4xy}{(x^2+y^2)^2}$.
+\end{itemize}
+The two agree, and therefore $\curl(gF) = 0$ on $U$.
+% Correction: Claude Opus 5 (High) --- Flash's first bullet reported -4x/(x^2+y^2)^2, having lost a
+% factor of y in the numerator, then silently used -4x for the *second* derivative too so that the
+% cancellation still came out. The conclusion was right; neither derivative was.
+
+  \item Parametrise $C$ by $x = a + a\cos\theta$, $y = a\sin\theta$, so that $\theta \in (0,\pi)$
+    traces out $C \cap U$. Then
+\[x^2+y^2 = 2a^2(1+\cos\theta), \qquad
+  \begin{pmatrix} 2xy \\ y^2-x^2 \end{pmatrix} = 2a^2(1+\cos\theta) \begin{pmatrix} \sin\theta \\ -\cos\theta \end{pmatrix},\]
+    using $\sin^2\theta - (1+\cos\theta)^2 = -2\cos\theta\,(1+\cos\theta)$ for the second component.
+    The common factor cancels, leaving
+\[F(x,y) = \begin{pmatrix} \sin\theta \\ -\cos\theta \end{pmatrix}.\]
+    Differentiating the parametrisation gives $\gamma'(\theta) = a(-\sin\theta, \cos\theta)\transp = -a\,F$,
+    so $F$ points along $C$ in the direction of \emph{decreasing} $\theta$: from $(0,0)$ over the top
+    of the circle towards $(2a,0)$, which is the clockwise sense. Hence a clockwise arclength
+    parametrisation $\gamma$ of a piece of $C \cap U$ satisfies $\dot\gamma = F(\gamma)$ exactly, and
+    part \textbf{(b)} applies: $\gamma$ is of minimal length.
+
+    Note that the radius is \emph{forced}. Solving $\dot\gamma \parallel F(\gamma)$ for the circle
+    through a given $(x,y) \in U$ centred at $(c,0)$ gives $c = (x^2+y^2)/(2x)$, and then $(x-c)^2 +
+    y^2 = c^2$: the circle passes through the origin. So it is not true that every circle centred on
+    $\{y=0\}$ is an integral curve of this particular $F$ --- only the ones through the origin are.
+    Every such circle \emph{is} a geodesic of the half-plane, but seeing that requires a different
+    $F$ for each one, which is what the bonus part of the original problem arranges.
+\end{enumerate}
+\end{exercisesolution}
+
+

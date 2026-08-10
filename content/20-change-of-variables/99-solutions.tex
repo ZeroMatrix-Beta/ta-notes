@@ -162,3 +162,87 @@ limit $R \to \infty$ taken afterwards. The compact statement is the one the cour
 dominated version is what the applications actually use.
 \end{remark}
 \end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:volume_ellipsoid_change_variables}]
+% Generator: Gemini 3.6 Flash (High)
+% Correction: Claude Opus 5 (High) --- \operatorname{vol} -> \vol, J\Phi -> \Jac\Phi, ^T ->
+% \transp, and \iiint -> \int as elsewhere in this chapter.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Define $\Phi(u,v,w) := (au, bv, cw)\transp$, and write $(x,y,z) = \Phi(u,v,w)$. Then
+    $(x/a)^2 + (y/b)^2 + (z/c)^2 = u^2+v^2+w^2$, so $(u,v,w)$ lies in the closed unit ball if and
+    only if $(x,y,z) \in U$. Since $a,b,c > 0$, the map $\Phi$ is a linear bijection, and therefore
+    $\Phi(\overline{B_1(0)}) = U$.
+
+  \item The Jacobian matrix of $\Phi$ is the diagonal matrix
+\[\Jac\Phi = \begin{pmatrix} a & 0 & 0 \\ 0 & b & 0 \\ 0 & 0 & c \end{pmatrix},\]
+    constant in $(u,v,w)$, with determinant $\det \Jac\Phi = abc > 0$.
+
+  \item By the change of variables theorem (\cref{thm:change_of_variables}),
+\[\vol_3(U) = \int_U 1 \, d\vol_3 = \int_{\overline{B_1(0)}} \lvert\det \Jac\Phi\rvert \, d\vol_3 = abc \int_{\overline{B_1(0)}} 1 \, d\vol_3 .\]
+The unit ball in $\mathbb{R}^3$ has volume $\tfrac{4}{3}\pi$, and therefore
+\[\vol_3(U) = \frac{4}{3} \pi abc.\]
+\end{enumerate}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:cubic_shear_area}]
+% Generator: Claude Opus 5 (High)
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Differentiating each component,
+\[D_x\varphi = \Jac\varphi(x) = \begin{pmatrix} 3x_1^2 & -1 \\ 1 & 1 \end{pmatrix},
+  \qquad \det \Jac\varphi(x) = 3x_1^2 + 1 \ge 1 > 0 .\]
+
+  \item The determinant never vanishes, so by the inverse function theorem
+    (\cref{thm:inverse_function_theorem}) $\varphi$ is a local diffeomorphism at every point; in
+    particular $\varphi(\mathbb{R}^2)$ is open. It remains to prove global injectivity, and then
+    $\varphi$ is a bijection onto its image which is locally a diffeomorphism, hence a
+    diffeomorphism onto its image.
+
+    Suppose $\varphi(x) = \varphi(y)$. The second components give $x_2 + x_1 = y_2 + y_1$, that is,
+    $x_2 - y_2 = -(x_1 - y_1)$. Substituting this into the equality of first components,
+    $x_1^3 - x_2 = y_1^3 - y_2$, yields
+\[x_1^3 - y_1^3 = x_2 - y_2 = -(x_1 - y_1),
+  \qquad\text{that is,}\qquad (x_1 - y_1)\big(x_1^2 + x_1y_1 + y_1^2 + 1\big) = 0 .\]
+    The second factor is at least $1$, because $x_1^2 + x_1y_1 + y_1^2 = \big(x_1 +
+    \tfrac{y_1}{2}\big)^2 + \tfrac34 y_1^2 \ge 0$. Hence $x_1 = y_1$, and then $x_2 = y_2$.
+
+  \item By part \textbf{(a)} the Jacobian determinant is positive, so the change of variables
+    theorem (\cref{thm:change_of_variables}) gives
+\[\vol_2(\varphi(Q)) = \int_Q \lvert\det \Jac\varphi\rvert \, dx
+  = \int_0^1\!\!\int_0^1 \big(3x_1^2 + 1\big) \, dx_2\,dx_1
+  = \int_0^1 \big(3x_1^2+1\big)\,dx_1 = 1 + 1 = 2 .\]
+\end{enumerate}
+\begin{remark}
+The map is not linear, so the image of the square is not a parallelogram and there is no single
+factor by which areas scale. The change of variables formula handles that by scaling
+\emph{pointwise} and integrating the result, which is the whole reason the determinant appears
+inside the integral rather than outside it.
+\end{remark}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution of \cref{ex:gaussian_second_moment_polar}]
+% Generator: Claude Opus 5 (High)
+Following the hint, the substitution $(x,y) \mapsto (y,x)$ is a linear change of variables with
+Jacobian determinant $-1$, and it carries the integrand $x^2e^{-\alpha(x^2+y^2)}$ to
+$y^2e^{-\alpha(x^2+y^2)}$. Hence the two integrals agree, and adding them gives
+\[2I_\alpha = \int_{\mathbb{R}^2} (x^2+y^2)\,e^{-\alpha(x^2+y^2)} \, dx\,dy .\]
+The integrand is now radial, which is what makes polar coordinates pay. Writing $x = r\cos\theta$,
+$y = r\sin\theta$, with Jacobian determinant $r$,
+\[2I_\alpha = \int_0^{2\pi}\!\!\int_0^\infty r^2 e^{-\alpha r^2}\, r\,dr\,d\theta
+  = 2\pi \int_0^\infty r^3 e^{-\alpha r^2}\,dr .\]
+Substituting $u := r^2$, so that $du = 2r\,dr$, turns the remaining integral into one that can be
+done by parts:
+\[\int_0^\infty r^3 e^{-\alpha r^2}\,dr = \frac12 \int_0^\infty u e^{-\alpha u}\,du
+  = \frac{1}{2\alpha^2}.\]
+Therefore $2I_\alpha = 2\pi \cdot \frac{1}{2\alpha^2} = \frac{\pi}{\alpha^2}$, and
+\[I_\alpha = \frac{\pi}{2\alpha^2}.\]
+\begin{remark}
+Two sanity checks come free. Scaling $(x,y) \mapsto (x,y)/\sqrt\alpha$ predicts $I_\alpha =
+\alpha^{-2} I_1$, which the answer satisfies; and $I_\alpha$ should equal
+$\tfrac12 \cdot \tfrac{1}{2\alpha}\cdot\tfrac{\pi}{\alpha}$ read off from the one-dimensional
+Gaussian moments, which it does. The symmetry trick in the first line is the same one that
+evaluates $\int_{\mathbb{R}} e^{-x^2}dx$ by squaring it: an integral that resists in Cartesian
+coordinates becomes radial once it is paired with its own mirror image.
+\end{remark}
+\end{exercisesolution}
+
+

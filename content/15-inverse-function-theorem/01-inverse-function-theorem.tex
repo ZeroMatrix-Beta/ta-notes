@@ -286,3 +286,23 @@ Thus, for every $x_0 \in U$, there is a neighbourhood $V_0 \subseteq U$ such tha
 \end{enumerate}
 \exinfo{This exercise is Problem 7.1 of Problem Sheet 7, Analysis II, Spring Semester 2026.}
 \end{exercise}
+
+% Source: old_exams/examHS24.pdf (13 February 2025), Wahr/Falsch-Fragen, Aufgabe 5, pp. 3--4
+% Extractor: Claude Opus 5 (High)
+\begin{exercise}[True or False \textnormal{(a degenerate critical point)}]
+\label{ex:hessian_gradient_diffeomorphism}
+Let $f \in C^\infty(\mathbb{R}^3)$ satisfy
+\[f(0) = 0, \qquad \nabla f(0) = \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}, \qquad
+  \Hess f(0) = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 0 & 1 \\ 0 & 1 & 0 \end{pmatrix}.\]
+Decide whether each of the following is true or false, with justification.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $(0,0,0)$ is a local maximum point for $f$.
+  \item $(0,0,0)$ is a saddle point for $f$.
+  \item $f(x,y,z) = x^2 - y^2 - z^2 + o(x^2+y^2+z^2)$ as $(x,y,z) \to (0,0,0)$.
+  \item $f(x,y,z) = O(x^2+y^2+z^2)$ as $(x,y,z) \to (0,0,0)$.
+  \item The map $\nabla f : \mathbb{R}^3 \to \mathbb{R}^3$, $x \mapsto \nabla f(x)$, restricted to a
+    sufficiently small ball centred at $(0,0,0)$, is a diffeomorphism onto its image.
+\end{enumerate}
+\exinfo{This exercise is taken from the exam of 13 February 2025, where it appears as the fifth
+block of true/false questions.}
+\end{exercise}

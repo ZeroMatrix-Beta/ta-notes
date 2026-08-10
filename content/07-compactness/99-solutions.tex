@@ -220,3 +220,81 @@ generalises to any connected, locally connected ambient space.
     common margin}.
 \end{enumerate}
 \end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:annulus_continuous_image}]
+% Generator: Gemini 3.6 Flash (High)
+% Correction: Claude Opus 5 (High) --- solution for part (c) supplied; U is bounded by
+% \overline{B_2(0)}, not B_2(0), since (0,2) lies in U.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item The map $(x,y) \mapsto x^2+y^2$ is continuous, and $U$ is the preimage of the closed set
+    $[1,4]$ under it, so $U$ is closed. It is also bounded, being contained in
+    $\overline{B_2(0)}$. By Heine--Borel (\cref{thm:heine_borel}), $U$ is compact. It is moreover
+    path-connected --- any two of its points can be joined by moving along a circle and then
+    radially --- and therefore connected.
+
+  \item Since $f$ is continuous and $U$ is compact, $f(U)$ is compact
+    (\cref{item:continuity_preserves_compact}); since $U$ is connected, $f(U)$ is connected
+    (\cref{thm:continuity_preserves_connected}). The connected subsets of $\mathbb{R}$ are exactly
+    the intervals, and a compact interval is one of the form $[a,b]$. It remains to rule out
+    $a = b$, that is, to check $f$ is non-constant: $(1,0)$ and $(0,2)$ both lie in $U$, and
+    $f(1,0) = \sin 0 - 0 = 0$ while $f(0,2) = \sin 0 - 16 = -16$. Hence $f(U) = [a,b]$ with $a < b$.
+
+  \item \textbf{No.} A loop running once around the inner hole cannot be contracted to a point
+    within $U$ without crossing the removed disc $\{x^2+y^2 < 1\}$. The annulus is the standard
+    example separating \qt{connected} from \qt{simply connected}, and it is worth keeping the two
+    apart: part \textbf{(a)} is what \textbf{(b)} needs, and simple connectedness plays no role
+    there at all.
+\end{enumerate}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:nearest_point_to_origin}]
+% Generator: Claude Opus 5 (High)
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item The set $A$ need not be bounded, so Weierstrass does not apply to it directly. The remedy is
+    to cut it down to a compact piece without losing the minimum. Fix any $a_0 \in A$ and set
+    $R := \lvert a_0\rvert$. The set
+\[K := A \cap \overline{B_R(0)}\]
+    is closed (an intersection of two closed sets) and bounded, hence compact by Heine--Borel
+    (\cref{thm:heine_borel}), and it is non-empty because $a_0 \in K$. Since $f$ is continuous, it
+    attains a minimum on $K$ (\cref{item:extreme_value_theorem}), say at $P_0 \in K \subseteq A$.
+    This $P_0$ minimises over all of $A$: any $P \in A \setminus K$ has $\lvert P\rvert > R =
+    \lvert a_0\rvert \ge f(P_0)$, because $a_0 \in K$.
+
+  \item Take $A := \{x \in \mathbb{R}^n \mid 0 < \lvert x\rvert \le 1\}$, the closed unit ball with
+    its centre removed. Then $\inf_A f = 0$, since $\lvert x\rvert$ can be made as small as we like,
+    but $f(x) = 0$ would force $x = 0 \notin A$. So the infimum is not attained. The set is bounded,
+    which shows that closedness --- not boundedness --- is the hypothesis doing the work in
+    \textbf{(a)}.
+
+  \item Let $A$ be convex and suppose $P_0, P_1 \in A$ both minimise, with common value
+    $m := \lvert P_0\rvert = \lvert P_1\rvert$. If $m = 0$ then $P_0 = P_1 = 0$ and there is nothing
+    to prove, so assume $m > 0$. By convexity the midpoint $M := \tfrac12(P_0+P_1)$ lies in $A$, and
+    the triangle inequality gives
+\[\lvert M\rvert \le \tfrac12\big(\lvert P_0\rvert + \lvert P_1\rvert\big) = m.\]
+    Equality in the triangle inequality for the Euclidean norm forces $P_0$ and $P_1$ to be
+    non-negative multiples of one another; having equal non-zero norms, they would then be equal.
+    So if $P_0 \neq P_1$ the inequality is strict, $\lvert M\rvert < m$, contradicting minimality of
+    $m$. Hence $P_0 = P_1$.
+
+  \item Let $P_0 \in A$ be a minimiser and put $m := \lvert P_0\rvert$, which is positive because
+    $0 \notin A$. Suppose, for contradiction, that $P_0$ were an interior point of $A$, so that
+    $B_\varepsilon(P_0) \subseteq A$ for some $\varepsilon > 0$. Move from $P_0$ straight towards the
+    origin: the point
+\[P_1 := \left(1 - \frac{\varepsilon}{2m}\right) P_0\]
+    satisfies $\lvert P_1 - P_0\rvert = \frac{\varepsilon}{2m}\lvert P_0\rvert = \frac{\varepsilon}{2}
+    < \varepsilon$, so $P_1 \in A$, while
+    $\lvert P_1\rvert = m - \frac{\varepsilon}{2} < m$. This contradicts the minimality of
+    $\lvert P_0\rvert$. Therefore $P_0$ is not interior, and since $P_0 \in A \subseteq \overline{A}$
+    it must lie in $\partial A$.
+\end{enumerate}
+\begin{remark}
+The four parts isolate four different hypotheses and show what each one buys: closedness gives
+\emph{existence}, convexity gives \emph{uniqueness}, and $0 \notin A$ gives \emph{location}. Part
+\textbf{(b)} is what stops the list reading as decoration. It is worth noticing that boundedness is
+never assumed: the trick in \textbf{(a)} of intersecting with a ball large enough to catch one
+point of $A$ is the standard way to run a Weierstrass argument on an unbounded closed set, and it
+recurs whenever a coercive function is minimised.
+\end{remark}
+\end{exercisesolution}
+
+

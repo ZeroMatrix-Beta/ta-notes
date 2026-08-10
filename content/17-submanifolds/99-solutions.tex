@@ -43,3 +43,34 @@ official-sheet exercises, so all solutions below are original. Each has been che
     diffeomorphism everywhere on its domain) a diffeomorphism onto its image.
 \end{enumerate}
 \end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:submanifold_quadric_tangent_space}]
+% Generator: Gemini 3.6 Flash (High)
+% Correction: Claude Opus 5 (High) --- ^T -> \transp throughout, \implies replaced by prose, and the
+% check that p lies on M added: the tangent space computation presupposes it.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Define the smooth function $F : \mathbb{R}^3 \to \mathbb{R}$,
+    $F(x_1,x_2,x_3) := x_1 x_2 + x_2 x_3 + x_1 x_3 - 1$, so that $M = F^{-1}(0)$. Its gradient is
+\[\nabla F(x) = (x_2+x_3,\; x_1+x_3,\; x_1+x_2)\transp .\]
+    Suppose $\nabla F(x) = 0$. Adding the three equations $x_2+x_3 = x_1+x_3 = x_1+x_2 = 0$ gives
+    $2(x_1+x_2+x_3) = 0$, and subtracting each equation in turn then forces $x_1 = x_2 = x_3 = 0$.
+    But $F(0,0,0) = -1 \neq 0$, so the origin is not in $M$. Hence $\nabla F$ is non-zero at every
+    point of $M$, which is to say $0$ is a regular value of $F$. By the regular value theorem
+    (\cref{thm:regular_value_theorem}), $M$ is a smooth submanifold of $\mathbb{R}^3$ of dimension
+    $3 - 1 = 2$.
+
+  \item First, $p = (-1,2,3)$ does lie on $M$: indeed $(-1)(2) + (2)(3) + (-1)(3) = -2 + 6 - 3 = 1$.
+    At this point,
+\[\nabla F(-1,2,3) = (2+3,\; -1+3,\; -1+2)\transp = (5, 2, 1)\transp .\]
+    The tangent space is the kernel of $DF(p)$, equivalently the orthogonal complement of
+    $\nabla F(p)$:
+\[T_p M = \left\{(v_1, v_2, v_3)\transp \in \mathbb{R}^3 \;\middle|\; 5v_1 + 2v_2 + v_3 = 0\right\}.\]
+    Reading $v_3$ off from $v_1$ and $v_2$ gives two independent solutions: taking $(v_1,v_2) =
+    (1,0)$ yields $v_3 = -5$, and taking $(v_1,v_2) = (0,1)$ yields $v_3 = -2$. Hence
+\[\left\{\begin{pmatrix} 1 \\ 0 \\ -5 \end{pmatrix}, \begin{pmatrix} 0 \\ 1 \\ -2 \end{pmatrix}\right\}\]
+    is a basis of $T_p M$; the two vectors are independent because their first two components
+    already are, and there are two of them, matching $\dim T_p M = 2$.
+\end{enumerate}
+\end{exercisesolution}
+
+

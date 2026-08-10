@@ -332,3 +332,53 @@ Let $T$ be the closed triangle with vertices $(0,0)$, $(1,0)$ and $(0,1)$, and c
     the answer?
 \end{enumerate}
 \end{aiexercise}
+
+% Source: old_exams/examHS24.pdf (13 February 2025), Kurzproblem 1, part 1, p. 8
+% Extractor: Gemini 3.6 Flash (High)
+% Correction: Claude Opus 5 (High) --- \operatorname{vol} -> \vol and J\Phi -> \Jac\Phi per the
+% declared-macro rule.
+\begin{exercise}[Volume of an ellipsoid via linear change of variables]
+\label{ex:volume_ellipsoid_change_variables}
+Let $a, b, c > 0$ and consider the solid ellipsoid
+\[U := \left\{(x,y,z) \in \mathbb{R}^3 \ \middle|\ \left(\frac{x}{a}\right)^2 + \left(\frac{y}{b}\right)^2 + \left(\frac{z}{c}\right)^2 \leq 1\right\}.\]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Define a linear change of variables $\Phi : \mathbb{R}^3 \to \mathbb{R}^3$ mapping the closed unit ball $\overline{B_1(0)} \subseteq \mathbb{R}^3$ bijectively onto $U$.
+  \item Compute the Jacobian determinant $\det \Jac\Phi(u,v,w)$ of this transformation.
+  \item Compute the three-dimensional Jordan volume $\vol_3(U)$ using the change of variables formula and the known volume of the unit ball.
+\end{enumerate}
+\exinfo{This exercise is taken from the exam of 13 February 2025, Short Problem 1, part 1, which
+also asks for a labelled 3D sketch of $U$.}
+\end{exercise}
+
+\begin{ainote}
+The original exam writes the ellipsoid with an equality, $(x/a)^2+(y/b)^2+(z/c)^2 = 1$, and then
+asks for its volume --- but that set is the ellipsoid \emph{surface}, whose Jordan volume is $0$.
+The intended object is the solid region it bounds, so the inequality is used here.
+\end{ainote}
+
+% Source: old_exams/fs2023/Prüfung.pdf (9 August 2021), Teil A, Frage 5, p. 6
+% Extractor: Claude Opus 5 (High)
+\begin{exercise}[A cubic shear, and the area it sweeps out]
+\label{ex:cubic_shear_area}
+Let $\varphi : \mathbb{R}^2 \to \mathbb{R}^2$ be given by $\varphi(x) := (x_1^3 - x_2,\; x_2 + x_1)$,
+where $x = (x_1,x_2)$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Compute the derivative $D_x\varphi$ for every $x \in \mathbb{R}^2$.
+  \item Show that $\varphi : \mathbb{R}^2 \to \varphi(\mathbb{R}^2)$ is a diffeomorphism.
+  \item What is the area of the image $\varphi(Q)$ of the square $Q := [0,1] \times [0,1]$?
+\end{enumerate}
+\exinfo{This exercise is taken from the exam of 9 August 2021, Part A, Problem 5.}
+\end{exercise}
+
+% Source: old_exams/examHS24.pdf (13 February 2025), Wahr/Falsch-Fragen, Aufgabe 9, p. 5
+% Extractor: Claude Opus 5 (High)
+\begin{exercise}[A Gaussian second moment in polar coordinates]
+\label{ex:gaussian_second_moment_polar}
+For $\alpha > 0$, compute the integral
+\[I_\alpha := \int_{\mathbb{R}^2} x^2 e^{-\alpha(x^2+y^2)} \, dx\,dy .\]
+\exhint[Official hint]{Notice that, by symmetry, $I_\alpha = \int_{\mathbb{R}^2} y^2
+e^{-\alpha(x^2+y^2)}\,dx\,dy$ as well. Compute $2I_\alpha$ using polar coordinates.}
+\exinfo{This exercise is taken from the exam of 13 February 2025, where it appears as the ninth
+block of true/false questions, there phrased as a series of checkpoints along this computation.}
+\end{exercise}
+

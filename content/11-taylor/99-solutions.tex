@@ -174,3 +174,56 @@ the order-$2$ coefficients differ. The argument above breaks at precisely the ri
 $d = \sigma$ the bound becomes $|R_d(u) + O(t)| \leq M$, which says nothing.
 \end{ainote}
 \end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:taylor_parametric_integral}]
+% Generator: Gemini 3.6 Flash (High)
+% Correction: Claude Opus 5 (High) --- parts (c) and (d) written; Flash's (c) only observed that
+% x = 0 is critical, which answers neither the source's question nor its own weakened one.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item The integrand is continuous and both limits are differentiable in $x$, so by the Leibniz
+    rule together with the fundamental theorem of calculus,
+\[f'(x) = \frac{d}{dx} \int_{x-1}^{x+1} \cos(\pi t^2) \, dt = \cos\big(\pi (x+1)^2\big) - \cos\big(\pi (x-1)^2\big).\]
+Since $(x\pm1)^2 = x^2 \pm 2x + 1$ and $\cos(\theta+\pi) = -\cos\theta$, each term simplifies:
+\[\cos\big(\pi(x^2+1) \pm 2\pi x\big) = -\cos(\pi x^2 \pm 2\pi x).\]
+Therefore $f'(x) = \cos(\pi x^2 - 2\pi x) - \cos(\pi x^2 + 2\pi x)$, and the identity
+$\cos A - \cos B = -2\sin\frac{A+B}{2}\sin\frac{A-B}{2}$ collapses this to
+\[f'(x) = 2 \sin(\pi x^2) \sin(2\pi x).\]
+
+  \item Expand each factor as $x \to 0$: $\sin(2\pi x) = 2\pi x - \frac{4\pi^3}{3} x^3 + O(x^5)$ and
+    $\sin(\pi x^2) = \pi x^2 + O(x^6)$. Multiplying,
+\[f'(x) = 2 \big(\pi x^2 + O(x^6)\big)\left(2\pi x - \frac{4\pi^3}{3}x^3 + O(x^5)\right) = 4\pi^2 x^3 + O(x^5).\]
+Integrating from $0$,
+\[f(x) = f(0) + \int_0^x \big(4\pi^2 t^3 + O(t^5)\big)\,dt = f(0) + \pi^2 x^4 + O(x^6),\]
+where $f(0) = \int_{-1}^1 \cos(\pi t^2)\,dt = 2\int_0^1 \cos(\pi t^2)\,dt$. Hence
+$a_1 = a_2 = a_3 = 0$ and $a_4 = \pi^2$.
+
+  \item By part \textbf{(a)}, $f'(x) = 0$ if and only if one of the two sine factors vanishes.
+    Now $\sin(\pi x^2) = 0$ exactly when $x^2$ is a non-negative integer, and $\sin(2\pi x) = 0$
+    exactly when $2x$ is an integer. The set of critical points is therefore
+\[\left\{\pm\sqrt{n} \;\middle|\; n \in \mathbb{Z}_{\geq 0}\right\} \cup \tfrac{1}{2}\mathbb{Z}.\]
+    The two families overlap precisely at the integers whose square roots are integers, so the
+    critical points of the form $x = \pm 1, \pm 2, \dots$ are \newterm{double} zeros of $f'$, and
+    those are the ones where the classification changes character.
+
+  \item \textbf{At $x = 0$:} by part \textbf{(b)}, $f(x) - f(0) = \pi^2 x^4 + O(x^6) > 0$ for all
+    small $x \neq 0$. Equivalently, $f'(x) = 4\pi^2 x^3 + O(x^5)$ changes sign from negative to
+    positive. Either way, $x = 0$ is a strict local \textbf{minimum} (and $f^{(4)}(0) = 4!\,a_4 =
+    24\pi^2 > 0$).
+
+    \textbf{At $x = 1$:} write $x = 1 + h$. Then $\sin(\pi x^2) = \sin\big(\pi + \pi(2h+h^2)\big) =
+    -\sin\big(\pi(2h+h^2)\big) = -2\pi h + O(h^2)$ and $\sin(2\pi x) = \sin(2\pi h) = 2\pi h +
+    O(h^3)$, so
+\[f'(1+h) = 2(-2\pi h + O(h^2))(2\pi h + O(h^3)) = -8\pi^2 h^2 + O(h^3).\]
+    This is strictly negative for all small $h \neq 0$, on \emph{both} sides. So $f$ is decreasing
+    through $x = 1$ with a horizontal tangent: the point is \textbf{neither} a maximum nor a
+    minimum.
+\end{enumerate}
+\begin{remark}
+The contrast between the two points is the whole content of part \textbf{(d)}. Both are critical,
+and at both the second derivative vanishes, so the Hessian test says nothing at either. What decides
+the question is the \emph{order} of the first non-vanishing derivative: odd order at $x=1$ (no
+extremum), even order at $x=0$ (extremum, with the sign of the coefficient choosing which).
+\end{remark}
+\end{exercisesolution}
+
+

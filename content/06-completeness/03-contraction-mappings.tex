@@ -206,3 +206,39 @@ Select all the statements below that are true.
 \end{enumerate}
 \exinfo{This exercise is Problem 3.5 of Problem Sheet 3, Analysis II, Spring Semester 2026.}
 \end{exercise}
+
+% Source: old_exams/WS22_Prüfung.pdf (24 January 2022), Teil B, Aufgabe 2(d), p. 13
+% Extractor: Gemini 3.6 Flash (High)
+% Correction: Claude Opus 5 (High) --- three repairs. (1) Flash set the problem in "a complete
+% metric space (X,d)", where the expression f(x)/lambda that the whole argument turns on is not
+% defined: a metric space has no scalar multiplication. The source states it for f : R^n -> R^n,
+% restored here. (2) Flash cited "the February 2025 exam, Problem 2 of Part A"; the problem is not
+% in that exam at all. (3) Moved here from 01-completeness.tex, which sits before
+% thm:banach_fixed_point and so quoted a theorem the reader had not met yet.
+\begin{exercise}[Contraction mappings and the equation $f(x) = \lambda x$]
+\label{ex:banach_fixed_point_linear}
+Let $f : \mathbb{R}^n \to \mathbb{R}^n$ be $L$-Lipschitz with respect to the Euclidean metric, for
+some $L > 0$, and let $\lambda > L$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Show that $g : \mathbb{R}^n \to \mathbb{R}^n$, $g(x) := \lambda^{-1} f(x)$, is a contraction.
+  \item Conclude that the equation $f(x) = \lambda x$ has a unique solution $x \in \mathbb{R}^n$.
+\end{enumerate}
+\exinfo{This exercise is taken from the exam of 24 January 2022, Part B, Problem 2\textbf{(d)}. The
+original asks only for the conclusion, and only for all sufficiently large $\lambda$; the split into
+two parts, and the explicit threshold $\lambda > L$, are added here.}
+\end{exercise}
+
+% Source: old_exams/examFS24.pdf (21 August 2024), Wahr/Falsch-Fragen, Aufgabe 2, p. 2
+% Extractor: Claude Opus 5 (High)
+\begin{exercise}[True or False \textnormal{(the hypotheses of Banach's theorem)}]
+\label{ex:banach_hypotheses_true_false}
+Let $X := [0,1]$ carry the Euclidean metric, and let $f : X \to X$ be $f(x) := x^2$. Decide whether
+each of the following is true or false, with justification.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $f$ has Lipschitz constant $2$.
+  \item $X$ and $f$ satisfy the hypotheses of the Banach fixed point theorem.
+  \item $f$ has fixed points.
+\end{enumerate}
+\exinfo{This exercise is taken from the exam of 21 August 2024, where it appears as the second block
+of true/false questions.}
+\end{exercise}

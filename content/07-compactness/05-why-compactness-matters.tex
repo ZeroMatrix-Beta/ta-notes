@@ -196,3 +196,38 @@ Select all the statements below that are true.
 \end{enumerate}
 \exinfo{This exercise is Problem 3.4 of Problem Sheet 3, Analysis II, Spring Semester 2026.}
 \end{exercise}
+
+% Source: old_exams/examFS24.pdf (21 August 2024), Wahr/Falsch-Fragen, Aufgabe 1, p. 2
+% Extractor: Gemini 3.6 Flash (High)
+% Correction: Claude Opus 5 (High) --- \subset -> \subseteq, and part (c) added back: the original
+% also asks whether U is *simply* connected, which is the one item on that true/false block with a
+% trap in it, and Flash dropped it. Citation corrected: the source is the true/false section, not a
+% "Part A".
+\begin{exercise}[Continuous image of an annulus]
+\label{ex:annulus_continuous_image}
+Consider the closed annulus $U := \{(x,y) \in \mathbb{R}^2 \mid 1 \leq x^2+y^2 \leq 4\}$ and the continuous function $f : U \to \mathbb{R}$, $f(x,y) := \sin(xy) - y^4$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Determine whether $U$ is compact and whether $U$ is connected.
+  \item Prove that the image $f(U) \subseteq \mathbb{R}$ is a compact, connected interval $[a,b]$ for some real numbers $a < b$.
+  \item Is $U$ simply connected?
+\end{enumerate}
+\exinfo{This exercise is taken from the exam of 21 August 2024, where it appears as the first block
+of true/false questions. It is reformulated here as a proof exercise.}
+\end{exercise}
+
+% Source: old_exams/fs2023/Prüfung.pdf (9 August 2021), Teil B, Aufgabe 3, p. 15
+% Extractor: Claude Opus 5 (High)
+\begin{exercise}[Nearest point to the origin]
+\label{ex:nearest_point_to_origin}
+Let $A \subseteq \mathbb{R}^n$ be non-empty and let $f : A \to \mathbb{R}_{\ge 0}$, $f(x) :=
+\lvert x\rvert$, be the restriction of the Euclidean norm to $A$. Prove the following.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item If $A$ is closed, then $f$ attains a minimum on $A$: there is $P_0 \in A$ with
+    $f(P_0) \le f(P)$ for all $P \in A$.
+  \item Statement \textbf{(a)} is false in general when $A$ is not assumed closed.
+  \item If $A$ is convex, then the minimum is attained at no more than one point of $A$.
+  \item If $0 \notin A$, then every minimiser $P_0 \in A$ lies in $\partial A$.
+\end{enumerate}
+\exinfo{This exercise is taken from the exam of 9 August 2021, Part B, Problem 3.}
+\end{exercise}
+

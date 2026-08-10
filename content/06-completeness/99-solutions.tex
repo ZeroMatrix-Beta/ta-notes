@@ -288,3 +288,80 @@ not merely approached.
     thoroughly practical algorithm. Completeness is not a technicality.
 \end{itemize}
 \end{exercisesolution}
+
+\begin{exercisesolution}[Solution of \cref{ex:incomplete_metric_space_example}]
+% Generator: Claude Opus 5 (High)
+Take $X := (0,1]$ with the Euclidean distance $d(x,y) := \lvert x-y\rvert$ inherited from
+$\mathbb{R}$. The sequence $x_k := 1/k$ lies in $X$ and is Cauchy, since $\lvert x_k - x_l\rvert \le
+\max\{1/k, 1/l\} \to 0$. But it does not converge in $X$: its only candidate limit in $\mathbb{R}$
+is $0$, and $0 \notin X$, so no point of $X$ can be its limit. Hence $(X,d)$ is not complete.
+
+The same mechanism gives the other standard answers. Taking $X := \mathbb{Q}$ with
+$d(x,y) := \lvert x-y\rvert$, any rational sequence converging to $\sqrt2$ is Cauchy without a limit
+in $X$; taking $X := \mathbb{R} \setminus \{0\}$ works for the same reason as $(0,1]$.
+\begin{ainote}
+What is being exploited each time is that completeness is \emph{not} a property of the distance
+alone: $(0,1]$ and $[0,1]$ carry the same formula for $d$, and one is complete while the other is
+not. A Cauchy sequence is a sequence that is trying to converge, and the question is only whether
+the space has kept the point it is aiming at. This is exactly the gap that the completion of a
+metric space (\cref{sec:completion_of_a_metric_space}) is built to fill.
+\end{ainote}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution of \cref{ex:banach_hypotheses_true_false}]
+% Generator: Claude Opus 5 (High)
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{True.} For $x,y \in [0,1]$,
+    $\lvert x^2 - y^2\rvert = \lvert x+y\rvert\,\lvert x-y\rvert \le 2\lvert x-y\rvert$,
+    since $x + y \le 2$ on $[0,1]$. So $2$ is a Lipschitz constant. It is even the optimal one, as
+    $\lvert f'(x)\rvert = 2x$ approaches $2$ at $x = 1$.
+  \item \textbf{False.} The space $X = [0,1]$ is complete, and $f$ does map $X$ into $X$; what fails
+    is the contraction hypothesis. A contraction needs a Lipschitz constant \emph{strictly less
+    than $1$}, and by \textbf{(a)} the best available constant here is $2$. Concretely, taking
+    $x = 1$ and $y = 1 - \varepsilon$ gives
+    $\lvert f(x) - f(y)\rvert = (2-\varepsilon)\varepsilon > \lvert x - y\rvert$ for small
+    $\varepsilon > 0$: near $x = 1$ the map \emph{expands} distances.
+  \item \textbf{True} --- and note the plural. Solving $x^2 = x$ on $[0,1]$ gives $x = 0$ and
+    $x = 1$, so $f$ has exactly two fixed points.
+\end{enumerate}
+\begin{remark}
+Parts \textbf{(b)} and \textbf{(c)} together are the point of the exercise. The Banach fixed point
+theorem (\cref{thm:banach_fixed_point}) is a sufficient condition, not a necessary one: its
+hypotheses fail here, and fixed points exist anyway. What the failure does cost is the
+\emph{uniqueness} half of the conclusion, and sure enough there are two of them. Reading \qt{the
+hypotheses fail} as \qt{there is no fixed point} is the standard mistake.
+\end{remark}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:banach_fixed_point_linear}]
+% Generator: Gemini 3.6 Flash (High)
+% Correction: Claude Opus 5 (High) --- rewritten for R^n. Flash's version worked in an abstract
+% metric space and wrote d(f(x)/lambda, f(y)/lambda) = d(f(x),f(y))/lambda, which is meaningless
+% there and false for a general metric even when scaling does make sense. It is the homogeneity of
+% the Euclidean norm that is doing the work, so the norm has to be visible in the computation.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Fix $x,y \in \mathbb{R}^n$. Since the Euclidean norm is homogeneous and $f$ is
+    $L$-Lipschitz,
+\[
+\lvert g(x) - g(y)\rvert = \left\lvert \frac{f(x) - f(y)}{\lambda} \right\rvert
+  = \frac{1}{\lambda}\,\lvert f(x) - f(y)\rvert \leq \frac{L}{\lambda}\,\lvert x - y\rvert .
+\]
+Set $k := L/\lambda$. Since $\lambda > L > 0$ we have $k < 1$, and therefore $g$ is a contraction
+with contraction constant $k$.
+
+  \item The space $\mathbb{R}^n$ is complete, so the Banach Fixed Point Theorem
+    (\cref{thm:banach_fixed_point}) applies to $g$ and yields a unique $x \in \mathbb{R}^n$ with
+    $g(x) = x$. Multiplying $\lambda^{-1} f(x) = x$ by $\lambda$ turns this into $f(x) = \lambda x$,
+    and the two equations have exactly the same solutions. Hence $f(x) = \lambda x$ has a unique
+    solution.
+\end{enumerate}
+\begin{ainote}
+The hypothesis is what makes this work, and it is worth naming: a Lipschitz $f$ need not be a
+contraction, and need have no fixed point at all (translation $x \mapsto x + v$ is $1$-Lipschitz).
+Dividing by $\lambda > L$ buys the missing factor. This is also why the original exam question says
+\qt{for all sufficiently large $\lambda$} rather than naming a threshold: any $\lambda > L$ works,
+but $L$ is not part of the data the question hands you.
+\end{ainote}
+\end{exercisesolution}
+
+

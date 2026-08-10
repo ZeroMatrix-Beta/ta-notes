@@ -103,3 +103,92 @@ with no relative sign corrections needed: $\boxed{I_b+I_t+I_r+I_l}$, answer \tex
 \end{exercisesolution}
 
 % Verified: solved independently, matches Sol12 answer (b).
+% Correction: Claude Opus 5 (High) --- this comment belongs to ex:12.8 above. Flash appended its
+% own solution between the two, leaving the comment claiming a block it had never checked.
+
+\begin{exercisesolution}[Proof of \cref{ex:curl_identity_greens_formula}]
+% Generator: Gemini 3.6 Flash (High)
+% Correction: Claude Opus 5 (High) --- \operatorname{rot} -> \curl, J\Phi -> \Jac\Phi, and the line
+% integrals rewritten in this chapter's own notation (\int_{\partial\Omega} F\cdot\tau\,dL, as in
+% thm:green_theorem) rather than the physics d\mathbf{r}. Part (b) also justified properly: Flash
+% asserted "d\Phi_2 = d\Psi_2 on \partial\Omega", which is false for the full differentials --- only
+% the tangential derivative agrees, and that is all the line integral sees.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Write $V = (V_1, V_2)\transp = (\Phi_1 \partial_1 \Phi_2, \Phi_1 \partial_2 \Phi_2)\transp$.
+The scalar curl in the plane is $\curl V = \partial_1 V_2 - \partial_2 V_1$, so the product rule
+gives
+\begin{align*}
+\curl V &= \partial_1 (\Phi_1 \partial_2 \Phi_2) - \partial_2 (\Phi_1 \partial_1 \Phi_2) \\
+&= (\partial_1 \Phi_1 \partial_2 \Phi_2 + \Phi_1 \partial_1 \partial_2 \Phi_2) - (\partial_2 \Phi_1 \partial_1 \Phi_2 + \Phi_1 \partial_2 \partial_1 \Phi_2).
+\end{align*}
+Since $\Phi \in C^2(\overline{\Omega}, \mathbb{R}^2)$, Schwarz's lemma
+(\cref{thm:schwarz_mixed_partials}) gives $\partial_1 \partial_2 \Phi_2 = \partial_2 \partial_1
+\Phi_2$, and the two second-derivative terms cancel. Consequently,
+\[\curl V = \partial_1 \Phi_1 \partial_2 \Phi_2 - \partial_2 \Phi_1 \partial_1 \Phi_2 = \det \begin{pmatrix} \partial_1 \Phi_1 & \partial_2 \Phi_1 \\ \partial_1 \Phi_2 & \partial_2 \Phi_2 \end{pmatrix} = \det \Jac\Phi.\]
+Note that the hypothesis $\Phi \in C^2$ is doing real work here: without equality of mixed partials
+the identity is simply false.
+
+  \item Write $V_\Phi := \Phi_1 \nabla \Phi_2$ and $V_\Psi := \Psi_1 \nabla \Psi_2$. By part
+\textbf{(a)}, $\curl V_\Phi = \det \Jac\Phi$ and $\curl V_\Psi = \det \Jac\Psi$, so Green's theorem
+(\cref{thm:green_theorem}) turns both integrals into boundary integrals:
+\[\int_\Omega \det \Jac\Phi \, dx = \int_{\partial \Omega} V_\Phi \cdot \tau \, dL,
+\qquad
+\int_\Omega \det \Jac\Psi \, dx = \int_{\partial \Omega} V_\Psi \cdot \tau \, dL.\]
+It remains to see that the two boundary integrands agree. Fix a point of $\partial\Omega$ and let
+$\tau$ be the unit tangent there. Since $\Phi = \Psi$ on all of $\partial\Omega$, the two maps agree
+along the boundary curve, and therefore so do their derivatives \emph{in the direction $\tau$}:
+\[\nabla \Phi_2 \cdot \tau = \partial_\tau \Phi_2 = \partial_\tau \Psi_2 = \nabla \Psi_2 \cdot \tau .\]
+(The full gradients need not agree, since nothing constrains the normal derivative; but the line
+integral only ever sees the tangential part.) Together with $\Phi_1 = \Psi_1$ on $\partial\Omega$
+this gives $V_\Phi \cdot \tau = V_\Psi \cdot \tau$ pointwise on $\partial\Omega$, and hence
+\[\int_\Omega \det \Jac\Phi \, dx = \int_\Omega \det \Jac\Psi \, dx.\]
+\end{enumerate}
+\begin{remark}
+The statement is a genuinely striking one: $\int_\Omega \det\Jac\Phi$ is an interior quantity, the
+signed area swept out by $\Phi$, yet it depends on nothing but the boundary values of $\Phi$. That
+is the same phenomenon as a conservative field having path-independent work, one dimension up.
+\end{remark}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution of \cref{ex:angle_field_true_false}]
+% Generator: Claude Opus 5 (High)
+Begin with the computation every part relies on. Writing $X = (P,Q)$ with $P = -y/(x^2+y^2)$ and
+$Q = x/(x^2+y^2)$,
+\[\partial_x Q = \frac{(x^2+y^2) - 2x^2}{(x^2+y^2)^2} = \frac{y^2-x^2}{(x^2+y^2)^2},
+  \qquad
+  \partial_y P = \frac{-(x^2+y^2) + 2y^2}{(x^2+y^2)^2} = \frac{y^2-x^2}{(x^2+y^2)^2},\]
+so $\curl X = \partial_x Q - \partial_y P = 0$ throughout $U$. The field is closed. Whether it is
+also a gradient is precisely what the domain decides.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{False.} Suppose such a $u$ existed. Then the work of $X$ around any closed loop in
+    $U$ would vanish. But along the unit circle $\sigma(t) := (\cos t, \sin t)$, $t \in [0,2\pi]$,
+    we have $X(\sigma(t)) = (-\sin t, \cos t) = \dot\sigma(t)$, so the integrand is
+    $\lvert\dot\sigma\rvert^2 = 1$ and
+\[\int_\sigma X \cdot d\sigma = \int_0^{2\pi} 1 \, dt = 2\pi \neq 0 .\]
+    So no potential exists on $U$. Being closed is not enough; $U$ is not simply connected, and this
+    field is the standard witness that the Poincaré lemma (\cref{thm:poincare_lemma}) genuinely needs
+    that hypothesis.
+  \item \textbf{True.} The half-plane $V$ is convex, hence simply connected, so a closed field on it
+    is exact (\cref{cor:potentials_simply_connected}). Explicitly, $v(x,y) := \arctan(y/x)$ is $C^1$
+    on $V$ --- note $x > 0$ there, so the quotient is defined and smooth --- and
+\[\nabla v = \frac{1}{1 + y^2/x^2}\left(-\frac{y}{x^2},\; \frac{1}{x}\right)
+   = \frac{1}{x^2+y^2}\,(-y,\, x) = X .\]
+    The potential is the polar angle, which is single-valued on the half-plane but not on $U$: that
+    is \textbf{(a)} and \textbf{(b)} in one sentence.
+  \item \textbf{False.} Injectivity on $[0,1)$ makes $\gamma$ a simple closed curve, but it says
+    nothing about \emph{where} that curve runs. Two things can go wrong. First, the loop need not
+    enclose the origin at all: the circle of radius $\tfrac12$ about $(0,1)$ is a simple closed curve
+    in $U$ through $(0,1)$, and since it bounds a disc on which $X$ is defined and closed, Green's
+    theorem (\cref{thm:green_theorem}) gives $\int_\gamma X \cdot d\gamma = 0$. Second, even a loop
+    that does enclose the origin may be traversed clockwise, giving $-2\pi$. The correct general
+    statement is that the integral equals $2\pi$ times the winding number of $\gamma$ about the
+    origin, and \qt{simple closed curve} pins that number down only up to sign, and only once the
+    origin is known to be inside.
+\end{enumerate}
+\begin{remark}
+This one field carries most of the chapter's content. It is closed but not exact, so it separates the
+two notions; the failure is measured by an integer, the winding number; and the obstruction is a
+property of the \emph{domain}, not of the field --- restrict it to any simply connected piece of $U$,
+as in \textbf{(b)}, and a potential appears at once.
+\end{remark}
+\end{exercisesolution}

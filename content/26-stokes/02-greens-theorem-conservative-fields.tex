@@ -261,3 +261,21 @@ $c_y=-3y-z$, so $c = -\tfrac32y^2-yz+d(z)$; matching
 $\partial_zf = 4x-y+d'(z)$ against $F_3=4x-y+2z$ gives $d'(z)=2z$, so $d(z)=z^2$. A potential is
 \[f(x,y,z) = \tfrac12x^2+2xy+4xz-\tfrac32y^2-yz+z^2.\]
 \end{exercisesolution}
+
+% Source: old_exams/examHS24.pdf (13 February 2025), Wahr/Falsch-Fragen, Aufgabe 11, p. 6
+% Extractor: Claude Opus 5 (High)
+\begin{exercise}[True or False \textnormal{(the angle field)}]
+\label{ex:angle_field_true_false}
+Consider the vector field
+\[X := \frac{1}{x^2+y^2}\,(-y,\, x) \qquad \text{defined on } U := \mathbb{R}^2 \setminus \{(0,0)\},\]
+let $V := \{(x,y) \in U \mid x > 0\}$ be the open right half-plane, and let $\gamma : [0,1] \to U$ be
+a $C^1$ curve with $\gamma(0) = \gamma(1) = (0,1)$. Decide whether each of the following is true or
+false, with justification.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item There exists $u \in C^1(U)$ with $\nabla u = X$ on $U$.
+  \item There exists $v \in C^1(V)$ with $\nabla v = X$ on $V$.
+  \item $\int_\gamma X \cdot d\gamma = 2\pi$, provided $\gamma$ restricted to $[0,1)$ is injective.
+\end{enumerate}
+\exinfo{This exercise is taken from the exam of 13 February 2025, where it appears as the eleventh
+and last block of true/false questions.}
+\end{exercise}

@@ -613,3 +613,107 @@ worth naming:
     sensitivity is computable without ever solving the original equation twice.
 \end{itemize}
 \end{remark}
+
+\subsection{Higher-order linear ODEs and Cauchy--Lipschitz counterexamples}
+\label{sec:higher_order_odes_counterexample}
+
+% Source: old_exams/examHS24.pdf (13 February 2025), Kurzproblem 2, p. 9
+% Extractor: Gemini 3.6 Flash (High)
+\begin{exercise}[Third-order linear ODE with constant coefficients]
+\label{ex:third_order_linear_ode}
+For a parameter $\lambda > 0$ and a continuous function $f : [0,\infty) \to \mathbb{R}$, consider the third-order linear differential equation
+\begin{equation}
+\label{eq:3rd_order_ode}
+y^{(3)}(t) + 2\lambda y''(t) + \lambda^2 y'(t) = f(t), \qquad y(0) = y'(0) = y''(0) = 0.
+\end{equation}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Find the general solution of the associated homogeneous equation $y^{(3)} + 2\lambda y'' + \lambda^2 y' = 0$.
+  \item For $\lambda = 1$ and $f(t) = e^{-t}$, find the explicit solution $y(t)$ of \eqref{eq:3rd_order_ode}.
+  \item Show that there exists a smooth impulse response function $h : [0,\infty) \to \mathbb{R}$ such that for any continuous $f$, the solution of \eqref{eq:3rd_order_ode} is given by the convolution integral
+  \[y(t) = \int_0^t f(s) h(t-s) \, ds,\]
+  and determine $h(t)$ explicitly for general $\lambda > 0$.
+\end{enumerate}
+\exinfo{This exercise is taken from the exam of 13 February 2025, Short Problem 2. Part 3 of the
+original, which asks for the explicit solution when $f(t) = \cos(\lambda t)$, is omitted here.}
+\end{exercise}
+
+\begin{exercisesolution}[Proof of \cref{ex:third_order_linear_ode}]
+% Generator: Gemini 3.6 Flash (High)
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item The characteristic polynomial of the homogeneous equation is $P(r) = r^3 + 2\lambda r^2 + \lambda^2 r = r(r+\lambda)^2 = 0$. Its roots are $r_1 = 0$ (simple) and $r_2 = -\lambda$ (double root). The general homogeneous solution is:
+\[y_h(t) = C_1 + C_2 e^{-\lambda t} + C_3 t e^{-\lambda t}, \qquad C_1, C_2, C_3 \in \mathbb{R}.\]
+
+  \item For $\lambda = 1$ and $f(t) = e^{-t}$, the characteristic root $r = -1$ is a double root of $P(r)$, so the trial particular solution is $y_p(t) = A t^2 e^{-t}$.
+Differentiating $y_p$:
+\begin{align*}
+y_p'(t) &= A (2t - t^2) e^{-t}, \\
+y_p''(t) &= A (2 - 4t + t^2) e^{-t}, \\
+y_p^{(3)}(t) &= A (-6 + 6t - t^2) e^{-t}.
+\end{align*}
+Plugging into $y_p^{(3)} + 2y_p'' + y_p' = e^{-t}$, the terms in $t$ and $t^2$ cancel and only the
+constants survive:
+\[A \Big[(-6+6t-t^2) + 2(2-4t+t^2) + (2t-t^2)\Big] e^{-t} = -2A e^{-t}.\]
+% Correction: Claude Opus 5 (High) --- the bracket sums to -2, not +2. Flash read the constant term
+% as +2 and got A = 1/2, which flipped the sign of the whole answer and contradicted its own part
+% (c): convolving f = e^{-t} against the h found there returns 1 - (1+t+t^2/2)e^{-t}, not its
+% negative. Verified against Sol: y' = f*h' + f(t)h(0) etc. gives y(0)=y'(0)=y''(0)=0.
+Therefore $-2A = 1$, so $A = -\tfrac{1}{2}$ and $y_p(t) = -\tfrac{1}{2} t^2 e^{-t}$.
+Setting initial conditions on $y(t) = C_1 + C_2 e^{-t} + C_3 t e^{-t} - \frac{1}{2} t^2 e^{-t}$:
+\begin{itemize}
+  \item $y(0) = C_1 + C_2 = 0$.
+  \item $y'(0) = -C_2 + C_3 = 0$, and therefore $C_3 = C_2$.
+  \item $y''(0) = C_2 - 2C_3 - 1 = 0$, which reduces to $-C_2 = 1$, so $C_2 = -1$.
+\end{itemize}
+Thus $C_1 = 1$, $C_2 = -1$, $C_3 = -1$. The explicit solution is:
+\[y(t) = 1 - e^{-t} - t e^{-t} - \frac{1}{2} t^2 e^{-t} = 1 - \left(1 + t + \frac{1}{2} t^2\right) e^{-t}.\]
+This is consistent with \textbf{(c)}: for $\lambda = 1$ the impulse response is
+$h(t) = 1 - e^{-t} - te^{-t}$, and $\int_0^t e^{-s} h(t-s) \, ds$ reproduces exactly this $y$.
+
+  \item By Duhamel's principle, $h(t)$ is the solution of the homogeneous equation $h^{(3)} + 2\lambda h'' + \lambda^2 h' = 0$ with initial conditions $h(0) = 0, h'(0) = 0, h''(0) = 1$.
+Writing $h(t) = A + B e^{-\lambda t} + C t e^{-\lambda t}$:
+\begin{itemize}
+  \item $h(0) = A + B = 0 \implies B = -A$.
+  \item $h'(0) = -\lambda B + C = 0 \implies C = \lambda B = -\lambda A$.
+  \item $h''(0) = \lambda^2 B - 2\lambda C = -\lambda^2 A + 2\lambda^2 A = \lambda^2 A = 1 \implies A = \frac{1}{\lambda^2}$.
+\end{itemize}
+Thus $B = -\frac{1}{\lambda^2}$ and $C = -\frac{1}{\lambda}$.
+The impulse response is:
+\[h(t) = \frac{1}{\lambda^2} \left(1 - e^{-\lambda t} - \lambda t e^{-\lambda t}\right).\]
+By linear ODE theory, $y(t) = \int_0^t f(s) h(t-s) \, ds$ satisfies \eqref{eq:3rd_order_ode}.
+\end{enumerate}
+\end{exercisesolution}
+
+% Source: old_exams/examHS24.pdf (13 February 2025), Kästchenaufgabe 4, p. 7
+% Extractor: Gemini 3.6 Flash (High)
+\begin{exercise}[Cauchy--Lipschitz non-uniqueness counterexample]
+\label{ex:cauchy_lipschitz_nonuniqueness_power}
+Let $\alpha > 1$. Consider the initial value problem
+\[u'(t) = F(t, u(t)), \quad t > 0, \qquad u(0) = 0.\]
+Give an explicit continuous function $F \in C^0(\mathbb{R}^2)$ such that both $u(t) \equiv 0$ and $u(t) = t^\alpha$ are solutions for $t \ge 0$, and explain why this does not contradict the Cauchy--Lipschitz Theorem (\cref{thm:picard_lindeloef_local}).
+\exinfo{This exercise is taken from the exam of 13 February 2025, Box Problem 4. The request to
+explain why Cauchy--Lipschitz is not contradicted is added here; the original asks only for $F$.}
+\end{exercise}
+
+\begin{exercisesolution}[Proof of \cref{ex:cauchy_lipschitz_nonuniqueness_power}]
+% Generator: Gemini 3.6 Flash (High)
+Differentiating $u(t) = t^\alpha$ gives $u'(t) = \alpha t^{\alpha-1} = \alpha (t^\alpha)^{(\alpha-1)/\alpha} = \alpha (u(t))^{(\alpha-1)/\alpha}$.
+Thus, define $F(t,u) := \alpha \lvert u\rvert^{(\alpha-1)/\alpha}$.
+Since $\alpha > 1$, $\beta := \frac{\alpha-1}{\alpha} \in (0,1)$, so $F(t,u) = \alpha \lvert u\rvert^\beta$ is continuous on $\mathbb{R}^2$.
+Both functions do solve the problem:
+% Correction: Claude Opus 5 (High) --- was an enumerate with \arabic* labels, which style.md forbids
+% for sub-parts and cases; these are two named checks, so itemize with a bold lead-in. Also
+% "u_1'(0) = 0" corrected to "u_1'(t) = 0", and the \implies signs replaced by prose.
+\begin{itemize}
+  \item \textbf{The zero solution:} $u_1(t) \equiv 0$ has $u_1'(t) = 0$, and $F(t,0) = 0$. Hence $u_1$ solves the initial value problem.
+  \item \textbf{The power solution:} $u_2(t) = t^\alpha$ has $u_2'(t) = \alpha t^{\alpha-1}$, and $F(t, u_2(t)) = \alpha (t^\alpha)^{(\alpha-1)/\alpha} = \alpha t^{\alpha-1}$ for $t \ge 0$. Since $u_2(0) = 0$, it too solves the initial value problem.
+\end{itemize}
+
+Why does this not contradict Cauchy--Lipschitz? The theorem asks for $F$ to be locally Lipschitz in
+its second argument, and this $F$ is not. Indeed,
+\[\frac{\partial F}{\partial u}(t,u) = \alpha \beta \lvert u\rvert^{\beta-1} = (\alpha-1) \lvert u\rvert^{-1/\alpha} \longrightarrow \infty \quad \text{as } u \to 0.\]
+The hypothesis therefore fails at the initial point $(0,0)$, which is exactly where the two
+solutions separate. Note that continuity alone still buys existence (Peano); it is only uniqueness
+that is lost.
+\end{exercisesolution}
+
+

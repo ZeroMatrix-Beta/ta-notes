@@ -55,8 +55,28 @@ where a passage came from is worth having before you rewrite it:
 | Marker | What it tells you |
 |---|---|
 | `% Source:` / `% Quelle:` | came from a tutor's PDF |
+| `% Extractor:` | **mined from an official source** (exam, problem sheet) by the named model; the mathematics is the examiner's |
 | `% Generator:`, `% Transition:`, `ai*` environments, TikZ figures, editorial `ainote`s | this document's own content |
+| `% Correction:` | a later model fixed a mathematical or provenance error in one of the above |
 | `% Originally:` | which week-chapter the file sat in before the topic restructure |
+
+**`% Extractor:` versus `% Generator:` — the line is authorship, not effort.** Added 2026-08-10,
+after a pass mined twelve old-exam problems and marked every *statement* `% Generator: Gemini 3.6
+Flash`. Transcribing a problem out of `old_exams/` is not authoring it, however much retypesetting
+and reformulation it took; marking it `% Generator:` claims credit for Serra's and Felder's
+mathematics and, worse, tells a future reviewer the statement was never checked against anything.
+
+* **`% Extractor: <model> (<effort>)`** goes on a statement lifted from an official PDF. It must be
+  accompanied by a `% Source:` line naming the file and page, exactly as a tutor transcription is —
+  the `\exinfo` sentence is for the *reader*, the `% Source:` comment is for the *editor*, and one
+  does not replace the other. A wrong `\exinfo` is invisible without it.
+* **`% Generator: <model> (<effort>)`** stays on the `exercisesolution`, which the model really did
+  write, and on `aiexercise` / `aiexample` content invented here.
+* A mined exercise with an authored solution therefore carries **both**, one per environment. This
+  is the same authored-here-versus-transcribed line as `remark` versus `ainote`.
+* **`% Correction: <model> (<effort>) --- <what changed>`** marks a later fix to either. Leave it in
+  place: a corrected block that reads as clean work inflates the apparent reliability of whatever
+  produced it, and the next review needs to know which passes have needed catching.
 
 Two habits worth keeping, because they cost nothing and preserve the audit trail:
 

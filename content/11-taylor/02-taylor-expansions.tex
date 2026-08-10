@@ -595,3 +595,26 @@ Multiplying these together and keeping terms up to order $4$:
 &= 1 - \frac{1}{2}x^2 + y^2 + \frac{1}{24}x^4 - \frac{1}{2}x^2y^2 + y^4 + o(|(x,y)|^4).
 \end{align*}
 \end{exercisesolution}
+
+% Source: old_exams/fs2023/Prüfung.pdf (9 August 2021), Teil B, Aufgabe 1, p. 13
+% Extractor: Gemini 3.6 Flash (High)
+% Correction: Claude Opus 5 (High) --- part (c) restored to the source's "all critical points";
+% Flash had weakened it to "in a neighbourhood of x = 0", and then answered neither version. Part
+% (d) restored: the source asks about x = 1 as well, and that is the interesting one.
+\begin{exercise}[Taylor expansion of a parametric integral]
+\label{ex:taylor_parametric_integral}
+Consider the function $f : \mathbb{R} \to \mathbb{R}$ defined by the parametric integral
+\[f(x) := \int_{x-1}^{x+1} \cos(\pi t^2) \, dt.\]
+The integral need not be evaluated explicitly.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Compute $f'(x)$, and simplify it to a product of two sines.
+  \item Find the coefficients of the fourth-order Taylor polynomial of $f$ around $x = 0$,
+  \[f(x) = f(0) + a_1 x + a_2 x^2 + a_3 x^3 + a_4 x^4 + O(x^5).\]
+  \item Determine \emph{all} critical points of $f$.
+  \item Decide, for each of the critical points $x = 0$ and $x = 1$, whether it is a local maximum,
+    a local minimum, or neither.
+\end{enumerate}
+\exinfo{This exercise is taken from the exam of 9 August 2021, Part B, Problem 1. The original
+opens with a part asking whether $f$ is continuously differentiable, bounded, and even.}
+\end{exercise}
+

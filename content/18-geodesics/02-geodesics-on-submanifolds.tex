@@ -91,6 +91,81 @@ is not the shortest route between two points on it, which is why long-haul route
 the pole.
 \end{aiexample}
 
+% Generator: Claude Opus 5 (High) --- FIG-CH18-01. The chapter had one figure in 300 lines, and
+% none for the equation it exists to prove.
+%
+% A first version of this figure was drawn as ONE sphere carrying both curves, and rendering it
+% killed it. Three faults, none visible in the source: the normal component of c'' lies along
+% the radius by definition, so its arrow was drawn exactly on top of the radius line and the two
+% collapsed into one unreadable stroke; the "tangential part" and "N_p S^2" labels overlapped;
+% and the great circle was drawn with no vector on it at all, so it asserted "c'' is radial"
+% while showing nothing. Two panels, and no radius line, fix all three.
+%
+% GEOMETRY, checked, so the drawing can be audited without redoing it. Both panels are drawn in
+% the plane y = 0, so screen coordinates ARE the (x,z) coordinates of R^3 and the vectors need
+% no projection; only the circles that leave that plane are foreshortened into ellipses.
+% Sphere radius 1.6 in both.
+%
+% LEFT (great circle). The equator is itself a great circle, so it is the one drawn. Marked
+% point p := (-1.6, 0, 0), on the silhouette. For c(t) = R(cos t, sin t, 0) one has c'' = -c,
+% i.e. it points straight at the centre: purely normal, nothing tangential left over.
+%
+% RIGHT (circle of latitude). Height h = 0.96, hence radius r = sqrt(2.56 - 0.9216) = 1.28;
+% ellipse centred (0,0.96) with semi-axes 1.28 and 0.40. Marked point p := (-1.28, 0, 0.96),
+% which satisfies |p| = sqrt(1.6384 + 0.9216) = 1.6, so it is on the sphere, and it is both the
+% leftmost point of the latitude ellipse and on the silhouette. That is what lets it be drawn
+% honestly. Unit normal n = p/1.6 = (-0.8, 0, 0.6). The acceleration points at the axis, along
+% +x; take c'' = (1.1, 0, 0). Then
+%   normal part      = <c'',n> n = (-0.88)(-0.8,0,0.6) = (0.704, 0, -0.528),
+%   tangential part  = c'' - that = (0.396, 0, 0.528),
+% and the check <(0.396,0,0.528), (-0.8,0,0.6)> = -0.3168 + 0.3168 = 0 confirms the second is
+% genuinely tangent, while the two sum to (1.1,0,0) as they must. Tips, from p:
+%   c''  -> (-0.18, 0.96);  normal -> (-0.576, 0.432);  tangential -> (-0.884, 1.488).
+% The whole point of the figure is that the last of these is not p itself.
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.05]
+  % ---- LEFT: a great circle. Its acceleration points at the centre. ----
+  \begin{scope}
+    \draw[gray!55] (0,0) circle (1.6);
+    \draw[blue!70!black, thick] (0,0) ellipse (1.6 and 0.5);
+    \fill (0,0) circle (1.1pt);
+    \draw[red!75!black, thick, ->] (-1.6,0) -- (-0.32,0);
+    \node[red!75!black, font=\scriptsize, anchor=south] at (-0.95,0.06) {$c''$};
+    \fill[blue!70!black] (-1.6,0) circle (1.5pt);
+    \node[blue!70!black, font=\scriptsize, anchor=east] at (-1.68,0) {$p$};
+    \node[font=\scriptsize, anchor=north, align=center] at (0,-1.95)
+      {great circle: $c''$ points at the centre,\\so it is purely normal};
+  \end{scope}
+
+  % ---- RIGHT: a circle of latitude. A tangential part survives. ----
+  \begin{scope}[shift={(4.7,0)}]
+    \draw[gray!55] (0,0) circle (1.6);
+    \draw[gray!45, dashed] (0,0) ellipse (1.6 and 0.5);
+    \draw[blue!70!black, thick] (0,0.96) ellipse (1.28 and 0.40);
+    \fill (0,0) circle (1.1pt);
+
+    % Guide line along the radius, i.e. along the normal direction, drawn thin and dotted so
+    % that the normal-component arrow reads as lying on it rather than fighting with it.
+    \draw[gray!45, dotted] (-1.28,0.96) -- (0.64,-0.48);
+
+    % The decomposition. Parallelogram first, so the arrows sit on top of it.
+    \draw[gray!55, dotted] (-0.576,0.432) -- (-0.18,0.96);
+    \draw[gray!55, dotted] (-0.884,1.488) -- (-0.18,0.96);
+    \draw[gray!50!black, dashed, ->] (-1.28,0.96) -- (-0.576,0.432);
+    \node[gray!45!black, font=\scriptsize, anchor=north west] at (-0.62,0.40) {normal};
+    \draw[OliveGreen, very thick, ->] (-1.28,0.96) -- (-0.884,1.488);
+    \draw[red!75!black, thick, ->] (-1.28,0.96) -- (-0.18,0.96);
+    \node[red!75!black, font=\scriptsize, anchor=west] at (-0.12,0.96) {$c''$};
+    \node[OliveGreen, font=\scriptsize, anchor=south] at (-0.55,1.60) {tangential part};
+
+    \fill[blue!70!black] (-1.28,0.96) circle (1.5pt);
+    \node[blue!70!black, font=\scriptsize, anchor=east] at (-1.36,0.96) {$p$};
+    \node[font=\scriptsize, anchor=north, align=center] at (0,-1.95)
+      {circle of latitude: a tangential\\part survives, so it is no geodesic};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
 % Generator: Claude Opus 5 (High)
 \begin{aiexercise}[Geodesics on the cylinder]
 \label{ex:ai_cylinder_geodesics}

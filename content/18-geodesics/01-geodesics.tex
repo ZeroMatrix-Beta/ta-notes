@@ -4,10 +4,25 @@
 \section{A short introduction to geodesics}
 \label{sec:geodesics}
 
-\begin{ainote}
-Corsin marks this section \qt{not exam relevant}. It is included anyway, since the calculation is
-short and the underlying idea, treating length as a functional and applying optimization to it,
-is the same one used later in the course for genuinely examinable variational arguments.
+% Checked 2026-08-10 against lec_notes.pdf (239 pp, 27 July 2026): "geodesic" occurs exactly
+% once in the whole file, in Example 9.14 on printed p. 5, and the surrounding pages were
+% rendered and read rather than grepped. There is no geodesics section, no length functional
+% and no variational argument anywhere in the lecture notes.
+\begin{ainote}[This chapter goes beyond the course]
+\label{ainote:geodesics_beyond_the_course}
+Two warnings before starting, and they point the same way.
+
+Corsin marks this section \qt{not exam relevant}. And the official lecture notes have no
+counterpart to it at all: the word \newterm{geodesic} appears in them exactly once, in
+Example 9.14 on printed p.\ 5, where the great-circle distance
+$d_1(x,y) = R\arccos\big(x\cdot y/R^2\big)$ is offered as a more natural metric on the sphere
+than the Euclidean one, with no indication of why that arc is the shortest. Nothing in the
+course computes a geodesic, and the calculus of variations does not appear in it.
+
+So this chapter is not lecture material, and nothing in it can be assumed known. It is here
+because the calculation is short and because the idea behind it, treating length as a functional
+and applying optimization to it, is worth meeting once; and it is here in particular because it
+answers the question Example 9.14 raises and then drops.
 \end{ainote}
 
 We will try to find the shortest path (i.e., a geodesic) from $0 \in \mathbb{R}^n$ to $x \in \mathbb{R}^n$. This
@@ -127,5 +142,37 @@ It is worth choosing, because the functional $L$ cannot see the difference and t
 Without it the computation still goes through, but $1/\lvert c'(t)\rvert$ stays inside the
 integral and the conclusion is that $\big(c'/\lvert c'\rvert\big)' \equiv 0$, which says the
 \emph{direction} of travel is constant while the speed is free. Constant speed converts that
-into the cleaner $c'' \equiv 0$.
+into the cleaner $c'' \equiv 0$. \Cref{ex:ai_variation_without_constant_speed} carries this out.
 \end{remark}
+
+\begin{aiexercise}[The fundamental lemma of the calculus of variations]
+% Generator: Claude Opus 5 (High)
+\label{ex:ai_fundamental_lemma}
+The proof of \cref{prop:geodesic_straight_line} passes from \qt{the integral vanishes for every
+$g$} to \qt{$c''$ vanishes at every $t$} in one step. Prove that step. Precisely: let
+$h \in C^0\big([0,1],\mathbb{R}^n\big)$ satisfy
+\[\int_0^1 \big\langle h(t),\,g(t)\big\rangle\,dt = 0
+  \qquad\text{for every } g \in C^\infty\big([0,1],\mathbb{R}^n\big) \text{ with } g(0)=g(1)=0.\]
+Show that $h \equiv 0$.
+
+\textit{Hint:} argue by contradiction, and use a bump function of the kind constructed in
+\cref{def:smooth_bump_function} to concentrate $g$ where $h$ is known not to vanish.
+\end{aiexercise}
+
+\begin{aiexercise}[The variation without the constant-speed hypothesis]
+% Generator: Claude Opus 5 (High)
+\label{ex:ai_variation_without_constant_speed}
+Repeat the computation in the proof of \cref{prop:geodesic_straight_line} for a minimiser
+$c \in C^2\big([0,1],\mathbb{R}^n\big)$ that is \emph{not} assumed to have constant speed, only
+$\lvert c'(t)\rvert > 0$ for every $t$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Show that $\left.\frac{d}{d\varepsilon}\right|_{\varepsilon=0}L(c_\varepsilon)
+    = \int_0^1 \big\langle c'(t)/\lvert c'(t)\rvert,\ g'(t)\big\rangle\,dt$, and integrate by
+    parts to bring it into the form $-\int_0^1\langle \cdot,\,g(t)\rangle\,dt$.
+  \item Conclude, using \cref{ex:ai_fundamental_lemma}, that
+    $\big(c'/\lvert c'\rvert\big)' \equiv 0$.
+  \item Deduce that the image of $c$ is still the straight segment from $0$ to $x$, and that
+    $L(c) = \lvert x\rvert$. Which feature of $c$ does the argument now fail to pin down, and
+    why is that unavoidable?
+\end{enumerate}
+\end{aiexercise}

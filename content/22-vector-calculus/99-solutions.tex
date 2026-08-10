@@ -3,6 +3,66 @@
 \section{Solutions}
 \label{sec:vector_calculus_solutions}
 
+\begin{exercisesolution}[Solution to \cref{ex:ai_curl_product_rule_counterexample}]
+% Generator: Claude Opus 5 (High)
+\textbf{(a)} Take $\varphi \equiv 1$ and $F(x,y,z) := (-y,\,x,\,0)$. The right-hand side is
+$(\grad\varphi)\times F = 0\times F = 0$, since a constant function has vanishing gradient. The
+left-hand side is
+\[\curl(\varphi F) = \curl F
+  = \big(\partial_y0 - \partial_z x,\ \partial_z(-y) - \partial_x 0,\
+    \partial_x x - \partial_y(-y)\big) = (0,\,0,\,2) \neq 0.\]
+So the two sides differ. The choice needs no work because $\varphi \equiv 1$ kills the
+right-hand side outright while leaving the left-hand side equal to $\curl F$, and any field with
+non-zero curl then finishes the job.
+
+\textbf{(b)} With $\varphi(x,y,z) = z$ and the same $F$, we have $\varphi F = (-yz,\,xz,\,0)$, so
+\[\curl(\varphi F)
+  = \big(\partial_y0 - \partial_z(xz),\ \partial_z(-yz) - \partial_x0,\
+    \partial_x(xz) - \partial_y(-yz)\big) = (-x,\,-y,\,2z).\]
+The two terms on the right of \cref{prop:curl_product_rule} are
+\[\varphi\,\curl F = z\,(0,0,2) = (0,\,0,\,2z),
+  \qquad
+  (\grad\varphi)\times F = (0,0,1)\times(-y,x,0) = (-x,\,-y,\,0),\]
+and they add to $(-x,\,-y,\,2z)$, which is $\curl(\varphi F)$.
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:ai_which_fields_are_gradients}]
+% Generator: Claude Opus 5 (High)
+\textbf{(a)} By \cref{ex:curl_grad_div_curl_zero}, a gradient field has vanishing curl, so a
+non-zero curl rules a field out. Computing both,
+\[\curl F = \big(\partial_y(xy) - \partial_z(xz),\ \partial_z(yz) - \partial_x(xy),\
+    \partial_x(xz) - \partial_y(yz)\big) = (x-x,\ y-y,\ z-z) = 0,\]
+\[\curl G = \big(\partial_y0 - \partial_z(-x),\ \partial_zy - \partial_x0,\
+    \partial_x(-x) - \partial_yy\big) = (0,\ 0,\ -2) \neq 0.\]
+So $G$ is not a gradient field. Note that this settles $G$ and does \emph{not} yet settle $F$:
+the test is necessary, not by itself sufficient.
+
+\textbf{(b)} Integrating the first component in $x$ suggests $f(x,y,z) := xyz$, and checking all
+three at once,
+\[\nabla f = (yz,\ xz,\ xy) = F.\]
+
+\textbf{(c)} Along $\gamma(t) = (\cos t,\sin t,0)$ we have $\gamma'(t) = (-\sin t,\cos t,0)$ and
+$G(\gamma(t)) = (\sin t,\,-\cos t,\,0)$, so the integrand is
+$\langle G(\gamma),\gamma'\rangle = -\sin^2t - \cos^2t = -1$ and
+\[\int_\gamma G\cdot d\vec s = \int_0^{2\pi}(-1)\,dt = -2\pi.\]
+The curve is closed, $\gamma(2\pi) = \gamma(0)$, so a potential would force the integral to be
+$f(\gamma(2\pi)) - f(\gamma(0)) = 0$ by \cref{prop:work_difference_potential}. Since
+$-2\pi \neq 0$, no potential exists, confirming part \textbf{(a)} without differentiating
+anything.
+
+\begin{remark}[On $\mathbb{R}^3$ the curl test is not merely necessary]
+\label{rem:curl_test_sufficient_on_r3}
+Part \textbf{(a)} was careful to say that $\curl F = 0$ does not by itself produce a potential,
+and in general it does not. On the domain here it does: $\mathbb{R}^3$ is star-shaped, so
+\cref{thm:poincare_lemma} applies and every curl-free field on it is a gradient. The guess in
+part \textbf{(b)} was therefore guaranteed to succeed before it was made.
+
+What the caution in \textbf{(a)} protects against is the same field on a smaller domain. Delete
+the $z$-axis and the conclusion fails, as \cref{q:quiz_q11} exhibits. The hypothesis that
+matters is a property of the domain, never of the field.
+\end{remark}
+\end{exercisesolution}
+
 \begin{exercisesolution}[Solution of \cref{ex:11.1}]
 The vector field $V(x,y,z) = (x,y,z-x^2-y^2)$ has divergence
 \[\divg V = \partial_x(x) + \partial_y(y) + \partial_z(z-x^2-y^2) = 1+1+1 = 3.\]

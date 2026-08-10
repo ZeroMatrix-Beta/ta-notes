@@ -3,6 +3,82 @@
 \section{Solutions}
 \label{sec:geodesics_solutions}
 
+\begin{exercisesolution}[Solution to \cref{ex:ai_fundamental_lemma}]
+% Generator: Claude Opus 5 (High)
+Suppose $h \not\equiv 0$, so that $h(t_0) \neq 0$ for some $t_0$. Since $h$ is continuous, the
+set where $h \neq 0$ is open in $[0,1]$, so we may take $t_0 \in (0,1)$: if $h$ were non-zero
+only at an endpoint it would still be non-zero just inside.
+
+Choose a component $i$ with $h_i(t_0) \neq 0$. Replacing $h$ by $-h$ if necessary, which changes
+neither the hypothesis nor the conclusion, assume $h_i(t_0) =: 2m > 0$. By continuity there is a
+$\delta > 0$ with $(t_0-\delta,\,t_0+\delta) \subseteq (0,1)$ and
+\[h_i(t) > m \qquad\text{for all } t \in (t_0-\delta,\,t_0+\delta).\]
+Now take the bump function of \cref{def:smooth_bump_function} on that interval,
+\[\varphi(t) := \begin{cases}
+    \exp\!\left(\dfrac{-1}{\delta^2 - (t-t_0)^2}\right), & \lvert t-t_0\rvert < \delta, \\[2ex]
+    0, & \text{otherwise,}
+  \end{cases}\]
+which is smooth on $\mathbb{R}$, non-negative, strictly positive on $(t_0-\delta,t_0+\delta)$ and
+zero outside it, and set $g := \varphi\,e_i$. Then $g$ is smooth with $g(0) = g(1) = 0$, so it is
+an admissible test function, and
+\[\int_0^1 \big\langle h(t),\,g(t)\big\rangle\,dt
+  = \int_{t_0-\delta}^{t_0+\delta} h_i(t)\,\varphi(t)\,dt
+  \ \geq\ m\int_{t_0-\delta}^{t_0+\delta}\varphi(t)\,dt \ > \ 0,\]
+the last inequality because $\varphi$ is continuous, non-negative and not identically zero on the
+interval. This contradicts the hypothesis. Consequently $h \equiv 0$.
+
+\begin{remark}[Where each hypothesis is spent]
+\label{rem:fundamental_lemma_hypotheses}
+Two ingredients carry the proof, and it is worth seeing which does what. \emph{Continuity} of $h$
+turns a single non-zero value into a whole interval of non-zero values of one sign, and without
+it the statement is false: a function equal to $1$ at one point and $0$ elsewhere integrates to
+zero against everything. \emph{Smoothness} of the bump is what keeps $g$ admissible, and it is
+the only reason the test class can be shrunk from all continuous $g$ to all smooth $g$ without
+weakening the conclusion. The conclusion itself is pointwise, which is the whole content: the
+hypothesis says $h$ vanishes on average against every test function, and the lemma upgrades that
+to vanishing everywhere.
+\end{remark}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:ai_variation_without_constant_speed}]
+% Generator: Claude Opus 5 (High)
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item By the second identity of \cref{lem:inner_product_derivative_identities} applied to
+    $\alpha := c_\varepsilon'$, and differentiating under the integral sign,
+    \[\left.\frac{d}{d\varepsilon}\right|_{\varepsilon=0} L(c_\varepsilon)
+      = \int_0^1 \frac{\big\langle c'(t),\ \partial_\varepsilon\big|_{\varepsilon=0}
+        c_\varepsilon'(t)\big\rangle}{\lvert c'(t)\rvert}\,dt
+      = \int_0^1 \left\langle \frac{c'(t)}{\lvert c'(t)\rvert},\ g'(t)\right\rangle dt.\]
+    Nothing was pulled out of the integral, which is the one difference from the proof of
+    \cref{prop:geodesic_straight_line}. Since $c \in C^2$ and $\lvert c'\rvert > 0$, the unit
+    tangent $c'/\lvert c'\rvert$ is $C^1$, so integration by parts is available:
+    \[\left.\frac{d}{d\varepsilon}\right|_{\varepsilon=0} L(c_\varepsilon)
+      = \left[\left\langle \frac{c'}{\lvert c'\rvert},\,g\right\rangle\right]_0^1
+        - \int_0^1 \left\langle \left(\frac{c'}{\lvert c'\rvert}\right)'(t),\ g(t)\right\rangle dt
+      = -\int_0^1 \left\langle \left(\frac{c'}{\lvert c'\rvert}\right)'(t),\ g(t)\right\rangle dt,\]
+    the boundary term vanishing because $g(0) = g(1) = 0$.
+  \item The left-hand side is zero for every admissible $g$, and
+    $\big(c'/\lvert c'\rvert\big)'$ is continuous, so \cref{ex:ai_fundamental_lemma} applies with
+    $h := \big(c'/\lvert c'\rvert\big)'$ and gives $\big(c'/\lvert c'\rvert\big)' \equiv 0$.
+  \item Therefore $c'/\lvert c'\rvert \equiv u$ for a constant unit vector $u$, so
+    $c'(t) = s(t)\,u$ with $s := \lvert c'\rvert > 0$. Integrating from $0$ and using $c(0)=0$,
+    \[c(t) = \sigma(t)\,u, \qquad \sigma(t) := \int_0^t s(\tau)\,d\tau,\]
+    with $\sigma$ strictly increasing and $\sigma(0) = 0$. The endpoint condition $c(1) = x$
+    reads $\sigma(1)\,u = x$, and $\sigma(1) = L(c)$ by definition of the length, so
+    $L(c) = \lvert x\rvert$ and $u = x/\lvert x\rvert$ (note $x \neq 0$, since $\sigma(1) > 0$).
+    The image is $\{\sigma u : 0 \leq \sigma \leq \lvert x\rvert\}$, the straight segment from
+    $0$ to $x$.
+
+    What the argument no longer pins down is the \emph{speed function} $s$, and with it the
+    parametrization: any positive continuous $s$ with $\int_0^1 s = \lvert x\rvert$ produces a
+    minimiser. That is unavoidable rather than a defect of the proof, because $L$ is invariant
+    under reparametrization (\cref{rem:geodesic_constant_speed}), so it cannot distinguish two
+    curves with the same image, and a criterion derived from $L$ alone cannot either. Assuming
+    constant speed picks one representative out of that family, and $c'' \equiv 0$ is the
+    statement for that representative.
+\end{enumerate}
+\end{exercisesolution}
+
 \begin{exercisesolution}[Solution to \cref{ex:ai_cylinder_geodesics}]
 % Generator: Claude Opus 5 (High)
 \begin{enumerate}[label=\textbf{(\alph*)}]

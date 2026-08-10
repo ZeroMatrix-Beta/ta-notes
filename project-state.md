@@ -37,7 +37,18 @@ reopen that decision, the gap is being closed with authored `aiexercise`s. Done 
 ch. 24 (which had none at all, and now has its own `99-solutions.tex`), three in ch. 20 (a
 substitution read off the integrand, an order swap that is impossible one way, and Frullani's
 integral via Feynman's trick), two in ch. 23 (a divergence-theorem drill and one open surface that
-has to be capped). Chapters 18 and 22 remain the thinnest on both axes.
+has to be capped), two in ch. 18 (the fundamental lemma of the calculus of variations, and the
+variation redone without the constant-speed hypothesis, both closing gaps the chapter's own
+remarks admit to), two in ch. 22 (a counterexample to the script's mis-stated curl product rule,
+and which of two fields is a gradient).
+
+**Figure density was measured on 2026-08-10, and two of the thinnest chapters were addressed.**
+Ch. 18 had one figure in 300 lines and none for the equation the chapter exists to prove; it now
+has a two-panel sphere showing a great circle against a circle of latitude. Ch. 22 illustrated the
+divergence and the curl but not the gradient; it now has a contour picture carrying both readings
+of `\nabla f`. By lines per figure the remaining outliers are **ch. 26** (864 lines, 2 figures,
+14 worked examples, and the chapter where boundary orientation most wants a picture), **ch. 06**
+(778 lines, 1) and **ch. 05** (663 lines, 1).
 
 **The 2026-08-09 prose revision is complete**, over all 26 chapters and all four appendices,
 against the em-dash policy and punctuation budget in `style.md`. Zero prose em-dashes remain in
@@ -136,6 +147,22 @@ did not change, and the only external `\cref` into the appendix (`q:quiz_q4`, fr
 still resolves. The second quiz is authored, not transcribed: it carries `% Generator:` and says
 so to the reader in its opening `ainote`, since the first section credits its questions to
 Prof.\ Serra and Prof.\ Lang and the two must not be confused.
+
+**Ch. 18 says in the document that it is not lecture material (2026-08-10, user).**
+`ainote:geodesics_beyond_the_course` now states both halves of the warning: Corsin's own
+"not exam relevant" marking, and the fact that the lecture notes have no counterpart. That
+second claim was **checked, not assumed**, per the rule two sections above: `geodesic` occurs
+exactly once in the whole of `lec_notes.pdf`, in Example 9.14 on printed p. 5, naming the
+great-circle metric on the sphere without saying why that arc is shortest; the page was rendered
+and read. Nothing in the course computes a geodesic and the calculus of variations does not
+appear in it. The other *ahead of the script* entries listed below carry no such reader-facing
+note yet.
+
+**Two ch. 22 AI-Notes were reclassified as remarks (2026-08-10).** The source/sink and
+paddle-wheel intuition blocks were `ainote`s, but both are plain mathematics with no source
+commentary in them, and both contain a `\newterm`, which `style.md` names as the reliable smell
+of a misfiled remark. They are `remark`s now, with titles. Neither was labelled, so no `\cref`
+moved. This is Test 1 in `style.md` applied, not a new decision.
 
 **AI-Notes are numbered and referenceable (2026-08-09).** `ainote` has a counter of its own,
 reset per chapter, so `\cref` prints `AI-Note 15.1`. It is deliberately **not** aliased to the

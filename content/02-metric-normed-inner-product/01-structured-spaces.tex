@@ -277,21 +277,22 @@ Let $V$ be a real vector space.
 \end{proposition}
 
 \begin{proof}
-\textbf{(a)} Definiteness of the norm is definiteness of the inner product, and homogeneity
-follows from bilinearity: $\|\alpha v\|^2 = \langle\alpha v,\alpha v\rangle =
-\alpha^2\|v\|^2$. For the triangle inequality, expand and apply
-\cref{prop:cauchy_schwarz_geometric_proof}:
-\begin{align*}
-  \|u+v\|^2 &= \|u\|^2 + 2\langle u,v\rangle + \|v\|^2 \\
-            &\leq \|u\|^2 + 2\lvert\langle u,v\rangle\rvert + \|v\|^2 \\
-            &\leq \|u\|^2 + 2\|u\|\,\|v\| + \|v\|^2 \ =\ \big(\|u\|+\|v\|\big)^2,
-\end{align*}
-and taking square roots gives $\|u+v\| \leq \|u\|+\|v\|$.
-
-\textbf{(b)} Definiteness: $d(x,y)=0$ means $\|x-y\|=0$, hence $x=y$. Symmetry: homogeneity
-with $\alpha=-1$ gives $\|x-y\| = \|-(y-x)\| = \|y-x\|$. Triangle inequality: writing
-$x-z = (x-y)+(y-z)$,
-\[d(x,z) = \|(x-y)+(y-z)\| \leq \|x-y\| + \|y-z\| = d(x,y)+d(y,z). \qedhere\]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Definiteness of the norm is definiteness of the inner product, and homogeneity
+    follows from bilinearity: $\|\alpha v\|^2 = \langle\alpha v,\alpha v\rangle =
+    \alpha^2\|v\|^2$. For the triangle inequality, expand and apply
+    \cref{prop:cauchy_schwarz_geometric_proof}:
+    \begin{align*}
+      \|u+v\|^2 &= \|u\|^2 + 2\langle u,v\rangle + \|v\|^2 \\
+                &\leq \|u\|^2 + 2\lvert\langle u,v\rangle\rvert + \|v\|^2 \\
+                &\leq \|u\|^2 + 2\|u\|\,\|v\| + \|v\|^2 \ =\ \big(\|u\|+\|v\|\big)^2,
+    \end{align*}
+    and taking square roots gives $\|u+v\| \leq \|u\|+\|v\|$.
+  \item Definiteness: $d(x,y)=0$ means $\|x-y\|=0$, hence $x=y$. Symmetry: homogeneity
+    with $\alpha=-1$ gives $\|x-y\| = \|-(y-x)\| = \|y-x\|$. Triangle inequality: writing
+    $x-z = (x-y)+(y-z)$,
+    \[d(x,z) = \|(x-y)+(y-z)\| \leq \|x-y\| + \|y-z\| = d(x,y)+d(y,z). \qedhere\]
+\end{enumerate}
 \end{proof}
 
 \begin{remark}[Neither arrow reverses]

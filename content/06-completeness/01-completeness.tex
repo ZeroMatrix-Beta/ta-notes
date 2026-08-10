@@ -114,16 +114,17 @@ Everything follows from the two-sided estimate, valid for every $j$:
 \[|x_{m,j}-x_j| \ \leq\ |x_m-x| \ =\ \sqrt{\sum_{i=1}^n|x_{m,i}-x_i|^2}
   \ \leq\ \sqrt{n}\,\max_i|x_{m,i}-x_i|.\]
 
-\textbf{(a)} If $|x_m-x| \to 0$, the left inequality forces each coordinate to
-converge. Conversely, if every coordinate converges then $\max_i|x_{m,i}-x_i| \to 0$ (a maximum
-of \emph{finitely} many null sequences), so the right inequality forces
-$|x_m - x| \to 0$.
-
-\textbf{(b)} Let $(x_m)$ be Cauchy in $\mathbb{R}^n$. The same left inequality gives
-$|x_{m,j}-x_{k,j}| \leq |x_m-x_k|$, so each coordinate sequence $(x_{m,j})_m$ is
-Cauchy in $\mathbb{R}$. Now $\mathbb{R}$ is complete, this being the completeness axiom from
-\emph{Analysis I} and the only input the proof has, so each coordinate sequence converges, say
-$x_{m,j} \to x_j$. Setting $x := (x_1,\dots,x_n)$, part \textbf{(a)} gives $x_m \to x$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item If $|x_m-x| \to 0$, the left inequality forces each coordinate to
+    converge. Conversely, if every coordinate converges then $\max_i|x_{m,i}-x_i| \to 0$ (a
+    maximum of \emph{finitely} many null sequences), so the right inequality forces
+    $|x_m - x| \to 0$.
+  \item Let $(x_m)$ be Cauchy in $\mathbb{R}^n$. The same left inequality gives
+    $|x_{m,j}-x_{k,j}| \leq |x_m-x_k|$, so each coordinate sequence $(x_{m,j})_m$ is
+    Cauchy in $\mathbb{R}$. Now $\mathbb{R}$ is complete, this being the completeness axiom from
+    \emph{Analysis I} and the only input the proof has, so each coordinate sequence converges,
+    say $x_{m,j} \to x_j$. Setting $x := (x_1,\dots,x_n)$, part \textbf{(a)} gives $x_m \to x$.
+\end{enumerate}
 \end{proof}
 
 % Reclassified from ainote to remark: this is an observation about the proof, not about the

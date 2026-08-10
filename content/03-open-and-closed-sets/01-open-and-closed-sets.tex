@@ -144,19 +144,21 @@ Let $(X,d)$ be a metric space.
 \end{proposition}
 
 \begin{proof}
-\textbf{(a)} Let $x \in \bigcup_i U_i$. Then $x \in U_{i_0}$ for some $i_0$, and since $U_{i_0}$
-is open there is $\varepsilon>0$ with $B_\varepsilon(x) \subseteq U_{i_0} \subseteq \bigcup_iU_i$.
-
-\textbf{(b)} Let $x \in \bigcap_{i=1}^kU_i$. For each $i$ pick $\varepsilon_i>0$ with
-$B_{\varepsilon_i}(x) \subseteq U_i$, and set $\varepsilon := \min\{\varepsilon_1,\dots,\varepsilon_k\}$.
-Then $\varepsilon > 0$, and \emph{this is the only place finiteness is used}: a minimum of
-finitely many positive numbers is positive, whereas an infimum of infinitely many can be $0$.
-Since $B_\varepsilon(x) \subseteq U_i$ for every $i$, we conclude that
-$B_\varepsilon(x) \subseteq \bigcap_iU_i$.
-
-\textbf{(c)} Take complements and apply \textbf{(a)}, \textbf{(b)} via De Morgan:
-$X\setminus\bigcap_iA_i = \bigcup_i(X\setminus A_i)$ and
-$X\setminus\bigcup_{i=1}^kA_i = \bigcap_{i=1}^k(X\setminus A_i)$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Let $x \in \bigcup_i U_i$. Then $x \in U_{i_0}$ for some $i_0$, and since $U_{i_0}$
+    is open there is $\varepsilon>0$ with
+    $B_\varepsilon(x) \subseteq U_{i_0} \subseteq \bigcup_iU_i$.
+  \item Let $x \in \bigcap_{i=1}^kU_i$. For each $i$ pick $\varepsilon_i>0$ with
+    $B_{\varepsilon_i}(x) \subseteq U_i$, and set
+    $\varepsilon := \min\{\varepsilon_1,\dots,\varepsilon_k\}$.
+    Then $\varepsilon > 0$, and \emph{this is the only place finiteness is used}: a minimum of
+    finitely many positive numbers is positive, whereas an infimum of infinitely many can be $0$.
+    Since $B_\varepsilon(x) \subseteq U_i$ for every $i$, we conclude that
+    $B_\varepsilon(x) \subseteq \bigcap_iU_i$.
+  \item Take complements and apply \textbf{(a)}, \textbf{(b)} via De Morgan:
+    $X\setminus\bigcap_iA_i = \bigcup_i(X\setminus A_i)$ and
+    $X\setminus\bigcup_{i=1}^kA_i = \bigcap_{i=1}^k(X\setminus A_i)$.
+\end{enumerate}
 \end{proof}
 
 % Generator: Claude Opus 5 (Medium)

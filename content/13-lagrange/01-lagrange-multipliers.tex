@@ -432,16 +432,20 @@ $D^2\varphi(0)$ is. This is the same cancellation that already made $Dh(0)=0$. S
 $v := D\varphi(0)w$, which ranges over all of $T_{x_0}$ as $w$ ranges over $\mathbb{R}^{n-k}$
 (since $D\varphi(0)$ is an isomorphism onto $T_{x_0}$),
 \[\Hess h(0)[w,w] = v\transp\Hess_xL(x_0,\lambda)v.\]
-So, $\Hess_xL(x_0,\lambda)$ being positive definite on $T_{x_0}$ is exactly $\Hess h(0)$ being
-positive definite, and the unconstrained Hessian test (\cref{thm:hessian_test}, applied to $h$
-on the open set $V \subseteq \mathbb{R}^{n-k}$) gives a strict local minimum of $h$ at $0$.
-Since $\varphi$ is a local homeomorphism from $V$ onto a neighbourhood of $x_0$ in
-$g^{-1}\{0\}$, that is exactly a strict local minimum of $f|_{g^{-1}\{0\}}$ at $x_0$. This proves
-\textbf{(1)}; \textbf{(2)} is identical with every inequality reversed. For \textbf{(3)}, if the
-quadratic form takes both signs on $T_{x_0}$, then $\Hess h(0)$ is indefinite, so $h$ increases
-along one direction through $0 \in V$ and decreases along another (\cref{thm:hessian_test}
-again), and transporting those two directions through $\varphi$ shows $f|_{g^{-1}\{0\}}$ does
-the same near $x_0$.
+The three cases now follow by reading the unconstrained Hessian test (\cref{thm:hessian_test})
+off $h$ on the open set $V \subseteq \mathbb{R}^{n-k}$, and transporting the conclusion back
+through $\varphi$, which is a local homeomorphism from $V$ onto a neighbourhood of $x_0$ in
+$g^{-1}\{0\}$.
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+  \item $\Hess_xL(x_0,\lambda)$ positive definite on $T_{x_0}$ is exactly $\Hess h(0)$ positive
+    definite, so the Hessian test gives a strict local minimum of $h$ at $0$, which transports
+    to a strict local minimum of $f|_{g^{-1}\{0\}}$ at $x_0$.
+  \item Identical, with every inequality reversed.
+  \item If the quadratic form takes both signs on $T_{x_0}$, then $\Hess h(0)$ is indefinite, so
+    $h$ increases along one direction through $0 \in V$ and decreases along another
+    (\cref{thm:hessian_test} again), and transporting those two directions through $\varphi$
+    shows $f|_{g^{-1}\{0\}}$ does the same near $x_0$.
+\end{enumerate}
 \end{proof}
 
 \begin{remark}

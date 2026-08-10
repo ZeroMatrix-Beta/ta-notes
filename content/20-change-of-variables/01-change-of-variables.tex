@@ -317,3 +317,17 @@ read $dx\,dy\,dz$. Quoted verbatim above, as the sheet is a primary source.
 % the box (0,1)x(1,2)x(-2,0) and that part 2's second constraint becomes v^{3/2} < u < 2v^{3/2}.
 % That is the answer to two of the three parts. Moved into 99-solutions.tex per the spoiler rule
 % in style.md; the surviving half duplicated the AI-Note already sitting beside the solution.
+
+\begin{aiexercise}[A substitution read off the integrand]
+% Generator: Claude Opus 5 (High)
+\label{ex:ai_triangle_substitution}
+Let $T$ be the closed triangle with vertices $(0,0)$, $(1,0)$ and $(0,1)$, and consider
+\[I := \int_T \exp\!\left(\frac{y-x}{y+x}\right)dx\,dy.\]
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Substitute $u := y-x$ and $v := y+x$. Show that the interior of $T$ corresponds to
+    $\{(u,v) : 0 < v < 1,\ -v < u < v\}$, and find the factor relating $dx\,dy$ to $du\,dv$.
+  \item Evaluate $I$. The inner integral is the one to do first, and it is elementary.
+  \item The integrand is undefined at the origin, which lies in $T$. Why does this not affect
+    the answer?
+\end{enumerate}
+\end{aiexercise}

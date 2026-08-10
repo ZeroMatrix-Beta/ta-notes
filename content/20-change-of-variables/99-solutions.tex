@@ -64,3 +64,101 @@ constraints stays curved. Reading the substitution off the constraints, as in pa
 worth remembering, and it is available far more often than it looks.
 \end{ainote}
 \end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:ai_triangle_substitution}]
+% Generator: Claude Opus 5 (High)
+\textbf{1. The new domain and the Jacobian factor.} The map $\Psi(x,y) := (y-x,\ y+x)$ is
+linear and invertible, with
+\[\Psi^{-1}(u,v) = (x,y) = \left(\frac{v-u}{2},\ \frac{u+v}{2}\right),
+  \qquad
+  \det\Jac\Psi^{-1} = \det\begin{pmatrix} -1/2 & 1/2 \\ 1/2 & 1/2\end{pmatrix} = -\frac12,\]
+so $dx\,dy = \tfrac12\,du\,dv$. The three sides of $T$ translate one at a time: $x \geq 0$ reads
+$u \leq v$, the condition $y \geq 0$ reads $u \geq -v$, and $x+y \leq 1$ reads $v \leq 1$. Taking
+strict inequalities for the interior gives exactly $0 < v < 1$ and $-v < u < v$, a triangle
+again, but one whose horizontal slices run in the direction the integrand likes.
+
+\textbf{2. The value.} On that region the integrand is $e^{u/v}$, and $v$ is constant along the
+inner integration, so the inner integral is an exponential in $u$:
+\[I = \frac12\int_0^1\!\!\int_{-v}^{v} e^{u/v}\,du\,dv
+    = \frac12\int_0^1 \Big[v\,e^{u/v}\Big]_{u=-v}^{u=v}\,dv
+    = \frac{e - e^{-1}}{2}\int_0^1 v\,dv
+    = \frac{e - e^{-1}}{4}.\]
+
+\textbf{3. The origin.} A single point is a Jordan null set, so removing it changes neither the
+Jordan measurability of $T$ nor the value of the integral. What does need checking is that the
+integral exists at all, and it does, because the integrand is \emph{bounded}: on $T$ one has
+$\lvert y-x\rvert \leq y+x$, so the exponent $u/v$ lies in $[-1,1]$ and the integrand lies
+between $e^{-1}$ and $e$. It is the boundedness, and not the smallness of the bad set on its
+own, that rescues the computation.
+
+\begin{remark}[Two ways to choose a substitution]
+\label{rem:substitution_from_the_integrand}
+\Cref{ex:change_of_variables_domain} chose $\Phi$ to straighten the \emph{domain}. Here the
+choice comes from the \emph{integrand}, which is a function of $y-x$ and $y+x$ and of nothing
+else. That the domain also becomes pleasant is a bonus, and a mild one: the new region is still
+a triangle. What made the integral collapse is that the inner integration now runs along the
+direction in which the integrand is a plain exponential.
+\end{remark}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:ai_order_swap_gaussian}]
+% Generator: Claude Opus 5 (High)
+\textbf{1.} The inner integral asks for an antiderivative of $y \mapsto e^{y^2}$, and there is
+none in elementary terms. Nothing about the outer integral repairs this, so the order as written
+is a dead end.
+
+\textbf{2.} The region is the triangle below the diagonal, and it admits two descriptions:
+\[R = \{(x,y) : 0 \leq x \leq 1,\ x \leq y \leq 1\}
+    = \{(x,y) : 0 \leq y \leq 1,\ 0 \leq x \leq y\}.\]
+The first reads it by vertical slices, the second by horizontal ones. Taking the second and
+applying \cref{thm:fubini},
+\[I = \int_0^1\!\!\int_0^{y} e^{y^2}\,dx\,dy.\]
+
+\textbf{3.} Now $e^{y^2}$ is constant in $x$, so the inner integral contributes a factor of $y$,
+and that factor is exactly what the substitution $s := y^2$ needs:
+\[I = \int_0^1 y\,e^{y^2}\,dy = \left[\frac{e^{y^2}}{2}\right]_0^1 = \frac{e-1}{2}.\]
+
+\begin{remark}[What the swap actually bought]
+\label{rem:order_swap_supplies_the_factor}
+The reversal did not find a cleverer antiderivative. It produced a factor of $y$ that was not
+there before, and $y\,e^{y^2}$ integrates where $e^{y^2}$ does not. That is the pattern worth
+recognising: when the length of a slice depends on the variable that is causing the trouble,
+swapping the order hands you that length as a factor in the integrand.
+\end{remark}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:ai_frullani}]
+% Generator: Claude Opus 5 (High)
+\textbf{1.} Both exponentials equal $1$ at $x = 0$, so the quotient is a difference quotient in
+disguise. Expanding, $e^{-ax} - e^{-bx} = (b-a)x + O(x^2)$, and therefore
+\[\lim_{x\to0^+}\frac{e^{-ax} - e^{-bx}}{x} = b - a.\]
+Assigning that value at $x = 0$ makes the integrand continuous on $[0,\infty)$, and it decays
+exponentially, so the improper integral converges.
+
+\textbf{2.} Only the second exponential depends on $t$, and the $x$ that the chain rule produces
+cancels the one in the denominator:
+\[I'(t) = \int_0^\infty \frac{\partial}{\partial t}\left(\frac{e^{-ax} - e^{-tx}}{x}\right)dx
+        = \int_0^\infty \frac{x\,e^{-tx}}{x}\,dx
+        = \int_0^\infty e^{-tx}\,dx
+        = \frac{1}{t}.\]
+That cancellation is the whole trick. Differentiating in the parameter removes the $1/x$ which
+made the integrand hard, and leaves an integral of one line.
+
+\textbf{3.} At $t = a$ the two exponentials coincide and the integrand vanishes identically, so
+$I(a) = 0$. Consequently, by the fundamental theorem of calculus,
+\[\int_0^\infty \frac{e^{-ax} - e^{-bx}}{x}\,dx = I(b) = I(b) - I(a) = \int_a^b \frac{dt}{t}
+  = \log\!\left(\frac{b}{a}\right).\]
+That the answer sees only the ratio $b/a$ is now visible in the derivation rather than a
+surprise, since $I'(t) = 1/t$ is scale-invariant.
+
+\begin{remark}[The hypotheses of \cref{thm:feynmans_trick} do not literally cover this]
+\label{rem:feynman_on_a_half_line}
+As stated, \cref{thm:feynmans_trick} differentiates under an integral over a \emph{compact} set
+$K$, and here the domain is $[0,\infty)$. The step is still legitimate, by the same reasoning
+\cref{ex:feynman_dirichlet_integral} appeals to. Fix $0 < t_0 < t_1$. For $t \in [t_0,t_1]$ the
+$t$-derivative of the integrand is $e^{-tx} \leq e^{-t_0x}$, a bound that is independent of $t$
+and integrable on $[0,\infty)$, so the differentiation may be carried out on $[0,R]$ and the
+limit $R \to \infty$ taken afterwards. The compact statement is the one the course proves; the
+dominated version is what the applications actually use.
+\end{remark}
+\end{exercisesolution}

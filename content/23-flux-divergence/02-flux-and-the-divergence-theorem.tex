@@ -321,3 +321,36 @@ where $\lvert x\rvert$ is the usual Euclidean norm.
   Why doesn't this contradict the Divergence Theorem?
 \end{enumerate}
 \end{exercise}
+
+\begin{aiexercise}[Flux of a cubic field through the sphere]
+% Generator: Claude Opus 5 (High)
+\label{ex:ai_flux_cubic_sphere}
+Let $F(x,y,z) := (x^3,\,y^3,\,z^3)$ and let $\Omega := B_1(0) \subseteq \mathbb{R}^3$. Compute
+the flux of $F$ out of $\partial\Omega$.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Say in one sentence what the integrand of \cref{def:flux} would look like here if the
+    sphere were parametrized directly, and why that route is unattractive.
+  \item Compute $\divg F$, and observe that it depends on the point only through its distance
+    $r$ from the origin.
+  \item Evaluate the volume integral. The shell reading of polar coordinates in
+    \cref{rem:polar_as_shells} does it without a Jacobian determinant.
+\end{enumerate}
+\end{aiexercise}
+
+\begin{aiexercise}[An open surface has to be closed first]
+% Generator: Claude Opus 5 (High)
+\label{ex:ai_capping_a_paraboloid}
+Let $S := \{(x,y,z) \in \mathbb{R}^3 : z = 1-x^2-y^2,\ z \geq 0\}$ be the piece of the
+paraboloid lying above the $xy$-plane, oriented by the upward-pointing normal, and let
+$F(x,y,z) := (x,\,y,\,z)$.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item \Cref{thm:gauss_divergence} applies to the boundary of a domain, and $S$ is not one.
+    Which set $D$ must be adjoined to $S$ so that $S \cup D = \partial\Omega$ for a bounded
+    domain $\Omega$, and what is the exterior unit normal along $D$?
+  \item Compute $\int_{\partial\Omega}\langle F,\nu\rangle\,d\vol_2$ using the divergence
+    theorem. You will need $\vol_3(\Omega)$, which is a one-line computation in cylindrical
+    coordinates.
+  \item Compute the flux through $D$ alone, directly from \cref{def:flux}, and deduce the flux
+    of $F$ through $S$.
+\end{enumerate}
+\end{aiexercise}

@@ -20,13 +20,13 @@ extracts a convergent subsequence from a family of approximate solutions.
 \label{def:sup_norm_function_space}
 Let $K \subseteq \mathbb{R}^n$ be compact. Write $C(K,\mathbb{R}^m)$ for the set of continuous
 maps $f : K \to \mathbb{R}^m$, a real vector space under pointwise operations, and equip it with
-the \newterm{supremum norm} (\germanterm{Supremumsnorm})
+the \newterm{supremum norm} \germanfor{Supremumsnorm}
 \[\lVert f\rVert_\infty := \sup_{x \in K} \lvert f(x)\rvert.\]
 \end{definition}
 
 The supremum is finite because $\lvert f\rvert$ is continuous on a compact set, hence bounded
-(\cref{sec:why_compactness_matters}) --- the same point already made for the supremum metric in
-\cref{ex:sup_metric_is_metric}. Convergence in this norm is exactly \emph{uniform} convergence.
+(\cref{sec:why_compactness_matters}), which is the same point already made for the supremum metric
+in \cref{ex:sup_metric_is_metric}. Convergence in this norm is exactly \emph{uniform} convergence.
 
 \begin{proposition}[$C(K,\mathbb{R}^m)$ is complete]
 \label{prop:function_space_complete}
@@ -46,7 +46,7 @@ $\ell \to \infty$ in $\lvert f_k(x)-f_\ell(x)\rvert < \varepsilon$ gives
 $\lvert f_k(x)-f(x)\rvert \leq \varepsilon$ for \emph{every} $x$, i.e.\
 $\lVert f_k - f\rVert_\infty \leq \varepsilon$.
 
-Finally $f$ is continuous, being a uniform limit of continuous functions --- the standard
+Finally $f$ is continuous, being a uniform limit of continuous functions, by the standard
 $\varepsilon/3$ argument from \emph{Analysis I}. Hence $f \in C(K,\mathbb{R}^m)$ and
 $f_k \to f$ in the norm.
 \end{proof}
@@ -60,7 +60,7 @@ statement to $C(K,\mathbb{R}^m)$ is \textbf{false}, and it is worth seeing exact
 \begin{aiexample}[A bounded sequence of functions with no convergent subsequence]
 \label{ex:bounded_no_convergent_subsequence}
 Take $K := [0,1]$, $m := 1$ and $f_k(x) := x^k$. Every $f_k$ is continuous with
-$\lVert f_k\rVert_\infty = 1$, so the sequence is bounded --- indeed it lies on the unit sphere.
+$\lVert f_k\rVert_\infty = 1$, so the sequence is bounded, and indeed lies on the unit sphere.
 
 Yet no subsequence converges in $C([0,1])$. Pointwise,
 \[f_k(x) \longrightarrow g(x) := \begin{cases} 0, & 0 \leq x < 1, \\ 1, & x = 1,\end{cases}\]
@@ -72,9 +72,9 @@ not continuous. So no subsequence can converge.
 Boundedness was never the issue. What goes wrong is that the $f_k$ become arbitrarily
 \emph{steep} near $x=1$: to keep $\lvert f_k(x)-f_k(y)\rvert$ below a fixed $\varepsilon$ there,
 one needs $\lvert x-y\rvert$ smaller and smaller as $k$ grows. Each individual $f_k$ is
-uniformly continuous (\cref{def:uniformly_continuous}) --- it is continuous on a compact
-interval --- but there is no single $\delta$ that works for all of them at once. Ruling that out
-is precisely what the next definition does.
+uniformly continuous (\cref{def:uniformly_continuous}), being continuous on a compact interval.
+What fails is that no single $\delta$ works for all of them at once. Ruling that out is precisely
+what the next definition does.
 \end{remark}
 \end{aiexample}
 
@@ -83,7 +83,7 @@ is precisely what the next definition does.
 \begin{definition}[Equicontinuity]
 \label{def:equicontinuous}
 A family $(f_k)_{k\in\mathbb{N}}$ in $C(K,\mathbb{R}^m)$ is \newterm{equicontinuous}
-(\germanterm{gleichgradig stetig}) if
+\germanfor{gleichgradig stetig} if
 \[\forall \varepsilon>0\ \ \exists \delta>0\ \ \forall k \in \mathbb{N}\ \ \forall x,y \in K :
   \quad \lvert x-y\rvert < \delta \implies \lvert f_k(x)-f_k(y)\rvert < \varepsilon.\]
 \end{definition}
@@ -94,10 +94,10 @@ Compare the three conditions, which differ only in what $\delta$ is allowed to d
 \begin{itemize}
   \item \textbf{Continuity} of one $f$: $\delta$ may depend on $\varepsilon$ \emph{and on the
     point} $x$.
-  \item \textbf{Uniform continuity} of one $f$: $\delta$ may depend on $\varepsilon$ only ---
-    one $\delta$ for all points.
-  \item \textbf{Equicontinuity} of a family: $\delta$ may depend on $\varepsilon$ only --- one
-    $\delta$ for all points \emph{and all members of the family}.
+  \item \textbf{Uniform continuity} of one $f$: $\delta$ may depend on $\varepsilon$ only, so
+    there is one $\delta$ for all points.
+  \item \textbf{Equicontinuity} of a family: $\delta$ may depend on $\varepsilon$ only, so there
+    is one $\delta$ for all points \emph{and all members of the family}.
 \end{itemize}
 So equicontinuity is uniform continuity made uniform in one further variable, the index. Each
 $x^k$ of \cref{ex:bounded_no_convergent_subsequence} is uniformly continuous, and the family is
@@ -116,10 +116,12 @@ $C(K,\mathbb{R}^m)$ that is
 Then $(f_k)$ has a subsequence converging uniformly to some $f \in C(K,\mathbb{R}^m)$.
 \end{theorem}
 
+% Linus states the theorem without proof, remarking that it is "mostly just used in proofs".
 \begin{ainote}
-Linus states the theorem without proof, remarking that it is \qt{mostly just used in proofs}.
-The sketch below is included because the mechanism --- a diagonal argument --- explains why
-\emph{both} hypotheses are needed, which the statement alone does not. The details are omitted.
+None of the transcribed notes prove this theorem; Linus states it and remarks that it is
+\qt{mostly just used in proofs}. The sketch below is included because its mechanism, a
+diagonal argument, explains why \emph{both} hypotheses are needed, which the statement alone does
+not. It is a sketch and not a proof: the details are omitted.
 \end{ainote}
 
 \begin{remark}[Proof sketch: the diagonal argument]
@@ -127,14 +129,14 @@ The sketch below is included because the mechanism --- a diagonal argument --- e
 Fix a countable dense subset $D = \{q_1,q_2,\dots\} \subseteq K$ (the points of $K$ with rational
 coordinates will do).
 
-\textbf{Step 1 --- converge on $D$, using boundedness.} The values $(f_k(q_1))_k$ form a bounded
+\textbf{Step 1: converge on $D$, using boundedness.} The values $(f_k(q_1))_k$ form a bounded
 sequence in $\mathbb{R}^m$, so by Bolzano--Weierstrass some subsequence converges at $q_1$. Pass
 to a further subsequence converging also at $q_2$, then at $q_3$, and so on. Each refinement is
-legitimate but no single one handles all of $D$; taking the \emph{diagonal} sequence --- the
-$j$-th member of the $j$-th subsequence --- produces one subsequence converging at every point
-of $D$ simultaneously.
+legitimate, but no single one of them handles all of $D$. Taking the \emph{diagonal} sequence,
+whose $j$-th member is the $j$-th member of the $j$-th subsequence, produces one subsequence
+converging at every point of $D$ simultaneously.
 
-\textbf{Step 2 --- upgrade to uniform convergence, using equicontinuity.} Convergence on a dense
+\textbf{Step 2: upgrade to uniform convergence, using equicontinuity.} Convergence on a dense
 set says nothing on its own about the rest of $K$; a sequence can converge at every rational and
 oscillate wildly in between. Equicontinuity forbids that: given $\varepsilon$, pick the $\delta$
 it supplies, cover the compact $K$ by finitely many balls of radius $\delta$ centred at points

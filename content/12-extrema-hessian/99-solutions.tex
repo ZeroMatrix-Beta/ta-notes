@@ -8,16 +8,14 @@
 Since $T$ is compact and $f$ is continuous, global extrema exist by the extreme value theorem
 (\cref{item:extreme_value_theorem}).
 \begin{itemize}
-  \item \textbf{Interior of $T$:} Critical points satisfy $\nabla f(x,y) = (y,x)\transp = (0,0)\transp \implies (x,y) = (0,0)$, which lies on the boundary. Thus, there are no critical points in $\operatorname{int}(T)$.
+  \item \textbf{Interior of $T$:} Critical points satisfy $\nabla f(x,y) = (y,x)\transp = (0,0)\transp$, and therefore $(x,y) = (0,0)$, which lies on the boundary. Thus, there are no critical points in $\operatorname{int}(T)$.
   \item \textbf{Boundary of $T$:}
     \begin{itemize}
       \item Along the leg $x = 0$ ($0 \le y \le 2$), $f(0,y) = 0$.
       \item Along the leg $y = 0$ ($0 \le x \le 2$), $f(x,0) = 0$.
       \item Along the hypotenuse $x+y = 2$ ($0 \le x \le 2$), substitute $y = 2-x$:
-        \[
-        h(x) := x(2-x) = 2x - x^2 \implies h'(x) = 2 - 2x = 0 \implies x = 1.
-        \]
-        This gives candidate point $(1,1)$ with $f(1,1) = 1$. The endpoints $(2,0)$ and $(0,2)$ yield $f = 0$.
+        \[h(x) := x(2-x) = 2x-x^2, \qquad h'(x) = 2-2x,\]
+        which vanishes at $x = 1$. This gives the candidate point $(1,1)$ with $f(1,1) = 1$. The endpoints $(2,0)$ and $(0,2)$ yield $f = 0$.
     \end{itemize}
 \end{itemize}
 Comparing values, the \textbf{global maximum} is $1$ at $(1,1)$, and the \textbf{global minimum} is $0$, attained everywhere on the coordinate axes legs of $T$.
@@ -30,7 +28,7 @@ By the spectral theorem, since $M$ is symmetric there exists an orthogonal matri
 \[OMO\transp = \begin{pmatrix} \lambda_1 & 0 \\ 0 & \lambda_2 \end{pmatrix}.\]
 Using $\det(AB) = \det(A)\det(B)$ and $\Tr(AB) = \Tr(BA)$,
 \[\det M = \det(OMO\transp) = \lambda_1\lambda_2, \qquad \Tr M = \Tr(MO\transp O) = \Tr(OMO\transp) = \lambda_1 + \lambda_2.\]
-So $\det M$ and $\Tr M$ are exactly the product and sum of the eigenvalues, and the four cases
+So, $\det M$ and $\Tr M$ are exactly the product and sum of the eigenvalues, and the four cases
 follow immediately:
 \begin{itemize}
   \item $\det M > 0$: $\lambda_1, \lambda_2$ have the same sign. If additionally $\Tr M > 0$,
@@ -81,9 +79,9 @@ statements necessarily hold.
 
 \begin{ainote}
 The official solution lists $(1,0)$ alongside $(-1,0)$ as \qt{local extrema} from the Lagrange
-system, then only mentions it again implicitly by omission from the final global-extrema summary
---- worth flagging explicitly: \textbf{Lagrange's condition finds all \emph{critical} points of
-$f|_{S^1}$, not automatically the global extrema}. Here $(1,0)$ is a genuine local maximum along
+system, then only mentions it again implicitly by omission from the final global-extrema summary.
+It is worth flagging explicitly that \textbf{Lagrange's condition finds all \emph{critical} points
+of $f|_{S^1}$, not automatically the global extrema}. Here $(1,0)$ is a genuine local maximum along
 the circle (value $1$) that is simply not the largest one; only comparing all candidate values
 at the end distinguishes it from the global maximum at $(-1,0)$ (value $3$).
 \end{ainote}
@@ -139,6 +137,46 @@ Reading off signs for each ordering of $a,b$ against $0$:
 $a-ax^2-ay^2=0$, that is, $x^2+y^2=1$, so the entire unit circle is critical. On that circle,
 \[\Hess f(x,y) = -4a\,e^{-1}\begin{pmatrix} x^2 & xy \\ xy & y^2 \end{pmatrix},\]
 whose determinant is $16a^2e^{-2}(x^2y^2 - x^2y^2) = 0$. The Hessian is therefore degenerate
-(\cref{def:sign_symmetric_matrix}) at every such point, and the test is inconclusive --- as it
-must be, since a whole curve of critical points cannot consist of isolated extrema.
+(\cref{def:sign_symmetric_matrix}) at every such point, and the test is inconclusive, as it must
+be, since a whole curve of critical points cannot consist of isolated extrema.
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:ai_fta_hypotheses}]
+% Generator: Claude Opus 5 (High)
+\textbf{(a)} The restriction is what makes $\lvert z\rvert^k \leq \lvert z\rvert^{n-1}$ for every
+$k \leq n-1$, which is the step that collapses the whole sum into a single power. For
+$\lvert z\rvert < 1$ the inequality reverses, the low powers dominate, and the estimate is simply
+false: at $z = 0$ it would read $\lvert a_0\rvert \geq 0 \cdot (0 - C)$ only by accident of the
+right-hand side being negative, and it gives nothing usable.
+
+Nothing is lost, because the estimate is only ever applied for $\lvert z\rvert \geq R$, and
+$R \geq 1$ automatically: $C = \sum_{k=0}^n\lvert a_k\rvert$ includes the term
+$\lvert a_n\rvert = 1$, so $C \geq 1$ and hence $R \geq C+1 \geq 2$. The hypothesis is free.
+
+\textbf{(b)} Here $f(z) = \lvert z\rvert^2+1 \geq 1$, so $f$ has no root, and indeed
+$\lvert f\rvert$ attains its minimum $1$ at $z_0 = 0$. Both halves of the first part of the proof
+therefore go through unchanged: $\lvert f\rvert$ grows without bound, the infimum is attained,
+and the minimiser is interior.
+
+The step that breaks is the expansion. The proof writes $g(z) := f(z_0+z) = \sum_k b_kz^k$, and
+$f$ here is not a polynomial in $z$: it is $z\overline z + 1$, and $\overline z$ is not expressible
+in powers of $z$. Concretely, at $z_0 = 0$ and $z = re^{i\varphi}$,
+\[g\big(re^{i\varphi}\big) = 1 + r^2,\]
+in which the perturbation carries \emph{no} factor $e^{i\ell\varphi}$. The direction $\varphi$
+has vanished from the expression, so there is no direction to aim, and the term $r^2$ increases
+$\lvert g\rvert$ whichever way one leaves the origin.
+
+That is the sharpest way to say what the proof actually uses: not that $f$ is smooth, nor that it
+grows, but that the lowest-order correction to $b_0$ has a \emph{phase} that the free parameter
+$\varphi$ can rotate onto $-b_0$. The function $z\overline z$ is the standard example of a
+perturbation with no phase to rotate.
+
+\textbf{(c)} The requirement is $e^{i(\ell\varphi+\psi)} = -1$, i.e.\
+$\ell\varphi + \psi \equiv \pi \pmod{2\pi}$, so
+\[\varphi_j := \frac{\pi - \psi + 2\pi j}{\ell}, \qquad j = 0,1,\ldots,\ell-1,\]
+which are $\ell$ distinct directions in $[0,2\pi)$, equally spaced by $2\pi/\ell$. The argument
+does not care which is used, because it needs only \emph{one} ray along which $\lvert g\rvert$
+falls below $\lvert b_0\rvert$; the contradiction is reached from a single such ray. That $\ell$
+of them exist rather than one is a bonus of working over $\mathbb{C}$, and it is exactly the
+freedom that \textbf{(b)} shows to be indispensable.
 \end{exercisesolution}

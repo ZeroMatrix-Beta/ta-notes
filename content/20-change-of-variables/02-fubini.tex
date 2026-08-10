@@ -35,7 +35,7 @@ Replacing $\mu_n(A_t)$ with $\mu_n(B_t)$ yields $\mu_{n+1}(B)$.
 
 \begin{theorem}[Volume of a cone over a measurable base]
 \label{thm:cone_volume_formula}
-Let $\Omega \subseteq \mathbb{R}^n$ be a bounded, Jordan measurable domain. The \newterm{cone over $\Omega$} (\germanterm{Kegel \"uber $\Omega$}) with vertex at $(0,1) \in \mathbb{R}^n \times \mathbb{R}$ and base $\Omega \times \{0\}$ is defined by
+Let $\Omega \subseteq \mathbb{R}^n$ be a bounded, Jordan measurable domain. The \newterm{cone over $\Omega$} \germanfor{Kegel \"uber $\Omega$} with vertex at $(0,1) \in \mathbb{R}^n \times \mathbb{R}$ and base $\Omega \times \{0\}$ is defined by
 \[
 C\Omega := \big\{(x, t) \in \mathbb{R}^n \times [0,1] \mid x \in (1-t)\Omega\big\}.
 \]
@@ -107,8 +107,8 @@ For any $t \in [0,1]$, the cross-section of $C\Omega$ at height $t$ is $(C\Omega
 
 \begin{ainote}
 Corsin writes the first line as $\int_0^1 dx \int_0^1 dy$, but the antiderivative taken on the
-next line is in $x$ --- it produces $x^{y+2}/(y+2)$, evaluated from $0$ to $1$. The differentials
-are therefore swapped relative to the computation actually performed; the order is corrected
+next line is in $x$, and it produces $x^{y+2}/(y+2)$, evaluated from $0$ to $1$. The
+differentials are therefore swapped relative to the computation actually performed. The order is corrected
 above and the result is unaffected.
 
 The example is well chosen: integrating $x^{y+1}$ in $y$ first would mean integrating an
@@ -137,7 +137,7 @@ Thus, the new bounds are $0 \leq x \leq 4$ and $\frac{1}{8}x^2 \leq y \leq \sqrt
 Let $f(u,v) := (u\cos v, u\sin v, u^2)\transp \in \mathbb{R}^3$ for $(u,v) \in \mathbb{R}^2$. Write the third coordinate $z(u,v)$ as a function of the first two, $\tilde{z}(x,y)$, and compute $\int_0^y \int_0^x \tilde{z}(x',y') \,dx'\,dy'$.
 
 We have $x(u,v) = u\cos v$ and $y(u,v) = u\sin v$. Then $x^2 + y^2 = u^2\cos^2 v + u^2\sin^2 v = u^2 = z(u,v)$.
-So we define $\tilde{z}(x,y) := x^2 + y^2$.
+So, we define $\tilde{z}(x,y) := x^2 + y^2$.
 The integral is:
 \begin{align}
 \int_0^y \int_0^x (x'^2 + y'^2) \,dx'\,dy'
@@ -158,7 +158,7 @@ This is not easily integrated with Fubini alone. But we can apply a transformati
 to simplify the integration domain $A$: take
 \[\Phi : U \to V, \qquad \begin{pmatrix}x\\y\end{pmatrix} \mapsto
   \begin{pmatrix}u(x,y)\\v(x,y)\end{pmatrix} = \begin{pmatrix}\tfrac{y}{\sqrt x}\\[2pt] xy\end{pmatrix},\]
-with $U$ and $V$ still to be determined --- they must be open.
+with $U$ and $V$ still to be determined, subject only to their being open.
 
 \textbf{Check injectivity.} Suppose, for $x,y,x',y' > 0$,
 \[\text{\textbf{(1)}}\ \ \frac{y}{\sqrt x} = \frac{y'}{\sqrt{x'}},
@@ -166,7 +166,7 @@ with $U$ and $V$ still to be determined --- they must be open.
 From \textbf{(2)}, $\dfrac{x}{x'} = \dfrac{y'}{y}$. Inserting into \textbf{(1)},
 \[\frac{1}{\sqrt x} = \frac{y'}{y}\cdot\frac{1}{\sqrt{x'}} = \frac{x}{x'}\cdot\frac{1}{\sqrt{x'}}
 \quad\Longrightarrow\quad x^{3/2} = (x')^{3/2} \quad\Longrightarrow\quad x = x',\]
-and consequently $\dfrac{y'}{y} = \dfrac{x}{x'} = 1$. So for $U := (0,\infty)^2$ and
+and consequently $\dfrac{y'}{y} = \dfrac{x}{x'} = 1$. So, for $U := (0,\infty)^2$ and
 $V := \Phi(U)$, the map $\Phi$ is a bijection between open sets.
 
 \textbf{Functional determinant.} We calculate $|\det \Jac\Phi|$; if it is strictly positive we
@@ -175,9 +175,9 @@ diffeomorphism. Now
 \[\Jac\Phi(x,y) = \begin{pmatrix} -\dfrac{y}{2\sqrt{x}^{\,3}} & \dfrac{1}{\sqrt x} \\[2ex] y & x \end{pmatrix},\]
 so that
 \[\big|\det \Jac\Phi(x,y)\big| = \left|-\frac32\,\frac{y}{\sqrt x}\right| = \frac32\,\frac{y}{\sqrt x} = \frac32\,u(x,y).\]
-So $\Phi$ is a diffeomorphism and $du\,dv = \tfrac32 u\,dx\,dy$. Furthermore, by design,
+So, $\Phi$ is a diffeomorphism and $du\,dv = \tfrac32 u\,dx\,dy$. Furthermore, by design,
 \[\Phi(A) = (1,2)^2.\]
-So with the change of variables (\cref{thm:change_of_variables}), followed by Fubini
+So, with the change of variables (\cref{thm:change_of_variables}), followed by Fubini
 (\cref{thm:fubini}),
 \[\int_A \frac{y}{\sqrt x}\,dy\,dx
   = \int_{(1,2)^2} u\,\frac{1}{\tfrac32 u}\,du\,dv
@@ -193,6 +193,19 @@ $1 \leq v \leq 2$, so $\Phi$ turns an awkward curvilinear region into a square, 
 does Fubini become available. That the integrand $y/\sqrt x$ is itself $u$, and cancels against
 most of the Jacobian factor, is a bonus of the same choice.
 \end{ainote}
+
+\begin{aiexercise}[An order of integration that cannot be done]
+% Generator: Claude Opus 5 (High)
+\label{ex:ai_order_swap_gaussian}
+Consider
+\[I := \int_0^1\!\!\int_x^1 e^{y^2}\,dy\,dx.\]
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item Explain what goes wrong if one attempts the inner integral as written.
+  \item Describe the region of integration by inequalities, and rewrite $I$ with the two
+    integrations in the opposite order.
+  \item Evaluate $I$.
+\end{enumerate}
+\end{aiexercise}
 
 % Sonnet 5 (Medium)
 We now want to look at a powerful new integration technique using ODEs.

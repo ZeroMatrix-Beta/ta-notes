@@ -6,11 +6,17 @@
 \chapter{Sequences and Convergence}
 \label{ch:sequences}
 
-% Transition: Claude Opus 5 (Medium)
-Open and closed sets describe a space statically: which points sit comfortably inside a set, and
-which sit on its edge. Sequences make the same information dynamic, and in a metric space they
-turn out to characterise both notions. This chapter defines convergence and accumulation points,
-proves that limits are unique, and shows how openness and closedness can be tested with sequences
-alone --- the tool that almost every argument in the following chapters uses.
+% Transition: Claude Opus 5 (High)
+Open and closed sets describe a space statically. They say which points sit comfortably inside a
+set and which sit on its edge, but they say it all at once, with no notion of approach. Sequences
+make the same information dynamic, and in a metric space the two descriptions turn out to be
+equivalent: a set is closed exactly when it catches the limits of its own convergent sequences.
+
+That equivalence is what makes this short chapter worth its own place. Almost every later
+argument that needs to produce a point produces it as a limit, and the sequential criterion is
+what converts that limit back into a statement about open or closed sets. The chapter also
+isolates a fact easy to pass over, namely that convergence depends only on the topology and not
+on the metric generating it, so two visibly different metrics can have exactly the same
+convergent sequences.
 
 \input{content/04-sequences/01-sequences-and-convergence.tex}

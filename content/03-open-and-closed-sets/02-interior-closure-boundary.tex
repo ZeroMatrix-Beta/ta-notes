@@ -8,12 +8,12 @@
 \begin{definition}[Interior, closure, and boundary]
 \label{def:interior_closure_boundary}
 Let $(X,d)$ be a metric space and $A \subseteq X$. The \newterm{interior}
-(\germanterm{Inneres}) of $A$ is
+\germanfor{Inneres} of $A$ is
 \[\operatorname{int}(A) := \{x \in A : \exists\, r>0 \text{ such that } B_r(x) \subseteq A\},\]
-the largest open subset of $X$ contained in $A$. The \newterm{closure} (\germanterm{Abschluss}) of
+the largest open subset of $X$ contained in $A$. The \newterm{closure} \germanfor{Abschluss} of
 $A$ is
 \[\overline{A} := \{x \in X : B_r(x) \cap A \neq \emptyset \text{ for all } r > 0\},\]
-the smallest closed subset of $X$ containing $A$. The \newterm{boundary} (\germanterm{Rand}) of
+the smallest closed subset of $X$ containing $A$. The \newterm{boundary} \germanfor{Rand} of
 $A$ is $\partial A := \overline{A} \setminus \operatorname{int}(A)$.
 \end{definition}
 
@@ -67,7 +67,7 @@ The two constructions are not independent: taking complements swaps them,
 \[X \setminus \operatorname{int}(A) = \overline{X\setminus A},
   \qquad\qquad
   X \setminus \overline{A} = \operatorname{int}(X\setminus A).\]
-Both read off \cref{def:interior_closure_boundary} directly --- $x$ fails to have a ball inside
+Both read off \cref{def:interior_closure_boundary} directly, since $x$ fails to have a ball inside
 $A$ exactly when every ball around $x$ meets $X\setminus A$. In particular $\partial A =
 \partial(X\setminus A)$: a set and its complement share their boundary, which is why the
 boundary of the open disk and of its closed complement are the same circle.
@@ -108,7 +108,7 @@ and deduce $\partial B_r(x) = \{y \in \mathbb{R}^n : d(x,y) = r\}$.
 
 \begin{remark}
 Item \textbf{(b)} of \cref{ex:interior_closure_boundary_more} above is exactly the case $r=1$,
-$x=0$, $n=2$ of this exercise --- worked here for general $x$, $r$ and $n$.
+$x=0$, $n=2$ of this exercise, worked here for general $x$, $r$ and $n$.
 \end{remark}
 
 % Quelle: Jérôme Paschoud/Notizen/Woche 2.1 Metrische Räume.pdf, p. 6

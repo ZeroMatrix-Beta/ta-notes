@@ -27,42 +27,65 @@ where $\tau$ is the unit tangent vector to the boundary $\partial\Omega$ oriente
 
 \begin{ainote}
 % Supplement: Sascha Brack/Class Notes/Week_10_Notes_Monday.pdf, p. 16
+% Redrawn 2026-08-09 (Opus 5, high). Five faults in the version it replaces:
+%   * THE MATHEMATICAL ONE. Both blue arrows on the shared edge were backwards. Traversed
+%     counterclockwise, the left cell's right edge runs UP and the right cell's left edge runs
+%     DOWN. The figure drew the downward arrow at x = -0.05, on the left cell's side, and the
+%     upward one at x = +0.05, on the right cell's side, so each cell's shared edge contradicted
+%     that cell's own orientation. Since the pair is still antiparallel the picture appeared to
+%     cancel, which is why this survived: the cancellation is the conclusion, but which arrow
+%     belongs to which cell is the reason for it, and that was the part reversed.
+%   * Every direction arrow was a degenerate segment of length 0.01, e.g.
+%     `(-0.25,1.0) -- (-0.26,1.0)`, drawn only to hang an arrowhead on. At scale 1.5 that is
+%     0.015cm, so they rendered as malformed barbs, and the two blue ones, 0.1 apart, merged
+%     into one unreadable blob.
+%   * The picture set no `>=Latex`, alone among the Part VII figures.
+%   * The domain circle was drawn twice, black underneath and red arcs on top, leaving a black
+%     fringe along the boundary.
+%   * `cancels` and `out` were two nodes at two unrelated positions, so they read as two
+%     separate labels, and the leader landed on a cell corner rather than on the shared edge.
+% The interior circulations are now drawn with a 30-degree gap, which is what makes their sense
+% of rotation legible at this size, and they run counterclockwise like the boundary --- the
+% agreement is the whole content of the picture.
 \begin{center}
-\begin{tikzpicture}[scale=1.5]
-  % Domain
-  \draw[ultra thick] (0,0) circle (1.5);
-  % Boundary orientation
-  \draw[red, ultra thick, ->] (1.5,0) arc (0:90:1.5);
-  \draw[red, ultra thick, ->] (0,1.5) arc (90:180:1.5);
-  \draw[red, ultra thick, ->] (-1.5,0) arc (180:270:1.5);
-  \draw[red, ultra thick, ->] (0,-1.5) arc (270:360:1.5);
-  
-  \node[red, align=left] at (1.5, 1.8) {boundary\\is left over};
-  \draw[red, ->] (1.0, 1.7) to[out=180, in=90] (0, 1.55);
-  
-  % Internal rotations
-  \foreach \x/\y in {-0.6/-0.3, 0.4/-0.4, -0.2/0.1, 0.8/-0.8} {
-    \draw[red, thick, ->] (\x,\y) arc (0:360:0.2);
+\begin{tikzpicture}[>=Latex, scale=1.5]
+  % The domain, oriented counterclockwise as the theorem requires.
+  \draw[red, ultra thick] (0,0) circle (1.5);
+  \foreach \a in {45,135,225,315} {
+    \draw[red, ultra thick, ->] ({1.5*cos(\a-7)},{1.5*sin(\a-7)}) arc (\a-7:\a+7:1.5);
   }
-  
-  % Two cancelling squares
-  \draw[red, thick] (-0.5, 0.6) rectangle (0, 1.0);
-  \draw[red, thick] (0, 0.6) rectangle (0.5, 1.0);
-  % arrows
-  \draw[red, thick, ->] (-0.25, 1.0) -- (-0.26, 1.0);
-  \draw[red, thick, ->] (0.25, 1.0) -- (0.24, 1.0);
-  \draw[red, thick, ->] (-0.5, 0.8) -- (-0.5, 0.79);
-  \draw[red, thick, ->] (0.5, 0.8) -- (0.5, 0.81);
-  \draw[red, thick, ->] (-0.25, 0.6) -- (-0.24, 0.6);
-  \draw[red, thick, ->] (0.25, 0.6) -- (0.26, 0.6);
-  
-  \draw[blue, thick, ->] (-0.05, 0.8) -- (-0.05, 0.7);
-  \draw[blue, thick, ->] (0.05, 0.7) -- (0.05, 0.8);
-  
-  \node[purple] at (0.4, 1.2) {cancels};
-  \node[purple] at (0.8, 0.8) {out};
-  \draw[purple, ->] (0.2, 1.1) to[out=180, in=90] (0, 0.9);
-  
+  \node[red, align=left, font=\small] at (1.55,1.75) {boundary\\is left over};
+  \draw[red, ->] (0.98,1.56) to[out=205, in=75] (0.44,1.43);
+
+  % Interior circulations, counterclockwise like the boundary. Each is a 330-degree arc centred
+  % on (\x,\y): it starts at 120 degrees, at (\x-0.1, \y+0.1732), and ends at 450 = 90 degrees,
+  % i.e. at the TOP of the circle, where the counterclockwise tangent is exactly (-1,0). Putting
+  % the head there and nowhere else is deliberate: a horizontal arrowhead is unambiguous at this
+  % size, and it lets the reader compare it directly against the boundary arrowheads, which is
+  % the whole content of the picture. An earlier version ended the arc at 330 degrees, where the
+  % head sits at 5 o'clock at a slant and the sense of rotation cannot be read off at all.
+  \foreach \x/\y in {-0.6/-0.3, 0.4/-0.4, -0.15/-0.75, 0.8/-0.8} {
+    \draw[red, thick, ->] ({\x+0.2*cos(120)},{\y+0.2*sin(120)}) arc (120:450:0.2);
+  }
+
+  % Two adjacent cells, each traversed counterclockwise.
+  \draw[red, thick] (-0.75,0.55) rectangle (-0.25,0.95);
+  \draw[red, thick] (-0.25,0.55) rectangle (0.25,0.95);
+  % The left cell's outer edges.
+  \draw[red, thick, ->] (-0.59,0.55) -- (-0.41,0.55);
+  \draw[red, thick, ->] (-0.41,0.95) -- (-0.59,0.95);
+  \draw[red, thick, ->] (-0.75,0.84) -- (-0.75,0.66);
+  % The right cell's outer edges.
+  \draw[red, thick, ->] (-0.09,0.55) -- (0.09,0.55);
+  \draw[red, thick, ->] (0.09,0.95) -- (-0.09,0.95);
+  \draw[red, thick, ->] (0.25,0.66) -- (0.25,0.84);
+  % The shared edge: up for the left cell, down for the right one.
+  \draw[blue, thick, ->] (-0.34,0.63) -- (-0.34,0.87);
+  \draw[blue, thick, ->] (-0.16,0.87) -- (-0.16,0.63);
+
+  \node[purple, font=\scriptsize, align=center] at (0.45,0.14)
+    {these cancel\\on the shared edge};
+  \draw[purple, ->] (-0.25,0.30) -- (-0.25,0.52);
 \end{tikzpicture}
 \end{center}
 We integrate the rotation inside the domain. Basically all the \qt{intermediate values} cancel out because for two points close to each other, the rotation points in opposite directions. Only the boundary is left over in the end!
@@ -126,7 +149,7 @@ gives three different answers:
 \[\int_{\gamma_0}F\cdot d\gamma_0 = \int_0^1\langle(-t,t),(1,1)\rangle\,dt = 0, \qquad
   \int_{\gamma_1}F\cdot d\gamma_1 = 1, \qquad \int_{\gamma_2}F\cdot d\gamma_2 = -1.\]
 Moving \emph{perpendicular} to $F$ costs no work, moving \emph{with} $F$ does positive work, and
-moving \emph{against} $F$ does negative work --- and since the three paths share endpoints but
+moving \emph{against} $F$ does negative work. Since the three paths share endpoints but
 disagree on the work done, $F$ cannot be conservative (\cref{def:conservative_field} below):
 \Cref{prop:work_difference_potential} would otherwise force all three integrals to agree.
 \end{example}

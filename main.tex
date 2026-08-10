@@ -82,20 +82,28 @@
 \colorlet{EnvAINote}{GoldOrange}
 
 % --- Proofs ---
-\colorlet{ProofTint}{OliveGreen}
+\definecolor{ThemeGreen}{HTML}{008837}
+% \colorlet{ProofTint}{OliveGreen}
+\colorlet{ProofTint}{ThemeGreen}
 \colorlet{ProofQEDText}{ProofTint}
 \colorlet{ProofQEDBg}{white}
 
 % --- Running text ---
-\colorlet{TextEmphColor}{MidnightBlue}
-\colorlet{TextBoldColor}{Brown!80!black}   % Espresso brown
+% \colorlet{TextEmphColor}{MidnightBlue}
+\definecolor{EmphBlue}{HTML}{008CC8}
+\colorlet{TextEmphColor}{EmphBlue}
+% \colorlet{TextBoldColor}{Brown!80!black}   % Espresso brown
+\definecolor{TextBoldColor}{HTML}{A8651E}    % Warm Bronze Brown
 \colorlet{TextMetaNote}{Gray}
 \colorlet{LinkColor}{MidnightBlue}
 \colorlet{FileColor}{Magenta}
 
 % --- Lists ---
-\colorlet{ItemizeBullet}{BurntOrange}
-\colorlet{EnumerateBullet}{MidnightBlue}
+% \colorlet{ItemizeBullet}{BurntOrange}
+% \colorlet{EnumerateBullet}{MidnightBlue}
+\definecolor{ListAmber}{HTML}{BD2400}
+\colorlet{ItemizeBullet}{ListAmber}
+\colorlet{EnumerateBullet}{ListAmber}
 
 % --- Headings ---
 \colorlet{PartTitleText}{ThemePurple!95!black}
@@ -179,15 +187,24 @@
   \setlength{\belowdisplayshortskip}{0.8\customparskip plus 0.2ex minus 0.1ex}
 }
 
-% Macro for omitted content (kept for future use if needed)
-\newcommand{\omitted}[1]{\textcolor{red}{#1}}
+% RETIRED 2026-08-09: \omitted{...}, a red-text macro from a dead error-flagging convention.
+% It was marked "kept for future use if needed" and had zero uses in content/. Errors are
+% flagged in an `ainote`, which is the whole system; see style.md.
 
 % Custom commands for italicized terminology and "quotes".
 % \newterm    -> English quotes ``...''   (the default; this is an English text)
-% \germanterm -> German quotes  \glqq...\grqq  for German technical terms
-\newcommand{\newterm}[1]{\textcolor{BrickRed}{``}\textcolor{TextBoldColor}{\textit{#1}}\textcolor{BrickRed}{''}}
-\newcommand{\germanterm}[1]{\textcolor{BrickRed}{\glqq}\textcolor{TextBoldColor}{\textit{#1}}\textcolor{BrickRed}{\grqq}}
-\newcommand{\qt}[1]{\textit{\textcolor{BrickRed}{``}#1\textcolor{BrickRed}{''}}}
+% \germanterm -> German quotes  \glqq...\grqq  for a German word MENTIONED in a sentence,
+%                where the word itself is the subject: \germanterm{Abschluss} is the closure.
+% \germanfor  -> the MIRRORING form, for giving the German of an English term just introduced:
+%                a \newterm{compact} set \germanfor{kompakte Menge}
+%                prints  a "compact" set (German: \glqq kompakte Menge\grqq).
+%                It carries its own parentheses, so do NOT wrap it in a literal pair --- that
+%                was the old \germanterm convention and it is what this macro replaces.
+\definecolor{QuoteRed}{HTML}{BD2400}
+\newcommand{\newterm}[1]{\textcolor{QuoteRed}{``}\textcolor{TextBoldColor}{\textit{#1}}\textcolor{QuoteRed}{''}}
+\newcommand{\germanterm}[1]{\textcolor{QuoteRed}{\glqq}\textcolor{TextBoldColor}{\textit{#1}}\textcolor{QuoteRed}{\grqq}}
+\newcommand{\germanfor}[1]{(German:\ \germanterm{#1})}
+\newcommand{\qt}[1]{\textit{\textcolor{QuoteRed}{``}#1\textcolor{QuoteRed}{''}}}
 \newcommand{\inlinemetanote}[1]{\textit{[\textcolor{TextMetaNote}{#1}]}}
 \newcommand{\hint}[1]{\textcolor{OliveGreen}{\textbf{Hint:}} #1}
 
@@ -386,56 +403,57 @@
 % ==========================================
 % THEOREM CONFIGURATION
 % ==========================================
+% 1. Theorems, Lemmata, Propositions, Corollaries, Claims (\faGem)
 \newtheoremstyle{purplethm}%
 {\customenvspace}{\customenvspace}{\normalfont}{}{\color{EnvTheorem}\sffamily\bfseries}{:}{0.5em}%
-% NB: the space before the number lives in \thmnumber, not in \thmname -- otherwise
-% unnumbered environments (\newtheorem*) would emit a stray space before the note
-% or before the colon ("Remark  (...)", "Important remark :").
-{\thmname{\textcolor{EnvTheorem}{\sffamily\bfseries#1}}\thmnumber{\sffamily\bfseries\ #2}%
+{\textcolor{EnvTheorem}{\faGem}\hspace{0.4em}%
+ \thmname{\textcolor{EnvTheorem}{\sffamily\bfseries#1}}\thmnumber{\sffamily\bfseries\ #2}%
+ \thmnote{\ \textcolor{EnvTheorem}{\bfseries(}{\normalfont\sffamily\itshape#3}\textcolor{EnvTheorem}{\bfseries)}}}
+
+% 2. Definitions (\faBookOpen)
+\newtheoremstyle{defthm}%
+{\customenvspace}{\customenvspace}{\normalfont}{}{\color{EnvTheorem}\sffamily\bfseries}{:}{0.5em}%
+{\textcolor{EnvTheorem}{\faBookOpen}\hspace{0.4em}%
+ \thmname{\textcolor{EnvTheorem}{\sffamily\bfseries#1}}\thmnumber{\sffamily\bfseries\ #2}%
+ \thmnote{\ \textcolor{EnvTheorem}{\bfseries(}{\normalfont\sffamily\itshape#3}\textcolor{EnvTheorem}{\bfseries)}}}
+
+% 3. Questions & Answers (\faQuestionCircle)
+\newtheoremstyle{questionthm}%
+{\customenvspace}{\customenvspace}{\normalfont}{}{\color{MidnightBlue}\sffamily\bfseries}{:}{0.5em}%
+{\textcolor{MidnightBlue}{\faQuestionCircle}\hspace{0.4em}%
+ \thmname{\textcolor{MidnightBlue}{\sffamily\bfseries#1}}\thmnumber{\sffamily\bfseries\ #2}%
+ \thmnote{\ \textcolor{MidnightBlue}{\bfseries(}{\normalfont\sffamily\itshape#3}\textcolor{MidnightBlue}{\bfseries)}}}
+
+% 4. Remarks & Notes (\faInfoCircle)
+\newtheoremstyle{remarkthm}%
+{\customenvspace}{\customenvspace}{\normalfont}{}{\color{ThemeGreen}\sffamily\bfseries}{:}{0.5em}%
+{\textcolor{ThemeGreen}{\faInfoCircle}\hspace{0.4em}%
+ \thmname{\textcolor{ThemeGreen}{\sffamily\bfseries#1}}\thmnumber{\sffamily\bfseries\ #2}%
+ \thmnote{\ \textcolor{ThemeGreen}{\bfseries(}{\normalfont\sffamily\itshape#3}\textcolor{ThemeGreen}{\bfseries)}}}
+
+% 5. Examples & Exercises (\faLightbulb)
+\newtheoremstyle{examplethm}%
+{\customenvspace}{\customenvspace}{\normalfont}{}{\color{EnvTheorem}\sffamily\bfseries}{:}{0.5em}%
+{\textcolor{EnvTheorem}{\faLightbulb}\hspace{0.4em}%
+ \thmname{\textcolor{EnvTheorem}{\sffamily\bfseries#1}}\thmnumber{\sffamily\bfseries\ #2}%
  \thmnote{\ \textcolor{EnvTheorem}{\bfseries(}{\normalfont\sffamily\itshape#3}\textcolor{EnvTheorem}{\bfseries)}}}
 
 \theoremstyle{purplethm}
 
-% NB: deliberately NOT \newtheorem{theorem}{Theorem}[section]. The counter resets per
-% *chapter* (see \@addtoreset below) and the printed number is built by hand in
-% \thetheorem, which appends the section letter. An automatic per-section reset would
-% restart the arabic part inside a chapter and print e.g. "6.a.1", "6.b.1", "6.c.1"
-% instead of a single run 6.a.1 ... 6.c.17.
-%
-% This comment used to say that each content file hard-codes its own \thetheorem prefix to
-% stay in step with "Prof. Biran's handwritten notes". That was imported wholesale from a
-% different repository (a linear-algebra project) and never described this document: no
-% file here overrides \thetheorem, and none should -- doing so would nail a wrong chapter
-% number into a topic that has since moved chapters more than once.
 \newtheorem{theorem}{Theorem}
 
-% The decoupled theorem display format: Chapter.letter.Number
-% Robust against chapters that jump straight to \subsection (i.e. no \section at
-% all): in that case the section letter is simply omitted -> "Chapter.Number".
 \renewcommand{\thetheorem}{%
   \thechapter.\ifnum\value{section}>0 \alph{section}.\fi\arabic{theorem}}
 
-% hyperref builds its anchor names from \theH<counter>, NOT from \the<counter>.
-% Its default for a counter reset by `section' omits the chapter, so e.g. the
-% first theorem of every section of every chapter would claim the anchor
-% `theorem.<n>.1' -- the duplicates get dropped and \cref links silently jump to
-% the wrong environment. Mirroring the printed number keeps the anchors unique.
-% (\AtBeginDocument: hyperref installs its own defaults late, so a plain
-% \renewcommand here would simply be overwritten.)
 \makeatletter
 \AtBeginDocument{%
   \renewcommand{\theHtheorem}{\thechapter.\alph{section}.\arabic{theorem}}%
   \renewcommand{\theHequation}{\thechapter.\alph{section}.\arabic{equation}}%
-  % The aliased counters below need the same treatment, and must point at the
-  % *same* anchor as \theHtheorem -- they are one counter under many names.
   \@namedef{theHlemma}{\theHtheorem}%
   \@namedef{theHcorollary}{\theHtheorem}%
   \@namedef{theHdefinition}{\theHtheorem}%
   \@namedef{theHproposition}{\theHtheorem}%
   \@namedef{theHexercise}{\theHtheorem}%
-  % Sonnet 5 (Medium): every formerly-unnumbered environment below is now
-  % aliased to the theorem counter too (see "NUMBERED ENVIRONMENTS, continued"),
-  % so it needs the same anchor treatment as lemma/corollary/... above.
   \@namedef{theHclaim}{\theHtheorem}%
   \@namedef{theHnotation}{\theHtheorem}%
   \@namedef{theHremark}{\theHtheorem}%
@@ -447,14 +465,11 @@
   \@namedef{theHimportantremark}{\theHtheorem}%
   \@namedef{theHgoals}{\theHtheorem}%
   \@namedef{theHconclusion}{\theHtheorem}%
-  % (no theHainote: ainote is unnumbered, see its \newtheorem* below)
   \@namedef{theHaiexample}{\theHtheorem}%
   \@namedef{theHaiexercise}{\theHtheorem}%
 }
 \makeatother
 
-% Reset the theorem counter at every chapter too, not only at every section --
-% otherwise a section-less chapter would keep counting from the previous one.
 \makeatletter
 \@addtoreset{theorem}{chapter}
 \makeatother
@@ -462,18 +477,7 @@
 \setcounter{MaxMatrixCols}{20}
 
 % --- NUMBERED ENVIRONMENTS ---
-% NB: deliberately NOT \newtheorem{lemma}[theorem]{Lemma}.
-% That form makes `lemma' share the *counter named* `theorem', and cleveref
-% derives a reference's type from the counter name -- so every \cref to a
-% lemma, corollary, definition or proposition printed "Theorem". Only 52 of the
-% ~290 numbered environments in this document are actually theorems, so almost
-% every cross-reference was mislabelled.
-%
-% aliascnt gives each environment a counter of its own name that is merely an
-% alias of `theorem'. The shared, continuous numbering is preserved exactly
-% (\thelemma expands to \thetheorem, dynamically, so the per-file
-% \renewcommand{\thetheorem} prefixes still apply), but cleveref can now tell
-% the environments apart.
+\theoremstyle{purplethm}
 \newaliascnt{lemma}{theorem}
 \newtheorem{lemma}[lemma]{Lemma}
 \aliascntresetthe{lemma}
@@ -482,35 +486,50 @@
 \newtheorem{corollary}[corollary]{Corollary}
 \aliascntresetthe{corollary}
 
-\newaliascnt{definition}{theorem}
-\newtheorem{definition}[definition]{Definition}
-\aliascntresetthe{definition}
-
 \newaliascnt{proposition}{theorem}
 \newtheorem{proposition}[proposition]{Proposition}
 \aliascntresetthe{proposition}
 
-\newaliascnt{exercise}{theorem}
-\newtheorem{exercise}[exercise]{Exercise}
-\aliascntresetthe{exercise}
-
-% --- NUMBERED ENVIRONMENTS, continued ---
-% Sonnet 5 (Medium): this project wants every environment numbered, so that
-% cleveref/\cref can identify and cross-reference every instance -- an
-% environment created with \newtheorem* has NO counter at all, so a \label
-% placed inside one is silently attributed to whatever ambient counter (e.g.
-% the enclosing subsection) was last stepped, producing wrong \cref output
-% (e.g. "Section 2.d.4" instead of "AI-Exercise 2.d.13"). Every environment
-% below therefore follows the same \newaliascnt pattern as lemma/corollary/
-% definition/proposition/exercise above, so it shares the single running
-% Chapter.Section.N sequence and cleveref can tell it apart by name. The
-% starred (theorem*, lemma*, ...) escape-hatch environments are removed
-% entirely, since they were unused (grep across content/*.tex) and are now
-% redundant with their numbered counterparts.
 \newaliascnt{claim}{theorem}
 \newtheorem{claim}[claim]{Claim}
 \aliascntresetthe{claim}
 
+\theoremstyle{defthm}
+\newaliascnt{definition}{theorem}
+\newtheorem{definition}[definition]{Definition}
+\aliascntresetthe{definition}
+
+\theoremstyle{examplethm}
+\newaliascnt{exercise}{theorem}
+\newtheorem{exercise}[exercise]{Exercise}
+\aliascntresetthe{exercise}
+
+\newaliascnt{example}{theorem}
+\newtheorem{example}[example]{Example}
+\aliascntresetthe{example}
+
+\newaliascnt{warmup}{theorem}
+\newtheorem{warmup}[warmup]{Warm up}
+\aliascntresetthe{warmup}
+
+\newaliascnt{aiexample}{theorem}
+\newtheorem{aiexample}[aiexample]{AI-Example}
+\aliascntresetthe{aiexample}
+
+\newaliascnt{aiexercise}{theorem}
+\newtheorem{aiexercise}[aiexercise]{AI-Exercise}
+\aliascntresetthe{aiexercise}
+
+\theoremstyle{questionthm}
+\newaliascnt{question}{theorem}
+\newtheorem{question}[question]{Question}
+\aliascntresetthe{question}
+
+\newaliascnt{answer}{theorem}
+\newtheorem{answer}[answer]{Answer}
+\aliascntresetthe{answer}
+
+\theoremstyle{remarkthm}
 \newaliascnt{notation}{theorem}
 \newtheorem{notation}[notation]{Notation}
 \aliascntresetthe{notation}
@@ -519,25 +538,9 @@
 \newtheorem{remark}[remark]{Remark}
 \aliascntresetthe{remark}
 
-\newaliascnt{example}{theorem}
-\newtheorem{example}[example]{Example}
-\aliascntresetthe{example}
-
 \newaliascnt{summary}{theorem}
 \newtheorem{summary}[summary]{Summary}
 \aliascntresetthe{summary}
-
-\newaliascnt{warmup}{theorem}
-\newtheorem{warmup}[warmup]{Warm up}
-\aliascntresetthe{warmup}
-
-\newaliascnt{question}{theorem}
-\newtheorem{question}[question]{Question}
-\aliascntresetthe{question}
-
-\newaliascnt{answer}{theorem}
-\newtheorem{answer}[answer]{Answer}
-\aliascntresetthe{answer}
 
 \newaliascnt{importantremark}{theorem}
 \newtheorem{importantremark}[importantremark]{Important remark}
@@ -553,29 +556,12 @@
 
 \newtheoremstyle{ainotethm}%
 {\customenvspace}{\customenvspace}{\normalfont}{}{\color{EnvAINote}\sffamily\bfseries}{:}{0.5em}%
-{\thmname{\textcolor{EnvAINote}{\sffamily\bfseries#1}}\thmnumber{\sffamily\bfseries\ #2}%
+{\textcolor{EnvAINote}{\faRobot}\hspace{0.4em}%
+ \thmname{\textcolor{EnvAINote}{\sffamily\bfseries#1}}\thmnumber{\sffamily\bfseries\ #2}%
  \thmnote{\ \textcolor{EnvAINote}{\bfseries(}{\normalfont\sffamily\itshape#3}\textcolor{EnvAINote}{\bfseries)}}}
 
 \theoremstyle{ainotethm}
-% ainote is the ONE deliberately unnumbered environment in this document.
-% The project-wide "everything is numbered" rule exists because a \label inside an
-% unnumbered environment is silently misattributed by cleveref to the last-stepped
-% ambient counter. That hazard needs a \label to bite, and an ainote never carries
-% one: an AI-Note is editorial commentary about the transcription, never a result
-% anyone cites. Numbering them only inflated the shared theorem counter, so that
-% e.g. a Lemma 2.f.43 was followed by Definition 2.f.46 with two AI-Notes in
-% between. Consequently there is no \theHainote entry and no \crefname either.
-% If you ever need to \label one, it is content, not commentary -- make it a
-% remark (see the semantics section in gemini.md).
-\newtheorem*{ainote}{AI-Note}
-
-\newaliascnt{aiexample}{theorem}
-\newtheorem{aiexample}[aiexample]{AI-Example}
-\aliascntresetthe{aiexample}
-
-\newaliascnt{aiexercise}{theorem}
-\newtheorem{aiexercise}[aiexercise]{AI-Exercise}
-\aliascntresetthe{aiexercise}
+\newtheorem{ainote}{AI-Note}[chapter]
 \theoremstyle{purplethm}
 
 % ==========================================
@@ -631,23 +617,26 @@
 \Crefname{goals}{Goals}{Goals}
 \crefname{conclusion}{Conclusion}{Conclusions}
 \Crefname{conclusion}{Conclusion}{Conclusions}
-% No \crefname for ainote: it is unnumbered by design and carries no counter,
-% so it cannot (and should not) be cross-referenced. See the note at its \newtheorem*.
+\crefname{ainote}{AI-Note}{AI-Notes}
+\Crefname{ainote}{AI-Note}{AI-Notes}
 \crefname{aiexample}{AI-Example}{AI-Examples}
 \Crefname{aiexample}{AI-Example}{AI-Examples}
 \crefname{aiexercise}{AI-Exercise}{AI-Exercises}
 \Crefname{aiexercise}{AI-Exercise}{AI-Exercises}
 
 % ==========================================
-% PROOF ENVIRONMENT (olive green, upright, standard text Q.E.D.)
+% PROOF ENVIRONMENT (with pen nib icon & shadowed Q.E.D. box)
 % ==========================================
-\newcommand{\qedbox}{\textcolor{ProofTint}{\sffamily\bfseries Q.E.D.}}
+\newcommand{\qedbox}{%
+  \tikz[baseline=(Q.base)]\node[draw=ProofTint, fill=ProofQEDBg, line width=1pt, rounded corners=2pt, inner xsep=4pt, inner ysep=2pt, font=\sffamily\bfseries\small, text=ProofQEDText, drop shadow={shadow xshift=0.5ex, shadow yshift=-0.5ex, fill=ProofTint, opacity=0.4}] (Q) {Q.E.D.};%
+}
 \renewcommand{\qedsymbol}{\qedbox}
 
 \makeatletter
 \renewenvironment{proof}[1][\proofname]{%
   \par\if@nobreak\vspace{-1ex}\else\addvspace{2.2ex plus 0.5ex minus 0.2ex}\fi
-  \noindent{\normalfont\sffamily\bfseries\color{ProofTint}#1:}%
+  \noindent\textcolor{ProofTint}{\faPenNib}\hspace{0.5em}%
+  {\normalfont\sffamily\bfseries\color{ProofTint}#1:}%
   \par\nobreak\vspace{0.8ex plus .1ex}\vspace{-\parskip}
   \@afterindentfalse\@afterheading
 }{%
@@ -681,19 +670,11 @@
 %
 % Do not reinstate these without reinstating the week structure -- see gemini.md.
 
-% ==========================================
-% FIGURE STUB (placeholder box until the dedicated TikZ pass, step 5)
-% ==========================================
-% Usage: \begin{figurestub}{FIG-W02-01} description text \end{figurestub}
-% Renders the drawing spec inline so the document compiles now; a later pass
-% replaces each box with a real tikzpicture without touching content/*.tex prose.
-\newtcolorbox{figurestub}[1]{
-  enhanced, breakable, arc=2pt, boxrule=0.4pt,
-  colback=Gray!5, colframe=Gray!50!black,
-  fonttitle=\sffamily\bfseries\small,
-  coltitle=black, colbacktitle=Gray!20,
-  title={Figure stub --- #1}
-}
+% RETIRED 2026-08-09: \begin{figurestub}{FIG-W02-01} ... \end{figurestub}, a grey placeholder
+% box that carried a drawing spec until the figure behind it was drawn. Every figure is now
+% drawn and render-checked, the environment had zero uses left in content/, and leaving a
+% placeholder mechanism defined invites new placeholders. Do not reinstate it: a figure that
+% cannot be drawn yet does not go into the document at all.
 
 % --- MATH OPERATORS ---
 \newcommand{\M}{\mathcal{M}}
@@ -867,12 +848,17 @@
 
 \part{Foundations}
 
-% Generator: Claude Sonnet 5 (High) --- part-level framing prose, new content, not tied to any
-% tutor source.
-This short part collects what the rest of the course leans on from \emph{Analysis I}, together
-with a few habits of visualization used throughout: how to picture sets and functions of several
-variables, and Young's inequality, whose role stays invisible until norms and inner products
-enter in the next part.
+% Generator: Claude Opus 5 (High) --- part-level framing prose, new content, not tied to any
+% tutor source. Rewritten 2026-08-09 in the fuller register style.md now prescribes for \part.
+\emph{Analysis II} begins where \emph{Analysis I} stopped, and the first thing to settle is how
+much of it carries over. The definitions of convergence, of continuity, and of a set being open
+survive the move to several variables essentially verbatim. What does not survive is every
+statement that quietly used the ordering of $\mathbb{R}$, and each of those has to be rebuilt on
+a new hypothesis. This part draws that line, fixes the notation for $\mathbb{R}^n$, and rehearses
+two habits used constantly later on: sketching a subset of $\mathbb{R}^n$ from the inequalities
+defining it, and reading a function of two variables off its level sets. It also proves Young's
+inequality, which looks like an isolated exercise here and turns out to be the engine behind the
+Hölder and Minkowski inequalities in the next part.
 
 \input{content/01-prerequisites/00-chapter.tex}
 
@@ -882,13 +868,16 @@ enter in the next part.
 % Lipschitz map with constant < 1.
 \part{Metric Spaces and Topology}
 
-% Generator: Claude Sonnet 5 (High) --- part-level framing prose, new content.
-Ordinary calculus on $\mathbb{R}^n$ depends on very little about $\mathbb{R}^n$ itself --- only
-that it carries a notion of distance. This part abstracts that notion into a metric space and
-develops the topological vocabulary (open, closed, compact, connected) needed to make sense of
-convergence and continuity in a setting general enough to include function spaces alongside
-$\mathbb{R}^n$. Completeness and compactness, in particular, are the two finiteness-type
-properties that almost every existence argument later in the course quietly leans on.
+% Generator: Claude Opus 5 (High) --- part-level framing prose, new content.
+Very little of one-variable analysis actually used the arithmetic of $\mathbb{R}$. Convergence,
+continuity and compactness need only a notion of distance, and this part takes that observation
+seriously by developing all three for an arbitrary metric space. The payoff is not generality for
+its own sake. Function spaces such as $C^0([0,1],\mathbb{R})$ are metric spaces too, so once the
+theory is stated at this level, the same arguments apply to a sequence of functions and to a
+sequence of points alike. Two properties do most of the work: completeness, which guarantees that
+a limit one has constructed actually exists, and compactness, which allows an infinite problem to
+be replaced by a finite one. Almost every existence proof in the remaining five parts leans on
+one of them.
 
 \input{content/02-metric-normed-inner-product/00-chapter.tex}
 \input{content/03-open-and-closed-sets/00-chapter.tex}
@@ -900,12 +889,15 @@ properties that almost every existence argument later in the course quietly lean
 
 \part{Differential Calculus}
 
-% Generator: Claude Sonnet 5 (High) --- part-level framing prose, new content.
-With a topology in hand, this part extends differentiation from one variable to several: the
-differential as a linear approximation, the chain rule along paths and through compositions, and
-Taylor's theorem as the systematic way to improve that approximation order by order. Almost
-everything from here on --- optimization, the inverse and implicit function theorems, vector
-calculus --- is built on the single definition of differentiability given at the start of it.
+% Generator: Claude Opus 5 (High) --- part-level framing prose, new content.
+In one variable the derivative is a number, which makes it tempting to expect the several-variable
+derivative to be a list of numbers. It is not. The right object is a linear map, the one that best
+approximates $f$ near a point, and the partial derivatives are merely its matrix in the standard
+basis. Getting this order of ideas right is what turns the chain rule into a statement about
+composing linear maps rather than a formula to be memorised. This part sets up that differential,
+works out how to compute with it, and closes with Taylor's theorem, which sharpens the linear
+approximation to any order and supplies the quantitative estimates the optimization theory of the
+next part runs on.
 
 \input{content/09-differential/00-chapter.tex}
 \input{content/10-chain-rule/00-chapter.tex}
@@ -913,12 +905,15 @@ calculus --- is built on the single definition of differentiability given at the
 
 \part{Optimization and Convexity}
 
-% Generator: Claude Sonnet 5 (High) --- part-level framing prose, new content.
-Differentiability turns the search for extrema into algebra: unconstrained critical points are
-found by setting a gradient to zero, and classified by the sign of a Hessian. This part builds
-that machinery, extends it to extrema constrained to a level set via Lagrange multipliers, and
-closes with convexity --- the one hypothesis under which a critical point is automatically a
-\emph{global} extremum, not merely a candidate that still needs checking.
+% Generator: Claude Opus 5 (High) --- part-level framing prose, new content.
+Differentiability turns the search for extrema into algebra. An interior extremum forces the
+gradient to vanish, so the candidates can be found by solving equations, and the sign behaviour of
+the Hessian then decides which kind of point each candidate is. Two complications occupy the rest
+of the part. When the variables are constrained to a level set, the gradient need not vanish at an
+extremum at all, and the method of Lagrange multipliers says what condition replaces it. When the
+Hessian test comes out inconclusive, or when the question asked is global rather than local,
+convexity is the hypothesis that settles it: for a convex function a critical point is not a
+candidate but an answer.
 
 \input{content/12-extrema-hessian/00-chapter.tex}
 \input{content/13-lagrange/00-chapter.tex}
@@ -926,13 +921,16 @@ closes with convexity --- the one hypothesis under which a critical point is aut
 
 \part{Inverse and Implicit Functions; Submanifolds}
 
-% Generator: Claude Sonnet 5 (High) --- part-level framing prose, new content.
-Two questions drive this part: when can an equation be solved locally for one variable in terms
-of the others (the implicit function theorem), and when is a map locally invertible (its close
-relative, the inverse function theorem)? Both answers hinge on the same linear-algebra
-hypothesis --- invertibility of a Jacobian --- and both feed directly into the definition of a
-submanifold: a set that locally looks like $\mathbb{R}^m$ sitting inside $\mathbb{R}^n$, which is
-exactly the kind of object the rest of the course learns to integrate over.
+% Generator: Claude Opus 5 (High) --- part-level framing prose, new content.
+Two questions run through this part. When can an equation $f(x,y) = 0$ be solved for $y$ as a
+function of $x$, and when is a map invertible near a point? Neither has a workable global answer,
+but both have clean local ones, and both reduce to the same linear-algebra hypothesis:
+invertibility of a Jacobian. That is the content of the implicit and inverse function theorems,
+which turn out to be equivalent to each other and are proved here from the contraction principle
+of Part II. Their deeper use is definitional. A level set on which the differential is surjective
+is locally a graph, and being locally a graph is precisely what it means to be a submanifold, a
+subset of $\mathbb{R}^n$ that looks like $\mathbb{R}^m$ from close up. The closing chapters
+develop that notion, since submanifolds are the objects the last two parts integrate over.
 
 \input{content/15-inverse-function-theorem/00-chapter.tex}
 \input{content/16-implicit-function-theorem/00-chapter.tex}
@@ -941,12 +939,16 @@ exactly the kind of object the rest of the course learns to integrate over.
 
 \part{Integration}
 
-% Generator: Claude Sonnet 5 (High) --- part-level framing prose, new content.
-Having spent several parts differentiating, the course now turns to integration in several
-variables. Jordan measure gives a rigorous notion of volume; the change of variables formula
-generalizes substitution; and the Gram determinant measures how much a parametrization distorts
-area or volume --- the tool that makes integrating over a curved submanifold, rather than a flat
-region of $\mathbb{R}^n$, meaningful.
+% Generator: Claude Opus 5 (High) --- part-level framing prose, new content.
+Integration in several variables raises a question that one variable never had to face. Before
+asking what $\int_A f$ is, one has to say which sets $A$ possess a volume at all, and Jordan
+measure is the answer this course uses. With that settled, Fubini's theorem reduces a multiple
+integral to iterated one-dimensional ones, and substitution generalizes to the change of variables
+formula, in which the factor that appears is $\lvert\det \Jac\phi\rvert$, the local volume
+distortion of the substitution. The final chapter leaves flat regions behind altogether. The Gram
+determinant measures how much a parametrization stretches length, area or volume, and with it one
+can integrate over a curve or a surface sitting inside $\mathbb{R}^n$ rather than over a piece of
+$\mathbb{R}^n$ itself.
 
 \input{content/19-jordan-measure/00-chapter.tex}
 \input{content/20-change-of-variables/00-chapter.tex}
@@ -954,13 +956,17 @@ region of $\mathbb{R}^n$, meaningful.
 
 \part{Vector Calculus and Differential Forms}
 
-% Generator: Claude Sonnet 5 (High) --- part-level framing prose, new content.
-The course closes by giving the classical vector operators --- gradient, divergence, curl --- and
-the classical integral theorems --- Green, the divergence theorem, Stokes --- a single unifying
-language: differential forms and the exterior derivative. Every theorem in this part turns out to
-be the same identity, $\int_M d\omega = \int_{\partial M}\omega$, stated once and specialized
-several different ways --- the payoff for the topological, differential and integration
-machinery built across the whole document.
+% Generator: Claude Opus 5 (High) --- part-level framing prose, new content.
+The classical integral theorems of vector calculus look at first like three unrelated results.
+Green's theorem converts a line integral into a double integral, the divergence theorem converts a
+flux through a closed surface into a triple integral, and the theorem of Stokes converts a
+circulation into a flux. This part proves all three, and then explains why they are one theorem.
+The apparatus that achieves this consists of differential forms and the exterior derivative $d$,
+a single operator that absorbs $\grad$, $\curl$ and $\divg$ at once. In that language each of the
+statements above reads $\int_M d\omega = \int_{\partial M}\omega$, and the classical versions are
+what it becomes when $M$ is a plane region, a solid, or a surface. Everything built earlier is
+needed here: submanifolds to integrate over, orientation to fix the sign, and compactness to keep
+the integrals finite.
 
 \input{content/22-vector-calculus/00-chapter.tex}
 \input{content/23-flux-divergence/00-chapter.tex}

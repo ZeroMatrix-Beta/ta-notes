@@ -24,8 +24,8 @@ which has no convenient antiderivative. By introducing a parameter $\alpha \in (
 Note that the integrand is a $C^1$ function on
 $U := \big(-\tfrac{1}{1+\varepsilon},\ \tfrac1\varepsilon\big) \times (-\varepsilon,\ 1+\varepsilon)$
 in the variables $(x,\alpha)$, with $K := [0,1]$ and $[a,b] := [0,1]$ satisfying
-$K\times[a,b] \subseteq U$ for $0 < \varepsilon < 1$ (pay attention to the logarithm --- it is
-what forces $1+\alpha x > 0$). So we may differentiate under the integral!
+$K\times[a,b] \subseteq U$ for $0 < \varepsilon < 1$ (pay attention to the logarithm, which is
+what forces $1+\alpha x > 0$). So, we may differentiate under the integral!
 
 \textbf{We obtain an ordinary differential equation.} By \cref{thm:feynmans_trick},
 \[I'(\alpha) = \frac{d}{d\alpha}\int_0^1 \frac{\log(1+\alpha x)}{1+x^2}\,dx
@@ -56,8 +56,8 @@ fundamental theorem of calculus
    - \underbrace{\frac{\log(1+\alpha)}{1+\alpha^2}}_{\textstyle \to\, I(1)}\right)d\alpha.
 \end{aligned}
 \]
-The last term is $I(1)$ again --- the integral we started from, with $\alpha$ merely renamed ---
-so bringing it to the left-hand side,
+The last term is $I(1)$ again, the integral we started from with $\alpha$ merely renamed, so
+bringing it to the left-hand side,
 \[
 \begin{aligned}
 2\,I(1) &= \Big[\log\sqrt2\,\arctan(\alpha) + \tfrac{\pi}{8}\log(1+\alpha^2)\Big]_0^1
@@ -90,7 +90,7 @@ Corsin's final integration writes the $\alpha$-term as
 $\tfrac{\pi}{2}\cdot\tfrac{\alpha}{1+\alpha^2}$, integrating to $\tfrac{\pi}{4}\log(1+\alpha^2)$.
 Both are a factor $2$ away from what $I'(\alpha)$ gives: his own line above has
 $\tfrac{\alpha\pi}{4}$, so the term is $\tfrac{\pi}{4}\cdot\tfrac{\alpha}{1+\alpha^2}$ and its
-antiderivative is $\tfrac{\pi}{8}\log(1+\alpha^2)$. Corrected above --- and the correction is
+antiderivative is $\tfrac{\pi}{8}\log(1+\alpha^2)$. Corrected above, and the correction is
 self-checking, since it is exactly what makes his two bracket terms come out equal, as his own
 next line asserts:
 $\tfrac{\pi}{8}\log 2 = \tfrac{\pi}{8}\cdot 2\log\sqrt2 = \tfrac{\pi\log\sqrt2}{4}$. His final
@@ -99,18 +99,36 @@ answer $\tfrac{\pi\log 2}{8}$ is correct and matches the known value.
 
 % Generator: Claude Opus 5 (Medium)
 \begin{ainote}[Why this is called a trick, and when to reach for it]
-The move that makes this work is not the differentiation --- it is noticing that the
+The move that makes this work is not the differentiation. It is noticing that the
 \emph{antiderivative} of the resulting integrand is elementary while the original one is not.
 The pattern is worth naming:
 \begin{enumerate}[label=\textbf{\arabic*.}]
   \item Insert a parameter $\alpha$ so that the target is $I(\alpha_1)$ for some
-    $\alpha_1$, and so that $I(\alpha_0)$ is trivial for some other $\alpha_0$ --- here
+    $\alpha_1$, and so that $I(\alpha_0)$ is trivial for some other $\alpha_0$. Here
     $I(0)=0$, because $\log 1 = 0$.
   \item Differentiate under the integral. The $\log$ disappears, leaving a rational function
     that partial fractions can handle.
   \item Integrate $I'$ back from $\alpha_0$ to $\alpha_1$.
 \end{enumerate}
-The self-reference in step 3 --- the answer reappearing on the right-hand side, so that one
-solves for $I(1)$ rather than computing it --- is specific to this integral and is the reason it
-is a classic. Do not expect it in general; usually step 3 is an honest integration.
+The self-reference in step 3, where the answer reappears on the right-hand side so that one
+solves for $I(1)$ rather than computing it, is specific to this integral and is the reason it
+is a classic. Do not expect it in general. Usually step 3 is an honest integration.
 \end{ainote}
+
+\begin{aiexercise}[Frullani's integral]
+% Generator: Claude Opus 5 (High)
+\label{ex:ai_frullani}
+Fix $0 < a < b$. The aim is to show that
+\[\int_0^\infty \frac{e^{-ax} - e^{-bx}}{x}\,dx = \log\!\left(\frac{b}{a}\right),\]
+an answer that depends on $a$ and $b$ only through their ratio.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item The integrand is undefined at $x = 0$. Compute $\lim_{x\to0^+}$ of it, so that the
+    integrand extends continuously to $[0,\infty)$.
+  \item Hold $a$ fixed and let the second exponent be the parameter: define
+    \[I(t) := \int_0^\infty \frac{e^{-ax} - e^{-tx}}{x}\,dx \qquad \text{for } t > 0.\]
+    Differentiate under the integral sign and evaluate the resulting integral, which is
+    elementary.
+  \item Identify the value of $t$ for which $I(t)$ is trivially zero, and integrate $I'$ from
+    there to $t = b$.
+\end{enumerate}
+\end{aiexercise}

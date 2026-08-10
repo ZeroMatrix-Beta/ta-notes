@@ -55,8 +55,8 @@
     $\tfrac14 > 0$, the defining inequality is violated.
   \item \textbf{Convex.} Again the Hessian is constant,
     \[\Hess f(x,y) = \begin{pmatrix} 2 & 1 \\ 1 & 2\end{pmatrix},\]
-    with eigenvalues $2 \pm 1$, i.e.\ $3$ and $1$, both strictly positive. So the Hessian is
-    positive definite everywhere and $f$ is convex --- in fact strictly so.
+    with eigenvalues $2 \pm 1$, i.e.\ $3$ and $1$, both strictly positive. So, the Hessian is
+    positive definite everywhere and $f$ is convex, in fact strictly so.
 
     Without eigenvalues: $x^2+xy+y^2 = \big(x+\tfrac{y}{2}\big)^2 + \tfrac34 y^2$ is a sum of
     squares of affine functions, and such a sum is always convex.
@@ -75,10 +75,10 @@
     Note that the \emph{main} diagonal would not have exposed this: from $(0,0)$ to $(\pi,\pi)$
     the midpoint value $0$ sits below the average $1$, consistent with convexity. Choosing the
     direction well is most of the work in these problems, and the indefinite Hessian tells you
-    which direction to choose --- an eigenvector for the negative eigenvalue, here $(1,-1)$.
+    which direction to choose, namely an eigenvector for the negative eigenvalue, here $(1,-1)$.
   \item \textbf{No.} Part \textbf{(a)} is already a counterexample: $g(x) := x$ and
     $h(y) := y$ are affine, hence convex, yet $g(x)h(y) = xy$ is not. Convexity is preserved by
-    sums and by non-negative scalar multiples, but not by products --- which is why
+    sums and by non-negative scalar multiples, but not by products. That is why
     \cref{prop:convexity_characterizations} is stated for a single function rather than as a
     calculus of convex building blocks.
 \end{enumerate}

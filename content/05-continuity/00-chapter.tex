@@ -7,16 +7,21 @@
 \chapter{Continuity}
 \label{ch:continuity}
 
-% Transition: Claude Opus 5 (Medium)
+% Transition: Claude Opus 5 (High)
+% Lipschitz continuity is drawn from a second tutor's slides. It reached Corsin's own notes only
+% obliquely, as a constant used for contraction mappings; sec:lipschitz_continuity names it
+% properly and places it in the hierarchy.
 With distance, shape and convergence in place, we can finally ask the question the whole
-apparatus was built for: what does it mean for a map \emph{between} two metric spaces to respect
-that structure? Three equivalent answers are given --- $\varepsilon$--$\delta$, sequential and
-topological --- followed by the two strengthenings that matter later, uniform continuity and
-Lipschitz continuity.
+apparatus was built for. What does it mean for a map \emph{between} two metric spaces to respect
+that structure?
 
-Lipschitz continuity is drawn from a second tutor's slides and reached Corsin's own notes only
-obliquely, as a constant used for contraction mappings; \cref{sec:lipschitz_continuity} names it
-properly and places it in the hierarchy.
+Three answers are given, and they are equivalent: the $\varepsilon$--$\delta$ condition inherited
+from \emph{Analysis I}, a sequential condition, and a topological one asking that preimages of
+open sets be open. Having all three is not redundance. The first is what one verifies for a
+concrete function, the second is what combines with the sequential arguments of the previous
+chapter, and the third is the only one that survives when the metric is taken away. The chapter
+then adds the two strengthenings needed later, uniform continuity and Lipschitz continuity, and
+locates them in a hierarchy of increasingly demanding conditions.
 
 \input{content/05-continuity/01-continuity.tex}
 \input{content/05-continuity/02-lipschitz-continuity.tex}

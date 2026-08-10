@@ -1,21 +1,30 @@
 % Generator: Claude Opus 5 (High)
 % Glossary of the English/German term pairs mirrored on first introduction throughout the
 % document, as required by the "German mirroring" rule in gemini.md. Every entry below
-% corresponds to exactly one \newterm{...} (\germanterm{...}) pair in content/week-NN.tex,
-% and the "Week" column records where that first introduction happens.
+% corresponds to exactly one \newterm{...} \germanfor{...} pair under content/, and the "Ch."
+% column records where that first introduction happens.
 %
-% MAINTENANCE: when adding a \germanterm{...} anywhere, add its row here too. To list every
-% pair currently in the document and compare against this table:
-%   grep -ohE '\\germanterm\{[^}]*\}' content/week-*.tex | sort -u
-% A German term must appear exactly once across all week files (first introduction only);
+% TWO MACROS, AND THEY ARE NOT INTERCHANGEABLE (see the preamble):
+%   \germanfor{X}  is the mirroring form. It prints (German: "X") and supplies its own
+%                  parentheses, so it is never wrapped in a literal pair. These are the
+%                  entries this table indexes.
+%   \germanterm{X} prints a bare "X", for a German word mentioned as the subject of a
+%                  sentence, as in the paragraph below. Those are not glossary entries.
+% Until 2026-08-09 there was only \germanterm and the mirroring sites wrote (\germanterm{X})
+% by hand; 101 of them were converted.
+%
+% MAINTENANCE: when adding a \germanfor{...} anywhere, add its row here too. To list every
+% pair currently in the document and compare against this table, search for
+%   \\germanfor\{[^}]*\}
+% A German term must appear exactly once across all files (first introduction only);
 % duplicates are a style error, not a harmless repetition.
 
 \chapter{Glossary --- English and German terms}
 \label{ch:glossary}
 
 The lecture and the exercise sheets for this course exist in both English and German, and the
-two vocabularies do not always line up in the obvious way --- \germanterm{Abschluss} is the
-closure and not a \qt{conclusion}, \germanterm{Rand} is the boundary and not a \qt{rim}, and
+two vocabularies do not always line up in the obvious way. Note that \germanterm{Abschluss} is
+the closure and not a \qt{conclusion}, \germanterm{Rand} is the boundary and not a \qt{rim}, and
 \germanterm{Satz von Schwarz} is what English-language texts usually call Clairaut's theorem.
 Each term below is mirrored once in the main text, at the point where it is first introduced;
 this appendix collects those pairs in one place so the document can be used alongside German
@@ -56,6 +65,7 @@ differential (the) & das Differential & 10 \\
 differential $p$-form & Differentialform & 24 \\
 directional derivative & Richtungsableitung & 10 \\
 disconnected & unzusammenhängend & 8 \\
+equivalent (of norms) & äquivalent & 2 \\
 \end{tabular}
 \end{center}
 
@@ -153,7 +163,7 @@ and English literature genuinely diverge rather than merely translate.
   \item \textbf{\germanterm{Neilsche Parabel}} names the curve $y^2 = x^3$ after William Neile.
     The English \emph{cuspidal cubic} is descriptive rather than eponymous, so searching for one
     name will not find the other.
-  \item \textbf{\germanterm{gleichmässig}} carries both English senses --- it is
+  \item \textbf{\germanterm{gleichmässig}} carries both English senses. It is
     \qt{uniform} in \emph{uniform convergence} and in \emph{uniformly continuous}, which are
     different notions (\cref{ex:uniform_convergence}, \cref{def:uniformly_continuous}). The
     German gives no hint that these are distinct, and neither does the English.

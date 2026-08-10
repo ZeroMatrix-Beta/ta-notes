@@ -1,0 +1,181 @@
+% Originally: new section (no predecessor in the week-based skeleton).
+% Generator: Claude Opus 5 (High) --- \cref{sec:geodesics} opens by promising that "the
+% essentially same calculation can be used to find the shortest path between points on a sphere
+% or any other submanifold", and then never carries it out: the chapter ends with the flat case.
+% This section closes that gap, and it is also the reason the chapter was moved to sit after
+% \cref{ch:submanifolds} rather than in front of the vector-calculus material.
+
+\section{Geodesics on a submanifold}
+\label{sec:geodesics_on_submanifolds}
+
+What survives of \qt{shortest means straight} when the curve is not free to leave a surface? On
+$\mathbb{R}^n$ the answer was $c'' \equiv 0$, and on a sphere that is hopeless: no curve with
+zero acceleration stays on a sphere at all. Something weaker has to replace it, and the
+computation itself says what.
+
+The only place the ambient space entered the proof of \cref{prop:geodesic_straight_line} was in
+the choice of perturbations $g$. There, $g$ ranged over \emph{all} smooth fields vanishing at the
+endpoints, and that is exactly what forced $c'' \equiv 0$. On a submanifold the competitors must
+stay on $M$, so $g$ may only push along $M$, and the conclusion weakens in step: $c''$ has to be
+orthogonal to the directions $g$ is allowed to take, and to nothing else.
+
+\begin{proposition}[The geodesic equation]
+\label{prop:geodesic_equation_submanifold}
+Let $M \subseteq \mathbb{R}^n$ be a $C^2$ submanifold and let $c \in C^2([0,1],\mathbb{R}^n)$ with
+$c(t) \in M$ for all $t$ and constant speed $\lvert c'(t)\rvert \equiv \lambda > 0$. If $c$
+minimises length among $C^1$ curves in $M$ with the same endpoints, then
+\[c''(t) \ \perp\ T_{c(t)}M \qquad \text{for every } t \in [0,1],\]
+that is, $c''(t) \in N_{c(t)}M$ in the sense of \cref{def:normal_space}.
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+Let $g \in C^1$ vanish at the endpoints and be \newterm{tangential} along $c$, meaning
+$g(t) \in T_{c(t)}M$ for every $t$. Take any family $c_\varepsilon$ of $C^1$ curves \emph{in $M$}
+with $c_0 = c$, with the endpoints held fixed, and with
+$\partial_\varepsilon\big|_{\varepsilon=0}c_\varepsilon = g$. Such a family exists: read $M$ near
+$c(t)$ through a local parametrization (\cref{thm:local_parametrization}), push $g$ back to the
+parameter domain, move there, and push forward again. This is the one step taken on trust here,
+and it is the only place the submanifold structure is used.
+
+From there the computation of \cref{prop:geodesic_straight_line} runs verbatim, since it never
+asked where $g$ came from, and yields
+\[0 = \left.\frac{d}{d\varepsilon}\right|_{\varepsilon=0}L(c_\varepsilon)
+    = -\frac1\lambda\int_0^1 \big\langle c''(t),\,g(t)\big\rangle\,dt.\]
+The fundamental lemma of the calculus of variations now applies to tangential $g$ only, so it
+gives that the tangential \emph{part} of $c''(t)$ vanishes for every $t$, rather than $c''$
+itself. That is precisely $c''(t) \perp T_{c(t)}M$.
+\end{proof}
+
+\begin{remark}[Reading the equation]
+The statement has a mechanical reading worth carrying: a geodesic is a curve that accelerates
+\emph{only as much as the surface forces it to}. Any acceleration along $M$ would be wasted
+motion that a shorter competitor avoids, so all that is left points out of $M$, and the surface
+supplies exactly that much to keep the curve on itself. Setting $M = \mathbb{R}^n$ recovers
+\cref{prop:geodesic_straight_line}, since then $T_{c(t)}M = \mathbb{R}^n$ and orthogonality to
+everything means $c'' \equiv 0$.
+
+The converse fails, and for the same reason it failed in \cref{prop:extremum_implies_critical}:
+the equation is a first-order criticality condition, so it detects candidates. On the sphere the
+long way round a great circle satisfies it and is not shortest.
+\end{remark}
+
+% Generator: Claude Opus 5 (High)
+\begin{aiexample}[Great circles, and why a circle of latitude is not a geodesic]
+\label{ex:great_circles_geodesics}
+Take $M := S^2 = \{x \in \mathbb{R}^3 : \lvert x\rvert^2 = 1\}$. By
+\cref{prop:gradient_orthogonality_level_sets} applied to $g(x) := \lvert x\rvert^2$, the normal
+space at $p \in S^2$ is $N_pS^2 = \operatorname{span}\{p\}$, so
+\cref{prop:geodesic_equation_submanifold} reads: \textbf{$c$ is a geodesic candidate exactly when
+$c''(t)$ is a multiple of $c(t)$.}
+
+\textbf{A great circle satisfies it.} Fix orthonormal $p,v \in \mathbb{R}^3$ and put
+\[c(t) := \cos(\lambda t)\,p + \sin(\lambda t)\,v.\]
+Then $\lvert c(t)\rvert = 1$, so $c$ runs in $S^2$, and $\lvert c'(t)\rvert \equiv \lambda$, so
+the constant-speed hypothesis holds. Differentiating twice,
+\[c''(t) = -\lambda^2\big(\cos(\lambda t)\,p + \sin(\lambda t)\,v\big) = -\lambda^2\,c(t),\]
+which is a multiple of $c(t)$. The condition holds at every $t$.
+
+\textbf{A circle of latitude does not.} Fix a height $h$ with $0 < \lvert h\rvert < 1$, put
+$r := \sqrt{1-h^2}$, and run around the circle at that height at constant speed:
+\[c(t) := \big(r\cos(\omega t),\ r\sin(\omega t),\ h\big), \qquad \omega \neq 0.\]
+Again $\lvert c(t)\rvert^2 = r^2+h^2 = 1$ and $\lvert c'(t)\rvert \equiv r\lvert\omega\rvert$ is
+constant. But
+\[c''(t) = -\omega^2\big(r\cos(\omega t),\ r\sin(\omega t),\ 0\big),\]
+whose third coordinate is $0$ while the third coordinate of $c(t)$ is $h \neq 0$, and whose first
+two coordinates are not both zero. So, $c''(t)$ is not a multiple of $c(t)$, and no circle of
+latitude other than the equator ($h=0$, where the two agree and the curve is a great circle) is a
+geodesic.
+
+This is the flight-path fact in the form the equation gives it: flying due west along a parallel
+is not the shortest route between two points on it, which is why long-haul routes bend towards
+the pole.
+\end{aiexample}
+
+% Generator: Claude Opus 5 (High) --- FIG-CH18-01. The chapter had one figure in 300 lines, and
+% none for the equation it exists to prove.
+%
+% A first version of this figure was drawn as ONE sphere carrying both curves, and rendering it
+% killed it. Three faults, none visible in the source: the normal component of c'' lies along
+% the radius by definition, so its arrow was drawn exactly on top of the radius line and the two
+% collapsed into one unreadable stroke; the "tangential part" and "N_p S^2" labels overlapped;
+% and the great circle was drawn with no vector on it at all, so it asserted "c'' is radial"
+% while showing nothing. Two panels, and no radius line, fix all three.
+%
+% GEOMETRY, checked, so the drawing can be audited without redoing it. Both panels are drawn in
+% the plane y = 0, so screen coordinates ARE the (x,z) coordinates of R^3 and the vectors need
+% no projection; only the circles that leave that plane are foreshortened into ellipses.
+% Sphere radius 1.6 in both.
+%
+% LEFT (great circle). The equator is itself a great circle, so it is the one drawn. Marked
+% point p := (-1.6, 0, 0), on the silhouette. For c(t) = R(cos t, sin t, 0) one has c'' = -c,
+% i.e. it points straight at the centre: purely normal, nothing tangential left over.
+%
+% RIGHT (circle of latitude). Height h = 0.96, hence radius r = sqrt(2.56 - 0.9216) = 1.28;
+% ellipse centred (0,0.96) with semi-axes 1.28 and 0.40. Marked point p := (-1.28, 0, 0.96),
+% which satisfies |p| = sqrt(1.6384 + 0.9216) = 1.6, so it is on the sphere, and it is both the
+% leftmost point of the latitude ellipse and on the silhouette. That is what lets it be drawn
+% honestly. Unit normal n = p/1.6 = (-0.8, 0, 0.6). The acceleration points at the axis, along
+% +x; take c'' = (1.1, 0, 0). Then
+%   normal part      = <c'',n> n = (-0.88)(-0.8,0,0.6) = (0.704, 0, -0.528),
+%   tangential part  = c'' - that = (0.396, 0, 0.528),
+% and the check <(0.396,0,0.528), (-0.8,0,0.6)> = -0.3168 + 0.3168 = 0 confirms the second is
+% genuinely tangent, while the two sum to (1.1,0,0) as they must. Tips, from p:
+%   c''  -> (-0.18, 0.96);  normal -> (-0.576, 0.432);  tangential -> (-0.884, 1.488).
+% The whole point of the figure is that the last of these is not p itself.
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.05]
+  % ---- LEFT: a great circle. Its acceleration points at the centre. ----
+  \begin{scope}
+    \draw[gray!55] (0,0) circle (1.6);
+    \draw[blue!70!black, thick] (0,0) ellipse (1.6 and 0.5);
+    \fill (0,0) circle (1.1pt);
+    \draw[red!75!black, thick, ->] (-1.6,0) -- (-0.32,0);
+    \node[red!75!black, font=\scriptsize, anchor=south] at (-0.95,0.06) {$c''$};
+    \fill[blue!70!black] (-1.6,0) circle (1.5pt);
+    \node[blue!70!black, font=\scriptsize, anchor=east] at (-1.68,0) {$p$};
+    \node[font=\scriptsize, anchor=north, align=center] at (0,-1.95)
+      {great circle: $c''$ points at the centre,\\so it is purely normal};
+  \end{scope}
+
+  % ---- RIGHT: a circle of latitude. A tangential part survives. ----
+  \begin{scope}[shift={(4.7,0)}]
+    \draw[gray!55] (0,0) circle (1.6);
+    \draw[gray!45, dashed] (0,0) ellipse (1.6 and 0.5);
+    \draw[blue!70!black, thick] (0,0.96) ellipse (1.28 and 0.40);
+    \fill (0,0) circle (1.1pt);
+
+    % Guide line along the radius, i.e. along the normal direction, drawn thin and dotted so
+    % that the normal-component arrow reads as lying on it rather than fighting with it.
+    \draw[gray!45, dotted] (-1.28,0.96) -- (0.64,-0.48);
+
+    % The decomposition. Parallelogram first, so the arrows sit on top of it.
+    \draw[gray!55, dotted] (-0.576,0.432) -- (-0.18,0.96);
+    \draw[gray!55, dotted] (-0.884,1.488) -- (-0.18,0.96);
+    \draw[gray!50!black, dashed, ->] (-1.28,0.96) -- (-0.576,0.432);
+    \node[gray!45!black, font=\scriptsize, anchor=north west] at (-0.62,0.40) {normal};
+    \draw[OliveGreen, very thick, ->] (-1.28,0.96) -- (-0.884,1.488);
+    \draw[red!75!black, thick, ->] (-1.28,0.96) -- (-0.18,0.96);
+    \node[red!75!black, font=\scriptsize, anchor=west] at (-0.12,0.96) {$c''$};
+    \node[OliveGreen, font=\scriptsize, anchor=south] at (-0.55,1.60) {tangential part};
+
+    \fill[blue!70!black] (-1.28,0.96) circle (1.5pt);
+    \node[blue!70!black, font=\scriptsize, anchor=east] at (-1.36,0.96) {$p$};
+    \node[font=\scriptsize, anchor=north, align=center] at (0,-1.95)
+      {circle of latitude: a tangential\\part survives, so it is no geodesic};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+% Generator: Claude Opus 5 (High)
+\begin{aiexercise}[Geodesics on the cylinder]
+\label{ex:ai_cylinder_geodesics}
+Let $Z := \{(x,y,z) \in \mathbb{R}^3 : x^2+y^2 = 1\}$ be the unit cylinder, and for
+$a, b \in \mathbb{R}$ not both zero consider the helix
+\[c(t) := \big(\cos(at),\ \sin(at),\ bt\big).\]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Show that $c$ runs in $Z$ at constant speed, and compute that speed.
+  \item Determine $N_{c(t)}Z$, and verify that $c$ satisfies the geodesic equation of
+    \cref{prop:geodesic_equation_submanifold} for every choice of $a$ and $b$.
+  \item Which curves do the cases $a = 0$ and $b = 0$ describe?
+\end{enumerate}
+\end{aiexercise}

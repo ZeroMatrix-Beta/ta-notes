@@ -4,9 +4,13 @@
 \label{sec:gram_determinant_solutions}
 
 \begin{exercisesolution}[Solution to \cref{ex:9.1}]
+% This label is referenced from 02-volume-of-embedded-surfaces.tex with \cpageref, NOT \cref.
+% exercisesolution wraps `proof`, which has no counter, so a \label inside it is silently
+% misattributed to the last-stepped ambient counter: \cref printed "Section 21.e" here until
+% 2026-08-09. Page references are unaffected and are the documented workaround in style.md.
 \label{ex:solution_9.1}
 % Generator: Claude Sonnet 5 (Medium)
-Following the official hint rather than Corsin's --- see the \texttt{ainote} above --- we use
+Following the official hint rather than Corsin's (\cref{note:9.1_coordinates_mislabelled}), we use
 cylindrical coordinates $(x,y,z) = (r\cos\theta,r\sin\theta,z)$, under which $x^2+y^2=r^2$.
 The two bounding surfaces become $r^2+z^2=8$ and $z = r^2/2$; intersecting them,
 \[z^2+2z-8 = 0 \quad\Longrightarrow\quad z = 2 \text{ or } z=-4,\]
@@ -58,12 +62,10 @@ Since $x+(3-x)=3$, the bracket is $-\tfrac12\big(3^{-2}-(x+1)^{-2}\big)
   = \boxed{\ \frac1{36}\ }.\]
 \end{exercisesolution}
 
-\begin{ainote}
-All three parts of \cref{ex:9.2} and \cref{ex:9.1} were worked out independently before
-consulting \texttt{Sol9\_Analysis2\_eng.pdf}; all four answers ($\tfrac{4\pi}{3}(8\sqrt2-7)$,
-$\tfrac{17}{2}$, $-\tfrac\pi2$, $\tfrac1{36}$) match the official solution exactly, so no
-divergence to record.
-\end{ainote}
+% All three parts of ex:9.2 and ex:9.1 were worked out independently before consulting
+% Sol9_Analysis2_eng.pdf; all four answers (4pi/3 (8sqrt2 - 7), 17/2, -pi/2, 1/36) match the
+% official solution exactly, so there is no divergence to record. (Was an ainote until
+% 2026-08-09: style.md names cross-checking against SolN as editor-facing under Test 2.)
 
 \begin{exercisesolution}[Solution to \cref{ex:10.1}]
 % Generator: Claude Sonnet 5 (Medium)
@@ -71,9 +73,9 @@ We parametrize $\mathbb{S}^2$ (up to a null set) using latitude/longitude spheri
 coordinates
 \[\Phi : (-\pi,\pi)\times\left(-\tfrac\pi2,\tfrac\pi2\right) \to \mathbb{S}^2, \qquad
   (\varphi,\theta) \mapsto \begin{pmatrix}\cos\varphi\cos\theta\\ \sin\varphi\cos\theta\\
-  \sin\theta\end{pmatrix}\]
---- note this is \emph{not} the $(r\equiv1)$ parametrization used elsewhere in this chapter,
-whose polar angle runs over $(0,\pi)$; here $\theta$ is measured from the equator, matching
+  \sin\theta\end{pmatrix}.\]
+Note that this is \emph{not} the $(r\equiv1)$ parametrization used elsewhere in this chapter,
+whose polar angle runs over $(0,\pi)$. Here $\theta$ is measured from the equator, matching
 the exercise's range $\theta\in(-\pi/2,\pi/2)$. Computing
 \[\partial_\varphi\Phi\times\partial_\theta\Phi = \begin{pmatrix}-\sin\varphi\cos\theta\\
   \cos\varphi\cos\theta\\ 0\end{pmatrix} \times \begin{pmatrix}-\cos\varphi\sin\theta\\
@@ -143,7 +145,7 @@ improper integrals are unambiguous (possibly $+\infty$). The volume is finite:
 For the surface area, $f'(x) = -1/x^2$, so the integrand is $\sqrt{1+x^{-4}}/x \geq 1/x$
 pointwise, and since $\int_1^\infty \frac1x\,dx$ diverges, so does
 \[2\pi\int_1^\infty \frac{\sqrt{1+x^{-4}}}{x}\,dx = \boxed{\ +\infty\ }.\]
-This is the classical \newterm{Gabriel's horn} (\germanterm{Torricellis Trompete}): finite
+This is the classical \newterm{Gabriel's horn} \germanfor{Torricellis Trompete}: finite
 volume, infinite surface area.
 
 \textbf{Part 5.} ($\Leftarrow$) Suppose $(*)$ holds. Since $f'(a^+)=+\infty$, the inverse
@@ -159,9 +161,9 @@ $f'(b^-)=-\infty$, handles the other end, so $\partial\Omega$ is a $C^1$ submani
 $\Omega$ is a bounded $C^1$ domain.
 
 ($\Rightarrow$) Suppose $\Omega$ is a bounded $C^1$ domain. If $f$ vanished at some interior
-point, $\Omega$ would be disconnected by Part 1 --- excluded by \cref{def:bounded_ck_domain},
-which requires $\Omega$ itself to make sense as a single bounded open set with $(n-1)$-manifold
-boundary (implicit in the exercise's setup); so $f>0$ on $(a,b)$. For the endpoint condition
+point, $\Omega$ would be disconnected by Part 1, which \cref{def:bounded_ck_domain} excludes,
+since it requires $\Omega$ itself to make sense as a single bounded open set with $(n-1)$-manifold
+boundary (implicit in the exercise's setup). Therefore $f>0$ on $(a,b)$. For the endpoint condition
 at $a$: the point $P:=(a,f(a),0)\in\partial\Omega$ is a smooth boundary point, so
 $T_P(\partial\Omega)$ is $2$-dimensional and contains
 \[\frac{d}{dt}\Big|_{t=0^+}\big(a,f(a)-t,0\big) = -e_2, \qquad

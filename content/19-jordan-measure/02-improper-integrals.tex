@@ -1,0 +1,109 @@
+% Originally: new section (no predecessor in the week-based skeleton, and none in any tutor's
+% notes). Added 2026-08-10 after a pass over lec_notes.pdf found that this document uses improper
+% multidimensional integrals in at least four places without ever defining one:
+%   * ex:improper_integral_polar (ch. 20) states outright that "its Riemann improper integral is
+%     well-defined", which is a claim about a definition we did not have;
+%   * ex:gaussian_integral_polar (ch. 20) integrates over all of R^2;
+%   * ex:ai_frullani (ch. 20) integrates over the half-line;
+%   * ex:10.3 (ch. 21), Gabriel's horn, integrates over [1, infinity).
+% The lecture notes devote two pages to it and no tutor covers it, so this is a genuine gap
+% rather than a deliberate skip. Corsin never reaches it either.
+
+% Supplement: lec_notes.pdf, pp. 124--125
+\section{Improper integrals}
+\label{sec:improper_integrals}
+
+Everything so far has integrated a continuous function over a \emph{bounded} Jordan measurable
+set. Two situations fall outside that and both occur constantly in practice: the domain may be
+unbounded, and the integrand may be unbounded near the edge of its domain. What should
+$\int_{\mathbb{R}^2}f$ mean?
+
+The answer avoids limits entirely, at the cost of one hypothesis.
+
+\begin{definition}[Improper integral]
+\label{def:improper_integral}
+Let $U \subseteq \mathbb{R}^n$ be open and let $f \in C^0(U)$ be \textbf{non-negative}. The
+\newterm{improper integral} \germanfor{uneigentliches Integral} of $f$ over $U$, still written
+$\int_U f$, is
+\[\int_U f := \sup\left\{\int_K f \ \middle|\ K \subseteq U \text{ compact and Jordan
+  measurable}\right\} \ \in\ [0,+\infty].\]
+\end{definition}
+
+Each $\int_K f$ on the right is an ordinary integral: $K$ is compact and Jordan measurable and
+$f$ is continuous on it, so \cref{def:riemann_integral_rn} applies. The supremum of a set of
+real numbers bounded below by $0$ always exists in $[0,+\infty]$, so $\int_U f$ is always
+defined. It may be $+\infty$, and in that case one says the improper integral \newterm{diverges}.
+
+\begin{remark}[Why non-negativity, and what it buys]
+\label{rem:improper_needs_nonnegativity}
+The hypothesis $f \geq 0$ is not a technicality that a more careful definition would remove. It
+is what makes the supremum monotone, so that enlarging $K$ can only increase $\int_K f$, and
+that monotonicity is the whole of \cref{lem:improper_integral_as_limit} below.
+
+Drop it and the value stops being well defined. For a sign-changing $f$ one can arrange
+exhaustions that pick up the positive part faster or slower than the negative part and obtain
+different answers, exactly as a conditionally convergent series can be rearranged to any sum.
+\Cref{ex:feynman_dirichlet_integral} is the case in point: $\int_0^\infty (\sin x)/x\,dx = \pi/2$
+is \emph{not} an improper integral in the sense above, since $(\sin x)/x$ changes sign infinitely
+often and $\int_0^\infty \lvert\sin x\rvert/x\,dx = +\infty$. Its value depends on integrating in
+the order $\int_0^R$ and then letting $R \to \infty$, which is why that example needs a
+justification the others do not.
+\end{remark}
+
+The definition is clean but useless for computing, since one cannot take a supremum over all
+compact subsets by hand. The next result says that any single sensible exhaustion suffices, and
+that it does not matter which one is chosen.
+
+\begin{lemma}[Improper integrals as limits]
+\label{lem:improper_integral_as_limit}
+Let $U \subseteq \mathbb{R}^n$ be open and $f \in C^0(U)$ non-negative. Let
+$K_1 \subseteq K_2 \subseteq K_3 \subseteq \cdots$ be compact Jordan measurable sets with
+\[\bigcup_{\ell=1}^\infty \operatorname{int}(K_\ell) = U.\]
+Then
+\[\int_U f = \lim_{\ell\to\infty}\int_{K_\ell} f,\]
+and in particular the limit exists in $[0,+\infty]$.
+\end{lemma}
+
+\begin{proof}
+Since the $K_\ell$ are nested and $f \geq 0$, the sequence $\int_{K_\ell}f$ is non-decreasing, so
+it converges in $[0,+\infty]$; call the limit $\Lambda$.
+
+\textbf{$\int_U f \leq \Lambda$.} Let $K \subseteq U$ be compact and Jordan measurable. The sets
+$\operatorname{int}(K_\ell)$ are open and cover $U$, hence cover $K$, so by compactness finitely
+many of them suffice; since they are nested, a single one does, say
+$K \subseteq \operatorname{int}(K_{\ell_0}) \subseteq K_{\ell_0}$. Non-negativity then gives
+$\int_K f \leq \int_{K_{\ell_0}} f \leq \Lambda$. Taking the supremum over all such $K$ yields
+$\int_U f \leq \Lambda$.
+
+\textbf{$\Lambda \leq \int_U f$.} Each $K_\ell$ is itself compact and Jordan measurable and
+contained in $U$, so it competes in the supremum defining $\int_U f$. Consequently
+$\int_{K_\ell} f \leq \int_U f$ for every $\ell$, and letting $\ell \to \infty$ gives
+$\Lambda \leq \int_U f$.
+\end{proof}
+
+\begin{remark}[What the lemma licenses]
+\label{rem:improper_exhaustion_free_choice}
+Read the two halves together: the value does not depend on the exhaustion, so one may choose
+whichever exhaustion makes the computation easy. That is the licence
+\cref{ex:improper_integral_polar} and \cref{ex:gaussian_integral_polar} were already using when
+they integrated over $\mathbb{R}^2$ in polar coordinates, and it is what
+\cref{ex:ai_gaussian_two_exhaustions} makes explicit by running two different exhaustions against
+each other and comparing the answers.
+\end{remark}
+
+\begin{aiexercise}[The Gaussian integral, two exhaustions at once]
+% Generator: Claude Opus 5 (High)
+\label{ex:ai_gaussian_two_exhaustions}
+Let $f(x,y) := e^{-(x^2+y^2)}$ on $U := \mathbb{R}^2$, which is continuous and positive, and put
+$I := \int_{-\infty}^{\infty} e^{-t^2}\,dt$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Check that the closed disks $D_\ell := \overline{B_\ell(0)}$ and the closed squares
+    $Q_\ell := [-\ell,\ell]^2$ each form an exhaustion of $\mathbb{R}^2$ in the sense of
+    \cref{lem:improper_integral_as_limit}.
+  \item Compute $\lim_{\ell\to\infty}\int_{D_\ell} f$ in polar coordinates.
+  \item Compute $\lim_{\ell\to\infty}\int_{Q_\ell} f$ using \cref{thm:fubini}, leaving the answer
+    in terms of $I$.
+  \item Conclude the value of $I$, and say which step would collapse if $f$ were allowed to
+    change sign.
+\end{enumerate}
+\end{aiexercise}

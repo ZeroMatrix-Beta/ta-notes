@@ -4,8 +4,8 @@
 \label{sec:integration_of_forms}
 
 % Source: Corsin Nick/Class Notes/Week 12.pdf, p. 6
-If $\mathcal{M}$ is an $m$-dimensional submanifold of $\mathbb{R}^m$ --- i.e.\ simply an open
-set --- and $\omega \in \Omega^m(\mathcal{M})$ an $m$-form, then
+If $\mathcal{M}$ is an $m$-dimensional submanifold of $\mathbb{R}^m$ (i.e.\ simply an open set)
+and $\omega \in \Omega^m(\mathcal{M})$ is an $m$-form, then
 \[\int_{\mathcal{M}} \omega := \int_{\mathcal{M}} \omega_x(e_1,\ldots,e_m)\,dx;\]
 in particular, for $f \in C^\infty(\mathcal{M})$,
 \[\int_{\mathcal{M}} f\,dx^1\wedge\cdots\wedge dx^m = \int_{\mathcal{M}} f(x)\,dx,\]
@@ -59,7 +59,7 @@ The coefficient at $p$ is $3\cos(0) = 3$, and therefore
 \[\omega_p(v_1,v_2) = 3 \cdot \tfrac12 = \tfrac32.\]
 
 Two things are worth noticing. The second components of $v_1$ and $v_2$ never entered the
-computation --- a form built from $dx^1$ and $dx^3$ is simply blind to motion in the $x^2$
+computation, since a form built from $dx^1$ and $dx^3$ is blind to motion in the $x^2$
 direction, which is what makes it the natural thing to integrate over a surface in the
 $x^1x^3$-plane. And the answer is \emph{signed}: swapping $v_1$ and $v_2$ swaps the determinant's
 columns and returns $-\tfrac32$. That sign is exactly the orientation data of
@@ -69,9 +69,8 @@ well defined.
 
 \begin{ainote}
 Applying \cref{def:integral_of_form_over_submanifold} to $\omega_F^{n-1}$ or $\omega_F^2$ from
-\cref{ch:differential_forms} recovers exactly the flux integrals of \cref{ch:flux} --- those
-were, all along,
-integrals of forms in this sense. And \cref{def:pullback_of_forms} is what makes the
+\cref{ch:differential_forms} recovers exactly the flux integrals of \cref{ch:flux}. Those were,
+all along, integrals of forms in this sense. And \cref{def:pullback_of_forms} is what makes the
 motivating reparametrization-invariance calculation precise: $\int_L \omega$ does
 not depend on the parametrization $\phi$ chosen, only on $L$ and its orientation.
 \end{ainote}
@@ -82,18 +81,18 @@ not depend on the parametrization $\phi$ chosen, only on $L$ and its orientation
 \label{note:partitions_of_unity_motivation}
 Lukas Krause notes that when a submanifold $\mathcal{M} \subseteq \mathbb{R}^n$ cannot be covered by a single local parametrization chart (for instance, a sphere $S^2$ or a compact manifold with boundary), one cannot directly evaluate $\int_{\mathcal{M}} \omega$ using a single coordinate domain $U$. 
 
-The solution is to decompose any continuous function $f$ on $\mathcal{M}$ into a sum of functions $f = \sum_{l=1}^N \eta_l f$, each supported inside a single coordinate chart domain $U_l$. Integrating each term $\eta_l f$ separately and summing the results yields the total integral over $\mathcal{M}$. The key technical tool for this decomposition is a \newterm{smooth partition of unity} (\germanterm{glatte Zerlegung der Eins}).
+The solution is to decompose any continuous function $f$ on $\mathcal{M}$ into a sum of functions $f = \sum_{l=1}^N \eta_l f$, each supported inside a single coordinate chart domain $U_l$. Integrating each term $\eta_l f$ separately and summing the results yields the total integral over $\mathcal{M}$. The key technical tool for this decomposition is a \newterm{smooth partition of unity} \germanfor{glatte Zerlegung der Eins}.
 \end{ainote}
 
 % Source: Jérôme Paschoud/Notizen/Woche 9.2 d-Volumen.pdf, p. 2
 % Generator: Gemini 3.1 Pro (High)
 \begin{definition}[Support of a function]
 \label{def:support_of_function}
-Let $U \subseteq \mathbb{R}^n$ be open and $f: U \to \mathbb{R}$ a continuous function. The \newterm{support} (\germanterm{Tr\"ager}) of $f$ is the closure of the set where $f$ is non-zero:
+Let $U \subseteq \mathbb{R}^n$ be open and $f: U \to \mathbb{R}$ a continuous function. The \newterm{support} \germanfor{Tr\"ager} of $f$ is the closure of the set where $f$ is non-zero:
 \[
 \operatorname{supp}(f) := \overline{\{x \in U \mid f(x) \neq 0\}}.
 \]
-If $\operatorname{supp}(f)$ is a bounded set (and $\operatorname{supp}(f) \subset U$), we say that $f$ is \newterm{compactly supported} (\germanterm{kompakt getragen}).
+If $\operatorname{supp}(f)$ is a bounded set (and $\operatorname{supp}(f) \subset U$), we say that $f$ is \newterm{compactly supported} \germanfor{kompakt getragen}.
 \end{definition}
 
 % Source: Jérôme Paschoud/Notizen/Woche 9.2 d-Volumen.pdf, p. 2
@@ -110,9 +109,9 @@ If $\operatorname{supp}(f)$ is a bounded set (and $\operatorname{supp}(f) \subse
 % Generator: Gemini 3.6 Flash (High)
 \begin{definition}[Standard smooth bump function]
 \label{def:smooth_bump_function}
-The canonical $C^\infty$ \newterm{bump function} (\germanterm{H\"ockerfunktion}) $\psi : \mathbb{R}^n \to \mathbb{R}$ supported on the unit ball $B_1(0)$ is defined by
+The canonical $C^\infty$ \newterm{bump function} \germanfor{H\"ockerfunktion} $\psi : \mathbb{R}^n \to \mathbb{R}$ supported on the unit ball $B_1(0)$ is defined by
 \[
-\psi(x) := \begin{cases} \exp\!\left(-\dfrac{1}{1 - \|x\|^2}\right) & \text{if } \|x\| < 1, \\[1.5ex] 0 & \text{if } \|x\| \geq 1. \end{cases}
+\psi(x) := \begin{cases} \exp\!\left(-\dfrac{1}{1 - |x|^2}\right) & \text{if } |x| < 1, \\[1.5ex] 0 & \text{if } |x| \geq 1. \end{cases}
 \]
 Since all higher derivatives of $t \mapsto \exp(-1/(1-t))$ approach $0$ faster than any polynomial as $t \to 1^-$, $\psi \in C^\infty(\mathbb{R}^n)$ with $\operatorname{supp}(\psi) = \overline{B_1(0)}$.
 \end{definition}
@@ -149,3 +148,20 @@ Define an $n$-differential form $\omega$ on $U$ by $\omega = d\psi^1\wedge d\psi
   forms.
 \end{enumerate}
 \end{exercise}
+
+\begin{aiexercise}[Integrating $dx\wedge dy$ over a hemisphere]
+% Generator: Claude Opus 5 (High)
+\label{ex:ai_area_form_over_hemisphere}
+Let $D := \{(u,v) : u^2+v^2 < 1\}$ and let $S^+$ and $S^-$ be the open upper and lower halves of
+the unit sphere in $\mathbb{R}^3$, each oriented by the \emph{outward} normal. Consider the
+$2$-form $dx\wedge dy$ on $\mathbb{R}^3$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Parametrize $S^+$ as a graph, $\phi(u,v) := \big(u,\ v,\ \sqrt{1-u^2-v^2}\big)$ over
+    $D$. Compute $\phi^*(dx\wedge dy)$ and deduce $\int_{S^+} dx\wedge dy$.
+  \item Do the same for $S^-$ with $\psi(u,v) := \big(u,\ v,\ -\sqrt{1-u^2-v^2}\big)$. The
+    pullback is the same as in \textbf{(a)}, yet the answer is not. Which hypothesis of
+    \cref{def:integral_of_form_over_submanifold} accounts for the difference?
+  \item Deduce $\int_{S^2} dx\wedge dy$, and confirm the value a second time by writing
+    $dx\wedge dy = d(x\,dy)$ and applying \cref{thm:stokes_general}.
+\end{enumerate}
+\end{aiexercise}

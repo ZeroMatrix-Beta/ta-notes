@@ -4,12 +4,13 @@
 \section{What \emph{does} imply differentiability}
 \label{sec:sufficient_condition_differentiability}
 
+% Sascha Brack's notes (Lecture 8) state the sufficient condition as his Theorem 2.9 and organise
+% the picture into a chain of implications; both are reproduced below.
 \begin{ainote}
-Corsin's notes give the definition and the warnings, but never state a \emph{sufficient}
-condition --- so far we have two counterexamples and no positive test. Sascha Brack's notes
-(Lecture 8) state one as Theorem 2.9 and organise the whole picture into a chain of
-implications; both are reproduced below, since without them the practical question
-\qt{how do I actually check differentiability?} is left unanswered.
+The course gives the definition of differentiability and the warnings that go with it, but never
+states a \emph{sufficient} condition, so up to this point we have two counterexamples and no
+positive test at all. The theorem below supplies one, from a second tutor's notes. Without it the
+practical question \qt{how do I actually check differentiability?} has no answer.
 \end{ainote}
 
 \begin{theorem}[Continuous partial derivatives suffice]
@@ -23,7 +24,7 @@ Such an $F$ is called \newterm{continuously differentiable}, written $F \in C^1(
 
 This is the theorem that makes the subject workable: in practice one almost never checks the
 definition directly. Compute the partials, observe that they are built from continuous pieces,
-and differentiability follows --- which is exactly why the course can write $f \in C^1$, $C^2$,
+and differentiability follows. That is exactly why the course can write $f \in C^1$, $C^2$ and
 $C^k$ so freely from here onward.
 
 Together with the two counterexamples, the whole landscape is a single chain, each link
@@ -82,9 +83,9 @@ one-directional:
 \end{tikzpicture}
 \end{center}
 
-Every downward arrow holds, and \textbf{not one of them reverses} --- each failure is witnessed
-by an example already in this chapter, so the diagram doubles as a map of where those
-counterexamples belong:
+Every downward arrow holds, and \textbf{not one of them reverses}. Each failure is witnessed by an
+example already in this chapter, so the diagram doubles as a map of where those counterexamples
+belong:
 \begin{itemize}
   \item \textbf{Differentiable $\not\Rightarrow$ $C^1$:} \cref{ex:differentiable_not_c1}, whose
     partial derivatives oscillate without limit at the origin even though the differential
@@ -99,8 +100,8 @@ counterexamples belong:
     direction $v = (a,b)$ with $ab \neq 0$,
     \[\frac{f(ta,tb)}{t} = \frac{1}{t}\cdot\frac{t^2ab}{t^2(a^2+b^2)}
       = \frac{ab}{t\,(a^2+b^2)} \ \xrightarrow{\ t \to 0\ }\ \pm\infty,\]
-    so $\partial_vf(0,0)$ exists only along the two axes --- the two directions the partial
-    derivatives happen to look at.
+    so $\partial_vf(0,0)$ exists only along the two axes, which are precisely the two directions
+    the partial derivatives happen to look at.
 \end{itemize}
 The three counterexamples are not variations on one theme; they fail at three different
 heights, which is precisely why the chain has three separate links.
@@ -113,15 +114,16 @@ Sascha's notes distil the above into three steps, worth following in this order.
   \item \textbf{Compute the partial derivatives $\partial_iF(x_0)$.} If one of them fails to
     exist, $F$ is not differentiable and you are done. If they all exist \emph{and are
     continuous near $x_0$}, $F$ \emph{is} differentiable by
-    \Cref{thm:continuous_partials_imply_differentiable} --- also done. Most exercises end here.
+    \Cref{thm:continuous_partials_imply_differentiable}, and you are done again. Most exercises
+    end here.
   \item \textbf{Otherwise, guess the candidate.} If $F$ is differentiable at all, the differential
     can only be $L := \big(\partial_1F(x_0),\dots,\partial_nF(x_0)\big)$, since the partials are
     forced (\cref{sec:jacobi_matrix}).
   \item \textbf{Verify the candidate against the definition:}
-    \[\lim_{h\to0}\frac{\big|F(x_0+h)-F(x_0)-L(h)\big|}{\lVert h\rVert} \overset{?}{=} 0.\]
+    \[\lim_{h\to0}\frac{\big|F(x_0+h)-F(x_0)-L(h)\big|}{|h|} \overset{?}{=} 0.\]
     In $\mathbb{R}^2$, substituting $h = (r\cos\theta,\ r\sin\theta)$ and checking that the
-    result tends to $0$ \emph{uniformly in $\theta$} is usually the quickest route --- the same
-    polar trick used in \cref{ex:all_directional_derivatives_exist} and, later, in
+    result tends to $0$ \emph{uniformly in $\theta$} is usually the quickest route. This is the
+    same polar trick used in \cref{ex:all_directional_derivatives_exist} and, later, in
     \Cref{q:quiz_q4}.
 \end{enumerate}
 Step 1 is the one students skip; it settles the overwhelming majority of cases without any
@@ -138,7 +140,7 @@ Let $f(x,y) := \frac{x^2 y}{x^2+y^2}$ for $(x,y) \neq (0,0)$ and $f(0,0) := 0$. 
     They exist, but to use \cref{thm:continuous_partials_imply_differentiable} we would have to compute them everywhere and show they are continuous at $(0,0)$, which is tedious and (as we will see) false. We proceed to step 2.
   \item \textbf{Guess the candidate:} The only possible differential is $L(h_1,h_2) = \partial_1 f(0,0)h_1 + \partial_2 f(0,0)h_2 = 0$.
   \item \textbf{Verify against the definition:} We check whether the following limit is zero:
-    \[\lim_{h\to 0} \frac{|f(h_1,h_2) - f(0,0) - L(h)|}{\lVert h\rVert} = \lim_{h\to 0} \frac{\frac{h_1^2 h_2}{h_1^2+h_2^2}}{\sqrt{h_1^2+h_2^2}} = \lim_{h\to 0} \frac{h_1^2 h_2}{(h_1^2+h_2^2)^{3/2}}.\]
+    \[\lim_{h\to 0} \frac{|f(h_1,h_2) - f(0,0) - L(h)|}{|h|} = \lim_{h\to 0} \frac{\frac{h_1^2 h_2}{h_1^2+h_2^2}}{\sqrt{h_1^2+h_2^2}} = \lim_{h\to 0} \frac{h_1^2 h_2}{(h_1^2+h_2^2)^{3/2}}.\]
     Passing to polar coordinates $h = (r\cos\theta, r\sin\theta)$, the expression becomes
     \[\frac{r^3\cos^2\theta\sin\theta}{r^3} = \cos^2\theta\sin\theta.\]
     This depends on the angle of approach $\theta$ (for instance, it is $0$ along the axes but $\frac{1}{2\sqrt{2}} \neq 0$ along $h_1=h_2$), so the limit as $r \to 0$ is not uniformly $0$. Hence $f$ is \textbf{not differentiable} at $(0,0)$.
@@ -158,7 +160,7 @@ Let $f(x,y) := \frac{x^2 y^2}{\sqrt{x^2+y^2}}$ for $(x,y) \neq (0,0)$ and $f(0,0
     As $r \to 0$, this tends to $0$ uniformly in $\theta$, so $\partial_1 f$ is continuous at $(0,0)$. The same holds for $\partial_2 f$. By \cref{thm:continuous_partials_imply_differentiable}, $f$ is differentiable at the origin.
   \item \textbf{Guess the candidate:} We already know $f$ is differentiable and $L = (0,0)$. But for practice, let's verify it with the definition directly.
   \item \textbf{Verify against the definition:} We check the limit
-    \[\lim_{h\to 0} \frac{|f(h_1,h_2) - f(0,0) - L(h)|}{\lVert h\rVert} = \lim_{h\to 0} \frac{\frac{h_1^2 h_2^2}{\sqrt{h_1^2+h_2^2}}}{\sqrt{h_1^2+h_2^2}} = \lim_{h\to 0} \frac{h_1^2 h_2^2}{h_1^2+h_2^2}.\]
+    \[\lim_{h\to 0} \frac{|f(h_1,h_2) - f(0,0) - L(h)|}{|h|} = \lim_{h\to 0} \frac{\frac{h_1^2 h_2^2}{\sqrt{h_1^2+h_2^2}}}{\sqrt{h_1^2+h_2^2}} = \lim_{h\to 0} \frac{h_1^2 h_2^2}{h_1^2+h_2^2}.\]
     In polar coordinates, this is $\frac{r^4\cos^2\theta\sin^2\theta}{r^2} = r^2\cos^2\theta\sin^2\theta$. As $r \to 0$, the limit is clearly $0$ uniformly in $\theta$, confirming $f$ is differentiable with $Df_0 = 0$.
 \end{enumerate}
 \end{example}

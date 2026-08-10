@@ -36,31 +36,32 @@ maxima of $T|_{S^2}$, which \textbf{are not necessarily critical points of $T$}!
 % perpendicular", which is both missing its subject and the wrong direction of implication.
 Read the picture as follows. At $p$ the gradient $\nabla T(p)$ has a non-zero component
 \emph{along} the surface, so walking on $S^2$ in that direction increases $T$: the point $p$
-cannot be a local extremum of $T|_{S^2}$. So if $T|_{S^2}$ \emph{does} have a local extremum at a
-point, then $\nabla T$ there must have no tangential component left --- it must be
+cannot be a local extremum of $T|_{S^2}$. So, if $T|_{S^2}$ \emph{does} have a local extremum at a
+point, then $\nabla T$ there must have no tangential component left. It must be
 \textbf{perpendicular to the surface}, as at $q$.
 
 Note the direction of that statement carefully: perpendicularity is \textbf{necessary, not
-sufficient}. Plenty of points have a perpendicular gradient without being extrema at all --- on
-the earth, the coldest place has a perpendicular gradient just as the hottest does, and so does
-many a saddle. What the condition delivers is a shortlist of \emph{candidates}; deciding which
-of them are maxima, which minima, and which neither is a separate step, and in practice is done
-by simply evaluating $T$ at each and comparing.
+sufficient}. Plenty of points have a perpendicular gradient without being extrema at all. On the
+earth, the coldest place has a perpendicular gradient just as the hottest does, and so does many
+a saddle. What the condition delivers is a shortlist of \emph{candidates}. Deciding which of them
+are maxima, which minima, and which neither is a separate step, and in practice it is done by
+evaluating $T$ at each and comparing.
 
-Note also that $S^2$ is the \newterm{level set} (\germanterm{Niveaumenge}) $g(x) = 0$ for
+Note also that $S^2$ is the \newterm{level set} \germanfor{Niveaumenge} $g(x) = 0$ for
 $g(x) := |x|^2 - 1$ (i.e., $S^2 = g^{-1}\{0\}$).
 
 \begin{remark}[Gradient perpendicular to level sets]
 For $g(x) := |x|^2-1$ we have $\nabla g(x) = 2x$, which at a point $x \in S^2$ is the outward
-radial direction --- perpendicular to $S^2$. In general, the gradient is perpendicular to the
-level sets.
+radial direction, and therefore perpendicular to $S^2$. In general, the gradient is perpendicular
+to the level sets.
 \end{remark}
 
 \begin{ainote}
 Corsin writes $\nabla g(x) = \tfrac{x}{|x|}$ here. That is the gradient of $x \mapsto |x|$, not
 of the $g(x) = |x|^2-1$ just fixed above, whose gradient is $2x$. The two differ only by the
-positive factor $2|x|$, so they point the same way and the geometric conclusion is unaffected
---- but the constraint actually differentiated in the Lagrangian below is the squared one. See \cref{ex:xyz_on_ball} for the same $|x|$ versus $|x|^2$ slip in the exercise.
+positive factor $2|x|$, so they point the same way and the geometric conclusion is unaffected.
+The constraint actually differentiated in the Lagrangian below is nonetheless the squared one.
+See \cref{ex:xyz_on_ball} for the same $|x|$ versus $|x|^2$ slip in the exercise.
 \end{ainote}
 
 % Source: Corsin Nick/Class Notes/Week 5.pdf, pp. 4--5
@@ -77,9 +78,9 @@ $x_0 \in g^{-1}\{0\}$, then
 \begin{remark}
 Once $(\nabla g_1,\dots,\nabla g_k)$ are linearly independent everywhere on $g^{-1}\{0\}$ (the
 standing assumption below), the constraint set $g^{-1}\{0\}$ is in fact a submanifold of
-$\mathbb{R}^n$ --- this is made precise by \cref{thm:regular_value_theorem}, which also
-explains \cref{prop:constrained_optimization} geometrically: $\nabla f(x_0)$ must be normal to the
-tangent space of the constraint set at a constrained extremum.
+$\mathbb{R}^n$. This is made precise by \cref{thm:regular_value_theorem}, which also explains
+\cref{prop:constrained_optimization} geometrically: $\nabla f(x_0)$ must be normal to the tangent
+space of the constraint set at a constrained extremum.
 \end{remark}
 
 For $k = 1$, this corresponds to our intuition above of $\nabla f(x_0)$ \textbf{parallel to}
@@ -91,11 +92,11 @@ since otherwise $\lambda_0 = 0$ is possible (which does not give us anything).
 % Generator: Claude Opus 5 (Medium)
 \begin{aiexample}[What goes wrong when $\nabla g$ vanishes]
 \label{ex:constraint_qualification_fails}
-The standing assumption is not bookkeeping --- drop it and the method can miss an extremum
+The standing assumption is not bookkeeping. Drop it and the method can miss an extremum
 outright. Let
 \[f(x,y) := x, \qquad M := \{(x,y) \in \mathbb{R}^2 : y^2 = x^3\},\]
-the \newterm{cuspidal cubic} (\germanterm{Neilsche Parabel}). Since $y^2 \geq 0$ forces
-$x^3 \geq 0$, every point of $M$ has $x \geq 0$, and $(0,0) \in M$. So $f$ attains a clear
+the \newterm{cuspidal cubic} \germanfor{Neilsche Parabel}. Since $y^2 \geq 0$ forces
+$x^3 \geq 0$, every point of $M$ has $x \geq 0$, and $(0,0) \in M$. So, $f$ attains a clear
 \textbf{global minimum on $M$ at the origin}.
 
 Now run the method with $g(x,y) := y^2-x^3$. The Lagrange condition $\nabla f = \lambda\nabla g$
@@ -106,9 +107,9 @@ multiplier $\lambda$ exists. The method returns \textbf{no candidates at all}, w
 sits there in plain sight.
 
 The culprit is visible in $\nabla g(0,0) = (0,0)$: the standing assumption fails at exactly the
-point that matters. Geometrically, $M$ has a \emph{cusp} at the origin --- it is not a smooth
-curve there, so it has no tangent line, and \qt{$\nabla f$ perpendicular to the constraint} has
-nothing to be perpendicular to.
+point that matters. Geometrically, $M$ has a \emph{cusp} at the origin. It is not a smooth curve
+there, so it has no tangent line, and \qt{$\nabla f$ perpendicular to the constraint} has nothing
+to be perpendicular to.
 
 \textbf{The practical moral:} before trusting a Lagrange computation, check that
 $\nabla g \neq 0$ (or, for several constraints, that the $\nabla g_j$ are independent) at every
@@ -121,10 +122,10 @@ point of the constraint set. Where it fails, add those points to your candidate 
 $\{\nabla f(x_0), \nabla g_1(x_0), \dots, \nabla g_k(x_0)\}$, i.e.\ scalars
 $\lambda_0, \lambda_1, \dots, \lambda_k$, not all zero, with
 $\lambda_0 \nabla f(x_0) + \lambda_1 \nabla g_1(x_0) + \dots + \lambda_k \nabla g_k(x_0) = 0$.
-The standing assumption above --- $(\nabla g_1,\dots,\nabla g_k)$ linearly independent --- is
+The standing assumption above, that $(\nabla g_1,\dots,\nabla g_k)$ are linearly independent, is
 exactly what rules out $\lambda_0 = 0$ (else the $\nabla g_j$'s alone would already be dependent),
 so $\lambda_0 \neq 0$ and we may divide by it, silently renaming $\lambda_j/\lambda_0$ as
-$\lambda_j$; this is why the Lagrangian below carries no separate $\lambda_0$. Adrien Martelli's
+$\lambda_j$. This is why the Lagrangian below carries no separate $\lambda_0$. Adrien Martelli's
 notes keep $\lambda_0$ explicit instead of dividing it away, pairing the dependence relation with
 a normalization constraint $\lambda_0^2 + \dots + \lambda_k^2 = 1$ (any nonzero vector of
 multipliers can be rescaled to satisfy this). The two formulations are equivalent whenever
@@ -136,7 +137,7 @@ forced, e.g.\ if $x_0$ is itself a critical point of the constraint map $g$.
 % Generator: Claude Opus 5 (High)
 \begin{remark}[What the multiplier itself measures]
 \label{rem:lagrange_multiplier_sensitivity}
-So far $\lambda$ has been bookkeeping --- a number produced by the method and then discarded once
+So far $\lambda$ has been bookkeeping, a number produced by the method and then discarded once
 the candidate points are found. It carries information of its own. Consider the constrained
 problem with the constraint level left free,
 \[m(c) := \min\{f(x) : g(x) = c\},\]
@@ -145,10 +146,10 @@ $g(x^*(c)) = c$ gives $\langle \nabla g(x^*(c)), (x^*)'(c)\rangle = 1$, while th
 condition $\nabla f = \lambda\nabla g$ at $x^*(c)$ turns the chain rule for $m$ into
 \[m'(c) = \big\langle \nabla f(x^*(c)),\ (x^*)'(c)\big\rangle
         = \lambda\big\langle \nabla g(x^*(c)),\ (x^*)'(c)\big\rangle = \lambda.\]
-So $\lambda$ is the rate at which the optimal value responds to relaxing the constraint by one
-unit --- in economics this reading is standard enough to have its own name, the
-\qt{shadow price} of the constraint. A large $\lvert\lambda\rvert$ says the constraint is
-expensive; $\lambda = 0$ says it is not binding at all.
+So, $\lambda$ is the rate at which the optimal value responds to relaxing the constraint by one
+unit. In economics this reading is standard enough to have its own name, the \newterm{shadow
+price} \germanfor{Schattenpreis} of the constraint. A large $\lvert\lambda\rvert$ says the
+constraint is expensive, and $\lambda = 0$ says it is not binding at all.
 \end{remark}
 
 % Source: Corsin Nick/Class Notes/Week 5.pdf, pp. 4--5
@@ -174,7 +175,7 @@ expensive; $\lambda = 0$ says it is not binding at all.
 \end{center}
 
 As the figure suggests, $\nabla g(x)$ is perpendicular to the constraint set $M := g^{-1}\{0\}$. To find extrema along $M$, we basically only care about the tangential part of $\nabla f$. We can then find a multiplier $\lambda$ to \qt{erase} the perpendicular component of $\nabla f(x_0)$. We do this by forming the \newterm{Lagrangian}
-(\germanterm{Lagrange-Funktion}):
+\germanfor{Lagrange-Funktion}:
 \[
 \begin{aligned}
 L : U \times \mathbb{R}^k &\to \mathbb{R} \\
@@ -191,25 +192,18 @@ The construction can look like a trick pulled out of nowhere. It is not: $L$ is 
 precisely so that setting \emph{one} gradient to zero encodes \emph{both} halves of the problem
 at once.
 
-Read the two underbraces. Differentiating in the $x_i$ reproduces the geometric condition ---
-$\nabla f$ parallel to the $\nabla g_j$, i.e.\ no tangential component left. Differentiating in
+Read the two underbraces. Differentiating in the $x_i$ reproduces the geometric condition, namely
+$\nabla f$ parallel to the $\nabla g_j$, with no tangential component left. Differentiating in
 $\lambda_j$ returns $g_j(x)=0$, the constraint itself, because $\lambda_j$ appears in $L$ only
-in the term $-\lambda_jg_j(x)$, linearly. So the multipliers are not auxiliary clutter: they are
+in the term $-\lambda_jg_j(x)$, linearly. So, the multipliers are not auxiliary clutter: they are
 exactly the bookkeeping that lets a \emph{constrained} problem in $n$ variables be written as an
 \emph{unconstrained} critical-point problem in $n+k$ variables, which is the one kind of problem
 we already know how to solve (\cref{prop:extremum_implies_critical}).
 
 That also explains the minus sign, which is arbitrary: writing $f + \lambda\cdot g$ merely flips
 the sign of every $\lambda_j$ and changes nothing. And it explains why $\lambda$ is discarded at
-the end --- it is scaffolding, not part of the answer.
-
-\begin{ainote}
-Though $\lambda$ is not meaningless. In applications it is the \newterm{shadow price}
-(\germanterm{Schattenpreis}): if the constraint is relaxed from $g=0$ to $g=c$, the optimal value
-changes at rate $\lambda$ to first order, $\tfrac{d}{dc}f_{\text{opt}}(c) = \lambda$. This is
-where the name comes from in economics, and it is why $\lambda$ carries units. Not needed for
-this course, but it is the usual answer to \qt{what \emph{is} $\lambda$?}
-\end{ainote}
+the end. It is scaffolding, not part of the answer. That does not make it meaningless, and
+\cref{rem:lagrange_multiplier_sensitivity} above says what it measures.
 \end{remark}
 
 % Source: Corsin Nick/Class Notes/Week 5.pdf, pp. 5--6
@@ -240,8 +234,9 @@ We then have
 \begin{equation*}
 2\lambda = \frac{yz}{x} = \frac{xz}{y} = \frac{xy}{z} \tag{$*$}
 \end{equation*}
-\[\implies \underbrace{y^2z^2 = x^2z^2}_{y^2 = x^2} = \underbrace{x^2y^2}_{y^2 = z^2} \qquad \text{(if any coordinate is 0, so are the others)}\]
-\[\implies x^2 = y^2 = z^2.\]
+and multiplying these in pairs gives
+\[\underbrace{y^2z^2 = x^2z^2}_{y^2 = x^2} = \underbrace{x^2y^2}_{y^2 = z^2} \qquad \text{(if any coordinate is 0, so are the others)},\]
+and therefore $x^2 = y^2 = z^2$.
 Then $x^2+y^2+z^2 = 1 \implies 3x^2 = 1 \implies x = \pm\frac{1}{\sqrt{3}}$, giving
 \textbf{8 solutions}:
 \[(x,y,z) \in \left\{\tfrac{1}{\sqrt{3}}(\alpha,\beta,\gamma) : \alpha,\beta,\gamma \in \{\pm 1\}\right\}\]
@@ -272,7 +267,8 @@ Hence $f$ attains its \textbf{global maximum} $\tfrac{1}{3\sqrt3}$ at the four p
 even number of minus signs, and its \textbf{global minimum} $-\tfrac{1}{3\sqrt3}$ at the four
 with an odd number. The interior candidates are \textbf{not extrema at all}: at any point of a
 coordinate axis $f=0$, yet every neighbourhood contains points where $xyz>0$ and points where
-$xyz<0$ --- flip the sign of one coordinate. They are the three-variable analogue of a saddle.
+$xyz<0$, since flipping the sign of one coordinate flips the sign of the product. They are the
+three-variable analogue of a saddle.
 \end{exercisesolution}
 
 \begin{ainote}
@@ -280,6 +276,45 @@ Corsin writes $g(x) = |x| - 1$ for the constraint above, but the Lagrangian uses
 $x^2+y^2+z^2-1$, i.e.\ $|x|^2-1$. Both cut out the same sphere; the squared version is the one
 actually differentiated, so it is used throughout.
 \end{ainote}
+
+% Source: Corsin Nick/Class Notes/Week 5.pdf, p. 6
+% Moved here from ~180 lines further down, where it sat after two unrelated exercises: the eight
+% marked vertices are exactly the boundary candidates found in \cref{ex:xyz_on_ball} above.
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.4]
+  % Sphere
+  \draw[blue!80!black, thick] (0,0) circle (1.4);
+  \draw[blue!80!black, dashed] (1.4,0) arc (0:180:1.4 and 0.45);
+  \draw[blue!80!black] (-1.4,0) arc (180:360:1.4 and 0.45);
+
+  % Axes
+  \draw[green!60!black, thick, ->] (-1.6,0) -- (1.6,0) node[right, font=\footnotesize] {$x$};
+  \draw[green!60!black, thick, ->] (0,-1.6) -- (0,1.6) node[above, font=\footnotesize] {$z$};
+  \draw[green!60!black, thick, ->] (0.8,-1.0) -- (-0.8,1.0) node[above left, font=\footnotesize] {$y$};
+
+  % Inscribed cube vertices (+-1/sqrt(3), +-1/sqrt(3), +-1/sqrt(3))
+  \coordinate (A1) at (-0.6, -0.5);
+  \coordinate (A2) at (0.6, -0.5);
+  \coordinate (A3) at (0.8, 0.2);
+  \coordinate (A4) at (-0.4, 0.2);
+
+  \coordinate (B1) at (-0.6, 0.7);
+  \coordinate (B2) at (0.6, 0.7);
+  \coordinate (B3) at (0.8, 1.4);
+  \coordinate (B4) at (-0.4, 1.4);
+
+  % Cube edges
+  \draw[red!80!black, thick, dotted] (A1)--(A2)--(A3)--(A4)--cycle;
+  \draw[red!80!black, thick, dotted] (B1)--(B2)--(B3)--(B4)--cycle;
+  \draw[red!80!black, thick, dotted] (A1)--(B1) (A2)--(B2) (A3)--(B3) (A4)--(B4);
+
+  % Vertex dots
+  \foreach \p in {A1,A2,A3,A4,B1,B2,B3,B4} {
+    \fill[red!80!black] (\p) circle (1.8pt);
+  }
+  \node[below, font=\small] at (0,-1.7) {8 critical points $\tfrac{1}{\sqrt{3}}(\pm 1, \pm 1, \pm 1)$ on $S^2$};
+\end{tikzpicture}
+\end{center}
 
 % Source: Jérôme Paschoud/Notizen/Woche 5.2 Optimierung I.pdf, p. 3
 % Generator: Gemini 3.6 Flash (High)
@@ -304,6 +339,41 @@ If $\lambda = 1/2$, then $y = x$. The constraint gives $2x^2 = 2 \implies x = \p
 If $\lambda = -1/2$, then $y = -x$. The constraint gives $2x^2 = 2 \implies x = \pm 1$, giving points $(1,-1)$ and $(-1,1)$. At these points, $f(\pm 1, \mp 1) = -1$.
 Since the circle is compact, these must be the global extrema. The maximum is $1$ and the minimum is $-1$.
 \end{exercisesolution}
+
+% Source: Jérôme Paschoud/Notizen/Woche 5.2 Optimierung I.pdf, p. 3
+% Generator: Gemini 3.6 Flash (High)
+% Moved up from below the second-order test, next to the other first-order drill it belongs with.
+\begin{exercise}[Largest rectangle in an ellipse]
+\label{ex:largest_rectangle_ellipse}
+Given an ellipse $E = \{ (x,y) \in \mathbb{R}^2 \mid x^2/A^2 + y^2/B^2 = 1 \}$, find the rectangle (with sides parallel to the axes) whose vertices lie on $E$ and has the largest area. (cf.\ Michaels Bsp 7.2.7)
+\end{exercise}
+
+\begin{exercisesolution}[\cref{ex:largest_rectangle_ellipse}]
+Let the vertices of the rectangle in the four quadrants be $(\pm x, \pm y)$ with $x, y \geq 0$. The area of the rectangle is $f(x,y) = 4xy$.
+We maximize $f(x,y)$ subject to the constraint $g(x,y) = \frac{x^2}{A^2} + \frac{y^2}{B^2} - 1 = 0$ in the region $x > 0, y > 0$.
+The Lagrangian is
+\[L(x,y,\lambda) := 4xy - \lambda\left(\frac{x^2}{A^2} + \frac{y^2}{B^2} - 1\right).\]
+The critical point equations are:
+\begin{align*}
+  \partial_x L &= 4y - \frac{2\lambda x}{A^2} = 0 \implies \lambda = \frac{2yA^2}{x} \\
+  \partial_y L &= 4x - \frac{2\lambda y}{B^2} = 0 \implies \lambda = \frac{2xB^2}{y} \\
+  \partial_\lambda L &= 1 - \frac{x^2}{A^2} - \frac{y^2}{B^2} = 0.
+\end{align*}
+Equating the expressions for $\lambda$ yields $\frac{2yA^2}{x} = \frac{2xB^2}{y} \implies y^2 A^2 = x^2 B^2$, or $\frac{x^2}{A^2} = \frac{y^2}{B^2}$.
+Substituting this into the constraint gives $2\frac{x^2}{A^2} = 1 \implies x = \frac{A}{\sqrt{2}}$.
+Similarly, $y = \frac{B}{\sqrt{2}}$.
+The maximal area is $f\left(\frac{A}{\sqrt{2}}, \frac{B}{\sqrt{2}}\right) = 4 \cdot \frac{A}{\sqrt{2}} \cdot \frac{B}{\sqrt{2}} = 2AB$.
+\end{exercisesolution}
+
+\subsection{Second-order conditions on the constraint set}
+
+% Generator: Claude Opus 5 (High) --- lead-in for the theorem below.
+Every example so far has closed the same gap in the same way. The Lagrange condition returns a
+list of candidates, and compactness plus a comparison of values decides among them. That works
+only when the constraint set is compact, and it decides only the global extrema. Is there a
+second-order test, of the kind \cref{thm:hessian_test} provides in the unconstrained case? There
+is, and it is that same test, applied to the Lagrangian rather than to $f$, and read only along
+directions that stay on the constraint set.
 
 % Generator: Claude Sonnet 5 (High) --- new content: a second-order test for constrained
 % extrema was never given anywhere in this document, only the unconstrained Hessian test
@@ -358,15 +428,15 @@ Differentiating a second time, for $w \in \mathbb{R}^{n-k}$,
 \[\Hess h(0)[w,w] = \big(D\varphi(0)w\big)\transp\Hess_xL(x_0,\lambda)\big(D\varphi(0)w\big)
   \ +\ D_xL(x_0,\lambda)\cdot D^2\varphi(0)[w,w],\]
 and the second term vanishes because $D_xL(x_0,\lambda)=0$, regardless of what
-$D^2\varphi(0)$ is --- the same cancellation that already made $Dh(0)=0$. So, writing
+$D^2\varphi(0)$ is. This is the same cancellation that already made $Dh(0)=0$. So, writing
 $v := D\varphi(0)w$, which ranges over all of $T_{x_0}$ as $w$ ranges over $\mathbb{R}^{n-k}$
 (since $D\varphi(0)$ is an isomorphism onto $T_{x_0}$),
 \[\Hess h(0)[w,w] = v\transp\Hess_xL(x_0,\lambda)v.\]
-So $\Hess_xL(x_0,\lambda)$ being positive definite on $T_{x_0}$ is exactly $\Hess h(0)$ being
+So, $\Hess_xL(x_0,\lambda)$ being positive definite on $T_{x_0}$ is exactly $\Hess h(0)$ being
 positive definite, and the unconstrained Hessian test (\cref{thm:hessian_test}, applied to $h$
-on the open set $V \subseteq \mathbb{R}^{n-k}$) gives a strict local minimum of $h$ at $0$ ---
-which, since $\varphi$ is a local homeomorphism from $V$ onto a neighbourhood of $x_0$ in
-$g^{-1}\{0\}$, is exactly a strict local minimum of $f|_{g^{-1}\{0\}}$ at $x_0$. This proves
+on the open set $V \subseteq \mathbb{R}^{n-k}$) gives a strict local minimum of $h$ at $0$.
+Since $\varphi$ is a local homeomorphism from $V$ onto a neighbourhood of $x_0$ in
+$g^{-1}\{0\}$, that is exactly a strict local minimum of $f|_{g^{-1}\{0\}}$ at $x_0$. This proves
 \textbf{(1)}; \textbf{(2)} is identical with every inequality reversed. For \textbf{(3)}, if the
 quadratic form takes both signs on $T_{x_0}$, then $\Hess h(0)$ is indefinite, so $h$ increases
 along one direction through $0 \in V$ and decreases along another (\cref{thm:hessian_test}
@@ -376,15 +446,14 @@ the same near $x_0$.
 
 \begin{remark}
 This is exactly \cref{thm:hessian_test} run on the Lagrangian instead of on $f$ itself, with the
-Hessian test's ordinary $\mathbb{R}^n$ replaced by the tangent space $T_{x_0}$ --- which is
-also why $L$, not $f$, is the right function to differentiate: only $L$ has a genuine critical
-point at $x_0$ (in the full, unrestricted sense), since $f$ itself typically does not. In
-practice \textbf{(1)}--\textbf{(3)} are checked by picking any basis $v_1,\dots,v_{n-k}$ of
-$T_{x_0}$ (e.g.\ a basis of $\ker Dg(x_0)$) and testing the definiteness of the
-$(n-k)\times(n-k)$ matrix $\big(v_i\transp\Hess_xL(x_0,\lambda)v_j\big)_{i,j}$ with
-\cref{thm:hessian_test}, or with the determinant/trace recipe from
-\cref{sec:hessian_test} --- there is no need to construct $\varphi$ explicitly, which was only
-a proof device.
+Hessian test's ordinary $\mathbb{R}^n$ replaced by the tangent space $T_{x_0}$. That is also why
+$L$, not $f$, is the right function to differentiate: only $L$ has a genuine critical point at
+$x_0$ (in the full, unrestricted sense), since $f$ itself typically does not. In practice
+\textbf{(1)}--\textbf{(3)} are checked by picking any basis $v_1,\dots,v_{n-k}$ of $T_{x_0}$
+(e.g.\ a basis of $\ker Dg(x_0)$) and testing the definiteness of the $(n-k)\times(n-k)$ matrix
+$\big(v_i\transp\Hess_xL(x_0,\lambda)v_j\big)_{i,j}$ with \cref{thm:hessian_test}, or with the
+determinant/trace recipe from \cref{sec:hessian_test}. There is no need to construct $\varphi$
+explicitly, which was only a proof device.
 \end{remark}
 
 % Generator: Claude Sonnet 5 (High)
@@ -398,7 +467,7 @@ minimum, without appealing to compactness. Here
   = \begin{pmatrix}-2\lambda&1\\1&-2\lambda\end{pmatrix},\]
 which is indefinite (eigenvalues $-2\lambda\pm1$, of opposite sign whenever $|\lambda|<\tfrac12$)
 or degenerate (at $\lambda=\pm\tfrac12$, exactly the values that occur here) on all of
-$\mathbb{R}^2$ --- the unconstrained Hessian test would say nothing. But restricted to the
+$\mathbb{R}^2$, so the unconstrained Hessian test would say nothing. Restricted to the
 $1$-dimensional tangent space it is a different story.
 
 At $(1,1)$, $\lambda=\tfrac12$: $\Hess_xL = \left(\begin{smallmatrix}-1&1\\1&-1\end{smallmatrix}\right)$, and $T_{(1,1)} = \ker\begin{pmatrix}2&2\end{pmatrix} = \operatorname{span}\{(1,-1)\}$. For $v=(1,-1)$,
@@ -414,66 +483,15 @@ conclusions. This is the sharpest illustration available of the theorem's point:
 $1$-dimensional tangent space resolves it completely in both cases.
 \end{example}
 
-% Source: Jérôme Paschoud/Notizen/Woche 5.2 Optimierung I.pdf, p. 3
-% Generator: Gemini 3.6 Flash (High)
-\begin{exercise}[Largest rectangle in an ellipse]
-\label{ex:largest_rectangle_ellipse}
-Given an ellipse $E = \{ (x,y) \in \mathbb{R}^2 \mid x^2/A^2 + y^2/B^2 = 1 \}$, find the rectangle (with sides parallel to the axes) whose vertices lie on $E$ and has the largest area. (cf.\ Michaels Bsp 7.2.7)
-\end{exercise}
+\subsection{An application: the spectral theorem}
 
-\begin{exercisesolution}[\cref{ex:largest_rectangle_ellipse}]
-Let the vertices of the rectangle in the four quadrants be $(\pm x, \pm y)$ with $x, y \geq 0$. The area of the rectangle is $f(x,y) = 4xy$.
-We maximize $f(x,y)$ subject to the constraint $g(x,y) = \frac{x^2}{A^2} + \frac{y^2}{B^2} - 1 = 0$ in the region $x > 0, y > 0$.
-The Lagrangian is
-\[L(x,y,\lambda) := 4xy - \lambda\left(\frac{x^2}{A^2} + \frac{y^2}{B^2} - 1\right).\]
-The critical point equations are:
-\begin{align*}
-  \partial_x L &= 4y - \frac{2\lambda x}{A^2} = 0 \implies \lambda = \frac{2yA^2}{x} \\
-  \partial_y L &= 4x - \frac{2\lambda y}{B^2} = 0 \implies \lambda = \frac{2xB^2}{y} \\
-  \partial_\lambda L &= 1 - \frac{x^2}{A^2} - \frac{y^2}{B^2} = 0.
-\end{align*}
-Equating the expressions for $\lambda$ yields $\frac{2yA^2}{x} = \frac{2xB^2}{y} \implies y^2 A^2 = x^2 B^2$, or $\frac{x^2}{A^2} = \frac{y^2}{B^2}$.
-Substituting this into the constraint gives $2\frac{x^2}{A^2} = 1 \implies x = \frac{A}{\sqrt{2}}$.
-Similarly, $y = \frac{B}{\sqrt{2}}$.
-The maximal area is $f\left(\frac{A}{\sqrt{2}}, \frac{B}{\sqrt{2}}\right) = 4 \cdot \frac{A}{\sqrt{2}} \cdot \frac{B}{\sqrt{2}} = 2AB$.
-\end{exercisesolution}
-
-% Source: Corsin Nick/Class Notes/Week 5.pdf, p. 6
-\begin{center}
-\begin{tikzpicture}[>=Latex, scale=1.4]
-  % Sphere
-  \draw[blue!80!black, thick] (0,0) circle (1.4);
-  \draw[blue!80!black, dashed] (1.4,0) arc (0:180:1.4 and 0.45);
-  \draw[blue!80!black] (-1.4,0) arc (180:360:1.4 and 0.45);
-
-  % Axes
-  \draw[green!60!black, thick, ->] (-1.6,0) -- (1.6,0) node[right, font=\footnotesize] {$x$};
-  \draw[green!60!black, thick, ->] (0,-1.6) -- (0,1.6) node[above, font=\footnotesize] {$z$};
-  \draw[green!60!black, thick, ->] (0.8,-1.0) -- (-0.8,1.0) node[above left, font=\footnotesize] {$y$};
-
-  % Inscribed cube vertices (+-1/sqrt(3), +-1/sqrt(3), +-1/sqrt(3))
-  \coordinate (A1) at (-0.6, -0.5);
-  \coordinate (A2) at (0.6, -0.5);
-  \coordinate (A3) at (0.8, 0.2);
-  \coordinate (A4) at (-0.4, 0.2);
-
-  \coordinate (B1) at (-0.6, 0.7);
-  \coordinate (B2) at (0.6, 0.7);
-  \coordinate (B3) at (0.8, 1.4);
-  \coordinate (B4) at (-0.4, 1.4);
-
-  % Cube edges
-  \draw[red!80!black, thick, dotted] (A1)--(A2)--(A3)--(A4)--cycle;
-  \draw[red!80!black, thick, dotted] (B1)--(B2)--(B3)--(B4)--cycle;
-  \draw[red!80!black, thick, dotted] (A1)--(B1) (A2)--(B2) (A3)--(B3) (A4)--(B4);
-
-  % Vertex dots
-  \foreach \p in {A1,A2,A3,A4,B1,B2,B3,B4} {
-    \fill[red!80!black] (\p) circle (1.8pt);
-  }
-  \node[below, font=\small] at (0,-1.7) {8 critical points $\tfrac{1}{\sqrt{3}}(\pm 1, \pm 1, \pm 1)$ on $S^2$};
-\end{tikzpicture}
-\end{center}
+% Generator: Claude Opus 5 (High) --- lead-in for the theorem below.
+The spectral theorem has been used freely since \cref{rem:diagonalizing_hessian}, on the strength
+of linear algebra alone. It can also be \emph{proved} here, and the proof is a fair test of what
+\cref{prop:constrained_optimization} is worth. Maximise the quadratic form
+$x \mapsto \langle x, Ax\rangle$ over the unit sphere, and the multiplier that falls out is an
+eigenvalue. Nothing is circular in this, since \cref{prop:constrained_optimization} nowhere uses
+diagonalisation.
 
 % Generator: Claude Opus 5 (High) --- not in Corsin's notes; included because it is the one
 % place in the course where an analytic tool repays a debt to linear algebra, and because the
@@ -509,7 +527,7 @@ across the inner product,
 \[\langle Av_{k+1}, v_i\rangle = \langle v_{k+1}, Av_i\rangle
   = \lambda_i\langle v_{k+1},v_i\rangle = 0,\]
 using that $v_i$ is already an eigenvector. Hence $\mu_i = 0$ for every $i \leq k$, and the
-displayed identity collapses to $Av_{k+1} = \lambda_{k+1}v_{k+1}$. So $v_{k+1}$ is a unit
+displayed identity collapses to $Av_{k+1} = \lambda_{k+1}v_{k+1}$. So, $v_{k+1}$ is a unit
 eigenvector orthogonal to all its predecessors, and after $n$ steps the $v_j$ form the required
 basis. Each eigenvalue is real because $\lambda_j = \langle v_j, Av_j\rangle$ is a real number by
 construction.
@@ -518,19 +536,19 @@ construction.
 % Supplement: Analysis_II_Script_v1.pdf, p. 73
 \begin{exercise}[Antipodal points maximise distance on the sphere]
 \label{ex:antipodal_max_distance}
-Let $n \geq 2$. Prove that two points $x,y \in S^{n-1}$ have maximal distance $\|x-y\|$ if and
-only if $x = -y$. Consider the function $(x,y) \mapsto \|x-y\|^2$ on
+Let $n \geq 2$. Prove that two points $x,y \in S^{n-1}$ have maximal distance $|x-y|$ if and
+only if $x = -y$. Consider the function $(x,y) \mapsto |x-y|^2$ on
 $S^{n-1}\times S^{n-1} \subset \mathbb{R}^{2n}$.
 \end{exercise}
 
 \begin{exercisesolution}[Proof of \cref{ex:antipodal_max_distance}]
 % Generator: Claude Sonnet 5 (High)
-Since $\|x\|=\|y\|=1$ on $S^{n-1}$,
-\[f(x,y) := \|x-y\|^2 = \|x\|^2 - 2\langle x,y\rangle + \|y\|^2 = 2 - 2\langle x,y\rangle,\]
-so maximising $\|x-y\|$ is the same as maximising $f$, i.e.\ minimising $\langle x,y\rangle$.
+Since $|x|=|y|=1$ on $S^{n-1}$,
+\[f(x,y) := |x-y|^2 = |x|^2 - 2\langle x,y\rangle + |y|^2 = 2 - 2\langle x,y\rangle,\]
+so maximising $|x-y|$ is the same as maximising $f$, i.e.\ minimising $\langle x,y\rangle$.
 The domain $S^{n-1}\times S^{n-1}$ is compact (a product of compact sets), so $f$ attains a
 maximum somewhere by the extreme value theorem; we locate it with Lagrange multipliers under the
-two constraints $g_1(x,y) := \|x\|^2-1 = 0$ and $g_2(x,y) := \|y\|^2-1=0$.
+two constraints $g_1(x,y) := |x|^2-1 = 0$ and $g_2(x,y) := |y|^2-1=0$.
 
 Computing gradients in $\mathbb{R}^{2n} = \mathbb{R}^n_x \times \mathbb{R}^n_y$:
 \[\nabla f = (-2y,\,-2x), \qquad \nabla g_1 = (2x,\,0), \qquad \nabla g_2 = (0,\,2y).\]
@@ -539,10 +557,10 @@ supported on disjoint blocks of coordinates), so \cref{prop:constrained_optimiza
 $\lambda_1,\lambda_2$ with $\nabla f = \lambda_1\nabla g_1 + \lambda_2\nabla g_2$, i.e.\
 \[-2y = 2\lambda_1x, \qquad -2x = 2\lambda_2y \qquad\Longrightarrow\qquad
   y = -\lambda_1x, \quad x=-\lambda_2y.\]
-So $x$ and $y$ are parallel; combined with $\|x\|=\|y\|=1$, this forces $y = x$ or $y=-x$.
-These are the only two candidates, and $f(x,x) = 0$ while $f(x,-x) = \|2x\|^2 = 4$. The maximum
-of $f$ over the compact domain is therefore $4$, attained exactly when $y=-x$ --- i.e.\ exactly
-at antipodal pairs, where $\|x-y\| = 2$.
+So, $x$ and $y$ are parallel. Combined with $|x|=|y|=1$, this forces $y = x$ or $y=-x$.
+These are the only two candidates, and $f(x,x) = 0$ while $f(x,-x) = |2x|^2 = 4$. The maximum
+of $f$ over the compact domain is therefore $4$, attained exactly when $y=-x$ (i.e.\ exactly at
+antipodal pairs, where $|x-y| = 2$).
 \end{exercisesolution}
 
 % Generator: Claude Opus 5 (High)

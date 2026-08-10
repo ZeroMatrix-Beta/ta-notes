@@ -8,9 +8,9 @@ Open and closed sets describe a space statically: which points sit comfortably i
 which sit on its edge. Sequences describe the same thing dynamically, by asking where a moving
 point ends up. The two descriptions turn out to be equivalent
 (\cref{prop:open_closed_via_sequences}), and having both is what makes metric spaces pleasant to
-work in --- one is easier to verify, the other easier to apply. Note that the definition below
-is word for word the one from \emph{Analysis I}, with $|x_n - x|$ replaced by $d(x_n,x)$; this
-is the pattern for the whole chapter.
+work in. One description is usually easier to verify, the other easier to apply. Note that the
+definition below is word for word the one from \emph{Analysis I}, with $|x_n - x|$ replaced by
+$d(x_n,x)$. That substitution is the pattern for the whole chapter.
 
 % Source: Corsin Nick/Class Notes/Week 2.pdf, pp. 1--13
 \begin{definition}[Convergent sequence]
@@ -49,8 +49,8 @@ $x : \mathbb{N} \to X$. We say that $(x_n)_{n=0}^{\infty}$ \newterm{converges} t
 \label{not:eventually}
 Let $(x_n)_{n\geq0}$ be a sequence in a set $X$ and let $\mathcal{P}$ be a property that a point
 of $X$ may or may not have. One says $x_n$ satisfies $\mathcal{P}$ \newterm{eventually}
-(\germanterm{schlie\ss lich}) if there exists $N \in \mathbb{N}$ such that $\mathcal{P}(x_n)$
-holds for all $n \geq N$ --- equivalently, if $\mathcal{P}(x_n)$ fails for at most finitely many
+\germanfor{schlie\ss lich} if there exists $N \in \mathbb{N}$ such that $\mathcal{P}(x_n)$
+holds for all $n \geq N$, or equivalently if $\mathcal{P}(x_n)$ fails for at most finitely many
 $n$. In this vocabulary, \cref{def:convergent_sequence} reads: $(x_n)_n$ converges to $x$ if, for
 every $\varepsilon>0$, $x_n$ eventually lies in $B_\varepsilon(x)$. The same compression applies
 throughout the rest of this chapter and the next three.
@@ -108,7 +108,7 @@ throughout.
 \begin{definition}[Accumulation point]
 \label{def:accumulation_point}
 Let $(x_n)_{n=0}^{\infty}$ be a sequence in a metric space $(X,d)$. A point $x \in X$ is an
-\newterm{accumulation point} (\germanterm{H\"aufungspunkt}) of $(x_n)_{n=0}^{\infty}$ if some
+\newterm{accumulation point} \germanfor{H\"aufungspunkt} of $(x_n)_{n=0}^{\infty}$ if some
 subsequence $(x_{n_k})_{k=0}^{\infty}$ converges to $x$.
 \end{definition}
 
@@ -151,17 +151,17 @@ some control ruling out the first counterexample's boundary-escaping behaviour.
 
     \textbf{($\Leftarrow$)} By contraposition. If $U$ is not open, some $x \in U$ has
     $B_{1/n}(x) \not\subseteq U$ for every $n \geq 1$, so we may pick
-    $x_n \in B_{1/n}(x)\setminus U$. Then $d(x_n,x) < \tfrac1n \to 0$, so $x_n \to x \in U$ ---
-    yet \emph{no} term lies in $U$.
+    $x_n \in B_{1/n}(x)\setminus U$. Then $d(x_n,x) < \tfrac1n \to 0$, so $x_n \to x \in U$, and
+    yet \emph{no} term of the sequence lies in $U$.
   \item \textbf{($\Rightarrow$)} Let $A$ be closed, $(x_n)$ a sequence in $A$ with $x_n \to x$.
     If $x \notin A$, then $x$ lies in the open set $X\setminus A$, so by \textbf{(a)} the
-    sequence eventually lies in $X\setminus A$ --- contradicting $x_n \in A$ for all $n$. Hence
+    sequence eventually lies in $X\setminus A$, contradicting $x_n \in A$ for all $n$. Hence
     $x \in A$.
 
     \textbf{($\Leftarrow$)} We show $X\setminus A$ is open. If it were not, the same
     construction as in \textbf{(a)} yields $x \in X\setminus A$ and points
     $x_n \in B_{1/n}(x) \cap A$. Then $(x_n)$ is a sequence in $A$ converging to $x$, so the
-    hypothesis forces $x \in A$ --- a contradiction.
+    hypothesis forces $x \in A$, which is the required contradiction.
 \end{enumerate}
 \end{proof}
 
@@ -171,8 +171,9 @@ Both \qt{$\Leftarrow$} directions used the same device: negating \qt{some ball f
 gives a bad point in $B_{1/n}(x)$ for \emph{every} $n$, and collecting those points produces a
 sequence converging to $x$. It is worth recognising, because it is the standard bridge from a
 statement about balls to a statement about sequences, and it is exactly what makes
-\cref{def:open_closed} and \cref{prop:open_closed_via_sequences} interchangeable in practice ---
-one usually proves closedness by the sequence criterion and openness by the ball criterion.
+\cref{def:open_closed} and \cref{prop:open_closed_via_sequences} interchangeable in practice. In
+the usual division of labour one proves closedness by the sequence criterion and openness by the
+ball criterion.
 Note that it needs the radii $\tfrac1n$ to shrink to $0$, which is where the metric enters;
 in a general topological space the equivalence can fail.
 \end{remark}
@@ -200,24 +201,24 @@ same convergent sequences if and only if the topologies they generate coincide.
 
 \begin{proof}
 By \cref{lem:convergence_is_topological}, whether $x_n \to x$ depends only on the collection of
-open sets, i.e.\ only on the topology $d_1$ or $d_2$ generates --- so equal topologies give equal
-convergent sequences.
+open sets, that is, only on the topology $d_1$ or $d_2$ generates. Consequently, equal topologies
+give equal convergent sequences.
 
 For the converse, suppose $U \subseteq X$ is open with respect to $d_1$ but not with respect to
 $d_2$; we exhibit a sequence distinguishing the two. Since $U$ is not $d_2$-open, some $x \in U$
 has, for every $k \geq 0$, a point $x_k \in B^{d_2}_{2^{-k}}(x) \setminus U$. Then $x_k \to x$
 with respect to $d_2$ (\cref{def:convergent_sequence}, since $2^{-k}\to0$), so by hypothesis also
 $x_k \to x$ with respect to $d_1$. But $U$ is $d_1$-open and contains $x$, so
-\cref{lem:convergence_is_topological} forces $(x_k)_k$ to eventually lie in $U$ --- contradicting
+\cref{lem:convergence_is_topological} forces $(x_k)_k$ to eventually lie in $U$, contradicting
 $x_k \notin U$ for every $k$. So every $d_1$-open set is $d_2$-open, and by symmetry the two
 topologies coincide.
 \end{proof}
 
 \begin{remark}
 This is the precise sense in which \qt{only the topology matters, not the metric itself} for
-convergence: two visibly different metrics --- even one bounded and one not --- generate the same
-convergent sequences exactly when they generate the same open sets, with no need to compare them
-directly. \Cref{ex:2.5}\textbf{.2}'s three product metrics are one instance of this; so is
+convergence. Two visibly different metrics, even one bounded and one unbounded, generate the same
+convergent sequences exactly when they generate the same open sets, and one never has to compare
+the metrics directly. \Cref{ex:2.5}\textbf{.2}'s three product metrics are one instance of this; so is
 \cref{prop:concave_reshaping_metric} together with \cref{ex:reshaping_same_convergence}.
 \end{remark}
 
@@ -238,8 +239,8 @@ In the euclidean metric space $\mathbb{R}^2$, and with
     $(\tfrac12, \tfrac1n) \to (\tfrac12, 0)$ is a convergent sequence in the set whose limit is
     not.
 \end{enumerate}
-The picture below shows exactly these three witnesses --- in \textbf{(a)} the escaping sequence
-stays trapped, in \textbf{(c)} one sequence escapes through the open edge while another does
+The picture below shows exactly these three witnesses. In \textbf{(a)} the escaping sequence stays
+trapped, whereas in \textbf{(c)} one sequence escapes through the open edge while another does
 not.
 \end{example}
 
@@ -333,7 +334,7 @@ Open, since the full space is always open, as shown before.
 \begin{exercisesolution}[Solution to \cref{ex:uniform_convergence}]
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item $\displaystyle \forall \varepsilon > 0 \ \exists N \in \mathbb{N} : \sup_{x \in [0,1]} |f_n(x) - f(x)| < \varepsilon \quad \forall n \geq N$.
-  \item This is \newterm{uniform convergence} (\germanterm{gleichm\"assige Konvergenz})!
+  \item This is \newterm{uniform convergence} \germanfor{gleichm\"assige Konvergenz}!
   \item $C^0([0,1])$ is closed in the space of bounded functions with the supremum metric.
 
     \textit{Proof.} Let $f \in X \setminus C^0([0,1])$, i.e., $f : [0,1] \to \mathbb{R}$ is

@@ -10,20 +10,21 @@
 In the lecture, you have seen the following formula. For
 $f \in C^k(U \subseteq \mathbb{R}^n, \mathbb{R})$, $\bar x \in U$:
 \[f(\bar x + h) = \sum_{|\alpha| = 0}^{k} \partial^\alpha f(\bar x)\,\frac{h^\alpha}{\alpha!} + o(|h|^k)\]
-where $\alpha$ is a \newterm{multi-index} (\germanterm{Multiindex}) in $\mathbb{N}^n$.
+where $\alpha$ is a \newterm{multi-index} \germanfor{Multiindex} in $\mathbb{N}^n$.
 
 In practice, we never use this formula directly, but it is worth unpacking once (e.g., as in \cref{ex:taylor_maximal_expansion}).
 
 % Generator: Claude Opus 5 (High) --- the multi-index notation above is only well defined
 % because mixed partials commute; the fact is used twice below (in the expansion and in
 % \cref{rem:second_order_taylor_hessian}) but stated nowhere in the source notes.
-\begin{ainote}
-Before unpacking it, one hypothesis hidden in the notation deserves to be made explicit. Writing
-$\partial^\alpha$ for a multi-index $\alpha$ presumes that it does not matter \emph{in which
-order} the derivatives are taken --- otherwise $\partial^{(1,1)}$ would be ambiguous between
-$\partial_1\partial_2$ and $\partial_2\partial_1$. That this is legitimate is a theorem, stated
-next; neither Corsin's notes nor the working formula below mention it, yet both depend on it.
-\end{ainote}
+% Neither Corsin's notes nor the working formula below mention Schwarz's theorem, yet both depend
+% on it. Reclassified from ainote to plain prose: this is a mathematical prerequisite.
+% Transition: Claude Opus 5 (High)
+Before unpacking the formula, one hypothesis hidden in the notation deserves to be made explicit.
+Writing $\partial^\alpha$ for a multi-index $\alpha$ presumes that it does not matter \emph{in
+which order} the derivatives are taken, since otherwise $\partial^{(1,1)}$ would be ambiguous
+between $\partial_1\partial_2$ and $\partial_2\partial_1$. That the presumption is legitimate is
+itself a theorem, and it is stated next.
 
 \begin{theorem}[Schwarz / Clairaut --- mixed partial derivatives commute]
 \label{thm:schwarz_mixed_partials}
@@ -44,8 +45,8 @@ Continuity of the second derivatives is genuinely needed. The standard counterex
 for which a direct computation from the definition gives
 $\partial_1\partial_2 f(0,0) = 1$ but $\partial_2\partial_1 f(0,0) = -1$. This $f$ has both
 mixed partials everywhere, but they are not continuous at the origin, so
-\cref{thm:schwarz_mixed_partials} does not apply --- and indeed fails. Since everything in
-\cref{sec:taylor_expansions} assumes $f \in C^k$, the issue never arises here; it is worth
+\cref{thm:schwarz_mixed_partials} does not apply, and indeed fails. Since everything in
+\cref{sec:taylor_expansions} assumes $f \in C^k$, the issue never arises here. It is worth
 knowing that it \emph{could}.
 \end{remark}
 
@@ -107,8 +108,8 @@ f(\bar x + h) = &\ f(\bar x) && (\alpha) \\
 \begin{ainote}
 Corsin writes the recall line as
 $\partial^\alpha = \partial_{\alpha_1}\partial_{\alpha_2}\cdots\partial_{\alpha_n}$ with the
-example $\partial^{(2,1)} = \partial_2\partial_1$. Read literally that is the wrong object --- a
-multi-index $\alpha$ records \textit{how many times} each $\partial_i$ is applied, so
+example $\partial^{(2,1)} = \partial_2\partial_1$. Read literally that is the wrong object, since
+a multi-index $\alpha$ records \textit{how many times} each $\partial_i$ is applied, so
 $\partial^{(2,1)} = \partial_1^2\partial_2$. His own expansion above uses
 $\partial_1^2\partial_2 f(\bar x)\,\tfrac{h_1^2h_2}{2}$ for $\delta_2$, confirming the intended
 meaning. Corrected above.
@@ -155,8 +156,8 @@ Equivalently, in multi-index notation,
 
 \begin{proof}
 Let $\varphi(t) := f(\bar x+th)$ for $t \in [0,1]$, well defined and $C^{k+1}$ since $f \in
-C^{k+1}$ and the segment $\bar x+th$ stays in $U$. By induction on $\ell$ via the chain rule ---
-exactly the computation underlying \cref{thm:taylor_working_formula} itself ---
+C^{k+1}$ and the segment $\bar x+th$ stays in $U$. By induction on $\ell$ via the chain rule,
+which is exactly the computation underlying \cref{thm:taylor_working_formula} itself,
 \[\varphi^{(\ell)}(t) = \Big(\sum_{m=1}^n h_m\partial_m\Big)^{\!\ell}f(\bar x+th)
   \qquad \text{for } 0 \leq \ell \leq k+1.\]
 Apply the one-variable Taylor theorem with Lagrange remainder (\emph{Analysis I}) to $\varphi$
@@ -172,12 +173,12 @@ $\big(\sum_mh_m\partial_m\big)^\ell$ via the multinomial theorem, exactly as in
 \begin{remark}
 Unlike \cref{thm:taylor_working_formula}'s $o(|h|^k)$ remainder, this is an \emph{exact}
 equality for the specific $h$ in question, not merely a statement about what happens as
-$h \to 0$ --- genuinely different information, and what is needed whenever a hard, uniform error
-bound is wanted rather than an asymptotic one (e.g.\ bounding $|f(\bar x+h) - T_k(h)|$ over an
-entire region at once, given a bound on the $(k{+}1)$-th derivatives there). The price is that
-$\theta$ depends on $\bar x$, $h$ \emph{and} $k$ together, and is almost never computable in
-practice --- which is exactly why the rest of this chapter uses the asymptotic form for actually
-computing expansions, and reserves this one for error estimates.
+$h \to 0$. That is genuinely different information, and it is what is needed whenever a hard,
+uniform error bound is wanted rather than an asymptotic one (e.g.\ bounding
+$|f(\bar x+h) - T_k(h)|$ over an entire region at once, given a bound on the $(k{+}1)$-th
+derivatives there). The price is that $\theta$ depends on $\bar x$, $h$ \emph{and} $k$ together,
+and is almost never computable in practice. That is exactly why the rest of this chapter uses the
+asymptotic form for actually computing expansions, and reserves this one for error estimates.
 \end{remark}
 
 % Quelle: Linus Lüchinger/Slides/Slides-03-16.pdf, slide 12;
@@ -212,15 +213,15 @@ derivatives in order to produce an expansion; the corollary says that an expansi
 was obtained, hands back the derivatives. Given
 \[f(x_0+h) = c + a\transp h + \tfrac12 h\transp Bh + o(\lvert h\rvert^2)\]
 one may read off $f(x_0) = c$, $\nabla f(x_0) = a$ and $\Hess f(x_0) = B$ without differentiating
-anything --- the same move by which \cref{def:differentiable} recognises a differential from an
-$o(\lvert h\rvert)$ estimate, now carried to higher order. It is the standard route to a Hessian
+anything. This is the same move by which \cref{def:differentiable} recognises a differential from
+an $o(\lvert h\rvert)$ estimate, now carried to higher order. It is the standard route to a Hessian
 for functions built out of known series.
 
 Two cautions on the bookkeeping, both of which the exercise below turns on. The estimate must be
 $o(\lvert h\rvert^{k})$, not $O(\lvert h\rvert^{k})$: an $O(\lvert h\rvert^{k})$ error can
 contain a genuine degree-$k$ term and so corrupts the order-$k$ coefficients, leaving only the
 derivatives of order $< k$ determined. And the expansion determines derivatives only up to
-order $k$ --- nothing beyond.
+order $k$, and nothing beyond it.
 \end{remark}
 
 % Supplement: Linus Lüchinger/Slides/Slides-03-19.pdf, slide 6
@@ -242,22 +243,29 @@ Assume in each case that $f$ is as smooth as the relevant statement requires.
 
 % Supplement: Toby Lane/class-document.pdf, §3.4.4
 \begin{remark}[Two ways to weight the same expansion]
-\Cref{ex:taylor_maximal_expansion} above and \cref{thm:taylor_working_formula} look like they
-disagree on how heavily mixed partial derivatives are weighted --- e.g.\ the coefficient of
-$h_1^2h_2$ is $\tfrac12$ in the explicit multi-index expansion, but expanding the working formula
-$\tfrac{1}{\ell!}(h_1\partial_1+h_2\partial_2)^\ell$ by the multinomial theorem produces a
-coefficient $\tfrac{\ell!}{\alpha!} \cdot \tfrac{1}{\ell!} = \tfrac{1}{\alpha!}$ for the term
-$h^\alpha\partial^\alpha f$, which for $\alpha = (2,1)$ (so $\ell = |\alpha| = 3$) is
-$\tfrac{1}{2!\,1!} = \tfrac12$ as well --- they agree, but for two different reasons. The working
-formula's $\tfrac{1}{\ell!}$ weights \emph{all} $\ell$-fold products of partials \emph{globally},
-including repeated ones like $\partial_1\partial_2$ appearing in more than one order in the
-multinomial expansion of $(h_1\partial_1+h_2\partial_2)^\ell$; by Schwarz's lemma (equality of
-mixed partial derivatives, valid here since $f \in C^k$) those repeats collapse onto the
-same $\partial^\alpha$, and it is exactly this collapsing --- a multinomial coefficient
-$\ell!/\alpha!$ of them --- that turns the global $1/\ell!$ into the per-term $1/\alpha!$ seen in
-\Cref{ex:taylor_maximal_expansion}. In short: $1/\ell!$ weights \emph{paths} through the mixed
-partial derivatives, while $1/\alpha!$ weights the \emph{distinct} derivatives themselves once
-those paths are identified with each other.
+\Cref{ex:taylor_maximal_expansion} above and \cref{thm:taylor_working_formula} appear to disagree
+on how heavily mixed partial derivatives are weighted. Take the coefficient of $h_1^2h_2$, so
+$\alpha = (2,1)$ and $\ell = |\alpha| = 3$. The explicit multi-index expansion gives $\tfrac12$
+directly. The working formula instead offers $\tfrac{1}{\ell!}(h_1\partial_1+h_2\partial_2)^\ell$,
+and expanding that by the multinomial theorem produces
+\[
+  \frac{\ell!}{\alpha!}\cdot\frac{1}{\ell!} \;=\; \frac{1}{\alpha!}
+  \;=\; \frac{1}{2!\,1!} \;=\; \frac12
+\]
+for the term $h^\alpha\partial^\alpha f$. The two agree, but they arrive by different routes, and
+seeing why is worth the paragraph.
+
+The working formula's $\tfrac{1}{\ell!}$ weights \emph{all} $\ell$-fold products of partials
+globally, including repeated ones such as $\partial_1\partial_2$, which appears in more than one
+order in the multinomial expansion of $(h_1\partial_1+h_2\partial_2)^\ell$. By Schwarz's lemma
+(equality of mixed partial derivatives, valid here because $f \in C^k$) all those repeats collapse
+onto the same $\partial^\alpha$, and there are exactly $\ell!/\alpha!$ of them. That collapsing is
+what turns the global $1/\ell!$ into the per-term $1/\alpha!$ seen in
+\Cref{ex:taylor_maximal_expansion}.
+
+In short, $1/\ell!$ weights \emph{paths} through the mixed partial derivatives, whereas
+$1/\alpha!$ weights the \emph{distinct} derivatives themselves, once those paths have been
+identified with one another.
 \end{remark}
 
 % Sonnet 5 (Medium)
@@ -317,19 +325,19 @@ $x_0 \in \mathbb{R}^n$ can be expressed compactly as
 \[f(x_0+x) = f(x_0) + \nabla f(x_0)\cdot x + \tfrac{1}{2}x\transp \cdot \Hess f(x_0)\cdot x + o(|x|^2)\]
 where
 \[\Hess f(x_0) = \big(\partial_i\partial_j f(x_0)\big)_{i,j=1,\dots,n}\]
-is the \newterm{Hessian matrix} (\germanterm{Hesse-Matrix}) of $f$.
+is the \newterm{Hessian matrix} \germanfor{Hesse-Matrix} of $f$.
 \end{remark}
 
 % Generator: Claude Opus 5 (High)
 This is the form the rest of the course actually uses, and it is worth reading term by term as
 a sequence of ever-better approximations to $f$ near $x_0$:
 \begin{itemize}
-  \item the \textbf{constant} term $f(x_0)$ --- the crudest guess, exact only at $x_0$;
-  \item the \textbf{linear} term $\nabla f(x_0)\cdot x$ --- the tangent plane, i.e.\ exactly
-    the differential of \cref{def:differentiable};
-  \item the \textbf{quadratic} term $\tfrac12 x\transp\Hess f(x_0)\,x$ --- the first term that
-    sees curvature, and the one that decides in \cref{sec:hessian_test} whether a critical point is a minimum, a
-    maximum, or a saddle.
+  \item the \textbf{constant} term $f(x_0)$, the crudest guess, exact only at $x_0$;
+  \item the \textbf{linear} term $\nabla f(x_0)\cdot x$, which is the tangent plane and hence
+    exactly the differential of \cref{def:differentiable};
+  \item the \textbf{quadratic} term $\tfrac12 x\transp\Hess f(x_0)\,x$, the first term that sees
+    curvature, and the one that decides in \cref{sec:hessian_test} whether a critical point is a
+    minimum, a maximum, or a saddle.
 \end{itemize}
 By \cref{thm:schwarz_mixed_partials} the Hessian is symmetric, which is what makes that
 last decision a question about the \emph{signs of its eigenvalues} rather than anything harder.
@@ -372,8 +380,8 @@ last decision a question about the \emph{signs of its eigenvalues} rather than a
 
 In several variables the same picture holds with \qt{tangent line} replaced by \emph{tangent
 plane} and \qt{parabola} by a paraboloid, bowl-shaped or saddle-shaped according to the
-signs of the eigenvalues of $\Hess f(x_0)$ --- which is exactly the classification carried out
-in \cref{sec:hessian_test}.
+signs of the eigenvalues of $\Hess f(x_0)$. That is exactly the classification carried out in
+\cref{sec:hessian_test}.
 
 % Source: Corsin Nick/Class Notes/Week 4.pdf, p. 12
 % (Re-cited: the reading of the three terms and the figure above are additions.)
@@ -535,7 +543,7 @@ Compute the Taylor expansion of $f(x,y) := \exp(\arctan(x-y))$ to order $2$ arou
 Write $s := x-y$, itself of order $|h|$. Since $\arctan$ is odd, $\arctan(t) = t + O(t^3)$, so
 \[\arctan(s) = s + O(|h|^3) = s + o(|h|^2).\]
 Since $\exp$ is smooth and bounded near $0$, an $o(|h|^2)$ correction inside $\exp$ contributes
-only an $o(|h|^2)$ correction to the output --- so to order $2$, $\exp(\arctan(s))$ and
+only an $o(|h|^2)$ correction to the output. Consequently, to order $2$, $\exp(\arctan(s))$ and
 $\exp(s)$ agree:
 \[\exp(\arctan(x-y)) = \exp(x-y) + o(|(x,y)|^2).\]
 Now $\exp(s) = 1+s+\tfrac12s^2+O(s^3)$ with $s^2 = x^2-2xy+y^2$, so
@@ -557,7 +565,7 @@ $t^2 = O(|h|^4) = o(|h|^2)$:
 
 \begin{remark}
 Together with \cref{ex:taylor_expansion_sin_xy,ex:taylor_expansion_sqrt_1_plus_x_plus_y2} above,
-these two exercises are exactly script Exercise 10.36 --- \qt{compute the Taylor polynomials up
+these two exercises are exactly script Exercise 10.36: \qt{compute the Taylor polynomials up
 to the quadratic order of $\sin(xy)$, $\sqrt{1+x+y^2}$, $\exp(\arctan(x-y))$,
 $1/(1-x^2-y^2)$ --- don't use the general formula!} All four are worked by the same \qt{1D
 substitution} technique this section uses throughout.

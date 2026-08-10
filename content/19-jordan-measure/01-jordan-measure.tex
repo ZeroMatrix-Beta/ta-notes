@@ -6,7 +6,7 @@
 
 % Supplement: Sascha Brack/Class Notes/Week_08_Notes_Monday.pdf, pp. 5--7
 \subsection{Jordan measure and the Riemann integral}
-The rigorous definition of the multidimensional integral relies on the \newterm{Jordan measure} (\germanterm{Jordan-Maß}). The intuition, as presented in Sascha Brack's notes, involves \qt{dyadic cubes} (pixels) that approximate a region from the inside and outside.
+The rigorous definition of the multidimensional integral relies on the \newterm{Jordan measure} \germanfor{Jordan-Maß}. The intuition, as presented in Sascha Brack's notes, involves \qt{dyadic cubes} (pixels) that approximate a region from the inside and outside.
 
 \begin{center}
 \begin{tikzpicture}[scale=0.8]
@@ -32,9 +32,9 @@ The rigorous definition of the multidimensional integral relies on the \newterm{
 \begin{definition}[Dyadic cube and dyadic set]
 \label{def:dyadic_set}
 For $p \in \mathbb{N}$ and $a \in \mathbb{Z}^n$, the \newterm{dyadic cube}
-(\germanterm{dyadischer Würfel}) of generation $p$ at $a$ is
+\germanfor{dyadischer Würfel} of generation $p$ at $a$ is
 \[Q_p(a) := 2^{-p}\big(a + [0,1)^n\big),\]
-a half-open cube of side length $2^{-p}$. A \newterm{dyadic set} (\germanterm{dyadische Menge})
+a half-open cube of side length $2^{-p}$. A \newterm{dyadic set} \germanfor{dyadische Menge}
 is a finite union $E = \bigcup_{\ell=1}^N Q_p(a(\ell))$ of distinct dyadic cubes \emph{of one
 common generation} $p$, and its volume is
 \[\mu(E) := 2^{-pn}N.\]
@@ -57,7 +57,7 @@ by the principle of inclusion--exclusion,
 Any finite collection of dyadic sets can be refined to a common generation $p$ without changing
 any of their measures (splitting a cube of generation $p$ into $2^n$ cubes of generation $p+1$
 replaces one term of $\mu(E) := 2^{-pn}N$ by $2^n$ terms of size $2^{-(p+1)n}$, which sum to the
-same value) --- so we may assume $E_1,\dots,E_N$ all consist of cubes of one common generation
+same value). So, we may assume $E_1,\dots,E_N$ all consist of cubes of one common generation
 $p$. Each such cube $Q$ then either lies in none of the $E_i$, or in exactly the $E_i$ indexed
 by some non-empty $J \subseteq \{1,\dots,N\}$, and $Q$ contributes $2^{-pn}$ to
 $\mu(E_{i_1}\cap\dots\cap E_{i_k})$ exactly when $\{i_1,\dots,i_k\}\subseteq J$.
@@ -115,12 +115,98 @@ Furthermore, the multidimensional integral of a non-negative function $f : A \to
 % Generator: Gemini 3.1 Pro (High)
 \begin{definition}[Riemann integral in $\mathbb{R}^n$]
 \label{def:riemann_integral_rn}
-Let $A \subseteq \mathbb{R}^n$ and $f: A \to \mathbb{R}$. Analogous to Analysis I, the integral is defined via dyadic step functions (\germanterm{dyadische Treppenfunktionen}). The lower and upper integrals are defined as
+Let $A \subseteq \mathbb{R}^n$ and $f: A \to \mathbb{R}$. Analogous to Analysis I, the integral is defined via dyadic step functions \germanfor{dyadische Treppenfunktionen}. The lower and upper integrals are defined as
 \begin{align*}
   \underline{\int}_A f &:= \sup \left\{ \int_A g \;\middle|\; g: \mathbb{R}^n \to \mathbb{R} \text{ dyadic step function with } g \leq f \right\}, \\
   \overline{\int}_A f &:= \inf \left\{ \int_A h \;\middle|\; h: \mathbb{R}^n \to \mathbb{R} \text{ dyadic step function with } h \geq f \right\}.
 \end{align*}
 The function $f$ is \newterm{Riemann integrable} if $\underline{\int}_A f = \overline{\int}_A f$. In this case, their common value is denoted by $\int_A f$.
+
+% Generator: Claude Opus 5 (High) --- FIG-19-01, dyadic step functions sandwiching f.
+% The definition above is a sup and an inf over step functions and never shows one, so the
+% picture below supplies the missing object in one variable, where it can actually be drawn.
+% Arithmetic check. f(x) = 0.3 + 1.2x - 0.5x^2 on [0,1], with f'(x) = 1.2 - x > 0 there, so f
+% is INCREASING and the extrema on any interval [a,b] are simply f(a) and f(b). Hence the
+% lower step function takes f(a) and the upper takes f(b) on each dyadic interval. Values:
+%   f(0)=0.3   f(1/4)=0.56875   f(1/2)=0.775   f(3/4)=0.91875   f(1)=1.0
+% Left panel, mesh 2^-1:  lower 0.300, 0.775 | upper 0.775, 1.000
+% Right panel, mesh 2^-2: lower 0.300, 0.569, 0.775, 0.919 | upper 0.569, 0.775, 0.919, 1.000
+% The orange gap column areas are (2^-1)*sum(U-L): left 0.5*(0.475+0.225) = 0.350,
+% right 0.25*(0.269+0.206+0.144+0.081) = 0.175 -- exactly halved, as the caption claims.
+In one variable the construction can simply be drawn, and it is worth seeing once. Fix a dyadic
+mesh. On each dyadic interval let $g$ be the largest constant still lying below $f$, and $h$ the
+smallest constant still lying above it. Refining the mesh can only raise $g$ and lower $h$, so the
+orange gap between them shrinks, and $f$ is integrable exactly when that gap can be driven to $0$.
+
+\begin{center}
+\begin{tikzpicture}[x={(4.1cm,0)}, y={(0,2.3cm)}, >=Latex,
+    lo/.style={blue!60!black, thick},
+    hi/.style={orange!85!black, thick}]
+
+  % ---------------- left panel: mesh 2^{-1} ----------------
+  \begin{scope}
+    \fill[blue!16] (0,0) rectangle (0.5,0.300);
+    \fill[blue!16] (0.5,0) rectangle (1,0.775);
+    \fill[orange!35] (0,0.300) rectangle (0.5,0.775);
+    \fill[orange!35] (0.5,0.775) rectangle (1,1.000);
+
+    \draw[lo] (0,0.300) -- (0.5,0.300) (0.5,0.775) -- (1,0.775);
+    \draw[hi] (0,0.775) -- (0.5,0.775) (0.5,1.000) -- (1,1.000);
+    \draw[lo, dotted] (0.5,0.300) -- (0.5,0.775);
+    \draw[hi, dotted] (0.5,0.775) -- (0.5,1.000);
+
+    \draw[->, gray!70] (-0.04,0) -- (1.13,0) node[right, font=\footnotesize, text=black] {$x$};
+    \draw[->, gray!70] (0,-0.06) -- (0,1.20);
+    \draw[black, very thick, domain=0:1, samples=70]
+      plot (\x, {0.3 + 1.2*\x - 0.5*\x*\x});
+    \node[black, font=\footnotesize, anchor=south west] at (0.66,1.02) {$f$};
+
+    \foreach \t/\lbl in {0/0, 0.5/{\tfrac12}, 1/1}
+      \draw[gray!70] (\t,0.02) -- (\t,-0.02) node[below, font=\scriptsize, text=black] {$\lbl$};
+    \node[font=\scriptsize, align=center, anchor=north] at (0.5,-0.16)
+      {mesh $2^{-1}$\\ gap area $0.350$};
+  \end{scope}
+
+  % ---------------- right panel: mesh 2^{-2} ----------------
+  \begin{scope}[shift={(1.42,0)}]
+    \foreach \a/\b/\L/\U in {0/0.25/0.300/0.569, 0.25/0.5/0.569/0.775,
+                             0.5/0.75/0.775/0.919, 0.75/1/0.919/1.000}{
+      \fill[blue!16] (\a,0) rectangle (\b,\L);
+      \fill[orange!35] (\a,\L) rectangle (\b,\U);
+      \draw[lo] (\a,\L) -- (\b,\L);
+      \draw[hi] (\a,\U) -- (\b,\U);
+    }
+    \foreach \t in {0.25,0.5,0.75}{\draw[gray!45, dotted] (\t,0) -- (\t,1.05);}
+
+    \draw[->, gray!70] (-0.04,0) -- (1.13,0) node[right, font=\footnotesize, text=black] {$x$};
+    \draw[->, gray!70] (0,-0.06) -- (0,1.20);
+    \draw[black, very thick, domain=0:1, samples=70]
+      plot (\x, {0.3 + 1.2*\x - 0.5*\x*\x});
+    \node[black, font=\footnotesize, anchor=south west] at (0.66,1.02) {$f$};
+
+    \foreach \t/\lbl in {0/0, 0.5/{\tfrac12}, 1/1}
+      \draw[gray!70] (\t,0.02) -- (\t,-0.02) node[below, font=\scriptsize, text=black] {$\lbl$};
+    \node[font=\scriptsize, align=center, anchor=north] at (0.5,-0.16)
+      {mesh $2^{-2}$\\ gap area $0.175$};
+  \end{scope}
+
+  % ---------------- legend ----------------
+  % Kept clear of the two-line panel captions, which are anchored at y = -0.16 and run to
+  % roughly y = -0.40 at \scriptsize.
+  \begin{scope}[shift={(0.16,-0.60)}]
+    \fill[blue!16, draw=blue!60!black] (0.02,-0.02) rectangle (0.09,0.04);
+    \node[font=\scriptsize, anchor=west] at (0.11,0.01) {lower step function $g \leq f$};
+    \fill[orange!35, draw=orange!85!black] (0.86,-0.02) rectangle (0.93,0.04);
+    \node[font=\scriptsize, anchor=west] at (0.95,0.01)
+      {gap $\overline{\int} - \underline{\int}$, i.e.\ $h-g$};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+Halving the mesh here halves the gap, from $0.350$ to $0.175$. That is not a coincidence of this
+example: for a monotone $f$ on an interval the upper and lower steps differ, on each piece, by
+exactly the rise of $f$ across it, and those rises telescope. In $\mathbb{R}^n$ the same
+construction stacks columns over dyadic cubes instead of intervals:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
@@ -219,7 +305,7 @@ Because a countable cover is allowed, the set $\mathbb{Q} \cap [0,1]$ is Lebesgu
 Stating the difference as \qt{finitely many} against \qt{countably many} is correct but hides
 where the extra power actually comes from. A Jordan cover is a \emph{dyadic set}, and every cube
 in a dyadic set of generation $p$ has the same side length $2^{-p}$
-(\cref{def:dyadic_set}). So the two conditions really read:
+(\cref{def:dyadic_set}). So, the two conditions really read:
 \begin{itemize}
   \item \textbf{Jordan null:} for each $\varepsilon>0$, cover $E$ by cubes that all have
     \emph{one common side length}, of total volume $<\varepsilon$. Finiteness is then automatic:
@@ -268,15 +354,15 @@ Let $L: \mathbb{R}^n \to \mathbb{R}^n$ be a linear, invertible map. If $E \subse
   \item Let $X, Y \subset [0,1]$ such that $\mu_{out}(X) > 1/2$ and $\mu_{out}(Y) > 1/2$. Then
     $X \cap Y \neq \emptyset$.
 \end{enumerate}
-\textit{Official hint:} \textbf{8.2.5} --- $\mu_{out}$ can be positive and large on very sparse
+\textit{Official hint:} \textbf{8.2.5:} $\mu_{out}$ can be positive and large on very sparse
 sets\dots
 
 % Supplement: Sascha Brack/Ex Sheet Hints/Ex8_Analysis2_hints.pdf, p. 1
-\textit{Sascha Brack's hints:} a toolkit of sets worth testing every part against ---
+\textit{Sascha Brack's hints:} a toolkit of sets worth testing every part against, namely
 $\mathbb{Q}$, the irrationals $\mathbb{R}\setminus\mathbb{Q}$, $\mathbb{Q}\cap[0,1]$, and
 $(\mathbb{R}\setminus\mathbb{Q})\cap[0,1]$. For \textbf{8.2.3} specifically: monotonicity already
 gives $\mu_{out}(D) \leq \mu_{out}([0,1]) = 1$, so the work is showing
-$\mu_{out}(D) \geq 1$ --- essentially, that the \qt{smallest} dyadic set containing $D$ also
+$\mu_{out}(D) \geq 1$, essentially that the \qt{smallest} dyadic set containing $D$ also
 contains $[0,1]$.
 \end{exercise}
 

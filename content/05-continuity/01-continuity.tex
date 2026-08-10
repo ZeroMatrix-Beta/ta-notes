@@ -7,7 +7,7 @@
 \begin{definition}[Continuous map]
 \label{def:continuous}
 For $(X, d_X)$ and $(Y, d_Y)$ metric spaces, a function $f : X \to Y$ is called \newterm{continuous}
-(\germanterm{stetig}) if one of the following equivalent conditions holds:
+\germanfor{stetig} if one of the following equivalent conditions holds:
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item \textbf{($\varepsilon$--$\delta$):} $\forall x_0 \in X, \varepsilon > 0 \ \exists \delta > 0$ such that for all $x \in X$:
     \[d(x_0, x) < \delta \implies d(f(x_0), f(x)) < \varepsilon\]
@@ -20,8 +20,8 @@ For $(X, d_X)$ and $(Y, d_Y)$ metric spaces, a function $f : X \to Y$ is called 
 
 \begin{ainote}
 Corsin writes $d(x_0,x) < \varepsilon$ in the ($\varepsilon$--$\delta$) hypothesis above, which
-must read $\delta$ --- otherwise the quantified $\delta$ is never used. A slip of the pen;
-corrected in \cref{def:continuous}.
+must read $\delta$, since otherwise the quantified $\delta$ is never used at all. This is a slip
+of the pen, and it is corrected in \cref{def:continuous}.
 \end{ainote}
 
 % Generator: Claude Opus 5 (High) --- \cref{def:continuous} asserts the equivalence of three
@@ -45,8 +45,8 @@ $d_Y(f(x_n),f(x)) < \varepsilon$, so $f(x_n) \to f(x)$.
 By the shrinking-ball construction (\cref{rem:shrinking_ball_trick}) there are
 $x \in f^{-1}(U)$ and points $x_n \in B_{1/n}(x)$ with $x_n \notin f^{-1}(U)$. Then $x_n \to x$,
 so $f(x_n) \to f(x) \in U$ by \textbf{(b)}, and since $U$ is open,
-\cref{prop:open_closed_via_sequences}\textbf{(a)} forces $f(x_n) \in U$ for large $n$ ---
-i.e.\ $x_n \in f^{-1}(U)$, a contradiction.
+\cref{prop:open_closed_via_sequences}\textbf{(a)} forces $f(x_n) \in U$ for large $n$. That is,
+$x_n \in f^{-1}(U)$, which is a contradiction.
 
 \textbf{(c) $\Rightarrow$ (a).} Fix $x_0 \in X$ and $\varepsilon>0$. The ball
 $B_\varepsilon(f(x_0)) \subseteq Y$ is open (\cref{ex:ai_open_balls_are_open}), so
@@ -55,9 +55,67 @@ is $\delta>0$ with $B_\delta(x_0) \subseteq f^{-1}\big(B_\varepsilon(f(x_0))\big
 precisely that $d_X(x_0,x)<\delta$ implies $d_Y(f(x_0),f(x))<\varepsilon$.
 \end{proof}
 
+% Generator: Claude Opus 5 (High) --- FIG-05-01. The chapter defines continuity three ways and
+% had no picture at all; its only figure was the Lipschitz cone, two sections later.
+%
+% GEOMETRY. Nothing here is a computation, so there is no arithmetic to check; what matters is
+% that the drawing asserts only true things. Two deliberate choices:
+%   * The image of B_delta(x_0) is drawn as an irregular blob strictly INSIDE B_epsilon(f(x_0)),
+%     not as a disc and not filling it. Continuity says the image is contained in the target
+%     ball; it says nothing about the image being round, being centred, or exhausting the ball.
+%     A figure drawing f(B_delta) as a concentric disc would assert all three.
+%   * The blob touches neither the boundary of B_epsilon nor f(x_0)'s dot, since the inclusion
+%     is into the OPEN ball and f(x_0) is interior to the image, not on its edge.
+% The same picture reads condition (c) backwards: B_delta sits inside the preimage of the open
+% ball B_epsilon, which is the containment the proof of (c) => (a) produces.
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.0]
+  % ---- the source space ----
+  \draw[gray!55] plot[smooth cycle, tension=0.75] coordinates
+    {(-2.5,1.15) (-0.85,1.5) (0.15,0.55) (-0.35,-1.2) (-1.9,-1.45) (-2.95,-0.25)};
+  \node[gray!55!black, font=\small] at (-2.72,1.28) {$X$};
+  \fill[MidnightBlue!8] (-1.45,0.05) circle (0.62);
+  \draw[MidnightBlue!70, thick] (-1.45,0.05) circle (0.62);
+  \fill[MidnightBlue!70] (-1.45,0.05) circle (1.4pt);
+  \node[MidnightBlue!70, font=\scriptsize, anchor=north east] at (-1.5,-0.02) {$x_0$};
+  \node[MidnightBlue!70, font=\scriptsize, anchor=south] at (-1.45,0.70) {$B_\delta(x_0)$};
+
+  % ---- the map ----
+  \draw[->, thick] (0.55,0.05) -- (1.95,0.05) node[midway, above, font=\small] {$f$};
+
+  % ---- the target space ----
+  \draw[gray!55] plot[smooth cycle, tension=0.75] coordinates
+    {(2.6,1.3) (4.4,1.5) (5.5,0.4) (4.9,-1.3) (3.3,-1.5) (2.35,-0.3)};
+  \node[gray!55!black, font=\small] at (5.35,1.15) {$Y$};
+  \fill[BrickRed!7] (3.95,0.05) circle (0.78);
+  \draw[BrickRed!80, thick] (3.95,0.05) circle (0.78);
+  \node[BrickRed!80, font=\scriptsize, anchor=south] at (3.95,0.86)
+    {$B_\varepsilon(f(x_0))$};
+
+  % The image: irregular, strictly inside, not centred. All three are deliberate.
+  \fill[OliveGreen!14] plot[smooth cycle, tension=0.8] coordinates
+    {(3.72,0.42) (4.25,0.3) (4.38,-0.12) (3.95,-0.42) (3.55,-0.18)};
+  \draw[OliveGreen, thick] plot[smooth cycle, tension=0.8] coordinates
+    {(3.72,0.42) (4.25,0.3) (4.38,-0.12) (3.95,-0.42) (3.55,-0.18)};
+  \fill[BrickRed!80] (3.95,0.02) circle (1.4pt);
+  % Anchored below the dot and inside the blob. Anchored east it extended leftwards across the
+  % blob's own outline at x = 3.55, so the label sat half in and half out of the region it names.
+  \node[BrickRed!80, font=\scriptsize, anchor=north] at (3.95,-0.04) {$f(x_0)$};
+  \node[OliveGreen, font=\scriptsize, anchor=north west] at (4.35,-0.35)
+    {$f\big(B_\delta(x_0)\big)$};
+\end{tikzpicture}
+\end{center}
+
+Condition \textbf{(a)} is the statement that the green region fits inside the red ball, and that
+a $\delta$ making it fit can be found however small the red ball is made. Condition \textbf{(c)}
+is the same picture read from right to left: $B_\delta(x_0)$ lies inside
+$f^{-1}\big(B_\varepsilon(f(x_0))\big)$, which is exactly the containment produced in the
+\textbf{(c)} $\Rightarrow$ \textbf{(a)} step above. Note what the drawing does not claim: the
+image need not be round, need not be centred at $f(x_0)$, and need not fill the ball.
+
 \begin{remark}[Which of the three to reach for]
-Condition \textbf{(c)} is the only one that never mentions the metric, which is why it --- and
-not the $\varepsilon$--$\delta$ formulation --- is what survives into general topology
+Condition \textbf{(c)} is the only one that never mentions the metric. That is why it, and not the
+$\varepsilon$--$\delta$ formulation, is what survives into general topology
 (\cref{sec:structured_spaces}). Condition \textbf{(b)} is usually the fastest way to prove a
 function is \emph{dis}continuous, since a single badly chosen sequence suffices; this is exactly
 how \cref{ex:partial_derivatives_not_continuous} works. Condition \textbf{(a)} is the
@@ -69,7 +127,7 @@ one to use when a quantitative modulus is wanted, as in
 \begin{definition}[Uniform continuity]
 \label{def:uniformly_continuous}
 For $(X,d_X)$ and $(Y,d_Y)$ metric spaces, a function $f : X \to Y$ is \newterm{uniformly
-continuous} (\germanterm{gleichm\"assig stetig}) if
+continuous} \germanfor{gleichm\"assig stetig} if
 \[\forall \varepsilon > 0 \ \exists \delta > 0 \ \forall x, x' \in X : \quad d_X(x,x') < \delta \ \text{ implies } \ d_Y(f(x),f(x')) < \varepsilon.\]
 \end{definition}
 
@@ -80,7 +138,7 @@ Compare \cref{def:continuous} \textbf{(a)} with \cref{def:uniformly_continuous}:
 content.
 \begin{itemize}
   \item \textbf{Continuity:} $\forall x_0\ \forall\varepsilon\ \exists\delta$. The point $x_0$
-    is chosen \emph{before} $\delta$, so $\delta$ may depend on it --- a different $\delta$ is
+    is chosen \emph{before} $\delta$, so $\delta$ may depend on it, and a different $\delta$ is
     allowed at every point.
   \item \textbf{Uniform continuity:} $\forall\varepsilon\ \exists\delta\ \forall x$. Now
     $\delta$ is chosen \emph{before} seeing the point, so one and the same $\delta$ must work
@@ -90,8 +148,8 @@ Uniform continuity is therefore strictly stronger. The standard witness is
 $f(x) := 1/x$ on $(0,1)$: it is continuous, but near $0$ the graph steepens without bound, so
 the $\delta$ that works at $x_0 = \tfrac12$ is hopeless at $x_0 = \tfrac{1}{1000}$, and no
 single $\delta$ survives. \Cref{prop:compact_implies_uniformly_continuous} below says that on a
-\emph{compact} space this can never happen --- the gap between the two notions closes exactly
-when there is no room to run off to a bad point.
+\emph{compact} space this can never happen. The gap between the two notions closes exactly when
+there is no room left to run off towards a bad point.
 \end{importantremark}
 
 \begin{example}[$f(x) = x^2$]
@@ -133,7 +191,7 @@ $\{0\} = \id^{-1}(\{0\})$ is not open in $(X, d_X)$.
 \end{answer}
 
 \begin{question}
-And what if the roles are reversed --- $d_X$ the discrete metric, $d_Y$ arbitrary?
+And what if the roles are reversed, with $d_X$ the discrete metric and $d_Y$ arbitrary?
 \end{question}
 
 \begin{answer}
@@ -208,9 +266,9 @@ Therefore, we can simply choose $\delta := \varepsilon$. Then $d(x, x') < \delta
 \begin{corollary}[Closed sets are exactly the zero sets of a distance function]
 \label{cor:closed_iff_zero_of_distance}
 Let $(X,d)$ be a metric space and $\emptyset \neq E \subseteq X$. The function
-$f_E(x) := d(x,E) = \inf_{z\in E}d(x,z)$ is $1$-Lipschitz --- this is \cref{ex:2.3}\textbf{(c)},
+$f_E(x) := d(x,E) = \inf_{z\in E}d(x,z)$ is $1$-Lipschitz, which is \cref{ex:2.3}\textbf{(c)},
 proved there by the same reverse-triangle-inequality argument as
-\cref{ex:distance_to_point_continuous} above --- and
+\cref{ex:distance_to_point_continuous} above. Moreover,
 \[E \text{ is closed} \quad\Longleftrightarrow\quad E = \{x \in X : f_E(x) = 0\}.\]
 \end{corollary}
 

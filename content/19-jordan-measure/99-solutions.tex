@@ -1,6 +1,6 @@
-% Originally: content/week-08.tex had a \section{Solutions} containing only an AI-Note reading
-% "TODO --- pending the exercise statements". The statements had in fact been transcribed, so
-% 8.2 and 8.4 stood in the document unsolved. Written here for the first time.
+% Originally: content/week-08.tex had a \section{Solutions} holding nothing but a placeholder
+% note, which had already gone stale, since the statements were in fact transcribed. So 8.2 and
+% 8.4 stood in the document unsolved. Written here for the first time.
 \section{Solutions}
 \label{sec:jordan_measure_solutions}
 
@@ -12,9 +12,9 @@ that distinction three times; parts 4 and 5 are the difference between a measure
 sub-additive outer measure.
 \begin{enumerate}[label=\textbf{\arabic*.}]
   \item \textbf{False.} Take $X := \mathbb{Q}\cap[0,1]$: bounded and countable, yet
-    $\mu_{out}(X) = 1$ by part 3, since $X$ is dense in $[0,1]$. Countability buys nothing here
-    --- only finitely many intervals are allowed at a time, and finitely many intervals covering
-    a dense set must cover the whole of $[0,1]$.
+    $\mu_{out}(X) = 1$ by part 3, since $X$ is dense in $[0,1]$. Countability buys nothing here,
+    since only finitely many intervals are allowed at a time, and finitely many intervals
+    covering a dense set must cover the whole of $[0,1]$.
   \item \textbf{True}, and this is exactly where countable covers do buy something. Enumerate
     $X = \{x_1,x_2,\dots\}$ and, given $\varepsilon > 0$, cover $x_k$ by an interval of length
     $\varepsilon 2^{-k}$. The total length is $\sum_{k\geq1}\varepsilon2^{-k} = \varepsilon$, and
@@ -22,21 +22,21 @@ sub-additive outer measure.
   \item \textbf{True.} Monotonicity gives $\mu_{out}(D) \leq \mu_{out}([0,1]) = 1$, so only the
     lower bound needs an argument. Let $I_1,\dots,I_N$ be finitely many intervals covering $D$.
     Enlarging each to its closure changes no length, so we may assume they are closed; then
-    $\bigcup_{k=1}^N I_k$ is \emph{closed} --- this is where finiteness enters --- and contains
+    $\bigcup_{k=1}^N I_k$ is \emph{closed}, which is where finiteness enters, and contains
     $D$, hence contains $\overline D = [0,1]$. Therefore
     $\sum_{k=1}^N |I_k| \geq \mu([0,1]) = 1$. Taking the infimum over such covers,
     $\mu_{out}(D) \geq 1$.
   \item \textbf{True.} Suppose $X \cap Y = \emptyset$. Jordan measure is additive on disjoint
     Jordan measurable sets, so
     \[\mu(X \cup Y) = \mu(X) + \mu(Y) > \tfrac12 + \tfrac12 = 1.\]
-    But $X \cup Y \subseteq [0,1]$, so monotonicity forces $\mu(X\cup Y) \leq 1$ --- a
+    But $X \cup Y \subseteq [0,1]$, so monotonicity forces $\mu(X\cup Y) \leq 1$, a
     contradiction. Hence $X \cap Y \neq \emptyset$.
   \item \textbf{False}, and this is the official hint's point. Take
     \[X := \mathbb{Q}\cap[0,1], \qquad Y := (\mathbb{R}\setminus\mathbb{Q})\cap[0,1].\]
     Both are dense in $[0,1]$, so part 3 gives $\mu_{out}(X) = \mu_{out}(Y) = 1 > \tfrac12$; yet
     $X \cap Y = \emptyset$ by construction. The argument of part 4 breaks at its first step:
-    $\mu_{out}$ is only \emph{sub}additive, so $\mu_{out}(X\cup Y) \leq \mu_{out}(X)+\mu_{out}(Y)$
-    --- an inequality pointing the wrong way to produce a contradiction. Neither set is Jordan
+    $\mu_{out}$ is only \emph{sub}additive, so $\mu_{out}(X\cup Y) \leq \mu_{out}(X)+\mu_{out}(Y)$,
+    an inequality pointing the wrong way to produce a contradiction. Neither set is Jordan
     measurable, which is precisely why part 4 does not apply.
 \end{enumerate}
 
@@ -53,15 +53,15 @@ theory visible on this sheet traces back to that one sentence.
 \textbf{The correct answer is 4: $f$ locally Lipschitz continuous and $m \geq n$.} Both
 hypotheses are needed, and dropping either one admits a counterexample.
 
-\textbf{Why 1 and 2 fail --- uniform continuity is not enough.} Let $c : [0,1] \to [0,1]$ be the
+\textbf{Why 1 and 2 fail:} uniform continuity is not enough. Let $c : [0,1] \to [0,1]$ be the
 Cantor function, which is continuous on a compact interval and hence uniformly continuous, and
 let $N \subset [0,1]$ be the Cantor set. Then $N$ is Jordan-null (it is covered by $2^k$
 intervals of total length $(2/3)^k \to 0$), while $c(N) = [0,1]$ is not null. Here $n = m = 1$, so
-this single example kills option 1 \emph{and} option 2 --- the extra hypothesis $m \geq n$ does
+this single example kills option 1 \emph{and} option 2. The extra hypothesis $m \geq n$ does
 nothing to rescue mere continuity. Intuitively, a uniformly continuous map has no bound on how
 much it may stretch, only on how abruptly.
 
-\textbf{Why 3 fails --- $m \geq n$ is not decoration.} Let $f : \mathbb{R}^2 \to \mathbb{R}$,
+\textbf{Why 3 fails:} $m \geq n$ is not decoration. Let $f : \mathbb{R}^2 \to \mathbb{R}$,
 $f(x,y) := y$, which is Lipschitz with constant $1$, and let
 $N := \{0\}\times[0,1]$, a segment and so Jordan-null in $\mathbb{R}^2$. Then $f(N) = [0,1]$,
 which is not null in $\mathbb{R}^1$. Here $m = 1 < 2 = n$: a projection loses a dimension, and
@@ -81,9 +81,51 @@ As $\varepsilon$ was arbitrary, $f(N)$ is null.
 
 \begin{ainote}
 The proof shows exactly where each hypothesis is spent. \emph{Lipschitz} is what converts a bound
-on the side of a cube into a bound on the diameter of its image --- continuity alone gives no
+on the side of a cube into a bound on the diameter of its image. Continuity alone gives no
 such conversion. \emph{$m \geq n$} is what makes $s_i^{\,m} \leq s_i^{\,n}$, i.e.\ what stops the
 volume from being measured with too few powers of $s_i$. The two counterexamples attack precisely
 these two steps.
 \end{ainote}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:ai_gaussian_two_exhaustions}]
+% Generator: Claude Opus 5 (High)
+\textbf{(a)} Both families are nested and consist of compact sets whose boundaries are a circle
+and the four sides of a square respectively, each a Jordan null set, so both are Jordan
+measurable by \cref{thm:jordan_measurability_boundary_criterion}. For the covering condition,
+$\operatorname{int}(D_\ell) = B_\ell(0)$ and $\operatorname{int}(Q_\ell) = (-\ell,\ell)^2$, and
+every point of $\mathbb{R}^2$ lies in both once $\ell$ exceeds its distance from the origin.
+Hence $\bigcup_\ell\operatorname{int}(D_\ell) = \bigcup_\ell\operatorname{int}(Q_\ell) =
+\mathbb{R}^2$, and \cref{lem:improper_integral_as_limit} applies to each.
+
+\textbf{(b)} In polar coordinates, using \cref{thm:change_of_variables} with Jacobian $r$,
+\[\int_{D_\ell} e^{-(x^2+y^2)}\,dx\,dy = \int_0^{2\pi}\!\!\int_0^{\ell} e^{-r^2}\,r\,dr\,d\varphi
+  = 2\pi\left[-\frac{e^{-r^2}}{2}\right]_0^{\ell} = \pi\big(1 - e^{-\ell^2}\big)
+  \ \xrightarrow[\ell\to\infty]{}\ \pi.\]
+
+\textbf{(c)} On a square the integrand factorises, so \cref{thm:fubini} splits it:
+\[\int_{Q_\ell} e^{-(x^2+y^2)}\,dx\,dy
+  = \left(\int_{-\ell}^{\ell} e^{-x^2}dx\right)\left(\int_{-\ell}^{\ell} e^{-y^2}dy\right)
+  = \left(\int_{-\ell}^{\ell} e^{-x^2}dx\right)^{\!2}
+  \ \xrightarrow[\ell\to\infty]{}\ I^2.\]
+
+\textbf{(d)} Both limits compute the same number $\int_{\mathbb{R}^2}f$, by
+\cref{lem:improper_integral_as_limit}, so $I^2 = \pi$ and $I = \sqrt\pi$, the positive root since
+the integrand is positive.
+
+The step that collapses without $f \geq 0$ is the identification in \textbf{(d)}. Non-negativity
+is what makes $\ell \mapsto \int_{K_\ell}f$ monotone, and monotonicity is what forces every
+exhaustion to the same limit. For a sign-changing integrand the disks and the squares are free to
+disagree, and \cref{rem:improper_needs_nonnegativity} gives the standard example of an integral
+whose value genuinely depends on how the domain is exhausted.
+
+\begin{remark}[This is the argument \cref{ex:gaussian_integral_polar} was already making]
+\label{rem:gaussian_two_exhaustions_retro}
+The classical derivation of $\int_{\mathbb{R}}e^{-x^2}dx = \sqrt\pi$ squares the integral, reads
+the product as an integral over $\mathbb{R}^2$, and switches to polar coordinates. Written out,
+that is precisely the comparison above: the squaring step is the square exhaustion and the polar
+step is the disk exhaustion, and the derivation works because the two agree. What
+\cref{lem:improper_integral_as_limit} adds is the permission to move between them, which the
+classical presentation uses without mentioning.
+\end{remark}
 \end{exercisesolution}

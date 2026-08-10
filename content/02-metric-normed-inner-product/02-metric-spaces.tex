@@ -5,15 +5,16 @@
 
 \begin{definition}[Metric space]
 \label{def:metric_space}
-A \newterm{metric space} (\germanterm{metrischer Raum}) $(X,d)$ is any set $X$ with a
-\newterm{metric} (\germanterm{Metrik}) $d : X \times X \to \mathbb{R}_{\geq 0}$ such that for all
+A \newterm{metric space} \germanfor{metrischer Raum} $(X,d)$ is any set $X$ with a
+\newterm{metric} \germanfor{Metrik} $d : X \times X \to \mathbb{R}_{\geq 0}$ such that for all
 $x, y, z \in X$:
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item \textbf{Definiteness:} $d(x,y) \geq 0$, with equality if and only if $x = y$. In words: the
     distance is non-negative, and a point has zero distance to itself.
-  \item \textbf{Symmetry:} $d(x,y) = d(y,x)$, i.e., $x$ has the same distance to $y$ as $y$ to $x$.
-  \item \textbf{Triangle inequality ($\Delta$-inequality):} $d(x,z) \leq d(x,y) + d(y,z)$ ---
-    \qt{detours make the way longer}.
+  \item \textbf{Symmetry:} $d(x,y) = d(y,x)$, that is, $x$ has the same distance to $y$ as $y$
+    has to $x$.
+  \item \textbf{Triangle inequality ($\Delta$-inequality):} $d(x,z) \leq d(x,y) + d(y,z)$. In
+    words, \qt{detours make the way longer}.
 \end{enumerate}
 \end{definition}
 
@@ -63,18 +64,18 @@ once you know what it is keeping out.
     $-1$ from $1$, and no sequence could ever have a unique limit.
   \item \textbf{Symmetry fails:} $d(x,y) := \max\{\,y-x,\ 2(x-y)\,\}$, i.e.\ moving to the right
     costs $1$ per unit and moving to the left costs $2$. Here $d(0,1)=1$ but $d(1,0)=2$, so the
-    return trip is more expensive than the outward one. Definiteness still holds ---
-    $d(x,y) = 0$ forces $y-x \leq 0 \leq y-x$, hence $x=y$ --- and so does the triangle
-    inequality, since $d(x,y) = \varphi(y-x)$ for $\varphi(t) := \max\{t,-2t\}$, and $\varphi$
-    is a maximum of two linear functions vanishing at $0$, hence convex and positively
-    homogeneous, hence subadditive. (Such a $d$ is called a \newterm{quasi-metric} and is
-    genuinely useful elsewhere --- but $B_r(x)$ would then depend on which argument the centre
-    sits in.)
+    return trip is more expensive than the outward one. Definiteness still holds, since
+    $d(x,y) = 0$ forces both $y - x \leq 0$ and $x - y \leq 0$, hence $x = y$. So does the
+    triangle inequality: writing $d(x,y) = \varphi(y-x)$ for $\varphi(t) := \max\{t,-2t\}$, the
+    function $\varphi$ is a maximum of two linear functions vanishing at $0$, hence convex and
+    positively homogeneous, and therefore subadditive. Such a $d$ is called a
+    \newterm{quasi-metric} and is genuinely useful elsewhere, though note that $B_r(x)$ would then
+    depend on which argument the centre sits in.
   \item \textbf{Triangle inequality fails:} $d(x,y) := (x-y)^2$. Definiteness and symmetry are
     clear, but
     \[d(0,2) = 4 \quad > \quad d(0,1)+d(1,2) = 1+1 = 2,\]
-    so the detour through $1$ is \emph{shorter} than going direct --- exactly the
-    \qt{detours make the way longer} slogan reversed.
+    so the detour through $1$ is \emph{shorter} than going direct. This is exactly the
+    \qt{detours make the way longer} slogan running backwards.
 \end{enumerate}
 \end{aiexample}
 
@@ -85,9 +86,9 @@ Three axioms are few enough that a great many things qualify as metrics, and the
 list below is exactly that breadth. Two of the examples are not what one would draw on a
 blackboard as \qt{distance}: the discrete metric measures nothing but \qt{same or different},
 and the supremum metric measures the distance between two \emph{functions}. Both are legitimate,
-and it is worth letting them stretch the intuition now --- the second, in particular, is the
-setting in which uniform convergence turns out to be an ordinary case of
-\cref{def:convergent_sequence} (\cref{ex:uniform_convergence}).
+and it is worth letting them stretch the intuition now. The second in particular is the setting in
+which uniform convergence turns out to be nothing more than an ordinary instance of
+\cref{def:convergent_sequence}; see \cref{ex:uniform_convergence}.
 
 % Source: Corsin Nick/Class Notes/Week 2.pdf, pp. 1--13
 \begin{example}[Standard metrics on $\mathbb{R}^n$]
@@ -139,14 +140,14 @@ setting in which uniform convergence turns out to be an ordinary case of
 \end{tikzpicture}
 \end{center}
 
-Note that $d_1$ is the \textbf{sum} of the two legs and $d_3$ the \textbf{larger} of them ---
-neither is a single leg on its own. Only $d_2$ is the straight-line distance you would draw by
-reflex.
+Note that $d_1$ is the \textbf{sum} of the two legs and $d_3$ the \textbf{larger} of them. Neither
+is a single leg on its own. Only $d_2$ is the straight-line distance one would draw by reflex, and
+it is worth remembering that the other two are just as legitimate.
 
 % Supplement: Analysis_II_Script_v1.pdf, p. 6
 \begin{remark}[Why $d_1$ is the \qt{Manhattan} metric]
-The official script motivates the name explicitly: in a grid of streets running only
-north--south and east--west --- as in much of Manhattan --- a taxi cannot cut across a block
+The official script motivates the name explicitly. In a grid of streets running only
+north--south and east--west, as in much of Manhattan, a taxi cannot cut across a block
 diagonally. To travel from $x=(x_1,x_2)$ to $y=(y_1,y_2)$ it moves horizontally from $x$ to
 $(y_1,x_2)$ and then vertically to $y$ (or the two legs in the other order), covering exactly
 $|x_1-y_1|+|x_2-y_2| = d_1(x,y)$ either way. This is precisely the orange path in the figure
@@ -156,16 +157,18 @@ above.
 % Source: Corsin Nick/Class Notes/Week 2.pdf, pp. 1--13
 In general,
 \[
-d(x,y) := \sqrt[m]{\sum_{k=1}^{n} (x_k - y_k)^m}
+d_m(x,y) := \sqrt[m]{\sum_{k=1}^{n} |x_k - y_k|^m}
 \]
-is a metric on $\mathbb{R}^n$ for any $m$.
+is a metric on $\mathbb{R}^n$ for every $m \geq 1$, with $d_1$, $d_2$ above as the cases
+$m = 1, 2$.
 
 \begin{ainote}
-Two caveats Corsin leaves out. The powers must be taken of \textbf{absolute values},
-$\sqrt[m]{\sum_k|x_k-y_k|^m}$ --- otherwise for odd $m$ the radicand can be negative. And it is
-a metric only for $m \geq 1$: for $m \in (0,1)$ the triangle inequality fails, as
-\Cref{ex:4.3}\textbf{.6} shows with $x=e_1$, $y=e_2$, where
-$|x+y|_m = 2^{1/m} > 2 = |x|_m+|y|_m$. Written as stated above.
+Corsin writes this formula as $\sqrt[m]{\sum_k (x_k-y_k)^m}$, without the absolute values, and
+for any $m$. Two corrections have been applied above. The powers must be taken of
+\textbf{absolute values}, since for odd $m$ the radicand can otherwise be negative. And the
+result is a metric only for $m \geq 1$: for $m \in (0,1)$ the triangle inequality fails, as
+\Cref{ex:4.3}\textbf{.6} shows with $x = e_1$ and $y = e_2$, where
+$|x+y|_m = 2^{1/m} > 2 = |x|_m + |y|_m$.
 \end{ainote}
 
 % Quelle: Linus Lüchinger/Slides/Slides-02-26.pdf, slide 4
@@ -200,9 +203,9 @@ then subadditivity give
 This gives a quick reflex for the standard exercise \qt{is this a metric?} when the candidate has
 the form $h(\lvert x-y\rvert)$ on $\mathbb{R}$: \textbf{sketch $h$ and look at its curvature.}
 A concave $h$ bends \emph{towards} the axis, so distances grow ever more slowly and long jumps
-become relatively cheap --- exactly the direction the triangle inequality wants. A convex $h$
-does the opposite, making one long jump more expensive than two short ones, which is precisely
-what the triangle inequality forbids.
+become relatively cheap, which is exactly the direction the triangle inequality wants. A convex
+$h$ does the opposite, making one long jump more expensive than two short ones, and that is
+precisely what the triangle inequality forbids.
 
 The two textbook cases sit on either side.
 \begin{itemize}
@@ -213,11 +216,12 @@ The two textbook cases sit on either side.
     $d(x,y) := e^{\lvert x-y\rvert}-1$ is \textbf{not} a metric: taking $x=0$, $y=1$, $z=2$,
     \[d(0,2) = e^2-1 \approx 6.389 \quad>\quad 2(e-1) \approx 3.437 = d(0,1)+d(1,2).\]
 \end{itemize}
-The heuristic is one-directional, and worth stating carefully: concavity \emph{guarantees} a
-metric, whereas convexity only \emph{suggests} failure --- it is not a proof, and a convex $h$
-must still be refuted by an explicit triple, as above. The reason the $m$-metrics of the
-preceding \cref{ex:metric_examples} split at $m=1$ is the same phenomenon seen along
-each axis: $t \mapsto t^{1/m}$ is concave for $m \geq 1$ and convex for $m \in (0,1)$.
+The heuristic runs in one direction only, and is worth stating carefully. Concavity
+\emph{guarantees} a metric, whereas convexity merely \emph{suggests} failure. Convexity is not a
+proof of anything, and a convex $h$ must still be refuted by an explicit triple, as above.
+Finally, note that the $m$-metrics of the preceding \cref{ex:metric_examples} split at $m = 1$ for
+the same reason, seen along each axis: $t \mapsto t^{1/m}$ is concave for $m \geq 1$ and convex
+for $m \in (0,1)$.
 \end{remark}
 
 % Generator: Claude Opus 5 (High) --- FIG-02-04
@@ -271,7 +275,7 @@ $h \circ d$.
     \[
     d(f,g) := \sup_{x \in [0,1]} |f(x) - g(x)|
     \]
-    This is well defined --- i.e.\ the supremum is a real number and not $+\infty$ --- because
+    This is well defined, meaning that the supremum is a real number rather than $+\infty$, because
     $|f-g|$ is continuous on the compact interval $[0,1]$ and therefore bounded, by the extreme
     value theorem from \emph{Analysis I} (revisited in this generality as
     \cref{lem:sequential_compactness_extreme_values} below). Compactness of the domain is doing
@@ -332,18 +336,18 @@ $h \circ d$.
 The two pictures above compare two different metrics that $S^2$ inherits or acquires, and it is
 worth writing both down. Restricting the ambient Euclidean metric of $\mathbb{R}^3$ gives the
 \newterm{chord metric}
-\[d_0(x,y) := \|x-y\|, \qquad x,y \in S^2,\]
-the orange dashed segment in the right-hand panel; since $\|x\|=\|y\|=1$, expanding
-$\|x-y\|^2 = \langle x-y,x-y\rangle$ gives the closed form
-$d_0(x,y) = \sqrt{2-2\langle x,y\rangle}$. The geodesic metric described above --- arc length
-along a great circle, the solid blue curve in both panels --- is instead
+\[d_0(x,y) := |x-y|, \qquad x,y \in S^2,\]
+the orange dashed segment in the right-hand panel; since $|x|=|y|=1$, expanding
+$|x-y|^2 = \langle x-y,x-y\rangle$ gives the closed form
+$d_0(x,y) = \sqrt{2-2\langle x,y\rangle}$. The geodesic metric described above measures arc length
+along a great circle instead, and is the solid blue curve in both panels. It is given by
 \[d_1(x,y) := \arccos\big(\langle x,y\rangle\big) \in [0,\pi].\]
 Both are genuine metrics on $S^2$ (\cref{ex:metric_examples}\textbf{(d)} already noted $d_0$;
 $d_1$ measures the same distance a great-circle flight would fly). They disagree as soon as
-$x \neq y$: the chord always cuts inside the sphere, so $d_0(x,y) \leq d_1(x,y)$, with equality
-only in the limit $y \to x$. This is the sharpest instance in the chapter of a general warning
---- a subset inherits a metric from its ambient space, but that inherited metric need not be the
-one a geometer studying the subset \emph{intrinsically} would choose.
+$x \neq y$, since the chord always cuts inside the sphere. Therefore, $d_0(x,y) \leq d_1(x,y)$,
+with equality only in the limit $y \to x$. This is the sharpest instance in the chapter of a
+general warning. A subset inherits a metric from its ambient space, but that inherited metric need
+not be the one a geometer studying the subset \emph{intrinsically} would choose.
 \end{remark}
 
 % Quelle: Linus Lüchinger/Slides/Slides-02-23.pdf, slide 12
@@ -370,9 +374,9 @@ point $y \neq x$ has $d(y,x) = \lVert x\rVert + \lVert y\rVert \geq \lVert x\rVe
 \[B_r(x) = \{x\}.\]
 Every non-zero point is therefore \textbf{isolated}, and $\{x\}$ is open. The origin is the sole
 exception: $d(y,0) = \lVert y\rVert$ for $y \neq 0$, so $B_r(0)$ is the ordinary ball of radius
-$r$. The space is thus discrete everywhere except at one point, where it looks entirely normal
---- which is a useful shape to keep in mind whenever a proof seems to be using more about a
-metric space than the three axioms actually give.
+$r$. The space is thus discrete everywhere except at one point, where it looks entirely normal.
+That is a useful shape to keep in mind whenever a proof seems to be using more about a metric
+space than the three axioms actually give.
 \end{remark}
 \end{example}
 
@@ -396,9 +400,9 @@ For a single point of $\mathbb{R}^2$ or $\mathbb{R}^3$, plain $(x,y)$ or $(x,y,z
 fine.
 
 The reason this matters more here than in \emph{Analysis I} is that the product metrics of
-\cref{ex:2.5} and the continuity proofs that follow genuinely need both indices at once, so an
-expression such as $d(x_1,y_1) + d(x_2,y_2)$ is ambiguous until the convention is fixed --- it
-means quite different things under the two readings.
+\cref{ex:2.5} and the continuity proofs that follow genuinely need both indices at once. An
+expression such as $d(x_1,y_1) + d(x_2,y_2)$ is therefore ambiguous until the convention is fixed,
+and means quite different things under the two readings.
 \end{remark}
 
 % Source: Corsin Nick/Class Notes/Week 2.pdf, pp. 1--13
@@ -497,28 +501,100 @@ Which of the following pairs are metric spaces? Prove it or provide a counterexa
   \item $(\mathbb{R}^{n \times n}, d)$ with
     $d(X,Y) := \left(\Tr\{(X-Y)\transp(X-Y)\}\right)^{1/2}$.
   \item \textbf{(*)} $(\mathbb{R}^{n \times n}, d)$ with
-    $$d(X,Y) := \sup\{|v\transp(X-Y)v| : v \in \mathbb{R}^n, \|v\| = 1\},$$
+    $$d(X,Y) := \sup\{|v\transp(X-Y)v| : v \in \mathbb{R}^n, |v| = 1\},$$
     and $\mathbb{R}^{n\times n}$ denoting the set of square matrices.
   \item \textbf{(*)} $(\mathbb{R}^2/\mathbb{Z}^2, d)$ where the flat 2-dimensional torus
     $\mathbb{R}^2/\mathbb{Z}^2$ is the set of equivalence classes of pairs of real numbers under
     the equivalence relation
     $$x, y \in \mathbb{R}^2, \quad x \sim y \iff x_1 - y_1 \in \mathbb{Z},\ x_2 - y_2 \in \mathbb{Z},$$
-    and $d([x],[y]) := \inf_{k,h \in \mathbb{Z}} \|x - y + (k,h)\|$, with $\|\cdot\|$ denoting the
+    and $d([x],[y]) := \inf_{k,h \in \mathbb{Z}} |x - y + (k,h)|$, with $|\cdot|$ denoting the
     Euclidean distance and $[x] \in \mathbb{R}^2/\mathbb{Z}^2$ denoting the equivalence class of
     $x \in \mathbb{R}^2$.
 \end{enumerate}
 
-\textit{Official hints:} \textbf{2.1.3} and \textbf{2.1.4} --- ignore what happens in the second
-variable, it is there only to distract you. \textbf{2.1.5} --- rewrite, for a general matrix
+\textit{Official hints:} \textbf{2.1.3} and \textbf{2.1.4:} ignore what happens in the second
+variable, it is there only to distract you. \textbf{2.1.5:} rewrite, for a general matrix
 $A := X - Y$, what $\Tr\{A\transp A\}^{1/2}$ actually means; it should look familiar.
-\textbf{2.1.6} --- see what happens if $(X-Y)$ is anti-symmetric. \textbf{2.1.7} --- convince
-yourself first that the ``inf'' is in fact a ``min''.
+\textbf{2.1.6:} see what happens if $(X-Y)$ is anti-symmetric. \textbf{2.1.7:} convince yourself
+first that the ``inf'' is in fact a ``min''.
 \end{exercise}
 
 % Quelle: Diego Torres Tejeda/Notes - 02.03 - Diego Torres Tejeda.pdf, p. 2
-\begin{ainote}[Diego's geometric intuition for the flat torus $\mathbb{R}^2/\mathbb{Z}^2$]
-Diego's notes highlight the geometric picture behind part \textbf{2.1.7}: every equivalence class in $\mathbb{R}^2/\mathbb{Z}^2$ has a representative in $[0,1] \times [0,1]$. Identifying opposite boundaries $(0,x) \sim (1,x)$ and $(x,0) \sim (x,1)$ folds the unit square into a cylinder and subsequently into a 2D torus $\mathbb{T}^2 := \mathbb{R}^2/\mathbb{Z}^2$. The distance $d([x],[y])$ is simply the shortest Euclidean distance between points on this folded torus.
-\end{ainote}
+% Reclassified from ainote to remark: this is mathematics, not commentary on the transcription.
+\begin{remark}[The flat torus $\mathbb{R}^2/\mathbb{Z}^2$, folded up]
+\label{rem:flat_torus_folding}
+Part \textbf{2.1.7} is much easier to think about with a picture. Every equivalence class in
+$\mathbb{R}^2/\mathbb{Z}^2$ has a representative in the unit square $[0,1] \times [0,1]$, so the
+torus is that square with its opposite edges identified: $(0,t) \sim (1,t)$ glues left to right,
+and $(t,0) \sim (t,1)$ glues bottom to top. Performing the two gluings in turn folds the square
+first into a cylinder and then into a torus $\mathbb{T}^2 := \mathbb{R}^2/\mathbb{Z}^2$.
+
+\begin{center}
+% Generator: Claude Opus 5 (High) --- FIG-02-05.
+% Three stages, left to right. Matching arrowheads mark edges that get identified: the blue
+% single arrows on the vertical edges are glued first (giving the cylinder, whose two rims are
+% then the orange edges), the orange double arrows on the horizontal edges second (bending the
+% cylinder round so its two rims meet, giving the torus).
+\begin{tikzpicture}[>=Latex, scale=1.0,
+    glueA/.style={blue!70!black, line width=1.1pt},
+    glueB/.style={orange!90!black, line width=1.1pt}]
+
+  % ---------- (1) the unit square with its edge identifications ----------
+  \begin{scope}[shift={(0,0)}]
+    \fill[blue!7] (0,0) rectangle (2,2);
+    \draw[glueB] (0,0) -- (2,0);
+    \draw[glueB] (0,2) -- (2,2);
+    \draw[glueA] (0,0) -- (0,2);
+    \draw[glueA] (2,0) -- (2,2);
+    % single arrowheads: vertical pair; double arrowheads: horizontal pair
+    \draw[glueA,->] (0,0.92) -- (0,1.16);
+    \draw[glueA,->] (2,0.92) -- (2,1.16);
+    \draw[glueB,->] (0.86,0) -- (1.10,0);
+    \draw[glueB,->] (1.06,0) -- (1.30,0);
+    \draw[glueB,->] (0.86,2) -- (1.10,2);
+    \draw[glueB,->] (1.06,2) -- (1.30,2);
+    \node[font=\scriptsize, align=center, anchor=north] at (1,-0.34)
+      {\textbf{(1)} the square $[0,1]^2$\\ opposite edges identified};
+  \end{scope}
+
+  % ---------- (2) glue the blue pair: a cylinder ----------
+  \begin{scope}[shift={(4.0,0)}]
+    \draw[glueB] (1.0,1.72) ellipse (0.72 and 0.26);
+    \draw[gray!55, dashed] (0.28,0.28) arc (180:0:0.72 and 0.26);
+    \draw[glueB] (1.72,0.28) arc (0:-180:0.72 and 0.26);
+    \draw[black!70] (0.28,1.72) -- (0.28,0.28);
+    \draw[black!70] (1.72,1.72) -- (1.72,0.28);
+    \node[font=\scriptsize, align=center, anchor=north] at (1,-0.34)
+      {\textbf{(2)} glue left to right:\\ a cylinder, two orange rims};
+  \end{scope}
+
+  % ---------- (3) glue the orange rims to each other: a torus ----------
+  % The seam where the two rims meet is a MERIDIAN of the tube, not a circle round the hole, so
+  % it is drawn as the small orange ellipse standing across the tube at the right. An earlier
+  % version put a dashed ellipse around the centre, which read as a second hole.
+  \begin{scope}[shift={(8.0,1.0)}]
+    \draw[black!70, thick] (1,0) ellipse (1.15 and 0.72);
+    % the inner hole, drawn as the usual pair of arcs
+    \draw[black!70, thick] (0.42,0.12) .. controls (0.72,-0.22) and (1.28,-0.22) .. (1.58,0.12);
+    \draw[black!70, thick] (0.58,0.01) .. controls (0.78,0.22)  and (1.22,0.22)  .. (1.42,0.01);
+    % the seam: one meridian circle of the tube, on the right-hand side
+    \draw[glueB, thick] (1.72,0) ellipse (0.115 and 0.42);
+    % Label kept clear of the outer silhouette, which reaches x = 2.15.
+    \node[glueB, font=\scriptsize, anchor=west] at (2.22,0.46) {seam};
+    \draw[glueB, very thin] (2.20,0.44) -- (1.80,0.22);
+    \node[font=\scriptsize, align=center, anchor=north] at (1,-1.34)
+      {\textbf{(3)} glue the two rims:\\ the torus $\mathbb{T}^2$};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+With the picture in hand the formula reads off directly. The distance $d([x],[y])$ is the
+shortest Euclidean distance between representatives, which is to say the length of the shortest
+path on the folded torus. The infimum over $k,h \in \mathbb{Z}$ in the problem statement is just
+the search over which copy of $y$ in the tiling of the plane by unit squares lies nearest to $x$,
+and since only finitely many copies can be candidates, that infimum is attained. This is what the
+official hint means when it says to convince yourself the infimum is really a minimum.
+\end{remark}
 
 % Originally: content/exercise-sheets/week-02.tex, problem 2.5
 % Source: exercises/Ex2_Analysis2_eng.pdf, p. 1
@@ -543,7 +619,7 @@ $$
   \item Show that a sequence $(x_n, y_n) \to (x,y)$ with respect to $(X \times Y, d_3)$ if and
     only if $x_n \to x$ with respect to $d_X$ and $y_n \to y$ with respect to $d_Y$.
 \end{enumerate}
-\textit{Official hint:} don't get distracted by the abstract set-up --- you already know all
+\textit{Official hint:} don't get distracted by the abstract set-up, since you already know all
 these things for $\mathbb{R} \times \mathbb{R}$; start from there, then rewrite those arguments in
 this general framework.
 \end{exercise}

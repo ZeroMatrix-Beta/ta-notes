@@ -5,7 +5,7 @@
 
 \begin{definition}[Connected and disconnected metric spaces]
 \label{def:connectedness}
-A metric space $(X,d)$ is \newterm{disconnected} (\germanterm{unzusammenh\"angend}) if there
+A metric space $(X,d)$ is \newterm{disconnected} \germanfor{unzusammenh\"angend} if there
 exist subsets $U_1, U_2 \subseteq X$ which are
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item \textbf{open},
@@ -16,7 +16,7 @@ such that $X = U_1 \cup U_2$. Similarly, for a subset $A \subseteq X$, it is dis
 disconnected as a metric space with the induced metric $d|_{A \times A}$.
 
 If no such pair $U_1, U_2$ exists, $X$ is \newterm{connected}
-(\germanterm{zusammenh\"angend}) --- that is, connected is the negation of disconnected.
+\germanfor{zusammenh\"angend}. Connected is thus defined as the negation of disconnected.
 \end{definition}
 
 Typically, proving that a set or metric space is connected is done \textbf{by contradiction},
@@ -82,8 +82,8 @@ means: \qt{the space cannot be separated by open sets.}
 % but stated nowhere in the source notes.
 \begin{proposition}[Intervals are connected]
 \label{prop:intervals_connected}
-Every interval $I \subseteq \mathbb{R}$ --- open, closed, half-open, bounded or not --- is
-connected (\cref{def:connectedness}). Conversely, a connected subset of $\mathbb{R}$ is an
+Every interval $I \subseteq \mathbb{R}$, whether open, closed, half-open, bounded or unbounded,
+is connected (\cref{def:connectedness}). Conversely, a connected subset of $\mathbb{R}$ is an
 interval.
 \end{proposition}
 
@@ -97,10 +97,10 @@ in $U_1$ or in $U_2$, and both lead to a contradiction:
 \begin{itemize}
   \item If $c \in U_1$, openness gives $\varepsilon>0$ with $(c-\varepsilon,c+\varepsilon)\cap I
     \subseteq U_1$; together with $[a,c) \subseteq U_1$ this yields $[a,t] \subseteq U_1$ for
-    some $t>c$ unless $c=b$ --- contradicting either the supremum or $b \in U_2$.
+    some $t>c$ unless $c=b$, contradicting either the supremum or $b \in U_2$.
   \item If $c \in U_2$, openness gives $\varepsilon>0$ with $(c-\varepsilon,c] \cap I \subseteq
     U_2$. But $c>a$ (as $a \in U_1$ is open in $I$), so by definition of the supremum there is
-    $t \in (c-\varepsilon,c]$ with $[a,t] \subseteq U_1$ --- contradicting disjointness.
+    $t \in (c-\varepsilon,c]$ with $[a,t] \subseteq U_1$, contradicting disjointness.
 \end{itemize}
 So no such splitting exists, and $I$ is connected. For the converse, a set $A \subseteq
 \mathbb{R}$ that is not an interval admits $a<c<b$ with $a,b \in A$ and $c \notin A$; then
@@ -114,9 +114,9 @@ a continuous image of $[0,1]$ (\cref{def:path}), so path-connected sets are conn
 (\cref{lem:path_connected_implies_connected}) purely because the \emph{interval} is; and the
 intermediate value theorem, invoked in the topologist's sine curve below, is
 \cref{thm:continuity_preserves_connected} applied to an interval, since the connected subsets of
-$\mathbb{R}$ are exactly the intervals. In other words, the single fact that $\mathbb{R}$ has no
-gaps --- the completeness axiom, which is what powers the supremum above --- is the source of
-all of it.
+$\mathbb{R}$ are exactly the intervals. In other words, all of it flows from the single fact that
+$\mathbb{R}$ has no gaps. That fact is the completeness axiom, and it is what powers the supremum
+in the proof above.
 \end{remark}
 
 \begin{aiexample}[Disconnectedness of Rational Numbers]
@@ -179,13 +179,14 @@ By \cref{prop:intervals_connected}, $[a,b]$ is connected, so $f([a,b])$ is conne
 again). An interval containing $f(a)$ and $f(b)$ contains everything between them.
 \end{proof}
 
-\begin{ainote}
-The intermediate value theorem is a result from \emph{Analysis I}, but it is worth re-deriving
-it here in one line: it is the first place where connectedness earns its keep, and the proof
-makes visible that the theorem is really a statement about $\mathbb{R}$ having no gaps rather
-than about $f$. It is used in the topologist's sine curve
+% Reclassified from ainote to plain prose: this says why the corollary is worth stating, which
+% is a mathematical judgement, not a note about the transcription.
+% Transition: Claude Opus 5 (High)
+The intermediate value theorem is a result from \emph{Analysis I}, and re-deriving it here costs
+one line. It is worth the line twice over. This is the first place where connectedness earns its
+keep, and the derivation makes visible that the theorem is really a statement about $\mathbb{R}$
+having no gaps rather than a statement about $f$. It is used again in the topologist's sine curve
 (\cpageref{ex:topologists_sine_curve}) below.
-\end{ainote}
 
 % Supplement: Analysis_II_Script_v1.pdf, p. 29
 \begin{corollary}[Intermediate value theorem on a connected space]
@@ -205,8 +206,8 @@ between them.
 \begin{remark}
 \Cref{cor:intermediate_value_theorem} is the special case $X = [a,b]$. Stating the general
 version separately is worth doing once: it makes clear that connectedness, not any special
-property of an interval, is what the intermediate value theorem actually needs --- exactly the
-moral of \cref{rem:intervals_are_the_base_case}.
+property of an interval, is what the intermediate value theorem actually needs. That is exactly
+the moral of \cref{rem:intervals_are_the_base_case}.
 \end{remark}
 
 % Supplement: Sascha Brack/Class Notes/Week_03_Notes_Monday.pdf, p. 4
@@ -238,7 +239,7 @@ $(V_1 \cup V_2) \cap U_2 = \emptyset$ and $V_1 \cup V_2$ is connected.
 
 \textbf{(b) False.} \textit{Counterexample:}
 \[
-X = \mathbb{R}^2, \quad U = [-1,1] \times \{0\}, \quad V = S^1 = \{x \in \mathbb{R}^2 : \|x\| = 1\},
+X = \mathbb{R}^2, \quad U = [-1,1] \times \{0\}, \quad V = S^1 = \{x \in \mathbb{R}^2 : |x| = 1\},
 \]
 \[
 U \cap V = \{(-1,0), (1,0)\}.
@@ -252,7 +253,7 @@ $U_2$ is open, also $U_2 \cap \overline{A} = \emptyset$.
 \end{exercisesolution}
 
 \begin{ainote}
-Corsin writes $\|x\| = R^2$ in the definition of $S^1$ above; it must be $\|x\| = 1$, as the
+Corsin writes $|x| = R^2$ in the definition of $S^1$ above; it must be $|x| = 1$, as the
 stated intersection $\{(\pm 1, 0)\}$ confirms. Corrected here.
 \end{ainote}
 
@@ -309,22 +310,22 @@ cannot meet $\bigcup_i V_i$: no separation of the union exists.
 \begin{definition}[Connected component]
 \label{def:connected_component}
 Let $(X,d)$ be a metric space and $x \in X$. The \newterm{connected component}
-(\germanterm{Zusammenhangskomponente}) of $x$ is
+\germanfor{Zusammenhangskomponente} of $x$ is
 \[C_x := \bigcup\{V \subseteq X : V \text{ connected and } x \in V\},\]
 the union of all connected subsets of $X$ containing $x$.
 \end{definition}
 
 \begin{remark}
 By \cref{cor:union_connected_common_point} (with $I$ indexing \emph{all} connected sets
-containing $x$, and common point $p := x$), $C_x$ is itself connected --- it is the
+containing $x$, and common point $p := x$), $C_x$ is itself connected. It is therefore the
 \emph{largest} connected subset of $X$ containing $x$, since it contains every connected set
 that does. Two connected components are either equal or disjoint: if $C_x \cap C_y \neq
 \emptyset$, pick $p$ in the intersection; then $C_x \cup C_y$ is connected
 (\cref{cor:union_connected_common_point} again, common point $p$) and contains both $x$ and $y$,
 so maximality of $C_x$ and $C_y$ forces $C_x \cup C_y \subseteq C_x$ and
-$C_x \cup C_y \subseteq C_y$, i.e.\ $C_x = C_y$. Hence the connected components partition $X$ into
-disjoint pieces --- the connectedness analogue of how an equivalence relation partitions a set
-into equivalence classes.
+$C_x \cup C_y \subseteq C_y$, that is, $C_x = C_y$. Hence the connected components partition $X$
+into disjoint pieces, which is the connectedness analogue of the way an equivalence relation
+partitions a set into equivalence classes.
 \end{remark}
 
 % Source: Jérôme Paschoud/Notizen/Woche 3.2 Zusammenhängende Mengen.pdf, p. 3

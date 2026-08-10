@@ -4,18 +4,26 @@
 \label{sec:lipschitz_continuity}
 
 % Quelle: Linus Lüchinger/Slides/Slides-03-02.pdf, pp. 10--13 -- Sonnet 5 (Medium)
+% Lüchinger's exercise slides motivate and name the condition and give a quick self-test; both
+% are reproduced here, reformulated, since they fill a genuine gap in Corsin's own notes.
+% Corrected 2026-08-09 against lec_notes.pdf. This AI-Note previously asserted that "the course
+% never formally introduces Lipschitz continuity" and that the reader "will not find it under this
+% name in the lecture material". Both are false: Definition 9.55 (printed p. 15) introduces uniform
+% and Lipschitz continuity together. The note is kept, because the provenance point is still worth
+% making, but it now says the true thing.
+% Supplement: lec_notes.pdf, p. 15 (Definition 9.55)
 \begin{ainote}
-Corsin never formally introduces Lipschitz continuity, even though a Lipschitz
-constant is already used informally for contraction mappings
-(\cref{def:contraction_mapping}, below). Lüchinger's exercise slides motivate and name it as a
-strictly stronger condition than uniform continuity, and give a quick self-test; both are
-reproduced here (reformulated), since they fill a genuine gap.
+Corsin's own notes use a Lipschitz constant informally, for contraction mappings
+(\cref{def:contraction_mapping}, below), without ever defining the term; the definition and the
+hierarchy that follow are supplied from other tutors. The lecture notes do define it, alongside
+uniform continuity, in Definition 9.55 on p.\ 15, so this is a gap in the TA material rather than
+in the course.
 \end{ainote}
 
 \begin{definition}[Lipschitz continuity]
 \label{def:lipschitz_continuous}
 Let $(X,d_X)$, $(Y,d_Y)$ be metric spaces. A function $f : X \to Y$ is \newterm{Lipschitz
-continuous} (\germanterm{Lipschitz-stetig}) if there exists $L \geq 0$, a \newterm{Lipschitz
+continuous} \germanfor{Lipschitz-stetig} if there exists $L \geq 0$, a \newterm{Lipschitz
 constant} for $f$, such that
 \[d_Y(f(x),f(x')) \leq L\cdot d_X(x,x') \quad \text{for all } x,x' \in X.\]
 \end{definition}
@@ -28,18 +36,17 @@ Lipschitz continuity is stronger than uniform continuity
 constant and there is nothing to prove); then $\delta := \varepsilon/L$ satisfies the definition
 of uniform continuity, since
 \[d_X(x,x') < \frac{\varepsilon}{L} \quad \text{gives} \quad d_Y(f(x),f(x')) \leq L\,d_X(x,x') < \varepsilon\]
-for \emph{every} pair $x,x'$ --- the same $\delta$ at every point, which is exactly what
-uniform continuity asks for. The second implication is immediate: a $\delta$ that works at all
-points in particular works at each one.
+for \emph{every} pair $x,x'$. This is one and the same $\delta$ at every point, which is exactly
+what uniform continuity asks for. The second implication is immediate: a $\delta$ that works at
+all points in particular works at each one.
 
 Both converses fail. Every continuously differentiable function on a compact \emph{interval} is
-Lipschitz continuous, with $L := \sup|f'|$ by the mean value theorem --- the interval matters,
-since the mean value theorem needs the segment between the two points to lie in the domain ---
-but $f(x) := \sqrt{x}$ on
-$[0,\infty)$ is uniformly continuous and \emph{not} Lipschitz: a Lipschitz constant would force
-$\delta$ to shrink only linearly in $\varepsilon$, whereas here
+Lipschitz continuous, with $L := \sup|f'|$ by the mean value theorem. The word \emph{interval}
+matters here, since the mean value theorem needs the segment between the two points to lie in the
+domain. But $f(x) := \sqrt{x}$ on $[0,\infty)$ is uniformly continuous and \emph{not} Lipschitz.
+A Lipschitz constant would force $\delta$ to shrink only linearly in $\varepsilon$, whereas here
 $|\sqrt{x}-\sqrt{x'}| < \varepsilon$ near $0$ already requires $\delta$ of order
-$\varepsilon^2$. The reason is visible in the graph --- the tangent at $0$ is vertical, so no
+$\varepsilon^2$. The reason is visible in the graph, since the tangent at $0$ is vertical and no
 finite slope $L$ can dominate it.
 \end{remark}
 
@@ -90,7 +97,7 @@ Give an example of:
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item A $\tfrac{1}{2}$-Lipschitz function $f : [0,1) \to [0,1)$ that has no fixed point.
   \item A map $f : \mathbb{R}^2 \to \mathbb{R}^2$ that has no fixed point, but is an isometry,
-    i.e.\ $\|f(x) - f(x')\| = \|x - x'\|$ for all $x, x' \in \mathbb{R}^2$.
+    i.e.\ $|f(x) - f(x')| = |x - x'|$ for all $x, x' \in \mathbb{R}^2$.
 \end{enumerate}
 \end{exercise}
 
@@ -110,7 +117,7 @@ Select all the statements below that are true.
 
 \begin{remark}
 Corsin's third reason to care about compactness (\cref{sec:why_compactness_matters}) is precisely
-that a continuous function on a compact space is uniformly continuous --- which settles
+that a continuous function on a compact space is uniformly continuous, which settles
 \cref{ex:3.6}(c) and (d) at once.
 \end{remark}
 
@@ -135,7 +142,7 @@ $$d_Y\big(f(x), f(y)\big) \leq \omega\big(d_X(x,y)\big) \qquad \forall x,y \in X
     $t_1, t_2 \geq 0$.
   \item \textit{(Bonus 2)} Assume $X \subset \mathbb{R}^n$ is \textbf{convex}, meaning: for all
     $x_1, x_2 \in X$ and all $\lambda \in [0,1]$, $(1-\lambda)x_1 + \lambda x_2 \in X$. With
-    $d_X(x,y) = \|x-y\|$ (Euclidean distance), show again that the modulus from (1) can be chosen
+    $d_X(x,y) = |x-y|$ (Euclidean distance), show again that the modulus from (1) can be chosen
     subadditive.
 \end{enumerate}
 
@@ -148,8 +155,8 @@ this issue, and in many familiar settings (e.g.\ intervals/convex sets in $\math
 resulting $\omega_f(t)$ is finite for all $t$.
 \end{remark}
 
-\textit{Official hints:} \textbf{3.11.1} --- define the ``worst oscillation at scale $t$''
-$\omega_f(t) := \sup\{d_Y(f(x),f(y)) : d_X(x,y) \leq t\}$. \textbf{3.11.2 / 3.11.3} --- if
+\textit{Official hints:} \textbf{3.11.1:} define the ``worst oscillation at scale $t$''
+$\omega_f(t) := \sup\{d_Y(f(x),f(y)) : d_X(x,y) \leq t\}$. \textbf{3.11.2 / 3.11.3:} if
 $d_X(x,y) \leq t_1 + t_2$, choose an intermediate point $z$ on the segment from $x$ to $y$ so
 that $d_X(x,z) \leq t_1$ and $d_X(z,y) \leq t_2$, then use the triangle inequality in $Y$.
 \end{exercise}

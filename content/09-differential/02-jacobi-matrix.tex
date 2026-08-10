@@ -6,11 +6,11 @@
 
 Since $DF_{x_0} : \mathbb{R}^n \to \mathbb{R}^m$ (\cref{def:differentiable}) is a linear map, there is a \textbf{1--1
 correspondence with a matrix once a basis is fixed}! In the standard basis of $\mathbb{R}^n$,
-$(e_1,\dots,e_n)$, this is the \newterm{Jacobi matrix} (\germanterm{Jacobi-Matrix}):
+$(e_1,\dots,e_n)$, this is the \newterm{Jacobi matrix} \germanfor{Jacobi-Matrix}:
 \[DF_x \;\cong\; \Jac F(x) = \begin{pmatrix} \dfrac{\partial F_1}{\partial x_1} & \cdots & \dfrac{\partial F_1}{\partial x_n} \\[1ex] \vdots & \ddots & \vdots \\[1ex] \dfrac{\partial F_m}{\partial x_1} & \cdots & \dfrac{\partial F_m}{\partial x_n}\end{pmatrix}\]
 ($m$ rows, $n$ columns), where we wrote $F(x) = (F_1, \dots, F_m)\transp$ and
 \[\frac{\partial F}{\partial x_i} =: \partial_i F(x)\]
-is the \newterm{$i$-th partial derivative} (\germanterm{partielle Ableitung}) at $x$:
+is the \newterm{$i$-th partial derivative} \germanfor{partielle Ableitung} at $x$:
 \[\partial_i F(x) = \lim_{s\to 0}\frac{F(x+se_i)-F(x)}{s}.\]
 This defines a function $\partial_i F : U \to \mathbb{R}^m$. If $F$ is differentiable, then
 \[\partial_i F(x) = DF_x(e_i).\]
@@ -48,12 +48,13 @@ f_2 = \frac{r^4\cos^2\theta\sin^2\theta}{r^2} = r^2\cos^2\theta\sin^2\theta.\]
 In $f_1$ every $r$ cancels: the function is constant along each ray and takes a different
 constant on different rays, so no limit exists and $f_1$ is discontinuous at the origin. In
 $f_2$ a factor $r^2$ survives, and since $|\cos^2\theta\sin^2\theta| \leq 1$ we get
-$|f_2| \leq r^2 \to 0$ \emph{uniformly in $\theta$} --- so $f_2$ is continuous at the origin.
+$|f_2| \leq r^2 \to 0$ \emph{uniformly in $\theta$}, so $f_2$ is continuous at the origin.
 
 The pair is worth doing once because it shows what the polar substitution is actually testing.
-The question is never \qt{does the expression go to zero along each fixed ray?} --- $f_1$ does
-not even do that --- but \textbf{does the $\theta$-dependence get killed by a positive power of
-$r$?} If the $r$'s cancel completely, the direction survives into the limit and there is none.
+The question is never \qt{does the expression go to zero along each fixed ray?}, which $f_1$ does
+not even manage. The question is \textbf{does the $\theta$-dependence get killed by a positive
+power of $r$?} If the $r$'s cancel completely, the direction survives into the limit and there is
+none.
 This is the same test used in \cref{q:quiz_q4} on the repetition quiz, and the reason
 step 3 of \cref{rem:differentiability_recipe} insists on \qt{uniformly in $\theta$}.
 \end{remark}
@@ -92,15 +93,15 @@ strongest condition is at the bottom, and every arrow points at something weaker
 \begin{importantremark}[Not one of these arrows reverses]
 The diagram is easy to misread as a set of equivalences, and it is nothing of the kind: every
 $\Rightarrow$ in it is strict. \Cref{ex:partial_derivatives_not_continuous} already shows the
-bottom-left arrow failing backwards --- both partial derivatives exist at the origin and $f$ is
-not even continuous there. The other two failures, with their counterexamples, are collected in
+bottom-left arrow failing backwards, since there both partial derivatives exist at the origin
+while $f$ is not even continuous. The other two failures, with their counterexamples, are collected in
 \cref{sec:sufficient_condition_differentiability}, which redraws this same landscape as a single
 vertical chain and attaches a witness to each broken link.
 
 The one genuine equivalence is the horizontal arrow along the bottom, and it is worth seeing
 why. Left to right: continuous partials make $f$ continuously differentiable
 (\cref{thm:continuous_partials_imply_differentiable}), so every directional derivative exists
-and equals $Df_x(v)$, which depends continuously on $x$. Right to left is immediate --- take
+and equals $Df_x(v)$, which depends continuously on $x$. Right to left is immediate: take
 $v = e_i$.
 \end{importantremark}
 
@@ -109,18 +110,21 @@ $v = e_i$.
 % Transition: Claude Opus 5 (High)
 The three examples that follow are the three shapes the Jacobian takes, and it is worth naming
 them, because the layout of the matrix changes completely between them while the underlying
-object --- the linear map $DF_{x_0}$ --- does not.
+object, the linear map $DF_{x_0}$, does not.
 \begin{itemize}
   \item \textbf{A curve} ($n=1$, $m$ arbitrary): one column, so $\Jac\gamma(t)$ is a
     \emph{column vector}, the velocity.
   \item \textbf{A scalar field} ($n$ arbitrary, $m=1$): one row, so $\Jac f(x)$ is a
-    \emph{row vector} --- the transposed gradient, $(\nabla f)\transp$.
+    \emph{row vector}, namely the transposed gradient $(\nabla f)\transp$.
   \item \textbf{A vector field} (both $>1$): the full $m \times n$ matrix, whose columns are the
     partial derivatives and whose rows are the gradients of the components.
 \end{itemize}
-The gradient being a row and the velocity a column is not a convention to memorise: it follows
-from \qt{$m$ rows, $n$ columns} and nothing else. Confusing the two is the commonest source of
-shape errors when the chain rule is applied later in this chapter.
+That the Jacobian of a scalar field is a row while the Jacobian of a curve is a column is not a
+convention to memorise: it follows from \qt{$m$ rows, $n$ columns} and nothing else. Note the
+transpose in the second bullet, which is the one place a real convention enters: the
+\emph{gradient} $\nabla f$ is a column vector, so it is $\Jac f = (\nabla f)\transp$ that is the
+row. Confusing the two is the commonest source of shape errors when the chain rule is applied
+later in this chapter.
 
 % Source: Corsin Nick/Class Notes/Week 4.pdf, p. 4
 \begin{example}[Derivative of a curve]
@@ -150,15 +154,15 @@ Its determinant is $\det \Jac f(r,\theta) = r\cos^2\theta + r\sin^2\theta = r > 
 \end{tikzpicture}
 \end{center}
 
-This vector is the \textbf{velocity of the curve} (\germanterm{Geschwindigkeit}) at
+This vector is the \textbf{velocity of the curve} \germanfor{Geschwindigkeit} at
 $t = \tfrac{\pi}{4}$; its length $|\gamma'(t)|$ is the \textbf{speed}. We get that
 \[\gamma\!\left(\tfrac{\pi}{4}+h\right) = \frac{1}{\sqrt{2}}\begin{pmatrix}1\\1\end{pmatrix} + \frac{h}{\sqrt{2}}\begin{pmatrix}-1\\1\end{pmatrix} + o(|h|).\]
 
 \begin{ainote}
 Corsin calls $\gamma'(\tfrac{\pi}{4})$ the \qt{speed} of the curve. Strictly, $\gamma'(t)$ is the
-\emph{velocity} --- a vector, carrying both a direction and a magnitude --- while the speed is
-the scalar $|\gamma'(t)|$, here $|(-1,1)|/\sqrt2 = 1$. Since the display below uses the vector,
-the distinction matters; corrected above.
+\emph{velocity}, a vector carrying both a direction and a magnitude, whereas the speed is the
+scalar $|\gamma'(t)|$, here $|(-1,1)|/\sqrt2 = 1$. Since the display below uses the vector, the
+distinction matters. Corrected above.
 \end{ainote}
 
 % Source: Corsin Nick/Class Notes/Week 4.pdf, p. 4
@@ -187,12 +191,12 @@ Because these partial derivatives exist everywhere and are continuous, $f$ is di
 \end{example}
 
 From this, we see that the \textbf{rows} of the Jacobian are the \newterm{gradients}
-(\germanterm{Gradient}):
+\germanfor{Gradient}:
 \[\Jac F(x) = \begin{pmatrix} \nabla F_1 \\ \hline \vdots \\ \hline \nabla F_m \end{pmatrix}\]
 
 \begin{ainote}
 Corsin's sentence reads ``the columns of the Jacobian are the gradients'', but the displayed
-matrix stacks $\nabla F_1, \dots, \nabla F_m$ as rows --- which is the correct statement, and
+matrix stacks $\nabla F_1, \dots, \nabla F_m$ as rows. The display is the correct one, and it is
 consistent with $(\nabla f)\transp$ just above. Corrected to ``rows''.
 \end{ainote}
 
@@ -210,9 +214,9 @@ We claim that $f$ is differentiable at $(0,0)$ with $Df_{(0,0)} = (0, 0)$, but t
 
 \textbf{Step 1: Differentiability at $(0,0)$.} We use the definition of the differential. Let $L = (0, 0)$. We need to show that
 \[
-  \lim_{h \to (0,0)} \frac{f(h_1, h_2) - f(0,0) - L\begin{pmatrix}h_1\\h_2\end{pmatrix}}{\|h\|} = 0.
+  \lim_{h \to (0,0)} \frac{f(h_1, h_2) - f(0,0) - L\begin{pmatrix}h_1\\h_2\end{pmatrix}}{|h|} = 0.
 \]
-Plugging in the definitions and changing to polar coordinates $(h_1, h_2) = (r\cos\theta, r\sin\theta)$ with $r = \|h\| = \sqrt{h_1^2+h_2^2}$:
+Plugging in the definitions and changing to polar coordinates $(h_1, h_2) = (r\cos\theta, r\sin\theta)$ with $r = |h| = \sqrt{h_1^2+h_2^2}$:
 \[
   \lim_{r \to 0} \frac{r^2 \sin(1/r) - 0 - 0}{r} = \lim_{r \to 0} r \sin(1/r) = 0.
 \]
@@ -254,17 +258,19 @@ Let $f(x,y) := x^2 y + \sin(xy)$ defined on $\mathbb{R}^2$.
 Nothing in \cref{def:differentiable} requires the domain to be $\mathbb{R}^n$ with $n$ small, or
 even to be written as a column of numbers. A function of an $n\times m$ matrix is a function of
 $nm$ real variables, and its partial derivatives $\partial f/\partial A_{ij}$ are defined exactly
-as before --- vary one entry, freeze the rest.
+as before, by varying one entry and freezing the rest.
 
-\begin{ainote}[Why this is worth a subsection]
+% Reclassified from ainote to remark: motivation for the mathematics, not commentary on the
+% transcription. Linus spends part of a session making this argument.
+\begin{remark}[Why this is worth a subsection]
 Taking derivatives with respect to a matrix argument can look like a formal exercise with no
-purpose. Linus spends part of a session arguing the opposite, and the argument is worth
-recording: \textbf{it is how neural networks are trained.} The parameters of such a network are
-matrices; the function being minimised sends those matrices to a single number measuring how
-badly the network fits the data; and training consists of computing the gradient with respect
-to those matrices and stepping a little way against it, because $-\nabla f$ points in the
-direction of steepest decrease. Every step of that loop is the material of this chapter.
-\end{ainote}
+purpose. It is not, and the reason is worth recording: \textbf{it is how neural networks are
+trained.} The parameters of such a network are matrices. The function being minimised sends those
+matrices to a single number measuring how badly the network fits the data, and training consists
+of computing the gradient with respect to those matrices and then stepping a little way against
+it, because $-\nabla f$ points in the direction of steepest decrease. Every step of that loop is
+the material of this chapter.
+\end{remark}
 
 The simplest instance is already worth doing by hand, and it is exactly linear regression.
 
@@ -293,19 +299,20 @@ Collecting the entries back into arrays of the same shape as the variables,
 \[\nabla_{\!A} f = 2\big(AX + b\mathbf{1}\transp - Y\big)X\transp, \qquad
   \nabla_{\!b} f = 2\big(AX + b\mathbf{1}\transp - Y\big)\mathbf{1}.\]
 The gradient with respect to $b$ is twice the vector of row sums of the residual, and the
-gradient with respect to $A$ is the residual correlated against the inputs --- both entirely
-explicit, and both computed by nothing beyond partial differentiation and the chain rule.
+gradient with respect to $A$ is the residual correlated against the inputs. Both are entirely
+explicit, and both were computed with nothing beyond partial differentiation and the chain rule.
 \end{aiexample}
 
-\begin{ainote}[A notational caution]
-Linus flags one point that trips people up. Since $f$ above has domain
+% Reclassified from ainote to remark: a caution about how the identity is read is mathematics.
+\begin{remark}[A notational caution]
+One point trips people up here. Since $f$ above has domain
 $\mathbb{R}^{n\times m}\times\mathbb{R}^n$ of dimension $nm+n$, its Jacobian is formally a
 $1\times(nm+n)$ row, and $\partial_v f(A,b) = \Jac f(A,b)\,v$ would require flattening the matrix
 direction $v$ into a column of length $nm$. That flattening is pure bookkeeping and is almost
 never performed: one keeps $\nabla_{\!A}f$ shaped like $A$, as above. The identity
-$\partial_vf = \Jac f\cdot v$ of \cref{sec:jacobi_matrix} still holds --- it is just being read
+$\partial_vf = \Jac f\cdot v$ of \cref{sec:jacobi_matrix} still holds, and is simply being read
 in a reshaped coordinate system.
-\end{ainote}
+\end{remark}
 
 % Originally: content/week-04.tex, \exercisesheet{4}
 % Source: exercises/Ex4_Analysis2_eng.pdf

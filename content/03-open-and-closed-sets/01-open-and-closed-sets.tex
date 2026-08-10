@@ -18,9 +18,19 @@ $y \in X$ is what makes openness relative to the space, and it is exactly what t
 misconception on \cref{rem:common_misconception} turns on.
 \end{importantremark}
 
-\begin{ainote}
-\Cref{def:open_ball} is stated for $r \in \mathbb{R}$ rather than $r > 0$. Harmless here, but
-loose.
+% Supplement: lec_notes.pdf, p. 11 (Definition 9.38)
+\begin{ainote}[Two things to know about this definition]
+\label{ainote:ball_notation}
+First, \cref{def:open_ball} is stated for $r \in \mathbb{R}$ rather than $r > 0$. Harmless here,
+but loose; the two degenerate cases are spelled out in the remark below.
+
+Second, and more likely to trip you up when reading alongside the lecture: \textbf{the lecture
+notes put the arguments the other way round}, writing $B(x,r)$ where this document writes
+$B_r(x)$ (Definition 9.38, p.\ 11). The two mean exactly the same set, centre $x$ and radius $r$;
+only the typography differs. This document keeps $B_r(x)$, because that is what Corsin's notes
+use and it is what every later chapter here is written in. The one thing to watch is that in the
+lecture's ordering the centre comes \emph{first}, so $B(0,1)$ and $B_1(0)$ are the same ball
+while $B(1,0)$ and $B_1(0)$ are not.
 \end{ainote}
 
 % Moved here from before \cref{def:open_ball} (review item D1): it uses $B_r(x)$,
@@ -33,9 +43,8 @@ $x \in X$ with radius $r > 0$ is
 B_r(x) = \begin{cases} \{x\} & \text{if } 0 < r \leq 1, \\ X & \text{if } r > 1. \end{cases}
 \]
 Hence every singleton $\{x\}$ is open in the discrete metric, and consequently every subset of
-$X$ is both open and closed (\newterm{clopen}) --- which is exactly what
-\Cref{ex:X_empty_clopen} below asks you to verify for $X$ and $\emptyset$ in a general metric
-space.
+$X$ is both open and closed (\newterm{clopen}). This is exactly what \Cref{ex:X_empty_clopen}
+below asks you to verify for $X$ and $\emptyset$ in a general metric space.
 \end{aiexample}
 
 % Generator: Claude Opus 5 (Medium)
@@ -43,7 +52,7 @@ space.
 Taking \cref{def:open_ball} literally at the edges of its range is a cheap way to test whether
 you have read it correctly.
 \begin{itemize}
-  \item If $r \leq 0$, then $B_r(x) = \emptyset$ --- \emph{not} $\{x\}$. The condition is
+  \item If $r \leq 0$, then $B_r(x) = \emptyset$, and \emph{not} $\{x\}$. The condition is
     $d(y,x) < r$, strictly, and $d(x,x) = 0 \not< 0$. So even the centre is missing from
     $B_0(x)$.
   \item In the discrete metric $B_1(x) = \{x\}$, while $B_{1.01}(x) = X$: a ball can jump from a
@@ -66,9 +75,9 @@ Draw the picture, then let the triangle inequality do the work.
 
 \begin{definition}[Open and closed sets]
 \label{def:open_closed}
-Then, we call a subset $U \subseteq X$ \newterm{open} (\germanterm{offen}) if and only if
+Then, we call a subset $U \subseteq X$ \newterm{open} \germanfor{offen} if and only if
 \[\forall y \in U \ \exists \varepsilon > 0 \text{ such that } B_\varepsilon(y) \subseteq U.\]
-And we call $A \subseteq X$ \newterm{closed} (\germanterm{abgeschlossen}) if and only if
+And we call $A \subseteq X$ \newterm{closed} \germanfor{abgeschlossen} if and only if
 $X \setminus A$ is open.
 \end{definition}
 
@@ -115,7 +124,7 @@ $X := (0,1)\cup(2,3) \subset \mathbb{R}$ with the standard metric: both $(0,1)$ 
 clopen \emph{in $X$}. Each is open in $\mathbb{R}$, hence open in $X$; and each is the complement
 in $X$ of the other, so each is also closed in $X$. Whether a space has clopen subsets besides
 $X$ and $\emptyset$ turns out to be exactly the question \cref{ch:connectedness} is organised
-around --- a space with none is called \newterm{connected}.
+around. A space with none is called \newterm{connected}.
 \end{example}
 
 % Supplement: Sascha Brack/Class Notes/Week_02_Notes_Friday_Updated.pdf, p. 1
@@ -140,8 +149,10 @@ is open there is $\varepsilon>0$ with $B_\varepsilon(x) \subseteq U_{i_0} \subse
 
 \textbf{(b)} Let $x \in \bigcap_{i=1}^kU_i$. For each $i$ pick $\varepsilon_i>0$ with
 $B_{\varepsilon_i}(x) \subseteq U_i$, and set $\varepsilon := \min\{\varepsilon_1,\dots,\varepsilon_k\}$.
-Then $\varepsilon > 0$ --- \emph{this is where finiteness is used} --- and
-$B_\varepsilon(x) \subseteq U_i$ for every $i$, hence $B_\varepsilon(x) \subseteq \bigcap_iU_i$.
+Then $\varepsilon > 0$, and \emph{this is the only place finiteness is used}: a minimum of
+finitely many positive numbers is positive, whereas an infimum of infinitely many can be $0$.
+Since $B_\varepsilon(x) \subseteq U_i$ for every $i$, we conclude that
+$B_\varepsilon(x) \subseteq \bigcap_iU_i$.
 
 \textbf{(c)} Take complements and apply \textbf{(a)}, \textbf{(b)} via De Morgan:
 $X\setminus\bigcap_iA_i = \bigcup_i(X\setminus A_i)$ and

@@ -8,18 +8,22 @@
 \chapter{Metric, Normed and Inner-Product Spaces}
 \label{ch:metric_spaces}
 
-% Transition: Claude Opus 5 (Medium)
-This chapter abstracts the notion of distance from $\mathbb{R}^n$ to an arbitrary set. It sets up
-the hierarchy of structured spaces --- topological, metric, normed, inner-product --- that the
-rest of the course rests on, establishes the metric axioms and the three standard metrics $d_1$,
-$d_2$, $d_3$, and closes with the geometry that an inner product buys over a mere norm: angles,
-orthogonal projection, and the Cauchy--Schwarz inequality.
-
-Corsin taught the two halves a week apart, opening the later one with a recap of the definitions
-given here; \cref{sec:inner_products_recap} keeps that recap, now as a pointer back to
-\cref{sec:structured_spaces} rather than a repetition.
+% Transition: Claude Opus 5 (High)
+% Corsin taught the two halves of this chapter a week apart, opening the later one with a recap
+% of the definitions given here. sec:inner_products_recap keeps that recap, now as a pointer back
+% to sec:structured_spaces rather than a repetition.
+How much structure does a set need before one can do analysis on it? This chapter answers that by
+taking $\mathbb{R}^n$ apart into layers. Distance comes first, and distance alone already carries
+convergence and continuity. Adding a linear structure gives a norm, which measures the length of
+one vector rather than the gap between two. Adding an inner product on top of that gives angles,
+and with them orthogonal projection. The layers nest, each one strictly inside the last, and the
+inequality that makes the innermost layer work at all is Cauchy--Schwarz. A last section settles
+the question all of this raises: on $\mathbb{R}^n$ the choice of norm turns out not to matter for
+anything topological, and it matters a great deal that this is a theorem rather than an
+assumption.
 
 \input{content/02-metric-normed-inner-product/01-structured-spaces.tex}
 \input{content/02-metric-normed-inner-product/02-metric-spaces.tex}
 \input{content/02-metric-normed-inner-product/03-cauchy-schwarz.tex}
+\input{content/02-metric-normed-inner-product/04-equivalence-of-norms.tex}
 \input{content/02-metric-normed-inner-product/99-solutions.tex}

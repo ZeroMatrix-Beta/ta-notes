@@ -6,12 +6,17 @@
 \chapter{The Mean Value Theorem and Taylor Expansions}
 \label{ch:taylor}
 
-% Transition: Claude Opus 5 (Medium)
-Having linearized a map once, we ask how good that linear approximation is, and how to improve it
-order by order --- the several-variable analogue of the Taylor series from \emph{Analysis I}. The
-mean value theorem comes first, because it is what the error terms are estimated with, and
-because it is the first result in this course that becomes an \emph{inequality} rather than an
-equality once the target is $\mathbb{R}^m$ with $m > 1$ (\cref{ex:4.5}).
+% Transition: Claude Opus 5 (High)
+Having linearized a map once, we ask two further questions. How good is that linear approximation,
+and how is it improved order by order? The answer is the several-variable analogue of the Taylor
+series from \emph{Analysis I}, and it is what supplies every quantitative estimate in the
+optimization theory of the next part.
+
+The mean value theorem comes first, for two reasons. It is the instrument the error terms are
+estimated with, and it is the first result in this course that survives the move to
+$\mathbb{R}^m$ only as an \emph{inequality} rather than an equality once $m > 1$ (\cref{ex:4.5}).
+That degradation is not a defect of the proof. There is simply no single intermediate point at
+which all $m$ components can be caught at once.
 
 \input{content/11-taylor/01-mean-value-theorem.tex}
 \input{content/11-taylor/02-taylor-expansions.tex}

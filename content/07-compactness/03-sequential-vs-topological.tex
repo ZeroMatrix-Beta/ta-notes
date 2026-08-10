@@ -2,15 +2,15 @@
 
 \subsection{Sequential and topological compactness agree}
 
+% Diego Torres Tejeda's supplementary note "Addendum - Sequential and Topological Compactness.pdf"
+% is the one typeset document among his materials, the rest being handwritten scans. Its proof is
+% adapted below into this project's notation and house style.
 \begin{ainote}
-Corsin (and \cref{def:sequential_topological_compactness}, quoting the official lecture notes)
-states this equivalence but never proves it, nor does he prove \cref{thm:sequential_compactness}
-above. Diego Torres Tejeda's supplementary note \texttt{Addendum - Sequential and Topological
-Compactness.pdf} --- the one typeset document among his materials, the rest being handwritten
-scans --- works out a complete, self-contained proof. Adapted below into this project's notation
-and house style; by the reduction already noted above (compactness of $K \subseteq X$ is
-compactness of the metric space $(K,d|_{K\times K})$), it suffices to treat a whole metric space
-$X$ rather than a subset $K$.
+Neither this equivalence nor \cref{thm:sequential_compactness} above is proved in the
+transcribed notes. A complete, self-contained proof is supplied here
+from a second tutor's addendum. By the reduction already noted above, compactness of
+$K \subseteq X$ being compactness of the metric space $(K,d|_{K\times K})$, it suffices to treat a
+whole metric space $X$ rather than a subset $K$.
 \end{ainote}
 
 \begin{lemma}[Continuous functions attain extrema on sequentially compact spaces]
@@ -29,13 +29,13 @@ $x$.
 
 \begin{remark}
 This is exactly the extreme value theorem (\cref{item:extreme_value_theorem}) proved from first
-principles, without presupposing \cref{thm:sequential_compactness} --- needed here since that
-theorem is precisely what we are about to prove.
+principles, without presupposing \cref{thm:sequential_compactness}. Avoiding that appeal is
+essential here, since that theorem is precisely what we are about to prove.
 \end{remark}
 
 \begin{definition}[Totally bounded]
 \label{def:totally_bounded}
-A metric space $(X,d)$ is \newterm{totally bounded} (\germanterm{total beschr\"ankt}) if for
+A metric space $(X,d)$ is \newterm{totally bounded} \germanfor{total beschr\"ankt} if for
 every $\varepsilon > 0$ there exist finitely many points $x_1,\dots,x_n \in X$ such that
 \[X = \bigcup_{k=1}^{n} B_\varepsilon(x_k).\]
 \end{definition}
@@ -65,8 +65,8 @@ $\varepsilon := \tfrac12$, every ball $B_{1/2}(x) = \{x\}$ (\cref{def:open_ball}
 \begin{remark}
 This is the same asymmetry \cref{lem:sequentially_compact_totally_bounded} proves in one
 direction only: sequential compactness forces \emph{both} boundedness and total boundedness, and
-this exercise shows the two are genuinely different hypotheses --- total boundedness is the
-strictly stronger, and in general infinite-dimensional, condition.
+this exercise shows the two are genuinely different hypotheses. Total boundedness is the strictly
+stronger of the two, and the gap opens up in infinite dimensions.
 \end{remark}
 
 \begin{lemma}[Sequential compactness gives (total) boundedness]
@@ -82,8 +82,8 @@ $X = B_{M+1}(x_0)$.
 
 \textbf{Totally bounded.} Fix $\varepsilon > 0$. Construct a sequence inductively: let
 $x_1 \in X$ be arbitrary, and, having chosen $x_1,\dots,x_n$, let
-$U_n := \bigcup_{k=1}^n B_\varepsilon(x_k)$; if $U_n = X$, stop --- we have the desired finite
-cover. Otherwise, pick $x_{n+1} \in X\setminus U_n$, so that $d(x_{n+1},x_k) \geq \varepsilon$ for
+$U_n := \bigcup_{k=1}^n B_\varepsilon(x_k)$. If $U_n = X$, stop, since we then have the desired
+finite cover. Otherwise pick $x_{n+1} \in X\setminus U_n$, so that $d(x_{n+1},x_k) \geq \varepsilon$ for
 all $k \leq n$. If this process never terminates, sequential compactness gives a convergent, hence
 Cauchy, subsequence $(x_{n_k})_k$; but $d(x_{n_k},x_{n_{k+1}}) \geq \varepsilon$ for all $k$
 contradicts the Cauchy property. So, the process must terminate after finitely many steps, giving
@@ -124,8 +124,8 @@ $B_{\varepsilon_x}(x) \cap \{x_n : n \geq N_x\} = \emptyset$. The balls
 $\{B_{\varepsilon_x}(x)\}_{x \in X}$ cover $X$, so topological compactness gives finitely many
 $x_1,\dots,x_m$ with $X = \bigcup_{k=1}^m B_{\varepsilon_{x_k}}(x_k)$. With
 $N := \max\{N_{x_1},\dots,N_{x_m}\}$, every $x_n$ with $n \geq N$ then avoids
-$B_{\varepsilon_{x_1}}(x_1) \cup \dots \cup B_{\varepsilon_{x_m}}(x_m) = X$ --- absurd. So $X$ is
-sequentially compact.
+$B_{\varepsilon_{x_1}}(x_1) \cup \dots \cup B_{\varepsilon_{x_m}}(x_m) = X$, which is absurd.
+Therefore, $X$ is sequentially compact.
 
 \begin{center}
 \begin{tikzpicture}[scale=1.5]
@@ -181,7 +181,7 @@ $B_{r(x)}(x) \subseteq U_i$ for some $i$, so $y \in U_i$, and the triangle inequ
 Halving, $r(y) = \tfrac12R(y) \geq \tfrac12\big(r(x)-d(x,y)\big)$, which also holds trivially
 when $d(x,y) \geq r(x)$ since $r(y) \geq 0$. By symmetry,
 \[|r(x)-r(y)| \leq \tfrac12\,d(x,y),\]
-so $r$ is $\tfrac12$-Lipschitz --- in particular continuous, which is all that is needed below.
+so $r$ is $\tfrac12$-Lipschitz, and in particular continuous, which is all that is needed below.
 
 By \cref{lem:sequential_compactness_extreme_values}, $r$ attains a minimum
 $\varepsilon := \min_{x\in X} r(x) > 0$ on $X$. Then $B_\varepsilon(x) \subseteq U_i$ for some $i$,
@@ -205,7 +205,7 @@ subsequences), and it converges by completeness.
 \begin{definition}[Lebesgue number]
 \label{def:lebesgue_number}
 Let $(X,d)$ be a metric space and $\{U_i\}_{i\in I}$ an open cover of $X$. A number
-$\varepsilon > 0$ is a \newterm{Lebesgue number} (\germanterm{Lebesgue-Zahl}) for the cover if
+$\varepsilon > 0$ is a \newterm{Lebesgue number} \germanfor{Lebesgue-Zahl} for the cover if
 \[\forall x \in X\ \exists i \in I: B_\varepsilon(x) \subseteq U_i.\]
 \end{definition}
 
@@ -213,7 +213,7 @@ $\varepsilon > 0$ is a \newterm{Lebesgue number} (\germanterm{Lebesgue-Zahl}) fo
 The proof of \cref{thm:sequential_topological_compactness_equivalence} ($\Rightarrow$) shows
 more than stated: on a compact metric space, \emph{every} open cover has a Lebesgue number (take
 $\varepsilon := \min_{x\in X} r(x)$ as constructed there). This is known as \newterm{Lebesgue's
-covering lemma} (\germanterm{Lebesguesches \"Uberdeckungslemma}).
+covering lemma} \germanfor{Lebesguesches \"Uberdeckungslemma}.
 \end{remark}
 
 \begin{proposition}[Compactness implies uniform continuity]
@@ -242,7 +242,7 @@ $A$ is compact.
 \begin{proof}
 Let $\mathcal{U}$ be an open cover of $A$. Since $A$ is closed, $X\setminus A$ is open, so
 \[\mathcal{U}' := \mathcal{U} \cup \{X\setminus A\}\]
-is an open cover of $K$ --- it covers $A$ by assumption and everything outside $A$ by the added
+is an open cover of $K$, covering $A$ by assumption and everything outside $A$ by the added
 set. Compactness of $K$ gives a finite subcover
 $U_{1},\dots,U_{m} \in \mathcal{U}'$ of $K$, hence of $A$.
 
@@ -267,12 +267,45 @@ the remaining sets still cover $A$. They all belong to $\mathcal{U}$, and there 
 many. As $\mathcal{U}$ was arbitrary, $A$ is compact.
 \end{proof}
 
-\begin{ainote}
-The trick --- \emph{enlarge the cover by the complement of the set you care about, then throw it
-away again} --- is the standard way to transfer compactness downward, and worth remembering: it
-reappears whenever one needs a compact subset of a compact set. Note the hypothesis \qt{closed}
-is essential: $(0,1) \subseteq [0,1]$ sits inside a compact set without being compact.
-\end{ainote}
+% Reclassified from ainote to remark: a proof technique worth naming is mathematics.
+\begin{remark}[Enlarge the cover, then discard the extra set]
+The trick just used is the standard way to transfer compactness downward, and it is worth
+remembering in the form \emph{enlarge the cover by the complement of the set you care about, then
+throw that complement away again}. It reappears whenever one needs a compact subset of a compact
+set. Note that the hypothesis \qt{closed} is essential, since $(0,1) \subseteq [0,1]$ sits inside
+a compact set without being compact.
+\end{remark}
+
+% Supplement: lec_notes.pdf, p. 21 (Corollary 9.71)
+% Generator: Claude Opus 5 (High) --- the converse of the proposition above, and the half of
+% Heine--Borel that costs nothing and holds in every metric space. The document had it only
+% inside \cref{thm:heine_borel}, where it looks like a fact about R^n, which it is not.
+\begin{proposition}[A compact subset is always closed]
+\label{prop:compact_implies_closed}
+Let $(X,d)$ be a metric space and $K \subseteq X$ compact. Then $K$ is closed in $X$.
+\end{proposition}
+
+\begin{proof}
+Let $(x_n) \subseteq K$ converge to some $x \in X$; by \cref{prop:open_closed_via_sequences} it
+suffices to show $x \in K$. Compactness gives a subsequence $x_{n_k} \to y$ with $y \in K$
+(\cref{thm:sequential_topological_compactness_equivalence}). But a subsequence of a convergent
+sequence converges to the same limit, so $y = x$ by uniqueness of limits
+(\cref{prop:uniqueness_of_limits}), and therefore $x \in K$.
+\end{proof}
+
+\begin{remark}[This is the cheap half of Heine--Borel]
+\label{rem:compact_closed_bounded_cheap_half}
+Together with \cref{lem:sequentially_compact_totally_bounded}, which gives boundedness, this
+proposition says that in \emph{every} metric space a compact set is closed and bounded. That
+direction is short and completely general, and it is the one \cref{thm:heine_borel} gets for
+free. What Heine--Borel adds, and what is special to $\mathbb{R}^n$, is the converse, and
+\cref{ex:heine_borel_fails} shows how badly the converse can fail elsewhere: there is a metric
+space with a closed bounded set that is not compact.
+
+The pairing with \cref{prop:closed_subset_of_compact} is worth noticing too. Compactness passes
+\emph{down} to closed subsets and \emph{up} to the property of being closed, so within a compact
+ambient space \qt{compact} and \qt{closed} are the same word.
+\end{remark}
 
 % Source: Corsin Nick/Class Notes/Week 2.pdf, p. 15
 \begin{exercise}[Compact sets are complete]

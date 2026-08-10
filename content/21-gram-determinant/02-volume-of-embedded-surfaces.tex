@@ -15,8 +15,8 @@ we define the $d$-volume of $\phi(E)$ by
 
 Here the Gram determinant in the integrand is the volume of the parallelotope spanned by the
 vectors $\partial_1\phi(x),\partial_2\phi(x),\dots,\partial_d\phi(x)$, which by assumption
-(see \qt{parametrized submanifold}) are linearly independent --- i.e.\ $D\phi(x)$ has full
-rank --- so the volume is strictly positive.
+(see \qt{parametrized submanifold}) are linearly independent, i.e.\ $D\phi(x)$ has full rank,
+so the volume is strictly positive.
 
 % Sonnet 5 (Medium) --- FIG-W09-03
 \begin{center}
@@ -39,7 +39,7 @@ rank --- so the volume is strictly positive.
 
 This factor gives a measure for the stretching of $E$ as it is \qt{glued} to the surface. If
 \[\sqrt{\det\big(D\phi(x)\transp D\phi(x)\big)} = 1 \quad \text{for all } x,\]
-then $\phi$ is called an \newterm{isometry} (\germanterm{Isometrie}). A special case is the
+then $\phi$ is called an \newterm{isometry} \germanfor{Isometrie}. A special case is the
 length of a curve, treated in \cref{sec:length_of_curve} below.
 
 % Quelle: Linus Lüchinger/Slides/Slides-04-20.pdf, slide 14
@@ -52,21 +52,21 @@ $x$?} Near $x$ the map $\phi$ is its differential, so the question is really abo
 map $D\phi(x)$, and the answer runs in three steps.
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item \textbf{The obvious candidate does not exist.} For a map $\mathbb{R}^n \to \mathbb{R}^n$
-    the stretching factor is $\lvert\det\rvert$. Here $D\phi(x)$ is $n \times d$ with $d < n$ ---
-    a \emph{rectangular} matrix --- and a rectangular matrix has no determinant. So the
-    one-line answer is unavailable, and something has to replace it.
+    the stretching factor is $\lvert\det\rvert$. Here $D\phi(x)$ is $n \times d$ with $d < n$, a
+    \emph{rectangular} matrix, and a rectangular matrix has no determinant. So, the one-line
+    answer is unavailable, and something has to replace it.
   \item \textbf{A factor nevertheless exists.} A linear map still scales all $d$-volumes in its
     domain by one and the same constant: it sends the unit cube of $\mathbb{R}^d$ to a fixed
     parallelotope, and every other region is built from scaled copies of that cube. Call this
     constant $c \geq 0$. It is what we want; we only need a formula for it.
   \item \textbf{The Gram matrix supplies it.} The product $D\phi(x)\transp D\phi(x)$ is
-    $d \times d$ --- square at last --- so it \emph{does} have a determinant, and that
+    $d \times d$, square at last, so it \emph{does} have a determinant, and that
     determinant turns out to be exactly $c^2$. Hence $c = \sqrt{\det(D\phi\transp D\phi)}$, and
     the square root is there for no deeper reason than to undo that squaring.
 \end{enumerate}
 The two familiar formulas are the small cases. For $d=1$ the matrix $D\phi(t)$ is the single
-column $\phi'(t)$, so $D\phi\transp D\phi = \lvert\phi'(t)\rvert^2$ and $c = \lvert\phi'(t)\rvert$
---- the arc-length integrand of \cref{sec:length_of_curve}. For $d=2$, $n=3$ one computes
+column $\phi'(t)$, so $D\phi\transp D\phi = \lvert\phi'(t)\rvert^2$ and $c = \lvert\phi'(t)\rvert$,
+which is the arc-length integrand of \cref{sec:length_of_curve}. For $d=2$, $n=3$ one computes
 $c = \lvert\partial_1\phi \times \partial_2\phi\rvert$, the area of the parallelogram the two
 tangent vectors span, which is the surface-area formula used throughout this chapter.
 \end{remark}
@@ -75,7 +75,7 @@ tangent vectors span, which is the surface-area formula used throughout this cha
 \begin{remark}[Two objects, three notations]
 \label{rem:notation_D_phi}
 From this chapter onwards the lecture notes write $D\phi(x)$ for the Jacobian \emph{matrix} of
-$\phi$ at $x$ --- the object earlier chapters of this document call $\Jac\phi(x)$. That collides
+$\phi$ at $x$, the object earlier chapters of this document call $\Jac\phi(x)$. That collides
 with the notation $D\phi_x$ used since \cref{ch:differential} for the \emph{differential}, the
 linear map itself. The two are not the same kind of object, even though they carry the same
 information:
@@ -142,8 +142,8 @@ $x,y$ accordingly,
 
 \textbf{Change of variables.}
 \[dx\,dy = |\det D\Psi(r,\theta)|\,dr\,d\theta
-  = \left\lVert \begin{matrix} 2\cos\theta & -2r\sin\theta \\ \sin\theta & r\cos\theta
-    \end{matrix}\right\rVert dr\,d\theta = 2r\,dr\,d\theta,\]
+  = \left|\det\begin{pmatrix} 2\cos\theta & -2r\sin\theta \\ \sin\theta & r\cos\theta
+    \end{pmatrix}\right| dr\,d\theta = 2r\,dr\,d\theta,\]
 giving
 \[
 \begin{aligned}
@@ -160,8 +160,8 @@ giving
 \begin{ainote}
 Worth flagging what makes $A$ awkward: it is an ellipse, not a disc, so naive polar
 coordinates $(x,y)=(\rho\cos\theta,\rho\sin\theta)$ would force $\rho$ to depend on $\theta$
-along the boundary. The fix is to build the eccentricity into the change of variables itself
---- scaling $x$ by a factor of $2$ relative to $y$ turns the ellipse into the disc $r<\sqrt2$
+along the boundary. The fix is to build the eccentricity into the change of variables itself.
+Scaling $x$ by a factor of $2$ relative to $y$ turns the ellipse into the disc $r<\sqrt2$
 before polar coordinates are even applied. This is the same idea as
 \Cref{ex:change_of_variables_domain}: choose $\Psi$ to straighten the domain, not
 to simplify the integrand.
@@ -234,12 +234,16 @@ $x^2+y^2+z^2=8$ and $2z=x^2+y^2$. \textit{Official hint:} use cylindrical coordi
   \qquad \text{for } (r,\theta,\varphi) \in (0,\infty)\times(0,\pi)\times(0,2\pi).\]
 \end{exercise}
 
-\begin{ainote}
+% The solution in 99-solutions.tex points back at this note, so it carries a label. Possible
+% only since 2026-08-09, when ainote gained its own counter; the solution used to say
+% "see the \texttt{ainote} above", which leaked a LaTeX environment name into the typeset text.
+\begin{ainote}[Corsin's hint is spherical, not cylindrical]
+\label{note:9.1_coordinates_mislabelled}
 Corsin labels the formula above \qt{cylindrical coordinates}, but $(r\sin\theta\cos\varphi$, $r\sin\theta\sin\varphi$, $r\cos\theta)$ is the \textbf{spherical} parametrization, and his
 range $\theta \in (-\pi/2,\pi/2)$ has been corrected to $(0,\pi)$, the range on which
 $\theta \mapsto \cos\theta$ actually covers $[-1,1]$ bijectively (already logged in \cref{ex:7.6}). The mislabelling is doubly worth noting here, since the official sheet's own hint
-recommends \emph{cylindrical} coordinates $(r,\theta,z)$ --- and that is in fact the more
-natural choice for this problem, as \cref{ex:solution_9.1} below uses: both surfaces are
+recommends \emph{cylindrical} coordinates $(r,\theta,z)$, and that is in fact the more
+natural choice for this problem, as the solution on \cpageref{ex:solution_9.1} does: both surfaces are
 surfaces of revolution about the $z$-axis, which cylindrical coordinates respect directly,
 whereas spherical coordinates mix $r$ and $\theta$ into both defining equations.
 \end{ainote}

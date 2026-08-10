@@ -4,10 +4,16 @@
 \section{The mean value theorem}
 \label{sec:mean_value_theorem}
 
+% Diego Torres Tejeda's notes state the theorem together with the warning that follows.
+% Corrected 2026-08-09 against lec_notes.pdf. The note previously read "the course never states
+% it", which is false: Theorem 10.28, printed p. 44, is this theorem, with this proof.
+% Supplement: lec_notes.pdf, p. 44 (Theorem 10.28)
 \begin{ainote}
-The mean value theorem is used twice in this chapter --- in the official hint to
-\Cref{ex:4.6} and in its solution --- but Corsin never states it. Diego Torres Tejeda's notes
-state it, together with the warning that follows, which is what \cref{ex:4.6} actually turns on.
+The mean value theorem is used twice in this chapter, in the official hint to \Cref{ex:4.6} and
+again in its solution, but none of the transcribed TA notes state it. It is therefore stated here,
+together with the warning that follows, which is what \cref{ex:4.6} actually turns on. In the
+lecture notes it is Theorem 10.28 (\qt{Higher dimensional Mean Value Theorem}, p.\ 44), proved
+exactly as below.
 \end{ainote}
 
 \begin{theorem}[Mean value theorem]
@@ -27,9 +33,9 @@ $\varphi(1)-\varphi(0) = \varphi'(t_0)$, which is the claim.
 
 \begin{importantremark}[It fails for vector-valued $f$]
 \label{rem:mvt_fails_vector_valued}
-The hypothesis \qt{$f : U \to \mathbb{R}$} is essential --- \textbf{the theorem is false the
-moment the target is $\mathbb{R}^m$ with $m \geq 2$}, and this is exactly what
-\cref{ex:4.5} below probes.
+The hypothesis \qt{$f : U \to \mathbb{R}$} is essential. \textbf{The theorem is false the moment
+the target is $\mathbb{R}^m$ with $m \geq 2$}, and this is exactly what \cref{ex:4.5} below
+probes.
 % Corrected: this pointed at \cref{ex:4.6}, which applies the *scalar* theorem to $u(x+t\nu)$
 % and never leaves $\mathbb{R}$. The problem that probes the vector-valued failure is 4.5 ---
 % which was not in the built document when the sentence was written.
@@ -40,12 +46,12 @@ $\xi_1,\dots,\xi_m$ with
 but the $\xi_i$ are \emph{different points} in general, and no single $\xi$ need work for all
 components at once. The standard witness is the \emph{circle}
 $\gamma(t) := (\cos t, \sin t)$ on $[0,2\pi]$: here $\gamma(2\pi)-\gamma(0) = 0$, while
-$\gamma'(t) = (-\sin t,\cos t)$ has $|\gamma'(t)| = 1$ and so never vanishes --- there is no
+$\gamma'(t) = (-\sin t,\cos t)$ has $|\gamma'(t)| = 1$ and so never vanishes. There is no such
 $\xi$ at all. Geometrically this is entirely reasonable: a walker who returns to the starting
 point must have had zero \emph{average} velocity, but need never have stood still. In one
 dimension \qt{returning} forces a turning point; in two it does not.
 
-What survives for vector-valued $f$ is the \newterm{mean value inequality} (\germanterm{Mittelwertsatz-Ungleichung}), which replaces exact equality by a sharp upper bound controlling the displacement in terms of the maximum derivative along the line segment.
+What survives for vector-valued $f$ is the \newterm{mean value inequality} \germanfor{Mittelwertsatz-Ungleichung}, which replaces exact equality by a sharp upper bound controlling the displacement in terms of the maximum derivative along the line segment.
 \end{importantremark}
 
 % Source: Diego Torres Tejeda/Notes - 09.03 - Diego Torres Tejeda.pdf, p. 9
@@ -54,13 +60,13 @@ What survives for vector-valued $f$ is the \newterm{mean value inequality} (\ger
 \label{thm:mean_value_inequality}
 Let $U \subseteq \mathbb{R}^n$ be open, $x \in U$, and $h \in \mathbb{R}^n$ such that the line segment $[x, x+h] := \{x + th \mid t \in [0,1]\}$ lies entirely in $U$. If $F : U \to \mathbb{R}^m$ is differentiable at every point of $[x, x+h]$, then
 \[
-\|F(x+h) - F(x)\| \leq \left( \sup_{t \in [0,1]} \|DF_{x+th}\|_{\mathrm{op}} \right) \|h\|,
+|F(x+h) - F(x)| \leq \left( \sup_{t \in [0,1]} \|DF_{x+th}\|_{\mathrm{op}} \right) |h|,
 \]
-where $\|DF_z\|_{\mathrm{op}} := \sup_{\|v\|\leq 1} \|DF_z(v)\|$ is the operator norm of the linear map $DF_z$.
+where $\|DF_z\|_{\mathrm{op}} := \sup_{|v|\leq 1} |DF_z(v)|$ is the operator norm of the linear map $DF_z$.
 \end{theorem}
 
 \begin{proof}
-Set $y := F(x+h) - F(x) \in \mathbb{R}^m$. If $y = 0$, the inequality holds trivially. Assuming $y \neq 0$, let $u := \frac{y}{\|y\|}$, so that $\|u\| = 1$ and $\langle u, y \rangle = \|y\|$.
+Set $y := F(x+h) - F(x) \in \mathbb{R}^m$. If $y = 0$, the inequality holds trivially. Assuming $y \neq 0$, let $u := \frac{y}{|y|}$, so that $|u| = 1$ and $\langle u, y \rangle = |y|$.
 
 Define the auxiliary scalar function $\varphi : [0,1] \to \mathbb{R}$ by
 \[
@@ -68,11 +74,11 @@ Define the auxiliary scalar function $\varphi : [0,1] \to \mathbb{R}$ by
 \]
 By the chain rule along a path (\cref{sec:chain_rule_along_path}), $\varphi$ is continuous on $[0,1]$ and differentiable on $(0,1)$ with derivative $\varphi'(t) = \langle u, DF_{x+th}(h) \rangle$. Applying the scalar Mean Value Theorem (\cref{thm:mean_value_theorem}) to $\varphi$ on $[0,1]$, there exists some $t_0 \in (0,1)$ such that $\varphi(1) - \varphi(0) = \varphi'(t_0)$, which expands to
 \[
-\|F(x+h) - F(x)\| = \langle u, F(x+h) - F(x) \rangle = \langle u, DF_{x+t_0 h}(h) \rangle.
+|F(x+h) - F(x)| = \langle u, F(x+h) - F(x) \rangle = \langle u, DF_{x+t_0 h}(h) \rangle.
 \]
 Applying the Cauchy--Schwarz inequality and the definition of the operator norm, we obtain
 \[
-\|F(x+h) - F(x)\| \leq \|u\| \, \|DF_{x+t_0 h}(h)\| \leq 1 \cdot \|DF_{x+t_0 h}\|_{\mathrm{op}} \, \|h\| \leq \left( \sup_{t \in [0,1]} \|DF_{x+th}\|_{\mathrm{op}} \right) \|h\|,
+|F(x+h) - F(x)| \leq |u| \, |DF_{x+t_0 h}(h)| \leq 1 \cdot \|DF_{x+t_0 h}\|_{\mathrm{op}} \, |h| \leq \left( \sup_{t \in [0,1]} \|DF_{x+th}\|_{\mathrm{op}} \right) |h|,
 \]
 \end{proof}
 
@@ -125,7 +131,7 @@ Applying the Cauchy--Schwarz inequality and the definition of the operator norm,
     \draw[->, very thick, green!55!black] (FXI) -- ++(0.95, 0.6) node[above, font=\footnotesize] {$DF_{\xi}(h)$};
 
     % Unit dual vector direction u
-    \draw[->, dashed, gray!70!black] (FX) -- ++(2.4, 1.6) node[right, font=\scriptsize] {$u = \frac{y}{\|y\|}$};
+    \draw[->, dashed, gray!70!black] (FX) -- ++(2.4, 1.6) node[right, font=\scriptsize] {$u = \frac{y}{|y|}$};
   \end{scope}
 
 \end{tikzpicture}
@@ -135,9 +141,84 @@ Applying the Cauchy--Schwarz inequality and the definition of the operator norm,
 \label{rem:mvi_lipschitz_bound}
 As Diego Torres Tejeda emphasizes in his notes, \Cref{thm:mean_value_inequality} is the principal multivariable tool for establishing Lipschitz continuity. If $U \subseteq \mathbb{R}^n$ is \emph{convex} and $F : U \to \mathbb{R}^m$ is differentiable with $\|DF_z\|_{\mathrm{op}} \leq M$ for all $z \in U$, then for any pair $x, y \in U$, the line segment $[x, y]$ lies in $U$, so
 \[
-\|F(y) - F(x)\| \leq M \|y - x\|.
+|F(y) - F(x)| \leq M |y - x|.
 \]
 Thus $F$ is $M$-Lipschitz continuous on $U$.
+\end{remark}
+
+% Supplement: lec_notes.pdf, p. 46 (10.32)
+% Generator: Claude Opus 5 (High) --- the corollary that removes both hypotheses of the remark
+% above (convexity, and a global bound) at the price of a local conclusion. The document used
+% "locally Lipschitz" in three later places without ever establishing it.
+\begin{corollary}[Every $C^1$ function is locally Lipschitz]
+\label{cor:c1_locally_lipschitz}
+Let $U \subseteq \mathbb{R}^n$ be open, not necessarily convex, and let
+$F \in C^1(U,\mathbb{R}^m)$. Then every point of $U$ has a ball around it on which $F$ is
+Lipschitz, with a constant that may depend on the ball.
+\end{corollary}
+
+\begin{proof}
+Given $z \in U$, choose $r > 0$ with $\overline{B_r(z)} \subseteq U$. This closed ball is closed
+and bounded, hence compact (\cref{thm:heine_borel}), and $x \mapsto \|\Jac F(x)\|_2$ is
+continuous because $F$ is $C^1$ and the Hilbert--Schmidt norm is a polynomial in the entries. So
+it attains a finite maximum $M$ there (\cref{lem:sequential_compactness_extreme_values}). By
+\cref{lem:hilbert_schmidt_bounds_lengths} that bounds the operator norm too,
+$\|DF_x\|_{\mathrm{op}} \leq \|\Jac F(x)\|_2 \leq M$ on $\overline{B_r(z)}$. The open ball
+$B_r(z)$ is convex, so \cref{rem:mvi_lipschitz_bound} applies on it with that $M$.
+\end{proof}
+
+\begin{importantremark}[Local, and not more than local]
+\label{rem:locally_lipschitz_not_global}
+The word \emph{locally} is not decoration. On $U = \mathbb{R}$ the function $F(x) := x^2$ is
+$C^1$, hence Lipschitz on every bounded interval, and Lipschitz on no unbounded one: the constant
+$M = \max|F'|$ produced by the proof grows with the ball and has no finite supremum. What
+\cref{rem:mvi_lipschitz_bound} needs, and what fails here, is a bound on the derivative that is
+uniform over the whole domain.
+
+Locally Lipschitz is nevertheless the right hypothesis surprisingly often, because it is what
+Picard--Lindelöf asks of the right-hand side of an ODE
+(\cref{thm:picard_lindeloef_local}), and \cref{ex:c1_implies_locally_lipschitz} is this corollary
+again, proved from scratch in the form that theorem wants.
+\end{importantremark}
+
+% Supplement: lec_notes.pdf, p. 46 (Theorem 10.33)
+% Generator: Claude Opus 5 (High) --- missing entirely. It is the multivariable "zero derivative
+% means constant", and it is the one place where connectedness (ch. 8) does real work inside the
+% differential calculus, which is worth showing rather than leaving implicit.
+\begin{theorem}[Vanishing differential on a connected set]
+\label{thm:zero_differential_constant}
+Let $U \subseteq \mathbb{R}^n$ be open and \emph{connected}, and let $F : U \to \mathbb{R}^m$ be
+differentiable with $DF_x = 0$ for every $x \in U$. Then $F$ is constant.
+
+Without connectedness the conclusion weakens to: $F$ is constant on each connected component of
+$U$.
+\end{theorem}
+
+\begin{proof}
+Assume $U \neq \emptyset$, fix $x_0 \in U$ and put
+\[G := \{x \in U : F(x) = F(x_0)\}.\]
+$G$ is non-empty, since $x_0 \in G$, and closed in $U$, being the preimage of the closed set
+$\{F(x_0)\}$ under the continuous map $F$ (\cref{prop:differentiable_implies_continuous}).
+
+$G$ is also \emph{open}. Given $x \in G$, choose $r > 0$ with $B_r(x) \subseteq U$. A ball is
+convex, so \cref{rem:mvi_lipschitz_bound} applies on it with $M = 0$, giving
+$|F(y) - F(x)| \leq 0$, that is $F(y) = F(x) = F(x_0)$, for every $y \in B_r(x)$. Hence
+$B_r(x) \subseteq G$.
+
+So $G$ is a non-empty subset of $U$ that is both open and closed in $U$. Since $U$ is connected,
+$G = U$ (\cref{def:connectedness}), which is the claim. If $U$ is not connected, run the argument
+inside a single component, which is itself open and connected.
+\end{proof}
+
+\begin{remark}[Why connectedness cannot be dropped]
+\label{rem:zero_differential_needs_connected}
+On $U := (0,1) \cup (2,3) \subseteq \mathbb{R}$ the function that is $0$ on the first interval and
+$1$ on the second is differentiable with vanishing derivative everywhere, and is not constant.
+Nothing in the local argument can see this: the derivative is a purely local object, and
+\qt{constant} is not. Connectedness is precisely the hypothesis that lets a local statement be
+propagated to a global one, which is why the proof above is a connectedness argument
+(\qt{non-empty, open and closed, hence everything}) with a one-line differential calculus input
+rather than the other way round.
 \end{remark}
 
 \begin{example}[Computing a Lipschitz constant via the Mean Value Inequality]
@@ -150,13 +231,13 @@ The Jacobi matrix of $F$ at $(x,y)$ is
 \]
 For any vector $v = (v_1, v_2)\transp \in \mathbb{R}^2$, the squared norm of $\Jac F(x,y) v$ is
 \[
-\|\Jac F(x,y) v\|^2 = \cos^2(x+y)(v_1+v_2)^2 + \sin^2(x-y)(v_1-v_2)^2.
+|\Jac F(x,y) v|^2 = \cos^2(x+y)(v_1+v_2)^2 + \sin^2(x-y)(v_1-v_2)^2.
 \]
 Since $\cos^2(x+y) \leq 1$ and $\sin^2(x-y) \leq 1$, we estimate:
 \[
-\|\Jac F(x,y) v\|^2 \leq (v_1+v_2)^2 + (v_1-v_2)^2 = (v_1^2 + 2v_1v_2 + v_2^2) + (v_1^2 - 2v_1v_2 + v_2^2) = 2(v_1^2 + v_2^2) = 2\|v\|^2.
+|\Jac F(x,y) v|^2 \leq (v_1+v_2)^2 + (v_1-v_2)^2 = (v_1^2 + 2v_1v_2 + v_2^2) + (v_1^2 - 2v_1v_2 + v_2^2) = 2(v_1^2 + v_2^2) = 2|v|^2.
 \]
-Taking square roots gives $\|\Jac F(x,y) v\| \leq \sqrt{2}\|v\|$, so $\|DF_{(x,y)}\|_{\mathrm{op}} \leq \sqrt{2}$ for all $(x,y) \in \mathbb{R}^2$. Since $\mathbb{R}^2$ is convex, \Cref{rem:mvi_lipschitz_bound} implies that $F$ is $\sqrt{2}$-Lipschitz continuous on $\mathbb{R}^2$.
+Taking square roots gives $|\Jac F(x,y) v| \leq \sqrt{2}|v|$, so $\|DF_{(x,y)}\|_{\mathrm{op}} \leq \sqrt{2}$ for all $(x,y) \in \mathbb{R}^2$. Since $\mathbb{R}^2$ is convex, \Cref{rem:mvi_lipschitz_bound} implies that $F$ is $\sqrt{2}$-Lipschitz continuous on $\mathbb{R}^2$.
 \end{example}
 
 \begin{center}
@@ -215,7 +296,7 @@ Taking square roots gives $\|\Jac F(x,y) v\| \leq \sqrt{2}\|v\|$, so $\|DF_{(x,y
 
     \node[font=\scriptsize, align=center, anchor=north] at (0,-1.57)
       {\textbf{vector-valued $\gamma$:} $\gamma(2\pi)-\gamma(0)=0$,\\ yet $\gamma'$ never
-       vanishes --- no $\xi$ exists};
+       vanishes, so no $\xi$ exists};
   \end{scope}
 \end{tikzpicture}
 \end{center}

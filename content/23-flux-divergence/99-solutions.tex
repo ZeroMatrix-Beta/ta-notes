@@ -35,8 +35,76 @@ measure in $B_1$). On $\partial B_1$, $\nu(x)=x$ and $\lvert x\rvert=1$, so $V_{
   = \int_{\partial B_1} 1\,d\vol_{n-1} = \vol_{n-1}(\partial B_1) > 0.\]
 This does not contradict \cref{thm:gauss_divergence}: the theorem requires $F$ to be $C^1$ on
 all of $\overline{B_1}$, but $V_{-n}(x) = \lvert x\rvert^{-n}x$ is not even defined, let alone
-continuously differentiable, at $x=0 \in \overline{B_1}$ --- its hypotheses simply do not hold
-on this domain.
+continuously differentiable, at $x=0 \in \overline{B_1}$. Its hypotheses simply do not hold on
+this domain.
 \end{exercisesolution}
 
 % Verified: solved independently, all three parts match Sol11 exactly.
+
+\begin{exercisesolution}[Solution to \cref{ex:ai_flux_cubic_sphere}]
+% Generator: Claude Opus 5 (High)
+\textbf{1.} On the unit sphere the exterior unit normal is $\nu(x,y,z) = (x,y,z)$, so the
+integrand of \cref{def:flux} is $\langle F,\nu\rangle = x^4+y^4+z^4$. In the spherical
+parametrization that becomes
+$\sin^4\theta\cos^4\varphi + \sin^4\theta\sin^4\varphi + \cos^4\theta$, multiplied by the surface
+element $\sin\theta$: a fourth-power trigonometric integral in two variables, where the
+divergence theorem offers a radial integral in one.
+
+\textbf{2.} Writing $r$ for the distance to the origin,
+$\divg F = 3x^2+3y^2+3z^2 = 3r^2$, which is radial.
+
+\textbf{3.} Because the integrand is radial, \cref{rem:polar_as_shells} applies with $n = 3$ and
+$C_3 = 4\pi$:
+\[\int_{\partial\Omega}\langle F,\nu\rangle\,d\vol_2 = \int_{B_1(0)} 3r^2\,d\vol_3
+  = 4\pi\int_0^1 3r^2\cdot r^2\,dr = 12\pi\int_0^1 r^4\,dr = \frac{12\pi}{5}.\]
+
+\begin{remark}[The direct route, for once, is also available]
+\label{rem:cubic_flux_direct_check}
+The surface integral abandoned in part 1 is not actually intractable, and working it out is a
+worthwhile check. By the symmetry of the sphere under permuting the coordinates, the three terms
+of $x^4+y^4+z^4$ contribute equally, so
+\[\int_{\mathbb{S}^2}\big(x^4+y^4+z^4\big)\,d\vol_2 = 3\int_{\mathbb{S}^2} z^4\,d\vol_2
+  = 3\int_0^{2\pi}\!\!\int_0^\pi \cos^4\theta\,\sin\theta\,d\theta\,d\varphi
+  = 6\pi\left[-\frac{\cos^5\theta}{5}\right]_0^\pi = \frac{12\pi}{5},\]
+in agreement. Note that what made this bearable was a symmetry argument, applied \emph{before}
+any trigonometry: expanding all three fourth powers first is the version that is unpleasant.
+\end{remark}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:ai_capping_a_paraboloid}]
+% Generator: Claude Opus 5 (High)
+\textbf{1.} Take $\Omega := \{(x,y,z) : x^2+y^2 < 1,\ 0 < z < 1-x^2-y^2\}$, the solid region
+between the paraboloid and the plane $z = 0$. Its boundary is $S$ together with the flat disk
+\[D := \{(x,y,0) : x^2+y^2 \leq 1\},\]
+whose exterior unit normal is $\nu \equiv -e_3$, since $\Omega$ lies above it. On $S$ the
+exterior normal is the upward-pointing one, which is the orientation the exercise already fixes,
+so no sign has to be corrected later.
+
+\textbf{2.} Here $\divg F = 1+1+1 = 3$, so the flux out of $\partial\Omega$ is three times a
+volume. In cylindrical coordinates,
+\[\vol_3(\Omega) = \int_0^{2\pi}\!\!\int_0^1\!\!\int_0^{1-r^2} r\,dz\,dr\,d\varphi
+  = 2\pi\int_0^1 \big(r - r^3\big)\,dr = 2\pi\left(\frac12 - \frac14\right) = \frac{\pi}{2},\]
+and therefore
+\[\int_{\partial\Omega}\langle F,\nu\rangle\,d\vol_2 = 3\,\vol_3(\Omega) = \frac{3\pi}{2}.\]
+
+\textbf{3.} Along $D$ the third coordinate is $z = 0$, so
+$\langle F,\nu\rangle = \langle (x,y,0),\,-e_3\rangle = -z = 0$ at every point: the field is
+tangent to the cap, and contributes nothing. Splitting the boundary integral,
+\[\int_S \langle F,\nu\rangle\,d\vol_2
+  = \int_{\partial\Omega}\langle F,\nu\rangle\,d\vol_2 - \int_D \langle F,\nu\rangle\,d\vol_2
+  = \frac{3\pi}{2} - 0 = \frac{3\pi}{2}.\]
+
+\begin{remark}[The cap vanished because of this field, not because it is a cap]
+\label{rem:cap_contribution_is_not_generally_zero}
+It is tempting to read part 3 as licence to ignore the lid. Change $F$ to
+$\widetilde F(x,y,z) := (x,\,y,\,z+1)$ and nothing about the first two parts moves, since
+$\divg\widetilde F = 3$ as before and the closed flux is still $3\pi/2$. But now
+$\langle \widetilde F,\nu\rangle = -1$ on $D$, so the cap carries a flux of $-\pi$, and the flux
+through the paraboloid is $3\pi/2 + \pi = 5\pi/2$ instead. The subtraction in part 3 is doing
+real work; it merely had nothing to subtract.
+
+\Cref{ex:11.1} is the same technique on a hemisphere, and the two are worth reading as a pair:
+there the cap contributes $\pi/2$ and must be subtracted, here it contributes nothing. The
+method is identical and only the arithmetic differs, which is the point.
+\end{remark}
+\end{exercisesolution}

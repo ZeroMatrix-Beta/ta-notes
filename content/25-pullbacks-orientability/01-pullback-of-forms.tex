@@ -9,7 +9,7 @@
 \label{def:pullback_of_forms}
 Let $U \subseteq \mathbb{R}^m$, $V \subseteq \mathbb{R}^n$ be open, $F : U \to V$ a smooth
 map, and $\omega \in \Omega^p(V)$ a differential $p$-form on $V$. The \newterm{pullback}
-(\germanterm{Zur\"uckziehung}) of $\omega$ under $F$ is the differential $p$-form on $U$
+\germanfor{Zur\"uckziehung} of $\omega$ under $F$ is the differential $p$-form on $U$
 defined by
 \[(F^*\omega)_x(v_1,\ldots,v_p) := \omega_{F(x)}\big(DF_x(v_1),\ldots,DF_x(v_p)\big).\]
 \end{definition}
@@ -54,3 +54,24 @@ F^*\omega &= F^*(x_3 \,dx_3 + x_1 x_2 \,dx_2) \\
 &= \big(2u(u^2 - v) + (u+v)e^{2u}\big) \,du - (u^2 - v) \,dv.
 \end{align*}
 \end{example}
+
+\begin{aiexercise}[The pullback of the area form is the Jacobian]
+% Generator: Claude Opus 5 (High)
+\label{ex:ai_pullback_area_form}
+Let $\Phi(r,\theta) := (r\cos\theta,\ r\sin\theta)$ be the polar coordinate map, and write
+$(x,y)$ for the coordinates on the target.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Compute $\Phi^*(dx)$ and $\Phi^*(dy)$, and wedge them together to obtain
+    $\Phi^*(dx\wedge dy)$. Compare the answer with the polar entry of
+    \cref{rem:coordinate_jacobians_table}.
+  \item \Cref{ex:12.9} proves the general identity behind part \textbf{(a)}, namely that a
+    pullback of a top-degree form produces the factor $\det\Jac\Phi$, and it assumes
+    $\det\Jac\Phi > 0$ throughout. \Cref{thm:change_of_variables}, by contrast, carries
+    $\lvert\det\Jac\Phi\rvert$ and needs no such hypothesis. Explain what the two are measuring
+    differently, and which of them notices that $\Phi(u_1,u_2) := (u_2,u_1)$ reverses
+    orientation.
+  \item Using part \textbf{(b)}, say what would go wrong in \cref{ex:12.9} if its positivity
+    hypothesis were dropped, and why the change of variables formula is untroubled by the same
+    map.
+\end{enumerate}
+\end{aiexercise}

@@ -10,22 +10,23 @@ The \textbf{Hessian} (\cref{rem:second_order_taylor_hessian}) of $f \in C^2(U,\m
 $U \subseteq \mathbb{R}^n$, is given by
 \[\Hess f(x) = (\partial_i\partial_j f)_{i,j=1,\dots,n}\]
 with respect to the standard basis of $\mathbb{R}^n$. By \newterm{Schwarz's lemma}
-(\germanterm{Satz von Schwarz}), stated as \cref{thm:schwarz_mixed_partials},
+\germanfor{Satz von Schwarz}, stated as \cref{thm:schwarz_mixed_partials},
 $\Hess f(x)$ is symmetric.
 
 % Supplement: Lukas Krause/Week 5 March 16-20 Notes Lukas Krause.pdf, pp. 2--3
-\begin{ainote}
-Symmetry of the Hessian is the hypothesis every statement in this section rests on --- the
-spectral theorem in \cref{rem:diagonalizing_hessian}, the eigenvalue criteria, the Hurwitz
-minors --- and neither Corsin nor \cref{thm:schwarz_mixed_partials} proves it. Lukas Krause's notes give a
-complete proof, and unusually he leaves his \emph{failed} first attempt in place, with the
-comment that it is instructive to see why the obvious calculation does not work. Both are
-reproduced below, because the failure is genuinely the more informative half.
-\end{ainote}
+% Lukas supplies the proof, and unusually he leaves his own failed first attempt on the page,
+% with the comment that it is instructive to see why the obvious calculation does not work.
+% Both are reproduced below.
+\begin{remark}[Why symmetry is proved here]
+Everything in this section rests on symmetry of the Hessian: the spectral theorem in
+\cref{rem:diagonalizing_hessian}, the eigenvalue criteria, the Hurwitz minors. Yet
+\cref{thm:schwarz_mixed_partials} was quoted without proof where it first appeared, so the proof
+is supplied now. It comes with the attempt that fails, which is the more informative half.
+\end{remark}
 
 \begin{proof}[Proof of \cref{thm:schwarz_mixed_partials}]
 It suffices to treat $m=1$ (apply the result to each component), $i<j$ (there is nothing to
-prove when $i=j$), and $n=2$ with $i=1$, $j=2$ (freeze all the other variables). So let
+prove when $i=j$), and $n=2$ with $i=1$, $j=2$ (freeze all the other variables). So, let
 $f \in C^2$ near $(x,y)$ and write $\partial_1,\partial_2$ for the two partial derivatives.
 
 \textit{The attempt that fails.} Unwinding both mixed derivatives as iterated limits gives
@@ -44,20 +45,20 @@ which is the second difference of $f$ over a square of side $h$, and
 $\varphi(t) := f(x+th, y+h) - f(x+th, y)$, so that $F(h) = \varphi(1)-\varphi(0)$. The mean
 value theorem gives $\xi_1 \in (0,1)$ with
 \[F(h) = \varphi'(\xi_1) = h\,\partial_1f(x+\xi_1h,\ y+h) - h\,\partial_1f(x+\xi_1h,\ y).\]
-Now apply the mean value theorem a second time, to $\psi(t) := \partial_1f(x+\xi_1h,\ y+th)$ ---
-legitimate precisely because $f \in C^2$, so $\partial_1 f$ is itself continuously
+Now apply the mean value theorem a second time, to $\psi(t) := \partial_1f(x+\xi_1h,\ y+th)$.
+This is legitimate precisely because $f \in C^2$, so $\partial_1 f$ is itself continuously
 differentiable in the second variable. Since $F(h) = h\big(\psi(1)-\psi(0)\big)$, there is
 $\xi_2 \in (0,1)$ with
 \[F(h) = h\,\psi'(\xi_2) = h^2\,\partial_2\partial_1f(x+\xi_1h,\ y+\xi_2h).\]
-Grouping the four terms of $F(h)$ the other way --- first and third together, second and fourth
-together --- runs the identical argument with the roles of the variables exchanged and produces
+Grouping the four terms of $F(h)$ the other way (first and third together, second and fourth
+together) runs the identical argument with the roles of the variables exchanged and produces
 $\tilde\xi_1,\tilde\xi_2 \in (0,1)$ with
 $F(h) = h^2\,\partial_1\partial_2f(x+\tilde\xi_1h,\ y+\tilde\xi_2h)$. Dividing both expressions
 by $h^2 \neq 0$,
 \[\partial_2\partial_1f(x+\xi_1h,\ y+\xi_2h)
   \ =\ \partial_1\partial_2f(x+\tilde\xi_1h,\ y+\tilde\xi_2h).\]
-All four numbers $\xi_1,\xi_2,\tilde\xi_1,\tilde\xi_2$ lie in $(0,1)$ --- bounded, though they
-depend on $h$ --- so both arguments converge to $(x,y)$ as $h \to 0$. Continuity of the mixed
+All four numbers $\xi_1,\xi_2,\tilde\xi_1,\tilde\xi_2$ lie in $(0,1)$. They depend on $h$, but
+they stay bounded, so both arguments converge to $(x,y)$ as $h \to 0$. Continuity of the mixed
 second partials (again $f \in C^2$) lets us pass to the limit on both sides, giving
 $\partial_2\partial_1f(x,y) = \partial_1\partial_2f(x,y)$.
 \end{proof}
@@ -67,27 +68,26 @@ $\partial_2\partial_1f(x,y) = \partial_1\partial_2f(x,y)$.
 The two attempts differ in exactly one respect: the failed one lets $h_1$ and $h_2$ go to zero
 \emph{independently}, the successful one ties them together as a single $h$ and only takes a
 limit at the very end. That is why the second difference $F(h)$ over a \emph{square} is the
-right object --- it is symmetric in the two variables by construction, so the two groupings of
-its four terms compute the two mixed partials, and the symmetry of the answer is inherited from
-the symmetry of the square rather than proved by force.
+right object. It is symmetric in the two variables by construction, so the two groupings of its
+four terms compute the two mixed partials, and the symmetry of the answer is inherited from the
+symmetry of the square rather than proved by force.
 
 It also locates precisely where continuity is used: twice, once to apply the mean value theorem
 to $\partial_1f$ and once to pass to the limit at the end. Drop it and the conclusion genuinely
-fails --- see \cref{rem:schwarz_needs_c2} for the standard counterexample, which is
-also the function Lukas sets as an exercise alongside this proof.
+fails. \Cref{rem:schwarz_needs_c2} gives the standard counterexample.
 \end{remark}
 
 \begin{definition}[Sign of a symmetric matrix]
 \label{def:sign_symmetric_matrix}
 A symmetric matrix $A \in \mathbb{R}^{n\times n}$ is:
 \begin{itemize}
-  \item \newterm{positive definite} (\germanterm{positiv definit}) if $v\transp Av > 0$ for all
+  \item \newterm{positive definite} \germanfor{positiv definit} if $v\transp Av > 0$ for all
     $v \in \mathbb{R}^n\setminus\{0\}$;
-  \item \newterm{negative definite} (\germanterm{negativ definit}) if $v\transp Av < 0$ for all
+  \item \newterm{negative definite} \germanfor{negativ definit} if $v\transp Av < 0$ for all
     $v \in \mathbb{R}^n\setminus\{0\}$;
   \item \textbf{indefinite} if there exist $v, u \in \mathbb{R}^n\setminus\{0\}$ such that
     $v\transp Av > 0$ and $u\transp Au < 0$;
-  \item \textbf{degenerate} (\germanterm{entartet}) if there exists
+  \item \textbf{degenerate} \germanfor{entartet} if there exists
     $v \in \mathbb{R}^n\setminus\{0\}$ such that $Av = 0$; equivalently, if $\det A = 0$, or
     if $0$ is an eigenvalue of $A$.
 \end{itemize}
@@ -97,10 +97,9 @@ A symmetric matrix $A \in \mathbb{R}^{n\times n}$ is:
 Corsin defines degenerate as \qt{there exists $v \neq 0$ with $v\transp Av = 0$}. That
 condition is much weaker than intended: if $A$ is indefinite, with $v\transp Av > 0$ and
 $u\transp Au < 0$, then $t \mapsto (tv+(1-t)u)\transp A(tv+(1-t)u)$ is continuous and changes
-sign, so it vanishes at some $w \neq 0$ --- making \emph{every} indefinite matrix degenerate,
-and the third bullet of \cref{thm:hessian_test} vacuous. The intended notion is a nontrivial
-kernel ($\det A = 0$), which is also what \cref{ex:6.2} states. Corrected above.
-
+sign, so it vanishes at some $w \neq 0$. Every indefinite matrix would then be degenerate, and
+the third bullet of \cref{thm:hessian_test} vacuous. The intended notion is a nontrivial kernel
+($\det A = 0$), which is also what \cref{ex:6.2} states. Corrected above.
 \end{ainote}
 
 % Supplement: Sascha Brack/Class Notes/Week_05_Notes_Friday.pdf, pp. 3--4
@@ -143,9 +142,9 @@ so every entry of $\Hess f(0)$ is recovered from $Q$ alone.
 \begin{remark}
 This is the same phenomenon as recovering an inner product from its induced norm via the
 parallelogram-style polarisation identity: a symmetric bilinear form is determined by its
-values on the diagonal. Here it says a single-variable computation --- differentiating
-$t\mapsto f(te)$ twice at $t=0$, for every direction $e$ --- already contains everything the
-full Hessian matrix does.
+values on the diagonal. Here it says that a single-variable computation, differentiating
+$t\mapsto f(te)$ twice at $t=0$ for every direction $e$, already contains everything the full
+Hessian matrix does.
 \end{remark}
 
 \begin{theorem}[The Hessian test]
@@ -155,11 +154,11 @@ If $f \in C^2(U,\mathbb{R})$ has a critical point $x_0 \in \operatorname{int}(U)
   \item $\Hess f(x_0)$ \textbf{positive definite} $\Rightarrow$ local \textbf{min} at $x_0$;
   \item $\Hess f(x_0)$ \textbf{negative definite} $\Rightarrow$ local \textbf{max} at $x_0$;
   \item $\Hess f(x_0)$ \textbf{indefinite} $\Rightarrow$ \newterm{saddle point}
-    (\germanterm{Sattelpunkt}) at $x_0$.
+    \germanfor{Sattelpunkt} at $x_0$.
 \end{itemize}
-If $\Hess f(x_0)$ is degenerate but not indefinite --- that is, positive or negative
-semidefinite with $0$ an eigenvalue --- the test gives \textbf{no information}, and all three
-behaviours are possible.
+If $\Hess f(x_0)$ is degenerate but not indefinite (i.e.\ positive or negative semidefinite with
+$0$ an eigenvalue), the test gives \textbf{no information}, and all three behaviours are
+possible.
 \end{theorem}
 
 \begin{ainote}
@@ -167,12 +166,11 @@ Corsin's third bullet reads \qt{indefinite and not degenerate}. With degeneracy 
 $\det A = 0$ the extra hypothesis is unnecessary: indefiniteness alone already forces a saddle,
 since directions $v$ with $v\transp\Hess f(x_0)v > 0$ and $u$ with $u\transp\Hess f(x_0)u < 0$
 make $t\mapsto f(x_0+tv)$ increase and $t\mapsto f(x_0+tu)$ decrease away from $x_0$. Dropped
-above, and the genuinely inconclusive case --- semidefinite \emph{and} degenerate --- stated
-explicitly instead, since that is the one students actually run into
-(\cref{ex:6.8} is exactly this trap). The official script carries the identical redundant
-hypothesis (its Prop.\ 11.15(3): \qt{indefinite and non-degenerate}), so this is not a slip
-specific to Corsin's notes --- both sources state the theorem with one clause more than it
-needs.
+above. The genuinely inconclusive case, semidefinite \emph{and} degenerate, is stated explicitly
+instead, since that is the one students actually run into (\cref{ex:6.8} is exactly this trap).
+The official script carries the identical redundant hypothesis (its Prop.\ 11.15(3):
+\qt{indefinite and non-degenerate}), so this is not a slip specific to Corsin's notes. Both
+sources state the theorem with one clause more than it needs.
 \end{ainote}
 
 % Quelle: Linus Lüchinger/Slides/Slides-03-23.pdf, slides 10--11
@@ -187,7 +185,7 @@ reading, which recovers the one-dimensional test as the case $n=1$, makes the co
 the entries of $\nabla f$, so the Hessian is to $\nabla f$ what $\nabla f$ is to $f$. Applying
 the linear approximation to $\nabla f$ at the critical point, where $\nabla f(x_0) = 0$,
 \[\nabla f(x_0+v) \approx \underbrace{\nabla f(x_0)}_{=\,0} + \Hess f(x_0)\,v = \Hess f(x_0)\,v.\]
-So once we step off $x_0$ in the direction $v$, the gradient we find there is approximately
+So, once we step off $x_0$ in the direction $v$, the gradient we find there is approximately
 $\Hess f(x_0)v$.
 
 \textbf{Step two: the gradient moves $f$.} The gradient measures the rate of change of $f$, so
@@ -202,10 +200,10 @@ form it does.
 
 Now the theorem reads itself. If $\Hess f(x_0)$ is positive definite, then
 $v\transp \Hess f(x_0) v > 0$ for every $v \neq 0$, so $f$ increases in \emph{every} direction
-away from $x_0$ --- a strict local minimum. Negative definite reverses every inequality. And
-indefinite means some directions give a positive value and others a negative one, so $f$ rises
-along some and falls along others: a saddle. The degenerate-but-not-indefinite case is
-inconclusive for a reason now visible --- along an eigenvector with eigenvalue $0$ the quadratic
+away from $x_0$, and that is a strict local minimum. Negative definite reverses every
+inequality. Indefinite means some directions give a positive value and others a negative one, so
+$f$ rises along some and falls along others: a saddle. The degenerate-but-not-indefinite case is
+now inconclusive for a visible reason. Along an eigenvector with eigenvalue $0$ the quadratic
 term vanishes entirely, so the approximation says nothing and the behaviour is decided by terms
 this expansion has discarded.
 \end{remark}
@@ -222,8 +220,8 @@ $\nabla f(x,y) = (2x,\,-2y)\transp$ vanishes at $(0,0)$, and the Hessian is cons
 \Hess f(0,0) = \begin{pmatrix} 2 & 0 \\ 0 & -2 \end{pmatrix}.
 \]
 Its eigenvalues are $\lambda_1 = 2 > 0$ and $\lambda_2 = -2 < 0$, so $\Hess f(0,0)$ is
-indefinite and $(0,0)$ is a saddle point by \cref{thm:hessian_test} --- the model case the word
-\qt{saddle} is named after, since $f$ rises along the $x$-axis and falls along the $y$-axis.
+indefinite and $(0,0)$ is a saddle point by \cref{thm:hessian_test}. This is the model case the
+word \qt{saddle} is named after, since $f$ rises along the $x$-axis and falls along the $y$-axis.
 \end{aiexample}
 
 \begin{remark}[Mnemonic]
@@ -288,16 +286,16 @@ positive $= \smile \dots$ min; negative $= \frown \dots$ max; indefinite $=$ sad
 The picture is the whole theorem. By \cref{rem:diagonalizing_hessian} the second-order Taylor
 term is $\tfrac12\sum_i\lambda_ia_i^2$ in the eigenbasis, so along the $i$-th eigendirection $f$
 behaves like the parabola $\tfrac12\lambda_it^2$: it curves \emph{up} when $\lambda_i>0$ and
-\emph{down} when $\lambda_i<0$. All up gives a minimum, all down a maximum, and one of each
-gives a saddle --- there is a direction of ascent and a direction of descent through the same
-point, so it is neither. And when some $\lambda_i = 0$ that direction is \emph{flat} to second
-order, the quadratic term says nothing about it, and the test must fall silent --- which is
-exactly the degenerate case, illustrated by $x^4+y^4$ against $x^4-y^4$ above.
+\emph{down} when $\lambda_i<0$. All up gives a minimum, all down a maximum. One of each gives a
+saddle, since there is then a direction of ascent and a direction of descent through the same
+point. And when some $\lambda_i = 0$ that direction is \emph{flat} to second order, the
+quadratic term says nothing about it, and the test must fall silent. That is exactly the
+degenerate case, illustrated by $x^4+y^4$ against $x^4-y^4$ below.
 
 \begin{ainote}
 The regularity in \cref{thm:hessian_test} is stated by Corsin as $C^3$; the test needs only
 $C^2$ (which is what the Hessian's definition assumes). Relaxed to $C^2$ above. This is not just
-Corsin's own habit --- the official script's Prop.\ 11.15 independently requires $f \in C^3$ too,
+Corsin's own habit. The official script's Prop.\ 11.15 independently requires $f \in C^3$ too,
 and its proof indeed only uses the second-order Taylor expansion (with an $o(\lvert h\rvert^2)$
 remainder), which needs nothing beyond $C^2$. Ours is both the weaker hypothesis and the
 standard statement of this theorem.
@@ -317,7 +315,7 @@ Consider $f(x,y) := x^4 + y^4$ and $g(x,y) := x^4 - y^4$ at the critical point $
 \begin{remark}
 Script Exercise 11.16 makes the same point with a two-parameter family:
 $f_{a,b}(x,y) := ax^4+by^4$ has $\Hess f_{a,b}(0,0)$ equal to the zero matrix \emph{regardless of
-$a,b$}, yet the behaviour at $0$ ranges over every possible case as $a,b$ vary --- $a,b>0$
+$a,b$}, yet the behaviour at $0$ ranges over every possible case as $a,b$ vary. Taking $a,b>0$
 recovers the strict minimum of $f$ above ($a=b=1$), $a,b<0$ gives a strict maximum, and opposite
 signs recover the saddle of $g$ above ($a=1,\,b=-1$). It is the sharpest available statement of
 \qt{degenerate $\Rightarrow$ no information}: the identical (zero) Hessian is compatible with
@@ -341,7 +339,7 @@ Note: $\det(A) = \lambda_1\cdots\lambda_n$ and $\Tr(A) = \lambda_1+\dots+\lambda
 \begin{itemize}
   \item Solve the characteristic equation $\det(A - \lambda\id) = 0$ for $\lambda$ and check all
     eigenvalues.
-  \item \newterm{Hurwitz criterion} (\germanterm{Hurwitz-Kriterium}): for
+  \item \newterm{Hurwitz criterion} \germanfor{Hurwitz-Kriterium}: for
     \[A = \begin{pmatrix} a_{11} & a_{12} & \cdots & a_{1n} \\ a_{21} & \ddots & & \vdots \\ \vdots & & \ddots & \\ a_{n1} & \cdots & & a_{nn}\end{pmatrix}\]
     define the leading principal minors
     \[A_1 = \det(a_{11}), \quad A_2 = \det\begin{pmatrix} a_{11} & a_{12} \\ a_{21} & a_{22}\end{pmatrix}, \quad \dots, \quad A_n = \det(A).\]
@@ -472,7 +470,7 @@ Setting $\nabla f(x,y) = (0,0)$ gives the system:
 x - 2y &= 0 \implies x = 2y.
 \end{align*}
 Substituting into the first equation: $-2(2y) + y = 1 \implies -3y = 1 \implies y = -1/3$.
-Then $x = -2/3$. So the only critical point is $(-2/3, -1/3)$.
+Then $x = -2/3$. So, the only critical point is $(-2/3, -1/3)$.
 
 To classify it, we compute the Hessian matrix:
 \[ Hf(x,y) = \begin{pmatrix} -2 & 1 \\ 1 & -2 \end{pmatrix}. \]

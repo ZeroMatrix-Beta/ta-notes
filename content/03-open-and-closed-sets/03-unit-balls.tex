@@ -12,8 +12,8 @@ metric?
 \begin{answer}
 Supremum: the axis-aligned \textbf{open square} $(-1,1)^2$. Manhattan: the \textbf{open diamond}
 $\{|x_1|+|x_2| < 1\}$. In both cases the strict inequality in \cref{def:open_ball} matters: the
-points $(\pm 1,0)$ and $(0,\pm 1)$ sit on the boundary and are \emph{not} in the ball --- they
-are the corners of the diamond and the edge midpoints of the square, drawn hollow below.
+points $(\pm 1,0)$ and $(0,\pm 1)$ sit on the boundary and are \emph{not} in the ball. They are
+the corners of the diamond and the edge midpoints of the square, and are drawn hollow below.
 \end{answer}
 
 
@@ -63,17 +63,16 @@ are the corners of the diamond and the edge midpoints of the square, drawn hollo
 \begin{remark}[The unit ball remembers which metric it came from]
 \label{rem:unit_balls_distinguish_metrics}
 Three metrics, three unmistakably different unit balls: the square for $d_3$, the disk for
-$d_2$, the diamond for $d_1$. This is the quickest way to tell the three apart, and it also
-makes \cref{ex:ai_metric_equivalence} visible --- the inclusions
+$d_2$, the diamond for $d_1$. This is the quickest way to tell the three apart, and it also makes
+\cref{ex:ai_metric_equivalence} visible, since the inclusions
 \[B^{d_1}_1(0) \ \subseteq\ B^{d_2}_1(0) \ \subseteq\ B^{d_3}_1(0)\]
-are precisely the inequalities $d_3 \leq d_2 \leq d_1$ read backwards: the larger the metric,
-the harder it is to be within distance $1$, hence the smaller the ball. The same family,
-continued to all $p \geq 1$, is sketched in \cref{ex:4.3}\textbf{.1}, where the square
-reappears as the limiting case $p \to \infty$.
+are precisely the inequalities $d_3 \leq d_2 \leq d_1$ read backwards. The larger the metric, the
+harder it is to be within distance $1$, and hence the smaller the ball. The same family, continued
+to all $p \geq 1$, is sketched in \cref{ex:4.3}\textbf{.1}, where the square reappears as the
+limiting case $p \to \infty$.
 
-None of this changes which sets are open, incidentally --- all three metrics have the same open
-sets, as \cref{ex:ai_metric_equivalence} shows. The balls look different; the topology does not
-notice.
+None of this changes which sets are open. All three metrics have the same open sets, as
+\cref{ex:ai_metric_equivalence} shows. The balls look different, and the topology does not notice.
 \end{remark}
 
 
@@ -103,8 +102,8 @@ that are necessarily true.
   \item $\overline{Y_1 \cap Y_2} \subset \overline{Y_1} \cap \overline{Y_2}$
   \item $\overline{Y_1 \cap Y_2} = \overline{Y_1} \cap \overline{Y_2}$
 \end{enumerate}
-\textit{Official hints:} \textbf{(b)} --- compare with \cref{ex:2.1}.3. \textbf{(d)} --- play
-with a set of three points (a triangle).
+\textit{Official hints:} \textbf{(b):} compare with \cref{ex:2.1}.3. \textbf{(d):} play with a set
+of three points (a triangle).
 \end{exercise}
 
 % Originally: content/exercise-sheets/week-02.tex, problem 2.3
@@ -114,7 +113,9 @@ with a set of three points (a triangle).
 \label{ex:2.3}
 Let $(X,d)$ be a metric space, and $A \subset X$ a non-empty subset. We define the function
 ``distance from $A$'' as
-$$d(\cdot, A) : X \to [0,\infty), \qquad d(x,A) := \inf_{a \in A} d(x,a).$$
+\[
+  d(\cdot, A) : X \to [0,\infty), \qquad d(x,A) := \inf_{a \in A} d(x,a).
+\]
 Select all the statements below that are necessarily true.
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item If $A$ is closed and $x \in A^c$, then $d(x,A) > 0$.

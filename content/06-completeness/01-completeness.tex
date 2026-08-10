@@ -8,9 +8,58 @@
 Let $(X,d)$ be a metric space and $(x_n)_{n=0}^{\infty}$ a sequence in $X$. We say that
 $(x_n)_{n=0}^{\infty}$ is \newterm{Cauchy} if
 \[\forall \varepsilon > 0 \ \exists N \in \mathbb{N} \text{ such that } d(x_n, x_m) < \varepsilon \quad \forall n, m \geq N.\]
-$(X,d)$ is a \newterm{complete metric space} (\germanterm{vollst\"andiger metrischer Raum}) if
+$(X,d)$ is a \newterm{complete metric space} \germanfor{vollst\"andiger metrischer Raum} if
 every Cauchy sequence in $X$ converges with respect to $d$.
 \end{definition}
+
+% Generator: Claude Opus 5 (High) --- FIG-06-01. The chapter had one figure in 780 lines, and it
+% was the Banach iteration two sections later, so the definition this chapter is built on had
+% none. Completeness is a property of the SPACE rather than of the sequence, which is the single
+% point a picture can make and prose keeps failing to.
+%
+% GEOMETRY, checked. The same sequence x_n := 1/n is drawn twice on the same axis, so the two
+% panels differ in exactly one respect: whether the point 0 belongs to the space. Ticks are
+% placed at the true reciprocals, at x = 4*(1/n) for n = 1..6, i.e.
+%   n=1 -> 4.000   n=2 -> 2.000   n=3 -> 1.333   n=4 -> 1.000   n=5 -> 0.800   n=6 -> 0.667
+% so the visible crowding towards the left is the real 1/n spacing and not a sketch of it. Only
+% the first four are labelled; past that the labels would collide, which is itself the point.
+% The hollow circle at the origin in the lower panel marks a point that is NOT in the space, and
+% the filled one in the upper panel a point that is. That distinction is the whole figure.
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.0]
+  % ---- upper panel: the same sequence inside [0,1], where the limit is present ----
+  \begin{scope}
+    \draw[gray!70, thick] (-0.35,0) -- (4.85,0);
+    \draw[MidnightBlue!70, very thick] (0,0) -- (4,0);
+    \foreach \x in {4, 2, 1.3333, 1, 0.8, 0.6667}
+      \fill[MidnightBlue!70] (\x,0) circle (1.5pt);
+    \fill[OliveGreen] (0,0) circle (2.2pt);
+    \node[OliveGreen, font=\scriptsize, anchor=north] at (0,-0.14) {$0$};
+    \node[MidnightBlue!70, font=\scriptsize, anchor=north] at (4,-0.14) {$1$};
+    \node[MidnightBlue!70, font=\scriptsize, anchor=north] at (2,-0.14) {$\tfrac12$};
+    \node[MidnightBlue!70, font=\scriptsize, anchor=north] at (1.3333,-0.14) {$\tfrac13$};
+    \node[font=\scriptsize, anchor=west] at (5.05,0)
+      {$X = [0,1]$: the limit is in $X$, so $(x_n)$ converges};
+  \end{scope}
+
+  % ---- lower panel: the same points, the same spacing, one point removed ----
+  \begin{scope}[shift={(0,-1.35)}]
+    \draw[gray!70, thick] (-0.35,0) -- (4.85,0);
+    \draw[BrickRed!75, very thick] (0,0) -- (4,0);
+    \foreach \x in {4, 2, 1.3333, 1, 0.8, 0.6667}
+      \fill[BrickRed!75] (\x,0) circle (1.5pt);
+    \draw[BrickRed!75, thick, fill=white] (0,0) circle (2.4pt);
+    \node[BrickRed!75, font=\scriptsize, anchor=north] at (0,-0.16) {$0 \notin X$};
+    \node[font=\scriptsize, anchor=west] at (5.05,0)
+      {$X = (0,1]$: same sequence, still Cauchy, no limit in $X$};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+The two rows carry the same points, at the same spacing, and $(x_n)$ is Cauchy in both: whether
+the terms bunch together is decided by the terms alone. Whether they bunch together \emph{around
+something} is not. Completeness is therefore a property of the space, and a sequence cannot be
+inspected on its own to determine it.
 
 % Supplement: Analysis_II_Script_v1.pdf, p. 10
 \begin{exercise}[Elementary facts about Cauchy sequences]
@@ -32,17 +81,21 @@ the whole sequence. This is exactly the shape of the argument used throughout
 \cref{ch:compactness}.
 \end{remark}
 
-\begin{ainote}
-The official course script (\S9.1.4, \qt{The reals as the completion of $\mathbb{Q}$}) develops
-the converse construction: given \emph{any} incomplete metric space $(X,d)$, one builds a
-complete space $(\overline X,\overline d)$ containing an isometric copy of $X$ as a dense subset
---- the \newterm{completion} of $(X,d)$, of which $\mathbb{R}$ as the completion of
-$\mathbb{Q}$ is the motivating case (that specific construction of $\mathbb{R}$ itself is marked
-\qt{extra material; cf.\ Grundstrukturen} by the script and is not repeated here, since it
-belongs to the sibling \emph{Grundstrukturen} project). Corsin's notes never construct a
-completion, so \cref{sec:completion_of_a_metric_space} below is a supplement in its own right,
-sourced directly from the script rather than from any tutor.
-\end{ainote}
+% Corsin's notes never construct a completion, so sec:completion_of_a_metric_space below is a
+% supplement in its own right, sourced from Analysis_II_Script_v1.pdf rather than from any tutor.
+% Reclassified from ainote to remark: the existence of the completion is mathematics.
+\begin{remark}[The converse construction]
+Incompleteness is a defect that can always be repaired. Given \emph{any} metric space $(X,d)$,
+complete or not, one can build a complete space $(\overline X,\overline d)$ containing an
+isometric copy of $X$ as a dense subset. This is the \newterm{completion} of $(X,d)$, and
+$\mathbb{R}$ as the completion of $\mathbb{Q}$ is the motivating case. The construction is carried
+out in \cref{sec:completion_of_a_metric_space} below.
+
+That specific route to $\mathbb{R}$ itself is not repeated here, the course script marking it as
+extra material belonging to \emph{Grundstrukturen}. What is worth taking from the general
+construction is that no metric space is irreparably incomplete, so the interesting question is
+never whether a completion exists, but whether the one you already have is complete.
+\end{remark}
 
 % Supplement: Sascha Brack/Class Notes/Week_02_Notes_Monday_Updated.pdf, pp. 7--9
 \begin{proposition}[Convergence in $\mathbb{R}^n$ is coordinatewise; $\mathbb{R}^n$ is complete]
@@ -58,28 +111,30 @@ $x_m = (x_{m,1},\dots,x_{m,n})$.
 
 \begin{proof}
 Everything follows from the two-sided estimate, valid for every $j$:
-\[|x_{m,j}-x_j| \ \leq\ \lVert x_m-x\rVert \ =\ \sqrt{\sum_{i=1}^n|x_{m,i}-x_i|^2}
+\[|x_{m,j}-x_j| \ \leq\ |x_m-x| \ =\ \sqrt{\sum_{i=1}^n|x_{m,i}-x_i|^2}
   \ \leq\ \sqrt{n}\,\max_i|x_{m,i}-x_i|.\]
 
-\textbf{(a)} If $\lVert x_m-x\rVert \to 0$, the left inequality forces each coordinate to
+\textbf{(a)} If $|x_m-x| \to 0$, the left inequality forces each coordinate to
 converge. Conversely, if every coordinate converges then $\max_i|x_{m,i}-x_i| \to 0$ (a maximum
 of \emph{finitely} many null sequences), so the right inequality forces
-$\lVert x_m - x\rVert \to 0$.
+$|x_m - x| \to 0$.
 
 \textbf{(b)} Let $(x_m)$ be Cauchy in $\mathbb{R}^n$. The same left inequality gives
-$|x_{m,j}-x_{k,j}| \leq \lVert x_m-x_k\rVert$, so each coordinate sequence $(x_{m,j})_m$ is
-Cauchy in $\mathbb{R}$. Since $\mathbb{R}$ is complete --- this is the completeness axiom from
-\emph{Analysis I}, and the only input the proof has --- each converges, say
+$|x_{m,j}-x_{k,j}| \leq |x_m-x_k|$, so each coordinate sequence $(x_{m,j})_m$ is
+Cauchy in $\mathbb{R}$. Now $\mathbb{R}$ is complete, this being the completeness axiom from
+\emph{Analysis I} and the only input the proof has, so each coordinate sequence converges, say
 $x_{m,j} \to x_j$. Setting $x := (x_1,\dots,x_n)$, part \textbf{(a)} gives $x_m \to x$.
 \end{proof}
 
-\begin{ainote}
-Worth noting how little is proved here: completeness of $\mathbb{R}^n$ is completeness of
-$\mathbb{R}$, applied $n$ times. That is also where the argument would fail in infinite
-dimensions --- $\max_i$ over infinitely many coordinates need not tend to $0$ even when each
-does, which is exactly the phenomenon behind the $\varepsilon$-net argument in
-\Cref{lem:sequentially_compact_totally_bounded}.
-\end{ainote}
+% Reclassified from ainote to remark: this is an observation about the proof, not about the
+% transcription of it.
+\begin{remark}[How little was actually used]
+Completeness of $\mathbb{R}^n$ is completeness of $\mathbb{R}$, applied $n$ times. Nothing else
+enters, which is worth noticing because it shows exactly where the argument would break in
+infinite dimensions. There $\max_i$ runs over infinitely many coordinates and need not tend to
+$0$ even when every individual coordinate does. That failure is the same phenomenon behind the
+$\varepsilon$-net argument in \Cref{lem:sequentially_compact_totally_bounded}.
+\end{remark}
 
 % Source: Corsin Nick/Class Notes/Week 2.pdf, pp. 1--13
 \begin{example}[Completeness examples]
@@ -100,45 +155,43 @@ The second bullet is easy to over-read as \qt{complete means closed}. It does no
 difference is worth pinning down now (because it recurs).
 
 \textbf{Closedness is relative, completeness is intrinsic.} \qt{Closed} only means anything once
-you say \emph{closed in what} (i.e., it is a statement about how a set sits inside an ambient space).
-Completeness asks nothing about an ambient space --- only whether the Cauchy sequences of the
-space converge \emph{within it}. So:
+you say \emph{closed in what}, since it is a statement about how a set sits inside an ambient
+space. Completeness asks nothing about an ambient space, but only whether the Cauchy sequences of
+the space converge \emph{within it}. So:
 \begin{itemize}
-  \item $\mathbb{Q}$ is \textbf{closed in $\mathbb{Q}$} --- every space is closed in itself
-    (\cref{ex:X_empty_clopen}) --- and yet \textbf{not complete}: the decimal approximations
+  \item $\mathbb{Q}$ is \textbf{closed in $\mathbb{Q}$}, every space being closed in itself
+    (\cref{ex:X_empty_clopen}), and yet \textbf{not complete}: the decimal approximations
     $1,\,1.4,\,1.41,\,1.414,\dots$ form a Cauchy sequence in $\mathbb{Q}$ that converges to nothing there.
     (Alternatively, the sequence defined recursively by $x_0 := 1$ and $x_{n+1} := \frac{x_n}{2} + \frac{1}{x_n}$
     is Cauchy in $\mathbb{Q}$, but its limit $\sqrt{2}$ is not in $\mathbb{Q}$.)
   \item $(0,1)$ is \textbf{not closed in $\mathbb{R}$} and also not complete, which is the
-    second bullet's case --- but the two failures have different causes, and the first does not
-    imply the second in general.
+    second bullet's case. The two failures nevertheless have different causes, and the first does
+    not imply the second in general.
 \end{itemize}
 
 What \emph{is} true is a one-directional statement, and only inside a complete ambient space:
 if $X$ is complete and $A \subseteq X$, then
 \[A \text{ closed in } X \iff A \text{ complete}.\]
-This is why the second bullet is correct \emph{as stated for $\mathbb{R}^n$} --- it silently uses
+This is why the second bullet is correct \emph{as stated for $\mathbb{R}^n$}. It silently uses
 completeness of the ambient $\mathbb{R}^n$. Drop that hypothesis and the equivalence dies, as
 $\mathbb{Q}$ inside $\mathbb{Q}$ shows.
 
-\begin{ainote}
-The same relative-versus-intrinsic distinction is the one behind
-\Cref{rem:common_misconception} ($[0,1]^2$ is open in itself, not in $\mathbb{R}^2$), and it
-returns as \cref{rem:boundedness_not_topological}. Compactness, by contrast, is
-intrinsic like completeness: a subset $K$ is compact exactly when the metric space
-$(K, d|_{K\times K})$ is, with no reference to the ambient space at all --- which is precisely
-the reduction used in \cref{def:sequential_topological_compactness}.
-\end{ainote}
+The same relative-versus-intrinsic distinction lies behind \cref{rem:common_misconception}
+($[0,1]^2$ is open in itself, not in $\mathbb{R}^2$), and it returns as
+\cref{rem:boundedness_not_topological}. Compactness, by contrast, is intrinsic in the way
+completeness is: a subset $K$ is compact exactly when the metric space $(K, d|_{K\times K})$ is,
+with no reference to any ambient space. That is precisely the reduction used in
+\cref{def:sequential_topological_compactness}.
 \end{remark}
 
 \begin{remark}
-The second bullet of \cref{rem:complete_vs_closed}'s example --- $(0,1) \subset \mathbb{R}$ is
-open and not complete --- is not a quirk of that particular interval: script Exercise 9.76 asks
+The second bullet of \cref{rem:complete_vs_closed}'s example, in which $(0,1) \subset \mathbb{R}$
+is open and not complete, is not a quirk of that particular interval: script Exercise 9.76 asks
 for exactly this in general, and the fact is already in this document as
-\cref{ex:3.4}\textbf{(b)} below --- \emph{every} proper, non-empty open subset of $\mathbb{R}^n$
-fails to be complete, for the same underlying reason. That solution gives the topological proof
-via connectedness; an ainote there records the script's more elementary, connectedness-free
-alternative.
+\cref{ex:3.4}\textbf{(b)} below. \emph{Every} proper, non-empty open subset of $\mathbb{R}^n$
+fails to be complete, and for the same underlying reason. That solution gives the topological
+proof via connectedness, and a remark alongside it records the script's more elementary,
+connectedness-free alternative.
 \end{remark}
 \begin{exercise}[Completeness is not a topological property]
 \label{ex:completeness_not_topological}
@@ -158,19 +211,19 @@ $x_n \to 1/\ell$.
 \end{exercise}
 
 \begin{ainote}
-Diego states the exercise on $X = (0,\infty)$, but there part \textbf{(c)} is false: on
+Diego states this exercise on $X = (0,\infty)$, where part \textbf{(c)} is false. On
 $(0,\infty)$ the map $x\mapsto1/x$ is a bijection \emph{onto} $(0,\infty)$, so $(X,d)$ is
-isometric to $\big((0,\infty),|\cdot|\big)$, which is not complete --- concretely $x_n := n$
+isometric to $\big((0,\infty),|\cdot|\big)$, which is not complete: concretely, $x_n := n$
 satisfies $d(x_n,x_m) = |\tfrac1n-\tfrac1m| \to 0$ yet has no limit in $X$. His own hint asks to
 show $\ell > 0$, and that is precisely the step that fails. Restricting to a bounded interval
-repairs it: on $(0,1]$ the image is $[1,\infty)$, which \emph{is} closed in $\mathbb{R}$ and
-hence complete. Typeset with $X := (0,1]$ above.
+repairs it, since on $(0,1]$ the image is $[1,\infty)$, which \emph{is} closed in $\mathbb{R}$ and
+hence complete. The exercise is therefore typeset with $X := (0,1]$ above.
 \end{ainote}
 
 % Sonnet 5 (Medium)
 Compactness will turn out to be a strictly stronger finiteness-type property than completeness:
 every compact metric space is complete (\cref{ex:compact_finite_complete}), but the converse
-fails --- $\mathbb{R}^n$ itself is complete, yet (being unbounded) not compact, as we will see
-next (\cref{thm:sequential_compactness}, \cref{sec:heine_borel}).
+fails. Note that $\mathbb{R}^n$ itself is complete and yet, being unbounded, not compact, as we
+will see next (\cref{thm:sequential_compactness}, \cref{sec:heine_borel}).
 
 % Source: Corsin Nick/Class Notes/Week 2.pdf, pp. 1--13

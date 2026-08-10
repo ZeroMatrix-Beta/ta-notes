@@ -123,8 +123,8 @@ not, which is what the second half of each part is asking about.
       \partial_v\,(x\cdot e) = \langle e,v\rangle, \qquad
       \partial_v\,g(x\cdot e) = g'(\langle x,e\rangle)\,\langle e,v\rangle.\]
     The fourth is worth reading geometrically: $x/|x|$ records only a direction, so moving $x$
-    along itself changes nothing --- and indeed the bracket is exactly $v$ with its component
-    along $x$ removed.
+    along itself changes nothing, and indeed the bracket is exactly $v$ with its component along
+    $x$ removed.
   \item For matrix arguments the cleanest route is the one Corsin's hint suggests: expand
     $f(x+tv)$ in powers of $t$ and read off the coefficient of $t$. The first three maps are
     linear, hence their own derivatives:
@@ -172,8 +172,8 @@ $\varphi(t) := b(t)$ for the latitude, so that
     The first component is the centripetal term; the other two are tangential.
   \item Substituting $\varphi = b$, $\theta' = \omega + a'$ and $\theta'' = a''$, the assumption
     $r''(t) = \lambda(t)\,r(t) = \lambda(t)R\,e_r$ says precisely that the $e_\varphi$ and
-    $e_\theta$ components vanish --- the frame is orthonormal, so there is no cancellation
-    between them to hope for. That is
+    $e_\theta$ components vanish. The frame is orthonormal, so there is no cancellation between
+    them to hope for. That is
     \[b'' + \sin b\cos b\,(\omega+a')^2 = 0, \qquad
       \cos b\;a'' - 2\sin b\,(\omega+a')\,b' = 0,\]
     which is the claim. Away from the poles $\cos b \neq 0$, so dividing the second equation by
@@ -181,11 +181,13 @@ $\varphi(t) := b(t)$ for the latitude, so that
     \[a'' - 2\tan b\,(\omega+a')\,b' = 0.\]
 \end{enumerate}
 
-\begin{ainote}
+% Reclassified from ainote to remark: two observations about the equations themselves.
+\begin{remark}[Reading the two equations physically]
 Two features are worth noticing. First, $\omega$ enters only through the combination
-$\omega + a'$, the \emph{absolute} angular velocity --- which is what one would hope: the
-equations cannot distinguish a car driving east on a still Earth from a parked car on a rotating
-one. Second, the factor $2$ in the $e_\theta$ equation is the Coriolis term; it is the same
-$2\theta'\varphi'$ that appears in the acceleration in polar coordinates one dimension lower.
-\end{ainote}
+$\omega + a'$, which is the \emph{absolute} angular velocity. That is what one would hope for,
+since the equations ought not to distinguish a car driving east on a still Earth from a parked car
+on a rotating one. Second, the factor $2$ in the $e_\theta$ equation is the Coriolis term, and it
+is the same $2\theta'\varphi'$ that appears in the acceleration in polar coordinates one dimension
+lower.
+\end{remark}
 \end{exercisesolution}

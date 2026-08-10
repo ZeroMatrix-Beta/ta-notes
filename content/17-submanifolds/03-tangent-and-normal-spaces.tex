@@ -35,7 +35,7 @@ basis of $T_pM$:
 
 \begin{definition}[Tangent space]
 \label{def:tangent_space}
-For $M$, $f$ as above, the \newterm{tangent space} (\germanterm{Tangentialraum}) of $M$ at
+For $M$, $f$ as above, the \newterm{tangent space} \germanfor{Tangentialraum} of $M$ at
 $p \in M$ is
 \[T_pM := \operatorname{span}\{\partial_1f(q),\dots,\partial_mf(q)\} = Df_q(\mathbb{R}^m);\]
 it is independent of the choice of $f$.
@@ -54,7 +54,7 @@ We determine $T_{e_3}S^2_+$, where $e_3 = (0,0,1)$:
   &= \left.\begin{pmatrix} 0 \\ 1 \\ \dfrac{-y}{\sqrt{1-x^2-y^2}}\end{pmatrix}\right|_{(x,y)=(0,0)}
    = \begin{pmatrix}0\\1\\0\end{pmatrix} = e_2.
 \end{align*}
-So $T_{e_3}S^2_+ = T_{e_3}S^2 = \operatorname{span}\{e_1,e_2\} = \mathbb{R}^2\times\{0\}$.
+So, $T_{e_3}S^2_+ = T_{e_3}S^2 = \operatorname{span}\{e_1,e_2\} = \mathbb{R}^2\times\{0\}$.
 \end{example}
 
 % Source: Diego Torres Tejeda/Notes - 13.04 - Diego Torres Tejeda.pdf, p. 2
@@ -93,13 +93,14 @@ In particular, at the outer point $p_0 := (R_1+R_2, 0, 0)\transp$ (where $t = 0,
 \end{center}
 
 % Quelle: Diego Torres Tejeda/Notes - 30.03 - Diego Torres Tejeda.pdf, p. 2 -- Sonnet 5 (Medium)
-\begin{ainote}[Tangent vectors as velocities of curves]
-Corsin defines $T_pM$ only via a parametrization (\cref{def:tangent_space}). Diego's notes give
-an equivalent, more intrinsic description --- a vector is tangent to $M$ if it is the velocity of
-some curve running along $M$ --- which is worth recording since it is how tangent vectors are
-usually pictured, and is often the quicker way to check whether a given vector lies in $T_pM$
-without first writing down a parametrization.
-\end{ainote}
+% Corsin defines T_pM only via a parametrization; the curve description below is Diego's. (Was
+% an ainote until 2026-08-09. The mathematics is the proposition, and who-wrote-which-definition
+% is editor-facing by Test 2 in style.md.)
+\Cref{def:tangent_space} builds $T_pM$ out of a parametrization, so the space is pinned down by a
+formula rather than by what its elements are. There is an equivalent description that says what
+they are. A vector is tangent to $M$ at $p$ exactly when some curve running inside $M$ passes
+through $p$ with that velocity, which is both how tangent vectors are usually pictured and the
+quicker test in practice, since no parametrization need be written down.
 
 \begin{proposition}[Tangent space via curves]
 \label{prop:tangent_space_via_curves}
@@ -181,7 +182,7 @@ normal to the $m$-dimensional plane $T_{f(q)}M$, we can define:
 \begin{definition}[Normal space]
 \label{def:normal_space}
 Let $M^m \subseteq \mathbb{R}^n$ be a submanifold and $F : U^n \to \mathbb{R}^{n-m}$ an implicit
-representation, $M = F^{-1}\{0\}$. Then the \newterm{normal space} (\germanterm{Normalraum}) of
+representation, $M = F^{-1}\{0\}$. Then the \newterm{normal space} \germanfor{Normalraum} of
 $M$ at $p \in M$ is
 \[N_pM := \operatorname{span}\{\nabla F_1(p),\dots,\nabla F_{n-m}(p)\}.\]
 \end{definition}
@@ -190,7 +191,7 @@ $M$ at $p \in M$ is
 Represent $S^2$ implicitly: $S^2 = F^{-1}\{1\} = \{(x,y,z)\in\mathbb{R}^3 : F(x,y,z)=1\}$ where
 $F(x,y,z) = x^2+y^2+z^2$. We determine $N_{e_3}S^2$:
 \[\nabla F(0,0,1) = (2x,2y,2z)\big|_{(x,y,z)=(0,0,1)} = 2e_3.\]
-So $N_{e_3}S^2 = \operatorname{span}\{e_3\} = \{0\}\times\mathbb{R}$.
+So, $N_{e_3}S^2 = \operatorname{span}\{e_3\} = \{0\}\times\mathbb{R}$.
 \end{example}
 
 % Generator: Claude Opus 5 (High) --- the example above is the $n=3$, $F = \lvert x\rvert^2$
@@ -226,7 +227,7 @@ For a parametrized surface $f : V \to \mathbb{R}^3$, the tangent space at $p = f
 
 Let us apply this to the sphere $S^2$ using spherical coordinates:
 \[\Phi(\theta,\varphi) = \begin{pmatrix} \sin\theta\cos\varphi \\ \sin\theta\sin\varphi \\ \cos\theta \end{pmatrix}, \qquad (\theta,\varphi) \in (0,\pi) \times (-\pi,\pi).\]
-(Note that the image of $\Phi$ is the unit sphere minus a \qt{thin slice} --- the boundary where $\varphi = \pm\pi$ and the poles where $\theta \in \{0,\pi\}$.)
+(Note that the image of $\Phi$ is the unit sphere minus a \qt{thin slice}, namely the meridian where $\varphi = \pm\pi$ together with the two poles where $\theta \in \{0,\pi\}$.)
 The tangent space $T_{\Phi(\theta,\varphi)} S^2$ is spanned by the partial derivatives:
 \[
 \partial_\theta \Phi(\theta,\varphi) = \begin{pmatrix} \cos\theta\cos\varphi \\ \cos\theta\sin\varphi \\ -\sin\theta \end{pmatrix}, \qquad

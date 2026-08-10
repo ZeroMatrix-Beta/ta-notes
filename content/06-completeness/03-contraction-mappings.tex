@@ -4,16 +4,19 @@
 \section{Contraction mappings and the Banach fixed point theorem}
 \label{sec:banach_fixed_point}
 
-\begin{ainote}
-Not in Corsin's own notes either, but needed to justify the appeal to the \qt{Banach Fixed
-Point Theorem} in the solution to \cref{ex:ai_contraction_cos} below --- and a standard companion
-to completeness (\cref{def:complete_metric_space}), which is why it sits in this chapter.
-\end{ainote}
+% Not in Corsin's own notes either, but needed to justify the appeal to the "Banach Fixed Point
+% Theorem" in the solution to ex:ai_contraction_cos below, and a standard companion to
+% completeness (def:complete_metric_space), which is why it sits in this chapter.
+% Transition: Claude Opus 5 (High)
+Completeness guarantees that certain limits exist, but on its own it does not say what they are.
+The following theorem is the standard way of turning that guarantee into a construction: it
+identifies a single point, proves it exists, proves it is unique, and supplies an algorithm that
+converges to it. Almost every existence proof in the second half of this course goes through it.
 
 \begin{definition}[Contraction mapping]
 \label{def:contraction_mapping}
 Let $(X,d)$ be a metric space. A map $f : X \to X$ is a \newterm{contraction}
-(\germanterm{Kontraktion}) if it is Lipschitz continuous (\cref{def:lipschitz_continuous}) with
+\germanfor{Kontraktion} if it is Lipschitz continuous (\cref{def:lipschitz_continuous}) with
 some Lipschitz constant $L \in [0,1)$, i.e.,
 \[d(f(x),f(y)) \leq L \cdot d(x,y) \quad \text{for all } x,y \in X.\]
 \end{definition}
@@ -22,7 +25,7 @@ some Lipschitz constant $L \in [0,1)$, i.e.,
 \label{thm:banach_fixed_point}
 Let $(X,d)$ be a nonempty complete metric space (\cref{def:complete_metric_space}) and let
 $f : X \to X$ be a contraction (\cref{def:contraction_mapping}). Then $f$ has a unique
-\newterm{fixed point} (\germanterm{Fixpunkt}) $x^* \in X$, i.e., $f(x^*) = x^*$; moreover, for any
+\newterm{fixed point} \germanfor{Fixpunkt} $x^* \in X$, i.e., $f(x^*) = x^*$; moreover, for any
 $x_0 \in X$, the iterates $x_{n+1} := f(x_n)$ converge to $x^*$.
 \end{theorem}
 
@@ -47,6 +50,65 @@ so $(1-L)\,d(x,y) \leq 0$. Since $L<1$ we have $1-L>0$, forcing $d(x,y) \leq 0$ 
 $d(x,y)=0$, i.e.\ $x=y$.
 \end{proof}
 
+% Generator: Claude Opus 5 (High) --- FIG-06-01, cobweb diagrams for the fixed point iteration.
+% This chapter had no figure at all, and the theorem's proof is a construction (iterate f from
+% an arbitrary starting point) whose whole content is visual in one variable.
+% Arithmetic check. LEFT: f(x) = 0.45x + 0.35, a contraction with L = 0.45 < 1. Fixed point
+% x* = 0.35/(1-0.45) = 0.35/0.55 = 0.6364. From x0 = 0.05 the iterates are
+%   0.05 -> 0.3725 -> 0.51763 -> 0.58293 -> 0.61232 -> 0.62554, climbing to x*.
+% RIGHT: f(x) = x + 0.12, slope exactly 1, so L = 1 and NOT a contraction. The graph is
+% parallel to the diagonal and never meets it, so there is no fixed point at all. From
+% x0 = 0.10 the iterates are 0.22, 0.34, 0.46, 0.58, 0.70, 0.82, marching off to the right.
+% This is the second bullet of rem:banach_hypotheses (the T(x) = x+1 example) drawn on [0,1].
+\begin{center}
+\begin{tikzpicture}[x={(3.4cm,0)}, y={(0,3.4cm)}, >=Latex,
+    web/.style={BrickRed, thick},
+    fgraph/.style={blue!65!black, very thick}]
+
+  % ---------------- left: a genuine contraction ----------------
+  \begin{scope}
+    \draw[->, gray!70] (0,0) -- (1.1,0) node[right, font=\footnotesize, text=black] {$x$};
+    \draw[->, gray!70] (0,0) -- (0,1.1);
+    \draw[gray!55, dashed] (0,0) -- (1,1) node[above left, font=\scriptsize, text=black] {$y=x$};
+    \draw[fgraph] (0,0.35) -- (1,0.80) node[right, font=\scriptsize] {$f$};
+
+    \draw[web] (0.05,0.05) -- (0.05,0.3725) -- (0.3725,0.3725) -- (0.3725,0.51763)
+      -- (0.51763,0.51763) -- (0.51763,0.58293) -- (0.58293,0.58293) -- (0.58293,0.61232)
+      -- (0.61232,0.61232) -- (0.61232,0.62554);
+
+    \fill[black] (0.6364,0.6364) circle (1.7pt);
+    \node[font=\scriptsize, anchor=west] at (0.68,0.60) {$x^{*}$};
+    \draw[gray!70] (0.05,0.02) -- (0.05,-0.02) node[below, font=\scriptsize, text=black] {$x_0$};
+    \node[font=\scriptsize, align=center, anchor=north] at (0.5,-0.15)
+      {contraction, $L=0.45$\\ iterates climb to the unique $x^{*}$};
+  \end{scope}
+
+  % ---------------- right: slope exactly 1, no fixed point ----------------
+  \begin{scope}[shift={(1.42,0)}]
+    \draw[->, gray!70] (0,0) -- (1.1,0) node[right, font=\footnotesize, text=black] {$x$};
+    \draw[->, gray!70] (0,0) -- (0,1.1);
+    \draw[gray!55, dashed] (0,0) -- (1,1) node[below right, font=\scriptsize, text=black] {$y=x$};
+    \draw[fgraph] (0,0.12) -- (0.88,1.0) node[above left, font=\scriptsize] {$f$};
+
+    \draw[web] (0.10,0.10) -- (0.10,0.22) -- (0.22,0.22) -- (0.22,0.34) -- (0.34,0.34)
+      -- (0.34,0.46) -- (0.46,0.46) -- (0.46,0.58) -- (0.58,0.58) -- (0.58,0.70)
+      -- (0.70,0.70) -- (0.70,0.82) -- (0.82,0.82) -- (0.82,0.94);
+    \draw[web, ->] (0.82,0.94) -- (0.94,0.94);
+
+    \draw[gray!70] (0.10,0.02) -- (0.10,-0.02) node[below, font=\scriptsize, text=black] {$x_0$};
+    \node[font=\scriptsize, align=center, anchor=north] at (0.5,-0.15)
+      {$L=1$: graph parallel to $y=x$\\ no fixed point, iterates escape};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+The left panel is the proof in miniature. Each step moves vertically to the graph of $f$ and then
+horizontally back to the diagonal, and because the graph is shallower than the diagonal, the steps
+shrink by a factor of at least $L$ every time. That is precisely the geometric-series estimate the
+proof runs on. The right panel shows what a single missing hypothesis costs: with slope exactly
+$1$ the graph never meets the diagonal, so no fixed point exists and the same iteration marches
+off instead of converging.
+
 \begin{remark}[Where each hypothesis is used]
 \label{rem:banach_hypotheses}
 Both hypotheses of \cref{thm:banach_fixed_point} are indispensable, and each fails in a
@@ -54,7 +116,7 @@ different way.
 \begin{itemize}
   \item \textbf{Completeness} is what supplies the limit. On the incomplete space
     $X := (0,1]$, the map $f(x) := x/2$ is a contraction with $L=\tfrac12$ and has no fixed
-    point in $X$ --- the iterates march towards $0$, which is missing.
+    point in $X$, since the iterates march towards $0$, which is exactly the point missing.
   \item \textbf{$L<1$ strictly} is what forces the iterates together. The map
     $f(x) := x + \tfrac{1}{1+e^{x}}$ on the complete space $\mathbb{R}$ satisfies the strict
     inequality $|f(x)-f(y)| < |x-y|$ for $x \neq y$, yet has no fixed point, since
@@ -80,11 +142,11 @@ Find examples for:
 Part \textbf{(b)} sharpens \cref{rem:banach_hypotheses}'s second bullet: that example already
 showed a Lipschitz constant of exactly $1$ can defeat the theorem, but its map $T$ was not an
 isometry ($|T(x)-T(y)| < |x-y|$ strictly, just with no uniform gap). An isometry is the most
-rigid failure imaginable --- it does not even shrink distances a little --- and it \emph{still}
-need not have a fixed point, even on a complete space. Note that unboundedness is doing real
-work in the counterexample: on a \emph{compact} space, an isometry into itself is automatically
-surjective, but even that is not enough to force a fixed point --- an irrational rotation of the
-circle $S^1$ (compact, and an isometry) has none either. Fixed points of isometries are a
+rigid failure imaginable, not shrinking distances even a little, and it \emph{still} need not have
+a fixed point, even on a complete space. Note that unboundedness is doing real work in the
+counterexample: on a \emph{compact} space an isometry into itself is automatically surjective, and
+even that is not enough to force a fixed point. An irrational rotation of the circle $S^1$, which
+is compact and an isometry, has none either. Fixed points of isometries are a
 genuinely separate question from \cref{thm:banach_fixed_point}, not one it settles as a special
 case.
 \end{remark}

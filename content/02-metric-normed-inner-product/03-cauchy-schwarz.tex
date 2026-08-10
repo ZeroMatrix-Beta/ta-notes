@@ -173,7 +173,7 @@ the line to $v$.
 % Originally: content/exercise-sheets/week-03.tex, problem 3.7
 % Source: exercises/Ex3_Analysis2_eng.pdf
 
-\begin{exercise}[3.7 --- Cauchy--Schwarz]
+\begin{exercise}[Cauchy--Schwarz]
 \label{ex:3.7}
 Let $V$ be a vector space over $\mathbb{R}$, let $\langle\cdot,\cdot\rangle$ be an inner product
 on $V$, and let $\|\cdot\| : V \to \mathbb{R}$ be given by $\|v\| = \sqrt{\langle v,v\rangle}$.
@@ -183,6 +183,7 @@ Then the inequality
 \end{equation*}
 holds for all $v, w \in V$. Furthermore, equality in (1) holds if and only if $v$ and $w$ are
 linearly dependent.
+\exinfo{This exercise is Problem 3.7 of Problem Sheet 3, Analysis II, Spring Semester 2026.}
 \end{exercise}
 
 \begin{remark}
@@ -193,18 +194,19 @@ including the geometric reading and an explicit proof hint.
 % Originally: content/exercise-sheets/week-03.tex, problem 3.8
 % Source: exercises/Ex3_Analysis2_eng.pdf
 
-\begin{exercise}[3.8 --- Inner product and norm]
+\begin{exercise}[Inner product and norm]
 \label{ex:3.8}
 Let $V$ be a vector space over $\mathbb{R}$, let $\langle -,-\rangle$ be an inner product on $V$.
 The map defined by
 $$\|\cdot\| : V \to \mathbb{R}, \qquad \|v\| = \sqrt{\langle v,v\rangle}$$
 satisfies the triangular inequality and is a norm.
+\exinfo{This exercise is Problem 3.8 of Problem Sheet 3, Analysis II, Spring Semester 2026.}
 \end{exercise}
 
 % Originally: content/exercise-sheets/week-03.tex, problem 3.9
 % Source: exercises/Ex3_Analysis2_eng.pdf
 
-\begin{exercise}[3.9 --- All norms are equivalent in $\mathbb{R}^n$]
+\begin{exercise}[All norms are equivalent in $\mathbb{R}^n$]
 \label{ex:3.9}
 Let $|\cdot|$ denote the standard Euclidean norm in $\mathbb{R}^n$ and let
 $f : \mathbb{R}^n \to [0,\infty)$ be another norm (that is, a function satisfying the properties
@@ -225,6 +227,7 @@ $|f(x) - f(y)| \leq f(x-y)$, and that Lipschitz functions are always continuous.
 and use that $f$, being a norm, is nondegenerate. \textbf{3.9.5:} if $f$ is equivalent to $|\cdot|$ and
 $\tilde f$ is equivalent to $|\cdot|$, it follows by transitivity that $f$ is equivalent to
 $\tilde f$.}
+\exinfo{This exercise is Problem 3.9 of Problem Sheet 3, Analysis II, Spring Semester 2026.}
 \end{exercise}
 
 \begin{remark}
@@ -250,7 +253,7 @@ algebraically simplest such example, with an explicit basis and no analysis requ
 % Originally: content/exercise-sheets/week-03.tex, problem 3.10
 % Source: exercises/Ex3_Analysis2_eng.pdf
 
-\begin{exercise}[3.10 --- Hilbert--Schmidt norm of the composition]
+\begin{exercise}[Hilbert--Schmidt norm of the composition]
 \label{ex:3.10}
 Take two linear functions $\varphi : \mathbb{R}^d \to \mathbb{R}^n$ and
 $\psi : \mathbb{R}^n \to \mathbb{R}^m$, and denote with $\Phi$, $\Psi$ the matrices that represent
@@ -264,12 +267,13 @@ notes).
 \exhint[Official hint]{Recall that $\|M\|^2$ is the sum of the squares of the entries of $M$.
 Notice that $(\Psi\cdot\Phi)^i_j$ ($i$-th row, $j$-th column) is the scalar product of $\Psi^i$
 and $\Phi_j$, which are vectors of $\mathbb{R}^n$. Apply Cauchy--Schwarz to each of them.}
+\exinfo{This exercise is Problem 3.10 of Problem Sheet 3, Analysis II, Spring Semester 2026.}
 \end{exercise}
 
 % Originally: content/week-04.tex, \exercisesheet{4}
 % Source: exercises/Ex4_Analysis2_eng.pdf
 
-\begin{exercise}[4.3 --- $p$-norms \textnormal{(semi-important; parts 4 and 6 important)}]
+\begin{exercise}[$p$-norms \textnormal{(semi-important; parts 4 and 6 important)}]
 \label{ex:4.3}
 For $p \geq 1$ and $x \in \mathbb{R}^n$ define the \textbf{$p$-norm} of $x$ as
 \[|x|_p := \Big(\sum_{i=1}^{n} |x_i|^p\Big)^{1/p}.\]
@@ -298,12 +302,13 @@ you need. \textbf{4.3.5:} write the convexity inequality between $x$, $y$ and th
 $(x+y)/2$. To get the general case from the one with positive coordinates, observe that for
 $x \in \mathbb{R}^n$, denoting $\hat x := (|x_1|,\dots,|x_n|)$, we have
 $|x+y|_p \leq |\hat x + \hat y|_p$ and $|\hat x|_p = |x|_p$ for all $x,y \in \mathbb{R}^n$.}
+\exinfo{This exercise is Problem 4.3 of Problem Sheet 4, Analysis II, Spring Semester 2026.}
 \end{exercise}
 
 % Originally: content/exercise-sheets/week-04.tex, problem 4.4 --- never previously built
 % Source: exercises/Ex4_Analysis2_eng.pdf
 
-\begin{exercise}[4.4 --- $p$-means \textnormal{(optional)}]
+\begin{exercise}[$p$-means \textnormal{(optional)}]
 \label{ex:4.4}
 For $x \in \mathbb{R}^n$ with positive coordinates and $p \neq 0$ define the \textbf{$p$-mean} as
 $$\mu_p(x) := \left(\frac{x_1^p + \dots + x_n^p}{n}\right)^{1/p}.$$
@@ -324,4 +329,5 @@ $f : \mathbb{R}\to\mathbb{R}$,
 $f(\lambda_1x_1 + \dots + \lambda_nx_n) \geq \lambda_1f(x_1)+\dots+\lambda_nf(x_n)$ for all
 $x_i \in \mathbb{R}$, $0 \leq \lambda_i \leq 1$ with $\lambda_1+\dots+\lambda_n = 1$.
 \textbf{4.4.3:} it might be more convenient to work with $\log f(t)$.}
+\exinfo{This exercise is Problem 4.4 of Problem Sheet 4, Analysis II, Spring Semester 2026.}
 \end{exercise}

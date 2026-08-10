@@ -155,6 +155,35 @@ section and subsection titles are `MidnightBlue`; subsubsection is `TextBoldColo
   the search tool, whose pattern is passed as a parameter and never sees a shell. On the file
   above, the search tool with pattern `\\\\` correctly returns the four matrix-row lines that
   `grep -cF` could not find.
+* ⚠️ **Never put a commit message on the command line — write it to a file and use
+  `git commit -F`.** This is the shell-quoting hazard above arriving by a third door, and it bites
+  in PowerShell as readily as in Bash.
+
+  `git commit -m @'...'@` with a here-string looks safe, and usually is. It broke on 2026-08-10
+  with
+
+  ```
+  error: unknown switch `A'
+  ```
+
+  because the message contained double-quoted phrases. PowerShell re-quotes a multi-line string
+  when handing it to a **native** executable, and the embedded `"` characters split the one
+  argument into several, so the words `git add -A` sitting in the middle of the prose arrived at
+  `git` as a flag.
+
+  **What makes it dangerous is that it is intermittent.** A longer message committed minutes
+  earlier through the identical here-string worked perfectly — it simply happened to contain no
+  `"`. So the form appears reliable right up until a message quotes something, and the failure
+  then points at a word in the prose rather than at the quoting.
+
+  Write the message with the edit tool, to the scratchpad, and pass the path:
+
+  ```bash
+  git commit -F /path/to/commitmsg.txt
+  ```
+
+  Nothing then crosses the shell boundary. The same reasoning applies to any prose argument long
+  enough to contain punctuation: `-F`, `--file`, or a heredoc-free equivalent beats `-m`.
 * **A literal `[` or `]` inside a `[...]` environment title closes the argument early.** An
   exercise titled `[$\mathbb{R}[x]$ is infinite-dimensional]` broke LaTeX's optional-argument
   bracket matching — the `[x]` ended the `\begin{exercise}[...]` argument, and the error surfaces

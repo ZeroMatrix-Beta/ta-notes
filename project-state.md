@@ -245,18 +245,45 @@ matters, open it.
 * Provenance comment: `% Supplement: lec_notes.pdf, p. 26`.
 * ⚠️ The `pdftotext` warning below applies to this file. Render the page and read it.
 
-### The lecture notes — surveyed twice, mined out
+### The lecture notes — surveyed three times
+
+⚠️ **The third survey (2026-08-10) falsified the previous heading, which read "mined out".** A
+walk down the lecture notes' own table of contents, section by section against `content/`, found
+**§13.2.5 Improper integrals** (printed pp. 124–125) with no counterpart here. It is not a
+skip-by-decision: no tutor covers it, Corsin never reaches it, and it was not in the
+*Enrich existing sections only* table. Worse, **the document was already using the notion in four
+places without defining it** — `ex:improper_integral_polar` asserted in so many words that "its
+Riemann improper integral is well-defined", `ex:gaussian_integral_polar` integrated over
+`ℝ²`, `ex:ai_frullani` over the half-line, and `ex:10.3` (Gabriel's horn) over `[1,∞)`. Now
+`content/19-jordan-measure/02-improper-integrals.tex`: Definition 13.55 as
+`def:improper_integral`, Lemma 13.56 as `lem:improper_integral_as_limit` with proof, and an
+`aiexercise` running the disk and square exhaustions of the Gaussian against each other, which is
+the argument `ex:gaussian_integral_polar` was making implicitly all along. It also lets the
+document say why `ex:feynman_dirichlet_integral` is the odd one out: `(sin x)/x` changes sign, so
+`∫₀^∞ (sin x)/x` is not an improper integral in this sense at all.
+
+Two lessons worth keeping. **A grep for a topic name is not a survey** — "improper" *did* occur in
+`content/`, four times, which is exactly why the gap survived two passes: the word was present and
+the definition was not. Walk the source's table of contents instead. And **a section the document
+silently depends on is worth more than a section it merely omits**; the other entries in the
+skip table are genuinely optional, this one was load-bearing.
+
+The rest of the comparison came out clean: §10.2.5 real analytic functions is
+`content/11-taylor/03-analytic-functions.tex`, §14.5.1 (the divergence theorem in the language of
+`k`-forms) is folded into `content/26-stokes/04-stokes-theorem.tex`, §14.2.1 partitions of unity
+is `prop:partition_of_unity_finite`, and §15.2.5 Peano is in `appendix-a-odes.tex`.
 
 *Analysis II: Several Variables*, Joaquim Serra. It continues the Analysis I numbering, so its
 chapters run **9–15**, not 1–7.
 
-**Two surveys, against two revisions of the same file, and this is where the page-number caveat
-above comes from:**
+**Three surveys, the first two against different revisions of the same file, which is where the
+page-number caveat above comes from:**
 
 | Date | Revision surveyed | Offset in force | Outcome |
 |---|---|---|---|
 | 2026-08-07 | 207 pp, as `Analysis_II_Script_v1.pdf` | printed = PDF − 4 | Every divergence, gap, exercise and example transcribed and build-verified. |
 | 2026-08-09 | 239 pp, as `lec_notes.pdf`, dated 27 July 2026 | printed = PDF − 5 | Norm convention adopted, notation audited, six missing statements added. See *Where the document stands*. |
+| 2026-08-10 | same 239 pp file | printed = PDF − 5 | Table of contents walked section by section against `content/`. One gap: §13.2.5 improper integrals, now ch. 19 §b. Everything else accounted for. |
 
 The file grew by 32 pages between the two, which is why an old citation's page can miss and why
 the offset changed. ⚠️ **Never quote a formula from the extracted text.** `pdftotext` eats `∂`,

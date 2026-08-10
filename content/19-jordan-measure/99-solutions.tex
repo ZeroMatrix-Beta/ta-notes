@@ -87,3 +87,45 @@ volume from being measured with too few powers of $s_i$. The two counterexamples
 these two steps.
 \end{ainote}
 \end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:ai_gaussian_two_exhaustions}]
+% Generator: Claude Opus 5 (High)
+\textbf{(a)} Both families are nested and consist of compact sets whose boundaries are a circle
+and the four sides of a square respectively, each a Jordan null set, so both are Jordan
+measurable by \cref{thm:jordan_measurability_boundary_criterion}. For the covering condition,
+$\operatorname{int}(D_\ell) = B_\ell(0)$ and $\operatorname{int}(Q_\ell) = (-\ell,\ell)^2$, and
+every point of $\mathbb{R}^2$ lies in both once $\ell$ exceeds its distance from the origin.
+Hence $\bigcup_\ell\operatorname{int}(D_\ell) = \bigcup_\ell\operatorname{int}(Q_\ell) =
+\mathbb{R}^2$, and \cref{lem:improper_integral_as_limit} applies to each.
+
+\textbf{(b)} In polar coordinates, using \cref{thm:change_of_variables} with Jacobian $r$,
+\[\int_{D_\ell} e^{-(x^2+y^2)}\,dx\,dy = \int_0^{2\pi}\!\!\int_0^{\ell} e^{-r^2}\,r\,dr\,d\varphi
+  = 2\pi\left[-\frac{e^{-r^2}}{2}\right]_0^{\ell} = \pi\big(1 - e^{-\ell^2}\big)
+  \ \xrightarrow[\ell\to\infty]{}\ \pi.\]
+
+\textbf{(c)} On a square the integrand factorises, so \cref{thm:fubini} splits it:
+\[\int_{Q_\ell} e^{-(x^2+y^2)}\,dx\,dy
+  = \left(\int_{-\ell}^{\ell} e^{-x^2}dx\right)\left(\int_{-\ell}^{\ell} e^{-y^2}dy\right)
+  = \left(\int_{-\ell}^{\ell} e^{-x^2}dx\right)^{\!2}
+  \ \xrightarrow[\ell\to\infty]{}\ I^2.\]
+
+\textbf{(d)} Both limits compute the same number $\int_{\mathbb{R}^2}f$, by
+\cref{lem:improper_integral_as_limit}, so $I^2 = \pi$ and $I = \sqrt\pi$, the positive root since
+the integrand is positive.
+
+The step that collapses without $f \geq 0$ is the identification in \textbf{(d)}. Non-negativity
+is what makes $\ell \mapsto \int_{K_\ell}f$ monotone, and monotonicity is what forces every
+exhaustion to the same limit. For a sign-changing integrand the disks and the squares are free to
+disagree, and \cref{rem:improper_needs_nonnegativity} gives the standard example of an integral
+whose value genuinely depends on how the domain is exhausted.
+
+\begin{remark}[This is the argument \cref{ex:gaussian_integral_polar} was already making]
+\label{rem:gaussian_two_exhaustions_retro}
+The classical derivation of $\int_{\mathbb{R}}e^{-x^2}dx = \sqrt\pi$ squares the integral, reads
+the product as an integral over $\mathbb{R}^2$, and switches to polar coordinates. Written out,
+that is precisely the comparison above: the squaring step is the square exhaustion and the polar
+step is the disk exhaustion, and the derivation works because the two agree. What
+\cref{lem:improper_integral_as_limit} adds is the permission to move between them, which the
+classical presentation uses without mentioning.
+\end{remark}
+\end{exercisesolution}

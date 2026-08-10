@@ -9,7 +9,7 @@ a style decision actually changes.
 |---|---|
 | `gemini.md` | Role, fidelity policy, tool usage — read first |
 | `build-and-preamble.md` | Build traps, `main.tex` facts, numbering, the preamble's environments |
-| `project-state.md` | Which tutor is the blueprint, what is done, standing decisions |
+| `gemini.md` | Also holds the sources: blueprint tutor, reference documents, scope against the script |
 
 ## Expansion rules — shorthand into prose
 
@@ -596,6 +596,55 @@ does not help and thin in the places it does.
   an `ainote` *why* the primary tutor's notes don't already cover it (skipped, stated without
   proof, etc.) before presenting the supplement, and reformulate rather than copying verbatim.
 
+## EXERCISES — TRANSCRIPTION CONVENTIONS
+
+Each sheet's problems sit with the material they test.
+
+* **Quote every problem statement verbatim.** Do not paraphrase; attribute the sheet.
+* **The title carries no sheet number.** `\begin{exercise}[Volume \textnormal{(important)}]`, never
+  `[9.1 --- Volume ...]`. The number goes in a closing `\exinfo` line instead — see the
+  `\exhint`/`\exinfo` entry above.
+* **Tag each problem** with its priority from Corsin's *Recommended exercises* colour code. The tag
+  goes inside the title, wrapped in `\textnormal{}` so it does not inherit the title's italics:
+
+  | Corsin's marker | Tag in the title |
+  |---|---|
+  | blue ▨ | `\textnormal{(important)}` |
+  | orange ▨ | `\textnormal{(semi-important)}` |
+  | red ▨ | `\textnormal{(optional)}` |
+  | official `(*)` | `(*)` at the start of the title text |
+
+* Corsin's hint follows the statement as `\exhint[Corsin's hint]{...}`, page-pointed by a
+  `% Source:` comment. A hint printed on the sheet is `\exhint[Official hint]{...}`.
+* **When you transcribe a new problem, add it to the table in
+  `content/appendix-d-problem-sheets.tex`**, which restores the sheet view: one table per sheet,
+  with Corsin's priority markings and comments, and a column pointing at the hosting section.
+* **Every exercise needs a solution** — see *Exercise Solutions* below for where it goes. Two
+  exercises deliberately carry *two* solution blocks and say so in their `[...]` titles:
+  `ex:taylor_explicit_example` (ch. 11, a cumbersome solution and an easy one) and `ex:6.9` (ch. 12,
+  a solution and its continuation). ⚠️ **Read the titles before treating a per-chapter count
+  mismatch as either a defect or as harmless** — a genuine duplicate looks exactly the same from a
+  count, and ch. 23 held one until 2026-08-10.
+
+## GERMAN MIRRORING
+
+The document is English, but German technical terms are mirrored on **first introduction** so it
+can be used alongside German lecture and exercise material:
+
+```latex
+a \newterm{compact} set \germanfor{kompakte Menge}
+the \newterm{implicit function theorem} \germanfor{Satz über implizite Funktionen}
+```
+
+**The two macros are not interchangeable.** `\germanfor{X}` prints `(German: „X")` and carries its
+own parentheses, for mirroring an English term just introduced. `\germanterm{X}` prints a bare
+`„X"`, for a German word that is itself the subject of a sentence. Only `\germanfor` entries belong
+in the glossary.
+
+Only on first introduction — never repeated. Canonical German wording comes from **Jérôme
+Paschoud**'s topic-named files. Every pair also goes into `content/appendix-b-glossary.tex`, whose
+third column is the **chapter** of first introduction (a letter there means an appendix).
+
 ## ENVIRONMENT SEMANTICS — WHAT GOES WHERE
 
 Each environment has a precise semantic role. Using the wrong one is a style error.
@@ -727,12 +776,17 @@ Each environment has a precise semantic role. Using the wrong one is a style err
   `Analysis_II_Script_v1.pdf`, and the script in particular does prove a great many results we
   merely state. Either open the source and check, or write only the claim you actually verified.
 
+  Two claims of exactly this kind were sitting in the typeset text and both turned out to be
+  false: that the course never introduces Lipschitz continuity (Definition 9.55 does) and that it
+  never states the mean value theorem (Theorem 10.28 is it). That is the cost of the shortcut.
+
   * **BAD** (unverified, and it reads as fact): `Neither the course nor this document proves the
     inverse function theorem.`
   * **GOOD** (verified, and says exactly as much as was checked): `\Cref{thm:inverse_function_theorem}
     is stated above without proof`, plus a `% ⚠️ TO CHECK AGAINST THE SOURCES` comment naming the
-    files someone should open, and a line in `project-state.md` so the check is tracked rather
-    than forgotten.
+    files someone should open. The comment is the whole mechanism; there is nowhere else to track
+    it, and a check that has not been done is better left visible at the spot than promised in a
+    list somewhere.
 
 * ⚠️ **The `ai*` prefix means "invented here", NOT "typeset by an AI".** Everything in this
   document is typeset by an AI, so that reading would make the prefix meaningless. What

@@ -9,7 +9,52 @@ it claims, fix it here rather than working around it.
 |---|---|
 | `gemini.md` | Role, fidelity policy, tool usage — read first |
 | `style.md` | House style: prose, notation, environments, provenance conventions |
-| `project-state.md` | Which tutor is the blueprint, what is done, standing decisions |
+| `gemini.md` | Also holds the sources: blueprint tutor, reference documents, scope against the script |
+
+## Document layout — SETTLED
+
+**Part = thematic block. Chapter = topic. Section = one file. Day and week = gone.**
+
+Seven `\part`s over 26 topic chapters, each chapter a directory, each section its own file.
+
+```
+content/
+  07-compactness/
+    00-chapter.tex      <- \chapter + \label + a short intro + nothing but \input lines
+    01-open-covers.tex
+    ...
+    99-solutions.tex    <- the chapter's single \section{Solutions}
+```
+
+`main.tex` holds the `\part` lines and one `\input` of each `00-chapter.tex`, in order. **To add a
+chapter:** make the directory, write `00-chapter.tex`, add the `\input`. **To add material to an
+existing chapter:** drop a new `NN-*.tex` beside its siblings and add one `\input` line to that
+chapter's stub. Nothing else has to be touched — that is the whole reason for the layout.
+
+⚠️ **Do not undo the restructure** from one-chapter-per-teaching-week to topic chapters. It was
+done on the user's explicit instruction, and it changed no mathematics: within a topic the order of
+results, the proofs and the examples are the tutor's; only the containers moved.
+
+**Every file carries its provenance.** The first line of each is an `% Originally:` comment naming
+the old week file it came from; the `% Source:` comments beneath are the tutor's own, unchanged.
+Those two answer different questions — where the text used to sit in *our* document, and where it
+came from in *his* notes — and both are worth keeping.
+
+**File naming:** `content/NN-topic-slug/NN-section-slug.tex`, with `00-chapter.tex` for the stub and
+`99-solutions.tex` for the solutions. There is no `transcript/` stage and no
+`content/exercise-sheets/` directory — typeset straight into the section file.
+
+**Avoid a chapter that is one section repeating the chapter's own title.** If a chapter has exactly
+one section and they share a name, either split the section or let the chapter absorb it.
+
+**Heading suffixes and colours.** All numbered headings carry a green `(...)` suffix in `OliveGreen`
+(`SecNumberColor`): `\chapter{...}` → `Title (Chapter 7)`, and `(Appendix C)` after `\appendix`;
+`\section{...}` → `Title (Section 7.a)`; `\subsection{...}` → `Title (Subsection 7.a.1)`. Part
+titles are `ThemePurple` (`PartTitleText`) with the number in `OliveGreen` (`PartNumberText`);
+section and subsection titles are `MidnightBlue`; subsubsection is `TextBoldColor`.
+
+**Retired macros — do not reinstate.** `\session{Monday}`, `\exercisesheet{N}` and
+`\continuedfrom{label}` all existed to prop up the week structure and are gone from `main.tex`.
 
 ## Numbering is automatic — do not configure it
 
@@ -175,7 +220,7 @@ Picard–Lindelöf Lipschitz line shortened it enough to fit. Page numbers are d
 longer tabulated here, because they move whenever anything upstream is added; find the warning's
 nearest `[NNN]` marker in the `.log` instead.
 
-⚠️ **Attribute these by page, not by guesswork.** A list in `project-state.md` had named
+⚠️ **Attribute these by page, not by guesswork.** A list kept elsewhere had named
 `26-stokes/02` and omitted `14-convexity` entirely, and it went unchallenged for some time
 because the counts matched. The reliable method: find the `[NNN]` page marker nearest the
 warning in the `.log`, then read that page of the PDF. The bracketed file nesting in the log is
@@ -227,7 +272,7 @@ not trustworthy on its own, because parentheses in ordinary text confuse the obv
 \newenvironment{exercisehint}[1][Hint]{\exnoteopen{HintTint}{\faLightbulb[regular]}{#1}}{\exnoteclose}
 % \newterm  -> ENGLISH quotes (main.tex:188). \germanterm (main.tex:189) is the
 % \glqq...\grqq one. They are deliberately different -- the German-mirroring
-% convention in project-state.md depends on it. Do not collapse them.
+% convention in style.md depends on it. Do not collapse them.
 \newcommand{\newterm}[1]{\textcolor{BrickRed}{``}\textcolor{TextBoldColor}{\textit{#1}}\textcolor{BrickRed}{''}}
 \newcommand{\germanterm}[1]{\textcolor{BrickRed}{\glqq}\textcolor{TextBoldColor}{\textit{#1}}\textcolor{BrickRed}{\grqq}}
 \newcommand{\qt}[1]{\textit{\textcolor{BrickRed}{``}#1\textcolor{BrickRed}{''}}}
@@ -278,6 +323,11 @@ not trustworthy on its own, because parentheses in ordinary text confuse the obv
 ```bash
 cd "C:/Users/miche/latex/ta-notes" && latexmk -pdf -interaction=nonstopmode main.tex
 ```
+
+**`main.pdf` is tracked.** `.gitignore` un-ignores it specifically, so the built document travels
+with the source; every other root PDF stays ignored. The cost is that each rebuild which changes it
+adds a ~2 MB blob to history permanently. Rebuild it in the same commit as the source change, so
+the two never disagree.
 
 MiKTeX at `C:\Users\miche\AppData\Local\Programs\MiKTeX\miktex\bin\x64`.
 **Be careful with** the theorem / `aliascnt` / `cleveref` block at roughly `main.tex:410–640` —

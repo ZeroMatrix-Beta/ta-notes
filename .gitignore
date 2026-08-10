@@ -3,7 +3,7 @@
 # and far too large for git. Keep them out; the % Source: and % Supplement:
 # comments in content/ carry a page pointer back to every one of them.
 # (This used to say the pointers live in transcript/. There is no transcript/
-# stage — see the document skeleton in project-state.md.)
+# stage — see the document layout in build-and-preamble.md.)
 # ---------------------------------------------------------------
 Adrien Martelli/
 Corsin Nick/

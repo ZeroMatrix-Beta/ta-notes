@@ -653,6 +653,86 @@
 }
 
 % ==========================================
+% TRAILING NOTES ON AN EXERCISE / EXAMPLE  (\faTag Info, \faLightbulb Hint)
+% ==========================================
+% Generator: Claude Opus 5 (Medium)
+% Two sibling notes that hang off the END of an exercise/example statement, sharing one
+% geometry: a slightly narrower centred block, small italic, in a muted colour.
+%
+%   \exinfo{...}  -- \faTag, meta-note gray. Where the problem COMES FROM.
+%   \exhint{...}  -- \faLightbulb, olive green. How to START it.
+%
+%   \begin{exercise}[Continuity of the distance]
+%     ... statement ...
+%     \exhint[Official hint]{Recall that $\|M\|^2$ is the sum of the squares of the entries.}
+%     \exinfo{This exercise is Problem 2.6 of Problem Sheet 2, Analysis II,
+%             Spring Semester 2026.}
+%   \end{exercise}
+%
+% Order when both appear: hint first, provenance last -- the Info line closes the block.
+%
+% \exinfo/\exhint are the one-liners; the exerciseinfo/exercisehint environments they wrap
+% are there for notes that run to several paragraphs or carry a display.
+%
+% \exhint takes an optional label, default "Hint". Use [Official hint] (or [Official hints])
+% for a hint printed on the problem sheet itself, which is the distinction ~20 hand-rolled
+% \textit{Official hint:} lines in content/ were already drawing by hand; this environment
+% supersedes them, and supersedes the older \hint macro further up, which had one call site.
+%
+% Write an \exinfo as a FULL SENTENCE ending in a period -- "This exercise is Problem 4.3 of
+% Problem Sheet 4, ...", "This example is taken from the August 2019 exam, Problem 2.",
+% "This example follows the Wikipedia article on the Cantor set." A bare "Sheet 4, Ex. 4.3."
+% is exactly the terse catalogue reference this environment exists to replace.
+%
+% NB -- these are deliberately NOT numbered, and the "never leave a new environment
+% unnumbered" rule in build-and-preamble.md does not apply to them. That rule protects
+% environments a \label might be placed inside, where a missing counter silently misattributes
+% the label to the ambient one. These are formatting blocks that always sit inside a numbered
+% environment and are never themselves the target of a \cref -- the enclosing exercise is what
+% one references. Do not give them counters.
+%
+% Also deliberately not tcolorboxes: a frame here would compete with the environment it sits
+% inside. If a boxed variant is ever wanted, redefine \exnoteopen alone -- every call site,
+% and both environments, stay untouched.
+% Expressed as a mix of the two colours it sits between rather than as a literal, so it keeps
+% tracking them: the proof's green, softened a little toward the gray of the Info line above.
+% Raise the percentage for a greener hint, lower it for a grayer one.
+\colorlet{HintTint}{ProofTint!70!TextMetaNote}
+
+\newlength{\exnoteindent}
+\setlength{\exnoteindent}{2.5em}
+
+% #1 colour, #2 icon, #3 label
+\newcommand{\exnoteopen}[3]{%
+  \par\addvspace{1.2ex plus 0.3ex minus 0.2ex}%
+  \begingroup
+  % \centering must come FIRST: it overwrites \leftskip and \rightskip with 0pt plus 1fil,
+  % so an indent set before it would be silently discarded. Advancing them afterwards keeps
+  % the centring glue and narrows the measure on both sides.
+  \centering
+  \addtolength{\leftskip}{\exnoteindent}%
+  \addtolength{\rightskip}{\exnoteindent}%
+  \small\color{#1}%
+  #2\hspace{0.4em}{\normalfont\sffamily\bfseries #3:}\ \itshape\ignorespaces
+}
+\newcommand{\exnoteclose}{%
+  \par
+  \endgroup
+  \addvspace{0.4ex plus 0.2ex}%
+}
+
+\newenvironment{exerciseinfo}{\exnoteopen{TextMetaNote}{\faTag}{Info}}{\exnoteclose}
+\newcommand{\exinfo}[1]{\begin{exerciseinfo}#1\end{exerciseinfo}}
+
+% \faLightbulb[regular] -- the OUTLINE bulb, deliberately not the solid \faLightbulb that
+% heads every example/exercise environment. A hint sitting inside an exercise would otherwise
+% repeat that environment's own icon a few lines below it.
+\newenvironment{exercisehint}[1][Hint]{%
+  \exnoteopen{HintTint}{\faLightbulb[regular]}{#1}%
+}{\exnoteclose}
+\newcommand{\exhint}[2][Hint]{\begin{exercisehint}[#1]#2\end{exercisehint}}
+
+% ==========================================
 % RETIRED: the week-skeleton macros
 % ==========================================
 % This document used to be organised one chapter per teaching week, and carried three

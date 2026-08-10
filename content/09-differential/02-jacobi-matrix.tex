@@ -324,3 +324,26 @@ $(x,y) \in (0,\infty)\times\mathbb{R} \subset \mathbb{R}^2$. Compute $\partial_x
 $\partial_y u$.
 \exinfo{This exercise is Problem 4.1 of Problem Sheet 4, Analysis II, Spring Semester 2026.}
 \end{exercise}
+
+% Source: old_exams/examHS24.pdf (13 February 2025), Wahr/Falsch-Fragen, Aufgabe 4, p. 3
+% Extractor: Gemini 3.1 Pro (High)
+\begin{exercise}[True or False \textnormal{(piecewise differentiability)}]
+\label{ex:examHS24_TF_diff_piecewise}
+Consider the function $f \colon \mathbb{R}^2 \to \mathbb{R}$ given by
+\[
+f(x,y) = \begin{cases}
+y^2 \cos x & \text{if } y \ge 0, \\
+0 & \text{if } y < 0.
+\end{cases}
+\]
+Decide whether each of the following statements is true or false.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $f \in C^0(\mathbb{R}^2)$.
+  \item $\partial_y f \in C^0(\mathbb{R}^2)$.
+  \item $\partial_y f \in C^1(\mathbb{R}^2)$.
+  \item $f \in C^2(\mathbb{R}^2)$.
+  \item $\frac{\partial^2 f}{\partial x^2}(0,0)$ exists.
+\end{enumerate}
+\exinfo{This exercise is taken from the exam of 13 February 2025, where it appears as the fourth
+block of true/false questions.}
+\end{exercise}

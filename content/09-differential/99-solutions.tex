@@ -18,3 +18,14 @@ Write $u(x,y) = x^{\sin(y)} = e^{\sin(y)\ln x}$ for $x > 0$. Differentiating wit
   \item Since $f(1,0) = 0$, the linearization at $(1,0)$ is $L(x,y) = f(1,0) + Df(1,0)(x-1, y-0) = 0 + 0(x-1) + 2y = 2y$.
 \end{enumerate}
 \end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:examHS24_TF_diff_piecewise}]
+% Generator: Gemini 3.1 Pro (High)
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{True:} For $y > 0$ and $y < 0$ the function is given by continuous formulas. On the interface $y=0$, we have $\lim_{y \to 0^+} y^2 \cos x = 0 = \lim_{y \to 0^-} 0$, which matches $f(x,0) = 0$.
+  \item \textbf{True:} For $y > 0$, $\partial_y f = 2y \cos x$; for $y < 0$, $\partial_y f = 0$. At $y=0$, the one-sided derivatives are $\lim_{h \to 0^+} \frac{h^2 \cos x - 0}{h} = 0$ and $\lim_{h \to 0^-} \frac{0 - 0}{h} = 0$. So $\partial_y f$ exists everywhere and evaluates to $2y \cos x$ for $y \ge 0$ and $0$ for $y < 0$. These two pieces patch continuously at $y=0$.
+  \item \textbf{False:} For $\partial_y f$ to be $C^1$, its own partial derivatives must be continuous. However, for $y>0$, $\partial_y(\partial_y f) = 2 \cos x$, while for $y<0$, it is $0$. As $y \to 0$, the upper half approaches $2 \cos x$, which does not match the lower half limit of $0$ unless $\cos x = 0$. Thus $\partial_{yy} f$ has jump discontinuities along the $x$-axis.
+  \item \textbf{False:} Since $\partial_{yy}f$ is not continuous (from the previous part), $f$ is not twice continuously differentiable on $\mathbb{R}^2$.
+  \item \textbf{True:} Along the $x$-axis ($y=0$), the function is $f(x,0) = 0$ everywhere. Therefore, the function restricted to the $x$-axis is identically zero, meaning $\partial_x f(x,0) = 0$ everywhere, and consequently its derivative with respect to $x$ again, $\partial_{xx} f(0,0)$, is also $0$.
+\end{enumerate}
+\end{exercisesolution}

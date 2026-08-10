@@ -245,4 +245,158 @@ coordinates becomes radial once it is paired with its own mirror image.
 \end{remark}
 \end{exercisesolution}
 
+\begin{exercisesolution}[Proof of \cref{ex:examHS24_TF_image_of_small_sets}]
+% Generator: Claude Opus 5 (High)
+Everything turns on a single number:
+\[\det\Jac\Phi(0,0) = 2\cdot 1 - 1\cdot(-1) = 3 .\]
+In particular $\Jac\Phi(0,0)$ is invertible, so the inverse function theorem
+(\cref{thm:inverse_function_theorem}) supplies an open ball $V$ around the origin on which $\Phi$
+is a $C^1$-diffeomorphism onto an open set. Since $\Phi$ is $C^1$, the map
+$x \mapsto \lvert\det\Jac\Phi(x)\rvert$ is continuous, and therefore
+\begin{equation}
+\label{eq:examHS24_A6_determinant_continuity}
+\lvert\det\Jac\Phi(x)\rvert = 3 + \varepsilon(x), \qquad \text{where } \varepsilon(x) \to 0
+\text{ as } x \to 0 .
+\end{equation}
+For a Jordan measurable $E$ with $\overline{E} \subseteq V$, the change of variables formula
+(\cref{thm:change_of_variables}), taken in the multiplied form $\int_{\Phi(E)} f = \int_E
+(f\circ\Phi)\,\lvert\det\Jac\Phi\rvert$ recorded just below it and applied to $f \equiv 1$, reads
+\begin{equation}
+\label{eq:examHS24_A6_volume_of_image}
+\vol_2\big(\Phi(E)\big) = \int_E \lvert\det\Jac\Phi(x)\rvert \, dx .
+\end{equation}
+Parts \textbf{(b)} and \textbf{(c)} are both this identity, read against
+\eqref{eq:examHS24_A6_determinant_continuity}.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{True.} For $r$ small enough we have $B_r(0,0) \subseteq V$, and a diffeomorphism is
+    in particular an open map. Hence $\Phi(B_r(0,0))$ is open.
+  \item \textbf{False.} Applying \eqref{eq:examHS24_A6_volume_of_image} to $E = B_r(0,0)$ and
+    substituting \eqref{eq:examHS24_A6_determinant_continuity},
+    \[\vol_2\big(\Phi(B_r(0,0))\big) = \int_{B_r(0,0)} \big(3 + \varepsilon(x)\big)\,dx
+      = 3\pi r^2 + \int_{B_r(0,0)} \varepsilon(x)\,dx .\]
+    The remaining integral is bounded in absolute value by $\pi r^2 \sup_{B_r(0,0)}
+    \lvert\varepsilon\rvert$, and that supremum tends to $0$ with $r$, so the term is $o(r^2)$. The
+    correct expansion is $3\pi r^2 + o(r^2)$. The stated coefficient $2$ is the top-left entry of
+    the Jacobian rather than its determinant.
+  \item \textbf{True.} Write $R_r := [0,r] \times [0, ar^{1/2}]$, a rectangle of area $ar^{3/2}$.
+    Every point of $R_r$ has norm at most $\sqrt{r^2 + a^2 r}$, which tends to $0$, so
+    $R_r \subseteq V$ for $r$ small enough and \eqref{eq:examHS24_A6_volume_of_image} applies:
+    \[\vol_2\big(\Phi(R_r)\big) = \int_{R_r} \big(3 + \varepsilon(x)\big)\,dx
+      = 3ar^{3/2} + \int_{R_r} \varepsilon(x)\,dx ,\]
+    and the error is bounded by $ar^{3/2}\sup_{R_r}\lvert\varepsilon\rvert = o(r^{3/2})$.
+\end{enumerate}
+\begin{remark}[Why part \textbf{(c)} is not simply part \textbf{(b)} again]
+Under \eqref{eq:examHS24_A6_volume_of_image} the two parts really are the same computation, and
+that is the point of the pair. The tempting alternative route is not. One is inclined to replace
+$\Phi$ by its linearisation, $\Phi(x) = \Jac\Phi(0,0)x + o(\lvert x\rvert)$, and read the volume
+off the linear map. For the ball that argument can be made to work, since the error
+$o(\lvert x\rvert) = o(r)$ is small against the radius $r$ in every direction. For $R_r$ it breaks:
+the rectangle has sides $r$ and $ar^{1/2}$, so its diameter is of order $r^{1/2}$ while its short
+side is of order $r$, and the error term $o(r^{1/2})$ is then far \emph{larger} than the side it
+would have to be weighed against. The change of variables formula never approximates $\Phi$ at all.
+It integrates the exact local scaling factor, and the only approximation left is to that factor's
+value, uniformly over a set shrinking to a point.
+\end{remark}
+\begin{ainote}
+The set $X := \Phi^{-1}((0,0)\transp)$ is introduced in the exam's statement and then used by none
+of the three items. It is reproduced in \cref{ex:examHS24_TF_image_of_small_sets} for fidelity to
+the source, and nothing above depends on it. A little can be said about it in passing: the inverse
+function theorem makes $\Phi$ injective near the origin, so $X$ meets a small ball around $(0,0)$
+in that single point, while away from the origin the hypotheses constrain $X$ not at all.
+\end{ainote}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:examHS24_TF_affine_volume_scaling}]
+% Generator: Claude Opus 5 (High)
+The map is affine, $\Psi(v) = Mv + b$, with
+\[M = \begin{pmatrix} -1 & 0 & 0 \\ 0 & 1 & \alpha \\ 0 & \alpha & 1 \end{pmatrix},
+  \qquad b = \begin{pmatrix} e^\pi \\ 0 \\ 0 \end{pmatrix} .\]
+Expanding along the first row gives $\det M = -(1 - \alpha^2) = \alpha^2 - 1$. A translation does
+not change volume, so for every Jordan measurable $E$,
+\begin{equation}
+\label{eq:examHS24_A7_scaling}
+\vol_3\big(\Psi(E)\big) = \lvert\det M\rvert \, \vol_3(E)
+  = \lvert\alpha^2 - 1\rvert \, \vol_3(E) .
+\end{equation}
+Iterating $\Psi$ iterates its linear part, so $\Psi^k$ is affine with linear part $M^k$ and
+\eqref{eq:examHS24_A7_scaling} gives $\vol_3(\Psi^k(E)) = \lvert\det M\rvert^k \vol_3(E)$. Every
+item is now a matter of evaluating $\lvert\alpha^2-1\rvert$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{False.} By \eqref{eq:examHS24_A7_scaling}, $\vol_3(\Psi(E))$ vanishes for every $E$
+    precisely when $\det M = 0$, that is when $\alpha^2 = 1$. That holds for $\alpha = 1$
+    \emph{and} for $\alpha = -1$, so the \qt{only if} direction fails. The correct criterion is
+    $\alpha = \pm 1$.
+  \item \textbf{True.} For $\alpha = -2$ we get $\det M = 4 - 1 = 3$, and therefore
+    $\vol_3(\Psi^k(E)) = 3^k \vol_3(E)$ for every $k \ge 0$.
+  \item \textbf{True.} For $\alpha = 0$ we get $\det M = -1$, so $\lvert\det M\rvert = 1$ and every
+    iterate preserves volume, the $2025$th included.
+  \item \textbf{False.} The inverse of an affine map with invertible linear part $M$ is affine with
+    linear part $M^{-1}$, so for $\alpha \in (0,1)$, where $1 - \alpha^2 > 0$,
+    \[\vol_3\big(\Psi^{-1}([0,1]^3)\big) = \frac{\vol_3([0,1]^3)}{\lvert\det M\rvert}
+      = \frac{1}{1-\alpha^2} .\]
+    The stated value is the negative of this, and no volume is negative.
+\end{enumerate}
+\begin{remark}
+Item \textbf{(d)} can be dismissed before any computation: the left-hand side is a volume and the
+right-hand side is negative throughout $(0,1)$. Item \textbf{(a)} is the one that rewards care.
+Writing the scaling factor as $\lvert\alpha^2-1\rvert$ puts both roots in view at once, and a
+criterion of the form \qt{if and only if $\alpha = 1$} then fails for the cheapest of reasons: it
+forgets that squaring loses a sign.
+\end{remark}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:examHS24_TF_spherical}]
+% Generator: Gemini 3.1 Pro (High)
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{True:} On the restricted domain $(0, 2\pi) \times (0, \pi) \times (0, \infty)$, the map $\Psi$ is injective. The angles $\phi \in (0, 2\pi)$ and $\theta \in (0, \pi)$ uniquely parameterise points away from the half-plane $\{(x,0,z) \mid x \ge 0\}$ and the $z$-axis.
+  \item \textbf{False:} The image of $\Psi$ omits the set where $\phi = 0$ (which corresponds to the half-plane $y = 0, x \ge 0$) and the $z$-axis (where $\theta = 0$ or $\theta = \pi$, or $r=0$). Therefore, it does not cover all of $\mathbb{R}^3$.
+  \item \textbf{False:} The order of the variables in the definition of $\Psi$ is $(\phi, \theta, r)$. Computing the Jacobian matrix for this specific ordering gives a determinant of $-r^2 \sin \theta$, not $+r^2 \sin \theta$. While the \emph{absolute value} of the determinant (which appears in the change of variables formula) is $r^2 \sin \theta$, the determinant itself is negative because $(\phi, \theta, r)$ is not an orientation-preserving ordering of the standard spherical coordinates.
+  \item \textbf{False:} The volume of a ball of radius $R$ in $\mathbb{R}^3$ is $\frac{4}{3}\pi R^3$. Therefore, $\vol_3(B_R \setminus B_r) = \frac{4}{3}\pi(R^3 - r^3)$, not $\pi(R^3 - r^3)$.
+  \item \textbf{True:} By the change of variables theorem, integrating the absolute value of the Jacobian determinant over the domain of $\Psi$ yields the volume. The integral with respect to $\phi$ separates and gives a factor of $\int_0^{2\pi} d\phi = 2\pi$, leaving $2\pi \int_0^\pi \int_0^R r^2 \sin \theta \, dr \, d\theta$.
+  \item \textbf{True:} This limit represents the derivative of the volume $V(R) = \frac{4}{3}\pi R^3$ with respect to $R$, evaluated at $R=1$. We have $\frac{d}{dR} \big(\frac{4}{3}\pi R^3\big) = 4\pi R^2$, which at $R=1$ evaluates to $4\pi$ (this is exactly the surface area of the unit sphere).
+\end{enumerate}
+\begin{ainote}
+Item \textbf{(c)} is answered \qt{false} above on the sign, and that answer is what the statement
+literally says: with the variables ordered $(\phi,\theta,r)$ as the exam itself orders them, the
+determinant is $-r^2\sin\theta$. A marking scheme may nonetheless have intended \qt{true}, reading
+the item as being about the factor $\lvert\det\Jac\Psi\rvert$ that enters the change of variables
+formula, which is $+r^2\sin\theta$. No official solution to this exam was available to settle it,
+so the divergence is recorded rather than resolved. Note also that the exam writes
+$\det \Jac\Psi(\theta,r)$, naming only two of the three variables; that is the source's own
+notation, kept in \cref{ex:examHS24_TF_spherical} as it stands.
+\end{ainote}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:examHS24_box_linear_vol}]
+% Generator: Gemini 3.1 Pro (High)
+For any linear map $\Phi \colon \mathbb{R}^2 \to \mathbb{R}^2$, the change of variables formula
+implies that the volume of the image of a Jordan measurable set $E$ is given by
+\[ \vol_2(\Phi(E)) = \lvert\det \Phi\rvert \cdot \vol_2(E). \]
+To satisfy the condition $\vol_2(\Phi(E)) = 2 \vol_2(E)$ for all $E$, we must have
+$\lvert\det \Phi\rvert = 2$. Any matrix with determinant $\pm 2$ will work. An explicit and simple
+choice is the diagonal matrix
+\[ \Phi(x,y) = (2x, y) \quad \text{or equivalently, the matrix } \begin{pmatrix} 2 & 0 \\ 0 & 1 \end{pmatrix}. \]
+Other valid choices include $\Phi(x,y) = (x, 2y)$ or $\Phi(x,y) = (\sqrt{2}x, \sqrt{2}y)$.
+\end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:ai_spanned_ellipsoid_volume}]
+% Generator: Gemini 3.1 Pro (High)
+Let $T \colon \mathbb{R}^3 \to \mathbb{R}^3$ be the linear map $T(t_1, t_2, t_3) := t_1 v_1 +
+t_2 v_2 + t_3 v_3$. Its matrix in the standard basis has columns $v_1, v_2, v_3$, so
+$\det T = \det(v_1, v_2, v_3) = 2$, and $A$ is precisely the image under $T$ of the closed unit ball
+$B := \{ t \in \mathbb{R}^3 \mid t_1^2 + t_2^2 + t_3^2 \le 1 \}$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{True:} By the change of variables formula (\cref{thm:change_of_variables}), or
+    equally by the geometric reading of the determinant,
+    \[ \vol_3(A) = \vol_3(T(B)) = \lvert\det T\rvert \cdot \vol_3(B)
+      = 2 \cdot \frac{4}{3}\pi = \frac{8\pi}{3}. \]
+  \item \textbf{True:} The unit ball $B$ is Jordan measurable, being bounded with boundary the unit
+    sphere, a smooth surface and hence of volume zero. The image of a Jordan measurable set under
+    an invertible linear map is again Jordan measurable.
+  \item \textbf{False:} By part \textbf{(a)} the volume depends on the $v_i$ only through
+    $\det(v_1,v_2,v_3)$, which the hypothesis fixes at $2$. Every admissible choice therefore
+    yields the same volume $\frac{8\pi}{3}$.
+\end{enumerate}
+\end{exercisesolution}
+
 

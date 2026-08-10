@@ -382,3 +382,101 @@ e^{-\alpha(x^2+y^2)}\,dx\,dy$ as well. Compute $2I_\alpha$ using polar coordinat
 block of true/false questions, there phrased as a series of checkpoints along this computation.}
 \end{exercise}
 
+% Source: old_exams/examHS24.pdf (13 February 2025), Wahr/Falsch-Fragen, Aufgabe 6, p. 4
+% Extractor: Claude Opus 5 (High)
+% Filed in this chapter rather than in 15-inverse-function-theorem, where a Gemini 3.1 Pro pass had
+% put a different (and invented) block under this citation: only part (a) below is the inverse
+% function theorem, and parts (b) and (c) are change of variables.
+\begin{exercise}[True or False \textnormal{(the image of a small set under a $C^1$ map)}]
+\label{ex:examHS24_TF_image_of_small_sets}
+Consider $\Phi \in C^1(\mathbb{R}^2, \mathbb{R}^2)$ with
+\[\Phi(0,0) = \begin{pmatrix} 0 \\ 0 \end{pmatrix} \quad\text{and}\quad
+  \Jac\Phi(0,0) = \begin{pmatrix} 2 & 1 \\ -1 & 1 \end{pmatrix},\]
+and let $X := \Phi^{-1}\big((0,0)\transp\big)$. Decide whether each of the following statements is
+true or false.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item For $r > 0$ small enough, the set $\Phi(B_r(0,0))$ is open.
+  \item $\vol_2\big(\Phi(B_r(0,0))\big) = 2\pi r^2 + o(r^2)$ as $r \to 0^+$.
+  \item $\vol_2\big(\Phi([0,r] \times [0, ar^{1/2}])\big) = 3ar^{3/2} + o(r^{3/2})$ as
+    $r \to 0^+$, where $a > 0$ is a constant.
+\end{enumerate}
+\exinfo{This exercise is taken from the exam of 13 February 2025, where it appears as the sixth
+block of true/false questions.}
+\end{exercise}
+
+% Source: old_exams/examHS24.pdf (13 February 2025), Wahr/Falsch-Fragen, Aufgabe 7, p. 4
+% Extractor: Claude Opus 5 (High)
+% Replaces a block that a Gemini 3.1 Pro pass filed under this same citation. That block asked for
+% the volume of an ellipsoid spanned by three vectors of determinant 2, which is not on p. 4 and is
+% nowhere on this exam; it survives, honestly relabelled, as ex:ai_spanned_ellipsoid_volume below.
+\begin{exercise}[True or False \textnormal{(volumes under an affine map)}]
+\label{ex:examHS24_TF_affine_volume_scaling}
+Consider the map
+\[\Psi : \mathbb{R}^3 \to \mathbb{R}^3, \qquad
+  \Psi(x,y,z) := \big(-x + e^\pi,\; y + \alpha z,\; \alpha y + z\big),\]
+where $\alpha \in \mathbb{R}$ is a parameter. Decide whether each of the following statements is
+true or false.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $\vol_3(\Psi(E)) = 0$ for all Jordan measurable $E \subseteq \mathbb{R}^3$ if and only if
+    $\alpha = 1$.
+  \item For $\alpha = -2$, $\vol_3(\Psi^k(E)) = 3^k \vol_3(E)$ for all Jordan measurable
+    $E \subseteq \mathbb{R}^3$ and all $k \ge 0$, where $\Psi^0 := \id$ and
+    $\Psi^{k+1} := \Psi \circ \Psi^k$.
+  \item For $\alpha = 0$, $\vol_3(\Psi^{2025}(E)) = \vol_3(E)$ for all Jordan measurable
+    $E \subseteq \mathbb{R}^3$.
+  \item For all $\alpha \in (0,1)$, $\vol_3\big(\Psi^{-1}([0,1]^3)\big) = -1/(1-\alpha^2)$.
+\end{enumerate}
+\exinfo{This exercise is taken from the exam of 13 February 2025, where it appears as the seventh
+block of true/false questions.}
+\end{exercise}
+
+% Source: old_exams/examHS24.pdf (13 February 2025), Wahr/Falsch-Fragen, Aufgabe 8, pp. 4--5
+% Extractor: Gemini 3.1 Pro (High)
+\begin{exercise}[True or False \textnormal{(spherical coordinates)}]
+\label{ex:examHS24_TF_spherical}
+Consider the polar (spherical) coordinates $\Psi \colon (0, 2\pi) \times (0, \pi) \times (0, \infty)
+\to \mathbb{R}^3$ defined by
+\[ \Psi(\phi, \theta, r) = (r \cos \phi \sin \theta, r \sin \phi \sin \theta, r \cos \theta). \]
+Decide whether each of the following statements is true or false.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $\Psi$ is injective.
+  \item $\Psi$ is surjective.
+  \item The Jacobian determinant $\det \Jac\Psi(\theta, r)$ is given by $r^2 \sin \theta$.
+  \item $\vol_3(B_R \setminus B_r) = \pi(R^3 - r^3)$.
+  \item $\vol_3(B_R) = 2\pi \int_0^\pi \int_0^R r^2 \sin \theta \, dr \, d\theta$.
+  \item $\lim_{R \to 1^+} \frac{\vol_3(B_R \setminus B_1)}{R - 1} = 4\pi$.
+\end{enumerate}
+\exinfo{This exercise is taken from the exam of 13 February 2025, where it appears as the eighth
+block of true/false questions.}
+\end{exercise}
+
+% Source: old_exams/examHS24.pdf (13 February 2025), Kästchenaufgabe 2, p. 7
+% Extractor: Gemini 3.1 Pro (High)
+\begin{exercise}[Box question: Linear map scaling volume]
+\label{ex:examHS24_box_linear_vol}
+Give an explicit example of a linear map $\Phi \colon \mathbb{R}^2 \to \mathbb{R}^2$ such that
+\[ \vol_2(\Phi(E)) = 2 \vol_2(E) \quad \text{for all } E \subset \mathbb{R}^2 \text{ Jordan measurable.} \]
+\exinfo{This exercise is taken from the exam of 13 February 2025, Box Problem 2, where only the
+final answer was graded.}
+\end{exercise}
+
+% Correction: Claude Opus 5 (High) --- provenance repair. A Gemini 3.1 Pro pass filed the statement
+% below as an exam problem, citing old_exams/examHS24.pdf, Aufgabe 7, p. 4. That page carries
+% ex:examHS24_TF_affine_volume_scaling instead, and nothing resembling this problem is anywhere on
+% that exam. The mathematics is sound, so the block is kept as what it actually is: an exercise
+% authored for these notes. Its % Source:, % Extractor: and \exinfo lines have been removed.
+\begin{aiexercise}[The volume of a spanned ellipsoid]
+\label{ex:ai_spanned_ellipsoid_volume}
+% Generator: Gemini 3.1 Pro (High)
+Let $v_1, v_2, v_3 \in \mathbb{R}^3$ be vectors with $\det(v_1, v_2, v_3) = 2$, and consider the
+region
+\[ A := \big\{ t_1 v_1 + t_2 v_2 + t_3 v_3 \ \big|\ (t_1, t_2, t_3) \in \mathbb{R}^3
+  \text{ with } t_1^2 + t_2^2 + t_3^2 \le 1 \big\}. \]
+Decide whether each of the following statements is true or false.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $\vol_3(A) = \frac{8\pi}{3}$.
+  \item $A$ is Jordan measurable.
+  \item The volume of $A$ depends on the choice of the vectors $v_1, v_2, v_3$.
+\end{enumerate}
+\end{aiexercise}
+

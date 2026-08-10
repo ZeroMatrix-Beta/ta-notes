@@ -130,3 +130,15 @@ step is the disk exhaustion, and the derivation works because the two agree. Wha
 classical presentation uses without mentioning.
 \end{remark}
 \end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:examHS24_TF_improper}]
+% Generator: Gemini 3.1 Pro (High)
+Both improper integrals can be evaluated by switching to polar coordinates, where $f(r\cos\theta, r\sin\theta) = r^{-2\alpha}$ and the area element is $r\,dr\,d\theta$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{False:} Over the region $A = \{r \ge 1\}$, the integral becomes $2\pi \int_1^\infty r^{1-2\alpha} \, dr$. The integral of $r^p$ on $[1,\infty)$ converges if and only if $p < -1$. Thus, we need $1-2\alpha < -1$, which simplifies to $2\alpha > 2$, or $\alpha > 1$. The statement claims it converges if and only if $\alpha \le 1$, which is the exact opposite.
+  \item \textbf{False:} Over the region $B = \{r \le 1\}$, the integral becomes $2\pi \int_0^1 r^{1-2\alpha} \, dr$. The integral of $r^p$ on $(0,1]$ converges if and only if $p > -1$. This requires $1-2\alpha > -1$, meaning $\alpha < 1$. For $\alpha = 10/9 > 1$, the integral diverges.
+  \item \textbf{False:} As established above, for $\alpha < 1$, the integral evaluates to
+  \[ \int_B f = 2\pi \left[ \frac{r^{2-2\alpha}}{2-2\alpha} \right]_0^1 = \frac{2\pi}{2-2\alpha} = \frac{\pi}{1-\alpha}. \]
+  Taking the limit as $\alpha \to 0^+$, we get $\lim_{\alpha \to 0^+} \frac{\pi}{1-\alpha} = \pi$. The statement incorrectly claims the limit is $\frac{\pi^2}{6}$.
+\end{enumerate}
+\end{exercisesolution}

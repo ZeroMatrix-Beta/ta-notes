@@ -191,3 +191,12 @@ is the same $2\theta'\varphi'$ that appears in the acceleration in polar coordin
 lower.
 \end{remark}
 \end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:examHS24_TF_chain_rule}]
+% Generator: Gemini 3.1 Pro (High)
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{True:} This is the standard chain rule $\nabla(u \circ F) = \nabla u(F) \cdot \Jac F$, where the $i$-th component (derivative with respect to $x_i$) is the product of $\nabla u(F)$ with the $i$-th column of the Jacobian $\Jac F$.
+  \item \textbf{False:} Applying the product rule to the expression from part \textbf{(a)} yields $\partial_{ii}(u \circ F) = \partial_i \big( \sum_{j=1}^n (\partial_j u \circ F) \, \partial_iF_j \big) = \sum_{j=1}^n \big( \partial_i(\partial_j u \circ F) \, \partial_iF_j + (\partial_j u \circ F) \, \partial_{ii}F_j \big)$. Expanding the first term with the chain rule again gives $\sum_{j=1}^n \big( \sum_{k=1}^n (\partial_{jk} u \circ F) \, \partial_iF_k \big) \partial_iF_j$. The given formula erroneously collapses the double sum $\sum_{j,k}$ into a single sum $\sum_{j} \partial_{jj} u (\partial_iF_j)^2$, missing all the cross terms where $j \neq k$.
+  \item \textbf{True:} Since $F$ and $u$ are both $C^2$, their composition $u \circ F$ is also $C^2$. By Schwarz's theorem, the mixed partial derivatives commute.
+\end{enumerate}
+\end{exercisesolution}

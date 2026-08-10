@@ -356,6 +356,21 @@ $F(x,y,z) := (x,\,y,\,z)$.
 \end{enumerate}
 \end{aiexercise}
 
+% Source: old_exams/examHS24.pdf (13 February 2025), Kurzproblem 1, part 2, p. 8
+% Extractor: Gemini 3.1 Pro (High)
+\begin{exercise}[Flux of a field involving a curl across an ellipsoid]
+\label{ex:examHS24_KP1_part2_flux}
+For given positive numbers $a, b, c$, consider the solid ellipsoid
+\[ U := \left\{(x,y,z) \in \mathbb{R}^3 \ \middle|\ \left(\frac{x}{a}\right)^2 + \left(\frac{y}{b}\right)^2 + \left(\frac{z}{c}\right)^2 \le 1\right\}, \]
+and the vector fields
+\begin{align*}
+  A(x,y,z) &:= (\cosh(x), \sinh(x), e^{-\pi(y^2+z^2)})\transp, \\
+  B(x,y,z) &:= (x - \sinh(y), y + \cosh(x), z + e^{-\pi(x^2+y^2)})\transp + \curl A.
+\end{align*}
+Compute the outer flow of $B$ across the boundary of $U$ (take the normal vector to $\partial U$ to point outside of $U$).
+\exinfo{This exercise is taken from the exam of 13 February 2025, Short Problem 1, part 2.}
+\end{exercise}
+
 % Source: old_exams/examHS24.pdf (13 February 2025), Kurzproblem 1, part 3, p. 8
 % Extractor: Gemini 3.6 Flash (High)
 % Correction: Claude Opus 5 (High) --- \operatorname{div} -> \divg and ^T -> \transp per the

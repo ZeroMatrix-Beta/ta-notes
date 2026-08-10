@@ -109,3 +109,15 @@ path-connected, confirms. The step is written out explicitly above rather than l
 since it is the only place the hypothesis is used.
 \end{ainote}
 \end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:examHS24_TF_topology}]
+% Generator: Gemini 3.1 Pro (High)
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{True:} $U$ is defined by non-strict inequalities involving continuous functions (specifically, the pre-image of $[0, \infty)$ under $g_1(x,y) = y+x^2$ and $g_2(x,y) = x^2-y$). Consequently, $U$ is closed.
+  \item \textbf{True:} We can contract $U$ to the origin via the homotopy $H((x,y), t) = (tx, t^2y)$ for $t \in [0,1]$. Note that $(tx)^2 = t^2x^2$, and since $-x^2 \le y \le x^2$, multiplying by $t^2 \ge 0$ gives $-(tx)^2 \le t^2y \le (tx)^2$, which ensures the contraction stays within $U$.
+  \item \textbf{False:} $U$ is not bounded (for example, the sequence $(n,0)$ is in $U$ for all $n \in \mathbb{N}$), and therefore not compact.
+  \item \textbf{True:} Since $U$ is path-connected (from the homotopy to the origin) and therefore connected, its continuous image $f(U)$ is connected in $\mathbb{R}$.
+  \item \textbf{False:} The function is not bounded on $U$. Consider the path $(x,0)$ inside $U$; here $f(x,0) = x^2$, which grows without bound as $x \to \infty$.
+  \item \textbf{True:} Since $f(x,y) \ge 0$ everywhere on $U$ and $f(0,0) = 0$ with $(0,0) \in U$, the infimum is $0$ and it is attained at the origin.
+\end{enumerate}
+\end{exercisesolution}

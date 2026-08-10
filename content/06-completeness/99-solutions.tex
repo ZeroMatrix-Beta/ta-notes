@@ -366,4 +366,13 @@ but $L$ is not part of the data the question hands you.
 \end{ainote}
 \end{exercisesolution}
 
+\begin{exercisesolution}[Proof of \cref{ex:examHS24_TF_banach}]
+% Generator: Gemini 3.1 Pro (High)
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{True:} The derivative is $f'(x) = -\sin(x)$. Since $\lvert f'(x)\rvert = \lvert\sin x\rvert \le 1$ for all $x \in \mathbb{R}$, the mean value theorem gives $\lvert f(x) - f(y)\rvert \le 1 \cdot \lvert x-y\rvert$, so $f$ has Lipschitz constant $1$.
+  \item \textbf{False:} The Banach fixed point theorem requires a \emph{strict} contraction, that is, a Lipschitz constant $\lambda < 1$. Here, the tightest possible constant is $\sup_{x \in [-\pi,\pi]} \lvert f'(x)\rvert = 1$ (attained at $x = \pm \pi/2$), so the map is non-expansive but not strictly contractive.
+  \item \textbf{True:} The function $f(x) = \cos x$ is continuous and maps $[-\pi,\pi]$ into $[-1,1] \subseteq [-\pi,\pi]$. Since $g(x) := \cos x - x$ has $g(-\pi) = \pi - 1 > 0$ and $g(\pi) = -1 - \pi < 0$, the intermediate value theorem supplies a root, which is a fixed point of $f$.
+\end{enumerate}
+\end{exercisesolution}
+
 

@@ -155,6 +155,36 @@ section and subsection titles are `MidnightBlue`; subsubsection is `TextBoldColo
   the search tool, whose pattern is passed as a parameter and never sees a shell. On the file
   above, the search tool with pattern `\\\\` correctly returns the four matrix-row lines that
   `grep -cF` could not find.
+* ⚠️ **`\cpageref` takes ONE label here. A comma-separated list breaks the build.**
+  `\cref{a,b,c}` is fine and prints *Exercises 3.a.1, 3.a.4 and 3.a.9*. `\cpageref{a,b,c}` is not:
+  when two of the labels land on the same page or on consecutive ones, cleveref tries to compress
+  them into a page *range*, and the range machinery fails against this preamble's `aliascnt`-based
+  environments. It does not fail cleanly — it emits the raw label text, whose underscores are then
+  read as subscripts in text mode, so what you get is
+
+  ```
+  ! Missing $ inserted.
+  ! Extra }, or forgotten $.
+  l.10 ...clopen,ex:interior_closure_boundary_mixed}
+  ```
+
+  plus an `Overfull \hbox` of ~190pt where the label name was typeset.
+
+  **It is load-dependent, which is what makes it nasty.** Of twelve multi-label `\cpageref` calls
+  added on 2026-08-10, only three broke — the three whose labels happened to fall on pages close
+  enough to compress. The other nine compiled clean, so the construct looks safe until page breaks
+  move.
+
+  **Write one `\cpageref` per label**, pairing each with its own `\cref`:
+
+  ```latex
+  \Cref{ex:a} (\cpageref{ex:a}), \cref{ex:b} (\cpageref{ex:b}) and \cref{ex:c}
+  (\cpageref{ex:c}) are solved where they appear.
+  ```
+
+  Note that the preamble sets cleveref to *always capitalise*, so `\cref` and `\Cref` print the
+  same thing and `\cpageref` prints `Page 137`, not `page 137`. Keep using `\Cref` at the start of
+  a sentence anyway; the source should stay semantically right if that option is ever changed.
 * ⚠️ **Never put a commit message on the command line — write it to a file and use
   `git commit -F`.** This is the shell-quoting hazard above arriving by a third door, and it bites
   in PowerShell as readily as in Bash.

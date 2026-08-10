@@ -207,16 +207,24 @@ have no section for do **not** get new sections:
 | Script | Why skipped |
 |---|---|
 | §9.1.4 The reals as the completion of ℚ | Marked *extra material*; belongs to the sibling *Grundstrukturen* project. |
-| §11.5 Fundamental theorem of algebra via minimization | An application of Weierstrass rather than Analysis II content; needs its own section. |
+| ~~§11.1.5 Fundamental theorem of algebra via minimization~~ | **Reversed 2026-08-10 (user).** Now `content/12-extrema-hessian/03-fundamental-theorem-of-algebra.tex`. |
 | Thm 14.22 + Ex 14.24–14.30 Jordan curve theorem | A full section's worth. We already state Jordan–Brouwer where it is needed. |
 | §13.7 Partition of unity on compact submanifolds | We build partitions of unity a different, lighter way in ch. 25. |
 | §15.4 Differentiability w.r.t. initial conditions | We already have the theorem in `appendix-a-odes.tex`. |
 | §14.4 A glimpse into differential forms | We are *ahead* of the script here. |
 
-Reversed once, for the completion-of-a-metric-space construction (script §9.1.3), now
-`content/06-completeness/02-completion-of-a-metric-space.tex`. If any other entry is ever
-wanted, the FTA argument (§11.5) has the best value-to-length ratio: about a page, sitting
-naturally at the end of `12-extrema-hessian/`.
+Reversed **twice**. First for the completion-of-a-metric-space construction (script §9.1.3), now
+`content/06-completeness/02-completion-of-a-metric-space.tex`. Then, on 2026-08-10, for the FTA
+argument, which this table had itself singled out as the entry with the best value-to-length
+ratio. It is now `sec:fundamental_theorem_of_algebra`, the third section of
+`12-extrema-hessian/`, and the old reason for skipping it ("an application of Weierstrass rather
+than Analysis II content") turned out to undersell it: Weierstrass supplies only the *first* half,
+that the infimum is attained. The second half is an optimality argument at a minimiser where the
+deciding term is of order `ℓ`, the first non-vanishing coefficient after `b₀`, with nothing
+bounding `ℓ` in advance. That is precisely what chapters 11 and 12 cannot reach with first- and
+second-order conditions, so the section belongs to this chapter rather than merely fitting in it.
+
+**The four remaining entries above stay skipped**, and no further reversal is pending.
 
 **Do not mine the other TAs' exercise-sheet hint files.** This applies to
 `Sascha Brack/Ex Sheet Hints/` and `Simon Kamps/SerieNNHints.pdf`. It was tried once, for

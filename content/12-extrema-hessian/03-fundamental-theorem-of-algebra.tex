@@ -1,0 +1,119 @@
+% Originally: new section (no predecessor in the week-based skeleton, and no tutor covers it).
+% Added 2026-08-10 on the user's instruction, reversing the "enrich existing sections only"
+% decision of 2026-08-06 for this one entry. project-state.md had already singled it out as the
+% entry with the best value-to-length ratio, and the reason is that it belongs to THIS chapter
+% specifically: chapters 11 and 12 build first- and second-order optimality conditions, and this
+% is the standard example where neither suffices and the order is not known in advance.
+
+% Supplement: lec_notes.pdf, pp. 71--72
+\section{The fundamental theorem of algebra, by minimization}
+\label{sec:fundamental_theorem_of_algebra}
+
+The optimality conditions of this chapter came in two orders. A critical point is a first-order
+condition (\cref{prop:extremum_implies_critical}); the Hessian test is a second-order one
+(\cref{thm:hessian_test}), and it is silent when the Hessian is degenerate. What happens when
+both are silent?
+
+The answer is that one keeps expanding. The following proof is the standard illustration, and it
+is worth the page for two reasons: the order at which the expansion finally decides the question
+is not known in advance, and the theorem it proves is not an analysis theorem at all.
+
+\begin{theorem}[Fundamental theorem of algebra]
+\label{thm:fundamental_theorem_of_algebra}
+Every non-constant polynomial $f \in \mathbb{C}[z]$ has a root in $\mathbb{C}$. Consequently, by
+the division algorithm, $f$ has $n := \deg f$ complex roots counted with multiplicity.
+\end{theorem}
+
+\begin{proof}
+Write $f(z) = \sum_{k=0}^n a_kz^k$ with $n > 0$ and $a_n \neq 0$. Dividing by $a_n$ changes no
+roots, so assume $a_n = 1$. Consider
+\[\mu := \inf\big\{\lvert f(z)\rvert : z \in \mathbb{C}\big\} \ \geq\ 0.\]
+The proof has two halves: first that the infimum is attained, and then that its value is $0$.
+
+\textbf{The infimum is attained.} Put $C := \sum_{k=0}^{n}\lvert a_k\rvert$. For
+$\lvert z\rvert \geq 1$ every $\lvert z\rvert^k$ with $k \leq n-1$ is at most
+$\lvert z\rvert^{n-1}$, so the triangle inequality gives
+\[\lvert f(z)\rvert \ \geq\ \lvert z\rvert^n - \sum_{k=0}^{n-1}\lvert a_k\rvert\,\lvert z\rvert^k
+  \ \geq\ \lvert z\rvert^{n-1}\big(\lvert z\rvert - C\big).\]
+Fix any $R \geq C + 1 + 10\mu$. For $\lvert z\rvert \geq R$ both factors are controlled, since
+$\lvert z\rvert^{n-1} \geq 1$ and $\lvert z\rvert - C \geq 1 + 10\mu$, so
+\[\lvert f(z)\rvert \ \geq\ 1 + 10\mu \qquad\text{whenever } \lvert z\rvert \geq R.\]
+Consequently nothing outside the closed ball $K := \{z : \lvert z\rvert \leq R\}$ can compete for
+the infimum: off $K$ the values of $\lvert f\rvert$ exceed $\mu$ by at least $1$. Now $K$ is
+compact and $\lvert f\rvert$ is continuous, so by the extreme value theorem
+(\cref{item:extreme_value_theorem}) the minimum over $K$ is attained, say at $z_0$, and
+\[\lvert f(z_0)\rvert = \min_K \lvert f\rvert = \mu.\]
+Since $\lvert f\rvert \geq 1 + 10\mu > \mu$ on $\partial K$, the point $z_0$ lies in the interior
+of $K$, and is therefore a genuine local minimum of $\lvert f\rvert$ on an open set.
+
+\textbf{The minimum value is $0$.} Recentre at $z_0$ by setting
+\[g(z) := f(z_0 + z) = \sum_{k=0}^{n} b_kz^k,\]
+which is again a polynomial of degree $n$, and note $b_0 = g(0) = f(z_0)$. Suppose, for
+contradiction, that $b_0 \neq 0$. Let $\ell \geq 1$ be the smallest index with $b_\ell \neq 0$,
+which exists because $g$ is non-constant. Writing $z = re^{i\varphi}$ and collecting the
+higher-order terms,
+\[g\big(re^{i\varphi}\big) = b_0 + b_\ell r^\ell e^{i\ell\varphi} + O\big(r^{\ell+1}\big)
+  = b_0\left(1 + \frac{b_\ell}{b_0}r^\ell e^{i\ell\varphi}\right) + O\big(r^{\ell+1}\big)
+  \qquad\text{as } r \downarrow 0.\]
+The direction $\varphi$ is still free, and this is where it is spent. Write
+$b_\ell/b_0 = se^{i\psi}$ with $s > 0$, and choose
+\[\varphi := \frac{\pi - \psi}{\ell}, \qquad\text{so that}\qquad
+  e^{i(\ell\varphi + \psi)} = e^{i\pi} = -1.\]
+Along that ray the bracket becomes $1 - sr^\ell$, which is positive for small $r$, so for all
+sufficiently small $r > 0$ and some constant $M > 0$,
+\[\lvert b_0\rvert = \lvert g(0)\rvert \leq \big\lvert g\big(re^{i\varphi}\big)\big\rvert
+  = \Big\lvert b_0\big(1 - sr^\ell\big) + O\big(r^{\ell+1}\big)\Big\rvert
+  \leq \lvert b_0\rvert\big(1 - sr^\ell\big) + Mr^{\ell+1},\]
+the first inequality because $z_0$ minimises $\lvert f\rvert$, hence $0$ minimises $\lvert g
+\rvert$. Cancelling $\lvert b_0\rvert$ and dividing by $r^\ell$,
+\[0 < s\,\lvert b_0\rvert \leq Mr,\]
+which fails as soon as $r < s\lvert b_0\rvert/M$. This contradiction forces $b_0 = 0$, that is
+$f(z_0) = 0$.
+\end{proof}
+
+\begin{remark}[Why this proof sits in this chapter]
+\label{rem:fta_needs_higher_order}
+The second half is an optimality argument, and it is the reason the section is here. At the
+minimiser one expands and asks which term first detects a direction of descent. The first-order
+term is $b_1$, the second-order term is $b_2$, and \emph{either may vanish}: the deciding index
+is $\ell$, the first non-zero coefficient after $b_0$, and nothing in the hypotheses bounds it.
+For $f(z) = z^7 + 1$ recentred at a minimiser, $\ell$ is $7$.
+
+So the pattern of \cref{thm:hessian_test} does not merely fail to apply here, it could not: a
+test that stops at second order cannot see an obstruction of order seven. What replaces it is the
+observation that once a lowest non-vanishing term exists, one can \emph{aim} at it, choosing
+$\varphi$ so that the term points directly against $b_0$ and shortens it.
+
+Two further features are worth noticing. The argument never differentiates anything: $\lvert
+f\rvert$ is not holomorphic and is not even differentiable at its zeros, and no derivative is
+taken anywhere above. And the choice of $\varphi$ has no real-variable counterpart. On
+$\mathbb{R}$ there are two directions to try, and $x \mapsto x^2 + 1$ has a strict positive
+minimum precisely because neither works; on $\mathbb{C}$ there is a whole circle of directions
+and $\ell$ of them do the job. That is the sense in which this is a theorem about $\mathbb{C}$
+that happens to be proved by optimization.
+\end{remark}
+
+\begin{ainote}
+The name is a historical accident worth flagging, since it invites a wrong expectation of the
+proof above. The statement is not a theorem of algebra and has no purely algebraic proof: any
+argument must use some completeness or connectedness property of $\mathbb{R}$, because the
+theorem is false over fields that look algebraically similar but are not complete. Over the
+rationals, for example, $z^2-2$ has no root. In the proof above, the analytic input enters at
+exactly one place, the extreme value theorem, and that is where completeness is hiding.
+\end{ainote}
+
+% Generator: Claude Opus 5 (High)
+\begin{aiexercise}[Where each hypothesis is used]
+\label{ex:ai_fta_hypotheses}
+The proof of \cref{thm:fundamental_theorem_of_algebra} has more moving parts than it appears.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item The growth estimate concludes $\lvert f(z)\rvert \geq \lvert z\rvert^{n-1}(\lvert z\rvert
+    - C)$ only for $\lvert z\rvert \geq 1$. Where is that restriction used, and what goes wrong
+    without it?
+  \item Show that the theorem fails for $f(z) := \overline{z}\,z + 1 = \lvert z\rvert^2+1$,
+    viewed as a function $\mathbb{C}\to\mathbb{C}$, and identify the single step of the proof
+    that breaks. (This function is continuous and its modulus does attain a minimum.)
+  \item The choice $\varphi := (\pi-\psi)/\ell$ is one of $\ell$ possible choices. Write down the
+    others, and explain why the argument does not care which is taken.
+\end{enumerate}
+\end{aiexercise}

@@ -329,6 +329,32 @@ That is a submanifold chart for $\Phi(M)$ at $q$, of the same dimension $m$. As 
 $\Phi(M)$ is an $m$-dimensional $C^k$ submanifold.
 \end{proof}
 
+% Source: old_exams/fs2023/Probeprfg1.pdf (Probeprüfung Analysis II, undated), Aufgabe 7, p. 2
+% Extractor: Claude Opus 5 (High)
+% The paper names no lecturer; see old-exam-mining.md.
+% Placed directly after prop:diffeomorphism_preserves_submanifold because it is the same question
+% -- which operations preserve the property -- asked about four more of them. Parts (c) and (d)
+% add products and transversal intersections, neither of which appears anywhere in this chapter,
+% and (d) is the only place in the document where transversality is used.
+\begin{exercise}[True or False \textnormal{(which operations preserve submanifolds?)}]
+\label{ex:operations_preserving_submanifolds}
+Decide whether each of the following is true or false, with justification.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item If $M$ is a $k$-dimensional submanifold of $\mathbb{R}^n$ and $N \subseteq M$ is open in
+    $M$, then $N$ is itself a $k$-dimensional submanifold of $\mathbb{R}^n$.
+  \item The union of two disjoint $k$-dimensional submanifolds of $\mathbb{R}^n$ is a
+    $k$-dimensional submanifold of $\mathbb{R}^n$.
+  \item The Cartesian product of a $k$-dimensional submanifold of $\mathbb{R}^m$ and an
+    $l$-dimensional submanifold of $\mathbb{R}^n$ is a $(k+l)$-dimensional submanifold of
+    $\mathbb{R}^{m+n}$.
+  \item If $M$ and $N$ are $(n-1)$-dimensional submanifolds of $\mathbb{R}^n$ for $n \geq 2$, and
+    $T_pM \neq T_pN$ for every $p \in M \cap N$, then $M \cap N$ is an $(n-2)$-dimensional
+    submanifold of $\mathbb{R}^n$.
+\end{enumerate}
+\exinfo{This exercise is taken from the mock examination \emph{Probepr\"ufung Analysis II}
+(undated) in \texttt{old\_exams/fs2023/}, Problem 7. That paper names no lecturer.}
+\end{exercise}
+
 \begin{remark}[Why the dimension cannot move]
 \label{rem:dimension_is_a_diffeomorphism_invariant}
 The proof transports one chart into another and never touches $m$, which is the whole content: a

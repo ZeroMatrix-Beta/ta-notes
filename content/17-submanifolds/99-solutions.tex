@@ -220,6 +220,84 @@ rank, and when the shortcut and the rank disagree it is the rank that is right.
 \end{remark}
 \end{exercisesolution}
 
+\begin{exercisesolution}[Solution to \cref{ex:operations_preserving_submanifolds}]
+% Generator: Claude Opus 5 (High) --- the four statements are the examiner's; the working, the
+% counterexample in (b) and the remark are written for these notes. Probeprfg1 ships no key.
+Throughout, \qt{submanifold} is used in the sense of \cref{def:submanifold}: locally
+straightenable by a diffeomorphism of the ambient space.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{True}, and there is nothing to prove beyond intersecting with one more open set.
+    Being open in $M$ means $N = M \cap W$ for some open $W \subseteq \mathbb{R}^n$. Fix $p \in
+    N$ and take a submanifold chart $\Psi : U_p \to V$ for $M$ at $p$. Replacing $U_p$ by
+    $U_p \cap W$, which is still an open neighbourhood of $p$, turns it into a submanifold chart
+    for $N$ at $p$ of the same dimension. The definition is local, so shrinking the neighbourhood
+    costs nothing.
+  \item \textbf{False}, and this is the one that has to be met rather than reasoned about.
+    In $\mathbb{R}^2$ take
+    \[M := \{(x,0) \mid x > 0\}, \qquad N := \{(0,y) \mid y \in \mathbb{R}\}.\]
+    They are disjoint, since every point of $M$ has $x > 0$ and every point of $N$ has $x = 0$,
+    and each is a $1$-dimensional submanifold: $M$ is an open subset of the $x$-axis, so
+    part \textbf{(a)} applies, and $N$ is a line.
+
+    But $M \cup N$ is not a submanifold at the origin. Every ball $B_\varepsilon(0,0)$ meets it
+    in a segment of the $y$-axis together with a half-open segment running right, and deleting
+    the origin from that set leaves \emph{three} connected pieces, whereas deleting a point from
+    a straightened $(\mathbb{R}\times\{0\})\cap V$ leaves two. No diffeomorphism can change the
+    number of pieces, so no submanifold chart exists at $(0,0)$.
+
+    What goes wrong is that disjointness is not enough: the two pieces are disjoint but one of
+    them accumulates on the other. Requiring instead that $M$ and $N$ have disjoint
+    \emph{closures} makes the statement true, and then each point of the union has a
+    neighbourhood meeting only one of the two.
+  \item \textbf{True}, and it is the chart definition again. Fix $(p,q) \in M \times N$ and take
+    submanifold charts $\Psi : U_p \to V$ for $M$ and $\Xi : U_q \to W$ for $N$, with
+    $\Psi(U_p \cap M) = (\mathbb{R}^k\times\{0\})\cap V$ and
+    $\Xi(U_q \cap N) = (\mathbb{R}^l\times\{0\})\cap W$. Then $\Psi\times\Xi$ is a
+    diffeomorphism of the open set $U_p\times U_q \subseteq \mathbb{R}^{m+n}$ onto $V\times W$,
+    and it carries $(U_p\times U_q) \cap (M\times N)$ onto
+    \[\big((\mathbb{R}^k\times\{0\})\cap V\big) \times \big((\mathbb{R}^l\times\{0\})\cap W\big).\]
+    Composing with the permutation of coordinates that gathers the $k$ and the $l$ live
+    directions together, which is linear and invertible and hence a diffeomorphism, turns this
+    into $(\mathbb{R}^{k+l}\times\{0\}) \cap (V\times W)$. That is a submanifold chart of
+    dimension $k+l$.
+  \item \textbf{True}, and the hypothesis on the tangent spaces is exactly what is needed. Fix
+    $p \in M \cap N$. Each of $M$ and $N$ is locally a level set, and \cref{def:submanifold}
+    supplies this directly: a submanifold chart $\Psi : U \to V$ for $M$ at $p$ satisfies
+    $\Psi(U \cap M) = (\mathbb{R}^{n-1}\times\{0\}) \cap V$, so its last component
+    $F := \Psi_n$ is $C^1$ with $M \cap U = F^{-1}\{0\}$, and $\nabla F(p) \neq 0$ because it is
+    a row of the invertible matrix $\Jac\Psi(p)$. Do the same for $N$, shrink to a common
+    neighbourhood, and write $G$ for its function. So
+    \[M \cap U = F^{-1}\{0\}, \quad \nabla F(p) \neq 0, \qquad
+      N \cap U = G^{-1}\{0\}, \quad \nabla G(p) \neq 0 .\]
+    By \cref{prop:gradient_orthogonality_level_sets}, $T_pM$ has $\nabla F(p)$ as its
+    normal line, and likewise for $N$. Two hyperplanes in $\mathbb{R}^n$ coincide precisely when
+    their normal lines do, so $T_pM \neq T_pN$ says exactly that $\nabla F(p)$ and $\nabla G(p)$
+    are linearly independent.
+
+    That makes $H := (F,G) : U \to \mathbb{R}^2$ a map whose Jacobian at $p$ has the two
+    independent rows $\nabla F(p)\transp$ and $\nabla G(p)\transp$, hence rank $2$, so $DH_p$ is
+    surjective. Full rank is an open condition, so after shrinking $U$ it holds throughout, and
+    \cref{thm:regular_value_theorem} makes
+    \[H^{-1}\{0\} = (M\cap U) \cap (N \cap U) = (M\cap N)\cap U\]
+    a submanifold of dimension $n-2$. As $p$ was arbitrary, $M \cap N$ is one.
+\end{enumerate}
+
+\begin{remark}[Transversality is the name of the hypothesis in \textbf{(d)}]
+Two submanifolds are said to meet \newterm{transversally} at $p$ if their tangent spaces together
+span the ambient space, $T_pM + T_pN = \mathbb{R}^n$. For two hyperplanes that is the same as
+being distinct, which is why part \textbf{(d)} can state the condition the way it does, and the
+general theorem says that a transversal intersection is a submanifold of dimension
+$\dim M + \dim N - n$. Here $(n-1)+(n-1)-n = n-2$, as found.
+
+The hypothesis is doing real work, and dropping it breaks the conclusion immediately: two spheres
+in $\mathbb{R}^3$ meeting at a single point of tangency have the same tangent plane there, and
+their intersection is a point, of dimension $0$ rather than $1$. Two coincident planes are worse
+still, intersecting in a plane. Transversality is what rules both out, and the reason it is the
+right condition rather than a convenient one is visible in the proof: it is precisely the
+statement that stacking the two constraints gives a map of full rank.
+\end{remark}
+\end{exercisesolution}
+
 \begin{exercisesolution}[Solution to \cref{ex:level_set_of_a_wide_jacobian}]
 % Generator: Claude Opus 5 (High) --- the six statements are the examiner's; the working is
 % written for these notes. Verdicts checked afterwards against exercises_2024/mocksol.pdf and

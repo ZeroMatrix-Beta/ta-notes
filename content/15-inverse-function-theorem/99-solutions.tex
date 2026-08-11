@@ -196,3 +196,59 @@ continuous map need not have the property at all: unlike compactness of \emph{im
 automatic.
 \end{remark}
 \end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:local_diffeomorphism_four_consequences}]
+% Generator: Claude Opus 5 (High) --- the four statements are the examiner's; the working is
+% written for these notes. Verdicts checked afterwards against Probeprfg2_Lsg.pdf and agree.
+The hypothesis is exactly that of \cref{thm:inverse_function_theorem} at every point at once, so
+$f$ is a \emph{local} diffeomorphism: each $x \in U$ has an open neighbourhood that $f$ maps
+diffeomorphically onto an open set. Everything below is a consequence of that one sentence.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{True.} Local injectivity makes the fibre $f^{-1}\{y\}$ \emph{discrete}: if
+    $x \in f^{-1}\{y\}$, the neighbourhood on which $f$ is injective contains no second point of
+    the fibre. A discrete subset of $\mathbb{R}^n$ is countable, and the reason is that
+    $\mathbb{R}^n$ has a countable base. Concretely, around each $x$ in the fibre choose a ball
+    $B(a_x,\rho_x)$ with $a_x \in \mathbb{Q}^n$ and $\rho_x \in \mathbb{Q}_{>0}$ containing $x$
+    and no other fibre point; distinct fibre points receive distinct pairs $(a_x,\rho_x)$, and
+    there are only countably many such pairs.
+  \item \textbf{True}, and note that this part does not use the invertibility at all, only that
+    $f$ is $C^1$. A $C^1$ map is locally Lipschitz, so cover $U$ by countably many balls $B_i$
+    with $\overline{B_i} \subseteq U$ on which $f$ is Lipschitz with some constant $L_i$. A set of diameter $d$ has
+    image of diameter at most $L_id$, so a cube of side $s$ lands inside a set of diameter
+    $L_i s\sqrt n$ and hence inside a cube of side $L_i s\sqrt n$, whose volume is
+    $(L_i\sqrt n)^n$ times the original. Covering a null set $Z \cap B_i$ by cubes of total
+    volume $< \varepsilon$ therefore covers $f(Z \cap B_i)$ by cubes of total volume
+    $< (L_i\sqrt n)^n\varepsilon$, so $f(Z\cap B_i)$ is null. A countable union of null sets is
+    null, so $f(Z)$ is null.
+  \item \textbf{True.} A local diffeomorphism is an open map, since it maps each of the
+    neighbourhoods above onto an open set and every open subset of $U$ is a union of such pieces;
+    in particular $f(U)$ is open. Adding injectivity makes $f : U \to f(U)$ a continuous open
+    bijection, hence a homeomorphism. Differentiability of the inverse is then local and is what
+    \cref{thm:inverse_function_theorem} already supplies at each point: near any $y = f(x)$ the
+    global inverse agrees with the local one, which is $C^1$.
+  \item \textbf{False.} Surjectivity constrains where $f$ goes, never how many times it goes
+    there, and nothing in the hypotheses forbids several sheets landing on the same target. Let
+    $\varphi : B_1(0) \to \mathbb{R}^n$, $\varphi(x) := x/(1-\lvert x\rvert^2)$, which is a
+    diffeomorphism of the open unit ball onto $\mathbb{R}^n$: it is radial, and
+    $r \mapsto r/(1-r^2)$ maps $[0,1)$ onto $[0,\infty)$ with derivative
+    $(1+r^2)/(1-r^2)^2 > 0$. Now take the \emph{disconnected} domain
+    \[U := B_1(0)\ \cup\ B_1(3e_1), \qquad
+      f(x) := \begin{cases} \varphi(x) & x \in B_1(0), \\
+        \varphi(x - 3e_1) & x \in B_1(3e_1).\end{cases}\]
+    Then $f$ is $C^\infty$ with invertible differential everywhere and is surjective, but it is
+    two-to-one, so it is not injective and cannot be a diffeomorphism.
+\end{enumerate}
+
+\begin{remark}[What separates \textbf{(c)} from \textbf{(d)}]
+Read as a pair, the last two parts say that injectivity is not a convenience in \textbf{(c)} but
+the entire remaining content. The inverse function theorem is local by nature and gives
+everything local for free: openness, smoothness of the inverse where it exists, the countable
+fibres of \textbf{(a)}. The one thing it never gives is that the local inverses fit together into
+a single function, and that is precisely what injectivity asserts.
+
+The counterexample in \textbf{(d)} takes the cheapest possible route to failure, handing two
+disjoint pieces of $U$ the same target, and it is worth noticing that it is disconnected for that
+reason rather than by accident. \Cref{ex:local_invertible_not_globally_injective} makes the same
+point on a connected domain, where the folding is harder to see and no less real.
+\end{remark}
+\end{exercisesolution}

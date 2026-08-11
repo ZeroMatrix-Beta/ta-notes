@@ -391,3 +391,26 @@ $f$ is \emph{not} a diffeomorphism of $\mathbb{R}^2$.
 \exinfo{This exercise is taken from the mock examination for Analysis II, Spring Semester 2024
 (Prof.\ Joaquim Serra), Box Problem 18, where only the final answer was graded.}
 \end{exercise}
+
+% Source: old_exams/fs2023/Probeprfg2.pdf (Probeprüfung Analysis II, 17 August 2022, revised),
+% Aufgabe 6, p. 2
+% Extractor: Claude Opus 5 (High)
+% The paper names no lecturer; see old-exam-mining.md.
+% Four consequences of one hypothesis, that Df is invertible everywhere. Parts (a) and (b) are
+% both non-obvious and neither is stated anywhere in the document; (c) is the global upgrade the
+% chapter uses implicitly and never proves; (d) is false and needs a counterexample rather than
+% an argument. Sits after the two box questions because it is the same subject asked abstractly.
+\begin{exercise}[True or False \textnormal{(an everywhere-invertible differential)}]
+\label{ex:local_diffeomorphism_four_consequences}
+Let $U \subseteq \mathbb{R}^n$ be open and let $f : U \to \mathbb{R}^n$ be continuously
+differentiable with $Df_x$ invertible at every $x \in U$. Decide whether each of the following is
+true or false, with justification.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item For every $y \in \mathbb{R}^n$ the preimage $f^{-1}\{y\}$ is finite or countable.
+  \item $f$ maps null sets to null sets.
+  \item If $f$ is injective, then $f : U \to f(U)$ is a diffeomorphism.
+  \item If $f$ is surjective, then $f : U \to \mathbb{R}^n$ is a diffeomorphism.
+\end{enumerate}
+\exinfo{This exercise is taken from the mock examination \emph{Probepr\"ufung Analysis II} of
+17 August 2022 (revised), Problem 6. That paper names no lecturer.}
+\end{exercise}

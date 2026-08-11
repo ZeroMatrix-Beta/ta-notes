@@ -296,6 +296,50 @@ $u,v : \mathbb{R}^n \to (0,\infty)$? Decide each, with justification.
 (Prof.\ Joaquim Serra), where it appears as the fourth block of multiple-choice questions.}
 \end{exercise}
 
+% Source: old_exams/fs2023/Probeprfg2.pdf (Probeprüfung Analysis II, 17 August 2022, revised),
+% Aufgabe 5, p. 1--2
+% Extractor: Claude Opus 5 (High)
+% The paper names no lecturer; see old-exam-mining.md.
+% Four statements about one object, the gradient field of a smooth function, which is why the
+% block sits here rather than being split across chapters 12 and 17. Part (b) is the one that
+% earns it: a gradient field has no closed orbits, and the document says nothing of the kind.
+% The exam writes n for the outward normal; rendered as \nu, matching chapter 23 throughout.
+\begin{exercise}[True or False \textnormal{(what a gradient field cannot do)}]
+\label{ex:gradient_field_four_verdicts}
+Let $f : \mathbb{R}^n \to \mathbb{R}$ be smooth, $n \geq 2$, and consider its gradient field
+$\nabla f$. Decide whether each of the following is true or false, with justification.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item If $\nabla f(x_0) \neq 0$ at some $x_0 \in \mathbb{R}^n$, then there is an open
+    neighbourhood $U$ of $x_0$ such that $\{x \in U \mid f(x) = f(x_0)\}$ is an
+    $(n-1)$-dimensional submanifold of $\mathbb{R}^n$.
+  \item There is no regular smooth curve $\gamma : [0,1] \to \mathbb{R}^n$ with
+    $\gamma(0) = \gamma(1)$ satisfying $\gamma'(t) = \nabla f(\gamma(t))$ for all $t \in [0,1]$.
+  \item If $\nabla f(x) \neq 0$ for every $x \in \mathbb{R}^n$, then $f$ is unbounded.
+  \item If $\emptyset \neq B \subset \mathbb{R}^n$ is a compact, smoothly bounded region with
+    outward unit normal field $\nu$, and $\langle\nabla f(x),\nu(x)\rangle > 0$ for all
+    $x \in \partial B$, then $f$ has a local minimum in the interior of $B$.
+\end{enumerate}
+\exinfo{This exercise is taken from the mock examination \emph{Probepr\"ufung Analysis II} of
+17 August 2022 (revised), Problem 5. That paper names no lecturer.}
+\end{exercise}
+
+% Source: old_exams/fs2023/Probeprfg3.pdf (Probeprüfung Analysis II, 31 January 2023),
+% Aufgabe 12, p. 4
+% Extractor: Claude Opus 5 (High)
+% The paper names no lecturer; see old-exam-mining.md.
+% Three lines with the trace, and the only statement anywhere in this chapter about how the
+% operators behave under a change of coordinates. Kept as an exercise because the official hint
+% ("Spur") gives away the whole method and is worth printing as one.
+\begin{exercise}[The divergence is unchanged by a linear change of coordinates]
+\label{ex:divergence_under_conjugation}
+Let $A \in \GL_n(\mathbb{R})$ and let $f : \mathbb{R}^n \to \mathbb{R}^n$ be a differentiable
+vector field. Prove that for every $x \in \mathbb{R}^n$,
+\[\divg\big(A^{-1}\circ f\circ A\big)(x) = (\divg f)(Ax).\]
+\exhint[Official hint]{Trace.}
+\exinfo{This exercise is taken from the mock examination \emph{Probepr\"ufung Analysis II} of
+31 January 2023, Problem 12. That paper names no lecturer.}
+\end{exercise}
+
 
 % --- exercises relocated here from the dissolved sheets ---
 

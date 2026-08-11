@@ -104,6 +104,77 @@ $\lvert\nabla u\rvert^2$ is traded for $u\Delta u$ throughout the theory of the 
 \end{remark}
 \end{exercisesolution}
 
+\begin{exercisesolution}[Solution to \cref{ex:gradient_field_four_verdicts}]
+% Generator: Claude Opus 5 (High) --- the four statements are the examiner's; the working is
+% written for these notes. Verdicts checked afterwards against Probeprfg2_Lsg.pdf and agree.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{True.} The condition $\nabla f(x_0) \neq 0$ says exactly that
+    $Df_{x_0} : \mathbb{R}^n \to \mathbb{R}$ is surjective, and it persists on a neighbourhood
+    $U$ of $x_0$ because $\nabla f$ is continuous. \Cref{thm:regular_value_theorem}, applied to
+    $f|_U$ and the value $f(x_0)$, then makes $\{x \in U \mid f(x) = f(x_0)\}$ a submanifold of
+    dimension $n-1$. The restriction to a neighbourhood is not a technicality: the full level set
+    $\{f = f(x_0)\}$ may contain critical points far from $x_0$ and be no manifold at all.
+  \item \textbf{True}, and this is the statement worth remembering. Suppose such a $\gamma$
+    existed. Integrating $f$ along it and using the chain rule along a path
+    (\cref{sec:chain_rule_along_path}) together with the hypothesis $\gamma' = \nabla f\circ
+    \gamma$,
+    \[f(\gamma(1)) - f(\gamma(0)) = \int_0^1 \big\langle\nabla f(\gamma(t)),\ \gamma'(t)\big\rangle\,dt
+      = \int_0^1 \lvert\gamma'(t)\rvert^2\,dt .\]
+    The curve is regular, so $\gamma'$ never vanishes and the integrand is continuous and
+    strictly positive; the right-hand side is therefore strictly positive. But $\gamma(0) =
+    \gamma(1)$ makes the left-hand side zero. No such curve exists.
+  \item \textbf{False.} Take $f(x) := \arctan(x_1)$, so that
+    $\nabla f(x) = \big(1/(1+x_1^2),\,0,\dots,0\big)$, which is nowhere zero, while
+    $\lvert f\rvert < \pi/2$ everywhere. A non-vanishing gradient forces $f$ to keep increasing
+    in some direction, but says nothing about how fast, and a bounded function can increase
+    forever.
+  \item \textbf{True.} Since $B$ is compact and $f$ continuous, $f|_B$ attains its minimum at
+    some $p \in B$. Suppose $p \in \partial B$. Moving inward from $p$ means moving in the
+    direction $-\nu(p)$, and the directional derivative there is
+    \[D_{-\nu(p)}f(p) = \big\langle\nabla f(p),\ -\nu(p)\big\rangle
+      = -\big\langle\nabla f(p),\ \nu(p)\big\rangle < 0\]
+    by hypothesis. So $f(p - t\nu(p)) < f(p)$ for all small $t > 0$, and those points lie in $B$
+    because $\partial B$ is smooth. That contradicts minimality, so $p$ lies in the interior, and
+    a minimum over $B$ attained at an interior point is in particular a local minimum.
+\end{enumerate}
+
+\begin{remark}[Two of these are restrictions that only gradients obey]
+Parts \textbf{(b)} and \textbf{(d)} both say a gradient field cannot do something, and both are
+proved the same way: integrate $f$ rather than reason about $\nabla f$ directly. That is the
+whole advantage of being a gradient, and the contrast is sharp. A general vector field has closed
+orbits routinely --- $F(x,y) := (-y,x)$ is the rotation field of \cref{ex:autonomous_rotation},
+whose orbits are circles --- and part \textbf{(b)} says no gradient field ever does. In physical
+terms a conservative field cannot drive a cycle, because going round would return the potential
+to its starting value while the field did strictly positive work.
+\end{remark}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Proof of \cref{ex:divergence_under_conjugation}]
+% Generator: Claude Opus 5 (High) --- the statement and the one-word hint are the examiner's; the
+% proof and the remark are written for these notes.
+Write $g := A^{-1}\circ f\circ A$, so that $g(x) = A^{-1}f(Ax)$. A linear map is its own
+differential, so the chain rule gives
+\[\Jac g(x) = A^{-1}\,\Jac f(Ax)\,A .\]
+The divergence of a vector field is the trace of its Jacobian, $\divg g = \sum_i \partial_i g_i =
+\Tr(\Jac g)$. Since $\Tr(MN) = \Tr(NM)$, taking $M := A^{-1}\Jac f(Ax)$ and $N := A$,
+\[\divg g(x) = \Tr\big(A^{-1}\,\Jac f(Ax)\,A\big) = \Tr\big(\Jac f(Ax)\big) = (\divg f)(Ax) .\]
+
+\begin{remark}[What is really invariant, and how much of it]
+The proof used nothing about $\Jac f$ beyond the fact that conjugation does not move the trace,
+and the same is true of every coefficient of the characteristic polynomial: $A^{-1}MA$ and $M$
+have the same one. So the argument proves more than it was asked to. Not only the divergence but
+the whole characteristic polynomial of the Jacobian is unchanged by a linear change of
+coordinates, and in particular so is $\det \Jac f$, which is the factor
+\cref{thm:change_of_variables} integrates against.
+
+That is worth knowing because the individual summands are \emph{not} invariant. There is no sense
+in which $\partial_1 f_1$ survives a change of coordinates; it is only the sum that does, and the
+divergence is therefore a property of the vector field rather than of the axes chosen to write it
+in. A quantity defined by a formula in coordinates has to earn that status, and this exercise is
+the proof that the divergence has.
+\end{remark}
+\end{exercisesolution}
+
 \begin{exercisesolution}[Solution of \cref{ex:11.1}]
 The vector field $V(x,y,z) = (x,y,z-x^2-y^2)$ has divergence
 \[\divg V = \partial_x(x) + \partial_y(y) + \partial_z(z-x^2-y^2) = 1+1+1 = 3.\]

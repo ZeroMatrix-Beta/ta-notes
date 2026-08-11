@@ -317,3 +317,75 @@ some open set $U \subseteq \mathbb{R}^3$.
 answer was graded. The exam's formula sheet defines \qt{conservative} as it is defined here: $V$ is
 conservative if and only if there is $u \in C^1(U)$ with $\nabla u = V$.}
 \end{exercise}
+
+% Source: old_exams/FS16.pdf (Klausur zur Analysis I/II, summer 2016, Prof. H. Knörrer),
+% Aufgabe 10, p. 6
+% Extractor: Claude Opus 5 (High)
+% Kept as a worked example: the statement is a one-line identity whose interest is entirely in the
+% proof, and in the fact that it needs LESS regularity than the Green's theorem route suggests.
+\begin{example}[Differentiating an integral over a moving rectangle]
+\label{ex:moving_rectangle_derivative}
+Fix $a < b$ and $c < d$, and for $t \in \mathbb{R}$ let
+\[Q_t := [a+t,\,b+t] \times [c+t,\,d+t]\]
+be the rectangle $Q_0$ translated along the diagonal direction $(1,1)$.
+
+\textbf{Claim.} For every continuous $f : \mathbb{R}^2 \to \mathbb{R}$ and every $t \in \mathbb{R}$,
+\[\frac{d}{dt}\int_{Q_t} f \,d\vol_2 = \int_{\partial Q_t} f\,(-dx + dy),\]
+the boundary being traversed counterclockwise.
+
+Write the left-hand side as an iterated integral and differentiate the limits. Put
+\[H(t,x) := \int_{c+t}^{d+t} f(x,y)\,dy, \qquad \text{so that} \qquad
+  G(t) := \int_{Q_t} f\,d\vol_2 = \int_{a+t}^{b+t} H(t,x)\,dx\]
+by Fubini (\cref{thm:fubini}). The fundamental theorem of calculus applies to $H$ in its second
+argument, $f$ being continuous, and gives
+$\partial_t H(t,x) = f(x,d+t) - f(x,c+t)$. Differentiating $G$ combines the two mechanisms
+(moving limits and a moving integrand) and yields
+\[G'(t) = \underbrace{H(t,b+t) - H(t,a+t)}_{\text{the limits move}}
+        + \underbrace{\int_{a+t}^{b+t}\big(f(x,d+t)-f(x,c+t)\big)dx}_{\text{the integrand moves}},\]
+that is,
+\begin{align*}
+G'(t) &= \int_{c+t}^{d+t} f(b+t,y)\,dy \;-\; \int_{c+t}^{d+t} f(a+t,y)\,dy \\
+      &\qquad + \int_{a+t}^{b+t} f(x,d+t)\,dx \;-\; \int_{a+t}^{b+t} f(x,c+t)\,dx.
+\end{align*}
+
+Now read off the right-hand side of the claim. Traversing $\partial Q_t$ counterclockwise, the four
+edges contribute:
+
+\begin{itemize}
+  \item \textbf{Bottom} ($y = c+t$, $x$ increasing): $dy = 0$, so the contribution is
+    $-\int_{a+t}^{b+t} f(x,c+t)\,dx$.
+  \item \textbf{Right} ($x = b+t$, $y$ increasing): $dx = 0$, contributing
+    $+\int_{c+t}^{d+t} f(b+t,y)\,dy$.
+  \item \textbf{Top} ($y = d+t$, $x$ decreasing): $dy = 0$ and the orientation reverses the sign
+    twice, contributing $+\int_{a+t}^{b+t} f(x,d+t)\,dx$.
+  \item \textbf{Left} ($x = a+t$, $y$ decreasing): $dx = 0$, contributing
+    $-\int_{c+t}^{d+t} f(a+t,y)\,dy$.
+\end{itemize}
+
+The four terms are exactly the four in $G'(t)$, which proves the claim.
+
+\begin{remark}[Green's theorem is the shadow, not the substance]
+The combination $-dx + dy$ is the line integral of the vector field $(-f,\,f)$, so for $f \in C^1$
+Green's theorem (\cref{thm:greens_theorem}) rewrites the right-hand side as
+\[\int_{\partial Q_t} (-f)\,dx + f\,dy = \int_{Q_t}\big(\partial_1 f + \partial_2 f\big)\,d\vol_2,\]
+and the identity becomes the chain rule: substituting $x = u+t$, $y = v+t$ turns $G$ into
+$\int_{Q_0} f(u+t,v+t)\,d\vol_2(u,v)$, whose $t$-derivative is exactly
+$\int_{Q_0}(\partial_1f+\partial_2f)(u+t,v+t)$. That is the quickest route, and it is worth
+knowing which direction $(1,1)$ is doing: the rectangle moves diagonally, so both partial
+derivatives appear, and a purely horizontal motion would leave only $\partial_1 f$.
+
+But that route needs $f \in C^1$, and the claim assumes only continuity. The argument given above
+never differentiates $f$; it differentiates only the \emph{limits} of integration, which the
+fundamental theorem of calculus permits for a merely continuous integrand. Preferring the longer
+proof here is not pedantry: the identity is true in a regularity range where Green's theorem has
+nothing to say.
+
+The statement is a two-dimensional instance of what is called the Reynolds transport theorem, which
+says that the rate of change of an integral over a moving region is the flux of the integrand
+through its boundary. Here the region moves rigidly with velocity $(1,1)$, and $-dx+dy$ is
+precisely the pairing of that velocity with the outward normal.
+\end{remark}
+\exinfo{This example is taken from the Analysis I \& II examination of summer 2016
+(Prof.\ H.\ Kn\"orrer), Problem 10, where it is set as a proof exercise. The closing remark is
+added here.}
+\end{example}

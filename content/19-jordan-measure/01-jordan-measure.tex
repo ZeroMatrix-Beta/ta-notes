@@ -325,6 +325,15 @@ unbounded, so it is not Jordan measurable at all.) The point is that the geometr
 available only when the sizes may vary.
 \end{remark}
 
+% Generator: Claude Opus 5 (High)
+\begin{remark}[The null sets are not the whole story]
+\label{rem:pointer_to_lebesgue_digression}
+Everything said so far compares the \emph{null} sets of the two theories, which is as far as this
+chapter needs to go. It leaves the obvious question unanswered: is Jordan measure the same thing as
+Lebesgue measure, and if not, what is the difference? \Cref{sec:lebesgue_digression} answers that
+in a few pages, without proofs and without being used anywhere later.
+\end{remark}
+
 % Source: Jérôme Paschoud/Notizen/Woche 8.1 Tangentialräume und Jordan Mass.pdf, p. 4
 % Generator: Gemini 3.1 Pro (High)
 \begin{theorem}[Linear transformations of Jordan measurable sets]
@@ -385,3 +394,36 @@ correct!}
 \end{enumerate}
 \exinfo{This exercise is Problem 8.4 of Problem Sheet 8, Analysis II, Spring Semester 2026.}
 \end{exercise}
+
+% Source: old_exams/HS20.pdf (Analysis I & II, 27 January 2021, Prof. Peter S. Jossen),
+% Teil B, Aufgabe 2, parts (b)--(e), p. 19
+% Extractor: Claude Opus 5 (High)
+% Part (a) of the original asks for the definition of a Lebesgue null set, which
+% rem:lebesgue_vs_jordan_null already gives. Nothing below needs Lebesgue *measure* or integration
+% -- see the ainote after the exercise, and note that Problem Sheet 8 already puts the term
+% "Lebesgue-null" in front of the reader in ex:8.2(b).
+\begin{exercise}[Null sets: what they cannot be, and how they combine]
+\label{ex:lebesgue_null_sets_properties}
+Throughout, \newterm{Lebesgue null} is as in \cref{rem:lebesgue_vs_jordan_null}: for every
+$\varepsilon > 0$ the set admits a countable cover by cubes of total volume less than $\varepsilon$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Can a non-empty open subset $U \subseteq \mathbb{R}^n$ be Lebesgue null? Justify your
+    answer.
+  \item Is a bounded Lebesgue null set necessarily closed? Justify your answer.
+  \item Show that a countable union of Lebesgue null sets is Lebesgue null.
+  \item Let $f : [0,1] \to \mathbb{R}$ be Riemann integrable. Show that its graph, viewed as the
+    subset $\Gamma_f := \{(x,f(x)) \mid x \in [0,1]\}$ of $\mathbb{R}^2$, is a Lebesgue null set.
+\end{enumerate}
+\exinfo{This exercise is taken from the Analysis I \& II examination of 27 January 2021
+(Prof.\ Peter S.\ Jossen), Part B, Problem 2, whose first part asks for the definition of a
+Lebesgue null set.}
+\end{exercise}
+
+\begin{ainote}
+Nothing in this block uses Lebesgue \emph{measure} or the Lebesgue integral, and this course
+develops neither. \qt{Lebesgue null} is used here only in the elementary sense of
+\cref{rem:lebesgue_vs_jordan_null} (coverable by countably many cubes of arbitrarily small total
+volume), which is the sense already in play in \cref{ex:8.2}\textbf{(b)} on the official problem
+sheet. Part \textbf{(c)} is the one property of that notion this document repeatedly leans on
+without ever proving, which is why the block earns its place.
+\end{ainote}

@@ -332,6 +332,25 @@ does not help and thin in the places it does.
     of Problem Sheet 4, Analysis II, Spring Semester 2026.", "This example is taken from the
     August 2019 exam, Problem 2.", "This example follows the Wikipedia article on the Cantor
     set." A bare "Sheet 4, Ex. 4.3." is the terse catalogue reference this replaced.
+  - ⚠️ **`\exinfo` is not an exercise-only macro — a mined `example` needs one too** (2026-08-11,
+    on the user's instruction). When an old-exam problem is filed as a worked `example` rather
+    than as an `exercise` — because it is too hard to set, or diverges from what the course
+    proves — the reader still has to be told that the mathematics is an examiner's. Close the
+    `example` with an `\exinfo` exactly as an `exercise` would, and say what the exam actually
+    asked, since a problem set as *prove this* and reproduced here as *here is the proof* has had
+    its form changed: "This example is taken from the Analysis I & II examination of winter
+    2018/2019 (Prof. Manfred Einsiedler), Problem 9, where it is set as a proof exercise."
+    Anything you added on top (a counterexample, a closing remark) is worth naming in the same
+    sentence, so the `\exinfo` bounds the examiner's contribution rather than claiming all of it.
+  - **Name the lecturer for an old-exam citation**, in parentheses after the date
+    (2026-08-11, user). `old_exams/` spans at least eight professors (Knörrer, Einsiedler, Jossen,
+    Teichmann, Kowalski, Salamon, Serra, Felder) with visibly different exam styles and syllabus
+    emphases, so "the exam of 12 August 2020" under-identifies the source:
+    knowing that a problem is Jossen's rather than Serra's is what tells a reader whether its
+    phrasing and its scope are ones this course would use. The `% Source:` comment carries the
+    same attribution, plus the file name and page. **Note the papers are Analysis I & II**, so
+    say so in the `\exinfo` — most of what is on them is out of this document's scope, and a
+    reader who goes looking should know that before opening the file.
   - **`\exhint[Label]{...}`** takes an optional label, default `Hint`. Use `[Official hint]` for a
     hint printed on the sheet, `[Corsin's hint]` / `[Sascha Brack's hints]` for one from a
     tutor's notes. Capitalise the first word of the hint body — the label ends in a colon
@@ -674,6 +693,30 @@ Each environment has a precise semantic role. Using the wrong one is a style err
     categories would drift into it. Use a **titled** remark instead —
     `\begin{remark}[Why this hypothesis is there]` — which buys the same skimmability with no
     new semantics and no twelfth colour-coded box competing with `importantremark`.
+* **`aside`** — added 2026-08-11 on the user's instruction, for a fact that is genuinely
+  interesting and genuinely not needed: a piece of history, a startling special case, a connection
+  to a subject this course does not reach, a "while we are here" observation. Teal, with a
+  coffee-cup icon, so it is visibly neither mathematics-in-the-argument nor editorial commentary.
+
+  **The test is deletability.** Could this be removed without touching a single later argument? If
+  yes, and it is still worth reading, it is an `aside`. If removing it would leave a gap in a
+  proof, an unexplained notation, or an unanswered "why", it is a `remark`.
+
+  * **`aside`:** non-measurable sets exist and need the axiom of choice; Banach--Tarski;
+    who first proved a result and when; a striking numerical coincidence.
+  * **`remark`, not `aside`:** why a hypothesis is there; what a proof really shows; a pitfall in a
+    definition. These bear on the mathematics next to them, and filing them as digressions tells
+    the reader to skip something they should not.
+
+  ⚠️ **There is no `aiaside`, and none should be added.** The `ai*` prefix marks provenance —
+  invented here rather than transcribed — and for asides that carries no information, since
+  essentially every aside will be written for this document. Mark authorship with the usual
+  `% Generator:` comment inside the environment. (Settled by the user when the environment was
+  added: an aside may be purely AI-generated and is still a plain `aside`.)
+
+  **Keep them rare.** An aside that is not actually surprising is a remark in a louder colour, and
+  a page carrying two of them has neither. There is currently one, `aside:vitali_banach_tarski` in
+  `content/19-jordan-measure/03-a-glimpse-of-lebesgue.tex`, and that ratio is about right.
 * **`notation`** — strictly for introducing or summarising notation conventions used by the
   author in their notes. Do **not** use `notation` to comment on the fact that a particular
   tutor uses unusual notation — that is an `ainote`.

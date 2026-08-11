@@ -409,3 +409,63 @@ Consider the equation
 \exinfo{This exercise is taken from the exam of 24 January 2022, Part A, Problem 10.}
 \end{exercise}
 
+% Source: old_exams/FS16.pdf (Klausur zur Analysis I/II, summer 2016, Prof. H. Knörrer),
+% Aufgabe 12, p. 8
+% Extractor: Claude Opus 5 (High)
+% Kept as a worked example rather than an exercise: the exam sets it as "find the flaw", and the
+% flaw is the single most common misreading of thm:implicit_function_theorem, so the payoff is
+% larger when the reader is walked through it than when it is hidden in 99-solutions.tex.
+\begin{example}[Which derivative has to be invertible]
+\label{ex:knoerrer_wrong_partial_derivative}
+Consider the following assertion about the roots of a polynomial whose coefficients move with a
+parameter $t$.
+
+\textbf{Claim (false).} Let $n \ge 1$ and let $a_0,\dots,a_{n-1} : (-1,1) \to \mathbb{R}$ be
+continuously differentiable with $a_0(0) = 0$ and $a_0'(0) \neq 0$. For $t \in (-1,1)$ put
+\[p_t(x) := x^n + a_{n-1}(t)x^{n-1} + \dots + a_1(t)x + a_0(t).\]
+Then there are $\varepsilon > 0$ and a continuous $\gamma : (-\varepsilon,\varepsilon) \to
+\mathbb{R}$ with $\gamma(0) = 0$ and $p_t(\gamma(t)) = 0$ for all
+$t \in (-\varepsilon,\varepsilon)$.
+
+Informally: the root sitting at $x = 0$ when $t = 0$ can be followed continuously as $t$ moves.
+The following argument for it is wrong.
+
+\begin{quote}
+\itshape
+For $(x,t) \in \mathbb{R}\times(-1,1)$ set $F(x,t) := p_t(x)$. Then $F$ is a $C^1$ function on
+$\mathbb{R}\times(-1,1)$. We have $F(0,0) = 0$ and $\frac{\partial F}{\partial t}(0,0) \neq 0$. By
+the implicit function theorem there are $\varepsilon > 0$ and a differentiable, hence continuous,
+function $\gamma : (-\varepsilon,\varepsilon) \to \mathbb{R}$ with $\gamma(0) = 0$ and
+$F(\gamma(t),t) = 0$ for all $t \in (-\varepsilon,\varepsilon)$. This $\gamma$ is as required.
+\end{quote}
+
+\textbf{A counterexample.} Take $n = 2$ with $a_1 \equiv 0$ and $a_0(t) := t$, so that
+$p_t(x) = x^2 + t$. The hypotheses hold: $a_0(0) = 0$ and $a_0'(0) = 1 \neq 0$. But $p_t(x) = 0$
+forces $x^2 = -t$, which has no real solution when $t > 0$. So for every $\varepsilon > 0$ the
+required $\gamma$ fails to exist already at $t = \varepsilon/2$, and no continuity or
+differentiability is even in question.
+
+\textbf{Where the argument breaks.} The implicit function theorem
+(\cref{thm:implicit_function_theorem}) solves $F = 0$ for the variable whose partial derivative is
+invertible. To produce $x$ as a function of $t$, what must be non-zero is
+\[\frac{\partial F}{\partial x}(0,0) = a_1(0),\]
+and the hypotheses say nothing whatever about $a_1(0)$. The argument instead verifies
+$\frac{\partial F}{\partial t}(0,0) = a_0'(0) \neq 0$, which is the derivative in the
+\emph{parameter}. In the counterexample $a_1 \equiv 0$, so the condition that is actually needed
+fails, exactly as it must.
+
+\begin{remark}[The hypothesis is not useless, it is just about the other variable]
+Reading $\partial F/\partial t(0,0) \neq 0$ as a genuine hypothesis rather than as a slip is what
+makes the example memorable. It is the hypothesis of the implicit function theorem with the roles
+of the two variables exchanged, so it does yield something: near the origin the zero set of $F$ is
+the graph of a $C^1$ function $t = \tau(x)$, not of a function $x = \gamma(t)$. For $F(x,t) = x^2+t$
+this is the parabola $t = -x^2$, and the picture says everything. The zero set is a perfectly nice
+curve through the origin; it simply doubles back, so it is a graph over the $x$-axis and not over
+the $t$-axis. Which of the two variables can be solved for is precisely what the invertible
+partial derivative decides, and it is never symmetric in the two.
+\end{remark}
+\exinfo{This example is taken from the Analysis I \& II examination of summer 2016
+(Prof.\ H.\ Kn\"orrer), Problem 12, which asks for a counterexample and for the flaw in the
+argument. The reading of the false hypothesis in the closing remark is added here.}
+\end{example}
+

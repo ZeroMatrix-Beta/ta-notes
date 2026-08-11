@@ -593,3 +593,116 @@ Decide whether each of the following statements is true or false.
 \end{enumerate}
 \end{aiexercise}
 
+% Source: old_exams/HS18.pdf (Analysis I & II, winter 2018/2019, Prof. Manfred Einsiedler),
+% Aufgabe 13, p. 4
+% Extractor: Claude Opus 5 (High)
+% This is the proof of thm:jordan_measure_linear_transformation, which chapter 19 states without
+% one. Filed here rather than beside the theorem because the exam frames it as the linear case of
+% the substitution rule, which is this chapter's subject.
+\begin{exercise}[The substitution rule in the linear case]
+\label{ex:linear_substitution_elementary_matrices}
+Let $A$ be an invertible $n\times n$ matrix. \Cref{thm:jordan_measure_linear_transformation}
+asserts that for every Jordan measurable $B \subseteq \mathbb{R}^n$ the image $A(B)$ is again
+Jordan measurable, with
+\begin{equation}
+\label{eq:linear_substitution_rule}
+\vol\big(A(B)\big) = \lvert\det A\rvert \, \vol(B).
+\end{equation}
+This exercise proves it.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Prove \eqref{eq:linear_substitution_rule} directly in the case that $A$ is a diagonal
+    matrix.
+  \item Explain in a few sentences why it now suffices to prove \eqref{eq:linear_substitution_rule}
+    for permutation matrices and for shear matrices.
+  \item Prove \eqref{eq:linear_substitution_rule} when $A$ is a shear matrix. You may assume for
+    simplicity that $B = Q$ is a closed axis-parallel box.
+\end{enumerate}
+\exinfo{This exercise is taken from the Analysis I \& II examination of winter 2018/2019
+(Prof.\ Manfred Einsiedler), Problem 13.}
+\end{exercise}
+
+% Source: old_exams/HS17.pdf (Analysis I & II, winter 2017/2018, Prof. Manfred Einsiedler),
+% Aufgabe 13, pp. 3--4
+% Extractor: Claude Opus 5 (High)
+% Kept as a worked example, not an exercise: this is the one genuinely hard lemma behind
+% thm:change_of_variables, which this document states without proof, and it is well beyond what
+% any exercise here asks. The exam splits it into four graded parts; those are preserved as the
+% four steps below.
+% Notation normalised to the house convention: the exam writes ||.||_2 for the Euclidean norm,
+% which is single bars here (style.md, "Norms"). ||.||_infty keeps its double bars.
+\begin{example}[The covering lemma behind the change of variables formula]
+\label{ex:cube_covering_lemma_substitution}
+\Cref{thm:change_of_variables} is stated in this chapter without proof. The step that makes the
+proof hard is not the Jacobian factor but a prior, purely geometric one: a diffeomorphism that is
+close to the identity cannot let a cube shrink away. Made precise, that is the following.
+
+\textbf{Claim.} Let $\ell > 0$, let $Q_0 := [-\ell,\ell]^n \subseteq \mathbb{R}^n$, let
+$X \supseteq Q_0$ be open and let $\Phi : X \to \Phi(X) \subseteq \mathbb{R}^n$ be a
+diffeomorphism with $\Phi(0) = 0$ and $D_0\Phi = I_n$. Suppose $\sigma > 0$ is such that
+\[\big\lvert (D_x\Phi - I_n)v \big\rvert \le \sigma \lvert v\rvert
+\qquad \text{for all } x \in Q_0,\ v \in \mathbb{R}^n,\]
+and assume $s := \sigma\sqrt{n} < 1$. Then
+\[(1-s)\,Q_0 \subseteq \Phi(Q_0).\]
+
+Fix $y \in (1-s)Q_0$ and define $F_y : Q_0 \to \mathbb{R}^n$ by
+$F_y(x) := y - \big(\Phi(x) - x\big)$.
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{Why a fixed point is what we want.} By construction $F_y(x) = x$ holds if and only
+    if $y - \Phi(x) + x = x$, that is, if and only if $\Phi(x) = y$. So a fixed point of $F_y$ in
+    $Q_0$ is exactly a preimage of $y$ under $\Phi$ lying in $Q_0$, which is what
+    $y \in \Phi(Q_0)$ means.
+
+  \item \textbf{The displacement $\Phi - \id$ is a contraction.} Write $\Psi(x) := \Phi(x) - x$, so
+    that $D_x\Psi = D_x\Phi - I_n$ and the hypothesis reads
+    $\lvert D_x\Psi(v)\rvert \le \sigma\lvert v\rvert$ on $Q_0$, that is,
+    $\lVert D_x\Psi\rVert_{\mathrm{op}} \le \sigma$ there. Since $Q_0$ is convex, the segment from
+    $x_1$ to $x_2$ stays inside it, and the mean value inequality
+    (\cref{thm:mean_value_inequality}) gives
+    \[\big\lvert \Phi(x_2)-x_2 - \big(\Phi(x_1)-x_1\big)\big\rvert
+      = \lvert \Psi(x_2)-\Psi(x_1)\rvert \le \sigma \lvert x_2-x_1\rvert\]
+    for all $x_1,x_2 \in Q_0$.
+
+  \item \textbf{$F_y$ maps $Q_0$ into itself.} Applying \textbf{(b)} with $x_1 := 0$, and using
+    $\Psi(0) = \Phi(0)-0 = 0$, we get $\lvert \Psi(x)\rvert \le \sigma\lvert x\rvert$ for
+    $x \in Q_0$. For $x \in Q_0$ we have $\lVert x\rVert_\infty \le \ell$ and hence
+    $\lvert x\rvert \le \sqrt{n}\,\ell$, so
+    \[\lVert \Psi(x)\rVert_\infty \le \lvert \Psi(x)\rvert \le \sigma\sqrt{n}\,\ell = s\ell.\]
+    Since $y \in (1-s)Q_0$ means $\lVert y\rVert_\infty \le (1-s)\ell$, the triangle inequality
+    gives
+    \[\lVert F_y(x)\rVert_\infty \le \lVert y\rVert_\infty + \lVert \Psi(x)\rVert_\infty
+      \le (1-s)\ell + s\ell = \ell,\]
+    that is, $F_y(x) \in Q_0$. So $F_y : Q_0 \to Q_0$.
+
+  \item \textbf{Conclusion.} $Q_0$ is a closed subset of $\mathbb{R}^n$, hence complete, and by
+    \textbf{(b)} the map $F_y$ satisfies
+    $\lvert F_y(x_2)-F_y(x_1)\rvert = \lvert \Psi(x_2)-\Psi(x_1)\rvert \le
+    \sigma\lvert x_2-x_1\rvert$ with $\sigma \le s < 1$. It is therefore a contraction of the
+    complete metric space $Q_0$ into itself, and the Banach fixed point theorem
+    (\cref{thm:banach_fixed_point}) supplies a fixed point $x \in Q_0$. By \textbf{(a)},
+    $\Phi(x) = y$, so $y \in \Phi(Q_0)$. As $y \in (1-s)Q_0$ was arbitrary,
+    $(1-s)Q_0 \subseteq \Phi(Q_0)$.
+\end{enumerate}
+
+\begin{remark}[What the lemma is doing in the proof of the change of variables formula]
+The formula is proved by cutting the domain into tiny cubes and comparing $\vol(\Phi(Q))$ with
+$\lvert\det D\Phi\rvert\vol(Q)$ on each. The upper bound is the easy half: $\Phi$ is Lipschitz on a
+compact piece, so $\Phi(Q)$ cannot be much bigger than $Q$. The lower bound is where a naive
+argument stalls, because nothing about a Lipschitz map prevents an image from collapsing. This
+lemma is that lower bound. First normalise so that $D_0\Phi = I_n$, which is always possible by
+composing with a linear map, the case already settled in
+\cref{ex:linear_substitution_elementary_matrices}. The lemma then says the image of a cube still
+contains a cube shrunk only by the factor $1-s$, and $s \to 0$ as the cubes shrink, because
+$D\Phi$ is continuous. Letting the two bounds close is the proof.
+
+Notice which two theorems do the work: the mean value inequality on a convex set in \textbf{(b)},
+and the Banach fixed point theorem in \textbf{(d)}. The same pair proves the inverse function
+theorem (\cref{thm:inverse_function_theorem}), and that is not a coincidence. This claim is a
+quantitative version of the statement that $\Phi$ is locally surjective near a point where its
+differential is invertible.
+\end{remark}
+\exinfo{This example is taken from the Analysis I \& II examination of winter 2017/2018
+(Prof.\ Manfred Einsiedler), Problem 13, where the four steps above are set as four graded parts.
+The framing and the closing remark are added here.}
+\end{example}
+

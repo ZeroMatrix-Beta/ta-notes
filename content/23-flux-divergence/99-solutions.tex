@@ -326,5 +326,43 @@ have to compute a volume there.
 \end{remark}
 \end{exercisesolution}
 
+% Generator: Claude Opus 5 (High)
+% No solution key ships with the Knörrer papers, so this is an independent derivation.
+\begin{exercisesolution}[\cref{ex:knoerrer_divergence_free_compact_support}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item The product rule for the divergence of a scalar multiple of a vector field reads
+    \[\divg(fK) = \langle \nabla f, K\rangle + f \divg K.\]
+    The hypothesis $\divg K = 0$ kills the second term, so $\langle\nabla f,K\rangle = \divg(fK)$
+    everywhere. The field $fK$ is smooth, so \cref{thm:gauss_divergence} applies on the unit ball
+    and gives
+    \[\int_B \langle\nabla f, K\rangle \,d\vol_3 = \int_B \divg(fK)\,d\vol_3
+      = \int_{\partial B} f\,\langle K,\nu\rangle \,d\vol_2 .\]
+    It remains to see that the boundary integral vanishes. $K$ vanishes on
+    $\mathbb{R}^3\setminus B$, and every point of $\partial B$ is a limit of points outside $B$,
+    for instance $x = \lim_{t \downarrow 1} tx$ for $\lvert x\rvert = 1$. Since $K$ is continuous,
+    $K(x) = \lim_{t\downarrow1}K(tx) = 0$ for every $x \in \partial B$. The integrand is therefore
+    identically zero on $\partial B$, and
+    $\int_B \langle\nabla f,K\rangle\,d\vol_3 = 0$.
+
+  \item Apply \textbf{(a)} to the smooth function $f(x) := x_1$, whose gradient is the constant
+    field $\nabla f = e_1$. Then $\langle\nabla f,K\rangle = \langle e_1,K\rangle = K_1$, so
+    \[\int_B K_1 \,d\vol_3 = \int_B \langle\nabla f,K\rangle\,d\vol_3 = 0.\qedhere\]
+\end{enumerate}
+\begin{remark}[The hypotheses are used one each, and the second part is free]
+Part \textbf{(a)} spends $\divg K = 0$ on turning the integrand into a divergence, and spends the
+vanishing of $K$ outside $B$ on killing the boundary term. Neither hypothesis does anything else,
+and dropping either breaks the statement: without $\divg K = 0$ a term $\int_B f \divg K$ survives,
+and without the support condition the flux of $fK$ across the sphere need not vanish.
+
+Part \textbf{(b)} is the reason to prove \textbf{(a)} in the generality of an arbitrary $f$. Taking
+$f(x) = x_1$ is a device: the coordinate function is the cheapest smooth function whose gradient is
+a fixed basis vector, so a statement about all $\langle\nabla f, K\rangle$ specialises to one about
+a single component of $K$. Running the same trick on $x_2$ and $x_3$ gives $\int_B K = 0$ as a
+vector identity, which is the real content: \textbf{a divergence-free field with compact support
+has zero mean.} That is a standard fact about incompressible flows and is worth remembering in
+that form.
+\end{remark}
+\end{exercisesolution}
+
 
 

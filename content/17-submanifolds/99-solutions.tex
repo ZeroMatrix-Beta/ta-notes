@@ -11,8 +11,10 @@ Not every solution in this chapter is collected here. \Cref{ex:dimension_submani
 \begin{ainote}
 Corsin's notes for this material cover only the theory (submanifolds, the regular value and local
 parametrization theorems, tangent and normal spaces), with no page working out any of the
-official-sheet exercises, so all solutions below are original. Each has been checked against
-\texttt{exercises/Sol7\_Analysis2\_eng.pdf}; no divergence from the official solutions was found.
+official-sheet exercises, so all solutions below are original. Those answering a problem from
+Sheet 7 have been checked against \texttt{exercises/Sol7\_Analysis2\_eng.pdf}, and no divergence
+from the official solutions was found. The exam problems mined into this chapter come from papers
+that ship no key at all, so those solutions rest on independent derivation alone.
 \end{ainote}
 
 \begin{exercisesolution}[Solution to \cref{ex:7.6}]
@@ -121,6 +123,100 @@ number a diffeomorphism is allowed to change. It changes none:
 that makes \textbf{(e)} tempting is that $\Phi$ maps a two-dimensional ball onto a two-dimensional
 region, so its image \qt{fills out} the plane. It does, but the segment does not, and it is the
 segment being transported.
+\end{remark}
+\end{exercisesolution}
+
+% Generator: Claude Opus 5 (High)
+% No solution key ships with the Jossen papers, so this is an independent derivation.
+\begin{exercisesolution}[\cref{ex:orthogonal_group_submanifold}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item With $A = \left(\begin{smallmatrix} a & b \\ c & d\end{smallmatrix}\right)$,
+\[AA\transp = \begin{pmatrix} a & b \\ c & d \end{pmatrix}
+              \begin{pmatrix} a & c \\ b & d \end{pmatrix}
+            = \begin{pmatrix} a^2+b^2 & ac+bd \\ ac+bd & c^2+d^2 \end{pmatrix},\]
+    so in the coordinates of the statement
+\[F(a,b,c,d) = \big(a^2+b^2,\ ac+bd,\ ac+bd,\ c^2+d^2\big).\]
+    Every component is a polynomial, hence $F$ is smooth.
+
+  \item $(AA\transp)\transp = (A\transp)\transp A\transp = AA\transp$, so $F(A)$ is symmetric for
+    every $A$. This is already visible in the coordinate formula: the second and third components
+    of $F$ are the same function.
+
+  \item Differentiating the four components with respect to $a,b,c,d$ in turn,
+\[\Jac F(a,b,c,d) = \begin{pmatrix}
+  2a & 2b & 0 & 0 \\
+  c & d & a & b \\
+  c & d & a & b \\
+  0 & 0 & 2c & 2d
+\end{pmatrix}.\]
+
+  \item The second and third rows coincide for every $A$, so $\rank \Jac F(A) \le 3$ always. To see
+    that equality holds on $\Orth_2(\mathbb{R})$, note that $AA\transp = \id$ says exactly that the
+    two rows $u := (a,b)$ and $v := (c,d)$ of $A$ are orthonormal. Suppose
+\[\alpha(2a,2b,0,0) + \beta(c,d,a,b) + \gamma(0,0,2c,2d) = 0.\]
+    Its first two coordinates read $2\alpha u + \beta v = 0$, and $u,v$ are linearly independent,
+    so $\alpha = \beta = 0$. The last two then read $2\gamma v = 0$, so $\gamma = 0$ as well. The
+    three distinct rows are therefore independent and the rank is exactly $3$.
+
+    This is why \cref{thm:regular_value_theorem} cannot be applied to $F$ as a map
+    $\mathbb{R}^4 \to \mathbb{R}^4$: the theorem needs $D_AF$ to be \emph{surjective}, that is of
+    rank $4$, and the rank is $3$ at every point of $\Orth_2(\mathbb{R})$. Nor is this a defect of
+    the particular level: by \textbf{(b)} the image of $F$ lies in a three-dimensional subspace, so
+    $D_AF$ is nowhere surjective, for any $A$ whatsoever.
+
+  \item Identify $\operatorname{Sym}_2(\mathbb{R}) \cong \mathbb{R}^3$ by
+    $\left(\begin{smallmatrix} p & q \\ q & s\end{smallmatrix}\right) \mapsto (p,q,s)$ and let
+\[\widetilde F : \mathbb{R}^4 \to \mathbb{R}^3, \qquad
+  \widetilde F(a,b,c,d) := \big(a^2+b^2,\ ac+bd,\ c^2+d^2\big),\]
+    which is $F$ with the duplicated component dropped. Then
+    $\Orth_2(\mathbb{R}) = \widetilde F^{-1}\{(1,0,1)\}$, and
+\[\Jac \widetilde F(a,b,c,d) = \begin{pmatrix}
+  2a & 2b & 0 & 0 \\
+  c & d & a & b \\
+  0 & 0 & 2c & 2d
+\end{pmatrix}\]
+    has rank $3$ at every point of $\Orth_2(\mathbb{R})$, by the computation in \textbf{(d)}. So
+    $(1,0,1)$ is a regular value of $\widetilde F$, and the regular value theorem makes
+    $\Orth_2(\mathbb{R})$ a smooth submanifold of $\mathbb{R}^4 = \operatorname{Mat}_2(\mathbb{R})$
+    of dimension $4 - 3 = 1$.
+
+  \item By \cref{prop:gradient_orthogonality_level_sets} applied to each of the three defining
+    equations, or directly from the description of the tangent space to a regular level set,
+    $T_{\id}\Orth_2(\mathbb{R}) = \ker \Jac \widetilde F(\id)$. At
+    $(a,b,c,d) = (1,0,0,1)$,
+\[\Jac \widetilde F(1,0,0,1) = \begin{pmatrix}
+  2 & 0 & 0 & 0 \\
+  0 & 1 & 1 & 0 \\
+  0 & 0 & 0 & 2
+\end{pmatrix},\]
+    so a vector $(v_1,v_2,v_3,v_4)$ lies in the kernel precisely when $v_1 = 0$, $v_4 = 0$ and
+    $v_2 + v_3 = 0$. Hence
+\[T_{\id}\Orth_2(\mathbb{R}) = \operatorname{span}\left\{
+  \begin{pmatrix} 0 \\ 1 \\ -1 \\ 0\end{pmatrix}\right\}
+  = \operatorname{span}\left\{\begin{pmatrix} 0 & 1 \\ -1 & 0\end{pmatrix}\right\},\]
+    a line, in agreement with $\dim \Orth_2(\mathbb{R}) = 1$ from \textbf{(e)}. Using the full
+    $4\times4$ Jacobian of \textbf{(c)} gives the same kernel, since the repeated row imposes no
+    new condition.
+\end{enumerate}
+\begin{remark}[The tangent space names the answer]
+The line found in \textbf{(f)} consists of the \emph{antisymmetric} $2\times2$ matrices, and that
+is not a coincidence: differentiating $A(t)A(t)\transp = \id$ along any curve in
+$\Orth_2(\mathbb{R})$ through $\id$ gives $\dot A(0) + \dot A(0)\transp = 0$. The same computation
+in $n$ dimensions gives $\dim\Orth_n(\mathbb{R}) = \binom{n}{2}$, the dimension of the
+antisymmetric matrices, which for $n=2$ is $1$.
+
+That $\Orth_2(\mathbb{R})$ is one-dimensional is worth pausing on, because it is easy to expect
+more. Writing $u = (\cos\theta,\sin\theta)$ for the first row, orthonormality leaves exactly two
+choices of second row, so $\Orth_2(\mathbb{R})$ is a disjoint union of two circles: the rotations
+$\det A = 1$ and the reflections $\det A = -1$. A submanifold need not be connected, and the
+regular value theorem never claims it is.
+
+Set against \cref{ex:submanifold_matrices_rank1}, which lives in the same $\mathbb{R}^4$, the
+contrast is instructive. There a single scalar equation cut out a three-dimensional submanifold and
+the regular value theorem applied as it stands. Here the naive count would suggest
+$4 - 4 = 0$ dimensions, and it is wrong precisely because the four equations $AA\transp = \id$ are
+not independent: one of them is a duplicate. Counting equations is only a shortcut for computing a
+rank, and when the shortcut and the rank disagree it is the rank that is right.
 \end{remark}
 \end{exercisesolution}
 

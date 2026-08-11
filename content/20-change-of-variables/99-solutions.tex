@@ -451,4 +451,71 @@ destroyed; only area survives, and area is all the change of variables formula e
 \end{remark}
 \end{exercisesolution}
 
+% Generator: Claude Opus 5 (High)
+% No solution key ships with the Einsiedler papers, so this is an independent derivation.
+\begin{exercisesolution}[\cref{ex:linear_substitution_elementary_matrices}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Let $A = \operatorname{diag}(\lambda_1,\dots,\lambda_n)$ with all $\lambda_i \neq 0$, so
+    that $\det A = \lambda_1\cdots\lambda_n$. For a box
+    $Q = [a_1,b_1]\times\dots\times[a_n,b_n]$ the image $A(Q)$ is again a box, the $i$-th edge
+    running between $\lambda_ia_i$ and $\lambda_ib_i$, of length
+    $\lvert\lambda_i\rvert(b_i-a_i)$. Hence
+    \[\vol\big(A(Q)\big) = \prod_{i=1}^n \lvert\lambda_i\rvert(b_i-a_i)
+      = \lvert\det A\rvert\,\vol(Q).\]
+    For general Jordan measurable $B$, approximate from inside and outside by dyadic sets
+    $F \subseteq B \subseteq G$ with $\vol(G)-\vol(F) < \varepsilon$
+    (\cref{def:dyadic_set}). Since $A$ is a bijection, $A(F) \subseteq A(B) \subseteq A(G)$, and
+    both $A(F)$ and $A(G)$ are finite disjoint unions of boxes, to which the computation above
+    applies cube by cube. Therefore
+    \[\lvert\det A\rvert\,\vol(F) \le \mu_{\mathrm{in}}\big(A(B)\big)
+      \le \mu_{\mathrm{out}}\big(A(B)\big) \le \lvert\det A\rvert\,\vol(G),\]
+    and the two outer quantities differ by less than $\lvert\det A\rvert\,\varepsilon$. Letting
+    $\varepsilon \to 0$ shows $A(B)$ is Jordan measurable with
+    $\vol(A(B)) = \lvert\det A\rvert\,\vol(B)$.
+
+  \item Two observations combine. First, \eqref{eq:linear_substitution_rule} is multiplicative: if
+    it holds for $A_1$ and for $A_2$, then applying it twice gives
+    \[\vol\big(A_1A_2(B)\big) = \lvert\det A_1\rvert\,\vol\big(A_2(B)\big)
+      = \lvert\det A_1\rvert\,\lvert\det A_2\rvert\,\vol(B)
+      = \lvert\det(A_1A_2)\rvert\,\vol(B),\]
+    using $\det(A_1A_2) = \det A_1 \det A_2$. So the set of matrices satisfying
+    \eqref{eq:linear_substitution_rule} is closed under products. Second, Gaussian elimination
+    writes any invertible $A$ as a product of elementary matrices, and each elementary matrix is a
+    diagonal matrix, a permutation matrix or a shear. Part \textbf{(a)} handles the diagonal
+    factors, so proving the permutation and shear cases finishes the proof for every invertible
+    $A$.
+
+  \item A permutation matrix $P_\pi$ sends a box to the box with its edges relabelled, so it
+    preserves volume, and $\lvert\det P_\pi\rvert = 1$: the case is immediate.
+
+    For the shear, take $A$ to be the identity with one off-diagonal entry $c$, say
+    $A e_j = e_j$ for $j \neq 2$ and $Ae_2 = e_2 + c\,e_1$; every shear is of this form after a
+    permutation. Then $A$ is triangular with unit diagonal, so $\det A = 1$, and the claim is that
+    $A$ preserves volume. Let $Q = [a_1,b_1]\times\dots\times[a_n,b_n]$. Writing points as
+    $(x_1,x_2,x')$ with $x' \in \mathbb{R}^{n-2}$, we have
+    $A(x_1,x_2,x') = (x_1 + cx_2,\; x_2,\; x')$. Compute $\vol(A(Q))$ by Fubini
+    (\cref{thm:fubini}), integrating in $x_1$ first with $x_2$ and $x'$ held fixed. For fixed
+    $x_2 \in [a_2,b_2]$ and $x' $, the slice of $A(Q)$ is the interval
+    $[a_1+cx_2,\ b_1+cx_2]$, a \emph{translate} of $[a_1,b_1]$, of the same length $b_1-a_1$.
+    Since every slice has the length of the corresponding slice of $Q$, integrating over the
+    remaining variables gives $\vol(A(Q)) = \vol(Q) = \lvert\det A\rvert\,\vol(Q)$.
+\end{enumerate}
+\begin{remark}[Where the determinant actually enters]
+Only part \textbf{(a)} ever multiplies anything by a determinant, and there it is nothing but the
+product of the edge-scaling factors, the determinant of a diagonal matrix being visible to the
+naked eye. The shear contributes the factor $1$, and the permutation contributes $1$: neither case
+requires knowing what a determinant is. So the whole content of
+\eqref{eq:linear_substitution_rule} is the trivial diagonal computation, plus the fact that
+$\det$ is multiplicative and elementary matrices generate $\GL_n(\mathbb{R})$. That is a good
+answer to the question of why $\lvert\det A\rvert$, of all functions of $A$, is the volume
+distortion factor: it is the only multiplicative function that scales correctly on diagonal
+matrices and is blind to shears.
+
+Part \textbf{(c)} is worth reading once more for the shape of the argument. A shear preserves
+volume because it slides each line parallel to $e_1$ along itself, and a translated interval has
+the same length. Cavalieri's principle in one sentence, and the reason a leaning stack of coins has
+the volume of a straight one.
+\end{remark}
+\end{exercisesolution}
+
 

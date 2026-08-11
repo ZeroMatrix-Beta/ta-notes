@@ -232,6 +232,53 @@ $f(x),f(x') \in B_{\varepsilon/2}(y)$, hence $d_Y(f(x),f(x')) < \varepsilon$ by 
 inequality. Since $\delta$ did not depend on $x$, $f$ is uniformly continuous.
 \end{proof}
 
+% Source: old_exams/HS18.pdf (Analysis I & II, winter 2018/2019, Prof. Manfred Einsiedler),
+% Aufgabe 9, p. 2
+% Extractor: Claude Opus 5 (High)
+% Kept as a worked example rather than an exercise: it is the second, harder application of the
+% Lebesgue number above, and the two-regime split it turns on is the transferable part.
+\begin{example}[Locally Lipschitz on a compact space means Lipschitz]
+\label{ex:locally_lipschitz_is_lipschitz}
+Call $f : X \to \mathbb{R}$ \newterm{locally Lipschitz} \germanfor{lokal Lipschitz-stetig} if
+every $x_0 \in X$ admits an open neighbourhood $U_{x_0}$ and a constant $L_{x_0} > 0$ with
+\[\lvert f(x)-f(y)\rvert \le L_{x_0}\,d(x,y) \qquad \text{for all } x,y \in U_{x_0}.\]
+The constant is allowed to depend on the point, and on a general space it must: on $(0,1]$ the
+function $f(x) := 1/x$ is locally Lipschitz and not Lipschitz, the local constants blowing up as
+$x_0 \to 0$. If $X$ is compact, that cannot happen.
+
+\textbf{Claim.} If $(X,d)$ is compact and $f : X \to \mathbb{R}$ is locally Lipschitz, then $f$ is
+Lipschitz (\cref{def:lipschitz_continuous}).
+
+The neighbourhoods $\{U_{x_0}\}_{x_0 \in X}$ cover $X$, so compactness extracts a finite subcover
+$U_{x_1},\dots,U_{x_N}$. Put $L := \max_{1\le i\le N} L_{x_i}$, which is finite because the maximum
+is now over finitely many indices, and let $\delta > 0$ be a Lebesgue number for that finite
+subcover (\cref{def:lebesgue_number}). Fix $x,y \in X$ and split on how far apart they are.
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{Nearby points, $d(x,y) < \delta$.} The ball $B_\delta(x)$ lies inside some
+    $U_{x_i}$, and both $x$ and $y$ belong to it. The local estimate on $U_{x_i}$ therefore
+    applies to this pair, giving $\lvert f(x)-f(y)\rvert \le L_{x_i}d(x,y) \le L\,d(x,y)$.
+  \item \textbf{Distant points, $d(x,y) \ge \delta$.} Here no local estimate is available, and
+    none is needed. A locally Lipschitz function is continuous, so $f$ is bounded on the compact
+    $X$, say $\lvert f\rvert \le M$. Then
+    \[\lvert f(x)-f(y)\rvert \le 2M = \frac{2M}{\delta}\,\delta \le \frac{2M}{\delta}\,d(x,y).\]
+\end{enumerate}
+
+Consequently $f$ is Lipschitz with constant $\max\{L,\,2M/\delta\}$.
+
+\begin{remark}[Why two regimes, and why neither alone suffices]
+The finite subcover alone does \emph{not} finish the argument, and this is the step most solutions
+skip. It bounds the local constants, but a pair $x,y$ lying in \emph{no} common $U_{x_i}$ is
+never reached by any of them. The Lebesgue number is exactly what repairs that: it converts
+\qt{some member of the cover} into \qt{a uniform radius around every point}, so that every
+sufficiently close pair is covered by one estimate. The far regime is then free, because over a
+fixed distance a bounded function cannot vary fast.
+\end{remark}
+\exinfo{This example is taken from the Analysis I \& II examination of winter 2018/2019
+(Prof.\ Manfred Einsiedler), Problem 9, where it is set as a proof exercise. The counterexample on
+$(0,1]$ and the two-regime commentary are added here.}
+\end{example}
+
 % Supplement: Sascha Brack/Class Notes/Week_02_Notes_Friday_Updated.pdf, p. 6
 \begin{proposition}[A closed subset of a compact set is compact]
 \label{prop:closed_subset_of_compact}

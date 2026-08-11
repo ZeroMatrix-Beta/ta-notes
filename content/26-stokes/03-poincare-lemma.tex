@@ -80,3 +80,29 @@ loop would have to return $f(\gamma(1))-f(\gamma(0))=0$). This is exactly the wi
 \cref{cor:potentials_simply_connected} needs the hypothesis it has: the integrability
 conditions are necessary but, on a domain that is not simply connected, not sufficient.
 \end{example}
+
+% Source: old_exams/HS20.pdf (Analysis I & II, 27 January 2021, Prof. Peter S. Jossen),
+% Teil B, Aufgabe 3, p. 20
+% Extractor: Claude Opus 5 (High)
+% Filed directly after ex:vortex_field_not_conservative because it is that example's mirror image,
+% and the pair is the point: "not simply connected" is a reason the corollary DOES NOT APPLY, not a
+% proof that the field fails to be conservative. Part (e) of the original, asking for the
+% definition of a work integral, is omitted -- def:line_integral gives it.
+\begin{exercise}[Integrability conditions on a domain that is not connected]
+\label{ex:jossen_potential_on_disconnected_domain}
+Let $g : \mathbb{R} \to \mathbb{R}$ be twice continuously differentiable and let $F$ be the vector
+field defined on $U := \{(x,y,z) \in \mathbb{R}^3 : y \neq 0\}$ by
+\[F(x,y,z) := \left((1+x)\,e^{x+\frac1y},\ \ -\frac{x}{y^2}\,e^{x+\frac1y},\ \ g'(z)\right).\]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Is $U$ open? Is it connected? Is it simply connected?
+  \item Does $F$ satisfy the integrability conditions?
+  \item Is $F$ conservative? Justify your answer.
+  \item Does $F$ admit a potential? If so, give one; if not, explain why not.
+  \item Compute the work integral $\int_\gamma F \cdot d\gamma$ along the path
+    $\gamma : [0,1] \to U$, $\gamma(t) := \big(t\cos(2\pi t),\ 2 + t\sin(2\pi t),\ t^2-t+1\big)$.
+    Check first that $\gamma$ really does take values in $U$.
+\end{enumerate}
+\exinfo{This exercise is taken from the Analysis I \& II examination of 27 January 2021
+(Prof.\ Peter S.\ Jossen), Part B, Problem 3, one part of which asks for the definition of a work
+integral and is omitted here.}
+\end{exercise}

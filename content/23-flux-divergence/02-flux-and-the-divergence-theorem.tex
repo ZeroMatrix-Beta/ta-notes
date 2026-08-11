@@ -478,3 +478,73 @@ does not depend on $n$: that is, $I_n = I_m$ for all $n,m \in \mathbb{Z}_{\ge 0}
 asking for a statement of the divergence theorem on $B_1(0)$.}
 \end{exercise}
 
+% Source: old_exams/HS16.pdf (Klausur zur Analysis I/II, winter 2016, Prof. H. Knörrer),
+% Aufgabe 3, p. 3
+% Extractor: Claude Opus 5 (High)
+\begin{exercise}[A divergence-free field that dies at the boundary]
+\label{ex:knoerrer_divergence_free_compact_support}
+Let $B := \{x \in \mathbb{R}^3 : \lvert x\rvert \le 1\}$ be the closed unit ball and let
+$K = (K_1,K_2,K_3)$ be a smooth vector field on $\mathbb{R}^3$ which vanishes outside $B$ and
+satisfies $\divg K = 0$ on all of $\mathbb{R}^3$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Let $f$ be a smooth real-valued function on $\mathbb{R}^3$. Show that
+    \[\int_B \langle \nabla f, K\rangle \, d\vol_3 = 0.\]
+  \item Deduce that $\displaystyle\int_B K_1 \, d\vol_3 = 0$.
+\end{enumerate}
+\exinfo{This exercise is taken from the Analysis I \& II examination of winter 2016
+(Prof.\ H.\ Kn\"orrer), Problem 3.}
+\end{exercise}
+
+% Source: old_exams/FS18.pdf (Analysis I & II, summer 2018, Prof. Manfred Einsiedler),
+% Aufgabe 9, p. 2
+% Extractor: Claude Opus 5 (High)
+% Kept as a worked example: the statement gives away nothing, but the one-line idea that unlocks it
+% (subtract a constant field, which is invisible to the flux) is a technique rather than a drill,
+% and it is worth showing rather than burying in 99-solutions.tex.
+% Notation normalised: the exam writes ||.||_2, which is single bars here (style.md, "Norms").
+\begin{example}[The flux through a closed surface sees only the oscillation]
+\label{ex:flux_bounded_by_oscillation}
+Let $U \subseteq \mathbb{R}^3$ be an open neighbourhood of the closed unit ball
+$\overline{B_1(0)}$ and let $f : U \to \mathbb{R}^3$ be a continuously differentiable vector field.
+
+\textbf{Claim.} There is a constant $C > 0$, independent of $f$, with
+\[\left\lvert \int_{\partial B_1(0)} \langle f,\nu\rangle \,d\vol_2 \right\rvert
+  \;\le\; C \sup_{x,y \in \overline{B_1(0)}} \lvert f(x)-f(y)\rvert .\]
+
+The right-hand side does not change when a constant vector is added to $f$, so any proof must
+produce a left-hand side with the same property. That observation is the entire argument, because
+a constant field is invisible to the flux: if $c \in \mathbb{R}^3$ is constant then
+$\divg c = 0$, and \cref{thm:gauss_divergence} gives
+\[\int_{\partial B_1(0)} \langle c,\nu\rangle\,d\vol_2 = \int_{B_1(0)} \divg c \, d\vol_3 = 0.\]
+
+So fix any $y_0 \in \overline{B_1(0)}$, put $c := f(y_0)$, and subtract:
+\[\int_{\partial B_1(0)} \langle f,\nu\rangle \,d\vol_2
+ = \int_{\partial B_1(0)} \langle f - c,\ \nu\rangle \,d\vol_2 .\]
+Now estimate crudely. Since $\lvert\nu\rvert = 1$, the Cauchy--Schwarz inequality bounds the
+integrand by $\lvert f(x) - f(y_0)\rvert$, and every such value is at most the supremum in the
+claim. Therefore
+\[\left\lvert \int_{\partial B_1(0)} \langle f,\nu\rangle \,d\vol_2 \right\rvert
+ \le \int_{\partial B_1(0)} \lvert f(x)-f(y_0)\rvert \,d\vol_2(x)
+ \le \vol_2\big(\partial B_1(0)\big) \cdot \sup_{x,y\in\overline{B_1(0)}}\lvert f(x)-f(y)\rvert .\]
+The surface area of the unit sphere is $4\pi$, so $C := 4\pi$ works, and it depends on nothing but
+the domain.
+
+\begin{remark}[Why the estimate has to look like this]
+A bound by $\sup\lvert f\rvert$ would be easy and useless: it is false that the flux is small when
+$f$ is small in a relative sense, and true but uninformative that it is bounded by $4\pi\sup\lvert
+f\rvert$. The point of the stated inequality is the invariance. Adding a constant wind to a fluid
+changes $\sup\lvert f\rvert$ arbitrarily while changing the net flux through a closed surface not
+at all, so the correct majorant is a quantity blind to constants: the oscillation.
+
+Once that is seen, the proof writes itself, and this is the general shape: to prove an estimate
+invariant under some family of perturbations, first normalise using the invariance, then be as
+crude as you like. Note also how little was used. The field is $C^1$ only so that the divergence
+theorem applies to the constant field's counterpart; no derivative of $f$ appears in the final
+bound, and the constant $4\pi$ is just the area of the sphere. The same statement holds for any
+bounded $C^1$ domain, with $C$ the area of its boundary.
+\end{remark}
+\exinfo{This example is taken from the Analysis I \& II examination of summer 2018
+(Prof.\ Manfred Einsiedler), Problem 9, where it is set as a proof exercise. The closing remark is
+added here.}
+\end{example}
+

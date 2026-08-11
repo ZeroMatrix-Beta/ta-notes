@@ -231,3 +231,48 @@ Let $A \subseteq \mathbb{R}^n$ be non-empty and let $f : A \to \mathbb{R}_{\ge 0
 \exinfo{This exercise is taken from the exam of 9 August 2021, Part B, Problem 3.}
 \end{exercise}
 
+% Source: old_exams/FS20.pdf (Analysis I & II, 12 August 2020, Prof. Peter S. Jossen),
+% Teil B, Aufgabe 2, parts (c)--(e), p. 19
+% Extractor: Claude Opus 5 (High)
+% The paper's parts (a) and (b) are omitted: (a) asks for the definition of an open cover, and (b)
+% for a direct proof that (0,1] is not compact, which the (unlabelled) aiexample "Open Cover of
+% (0,1) with No Finite Subcover" in 04-heine-borel.tex already does for (0,1).
+\begin{exercise}[What boundedness of every continuous function buys]
+\label{ex:pseudocompactness_implications}
+Let $(X,d)$ be a non-empty metric space and consider the following four statements about it.
+\begin{itemize}
+  \item \textbf{(i)} Every continuous function $X \to \mathbb{R}$ is bounded.
+  \item \textbf{(ii)} Every continuous function $X \to \mathbb{R}$ attains a maximum and a minimum.
+  \item \textbf{(iii)} $X$ is compact.
+  \item \textbf{(iv)} Every sequence in $X$ has an accumulation point.
+\end{itemize}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Prove the equivalence \textbf{(i)} $\iff$ \textbf{(ii)}.
+  \item Prove the implication \textbf{(iii)} $\implies$ \textbf{(i)}, working directly from the
+    open-cover definition of compactness.
+  \item Prove the implication \textbf{(iv)} $\implies$ \textbf{(i)}.
+\end{enumerate}
+\exinfo{This exercise is taken from the Analysis I \& II examination of 12 August 2020
+(Prof.\ Peter S.\ Jossen), Part B, Problem 2. Its first two parts, on the definition of an open
+cover and on the non-compactness of $(0,1]$, are omitted here.}
+\end{exercise}
+
+% Source: old_exams/FS19.pdf (Analysis I & II, 15 August 2019, Prof. Peter S. Jossen),
+% Teil B, Aufgabe 2, parts (d)--(f), p. 24
+% Extractor: Claude Opus 5 (High)
+% Parts (a)--(c) of the original ask for the definitions of open, closed and compact plus one
+% example of each, which chapters 3 and 7 already carry.
+\begin{exercise}[Sums of sets, and which property survives]
+\label{ex:sumset_open_closed_compact}
+For subsets $A, B \subseteq \mathbb{R}^2$ write $A + B := \{a+b \mid a \in A,\ b \in B\}$. Prove
+the following, using in each case whichever characterisation of compactness is most convenient.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item If $A$ is open or $B$ is open, then $A+B$ is open.
+  \item If $A$ is closed and $B$ is compact, then $A+B$ is closed.
+  \item If $A$ and $B$ are compact, then $A+B$ is compact.
+\end{enumerate}
+\exinfo{This exercise is taken from the Analysis I \& II examination of 15 August 2019
+(Prof.\ Peter S.\ Jossen), Part B, Problem 2, whose first three parts ask for the definitions of
+open, closed and compact.}
+\end{exercise}
+

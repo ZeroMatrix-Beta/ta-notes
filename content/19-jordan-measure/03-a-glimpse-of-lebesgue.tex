@@ -1,0 +1,270 @@
+% Originally: written for this chapter; no predecessor week file.
+% Generator: Claude Opus 5 (High)
+% Added 2026-08-11 on the user's explicit instruction, after they asked whether Jordan measure and
+% Lebesgue measure are the same thing and then asked for a short digression section on Lebesgue
+% theory. This is a deliberate, user-authorised exception to the "enrich existing sections only"
+% scope rule in gemini.md, which is recorded there. Nothing here is proved, nothing here is used
+% by any later chapter, and the section says both of those things to the reader.
+
+\section{A digression: a glimpse of the Lebesgue integral}
+\label{sec:lebesgue_digression}
+
+This course builds one theory of integration: the Riemann integral over Jordan measurable sets. It
+is enough for everything in the chapters that follow, and no result later in this document depends
+on a single line of this section. Read it as an answer to a question the previous section provokes
+and cannot settle.
+
+The question is what \qt{Lebesgue-null} means, given that this course never defines a Lebesgue
+integral, and yet the term appears on the problem sheets (\cref{ex:8.2}\textbf{(b)}) and in the
+comparison remarks above. It comes from a second theory of integration, and the sanest way to place
+it is to see what that theory fixes. \textbf{Nothing below is proved.} The statements are given so
+that the vocabulary has somewhere to attach, and so that a reader meeting measure theory later
+recognises what it was built for.
+
+\subsection{Two things the Riemann theory cannot do}
+
+\begin{example}[The measurable sets are too few]
+\label{ex:lebesgue_defect_sets}
+\Cref{prop:algebra_jordan_measurable} says the Jordan measurable sets are closed under finite
+unions, intersections and differences. They are \emph{not} closed under countable unions. Each
+singleton $\{q\} \subseteq \mathbb{R}$ is Jordan measurable with measure $0$, and yet
+\[\mathbb{Q}\cap[0,1] = \bigcup_{k\ge1}\{q_k\}\]
+is not Jordan measurable at all: any finite cover of it by cubes also covers its closure $[0,1]$,
+so $\mu_{\mathrm{out}} = 1$ while $\mu_{\mathrm{in}} = 0$. \Cref{ex:non_jordan_measurable_open_set}
+is worse still, since the set there is \emph{open} and the volume of an open set ought not to be a
+question a theory declines to answer.
+\end{example}
+
+\begin{example}[Limits escape the class of integrable functions]
+\label{ex:lebesgue_defect_limits}
+Enumerate $\mathbb{Q}\cap[0,1] = \{q_1,q_2,\dots\}$ and let $f_k$ be the indicator function of
+$\{q_1,\dots,q_k\}$. Each $f_k$ is Riemann integrable, having only finitely many discontinuities,
+and $\int_0^1 f_k = 0$. The sequence increases pointwise to the Dirichlet function
+\[f(x) = \begin{cases} 1, & x \in \mathbb{Q}, \\ 0, & x \notin \mathbb{Q},\end{cases}\]
+which is not Riemann integrable, its upper and lower sums being $1$ and $0$ for every partition.
+
+A bounded increasing sequence of integrable functions therefore need not have an integrable limit.
+The only exchange theorem available in this course needs \emph{uniform} convergence, and uniform
+convergence is a strong hypothesis that the sequences arising in practice routinely fail.
+\end{example}
+
+Both defects have the same shape. The Riemann--Jordan theory is built on finite covers by cubes of
+one size, and it is stable under finite operations and unstable under countable ones. Lebesgue's
+construction changes exactly that.
+
+\subsection{Lebesgue measure}
+
+\begin{definition}[Lebesgue outer measure]
+\label{def:lebesgue_outer_measure}
+For $E \subseteq \mathbb{R}^n$ the \newterm{Lebesgue outer measure}
+\germanfor{äusseres Lebesgue-Mass} is
+\[\lambda^*(E) := \inf\left\{ \sum_{i=1}^\infty \vol(Q_i) \;\middle|\;
+E \subseteq \bigcup_{i=1}^\infty Q_i,\ Q_i \text{ cubes} \right\},\]
+the infimum running over all \emph{countable} covers of $E$ by cubes of arbitrary sizes.
+\end{definition}
+
+This is the notion already in use above: $E$ is Lebesgue null exactly when $\lambda^*(E) = 0$, which
+is \cref{rem:lebesgue_vs_jordan_null} restated. The defect of $\lambda^*$ is that it is only
+subadditive, not additive, so one restricts it to a good class of sets.
+
+\begin{definition}[Lebesgue measurable set]
+\label{def:lebesgue_measurable}
+A set $E \subseteq \mathbb{R}^n$ is \newterm{Lebesgue measurable}
+\germanfor{Lebesgue-messbar} if it splits every test set additively:
+\[\lambda^*(A) = \lambda^*(A\cap E) + \lambda^*(A\setminus E) \qquad
+\text{for every } A \subseteq \mathbb{R}^n.\]
+On this class one writes $\lambda := \lambda^*$ and calls it \newterm{Lebesgue measure}
+\germanfor{Lebesgue-Mass}.
+\end{definition}
+
+\begin{theorem}[What the construction delivers, without proof]
+\label{thm:lebesgue_measure_properties}
+The Lebesgue measurable subsets of $\mathbb{R}^n$ form a \newterm{$\sigma$-algebra}
+\germanfor{$\sigma$-Algebra}: a family containing $\emptyset$ and closed under complements and
+under \emph{countable} unions. It contains every open set, every closed set and every Lebesgue null
+set. On it, $\lambda$ is countably additive: for pairwise disjoint measurable $E_1,E_2,\dots$,
+\[\lambda\left(\bigcup_{k\ge1}E_k\right) = \sum_{k\ge1}\lambda(E_k).\]
+Moreover every Jordan measurable set $E$ is Lebesgue measurable with $\lambda(E) = \mu(E)$, and the
+inclusion is strict.
+\end{theorem}
+
+\begin{remark}[The answer to the question, in one line]
+\label{rem:jordan_is_not_lebesgue}
+Jordan measure and Lebesgue measure are \emph{not} the same, and the difference is not a matter of
+convention. Lebesgue measure is a strict extension: it agrees with Jordan measure wherever the
+latter is defined, so no volume computed anywhere in this document is put at risk, and it is
+defined on many more sets. The single structural upgrade is from an algebra to a
+$\sigma$-algebra, that is, from finite to countable stability, and both defects of
+\cref{ex:lebesgue_defect_sets,ex:lebesgue_defect_limits} dissolve in it.
+\end{remark}
+
+\subsection{The integral: partition the range, not the domain}
+
+The Riemann integral chops the \emph{domain} into small pieces and hopes the function is nearly
+constant on each. Lebesgue chops the \emph{range} instead, and asks how large the set is on which
+the function takes each value. The standard image: to count a heap of coins, a Riemann integrator
+picks them up in the order they lie and adds as they come, while a Lebesgue integrator first sorts
+them into denominations and multiplies. The second survives a much messier heap.
+
+Concretely, a \newterm{simple function} is a finite combination $s = \sum_{i=1}^N c_i \chi_{E_i}$
+with $c_i \ge 0$ and $E_i$ measurable, where $\chi_E$ is the indicator function of $E$; its
+integral is declared to be $\int s \,d\lambda := \sum_i c_i \lambda(E_i)$. For measurable
+$f \ge 0$ one then sets
+\[\int f \,d\lambda := \sup\left\{ \int s\,d\lambda \;\middle|\; s \text{ simple},\ 0 \le s \le f
+\right\},\]
+and for general $f$ one splits $f = f^+ - f^-$ into positive and negative parts, calling $f$
+\newterm{Lebesgue integrable} if $\int\lvert f\rvert\,d\lambda < \infty$.
+
+The Dirichlet function of \cref{ex:lebesgue_defect_limits} is now trivial: it is the indicator
+function of $\mathbb{Q}\cap[0,1]$, a null set, so its integral is $0$. Its Riemann sums never
+settle because they are forced to look at intervals; its Lebesgue integral is immediate because the
+set carrying the value $1$ is negligible.
+
+\subsection{What the extra work buys}
+
+\begin{theorem}[The convergence theorems, without proof]
+\label{thm:lebesgue_convergence_theorems}
+Let $f_k$ be measurable functions on a measurable $E \subseteq \mathbb{R}^n$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{Monotone convergence.} If $0 \le f_1 \le f_2 \le \dots$ pointwise and
+    $f_k \to f$ pointwise, then $\int_E f_k\,d\lambda \to \int_E f\,d\lambda$.
+  \item \textbf{Fatou's lemma.} If $f_k \ge 0$, then
+    $\int_E \liminf_k f_k \,d\lambda \le \liminf_k \int_E f_k\,d\lambda$.
+  \item \textbf{Dominated convergence.} If $f_k \to f$ pointwise and there is a single integrable
+    $g$ with $\lvert f_k\rvert \le g$ for all $k$, then $f$ is integrable and
+    $\int_E f_k\,d\lambda \to \int_E f\,d\lambda$.
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}[Why these are the point of the whole construction]
+\label{rem:why_dominated_convergence_matters}
+Compare the hypotheses. Ours is uniform convergence, a statement about $\sup_x\lvert f_k(x)-f(x)
+\rvert$, which fails as soon as the functions develop a moving spike. Dominated convergence asks
+only for pointwise convergence plus one integrable envelope, and the envelope is usually the easy
+part. Monotone convergence asks for nothing but monotonicity.
+
+This is where the cost of staying inside the Riemann theory is actually paid in this document.
+Uniform convergence is assumed by hand in \cref{sec:ascoli_arzela}, in the treatment of improper
+integrals in \cref{sec:improper_integrals}, and again when differentiating under the integral sign
+in \cref{sec:feynmans_trick}, where a domination hypothesis is what the argument morally wants.
+Each of those becomes shorter and more general in the Lebesgue setting.
+\end{remark}
+
+\subsection{How the two integrals compare}
+
+\begin{theorem}[Lebesgue's criterion, and the comparison, without proof]
+\label{thm:lebesgue_criterion_riemann}
+Let $Q \subseteq \mathbb{R}^n$ be a closed box and $f : Q \to \mathbb{R}$ bounded.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $f$ is Riemann integrable if and only if its set of discontinuities is Lebesgue null.
+  \item If $f$ is Riemann integrable, then it is Lebesgue integrable and the two integrals agree.
+\end{enumerate}
+\end{theorem}
+
+Part \textbf{(a)} is the reason a course with no Lebesgue integral still has to say
+\qt{Lebesgue null}. It is the sharp characterisation of Riemann integrability, and no notion built
+from finite covers replaces it: the Dirichlet function is discontinuous everywhere, a set of
+measure $1$, and it fails; a function with countably many jumps is discontinuous on a null set, and
+it succeeds.
+
+\begin{ainote}
+It is tempting to conclude that the Lebesgue integral simply subsumes the Riemann integral. For
+\emph{proper} integrals on a box, \cref{thm:lebesgue_criterion_riemann}\textbf{(b)} says exactly
+that. For \emph{improper} ones it is false in both directions, and the standard witness is
+\[\int_0^\infty \frac{\sin x}{x}\,dx = \frac{\pi}{2},\]
+which exists as an improper Riemann integral (\cref{def:improper_integral}) but not as a Lebesgue
+integral, because $\int_0^\infty \lvert \sin x\rvert/x \,dx = \infty$ and the Lebesgue theory
+integrates only absolutely. The improper Riemann integral is a limit of integrals and can exploit
+cancellation between the humps; the Lebesgue integral is defined through $\lvert f\rvert$ and
+cannot. So neither theory contains the other outright, and \qt{Lebesgue is strictly stronger} is a
+half-truth worth not repeating.
+\end{ainote}
+
+\begin{remark}[What to take away]
+\label{rem:lebesgue_digression_summary}
+Three sentences are enough to carry. Jordan measure is Lebesgue measure restricted to a smaller,
+finitely-stable class of sets, and where both are defined they agree. The Lebesgue theory exists
+because that class is too small to be closed under limits, and its payoff is the convergence
+theorems rather than any new volume. And the one place its vocabulary genuinely reaches into this
+course is Lebesgue's criterion, which is why \qt{Lebesgue null} had to be defined here at all.
+\end{remark}
+
+% Generator: Claude Opus 5 (High)
+% First use of the `aside' environment, added to main.tex in the same pass. This is the intended
+% shape: a genuinely startling fact that no later argument touches.
+\begin{aside}[Some sets have no volume at all, and a ball can be doubled]
+\label{aside:vitali_banach_tarski}
+\Cref{thm:lebesgue_measure_properties} carefully says which sets $\lambda$ is defined on, and never
+claims that is all of them. It cannot: there exist subsets of $\mathbb{R}$ that are not Lebesgue
+measurable. Vitali's construction takes the quotient $\mathbb{R}/\mathbb{Q}$ and picks one
+representative from each class inside $[0,1]$. The resulting set $V$ has countably many disjoint
+rational translates that together fill up an interval, so countable additivity would force
+$\lambda(V)$ to be simultaneously $0$ and positive. No value works, and $V$ is unmeasurable.
+
+The construction needs the axiom of choice, and this is not a technicality. It is consistent with
+the other axioms of set theory that \emph{every} subset of $\mathbb{R}$ is Lebesgue measurable, so
+the pathology is imported by the choice principle rather than discovered in the reals.
+
+Pushed into $\mathbb{R}^3$, the same idea gives the Banach--Tarski paradox: a solid ball can be cut
+into five pieces which, moved only by rotations and translations, reassemble into two solid balls
+of the original size. Nothing is stretched, and no volume is created, because the five pieces are
+unmeasurable and simply do not have volumes to add up. The paradox is a statement about the axiom
+of choice, not about geometry.
+\end{aside}
+
+\subsection{Exercises}
+
+% Generator: Claude Opus 5 (High)
+\begin{aiexercise}[Null sets from countability]
+\label{ex:ai_lebesgue_null_countable}
+Work directly from \cref{def:lebesgue_outer_measure}.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Show that a single point of $\mathbb{R}^n$ is Lebesgue null.
+  \item Show that every countable subset of $\mathbb{R}^n$ is Lebesgue null, and deduce that
+    $\mathbb{Q}^n$ is.
+  \item Show that a Lebesgue null set has empty interior. (Compare
+    \cref{ex:lebesgue_null_sets_properties}\textbf{(a)}, which is the same statement contraposed.)
+\end{enumerate}
+\end{aiexercise}
+
+% Generator: Claude Opus 5 (High)
+\begin{aiexercise}[An integral the Riemann theory cannot see]
+\label{ex:ai_lebesgue_three_valued}
+Define $f : [0,1] \to \mathbb{R}$ by
+\[f(x) := \begin{cases}
+1, & x \in \mathbb{Q}, \\
+2, & x \notin \mathbb{Q} \text{ and } x < \tfrac12, \\
+3, & x \notin \mathbb{Q} \text{ and } x \ge \tfrac12.
+\end{cases}\]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Compute $\int_{[0,1]} f \,d\lambda$.
+  \item Determine the set of points at which $f$ is continuous, and conclude from
+    \cref{thm:lebesgue_criterion_riemann} that $f$ is not Riemann integrable.
+\end{enumerate}
+\end{aiexercise}
+
+% Generator: Claude Opus 5 (High)
+\begin{aiexercise}[Dominated convergence where uniform convergence fails]
+\label{ex:ai_dominated_beats_uniform}
+For $k \ge 1$ let $f_k : [0,1] \to \mathbb{R}$, $f_k(x) := x^k$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Determine the pointwise limit $f$ of $(f_k)$ and show that the convergence is not uniform.
+  \item Exhibit an integrable dominating function and apply
+    \cref{thm:lebesgue_convergence_theorems}\textbf{(c)} to compute
+    $\lim_{k\to\infty}\int_{[0,1]} f_k\,d\lambda$.
+  \item Confirm the answer by evaluating $\int_0^1 x^k\,dx$ directly.
+\end{enumerate}
+\end{aiexercise}
+
+% Generator: Claude Opus 5 (High)
+\begin{aiexercise}[Improper Riemann but not Lebesgue]
+\label{ex:ai_improper_not_lebesgue}
+Define $f : [1,\infty) \to \mathbb{R}$ by $f(x) := (-1)^{k+1}/k$ for $x \in [k,k+1)$,
+$k \in \mathbb{N}_{\ge1}$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Show that the improper integral $\int_1^\infty f(x)\,dx$ converges, and identify its value.
+  \item Show that $\int_1^\infty \lvert f(x)\rvert\,dx = \infty$, so that $f$ is not Lebesgue
+    integrable.
+  \item Why does this not contradict \cref{thm:lebesgue_criterion_riemann}\textbf{(b)}?
+\end{enumerate}
+\end{aiexercise}

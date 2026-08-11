@@ -17,7 +17,13 @@ stale, so that project churn stops rotting the style rules:
 | **`gemini.md`** (this file) | Role, the two layers, fidelity, tool usage, the sources | rarely |
 | **`style.md`** | Prose, notation, environments, lists, figures, exercises, provenance conventions | when a style decision changes |
 | **`build-and-preamble.md`** | Build traps, `main.tex` facts and line numbers, numbering, document layout, the environment set | when `main.tex` changes |
+| **`old-exam-mining.md`** | The record of which `old_exams/` papers have been mined, what was taken, and what is **rejected forever** | when a mining pass runs |
 | **`project-state.md`** | ⚠️ **Deprecated 2026-08-10 on the user's instruction.** A stub. Do not write to it. | never |
+
+⚠️ **`old-exam-mining.md` is an inventory, not a status file.** It exists because the alternative is
+re-reading forty exam PDFs to rediscover that a problem was already considered and dropped, which
+is a cost no `git log` entry can save you. It records *decisions about sources*, never how far the
+project has got. Do not let it drift into the second thing.
 
 Read this file plus the one covering what you are about to do. **Put each new rule in the file
 matching its lifetime** — a `main.tex` line number never belongs in `style.md`. Mixing them is what
@@ -214,9 +220,19 @@ section for do **not** get new sections:
 | §15.4 Differentiability w.r.t. initial conditions | We already have the theorem in `appendix-a-odes.tex`. |
 | §14.4 A glimpse into differential forms | We are *ahead* of the script here. |
 
-These four stay skipped. The rule has been reversed twice, both times on the user's instruction —
-the completion of a metric space, and the fundamental theorem of algebra via minimisation — so a
-reversal is the user's call, not yours.
+These four stay skipped. The rule has been reversed **three** times, every time on the user's
+instruction — the completion of a metric space, the fundamental theorem of algebra via
+minimisation, and the Lebesgue digression below — so a reversal is the user's call, not yours.
+
+> **The Lebesgue digression (2026-08-11, user).** `content/19-jordan-measure/03-a-glimpse-of-lebesgue.tex`
+> is a section the script does not have and the course does not teach, added after the user asked
+> whether Jordan measure and Lebesgue measure are the same thing and then asked for a short
+> digression on Lebesgue theory. **Do not delete it as out of scope, and do not grow it either.**
+> It exists because "Lebesgue-null" appears on Problem Sheet 8 (`ex:8.2` part (b)) and in two
+> comparison remarks, with nothing anywhere to attach the word to. Every statement in it is given
+> **without proof and says so**, nothing later in the document depends on a line of it, and its
+> exercises are deliberately easy `aiexercise`s. That combination is what keeps it a digression
+> rather than a second theory of integration competing with the one the course actually builds.
 
 **Where we are ahead of the script — do not "fix" these by cutting them.** Differential forms
 (chs. 24–25: the script has four unproved paragraphs, we have a full treatment); geodesics (ch. 18,

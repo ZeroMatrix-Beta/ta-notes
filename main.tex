@@ -80,6 +80,11 @@
 \colorlet{EnvTheorem}{ThemePurple}
 \definecolor{GoldOrange}{HTML}{C26B00}
 \colorlet{EnvAINote}{GoldOrange}
+% `aside' (added 2026-08-11): a teal distinct from ThemeGreen (remark) and GoldOrange (AI-Note),
+% so that a digression is recognisable at a glance as neither mathematics-in-the-argument nor
+% editorial commentary. See the environment's own comment further down.
+\definecolor{TealAside}{HTML}{0F7B7B}
+\colorlet{EnvAside}{TealAside}
 
 % --- Proofs ---
 \definecolor{ThemeGreen}{HTML}{008837}
@@ -473,6 +478,7 @@
   \@namedef{theHconclusion}{\theHtheorem}%
   \@namedef{theHaiexample}{\theHtheorem}%
   \@namedef{theHaiexercise}{\theHtheorem}%
+  \@namedef{theHaside}{\theHtheorem}%
 }
 \makeatother
 
@@ -560,6 +566,42 @@
 \newtheorem{conclusion}[conclusion]{Conclusion}
 \aliascntresetthe{conclusion}
 
+% `aside' --- added 2026-08-11 on the user's instruction.
+%
+% WHAT IT IS FOR. A fact that is genuinely interesting and genuinely not needed: a piece of
+% history, a startling special case, a connection to a subject this course does not reach, a
+% "while we are here" observation. The test is the one the reader applies anyway: could this be
+% deleted without touching a single later argument? If yes, and it is still worth reading, it is
+% an aside.
+%
+% WHY IT IS NOT ONE OF THE EXISTING BOXES. `remark' is for mathematics that bears on the result
+% next to it, and burying a digression there dilutes a label the reader relies on. `ainote' is
+% editorial -- flagged errors, notation divergences, why a proof is missing -- and an aside is
+% none of those. The `didactic-insight' box rejected in style.md was rejected because its content
+% was really three kinds of ordinary remark plus history; an aside is exactly the leftover
+% category that argument identified as homeless.
+%
+% NOT `aiaside'. The ai* prefix marks provenance -- invented here rather than transcribed -- and
+% for asides that distinction carries no information, since essentially every aside will be
+% written for this document. Mark authorship with the usual `% Generator:' comment inside the
+% environment instead. (The user settled this explicitly: an aside may be purely AI-generated and
+% still be a plain `aside'.)
+%
+% KEEP THEM RARE. An aside that is not actually surprising is just a remark in a louder colour,
+% and a page with two of them has neither. Numbered like every other environment here, so it can
+% be \cref'd, but it should almost never need to be.
+\newtheoremstyle{asidethm}%
+{\customenvspace}{\customenvspace}{\normalfont}{}{\color{EnvAside}\sffamily\bfseries}{:}{0.5em}%
+{\textcolor{EnvAside}{\faCoffee}\hspace{0.4em}%
+ \thmname{\textcolor{EnvAside}{\sffamily\bfseries#1}}\thmnumber{\sffamily\bfseries\ #2}%
+ \thmnote{\ \textcolor{EnvAside}{\bfseries(}{\normalfont\sffamily\itshape#3}\textcolor{EnvAside}{\bfseries)}}}
+
+\theoremstyle{asidethm}
+\newaliascnt{aside}{theorem}
+\newtheorem{aside}[aside]{Aside}
+\aliascntresetthe{aside}
+\theoremstyle{remarkthm}
+
 \newtheoremstyle{ainotethm}%
 {\customenvspace}{\customenvspace}{\normalfont}{}{\color{EnvAINote}\sffamily\bfseries}{:}{0.5em}%
 {\textcolor{EnvAINote}{\faRobot}\hspace{0.4em}%
@@ -628,6 +670,8 @@
 \crefname{aiexample}{AI-Example}{AI-Examples}
 \Crefname{aiexample}{AI-Example}{AI-Examples}
 \crefname{aiexercise}{AI-Exercise}{AI-Exercises}
+\crefname{aside}{Aside}{Asides}
+\Crefname{aside}{Aside}{Asides}
 \Crefname{aiexercise}{AI-Exercise}{AI-Exercises}
 
 % ==========================================

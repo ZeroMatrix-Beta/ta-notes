@@ -189,3 +189,184 @@ The two conditions are complementary, so $\int_{\mathbb{R}^2}r^{-2\alpha}$ diver
 $\alpha$, and the bounded oscillating factor $\cos(xy)$ changes none of it.
 \end{remark}
 \end{exercisesolution}
+
+% Generator: Claude Opus 5 (High)
+% No solution key ships with the Jossen papers, so this is an independent derivation.
+\begin{exercisesolution}[\cref{ex:lebesgue_null_sets_properties}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{No.} Pick $p \in U$ and a closed cube $K \subseteq U$ centred at $p$, of side
+    length $\ell > 0$; this exists because $U$ is open. Suppose $U$ were Lebesgue null and cover it
+    by countably many cubes $Q_1,Q_2,\dots$ with $\sum_i \mu(Q_i) < \varepsilon$. Enlarge each
+    $Q_i$ to an \emph{open} cube $Q_i'\supseteq Q_i$ concentric with it and with
+    $\mu(Q_i') \le 2\mu(Q_i)$. The $Q_i'$ form an open cover of the compact set $K$, so finitely
+    many of them, say $Q_{i_1}',\dots,Q_{i_r}'$, already cover $K$. Subadditivity of the volume on
+    finite unions then gives
+\[\ell^n = \mu(K) \le \sum_{j=1}^r \mu(Q_{i_j}') \le 2\sum_{i} \mu(Q_i) < 2\varepsilon.\]
+    Choosing $\varepsilon := \ell^n/2$ makes this read $\ell^n < \ell^n$, a contradiction. So $U$
+    is not Lebesgue null.
+
+  \item \textbf{No.} The set $E := \{1/k \mid k \in \mathbb{N}_{\ge1}\} \subseteq \mathbb{R}$ is
+    bounded and countable, hence Lebesgue null by \textbf{(c)} below applied to its one-point
+    subsets. It is not closed: $1/k \to 0$ and $0 \notin E$.
+
+  \item Let $E = \bigcup_{k\ge1} E_k$ with each $E_k$ Lebesgue null, and let $\varepsilon > 0$.
+    Applying the definition to $E_k$ with the tolerance $\varepsilon\,2^{-k}$ produces countably
+    many cubes $\{Q_{k,j}\}_{j\ge1}$ covering $E_k$ with
+    $\sum_{j}\mu(Q_{k,j}) < \varepsilon\,2^{-k}$. The doubly indexed family
+    $\{Q_{k,j}\}_{k,j\ge1}$ is a countable union of countable families, hence countable; it covers
+    $E$; and its total volume is
+\[\sum_{k\ge1}\sum_{j\ge1}\mu(Q_{k,j}) < \sum_{k\ge1}\varepsilon\,2^{-k} = \varepsilon,\]
+    all terms being non-negative, so the order of summation is immaterial. Therefore $E$ is
+    Lebesgue null.
+
+  \item Let $\varepsilon > 0$. Since $f$ is Riemann integrable it is bounded, and there is a
+    partition $0 = t_0 < t_1 < \dots < t_N = 1$ whose upper and lower sums differ by less than
+    $\varepsilon/2$:
+\[\sum_{i=1}^N (M_i - m_i)\,\Delta t_i < \frac{\varepsilon}{2}, \qquad
+  M_i := \sup_{[t_{i-1},t_i]} f, \quad m_i := \inf_{[t_{i-1},t_i]} f, \quad
+  \Delta t_i := t_i - t_{i-1}.\]
+    For $x \in [t_{i-1},t_i]$ the point $(x,f(x))$ lies in the rectangle
+    $R_i := [t_{i-1},t_i]\times[m_i-\delta,\,M_i+\delta]$, where $\delta > 0$ is chosen below.
+    Hence $\Gamma_f \subseteq \bigcup_{i=1}^N R_i$ and
+\[\sum_{i=1}^N \mu(R_i) = \sum_{i=1}^N (M_i - m_i + 2\delta)\,\Delta t_i
+  < \frac{\varepsilon}{2} + 2\delta,\]
+    using $\sum_i \Delta t_i = 1$. Taking $\delta := \varepsilon/8$ makes the total less than
+    $\varepsilon$. Since $\varepsilon$ was arbitrary and the cover is finite, $\Gamma_f$ is in fact
+    a \emph{Jordan} null set, and a Jordan null set is Lebesgue null.
+\end{enumerate}
+\begin{remark}[Each part is one hypothesis doing one job]
+Part \textbf{(a)} is where the enlargement trick belongs. A countable cover cannot be summed
+against a volume directly, because volume is only finitely additive here; compactness converts the
+countable cover into a finite one, and the factor $2$ is the price of making the cubes open first.
+This is the same manoeuvre as in the proof of \cref{lem:compact_jordan_vs_lebesgue_null}, and it is
+the standard way to get from Lebesgue-style covers back to Jordan-style ones.
+
+Part \textbf{(d)} answers more than it was asked: the graph is Jordan null, not merely Lebesgue
+null, because the cover produced is finite. The integrability of $f$ is exactly what supplies that.
+Boundedness alone would not do, since there are bounded $f : [0,1]\to[0,1]$ whose graph is dense in
+the unit square, and a dense subset of the square has outer measure $1$. Recall why: a finite cover
+by closed rectangles also covers the closure.
+
+Read the four parts together and they say that null sets are large enough to be closed under
+countable unions, and small enough never to contain a ball. That pair is what makes \qt{negligible}
+a usable notion, and \textbf{(c)} is the half this document uses most often without comment.
+\end{remark}
+\end{exercisesolution}
+
+% Generator: Claude Opus 5 (High)
+% Solutions to the four aiexercises in 03-a-glimpse-of-lebesgue.tex.
+\begin{exercisesolution}[\cref{ex:ai_lebesgue_null_countable}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Let $p \in \mathbb{R}^n$ and $\varepsilon > 0$. The single cube of side length
+    $\delta := (\varepsilon/2)^{1/n}$ centred at $p$ covers $\{p\}$ and has volume
+    $\delta^n = \varepsilon/2 < \varepsilon$. A finite cover is in particular a countable one, so
+    $\lambda^*(\{p\}) = 0$.
+
+  \item Let $E = \{p_1,p_2,\dots\}$ be countable and let $\varepsilon > 0$. Cover $p_k$ by a cube
+    $Q_k$ of volume $\varepsilon\,2^{-k-1}$, as in \textbf{(a)}. Then $E \subseteq
+    \bigcup_k Q_k$ and
+    \[\sum_{k\ge1}\vol(Q_k) = \varepsilon\sum_{k\ge1}2^{-k-1} = \frac{\varepsilon}{2} < \varepsilon.\]
+    Hence $\lambda^*(E) = 0$. Since $\mathbb{Q}^n$ is a finite product of countable sets it is
+    countable, so it is Lebesgue null.
+
+  \item Suppose $E$ is Lebesgue null and had an interior point $p$. Then $E$ contains a cube $K$ of
+    some side length $\ell > 0$, and $\lambda^*$ is monotone, so
+    $\lambda^*(E) \ge \lambda^*(K) = \ell^n > 0$, contradicting $\lambda^*(E) = 0$. Hence
+    $\operatorname{int}(E) = \emptyset$.
+\end{enumerate}
+\begin{remark}
+Part \textbf{(b)} is the whole difference between the two theories in three lines. The geometric
+series is what lets infinitely many cubes have finite total volume, and it is available only
+because the cubes are allowed different sizes, which is exactly the point of
+\cref{rem:jordan_vs_lebesgue_sizes}. Part \textbf{(c)} then says a null set is small in the
+topological sense too, though the converse fails badly: the Cantor set
+(\cref{ex:cantor_set_jordan_null}) is null and uncountable, and there are nowhere dense sets of
+positive measure.
+\end{remark}
+\end{exercisesolution}
+
+% Generator: Claude Opus 5 (High)
+\begin{exercisesolution}[\cref{ex:ai_lebesgue_three_valued}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Split $[0,1]$ into the three sets on which $f$ is constant:
+    \[E_1 := \mathbb{Q}\cap[0,1], \qquad
+      E_2 := [0,\tfrac12)\setminus\mathbb{Q}, \qquad
+      E_3 := [\tfrac12,1]\setminus\mathbb{Q}.\]
+    These are disjoint, measurable and cover $[0,1]$, and $f = 1\cdot\chi_{E_1} + 2\cdot\chi_{E_2}
+    + 3\cdot\chi_{E_3}$ is a simple function. By
+    \cref{ex:ai_lebesgue_null_countable}\textbf{(b)}, $\lambda(E_1) = 0$, so removing it from
+    $[0,\tfrac12)$ and $[\tfrac12,1]$ changes nothing: $\lambda(E_2) = \lambda(E_3) = \tfrac12$.
+    Therefore
+    \[\int_{[0,1]} f\,d\lambda = 1\cdot 0 + 2\cdot\tfrac12 + 3\cdot\tfrac12 = \frac52.\]
+
+  \item $f$ is continuous at \emph{no} point of $[0,1]$. Fix $x$ and any $\delta > 0$. The interval
+    $(x-\delta,x+\delta)\cap[0,1]$ contains both rational and irrational points, since each set is
+    dense, so $f$ takes the value $1$ there and also a value in $\{2,3\}$. The oscillation of $f$
+    on every neighbourhood of $x$ is therefore at least $1$, and $f$ is discontinuous at $x$.
+
+    The discontinuity set is thus all of $[0,1]$, which has measure $1$ and is not Lebesgue null.
+    By \cref{thm:lebesgue_criterion_riemann}\textbf{(a)}, $f$ is not Riemann integrable.
+\end{enumerate}
+\begin{remark}
+The number $5/2$ is what one gets by ignoring the rationals entirely, and that is the honest
+summary of what the Lebesgue integral does here: it reads $f$ as the step function
+$2\cdot\chi_{[0,\frac12)} + 3\cdot\chi_{[\frac12,1]}$, which it is, away from a null set. The
+Riemann theory cannot perform that identification, because its upper sums must take the supremum
+over whole intervals and every interval meets $\mathbb{Q}$.
+\end{remark}
+\end{exercisesolution}
+
+% Generator: Claude Opus 5 (High)
+\begin{exercisesolution}[\cref{ex:ai_dominated_beats_uniform}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item For $0 \le x < 1$ we have $x^k \to 0$, and $1^k = 1$ for every $k$. So the pointwise limit
+    is $f = \chi_{\{1\}}$. The convergence is not uniform: taking $x_k := 2^{-1/k} \in (0,1)$ gives
+    $f_k(x_k) = \tfrac12$, so
+    $\sup_{x\in[0,1]}\lvert f_k(x)-f(x)\rvert \ge \tfrac12$ for every $k$.
+
+  \item Every $f_k$ satisfies $0 \le f_k \le 1$ on $[0,1]$, and the constant $g \equiv 1$ is
+    integrable there, with $\int_{[0,1]} g\,d\lambda = 1 < \infty$. Dominated convergence applies
+    and gives
+    \[\lim_{k\to\infty}\int_{[0,1]} f_k \,d\lambda = \int_{[0,1]} \chi_{\{1\}}\,d\lambda
+      = \lambda(\{1\}) = 0.\]
+
+  \item Directly, $\int_0^1 x^k\,dx = \frac{1}{k+1} \to 0$, in agreement.
+\end{enumerate}
+\begin{remark}
+The point is the contrast in hypotheses, not the value. The limit here is a function this course
+would rather not integrate at all, and the uniform-convergence theorem does not apply, yet a single
+constant bound settles the exchange. The dominating function is almost always this easy to find,
+which is why dominated convergence, and not any new set function, is what practitioners actually
+use the Lebesgue theory for.
+\end{remark}
+\end{exercisesolution}
+
+% Generator: Claude Opus 5 (High)
+\begin{exercisesolution}[\cref{ex:ai_improper_not_lebesgue}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $f$ is constant on each $[k,k+1)$, an interval of length $1$, so for integer $N \ge 1$
+    \[\int_1^N f(x)\,dx = \sum_{k=1}^{N-1} \frac{(-1)^{k+1}}{k}.\]
+    These are the partial sums of the alternating harmonic series, which converges to $\log 2$.
+    For non-integer upper limits the integral differs from the nearest such partial sum by at most
+    $1/\lfloor R\rfloor \to 0$, so the improper integral converges with
+    $\int_1^\infty f(x)\,dx = \log 2$.
+
+  \item $\lvert f\rvert = 1/k$ on $[k,k+1)$, hence
+    \[\int_1^N \lvert f(x)\rvert\,dx = \sum_{k=1}^{N-1}\frac1k \xrightarrow{\ N\to\infty\ } \infty,\]
+    the harmonic series diverging. Since Lebesgue integrability of $f$ means
+    $\int\lvert f\rvert\,d\lambda < \infty$, the function $f$ is not Lebesgue integrable.
+
+  \item That theorem compares the two integrals for a \emph{bounded} function on a \emph{box},
+    where the Riemann integral is proper. Here the domain $[1,\infty)$ is unbounded and the
+    integral exists only as a limit $\lim_{R\to\infty}\int_1^R$, which is a different construction:
+    it is allowed to exploit cancellation between the positive and negative humps, and it is that
+    cancellation the absolute-value requirement forbids.
+\end{enumerate}
+\begin{remark}[Neither theory contains the other]
+This is the standard corrective to \qt{Lebesgue generalises Riemann}. On a box the Lebesgue
+integral really is the stronger notion. Once improper integrals enter, the two constructions
+answer different questions, and $\int_0^\infty \sin(x)/x\,dx = \pi/2$ is the famous instance of the
+same phenomenon. In practice one keeps both: the Lebesgue integral for limits and for
+several-variable arguments, the improper Riemann integral for conditionally convergent ones.
+\end{remark}
+\end{exercisesolution}

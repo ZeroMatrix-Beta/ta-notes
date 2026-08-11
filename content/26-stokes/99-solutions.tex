@@ -452,3 +452,81 @@ potential means solving three equations. On a box problem where only the final a
 that is the difference between one line and half a page.
 \end{remark}
 \end{exercisesolution}
+
+% Generator: Claude Opus 5 (High)
+% No solution key ships with the Jossen papers, so this is an independent derivation.
+\begin{exercisesolution}[\cref{ex:jossen_potential_on_disconnected_domain}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $U$ is \textbf{open}: it is the preimage of the open set $\mathbb{R}\setminus\{0\}$ under
+    the continuous projection $(x,y,z)\mapsto y$.
+
+    $U$ is \textbf{not connected}. The two sets $U^+ := \{y > 0\}$ and $U^- := \{y < 0\}$ are open,
+    non-empty and disjoint, and their union is $U$, which is exactly a disconnection
+    (\cref{def:connectedness}).
+
+    $U$ is therefore \textbf{not simply connected} either, since simple connectedness includes
+    path-connectedness. It is worth recording what \emph{is} true: each of $U^+$ and $U^-$ is an
+    open half-space, hence convex, hence simply connected.
+
+  \item Yes. Writing $E := e^{x+\frac1y}$ for brevity, so that $\partial_1 E = E$ and
+    $\partial_2 E = -E/y^2$, we compute
+    \begin{align*}
+      \partial_2 F_1 &= \partial_y\big((1+x)E\big) = -\frac{(1+x)}{y^2}\,E, \\
+      \partial_1 F_2 &= \partial_x\left(-\frac{x}{y^2}E\right)
+        = -\frac{1}{y^2}E - \frac{x}{y^2}E = -\frac{(1+x)}{y^2}\,E,
+    \end{align*}
+    which agree. The remaining pairs are trivial: $F_1$ and $F_2$ do not depend on $z$ and $F_3$
+    depends on nothing else, so $\partial_3F_1 = 0 = \partial_1F_3$ and
+    $\partial_3F_2 = 0 = \partial_2F_3$. Hence $F$ satisfies the integrability conditions
+    (\cref{lem:integrability_conditions}) on all of $U$.
+
+  \item \textbf{Yes}, $F$ is conservative, and the cleanest justification is to produce a potential
+    outright, which is \textbf{(d)}. The structural reason is that $U$ has two connected
+    components, each of which is convex and therefore simply connected, so
+    \cref{cor:potentials_simply_connected} applies \emph{on each component separately} and supplies
+    a potential there. Being conservative is a condition checked component by component, since a
+    path in $U$ never leaves the component it starts in. Consequently, the two local potentials
+    together make $F$ conservative on $U$.
+
+  \item Yes. Take
+    \[u(x,y,z) := x\,e^{x+\frac1y} + g(z), \qquad (x,y,z) \in U,\]
+    which is well defined because $y \neq 0$ on $U$, and $C^2$ because $g$ is. Then
+    \[\partial_x u = e^{x+\frac1y} + x\,e^{x+\frac1y} = (1+x)e^{x+\frac1y} = F_1, \qquad
+      \partial_y u = -\frac{x}{y^2}e^{x+\frac1y} = F_2, \qquad
+      \partial_z u = g'(z) = F_3,\]
+    so $\nabla u = F$ on $U$.
+
+  \item First, $\gamma$ does take values in $U$: its second component is
+    $2 + t\sin(2\pi t)$, and $\lvert t\sin(2\pi t)\rvert \le t \le 1$ for $t \in [0,1]$, so that
+    component is at least $1 > 0$. The path stays in the component $U^+$ throughout.
+
+    Its endpoints are
+    \[\gamma(0) = (0,\,2,\,1), \qquad \gamma(1) = \big(\cos(2\pi),\ 2+\sin(2\pi),\ 1-1+1\big)
+      = (1,\,2,\,1).\]
+    By \cref{prop:work_difference_potential} the work integral of a conservative field depends only
+    on the endpoints, so with the potential from \textbf{(d)},
+    \[\int_\gamma F\cdot d\gamma = u(1,2,1) - u(0,2,1)
+      = \Big(1\cdot e^{1+\frac12} + g(1)\Big) - \Big(0\cdot e^{0+\frac12} + g(1)\Big)
+      = e^{3/2}.\]
+\end{enumerate}
+\begin{remark}[Not simply connected does not mean not conservative]
+Read this exercise against \cref{ex:vortex_field_not_conservative} and the pair says something the
+corollary alone does not. There, $U = \mathbb{R}^2\setminus\{0\}$ fails to be simply connected and
+the field really is not conservative. Here, $U = \{y\neq0\}$ also fails to be simply connected, and
+the field is conservative anyway. \Cref{cor:potentials_simply_connected} is a
+\emph{sufficient} condition, so when its hypothesis fails the correct conclusion is that the
+theorem is silent, never that the field has no potential. Answering \textbf{(c)} with \qt{no,
+because $U$ is not simply connected} is the mistake the problem is built to catch.
+
+The two failures are also of quite different kinds. $\mathbb{R}^2\setminus\{0\}$ is connected but
+has a hole, and it is the hole that a loop can wind around and accumulate work. $\{y\neq0\}$ has no
+holes at all; it merely falls into two pieces, each as simple as a region can be. Disconnection is
+the harmless failure, because no path can exploit it, and that is why the component-by-component
+argument in \textbf{(c)} works. The unhelpful thing about the phrase \qt{simply connected} is that
+it bundles the two together.
+
+Finally, note that the answer to \textbf{(e)} does not involve $g$ at all. The path returns to the
+height $z = 1$ it started at, so the $g(z)$ term of the potential cancels, and no property of $g$
+beyond differentiability was ever needed.
+\end{remark}
+\end{exercisesolution}

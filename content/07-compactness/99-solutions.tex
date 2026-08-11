@@ -309,4 +309,92 @@ recurs whenever a coercive function is minimised.
 \end{remark}
 \end{exercisesolution}
 
+% Generator: Claude Opus 5 (High)
+% No solution key ships with the Jossen papers, so this is an independent derivation.
+\begin{exercisesolution}[\cref{ex:pseudocompactness_implications}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Assume \textbf{(ii)} and let $f : X \to \mathbb{R}$ be continuous. It attains a maximum
+    at some $p$ and a minimum at some $q$, so $f(X) \subseteq [f(q),f(p)]$ and $f$ is bounded.
+
+    Conversely, assume \textbf{(i)} and let $f : X \to \mathbb{R}$ be continuous. Then
+    $M := \sup f(X)$ is a real number, since $f(X)$ is non-empty and bounded. Suppose $f$ never
+    took the value $M$. Then $M - f(x) > 0$ for every $x$, so
+    \[g : X \to \mathbb{R}, \qquad g(x) := \frac{1}{M-f(x)}\]
+    is well defined and continuous. By definition of the supremum there is a sequence $(x_k)$ in
+    $X$ with $f(x_k) \to M$, whence $g(x_k) \to +\infty$. Therefore $g$ is an unbounded continuous
+    function, contradicting \textbf{(i)}. Consequently $f$ attains its maximum, and applying this
+    to $-f$ gives the minimum.
+
+  \item Assume \textbf{(iii)} and let $f : X \to \mathbb{R}$ be continuous. The preimages
+    $f^{-1}\big((-k,k)\big)$, $k \in \mathbb{N}$, are open (\cref{def:continuous}) and cover $X$,
+    because every $f(x)$ is a real number and so lies in $(-k,k)$ for $k$ large. Compactness
+    yields finitely many indices $k_1 < \dots < k_r$ whose preimages already cover $X$, and these
+    are nested, so $X = f^{-1}\big((-k_r,k_r)\big)$. Hence $\lvert f\rvert < k_r$ throughout.
+
+  \item Assume \textbf{(iv)} and suppose some continuous $f : X \to \mathbb{R}$ were unbounded.
+    Choose $x_k \in X$ with $\lvert f(x_k)\rvert \ge k$ for every $k$. By \textbf{(iv)} the
+    sequence $(x_k)$ has an accumulation point $x \in X$, so some subsequence satisfies
+    $x_{k_j} \to x$. Continuity gives $f(x_{k_j}) \to f(x)$, so the numbers $f(x_{k_j})$ are
+    bounded. But $\lvert f(x_{k_j})\rvert \ge k_j \to \infty$, a contradiction.
+\end{enumerate}
+\begin{remark}[Weierstrass, split into its two halves]
+Part \textbf{(a)} is the striking one, and it is worth seeing what it says: the two conclusions of
+the extreme value theorem, \emph{bounded} and \emph{attained}, are not independent facts about the
+space. Either one forces the other, with no compactness assumed anywhere. What compactness (or
+\textbf{(iv)}) supplies is only the entry ticket \textbf{(i)}.
+
+The trick in \textbf{(a)} is worth keeping: to force a supremum to be attained, divide by the gap
+$M - f$ and let the failure to attain it manufacture an unbounded function. It reappears whenever a
+statement about suprema has to be converted into a statement about boundedness.
+
+None of the reverse implications hold. A space satisfying \textbf{(i)} is called
+\newterm{pseudocompact}, and there are pseudocompact metric spaces that are not compact. Inside
+$\mathbb{R}^n$ the gap closes, by \cref{thm:heine_borel}. The chain proved here is
+\textbf{(iii)} $\Rightarrow$ \textbf{(i)} $\Leftrightarrow$ \textbf{(ii)} and \textbf{(iv)}
+$\Rightarrow$ \textbf{(i)}; that \textbf{(iii)} and \textbf{(iv)} are themselves equivalent for
+metric spaces is \cref{thm:sequential_topological_compactness_equivalence}, which is a much deeper
+statement than either implication above.
+\end{remark}
+\end{exercisesolution}
+
+% Generator: Claude Opus 5 (High)
+\begin{exercisesolution}[\cref{ex:sumset_open_closed_compact}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Suppose $A$ is open. For fixed $b \in \mathbb{R}^2$ the translate
+    $A + b := \{a+b \mid a \in A\}$ is open, since translation is a homeomorphism of
+    $\mathbb{R}^2$; concretely, $B_r(a) \subseteq A$ gives $B_r(a+b) \subseteq A+b$. Now
+    \[A + B = \bigcup_{b \in B} (A+b)\]
+    is a union of open sets and therefore open. The case of $B$ open is symmetric, since
+    $A+B = B+A$.
+
+  \item Let $c \in \overline{A+B}$ and pick $c_k = a_k + b_k \in A+B$ with $c_k \to c$, where
+    $a_k \in A$ and $b_k \in B$. Since $B$ is compact, it is sequentially compact
+    (\cref{thm:sequential_topological_compactness_equivalence}), so a subsequence
+    $b_{k_j} \to b \in B$ converges. Then
+    \[a_{k_j} = c_{k_j} - b_{k_j} \longrightarrow c - b,\]
+    and $A$ is closed, so $c - b =: a$ lies in $A$. Hence $c = a + b \in A+B$, and $A+B$ is closed.
+
+  \item The product $A \times B \subseteq \mathbb{R}^4$ is compact: it is closed and bounded,
+    because $A$ and $B$ are, so \cref{thm:heine_borel} applies. Addition
+    \[s : \mathbb{R}^2\times\mathbb{R}^2 \to \mathbb{R}^2, \qquad s(a,b) := a+b\]
+    is continuous, being linear, and $A+B = s(A\times B)$ is the continuous image of a compact set,
+    hence compact.
+\end{enumerate}
+\begin{remark}[Compactness of $B$ is not decoration]
+Two closed sets can have a non-closed sum, so \textbf{(b)} genuinely needs more than closedness.
+Take
+\[A := \{(n,0) \mid n \in \mathbb{N}\}, \qquad B := \{(-n,\tfrac1n) \mid n \in \mathbb{N}\}.\]
+Both are closed, since each is a set of isolated points running off to infinity and so has no
+accumulation point at all. Their sum contains $(0,\tfrac1n)$ for every $n$, and those converge to
+the origin. But $(0,0) \in A+B$ would need $n = m$ and $\tfrac1m = 0$ at once, so the origin is
+missing and $A+B$ is not closed.
+
+What compactness of $B$ supplies in the proof is precisely the convergent subsequence of
+$(b_k)$: closedness of $B$ alone would let $(b_k)$ escape to infinity, which is exactly what the
+counterexample arranges. Note also that nothing in any of the three arguments used the dimension,
+so all three hold verbatim in $\mathbb{R}^n$, and \textbf{(a)} and \textbf{(b)} hold in any normed
+space.
+\end{remark}
+\end{exercisesolution}
+
 

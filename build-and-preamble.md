@@ -309,8 +309,8 @@ not trustworthy on its own, because parentheses in ordinary text confuse the obv
 % except `ainote`. See "This project's override" below, and main.tex:410-640,
 % which is authoritative. Reproduced here only to show the available names:
 %   remark, exercise, example, summary, warmup, question, answer,
-%   importantremark, goals, conclusion, notation, ainote, aiexample, aiexercise
-%   theorem, lemma, corollary, definition, proposition, claim*
+%   importantremark, goals, conclusion, notation, ainote, aiexample, aiexercise,
+%   aside, theorem, lemma, corollary, definition, proposition, claim*
 \newtheorem{ainote}{AI-Note}[chapter]   % <- the ONE with a counter of its own
 \newenvironment{exercisesolution}[1][Solution]{%
   \begin{proof}[#1]%
@@ -401,6 +401,19 @@ not the shared one.
 Adding a new environment means: `\newaliascnt{name}{theorem}`,
 `\newtheorem{name}[name]{Display Name}`, `\aliascntresetthe{name}`, a `\theHname` entry in the
 `\AtBeginDocument` block, and a `\crefname`/`\Crefname` pair — mirroring `lemma`/`corollary`/etc.
+
+**`aside` (added 2026-08-11, on the user's instruction).** Teal `TealAside` with `\faCoffee`,
+declared exactly like the others — `\newaliascnt{aside}{theorem}`, `\newtheorem{aside}[aside]{Aside}`,
+`\aliascntresetthe{aside}`, a `\theHaside` entry, and a `\crefname`/`\Crefname` pair. It is a
+worked instance of the "adding a new environment" recipe below, so copy it rather than the prose
+if you ever add another.
+
+Two things about it that are easy to get wrong:
+
+* **`\theoremstyle` is global and must be restored.** The declaration sets `asidethm`, declares
+  `aside`, and then sets `remarkthm` back, because the `ainote` block immediately below expects to
+  inherit it. Forget the restore and the next environment declared silently changes appearance.
+* **There is no `aiaside`, deliberately.** See `style.md` for why; do not add one.
 
 **The rule reaches theorem-like environments only.** `exerciseinfo` and `exercisehint` (added
 2026-08-10) are plain `\newenvironment` formatting blocks with no counter and no `\crefname`,

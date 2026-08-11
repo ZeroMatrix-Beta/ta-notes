@@ -323,6 +323,116 @@ The ambient dimension is $4$ and the number of independent constraints is $1$.
 So, the dimension of $M$ is $4 - 1 = 3$.
 \end{exercisesolution}
 
+% Source: old_exams/HS18.pdf (Analysis I & II, winter 2018/2019, Prof. Manfred Einsiedler),
+% Aufgabe 7, p. 2
+% Extractor: Claude Opus 5 (High)
+% Kept as a worked example: it is the half of thm:local_parametrization that the theorem's own
+% statement hides, namely that the homeomorphism clause is free once one shrinks the domain, and
+% that is a piece of theory rather than a drill.
+\begin{example}[An immersion is locally a parametrization]
+\label{ex:immersion_locally_submanifold}
+\Cref{thm:local_parametrization} asks a candidate parametrization $f$ for two things: that $Df_x$
+be injective everywhere, and that $f$ be a homeomorphism onto its image. The first is a condition
+on a matrix and is easy to check; the second is a global condition and is the one that fails in
+practice, as the figure-eight and the lollipop show. The following says that, locally, the second
+condition comes for free.
+
+\textbf{Claim.} Let $U \subseteq \mathbb{R}^n$ be open and let $f : U \to \mathbb{R}^{n+1}$ be
+smooth with $D_{x_0}f$ injective for every $x_0 \in U$ (such an $f$ is called an
+\newterm{immersion} \germanfor{Immersion}). Then every $x_0 \in U$ has an open neighbourhood
+$V \subseteq U$ such that $f(V)$ is an $n$-dimensional submanifold of $\mathbb{R}^{n+1}$.
+
+Fix $x_0 \in U$. The matrix $\Jac f(x_0)$ has $n+1$ rows and $n$ columns and is injective, so it
+has rank $n$: some $n$ of its rows are linearly independent. Permuting the coordinates of
+$\mathbb{R}^{n+1}$ is a linear diffeomorphism of the ambient space, and it carries submanifolds to
+submanifolds, so we may assume those are the first $n$ rows. Write accordingly
+\[f = \begin{pmatrix} g \\ h \end{pmatrix}, \qquad g : U \to \mathbb{R}^n,\quad
+h : U \to \mathbb{R},\]
+so that $\Jac g(x_0) \in \mathbb{R}^{n\times n}$ is invertible.
+
+By the inverse function theorem (\cref{thm:inverse_function_theorem}) there is an open
+$V \ni x_0$, $V \subseteq U$, such that $g|_V : V \to W := g(V)$ is a diffeomorphism onto an open
+set $W \subseteq \mathbb{R}^n$. Let $\varphi := (g|_V)^{-1} : W \to V$ and set
+\[\psi := h \circ \varphi : W \to \mathbb{R},\]
+which is smooth as a composition of smooth maps. For $x \in V$ we have $g(x) \in W$ and
+\[f(x) = \big(g(x),\, h(x)\big) = \big(g(x),\, \psi(g(x))\big),\]
+using $\varphi(g(x)) = x$. As $x$ runs over $V$, the point $g(x)$ runs over all of $W$. Therefore
+\[f(V) = \{(w,\psi(w)) \mid w \in W\}\]
+is exactly the graph of the smooth function $\psi$ over the open set $W$, and a graph is an
+$n$-dimensional submanifold of $\mathbb{R}^{n+1}$. To see that last point, apply the regular value
+theorem to $(w,s) \mapsto s - \psi(w)$, whose Jacobian $(-\nabla\psi(w)\transp,\ 1)$ never
+vanishes.
+
+\begin{remark}[What is local here, and what is not]
+The injectivity of $D_{x_0}f$ is a pointwise, linear-algebraic condition, and yet it forces $f$
+itself to be injective near $x_0$: on the shrunken $V$ the map $f$ is injective because its first
+block $g$ already is. That is the whole trick, and it is why an immersion cannot fail to be a
+parametrization for a local reason.
+
+What it cannot repair is a global collision. The figure-eight curve is an immersion of an open
+interval whose image meets itself at the crossing point, and no shrinking of the domain changes
+that the \emph{image} is not a submanifold there. The claim promises a neighbourhood $V$ in the
+\emph{domain} and says nothing about a neighbourhood of $f(x_0)$ in $\mathbb{R}^{n+1}$; the two
+are different requests, and only the first is granted. Compare
+\cref{ex:lollipop_tangent_field}, where the failure is of exactly this global kind.
+\end{remark}
+\exinfo{This example is taken from the Analysis I \& II examination of winter 2018/2019
+(Prof.\ Manfred Einsiedler), Problem 7, where it is set as a proof exercise. The framing against
+\cref{thm:local_parametrization} and the closing remark are added here.}
+\end{example}
+
+% Source: old_exams/HS19.pdf (Analysis I & II, 22 January 2020, Prof. Peter S. Jossen),
+% Teil B, Aufgabe 4, p. 21
+% Extractor: Claude Opus 5 (High)
+% Filed next to ex:submanifold_matrices_rank1 deliberately: both live in Mat_2(R) = R^4, and the
+% contrast is the point. There the regular value theorem applies as it stands; here the naive
+% application fails, because F lands in the symmetric matrices and so is nowhere submersive.
+% Parts (e) and (f) of the original invoke the constant rank theorem, which this document does not
+% state; the exercise is re-routed through the regular value theorem instead. See the ainote below.
+\begin{exercise}[The orthogonal group as a submanifold]
+\label{ex:orthogonal_group_submanifold}
+Let $\operatorname{Mat}_2(\mathbb{R})$ denote the $2\times 2$ real matrices, identified with
+$\mathbb{R}^4$ by listing the entries $a,b,c,d$ of
+$\left(\begin{smallmatrix} a & b \\ c & d\end{smallmatrix}\right)$ as a column. Define
+\[F : \operatorname{Mat}_2(\mathbb{R}) \to \operatorname{Mat}_2(\mathbb{R}), \qquad
+F(A) := AA\transp,\]
+and let $\Orth_2(\mathbb{R}) := \{A \in \operatorname{Mat}_2(\mathbb{R}) \mid F(A) = \id\}$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Write $F$ out in the coordinates $a,b,c,d$ and explain why it is smooth.
+  \item Show that $F(A)$ is symmetric for every $A$, so that $F$ takes values in the
+    three-dimensional subspace $\operatorname{Sym}_2(\mathbb{R}) \subseteq
+    \operatorname{Mat}_2(\mathbb{R})$ of symmetric matrices.
+  \item Compute the Jacobian matrix of $F$ at $A = \left(\begin{smallmatrix} a & b \\ c &
+    d\end{smallmatrix}\right)$. It is a $4\times 4$ matrix.
+  \item Show that this Jacobian has rank $3$ at every $A \in \Orth_2(\mathbb{R})$. Why does this
+    already rule out applying the regular value theorem to $F$ as it stands?
+  \item Regard $F$ instead as a map $\widetilde F : \mathbb{R}^4 \to \mathbb{R}^3$ into
+    $\operatorname{Sym}_2(\mathbb{R}) \cong \mathbb{R}^3$ and deduce from
+    \cref{thm:regular_value_theorem} that $\Orth_2(\mathbb{R})$ is a submanifold of
+    $\operatorname{Mat}_2(\mathbb{R})$. What is its dimension?
+  \item Determine the tangent space $T_{\id}\Orth_2(\mathbb{R})$ from the Jacobian computed in
+    \textbf{(c)}, and give a basis for it.
+\end{enumerate}
+\exinfo{This exercise is taken from the Analysis I \& II examination of 22 January 2020
+(Prof.\ Peter S.\ Jossen), Part B, Problem 4. The original reaches the submanifold property
+through the constant rank theorem, which it also asks the candidate to state; parts \textbf{(d)}
+and \textbf{(e)} are rephrased here to use the regular value theorem instead.}
+\end{exercise}
+
+\begin{ainote}
+The re-routing in \textbf{(e)} is not a simplification of Jossen's problem, it is the reason the
+problem is interesting. The constant rank theorem states that a $C^k$ map whose differential has
+the \emph{same} rank $r$ throughout a neighbourhood looks, in suitable charts, like the linear
+projection $(x_1,\dots,x_n) \mapsto (x_1,\dots,x_r,0,\dots,0)$; its level sets are then
+submanifolds of dimension $n-r$. This document does not state that theorem, and it does not need
+to here: restricting the codomain of $F$ to the subspace $\operatorname{Sym}_2(\mathbb{R})$ that
+its image already lies in turns the constant rank $3$ into a \emph{full} rank $3$, and the regular
+value theorem takes over. That manoeuvre, shrinking the target until the map becomes submersive,
+is the standard way to handle matrix groups without the heavier theorem, and it is worth
+knowing because $\Orth_n(\mathbb{R})$, $\operatorname{SL}_n(\mathbb{R})$ and their relatives all
+fall to it.
+\end{ainote}
+
 % Transition: Claude Opus 5 (High)
 Three equivalent descriptions are on the table, each characterising the same class of sets. What
 they do not yet come with is practice, both in choosing which description to write down for a

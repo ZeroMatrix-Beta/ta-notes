@@ -233,6 +233,55 @@ contributes a factor of $1$. Spherical coordinates are used already in
 has rotational symmetry about an axis without being a ball, e.g.\ a solid cylinder or cone.
 \end{remark}
 
+% Source: old_exams/examFS24.pdf (21 August 2024), Wahr/Falsch-Fragen, Aufgabe 8, p. 5
+% Extractor: Claude Opus 5 (High)
+% Worked out here rather than set as an exercise: it is a checklist against the table immediately
+% above, and its three-dimensional counterpart ex:examHS24_TF_spherical is already an exercise
+% further down this file. Note the exam's argument order (theta, r), which is the reverse of the
+% table's; kept as the exam has it, since the sign of the determinant depends on it.
+\begin{example}[Polar coordinates, checked item by item]
+\label{ex:polar_coordinates_checklist}
+% Generator: Claude Opus 5 (High) --- the four statements are the examiner's; the working is
+% written for these notes.
+Consider $\Psi : \mathbb{R}\times[0,\infty) \to \mathbb{R}^2$,
+$\Psi(\theta, r) := (r\cos\theta,\ r\sin\theta)$, and note the argument order: the angle first.
+Four statements, of which two are true.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{$\Psi$ restricted to $(0,2\pi]\times(0,\infty)$ is injective: true.} Suppose
+    $\Psi(\theta_1,r_1) = \Psi(\theta_2,r_2)$. Taking Euclidean norms gives $r_1 = r_2 =: r > 0$,
+    and dividing by $r$ leaves $(\cos\theta_1,\sin\theta_1) = (\cos\theta_2,\sin\theta_2)$, so
+    $\theta_1 - \theta_2 \in 2\pi\mathbb{Z}$. A half-open interval of length $2\pi$ contains at
+    most one representative of each such class, so $\theta_1 = \theta_2$.
+  \item \textbf{$\Psi$ restricted to $(0,2\pi]\times(0,\infty)$ is surjective: false.} Its image is
+    $\mathbb{R}^2\setminus\{(0,0)\}$: every non-zero point is reached, by \textbf{(a)} exactly
+    once, and the origin is reached only from $r = 0$, which the restriction excludes.
+  \item \textbf{$\det\Jac\Psi(\theta,r) = r^2\sin\theta\cos\theta$: false.} The columns of the
+    Jacobi matrix are the partial derivatives in $\theta$ and in $r$, in that order:
+    \[\Jac\Psi(\theta,r) = \begin{pmatrix} -r\sin\theta & \cos\theta \\
+      r\cos\theta & \sin\theta\end{pmatrix}, \qquad
+      \det\Jac\Psi(\theta,r) = -r\sin^2\theta - r\cos^2\theta = -r .\]
+    The magnitude $\lvert\det\Jac\Psi\rvert = r$ is the entry in
+    \cref{rem:coordinate_jacobians_table}; the minus sign appears only because the exam lists the
+    angle before the radius, which swaps two columns.
+  \item \textbf{$\vol_2(B_R) = 2\pi\int_0^R r\,dr$ for $B_R = \{x^2+y^2 < R^2\}$: true.} By
+    \cref{thm:change_of_variables} with the weight $\lvert\det\Jac\Psi\rvert = r$, and since the
+    integrand $1$ does not depend on $\theta$, the angular integral contributes a factor $2\pi$.
+    The right-hand side is $2\pi\cdot R^2/2 = \pi R^2$, as it should be. This is also the $n=2$
+    case of \cref{rem:polar_as_shells}.
+\end{enumerate}
+The proposed formula in \textbf{(c)} is worth a second look, because it is not a random wrong
+answer: $r^2\sin\theta$ is the \emph{spherical} Jacobian, and $\cos\theta$ is what a misremembered
+product rule adds to it. There is a cheap guard against importing one row of the table into
+another. Every system in it has the form $\Phi(r,\omega) = r\,u(\omega)$ for a map $u$ into the
+unit sphere, so $\Phi$ is homogeneous of degree $1$ in $r$. The radial column of $\Jac\Phi$ is then
+$u(\omega)$, free of $r$, while each of the $n-1$ angular columns is $r\,\partial u/\partial\omega_i$
+and so carries exactly one factor $r$. Multilinearity of the determinant pulls all $n-1$ of them
+out, leaving $\lvert\det\Jac\Phi\rvert = r^{n-1}$ times a function of the angles alone. In
+$\mathbb{R}^2$ that power is $r^1$, and the proposal carries $r^2$.
+\exinfo{This example is taken from the exam of 21 August 2024, where it appears as the eighth block
+of true/false questions.}
+\end{example}
+
 % Source: Jérôme Paschoud/Notizen/Woche 9.1 Variablenwechsel.pdf, p. 2
 % Generator: Gemini 3.1 Pro (High)
 \begin{example}[Volume of an ellipse]
@@ -285,7 +334,7 @@ Applying the change of variables formula:
 \label{ex:8.5}
 For each of the following domains and change of variables find the jacobian and the appropriate
 transformed domain. There is no need to actually compute the integrals!
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item $A := \{(x_1,x_2) \in \mathbb{R}^2 : x_1 > 0,\ x_2 < x_1,\ 1 < x_1^2+x_2^2 < 4\}$ and
     $x_1 = r\cos\theta$, $x_2 = r\sin\theta$. Using the change of variables formula, complete
     the dots in the following formula
@@ -314,8 +363,8 @@ a subset of $\mathbb{R}^3$ and the right-hand side carries three differentials, 
 read $dx\,dy\,dz$. Quoted verbatim above, as the sheet is a primary source.
 \end{ainote}
 
-% An AI-Note stood here until 2026-08-09 announcing, above the exercise, that part 3's domain is
-% the box (0,1)x(1,2)x(-2,0) and that part 2's second constraint becomes v^{3/2} < u < 2v^{3/2}.
+% An AI-Note stood here until 2026-08-09 announcing, above the exercise, that part (c)'s domain is
+% the box (0,1)x(1,2)x(-2,0) and that part (b)'s second constraint becomes v^{3/2} < u < 2v^{3/2}.
 % That is the answer to two of the three parts. Moved into 99-solutions.tex per the spoiler rule
 % in style.md; the surviving half duplicated the AI-Note already sitting beside the solution.
 
@@ -324,7 +373,7 @@ read $dx\,dy\,dz$. Quoted verbatim above, as the sheet is a primary source.
 \label{ex:ai_triangle_substitution}
 Let $T$ be the closed triangle with vertices $(0,0)$, $(1,0)$ and $(0,1)$, and consider
 \[I := \int_T \exp\!\left(\frac{y-x}{y+x}\right)dx\,dy.\]
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item Substitute $u := y-x$ and $v := y+x$. Show that the interior of $T$ corresponds to
     $\{(u,v) : 0 < v < 1,\ -v < u < v\}$, and find the factor relating $dx\,dy$ to $du\,dv$.
   \item Evaluate $I$. The inner integral is the one to do first, and it is elementary.
@@ -382,6 +431,23 @@ e^{-\alpha(x^2+y^2)}\,dx\,dy$ as well. Compute $2I_\alpha$ using polar coordinat
 block of true/false questions, there phrased as a series of checkpoints along this computation.}
 \end{exercise}
 
+% Source: old_exams/examFS24.pdf (21 August 2024), Wahr/Falsch-Fragen, Aufgabe 9, p. 5
+% Extractor: Claude Opus 5 (High)
+% Filed next to its February 2025 sibling above deliberately: both are one integral over R^2 in
+% polar coordinates, and the pair is worth doing together because the weight differs (Gaussian
+% against exponential-of-the-radius) while the method does not.
+\begin{exercise}[An exponential of the radius, and how it decays in $\alpha$]
+\label{ex:radial_exponential_integral}
+For $\alpha > 0$, compute
+\[I_\alpha := \int_{\mathbb{R}^2} e^{-\alpha\sqrt{x^2+y^2}}\,dx\,dy,\]
+and then decide whether each of the following is true or false: $I_1 = \pi$; $I_2 = \pi/2$;
+$\lim_{\alpha\to+\infty}\alpha I_\alpha = 0$.
+\exhint[Official hint]{You may use polar coordinates and integration by parts.}
+\exinfo{This exercise is taken from the exam of 21 August 2024, where it appears as the ninth block
+of true/false questions. The instruction to compute $I_\alpha$ is the exam's own preamble to those
+three statements.}
+\end{exercise}
+
 % Source: old_exams/examHS24.pdf (13 February 2025), Wahr/Falsch-Fragen, Aufgabe 6, p. 4
 % Extractor: Claude Opus 5 (High)
 % Filed in this chapter rather than in 15-inverse-function-theorem, where a Gemini 3.1 Pro pass had
@@ -430,6 +496,39 @@ true or false.
 block of true/false questions.}
 \end{exercise}
 
+% Source: old_exams/examFS24.pdf (21 August 2024), Wahr/Falsch-Fragen, Aufgabe 7, pp. 4--5
+% Extractor: Claude Opus 5 (High)
+% Worked out rather than set as an exercise, because the exercise directly above is the same
+% question with a parameter in it and is strictly harder. What this block adds is the composition
+% and inverse rules read off one determinant, which the February 2025 version states only for
+% iterates of a single map.
+\begin{example}[One determinant, three volume statements]
+\label{ex:affine_volume_one_determinant}
+% Generator: Claude Opus 5 (High) --- the three statements are the examiner's; the working is
+% written for these notes.
+Consider $\Psi : \mathbb{R}^3 \to \mathbb{R}^3$, $\Psi(x,y,z) := (z-1,\ x+2y,\ x-y)$. Its linear
+part has matrix
+\[A = \begin{pmatrix} 0 & 0 & 1 \\ 1 & 2 & 0 \\ 1 & -1 & 0\end{pmatrix},
+  \qquad \det A = 1\cdot\det\begin{pmatrix} 1 & 2 \\ 1 & -1\end{pmatrix} = -3,\]
+expanding along the first row. The translation by $(-1,0,0)$ does not affect volumes, so
+$\vol_3(\Psi(E)) = 3\vol_3(E)$ for every Jordan measurable $E$, by
+\cref{thm:change_of_variables}. Everything else follows from the factor $3$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{$\vol_3(\Psi^{-1}(E)) = \vol_3(E)$ for all Jordan measurable $E$: false.} The
+    inverse scales by $\lvert\det A^{-1}\rvert = 1/3$, so $\vol_3(\Psi^{-1}(E)) = \vol_3(E)/3$.
+  \item \textbf{$\vol_3(\Psi(E)) = 2\vol_3(E)$: false.} The factor is $3$, not $2$.
+  \item \textbf{$\vol_3(\Psi(\Psi(E))) = 9\vol_3(E)$: true.} Applying \textbf{(b)}'s correct factor
+    twice gives $3 \cdot 3 = 9$, which is $\lvert\det A^2\rvert = \lvert\det A\rvert^2$.
+\end{enumerate}
+Only \textbf{(b)} requires the determinant to be computed. Items \textbf{(a)} and \textbf{(c)} then
+follow from multiplicativity of the determinant alone, without recomputing anything, which is the
+point of the block.
+\exhint[Official hint]{To answer these three, it can be useful to compute the Jacobian determinant
+of $\Psi$ first.}
+\exinfo{This example is taken from the exam of 21 August 2024, where it appears as the seventh
+block of true/false questions.}
+\end{example}
+
 % Source: old_exams/examHS24.pdf (13 February 2025), Wahr/Falsch-Fragen, Aufgabe 8, pp. 4--5
 % Extractor: Gemini 3.1 Pro (High)
 \begin{exercise}[True or False \textnormal{(spherical coordinates)}]
@@ -458,6 +557,20 @@ Give an explicit example of a linear map $\Phi \colon \mathbb{R}^2 \to \mathbb{R
 \[ \vol_2(\Phi(E)) = 2 \vol_2(E) \quad \text{for all } E \subset \mathbb{R}^2 \text{ Jordan measurable.} \]
 \exinfo{This exercise is taken from the exam of 13 February 2025, Box Problem 2, where only the
 final answer was graded.}
+\end{exercise}
+
+% Source: old_exams/examFS24.pdf (21 August 2024), Kästchenaufgabe 2, p. 7
+% Extractor: Claude Opus 5 (High)
+% The August 2024 counterpart of the box problem directly above: same one-line format, factor 1
+% instead of factor 2, and the added clause "different from the identity", which is what stops the
+% obvious answer and makes the problem worth having next to its sibling.
+\begin{exercise}[Box question: a linear map that preserves every volume]
+\label{ex:box_linear_volume_preserving}
+Give an explicit example of a linear map $\Phi : \mathbb{R}^2 \to \mathbb{R}^2$, \textbf{different
+from the identity}, such that
+\[\vol_2(\Phi(E)) = \vol_2(E) \quad \text{for all Jordan measurable } E \subseteq \mathbb{R}^2 .\]
+\exinfo{This exercise is taken from the exam of 21 August 2024, Box Problem 2, where only the final
+answer was graded.}
 \end{exercise}
 
 % Correction: Claude Opus 5 (High) --- provenance repair. A Gemini 3.1 Pro pass filed the statement

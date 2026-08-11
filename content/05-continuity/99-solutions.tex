@@ -20,7 +20,7 @@ which is $1$-Lipschitz continuity (\cref{def:lipschitz_continuous}) and therefor
 (\cref{rem:continuity_hierarchy}).
 
 \textbf{For $d_1$ and $d_3$: yes, still Lipschitz, but the constant changes.} By
-\cref{ex:2.5} part 2 we have $d_2 \leq 2d_1$ and $d_2 \leq \sqrt2\,d_3$, so
+\cref{ex:2.5} part \textbf{(b)} we have $d_2 \leq 2d_1$ and $d_2 \leq \sqrt2\,d_3$, so
 \[\big|d(x_1,x_2)-d(y_1,y_2)\big| \leq 2\,d_1(x,y)
   \qquad\text{and}\qquad
   \big|d(x_1,x_2)-d(y_1,y_2)\big| \leq \sqrt2\,d_3(x,y).\]
@@ -175,7 +175,7 @@ domain is what removes the room to run off to a bad point.
 
 \begin{exercisesolution}[Solution to \cref{ex:3.11}]
 % Generator: Claude Opus 5 (High)
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item \textbf{($\Leftarrow$) A modulus of continuity forces uniform continuity.} Suppose
     $d_Y(f(x),f(y)) \leq \omega(d_X(x,y))$ for all $x,y$, with $\omega$ as in the statement. Let
     $\varepsilon > 0$. Since $\omega(t) \to 0$ as $t \downarrow 0$, there is $\delta > 0$ with
@@ -207,10 +207,10 @@ domain is what removes the room to run off to a bad point.
       \ \leq\ \omega_f(t_1) + \omega_f(t_2).\]
     Taking the supremum over all admissible $x,y$ yields
     $\omega_f(t_1+t_2) \leq \omega_f(t_1) + \omega_f(t_2)$.
-  \item \textbf{(Bonus 2) Convexity is exactly what the argument needed.} Repeat part 2 verbatim,
-    now reading $|x-y|$ as the Euclidean norm on $\mathbb{R}^n$ rather than the absolute value on
-    $\mathbb{R}$: the only property of an interval that was used is that the segment from $x$ to
-    $y$ lies inside $X$, and that is the definition of convexity. The intermediate point is
+  \item \textbf{(Bonus 2) Convexity is exactly what the argument needed.} Repeat part \textbf{(b)}
+    verbatim, now reading $|x-y|$ as the Euclidean norm on $\mathbb{R}^n$ rather than the absolute
+    value on $\mathbb{R}$: the only property of an interval that was used is that the segment from
+    $x$ to $y$ lies inside $X$, and that is the definition of convexity. The intermediate point is
     $z := x + \min\{t_1,|x-y|\}\,\frac{y-x}{|y-x|}$ for $x \neq y$, which lies on the segment and
     satisfies the same two estimates.
 \end{enumerate}
@@ -220,7 +220,8 @@ The official remark accompanying this problem gives the reason, and it is worth 
 $X = \mathbb{Z} \subseteq \mathbb{R}$ the map $f(n) := n^2$ is uniformly continuous for the
 trivial reason that any two distinct points are at distance at least $1$. Take
 $\delta := \tfrac12$, and the implication holds vacuously. Yet
-$|f(n+1)-f(n)| = 2n+1$ is unbounded, so $\omega_f(1) = +\infty$. Parts 2 and 3 rule this out by
+$|f(n+1)-f(n)| = 2n+1$ is unbounded, so $\omega_f(1) = +\infty$. Parts \textbf{(b)} and
+\textbf{(c)} rule this out by
 hypothesis rather than by luck: on a convex set the intermediate-point construction lets a large
 displacement be broken into many small ones, so $\omega_f(t) \leq \lceil t/s\rceil\,\omega_f(s)$
 is finite as soon as some $\omega_f(s)$ is. A space like $\mathbb{Z}$ has no intermediate points

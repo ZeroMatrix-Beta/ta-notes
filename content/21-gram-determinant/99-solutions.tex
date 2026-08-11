@@ -35,31 +35,32 @@ For the second, $\int_0^2 \tfrac12 r^3\,dr = \tfrac12\cdot\tfrac{16}{4} = 2$. So
 
 \begin{exercisesolution}[Solution to \cref{ex:9.2}]
 % Generator: Claude Sonnet 5 (Medium)
-\textbf{Part 1.} By Fubini (\cref{thm:fubini}),
-\[\iint_D (x^3+3x^2y+y^3)\,dx\,dy = \int_0^2\int_0^1 (x^3+3x^2y+y^3)\,dy\,dx
-  = \int_0^2\left(x^3+\frac32x^2+\frac14\right)dx.\]
-The last integral is $\left[\tfrac{x^4}{4}+\tfrac{x^3}{2}+\tfrac{x}{4}\right]_0^2 = 4+4+\tfrac12
-= \boxed{\ \tfrac{17}{2}\ }$.
-
-\textbf{Part 2.} Using Corsin's parametrization $D=\{0\leq x\leq y\leq\pi\}$,
-\[\iint_D x\cos(x+y)\,dx\,dy = \int_0^\pi\int_x^\pi x\cos(x+y)\,dy\,dx
-  = \int_0^\pi x\big[\sin(x+y)\big]_{y=x}^{y=\pi}\,dx.\]
-Since $\sin(x+\pi) = -\sin x$, the bracket equals $-\sin x - \sin(2x)$, so
-\[\iint_D x\cos(x+y)\,dx\,dy = -\int_0^\pi x\sin x\,dx - \int_0^\pi x\sin(2x)\,dx.\]
-Integrating by parts, $\int_0^\pi x\sin x\,dx = [-x\cos x+\sin x]_0^\pi = \pi$, and
-$\int_0^\pi x\sin(2x)\,dx = \left[-\tfrac{x}{2}\cos(2x)+\tfrac14\sin(2x)\right]_0^\pi
-= -\tfrac\pi2$. Hence
-\[\iint_D x\cos(x+y)\,dx\,dy = -\pi - \left(-\frac\pi2\right) = \boxed{\ -\frac\pi2\ }.\]
-
-\textbf{Part 3.} Here $D = \{1<x<2,\ 1<y<3-x\}$, so
-\[\iint_D \frac{1}{(x+y)^3}\,dx\,dy = \int_1^2\int_1^{3-x} (x+y)^{-3}\,dy\,dx
-  = \int_1^2 \left[-\frac12(x+y)^{-2}\right]_{y=1}^{y=3-x}dx.\]
-Since $x+(3-x)=3$, the bracket is $-\tfrac12\big(3^{-2}-(x+1)^{-2}\big)
-= \tfrac12(x+1)^{-2} - \tfrac1{18}$, and
-\[\int_1^2\left(\frac{1}{2(x+1)^2}-\frac1{18}\right)dx
-  = \left[-\frac{1}{2(x+1)}\right]_1^2 - \frac1{18}
-  = \left(-\frac16+\frac14\right) - \frac1{18} = \frac1{12}-\frac1{18}
-  = \boxed{\ \frac1{36}\ }.\]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item By Fubini (\cref{thm:fubini}),
+    \[\iint_D (x^3+3x^2y+y^3)\,dx\,dy = \int_0^2\int_0^1 (x^3+3x^2y+y^3)\,dy\,dx
+      = \int_0^2\left(x^3+\frac32x^2+\frac14\right)dx.\]
+    The last integral is
+    $\left[\tfrac{x^4}{4}+\tfrac{x^3}{2}+\tfrac{x}{4}\right]_0^2 = 4+4+\tfrac12
+    = \boxed{\ \tfrac{17}{2}\ }$.
+  \item Using Corsin's parametrization $D=\{0\leq x\leq y\leq\pi\}$,
+    \[\iint_D x\cos(x+y)\,dx\,dy = \int_0^\pi\int_x^\pi x\cos(x+y)\,dy\,dx
+      = \int_0^\pi x\big[\sin(x+y)\big]_{y=x}^{y=\pi}\,dx.\]
+    Since $\sin(x+\pi) = -\sin x$, the bracket equals $-\sin x - \sin(2x)$, so
+    \[\iint_D x\cos(x+y)\,dx\,dy = -\int_0^\pi x\sin x\,dx - \int_0^\pi x\sin(2x)\,dx.\]
+    Integrating by parts, $\int_0^\pi x\sin x\,dx = [-x\cos x+\sin x]_0^\pi = \pi$, and
+    $\int_0^\pi x\sin(2x)\,dx = \left[-\tfrac{x}{2}\cos(2x)+\tfrac14\sin(2x)\right]_0^\pi
+    = -\tfrac\pi2$. Hence
+    \[\iint_D x\cos(x+y)\,dx\,dy = -\pi - \left(-\frac\pi2\right) = \boxed{\ -\frac\pi2\ }.\]
+  \item Here $D = \{1<x<2,\ 1<y<3-x\}$, so
+    \[\iint_D \frac{1}{(x+y)^3}\,dx\,dy = \int_1^2\int_1^{3-x} (x+y)^{-3}\,dy\,dx
+      = \int_1^2 \left[-\frac12(x+y)^{-2}\right]_{y=1}^{y=3-x}dx.\]
+    Since $x+(3-x)=3$, the bracket is $-\tfrac12\big(3^{-2}-(x+1)^{-2}\big)
+    = \tfrac12(x+1)^{-2} - \tfrac1{18}$, and
+    \[\int_1^2\left(\frac{1}{2(x+1)^2}-\frac1{18}\right)dx
+      = \left[-\frac{1}{2(x+1)}\right]_1^2 - \frac1{18}
+      = \left(-\frac16+\frac14\right) - \frac1{18} = \frac1{12}-\frac1{18}
+      = \boxed{\ \frac1{36}\ }.\]
+\end{enumerate}
 \end{exercisesolution}
 
 % All three parts of ex:9.2 and ex:9.1 were worked out independently before consulting
@@ -82,8 +83,8 @@ the exercise's range $\theta\in(-\pi/2,\pi/2)$. Computing
   -\sin\varphi\sin\theta\\ \cos\theta\end{pmatrix} = \begin{pmatrix}\cos\varphi\cos^2\theta\\
   \sin\varphi\cos^2\theta\\ \sin\theta\cos\theta\end{pmatrix},\]
 its length is $\lvert\partial_\varphi\Phi\times\partial_\theta\Phi\rvert = \cos\theta$ (for
-$\theta\in(-\pi/2,\pi/2)$, so $\cos\theta>0$). By \cref{prop:flux_r3}(2), this is the Gram
-determinant, so $dA = \cos\theta\,d\theta\,d\varphi$, and
+$\theta\in(-\pi/2,\pi/2)$, so $\cos\theta>0$). By \cref{prop:flux_r3}\textbf{(b)}, this is the
+Gram determinant, so $dA = \cos\theta\,d\theta\,d\varphi$, and
 \[\int_S dA = \int_{\varphi_1}^{\varphi_2}\!\!\int_{\theta_1}^{\theta_2} \cos\theta\,d\theta\,
   d\varphi = \boxed{\ (\varphi_2-\varphi_1)\big(\sin\theta_2-\sin\theta_1\big)\ }.\]
 \end{exercisesolution}
@@ -110,84 +111,90 @@ Hence
 
 \begin{exercisesolution}[Solution to \cref{ex:10.3}]
 % Generator: Claude Sonnet 5 (Medium)
-\textbf{Part 1.} $\partial_{\mathrm{side}}\Omega$ is not closed (it omits, e.g., the limit
-point $(a,f(a),0)$ as $x\to a^+$) and not open (a $2$-dimensional surface has empty interior
-in $\mathbb{R}^3$), but it \emph{is} path-connected: from any point, first move along the
-graph of $f$ in the $x$-direction, then move around the circle in the $(y,z)$-variables.
-$\Omega$ is open (as the strict sublevel set of a continuous function), not closed, and its
-connectedness depends on $f$: if $f$ vanishes somewhere in $(a,b)$, the cross-section pinches
-to a point there and $\Omega$ is disconnected into the pieces on either side; if $f>0$
-throughout $(a,b)$, $\Omega$ is connected.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $\partial_{\mathrm{side}}\Omega$ is not closed (it omits, e.g., the limit
+    point $(a,f(a),0)$ as $x\to a^+$) and not open (a $2$-dimensional surface has empty interior
+    in $\mathbb{R}^3$), but it \emph{is} path-connected: from any point, first move along the
+    graph of $f$ in the $x$-direction, then move around the circle in the $(y,z)$-variables.
+    $\Omega$ is open (as the strict sublevel set of a continuous function), not closed, and its
+    connectedness depends on $f$: if $f$ vanishes somewhere in $(a,b)$, the cross-section pinches
+    to a point there and $\Omega$ is disconnected into the pieces on either side; if $f>0$
+    throughout $(a,b)$, $\Omega$ is connected.
 
-\textbf{Part 2.} In cylindrical coordinates $(x,\rho,\theta)$ with $y=\rho\cos\theta$,
-$z=\rho\sin\theta$, $dx\,dy\,dz = \rho\,d\rho\,d\theta\,dx$, the domain becomes the box-like
-region $\{a<x<b,\ 0<\rho<f(x),\ \theta\in[0,2\pi)\}$, so
-\[\vol_3(\Omega) = \int_a^b\!\!\int_0^{2\pi}\!\!\int_0^{f(x)} \rho\,d\rho\,d\theta\,dx
-  = \int_a^b\!\!\int_0^{2\pi} \frac12 f(x)^2\,d\theta\,dx
-  = \boxed{\ \pi\int_a^b f(x)^2\,dx\ }.\]
+  \item In cylindrical coordinates $(x,\rho,\theta)$ with $y=\rho\cos\theta$,
+    $z=\rho\sin\theta$, $dx\,dy\,dz = \rho\,d\rho\,d\theta\,dx$, the domain becomes the box-like
+    region $\{a<x<b,\ 0<\rho<f(x),\ \theta\in[0,2\pi)\}$, so
+    \[\vol_3(\Omega) = \int_a^b\!\!\int_0^{2\pi}\!\!\int_0^{f(x)} \rho\,d\rho\,d\theta\,dx
+      = \int_a^b\!\!\int_0^{2\pi} \frac12 f(x)^2\,d\theta\,dx
+      = \boxed{\ \pi\int_a^b f(x)^2\,dx\ }.\]
 
-\textbf{Part 3.} Using the suggested parametrization $\Phi(x,\theta) = (x,f(x)\cos\theta,
-f(x)\sin\theta)$, write the orthonormal frame $\xi_1:=(1,0,0)$, $\xi_2:=(0,\cos\theta,
-\sin\theta)$, $\xi_3:=(0,-\sin\theta,\cos\theta)$, so that
-\[\partial_x\Phi = \xi_1 + f'(x)\xi_2, \qquad \partial_\theta\Phi = f(x)\xi_3.\]
-Since $\xi_1,\xi_2,\xi_3$ are orthonormal and right-handed, $\xi_1\times\xi_3=-\xi_2$ and
-$\xi_2\times\xi_3=\xi_1$, so
-\[\partial_x\Phi\times\partial_\theta\Phi = f(x)\big(\xi_1\times\xi_3
-  + f'(x)\,\xi_2\times\xi_3\big) = f(x)\big({-\xi_2}+f'(x)\xi_1\big), \qquad
-  \lvert\partial_x\Phi\times\partial_\theta\Phi\rvert = f(x)\sqrt{1+f'(x)^2}.\]
-By \cref{prop:flux_r3}(2), this is the Gram determinant, so
-\[\vol_2(\partial_{\mathrm{side}}\Omega) = \int_a^b\!\!\int_0^{2\pi} f(x)\sqrt{1+f'(x)^2}\,
-  d\theta\,dx = \boxed{\ 2\pi\int_a^b f(x)\sqrt{1+f'(x)^2}\,dx\ }.\]
+  \item Using the suggested parametrization $\Phi(x,\theta) = (x,f(x)\cos\theta,
+    f(x)\sin\theta)$, write the orthonormal frame $\xi_1:=(1,0,0)$, $\xi_2:=(0,\cos\theta,
+    \sin\theta)$, $\xi_3:=(0,-\sin\theta,\cos\theta)$, so that
+    \[\partial_x\Phi = \xi_1 + f'(x)\xi_2, \qquad \partial_\theta\Phi = f(x)\xi_3.\]
+    Since $\xi_1,\xi_2,\xi_3$ are orthonormal and right-handed, $\xi_1\times\xi_3=-\xi_2$ and
+    $\xi_2\times\xi_3=\xi_1$, so
+    \begin{align*}
+      \partial_x\Phi\times\partial_\theta\Phi
+        &= f(x)\big(\xi_1\times\xi_3 + f'(x)\,\xi_2\times\xi_3\big)
+         = f(x)\big({-\xi_2}+f'(x)\xi_1\big), \\
+      \lvert\partial_x\Phi\times\partial_\theta\Phi\rvert &= f(x)\sqrt{1+f'(x)^2}.
+    \end{align*}
+    By \cref{prop:flux_r3}\textbf{(b)}, this is the Gram determinant, so
+    \[\vol_2(\partial_{\mathrm{side}}\Omega) = \int_a^b\!\!\int_0^{2\pi} f(x)\sqrt{1+f'(x)^2}\,
+      d\theta\,dx = \boxed{\ 2\pi\int_a^b f(x)\sqrt{1+f'(x)^2}\,dx\ }.\]
 
-\textbf{Part 4.} With $f(x)=1/x$ on $[1,\infty)$, both integrands are non-negative, so the
-improper integrals are unambiguous (possibly $+\infty$). The volume is finite:
-\[\pi\int_1^\infty \frac{1}{x^2}\,dx = \pi\Big[-\frac1x\Big]_1^\infty = \boxed{\ \pi\ }.\]
-For the surface area, $f'(x) = -1/x^2$, so the integrand is $\sqrt{1+x^{-4}}/x \geq 1/x$
-pointwise, and since $\int_1^\infty \frac1x\,dx$ diverges, so does
-\[2\pi\int_1^\infty \frac{\sqrt{1+x^{-4}}}{x}\,dx = \boxed{\ +\infty\ }.\]
-This is the classical \newterm{Gabriel's horn} \germanfor{Torricellis Trompete}: finite
-volume, infinite surface area.
+  \item With $f(x)=1/x$ on $[1,\infty)$, both integrands are non-negative, so the
+    improper integrals are unambiguous (possibly $+\infty$). The volume is finite:
+    \[\pi\int_1^\infty \frac{1}{x^2}\,dx = \pi\Big[-\frac1x\Big]_1^\infty = \boxed{\ \pi\ }.\]
+    For the surface area, $f'(x) = -1/x^2$, so the integrand is $\sqrt{1+x^{-4}}/x \geq 1/x$
+    pointwise, and since $\int_1^\infty \frac1x\,dx$ diverges, so does
+    \[2\pi\int_1^\infty \frac{\sqrt{1+x^{-4}}}{x}\,dx = \boxed{\ +\infty\ }.\]
+    This is the classical \newterm{Gabriel's horn} \germanfor{Torricellis Trompete}: finite
+    volume, infinite surface area.
 
-\textbf{Part 5.} ($\Leftarrow$) Suppose $(*)$ holds. Since $f'(a^+)=+\infty$, the inverse
-function theorem applies to $f|_{(a,a+\varepsilon)}$ for $\varepsilon$ small, giving a $C^1$,
-increasing inverse there; extend it by
-\[g(y) := \begin{cases} f^{-1}(y) & f(a)<y<f(a)+\varepsilon, \\ a & y\leq f(a). \end{cases}\]
-Since $f'(a^+)=+\infty$, $\lim_{y\to f(a)^+}g'(y) = \lim_{x\to a^+} 1/f'(x) = 0 =
-\lim_{y\to f(a)^-}g'(y)$, so $g\in C^1$ across $y=f(a)$. Around a boundary point $P :=
-(a,f(a)\cos\phi,f(a)\sin\phi)$, the map $(t,\theta)\mapsto\big(g(t),f(g(t))\cos\theta,
-f(g(t))\sin\theta\big)$ is then a regular $C^1$ parametrization of $\partial\Omega$ (using
-$f(a)>0$ to keep the angular direction non-degenerate). The symmetric argument at $b$, using
-$f'(b^-)=-\infty$, handles the other end, so $\partial\Omega$ is a $C^1$ submanifold and
-$\Omega$ is a bounded $C^1$ domain.
+  \item ($\Leftarrow$) Suppose $(*)$ holds. Since $f'(a^+)=+\infty$, the inverse
+    function theorem applies to $f|_{(a,a+\varepsilon)}$ for $\varepsilon$ small, giving a $C^1$,
+    increasing inverse there; extend it by
+    \[g(y) := \begin{cases} f^{-1}(y) & f(a)<y<f(a)+\varepsilon, \\ a & y\leq f(a). \end{cases}\]
+    Since $f'(a^+)=+\infty$, $\lim_{y\to f(a)^+}g'(y) = \lim_{x\to a^+} 1/f'(x) = 0 =
+    \lim_{y\to f(a)^-}g'(y)$, so $g\in C^1$ across $y=f(a)$. Around a boundary point $P :=
+    (a,f(a)\cos\phi,f(a)\sin\phi)$, the map $(t,\theta)\mapsto\big(g(t),f(g(t))\cos\theta,
+    f(g(t))\sin\theta\big)$ is then a regular $C^1$ parametrization of $\partial\Omega$ (using
+    $f(a)>0$ to keep the angular direction non-degenerate). The symmetric argument at $b$, using
+    $f'(b^-)=-\infty$, handles the other end, so $\partial\Omega$ is a $C^1$ submanifold and
+    $\Omega$ is a bounded $C^1$ domain.
 
-($\Rightarrow$) Suppose $\Omega$ is a bounded $C^1$ domain. If $f$ vanished at some interior
-point, $\Omega$ would be disconnected by Part 1, which \cref{def:bounded_ck_domain} excludes,
-since it requires $\Omega$ itself to make sense as a single bounded open set with $(n-1)$-manifold
-boundary (implicit in the exercise's setup). Therefore $f>0$ on $(a,b)$. For the endpoint condition
-at $a$: the point $P:=(a,f(a),0)\in\partial\Omega$ is a smooth boundary point, so
-$T_P(\partial\Omega)$ is $2$-dimensional and contains
-\[\frac{d}{dt}\Big|_{t=0^+}\big(a,f(a)-t,0\big) = -e_2, \qquad
-  \frac{d}{dt}\Big|_{t=0^-}\big(a,f(a)\cos t,f(a)\sin t\big) = f(a)e_3,\]
-so $T_P(\partial\Omega) = \operatorname{span}\{e_2,e_3\}$. But $T_P(\partial\Omega)$ must
-also contain the limit of the (rescaled, if necessary) tangent vectors
-\[v_\varepsilon := \frac{d}{dt}\Big|_{t=0^+}\big(a+\varepsilon+t,\ f(a+\varepsilon+t),\
-  0\big) = \big(1,\ f'(a+\varepsilon),\ 0\big)\]
-as $\varepsilon\to0^+$ (these are tangent to $\partial\Omega$ at nearby points converging to
-$P$). If $f'(a+\varepsilon)$ stayed bounded along some sequence $\varepsilon_k\to0^+$, the
-direction of $v_{\varepsilon_k}$ would converge to some $\alpha e_1+\beta e_2 \notin
-\operatorname{span}\{e_2,e_3\}$ (its $e_1$-component is the nonzero constant $1$, up to
-normalization), contradicting $T_P(\partial\Omega)=\operatorname{span}\{e_2,e_3\}$. So
-$f'(a^+)=+\infty$; the symmetric argument at $b$ gives $f'(b^-)=-\infty$.
+    ($\Rightarrow$) Suppose $\Omega$ is a bounded $C^1$ domain. If $f$ vanished at some interior
+    point, $\Omega$ would be disconnected by part \textbf{(a)}, which
+    \cref{def:bounded_ck_domain} excludes, since it requires $\Omega$ itself to make sense as a
+    single bounded open set with $(n-1)$-manifold boundary (implicit in the exercise's setup).
+    Therefore $f>0$ on $(a,b)$. For the endpoint condition at $a$: the point
+    $P:=(a,f(a),0)\in\partial\Omega$ is a smooth boundary point, so
+    $T_P(\partial\Omega)$ is $2$-dimensional and contains
+    \[\frac{d}{dt}\Big|_{t=0^+}\big(a,f(a)-t,0\big) = -e_2, \qquad
+      \frac{d}{dt}\Big|_{t=0^-}\big(a,f(a)\cos t,f(a)\sin t\big) = f(a)e_3,\]
+    so $T_P(\partial\Omega) = \operatorname{span}\{e_2,e_3\}$. But $T_P(\partial\Omega)$ must
+    also contain the limit of the (rescaled, if necessary) tangent vectors
+    \[v_\varepsilon := \frac{d}{dt}\Big|_{t=0^+}\big(a+\varepsilon+t,\ f(a+\varepsilon+t),\
+      0\big) = \big(1,\ f'(a+\varepsilon),\ 0\big)\]
+    as $\varepsilon\to0^+$ (these are tangent to $\partial\Omega$ at nearby points converging to
+    $P$). If $f'(a+\varepsilon)$ stayed bounded along some sequence $\varepsilon_k\to0^+$, the
+    direction of $v_{\varepsilon_k}$ would converge to some $\alpha e_1+\beta e_2 \notin
+    \operatorname{span}\{e_2,e_3\}$ (its $e_1$-component is the nonzero constant $1$, up to
+    normalization), contradicting $T_P(\partial\Omega)=\operatorname{span}\{e_2,e_3\}$. So
+    $f'(a^+)=+\infty$; the symmetric argument at $b$ gives $f'(b^-)=-\infty$.
+\end{enumerate}
 \end{exercisesolution}
 
 \begin{ainote}
 All parts of \cref{ex:10.1,ex:10.2,ex:10.3} were worked out independently before consulting
 \texttt{Sol10\_Analysis2\_eng.pdf}. The three main answers ($(\varphi_2-\varphi_1)(\sin\theta_2
 -\sin\theta_1)$, $8\pi^2$, $\pi\int_a^bf(x)^2dx$ / $2\pi\int_a^bf(x)\sqrt{1+f'(x)^2}dx$ /
-volume $\pi$, area $+\infty$) match exactly. Part 5 was reconstructed independently along the
-same two-directional strategy (build an explicit $C^1$ parametrization near each endpoint
-using the inverse function theorem; for the converse, derive a contradiction from the tangent
-space being forced to both contain $\operatorname{span}\{e_2,e_3\}$ and the limiting
+volume $\pi$, area $+\infty$) match exactly. Part \textbf{(e)} was reconstructed independently
+along the same two-directional strategy (build an explicit $C^1$ parametrization near each
+endpoint using the inverse function theorem; for the converse, derive a contradiction from the
+tangent space being forced to both contain $\operatorname{span}\{e_2,e_3\}$ and the limiting
 direction of $v_\varepsilon$) and agrees with the official solution in substance, though the
 write-up above is condensed relative to the official one.
 \end{ainote}

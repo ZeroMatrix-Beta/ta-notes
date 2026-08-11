@@ -229,9 +229,92 @@ above; the rest of his proof is unchanged.
 \end{tikzpicture}
 \end{center}
 
-% Sonnet 5 (Medium)
-We close the week with a change of subject: away from topology and back to the linear-algebraic
-structure (\cref{sec:structured_spaces}) that lets us talk about angles, not just distances.
+\subsection{Simple connectedness}
+\label{sec:simply_connected}
+
+% Supplement: lec_notes.pdf, Definition 14.89, printed p. 200
+% Generator: Claude Opus 5 (High)
+% Gap closed 2026-08-11. "Simply connected" was used in three exercises of chapters 7 and 8
+% (ex:annulus_continuous_image, ex:closed_unbounded_not_simply_connected, ex:examHS24_TF_topology)
+% and defined nowhere before chapter 26, where it appeared only informally, inside an ainote
+% attached to cor:potentials_simply_connected. The definition below is Definition 14.89, and the
+% ainote in 26-stokes/03-poincare-lemma.tex now points here instead of redefining the term.
+% NOTE: the lecture notes flag section 14.5.3 and this definition as "[Extra material]". Kept
+% anyway, and the scope rule in gemini.md is not being violated: this is not a new section for a
+% skipped topic but a definition for a term three of our own exercises already use, and it is
+% examined --- 21 August 2024 asks whether an annulus is simply connected (Aufgabe 1.2) and both
+% Serra papers close with a true/false block on closed-but-not-exact fields.
+Connectedness asks whether a set falls into separate pieces, and path-connectedness asks whether
+any two points can be joined. Neither notices a \emph{hole}: an annulus is connected and
+path-connected, and yet a loop running around its inner boundary cannot be shrunk to a point
+without leaving the set. The third notion in the family is the one that sees this, and it is
+needed as early as \cref{ex:annulus_continuous_image}, well before the chapter on the Poincaré
+lemma that puts it to work.
+
+\begin{definition}[Homotopy, simply connected set]
+\label{def:simply_connected}
+Let $U \subseteq \mathbb{R}^n$, and let $\gamma_0, \gamma_1 : [0,1] \to U$ be continuous paths
+with the same initial point $x_0 = \gamma_0(0) = \gamma_1(0)$ and the same endpoint
+$x_1 = \gamma_0(1) = \gamma_1(1)$. A \newterm{homotopy} \germanfor{Homotopie} from $\gamma_0$ to
+$\gamma_1$ within $U$ is a continuous map $H : [0,1]\times[0,1] \to U$ with
+\[H(0,t) = \gamma_0(t), \qquad H(1,t) = \gamma_1(t), \qquad
+  H(s,0) = x_0, \qquad H(s,1) = x_1\]
+for all $s,t \in [0,1]$. If such an $H$ exists we say $\gamma_1$ is \newterm{homotopic}
+\germanfor{homotop} to $\gamma_0$.
+
+The set $U$ is \newterm{simply connected} \germanfor{einfach zusammenhängend} if any two paths
+in $U$ with the same endpoints are homotopic.
+\end{definition}
+
+\begin{remark}[Reading the definition as a deformation]
+\label{rem:homotopy_as_deformation}
+Fix $s$ and the map $t \mapsto H(s,t)$ is itself a path in $U$ from $x_0$ to $x_1$. So $H$ is a
+family of paths depending continuously on the parameter $s$, starting at $\gamma_0$ when $s=0$ and
+ending at $\gamma_1$ when $s=1$. The last two conditions pin the two endpoints down throughout the
+deformation, which is what makes the notion non-trivial: without them, every path could be
+contracted to a point in any path-connected set and the definition would say nothing.
+
+Taking $\gamma_1$ constant gives the usual informal phrasing, that every loop in $U$ can be
+continuously shrunk to a point inside $U$.
+\end{remark}
+
+\begin{importantremark}[Three notions, and how they are ordered]
+\label{rem:three_connectedness_notions}
+For an \emph{open} subset of $\mathbb{R}^n$ the three properties are strictly ordered, each
+implying the one after it and none of the converses holding:
+\[\text{simply connected} \ \Longrightarrow\ \text{path-connected}
+  \ \Longrightarrow\ \text{connected}.\]
+The second implication is \cref{lem:path_connected_implies_connected}, and the first is immediate
+from the definitions, since a homotopy between two paths presupposes that two such paths exist.
+Each failure has a standard witness:
+\begin{itemize}
+  \item \textbf{Connected but not path-connected:} the topologist's sine curve,
+    \cref{ex:topologists_sine_curve}. This one needs the set to be non-open;
+    \cref{prop:open_euclidean_connected_path_connected} says the two notions coincide for open
+    subsets of $\mathbb{R}^n$.
+  \item \textbf{Path-connected but not simply connected:} the punctured plane
+    $\mathbb{R}^2\setminus\{0\}$, or any annulus. The loop around the hole cannot be contracted,
+    and \cref{ex:vortex_field_not_conservative} turns exactly that failure into a vector field with
+    no potential.
+\end{itemize}
+Two warnings that the annulus already illustrates. Simple connectedness is \emph{not} about
+convexity or about having no dents: $\mathbb{R}^n$ and any convex set are simply connected, but so
+is a spiral-shaped region. And it depends on the dimension in a way the other two do not:
+$\mathbb{R}^3\setminus\{0\}$ \emph{is} simply connected, because a loop in space can be slid off a
+single missing point, while $\mathbb{R}^2\setminus\{0\}$ is not. Removing a whole line from
+$\mathbb{R}^3$ destroys it again.
+\end{importantremark}
+
+% Transition: Claude Opus 5 (High) --- replaces a Sonnet 5 (Medium) sentence reading "We close the
+% week with a change of subject: away from topology and back to the linear-algebraic structure
+% (\cref{sec:structured_spaces}) that lets us talk about angles, not just distances." It was left
+% over from the week structure and pointed backwards at chapter 2, which no longer follows this
+% material; after the subsection above it also sat between two topology blocks.
+Of the three notions, only connectedness is used heavily in what follows, and it is used in one
+particular way: continuous images of connected sets are connected
+(\cref{thm:continuity_preserves_connected}), which is what turns a statement about a domain into a
+statement about the values a function takes on it. Simple connectedness returns in
+\cref{ch:stokes}, where it becomes the exact condition for a curl-free field to have a potential.
 
 
 

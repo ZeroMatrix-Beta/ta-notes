@@ -10,7 +10,7 @@ Not every solution in this chapter is collected here. \Cref{ex:chain_rule_comput
 
 \begin{exercisesolution}[Solution to \cref{ex:4.6}]
 % Generator: Claude Sonnet 5 (Medium)
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item Define $v(x_2,\dots,x_n) := u(0,x_2,\dots,x_n)$, which is $C^1$ as the restriction of $u$
     to the hyperplane $x_1 = 0$. For fixed $(x_2,\dots,x_n)$, the function
     $t \mapsto u(t,x_2,\dots,x_n)$ has derivative $\partial_1 u \equiv 0$ everywhere, hence is
@@ -23,16 +23,16 @@ Not every solution in this chapter is collected here. \Cref{ex:chain_rule_comput
     $t\nu_i/\nu_1$, i.e.\ moves $x$ in the direction $\tfrac{1}{\nu_1}\nu$. By the hint, applying
     the mean value theorem to $u(x+t\nu)$ shows $t \mapsto u(x+t\nu)$ is constant since
     $\partial_\nu u \equiv 0$; consequently $u$, expressed in the coordinates $(x_1, y_2,\dots,
-    y_n)$, has vanishing $x_1$-derivative and is therefore (by part 1) independent of $x_1$ in
-    these coordinates. Hence, there is a (unique, by the same argument as in part 1) function
-    $w \in C^1(\mathbb{R}^{n-1})$ with
+    y_n)$, has vanishing $x_1$-derivative and is therefore (by part \textbf{(a)}) independent of
+    $x_1$ in these coordinates. Hence, there is a (unique, by the same argument as in part
+    \textbf{(a)}) function $w \in C^1(\mathbb{R}^{n-1})$ with
     \[
     u(x_1,\dots,x_n) = w\!\left(x_2 - \frac{x_1\nu_2}{\nu_1},\dots,x_n - \frac{x_1\nu_n}{\nu_1}\right).
     \]
   \item In general, only \textbf{locally}: on any open subset where every fiber
     $\{x_1 : (x_1,x_2,\dots,x_n) \in U\}$ (for fixed $(x_2,\dots,x_n)$) is connected, the same
-    argument as in part 1 shows $u$ is locally of the form $v(x_2,\dots,x_n)$. But this need not
-    hold \textbf{globally} on all of $U$, even though $U$ itself is connected: with
+    argument as in part \textbf{(a)} shows $u$ is locally of the form $v(x_2,\dots,x_n)$. But this
+    need not hold \textbf{globally} on all of $U$, even though $U$ itself is connected: with
     $U := \{(x,y) : x^2 < y < x^2+1\}$ and $u(x,y) := \max\{0,y-2\}^2$ for $x \geq 0$, $u := 0$
     for $x \leq 0$, one checks $\partial_1 u \equiv 0$ throughout $U$ (near $x=0$ both branches
     agree, since $y < 2$ there), yet $u$ is not globally independent of $x$: for $y > 2$, the
@@ -79,7 +79,7 @@ D_v f(1,2) = \nabla f(1,2) \cdot v = \begin{pmatrix} 4 \\ 1 \end{pmatrix} \cdot 
 Throughout, $v$ is the direction and $x$ the base point. Where $f$ is differentiable the answer is
 just $\partial_v f(x) = \langle\nabla f(x), v\rangle$; the interest is in the points where it is
 not, which is what the second half of each part is asking about.
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item On $\mathbb{R}^2\setminus\{x_2=0\}$ both functions are smooth, so
     \[\partial_v\!\left(\frac{x_1}{x_2}\right) = \frac{v_1}{x_2} - \frac{x_1v_2}{x_2^2},
       \qquad
@@ -156,7 +156,7 @@ not, which is what the second half of each part is asking about.
 Write $\theta(t) := \omega t + a(t)$ for the longitude actually occupied in space and
 $\varphi(t) := b(t)$ for the latitude, so that
 \[r(t) = R\big(\cos\varphi\cos\theta,\ \cos\varphi\sin\theta,\ \sin\varphi\big).\]
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item The computation is far shorter in the moving orthonormal frame
     \begin{align*}
       e_r      &:= (\cos\varphi\cos\theta,\ \cos\varphi\sin\theta,\ \sin\varphi), \\
@@ -204,4 +204,82 @@ lower.
   \item \textbf{False:} Applying the product rule to the expression from part \textbf{(a)} yields $\partial_{ii}(u \circ F) = \partial_i \big( \sum_{j=1}^n (\partial_j u \circ F) \, \partial_iF_j \big) = \sum_{j=1}^n \big( \partial_i(\partial_j u \circ F) \, \partial_iF_j + (\partial_j u \circ F) \, \partial_{ii}F_j \big)$. Expanding the first term with the chain rule again gives $\sum_{j=1}^n \big( \sum_{k=1}^n (\partial_{jk} u \circ F) \, \partial_iF_k \big) \partial_iF_j$. The given formula erroneously collapses the double sum $\sum_{j,k}$ into a single sum $\sum_{j} \partial_{jj} u (\partial_iF_j)^2$, missing all the cross terms where $j \neq k$.
   \item \textbf{True:} Since $F$ and $u$ are both $C^2$, their composition $u \circ F$ is also $C^2$. By Schwarz's theorem, the mixed partial derivatives commute.
 \end{enumerate}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution of \cref{ex:regularity_ladder_xy2}]
+% Generator: Claude Opus 5 (High)
+One substitution settles everything. In polar coordinates $x = r\cos\theta$, $y = r\sin\theta$,
+\[f(r\cos\theta,\, r\sin\theta) = \frac{r\cos\theta \cdot r^2\sin^2\theta}{r^2}
+  = r\,\cos\theta\sin^2\theta \qquad (r > 0),\]
+so $f$ is positively homogeneous of degree $1$: it grows linearly along every ray, with a
+ray-dependent slope. That single formula answers \textbf{(c)} and \textbf{(d)} at once.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{True.} Away from the origin $f$ is a quotient of polynomials whose denominator does
+    not vanish, and such a quotient is $C^\infty$.
+  \item \textbf{True.} Along the $x$-axis $f(x,0) = 0$ for every $x$, so
+    $\partial_xf(0,0) = \lim_{s\to0}\big(f(s,0)-f(0,0)\big)/s = 0$. The same computation on the
+    $y$-axis gives $\partial_yf(0,0) = 0$, so both partial derivatives exist and vanish.
+  \item \textbf{True.} From the polar formula,
+    $\lvert f\rvert = r\,\lvert\cos\theta\rvert\sin^2\theta \leq r$, and the bound is uniform in
+    $\theta$. Consequently $f(x,y) \to 0 = f(0,0)$ as $(x,y) \to (0,0)$, and $f$ is continuous
+    there. Continuity away from the origin is \textbf{(a)}.
+  \item \textbf{False}, and $f$ is not even differentiable at the origin. By \textbf{(b)} the only
+    candidate for the differential is $L = 0$, so \cref{rem:differentiability_recipe} asks whether
+    $f(h)/\lvert h\rvert \to 0$. In polar coordinates that quotient is
+    \[\frac{f(r\cos\theta, r\sin\theta)}{r} = \cos\theta\sin^2\theta,\]
+    which does not depend on $r$ at all. It is $0$ along the axes but
+    $\tfrac{1}{2\sqrt2} \neq 0$ along $\theta = \pi/4$, so the limit is not $0$ and $f$ is not
+    differentiable at $(0,0)$. Since differentiability is weaker than $C^1$
+    (\cref{thm:continuous_partials_imply_differentiable} and the chain of implications above it),
+    $f \notin C^1(\mathbb{R}^2)$.
+\end{enumerate}
+% Generator: Claude Opus 5 (High) --- FIG-EX-FS24-TF4
+% Drawn to separate this function from the one in ex:partial_derivatives_not_continuous, whose
+% figure in 09-differential/02-jacobi-matrix.tex looks superficially the same. There, f itself is
+% CONSTANT along each ray and takes different constants on different rays, so it is discontinuous.
+% Here f GROWS LINEARLY along each ray, with a ray-dependent slope: that is continuity (the value
+% goes to 0 with r) together with non-differentiability (the slope does not). The figure has to
+% show the doubling, or it collapses into the other one.
+% Arithmetic, checked before the coordinates were written. Along theta = pi/4,
+%   f = r cos(theta) sin^2(theta) = r (sqrt2/2)(1/2) = r/(2 sqrt2)  ~ 0.3536 r,
+% and along both axes sin(theta) cos(theta) = 0 so f vanishes identically. Canvas: the diagonal
+% unit vector is (0.7071, 0.7071), so the marked points at canvas radius 1.2 and 2.4 sit at
+% (0.85, 0.85) and (1.70, 1.70). Those two are the r and 2r samples, and the labels beside them
+% must therefore read r/(2 sqrt2) and 2r/(2 sqrt2) -- a genuine doubling, not a repeat.
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.0]
+  \draw[gray, ->] (-0.45,0) -- (2.95,0) node[right, font=\small, black] {$x$};
+  \draw[gray, ->] (0,-0.45) -- (0,2.75) node[above, font=\small, black] {$y$};
+
+  % the two axis rays, on which f vanishes identically
+  \draw[orange!90!black, very thick] (0,0) -- (2.65,0);
+  \draw[orange!90!black, very thick] (0,0) -- (0,2.45);
+  \node[orange!90!black, font=\scriptsize, below] at (1.75,-0.10) {$f \equiv 0$};
+  \node[orange!90!black, font=\scriptsize, left] at (-0.10,1.95) {$f \equiv 0$};
+
+  % the diagonal ray, on which f grows linearly
+  \draw[purple, very thick] (0,0) -- (2.05,2.05);
+  \fill[purple] (0.85,0.85) circle (1.7pt);
+  \fill[purple] (1.70,1.70) circle (1.7pt);
+  \node[purple, font=\scriptsize, right] at (0.95,0.72) {$f = \dfrac{r}{2\sqrt2}$};
+  \node[purple, font=\scriptsize, right] at (1.80,1.57) {$f = \dfrac{2r}{2\sqrt2}$};
+  \node[purple, font=\scriptsize, above left] at (0.62,0.90) {$r$};
+  \node[purple, font=\scriptsize, above left] at (1.47,1.75) {$2r$};
+
+  \node[font=\scriptsize, align=center] at (1.25,-1.05)
+    {Along every ray $f$ is \emph{proportional} to $r$, so $f \to 0$ and $f$ is continuous;\\
+     but the ratio $f/r$ is a different constant on different rays, so $f$ is not differentiable};
+\end{tikzpicture}
+\end{center}
+
+\begin{remark}[Where this function sits in the chain]
+The four verdicts place $f$ at a definite height in the diagram of
+\cref{sec:sufficient_condition_differentiability}: strictly above $\tfrac{xy}{x^2+y^2}$, which
+fails already at continuity, and strictly below $\tfrac{x^2y^2}{\sqrt{x^2+y^2}}$, which is
+differentiable. Degree-$1$ homogeneity is what pins it there, and it does so in general. Such an
+$f$ is automatically continuous at the origin, since $\lvert f\rvert \leq Cr$; and it is
+differentiable there only if it is already \emph{linear}, because $f(h)/\lvert h\rvert$ then
+depends on the direction alone, so it can converge only by agreeing with $L(h)/\lvert h\rvert$
+exactly, in every direction at once.
+\end{remark}
 \end{exercisesolution}

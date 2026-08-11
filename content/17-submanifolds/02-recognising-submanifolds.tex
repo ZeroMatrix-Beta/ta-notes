@@ -293,6 +293,74 @@ failure away.
 \end{remark}
 \end{aiexample}
 
+\subsection{Transporting a submanifold by a diffeomorphism}
+
+% Generator: Claude Opus 5 (High)
+% Gap closed 2026-08-10: def:submanifold is stated through charts, and the fact that a
+% diffeomorphism carries submanifolds to submanifolds of the same dimension follows from it in
+% four lines, but it was nowhere in the document. ex:image_of_segment_submanifold below needs it,
+% and so does any argument that moves a submanifold into better coordinates.
+Each of the three descriptions above answers the question \qt{is this particular set a
+submanifold?}. A different question arises as soon as a map is in play: given that $M$ is a
+submanifold and $\Phi$ a diffeomorphism, what is $\Phi(M)$? Here the chart definition is the easy
+one to use, and it is about the only place where that is so.
+
+\begin{proposition}[Diffeomorphisms carry submanifolds to submanifolds]
+\label{prop:diffeomorphism_preserves_submanifold}
+Let $U, W \subseteq \mathbb{R}^n$ be open, let $\Phi : U \to W$ be a $C^k$-diffeomorphism, and let
+$M \subseteq U$ be an $m$-dimensional $C^k$ submanifold of $\mathbb{R}^n$. Then $\Phi(M)$ is an
+$m$-dimensional $C^k$ submanifold of $\mathbb{R}^n$. In particular the dimension is unchanged.
+\end{proposition}
+
+\begin{proof}
+Fix $q \in \Phi(M)$ and write $q = \Phi(p)$ with $p \in M$. By \cref{def:submanifold} there are an
+open neighbourhood $U_p \subseteq \mathbb{R}^n$ of $p$, an open $V \ni 0$, and a
+$C^k$-diffeomorphism $\Psi : U_p \to V$ with $\Psi(p) = 0$ and
+$\Psi(U_p \cap M) = (\mathbb{R}^m\times\{0\}) \cap V$. Replacing $U_p$ by $U_p \cap U$, we may
+assume $U_p \subseteq U$.
+
+Then $\Phi(U_p)$ is an open neighbourhood of $q$, and
+\[\Psi \circ \Phi^{-1} : \Phi(U_p) \longrightarrow V\]
+is a composition of $C^k$-diffeomorphisms, hence itself one, and it sends $q$ to $\Psi(p) = 0$.
+Since $\Phi$ is injective, $\Phi(U_p) \cap \Phi(M) = \Phi(U_p \cap M)$, and therefore
+\[(\Psi\circ\Phi^{-1})\big(\Phi(U_p) \cap \Phi(M)\big) = \Psi(U_p \cap M)
+  = (\mathbb{R}^m\times\{0\}) \cap V .\]
+That is a submanifold chart for $\Phi(M)$ at $q$, of the same dimension $m$. As $q$ was arbitrary,
+$\Phi(M)$ is an $m$-dimensional $C^k$ submanifold.
+\end{proof}
+
+\begin{remark}[Why the dimension cannot move]
+\label{rem:dimension_is_a_diffeomorphism_invariant}
+The proof transports one chart into another and never touches $m$, which is the whole content: a
+diffeomorphism can bend a submanifold arbitrarily, but it cannot change how many independent
+directions there are along it. This is worth stating because the tempting error runs the other
+way, imagining that a map into $\mathbb{R}^2$ whose image \qt{spreads out} raises the dimension.
+It cannot. A curve stays a curve.
+\end{remark}
+
+% Source: old_exams/examFS24.pdf (21 August 2024), Wahr/Falsch-Fragen, Aufgabe 6, p. 4
+% Extractor: Claude Opus 5 (High)
+% Split: parts 6.1-6.3 of this block are ex:local_diffeo_parameter_alpha in
+% content/15-inverse-function-theorem/01-inverse-function-theorem.tex. The enumeration is continued
+% at (d) with \setcounter so that the two halves read as one exam question, which is what they are.
+\begin{exercise}[True or False \textnormal{(the image of a segment)}]
+\label{ex:image_of_segment_submanifold}
+Continuing \cref{ex:local_diffeo_parameter_alpha}: let $\Phi \in C^1(\mathbb{R}^2,\mathbb{R}^2)$
+satisfy $\Phi(0,0) = (0,0)\transp$ and
+$\Jac\Phi(0,0) = \left(\begin{smallmatrix} \alpha+5 & -3 \\ 3 & \alpha-5\end{smallmatrix}\right)$,
+and take $\alpha = 0$. Decide whether each of the following is true or false, with justification.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \setcounter{enumi}{3}
+  \item For $r > 0$ small enough, the image of $\{(x,y) \in B_r(0,0) \mid y = 0\}$ under $\Phi$ is
+    a $C^1$ submanifold of dimension $1$.
+  \item For $r > 0$ small enough, the image of $\{(x,y) \in B_r(0,0) \mid y = 0\}$ under $\Phi$ is
+    a $C^1$ submanifold of dimension $2$.
+\end{enumerate}
+\exinfo{This exercise is taken from the exam of 21 August 2024, where it appears as the fourth and
+fifth parts of the sixth block of true/false questions. Its first three parts are
+\cref{ex:local_diffeo_parameter_alpha}.}
+\end{exercise}
+
 % Transition: Claude Opus 5 (High)
 Every argument in this section leaned on knowing which vectors point \emph{along} $M$ at a given
 point. The next section makes that space of directions an object in its own right.

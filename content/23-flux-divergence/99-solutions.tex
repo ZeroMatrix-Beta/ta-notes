@@ -4,7 +4,7 @@
 \label{sec:flux_solutions}
 
 \begin{exercisesolution}[Solution of \cref{ex:11.5}]
-\begin{enumerate}[label=\textbf{(\arabic*)}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item Writing $V_\alpha^i(x) = \lvert x\rvert^\alpha x_i$,
     \[
     \partial_i\big(\lvert x\rvert^\alpha x_i\big) = \alpha\lvert x\rvert^{\alpha-2}x_i^2
@@ -18,7 +18,7 @@
     \]
     Since $\lvert x\rvert^\alpha \neq 0$ for $x\neq0$, this vanishes identically exactly when
     $\alpha = -n$.
-  \item For $\alpha=0$, $V_0(x)=x$ and, by part \textbf{(1)}, $\divg V_0 \equiv n$. Applying
+  \item For $\alpha=0$, $V_0(x)=x$ and, by part \textbf{(a)}, $\divg V_0 \equiv n$. Applying
     \cref{thm:gauss_divergence} on $B_r$,
     \[\int_{B_r} \divg V_0\,dx = n\,\vol_n(B_r).\]
     On $\partial B_r$ the outward unit normal is $\nu(x) = x/r$, so $V_0(x)\cdot\nu(x) = x\cdot
@@ -26,7 +26,7 @@
     \[\int_{\partial B_r} V_0\cdot\nu\,d\vol_{n-1} = r\,\vol_{n-1}(\partial B_r).\]
     Equating the two expressions of $\int_{B_r}\divg V_0\,dx = \int_{\partial B_r}V_0\cdot\nu\,
     d\vol_{n-1}$ gives $r\,\vol_{n-1}(\partial B_r) = n\,\vol_n(B_r)$.
-  \item By part \textbf{(1)}, $\divg V_{-n}(x) = 0$ for every $x\neq0$, so $\int_{B_1}\divg
+  \item By part \textbf{(a)}, $\divg V_{-n}(x) = 0$ for every $x\neq0$, so $\int_{B_1}\divg
     V_{-n}(x)\,dx = 0$ trivially (the integrand vanishes on $B_1\setminus\{0\}$, a set of full
     measure in $B_1$). On $\partial B_1$, $\nu(x)=x$ and $\lvert x\rvert=1$, so $V_{-n}(x) =
     \lvert x\rvert^{-n}x = x$, giving
@@ -43,24 +43,25 @@
 
 \begin{exercisesolution}[Solution to \cref{ex:ai_flux_cubic_sphere}]
 % Generator: Claude Opus 5 (High)
-\textbf{1.} On the unit sphere the exterior unit normal is $\nu(x,y,z) = (x,y,z)$, so the
-integrand of \cref{def:flux} is $\langle F,\nu\rangle = x^4+y^4+z^4$. In the spherical
-parametrization that becomes
-$\sin^4\theta\cos^4\varphi + \sin^4\theta\sin^4\varphi + \cos^4\theta$, multiplied by the surface
-element $\sin\theta$: a fourth-power trigonometric integral in two variables, where the
-divergence theorem offers a radial integral in one.
-
-\textbf{2.} Writing $r$ for the distance to the origin,
-$\divg F = 3x^2+3y^2+3z^2 = 3r^2$, which is radial.
-
-\textbf{3.} Because the integrand is radial, \cref{rem:polar_as_shells} applies with $n = 3$ and
-$C_3 = 4\pi$:
-\[\int_{\partial\Omega}\langle F,\nu\rangle\,d\vol_2 = \int_{B_1(0)} 3r^2\,d\vol_3
-  = 4\pi\int_0^1 3r^2\cdot r^2\,dr = 12\pi\int_0^1 r^4\,dr = \frac{12\pi}{5}.\]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item On the unit sphere the exterior unit normal is $\nu(x,y,z) = (x,y,z)$, so the
+    integrand of \cref{def:flux} is $\langle F,\nu\rangle = x^4+y^4+z^4$. In the spherical
+    parametrization that becomes
+    $\sin^4\theta\cos^4\varphi + \sin^4\theta\sin^4\varphi + \cos^4\theta$, multiplied by the
+    surface element $\sin\theta$: a fourth-power trigonometric integral in two variables, where
+    the divergence theorem offers a radial integral in one.
+  \item Writing $r$ for the distance to the origin,
+    $\divg F = 3x^2+3y^2+3z^2 = 3r^2$, which is radial.
+  \item Because the integrand is radial, \cref{rem:polar_as_shells} applies with $n = 3$ and
+    $C_3 = 4\pi$:
+    \[\int_{\partial\Omega}\langle F,\nu\rangle\,d\vol_2 = \int_{B_1(0)} 3r^2\,d\vol_3
+      = 4\pi\int_0^1 3r^2\cdot r^2\,dr = 12\pi\int_0^1 r^4\,dr = \frac{12\pi}{5}.\]
+\end{enumerate}
 
 \begin{remark}[The direct route, for once, is also available]
 \label{rem:cubic_flux_direct_check}
-The surface integral abandoned in part 1 is not actually intractable, and working it out is a
+The surface integral abandoned in part \textbf{(a)} is not actually intractable, and working it
+out is a
 worthwhile check. By the symmetry of the sphere under permuting the coordinates, the three terms
 of $x^4+y^4+z^4$ contribute equally, so
 \[\int_{\mathbb{S}^2}\big(x^4+y^4+z^4\big)\,d\vol_2 = 3\int_{\mathbb{S}^2} z^4\,d\vol_2
@@ -73,34 +74,35 @@ any trigonometry: expanding all three fourth powers first is the version that is
 
 \begin{exercisesolution}[Solution to \cref{ex:ai_capping_a_paraboloid}]
 % Generator: Claude Opus 5 (High)
-\textbf{1.} Take $\Omega := \{(x,y,z) : x^2+y^2 < 1,\ 0 < z < 1-x^2-y^2\}$, the solid region
-between the paraboloid and the plane $z = 0$. Its boundary is $S$ together with the flat disk
-\[D := \{(x,y,0) : x^2+y^2 \leq 1\},\]
-whose exterior unit normal is $\nu \equiv -e_3$, since $\Omega$ lies above it. On $S$ the
-exterior normal is the upward-pointing one, which is the orientation the exercise already fixes,
-so no sign has to be corrected later.
-
-\textbf{2.} Here $\divg F = 1+1+1 = 3$, so the flux out of $\partial\Omega$ is three times a
-volume. In cylindrical coordinates,
-\[\vol_3(\Omega) = \int_0^{2\pi}\!\!\int_0^1\!\!\int_0^{1-r^2} r\,dz\,dr\,d\varphi
-  = 2\pi\int_0^1 \big(r - r^3\big)\,dr = 2\pi\left(\frac12 - \frac14\right) = \frac{\pi}{2},\]
-and therefore
-\[\int_{\partial\Omega}\langle F,\nu\rangle\,d\vol_2 = 3\,\vol_3(\Omega) = \frac{3\pi}{2}.\]
-
-\textbf{3.} Along $D$ the third coordinate is $z = 0$, so
-$\langle F,\nu\rangle = \langle (x,y,0),\,-e_3\rangle = -z = 0$ at every point: the field is
-tangent to the cap, and contributes nothing. Splitting the boundary integral,
-\[\int_S \langle F,\nu\rangle\,d\vol_2
-  = \int_{\partial\Omega}\langle F,\nu\rangle\,d\vol_2 - \int_D \langle F,\nu\rangle\,d\vol_2
-  = \frac{3\pi}{2} - 0 = \frac{3\pi}{2}.\]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Take $\Omega := \{(x,y,z) : x^2+y^2 < 1,\ 0 < z < 1-x^2-y^2\}$, the solid region
+    between the paraboloid and the plane $z = 0$. Its boundary is $S$ together with the flat disk
+    \[D := \{(x,y,0) : x^2+y^2 \leq 1\},\]
+    whose exterior unit normal is $\nu \equiv -e_3$, since $\Omega$ lies above it. On $S$ the
+    exterior normal is the upward-pointing one, which is the orientation the exercise already
+    fixes, so no sign has to be corrected later.
+  \item Here $\divg F = 1+1+1 = 3$, so the flux out of $\partial\Omega$ is three times a
+    volume. In cylindrical coordinates,
+    \[\vol_3(\Omega) = \int_0^{2\pi}\!\!\int_0^1\!\!\int_0^{1-r^2} r\,dz\,dr\,d\varphi
+      = 2\pi\int_0^1 \big(r - r^3\big)\,dr = 2\pi\left(\frac12 - \frac14\right) = \frac{\pi}{2},\]
+    and therefore
+    \[\int_{\partial\Omega}\langle F,\nu\rangle\,d\vol_2 = 3\,\vol_3(\Omega) = \frac{3\pi}{2}.\]
+  \item Along $D$ the third coordinate is $z = 0$, so
+    $\langle F,\nu\rangle = \langle (x,y,0),\,-e_3\rangle = -z = 0$ at every point: the field is
+    tangent to the cap, and contributes nothing. Splitting the boundary integral,
+    \[\int_S \langle F,\nu\rangle\,d\vol_2
+      = \int_{\partial\Omega}\langle F,\nu\rangle\,d\vol_2 - \int_D \langle F,\nu\rangle\,d\vol_2
+      = \frac{3\pi}{2} - 0 = \frac{3\pi}{2}.\]
+\end{enumerate}
 
 \begin{remark}[The cap vanished because of this field, not because it is a cap]
 \label{rem:cap_contribution_is_not_generally_zero}
-It is tempting to read part 3 as licence to ignore the lid. Change $F$ to
+It is tempting to read part \textbf{(c)} as licence to ignore the lid. Change $F$ to
 $\widetilde F(x,y,z) := (x,\,y,\,z+1)$ and nothing about the first two parts moves, since
 $\divg\widetilde F = 3$ as before and the closed flux is still $3\pi/2$. But now
 $\langle \widetilde F,\nu\rangle = -1$ on $D$, so the cap carries a flux of $-\pi$, and the flux
-through the paraboloid is $3\pi/2 + \pi = 5\pi/2$ instead. The subtraction in part 3 is doing
+through the paraboloid is $3\pi/2 + \pi = 5\pi/2$ instead. The subtraction in part \textbf{(c)}
+is doing
 real work; it merely had nothing to subtract.
 
 \Cref{ex:11.1} is the same technique on a hemisphere, and the two are worth reading as a pair:
@@ -202,6 +204,126 @@ which the offending factor is identically $1$. The radius $1$ is doing real work
 $\partial B_R(0)$ the same argument would give $I_n = R^{2n}\int\langle v,\nu\rangle$, which does
 depend on $n$ unless $R = 1$.
 \end{ainote}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution of \cref{ex:flux_truncated_paraboloid}]
+% Generator: Claude Opus 5 (High)
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $M$ is the paraboloid of revolution $z = 1+x^2+y^2$, opening upwards, with vertex at
+    $(0,0,1)$ and cut off at height $z = 5$. The cut happens where $x^2+y^2 = 4$, so the rim is the
+    circle of radius $2$ at height $5$.
+
+% Generator: Claude Opus 5 (High) --- FIG-EX-FS24-KP2
+% Geometry, checked before the coordinates were written. The visible profile curve is the slice
+% x = 0, i.e. z = 1 + y^2, drawn in the screen plane; the rim circle x^2+y^2 = 4 at z = 5 is drawn
+% as an ellipse in perspective. Scales: y is 0.8 cm per unit, z is 0.7 cm per unit.
+%   vertex  y=0, z=1  -> canvas (0, 0.7)
+%   rim     y=+-2, z=5 -> canvas (+-1.6, 3.5)
+% The profile in canvas coordinates is Y = 0.7*(1 + (X/0.8)^2) = 0.7 + 1.09375*X^2. Check the two
+% ends: X = 0 gives 0.7, and X = 1.6 gives 0.7 + 1.09375*2.56 = 0.7 + 2.8 = 3.5. Both land on the
+% points above, so the parabola meets the rim ellipse exactly at its left and right extremes.
+% Rim ellipse: centre (0,3.5), semi-axes 1.6 (horizontal) and 0.5 (vertical squash). The arc from
+% 180 to 360 degrees passes through 270, the bottom, so it is the FRONT half and is drawn solid;
+% the arc from 180 to 0 passes through the top and is the BACK half, drawn dashed.
+% The outward normal on M points away from U, hence downwards and outwards, which is why the arrow
+% at the sample point leaves the surface on its underside.
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.0]
+  % axes
+  \draw[->, gray] (0,0) -- (0,4.35) node[above, font=\small, black] {$z$};
+  \draw[->, gray] (0,0) -- (2.45,0) node[right, font=\small, black] {$y$};
+  \draw[->, gray] (0,0) -- (-1.35,-0.86) node[below left, font=\small, black] {$x$};
+
+  % the lid D at z = 5, drawn first so the surface lines sit on top of it
+  \fill[blue!8] (0,3.5) ellipse (1.6 and 0.5);
+  \node[blue!55!black, font=\scriptsize] at (0.72,3.72) {$D$};
+
+  % rim: back half dashed, front half solid
+  \draw[blue!60!black, dashed] (-1.6,3.5) arc (180:0:1.6 and 0.5);
+  \draw[blue!60!black, thick] (-1.6,3.5) arc (180:360:1.6 and 0.5);
+
+  % the paraboloid profile, slice x = 0
+  \draw[MidnightBlue, very thick, domain=-1.6:1.6, samples=80]
+    plot ({\x}, {0.7 + 1.09375*\x*\x});
+  \node[MidnightBlue, font=\small] at (-1.35,2.15) {$M$};
+
+  % vertex
+  \fill (0,0.7) circle (1.6pt);
+  \node[font=\scriptsize, right] at (0.08,0.62) {$(0,0,1)$};
+
+  % height markers
+  \draw[gray, dotted] (0,3.5) -- (-1.6,3.5);
+  \node[gray, font=\scriptsize, left] at (-1.62,3.5) {$z=5$};
+  \draw[gray, dotted] (0,0.7) -- (-0.75,0.7);
+  \node[gray, font=\scriptsize, left] at (-0.77,0.7) {$z=1$};
+
+  % exterior normal on M: at canvas (1.0, 0.7+1.09375) = (1.0, 1.794), pointing down and out
+  \draw[purple, thick, ->] (1.0,1.794) -- (1.72,1.34);
+  \node[purple, font=\scriptsize, right] at (1.7,1.28) {$\nu$};
+\end{tikzpicture}
+\end{center}
+
+  \item The field $E$ has
+    \[\divg E = \partial_x(xz) + \partial_y(2y-yz) + \partial_z(x^2+y^2) = z + (2-z) + 0 = 2 .\]
+    The boundary of $U$ consists of $M$ together with the flat lid
+    $D := \{(x,y,5) \mid x^2+y^2 < 4\}$, and the divergence theorem in its piecewise form
+    (\cref{thm:gauss_divergence_piecewise}) gives
+    \[\int_M \langle E,\nu\rangle\,d\vol_2 + \int_D \langle E,\nu\rangle\,d\vol_2
+      = \int_U \divg E\,d\vol_3 = 2\vol_3(U).\]
+    In cylindrical coordinates the region lies over the disk of radius $2$, between the paraboloid
+    and the plane $z=5$, so
+    \[\vol_3(U) = \int_0^{2\pi}\!\!\int_0^2 \big(5 - (1+r^2)\big)\,r\,dr\,d\theta
+      = 2\pi\int_0^2 (4-r^2)\,r\,dr = 2\pi\Big[2r^2 - \tfrac{r^4}{4}\Big]_0^2
+      = 2\pi(8-4) = 8\pi,\]
+    and therefore the total outer flux across $\partial U$ is $16\pi$.
+
+    On $D$ the exterior normal is $\nu = e_3$, so the integrand is the third component of $E$,
+    namely $x^2+y^2$, evaluated at $z=5$:
+    \[\int_D \langle E,\nu\rangle\,d\vol_2 = \int_0^{2\pi}\!\!\int_0^2 r^2\cdot r\,dr\,d\theta
+      = 2\pi\Big[\tfrac{r^4}{4}\Big]_0^2 = 8\pi .\]
+    Subtracting,
+    \[\boxed{\ \int_M \langle E,\nu\rangle\,d\vol_2 = 16\pi - 8\pi = 8\pi.\ }\]
+
+  \item First compute the curl, using the formula of \cref{def:rotation}:
+    \[\curl A = \big(\partial_yA_3 - \partial_zA_2,\ \partial_zA_1 - \partial_xA_3,\
+      \partial_xA_2 - \partial_yA_1\big)\transp
+      = \big(-xe^z,\ -ye^z,\ 2e^z\big)\transp,\]
+    since $\partial_yA_3 = 0$ and $\partial_zA_2 = xe^z$; $\partial_zA_1 = -ye^z$ and
+    $\partial_xA_3 = 0$; and $\partial_xA_2 = e^z$ against $\partial_yA_1 = -e^z$.
+
+    A curl is divergence-free, and here that is visible directly:
+    $\divg(\curl A) = -e^z - e^z + 2e^z = 0$. Consequently the divergence theorem gives
+    \emph{zero} total flux across $\partial U$, so the flux through $M$ is the negative of the flux
+    through $D$. On $D$ the normal is again $e_3$ and $z = 5$ throughout, so the integrand is the
+    constant $2e^5$ and
+    \[\int_D \langle \curl A,\nu\rangle\,d\vol_2 = 2e^5 \cdot \vol_2(D) = 2e^5\cdot\pi\cdot 2^2
+      = 8\pi e^5 .\]
+    Therefore
+    \[\boxed{\ \int_M \langle \curl A,\nu\rangle\,d\vol_2 = -8\pi e^5.\ }\]
+\end{enumerate}
+\begin{ainote}
+The version of the divergence theorem this needs is \cref{thm:gauss_divergence_piecewise}, not
+\cref{thm:gauss_divergence}: the region $U$ has an edge along the rim circle
+$\{x^2+y^2=4,\ z=5\}$, where the paraboloid meets the lid at a nonzero angle and the exterior
+normal jumps, so it is not a $C^1$ domain. That is precisely what the exam's hint licenses, by
+allowing the divergence theorem on a piecewise smooth domain without proof. Nothing in the
+computation is affected, because the rim carries no $\vol_2$.
+\end{ainote}
+\begin{remark}[Checking part \textbf{(c)} against Stokes]
+Part \textbf{(c)} never used the shape of $M$, only that $M$ and $D$ share a boundary, which is a
+sign that Stokes' theorem should give the same answer directly. The rim is
+$c(t) := (2\cos t,\ 2\sin t,\ 5)$, and on it
+\[A(c(t)) = \big(-2\sin t\,e^5,\ 2\cos t\,e^5,\ e^5\big), \qquad
+  \dot c(t) = (-2\sin t,\ 2\cos t,\ 0),\]
+so $\langle A(c),\dot c\rangle = 4e^5(\sin^2 t + \cos^2 t) = 4e^5$ and
+$\oint_c A\cdot dc = 8\pi e^5$. That is the flux of $\curl A$ through any surface spanning the rim
+whose orientation induces \emph{this} traversal, which for the lid means $\nu = e_3$: it matches
+the $8\pi e^5$ computed above. The exterior normal on $M$ points downwards and outwards, inducing
+the opposite traversal, and the sign flips to $-8\pi e^5$.
+
+The same shortcut does not apply to part \textbf{(b)}, since $E$ is not a curl, and one really does
+have to compute a volume there.
+\end{remark}
 \end{exercisesolution}
 
 

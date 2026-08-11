@@ -98,6 +98,10 @@ which uniform convergence turns out to be nothing more than an ordinary instance
     \[d(x,y) := \begin{cases} 1 & \text{if } x \neq y \\ 0 & \text{if } x = y \end{cases}\]
     Important for counterexamples!
   \item Let $X := \mathbb{R}^n$. Then we have many choices for a metric; some common ones are:
+  % The one deliberate exception to "(\alph*) everywhere" (2026-08-11): this is a SECOND-LEVEL
+  % list, sitting inside item (b) of the list above. Making it alphabetical too would print an
+  % item (b) whose sub-items are (a), (b), (c), so a reference to "(b)" would be ambiguous.
+  % Roman numerals keep the two levels distinguishable. Do not convert.
   \begin{enumerate}[label=\textbf{(\roman*)}]
     \item \textbf{Manhattan metric:}
       \[d_1(x,y) := |x_1 - y_1| + \dots + |x_n - y_n| = \sum_{k=1}^{n} |x_k - y_k|\]
@@ -490,7 +494,7 @@ d_3(x,0) \leq d_1(x,0) \leq 2 \, d_3(x,0).
 \begin{exercise}[Examples and Non-examples of Metric spaces]
 \label{ex:2.1}
 Which of the following pairs are metric spaces? Prove it or provide a counterexample.
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item $(B(X), d)$, where $B(X)$ denotes the set of all bounded functions from a non-empty set
     $X$ to $\mathbb{R}$ and
     $$d(f,g) := \sup_{x \in X} |f(x) - g(x)|.$$
@@ -612,7 +616,7 @@ d_2((x,y),(x',y')) &:= d_X(x,x') + d_Y(y,y') \\
 d_3((x,y),(x',y')) &:= \sqrt{d_X(x,x')^2 + d_Y(y,y')^2}.
 \end{aligned}
 $$
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item Show that they are all valid distance functions on $X \times Y$.
   \item Show that they are all equivalent, i.e.\ there is a number $C > 0$ such that
     $$d_1((x,y),(x',y')) \leq C\,d_2((x,y),(x',y')) \leq C^2 d_3((x,y),(x',y')) \leq C^3 d_1((x,y),(x',y'))$$

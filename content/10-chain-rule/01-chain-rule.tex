@@ -181,3 +181,44 @@ $n \ge 2$. Decide whether each of the following identities is true or false.
 \exinfo{This exercise is taken from the exam of 13 February 2025, where it appears as the third
 block of true/false questions.}
 \end{exercise}
+
+% Source: old_exams/examFS24.pdf (21 August 2024), Wahr/Falsch-Fragen, Aufgabe 3, pp. 2--3
+% Extractor: Claude Opus 5 (High)
+% Presented as a worked example rather than as an exercise: the block is three one-line verdicts,
+% and its value is entirely in seeing which hypothesis each one consumes. Its companion above,
+% ex:examHS24_TF_chain_rule, is the same theme set as a problem, and assumes F in C^2 where this
+% one assumes only C^1 --- which is the whole of part (c).
+\begin{example}[Which identities are forced, and by what]
+\label{ex:forced_identities_chain_rule}
+% Generator: Claude Opus 5 (High) --- the three statements are the examiner's; the discussion is
+% written for these notes.
+Let $u \in C^2(\mathbb{R}^n)$ and let $F = (F_1,\dots,F_n) \in C^1(\mathbb{R}^n,\mathbb{R}^n)$,
+with $n \geq 2$. Exactly one of the following three identities is forced by those hypotheses, and
+the two that fail do so for quite different reasons.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{$\partial_iF_j = \partial_jF_i$ for all $i,j$: not forced.} This asks the Jacobi
+    matrix $\Jac F$ to be symmetric at every point, which is the integrability condition of
+    \cref{lem:integrability_conditions}: it holds precisely when $F$ is a candidate for a gradient,
+    and nothing in the hypotheses makes it one. The rotation field
+    $F(x) := (-x_2,\, x_1,\, 0,\dots,0)$ is as smooth as one likes and has $\partial_1F_2 = 1$
+    while $\partial_2F_1 = -1$.
+  \item \textbf{$\partial_j\partial_iu = \partial_i\partial_ju$ for all $i,j$: forced.} This is
+    Schwarz's lemma (\cref{thm:schwarz_mixed_partials}), and $u \in C^2$ is exactly its hypothesis.
+    Note how differently the two statements read once they are set side by side: \textbf{(a)}
+    constrains an arbitrary vector field, \textbf{(b)} constrains the gradient of a function. Only
+    the second is automatic.
+  \item \textbf{$u \circ F \in C^2$: not forced.} The chain rule gives
+    $\partial_i(u\circ F) = \sum_{j}(\partial_ju\circ F)\,\partial_iF_j$, and the factors
+    $\partial_iF_j$ are merely continuous, so this says only that $u \circ F \in C^1$. To
+    differentiate once more one would have to differentiate $\partial_iF_j$, which the hypotheses
+    do not permit. Take $n = 2$, $u(y_1,y_2) := y_1$ and $F(x_1,x_2) := (x_1\lvert x_1\rvert,\, x_2)$.
+    Then $F \in C^1$, since $\partial_1F_1 = 2\lvert x_1\rvert$ is continuous, and
+    $(u\circ F)(x) = x_1\lvert x_1\rvert$ has the same non-differentiable first derivative at
+    $x_1 = 0$. Consequently $u \circ F \notin C^2$.
+\end{enumerate}
+The general rule that \textbf{(c)} illustrates is that a composition inherits the \emph{weaker} of
+the two regularities. Raise $F$ to $C^2$ and $u \circ F$ becomes $C^2$, which is what
+\cref{ex:examHS24_TF_chain_rule}\textbf{(c)} is then free to assume.
+\exinfo{This example is taken from the exam of 21 August 2024, where it appears as the third block
+of true/false questions.}
+\end{example}

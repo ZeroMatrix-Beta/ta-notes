@@ -8,7 +8,7 @@
 % Generator: Claude Opus 5 (High)
 In each part the work is the same two steps: find $\lvert\det\Jac\rvert$, then translate every
 constraint. As the exercise says, no integral is actually evaluated.
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item \textbf{Polar coordinates.} Here $\Phi(r,\theta) := (r\cos\theta, r\sin\theta)$ has
     $\det\Jac\Phi = r > 0$ (\cref{ex:polar_spherical_coordinates}), so
     $dx_1dx_2 = r\,dr\,d\theta$. The three constraints translate one at a time:
@@ -56,40 +56,42 @@ constraint. As the exercise says, no integral is actually evaluated.
 \end{enumerate}
 
 \begin{ainote}
-The three parts are graded deliberately, and comparing them is the lesson. In part 3 the change
-of variables was \emph{chosen} to be the constraints, so the domain is a box and the Jacobian a
-constant, and nothing is left to do. In part 1 the domain is a box in the new coordinates but the
-Jacobian is not constant. In part 2 neither holds: the Jacobian varies and one of the two
-constraints stays curved. Reading the substitution off the constraints, as in part 3, is the move
+The three parts are graded deliberately, and comparing them is the lesson. In part \textbf{(c)}
+the change of variables was \emph{chosen} to be the constraints, so the domain is a box and the
+Jacobian a constant, and nothing is left to do. In part \textbf{(a)} the domain is a box in the
+new coordinates but the Jacobian is not constant. In part \textbf{(b)} neither holds: the Jacobian
+varies and one of the two constraints stays curved. Reading the substitution off the constraints,
+as in part \textbf{(c)}, is the move
 worth remembering, and it is available far more often than it looks.
 \end{ainote}
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution to \cref{ex:ai_triangle_substitution}]
 % Generator: Claude Opus 5 (High)
-\textbf{1. The new domain and the Jacobian factor.} The map $\Psi(x,y) := (y-x,\ y+x)$ is
-linear and invertible, with
-\[\Psi^{-1}(u,v) = (x,y) = \left(\frac{v-u}{2},\ \frac{u+v}{2}\right),
-  \qquad
-  \det\Jac\Psi^{-1} = \det\begin{pmatrix} -1/2 & 1/2 \\ 1/2 & 1/2\end{pmatrix} = -\frac12,\]
-so $dx\,dy = \tfrac12\,du\,dv$. The three sides of $T$ translate one at a time: $x \geq 0$ reads
-$u \leq v$, the condition $y \geq 0$ reads $u \geq -v$, and $x+y \leq 1$ reads $v \leq 1$. Taking
-strict inequalities for the interior gives exactly $0 < v < 1$ and $-v < u < v$, a triangle
-again, but one whose horizontal slices run in the direction the integrand likes.
-
-\textbf{2. The value.} On that region the integrand is $e^{u/v}$, and $v$ is constant along the
-inner integration, so the inner integral is an exponential in $u$:
-\[I = \frac12\int_0^1\!\!\int_{-v}^{v} e^{u/v}\,du\,dv
-    = \frac12\int_0^1 \Big[v\,e^{u/v}\Big]_{u=-v}^{u=v}\,dv
-    = \frac{e - e^{-1}}{2}\int_0^1 v\,dv
-    = \frac{e - e^{-1}}{4}.\]
-
-\textbf{3. The origin.} A single point is a Jordan null set, so removing it changes neither the
-Jordan measurability of $T$ nor the value of the integral. What does need checking is that the
-integral exists at all, and it does, because the integrand is \emph{bounded}: on $T$ one has
-$\lvert y-x\rvert \leq y+x$, so the exponent $u/v$ lies in $[-1,1]$ and the integrand lies
-between $e^{-1}$ and $e$. It is the boundedness, and not the smallness of the bad set on its
-own, that rescues the computation.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{The new domain and the Jacobian factor.} The map $\Psi(x,y) := (y-x,\ y+x)$ is
+    linear and invertible, with
+    \[\Psi^{-1}(u,v) = (x,y) = \left(\frac{v-u}{2},\ \frac{u+v}{2}\right),
+      \qquad
+      \det\Jac\Psi^{-1} = \det\begin{pmatrix} -1/2 & 1/2 \\ 1/2 & 1/2\end{pmatrix} = -\frac12,\]
+    so $dx\,dy = \tfrac12\,du\,dv$. The three sides of $T$ translate one at a time: $x \geq 0$
+    reads $u \leq v$, the condition $y \geq 0$ reads $u \geq -v$, and $x+y \leq 1$ reads
+    $v \leq 1$. Taking strict inequalities for the interior gives exactly $0 < v < 1$ and
+    $-v < u < v$, a triangle again, but one whose horizontal slices run in the direction the
+    integrand likes.
+  \item \textbf{The value.} On that region the integrand is $e^{u/v}$, and $v$ is constant along
+    the inner integration, so the inner integral is an exponential in $u$:
+    \[I = \frac12\int_0^1\!\!\int_{-v}^{v} e^{u/v}\,du\,dv
+        = \frac12\int_0^1 \Big[v\,e^{u/v}\Big]_{u=-v}^{u=v}\,dv
+        = \frac{e - e^{-1}}{2}\int_0^1 v\,dv
+        = \frac{e - e^{-1}}{4}.\]
+  \item \textbf{The origin.} A single point is a Jordan null set, so removing it changes neither
+    the Jordan measurability of $T$ nor the value of the integral. What does need checking is
+    that the integral exists at all, and it does, because the integrand is \emph{bounded}: on $T$
+    one has $\lvert y-x\rvert \leq y+x$, so the exponent $u/v$ lies in $[-1,1]$ and the integrand
+    lies between $e^{-1}$ and $e$. It is the boundedness, and not the smallness of the bad set on
+    its own, that rescues the computation.
+\end{enumerate}
 
 \begin{remark}[Two ways to choose a substitution]
 \label{rem:substitution_from_the_integrand}
@@ -103,20 +105,20 @@ direction in which the integrand is a plain exponential.
 
 \begin{exercisesolution}[Solution to \cref{ex:ai_order_swap_gaussian}]
 % Generator: Claude Opus 5 (High)
-\textbf{1.} The inner integral asks for an antiderivative of $y \mapsto e^{y^2}$, and there is
-none in elementary terms. Nothing about the outer integral repairs this, so the order as written
-is a dead end.
-
-\textbf{2.} The region is the triangle below the diagonal, and it admits two descriptions:
-\[R = \{(x,y) : 0 \leq x \leq 1,\ x \leq y \leq 1\}
-    = \{(x,y) : 0 \leq y \leq 1,\ 0 \leq x \leq y\}.\]
-The first reads it by vertical slices, the second by horizontal ones. Taking the second and
-applying \cref{thm:fubini},
-\[I = \int_0^1\!\!\int_0^{y} e^{y^2}\,dx\,dy.\]
-
-\textbf{3.} Now $e^{y^2}$ is constant in $x$, so the inner integral contributes a factor of $y$,
-and that factor is exactly what the substitution $s := y^2$ needs:
-\[I = \int_0^1 y\,e^{y^2}\,dy = \left[\frac{e^{y^2}}{2}\right]_0^1 = \frac{e-1}{2}.\]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item The inner integral asks for an antiderivative of $y \mapsto e^{y^2}$, and there is
+    none in elementary terms. Nothing about the outer integral repairs this, so the order as
+    written is a dead end.
+  \item The region is the triangle below the diagonal, and it admits two descriptions:
+    \[R = \{(x,y) : 0 \leq x \leq 1,\ x \leq y \leq 1\}
+        = \{(x,y) : 0 \leq y \leq 1,\ 0 \leq x \leq y\}.\]
+    The first reads it by vertical slices, the second by horizontal ones. Taking the second and
+    applying \cref{thm:fubini},
+    \[I = \int_0^1\!\!\int_0^{y} e^{y^2}\,dx\,dy.\]
+  \item Now $e^{y^2}$ is constant in $x$, so the inner integral contributes a factor of $y$,
+    and that factor is exactly what the substitution $s := y^2$ needs:
+    \[I = \int_0^1 y\,e^{y^2}\,dy = \left[\frac{e^{y^2}}{2}\right]_0^1 = \frac{e-1}{2}.\]
+\end{enumerate}
 
 \begin{remark}[What the swap actually bought]
 \label{rem:order_swap_supplies_the_factor}
@@ -129,27 +131,27 @@ swapping the order hands you that length as a factor in the integrand.
 
 \begin{exercisesolution}[Solution to \cref{ex:ai_frullani}]
 % Generator: Claude Opus 5 (High)
-\textbf{1.} Both exponentials equal $1$ at $x = 0$, so the quotient is a difference quotient in
-disguise. Expanding, $e^{-ax} - e^{-bx} = (b-a)x + O(x^2)$, and therefore
-\[\lim_{x\to0^+}\frac{e^{-ax} - e^{-bx}}{x} = b - a.\]
-Assigning that value at $x = 0$ makes the integrand continuous on $[0,\infty)$, and it decays
-exponentially, so the improper integral converges.
-
-\textbf{2.} Only the second exponential depends on $t$, and the $x$ that the chain rule produces
-cancels the one in the denominator:
-\[I'(t) = \int_0^\infty \frac{\partial}{\partial t}\left(\frac{e^{-ax} - e^{-tx}}{x}\right)dx
-        = \int_0^\infty \frac{x\,e^{-tx}}{x}\,dx
-        = \int_0^\infty e^{-tx}\,dx
-        = \frac{1}{t}.\]
-That cancellation is the whole trick. Differentiating in the parameter removes the $1/x$ which
-made the integrand hard, and leaves an integral of one line.
-
-\textbf{3.} At $t = a$ the two exponentials coincide and the integrand vanishes identically, so
-$I(a) = 0$. Consequently, by the fundamental theorem of calculus,
-\[\int_0^\infty \frac{e^{-ax} - e^{-bx}}{x}\,dx = I(b) = I(b) - I(a) = \int_a^b \frac{dt}{t}
-  = \log\!\left(\frac{b}{a}\right).\]
-That the answer sees only the ratio $b/a$ is now visible in the derivation rather than a
-surprise, since $I'(t) = 1/t$ is scale-invariant.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Both exponentials equal $1$ at $x = 0$, so the quotient is a difference quotient in
+    disguise. Expanding, $e^{-ax} - e^{-bx} = (b-a)x + O(x^2)$, and therefore
+    \[\lim_{x\to0^+}\frac{e^{-ax} - e^{-bx}}{x} = b - a.\]
+    Assigning that value at $x = 0$ makes the integrand continuous on $[0,\infty)$, and it decays
+    exponentially, so the improper integral converges.
+  \item Only the second exponential depends on $t$, and the $x$ that the chain rule produces
+    cancels the one in the denominator:
+    \[I'(t) = \int_0^\infty \frac{\partial}{\partial t}\left(\frac{e^{-ax} - e^{-tx}}{x}\right)dx
+            = \int_0^\infty \frac{x\,e^{-tx}}{x}\,dx
+            = \int_0^\infty e^{-tx}\,dx
+            = \frac{1}{t}.\]
+    That cancellation is the whole trick. Differentiating in the parameter removes the $1/x$
+    which made the integrand hard, and leaves an integral of one line.
+  \item At $t = a$ the two exponentials coincide and the integrand vanishes identically, so
+    $I(a) = 0$. Consequently, by the fundamental theorem of calculus,
+    \[\int_0^\infty \frac{e^{-ax} - e^{-bx}}{x}\,dx = I(b) = I(b) - I(a) = \int_a^b \frac{dt}{t}
+      = \log\!\left(\frac{b}{a}\right).\]
+    That the answer sees only the ratio $b/a$ is now visible in the derivation rather than a
+    surprise, since $I'(t) = 1/t$ is scale-invariant.
+\end{enumerate}
 
 \begin{remark}[The hypotheses of \cref{thm:feynmans_trick} do not literally cover this]
 \label{rem:feynman_on_a_half_line}
@@ -397,6 +399,56 @@ $B := \{ t \in \mathbb{R}^3 \mid t_1^2 + t_2^2 + t_3^2 \le 1 \}$.
     $\det(v_1,v_2,v_3)$, which the hypothesis fixes at $2$. Every admissible choice therefore
     yields the same volume $\frac{8\pi}{3}$.
 \end{enumerate}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution of \cref{ex:radial_exponential_integral}]
+% Generator: Claude Opus 5 (High)
+The integrand is continuous and positive on $\mathbb{R}^2$, so the improper integral of
+\cref{def:improper_integral} is well defined, and by \cref{lem:improper_integral_as_limit} it may
+be computed along the exhaustion by closed disks. In polar coordinates the integrand depends only
+on $r = \sqrt{x^2+y^2}$, so the angular integral contributes $2\pi$ and
+\[I_\alpha = 2\pi\int_0^\infty e^{-\alpha r}\,r\,dr .\]
+Integrating by parts with $u := r$ and $v' := e^{-\alpha r}$,
+\[\int_0^R r\,e^{-\alpha r}\,dr
+  = \left[-\frac{r}{\alpha}e^{-\alpha r}\right]_0^R + \frac{1}{\alpha}\int_0^R e^{-\alpha r}\,dr
+  = -\frac{R}{\alpha}e^{-\alpha R} + \frac{1}{\alpha^2}\big(1 - e^{-\alpha R}\big).\]
+Both exponential terms vanish as $R \to \infty$ because $\alpha > 0$, so
+$\int_0^\infty r e^{-\alpha r}\,dr = 1/\alpha^2$ and
+\[\boxed{\;I_\alpha = \frac{2\pi}{\alpha^2}\;}\]
+The three statements now follow.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{$I_1 = \pi$: false.} $I_1 = 2\pi$.
+  \item \textbf{$I_2 = \pi/2$: true.} $I_2 = 2\pi/4 = \pi/2$.
+  \item \textbf{$\lim_{\alpha\to+\infty}\alpha I_\alpha = 0$: true.} $\alpha I_\alpha = 2\pi/\alpha
+    \to 0$.
+\end{enumerate}
+\begin{remark}[Why the $r$ changes the answer so much]
+Without the Jacobian factor $r$ the radial integral would be $\int_0^\infty e^{-\alpha r}dr =
+1/\alpha$, and the decay in $\alpha$ would be one power slower. The factor $r$ suppresses the
+region near the origin, where the integrand is largest, and it is exactly what turns $1/\alpha$
+into $1/\alpha^2$. Item \textbf{(c)} is a check on that power and nothing else: it is
+$\alpha I_\alpha$ rather than $I_\alpha$ precisely so that the answer $0$ distinguishes
+$\alpha^{-2}$ from $\alpha^{-1}$.
+\end{remark}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution of \cref{ex:box_linear_volume_preserving}]
+% Generator: Claude Opus 5 (High)
+By \cref{thm:change_of_variables}, a linear $\Phi$ scales every Jordan measurable set's volume by
+$\lvert\det\Phi\rvert$, so the requirement is exactly $\lvert\det\Phi\rvert = 1$ together with
+$\Phi \neq \id$. The shear
+\[\Phi(x,y) := (x+y,\ y), \qquad
+  \Phi = \begin{pmatrix} 1 & 1 \\ 0 & 1\end{pmatrix}, \qquad \det\Phi = 1,\]
+does it. So do the reflection $(x,y)\mapsto(y,x)$ and the point reflection
+$(x,y)\mapsto(-x,-y)$, both of determinant $-1$, and every rotation.
+\begin{remark}[What the extra clause is for]
+Dropping \qt{different from the identity} would make the problem vacuous, and adding it makes the
+answer informative: the volume-preserving linear maps of the plane form a large group, namely
+$\{A \in \GL_2(\mathbb{R}) \mid \lvert\det A\rvert = 1\}$, and the identity is one point of it. The
+shear above is the example worth remembering, because it is the one that visibly distorts a square
+into a parallelogram while changing nothing about its area. Length, angle and shape are all
+destroyed; only area survives, and area is all the change of variables formula ever sees.
+\end{remark}
 \end{exercisesolution}
 
 

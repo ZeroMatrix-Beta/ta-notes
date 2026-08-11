@@ -50,7 +50,7 @@ For any $x = (x_1, x_2) \in \mathbb{R}^2$, we have $\max\{|x_1|, |x_2|\} \leq |x
 % Generator: Claude Opus 5 (High)
 Throughout, non-negativity and symmetry are immediate in every part and are not belaboured; the
 interest is in \textbf{definiteness} and the \textbf{triangle inequality}.
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item \textbf{Yes.} Boundedness of $f$ and $g$ makes the supremum finite, so $d$ really maps
     into $\mathbb{R}$. Definiteness: $d(f,g)=0$ forces $|f(x)-g(x)| = 0$ for every $x$, i.e.\
     $f=g$. For the triangle inequality, estimate pointwise and only then take the supremum:
@@ -81,9 +81,9 @@ interest is in \textbf{definiteness} and the \textbf{triangle inequality}.
     $a+b+2\sqrt{ab} \geq a+b$. Hence
     \[|x_1-z_1|^{1/2} \leq \big(|x_1-y_1| + |y_1-z_1|\big)^{1/2}
       \leq |x_1-y_1|^{1/2} + |y_1-z_1|^{1/2}.\]
-    Contrast this with part 3: $\sqrt{\cdot}$ is concave and vanishes at $0$, hence subadditive,
-    while $(\cdot)^2$ is convex, hence super-additive. That single distinction settles both
-    parts.
+    Contrast this with part \textbf{(c)}: $\sqrt{\cdot}$ is concave and vanishes at $0$, hence
+    subadditive, while $(\cdot)^2$ is convex, hence super-additive. That single distinction
+    settles both parts.
   \item \textbf{Yes.} Write $A := X-Y$. Then
     \[\Tr(A\transp A) = \sum_{i=1}^n (A\transp A)_{ii} = \sum_{i,j=1}^n A_{ji}^2,\]
     so $d(X,Y)$ is nothing but the Euclidean distance between $X$ and $Y$ regarded as vectors of
@@ -130,10 +130,11 @@ interest is in \textbf{definiteness} and the \textbf{triangle inequality}.
 \end{exercisesolution}
 
 \begin{ainote}
-Parts 3, 4 and 6 are the ones worth revisiting, because each breaks (or rescues) a different
-axiom and together they cover every way the definition can fail. Part 3 kills the triangle
-inequality by growing too fast; part 4 rescues it by growing slowly enough; part 6 satisfies the
-triangle inequality perfectly and fails on definiteness instead. Read alongside
+Parts \textbf{(c)}, \textbf{(d)} and \textbf{(f)} are the ones worth revisiting, because each
+breaks (or rescues) a different axiom and together they cover every way the definition can fail.
+Part \textbf{(c)} kills the triangle inequality by growing too fast; part \textbf{(d)} rescues it
+by growing slowly enough; part \textbf{(f)} satisfies the triangle inequality perfectly and fails
+on definiteness instead. Read alongside
 \cref{ex:metric_axioms_are_needed}, they make the case that the three axioms are genuinely
 independent.
 \end{ainote}
@@ -144,7 +145,7 @@ Write $s := d_X(x,x')$ and $t := d_Y(y,y')$ throughout, so that the three candid
 $d_1 = \max\{s,t\}$, $d_2 = s+t$ and $d_3 = \sqrt{s^2+t^2}$. These are precisely the supremum,
 Manhattan and standard metrics of \cref{ex:metric_examples}, applied to the pair $(s,t)$. Almost
 everything below is that one observation.
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item \textbf{All three are metrics.} Each vanishes exactly when $s = t = 0$, i.e.\ when
     $x=x'$ and $y=y'$, which is definiteness; symmetry is inherited from $d_X$ and $d_Y$. For
     the triangle inequality, set
@@ -163,15 +164,15 @@ everything below is that one observation.
     $(s+t)^2 = s^2+t^2+2st \geq s^2+t^2$. Hence $C := 2$ satisfies the chain in the statement:
     $d_1 \leq 2d_2$, then $2d_2 \leq 4d_3$ (since $d_2 \leq \sqrt2\,d_3$ by Cauchy--Schwarz,
     and $\sqrt2 \leq 2$), and finally $4d_3 \leq 8d_1$ (since $d_3 \leq \sqrt2\,d_1$).
-  \item \textbf{Convergence is coordinatewise.} From part 2,
+  \item \textbf{Convergence is coordinatewise.} From part \textbf{(b)},
     \[\max\big\{d_X(x_n,x),\ d_Y(y_n,y)\big\}
       \ \leq\ d_3\big((x_n,y_n),(x,y)\big)
       \ \leq\ d_X(x_n,x) + d_Y(y_n,y).\]
     If the middle term tends to $0$, the left inequality forces both coordinates to converge; if
     both coordinates converge, the right inequality forces the middle term to $0$. This is
     \cref{prop:Rn_coordinatewise_complete}\textbf{(a)} with $n = 2$ and the two factors allowed
-    to be arbitrary metric spaces. By part 2 the same conclusion holds for $d_1$ and $d_2$,
-    since equivalent metrics have the same convergent sequences.
+    to be arbitrary metric spaces. By part \textbf{(b)} the same conclusion holds for $d_1$ and
+    $d_2$, since equivalent metrics have the same convergent sequences.
 \end{enumerate}
 \end{exercisesolution}
 
@@ -213,7 +214,7 @@ $(\lVert u\rVert + \lVert v\rVert)^2$.
 \begin{exercisesolution}[Solution to \cref{ex:3.9}]
 % Generator: Claude Opus 5 (High)
 Write $e_1,\dots,e_n$ for the standard basis and $|\cdot|$ for the Euclidean norm.
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item Expand $x = \sum_{i=1}^n x_ie_i$ and use the triangle inequality and homogeneity of $f$
     (\cref{def:norm}):
     \[f(x) \ \leq\ \sum_{i=1}^n f(x_ie_i) \ =\ \sum_{i=1}^n |x_i|\,f(e_i)
@@ -223,22 +224,24 @@ Write $e_1,\dots,e_n$ for the standard basis and $|\cdot|$ for the Euclidean nor
     $C_1 := \sqrt n \max_i f(e_i)$ works, and $C_1 > 0$ because $e_i \neq 0$ forces
     $f(e_i) > 0$ by definiteness.
   \item The reverse triangle inequality for $f$, namely $f(x) \leq f(y) + f(x-y)$ together with
-    its mirror image, gives $|f(x)-f(y)| \leq f(x-y)$. Combined with part 1 this yields
+    its mirror image, gives $|f(x)-f(y)| \leq f(x-y)$. Combined with part \textbf{(a)} this
+    yields
     \[|f(x)-f(y)| \ \leq\ f(x-y) \ \leq\ C_1|x-y|.\]
     So $f$ is $C_1$-Lipschitz with respect to the \emph{Euclidean} distance
     (\cref{def:lipschitz_continuous}), hence continuous (\cref{rem:continuity_hierarchy}). Note
     which distance is which here: the claim is continuity of $f$ as a function on the metric
-    space $(\mathbb{R}^n, |\cdot|)$, and part 1 is what makes that meaningful.
+    space $(\mathbb{R}^n, |\cdot|)$, and part \textbf{(a)} is what makes that meaningful.
   \item The unit sphere $S := \{x : |x| = 1\}$ is closed (preimage of $\{1\}$ under the
     continuous $|\cdot|$) and bounded, hence \textbf{compact} by \cref{thm:heine_borel}. By part
-    2 the function $f$ is continuous on $S$, so it attains a minimum there
+    \textbf{(b)} the function $f$ is continuous on $S$, so it attains a minimum there
     (\cref{item:extreme_value_theorem}), say $c_2 := f(x_0)$ with $|x_0| = 1$. Since $x_0 \neq 0$,
     definiteness gives $c_2 = f(x_0) > 0$.
   \item For $x \neq 0$ the vector $x/|x|$ lies in $S$, so $f(x/|x|) \geq c_2$, and homogeneity
     gives
     \[f(x) = |x|\,f\!\left(\frac{x}{|x|}\right) \ \geq\ c_2\,|x|.\]
-    For $x = 0$ both sides vanish. Together with part 1, $c_2|x| \leq f(x) \leq C_1|x|$.
-  \item Apply parts 1 and 4 to both norms: $c_2|x| \leq f(x) \leq C_1|x|$ and
+    For $x = 0$ both sides vanish. Together with part \textbf{(a)},
+    $c_2|x| \leq f(x) \leq C_1|x|$.
+  \item Apply parts \textbf{(a)} and \textbf{(d)} to both norms: $c_2|x| \leq f(x) \leq C_1|x|$ and
     $\tilde c_2|x| \leq \tilde f(x) \leq \tilde C_1|x|$, all four constants positive. Then
     \[\tilde f(x) \ \leq\ \tilde C_1|x| \ \leq\ \frac{\tilde C_1}{c_2}\,f(x),
       \qquad\qquad
@@ -250,8 +253,9 @@ Write $e_1,\dots,e_n$ for the standard basis and $|\cdot|$ for the Euclidean nor
 
 \begin{remark}[Where finite dimension is indispensable]
 \label{rem:norm_equivalence_needs_finite_dimension}
-The result is false in infinite dimensions, and the proof shows exactly which step breaks: part 1
-expands $x$ in a \emph{finite} basis and part 3 uses compactness of the unit sphere. In an
+The result is false in infinite dimensions, and the proof shows exactly which step breaks: part
+\textbf{(a)} expands $x$ in a \emph{finite} basis and part \textbf{(c)} uses compactness of the
+unit sphere. In an
 infinite-di\-men\-sional normed space the closed unit ball is never compact, and one can write
 down inequivalent norms. Take for instance $\lVert\cdot\rVert_\infty$ and
 $\int_0^1|\cdot|$ on $C^0([0,1])$, where a tall thin spike has supremum norm $1$ and integral
@@ -297,7 +301,8 @@ $\lVert\Psi\Phi\rVert \leq \lVert\Psi\rVert\,\lVert\Phi\rVert$.
 % property of the norm, so it is mathematics rather than commentary on the transcription.
 \begin{remark}[Submultiplicativity, and what it later buys]
 The Hilbert--Schmidt norm is the same object as the Frobenius norm met in
-\cref{ex:2.1} part 5 on the previous sheet, where it was shown to be the Euclidean norm of the
+\cref{ex:2.1} part \textbf{(e)} on the previous sheet, where it was shown to be the Euclidean
+norm of the
 matrix read as a vector of $\mathbb{R}^{n^2}$. The inequality just proved says that this norm is
 \newterm{submultiplicative} \germanfor{submultiplikativ}, which is exactly the property that
 makes it useful for estimating compositions of linear maps. It is also what will later let
@@ -308,12 +313,12 @@ $\lVert Df\rVert$ be handled like an absolute value in the mean value inequality
 
 \begin{exercisesolution}[Solution to \cref{ex:4.3}]
 % Generator: Claude Sonnet 5 (Medium)
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item For $n=2$, $\{x : |x|_1 \leq 1\}$ is the diamond with vertices $(\pm 1, 0)$, $(0,\pm 1)$;
     $\{x : |x|_2 \leq 1\}$ is the Euclidean unit disc; $\{x : |x|_{10} \leq 1\}$ is a curve close
     to the square $[-1,1]^2$, with rounded corners that flatten as $p$ grows. All three contain
     the four points $(\pm1,0)$, $(0,\pm1)$, since $|e_i|_p = 1$ for every $p$, and they increase
-    with $p$, which is the geometric content of part 2.
+    with $p$, which is the geometric content of part \textbf{(b)}.
     \begin{center}
     % Generator: Claude Opus 5 (High) --- FIG-W04-01: the p-balls for p = 1, 2, 10, plus the
     % limiting square. Plotted parametrically from |x|_p = 1 in the first quadrant,
@@ -408,7 +413,7 @@ Throughout write $S(t) := \sum_{i=1}^n x_i^t$, so that
 $\mu_t(x) = \big(S(t)/n\big)^{1/t}$ for $t \neq 0$, and set
 \[g(t) := \log \mu_t(x) = \frac{h(t)}{t}, \qquad h(t) := \log\frac{S(t)}{n}.\]
 Note $h(0) = \log(n/n) = 0$; this single fact does most of the work below.
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item Let $M := \max_i x_i$ and $m := \min_i x_i$, and let $k$ be the number of indices
     attaining $M$. Factoring out the largest term,
     \[\mu_t(x) = M\left(\frac{1}{n}\sum_{i=1}^n\Big(\frac{x_i}{M}\Big)^{t}\right)^{1/t},\]
@@ -430,7 +435,8 @@ Note $h(0) = \log(n/n) = 0$; this single fact does most of the work below.
     \[\sum_{i=1}^n \frac{a_i\log a_i}{a_1+\dots+a_n} \ \geq\ \log\!\left(\frac{a_1+\dots+a_n}{n}\right).\]
   \item \textit{Continuity.} On $\mathbb{R}\setminus\{0\}$, $g = h/t$ is a quotient of smooth
     functions with non-vanishing denominator. At $t = 0$ the value $g(0) := h'(0)$ computed in
-    part 1 is precisely the limit, so $g$, and hence also $f = e^{g}$, is continuous everywhere.
+    part \textbf{(a)} is precisely the limit, so $g$, and hence also $f = e^{g}$, is continuous
+    everywhere.
 
     \textit{Monotonicity.} Differentiating $g = h/t$ for $t \neq 0$,
     \[t^2 g'(t) = t\,h'(t) - h(t) = \frac{t\,S'(t)}{S(t)} - \log\frac{S(t)}{n}.\]
@@ -438,13 +444,14 @@ Note $h(0) = \log(n/n) = 0$; this single fact does most of the work below.
     $t\,S'(t) = \sum_i a_i\log a_i$ and $S(t) = \sum_i a_i$, and the displayed quantity becomes
     \[\sum_{i=1}^n\frac{a_i\log a_i}{a_1+\dots+a_n} \ -\ \log\!\left(\frac{a_1+\dots+a_n}{n}\right)
       \ \geq\ 0\]
-    by part 2. Hence $g' \geq 0$ on $t \neq 0$, and by continuity $g$ is non-decreasing on all of
+    by part \textbf{(b)}. Hence $g' \geq 0$ on $t \neq 0$, and by continuity $g$ is non-decreasing
+    on all of
     $\mathbb{R}$; so is $f = e^{g}$.
 
-    This is why part 2 was placed where it is: it is not a separate exercise but the derivative
-    computation of part 3 in disguise.
+    This is why part \textbf{(b)} was placed where it is: it is not a separate exercise but the
+    derivative computation of part \textbf{(c)} in disguise.
   \item Both inequalities are instances of $\mu_s(x) \leq \mu_t(x)$ for $s \leq t$, i.e.\ of
-    part 3.
+    part \textbf{(c)}.
     \begin{itemize}
       \item \textbf{Arithmetic--geometric:} $\mu_0(x) \leq \mu_1(x)$ reads
         $(x_1\cdots x_n)^{1/n} \leq \tfrac{1}{n}(x_1+\dots+x_n)$; multiplying by $n$ gives
@@ -476,13 +483,14 @@ Note $h(0) = \log(n/n) = 0$; this single fact does most of the work below.
 
 % Reclassified from ainote to remark: the divergence from the official hint is a mathematical
 % observation about the structure of the problem, not a note about the transcription.
-\begin{remark}[Why parts 2 and 3 are one statement]
+\begin{remark}[Why parts \textbf{(b)} and \textbf{(c)} are one statement]
 Jensen's inequality, used above without being stated, is available as
 \cref{prop:jensen_inequality} (\cref{ch:convexity}). The official hint for 4.4.2 routes through
 the concavity of $\log$ together with Cauchy--Schwarz. The solution above instead applies Jensen
 once, to the convex function $\varphi(s) = s\log s$. Both arrive at the same inequality, but the
-second makes visible why 4.4.2 and 4.4.3 are really a single statement: substituting
-$a_i := x_i^{\,t}$ turns the inequality of part 2 into the sign of $g'(t)$ in part 3. That is
+second makes visible why the two are really a single statement: substituting
+$a_i := x_i^{\,t}$ turns the inequality of part \textbf{(b)} into the sign of $g'(t)$ in part
+\textbf{(c)}. That is
 worth seeing, because monotonicity of the power means is the whole point of the problem, and the
 classical AM--GM inequality falls out of it as the single comparison $\mu_0 \leq \mu_1$.
 \end{remark}

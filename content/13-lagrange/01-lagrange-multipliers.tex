@@ -395,7 +395,7 @@ Write $L(x,\lambda) := f(x) - \sum_{j=1}^k\lambda_jg_j(x)$ for the Lagrangian, a
 \[T_{x_0} := \{v \in \mathbb{R}^n : Dg(x_0)v = 0\}\]
 be the tangent space of the constraint set $g^{-1}\{0\}$ at $x_0$ (a $(n-k)$-dimensional
 subspace, by \textbf{(a)}). Then:
-\begin{enumerate}[label=\textbf{(\arabic*)}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item If $v\transp\Hess_xL(x_0,\lambda)v > 0$ for all $v \in T_{x_0}\setminus\{0\}$, then
     $x_0$ is a \textbf{strict local minimum} of $f|_{g^{-1}\{0\}}$.
   \item If $v\transp\Hess_xL(x_0,\lambda)v < 0$ for all $v \in T_{x_0}\setminus\{0\}$, then
@@ -436,7 +436,7 @@ The three cases now follow by reading the unconstrained Hessian test (\cref{thm:
 off $h$ on the open set $V \subseteq \mathbb{R}^{n-k}$, and transporting the conclusion back
 through $\varphi$, which is a local homeomorphism from $V$ onto a neighbourhood of $x_0$ in
 $g^{-1}\{0\}$.
-\begin{enumerate}[label=\textbf{(\arabic*)}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item $\Hess_xL(x_0,\lambda)$ positive definite on $T_{x_0}$ is exactly $\Hess h(0)$ positive
     definite, so the Hessian test gives a strict local minimum of $h$ at $0$, which transports
     to a strict local minimum of $f|_{g^{-1}\{0\}}$ at $x_0$.
@@ -453,7 +453,7 @@ This is exactly \cref{thm:hessian_test} run on the Lagrangian instead of on $f$ 
 Hessian test's ordinary $\mathbb{R}^n$ replaced by the tangent space $T_{x_0}$. That is also why
 $L$, not $f$, is the right function to differentiate: only $L$ has a genuine critical point at
 $x_0$ (in the full, unrestricted sense), since $f$ itself typically does not. In practice
-\textbf{(1)}--\textbf{(3)} are checked by picking any basis $v_1,\dots,v_{n-k}$ of $T_{x_0}$
+\textbf{(a)}--\textbf{(c)} are checked by picking any basis $v_1,\dots,v_{n-k}$ of $T_{x_0}$
 (e.g.\ a basis of $\ker Dg(x_0)$) and testing the definiteness of the $(n-k)\times(n-k)$ matrix
 $\big(v_i\transp\Hess_xL(x_0,\lambda)v_j\big)_{i,j}$ with \cref{thm:hessian_test}, or with the
 determinant/trace recipe from \cref{sec:hessian_test}. There is no need to construct $\varphi$
@@ -601,7 +601,7 @@ Find the maximum and minimum values of $f(x,y) := x + 2y$ subject to the constra
 \label{ex:5.2}
 Consider the ball $U := \{(x,y,z) : x^2+y^2+z^2 < 1\}$ and the function
 \[f(x,y,z) := 1 - x^2 - y^2 + 4x.\]
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item Motivate rigorously why $f$ attains its absolute maximum and minimum in $\overline{U}$.
   \item Find all the critical points of $f$ which lie in the interior of $U$. Say whether
     $\sup_U f$ (or $\inf_U f$) is attained at some point in $U$.

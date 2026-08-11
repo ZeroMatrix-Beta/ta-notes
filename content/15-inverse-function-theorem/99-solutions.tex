@@ -74,3 +74,34 @@ carrying its conclusion back to the original ones without the change of variable
 argument breaks.
 \end{remark}
 \end{exercisesolution}
+
+\begin{exercisesolution}[Solution of \cref{ex:local_diffeo_parameter_alpha}]
+% Generator: Claude Opus 5 (High)
+Everything turns on one number:
+\[\det\Jac\Phi(0,0) = (\alpha+5)(\alpha-5) - (-3)\cdot 3 = \alpha^2 - 25 + 9 = \alpha^2 - 16 .\]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{False.} The determinant vanishes exactly when $\alpha^2 = 16$, so $\alpha^2 \neq 25$
+    is the wrong condition. Take $\alpha = 4$, which satisfies $\alpha^2 = 16 \neq 25$ and so is
+    covered by the claim. There $\det\Jac\Phi(0,0) = 0$, and no restriction of $\Phi$ to a
+    neighbourhood of the origin can be a diffeomorphism: if $\Phi|_V$ had a $C^1$ inverse $\Psi$,
+    the chain rule applied to $\Psi\circ\Phi = \id$ would give
+    $\Jac\Psi(\Phi(0,0))\,\Jac\Phi(0,0) = I_2$, forcing $\Jac\Phi(0,0)$ to be invertible.
+  \item \textbf{True.} If $\alpha^2 \neq 16$, then $\det\Jac\Phi(0,0) \neq 0$, so
+    $D\Phi_{(0,0)}$ is invertible, and $\Phi \in C^1$. The inverse function theorem
+    (\cref{thm:inverse_function_theorem}) supplies open sets $V \ni (0,0)$ and $W \ni \Phi(0,0)$
+    with $\Phi|_V : V \to W$ a $C^1$-diffeomorphism. Any ball $B_r(0,0) \subseteq V$ then works,
+    since a restriction of a diffeomorphism to an open subset is again one onto its image.
+  \item \textbf{True.} For $\alpha = 0$ the determinant is $-16 \neq 0$, so \textbf{(b)} applies.
+    Fix $V, W$ as there and $r > 0$ with $B_r(0,0) \subseteq V$. A diffeomorphism is in particular
+    a homeomorphism onto the open set $W$, so it maps open subsets of $V$ to open subsets of $W$,
+    and open subsets of an open set are open in $\mathbb{R}^2$. Hence $\Phi(B_r(0,0))$ is open.
+\end{enumerate}
+\begin{remark}[Where $25$ comes from, and why it is wrong]
+The two thresholds are not a random pair. A reader who computes the determinant as a product of
+the diagonal entries and forgets the off-diagonal contribution gets $(\alpha+5)(\alpha-5)$ and
+lands on $\alpha^2 = 25$, which is exactly the false condition of \textbf{(a)}. The off-diagonal
+pair $-3, 3$ contributes $+9$ and moves the singular set to $\alpha^2 = 16$, that is
+$\alpha = \pm4$. Item \textbf{(a)} and item \textbf{(b)} are therefore the same sentence with one
+arithmetic slip between them, and reading them as a pair is faster than checking either alone.
+\end{remark}
+\end{exercisesolution}

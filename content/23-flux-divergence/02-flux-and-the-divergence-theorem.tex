@@ -26,7 +26,7 @@ Let $\Omega \subseteq \mathbb{R}^3$ be a bounded $C^1$ domain and $F \in
 C^1(\overline\Omega,\mathbb{R}^3)$ a vector field, and let $\phi : B \to \partial\Omega
 \setminus N$ be a parametrization of $\partial\Omega\setminus N$, where $N \subseteq
 \partial\Omega$ is a null set, $B \subseteq \mathbb{R}^2$. Then:
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item $\displaystyle\nu(x) := \frac{\partial_1\phi(x)\times\partial_2\phi(x)}
     {\lvert\partial_1\phi(x)\times\partial_2\phi(x)\rvert}$ is an (interior or exterior) Gauss
     map (more precisely, $\nu\circ\phi^{-1}$ is a Gauss map, i.e.\
@@ -147,6 +147,43 @@ field, which is the shape of the fundamental theorem of calculus.
 \end{center}
 \end{ainote}
 
+% Generator: Claude Opus 5 (High)
+% Gap closed 2026-08-11. thm:gauss_divergence is stated for bounded C^1 domains, and the document
+% then applies it to a cube (ex:flux_divergence_cube, two blocks below) and to a truncated
+% paraboloid (ex:flux_truncated_paraboloid), neither of which is one. The extension was being used
+% silently; stated here instead. Not in Analysis_II_Script_v1.pdf, which does not treat piecewise
+% smooth boundaries at all --- hence no % Supplement: line.
+\begin{theorem}[Divergence theorem on a piecewise $C^1$ domain]
+\label{thm:gauss_divergence_piecewise}
+Let $\Omega \subseteq \mathbb{R}^n$ be a bounded open set whose boundary can be written as a
+finite union
+\[\partial\Omega = S_1 \cup \dots \cup S_N\]
+of $C^1$ hypersurfaces meeting only along a set of $\vol_{n-1}$-measure zero, and let
+$F : \overline\Omega \to \mathbb{R}^n$ be a $C^1$ vector field. Then the conclusion of
+\cref{thm:gauss_divergence} still holds,
+\[\int_\Omega \divg F\,d\vol_n = \int_{\partial\Omega} \langle F,\nu\rangle\,d\vol_{n-1}
+  = \sum_{i=1}^N \int_{S_i} \langle F,\nu\rangle\,d\vol_{n-1},\]
+where the exterior unit normal $\nu$ is defined at every boundary point off the exceptional set.
+\end{theorem}
+
+\begin{ainote}
+\Cref{thm:gauss_divergence_piecewise} is stated here without proof, as the course states it: the
+August 2024 exam grants it explicitly, telling candidates they may use the divergence theorem in a
+piecewise smooth domain without proof. It is worth having written down, because this document had
+already been using it twice over. A cube has edges and corners and is not a $C^1$ domain, so
+\cref{ex:flux_divergence_cube} below needs this version and not
+\cref{thm:gauss_divergence}; so does \cref{ex:flux_truncated_paraboloid}, whose region has an edge
+where the paraboloid meets its lid.
+
+The reason it is true is worth a sentence even without a proof. Cut $\Omega$ along finitely many
+surfaces into pieces that \emph{are} $C^1$ domains and apply \cref{thm:gauss_divergence} to each.
+Every interior cut is traversed by exactly two pieces, whose exterior normals there point in
+opposite directions, so those contributions cancel in pairs and only $\partial\Omega$ survives.
+The edges themselves contribute nothing because they carry no $(n-1)$-dimensional volume, which is
+the same reason the normal being undefined along them does no harm.
+\end{ainote}
+
+% Source: Corsin Nick/Class Notes/Week 10.pdf, p. 11
 \begin{example}[Recomputing \cref{ex:flux_unit_sphere} via the divergence theorem]
 \label{ex:flux_unit_sphere_via_divergence}
 With $\Omega = B_1(0)$ and $F(x,y,z) = (xz,z,y)$ as before, $\divg F = \partial_x(xz) +
@@ -309,7 +346,7 @@ Since this holds for any $\Omega$, the \newterm{continuity equation}
 For $\alpha\in\mathbb{R}$ consider the vector field
 \[V_\alpha(x) = \lvert x\rvert^\alpha x, \qquad x\in\mathbb{R}^n\setminus\{0\},\]
 where $\lvert x\rvert$ is the usual Euclidean norm.
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item Compute $\divg V_\alpha(x)$ for all $x\neq0$, and show that it vanishes identically
   for $\alpha=-n$.
   \item Using the Divergence theorem on $V_0$, show the following relation between the
@@ -328,7 +365,7 @@ where $\lvert x\rvert$ is the usual Euclidean norm.
 \label{ex:ai_flux_cubic_sphere}
 Let $F(x,y,z) := (x^3,\,y^3,\,z^3)$ and let $\Omega := B_1(0) \subseteq \mathbb{R}^3$. Compute
 the flux of $F$ out of $\partial\Omega$.
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item Say in one sentence what the integrand of \cref{def:flux} would look like here if the
     sphere were parametrized directly, and why that route is unattractive.
   \item Compute $\divg F$, and observe that it depends on the point only through its distance
@@ -344,7 +381,7 @@ the flux of $F$ out of $\partial\Omega$.
 Let $S := \{(x,y,z) \in \mathbb{R}^3 : z = 1-x^2-y^2,\ z \geq 0\}$ be the piece of the
 paraboloid lying above the $xy$-plane, oriented by the upward-pointing normal, and let
 $F(x,y,z) := (x,\,y,\,z)$.
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item \Cref{thm:gauss_divergence} applies to the boundary of a domain, and $S$ is not one.
     Which set $D$ must be adjoined to $S$ so that $S \cup D = \partial\Omega$ for a bounded
     domain $\Omega$, and what is the exterior unit normal along $D$?
@@ -401,6 +438,32 @@ Determine the value of $\alpha$ for which the outer flux of $F_\alpha$ across $\
 $1$.
 \exinfo{This exercise is taken from the exam of 13 February 2025, Box Problem 3, where only the
 final answer was graded.}
+\end{exercise}
+
+% Source: old_exams/examFS24.pdf (21 August 2024), Kurzproblem 2, p. 9
+% Extractor: Claude Opus 5 (High)
+% The counterpart of ex:examHS24_KP1_part2_flux above, and worth having beside it: there the
+% surface is the whole closed boundary of an ellipsoid, so the divergence theorem applies directly;
+% here M is only the curved part of a piecewise smooth boundary, so the flux through the flat lid
+% has to be computed separately and subtracted. That subtraction is the whole exercise.
+\begin{exercise}[Outer flux across a truncated paraboloid]
+\label{ex:flux_truncated_paraboloid}
+Consider the region, the surface and the two vector fields
+\begin{align*}
+  U &:= \{(x,y,z) \in \mathbb{R}^3 \mid 1+x^2+y^2 < z,\ z < 5\}, \\
+  M &:= \{(x,y,z) \in \mathbb{R}^3 \mid 1+x^2+y^2 = z,\ z < 5\}, \\
+  E(x,y,z) &:= (xz,\ 2y-yz,\ x^2+y^2)\transp, \qquad
+  A(x,y,z) := (-ye^z,\ xe^z,\ e^z)\transp .
+\end{align*}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Sketch $M$ in 3D perspective and label the axes.
+  \item Compute the outer flux of $E$ across $M$, taking the normal vector to $M$ that points out
+    of $U$.
+  \item Compute the outer flux of $\curl A$ across $M$, with the same choice of normal.
+\end{enumerate}
+\exhint[Official hint]{If needed, you may use the divergence theorem in a piecewise smooth domain
+without proof.}
+\exinfo{This exercise is taken from the exam of 21 August 2024, Short Problem 2.}
 \end{exercise}
 
 % Source: old_exams/fs2023/Prüfung.pdf (9 August 2021), Teil A, Frage 10, p. 11

@@ -24,7 +24,7 @@ $\Omega^0(U) = C^\infty(U)$.
 
 \begin{example}
 Let $U \subseteq \mathbb{R}^n$.
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item Any $f \in C^\infty(U)$ is a $0$-form.
   \item A vector field $F : U \to \mathbb{R}^n$ has an associated $1$-form $\omega_F(x) : v
   \mapsto \langle F(x),v\rangle$, that is,
@@ -51,7 +51,7 @@ Let $U \subseteq \mathbb{R}^n$.
 \end{example}
 
 \begin{ainote}
-Item 4 identifies $\omega_F^2$ with the flux integrand from
+Item \textbf{(d)} identifies $\omega_F^2$ with the flux integrand from
 \cref{sec:flux_divergence_theorem}: the flux $\int_S \langle F,\nu\rangle\,d\vol_2$ over a parametrized surface is
 exactly the integral, in the sense of the motivating change-of-variables calculation above, of
 the $2$-form $\omega_F^2$.
@@ -61,7 +61,7 @@ the $2$-form $\omega_F^2$.
 \begin{theorem}[Exterior derivative]
 \label{thm:exterior_derivative}
 There exists a unique linear operator $d : \Omega^k(U) \to \Omega^{k+1}(U)$ satisfying
-\begin{enumerate}[label=\textbf{(\arabic*)}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item for $f \in C^\infty(U) = \Omega^0(U)$: $df = Df$, the ordinary differential;
   \item for $\omega \in \Omega^k(U)$, $\theta \in \Omega^s(U)$: $d(\omega\wedge\theta) =
   d\omega\wedge\theta + (-1)^k\,\omega\wedge d\theta$;
@@ -73,7 +73,7 @@ There exists a unique linear operator $d : \Omega^k(U) \to \Omega^{k+1}(U)$ sati
 Corsin states this as a fact seen in the lecture, without proof, and moves directly to its
 consequences. The proof can be found in the official script
 (Analysis\_II\_Script\_v1.pdf, §14.3, pp.\ 136--138), where the operator is constructed
-explicitly in coordinates and properties (1)--(3) are verified.
+explicitly in coordinates and properties \textbf{(a)}--\textbf{(c)} are verified.
 \end{ainote}
 
 Denote by $dx^i$ the differential of $x \mapsto x^i$ in a moving frame $(e_1(x),\ldots,e_n(x))$,
@@ -87,7 +87,7 @@ with exterior derivative
 % Source: Corsin Nick/Class Notes/Week 11.pdf, pp. 14--15
 \begin{example}[The exterior derivative recovers the gradient and the curl]
 \label{ex:exterior_derivative_gradient_curl}
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item For $f \in C^\infty(\mathbb{R}^n) = \Omega^0(\mathbb{R}^n)$,
   \[df_x(v) = \left(\frac{\partial f}{\partial x^1}\ \Big|\ \cdots\ \Big|\ \frac{\partial f}
     {\partial x^n}\right)\!\begin{pmatrix}v^1\\ \vdots \\ v^n\end{pmatrix}
@@ -99,7 +99,8 @@ with exterior derivative
   is the shape that makes Stokes' theorem specialize to the FTC, as in
   \cref{sec:gauss_intuition}.
   \item Define a $1$-form on $U \subseteq \mathbb{R}^3$ by $\omega(x,y,z) = \langle
-  F(x,y,z),\cdot\rangle = F^1\,dx+F^2\,dy+F^3\,dz$ for a vector field $F$. By property (2) of
+  F(x,y,z),\cdot\rangle = F^1\,dx+F^2\,dy+F^3\,dz$ for a vector field $F$. By property
+  \textbf{(b)} of
   \cref{thm:exterior_derivative} and $d(dx^i)=0$ (since $dx^i = d(x^i)$ and $d^2=0$),
   \[
   d\omega = dF^1\wedge dx + dF^2\wedge dy + dF^3\wedge dz,
@@ -111,7 +112,7 @@ with exterior derivative
     dz + \Big(\frac{\partial F^1}{\partial z}-\frac{\partial F^3}{\partial x}\Big)dz\wedge dx
     + \Big(\frac{\partial F^2}{\partial x}-\frac{\partial F^1}{\partial y}\Big)dx\wedge dy.
   \]
-  Comparing with example item 4 in \cref{sec:differential_forms}, this is exactly
+  Comparing with example item \textbf{(d)} in \cref{sec:differential_forms}, this is exactly
   $\omega_{\nabla\times F}^2 = \langle\nabla\times F,\cdot\times\cdot\rangle = \det(\nabla
   \times F\mid\cdot\mid\cdot)$: the exterior derivative of the $1$-form associated to $F$ is
   the $2$-form associated to $\curl F$.
@@ -119,13 +120,13 @@ with exterior derivative
   % Generator: Claude Sonnet 5 (High) --- new content: the analogous fact for the divergence,
   % completing the grad/curl/div trio as the 0-, 1- and (n-1)-form faces of $d$, using the
   % $(n-1)$-form $\omega_F^{n-1}$ already introduced in \cref{sec:differential_forms} (example
-  % item 3) rather than redefining it. Used below in
+  % item (c)) rather than redefining it. Used below in
   % \cref{rem:one_theorem_four_costumes} to place the divergence theorem alongside Green,
   % classical Stokes and the FTC as instances of the single general Stokes theorem.
   \item Recall the $(n-1)$-form $\omega_F^{n-1} =
   \sum_{i=1}^n(-1)^{i-1}F^i\,dx^1\wedge\cdots\wedge\widehat{dx^i}\wedge\cdots\wedge dx^n$ from
-  \cref{sec:differential_forms} (example item 3), with $\widehat{dx^i}$ denoting an omitted
-  factor. In $d(F^i\,dx^1\wedge\cdots\widehat{dx^i}\cdots\wedge dx^n) =
+  \cref{sec:differential_forms} (example item \textbf{(c)}), with $\widehat{dx^i}$ denoting an
+  omitted factor. In $d(F^i\,dx^1\wedge\cdots\widehat{dx^i}\cdots\wedge dx^n) =
   dF^i\wedge dx^1\wedge\cdots\widehat{dx^i}\cdots\wedge dx^n$, only the $\partial_iF^i\,dx^i$
   summand of $dF^i = \sum_j\partial_jF^i\,dx^j$ survives, since every $j\neq i$ repeats a factor
   already present and so kills the wedge by antisymmetry. Therefore
@@ -141,8 +142,8 @@ with exterior derivative
       = (\divg F)\,dx^1\wedge\cdots\wedge dx^n.
   \end{align*}
   So, the exterior derivative of $\omega_F^{n-1}$ is $\divg F$ times the volume form. That
-  completes the pattern of items 1 and 2 above: $\grad$, $\curl$ and $\divg$ are exactly the
-  $0$-, $1$- and $(n-1)$-form faces of the single operator $d$.
+  completes the pattern of items \textbf{(a)} and \textbf{(b)} above: $\grad$, $\curl$ and
+  $\divg$ are exactly the $0$-, $1$- and $(n-1)$-form faces of the single operator $d$.
 
 % Source: Jérôme Paschoud/Notizen/Woche 12.1 Differentialformen.pdf, p. 6
   \item Let $\omega = x_3 \,dx_3 + x_1 x_2 \,dx_2$ be a $1$-form on $\mathbb{R}^3$. Let us compute its exterior derivative using the rules:
@@ -164,7 +165,7 @@ dx=dy\wedge dy=dz\wedge dz=0$ kills exactly the three diagonal terms, and antisy
 \end{ainote}
 
 % Generator: Claude Opus 5 (High) --- FIG-CH24-03. The chapter opens by promising that grad,
-% curl and div are one operator satisfying one identity. Items 1-3 of the example above prove
+% curl and div are one operator satisfying one identity. Items (a)-(c) of the example above prove
 % it, one column at a time, and the result was never assembled anywhere. This is that assembly.
 % Every vertical arrow is an identification established earlier in this chapter, and each is
 % labelled with the place it was made, so the diagram is checkable rather than decorative.
@@ -184,12 +185,14 @@ dx=dy\wedge dy=dz\wedge dz=0$ kills exactly the three diagonal terms, and antisy
 \begin{importantremark}[One operator, one identity]
 \label{rem:one_theorem_four_costumes_forms}
 For $U \subseteq \mathbb{R}^3$ the diagram above commutes, and each square is one of the three
-computations just performed: the left square is item 1, the middle is item 2, the right is
-item 3. Read downward it says that the classical vector operators are $d$ in disguise, and that
-the disguise is nothing but the choice of which object to call a vector field.
+computations just performed: the left square is item \textbf{(a)}, the middle is item
+\textbf{(b)}, the right is item \textbf{(c)}. Read downward it says that the classical vector
+operators are $d$ in disguise, and that the disguise is nothing but the choice of which object to
+call a vector field.
 
 The payoff is the bottom row's two mysteries collapsing into one line of the top row. Property
-(3) of \cref{thm:exterior_derivative} is $d \circ d = 0$, a single statement about a single
+\textbf{(c)} of \cref{thm:exterior_derivative} is $d \circ d = 0$, a single statement about a
+single
 operator, and reading it through the two identifications gives
 \[\curl\grad = 0 \qquad\text{and}\qquad \divg\curl = 0.\]
 These are the same fact twice, seen from two rungs of the same ladder. That is the whole reason
@@ -211,9 +214,10 @@ because anyone chose to stop there.
 \label{ex:ai_angle_form_closed}
 On $U := \mathbb{R}^2\setminus\{0\}$ define the $1$-form
 \[\omega := \frac{-y\,dx + x\,dy}{x^2+y^2}.\]
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item Show that $d\omega = 0$.
-  \item By part 1 and \cref{thm:exterior_derivative}, one might hope that $\omega = df$ for some
+  \item By part \textbf{(a)} and \cref{thm:exterior_derivative}, one might hope that
+    $\omega = df$ for some
     $f \in C^\infty(U)$. Compute $\int_\gamma \omega$ along the unit circle
     $\gamma(t) := (\cos t, \sin t)$, $t \in [0,2\pi]$, and explain what this rules out.
     \emph{Hint:} \cref{prop:work_difference_potential}, read through the identification
@@ -226,7 +230,7 @@ On $U := \mathbb{R}^2\setminus\{0\}$ define the $1$-form
 \label{ex:ai_exterior_derivative_drill}
 Compute $d\omega$ for each of the following, on the largest domain where the expression makes
 sense.
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item $\omega = xy\,dx + yz\,dy + zx\,dz$ on $\mathbb{R}^3$. Which vector field's curl have you
     just computed?
   \item $\omega = x_1x_2x_3\,dx_2\wedge dx_3$ on $\mathbb{R}^3$.

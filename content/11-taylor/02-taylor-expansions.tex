@@ -244,6 +244,49 @@ indicated point are determined by the given information, and which are not.
 Assume in each case that $f$ is as smooth as the relevant statement requires.
 \end{exercise}
 
+% Source: old_exams/examFS24.pdf (21 August 2024), Wahr/Falsch-Fragen, Aufgabe 5, p. 3
+% Extractor: Claude Opus 5 (High)
+% Worked out rather than set as an exercise: ex:reading_off_expansions immediately above already
+% asks the reader to do this, and what this block adds is the payoff, namely that the Hessian test
+% can be read off too and that reading it off without checking the gradient is a trap. The exam
+% writes Hf(0,0); rendered as \Hess per the notation table in style.md.
+\begin{example}[One expansion, five verdicts]
+\label{ex:expansion_five_verdicts}
+% Generator: Claude Opus 5 (High) --- the five statements are the examiner's; the working is
+% written for these notes.
+Suppose $f \in C^\infty(\mathbb{R}^2)$ satisfies
+\[f(x_1,x_2) = 10x_2 + x_1^2 + x_2^2 + o\big(\lvert x\rvert^2\big) \qquad
+  \text{as } \lvert x\rvert \to 0 .\]
+\Cref{cor:taylor_expansion_unique} applies with $k = 2$ and $x_0 = 0$, so the displayed polynomial
+\emph{is} the second-order Taylor polynomial of $f$ at the origin. Matching it term by term
+against
+\[f(h) = f(0) + \nabla f(0)\transp h + \tfrac12 h\transp\, \Hess f(0)\, h + o\big(\lvert h\rvert^2\big)\]
+gives everything at once:
+\[f(0) = 0, \qquad \nabla f(0) = \begin{pmatrix} 0 \\ 10 \end{pmatrix}, \qquad
+  \Hess f(0) = \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix}.\]
+The Hessian entries are $2$ rather than $1$ because it is $\tfrac12 h\transp \Hess f(0)h$, not
+$h\transp \Hess f(0)h$, that must reproduce $h_1^2 + h_2^2$. Five statements now settle
+themselves.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{$(0,0)$ must be a critical point of $f$: false.} The expansion carries a linear
+    term $10x_2$, so $\nabla f(0) \neq 0$.
+  \item \textbf{$f(0,0) = 0$: true.} It is the constant term, and there is none.
+  \item \textbf{$\partial^2f/\partial x_1^2(0,0) = 1$: false.} That entry is $2$.
+  \item \textbf{$\Hess f(0,0) = \left(\begin{smallmatrix} 2 & 0 \\ 0 & 2\end{smallmatrix}\right)$:
+    true}, as computed above.
+  \item \textbf{$f$ must have a strict local minimum at $(0,0)$: false.} Along the $x_2$-axis,
+    $f(0,t) = 10t + t^2 + o(t^2)$, which is negative for small $t < 0$ and positive for small
+    $t > 0$. The origin is not even a local extremum.
+\end{enumerate}
+Items \textbf{(d)} and \textbf{(e)} are the pair the block is built around. The Hessian really is
+positive definite, and that really does not make the origin a minimum: the second-derivative test
+of \cref{thm:hessian_test} is a statement about \emph{critical} points, and \textbf{(a)} has
+already shown this one is not. A definite Hessian at a non-critical point says nothing whatever
+about extrema, because the linear term dominates the quadratic one near the origin.
+\exinfo{This example is taken from the exam of 21 August 2024, where it appears as the fifth block
+of true/false questions.}
+\end{example}
+
 % Supplement: Toby Lane/class-document.pdf, §3.4.4
 \begin{remark}[Two ways to weight the same expansion]
 \Cref{ex:taylor_maximal_expansion} above and \cref{thm:taylor_working_formula} appear to disagree

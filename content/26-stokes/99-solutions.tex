@@ -12,52 +12,58 @@ Not every solution in this chapter is collected here. \Cref{ex:find_alpha_conser
 (\cpageref{ex:area_boundary_functional}) are solved where they appear.
 
 \begin{exercisesolution}[Solution of \cref{ex:12.3}]
-\textbf{1.} The domain is $\{(x,y,z) \in \mathbb{R}^3 : (x,y) \neq (0,0)\}$, i.e.\
-$\mathbb{R}^3$ with the $z$-axis removed. It is connected (path-connected: any two points can
-be joined by a path avoiding the axis), but not simply connected: $\gamma_1$, for instance, which
-winds once around the axis, cannot be contracted to a point without crossing it. (It is also
-not convex: the segment from $(-1,0,0)$ to $(1,0,0)$ leaves the domain.)
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item The domain is $\{(x,y,z) \in \mathbb{R}^3 : (x,y) \neq (0,0)\}$, i.e.\
+    $\mathbb{R}^3$ with the $z$-axis removed. It is connected (path-connected: any two points can
+    be joined by a path avoiding the axis), but not simply connected: $\gamma_1$, for instance,
+    which winds once around the axis, cannot be contracted to a point without crossing it. (It is
+    also not convex: the segment from $(-1,0,0)$ to $(1,0,0)$ leaves the domain.)
 
-\textbf{2.} Writing $F = (F^1,F^2,F^3)$ with $F^1 = 2(xz+y)/(x^2+y^2)$, $F^2 =
-2(yz-x)/(x^2+y^2)$, $F^3 = \log(x^2+y^2)$, a direct computation of each pair of mixed
-partials gives
-\[\partial_y F^3 = \partial_z F^2 = \frac{2y}{x^2+y^2}, \qquad
-  \partial_z F^1 = \partial_x F^3 = \frac{2x}{x^2+y^2}, \qquad
-  \partial_x F^2 = \partial_y F^1 = \frac{2(x^2-y^2-2xyz)}{(x^2+y^2)^2},\]
-so $\curl F = (\partial_yF^3-\partial_zF^2,\ \partial_zF^1-\partial_xF^3,\ \partial_xF^2-
-\partial_yF^1) = (0,0,0)$: $F$ is curl-free. On $\gamma_1$, $x=\cos t$, $y=\sin t$, $z=0$,
-$x^2+y^2=1$, so $F(\gamma_1(t)) = (2\sin t,\,-2\cos t,\,0)$ and $\gamma_1'(t) = (-\sin t,
-\cos t,0)$, giving
-\[\int_{\gamma_1} F\cdot d\gamma_1 = \int_0^{2\pi} \big(2\sin t\cdot(-\sin t) + (-2\cos t)
-  \cdot\cos t\big)\,dt = \int_0^{2\pi} -2\,dt = -4\pi.\]
-Since this is nonzero on a closed loop, $F$ is \textbf{not} conservative. It is curl-free, but
-its domain is not simply connected (part 1), so curl-free does not force conservative here.
+  \item Writing $F = (F^1,F^2,F^3)$ with $F^1 = 2(xz+y)/(x^2+y^2)$, $F^2 =
+    2(yz-x)/(x^2+y^2)$, $F^3 = \log(x^2+y^2)$, a direct computation of each pair of mixed
+    partials gives
+    \begin{align*}
+      \partial_y F^3 = \partial_z F^2 &= \frac{2y}{x^2+y^2}, &
+      \partial_z F^1 = \partial_x F^3 &= \frac{2x}{x^2+y^2}, \\
+      \partial_x F^2 = \partial_y F^1 &= \frac{2(x^2-y^2-2xyz)}{(x^2+y^2)^2},
+    \end{align*}
+    so $\curl F = (\partial_yF^3-\partial_zF^2,\ \partial_zF^1-\partial_xF^3,\ \partial_xF^2-
+    \partial_yF^1) = (0,0,0)$: $F$ is curl-free. On $\gamma_1$, $x=\cos t$, $y=\sin t$, $z=0$,
+    $x^2+y^2=1$, so $F(\gamma_1(t)) = (2\sin t,\,-2\cos t,\,0)$ and $\gamma_1'(t) = (-\sin t,
+    \cos t,0)$, giving
+    \[\int_{\gamma_1} F\cdot d\gamma_1 = \int_0^{2\pi} \big(2\sin t\cdot(-\sin t) + (-2\cos t)
+      \cdot\cos t\big)\,dt = \int_0^{2\pi} -2\,dt = -4\pi.\]
+    Since this is nonzero on a closed loop, $F$ is \textbf{not} conservative. It is curl-free, but
+    its domain is not simply connected (part \textbf{(a)}), so curl-free does not force
+    conservative here.
 
-\textbf{3.} Let $S := \{(x,y,z) : \sqrt{x^2+y^2} = 1+z/2,\ 0\leq z\leq2\}$, the cone swept out
-by linearly interpolating the radius from $\gamma_1$ ($z=0$, radius $1$) to $\gamma_2$ ($z=2$,
-radius $2$), parametrized by $H(s,t) := \big((1+s)\cos t,(1+s)\sin t,2s\big)$ for $(s,t) \in
-[0,1]\times[0,2\pi]$. Since the radius $1+s \geq 1 > 0$ throughout, $S$ never meets the
-$z$-axis and lies entirely in the domain of $F$; its oriented boundary (outward normal) is
-$\gamma_2$ minus $\gamma_1$. Since $\curl F = 0$ on $S$ by part 2, \cref{thm:stokes_classical}
-gives
-\[\int_{\gamma_2} F\cdot d\gamma_2 - \int_{\gamma_1} F\cdot d\gamma_1 = \int_{\partial S}
-  F\cdot ds = \int_S \curl F\cdot d\vec n = 0,\]
-i.e.\ $\int_{\gamma_1} F\cdot d\gamma_1 = \int_{\gamma_2} F\cdot d\gamma_2$.
+  \item Let $S := \{(x,y,z) : \sqrt{x^2+y^2} = 1+z/2,\ 0\leq z\leq2\}$, the cone swept out
+    by linearly interpolating the radius from $\gamma_1$ ($z=0$, radius $1$) to $\gamma_2$ ($z=2$,
+    radius $2$), parametrized by $H(s,t) := \big((1+s)\cos t,(1+s)\sin t,2s\big)$ for $(s,t) \in
+    [0,1]\times[0,2\pi]$. Since the radius $1+s \geq 1 > 0$ throughout, $S$ never meets the
+    $z$-axis and lies entirely in the domain of $F$; its oriented boundary (outward normal) is
+    $\gamma_2$ minus $\gamma_1$. Since $\curl F = 0$ on $S$ by part \textbf{(b)},
+    \cref{thm:stokes_classical} gives
+    \[\int_{\gamma_2} F\cdot d\gamma_2 - \int_{\gamma_1} F\cdot d\gamma_1 = \int_{\partial S}
+      F\cdot ds = \int_S \curl F\cdot d\vec n = 0,\]
+    i.e.\ $\int_{\gamma_1} F\cdot d\gamma_1 = \int_{\gamma_2} F\cdot d\gamma_2$.
 
-\textbf{4.} No. The disk $D := \{(x,y,z) : (x-6)^2+y^2 \leq 9,\ z=3\}$, oriented upward, has
-oriented boundary exactly $\gamma_3$, and $D$ lies entirely in the domain of $F$ (it does not
-meet the $z$-axis, since its center $(6,0,3)$ is at distance $6$ from the axis and its radius
-is only $3$). By \cref{thm:stokes_classical} with $\curl F=0$,
-\[\int_{\gamma_3} F\cdot d\gamma_3 = \int_{\partial D} F\cdot ds = \int_D \curl F\cdot d\vec n
-  = 0.\]
-Since $\int_{\gamma_1} F\cdot d\gamma_1 = -4\pi \neq 0 = \int_{\gamma_3} F\cdot d\gamma_3$, the
-two do \emph{not} agree, and Stokes' theorem gives no reason to expect they would: unlike the
-pair $(\gamma_1,\gamma_2)$, there is no surface joining $\gamma_1$ and $\gamma_3$ that stays
-inside the domain, since $\gamma_1$ winds around the excluded axis and $\gamma_3$ does not.
+  \item No. The disk $D := \{(x,y,z) : (x-6)^2+y^2 \leq 9,\ z=3\}$, oriented upward, has
+    oriented boundary exactly $\gamma_3$, and $D$ lies entirely in the domain of $F$ (it does not
+    meet the $z$-axis, since its center $(6,0,3)$ is at distance $6$ from the axis and its radius
+    is only $3$). By \cref{thm:stokes_classical} with $\curl F=0$,
+    \[\int_{\gamma_3} F\cdot d\gamma_3 = \int_{\partial D} F\cdot ds = \int_D \curl F\cdot d\vec n
+      = 0.\]
+    Since $\int_{\gamma_1} F\cdot d\gamma_1 = -4\pi \neq 0 = \int_{\gamma_3} F\cdot d\gamma_3$,
+    the two do \emph{not} agree, and Stokes' theorem gives no reason to expect they would: unlike
+    the pair $(\gamma_1,\gamma_2)$, there is no surface joining $\gamma_1$ and $\gamma_3$ that
+    stays inside the domain, since $\gamma_1$ winds around the excluded axis and $\gamma_3$ does
+    not.
+\end{enumerate}
 \end{exercisesolution}
 
 % Verified: solved independently, all four parts match Sol12_Analysis2_eng.pdf exactly.
-% Note: the official solution's part 2 labels vanishing curl as "divergence-free" where it
+% Note: the official solution's part 2 (our (b)) labels vanishing curl as "divergence-free" where it
 % visibly means curl-free (computes curl F, not div F) --- a wording slip, not repeated here.
 
 \begin{exercisesolution}[Solution of \cref{ex:12.4}]
@@ -156,6 +162,142 @@ The statement is a genuinely striking one: $\int_\Omega \det\Jac\Phi$ is an inte
 signed area swept out by $\Phi$, yet it depends on nothing but the boundary values of $\Phi$. That
 is the same phenomenon as a conservative field having path-independent work, one dimension up.
 \end{remark}
+
+% Generator: Claude Opus 5 (High) --- parts (c) to (f), added 2026-08-11 together with the
+% corresponding parts of the statement. Parts (a) and (b) above are Gemini 3.6 Flash's, corrected.
+From here on $\Omega = B_1$ and $\Phi(x) = x$ on $\partial B_1$. The four remaining parts form a
+chain, each one feeding the next, and the single computation they all run on is the one carried
+out in part \textbf{(d)}: a map taking values in the unit circle has vanishing Jacobian
+determinant.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \setcounter{enumi}{2}
+  \item The identity map $\Psi := \id$ is $C^2$ on $\overline{B_1}$ and agrees with $\Phi$ on
+    $\partial B_1$, which is exactly the hypothesis of \textbf{(b)}. Since
+    $\Jac(\id) = I_2$ has determinant $1$,
+    \[\int_{B_1}\det\Jac\Phi = \int_{B_1}\det\Jac(\id) = \int_{B_1} 1 = \vol_2(B_1) = \pi .\]
+    The integral of $\lvert\det\Jac\Phi\rvert$ dominates the absolute value of the integral of
+    $\det\Jac\Phi$, so
+    \[\int_{B_1}\lvert\det\Jac\Phi\rvert \;\geq\; \left\lvert\int_{B_1}\det\Jac\Phi\right\rvert
+      = \pi .\]
+    Note what has been proved: $\Phi$ may fold the disk over itself arbitrarily, but it can never
+    do so in a way that makes the total unsigned area it sweeps out drop below $\pi$.
+
+  \item Suppose, for contradiction, that $\Phi(\overline{B_1}) \subseteq \partial B_1$, so that
+    $\lvert\Phi(x)\rvert^2 = 1$ for every $x \in \overline{B_1}$. Differentiating this identity
+    with respect to $x_j$ gives $2\sum_{i=1}^2 \Phi_i\,\partial_j\Phi_i = 0$ for $j = 1,2$, which
+    in matrix form reads
+    \[\Phi(x)\transp\, \Jac\Phi(x) = 0 \qquad\text{for all } x \in \overline{B_1}.\]
+    The row vector $\Phi(x)\transp$ is non-zero, since $\lvert\Phi(x)\rvert = 1$, so
+    $\Jac\Phi(x)$ has a non-trivial left kernel and is therefore singular. Hence
+    $\det\Jac\Phi \equiv 0$ on $\overline{B_1}$ and $\int_{B_1}\lvert\det\Jac\Phi\rvert = 0$,
+    contradicting \textbf{(c)}.
+
+  \item Suppose $0 \notin \Phi(\overline{B_1})$. Then $\lvert\Phi\rvert$ is a continuous, strictly
+    positive function on the compact set $\overline{B_1}$, hence bounded below by some $c > 0$, and
+    \[\widetilde\Phi := \frac{\Phi}{\lvert\Phi\rvert}\]
+    is $C^2$ on $\overline{B_1}$: it is a composition of $\Phi \in C^2$ with the map
+    $y \mapsto y/\lvert y\rvert$, which is smooth on $\{\lvert y\rvert \geq c\}$. By construction
+    $\lvert\widetilde\Phi\rvert \equiv 1$, so $\widetilde\Phi(\overline{B_1}) \subseteq \partial
+    B_1$. Moreover $\widetilde\Phi(x) = x/\lvert x\rvert = x$ for $x \in \partial B_1$, since
+    $\Phi(x) = x$ and $\lvert x\rvert = 1$ there. So $\widetilde\Phi$ satisfies every hypothesis
+    that \textbf{(d)} places on $\Phi$, and its image \emph{is} contained in $\partial B_1$. That
+    is exactly what \textbf{(d)} forbids, so no such $\Phi$ exists and $0 \in \Phi(\overline{B_1})$.
+
+  \item Let $p \in \overline{B_1}$. If $\lvert p\rvert = 1$ then $\Phi(p) = p$ and there is nothing
+    to prove, so assume $\lvert p\rvert < 1$ and suppose $p \notin \Phi(\overline{B_1})$.
+
+    Exactly as in \textbf{(e)}, $\lvert\Phi - p\rvert$ is bounded below by some $c > 0$ on the
+    compact $\overline{B_1}$, so
+    \[G := \frac{\Phi - p}{\lvert\Phi - p\rvert} \ \in\ C^2(\overline{B_1},\mathbb{R}^2),
+      \qquad \lvert G\rvert \equiv 1 .\]
+    The computation in \textbf{(d)} applies verbatim to $G$ and gives $\det\Jac G \equiv 0$.
+    Feeding that into \textbf{(a)} and Green's theorem (\cref{thm:green_theorem}),
+    \begin{equation}
+    \label{eq:bonus_boundary_integral}
+      0 = \int_{B_1}\det\Jac G = \int_{\partial B_1} G_1\nabla G_2 \cdot \tau\,dL .
+    \end{equation}
+    Now evaluate that boundary integral. On $\partial B_1$ we have $\Phi(x) = x$, so
+    $G(x) = (x-p)/\lvert x-p\rvert$. Parametrise $\partial B_1$ by $x(t) := (\cos t, \sin t)$ and
+    write $c(t) := x(t) - p$, a circle of radius $1$ centred at $-p$. Since $G(x(t)) = c(t)/\lvert
+    c(t)\rvert$ lies on the unit circle, it admits a $C^1$ angle $\varphi$ with
+    \[G(x(t)) = \big(\cos\varphi(t),\ \sin\varphi(t)\big).\]
+    Then $\tfrac{d}{dt}G_2(x(t)) = \varphi'(t)\cos\varphi(t)$, so the integrand of
+    \eqref{eq:bonus_boundary_integral} is $\cos^2\varphi(t)\,\varphi'(t)$ and
+    \[\int_{\partial B_1} G_1\nabla G_2\cdot\tau\,dL
+      = \int_0^{2\pi}\cos^2\varphi\,\varphi'\,dt
+      = \int_{\varphi(0)}^{\varphi(2\pi)}\cos^2\varphi\,d\varphi
+      = \left[\frac{\varphi}{2} + \frac{\sin 2\varphi}{4}\right]_{\varphi(0)}^{\varphi(2\pi)} .\]
+    The loop closes up, so $\varphi(2\pi) - \varphi(0) = 2\pi N$ for an integer $N$, and
+    $\sin 2\varphi$ is $2\pi$-periodic so its two contributions cancel. The boundary integral is
+    therefore $\pi N$, and \eqref{eq:bonus_boundary_integral} forces $N = 0$.
+
+    But $N = 1$, and the angle field of \cref{ex:angle_field_true_false} is what shows it. Writing
+    $c(t) = \rho(t)\big(\cos\varphi(t), \sin\varphi(t)\big)$ with $\rho := \lvert c\rvert > 0$, and
+    taking $Y := (-x_2,\,x_1)/(x_1^2+x_2^2)$, we have $Y(c) = \rho^{-1}(-\sin\varphi,\cos\varphi)$
+    and
+    \[\langle Y(c),\dot c\rangle
+      = \frac{1}{\rho}\Big\langle(-\sin\varphi,\cos\varphi),\
+        \dot\rho\,(\cos\varphi,\sin\varphi) + \rho\dot\varphi\,(-\sin\varphi,\cos\varphi)\Big\rangle
+      = \dot\varphi,\]
+    the $\dot\rho$ term dropping out because the two vectors are orthogonal. Integrating,
+    $\int_c Y\cdot dc = \varphi(2\pi)-\varphi(0) = 2\pi N$: the angle field measures exactly the
+    total turning. Now $c$ is the unit circle centred at $-p$, and $\lvert -p\rvert < 1$ puts the
+    origin strictly inside it, so $\int_c Y\cdot dc = 2\pi$.
+
+% Generator: Claude Opus 5 (High) --- FIG-EX-FS24-P3F
+% The one geometric step in an otherwise algebraic proof, drawn because it is the step that is
+% easy to lose: translating the loop by -p keeps the ORIGIN inside it, and that is what forces
+% N = 1. Scale 1.4 cm per unit, so both circles have radius 1.4 and are congruent, as they must be
+% (c is a translate of \partial B_1, not a rescaling).
+% Arithmetic check on the placement. p is drawn at canvas (0.55, 0.35), i.e. p = (0.393, 0.250)
+% with |p| = 0.464 < 1: inside \partial B_1, as required. Then -p is at (-0.55,-0.35), and the
+% distance from that centre to the origin is sqrt(0.55^2 + 0.35^2) = sqrt(0.4250) = 0.652 cm,
+% comfortably less than the radius 1.4 cm, so the origin really is drawn strictly inside c. That
+% inequality is the figure's whole content, so it had to be checked rather than eyeballed.
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.0]
+  % the loop c = x - p, a translate of the unit circle, drawn first so \partial B_1 sits on top
+  \draw[BrickRed, very thick, dashed] (-0.55,-0.35) circle (1.4);
+  \fill[BrickRed] (-0.55,-0.35) circle (1.4pt);
+  \node[BrickRed, font=\scriptsize, below left] at (-0.60,-0.40) {$-p$};
+  \node[BrickRed, font=\small] at (-1.75,1.15) {$c = x - p$};
+
+  % the unit circle, fixed pointwise by \Phi
+  \draw[MidnightBlue, very thick] (0,0) circle (1.4);
+  \node[MidnightBlue, font=\small] at (1.30,1.30) {$\partial B_1$};
+
+  % p, inside the unit ball; and the origin, inside c
+  \fill (0.55,0.35) circle (1.4pt);
+  \node[font=\scriptsize, above right] at (0.58,0.36) {$p$};
+  \fill (0,0) circle (1.4pt);
+  \node[font=\scriptsize, below right] at (0.04,-0.04) {$0$};
+
+  \node[font=\scriptsize, align=center] at (0,-2.35)
+    {$\lvert p\rvert < 1$, so the origin lies inside $c$:\\the loop winds once about it, and $N=1$};
+\end{tikzpicture}
+\end{center}
+
+    To see the value $2\pi$, apply Green's
+    theorem to the region between $c$ and a small circle about the origin: $Y$ is closed there, so
+    the region contributes nothing and the two circles carry the same integral, and on a circle
+    centred at the origin the integrand is identically $1$, as computed in the solution of
+    \cref{ex:angle_field_true_false}. Hence $N = 1$, contradicting $N = 0$, and
+    $p \in \Phi(\overline{B_1})$ after all.
+\end{enumerate}
+\begin{remark}[What the chain actually proves]
+Read backwards, the four parts are one theorem: a $C^2$ map of the closed disk that fixes the
+circle pointwise must hit every point of the disk. It cannot retract the disk onto its own
+boundary, which is \textbf{(d)}, and that single fact is what \textbf{(e)} and \textbf{(f)} both
+exploit, each time by dividing by a norm to manufacture a map whose image \emph{is} in the circle.
+This is Brouwer's fixed point theorem in disguise, in the plane and in its smooth form, and the
+whole apparatus is two applications of Green's formula.
+
+The integer $N$ is where the topology finally enters. Everything before it is calculus, and
+calculus alone cannot produce a contradiction, since $0$ and $\pi N$ are both perfectly good
+numbers. What breaks the argument open is that $N$ is forced to be a \emph{whole number} by the
+loop closing up, and forced to be $1$ by where $p$ sits. An integer that must equal both $0$ and
+$1$ is the only genuinely non-analytic step in the proof.
+\end{remark}
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution of \cref{ex:angle_field_true_false}]
@@ -198,5 +340,115 @@ This one field carries most of the chapter's content. It is closed but not exact
 two notions; the failure is measured by an integer, the winding number; and the obstruction is a
 property of the \emph{domain}, not of the field --- restrict it to any simply connected piece of $U$,
 as in \textbf{(b)}, and a potential appears at once.
+\end{remark}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution of \cref{ex:two_fields_two_circles}]
+% Generator: Claude Opus 5 (High)
+Both fields are closed on $U$, as the exam states and as one checks in a line: $X_2 = 0$ and $X_1$
+does not depend on $x_2$, so both mixed partials vanish, and the computation for $Y$ is the one
+carried out for \cref{ex:angle_field_true_false}, where $Y$ appears under the name $X$. Being
+closed is where the two fields stop agreeing, and the six items are really two questions asked
+three times over.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{True.} Take $u(x_1,x_2) := -\cos(x_1)$, which is smooth on all of $\mathbb{R}^2$
+    and has $\nabla u = (\sin x_1,\, 0) = X$. Restricting it to $U$ gives the required potential.
+    The puncture is irrelevant here, since $X$ extends smoothly across the origin.
+  \item \textbf{False.} This is $Y$'s defining feature. If such a $v$ existed, the work of $Y$
+    around every closed loop in $U$ would vanish, and item \textbf{(d)} exhibits one where it does
+    not.
+  \item \textbf{True.} $X$ is a gradient on $U$ by \textbf{(a)}, so by
+    \cref{prop:work_difference_potential} its work along a path depends only on the endpoints:
+    $\int_c X\cdot dc = u(c(b)) - u(c(a))$ for any $C^1$ path $c : [a,b] \to U$. Both $\gamma$ and
+    $\sigma$ are closed, so both differences vanish.
+  \item \textbf{False.} On the unit circle $Y(\sigma(t)) = (-\sin t,\ \cos t) = \dot\sigma(t)$,
+    so the integrand is $\lvert\dot\sigma\rvert^2 = 1$ and
+    \[\int_\sigma Y\cdot d\sigma = \int_0^{2\pi} 1\,dt = 2\pi \neq 0 .\]
+  \item \textbf{True.} The curve $\gamma$ is the unit circle centred at $(10,0)$, so its first
+    coordinate satisfies $x_1 = 10+\cos t \geq 9 > 0$. It therefore lies in the open right
+    half-plane $V := \{x_1 > 0\}$, which is convex and hence simply connected. On $V$ the closed
+    field $Y$ is exact (\cref{cor:potentials_simply_connected}, with potential the polar angle
+    $\arctan(x_2/x_1)$), so \textbf{(c)}'s argument applies verbatim and the integral vanishes.
+  \item \textbf{True.} Same reason as \textbf{(c)}: $X$ is exact on $U$ and $\sigma$ is closed. It
+    does not matter that $\sigma$ encircles the puncture, because $X$ has no puncture to encircle.
+\end{enumerate}
+\begin{remark}[Reading the four integrals as a table]
+Items \textbf{(c)}--\textbf{(f)} are the four combinations of two fields with two loops, and the
+single non-zero entry is the pair $(Y,\sigma)$. The two loops are what to look at:
+
+% Generator: Claude Opus 5 (High) --- FIG-EX-FS24-TF11
+% Geometry, fixed before any coordinate was written. Both circles have radius 1 in the plane and
+% are drawn at 0.95 cm per unit, so they are congruent on the page as well: the figure must not
+% suggest that gamma is smaller or differently shaped, since the solution's whole point is that
+% the two differ only in position. The x-axis is broken between them, because sigma sits at the
+% origin and gamma at (10,0) and drawing 10 units to scale would leave the circles invisible; the
+% caption says so. The puncture at the origin is a HOLLOW dot (white fill, dark edge), the one
+% point not in U; gamma's centre is a solid dot, since (10,0) is an ordinary point of U.
+% Orientation arcs run counterclockwise on both, from angle 0 to 25 degrees at radius 0.95.
+% Placement check: sigma is centred at canvas (0,0) and gamma at (5.0,0), both radius 0.95, so
+% they are 5.0 cm apart and cannot overlap. The break marks sit at x = 2.2..2.5, clear of both
+% (sigma reaches x = 0.95, gamma starts at x = 4.05).
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.0]
+  % axes, broken between the two clusters
+  \draw[gray, ->] (0,-1.45) -- (0,1.65) node[above, font=\small, black] {$y$};
+  \draw[gray] (-1.75,0) -- (2.15,0);
+  \draw[gray, thick] (2.20,-0.16) -- (2.36,0.16);
+  \draw[gray, thick] (2.36,-0.16) -- (2.52,0.16);
+  \draw[gray, ->] (2.58,0) -- (6.75,0) node[right, font=\small, black] {$x$};
+
+  % sigma: the unit circle about the origin, which encircles the puncture
+  \draw[MidnightBlue, very thick] (0,0) circle (0.95);
+  \draw[MidnightBlue, very thick, ->] (0.95,0) arc (0:25:0.95);
+  % label offset to the upper left rather than straight up: at (0,1.22) it sat directly beneath
+  % the y-axis arrowhead and read as though it named the axis.
+  \node[MidnightBlue, font=\small] at (-0.90,0.95) {$\sigma$};
+  \fill[white] (0,0) circle (2.6pt);
+  \draw[black, thick] (0,0) circle (2.6pt);
+  \node[font=\scriptsize, below left] at (-0.05,-0.06) {$(0,0)$};
+
+  % gamma: the unit circle about (10,0), which does not
+  \draw[OliveGreen, very thick] (5.0,0) circle (0.95);
+  \draw[OliveGreen, very thick, ->] (5.95,0) arc (0:25:0.95);
+  \node[OliveGreen, font=\small] at (5.0,1.22) {$\gamma$};
+  \fill (5.0,0) circle (1.6pt);
+  \node[font=\scriptsize, below right] at (5.05,-0.06) {$(10,0)$};
+
+  % verdicts
+  \node[MidnightBlue, font=\scriptsize, align=center] at (0,-1.85)
+    {encircles the puncture\\$\int_\sigma Y\cdot d\sigma = 2\pi$};
+  \node[OliveGreen, font=\scriptsize, align=center] at (5.0,-1.85)
+    {does not\\$\int_\gamma Y\cdot d\gamma = 0$};
+  \node[gray, font=\scriptsize] at (2.36,-2.15) {($x$-axis broken)};
+\end{tikzpicture}
+\end{center}
+
+That is the whole point of the block:
+\begin{itemize}
+  \item \textbf{The field alone does not decide.} $Y$ gives $2\pi$ on $\sigma$ and $0$ on $\gamma$.
+  \item \textbf{The loop alone does not decide.} $\sigma$ gives $2\pi$ for $Y$ and $0$ for $X$.
+  \item \textbf{It takes both:} a field that is closed without being exact, \emph{and} a loop that
+    encircles the hole responsible. Either one on its own gives zero.
+\end{itemize}
+The two circles are chosen so that this is visible without any computation. They are congruent, so
+they cannot be told apart by shape, size or orientation; they differ only in \emph{where} they sit
+relative to the puncture.
+\end{remark}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution of \cref{ex:box_nonconstant_conservative_field}]
+% Generator: Claude Opus 5 (High)
+Take $U := \mathbb{R}^3$ and
+\[V(x,y,z) := (x,\ y,\ z)\transp = \nabla u(x,y,z), \qquad
+  u(x,y,z) := \tfrac12\big(x^2+y^2+z^2\big).\]
+This $V$ is a polynomial, hence $C^\infty$, it is a gradient by construction, and it is not
+constant. The radial field $V(x,y,z) = (x,0,0)\transp = \nabla(x^2/2)$ serves equally well, and is
+the shortest answer that meets every clause.
+\begin{remark}[Why the question is easier than it looks]
+The clause to watch is \qt{nonconstant}, which rules out the reflex answer $V \equiv e_1$. Beyond
+that, no verification is needed at all: writing down a potential \emph{first} and differentiating
+it makes conservativeness true by construction, whereas starting from a field and hunting for a
+potential means solving three equations. On a box problem where only the final answer is graded,
+that is the difference between one line and half a page.
 \end{remark}
 \end{exercisesolution}

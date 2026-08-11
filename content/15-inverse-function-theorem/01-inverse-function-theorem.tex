@@ -101,7 +101,7 @@ differential together with the Lipschitz bound.
 \begin{remark}[Checking for a global diffeomorphism]
 \label{rem:global_diffeomorphism_check}
 To verify that a map $f \in C^k(U, V)$ between open sets is a global $C^k$-diffeomorphism, it is best to check the following two conditions:
-\begin{enumerate}
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item \textbf{Global bijectivity:} Check that $f$ is bijective. This assures that a global inverse $f^{-1} : V \to U$ exists, and any local inverse will coincide with it.
   \item \textbf{Local diffeomorphism everywhere:} Check that the differential $Df_x$ (or $\Jac f(x)$) is invertible at every point $x \in U$. By the inverse function theorem, this ensures $f$ is a local $C^k$-diffeomorphism everywhere.
 \end{enumerate}
@@ -110,7 +110,7 @@ If both conditions hold, the global inverse $f^{-1}$ inherits the $C^k$ regulari
 
 % Generator: Claude Opus 5 (High) --- the standard witness that condition 1 of
 % \cref{rem:global_diffeomorphism_check} really is a separate hypothesis, and the example
-% \cref{ex:7.1} part 2 is asking about.
+% \cref{ex:7.1} part (b) is asking about.
 \begin{example}[Invertible everywhere, injective nowhere near globally]
 \label{ex:local_invertible_not_globally_injective}
 The second condition of \cref{rem:global_diffeomorphism_check} does not imply the first. Let
@@ -312,3 +312,28 @@ block of true/false questions.}
 % f(U) = R^n; no such question is on p. 4, or anywhere on the exam, and the block was deleted on
 % 2026-08-10. The genuine Aufgabe 6 is ex:examHS24_TF_image_of_small_sets, filed in
 % content/20-change-of-variables/ because two of its three items are change-of-variables questions.
+
+% Source: old_exams/examFS24.pdf (21 August 2024), Wahr/Falsch-Fragen, Aufgabe 6, p. 4
+% Extractor: Claude Opus 5 (High)
+% Split: parts 6.4 and 6.5 of the same block ask whether the image of a segment is a 1- or a
+% 2-dimensional submanifold, and are filed as ex:image_of_segment_submanifold in
+% content/17-submanifolds/02-recognising-submanifolds.tex, next to the proposition that settles
+% them. They continue this enumeration at (d).
+% The exam's setup also introduces X := Phi^{-1}((0,0)^T) and then never refers to it again, in any
+% of the five items; dropped here rather than transcribed as a dangling definition.
+\begin{exercise}[True or False \textnormal{(where the inverse function theorem applies)}]
+\label{ex:local_diffeo_parameter_alpha}
+Let $\alpha \in \mathbb{R}$ and let $\Phi \in C^1(\mathbb{R}^2,\mathbb{R}^2)$ satisfy
+\[\Phi(0,0) = \begin{pmatrix} 0 \\ 0 \end{pmatrix} \qquad\text{and}\qquad
+  \Jac\Phi(0,0) = \begin{pmatrix} \alpha+5 & -3 \\ 3 & \alpha-5 \end{pmatrix}.\]
+Decide whether each of the following is true or false, with justification.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item For every $\alpha$ with $\alpha^2 \neq 25$, the restriction of $\Phi$ to a sufficiently
+    small ball centred at $(0,0)$ is a diffeomorphism onto its image.
+  \item For every $\alpha$ with $\alpha^2 \neq 16$, the restriction of $\Phi$ to a sufficiently
+    small ball centred at $(0,0)$ is a diffeomorphism onto its image.
+  \item For $\alpha = 0$ and $r > 0$ small enough, the set $\Phi\big(B_r(0,0)\big)$ is open.
+\end{enumerate}
+\exinfo{This exercise is taken from the exam of 21 August 2024, where it appears as the sixth block
+of true/false questions. Its last two parts are \cref{ex:image_of_segment_submanifold}.}
+\end{exercise}

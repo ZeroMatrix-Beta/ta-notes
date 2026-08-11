@@ -110,7 +110,7 @@ heights, which is precisely why the chain has three separate links.
 \begin{remark}[A recipe for checking differentiability at a point]
 \label{rem:differentiability_recipe}
 Sascha's notes distil the above into three steps, worth following in this order.
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item \textbf{Compute the partial derivatives $\partial_iF(x_0)$.} If one of them fails to
     exist, $F$ is not differentiable and you are done. If they all exist \emph{and are
     continuous near $x_0$}, $F$ \emph{is} differentiable by
@@ -134,7 +134,7 @@ $\varepsilon$--$\delta$ work at all.
 \begin{example}[Checking differentiability at the origin]
 \label{ex:differentiability_recipe_application}
 Let $f(x,y) := \frac{x^2 y}{x^2+y^2}$ for $(x,y) \neq (0,0)$ and $f(0,0) := 0$. We check if $f$ is differentiable at the origin.
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item \textbf{Partial derivatives:}
     \[\partial_1 f(0,0) = \lim_{t\to 0}\frac{f(t,0)-f(0,0)}{t} = \lim_{t\to 0}\frac{0}{t} = 0, \qquad \partial_2 f(0,0) = \lim_{t\to 0}\frac{f(0,t)-f(0,0)}{t} = 0.\]
     They exist, but to use \cref{thm:continuous_partials_imply_differentiable} we would have to compute them everywhere and show they are continuous at $(0,0)$, which is tedious and (as we will see) false. We proceed to step 2.
@@ -151,7 +151,7 @@ Let $f(x,y) := \frac{x^2 y}{x^2+y^2}$ for $(x,y) \neq (0,0)$ and $f(0,0) := 0$. 
 \begin{example}[A function that is differentiable at the origin]
 \label{ex:differentiability_recipe_positive}
 Let $f(x,y) := \frac{x^2 y^2}{\sqrt{x^2+y^2}}$ for $(x,y) \neq (0,0)$ and $f(0,0) := 0$. We check differentiability at the origin following the recipe.
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item \textbf{Partial derivatives:} For $(x,y) \neq (0,0)$, the quotient and chain rules give
     \[\partial_1 f(x,y) = xy^2\frac{x^2+2y^2}{(x^2+y^2)^{3/2}}, \qquad \partial_2 f(x,y) = x^2y\frac{2x^2+y^2}{(x^2+y^2)^{3/2}}.\]
     At the origin, computing directly from the definition yields $\partial_1 f(0,0) = 0$ and $\partial_2 f(0,0) = 0$.
@@ -164,3 +164,26 @@ Let $f(x,y) := \frac{x^2 y^2}{\sqrt{x^2+y^2}}$ for $(x,y) \neq (0,0)$ and $f(0,0
     In polar coordinates, this is $\frac{r^4\cos^2\theta\sin^2\theta}{r^2} = r^2\cos^2\theta\sin^2\theta$. As $r \to 0$, the limit is clearly $0$ uniformly in $\theta$, confirming $f$ is differentiable with $Df_0 = 0$.
 \end{enumerate}
 \end{example}
+
+% Source: old_exams/examFS24.pdf (21 August 2024), Wahr/Falsch-Fragen, Aufgabe 4, p. 3
+% Extractor: Claude Opus 5 (High)
+% The function is ex:differentiability_recipe_application with x and y interchanged, so the origin
+% computation is one the reader has already seen. Kept anyway, and kept as an exercise rather than
+% a second worked example: what the exam adds is the full regularity ladder (smooth off the origin,
+% one partial derivative, continuity, C^1) rather than the single differentiability verdict, and
+% part (c) against part (d) is the pair the whole block is built around.
+\begin{exercise}[True or False \textnormal{(how much regularity does this function have?)}]
+\label{ex:regularity_ladder_xy2}
+Consider the function $f : \mathbb{R}^2 \to \mathbb{R}$ given by
+\[f(x,y) := \begin{cases} \dfrac{xy^2}{x^2+y^2} & \text{if } (x,y) \neq (0,0), \\[1ex]
+  0 & \text{if } (x,y) = (0,0).\end{cases}\]
+Decide whether each of the following is true or false, with justification.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $f \in C^\infty\big(\mathbb{R}^2\setminus\{(0,0)\}\big)$.
+  \item $\partial_x f(0,0)$ exists.
+  \item $f \in C^0(\mathbb{R}^2)$.
+  \item $f \in C^1(\mathbb{R}^2)$.
+\end{enumerate}
+\exinfo{This exercise is taken from the exam of 21 August 2024, where it appears as the fourth
+block of true/false questions.}
+\end{exercise}

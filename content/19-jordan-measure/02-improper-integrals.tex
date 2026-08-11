@@ -125,3 +125,26 @@ Decide whether each of the following statements is true or false.
 \exinfo{This exercise is taken from the exam of 13 February 2025, where it appears as the tenth
 block of true/false questions.}
 \end{exercise}
+
+% Source: old_exams/examFS24.pdf (21 August 2024), Wahr/Falsch-Fragen, Aufgabe 10, p. 5
+% Extractor: Claude Opus 5 (High)
+% The August 2024 counterpart of the exercise directly above, on the same two regions A and B. It
+% is not a duplicate: there the exponent is a parameter and the integral is computed exactly, here
+% the exponent is fixed at 2 and an oscillating numerator makes exact computation impossible, so
+% both verdicts have to come from comparison. Kept adjacent so the two methods sit side by side.
+\begin{exercise}[True or False \textnormal{(an oscillating numerator, decided by comparison)}]
+\label{ex:improper_cos_over_r4}
+Consider the function
+\[f(x,y) := \frac{\cos(xy)}{(x^2+y^2)^2}\]
+and the planar regions
+\[A := \{(x,y) \in \mathbb{R}^2 \mid x^2+y^2 \geq 1\}, \qquad
+  B := \{(x,y) \in \mathbb{R}^2 \mid x^2+y^2 \leq 1\}.\]
+Decide whether each of the following is true or false, with justification.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $\int_A \lvert f\rvert < \infty$.
+  \item $\int_B \lvert f\rvert < \infty$.
+  \item $\int_{\mathbb{R}^2} \lvert f\rvert < \infty$.
+\end{enumerate}
+\exinfo{This exercise is taken from the exam of 21 August 2024, where it appears as the tenth block
+of true/false questions.}
+\end{exercise}

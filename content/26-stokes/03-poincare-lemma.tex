@@ -18,8 +18,15 @@ Equivalently, if $F \in C^1(U, \mathbb{R}^n)$ satisfies the integrability condit
 then $F$ is conservative: there exists a potential $f \in C^2(U)$ such that $\nabla f = F$.
 \end{corollary}
 
+% Correction: Claude Opus 5 (High) --- this note used to state the definition of "simply connected"
+% informally, which was the document's only account of the term although chapters 7 and 8 already
+% used it. The definition now lives at def:simply_connected in 08-connectedness, taken from the
+% script's 14.41; what remains here is the intuition and the list of examples, which is what the
+% note was actually good for. Keep the two in step.
 \begin{ainote}[Intuition on simply connected spaces]
-A space $U$ is simply connected if any closed loop in $U$ can be continuously contracted to a point within $U$ (i.e.\ any two paths with the same endpoints are homotopic). 
+Recall from \cref{def:simply_connected} that $U$ is simply connected when any two paths in $U$ with
+the same endpoints are homotopic, or equivalently (\cref{rem:homotopy_as_deformation}) when any
+closed loop in $U$ can be continuously contracted to a point within $U$.
 
 % Supplement: Sascha Brack/Class Notes/Week_12_Notes_Monday.pdf, p. 7
 \begin{center}

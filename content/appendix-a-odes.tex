@@ -71,7 +71,7 @@ where $u_0$ is given by the initial conditions. Evaluating the matrix exponentia
 % Generator: Gemini 3.1 Pro (High)
 \begin{remark}[Calculating the matrix exponential in practice]
 When computing $\exp(A) = I + \sum_{m=1}^\infty \frac{A^m}{m!}$, the most common strategies are:
-\begin{enumerate}
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item \textbf{Look for a pattern:} Sometimes $A^2 = A$, or $A^3 = 2A$, or $A$ is nilpotent ($A^n = 0$ for $n \geq k$). In these cases, the infinite series can be simplified directly.
   \item \textbf{Diagonalization:} If $A$ is diagonalizable ($A = B D B^{-1}$), then $\exp(A) = B \exp(D) B^{-1}$, where $\exp(D)$ is the diagonal matrix of exponentials.
   \item \textbf{Jordan Normal Form (JNF):} If $A$ is not diagonalizable, one can use the JNF, though this is often more tedious and less frequently required.
@@ -285,7 +285,7 @@ The particular solution is $y_{\text{part}}(x) = \left(\frac{1}{10}x + \frac{1}{
 % Supplement: Analysis_II_Script_v1.pdf, p. 177
 \begin{exercise}[Three linear ODEs]
 \label{ex:three_linear_odes}
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item Determine the general solution on $I=\mathbb{R}$ of $y''-4y'+4y=\sin t$.
   \item Determine the solution on $I=\mathbb{R}$ of the initial value problem
     $y''-y=t$, $y(0)=1$, $y'(0)=3$.
@@ -296,43 +296,45 @@ The particular solution is $y_{\text{part}}(x) = \left(\frac{1}{10}x + \frac{1}{
 
 \begin{exercisesolution}[Proof of \cref{ex:three_linear_odes}]
 % Generator: Claude Sonnet 5 (High)
-\textbf{1.} The characteristic polynomial $r^2-4r+4=(r-2)^2$ has the double root $r=2$, so
-$y_{\mathrm{hom}}(t) = (C_1+C_2t)e^{2t}$. For the particular solution, try
-$y_{\mathrm{part}}(t) := A\sin t+B\cos t$ (\cref{tab:ode_ansatz}, with $\omega=1$ not a root of
-the characteristic polynomial, so no extra factor of $t$ is needed). Substituting,
-\[y_{\mathrm{part}}''-4y_{\mathrm{part}}'+4y_{\mathrm{part}}
-  = (3A+4B)\sin t + (3B-4A)\cos t \overset{!}{=} \sin t,\]
-so $3A+4B=1$ and $-4A+3B=0$, giving $B=\tfrac43A$ and then $A=\tfrac{3}{25}$, $B=\tfrac{4}{25}$.
-The general solution is
-\[y(t) = (C_1+C_2t)e^{2t} + \tfrac{3}{25}\sin t + \tfrac{4}{25}\cos t.\]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item The characteristic polynomial $r^2-4r+4=(r-2)^2$ has the double root $r=2$, so
+    $y_{\mathrm{hom}}(t) = (C_1+C_2t)e^{2t}$. For the particular solution, try
+    $y_{\mathrm{part}}(t) := A\sin t+B\cos t$ (\cref{tab:ode_ansatz}, with $\omega=1$ not a root
+    of the characteristic polynomial, so no extra factor of $t$ is needed). Substituting,
+    \[y_{\mathrm{part}}''-4y_{\mathrm{part}}'+4y_{\mathrm{part}}
+      = (3A+4B)\sin t + (3B-4A)\cos t \overset{!}{=} \sin t,\]
+    so $3A+4B=1$ and $-4A+3B=0$, giving $B=\tfrac43A$ and then $A=\tfrac{3}{25}$,
+    $B=\tfrac{4}{25}$. The general solution is
+    \[y(t) = (C_1+C_2t)e^{2t} + \tfrac{3}{25}\sin t + \tfrac{4}{25}\cos t.\]
 
-\textbf{2.} The characteristic polynomial $r^2-1$ has roots $r=\pm1$, so
-$y_{\mathrm{hom}}(t) = C_1e^t+C_2e^{-t}$. Since $r=0$ is not a root, try
-$y_{\mathrm{part}}(t) := At+B$; then $y_{\mathrm{part}}''-y_{\mathrm{part}} = -At-B
-\overset{!}{=} t$ gives $A=-1$, $B=0$, so $y_{\mathrm{part}}(t) = -t$. The general solution is
-$y(t) = C_1e^t+C_2e^{-t}-t$, with $y'(t) = C_1e^t-C_2e^{-t}-1$. The initial conditions give
-$C_1+C_2=1$ and $C_1-C_2=4$, so $C_1=\tfrac52$, $C_2=-\tfrac32$, and
-\[y(t) = \tfrac52e^t - \tfrac32e^{-t} - t.\]
+  \item The characteristic polynomial $r^2-1$ has roots $r=\pm1$, so
+    $y_{\mathrm{hom}}(t) = C_1e^t+C_2e^{-t}$. Since $r=0$ is not a root, try
+    $y_{\mathrm{part}}(t) := At+B$; then $y_{\mathrm{part}}''-y_{\mathrm{part}} = -At-B
+    \overset{!}{=} t$ gives $A=-1$, $B=0$, so $y_{\mathrm{part}}(t) = -t$. The general solution is
+    $y(t) = C_1e^t+C_2e^{-t}-t$, with $y'(t) = C_1e^t-C_2e^{-t}-1$. The initial conditions give
+    $C_1+C_2=1$ and $C_1-C_2=4$, so $C_1=\tfrac52$, $C_2=-\tfrac32$, and
+    \[y(t) = \tfrac52e^t - \tfrac32e^{-t} - t.\]
 
-\textbf{3.} This is a first-order linear ODE, $y'+p(t)y=t^4$ with
-$p(t) := -\big(\tfrac4t+1\big)$, so the standard integrating factor is
-$\mu(t) := \exp\!\big(\int p(t)\,dt\big) = \exp\big(-4\ln t - t\big) = t^{-4}e^{-t}$.
+  \item This is a first-order linear ODE, $y'+p(t)y=t^4$ with
+    $p(t) := -\big(\tfrac4t+1\big)$, so the standard integrating factor is
+    $\mu(t) := \exp\!\big(\int p(t)\,dt\big) = \exp\big(-4\ln t - t\big) = t^{-4}e^{-t}$.
 
-\begin{ainote}
-The script's own hint suggests $u(t):=e^{H(t)}y(t)$ with $H'(t)=\tfrac4t+1$, giving a
-\emph{positive} exponent. Checking it directly, $u' = e^H(H'y+y')$, and substituting
-$y'=H'y+t^4$ (from the ODE) gives $u' = e^H(2H'y+t^4)$, which still contains $y$. The
-substitution therefore does not decouple. The
-sign must be negative, $u(t) := e^{-H(t)}y(t) = t^{-4}e^{-t}y(t)$: then
-$u' = e^{-H}(y'-H'y) = e^{-H}\big(y'-(\tfrac4t+1)y\big) = e^{-H}t^4$ directly from the ODE, which
-\emph{does} decouple. Used below.
-\end{ainote}
+    \begin{ainote}
+    The script's own hint suggests $u(t):=e^{H(t)}y(t)$ with $H'(t)=\tfrac4t+1$, giving a
+    \emph{positive} exponent. Checking it directly, $u' = e^H(H'y+y')$, and substituting
+    $y'=H'y+t^4$ (from the ODE) gives $u' = e^H(2H'y+t^4)$, which still contains $y$. The
+    substitution therefore does not decouple. The
+    sign must be negative, $u(t) := e^{-H(t)}y(t) = t^{-4}e^{-t}y(t)$: then
+    $u' = e^{-H}(y'-H'y) = e^{-H}\big(y'-(\tfrac4t+1)y\big) = e^{-H}t^4$ directly from the ODE,
+    which \emph{does} decouple. Used below.
+    \end{ainote}
 
-So with $u(t) := t^{-4}e^{-t}y(t)$,
-\[u'(t) = t^{-4}e^{-t}t^4 = e^{-t} \qquad\Longrightarrow\qquad u(t) = -e^{-t}+C\]
-for a constant $C$. Hence $y(t) = t^4e^t\big(C-e^{-t}\big) = Ct^4e^t - t^4$. The initial
-condition $y(1)=1$ gives $Ce-1=1$, i.e.\ $C = 2/e$, so
-\[y(t) = 2t^4e^{t-1} - t^4, \qquad t \in (0,\infty).\]
+    So with $u(t) := t^{-4}e^{-t}y(t)$,
+    \[u'(t) = t^{-4}e^{-t}t^4 = e^{-t} \qquad\Longrightarrow\qquad u(t) = -e^{-t}+C\]
+    for a constant $C$. Hence $y(t) = t^4e^t\big(C-e^{-t}\big) = Ct^4e^t - t^4$. The initial
+    condition $y(1)=1$ gives $Ce-1=1$, i.e.\ $C = 2/e$, so
+    \[y(t) = 2t^4e^{t-1} - t^4, \qquad t \in (0,\infty).\]
+\end{enumerate}
 \end{exercisesolution}
 
 % Supplement: Analysis_II_Script_v1.pdf, pp. 175--177
@@ -682,6 +684,15 @@ The impulse response is:
 By linear ODE theory, $y(t) = \int_0^t f(s) h(t-s) \, ds$ satisfies \eqref{eq:3rd_order_ode}.
 \end{enumerate}
 \end{exercisesolution}
+
+% Kästchenaufgabe 4 of old_exams/examFS24.pdf (21 August 2024), p. 7, is deliberately NOT
+% transcribed. It asks for an explicit F in C^0(R^2) such that Cauchy-Lipschitz cannot be applied to
+% u' = F(t,u), u(0) = 0 around (0,0) --- which is the exercise immediately below, with the same
+% F(t,u) = alpha|u|^{(alpha-1)/alpha} answering both, and the February 2025 version is strictly
+% stronger: it also demands the two explicit solutions that witness the failure of uniqueness. This
+% is the one block of that exam where "we already have one that is almost identical, and adding it
+% has no value" genuinely applies. Every other block of examFS24 is in the document.
+% Recorded here rather than in an ainote: the reader of the PDF is not affected either way.
 
 % Source: old_exams/examHS24.pdf (13 February 2025), Kästchenaufgabe 4, p. 7
 % Extractor: Gemini 3.6 Flash (High)

@@ -147,14 +147,14 @@ All with respect to the standard metric on $\mathbb{R}$, using
 \begin{tabular}{@{}c l l l l@{}}
 & \textbf{$Y$} & \textbf{$\operatorname{int}(Y)$} & \textbf{$\overline{Y}$} & \textbf{$\partial Y$} \\
 \hline
-(1) & $[0,1]$ & $(0,1)$ & $[0,1]$ & $\{0,1\}$ \\
-(2) & $\mathbb{Q}$ & $\emptyset$ & $\mathbb{R}$ & $\mathbb{R}$ \\
-(3) & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ \\
-(4) & $(0,1)$ & $(0,1)$ & $[0,1]$ & $\{0,1\}$ \\
-(5) & $[-1,1)\setminus\{0\}$ & $(-1,0)\cup(0,1)$ & $[-1,1]$ & $\{-1,0,1\}$ \\
-(6) & $[0,\infty)$ & $(0,\infty)$ & $[0,\infty)$ & $\{0\}$ \\
-(7) & $\{0\}$ & $\emptyset$ & $\{0\}$ & $\{0\}$ \\
-(8) & $\left\{\tfrac1n : n \geq 1\right\}$ & $\emptyset$ &
+\textbf{(a)} & $[0,1]$ & $(0,1)$ & $[0,1]$ & $\{0,1\}$ \\
+\textbf{(b)} & $\mathbb{Q}$ & $\emptyset$ & $\mathbb{R}$ & $\mathbb{R}$ \\
+\textbf{(c)} & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ \\
+\textbf{(d)} & $(0,1)$ & $(0,1)$ & $[0,1]$ & $\{0,1\}$ \\
+\textbf{(e)} & $[-1,1)\setminus\{0\}$ & $(-1,0)\cup(0,1)$ & $[-1,1]$ & $\{-1,0,1\}$ \\
+\textbf{(f)} & $[0,\infty)$ & $(0,\infty)$ & $[0,\infty)$ & $\{0\}$ \\
+\textbf{(g)} & $\{0\}$ & $\emptyset$ & $\{0\}$ & $\{0\}$ \\
+\textbf{(h)} & $\left\{\tfrac1n : n \geq 1\right\}$ & $\emptyset$ &
   $\left\{\tfrac1n : n \geq 1\right\}\cup\{0\}$ &
   $\left\{\tfrac1n : n \geq 1\right\}\cup\{0\}$ \\
 \end{tabular}
@@ -162,15 +162,16 @@ All with respect to the standard metric on $\mathbb{R}$, using
 
 Three rows repay a second look.
 \begin{itemize}
-  \item \textbf{(1) versus (4).} The closed interval and the open interval have the same
+  \item \textbf{(a)} versus \textbf{(d)}. The closed interval and the open interval have the same
     interior, the same closure and the same boundary. These three operations simply cannot
     distinguish a set from any other set squeezed between its interior and its closure.
-  \item \textbf{(5).} Removing the single point $0$ from $[-1,1)$ adds $0$ to the boundary
+  \item \textbf{(e)}. Removing the single point $0$ from $[-1,1)$ adds $0$ to the boundary
     without changing the closure: a removed interior point becomes a boundary point. Note also
     that $1 \in \partial Y$ although $1 \notin Y$, while $-1 \in \partial Y$ and $-1 \in Y$. The
     boundary is indifferent to membership.
-  \item \textbf{(2) and (8).} Both have empty interior, so $\partial Y = \overline{Y}$: once a
-    set has no interior, the boundary swallows the entire closure. That is the general reason
+  \item \textbf{(b)} and \textbf{(h)}. Both have empty interior, so $\partial Y = \overline{Y}$:
+    once a set has no interior, the boundary swallows the entire closure. That is the general
+    reason
     for $\partial\mathbb{Q} = \mathbb{R}$ in
     \cref{ex:interior_closure_boundary_more}\textbf{(c)}, and not an accident of $\mathbb{Q}$.
 \end{itemize}

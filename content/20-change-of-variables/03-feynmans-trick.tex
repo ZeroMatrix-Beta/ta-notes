@@ -102,7 +102,7 @@ answer $\tfrac{\pi\log 2}{8}$ is correct and matches the known value.
 The move that makes this work is not the differentiation. It is noticing that the
 \emph{antiderivative} of the resulting integrand is elementary while the original one is not.
 The pattern is worth naming:
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item Insert a parameter $\alpha$ so that the target is $I(\alpha_1)$ for some
     $\alpha_1$, and so that $I(\alpha_0)$ is trivial for some other $\alpha_0$. Here
     $I(0)=0$, because $\log 1 = 0$.
@@ -121,7 +121,7 @@ is a classic. Do not expect it in general. Usually step 3 is an honest integrati
 Fix $0 < a < b$. The aim is to show that
 \[\int_0^\infty \frac{e^{-ax} - e^{-bx}}{x}\,dx = \log\!\left(\frac{b}{a}\right),\]
 an answer that depends on $a$ and $b$ only through their ratio.
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item The integrand is undefined at $x = 0$. Compute $\lim_{x\to0^+}$ of it, so that the
     integrand extends continuously to $[0,\infty)$.
   \item Hold $a$ fixed and let the second exponent be the parameter: define

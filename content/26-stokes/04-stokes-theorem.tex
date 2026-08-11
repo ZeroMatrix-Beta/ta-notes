@@ -301,7 +301,8 @@ divergence theorem; here $f$ is instead a $0$-form and the same identity is the 
 \cref{ex:exterior_derivative_gradient_curl}'s remark that $df = \langle\nabla f,\cdot\rangle$ is
 exactly the shape that makes this specialization work. The bottom row uses
 $d\omega_F^{n-1} = (\divg F)\,dx^1\wedge\cdots\wedge dx^n$
-(\cref{ex:exterior_derivative_gradient_curl}, item 3) together with the identification of
+(\cref{ex:exterior_derivative_gradient_curl}, item \textbf{(c)}) together with the identification
+of
 $\int_{\partial\Omega}\omega_F^{n-1}$ with the flux $\int_{\partial\Omega}\langle
 F,\nu\rangle\,d\vol_{n-1}$ already noted in \cref{ch:pullbacks}.
 
@@ -309,7 +310,7 @@ The pattern is worth stating in words, because it is easy to lose under the nota
 $k$-dimensional derivative measured \emph{inside} a region always equals the corresponding
 $(k{-}1)$-dimensional quantity measured on its \emph{boundary}. Differentiation and taking a
 boundary are, in this precise sense, the same operation viewed from two sides. That is also
-exactly the content of $d^2=0$ (\cref{thm:exterior_derivative}\textbf{(3)}): a boundary has no
+exactly the content of $d^2=0$ (\cref{thm:exterior_derivative}\textbf{(c)}): a boundary has no
 boundary, just as $d\omega$ has no further exterior derivative to take that isn't already zero.
 \end{remark}
 
@@ -327,8 +328,19 @@ Let $\Omega \subseteq \mathbb{R}^2$ be a bounded $C^1$ domain, and let $\Phi = (
   \item Let $\Psi \in C^2(\overline{\Omega}, \mathbb{R}^2)$ be another mapping such that $\Phi(x) = \Psi(x)$ for all $x \in \partial \Omega$. Prove that
   \[\int_\Omega \det \Jac\Phi(x) \, dx = \int_\Omega \det \Jac\Psi(x) \, dx.\]
 \end{enumerate}
-\exhint[Official hint]{Use Green's formula (i.e.\ 2D Stokes) on the plane.}
-\exinfo{This exercise is taken from the exam of 21 August 2024, Problem 3. The original continues
-with four further parts about $\Phi(\overline{B_1})$ when $\Phi$ fixes the unit circle.}
+For the remaining parts, take $\Omega = B_1$ to be the open unit ball of $\mathbb{R}^2$ and assume
+that $\Phi(x) = x$ for every $x \in \partial B_1$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \setcounter{enumi}{2}
+  \item Show that $\displaystyle\int_{B_1} \lvert\det\Jac\Phi\rvert \geq \pi$.
+  \item Show that $\Phi(\overline{B_1})$ cannot be contained in the boundary $\partial B_1$.
+  \item Show that $0 \in \Phi(\overline{B_1})$.
+  \item \textbf{(Bonus.)} Show that $\overline{B_1} \subseteq \Phi(\overline{B_1})$.
+\end{enumerate}
+Each part may be used in the later ones, even without proof.
+\exhint[Official hints]{\textbf{(b):} use Green's formula (i.e.\ 2D Stokes) on the plane.
+\textbf{(e):} consider $\widetilde\Phi(x) := \Phi(x)/\lvert\Phi(x)\rvert$.}
+\exinfo{This exercise is the whole of Problem 3 of the exam of 21 August 2024, worth 15 points plus
+6 bonus points for the last part.}
 \end{exercise}
 

@@ -57,7 +57,7 @@ standard basis.
 % Source: Corsin Nick/Class Notes/Week 11.pdf, p. 6
 \begin{aiexample}[Two families of examples]
 % Generator: Claude Sonnet 5 (Medium)
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item Fix $A \in \mathrm{Mat}_{k\times n}(\mathbb{R})$. For $v_1,\ldots,v_k \in
   \mathbb{R}^n$, write $V := (v_1\mid\cdots\mid v_k) \in \mathrm{Mat}_{n\times k}(\mathbb{R})$
   for the matrix with these columns; then $AV \in \mathrm{Mat}_{k\times k}(\mathbb{R})$, and
@@ -106,7 +106,7 @@ directly with the five properties below.
 \end{ainote}
 
 The following properties of $\wedge$ are the ones actually used:
-\begin{enumerate}[label=\textbf{(\arabic*)}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item $\wedge$ is bilinear.
   \item For $\alpha$ a $k$-form and $\beta$ an $m$-form, $\alpha\wedge\beta$ is a $(k+m)$-form.
   \item $(\alpha\wedge\beta)\wedge\gamma = \alpha\wedge(\beta\wedge\gamma) = \alpha\wedge\beta
@@ -115,13 +115,13 @@ The following properties of $\wedge$ are the ones actually used:
   \[L_1\wedge L_2\wedge\cdots\wedge L_k(v_1,\ldots,v_k) = \det\big(L_i(v_j)\big)_{1\leq i,j
   \leq k}.\]
   \item For $\alpha(T) := \det(AT)$, $\beta(S) := \det(BS)$ as in \cref{def:antisymmetric_k_linear_form}
-  example 1,
+  example \textbf{(a)},
   \[\alpha\wedge\beta(X) = \det\!\left(\begin{bmatrix} A \\ B \end{bmatrix} X\right).\]
 \end{enumerate}
 
 % Source: Corsin Nick/Class Notes/Week 11.pdf, p. 8
 \begin{example}
-By property (4), for $1 \leq i_1 < \cdots < i_k \leq n$,
+By property \textbf{(d)}, for $1 \leq i_1 < \cdots < i_k \leq n$,
 \[
 e_{i_1}^*\wedge\cdots\wedge e_{i_k}^*(v_1,\ldots,v_k) = \det\!\left(
   \begin{pmatrix} v_1^{i_1} & \cdots & v_k^{i_1} \\ \vdots & \ddots & \vdots \\ v_1^{i_k} &
@@ -282,19 +282,20 @@ L(v_1,\ldots,v_k) &= \sum_{1\leq i_1<\cdots<i_k\leq n} L(e_{i_1},\ldots,e_{i_k})
 \end{align}
 with $\ell_{i_1\cdots i_k} := L(e_{i_1},\ldots,e_{i_k})$, using that the inner sum over $\sigma$
 is exactly the determinant expansion of $e_{i_1}^*\wedge\cdots\wedge e_{i_k}^*(v_1,\ldots,v_k)$
-from property (4) above.
+from property \textbf{(d)} above.
 \end{proof}
 
 \begin{aiexercise}[Reading off all three shadows]
 % Generator: Claude Opus 5 (High)
 \label{ex:ai_three_shadows}
 Let $v := (1,2,0)$ and $w := (0,1,3)$ in $\mathbb{R}^3$.
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item Compute $dx^1\wedge dx^2(v,w)$, $dx^1\wedge dx^3(v,w)$ and $dx^2\wedge dx^3(v,w)$
-    directly from property (4).
+    directly from property \textbf{(d)}.
   \item Compute the cross product $v \times w$.
-  \item The three numbers in part 1 and the three components of $v \times w$ are the same three
-    numbers, but not in the same order and not all with the same sign. Find the correspondence,
+  \item The three numbers in part \textbf{(a)} and the three components of $v \times w$ are the
+    same three numbers, but not in the same order and not all with the same sign. Find the
+    correspondence,
     and say which of the three shadows needs its sign flipped to make the pattern uniform.
 \end{enumerate}
 \end{aiexercise}
@@ -303,7 +304,7 @@ Let $v := (1,2,0)$ and $w := (0,1,3)$ in $\mathbb{R}^3$.
 % Generator: Claude Opus 5 (High)
 \label{ex:ai_wedge_square}
 On $\mathbb{R}^4$, let $\alpha := dx^1\wedge dx^2 + dx^3\wedge dx^4$.
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item Compute $\alpha\wedge\alpha$.
   \item For a $1$-form $\beta$ one always has $\beta\wedge\beta = 0$. Explain why the same
     argument does not apply to $\alpha$, and state for which degrees $k$ a $k$-form must satisfy

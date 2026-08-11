@@ -221,7 +221,7 @@ have learned nothing, and must argue separately (see \cref{ex:cross_not_submanif
 Let $P := \{(x,t) \in \mathbb{R}^n\times\mathbb{R} : t=|x|^2\}$. One could use the regular value
 theorem, but instead take
 \[f : \mathbb{R}^n \to \mathbb{R}^n\times\mathbb{R}, \qquad x \mapsto (x,|x|^2).\]
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item The Jacobian matrix has full rank $n$ at every $x$:
 \[ \Jac f(x) = \begin{pmatrix} \id_{n\times n} \\ 2x\transp \end{pmatrix}. \]
     This one is tall, so by \cref{rem:full_rank_two_meanings} full rank means that $Df_x$ is
@@ -264,7 +264,7 @@ Parametrize $S^1$ by $(x(\theta),y(\theta)) := (\cos\theta,\sin\theta)$. Then
 \[f(\theta) := f(x(\theta),y(\theta)) = 2\cos^2\theta+\sin^2\theta-\cos\theta = \cos^2\theta-\cos\theta+1,\]
 using $\sin^2\theta = 1-\cos^2\theta$. Differentiating,
 \[f'(\theta) = -2\cos\theta\sin\theta+\sin\theta \overset{!}{=} 0.\]
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item $\sin\theta = 0 \implies \theta_1 \in \{0,\pi\}$.
   \item $\sin\theta \neq 0 \implies -2\cos\theta+1=0 \implies \cos\theta = \tfrac12 \implies
     \theta_2 \in \{\tfrac{\pi}{3},\tfrac{5\pi}{3}\}$.

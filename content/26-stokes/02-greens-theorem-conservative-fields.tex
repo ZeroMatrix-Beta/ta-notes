@@ -279,3 +279,41 @@ false, with justification.
 \exinfo{This exercise is taken from the exam of 13 February 2025, where it appears as the eleventh
 and last block of true/false questions.}
 \end{exercise}
+
+% Source: old_exams/examFS24.pdf (21 August 2024), Wahr/Falsch-Fragen, Aufgabe 11, p. 6
+% Extractor: Claude Opus 5 (High)
+% The August 2024 counterpart of the block directly above, and the reason for keeping both: this
+% one runs two fields against two loops, so the four line integrals separate "which field" from
+% "which loop". The February 2025 version varies only the loop, and leaves the winding number
+% quantified over all curves rather than pinned to a named one.
+\begin{exercise}[True or False \textnormal{(two closed fields against two circles)}]
+\label{ex:two_fields_two_circles}
+Consider the vector fields
+\[X := \sin(x_1)\,e_1 \qquad\text{and}\qquad Y := \frac{-x_2 e_1 + x_1 e_2}{x_1^2+x_2^2},\]
+both defined on $U := \mathbb{R}^2\setminus\{(0,0)\}$, and note that $\partial_1X_2 =
+\partial_2X_1$ and $\partial_1Y_2 = \partial_2Y_1$ throughout $U$. Consider also the two circles
+\[\gamma(t) := (10+\cos t,\ \sin t) \qquad\text{and}\qquad \sigma(t) := (\cos t,\ \sin t),
+  \qquad t \in [0,2\pi].\]
+Decide whether each of the following is true or false, with justification.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item There exists $u \in C^1(U)$ with $\nabla u = X$ on $U$.
+  \item There exists $v \in C^1(U)$ with $\nabla v = Y$ on $U$.
+  \item $\int_\gamma X \cdot d\gamma = 0$.
+  \item $\int_\sigma Y \cdot d\sigma = 0$.
+  \item $\int_\gamma Y \cdot d\gamma = 0$.
+  \item $\int_\sigma X \cdot d\sigma = 0$.
+\end{enumerate}
+\exinfo{This exercise is taken from the exam of 21 August 2024, where it appears as the eleventh
+and last block of true/false questions.}
+\end{exercise}
+
+% Source: old_exams/examFS24.pdf (21 August 2024), Kästchenaufgabe 3, p. 7
+% Extractor: Claude Opus 5 (High)
+\begin{exercise}[Box question: a nonconstant conservative field in space]
+\label{ex:box_nonconstant_conservative_field}
+Give an explicit example of a nonconstant conservative vector field $V \in C^1(U,\mathbb{R}^3)$ on
+some open set $U \subseteq \mathbb{R}^3$.
+\exinfo{This exercise is taken from the exam of 21 August 2024, Box Problem 3, where only the final
+answer was graded. The exam's formula sheet defines \qt{conservative} as it is defined here: $V$ is
+conservative if and only if there is $u \in C^1(U)$ with $\nabla u = V$.}
+\end{exercise}

@@ -211,7 +211,7 @@ satisfies the triangular inequality and is a norm.
 Let $|\cdot|$ denote the standard Euclidean norm in $\mathbb{R}^n$ and let
 $f : \mathbb{R}^n \to [0,\infty)$ be another norm (that is, a function satisfying the properties
 of \textit{Definition 9.89}).
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item Expressing $x$ in a basis and using the ``abstract'' properties that $f$ must have, show
     that there is a constant $C_1 > 0$ such that $f(x) \leq C_1|x|$ for all $x \in \mathbb{R}^n$.
   \item Show that $f$ is continuous in $\mathbb{R}^n$ (with respect to the standard distance of
@@ -273,11 +273,12 @@ and $\Phi_j$, which are vectors of $\mathbb{R}^n$. Apply Cauchy--Schwarz to each
 % Originally: content/week-04.tex, \exercisesheet{4}
 % Source: exercises/Ex4_Analysis2_eng.pdf
 
-\begin{exercise}[$p$-norms \textnormal{(semi-important; parts 4 and 6 important)}]
+\begin{exercise}[$p$-norms \textnormal{(semi-important; parts \textbf{(d)} and \textbf{(f)}
+important)}]
 \label{ex:4.3}
 For $p \geq 1$ and $x \in \mathbb{R}^n$ define the \textbf{$p$-norm} of $x$ as
 \[|x|_p := \Big(\sum_{i=1}^{n} |x_i|^p\Big)^{1/p}.\]
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item For $n = 2$ and $p = 1, 2, 10$ sketch the sets $\{x \in \mathbb{R}^2 : |x|_p \leq 1\}$.
   \item For a given $x \in \mathbb{R}^n$, compute the limit
     $|x|_\infty := \lim_{p\to\infty}|x|_p$.
@@ -312,7 +313,7 @@ $|x+y|_p \leq |\hat x + \hat y|_p$ and $|\hat x|_p = |x|_p$ for all $x,y \in \ma
 \label{ex:4.4}
 For $x \in \mathbb{R}^n$ with positive coordinates and $p \neq 0$ define the \textbf{$p$-mean} as
 $$\mu_p(x) := \left(\frac{x_1^p + \dots + x_n^p}{n}\right)^{1/p}.$$
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item Compute the limits $p \to \pm\infty$, $p \to 0$ and define accordingly
     $\mu_{-\infty}(x)$, $\mu_0(x)$, $\mu_{+\infty}(x)$.
   \item For any $n$-tuple of numbers $a_i > 0$ show that

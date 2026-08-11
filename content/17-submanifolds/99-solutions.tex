@@ -17,7 +17,7 @@ official-sheet exercises, so all solutions below are original. Each has been che
 
 \begin{exercisesolution}[Solution to \cref{ex:7.6}]
 % Generator: Claude Sonnet 5 (Medium)
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\textbf{(\alph*)}]
   \item Fixing $\theta_0,\varphi_0$, the image of $r \mapsto \Phi(r,\theta_0,\varphi_0)$ is the
     radial half-line through the point $p_0 := (\sin\theta_0\cos\varphi_0,
     \sin\theta_0\sin\varphi_0, \cos\theta_0)$ on the unit sphere, i.e., $\{rp_0 : r \in
@@ -88,6 +88,40 @@ cite the regular value theorem (\cref{thm:regular_value_theorem}); for a real-va
 the same thing, since a linear map $\mathbb{R}^3 \to \mathbb{R}$ is surjective precisely when its
 gradient is non-zero.
 \end{ainote}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution of \cref{ex:image_of_segment_submanifold}]
+% Generator: Claude Opus 5 (High)
+For $\alpha = 0$ the determinant computed in \cref{ex:local_diffeo_parameter_alpha} is
+$-16 \neq 0$, so fix $r > 0$ small enough that $\Phi$ restricted to $B_r(0,0)$ is a
+$C^1$-diffeomorphism onto the open set $\Phi(B_r(0,0))$. Write
+\[S := \{(x,y) \in B_r(0,0) \mid y = 0\} = (-r,r) \times \{0\}\]
+for the segment in question. It is itself a $1$-dimensional $C^1$ submanifold of $\mathbb{R}^2$:
+given $p = (a,0) \in S$, the translation $\Psi(x,y) := (x-a,\, y)$ is a diffeomorphism from
+$U_p := B_r(0,0)$ onto the open set $V := \Psi(U_p)$, it sends $p$ to $0$, and
+$\Psi(U_p \cap S) = (\mathbb{R}\times\{0\}) \cap V$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \setcounter{enumi}{3}
+  \item \textbf{True.} Apply \cref{prop:diffeomorphism_preserves_submanifold} to the
+    $C^1$-diffeomorphism $\Phi|_{B_r(0,0)} : B_r(0,0) \to \Phi(B_r(0,0))$ and to $S$. The image
+    $\Phi(S)$ is a $C^1$ submanifold of $\mathbb{R}^2$ of dimension $1$.
+  \item \textbf{False.} By \textbf{(d)} the set is $1$-dimensional, and no non-empty set is a
+    submanifold of two different dimensions at once. Independently of that: a $2$-dimensional
+    submanifold of $\mathbb{R}^2$ is an \emph{open} subset of $\mathbb{R}^2$, because a chart with
+    $m = n = 2$ reads $\Psi(U \cap M) = V = \Psi(U)$, so $U \cap M = U$ and $M$ contains the open
+    neighbourhood $U$ of each of its points. But $\Phi(S)$ is not open. Its complement in
+    $\Phi(B_r(0,0))$ is the image of $B_r(0,0) \setminus S$, which is dense in $B_r(0,0)$, and a
+    homeomorphism carries dense sets to dense sets, so every point of $\Phi(S)$ is a limit of
+    points outside it.
+\end{enumerate}
+\begin{remark}[The pair is a dimension check, not a submanifold check]
+The two items ask about the same set, so at most one can be true, and the real question is which
+number a diffeomorphism is allowed to change. It changes none:
+\cref{rem:dimension_is_a_diffeomorphism_invariant} is the whole content of the block. The picture
+that makes \textbf{(e)} tempting is that $\Phi$ maps a two-dimensional ball onto a two-dimensional
+region, so its image \qt{fills out} the plane. It does, but the segment does not, and it is the
+segment being transported.
+\end{remark}
 \end{exercisesolution}
 
 

@@ -176,6 +176,42 @@ everything below is that one observation.
 \end{enumerate}
 \end{exercisesolution}
 
+\begin{exercisesolution}[Proof of \cref{ex:integral_reciprocal_inequality}]
+% Generator: Claude Opus 5 (High) --- the statement is the examiner's; the proof, the equality
+% case and the remark are written for these notes. Probeprfg1 ships no solution key.
+Work in $V := C([a,b],\mathbb{R})$ with $\langle g,h\rangle := \int_a^b g h$, and take
+\[g := \sqrt{f}, \qquad h := \frac{1}{\sqrt f} .\]
+Both are continuous, because $f$ is continuous and strictly positive, so the square root and the
+reciprocal are applied only where they are smooth. The three quantities Cauchy--Schwarz relates
+are then exactly the three appearing in the problem:
+\[\langle g,h\rangle = \int_a^b \sqrt{f}\cdot\frac{1}{\sqrt f} = \int_a^b 1 = b-a, \qquad
+  \|g\|^2 = \int_a^b f, \qquad \|h\|^2 = \int_a^b \frac1f .\]
+\Cref{thm:cauchy_schwarz} gives $\langle g,h\rangle^2 \leq \|g\|^2\|h\|^2$, which is
+\[(b-a)^2 \ \leq\ \int_a^b f(x)\,dx \int_a^b \frac{1}{f(x)}\,dx ,\]
+as claimed.
+
+\textbf{Equality.} \Cref{thm:cauchy_schwarz} attains equality exactly when $g$ and $h$ are
+linearly dependent, that is when $\sqrt f = \lambda/\sqrt f$ for some $\lambda \in \mathbb{R}$,
+which says $f \equiv \lambda$. Since $f > 0$ the constant is positive, and conversely every
+positive constant gives equality, both sides being $(b-a)^2$. So equality holds precisely for the
+constant functions.
+
+\begin{remark}[What the inner product bought]
+Nothing in the statement mentions a vector space, and the inequality is about two ordinary
+one-variable integrals. What makes it a two-line proof rather than a calculation is choosing the
+right two \emph{vectors} in a space of functions, and the choice is forced once one notices that
+the product of the two integrands must be $1$, so that the pairing collapses to the length of the
+interval.
+
+This is the first place in these notes where the abstract inner product does something the
+Euclidean one could not, and it is worth registering why: \cref{thm:cauchy_schwarz} was proved
+for \emph{any} inner product space, so it applies verbatim to $C([a,b],\mathbb{R})$, where the
+vectors are functions and $\|g\|^2$ is an integral. The generality was not decoration. The
+discrete analogue, obtained the same way from the standard inner product on $\mathbb{R}^n$, is
+$\big(\sum_i x_i\big)\big(\sum_i 1/x_i\big) \geq n^2$ for positive $x_i$.
+\end{remark}
+\end{exercisesolution}
+
 \begin{exercisesolution}[Proof of \cref{ex:3.7}]
 % Generator: Claude Opus 5 (High)
 This is \cref{thm:cauchy_schwarz}, proved in \cref{sec:cauchy_schwarz} above by expanding

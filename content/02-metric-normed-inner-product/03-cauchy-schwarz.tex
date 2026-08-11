@@ -167,6 +167,26 @@ the pair shows where the projection comes from. It is not a lucky guess, but the
 the line to $v$.
 \end{remark}
 
+% Source: old_exams/fs2023/Probeprfg1.pdf (Probeprüfung Analysis II, undated), Aufgabe 11, p. 3
+% Extractor: Claude Opus 5 (High)
+% The paper names no lecturer; see old-exam-mining.md.
+% Kept here rather than filed as a one-variable problem: the point is not the integral but the
+% choice of the two vectors in the space of continuous functions, which is the first place in the
+% document where the abstract inner product does something the Euclidean one cannot.
+\begin{exercise}[An integral inequality from Cauchy--Schwarz]
+\label{ex:integral_reciprocal_inequality}
+Let $a < b$ and let $f : [a,b] \to \mathbb{R}_{>0}$ be continuous and strictly positive. Show
+that
+\[\int_a^b f(x)\,dx \int_a^b \frac{1}{f(x)}\,dx \ \geq\ (b-a)^2 ,\]
+and determine for which $f$ equality holds.
+\exhint{The space $C([a,b],\mathbb{R})$ carries the inner product
+$\langle g,h\rangle := \int_a^b g(x)h(x)\,dx$. Only the choice of the two vectors is left to
+find.}
+\exinfo{This exercise is taken from the mock examination \emph{Probepr\"ufung Analysis II}
+(undated) in \texttt{old\_exams/fs2023/}, Problem 11. That paper names no lecturer, and asks only
+for the inequality; the equality case is added here.}
+\end{exercise}
+
 
 % --- exercises relocated here from the dissolved sheets ---
 

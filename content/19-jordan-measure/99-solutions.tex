@@ -253,6 +253,49 @@ a usable notion, and \textbf{(c)} is the half this document uses most often with
 \end{remark}
 \end{exercisesolution}
 
+\begin{exercisesolution}[Proof of \cref{ex:vanishing_integral_forces_zero_ae}]
+% Generator: Claude Opus 5 (High) --- the statement is the examiner's; the proof and the remark
+% are written for these notes. Probeprfg3_Lsg.pdf gives the same level-set argument.
+The set where the conclusion fails is $\{f > 0\}$, and the whole proof is the observation that it
+is a countable union of sets on which $f$ is bounded below. For $t > 0$ put
+\[A_t := \{x \in Q \mid f(x) \geq t\}, \qquad\text{so that}\qquad
+  \{f > 0\} = \bigcup_{k=1}^\infty A_{1/k}.\]
+By \cref{ex:lebesgue_null_sets_properties}\textbf{(c)} it therefore suffices to show that each
+$A_t$ is null.
+
+Fix $t > 0$ and $\varepsilon > 0$. Since $f$ is Riemann integrable with integral $0$, there is a
+partition $P$ of $Q$ into boxes whose upper sum satisfies $U(f,P) < \varepsilon t$. Let
+$\mathcal{R}$ be the collection of boxes of $P$ that meet $A_t$. On any $R \in \mathcal{R}$ there
+is a point where $f \geq t$, so $\sup_R f \geq t$; and $f \geq 0$ makes every term of the upper
+sum non-negative, so discarding the boxes outside $\mathcal{R}$ only decreases it. Hence
+\[t\sum_{R \in \mathcal{R}} \vol_n(R)
+  \ \leq\ \sum_{R \in \mathcal{R}} \Big(\sup_R f\Big)\vol_n(R)
+  \ \leq\ U(f,P) \ <\ \varepsilon t ,\]
+and dividing by $t > 0$ gives $\sum_{R\in\mathcal{R}}\vol_n(R) < \varepsilon$. The boxes of
+$\mathcal{R}$ cover $A_t$ by construction, so $A_t$ admits a \emph{finite} cover by boxes of
+total volume less than $\varepsilon$. As $\varepsilon$ was arbitrary, $A_t$ is null.
+
+\begin{remark}[Each level set is Jordan null; only the union needs Lebesgue]
+The covers produced above are finite, so the argument proves more than was asked: every
+$A_t$ with $t>0$ is \emph{Jordan} null, not merely Lebesgue null
+(\cref{rem:lebesgue_vs_jordan_null}). The final set $\{f > 0\}$ need not be, because Jordan
+content is not countably additive and a countable union of Jordan null sets can fail to be Jordan
+null --- $\mathbb{Q}\cap[0,1]$ is the standing example, a countable union of points whose Jordan
+outer content is $1$. So the countable union in the first display is exactly the step that forces
+the weaker notion, and it is the reason the conclusion is stated \qt{almost everywhere} rather
+than on the complement of a Jordan null set.
+
+Note also where the hypotheses are used, since two of them are doing quite different jobs.
+Non-negativity is what lets the upper sum be truncated to $\mathcal{R}$; without it the discarded
+boxes could contribute an arbitrarily negative amount and the estimate collapses. Riemann
+integrability is what makes an upper sum small at all. And the conclusion really cannot be
+improved to $f \equiv 0$: the function on $[0,1]$ that is $1$ at each of finitely many points and
+$0$ elsewhere is Riemann integrable with integral $0$, and is not identically zero. For
+\emph{continuous} $f$ the stronger conclusion does hold, and needs no null sets --- if
+$f(p) > 0$, continuity gives a whole box on which $f > f(p)/2$, forcing a positive integral.
+\end{remark}
+\end{exercisesolution}
+
 % Generator: Claude Opus 5 (High)
 % Solutions to the four aiexercises in 03-a-glimpse-of-lebesgue.tex.
 \begin{exercisesolution}[\cref{ex:ai_lebesgue_null_countable}]

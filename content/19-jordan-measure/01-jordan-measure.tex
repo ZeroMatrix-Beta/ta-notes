@@ -428,6 +428,30 @@ sheet. Part \textbf{(c)} is the one property of that notion this document repeat
 without ever proving, which is why the block earns its place.
 \end{ainote}
 
+% Source: old_exams/fs2023/Probeprfg3.pdf (Probeprüfung Analysis II, 31 January 2023),
+% Aufgabe 10, part (c), p. 3
+% Extractor: Claude Opus 5 (High)
+% The paper names no lecturer; see old-exam-mining.md. Parts (a) and (b) of the original ask for
+% the definition of a null set and for closure under countable unions, which are
+% rem:lebesgue_vs_jordan_null and ex:lebesgue_null_sets_properties(c) directly above; only part
+% (c) is new, and it is placed here so that it can use them.
+% The Riemann-integrable hypothesis is what makes this worth having: for a *continuous* f the
+% conclusion is the stronger f == 0 and needs no null sets at all, which is why the analogous
+% continuous version from FS17 was rejected (see old-exam-mining.md).
+\begin{exercise}[A non-negative function with vanishing integral]
+\label{ex:vanishing_integral_forces_zero_ae}
+Say that a property holds \newterm{almost everywhere} on a set if the subset where it fails is
+Lebesgue null (\cref{rem:lebesgue_vs_jordan_null}).
+
+Let $Q \subseteq \mathbb{R}^n$ be a closed box and let $f : Q \to \mathbb{R}$ be Riemann
+integrable with $f \geq 0$ and $\int_Q f \,d\vol_n = 0$. Show that $f = 0$ almost everywhere
+on $Q$.
+\exinfo{This exercise is taken from the mock examination \emph{Probepr\"ufung Analysis II} of
+31 January 2023, Problem 10\textbf{(c)}. That paper names no lecturer. Its first two parts ask
+for the definition of a null set and for closure under countable unions, which are
+\cref{rem:lebesgue_vs_jordan_null} and \cref{ex:lebesgue_null_sets_properties}\textbf{(c)}.}
+\end{exercise}
+
 % Source: exercises/Ex8_Analysis2_eng.pdf, p. 1
 % Extractor: Claude Opus 5 (High)
 % Appendix D listed 8.1 as "not transcribed"; that row is now updated. The FS 2024 edition of

@@ -151,6 +151,40 @@ genuinely separate question from \cref{thm:banach_fixed_point}, not one it settl
 case.
 \end{remark}
 
+% Source: old_exams/august2025.pdf (Prof. Laura Kobel-Keller), Analysis II examination,
+% August 2025, Aufgabe 15 a), printed p. 14
+% Extractor: Claude Opus 5 (High)
+\begin{exercise}[A fixed point without a complete domain]
+\label{ex:kobel_local_banach_fixed_point}
+Let $E \subseteq X$ be a non-empty subset of a \emph{complete} metric space $X$, and let
+$f : E \to X$ be a contraction, so that
+\[d\big(f(x),f(y)\big) \le L\,d(x,y) \qquad \text{for all } x,y \in E, \text{ with } L < 1.\]
+Suppose further that there are $x_0 \in E$ and a fixed $r > 0$ such that the \emph{closed} ball
+$\overline{B}_r(x_0)$ is contained in $E$, and that
+\[d\big(f(x_0),x_0\big) \le (1-L)\,r.\]
+Show that $f$ has a fixed point in $E$: there exists $\bar x \in E$ with $f(\bar x) = \bar x$.
+\exinfo{This exercise is taken from the Analysis II examination of August 2025
+(Prof.\ Laura Kobel-Keller), Problem 15 a).}
+\end{exercise}
+
+% Generator: Claude Opus 5 (High)
+\begin{remark}[What this buys over \cref{thm:banach_fixed_point}]
+\label{rem:local_banach_fixed_point}
+Read the hypotheses against the theorem's and the exercise stops looking like a technical variant.
+Three things are given up. The domain $E$ is \emph{not} assumed complete, nor even closed. The map
+does \emph{not} send $E$ into $E$; its codomain is all of $X$. And $E$ may be far too large for
+the iteration to stay inside it.
+
+What replaces them is one inequality. The condition $d(f(x_0),x_0) \le (1-L)r$ says the very first
+step is short relative to the room available, and the geometric series then guarantees that the
+\emph{whole} orbit never leaves $\overline{B}_r(x_0)$: the total distance travelled is at most
+$\sum_{n\ge0}L^n\,d(f(x_0),x_0) \le r$. So the theorem is applied not to $E$ but to
+$\overline{B}_r(x_0)$, which is closed in the complete space $X$ and therefore complete, and which
+$f$ does map into itself. This is how the fixed-point theorem is used in practice — in the proof
+of \cref{thm:inverse_function_theorem}, for instance, one never has a globally invariant complete
+set to hand, only a small ball on which the first step is controlled.
+\end{remark}
+
 \begin{aiexercise}[{Contraction Mapping on $[0,1]$}]
 \label{ex:ai_contraction_cos}
 % Generator: Gemini 3.6 Flash (Medium)

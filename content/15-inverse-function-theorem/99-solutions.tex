@@ -105,3 +105,42 @@ $\alpha = \pm4$. Item \textbf{(a)} and item \textbf{(b)} are therefore the same 
 arithmetic slip between them, and reading them as a pair is faster than checking either alone.
 \end{remark}
 \end{exercisesolution}
+
+\begin{exercisesolution}[Solution of \cref{ex:kobel_ift_single_choice}]
+% Generator: Claude Opus 5 (High)
+The correct answer is \textbf{(b)}.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{False}, and it fails before any hypothesis on the derivative is examined.
+    \Cref{thm:inverse_function_theorem} needs domain and codomain of the \emph{same} dimension,
+    because a local inverse has to be defined on a neighbourhood of the image point. For
+    $n > 2$ the image of $f$ has empty interior in $\mathbb{R}^n$ --- it is at best a
+    $2$-dimensional surface --- so no neighbourhood of $f(0,0)$ in $\mathbb{R}^n$ lies in the
+    image, and there is nothing for an inverse to be defined on. Being locally \emph{injective},
+    which is what an immersion gives, is a strictly weaker conclusion.
+  \item \textbf{True.} For a map $\mathbb{R}^2 \to \mathbb{R}^2$, maximal rank means rank $2$,
+    which for a square matrix is invertibility, that is $\det\Jac f(0,0) \neq 0$. That is exactly
+    the hypothesis of \cref{thm:inverse_function_theorem}, and $f \in C^2 \subseteq C^1$ supplies
+    the regularity.
+  \item \textbf{False.} One non-vanishing partial derivative is one column of the Jacobian, and a
+    matrix with one non-zero column can still be singular. Take $f(x,y) := (x,0)\transp$: then
+    $\partial f/\partial x = (1,0)\transp \neq 0$ everywhere, while
+    $\Jac f = \left(\begin{smallmatrix}1&0\\0&0\end{smallmatrix}\right)$ has determinant $0$, and
+    $f$ is not injective on any neighbourhood of the origin --- it collapses every vertical
+    segment to a point.
+  \item \textbf{False}, by the same example with the roles of the variables exchanged: for
+    $f(x,y) := (y,0)\transp$ the partial $\partial f/\partial y$ is non-zero and the Jacobian is
+    again singular.
+\end{enumerate}
+\begin{remark}[The same answer if the partials are read component-wise]
+Items \textbf{(c)} and \textbf{(d)} are printed with $f$ itself, so
+$\partial f/\partial x(0,0) \neq 0$ says a whole column of the Jacobian is non-zero. A reader who
+takes $f = (f_1,f_2)\transp$ and reads them as $\partial f_1/\partial x(0,0) \neq 0$ gets a weaker
+hypothesis --- a single \emph{entry} is non-zero --- and the same counterexample refutes it. The
+question is robust to the ambiguity, which is presumably why it went unnoticed.
+
+What both readings test is the difference between \qt{some derivative does not vanish} and
+\qt{the derivative is invertible}. Only the second is a statement about the linear map $Df_{(0,0)}$
+as a whole, and only the second is what \cref{rem:inverse_function_theorem_intuition} argues is the
+right hypothesis.
+\end{remark}
+\end{exercisesolution}

@@ -185,6 +185,35 @@ arbitrary, $g = \overline f$.
 \end{enumerate}
 \end{exercisesolution}
 
+\begin{exercisesolution}[Proof of \cref{ex:kobel_local_banach_fixed_point}]
+% Generator: Claude Opus 5 (High)
+Write $K := \overline{B}_r(x_0)$. The whole content of the exercise is that $f$ restricts to a
+self-map of $K$, after which \cref{thm:banach_fixed_point} finishes the job.
+
+\textbf{$K$ is complete.} A closed ball is a closed subset of $X$, and a closed subset of a
+complete metric space is complete: a Cauchy sequence in $K$ is Cauchy in $X$, hence converges in
+$X$, and its limit lies in $K$ because $K$ is closed. It is also non-empty, since $x_0 \in K$.
+
+\textbf{$f(K) \subseteq K$.} Let $x \in K$, so $d(x,x_0) \le r$. Since $K \subseteq E$, both $x$
+and $x_0$ lie in the domain of $f$, and the triangle inequality together with the contraction
+estimate gives
+\[d\big(f(x),x_0\big) \ \le\ d\big(f(x),f(x_0)\big) + d\big(f(x_0),x_0\big)
+  \ \le\ L\,d(x,x_0) + (1-L)r \ \le\ Lr + (1-L)r \ =\ r,\]
+so $f(x) \in K$. The hypothesis $d(f(x_0),x_0) \le (1-L)r$ is used exactly once, here, and it is
+what makes the two terms add up to $r$ rather than to something larger.
+
+\textbf{Conclusion.} The restriction $f|_K : K \to K$ is a contraction with the same constant $L$
+on the non-empty complete metric space $K$, so \cref{thm:banach_fixed_point} supplies a unique
+$\bar x \in K$ with $f(\bar x) = \bar x$. Since $K \subseteq E$, this $\bar x$ is a fixed point in
+$E$, as required.
+
+\textbf{Uniqueness comes for free, and in all of $E$.} \Cref{thm:banach_fixed_point} gives
+uniqueness only within $K$, but the two-line argument used for the theorem itself needs nothing
+beyond the contraction estimate, which holds on all of $E$: if $f(x)=x$ and $f(y)=y$ with
+$x,y \in E$, then $d(x,y) = d(f(x),f(y)) \le L\,d(x,y)$, and $L<1$ forces $d(x,y)=0$. So $\bar x$
+is the only fixed point of $f$ in $E$, even though the existence argument saw only the ball.
+\end{exercisesolution}
+
 \begin{exercisesolution}[Proof of \cref{ex:ai_contraction_cos}]
 % Generator: Gemini 3.6 Flash (Medium)
 \begin{enumerate}[label=\textbf{(\alph*)}]
@@ -306,6 +335,31 @@ not. A Cauchy sequence is a sequence that is trying to converge, and the questio
 the space has kept the point it is aiming at. This is exactly the gap that the completion of a
 metric space (\cref{sec:completion_of_a_metric_space}) is built to fill.
 \end{ainote}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution of \cref{ex:kobel_cauchy_single_choice}]
+% Generator: Claude Opus 5 (High)
+Only \textbf{(d)} is correct.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{False.} A Cauchy sequence converges precisely when the ambient space has kept the
+    point it is aiming at, and that is the definition of completeness
+    (\cref{def:complete_metric_space}), not a theorem about Cauchy sequences.
+    \Cref{ex:incomplete_metric_space_example} is a counterexample in one line.
+  \item \textbf{False}, and this is the option the question is built around. Closedness is not a
+    property a space has, only a property a subset has \emph{relative to} something larger: every
+    metric space is closed in itself, so reading (b) as a hypothesis on $X$ alone makes it say
+    nothing at all, and $X := (0,1]$ is again a counterexample. What is true is the relative
+    statement: a closed subset of a \emph{complete} space is complete, and the ambient
+    completeness is the part (b) omits.
+  \item \textbf{False.} An interval need not be complete either. On $X := (0,1)$ the sequence
+    $a_i := 1/i$ is Cauchy with no limit in $X$. Only the closed bounded intervals, and the closed
+    unbounded ones, are complete.
+  \item \textbf{True.} A compact metric space is sequentially compact
+    (\cref{thm:sequential_compactness}), so $(a_i)$ has a convergent subsequence, and a Cauchy
+    sequence with a convergent subsequence converges
+    (\cref{ex:cauchy_elementary_facts}\textbf{(c)}). Hence every compact metric space is complete,
+    which is \cref{ex:compact_finite_complete}.
+\end{enumerate}
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution of \cref{ex:banach_hypotheses_true_false}]

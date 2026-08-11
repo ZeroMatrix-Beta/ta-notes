@@ -347,3 +347,22 @@ Decide whether each of the following statements is true or false.
 \exinfo{This exercise is taken from the exam of 13 February 2025 (Prof.\ Joaquim Serra), where it appears as the fourth
 block of true/false questions.}
 \end{exercise}
+
+% Source: old_exams/august2025.pdf (Prof. Laura Kobel-Keller), Analysis II examination,
+% August 2025, Frage 3, printed p. 3
+% Extractor: Claude Opus 5 (High)
+\begin{exercise}[Single choice: which condition gives differentiability at the origin?]
+\label{ex:kobel_differentiable_single_choice}
+Let $f$ be a function defined on the unit ball $B_1(0) \subseteq \mathbb{R}^n$. Exactly one of the
+following guarantees that $f$ is differentiable at the origin. Which?
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item All partial derivatives of $f$ exist on the unit ball.
+  \item There exists an \emph{arbitrary} map $L$ such that
+    \[\lim_{h\to0}\frac{\lVert f(h)-f(0)-L(h)\rVert}{\lVert h\rVert} = 0.\]
+  \item There exists a \emph{linear} map $L$ such that
+    $f(h)-f(0)-L(h) = o\big(\lVert h\rVert^2\big)$.
+  \item All partial derivatives of $f$ are bounded on the unit ball.
+\end{enumerate}
+\exinfo{This exercise is taken from the Analysis II examination of August 2025
+(Prof.\ Laura Kobel-Keller), Question 3.}
+\end{exercise}

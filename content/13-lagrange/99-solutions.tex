@@ -159,3 +159,69 @@ part \textbf{(b)} can then simply rule out the boundary.
 \end{remark}
 \end{exercisesolution}
 
+\begin{exercisesolution}[Solution of \cref{ex:kobel_lagrange_single_choice}]
+% Generator: Claude Opus 5 (High)
+The correct answer is \textbf{(a)}, and one line of the Lagrange system settles it.
+
+We have $\nabla g(x,y,z) = (0,\,2ay,\,2bz)\transp$, which vanishes only where $y = z = 0$; that
+point is not on the constraint set, since $g(x,0,0) = -\pi \neq 0$. So the constraint
+qualification holds everywhere on $g^{-1}\{0\}$ and \cref{prop:constrained_optimization} applies
+without reservation: at any constrained extremum there is a $\lambda$ with
+$\nabla f = \lambda\nabla g$, that is
+\[e^x = \lambda \cdot 0, \qquad 2y = 2\lambda a y, \qquad 2z = 2\lambda b z.\]
+The first equation reads $e^x = 0$, which has no real solution. The system is therefore
+inconsistent, there is no critical point of the constrained problem for any $a$ and $b$, and by the
+theorem there is no constrained extremum either.
+\begin{remark}[Why the other three are wrong, and what they are testing]
+\begin{itemize}
+  \item \textbf{(b)} fails on the geometry, and the phrase to distrust is \emph{independently of
+    the values of $a$ and $b$}. The set $\{ay^2+bz^2 = \pi\}$ in $\mathbb{R}^3$ is never compact,
+    whatever the signs: the variable $x$ is entirely unconstrained, so the set is a cylinder over a
+    conic in the $(y,z)$-plane and is unbounded along the $x$-axis. When $a,b>0$ that conic is an
+    ellipse and the set is an elliptic cylinder; when $a$ and $b$ have opposite signs it is a
+    hyperbola and the set is unbounded in the $(y,z)$-directions as well.
+  \item \textbf{(c)} fails for the reason \textbf{(a)} succeeds. Setting $a=b$ makes the cross
+    section a circle and does nothing to the first Lagrange equation, which is where the
+    obstruction lives.
+  \item \textbf{(d)} is the answer of a reader who notices that $f$ itself is unknown. But
+    \cref{prop:constrained_optimization} is a statement about $\nabla f$, and $\nabla f$ \emph{is}
+    given. Knowing $f$ only up to an additive constant is exactly enough.
+\end{itemize}
+The transferable point is that the constrained problem can be settled without ever writing down
+$f$, and that an inconsistent Lagrange system is a legitimate --- and here decisive --- outcome.
+\end{remark}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution of \cref{ex:kobel_sphere_meets_cylinder}]
+% Generator: Claude Opus 5 (High)
+The maximum is $\boxed{5/4}$.
+
+Subtract the second constraint from the first: $z^2 = 1 - 1/2 = 1/2$ on the whole constraint set.
+So $z$ is not a free variable at all, and the objective collapses to
+\[f = x^2 + y + z^2 = x^2 + y + \tfrac12 .\]
+The second constraint gives $x^2 = 1/2 - y^2$, leaving a function of the single variable $y$:
+\[\varphi(y) := \left(\tfrac12 - y^2\right) + y + \tfrac12 = 1 + y - y^2,
+  \qquad y \in \left[-\tfrac{1}{\sqrt2},\,\tfrac{1}{\sqrt2}\right],\]
+the interval being forced by $x^2 = 1/2-y^2 \ge 0$. Now $\varphi'(y) = 1-2y$ vanishes at
+$y = 1/2$, which lies in the interval since $1/2 < 1/\sqrt2$, and $\varphi'' = -2 < 0$, so this is
+the maximum. Its value is $\varphi(1/2) = 1 + 1/2 - 1/4 = 5/4$, attained where $y = 1/2$,
+$x^2 = 1/2-1/4 = 1/4$ and $z^2 = 1/2$, that is at the four points
+$\left(\pm\tfrac12,\ \tfrac12,\ \pm\tfrac{1}{\sqrt2}\right)$.
+
+The constraint set is compact --- it is the intersection of a sphere with a cylinder, two circles
+of radius $1/\sqrt{2}$ at heights $z = \pm 1/\sqrt2$ --- so a maximum exists and the computation
+above finds it.
+\begin{remark}[Reach for Lagrange second]
+\label{rem:constraints_before_multipliers}
+Two constraints in three variables leave a one-dimensional set, and \cref{prop:constrained_optimization}
+with two multipliers will find the answer. It is more work than the problem needs. The constraints
+here are algebraically compatible in a way that eliminates two of the three variables outright, and
+noticing that turns a $4 \times 4$ system into a one-variable parabola.
+
+The habit worth forming: before setting up multipliers, ask whether the constraints can be
+\emph{solved}. Multipliers exist for the case where they cannot --- where the constraint set has no
+convenient parametrisation --- and applying them to a constraint set you could have parametrised is
+a common way to lose marks to arithmetic.
+\end{remark}
+\end{exercisesolution}
+

@@ -29,3 +29,36 @@ Write $u(x,y) = x^{\sin(y)} = e^{\sin(y)\ln x}$ for $x > 0$. Differentiating wit
   \item \textbf{True:} Along the $x$-axis ($y=0$), the function is $f(x,0) = 0$ everywhere. Therefore, the function restricted to the $x$-axis is identically zero, meaning $\partial_x f(x,0) = 0$ everywhere, and consequently its derivative with respect to $x$ again, $\partial_{xx} f(0,0)$, is also $0$.
 \end{enumerate}
 \end{exercisesolution}
+
+\begin{exercisesolution}[Solution of \cref{ex:kobel_differentiable_single_choice}]
+% Generator: Claude Opus 5 (High)
+The correct answer is \textbf{(c)}.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{False}, and this is the misconception the chapter opens with. Existence of every
+    partial derivative does not even force continuity, let alone differentiability:
+    \cref{ex:partial_derivatives_not_continuous} exhibits a function whose two partials exist
+    everywhere and which is discontinuous at the origin. Partial derivatives see only the
+    coordinate directions, and differentiability is a statement about all directions at once.
+  \item \textbf{False}, and the word doing the damage is \emph{arbitrary}. Compare the displayed
+    limit with \cref{def:differentiable}: they are the same limit, except that the definition
+    requires $L$ to be \emph{linear}. Drop that and the condition becomes almost vacuous --- take
+    $L(h) := f(h)-f(0)$, which makes the numerator identically zero for every $f$ whatsoever. The
+    linearity of $L$ is not a technical convenience; it is the entire content of the definition,
+    since differentiability means precisely that $f$ is approximated by a linear map.
+  \item \textbf{True}, and it is true for the unexciting reason that it asks for too much.
+    Differentiability at $0$ is the existence of a linear $L$ with
+    $f(h)-f(0)-L(h) = o(\lVert h\rVert)$. Here the error is required to be
+    $o(\lVert h\rVert^2)$, which for small $h$ is a strictly stronger demand: if
+    $\lVert f(h)-f(0)-L(h)\rVert/\lVert h\rVert^2 \to 0$, then
+    \[\frac{\lVert f(h)-f(0)-L(h)\rVert}{\lVert h\rVert}
+      = \lVert h\rVert \cdot \frac{\lVert f(h)-f(0)-L(h)\rVert}{\lVert h\rVert^2} \to 0\]
+    as well. So $f$ is differentiable, with $Df_0 = L$.
+  \item \textbf{False.} Bounded partial derivatives are no better than existing ones for this
+    purpose --- the counterexample of \textbf{(a)} has partials that are bounded near the origin
+    along each axis, and boundedness says nothing about the behaviour in between. What \emph{does}
+    suffice is \emph{continuity} of the partials, which is
+    \cref{thm:continuous_partials_imply_differentiable}; note that this is a genuinely stronger
+    hypothesis than the one offered here, and that \cref{ex:differentiable_not_c1} shows it is not
+    necessary either.
+\end{enumerate}
+\end{exercisesolution}

@@ -727,4 +727,70 @@ solutions separate. Note that continuity alone still buys existence (Peano); it 
 that is lost.
 \end{exercisesolution}
 
+% Source: old_exams/august2025.pdf (Prof. Laura Kobel-Keller), Analysis II examination,
+% August 2025, Frage 2, printed p. 2
+% Extractor: Claude Opus 5 (High)
+\begin{exercise}[Single choice: which hypothesis makes the solution unique?]
+\label{ex:kobel_picard_lindeloef_single_choice}
+Consider the initial value problem
+\[\frac{dy}{dx} = f(x,y), \qquad y \in \mathbb{R}, \qquad y(0) = y_0 .\]
+Under exactly one of the following conditions does this problem have a unique (at least local)
+solution. Which?
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $f$ is continuous and bounded on a sufficiently small neighbourhood of $(0,y_0)$.
+  \item $f$ is continuous and bounded on a sufficiently small neighbourhood of $(0,y_0)$, and
+    there is a real number $L$ with $\lvert f(x,y_2)-f(x,y_1)\rvert \le L\lvert y_2-y_1\rvert$
+    for all arguments in that neighbourhood.
+  \item $f$ is continuous and bounded on a sufficiently small neighbourhood of $(0,y_0)$, and
+    there is a real number $L$ with $\lvert f(x_2,y)-f(x_1,y)\rvert \le L\lvert x_2-x_1\rvert$
+    for all arguments in that neighbourhood.
+  \item $f$ is bounded and Riemann integrable on a sufficiently small neighbourhood of
+    $(0,y_0)$.
+\end{enumerate}
+\exinfo{This exercise is taken from the Analysis II examination of August 2025
+(Prof.\ Laura Kobel-Keller), Question 2.}
+\end{exercise}
+
+% Kept inline: this appendix keeps every solution beside its exercise.
+\begin{exercisesolution}[Solution of \cref{ex:kobel_picard_lindeloef_single_choice}]
+% Generator: Claude Opus 5 (High)
+The correct answer is \textbf{(b)}: it is exactly the hypothesis of
+\cref{thm:picard_lindeloef_local}, with the Lipschitz estimate taken in the state variable $y$ and
+uniformly in $x$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{False.} Continuity alone gives \emph{existence}, by Peano's theorem, and nothing
+    more. \Cref{ex:cauchy_lipschitz_nonuniqueness_power} is the standard witness: $u' =
+    \alpha\lvert u\rvert^{(\alpha-1)/\alpha}$ with $u(0)=0$ has a continuous, locally bounded
+    right-hand side and at least two solutions through the origin. Uniqueness is the half of
+    Picard--Lindel\"of that the Lipschitz condition pays for.
+  \item \textbf{True}, as above.
+  \item \textbf{False}, and this is the option the question exists for. The estimate is taken in
+    the \emph{wrong variable}: it constrains how $f$ varies with the independent variable $x$
+    while $y$ is held fixed, which is a regularity statement about the coefficient functions and
+    has nothing to do with uniqueness. The counterexample of \textbf{(a)} again applies, since
+    $f(x,y) = \alpha\lvert y\rvert^{(\alpha-1)/\alpha}$ does not depend on $x$ at all and is
+    therefore Lipschitz in $x$ with $L=0$, while the initial value problem still has two
+    solutions.
+  \item \textbf{False.} Riemann integrability is weaker than continuity, so this hypothesis is
+    weaker than \textbf{(a)}, which already fails. It does not even guarantee existence.
+\end{enumerate}
+\begin{remark}[Which variable, and why]
+\label{rem:lipschitz_in_the_state_variable}
+The distinction between \textbf{(b)} and \textbf{(c)} is the one to carry away, and the proof of
+\cref{thm:picard_lindeloef_local} explains it in one line. That proof runs the contraction
+\[(\Phi u)(x) := y_0 + \int_0^x f\big(s,u(s)\big)\,ds\]
+on a space of functions, and the estimate needed is
+$\lvert (\Phi u)(x) - (\Phi v)(x)\rvert \le \int_0^x \lvert f(s,u(s)) - f(s,v(s))\rvert\,ds$. The
+two arguments compared differ in the \emph{second} slot and agree in the first, because the
+integration variable $s$ is the same on both sides. So the only estimate the argument can use is
+one in $y$, and control in $x$ is never asked for --- continuity in $x$ is enough to make the
+integral exist.
+
+Note also that \textbf{(b)}'s condition is \emph{uniform} in $x$ over the neighbourhood, which is
+what the local Lipschitz condition of \cref{thm:picard_lindeloef_local} amounts to once the
+neighbourhood has been shrunk, and what \cref{ex:c1_implies_locally_lipschitz} delivers from
+continuity of $\partial_yf$.
+\end{remark}
+\end{exercisesolution}
+
 

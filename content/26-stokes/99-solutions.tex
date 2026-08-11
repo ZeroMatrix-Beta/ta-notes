@@ -529,3 +529,70 @@ height $z = 1$ it started at, so the $g(z)$ term of the potential cancels, and n
 beyond differentiability was ever needed.
 \end{remark}
 \end{exercisesolution}
+
+\begin{exercisesolution}[Solution of \cref{ex:kobel_line_integral_yz_circle}]
+% Generator: Claude Opus 5 (High)
+The answer is \textbf{(c)}, the integral is $0$.
+
+Parametrise the circle. It lies in the plane $x = 0$, has radius $1$ and centre the origin, and
+must run counterclockwise as seen from the positive $x$-axis, which for the right-handed frame
+$(y,z)$ means increasing angle from the $y$-axis towards the $z$-axis:
+\[\gamma(t) = (0,\ \cos t,\ \sin t), \qquad t \in [0,2\pi], \qquad
+  \gamma'(t) = (0,\ -\sin t,\ \cos t).\]
+Now evaluate the field on the curve. Since $x = 0$ along $\gamma$, the middle component of $V$
+vanishes identically there, and $V(\gamma(t)) = (1,\,0,\,-2)$ is \emph{constant}. Hence
+\[V(\gamma(t))\cdot\gamma'(t) = 1\cdot 0 + 0\cdot(-\sin t) + (-2)\cos t = -2\cos t,\]
+and by \cref{def:line_integral}
+\[\int_\gamma V\cdot d\gamma = \int_0^{2\pi} -2\cos t\,dt = \big[-2\sin t\big]_0^{2\pi} = 0.\]
+\begin{remark}[Two ways to see the zero without integrating]
+Neither requires the parametrisation, and both are worth having.
+
+\textbf{The field is constant on the curve.} A constant field is a gradient field, of the linear
+function $\varphi(x,y,z) := x - 2z$, and by \cref{prop:work_difference_potential} the work of a
+gradient field around a \emph{closed} path is zero. The only reason $V$ itself is not a gradient
+field is its $x$ component in the second slot --- and that component is exactly what the plane
+$x=0$ switches off.
+
+\textbf{Stokes' theorem.} We have $\curl V = (0,0,1)\transp$, which is constant. Take the flat unit
+disc $D$ in the plane $x=0$ bounded by $\gamma$; its unit normal is $\pm(1,0,0)\transp$, so
+$\curl V \cdot \nu = 0$ pointwise on $D$ and \cref{thm:greens_theorem}'s three-dimensional form
+gives $\int_\gamma V\cdot d\gamma = \int_D \curl V\cdot\nu = 0$. The curl is non-zero, and the
+surface is oriented so as not to see it.
+
+The trap the question sets is to compute $\curl V \ne 0$, conclude \qt{not conservative}, and then
+guess a non-zero answer. Non-conservative fields have zero work around plenty of individual loops;
+what fails is only that the work is zero around \emph{every} loop.
+\end{remark}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution of \cref{ex:kobel_irrotational_single_choice}]
+% Generator: Claude Opus 5 (High)
+The correct answer is \textbf{(d)}, the guarded one.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{False.} This is the standing counterexample of this chapter. On
+    $G := \mathbb{R}^2\setminus\{0\}$ the angle field of
+    \cref{ex:vortex_field_not_conservative} is irrotational, and its work around the unit circle
+    is $2\pi \neq 0$. Vanishing curl gives path independence only \emph{locally}, and a closed
+    curve can encircle a hole.
+  \item \textbf{False}, and it is the option most likely to be chosen. The correct hypothesis is
+    \newterm{simply connected}, not connected: \cref{cor:potentials_simply_connected} needs every
+    loop to be contractible, and $\mathbb{R}^2\setminus\{0\}$ is connected --- indeed
+    path-connected --- while having no potential for the field above. Connectedness only buys
+    uniqueness of a potential up to an additive constant, once one exists.
+  \item \textbf{False.} Curl and divergence are independent of one another; nothing links them. The
+    field $V(x,y) := (x,y)\transp$ has $\curl V = 0$ and $\divg V = 2$.
+  \item \textbf{True}, and it is true because it claims almost nothing: \emph{may} be. It is
+    satisfied by any irrotational field on a simply connected $G$, for instance $G =
+    \mathbb{R}^2$, where \cref{thm:poincare_lemma} produces a potential outright.
+\end{enumerate}
+\begin{remark}[Why the correct answer is the weakest one]
+\label{rem:irrotational_weakest_true_statement}
+The question is unusual in that the true option is the one asserting the least, and a reader who
+reads \qt{it may be that} as a hedge rather than a claim will pass over it. The design is
+deliberate: options \textbf{(a)} and \textbf{(b)} are the two standard over-readings of
+$\curl V = 0$ --- that it forces closed line integrals to vanish, and that connectedness is the
+missing topological hypothesis --- and \textbf{(c)} tests whether the two differential operators
+have been kept apart. Under a hypothesis on $G$ this weak, nothing stronger than \textbf{(d)}
+survives.
+\end{remark}
+\end{exercisesolution}

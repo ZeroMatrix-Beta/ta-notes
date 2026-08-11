@@ -370,3 +370,94 @@ same phenomenon. In practice one keeps both: the Lebesgue integral for limits an
 several-variable arguments, the improper Riemann integral for conditionally convergent ones.
 \end{remark}
 \end{exercisesolution}
+
+\begin{exercisesolution}[Solution of \cref{ex:kobel_ball_minus_lattice}]
+% Generator: Claude Opus 5 (High)
+Two facts do all the work: $M$ is Jordan measurable, and $f$ is continuous and bounded. The
+criterion quoted with \cref{def:riemann_integral_rn} then applies.
+
+\textbf{$M$ is bounded}, being a subset of $\overline{B}_2(0)$.
+
+\textbf{The removed set is finite.} Write $L := \{x \in \mathbb{R}^4 \mid x_i \in \mathbb{Z}\}
+= \mathbb{Z}^4$ and $S := L \cap \overline{B}_2(0)$, so that $M = \overline{B}_2(0)\setminus S$. A
+lattice point $x \in S$ has $\sum_i x_i^2 \le 4$ with each $x_i$ an integer, so each $|x_i| \le 2$
+and $S \subseteq \{-2,-1,0,1,2\}^4$. In particular $S$ is finite.
+
+\textbf{$M$ is Jordan measurable.} A single point is a Jordan null set (cover it by one cube of
+side $\varepsilon$), hence Jordan measurable, and a finite union of Jordan measurable sets is
+Jordan measurable, so $S$ is. The closed ball is Jordan measurable --- its boundary is the sphere
+$\partial B_2(0)$, a Jordan null set, so
+\cref{thm:jordan_measurability_boundary_criterion} applies. Then
+$M = \overline{B}_2(0)\setminus S$ is Jordan measurable by
+\cref{prop:algebra_jordan_measurable}, and since $\mu(S) = 0$ we even get
+$\mu(M) = \mu(\overline{B}_2(0))$.
+
+\textbf{$f$ is continuous and bounded on $\overline{M}$.} It is a composition of polynomials, the
+square root and $\cos$: the map $x \mapsto |x|^2$ is a polynomial, $t \mapsto t^{3/2}$ is
+continuous on $[0,\infty)$, and $\cos$ is continuous on $\mathbb{R}$. So $f$ is continuous on all
+of $\mathbb{R}^4$, in particular on $\overline{M} = \overline{B}_2(0)$, and
+$\lvert f\rvert \le 1$ everywhere because it is a cosine.
+
+\textbf{Conclusion.} $M$ is Jordan measurable and $f$ is continuous on $\overline M$, so $f$ is
+Riemann integrable over $M$.
+\begin{remark}[What the exercise is actually testing]
+Neither the dimension $4$ nor the elaborate formula for $f$ matters; both are there to discourage
+computation. The formula is chosen so that $f$ is manifestly continuous but has no closed-form
+integral, and the removed set is chosen to look infinite --- $\mathbb{Z}^4$ is --- while being
+finite \emph{after intersection with the ball}. Establishing that is the one step of the problem
+that is not bookkeeping.
+
+Note also what the removal does \emph{not} affect. Deleting a Jordan null set changes neither
+Jordan measurability nor the value of the integral, so
+$\int_M f = \int_{\overline{B}_2(0)} f$. It is precisely this insensitivity that fails for
+countable removals: $[0,1]\setminus\mathbb{Q}$ is not Jordan measurable at all
+(\cref{rem:lebesgue_vs_jordan_null}).
+\end{remark}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution of \cref{ex:kobel_diffeomorphic_jordan_measure}]
+% Generator: Claude Opus 5 (High)
+The answer is \textbf{(a)}, $\mu(V) < \infty$.
+
+A diffeomorphism $\Phi$ carrying $U$ onto $V$ is in particular continuous, and $U$ is compact
+(closed and bounded in $\mathbb{R}^n$, \cref{thm:heine_borel}). A continuous image of a compact set
+is compact, so $V$ is compact, hence bounded, and a bounded Jordan measurable set has finite
+measure.
+
+Options \textbf{(b)}, \textbf{(c)} and \textbf{(d)} all assert something about the \emph{size} of
+$\mu(V)$, and a diffeomorphism controls nothing of the kind. The change-of-variables formula
+(\cref{thm:change_of_variables}) gives
+$\mu(V) = \int_U \lvert\det \Jac\Phi\rvert$, and the Jacobian determinant is at the diffeomorphism's
+disposal: the dilation $\Phi(x) := \lambda x$ turns $\mu(U)=1$ into $\mu(V) = \lambda^n$, which can
+be made equal to, greater than, or less than $1$ at will. So all three fail, and they fail for the
+same reason.
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution of \cref{ex:kobel_layer_cake}]
+% Generator: Claude Opus 5 (High)
+The answer is \textbf{(a)}, the \newterm{layer-cake formula}
+\[\int_\Omega f = \int_0^{\max f}\mu\big(\{x \in \Omega \mid f(x) > t\}\big)\,dt .\]
+For a positive step function the identity is a rearrangement of a finite sum. Let $f$ take the
+distinct positive values $c_1 < \dots < c_N$ on Jordan measurable pieces $A_1,\dots,A_N$
+partitioning $\Omega$, so that $\int_\Omega f = \sum_k c_k\,\mu(A_k)$. For $t \in
+[c_{k-1},c_k)$ the superlevel set $\{f > t\}$ is exactly $A_k \cup \dots \cup A_N$, whose measure
+is $\sum_{j \ge k}\mu(A_j)$. Hence
+\[\int_0^{\max f}\mu(\{f>t\})\,dt
+  = \sum_{k=1}^{N}(c_k - c_{k-1})\sum_{j\ge k}\mu(A_j)
+  = \sum_{j=1}^{N}\mu(A_j)\sum_{k\le j}(c_k-c_{k-1})
+  = \sum_{j=1}^N c_j\,\mu(A_j),\]
+with $c_0 := 0$, the middle step being an exchange of the order of summation and the last a
+telescoping sum. The two sides agree.
+
+Of the alternatives, \textbf{(c)} is zero for all but finitely many $t$ and so integrates to $0$;
+\textbf{(b)} and \textbf{(d)} use \emph{sub}level sets, which run the wrong way --- their integral
+is $\mu(\Omega)\max f - \int_\Omega f$, not $\int_\Omega f$.
+\begin{remark}[Why the layer-cake formula is worth remembering]
+It computes an integral by slicing the \emph{range} rather than the domain, which is exactly the
+move that separates the Lebesgue integral from the Riemann integral
+(\cref{sec:lebesgue_digression}). Here it is proved for step functions only, but that is the
+general case in disguise: the Lebesgue integral of a non-negative measurable function is
+\emph{defined} by this formula, with $\mu$ the Lebesgue measure and the right-hand side an
+improper Riemann integral of a monotone function of $t$.
+\end{remark}
+\end{exercisesolution}

@@ -44,16 +44,15 @@ paper itself is what goes in a citation. Note also that three pairs are byte-ide
 | `FS14`, `HS14` | Prof. E. Kowalski | Surveyed, nothing taken. |
 | `FS15`, `HS15` | Prof. D. Salamon | Surveyed, nothing taken. |
 | `HS00`–`HS03`, `FS04`–`FS12`, `HS04`–`HS12` | various / unidentified | Mostly *Vordiplom* papers. See the rejection notes below. |
-| `august2025` | Prof. Laura Kobel-Keller | **Not yet mined.** Unlike every file above, this one is *Analysis II alone* (`Analysis II: mehrere Variablen`), and it is bilingual German/English. See below. |
+| `august2025` | Prof. Laura Kobel-Keller | ✅ **Mined 2026-08-11, front to back.** Analysis II alone (`Analysis II: mehrere Variablen`), bilingual German/English. All 19 questions read from rendered pages. See the accepted table below and *What is left in `august2025`*. |
 
 `examHS24`, `examFS24`, `WS22_Prüfung` and `fs2023/Prüfung` were mined in earlier passes (Serra and
 Felder); `gemini.md` records their dates and the fact that only the two Felder papers ship a
 solution key.
 
-⚠️ **`august2025.pdf` and the three `Probeprfg` mock exams have never been mined by anybody.** An
-earlier revision of this file asserted that they had been, which was wrong: `grep` over `content/`
-returns no citation of either. See *Where to mine next*, immediately below, which is where that
-correction leads.
+⚠️ **The three `Probeprfg` mock exams have still never been mined.** `august2025.pdf` had not been
+either until 2026-08-11; an earlier revision of this file asserted otherwise, which was wrong. See
+*Where to mine next*, immediately below.
 
 ## Loose official material (not exams, not numbered sheets)
 
@@ -72,25 +71,26 @@ were re-derived here independently and are correct, so there is no erratum to in
 and stopped; the three targets below are untouched, and the first two are worth more than
 everything that block had left in it.
 
-### 1. `old_exams/august2025.pdf` — do this one first
+### 1. ~~`old_exams/august2025.pdf`~~ — done 2026-08-11
 
-**Prof. Laura Kobel-Keller, August 2025, 21 pages.** Never mined: no `% Source:` anywhere in
-`content/` names it. It is the single best target in the folder, for four independent reasons.
+**Prof. Laura Kobel-Keller, August 2025, 21 pages.** Mined front to back; see the accepted table.
+It was the best target in the folder for four reasons, all of which held up: it is *Analysis II
+alone* (title *Analysis II: mehrere Variablen*), so nothing had to be filtered out as
+single-variable; it is **bilingual**, so every statement was quoted from the examiner's own English
+rather than translated; it is the most recent paper here by roughly four years; and its
+single-choice and multiple-choice sections convert directly into the true/false `exercise` style
+already used in chapters 19 and 20.
 
-* **It is Analysis II alone.** Its title is *Analysis II: mehrere Variablen*. Every `HS*`/`FS*`
-  paper is a combined Analysis I & II exam whose first half has to be discarded, and that filtering
-  was the main cost of the last pass. Here there is nothing to filter.
-* **It is bilingual.** Every question is printed in German and then in English. The English is the
-  examiner's own, so a statement can be quoted rather than translated, which removes the one place
-  the last pass had to exercise judgement silently.
-* **It is the most recent exam in the folder**, by roughly four years, so its scope and emphasis
-  are the closest of anything here to the course this document actually serves.
-* **It opens with a single-choice section** (`Bei den folgenden Fragen gibt es jeweils genau eine
-  richtige Antwort`), which converts into `exercise` blocks in the true/false style already used
-  throughout chapters 19 and 20.
+**What is left in it, and why.** Twelve of the nineteen questions were taken. The other seven:
 
-Question 1 is a Cauchy-sequence question aimed at chapter 6, so the paper starts inside our scope
-on page 1. Work it front to back.
+| Question | Verdict |
+|---|---|
+| Frage 11 (a sequence converging in one norm on `ℝⁿ`; can it diverge, or be unbounded, in the Euclidean norm?) | Both options are false because all norms on `ℝⁿ` are equivalent, which `02-metric-normed-inner-product/04-equivalence-of-norms.tex` is an entire section about, with `ex:3.9` already asking for the proof. |
+| Aufgabe 12 (critical points of `x³/3 − y − x + y⁵/5`) | Routine Hessian classification. Chapter 12 carries six of these already, including two with a parameter. |
+| Aufgabe 14 (swap the order in `∫₀² ∫_{y²}^{2√(2y)} f dx dy`) | **Already in the document.** It is `ex:change_order_integration`, transcribed from Sascha Brack's notes long before this pass. The exercise now carries an `\exinfo` recording that the exam sets the identical region, and the pass added the two-panel figure instead. |
+| Aufgabe 15 b), c) (the sup-norm is a norm on `B(U,Y)`; a uniform limit of continuous maps is continuous) | Standard, and both are in chapter 2 and chapter 7 in substance. Only part a) was distinctive; it is `ex:kobel_local_banach_fixed_point`. |
+| Aufgabe 18 (prove Fubini) | A "reproduce the lecture's proof" part; see the standing rejection at the foot of this file. |
+| Aufgabe 19 (prove the Hessian test) | Same category, and we are **ahead** of it: the exam assumes `f ∈ C³`, our `thm:hessian_test` assumes `C²`. |
 
 ### 2. The three mock exams, two of which ship solution keys
 
@@ -157,6 +157,28 @@ official-sheet exercises are in. Treat them accordingly.
 | 11 | `FS18` A9 | Einsiedler | `23-flux-divergence/02` `ex:flux_bounded_by_oscillation` | worked example | Flux through a closed surface is bounded by the *oscillation* of the field, because a constant field is invisible to it. A technique, not a drill. |
 | 12 | `HS20` Teil B A3 | Jossen | `26-stokes/03` `ex:jossen_potential_on_disconnected_domain` | exercise | The mirror image of `ex:vortex_field_not_conservative`: a domain that is not simply connected on which the field *is* conservative. Catches "not simply connected ⟹ not conservative". |
 | 13 | `FS16` A10 | Knörrer | `26-stokes/02` `ex:moving_rectangle_derivative` | worked example | `d/dt ∫_{Q_t} f = ∮_{∂Q_t} f(−dx+dy)` for a rectangle sliding along the diagonal. Reynolds transport in miniature, and it holds for merely continuous `f`, where Green's theorem cannot reach. |
+
+## Accepted — 2026-08-11 pass, `august2025.pdf` (Prof. Laura Kobel-Keller)
+
+Twelve blocks, ten chapters. Every question was read from a rendered page; `pdftotext` was used for
+triage only. **This paper ships no solution key either**, so every solution below is an independent
+derivation, exactly as for the block above.
+
+| # | Question | Lands in | Form | Why it earns its place |
+|---|---|---|---|---|
+| 1 | Frage 1 | `06-completeness/01` `ex:kobel_cauchy_single_choice` | single choice | Option (b), *"has a limit if `X` is closed"*, is the sharpest form of the closed-relative-to-what confusion, and the chapter had nothing testing it. |
+| 2 | Aufgabe 15 a) | `06-completeness/03` `ex:kobel_local_banach_fixed_point` | exercise | A genuine refinement of Banach: no complete domain, no self-map, replaced by one inequality on the first step. It is how the theorem is *actually* used in the proof of the inverse function theorem. |
+| 3 | Frage 10 | `07-compactness/04` `ex:kobel_compactness_characterisation` | true/false | Puts "closed and bounded" against "complete and totally bounded" in one block, which `rem:boundedness_not_topological` argues for at length and nothing tested. |
+| 4 | Frage 3 | `09-differential/02` `ex:kobel_differentiable_single_choice` | single choice | Option (b) drops *linearity* from the definition of the differential, which is the one word carrying its content. Option (c) is a stronger-than-needed error term. |
+| 5 | Frage 4 | `13-lagrange/01` `ex:kobel_lagrange_single_choice` | single choice | The Lagrange system is inconsistent (`eˣ = 0`), so the problem is settled without ever knowing `f`. An inconsistent system as a legitimate outcome is not represented elsewhere. |
+| 6 | Aufgabe 13 | `13-lagrange/01` `ex:kobel_sphere_meets_cylinder` | exercise | Sphere ∩ cylinder. Not the rejected routine-Lagrange kind: the two constraints eliminate two variables outright, and the lesson is to try solving the constraints *before* reaching for multipliers. |
+| 7 | Frage 5 | `15-inverse-function-theorem/01` `ex:kobel_ift_single_choice` | single choice | Separates "some derivative is non-zero" from "the derivative is invertible", and rules out the mismatched-dimensions case in (a). |
+| 8 | Aufgabe 17 | `16-implicit-function-theorem/01` `ex:kobel_conic_implicit_maximal_interval` | exercise | Local theorem, global answer: the implicit function theorem gives *some* interval, and solving the quadratic gives all of `ℝ`. The official hint says outright that no theorem is needed for the last part. |
+| 9 | Frage 6 | `19-jordan-measure/01` `ex:kobel_diffeomorphic_jordan_measure` | single choice | A diffeomorphism preserves compactness, hence finiteness of measure, and nothing else. Three of the four options assert it preserves size. |
+| 10 | Frage 7 | `19-jordan-measure/01` `ex:kobel_layer_cake` | single choice | **The layer-cake formula**, which computes an integral by slicing the range. It is the move that separates Lebesgue from Riemann, and `03-a-glimpse-of-lebesgue.tex` had no concrete instance of it. |
+| 11 | Aufgabe 16 | `19-jordan-measure/01` `ex:kobel_ball_minus_lattice` | exercise | A ball in `ℝ⁴` minus the lattice points. The whole problem is noticing the removed set is *finite* after intersecting; everything else is assembling standard facts. |
+| 12 | Frage 8, Frage 9 | `26-stokes/02` `ex:kobel_line_integral_yz_circle`, `26-stokes/03` `ex:kobel_irrotational_single_choice` | single choice ×2 | The first has a non-conservative field with zero work around one loop, which catches "curl ≠ 0 ⟹ non-zero answer". The second's true option is the weakest one, *"it may be that a potential exists"* — its distractors are the two standard over-readings of `curl V = 0`. |
+| — | Frage 2 | `appendix-a-odes.tex` `ex:kobel_picard_lindeloef_single_choice` | single choice | Lipschitz **in the state variable**, not in the independent one. Options (b) and (c) differ only in which variable, and the appendix had nothing making that distinction explicit. |
 
 ### Not from the exams, but from the same pass
 

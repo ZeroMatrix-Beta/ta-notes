@@ -427,3 +427,56 @@ volume), which is the sense already in play in \cref{ex:8.2}\textbf{(b)} on the 
 sheet. Part \textbf{(c)} is the one property of that notion this document repeatedly leans on
 without ever proving, which is why the block earns its place.
 \end{ainote}
+
+% Source: old_exams/august2025.pdf (Prof. Laura Kobel-Keller), Analysis II examination,
+% August 2025, Aufgabe 16, printed p. 16
+% Extractor: Claude Opus 5 (High)
+\begin{exercise}[Integrating over a ball with the lattice points removed]
+\label{ex:kobel_ball_minus_lattice}
+Let $\overline{B}_2(0) := \{x \in \mathbb{R}^4 \mid |x| \le 2\}$ be the closed ball of radius $2$
+in $\mathbb{R}^4$, and set
+\[M := \overline{B}_2(0) \setminus \{x \in \mathbb{R}^4 \mid x_i \in \mathbb{Z}
+  \text{ for } 1 \le i \le 4\}.\]
+Show that
+\[f(x) := \cos\!\left(\frac{\pi}{2}\,\big(x_1^2+x_2^2+x_3^2+x_4^2\big)^{3/2}\right)\]
+is Riemann integrable over $M$.
+\exhint[Official hint]{You may of course use any result from the lecture without proving it
+again.}
+\exinfo{This exercise is taken from the Analysis II examination of August 2025
+(Prof.\ Laura Kobel-Keller), Problem 16.}
+\end{exercise}
+
+% Source: old_exams/august2025.pdf (Prof. Laura Kobel-Keller), Analysis II examination,
+% August 2025, Frage 6, printed p. 6
+% Extractor: Claude Opus 5 (High)
+\begin{exercise}[Single choice: what a diffeomorphism does to measure]
+\label{ex:kobel_diffeomorphic_jordan_measure}
+Let $U$ and $V$ be diffeomorphic Jordan measurable sets, and suppose $U$ is closed and bounded
+with $\mu(U) = 1$. Exactly one of the following necessarily holds. Which?
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $\mu(V) < \infty$.
+  \item $\mu(V) = \mu(U)$.
+  \item $\mu(V) > \mu(U)$.
+  \item $\mu(V) < \mu(U)$.
+\end{enumerate}
+\exinfo{This exercise is taken from the Analysis II examination of August 2025
+(Prof.\ Laura Kobel-Keller), Question 6.}
+\end{exercise}
+
+% Source: old_exams/august2025.pdf (Prof. Laura Kobel-Keller), Analysis II examination,
+% August 2025, Frage 7, printed p. 6
+% Extractor: Claude Opus 5 (High)
+\begin{exercise}[Single choice: the integral computed by slicing the range]
+\label{ex:kobel_layer_cake}
+The Riemann integral was introduced above via step functions. Let $f$ be a bounded, positive step
+function on a Jordan measurable set $\Omega$. Exactly one of the following expressions has the
+same value as $\int_\Omega f$. Which?
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $\displaystyle\int_0^{\max f}\mu\big(\{x \in \Omega \mid f(x) > t\}\big)\,dt$.
+  \item $\displaystyle\int_0^{\max f}\mu\big(\{x \in \Omega \mid f(x) < t\}\big)\,dt$.
+  \item $\displaystyle\int_0^{\max f}\mu\big(\{x \in \Omega \mid f(x) = t\}\big)\,dt$.
+  \item $\displaystyle\int_0^{\max f}\mu\big(\{x \in \Omega \mid f(x) \le t\}\big)\,dt$.
+\end{enumerate}
+\exinfo{This exercise is taken from the Analysis II examination of August 2025
+(Prof.\ Laura Kobel-Keller), Question 7.}
+\end{exercise}

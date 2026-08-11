@@ -397,4 +397,33 @@ space.
 \end{remark}
 \end{exercisesolution}
 
+\begin{exercisesolution}[Solution to \cref{ex:kobel_compactness_characterisation}]
+% Generator: Claude Opus 5 (High)
+Only \textbf{(c)} is true.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{False.} This is Heine--Borel (\cref{thm:heine_borel}), and it is a theorem about
+    $\mathbb{R}^n$ with the standard metric, not about metric spaces. \Cref{ex:heine_borel_fails}
+    breaks it with the bounded metric $\tilde d$, under which $\mathbb{N}$ is closed and bounded
+    and not compact; an infinite set with the discrete metric does the same.
+  \item \textbf{False.} Being open and closed is a statement about how $E$ sits in $X$, and it has
+    no bearing on compactness. Any space is open and closed in itself, so $E = X = \mathbb{R}$ is
+    a counterexample.
+  \item \textbf{True}, and it is the honest general replacement for \textbf{(a)}: a metric space is
+    compact if and only if it is complete and totally bounded
+    (\cref{rem:compact_iff_complete_totally_bounded}, built on
+    \cref{lem:sequentially_compact_totally_bounded}).
+  \item \textbf{False.} Total boundedness alone is not enough --- completeness is the other half of
+    \textbf{(c)} --- and openness does not supply it. The interval $(0,1) \subseteq \mathbb{R}$ is
+    open and totally bounded and not compact.
+\end{enumerate}
+\begin{remark}[Why \textbf{(a)} is the tempting one]
+\Cref{rem:boundedness_not_topological} already contains the reason \textbf{(a)} fails and
+\textbf{(c)} succeeds, and it is worth restating in one line, because the question is designed to
+catch a reader who remembers Heine--Borel without its hypothesis. Compactness is a topological
+property; boundedness is not, since two metrics with the same open sets can disagree about which
+sets are bounded. Total boundedness, unlike boundedness, is not so easily destroyed by rescaling
+the metric, and that is exactly why it is the notion that survives into the general statement.
+\end{remark}
+\end{exercisesolution}
+
 

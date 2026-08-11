@@ -671,3 +671,37 @@ Let $n \ge 1$ and let $A := \{x \in (0,1]^n \mid x_1 + \dots + x_n = 1\}$. Consi
 \exinfo{This exercise is taken from the Analysis I \& II exam of 24 January 2022 (Prof.\ Giovanni Felder), Part A, Problem 8.}
 \end{exercise}
 
+% Source: old_exams/august2025.pdf (Prof. Laura Kobel-Keller), Analysis II examination,
+% August 2025, Frage 4, printed p. 4
+% Extractor: Claude Opus 5 (High)
+\begin{exercise}[Single choice: a constrained problem with no critical point]
+\label{ex:kobel_lagrange_single_choice}
+Consider a function $f$ of three variables, of which all we know is that
+\[\nabla f(x,y,z) = \begin{pmatrix} e^x \\ 2y \\ 2z \end{pmatrix},\]
+together with the constraint $g(x,y,z) := ay^2 + bz^2 - \pi = 0$ for parameters
+$a,b \in \mathbb{R}\setminus\{0\}$. Exactly one of the following is correct. Which?
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Independently of the values of $a$ and $b$, $f$ has no extremal point under the given
+    constraint.
+  \item The constraint defines a compact set in space independently of the values of $a$ and $b$,
+    so both the constrained minimum and the constrained maximum have to be attained.
+  \item In the case $a = b$, the constrained minimum is attained.
+  \item Without further knowledge of $f$, no assertion about the constrained optimisation problem
+    is possible.
+\end{enumerate}
+\exinfo{This exercise is taken from the Analysis II examination of August 2025
+(Prof.\ Laura Kobel-Keller), Question 4.}
+\end{exercise}
+
+% Source: old_exams/august2025.pdf (Prof. Laura Kobel-Keller), Analysis II examination,
+% August 2025, Aufgabe 13, printed p. 11
+% Extractor: Claude Opus 5 (High)
+\begin{exercise}[Two constraints that leave nothing for Lagrange to do]
+\label{ex:kobel_sphere_meets_cylinder}
+Determine the maximal value of
+\[f : \mathbb{R}^3 \to \mathbb{R}, \qquad f(x,y,z) := x^2 + y + z^2\]
+subject to the two constraints $x^2+y^2+z^2 = 1$ and $x^2+y^2 = 1/2$.
+\exinfo{This exercise is taken from the Analysis II examination of August 2025
+(Prof.\ Laura Kobel-Keller), Problem 13, a box problem where only the final answer was graded.}
+\end{exercise}
+

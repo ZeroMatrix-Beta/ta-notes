@@ -130,7 +130,120 @@ $x \leq 2\sqrt{2y} \implies x^2 \leq 8y \implies y \geq \frac{1}{8}x^2$.
 $x \geq y^2 \implies y \leq \sqrt{x}$ (since $x,y \geq 0$).
 Thus, the new bounds are $0 \leq x \leq 4$ and $\frac{1}{8}x^2 \leq y \leq \sqrt{x}$. The reversed integral is:
 \[\int_0^4 \int_{\frac{1}{8}x^2}^{\sqrt{x}} f(x,y) \,dy\,dx.\]
+\exinfo{The same region, with the same two bounds, is Problem 14 of the Analysis II examination of
+August 2025 (Prof.\ Laura Kobel-Keller), a box problem where only the reversed integral was
+graded.}
 \end{example}
+
+% Generator: Claude Opus 5 (High) --- FIG-20-01, the two slicings of one region.
+% Requested in feedback/brainstorming_improvements.md, which names swapping bounds over a
+% non-rectangular domain as a major pain point and asks for exactly this picture. Drawn against
+% the region of ex:change_order_integration rather than the brainstorm's triangle, because a
+% triangle makes the two orders look symmetric and this region does not: the curved boundaries
+% are what force the algebra in the example above.
+%
+% Arithmetic check. The two boundary curves are the SAME two curves, read two ways:
+%   x = y^2        <=>  y = sqrt(x)      (upper boundary)
+%   x = 2 sqrt(2y) <=>  y = x^2/8        (lower boundary)
+% They meet where sqrt(x) = x^2/8, i.e. x^{3/2} = 8, x = 4, y = 2 -- and at the origin.
+% Both panels must therefore show the SAME shaded region; only the slice differs.
+%   LEFT (dx dy, outer y): horizontal slice at y = 1.2, running x = y^2 = 1.44
+%       to x = 2 sqrt(2.4) = 3.0984.
+%   RIGHT (dy dx, outer x): vertical slice at x = 2.2, running y = 2.2^2/8 = 0.605
+%       to y = sqrt(2.2) = 1.4832.
+% Both slice endpoints lie on the boundary curves by construction, which is the property the
+% figure asserts and the one worth re-checking if the coordinates are ever touched.
+\begin{center}
+\begin{tikzpicture}[x=1.05cm, y=1.05cm, >=Latex,
+    bdry/.style={blue!70!black, very thick},
+    slice/.style={BrickRed, very thick, <->}]
+
+  % ---------------- left panel: horizontal slices, the order as given ----------------
+  \begin{scope}
+    \fill[blue!8]
+      plot[domain=0:4, samples=60] ({\x}, {sqrt(\x)}) --
+      plot[domain=4:0, samples=60] ({\x}, {(\x)*(\x)/8}) -- cycle;
+
+    \draw[->, gray!70] (-0.25,0) -- (4.9,0) node[right, font=\footnotesize, text=black] {$x$};
+    \draw[->, gray!70] (0,-0.25) -- (0,2.7) node[above, font=\footnotesize, text=black] {$y$};
+
+    \draw[bdry] plot[domain=0:4, samples=60] ({\x}, {sqrt(\x)});
+    \draw[bdry] plot[domain=0:4, samples=60] ({\x}, {(\x)*(\x)/8});
+    % Placed at x = 3.4 on the upper curve (y = sqrt(3.4) = 1.844) rather than near x = 1: the
+    % dashed guide at y = 1.2 runs across the left half of this panel and the label collided
+    % with it there.
+    \node[above left, font=\scriptsize, blue!70!black, inner sep=1pt] at (3.4,1.844) {$x=y^2$};
+    \node[below right, font=\scriptsize, blue!70!black, inner sep=1pt] at (3.05,1.16)
+      {$x=2\sqrt{2y}$};
+
+    \draw[slice] (1.44,1.2) -- (3.0984,1.2);
+    \draw[gray!60, dashed] (0,1.2) -- (1.44,1.2);
+    \node[left, font=\scriptsize] at (-0.1,1.2) {$y$};
+
+    \fill (4,2) circle (1.4pt);
+    \node[right, font=\scriptsize, inner sep=2pt] at (4.05,2.1) {$(4,2)$};
+
+    \node[font=\scriptsize, BrickRed] (Lslab) at (1.05,2.5) {$y^2 \le x \le 2\sqrt{2y}$};
+    \draw[BrickRed, thin] (Lslab) -- (1.9,1.28);
+    \node[font=\footnotesize, align=center] at (2.0,-0.95)
+      {$\displaystyle\int_0^2\!\!\int_{y^2}^{2\sqrt{2y}} f \,dx\,dy$};
+    \node[font=\scriptsize, gray!50!black] at (2.0,-1.75) {fix $y$, sweep $x$};
+  \end{scope}
+
+  % ---------------- right panel: vertical slices, the order after swapping ------------
+  \begin{scope}[shift={(6.6,0)}]
+    \fill[blue!8]
+      plot[domain=0:4, samples=60] ({\x}, {sqrt(\x)}) --
+      plot[domain=4:0, samples=60] ({\x}, {(\x)*(\x)/8}) -- cycle;
+
+    \draw[->, gray!70] (-0.25,0) -- (4.9,0) node[right, font=\footnotesize, text=black] {$x$};
+    \draw[->, gray!70] (0,-0.25) -- (0,2.7) node[above, font=\footnotesize, text=black] {$y$};
+
+    \draw[bdry] plot[domain=0:4, samples=60] ({\x}, {sqrt(\x)});
+    \draw[bdry] plot[domain=0:4, samples=60] ({\x}, {(\x)*(\x)/8});
+    \node[above left, font=\scriptsize, blue!70!black, inner sep=1pt] at (1.15,1.07)
+      {$y=\sqrt{x}$};
+    \node[below right, font=\scriptsize, blue!70!black, inner sep=1pt] at (3.05,1.16)
+      {$y=x^2/8$};
+
+    \draw[slice] (2.2,0.605) -- (2.2,1.4832);
+    \draw[gray!60, dashed] (2.2,0) -- (2.2,0.605);
+    \node[below, font=\scriptsize] at (2.2,-0.08) {$x$};
+
+    \fill (4,2) circle (1.4pt);
+    \node[right, font=\scriptsize, inner sep=2pt] at (4.05,2.1) {$(4,2)$};
+
+    \node[font=\scriptsize, BrickRed] (Rslab) at (1.15,2.5) {$\tfrac{x^2}{8} \le y \le \sqrt{x}$};
+    \draw[BrickRed, thin] (Rslab) -- (2.2,1.55);
+    \node[font=\footnotesize, align=center] at (2.0,-0.95)
+      {$\displaystyle\int_0^4\!\!\int_{x^2/8}^{\sqrt{x}} f \,dy\,dx$};
+    \node[font=\scriptsize, gray!50!black] at (2.0,-1.75) {fix $x$, sweep $y$};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+\begin{remark}[Reading the swap off the picture]
+\label{rem:fubini_swap_picture}
+The region is the same in both panels; only the direction of the slice changes, and with it which
+variable is the outer one. That is the whole of Fubini's theorem for a non-rectangular domain, and
+the two mechanical rules follow from looking:
+
+\begin{itemize}
+  \item \textbf{The outer limits are constants, and they are the shadow of the region on the outer
+    axis.} On the left the outer variable is $y$ and the region's shadow on the $y$-axis is
+    $[0,2]$; on the right the outer variable is $x$ and its shadow is $[0,4]$. The two are
+    different numbers, which is the most common slip.
+  \item \textbf{The inner limits are functions of the outer variable, read off where the slice
+    enters and leaves the region.} Entering and leaving happens on the \emph{same two curves} in
+    both panels --- there is only one pair of boundary curves here. What changes is which of
+    $x = y^2$ and $y = \sqrt{x}$ is the useful way to write the first of them.
+\end{itemize}
+
+The reason the algebra in the example above is not merely a relabelling is the second bullet: each
+boundary has to be re-solved for the new inner variable. A region whose boundary cannot be solved
+for one of the variables cannot be swapped at all without first splitting it, and that is the
+situation \cref{ex:change_of_variables_domain} runs into.
+\end{remark}
 
 \begin{example}[Surface parametrization and Fubini]
 \label{ex:surface_parametrization_integral}

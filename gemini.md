@@ -213,8 +213,9 @@ that file says what to do with it.
 
 ### Scope against the lecture notes
 
-**Enrich existing sections only** (2026-08-06, user). Topics the script covers and we have no
-section for do **not** get new sections:
+~~**Enrich existing sections only**~~ (Rule removed 2026-08-11 on the user's instruction). You are now permitted to add new sections for topics that the script covers but we do not.
+
+However, the following specific topics should still remain skipped unless explicitly requested otherwise:
 
 | Script | Why skipped |
 |---|---|
@@ -224,9 +225,6 @@ section for do **not** get new sections:
 | §15.4 Differentiability w.r.t. initial conditions | We already have the theorem in `appendix-a-odes.tex`. |
 | §14.4 A glimpse into differential forms | We are *ahead* of the script here. |
 
-These four stay skipped. The rule has been reversed **three** times, every time on the user's
-instruction — the completion of a metric space, the fundamental theorem of algebra via
-minimisation, and the Lebesgue digression below — so a reversal is the user's call, not yours.
 
 > **The Lebesgue digression (2026-08-11, user).** `content/19-jordan-measure/03-a-glimpse-of-lebesgue.tex`
 > is a section the script does not have and the course does not teach, added after the user asked

@@ -25,11 +25,9 @@ re-reading forty exam PDFs to rediscover that a problem was already considered a
 is a cost no `git log` entry can save you. It records *decisions about sources*, never how far the
 project has got. Do not let it drift into the second thing.
 
-**If you are here to mine exams, go straight to its *Where to mine next* section.** As of
-2026-08-11 the answer is `old_exams/august2025.pdf` (Kobel-Keller, and the only paper in the folder
-that is Analysis II alone and printed bilingually), then the three `Probeprfg` mock exams, two of
-which ship the solution keys that nothing mined so far has had. The whole `HS*`/`FS*` block is
-finished; every one of those 37 files has a recorded verdict, so re-reading them is wasted effort.
+**If you are here to mine exams, open it first and read its *Where to mine next* section.** That
+section names the next target and says why; it is deliberately not repeated here, because a
+priority copied into two files is a priority that will be right in one of them.
 
 Read this file plus the one covering what you are about to do. **Put each new rule in the file
 matching its lifetime** — a `main.tex` line number never belongs in `style.md`. Mixing them is what

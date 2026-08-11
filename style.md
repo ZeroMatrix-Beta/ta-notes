@@ -329,9 +329,11 @@ does not help and thin in the places it does.
     problem is *about*; the sheet number is provenance and belongs in the Info line. Do not
     reintroduce the prefix.
   - **Write the provenance as a full sentence** ending in a period: "This exercise is Problem 4.3
-    of Problem Sheet 4, Analysis II, Spring Semester 2026.", "This example is taken from the
-    August 2019 exam, Problem 2.", "This example follows the Wikipedia article on the Cantor
-    set." A bare "Sheet 4, Ex. 4.3." is the terse catalogue reference this replaced.
+    of Problem Sheet 4, Analysis II, Spring Semester 2026.", "This exercise is taken from the
+    Analysis I & II examination of 15 August 2019 (Prof. Peter S. Jossen), Part B, Problem 2.",
+    "This example follows the Wikipedia article on the Cantor set." A bare "Sheet 4, Ex. 4.3." is
+    the terse catalogue reference this replaced. (The exam example used to read "the August 2019
+    exam, Problem 2", which no longer models the lecturer rule two bullets below.)
   - ⚠️ **`\exinfo` is not an exercise-only macro — a mined `example` needs one too** (2026-08-11,
     on the user's instruction). When an old-exam problem is filed as a worked `example` rather
     than as an `exercise` — because it is too hard to set, or diverges from what the course

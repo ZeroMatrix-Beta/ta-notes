@@ -177,6 +177,86 @@ already used in chapters 19 and 20.
 | Aufgabe 18 (prove Fubini) | A "reproduce the lecture's proof" part; see the standing rejection at the foot of this file. |
 | Aufgabe 19 (prove the Hessian test) | Same category, and we are **ahead** of it: the exam assumes `f ∈ C³`, our `thm:hessian_test` assumes `C²`. |
 
+### The three `Probeprfg` papers: surveyed 2026-08-11, transcription in progress
+
+⚠️ **This section is the survey, written before the transcription so that it survives independently
+of it.** All three papers have been read end to end and every problem has a verdict below. If the
+accepted table for them is missing or shorter than the *take* list here, the pass was interrupted;
+pick it up from this list rather than re-reading the PDFs.
+
+**They are Analysis II papers, not Analysis I & II.** This is the surprise, and it is worth stating
+loudly because the warning at the top of this file says the opposite about the `HS*`/`FS*` block:
+all three are headed *Probeprüfung Analysis II*, so **the single-variable rejection rule does not
+apply to them** and nothing has to be filtered out.
+
+**None of the three names a lecturer**, on the paper or in the PDF metadata, so `\exinfo` cites
+them by date alone. Do not attribute them to Felder, or to anyone else, on the strength of the
+`fs2023/` folder name. What the papers do carry:
+
+| File | Printed heading | Compiled | Key |
+|---|---|---|---|
+| `fs2023/Probeprfg1.pdf` | *Probeprüfung Analysis II*, undated | 31 May 2023 | none |
+| `fs2023/2022/Probeprfg2.pdf` | *Probeprüfung Analysis II (17. August 2022, überarbeitet)* | 7 June 2023 | `Probeprfg2_Lsg.pdf` |
+| `fs2023/Probeprfg3.pdf` | *Probeprüfung Analysis II (31. Januar 2023)* | 7 June 2023 | `Probeprfg3_Lsg.pdf` |
+
+The two dated ones are real examination dates with a mock's label on them; `Probeprfg1` is the only
+one that looks written as a mock. All three share a fixed structure — four computations, four
+multiple-choice blocks, four theory problems — and the multiple-choice blocks are the richest part
+by a wide margin, because each is four sharply contrasted statements rather than a single drill.
+
+⚠️ **`Probeprfg2` Aufgabe 2 is `ex:11.1`, word for word**: the flux of $(x,y,z-x^2-y^2)$ through
+the upper unit hemisphere, which this document already carries from **Problem Sheet 11 of FS 2026**.
+A sheet problem set in 2026 is a mock-exam problem from 2022. Do not add it a second time, and read
+it as a warning that these papers and the official sheets share a pool.
+
+#### To take
+
+| Problem | Lands in | Why |
+|---|---|---|
+| **P1 A7** (submanifolds: open subsets, disjoint unions, products, transversal intersections) | ch. 17 | Products and transversality are both absent from the document. The disjoint-union part is false and needs a real counterexample. |
+| **P1 A8** (`ẋ = Ax`: exponential growth, constant solutions, bounded solutions under real vs complex diagonalisability) | `appendix-a-odes.tex` | Parts (c) and (d) differ only in *real* versus *complex* diagonalisable, and the verdicts differ. Nothing in the appendix touches boundedness or stability. |
+| **P1 A11** (`∫f · ∫1/f ≥ (b−a)²`) | ch. 2, `03-cauchy-schwarz` | One line from Cauchy--Schwarz with `g = √f`, `h = 1/√f`. The chapter has the integral inner product and no application of it this sharp. |
+| **P1 A12** (`∫_B ‖∇u‖² = ∫_∂B u ∂ₙu` for harmonic `u`, hence uniqueness) | ch. 23 | **Green's first identity**, which appears nowhere. It also discharges a forward promise made in the new `ex:differential_identities_true_false` solution in ch. 22. |
+| **P2 A1** (which `(s,t)` minimises `∫_B (x−s)²+(y−t)²`) | ch. 20 | The centroid minimises the second moment. Pairs with P3 A11. |
+| **P2 A5** (gradient fields: level sets, closed orbits, boundedness, outward-pointing gradient on a boundary) | ch. 22 | Part (b) is that **a gradient field has no closed orbits**, one line from `f(γ(1))−f(γ(0)) = ∫\|γ'\|² > 0`. Not in the document in any form. |
+| **P2 A6** (`Df` invertible everywhere: countable fibres, null sets, injective ⟹ diffeomorphism, surjective ⟹ diffeomorphism) | ch. 15 | (a) and (b) are both non-obvious and neither is stated anywhere; (d) is false and needs a two-ball counterexample. |
+| **P3 A6** (flux through spheres in `ℝ³∖{0}`: divergence-free ⟹ `I_r` constant, **not** zero) | ch. 23 | The exact structure behind Gauss's law, set as a four-way contrast. `x/\|x\|³` separates (a) from (b). |
+| **P3 A8** (which of four functions can solve a third-order constant-coefficient homogeneous ODE) | `appendix-a-odes.tex` | Runs the theory **backwards**, from a solution to the equation, by counting how many roots each function forces. The appendix only ever runs forwards. |
+| **P3 A11** (centroid: additivity over a disjoint decomposition; the triangle centroid is `(o+p+q)/3`) | ch. 20 | Centroids appear nowhere in the document. Part (a) is the additivity that makes them computable at all. |
+| **P3 A12** (`div(A⁻¹∘f∘A)(x) = div f(Ax)`) | ch. 22 | Three lines with the trace, and it says the divergence is coordinate-independent. Nothing states any invariance of the operators. |
+| **P3 A10(c)** (`f ≥ 0` Riemann-integrable with `∫_Q f = 0` ⟹ `f = 0` almost everywhere) | ch. 19 | The Riemann-integrable version, which needs null sets, unlike the continuous version rejected below from `FS17`. Parts (a) and (b) are already `ex:lebesgue_null_sets_properties`. |
+
+**Borderline, and deliberately left:** **P3 A5** (discrete subsets of a compact metric space; locally
+Lipschitz ⟹ Lipschitz; uniformly continuous ⟹ Lipschitz). Parts (a) and (b) are a good pair — an
+infinite discrete subset exists, a *closed* one cannot — but part (c) is already
+`ex:locally_lipschitz_is_lipschitz` and part (d) is `√x` on `[0,1]`. Take the (a)/(b) half if ch. 7
+ever wants it.
+
+#### Rejected from these three
+
+| Problem | Why |
+|---|---|
+| P1 A1 (for which `c` is the ellipsoid tangent to a plane, and where) | Tangency via parallel gradients. `13-lagrange` carries several of this shape, and the constrained-optimisation rejection at the foot of this file covers the family. |
+| P1 A2 (area enclosed by `γ(t) = (cos t, sin 2t)`) | `26-stokes/05-area-via-greens-formula` is a whole section of exactly this, with five exercises. |
+| P1 A3 (flux through a cone of revolution) | The field is divergence-free, which is the only idea, and `ex:radial_weight_flux_independent` and `ex:flux_truncated_paraboloid` already carry it. |
+| P1 A4, P2 A4, P3 A4 (second- and third-order constant-coefficient ODEs with an initial value problem) | Three variants of one computation. `ex:three_linear_odes`, `ex:ode_inhomogeneous` and `ex:third_order_linear_ode` cover it, and the last already does the double-root resonance trick that P2 A4 turns on. |
+| P1 A5 (complete metric spaces: four implications) | `ex:completeness_not_topological`, `ex:kobel_compactness_characterisation` and `rem:boundedness_not_topological` cover all four. |
+| P1 A6 (partial derivatives, directional derivatives, `C¹`, differentiability) | The regularity ladder, which chapters 9 and 10 carry five times over, most recently as `ex:regularity_ladder_xy2`. |
+| P1 A9 (continuous image of a compact set; continuity on a compact set is uniform) | Reproduce-the-lecture; both are in `07-compactness`. |
+| P1 A10 (potential ⟹ conservative; integrability conditions; an example satisfying them without a potential) | Part (c) is `ex:vortex_field_not_conservative`. ⚠️ Its wording asks for a **conservative** field with no potential, which as the same problem defines the words is a contradiction; read as printed it is an error in the source. |
+| P2 A2 (flux through the upper hemisphere) | **Identical to `ex:11.1`.** See the warning above. |
+| P2 A3, P3 A3 (curl and a line integral around a triangle / a circle in a slanted plane) | Two more Stokes computations. `26-stokes` has the Serra ones, and `FS19` B5 and `FS20` B4 were rejected for the same reason. |
+| P2 A7 (circles `γ_{r,z}` in `ℝ³` minus the `z`-axis) | Its one distinctive part, that a curl-free field has the same circulation on all of them, is the homotopy invariance `ex:jossen_potential_on_disconnected_domain` and `ex:two_fields_two_circles` already set up. Weaker than P3 A6, which is kept. |
+| P2 A8 (a bound swap on `{x² ≤ y ≤ 1}`, plus the layer-cake formula) | `ex:change_order_integration` and `ex:kobel_layer_cake` respectively, the latter mined a day earlier. |
+| P2 A9, P2 A10 (state and prove Banach; define differentiability and prove `C¹` ⟹ differentiable) | Reproduce-the-lecture, and `06-completeness/03` and `10-chain-rule/03` prove both. |
+| P2 A11 (`∫_B det(Df)` as a boundary integral) | `ex:curl_identity_greens_formula`, the whole of Problem 3 of the 21 August 2024 exam, is this identity with more parts. |
+| P2 A12 (Young's inequality, then Hölder) | `ex:1.4` in `01-prerequisites/02-youngs-inequality.tex`. |
+| P3 A1 (Jacobian of elliptic coordinates; polar moment of inertia of an ellipse) | `ex:volume_ellipse` and `ex:gaussian_second_moment_polar` are the same substitution and the same integral. |
+| P3 A2 (`∫₀^{√π}∫_x^{√π} sin(y²)\,dy\,dx`) | The un-doable-as-written bound swap, which is `ex:ai_order_swap_gaussian` with `e^{y²}` instead. |
+| P3 A7 (level set of `F` with `∇F(x) ≠ 0`: submanifold globally or only locally, orthogonality, Lagrange) | Its one trap, global versus local, is what the new `ex:level_set_of_a_wide_jacobian` turns on, and `prop:gradient_orthogonality_level_sets` and `prop:constrained_optimization` state the other two. |
+| P3 A9 (`C_b(X)` with the supremum norm is complete) | Reproduce-the-lecture; `06-completeness` proves it. |
+| P3 A10(a), (b) (define null sets; a countable union of null sets is null) | `ex:lebesgue_null_sets_properties`, mined from `HS20`. Only part (c) is new. |
+
 ### 2. The three `Probeprfg` mock exams, two of which ship solution keys
 
 None of these is cited in `content/`, and **the keys are the point**: of the papers mined on

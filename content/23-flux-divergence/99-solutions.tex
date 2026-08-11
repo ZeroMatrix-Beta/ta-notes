@@ -364,5 +364,114 @@ that form.
 \end{remark}
 \end{exercisesolution}
 
+\begin{exercisesolution}[Proof of \cref{ex:green_first_identity_harmonic}]
+% Generator: Claude Opus 5 (High) --- the statement is the examiner's; the proof and the closing
+% remark are written for these notes. Probeprfg1 ships no solution key.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Apply \cref{thm:gauss_divergence} to the vector field $F := u\nabla u$, which is $C^1$ on
+    $U$ because $u$ is $C^2$. Its divergence is computed by the product rule,
+    \[\divg(u\nabla u) = \langle\nabla u,\nabla u\rangle + u\,\divg(\nabla u)
+      = \lvert\nabla u\rvert^2 + u\,\Delta u = \lvert\nabla u\rvert^2 ,\]
+    the last step because $u$ is harmonic. On the boundary,
+    $\langle F,\nu\rangle = u\,\langle\nabla u,\nu\rangle = u\,\partial_\nu u$. The divergence
+    theorem therefore reads
+    \[\int_B \lvert\nabla u\rvert^2 \,d\vol_3 = \int_B \divg F\,d\vol_3
+      = \int_{\partial B}\langle F,\nu\rangle\,d\vol_2
+      = \int_{\partial B} u\,\partial_\nu u \,d\vol_2 .\]
+  \item Either hypothesis makes the integrand $u\,\partial_\nu u$ vanish identically on
+    $\partial B$, so part \textbf{(a)} gives
+    \[\int_B \lvert\nabla u\rvert^2 \,d\vol_3 = 0 .\]
+    The integrand is continuous and non-negative, so it vanishes identically on $B$: if
+    $\lvert\nabla u(p)\rvert^2 = c > 0$ at some $p$ in the interior, continuity would give a ball
+    $B_r(p) \subseteq B$ on which the integrand exceeds $c/2$, forcing the integral to be at
+    least $\tfrac{c}{2}\vol_3(B_r(p)) > 0$; and the boundary contributes nothing to a volume
+    integral. Hence $\nabla u \equiv 0$ on $B$.
+
+    A function with vanishing gradient on a connected set is constant there. Concretely, join two
+    points $p,q$ of $B$ by a $C^1$ path $\gamma$ inside $B$ and differentiate along it
+    (\cref{sec:chain_rule_along_path}):
+    \[u(q) - u(p) = \int_0^1 \frac{d}{dt}u(\gamma(t))\,dt
+      = \int_0^1 \big\langle \nabla u(\gamma(t)),\ \gamma'(t)\big\rangle\,dt = 0 .\]
+\end{enumerate}
+
+\begin{remark}[What this buys: uniqueness for the two boundary value problems]
+Read the two hypotheses of part \textbf{(b)} as data prescribed on $\partial B$ and the statement
+becomes a uniqueness theorem. Suppose $u_1$ and $u_2$ are harmonic on $U$ and agree on
+$\partial B$. Their difference $u := u_1 - u_2$ is harmonic with $u|_{\partial B} = 0$, so
+\textbf{(b)} makes it constant, and the constant is $0$ because it vanishes on the boundary:
+\emph{a harmonic function is determined on $B$ by its boundary values}. That is uniqueness for
+the Dirichlet problem. The second hypothesis gives the same for the Neumann problem, where the
+normal derivative is prescribed instead, except that there the conclusion is weaker by exactly
+one constant, and necessarily so, since adding a constant changes neither $\Delta u$ nor
+$\partial_\nu u$.
+
+The mechanism is worth naming. Part \textbf{(a)} is \newterm{Green's first identity}, and it is
+integration by parts: the product rule for $\divg(u\nabla u)$, which is
+\cref{ex:differential_identities_true_false}\textbf{(d)}, trades a derivative from one factor to
+the other at the cost of a boundary term. The harmonicity is what kills the term that would
+otherwise survive, and the sign is what makes the argument work at all --- $\lvert\nabla
+u\rvert^2$ has one sign, so a vanishing integral forces a vanishing integrand, which no
+indefinite quantity would allow.
+\end{remark}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:flux_through_nested_spheres}]
+% Generator: Claude Opus 5 (High) --- the four statements are the examiner's; the working is
+% written for these notes. Verdicts checked afterwards against Probeprfg3_Lsg.pdf.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{False}, and the counterexample is the one field this situation was invented for.
+    Take the inverse-square field
+    \[f(x) := \frac{x}{\lvert x\rvert^3}, \qquad x \in U .\]
+    It is divergence free on $U$:
+    \[\divg f = \sum_i \partial_i\big(x_i\lvert x\rvert^{-3}\big)
+      = \sum_i\Big(\lvert x\rvert^{-3} - 3x_i^2\lvert x\rvert^{-5}\Big)
+      = 3\lvert x\rvert^{-3} - 3\lvert x\rvert^{-3} = 0 .\]
+    But on $\partial B_r(0)$ the outward normal is $\nu = x/r$, so
+    $\langle f,\nu\rangle = \lvert x\rvert^2/r^4 = 1/r^2$, a constant, and
+    \[I_r = \frac{1}{r^2}\vol_2\big(\partial B_r(0)\big) = \frac{4\pi r^2}{r^2} = 4\pi \neq 0 .\]
+  \item \textbf{True}, and note that the field above already illustrates it: $I_r = 4\pi$ for
+    every $r$. In general, fix $0 < r_1 < r_2$ and integrate over the shell
+    $A := \{x \mid r_1 \leq \lvert x\rvert \leq r_2\}$, which is a compact smoothly bounded region
+    contained in $U$ --- this is the step the puncture at the origin does not obstruct, and it is
+    why the hypothesis is enough. Its boundary is the two spheres, and the outward normal of $A$
+    on the inner one is $-\nu$, pointing towards the origin. So \cref{thm:gauss_divergence} gives
+    \[0 = \int_A \divg f\,d\vol_3 = I_{r_2} - I_{r_1} .\]
+  \item \textbf{False.} Take $f(x) := x$, which has $\curl f = 0$ since it is the gradient of
+    $\lvert x\rvert^2/2$. Here $\langle f,\nu\rangle = \langle x, x/r\rangle = r$ on
+    $\partial B_r(0)$, so
+    \[I_r = r\cdot 4\pi r^2 = 4\pi r^3 ,\]
+    which depends on $r$ as much as anything could. Being curl free constrains circulation, not
+    flux, and the two conditions answer different questions.
+  \item \textbf{True.} By \cref{ex:curl_grad_div_curl_zero} the field $\curl g$ is divergence
+    free, so part \textbf{(b)} already makes $I_r$ independent of $r$ --- but that alone does not
+    give the value $0$, as part \textbf{(a)} shows, and it cannot be obtained by letting
+    $r \to 0$, since $g$ need not extend across the origin. What settles it is that a sphere has
+    no boundary. Cut $\partial B_r(0)$ along its equator $C$ into the upper and lower caps
+    $S^{\pm}$. Applying \cref{thm:stokes_classical} to each,
+    \[\int_{S^+}\langle\curl g,\nu\rangle\,d\vol_2 = \oint_{C} g\cdot d\gamma,
+      \qquad
+      \int_{S^-}\langle\curl g,\nu\rangle\,d\vol_2 = -\oint_{C} g\cdot d\gamma,\]
+    the sign differing because the outward normal orients the equator oppositely as the boundary
+    of the two caps. Adding them gives $I_r = 0$.
+\end{enumerate}
+
+\begin{remark}[Divergence free is weaker than being a curl, and this is what measures the gap]
+Parts \textbf{(a)}, \textbf{(b)} and \textbf{(d)} together say something sharper than any of them
+says alone. On $U = \mathbb{R}^3\setminus\{0\}$ every divergence-free field has a flux
+independent of $r$, every field of the form $\curl g$ has that constant equal to zero, and the
+inverse-square field has it equal to $4\pi$. Therefore
+\[\frac{x}{\lvert x\rvert^3} \text{ is divergence free on } U
+  \quad\text{but is \emph{not} } \curl g \text{ for any } g \text{ on } U .\]
+The number $4\pi$ is an obstruction, and it is detecting the hole: on a ball, or on any
+star-shaped domain, no such field exists and every divergence-free field is a curl. That is the
+degree-two case of the Poincar\'e lemma (\cref{thm:poincare_lemma}), whose degree-one case
+\cref{ex:vortex_field_not_conservative} exhibits with the same domain punctured along a line
+instead of a point.
+
+In physics the same computation is Gauss's law, and $4\pi$ is why the charge enclosed can be read
+off a flux at any radius whatever.
+\end{remark}
+\end{exercisesolution}
+
 
 

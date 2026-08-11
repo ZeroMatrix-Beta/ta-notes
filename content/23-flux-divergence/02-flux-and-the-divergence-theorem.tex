@@ -548,3 +548,57 @@ bounded $C^1$ domain, with $C$ the area of its boundary.
 added here.}
 \end{example}
 
+% Source: old_exams/fs2023/Probeprfg1.pdf (Probeprüfung Analysis II, undated), Aufgabe 12, p. 3
+% Extractor: Claude Opus 5 (High)
+% The paper names no lecturer; see old-exam-mining.md, which says so of all three Probeprfg papers
+% and warns against attributing them from the folder name.
+% This is Green's first identity, which appears nowhere else in the document, and it discharges the
+% forward promise made in the solution to ex:differential_identities_true_false in ch. 22: that
+% div(u grad u) = |grad u|^2 + u Laplacian u becomes integration by parts once the divergence
+% theorem is applied to it. The words "harmonic" and "Laplacian" are introduced in the statement,
+% since the exam uses them and nothing earlier in this document does.
+\begin{exercise}[Green's first identity, and what vanishing data forces]
+\label{ex:green_first_identity_harmonic}
+Recall that the \newterm{Laplacian} \germanfor{Laplace-Operator} of a $C^2$ function $u$ is
+$\Delta u := \divg(\nabla u) = \sum_{i}\partial_i^2 u$, and that $u$ is called
+\newterm{harmonic} \germanfor{harmonisch} if $\Delta u = 0$.
+
+Let $U \subseteq \mathbb{R}^3$ be open, let $B \subset U$ be a compact, connected, smoothly
+bounded region with outward unit normal field $\nu : \partial B \to \mathbb{R}^3$, and let
+$u : U \to \mathbb{R}$ be harmonic. Write $\partial_\nu u := \langle\nabla u,\nu\rangle$ for the
+\newterm{outward normal derivative} \germanfor{Aussennormalableitung} of $u$ on $\partial B$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Show that
+    \[\int_B \lvert\nabla u\rvert^2 \,d\vol_3 = \int_{\partial B} u\,\partial_\nu u \,d\vol_2 .\]
+  \item Deduce that $u$ is constant on $B$ if either $u|_{\partial B} = 0$ or
+    $\partial_\nu u = 0$.
+\end{enumerate}
+\exinfo{This exercise is taken from the mock examination \emph{Probepr\"ufung Analysis II}
+(undated) in \texttt{old\_exams/fs2023/}, Problem 12. That paper names no lecturer.}
+\end{exercise}
+
+% Source: old_exams/fs2023/Probeprfg3.pdf (Probeprüfung Analysis II, 31 January 2023),
+% Aufgabe 6, p. 2
+% Extractor: Claude Opus 5 (High)
+% The paper names no lecturer; see old-exam-mining.md.
+% This is the structure behind Gauss's law set as a four-way contrast, and the pair (a)/(b) is the
+% whole point: on a domain with a hole, divergence-free buys independence of r and not vanishing.
+% The document has several flux computations of this shape but nothing that separates the two.
+% The exam writes rot; rendered as \curl per the declared-macro rule in style.md.
+\begin{exercise}[True or False \textnormal{(fluxes through a family of spheres)}]
+\label{ex:flux_through_nested_spheres}
+Let $U := \mathbb{R}^3\setminus\{0\}$, let $f : U \to \mathbb{R}^3$ be a continuously
+differentiable vector field, and for $r > 0$ write
+\[I_r := \int_{\partial B_r(0)}\langle f,\nu\rangle\,d\vol_2\]
+for the flux through the sphere of radius $r$ with respect to the outward normal. Decide whether
+each of the following is true or false, with justification.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item If $f$ is divergence free, then $I_r = 0$ for every $r > 0$.
+  \item If $f$ is divergence free, then $I_r$ does not depend on $r$.
+  \item If $f$ is curl free, then $I_r$ does not depend on $r$.
+  \item If $f = \curl g$ for some vector field $g$, then $I_r = 0$ for every $r > 0$.
+\end{enumerate}
+\exinfo{This exercise is taken from the mock examination \emph{Probepr\"ufung Analysis II} of
+31 January 2023, Problem 6. That paper names no lecturer.}
+\end{exercise}
+

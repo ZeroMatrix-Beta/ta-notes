@@ -74,6 +74,39 @@ where a passage came from is worth having before you rewrite it:
 | `% Generator:`, `% Transition:`, `ai*` environments, TikZ figures, editorial `ainote`s | this document's own content |
 | `% Correction:` | a later model fixed a mathematical or provenance error in one of the above |
 | `% Originally:` | which week-chapter the file sat in before the topic restructure |
+| `% Feedback:` | **an outside reviewer said this passage works.** Leave it alone unless you have a reason better than tidiness |
+
+**`% Feedback:` marks what not to touch, and that is a different job from the markers above.**
+Added 2026-08-11, when the user had Gemini 3.1 Pro review the whole document (`feedback/`, nine
+files, committed) and asked that its *praise* be recorded at the passages it praised. Every other
+marker in the table answers "where did this come from"; this one answers "has anyone read this and
+liked it".
+
+It exists because the failure mode it prevents is invisible. A later pass that shortens a proof,
+folds a remark into the body, or replaces a figure with a tidier one leaves no trace that something
+of value was removed — the diff looks like ordinary editing, and the reviewer who valued the passage
+is not in the room. Roughly twenty-five of these were placed in the first pass, mostly on remarks
+that pre-empt a specific student misconception and on figures that took several attempts to get
+right.
+
+Three rules for writing one:
+
+* **Say what was praised and why, not that praise happened.** `% Feedback: Gemini 3.1 Pro
+  (2026-08-11) --- the asymmetry sentences were singled out as pre-empting the commonest
+  misconception here. Keep them.` A bare "Gemini liked this" is noise.
+* **Only where the passage was right.** Where a review found a *defect*, fix the defect and mark it
+  `% Correction:` — do not leave a `% Feedback:` describing a problem. Where a review is simply
+  wrong, do nothing and say so in your reply to the user.
+* **It is not a veto.** A `% Feedback:` comment is evidence that a passage earned its place, not a
+  permission gate. If you have a mathematical reason to change it, change it and say why in the
+  commit — the same authority the fidelity section grants everywhere else.
+
+⚠️ **The reviewer's line numbers and file paths are not to be trusted.** Of the batch-3 citations,
+`18-geodesics/01-length-of-a-curve.tex`, `20-improper-integrals/`, `21-integration-on-submanifolds/`
+and `22-vector-calculus/03-potentials-and-conservative-fields.tex` name no file in this repository,
+and the label `rem:curve_reparametrization_not_equivalent` does not exist. Batch 1's line numbers,
+by contrast, were exact. **Locate every passage by searching for its text, never by opening the
+cited line.**
 
 **`% Extractor:` versus `% Generator:` — the line is authorship, not effort.** Added 2026-08-10,
 after a pass mined twelve old-exam problems and marked every *statement* `% Generator: Gemini 3.6
@@ -198,6 +231,8 @@ that file says what to do with it.
 | `lec_notes.pdf` (project root) | **The official lecture notes**, and the file to cite. 239 pp, dated 27 July 2026. The authority our theorems and notation are **checked against** — not a blueprint to transcribe. Its chapters run **9–15**, continuing the Analysis I numbering. |
 | `exercises/ExN_Analysis2_eng.pdf` | The official problem sheets — quoted verbatim, never paraphrased. |
 | `exercises/SolN_Analysis2_eng.pdf` | Official solutions, used only to **check** a solution you derived first. |
+| `feedback/` | **Gemini 3.1 Pro's review of the whole document**, committed 2026-08-11: three feedback batches, three exam-extraction lists, one script-extraction list, two brainstorming files. Bilingual, English first. Treat it as a *proposal* register, not an instruction list — its praise is recorded in the source as `% Feedback:` comments, its defects were fixed, and its file paths and labels need checking before use (see above). |
+| `exercises_2024/` | **The FS 2024 edition of this same course** (401-1262-07L, Prof. Joaquim Serra; sheets written by Federico Franceschini). Thirteen problem sheets with full official solutions in English and German, a mock exam with a key, and `exam1.pdf`, which is the 21 August 2024 paper already in `old_exams/` as `examFS24.pdf`. Recorded in `old-exam-mining.md`. |
 | `old_exams/` | Past exams, gitignored like the rest of the PDFs. ⚠️ **The naming misleads:** `examHS24.pdf` is the exam **of 13 February 2025**, `examFS24.pdf` is **21 August 2024** (both Serra); `WS22_Prüfung.pdf` is **24 January 2022** and `fs2023/Prüfung.pdf` is **9 August 2021** (both Felder, Analysis I & II). An `HSnn.pdf` is sat in the January **after** `nn` (`HS19.pdf` is 22 January 2020). Always cite the date, not the file name. **Read `old-exam-mining.md` before opening any of these** — it says which are done, which are rejected forever, and which to mine next. |
 
 * **`Analysis_II_Script_v1.pdf` is `lec_notes.pdf` under its old name** (confirmed by the user).

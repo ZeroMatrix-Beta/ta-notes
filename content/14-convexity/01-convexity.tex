@@ -49,6 +49,9 @@ $t \in [0,1]$,
 \end{tikzpicture}
 \end{center}
 
+% Feedback: Gemini 3.1 Pro (2026-08-11) --- noted as filling a gap the tutor left implicit: the
+% convexity characterisations below quantify over semidefiniteness, which was used and never
+% defined. Do not fold this back into the proposition that uses it.
 \begin{definition}[Semidefinite matrices]
 \label{def:semidefinite_matrix}
 Let $A \in \mathbb{R}^{n\times n}$ be symmetric. Then $A$ is
@@ -258,6 +261,9 @@ the first time.
 % Generator: Claude Opus 5 (High) --- part \textbf{(c)} of the exercise above says a critical
 % point of a convex function is a global minimum. It is worth pairing that with the fact that
 % convexity does not produce a critical point in the first place.
+% Feedback: Gemini 3.1 Pro (2026-08-11) --- singled out for clearing up a very common
+% misconception: convex plus bounded below does not give a minimum, because compactness is
+% missing. Keep it next to the characterisation it qualifies.
 \begin{example}[Convex, bounded below, and yet no minimum]
 \label{ex:convex_function_unattained_infimum}
 \Cref{ex:convexity_characterizations}\textbf{(c)} guarantees that \emph{if} a convex function has

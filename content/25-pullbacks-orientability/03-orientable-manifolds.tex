@@ -67,6 +67,10 @@ shared point disagree in handedness.
 %     standard basis by definition, and the handedness mismatch appears only in the images.
 %     They are now labelled as the domains, so the repetition reads as the point rather than
 %     as an oversight.
+% Feedback: Gemini 3.1 Pro (2026-08-11) --- called exceptional: two overlapping parametrizations
+% whose frames disagree in handedness, tied straight to the non-orientability of the Möbius
+% strip. Keep the frames disagreeing; the earlier version, a pure 180-degree rotation, drew the
+% case an orientable atlas ALLOWS, and that regression is what the arithmetic above guards.
 \begin{center}
 \begin{tikzpicture}[>=Latex, scale=1.0]
   \draw[green!50!black, thick] (0,0) .. controls (1.5,0.9) and (3.5,0.6) .. (5,1.2)

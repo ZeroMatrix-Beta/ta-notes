@@ -217,25 +217,14 @@ By \cref{prop:work_difference_potential}, the work along $\gamma$ is path-indepe
 Notice that the equation of the curve $x^4 - 6xy^3 = 4y^2$ was irrelevant, as long as it connects the two endpoints!
 \end{example}
 
-% Supplement: Analysis_II_Script_v1.pdf, p. 156
-\begin{exercise}[Which $\alpha$ makes this field conservative?]
-\label{ex:find_alpha_conservative}
-For which $\alpha \in \mathbb{R}$ is the vector field
-$F(x,y) := (\alpha xe^y,\ (y+1+x^2)e^y)\transp$ conservative? Find a potential for that value of
-$\alpha$.
-\end{exercise}
-
-\begin{exercisesolution}[Proof of \cref{ex:find_alpha_conservative}]
-% Generator: Claude Sonnet 5 (High)
-By \cref{lem:integrability_conditions}, a necessary condition is
-$\partial_yF_1 = \partial_xF_2$, i.e.\ $\alpha xe^y = 2xe^y$ for all $(x,y)$, forcing
-$\alpha = 2$. (This is also sufficient, since $F$ is $C^1$ on all of $\mathbb{R}^2$, which is
-simply connected, so a potential exists.) With $\alpha=2$,
-$F(x,y) = (2xe^y,\ (y+1+x^2)e^y)\transp$; integrating $\partial_xf=2xe^y$ gives
-$f(x,y) = x^2e^y+c(y)$, and matching $\partial_yf = x^2e^y+c'(y)$ against
-$F_2=(x^2+y+1)e^y$ gives $c'(y)=(y+1)e^y$, so $c(y) = ye^y$ (check:
-$\tfrac{d}{dy}(ye^y)=e^y+ye^y=(y+1)e^y$). A potential is $f(x,y) = x^2e^y+ye^y$.
-\end{exercisesolution}
+% Correction: Claude Opus 5 (High) --- an exercise "Which $\alpha$ makes this field conservative?"
+% (\label{ex:find_alpha_conservative}, cited to Analysis_II_Script_v1.pdf, p. 156) stood here with
+% an inline solution. It is Problem 12.5 of Problem Sheet 12 verbatim, up to renaming $\lambda$ to
+% $\alpha$, and that problem is already transcribed as \cref{ex:12.5} in
+% 05-area-via-greens-formula.tex, where appendix-d-problem-sheets.tex indexes it and where its
+% solution is checked against Sol12_Analysis2_eng.pdf. So the chapter was asking one question
+% twice and answering it twice. Duplicate found by Gemini 3.1 Pro (2026-08-11); the sheet copy is
+% the one kept, on its recommendation and because the appendix already points at it.
 
 % Supplement: Analysis_II_Script_v1.pdf, p. 164
 \begin{exercise}[Choosing parameters for an irrotational field]

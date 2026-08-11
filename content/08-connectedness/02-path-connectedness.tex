@@ -194,6 +194,9 @@ first coordinate vanishes is the origin. This contradicts $\gamma([0,1]) \subset
 such path exists.
 \end{proof}
 
+% Feedback: Gemini 3.1 Pro (2026-08-11) --- flagged as a genuine proof gap correctly closed: the
+% $a_n$ have to be produced on shrinking intervals $[0,a_{n-1}]$ or they need not tend to $0$.
+% Do not quietly drop this note; it is what records the divergence from Corsin's PDF.
 \begin{ainote}
 Corsin's argument produces the $a_n$ from the intermediate value theorem and then asserts
 $a_n \to 0$. That does not follow from the choice as stated. The intermediate value theorem
@@ -278,6 +281,9 @@ Taking $\gamma_1$ constant gives the usual informal phrasing, that every loop in
 continuously shrunk to a point inside $U$.
 \end{remark}
 
+% Feedback: Gemini 3.1 Pro (2026-08-11) --- singled out as the clearest summary in the chapter,
+% ordering the three notions with a witness for each failure. Keep both the chain and the two
+% closing warnings; the dimension warning is the part readers get wrong.
 \begin{importantremark}[Three notions, and how they are ordered]
 \label{rem:three_connectedness_notions}
 For an \emph{open} subset of $\mathbb{R}^n$ the three properties are strictly ordered, each
@@ -347,6 +353,17 @@ its graph
 is a connected subset of $\mathbb{R}^n \times \mathbb{R}^m$.
 \exinfo{This exercise is Problem 4.2 of Problem Sheet 4, Analysis II, Spring Semester 2026.}
 \end{exercise}
+
+% Generator: Claude Opus 5 (High), prompted by Gemini 3.1 Pro's note of 2026-08-11 that the sheet's
+% $C^1$ hypothesis is never used and a reader may well look for where it is.
+\begin{ainote}
+The hypothesis $f \in C^1$ is the sheet's, and it is far stronger than the statement needs:
+continuity of $f$ is enough, and differentiability plays no part in the argument. The graph map
+$x \mapsto (x,f(x))$ is continuous precisely when $f$ is, and connectedness is preserved by
+continuous maps (\cref{thm:continuity_preserves_connected}). \Cref{ex:ai_connected_image}\textbf{(b)}
+is the same statement under the weaker hypothesis. Do not go looking for the place where
+$C^1$ is used; there is none.
+\end{ainote}
 
 % Source: old_exams/WS22_Prüfung.pdf (24 January 2022), Teil A, Frage 7, p. 8
 % Extractor: Claude Opus 5 (High)

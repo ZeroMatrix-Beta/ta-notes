@@ -19,6 +19,9 @@ is a $C^k$-\newterm{diffeomorphism} \germanfor{Diffeomorphismus} and
 % Was an ainote until 2026-08-09. It is mathematics by Test 1 in style.md (it would be written
 % this way from scratch, with no source PDF in the room), so the attribution to Lukas belongs
 % in this comment and the geometry belongs in a remark.
+% Feedback: Gemini 3.1 Pro (2026-08-11) --- praised for making the hypothesis tangible through
+% 1D intuition (reflection across $y=x$, the horizontal tangent flipping vertical) before any
+% $n$-dimensional statement. Keep the $x^3$ opening.
 \begin{remark}[Why invertibility of $Df_{x_0}$ is the right hypothesis]
 \label{rem:inverse_function_theorem_intuition}
 In one variable, consider $f : \mathbb{R} \to \mathbb{R}$, $x \mapsto x^3$. The inverse $f^{-1}(y) = y^{1/3}$ exists everywhere, yet it fails to be differentiable at $y = 0$. Geometrically, the graph of $f^{-1}$ is obtained by reflecting the graph of $f$ across the line $y = x$. The horizontal tangent line of $f$ at $x = 0$ (where $f'(0) = 0$) flips into a vertical tangent line for $f^{-1}$ at $y = 0$, causing the derivative of the inverse to blow up.
@@ -164,6 +167,10 @@ The most important examples of diffeomorphisms are transformations between coord
 % Sonnet 5 (Medium) --- FIG-W06-02, drawn from the page image seen while transcribing.
 % Moved up from below FIG-W06-03 on 2026-08-09: this is the sketch that illustrates A2
 % directly, and the prose under FIG-W06-03 calls that one the "second" sketch.
+% Feedback: Gemini 3.1 Pro (2026-08-11) --- this sketch and FIG-W06-03 together, with the prose
+% between them, were called the highlight of the chapter for separating the failure modes
+% (locally invertible but not globally; injective but not a diffeomorphism). Keep both figures
+% and the discussion between them; either alone loses the contrast.
 \begin{center}
 \begin{tikzpicture}[>=Latex, scale=1.1]
   \draw[->] (-0.3,0) -- (7.3,0) node[right, font=\small] {$x$};

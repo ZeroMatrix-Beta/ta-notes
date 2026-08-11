@@ -197,6 +197,40 @@ that file says what to do with it.
   is on disk, including another session's in-flight edits. **Stage only the paths you touched**, and
   read `git status --short` before every commit.
 
+## LABELS — descriptive slugs, never the source's numbering
+
+**Added 2026-08-11 on the user's instruction**, and placed here rather than in `style.md` at their
+request, because it governs every file and is the kind of thing a pass gets wrong on its first
+block. `style.md` states the same rule among the notation conventions; `build-and-preamble.md`
+used to state the opposite and has been corrected.
+
+**Every `\label` is a descriptive, human-readable slug**, whatever the source called the thing:
+
+```latex
+\label{ex:jordan_null_products}          % GOOD
+\label{ex:path_concatenation_work}       % GOOD
+\label{ex:8.1}                           % BAD, even though the sheet calls it 8.1
+\label{prop:17.d.4}                      % BAD
+```
+
+**The reason is that `\cref` prints our number, not theirs.** `\cref{ex:8.1}` typesets *Exercise
+19.a.12* — so a label that reads `8.1` promises a number the document never shows, and the next
+editor has to open the file to find out which is which. A slug promises nothing and says what the
+exercise is about.
+
+Two corollaries:
+
+* **Make the slug specific enough to survive its neighbours.** A chapter with several Jordan
+  measure exercises cannot afford `ex:jordan_measure_1`; say which property is being proved. The
+  same goes for the `[...]` **title**, which is what a reader skimming the printed page sees.
+* **Keep the source's number where it identifies the source**, never as the label: it belongs in
+  the `\exinfo` sentence, in the `% Source:` comment, and in the sheet inventory in
+  `content/appendix-d-problem-sheets.tex`. Those name a part of *their* document and must stay
+  verifiable. If the original notes carried a label, put it in a `%` comment above the new one.
+
+⚠️ Roughly sixty `ex:N.M` labels predate this rule and are still in the tree. They are being swept
+to descriptive slugs; **do not add more, and do not treat their presence as permission**.
+
 ## THE SOURCES
 
 * **Corsin Nick is the blueprint.** His notes define which results appear and how they are proved.

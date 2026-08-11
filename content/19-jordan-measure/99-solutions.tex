@@ -371,6 +371,49 @@ several-variable arguments, the improper Riemann integral for conditionally conv
 \end{remark}
 \end{exercisesolution}
 
+\begin{exercisesolution}[Solution of \cref{ex:jordan_null_products}]
+% Generator: Claude Opus 5 (High)
+Throughout, unwind the definition in \cref{rem:lebesgue_vs_jordan_null}: $X$ is Jordan null means
+that for every $\varepsilon > 0$ there are \emph{finitely many} intervals
+$I_1,\dots,I_N \subset \mathbb{R}$ with
+\[X \subseteq \bigcup_{k=1}^N I_k \qquad\text{and}\qquad \sum_{k=1}^N \lvert I_k\rvert < \varepsilon.\]
+Both parts are proved by covering the product with the products of such a cover; what differs is
+only how the total area is estimated.
+
+\textbf{(a)} Let $\varepsilon > 0$ and put $\delta := \sqrt{\varepsilon}$. Choose intervals
+$I_1,\dots,I_N$ covering $X$ with $\sum_k\lvert I_k\rvert < \delta$. Then
+\[X \times X \ \subseteq\ \bigcup_{j=1}^N\bigcup_{k=1}^N I_j \times I_k,\]
+a cover by $N^2$ rectangles --- still finitely many. Their total area factorises:
+\[\sum_{j=1}^N\sum_{k=1}^N \lvert I_j\rvert\,\lvert I_k\rvert
+  \ =\ \left(\sum_{j=1}^N \lvert I_j\rvert\right)\!\left(\sum_{k=1}^N \lvert I_k\rvert\right)
+  \ <\ \delta^2 = \varepsilon .\]
+Since $\varepsilon$ was arbitrary, $X\times X$ is Jordan null.
+
+\textbf{(b)} Let $\varepsilon > 0$ and choose $I_1,\dots,I_N$ covering $X$ with
+$\sum_k\lvert I_k\rvert < \varepsilon$ --- no square root this time. Then
+\[X \times [0,1] \ \subseteq\ \bigcup_{k=1}^N I_k \times [0,1],\]
+again a finite cover by rectangles, of total area
+\[\sum_{k=1}^N \lvert I_k\rvert \cdot 1 \ =\ \sum_{k=1}^N\lvert I_k\rvert \ <\ \varepsilon .\]
+\begin{remark}[Where the two parts differ, and what the difference is telling you]
+\label{rem:jordan_null_products}
+The two estimates are $\delta^2$ and $\delta\cdot1$, and the exponent is the whole story: the
+first factor's total length enters \emph{linearly} in both, while the second factor contributes
+its own total size as a multiplier.
+
+That is why \textbf{(b)} works with a factor that is emphatically \emph{not} null. Being null in
+$\mathbb{R}$ is not required of $[0,1]$; being \emph{bounded} is, and that is all. The same proof
+gives $X \times B$ Jordan null for any bounded $B \subseteq \mathbb{R}$, with the total area
+bounded by $\varepsilon \cdot \operatorname{diam}(B)$.
+
+Drop boundedness and the statement fails: $X \times \mathbb{R}$ is not Jordan null for any
+non-empty $X$, and not for the interesting reason. Jordan null sets are bounded by definition
+(a finite cover by intervals is bounded), so $X \times \mathbb{R}$ is disqualified before any
+area is computed. Compare \cref{rem:lebesgue_vs_jordan_null}: the Lebesgue notion, allowing
+countable covers, does call $\{0\}\times\mathbb{R}$ null, and this is one of the cleanest places
+to see the two notions come apart.
+\end{remark}
+\end{exercisesolution}
+
 \begin{exercisesolution}[Solution of \cref{ex:kobel_ball_minus_lattice}]
 % Generator: Claude Opus 5 (High)
 Two facts do all the work: $M$ is Jordan measurable, and $f$ is continuous and bounded. The

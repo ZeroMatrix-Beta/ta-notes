@@ -77,8 +77,12 @@ section and subsection titles are `MidnightBlue`; subsubsection is `TextBoldColo
   `exercise` via `\newaliascnt{exercise}{theorem}`, so every `\begin{exercise}` is numbered and
   `\cref{ex:...}` resolves to a clickable reference out of the box. Do **not** declare a local
   counter, and do not look for an `exercise*` variant — there isn't one. Give every exercise a
-  descriptive label (`\label{ex:heine_borel_fails}`, or `\label{ex:4.3}` for a problem quoted
-  from the official sheet) and reference it with `\cref`.
+  descriptive label (`\label{ex:heine_borel_fails}`) and reference it with `\cref`.
+
+  ⚠️ **Not `\label{ex:4.3}`.** This entry used to offer the sheet number as an alternative for a
+  problem quoted from an official sheet. **Withdrawn 2026-08-11 on the user's instruction** — see
+  the label rule in `gemini.md`. Roughly sixty such labels predate the rule and are being swept;
+  do not add more.
 * **Multi-Pass Compilation for Cross-References:** When adding or modifying labels, `\cref` references, or `lastpage` counters, always run full multi-pass compilation (e.g. `latexmk`) until `.aux` files stabilize and all cross-reference warnings resolve.
 
 ## Build traps in this preamble (each has cost a broken build at least once)

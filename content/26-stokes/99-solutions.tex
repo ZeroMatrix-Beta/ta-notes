@@ -10,6 +10,53 @@ Not every solution in this chapter is collected here. \Cref{ex:choose_parameters
 (\cpageref{ex:spherical_cap_flux_stokes_gauss}) and \cref{ex:area_boundary_functional}
 (\cpageref{ex:area_boundary_functional}) are solved where they appear.
 
+\begin{exercisesolution}[Proof of \cref{ex:path_concatenation_work}]
+% Generator: Claude Opus 5 (High)
+\textbf{The concatenation is an admissible path.} First check that $\gamma * \sigma$ is defined at
+all. The two formulas overlap at $t = \tfrac12$, where they give $\sigma(1)$ and $\gamma(0)$; these
+agree by hypothesis, so $\gamma*\sigma$ is a well-defined continuous map $[0,1] \to U$. It is
+piecewise $C^1$ but in general \emph{not} $C^1$: at $t=\tfrac12$ the one-sided derivatives are
+$2\sigma'(1)$ and $2\gamma'(0)$, and nothing forces those to agree. This is exactly why
+\cref{def:line_integral} is stated for piecewise $C^1$ paths, and the single exceptional point does
+not affect any of the integrals below.
+
+\textbf{The computation.} Split the defining integral at $t = \tfrac12$:
+\[\int_{\gamma*\sigma} F \cdot d(\gamma*\sigma)
+  = \int_0^{1} F\big((\gamma*\sigma)(t)\big)\cdot(\gamma*\sigma)'(t)\,dt
+  = \underbrace{\int_0^{1/2}\!\!\cdots}_{=:A} \ +\ \underbrace{\int_{1/2}^{1}\!\!\cdots}_{=:B}.\]
+On $(0,\tfrac12)$ we have $(\gamma*\sigma)(t) = \sigma(2t)$, so by the chain rule
+$(\gamma*\sigma)'(t) = 2\sigma'(2t)$ and
+\[A = \int_0^{1/2} F\big(\sigma(2t)\big)\cdot 2\sigma'(2t)\,dt
+    = \int_0^1 F\big(\sigma(s)\big)\cdot\sigma'(s)\,ds = \int_\sigma F\cdot d\sigma,\]
+substituting $s := 2t$, $ds = 2\,dt$, which carries $t \in [0,\tfrac12]$ onto $s \in [0,1]$. On
+$(\tfrac12,1)$ we have $(\gamma*\sigma)(t) = \gamma(2t-1)$ and $(\gamma*\sigma)'(t) =
+2\gamma'(2t-1)$, so with $s := 2t-1$, again $ds = 2\,dt$ and $t \in [\tfrac12,1]$ onto
+$s \in [0,1]$,
+\[B = \int_{1/2}^{1} F\big(\gamma(2t-1)\big)\cdot 2\gamma'(2t-1)\,dt
+    = \int_0^1 F\big(\gamma(s)\big)\cdot\gamma'(s)\,ds = \int_\gamma F\cdot d\gamma.\]
+Adding $A$ and $B$ gives the claim. Note that $F$ enters only through its continuity; the
+hypothesis $F \in C^1$ is more than the statement needs.
+
+\textbf{In terms of work.} The work done against a force field over a journey is the sum of the
+work done over its legs. Nothing about the field is required for this --- not conservativity, not
+even path independence --- because it is a statement about the \emph{path}, not the field: the
+integral does not know that the journey was made in two stages.
+\begin{remark}[The factor $2$ is the whole proof, and it is not a coincidence]
+\label{rem:line_integral_reparametrisation_invariance}
+Each leg is traversed at double speed, which multiplies $\gamma'$ by $2$; and each leg occupies
+half the parameter interval, which divides $dt$ by $2$. The two cancel exactly.
+
+That cancellation is not special to this substitution. It is
+\newterm{reparametrisation invariance}: for any $C^1$ increasing bijection
+$\varphi : [a,b] \to [0,1]$, the substitution $s = \varphi(t)$ gives
+$\int_{\gamma\circ\varphi} F\cdot d(\gamma\circ\varphi) = \int_\gamma F \cdot d\gamma$, by the same
+one-line chain rule and change of variable. The line integral depends on the curve and the
+direction of travel, not on the schedule --- which is what licenses writing $\int_\gamma F$ for a
+\emph{curve} at all, as the rest of this chapter does. Reverse the direction and the sign flips,
+since $\varphi$ is then decreasing.
+\end{remark}
+\end{exercisesolution}
+
 \begin{exercisesolution}[Solution of \cref{ex:12.3}]
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item The domain is $\{(x,y,z) \in \mathbb{R}^3 : (x,y) \neq (0,0)\}$, i.e.\

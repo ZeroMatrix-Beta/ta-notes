@@ -154,6 +154,15 @@ and 4.5: they lived in \texttt{content/exercise-sheets/week-05.tex}, which nothi
 Sheet 6 is incomplete. Only the problems Corsin tagged \textbf{important} (6.2 and 6.7--6.12)
 were ever transcribed, and 6.1 and 6.3--6.6 have not been. Everything that \emph{is} transcribed
 is solved. This is a gap in the source material, not a casualty of the restructure.
+
+\textbf{6.1 is the exception, and it is deliberate.} It asks for two things about a convex
+$f \in C^2(\mathbb{R}^n)$: that a critical point is exactly a global minimiser, and for a
+non-negative example whose infimum is not attained. Both are already in the document ---
+\cref{ex:convexity_characterizations}\textbf{(c)} and
+\cref{ex:convex_function_unattained_infimum}, the latter with precisely the required
+$f(x) = e^{x_1+x_2}$. Transcribing 6.1 would print the same two questions a second time, so the
+row above stays \qt{not transcribed} while the mathematics is covered. Considered and rejected
+2026-08-11.
 \end{ainote}
 
 \section{Sheet 7}
@@ -202,7 +211,7 @@ never transcribed.
 \begin{tabular}{@{}l l l@{}}
 \textbf{Problem} & \textbf{Priority} & \textbf{Now in} \\
 \hline
-8.1 & --- & not transcribed \\[3pt]
+8.1 & --- & \cref{sec:multivariate_integration} \\[3pt]
 8.2 & important & \cref{sec:multivariate_integration} \\[3pt]
 8.3 & --- & not transcribed \\[3pt]
 8.4 & important & \cref{sec:multivariate_integration} \\[3pt]
@@ -212,6 +221,9 @@ never transcribed.
 \end{center}
 
 \begin{ainote}
+8.1 was added on 2026-08-11 as \cref{ex:jordan_null_products}; the row above used to read
+\qt{not transcribed}.
+
 Sheet 8's three transcribed problems had \emph{no} solutions at all until this restructure. The
 old chapter's \emph{Solutions} section held nothing but a placeholder note, which had already
 gone stale, since the statements were in fact transcribed. All three are now solved.
@@ -309,7 +321,7 @@ differential-form computations.
 \begin{tabular}{@{}l l l@{}}
 \textbf{Problem} & \textbf{Priority} & \textbf{Now in} \\
 \hline
-12.1 & semi-important & not transcribed \\[3pt]
+12.1 & semi-important & \cref{sec:greens_theorem_conservative_fields} \\[3pt]
 12.2 & optional & not transcribed \\[3pt]
 12.3 & important & \cref{sec:area_via_green} \\[3pt]
 12.4 & important & \cref{sec:area_via_green} \\[3pt]
@@ -321,11 +333,13 @@ differential-form computations.
 \end{center}
 
 \begin{ainote}
-12.1 (rigorous concatenation of paths), 12.2 (existence of a potential via a path integral,
-building the tool used implicitly in \cref{ex:12.5}), 12.6 (a Stokes reality check structurally
-identical to \cref{ex:12.3} part \textbf{(c)}) and 12.7 (four standard $\curl$/$\divg$
-product-rule
-identities) were never transcribed.
+12.2 (existence of a potential via a path integral, building the tool used implicitly in
+\cref{ex:12.5}), 12.6 (a Stokes reality check structurally identical to \cref{ex:12.3} part
+\textbf{(c)}) and 12.7 (four standard $\curl$/$\divg$ product-rule identities) have not been
+transcribed. 12.1 was in that list until 2026-08-11; it is now
+\cref{ex:path_concatenation_work}, placed beside \cref{def:line_integral} rather than with the
+other sheet-12 problems, because it is a property of that definition and is used implicitly from
+there onwards.
 \end{ainote}
 
 \section{Sheet 13}

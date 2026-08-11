@@ -16,6 +16,42 @@ Let $U \subseteq \mathbb{R}^n$ be an open set, $F : U \to \mathbb{R}^n$ a contin
 The work measures how much the vector field \qt{pushes} along the path.
 \end{definition}
 
+% Source: exercises/Ex12_Analysis2_eng.pdf, p. 1
+% Extractor: Claude Opus 5 (High)
+% Appendix D listed 12.1 as "not transcribed" and described it as "rigorous concatenation of
+% paths"; that row is now updated. The FS 2024 edition sets the identical problem as the BONUS
+% PROBLEM of its own sheet 12 (exercises_2024/ps12.pdf, p. 1).
+% Placed here rather than with the sheet-12 problems in 05-area-via-greens-formula.tex: it is a
+% property of def:line_integral itself, used implicitly from here onwards, and a reader meeting
+% it three sections later has already relied on it.
+\begin{exercise}[Work adds when two paths are concatenated \textnormal{(semi-important)}]
+\label{ex:path_concatenation_work}
+Let $U \subseteq \mathbb{R}^n$ be open and connected and let $\gamma,\sigma \in C^1([0,1],U)$ be
+paths with $\gamma(0) = \sigma(1)$. Define the \newterm{concatenation of $\sigma$ and $\gamma$}
+\germanfor{Verkettung} as the path
+\[(\gamma * \sigma)(t) := \begin{cases}
+  \sigma(2t) & \text{for } 0 \le t \le \tfrac12, \\
+  \gamma(2t-1) & \text{for } \tfrac12 \le t \le 1.
+\end{cases}\]
+Prove rigorously that for every $F \in C^1(U,\mathbb{R}^n)$,
+\[\int_{\gamma*\sigma} F \cdot d(\gamma*\sigma) = \int_\gamma F \cdot d\gamma
+  + \int_\sigma F \cdot d\sigma.\]
+Explain also what the formula says about physical work.
+\exinfo{This exercise is Problem 12.1 of Problem Sheet 12, Analysis II, Spring Semester 2026, where
+the closing question is marked as an extra worth no points. The FS 2024 edition of the course sets
+it as the bonus problem of its own Sheet 12.}
+\end{exercise}
+
+\begin{ainote}
+Read the definition before trusting the name: $\gamma * \sigma$ traverses $\boldsymbol{\sigma}$
+\emph{first} and $\gamma$ second, which is why the compatibility condition is
+$\gamma(0) = \sigma(1)$ rather than the other way round. The ordering is the one familiar from
+composition of maps, where $f \circ g$ applies $g$ first, and the sheet's own phrase
+\qt{concatenation of $\sigma$ and $\gamma$} names them in the order they are traversed even though
+the symbol does not. Nothing below depends on the convention --- the sum on the right is symmetric
+--- but a diagram drawn with the paths the wrong way round will not close up.
+\end{ainote}
+
 \subsection{Green's theorem}
 
 \begin{theorem}[Green's Theorem]

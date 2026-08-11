@@ -1,0 +1,74 @@
+% Generator: Claude Opus 5 (High)
+% Section added 2026-08-11. Both exercises are transcribed from the Probeprfg mock exams (see the
+% % Source: comments below); the definition, the connecting prose and the remarks are written for
+% this document, which had no notion of a centroid anywhere. The two problems come from different
+% papers and are placed together because each is the other's payoff: one computes the centroid,
+% the other says what the centroid is for.
+
+\section{Centroids}
+\label{sec:centroids}
+
+% Transition: Claude Opus 5 (High)
+Every integral in this chapter so far has been computed for its own sake. The simplest thing one
+actually does with an integral over a region is average a coordinate over it, and the resulting
+point is worth a name.
+
+\begin{definition}[Centroid of a plane region]
+\label{def:centroid}
+Let $B \subseteq \mathbb{R}^2$ be Jordan measurable with $\vol_2(B) > 0$. The \newterm{centroid}
+\germanfor{Fl\"achenschwerpunkt} of $B$ is the point $z_B := (x_B, y_B)$ with
+\[x_B := \frac{1}{\vol_2(B)}\int_B x \,d\vol_2(x,y), \qquad
+  y_B := \frac{1}{\vol_2(B)}\int_B y \,d\vol_2(x,y).\]
+\end{definition}
+
+The same formula defines the centroid of a Jordan measurable set in any $\mathbb{R}^n$, one
+coordinate at a time; nothing below uses the restriction to the plane except the triangle.
+
+\begin{remark}[Why the normalisation is there]
+Without the factor $1/\vol_2(B)$ the two integrals would scale with the size of $B$ as well as
+with its position, and doubling a region would move its \qt{centre}. Dividing by the area makes
+$z_B$ an \emph{average} of the coordinate functions rather than a total, and the immediate
+consequence is that $z_B$ is where one expects it to be: for a region symmetric about a line, the
+centroid lies on that line, because the coordinate perpendicular to it integrates to zero.
+\end{remark}
+
+% Source: old_exams/fs2023/Probeprfg3.pdf (Probeprüfung Analysis II, 31 January 2023),
+% Aufgabe 11, p. 4
+% Extractor: Claude Opus 5 (High)
+% The paper names no lecturer; see old-exam-mining.md.
+\begin{exercise}[Centroids add, and the centroid of a triangle]
+\label{ex:centroid_additivity_and_triangle}
+Let $B \subseteq \mathbb{R}^2$ be Jordan measurable with $\vol_2(B) > 0$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Suppose $B = \bigcup_{i=1}^n B_i$ for pairwise disjoint Jordan measurable sets
+    $B_1,\dots,B_n \subseteq \mathbb{R}^2$, each with $\vol_2(B_i) > 0$. Show that
+    \[z_B = \sum_{i=1}^n \frac{\vol_2(B_i)}{\vol_2(B)}\,z_{B_i}.\]
+  \item Show that if $B$ is a triangle with vertices $o = (0,0)$, $p = (r,0)$ and $q = (s,t)$,
+    where $r,s,t > 0$, then $z_B = \tfrac13(o+p+q)$.
+\end{enumerate}
+\exinfo{This exercise is taken from the mock examination \emph{Probepr\"ufung Analysis II} of
+31 January 2023, Problem 11. That paper names no lecturer.}
+\end{exercise}
+
+% Source: old_exams/fs2023/Probeprfg2.pdf (Probeprüfung Analysis II, 17 August 2022, revised),
+% Aufgabe 1, p. 1
+% Extractor: Claude Opus 5 (High)
+% The paper names no lecturer; see old-exam-mining.md. The original asks only for the minimising
+% pair; the two-part split, and part (b) in particular, are added here, because the general
+% statement is what makes the computation worth doing and the exam's own solution differentiates
+% under the integral sign without ever saying that the answer is the centroid.
+\begin{exercise}[What the centroid minimises]
+\label{ex:centroid_minimises_second_moment}
+Let $B := \{(x,y) \in \mathbb{R}^2 \mid x \geq 0,\ y \geq 0,\ x^2+y^2 \leq 1\}$ be the closed
+quarter disc, and for $(s,t) \in \mathbb{R}^2$ put
+\[I(s,t) := \int_B (x-s)^2 + (y-t)^2 \,d\vol_2(x,y).\]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Determine the pair $(s,t)$ at which $I$ is minimal.
+  \item Show that the answer to part \textbf{(a)} is no accident: for \emph{any} Jordan
+    measurable $B \subseteq \mathbb{R}^2$ with $\vol_2(B) > 0$, the function $I$ is minimised
+    exactly at $(s,t) = z_B$, and at no other point.
+\end{enumerate}
+\exinfo{Part \textbf{(a)} is taken from the mock examination \emph{Probepr\"ufung Analysis II} of
+17 August 2022 (revised), Problem 1; that paper names no lecturer. Part \textbf{(b)} is added
+here, since the general statement is what the computation is really about.}
+\end{exercise}

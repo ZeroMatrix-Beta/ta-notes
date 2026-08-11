@@ -556,4 +556,101 @@ for $\alpha > 0$, where it holds; the official key marks it true without comment
 \end{ainote}
 \end{exercisesolution}
 
+\begin{exercisesolution}[Proof of \cref{ex:centroid_additivity_and_triangle}]
+% Generator: Claude Opus 5 (High) --- the statement is the examiner's; the proof and the remark
+% are written for these notes. Probeprfg3_Lsg.pdf gives the same two results.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Jordan content is additive on pairwise disjoint Jordan measurable sets, so
+    $\vol_2(B) = \sum_i \vol_2(B_i)$, and the integral is additive over the same decomposition.
+    Applying the latter to the coordinate function $x$ and then reading each summand through
+    \cref{def:centroid},
+    \[\int_B x \,d\vol_2 = \sum_{i=1}^n \int_{B_i} x \,d\vol_2
+      = \sum_{i=1}^n \vol_2(B_i)\,x_{B_i} .\]
+    Dividing by $\vol_2(B)$ gives the first coordinate of the claim, and $y$ gives the second.
+  \item Parametrise the triangle by the affine map that carries the standard triangle
+    $T := \{(u,v) \mid u,v \geq 0,\ u+v \leq 1\}$ onto $B$, namely
+    \[\Phi(u,v) := u\,p + v\,q = (ur+vs,\ vt), \qquad
+      \Jac\Phi = \begin{pmatrix} r & s \\ 0 & t \end{pmatrix}, \qquad
+      \det\Jac\Phi = rt > 0 .\]
+    It is injective, since $\det\Jac\Phi \neq 0$ and $\Phi$ is affine, so
+    \cref{thm:change_of_variables} applies. First the area,
+    \[\vol_2(B) = \int_T rt \,du\,dv = rt\,\vol_2(T) = \tfrac{rt}{2},\]
+    and then the two coordinate integrals at once, writing them as the single
+    $\mathbb{R}^2$-valued integral $\int_B (x,y)\,d\vol_2$:
+    \[\int_B (x,y)\,d\vol_2 = \int_T \Phi(u,v)\,rt \,du\,dv
+      = rt\left(p\int_T u \,du\,dv + q\int_T v \,du\,dv\right).\]
+    Both remaining integrals equal $\int_0^1 u(1-u)\,du = \tfrac12-\tfrac13 = \tfrac16$, the
+    second by the symmetry of $T$ in $u$ and $v$. Hence
+    \[z_B = \frac{rt\cdot\tfrac16(p+q)}{\tfrac{rt}{2}} = \tfrac13(p+q) = \tfrac13(o+p+q),\]
+    the last step because $o = 0$.
+\end{enumerate}
+
+\begin{remark}[Part \textbf{(a)} is what makes part \textbf{(b)} useful]
+On its own, the triangle formula is a curiosity. Together with the additivity it computes the
+centroid of \emph{any} polygon, since every polygon can be cut into triangles: take the
+area-weighted average of the vertex averages. That is the whole algorithm, and it needs no
+integral once part \textbf{(b)} is known.
+
+Note also that nothing in the computation used the particular placement of the vertices. Any
+triangle is the image of $T$ under some invertible affine map, and $z_B = \tfrac13(o+p+q)$ says
+that the centroid is carried along by that map --- an affine map sends the centroid of a region
+to the centroid of the image, because it commutes with averaging. The same is not true of the
+circumcentre or of any other centre a triangle has.
+\end{remark}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:centroid_minimises_second_moment}]
+% Generator: Claude Opus 5 (High) --- part (a) is the examiner's; part (b), the completing-the-
+% square proof and the remark are written for these notes. The official key does part (a) by
+% differentiating under the integral sign and does not observe that the answer is the centroid;
+% see the AI-Note.
+One expansion settles both parts, so it is done first, for a general Jordan measurable $B$ with
+$V := \vol_2(B) > 0$. Expanding the integrand and integrating term by term,
+\begin{align*}
+  I(s,t) &= \int_B (x^2+y^2)\,d\vol_2 - 2s\int_B x\,d\vol_2 - 2t\int_B y\,d\vol_2
+    + (s^2+t^2)V \\
+  &= \int_B (x^2+y^2)\,d\vol_2 - 2sVx_B - 2tVy_B + (s^2+t^2)V ,
+\end{align*}
+using \cref{def:centroid} in the second line. Completing the square in $s$ and in $t$,
+\begin{equation}
+\label{eq:second_moment_completed_square}
+  I(s,t) = V\Big[(s-x_B)^2 + (t-y_B)^2\Big]
+    + \underbrace{\int_B (x^2+y^2)\,d\vol_2 - V\big(x_B^2+y_B^2\big)}_{\text{independent of }(s,t)} .
+\end{equation}
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item For the quarter disc the area is $V = \pi/4$, and in polar coordinates, with $\theta$
+    running over $[0,\pi/2]$,
+    \[\int_B x \,d\vol_2 = \int_0^{\pi/2}\!\!\int_0^1 (r\cos\theta)\,r\,dr\,d\theta
+      = \left(\int_0^1 r^2\,dr\right)\left(\int_0^{\pi/2}\cos\theta\,d\theta\right)
+      = \frac13 .\]
+    Hence $x_B = (1/3)/(\pi/4) = 4/(3\pi)$, and $y_B = 4/(3\pi)$ by the symmetry of $B$ in the
+    diagonal. By part \textbf{(b)} the minimising pair is
+    \[(s,t) = z_B = \left(\frac{4}{3\pi},\ \frac{4}{3\pi}\right) \approx (0.4244,\ 0.4244).\]
+  \item In \eqref{eq:second_moment_completed_square} the bracket is non-negative, vanishes
+    exactly when $(s,t) = z_B$, and is multiplied by $V > 0$; the remaining term does not depend
+    on $(s,t)$ at all. So $I$ is minimised at $z_B$ and at no other point.
+\end{enumerate}
+
+\begin{remark}[The leftover constant is the parallel axis theorem]
+\Cref{eq:second_moment_completed_square} says more than where the minimum is. Setting
+$z := (s,t)$ and evaluating the constant term by putting $z = z_B$, it reads
+\[I(z) = \vol_2(B)\,\lvert z - z_B\rvert^2 + I(z_B),\]
+so the second moment about \emph{any} point is the second moment about the centroid plus the
+area times the squared distance between the two. That is Steiner's parallel axis theorem, and it
+is the reason the centroid is the point mechanics cares about: it is the unique point about which
+a body is easiest to spin, and the penalty for choosing any other grows quadratically with how
+far off you are.
+\end{remark}
+
+\begin{ainote}
+The official key answers part \textbf{(a)} by differentiating under the integral sign to get
+$\int_B -2(x-s)\,d\vol_2 = 0$, then solving. That is correct and shorter, but it produces only a
+critical point, so convexity still has to be invoked to know it is a minimum, and it never
+records that the answer is the centroid of $B$. Completing the square gives the location, the
+uniqueness, the general statement and Steiner's theorem in one line, which is why it is used
+above.
+\end{ainote}
+\end{exercisesolution}
+
 

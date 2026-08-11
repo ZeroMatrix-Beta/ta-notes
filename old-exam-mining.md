@@ -58,7 +58,44 @@ either until 2026-08-11; an earlier revision of this file asserted otherwise, wh
 
 | File | What it is | State |
 |---|---|---|
+| `exercises_2024/` | **The FS 2024 edition of this same course** — 401-1262-07L, Prof. Joaquim Serra, sheets written by Federico Franceschini. Thirteen sheets with full official solutions in English *and* German, a 180-minute mock exam with a key, and `exam1.pdf`. | ⚠️ **Mostly a duplicate of `exercises/`. See the warning below before opening it.** |
 | `DiffComp.pdf` (project root) | **Prof. Joaquim Serra**, *Some differential form computations 1*, Analysis II FS 2026, issued 13 May 2026, ungraded. 4 pp: six problems computing `ω = df ∧ λ` on `ℝ³`, then his own full worked solutions. | ✅ **Mined 2026-08-11, in full.** All six are `ex:serra_df_wedge_lambda` in `content/24-differential-forms/02-exterior-derivative.tex`, solutions in that chapter's `99-solutions.tex`. Nothing left in it. |
+
+### ⚠️ `exercises_2024/` is the same sheets, renumbered by nothing at all
+
+**Established 2026-08-11 by reading the two side by side, not inferred.** The FS 2026 problem
+sheets in `exercises/` are a re-issue of the FS 2024 sheets in `exercises_2024/`. Problem `N.M` of
+one is problem `N.M` of the other, word for word, differing only where the sheet cites a numbered
+definition from the script (the script was renumbered between the two years).
+
+**The trap this sets.** The FS 2024 sheets label their problem `N.1` **`BONUS PROBLEM`**, and the
+FS 2026 sheets do not. A pass told to "mine all the bonus problems" will therefore find ten
+problems that look new and are not: seven of the ten were already transcribed years ago under
+`exercises/ExN_Analysis2_eng.pdf` provenance. They are `3.1`, `4.1`, `5.1`, `7.1`, `9.1`, `10.1`
+and `11.1`. **Check `content/` for the exercise before transcribing anything out of this folder.**
+
+Of the remaining three, `8.1` and `12.1` were mined on 2026-08-11 — appendix D had already listed
+both as *not transcribed*, so they were documented gaps rather than finds — and `6.1` was
+considered and **rejected**, because both of its parts are already in ch. 14
+(`ex:convexity_characterizations` part (c), and `ex:convex_function_unattained_infimum`, which uses
+exactly the `e^{x₁+x₂}` the problem asks for). That decision is recorded in appendix D too.
+
+**What the folder is still good for**, and it is not nothing:
+
+* **Official solutions to every sheet, in English and German.** `exercises/` ships these too, but a
+  second independent write-up is worth having when a solution here was derived rather than checked.
+* **`mock.pdf` + `mocksol.pdf`** — a 180-minute Analysis II mock exam with a key, cited nowhere in
+  `content/`. **Not yet mined.** It is a genuine addition and belongs with the `Probeprfg` mocks in
+  *Where to mine next*.
+* **The priority markers differ from Corsin's.** Franceschini marks his own recommended problems
+  with a heart, `(♡)`, and `(*)` for the harder ones. Where a problem carries a heart, tag it
+  `\textnormal{(important)}` exactly as for Corsin's blue marker.
+
+`exam1.pdf` is the exam of **21 August 2024** — the same paper as `old_exams/examFS24.pdf`, already
+mined. Same lecturer, same date, same course number, same 12 pages. It is **not** the same *file*:
+the two have different `md5sum`s and differ in size by a factor of nearly two (614 kB against
+357 kB), so they are two renderings of one document. Do not read it twice, and do not "correct"
+this row to say the files are identical — that was checked and they are not.
 
 Two things about `DiffComp.pdf` worth carrying forward. It is the **only** source mined so far that
 is by this course's own lecturer *and* ships worked solutions, so its solution block is marked
@@ -104,6 +141,13 @@ problems *and* verify the answers.
 | `old_exams/fs2023/Probeprfg3.pdf` | `old_exams/fs2023/Probeprfg3_Lsg.pdf` | 4 + 6 |
 | `old_exams/fs2023/2022/Probeprfg2.pdf` | `old_exams/fs2023/2022/Probeprfg2_Lsg.pdf` | 4 + 7 |
 | `old_exams/fs2023/Probeprfg1.pdf` | none | 3 |
+| `exercises_2024/mock.pdf` | `exercises_2024/mocksol.pdf` | added to this list 2026-08-11 |
+
+**`exercises_2024/mock.pdf` is a fourth mock and the best of the four.** It is an
+*Analysis II* mock (180 minutes) for Serra's own course, so unlike the three `Probeprfg` papers
+nothing has to be filtered out as single-variable, and it ships a key. Its first section is a
+60-point multiple-choice block whose items are true/false, which converts directly into the style
+used throughout chapters 19 and 20. There is also a German key, `mocksolDE.pdf`.
 
 Note the trap that the rest of this file warns about applies here too: `Probeprfg2` sits in
 `fs2023/2022/`, not beside its siblings. Copy the path, do not reconstruct it.

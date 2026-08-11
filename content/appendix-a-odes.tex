@@ -727,6 +727,105 @@ solutions separate. Note that continuity alone still buys existence (Peano); it 
 that is lost.
 \end{exercisesolution}
 
+% Source: exercises/Ex13_Analysis2_eng.pdf, pp. 1--2
+% Extractor: Claude Opus 5 (High)
+% Sheet 13 is the course's ODE sheet and had never been transcribed anywhere; appendix D even
+% recorded that no thirteenth sheet was known to exist, which was false. 13.4 is the one problem
+% on it that is not a solution technique: it asks whether the theorem APPLIES before asking for
+% an answer, which is what this section is for.
+\begin{exercise}[Normal form first, then the theorem, then the solution]
+\label{ex:serra_normal_form_cauchy_lipschitz}
+Put each of the following differential equations into normal form: that is, in each case find an
+open set $U \subseteq \mathbb{R}^2$ and a function $F : U \to \mathbb{R}$ with
+\[y'(x) = F\big(x,y(x)\big), \qquad (x,y) \in U \subseteq \mathbb{R}^2 .\]
+Then explain in each case whether the Cauchy--Lipschitz--Picard theorem
+(\cref{thm:picard_lindeloef_local}) applies. Finally, find an explicit formula for the solution
+$y(x)$ for a general initial datum.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $(x^2-x)\,y' = y^2 + y$.
+  \item $y' + e^y = 1$.
+  \item $x\,y' = 1 - y^2$.
+  \item $y'x^2 = y^2 + yx + x^2$.
+\end{enumerate}
+\exinfo{This exercise is Problem 13.4 of Problem Sheet 13, Analysis II, Spring Semester 2026. The
+FS 2024 edition of the course sets the same problem on its own Sheet 13.}
+\end{exercise}
+
+% Kept inline: this appendix keeps every solution beside its exercise.
+\begin{exercisesolution}[Solution of \cref{ex:serra_normal_form_cauchy_lipschitz}]
+% Generator: Claude Opus 5 (High)
+One observation covers the \qt{does the theorem apply} question in all four cases, so make it once.
+In each part $F$ is a rational or elementary expression that is $C^\infty$ on the open set $U$
+where its denominator does not vanish. In particular $\partial_yF$ exists and is continuous on
+$U$, so $F$ is locally Lipschitz in $y$ by \cref{ex:c1_implies_locally_lipschitz}, and
+\cref{thm:picard_lindeloef_local} applies at \emph{every} point of $U$. The interesting question is
+therefore not whether the theorem applies but \emph{what $U$ is}, because $U$ is what the excluded
+points carve up.
+
+\medskip
+\textbf{(a)} $\displaystyle y' = F(x,y) := \frac{y^2+y}{x^2-x}$, with
+$U = \{(x,y) : x \notin\{0,1\}\}$, three open vertical strips. The theorem applies on each, and no
+solution can be continued across $x=0$ or $x=1$.
+
+Separating variables, and using
+$\frac{1}{y(y+1)} = \frac1y - \frac1{y+1}$ and $\frac{1}{x(x-1)} = \frac{1}{x-1} - \frac1x$,
+\[\ln\left\lvert\frac{y}{y+1}\right\rvert = \ln\left\lvert\frac{x-1}{x}\right\rvert + c
+  \quad\Longrightarrow\quad \frac{y}{y+1} = K\,\frac{x-1}{x},\]
+which rearranges to
+\[y(x) = \frac{K(x-1)}{(1-K)x + K}.\]
+The two constant solutions $y \equiv 0$ and $y \equiv -1$ are the roots of $y^2+y$; the first is
+$K=0$, the second is the limit $K \to \infty$ and is not of the displayed form.
+
+\medskip
+\textbf{(b)} $y' = F(x,y) := 1 - e^y$, with $U = \mathbb{R}^2$. The theorem applies everywhere.
+
+Here $\frac{1}{1-e^y} = 1 + \frac{e^y}{1-e^y}$, so $\int\frac{dy}{1-e^y} = y - \ln\lvert 1-e^y\rvert$
+and
+\[\ln\left\lvert\frac{e^y}{1-e^y}\right\rvert = x + c
+  \quad\Longrightarrow\quad \frac{e^y}{1-e^y} = A e^{x}
+  \quad\Longrightarrow\quad e^y = \frac{Ae^x}{1+Ae^x},\]
+that is
+\[y(x) = x + \ln A - \ln\!\big(1 + Ae^{x}\big),\]
+together with the constant solution $y \equiv 0$, the root of $1-e^y$. Note $y < 0$ throughout:
+every solution approaches the equilibrium $0$ from below as $x \to \infty$, which the formula shows
+directly, since $\ln(1+Ae^x) - x - \ln A \to 0$.
+
+\medskip
+\textbf{(c)} $\displaystyle y' = F(x,y) := \frac{1-y^2}{x}$, with $U = \{(x,y) : x \neq 0\}$, two
+open half-planes. The theorem applies on each.
+
+With $\frac{1}{1-y^2} = \frac12\left(\frac{1}{1-y}+\frac{1}{1+y}\right)$,
+\[\tfrac12\ln\left\lvert\frac{1+y}{1-y}\right\rvert = \ln\lvert x\rvert + c
+  \quad\Longrightarrow\quad \frac{1+y}{1-y} = A x^2
+  \quad\Longrightarrow\quad y(x) = \frac{Ax^2-1}{Ax^2+1},\]
+plus the constant solutions $y \equiv \pm1$, the roots of $1-y^2$.
+
+\medskip
+\textbf{(d)} $\displaystyle y' = F(x,y) := \frac{y^2+yx+x^2}{x^2}
+  = \left(\frac{y}{x}\right)^{2} + \frac{y}{x} + 1$, with
+$U = \{(x,y) : x \neq 0\}$ again.
+
+$F$ depends on $(x,y)$ only through $v := y/x$, so substitute $y = vx$, $y' = v + xv'$:
+\[v + xv' = v^2+v+1 \quad\Longrightarrow\quad x\,v' = 1+v^2
+  \quad\Longrightarrow\quad \arctan v = \ln\lvert x\rvert + c,\]
+whence
+\[y(x) = x\,\tan\!\big(\ln\lvert x\rvert + c\big).\]
+\begin{remark}[What part \textbf{(d)} shows that the others do not]
+\label{rem:maximal_interval_can_be_bounded}
+In \textbf{(a)} and \textbf{(c)} the solution stops where the \emph{equation} stops, at the points
+the normal form had to exclude. Part \textbf{(d)} is different: $F$ is perfectly well behaved on
+the whole half-plane $x>0$, and yet the solution $x\tan(\ln x + c)$ blows up as
+$\ln x + c \to \pi/2$, at a point of $U$ that nothing in the equation singles out.
+
+This is exactly the last clause of \cref{thm:picard_lindeloef_local} in action --- as $x$ tends to
+an endpoint of the maximal interval, $(x,y(x))$ must leave every compact subset of $U$, and here it
+does so by the $y$ coordinate running to infinity rather than by the $x$ coordinate reaching a
+forbidden value. Local existence is genuinely local, and no amount of regularity of $F$ makes it
+global. Compare \cref{ex:cauchy_lipschitz_nonuniqueness_power}, which loses uniqueness instead of
+existence, and for the opposite reason: there the hypothesis fails, here it holds.
+\end{remark}
+\end{exercisesolution}
+
 % Source: old_exams/august2025.pdf (Prof. Laura Kobel-Keller), Analysis II examination,
 % August 2025, Frage 2, printed p. 2
 % Extractor: Claude Opus 5 (High)

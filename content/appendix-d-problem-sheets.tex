@@ -345,10 +345,47 @@ there onwards.
 \section{Sheet 13}
 \label{sec:sheet_index_13}
 
+% Correction: Claude Opus 5 (High), 2026-08-11. This section previously asserted that "whether a
+% thirteenth sheet was issued is not recorded in any source available here". That was false:
+% exercises/Ex13_Analysis2_eng.pdf sits in the same directory as the other twelve, and the FS 2024
+% edition ships its own sheet 13 as well (exercises_2024/ps13.pdf). The claim was presumably
+% inherited from the week-13 chapter, which carried no \exercisesheet heading, and never rechecked
+% against the directory --- an instance of the "a grep is not a survey" trap in gemini.md. Found
+% by the user.
+
+% Source: exercises/Ex13_Analysis2_eng.pdf
+\begin{center}
+\begin{tabular}{@{}l p{0.46\linewidth} l@{}}
+\textbf{Problem} & \textbf{What it asks} & \textbf{Now in} \\
+\hline
+13.1 & An inhomogeneous second-order initial value problem, solved and its solution shown
+  unique & not transcribed \\[3pt]
+13.2 & Three constant-coefficient homogeneous equations, and what changes over $\mathbb{C}$
+  & not transcribed \\[3pt]
+13.3 & Three non-homogeneous problems, the last by the integrating-factor trick
+  & not transcribed \\[3pt]
+13.4 & Four equations put in normal form, tested against Cauchy--Lipschitz, then solved
+  & \cref{sec:cauchy_lipschitz} \\[3pt]
+13.5 & Multiple choice: when the solution set is a vector space; bounded solutions of
+  $\dot x = Ax$; convergence of the Picard iteration & not transcribed \\[3pt]
+13.6 & True or false & not transcribed \\
+\end{tabular}
+\end{center}
+
 \begin{ainote}
-There is no sheet 13 anywhere in this document, and none was ever transcribed. The old
-week-13 chapter carried no \texttt{\textbackslash exercisesheet} heading at all. Whether a
-thirteenth sheet was issued is not recorded in any source available here. The two exercises in
-\cref{ch:stokes} that are not from an official sheet
+Sheet 13 is the course's ODE sheet, and its material belongs to \cref{ch:odes} rather than to any
+chapter of the main text --- which is why the week-13 chapter carried no exercise-sheet heading and
+why, until 2026-08-11, this appendix recorded that no thirteenth sheet was known to exist. It does
+exist; see the correction comment in the source.
+
+Only 13.4 is transcribed, as \cref{ex:serra_normal_form_cauchy_lipschitz}. It was chosen because it
+is the one problem on the sheet that is not a computation: it asks in each case \emph{whether} the
+existence and uniqueness theorem applies before asking for a solution, which is the question
+\cref{sec:cauchy_lipschitz} exists to answer. 13.1--13.3 are solution techniques that
+\cref{sec:solving_linear_systems_odes} and \cref{sec:inhomogeneous_odes} already cover, and 13.5
+reaches into the Picard iteration and the long-time behaviour of $\dot x = Ax$, neither of which
+this document develops.
+
+The two exercises in \cref{ch:stokes} that are not from an official sheet
 (\cref{ex:area_boundary_functional} and \cref{ex:area_ellipse}) come from Corsin's own notes.
 \end{ainote}

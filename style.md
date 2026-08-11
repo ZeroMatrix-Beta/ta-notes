@@ -347,10 +347,19 @@ does not help and thin in the places it does.
     Teichmann, Kowalski, Salamon, Serra, Felder) with visibly different exam styles and syllabus
     emphases, so "the exam of 12 August 2020" under-identifies the source:
     knowing that a problem is Jossen's rather than Serra's is what tells a reader whether its
-    phrasing and its scope are ones this course would use. The `% Source:` comment carries the
-    same attribution, plus the file name and page. **Note the papers are Analysis I & II**, so
-    say so in the `\exinfo` — most of what is on them is out of this document's scope, and a
-    reader who goes looking should know that before opening the file.
+    phrasing and its scope are ones this course would use. All 48 pre-existing exam citations were
+    given their lecturer on 2026-08-11.
+
+    **The `% Source:` comment is not required to repeat the name**, and the older ones do not: they
+    give the exact file and page (`old_exams/examHS24.pdf (13 February 2025), Aufgabe 4, p. 3`),
+    and `old-exam-mining.md` maps every file to its lecturer. That is enough for an editor, who
+    needs to reopen the PDF anyway. The reader has no such table, which is why the `\exinfo` must
+    carry the name. New `% Source:` lines may include it and several do; do not sweep the old ones.
+
+    **Say whether the paper is Analysis I & II.** The `HS*`/`FS*` papers and the two Felder ones
+    are combined Analysis I & II exams, so most of what is on them is out of this document's
+    scope and a reader who goes looking should know before opening the file. The Serra papers
+    (`examHS24`, `examFS24`) and `august2025` are Analysis II alone and take no such qualifier.
   - **`\exhint[Label]{...}`** takes an optional label, default `Hint`. Use `[Official hint]` for a
     hint printed on the sheet, `[Corsin's hint]` / `[Sascha Brack's hints]` for one from a
     tutor's notes. Capitalise the first word of the hint body — the label ends in a colon

@@ -3,6 +3,12 @@
 What has been taken out of `old_exams/` and what has been **rejected forever**, so that no later
 pass re-reads a paper this one already worked through.
 
+⚠️ **Despite the file name, this ledger also covers loose official material that is not an exam
+and not a numbered problem sheet** — currently `DiffComp.pdf` in the project root. Such files have
+no home in `content/appendix-d-problem-sheets.tex` either, which is an inventory of the numbered
+sheets only, so without a row here they are invisible and get mined twice or never. **If you find
+another stray official PDF, add it to the table below rather than inventing a third register.**
+
 `gemini.md` holds the mining *rules* (`% Extractor:` versus `% Generator:`, never invent a path,
 open the cited page and render it). This file holds only the *record*. It is an inventory, not a
 status report — the deliberate absence of a project-status file still stands, and nothing here says
@@ -38,10 +44,94 @@ paper itself is what goes in a citation. Note also that three pairs are byte-ide
 | `FS14`, `HS14` | Prof. E. Kowalski | Surveyed, nothing taken. |
 | `FS15`, `HS15` | Prof. D. Salamon | Surveyed, nothing taken. |
 | `HS00`–`HS03`, `FS04`–`FS12`, `HS04`–`HS12` | various / unidentified | Mostly *Vordiplom* papers. See the rejection notes below. |
+| `august2025` | Prof. Laura Kobel-Keller | **Not yet mined.** Unlike every file above, this one is *Analysis II alone* (`Analysis II: mehrere Variablen`), and it is bilingual German/English. See below. |
 
-`examHS24`, `examFS24`, `WS22_*`, `fs2023/*` and `august2025` are **not** covered by this file. They
-were mined in earlier passes (Serra and Felder); `gemini.md` records their dates and the fact that
-only the two Felder papers ship a solution key.
+`examHS24`, `examFS24`, `WS22_Prüfung` and `fs2023/Prüfung` were mined in earlier passes (Serra and
+Felder); `gemini.md` records their dates and the fact that only the two Felder papers ship a
+solution key.
+
+⚠️ **`august2025.pdf` and the three `Probeprfg` mock exams have never been mined by anybody.** An
+earlier revision of this file asserted that they had been, which was wrong: `grep` over `content/`
+returns no citation of either. See *Where to mine next*, immediately below, which is where that
+correction leads.
+
+## Loose official material (not exams, not numbered sheets)
+
+| File | What it is | State |
+|---|---|---|
+| `DiffComp.pdf` (project root) | **Prof. Joaquim Serra**, *Some differential form computations 1*, Analysis II FS 2026, issued 13 May 2026, ungraded. 4 pp: six problems computing `ω = df ∧ λ` on `ℝ³`, then his own full worked solutions. | ✅ **Mined 2026-08-11, in full.** All six are `ex:serra_df_wedge_lambda` in `content/24-differential-forms/02-exterior-derivative.tex`, solutions in that chapter's `99-solutions.tex`. Nothing left in it. |
+
+Two things about `DiffComp.pdf` worth carrying forward. It is the **only** source mined so far that
+is by this course's own lecturer *and* ships worked solutions, so its solution block is marked
+`% Extractor:`, not `% Generator:` — the mathematics is Serra's. And all six of his boxed answers
+were re-derived here independently and are correct, so there is no erratum to inherit.
+
+## Where to mine next
+
+**Start here. In this order.** The 2026-08-11 pass worked the `HS*`/`FS*` block and `DiffComp.pdf`
+and stopped; the three targets below are untouched, and the first two are worth more than
+everything that block had left in it.
+
+### 1. `old_exams/august2025.pdf` — do this one first
+
+**Prof. Laura Kobel-Keller, August 2025, 21 pages.** Never mined: no `% Source:` anywhere in
+`content/` names it. It is the single best target in the folder, for four independent reasons.
+
+* **It is Analysis II alone.** Its title is *Analysis II: mehrere Variablen*. Every `HS*`/`FS*`
+  paper is a combined Analysis I & II exam whose first half has to be discarded, and that filtering
+  was the main cost of the last pass. Here there is nothing to filter.
+* **It is bilingual.** Every question is printed in German and then in English. The English is the
+  examiner's own, so a statement can be quoted rather than translated, which removes the one place
+  the last pass had to exercise judgement silently.
+* **It is the most recent exam in the folder**, by roughly four years, so its scope and emphasis
+  are the closest of anything here to the course this document actually serves.
+* **It opens with a single-choice section** (`Bei den folgenden Fragen gibt es jeweils genau eine
+  richtige Antwort`), which converts into `exercise` blocks in the true/false style already used
+  throughout chapters 19 and 20.
+
+Question 1 is a Cauchy-sequence question aimed at chapter 6, so the paper starts inside our scope
+on page 1. Work it front to back.
+
+### 2. The three mock exams, two of which ship solution keys
+
+None of these is cited in `content/`, and **the keys are the point**: not one paper mined on
+2026-08-11 had a solution to check against, so every solution in the table below rests on
+independent derivation alone. These four files are the only chance in the whole folder to mine
+problems *and* verify the answers.
+
+| Problems | Key | Pages |
+|---|---|---|
+| `old_exams/fs2023/Probeprfg3.pdf` | `old_exams/fs2023/Probeprfg3_Lsg.pdf` | 4 + 6 |
+| `old_exams/fs2023/2022/Probeprfg2.pdf` | `old_exams/fs2023/2022/Probeprfg2_Lsg.pdf` | 4 + 7 |
+| `old_exams/fs2023/Probeprfg1.pdf` | none | 3 |
+
+Note the trap that the rest of this file warns about applies here too: `Probeprfg2` sits in
+`fs2023/2022/`, not beside its siblings. Copy the path, do not reconstruct it.
+
+⚠️ **Derive first, open the key second.** This is the `SolN_Analysis2_eng.pdf` rule in `style.md`,
+and it exists because reading a solution first steers your method even when you do not copy it.
+The keys are for checking, not for drafting.
+
+### 3. One deferred problem from the last pass
+
+`FS19` Teil B Aufgabe 4 (Jossen): the area `f(t)` of the region cut off by a moving ellipse, and
+whether `f` is `C¹`. It was dropped only for length, since it needs a figure. Pick it up if
+chapter 20 ever wants a parameter-integral example with a picture.
+
+### 4. Look for a second Serra example sheet
+
+`DiffComp.pdf` is titled *Some differential form computations **1***, and its problems are numbered
+`1.1`–`1.6` under a section heading `1.`. Both strongly suggest a sheet 2 exists. It is not in the
+repository as of 2026-08-11. If one appears, it goes straight to the top of this list: same
+lecturer, same course, same semester, worked solutions included.
+
+### What is genuinely exhausted
+
+The `HS*`/`FS*` block. Every one of those 37 files has been surveyed and its verdict recorded
+below, either in the accepted table or in the rejection tables. **Do not re-read them.** The one
+category deliberately left unharvested is constrained-optimisation problems, of which the folder
+holds at least five near-identical variants; the reasoning is in the rejection table and it has not
+changed.
 
 ## Accepted — 2026-08-11 pass
 

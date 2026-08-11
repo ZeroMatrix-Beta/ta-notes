@@ -17,13 +17,19 @@ stale, so that project churn stops rotting the style rules:
 | **`gemini.md`** (this file) | Role, the two layers, fidelity, tool usage, the sources | rarely |
 | **`style.md`** | Prose, notation, environments, lists, figures, exercises, provenance conventions | when a style decision changes |
 | **`build-and-preamble.md`** | Build traps, `main.tex` facts and line numbers, numbering, document layout, the environment set | when `main.tex` changes |
-| **`old-exam-mining.md`** | The record of which `old_exams/` papers have been mined, what was taken, and what is **rejected forever** | when a mining pass runs |
+| **`old-exam-mining.md`** | Which `old_exams/` papers are mined, what is **rejected forever**, and **where to mine next** | when a mining pass runs |
 | **`project-state.md`** | ⚠️ **Deprecated 2026-08-10 on the user's instruction.** A stub. Do not write to it. | never |
 
 ⚠️ **`old-exam-mining.md` is an inventory, not a status file.** It exists because the alternative is
 re-reading forty exam PDFs to rediscover that a problem was already considered and dropped, which
 is a cost no `git log` entry can save you. It records *decisions about sources*, never how far the
 project has got. Do not let it drift into the second thing.
+
+**If you are here to mine exams, go straight to its *Where to mine next* section.** As of
+2026-08-11 the answer is `old_exams/august2025.pdf` (Kobel-Keller, and the only paper in the folder
+that is Analysis II alone and printed bilingually), then the three `Probeprfg` mock exams, two of
+which ship the solution keys that nothing mined so far has had. The whole `HS*`/`FS*` block is
+finished; every one of those 37 files has a recorded verdict, so re-reading them is wasted effort.
 
 Read this file plus the one covering what you are about to do. **Put each new rule in the file
 matching its lifetime** — a `main.tex` line number never belongs in `style.md`. Mixing them is what
@@ -194,7 +200,7 @@ that file says what to do with it.
 | `lec_notes.pdf` (project root) | **The official lecture notes**, and the file to cite. 239 pp, dated 27 July 2026. The authority our theorems and notation are **checked against** — not a blueprint to transcribe. Its chapters run **9–15**, continuing the Analysis I numbering. |
 | `exercises/ExN_Analysis2_eng.pdf` | The official problem sheets — quoted verbatim, never paraphrased. |
 | `exercises/SolN_Analysis2_eng.pdf` | Official solutions, used only to **check** a solution you derived first. |
-| `old_exams/` | Past exams, gitignored like the rest of the PDFs. ⚠️ **The naming misleads:** `examHS24.pdf` is the exam **of 13 February 2025**, `examFS24.pdf` is **21 August 2024** (both Serra); `WS22_Prüfung.pdf` is **24 January 2022** and `fs2023/Prüfung.pdf` is **9 August 2021** (both Felder, Analysis I & II). Always cite the date, not the file name. Only the two Felder papers ship a solution key, so every exercise mined from a Serra paper rests on independent derivation alone. |
+| `old_exams/` | Past exams, gitignored like the rest of the PDFs. ⚠️ **The naming misleads:** `examHS24.pdf` is the exam **of 13 February 2025**, `examFS24.pdf` is **21 August 2024** (both Serra); `WS22_Prüfung.pdf` is **24 January 2022** and `fs2023/Prüfung.pdf` is **9 August 2021** (both Felder, Analysis I & II). An `HSnn.pdf` is sat in the January **after** `nn` (`HS19.pdf` is 22 January 2020). Always cite the date, not the file name. **Read `old-exam-mining.md` before opening any of these** — it says which are done, which are rejected forever, and which to mine next. |
 
 * **`Analysis_II_Script_v1.pdf` is `lec_notes.pdf` under its old name** (confirmed by the user).
   Fifty `% Supplement: Analysis_II_Script_v1.pdf` comments across 27 files still carry the old name

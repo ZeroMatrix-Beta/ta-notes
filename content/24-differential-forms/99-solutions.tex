@@ -131,3 +131,85 @@ theorems need a hypothesis on the domain at all.
     This is the Leibniz rule in disguise: $f\,dg + g\,df = d(fg)$, and $d\circ d = 0$.
 \end{enumerate}
 \end{exercisesolution}
+
+% Source: DiffComp.pdf (Prof. Joaquim Serra, "Some differential form computations 1",
+% Analysis II: Several Variables, ETH Zürich FS 2026), pp. 2--4
+% Extractor: Claude Opus 5 (High)
+% NOT % Generator: --- the mathematics below is Serra's own worked solution from the same sheet,
+% reformulated to house style, not authored here. Every one of the six was re-derived
+% independently before his page was read, and all six of his boxed answers are correct.
+\begin{exercisesolution}[\cref{ex:serra_df_wedge_lambda}]
+Throughout, the only two facts used are that $\wedge$ is bilinear and that it is alternating on
+$1$-forms, so $dx\wedge dx = 0$ and $dy\wedge dx = -dx\wedge dy$.
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $df = 2xy\,dx + (x^2+\cos y)\,dy$, so
+    \begin{align*}
+      \omega &= \big(2xy\,dx + (x^2+\cos y)\,dy\big)\wedge\big(x\,dx + y\,dy\big) \\
+             &= 2xy^2\,dx\wedge dy + x(x^2+\cos y)\,dy\wedge dx \\
+             &= \big(2xy^2 - x^3 - x\cos y\big)\,dx\wedge dy.
+    \end{align*}
+
+  \item $df = yz\,dx + xz\,dy + xy\,dz$, so
+    \begin{align*}
+      \omega &= \big(yz\,dx + xz\,dy + xy\,dz\big)\wedge\big(x\,dy + y\,dz + z\,dx\big) \\
+             &= xyz\,dx\wedge dy + y^2z\,dx\wedge dz + xyz\,dy\wedge dz \\
+             &\qquad + xz^2\,dy\wedge dx + xyz\,dz\wedge dx + x^2y\,dz\wedge dy.
+    \end{align*}
+    Reordering each product into the standard order gives
+    \[\omega = xz(y-z)\,dx\wedge dy + yz(y-x)\,dx\wedge dz + xy(z-x)\,dy\wedge dz.\]
+
+  \item $df = e^xy\,dx + e^x\,dy + 2z\,dz$, so
+    \begin{align*}
+      \omega &= \big(e^xy\,dx + e^x\,dy + 2z\,dz\big)\wedge\big((x+y)\,dx + z\,dy + xz\,dz\big) \\
+             &= e^xyz\,dx\wedge dy + e^xxyz\,dx\wedge dz + e^x(x+y)\,dy\wedge dx \\
+             &\qquad + e^xxz\,dy\wedge dz + 2z(x+y)\,dz\wedge dx + 2z^2\,dz\wedge dy,
+    \end{align*}
+    and after reordering,
+    \[\omega = e^x(yz-x-y)\,dx\wedge dy + z(e^xxy-2x-2y)\,dx\wedge dz + z(e^xx-2z)\,dy\wedge dz.\]
+
+  \item Here $f$ is a $1$-form, so $df = d(x^2)\wedge dy + d(y^2)\wedge dz
+    = 2x\,dx\wedge dy + 2y\,dy\wedge dz$. Therefore
+    \[\omega = \big(2x\,dx\wedge dy + 2y\,dy\wedge dz\big)\wedge\big(x\,dx + z\,dy\big).\]
+    Every term repeats a factor and dies except $2y\,dy\wedge dz\wedge x\,dx$. Since
+    $dy\wedge dz\wedge dx = dx\wedge dy\wedge dz$, this leaves
+    \[\omega = 2xy\,dx\wedge dy\wedge dz.\]
+
+  \item Again $f$ is a $1$-form. Using $d(xy) = y\,dx + x\,dy$, $d(z) = dz$ and
+    $d(x^2z) = 2xz\,dx + x^2\,dz$,
+    \begin{align*}
+      df &= (y\,dx + x\,dy)\wedge dx + dz\wedge dy + (2xz\,dx + x^2\,dz)\wedge dz \\
+         &= -x\,dx\wedge dy - dy\wedge dz + 2xz\,dx\wedge dz.
+    \end{align*}
+    Wedging with $\lambda = y\,dx + x\,dy + z\,dz$, only three products survive:
+    \[\omega = -xz\,dx\wedge dy\wedge dz - y\,dy\wedge dz\wedge dx + 2x^2z\,dx\wedge dz\wedge dy,\]
+    and reordering the last two gives
+    \[\omega = -\big(xz + y + 2x^2z\big)\,dx\wedge dy\wedge dz.\]
+
+  \item With $d(e^y) = e^y\,dy$, $d(xz) = z\,dx + x\,dz$ and $d(y^2z) = 2yz\,dy + y^2\,dz$,
+    \begin{align*}
+      df &= e^y\,dy\wedge dx + (z\,dx + x\,dz)\wedge dy + (2yz\,dy + y^2\,dz)\wedge dz \\
+         &= (z - e^y)\,dx\wedge dy + (2yz - x)\,dy\wedge dz.
+    \end{align*}
+    Wedging with $\lambda = dx + y\,dy + z\,dz$, the surviving terms are
+    $z(z-e^y)\,dx\wedge dy\wedge dz$ and $(2yz-x)\,dy\wedge dz\wedge dx$, so
+    \[\omega = \big(z^2 - ze^y + 2yz - x\big)\,dx\wedge dy\wedge dz.\]
+\end{enumerate}
+\begin{remark}[Two habits that make these quick]
+First, \textbf{expand before you reorder.} Wedging two sums of $1$-forms in $\mathbb{R}^3$ produces nine
+terms, of which three vanish immediately; sorting each survivor into the standard order
+$dx\wedge dy$, $dx\wedge dz$, $dy\wedge dz$ only at the end keeps the sign bookkeeping in one
+place. Reordering as you go is where signs get lost.
+
+Second, \textbf{count degrees first.} In \textbf{(d)}--\textbf{(f)} the form $df$ is already a $2$-form,
+so $df\wedge\lambda$ is a $3$-form, and on $\mathbb{R}^3$ there is only one basis $3$-form. That
+means every term either dies or lands on $dx\wedge dy\wedge dz$, and one can discard any product
+repeating a differential without writing it down at all. Parts \textbf{(d)}--\textbf{(f)} become
+three-line computations once that is used, whereas \textbf{(a)}--\textbf{(c)} genuinely need all
+three components.
+
+Worth noticing in \textbf{(a)}: the answer has no $dx\wedge dz$ or $dy\wedge dz$ component, and it
+could not have. Neither $f$ nor $\lambda$ involves $z$ at all, so the whole computation happens in
+the $xy$-plane and $dz$ never enters.
+\end{remark}
+\end{exercisesolution}

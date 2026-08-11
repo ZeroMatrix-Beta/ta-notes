@@ -426,4 +426,30 @@ the metric, and that is exactly why it is the notion that survives into the gene
 \end{remark}
 \end{exercisesolution}
 
+\begin{exercisesolution}[Solution to \cref{ex:box_preimage_of_compact_not_compact}]
+% Generator: Claude Opus 5 (High)
+Take the projection onto the first coordinate,
+\[g(x,y) := (x,\,0), \qquad K := \{(0,0)\}.\]
+Then $g$ is linear and therefore continuous, and it is nonconstant since $g(1,0) = (1,0)$ while
+$g(0,0) = (0,0)$. The set $K$ is a single point, hence compact. But
+\[g^{-1}(K) = \{(x,y) \mid x = 0\} = \{0\}\times\mathbb{R}\]
+is the whole $y$-axis, which is closed but unbounded and so not compact by
+\cref{thm:heine_borel}.
+
+\begin{remark}[Continuity preserves compactness in one direction only]
+\Cref{item:continuity_preserves_compact} says that $g(C)$ is compact whenever $C$ is, and it is easy
+to carry that away as a statement about $g$ and compactness rather than about images. It is not:
+the preimage of a compact set under a continuous map can be as large as one likes, and the
+example above makes it a whole line by collapsing one direction. A map that \emph{does} have the
+property is called \newterm{proper}, and properness is a genuine extra hypothesis, not a
+consequence of continuity. \Cref{ex:box_proper_map_not_diffeomorphism} constructs one, and shows
+that properness in turn buys much less than one might hope.
+
+The official key gives a different answer with the same moral, $g(x,y) := (\arctan x, \arctan y)$
+together with any compact $K$ containing the open square $(-\tfrac\pi2,\tfrac\pi2)^2$, for which
+$g^{-1}(K) = \mathbb{R}^2$. There the map is injective; it is the \emph{boundedness} of its
+image that does the work, rather than a collapsed direction.
+\end{remark}
+\end{exercisesolution}
+
 

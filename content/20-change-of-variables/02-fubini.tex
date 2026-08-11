@@ -320,5 +320,28 @@ Consider
 \end{enumerate}
 \end{aiexercise}
 
+% Source: exercises_2024/mock.pdf (Analysis II mock examination, Spring Semester 2024,
+% Prof. Joaquim Serra), Exercise 12, p. 3
+% Extractor: Claude Opus 5 (High)
+% Filed with Fubini rather than with the improper integrals of chapter 19 because the whole
+% problem is the product splitting; the one-dimensional pieces are then immediate. Part (a) is the
+% trap and is what earns the block its place: the printed value sqrt(pi) is the answer to a
+% one-dimensional Gaussian, and alpha = 0 is exactly the case where the z-integral does not exist.
+\begin{exercise}[True or False \textnormal{(a Gaussian slab, and what happens at $\alpha=0$)}]
+\label{ex:gaussian_slab_alpha_asymptotics}
+For $\alpha \geq 0$ consider
+\[I_\alpha := \int_{\mathbb{R}^3} e^{-x^2-y^2-\alpha\lvert z\rvert}\,dx\,dy\,dz .\]
+Decide whether each of the following is true or false, with justification.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $I_0 = \sqrt{\pi}$.
+  \item $\alpha I_\alpha = I_1$.
+  \item $\displaystyle\lim_{\alpha\to+\infty}\big(\alpha+\sqrt{\alpha}\big)I_\alpha = 2\pi$.
+\end{enumerate}
+\exinfo{This exercise is taken from the mock examination for Analysis II, Spring Semester 2024
+(Prof.\ Joaquim Serra), where it appears as the twelfth block of multiple-choice questions. Its
+paper supplies $\int_{\mathbb{R}}e^{-t^2}\,dt = \sqrt{\pi}$ as a formula that may be used without
+proof; \cref{ex:gaussian_integral_polar} derives it.}
+\end{exercise}
+
 % Sonnet 5 (Medium)
 We now want to look at a powerful new integration technique using ODEs.

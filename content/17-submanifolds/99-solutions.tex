@@ -220,4 +220,95 @@ rank, and when the shortcut and the rank disagree it is the rank that is right.
 \end{remark}
 \end{exercisesolution}
 
+\begin{exercisesolution}[Solution to \cref{ex:level_set_of_a_wide_jacobian}]
+% Generator: Claude Opus 5 (High) --- the six statements are the examiner's; the working is
+% written for these notes. Verdicts checked afterwards against exercises_2024/mocksol.pdf and
+% agree on all six.
+Everything rests on two computations. First, $\gamma(0) = (0,0,1)$, and differentiating
+componentwise,
+\[\gamma'(t) = \left(2\cos(2t),\ 1+t,\
+  \frac{-\sin t\,(1-t) + \cos t}{(1-t)^2}\right), \qquad\text{so}\qquad
+  \gamma'(0) = \begin{pmatrix} 2 \\ 1 \\ 1 \end{pmatrix}.\]
+Second, $\Jac F(0,0,1)$ has rank $2$: its leftmost $2\times2$ minor is
+$\left(\begin{smallmatrix} 1 & 1 \\ 0 & 1\end{smallmatrix}\right)$, of determinant $1$. Full rank
+is an open condition, since that minor is a continuous function of the point, so $\Jac F$ has
+rank $2$ on a whole neighbourhood $U$ of $(0,0,1)$, and \cref{thm:regular_value_theorem} applied
+to $F|_U$ makes $M \cap U$ a submanifold of dimension $3-2 = 1$. Two independent equations cut
+two dimensions out of three and leave a curve; parts \textbf{(b)} and \textbf{(c)} follow at
+once.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{False.} By the chain rule,
+    \[(F\circ\gamma)'(0) = \Jac F(\gamma(0))\,\gamma'(0)
+      = \begin{pmatrix} 1 & 1 & -2 \\ 0 & 1 & -1\end{pmatrix}
+        \begin{pmatrix} 2 \\ 1 \\ 1 \end{pmatrix}
+      = \begin{pmatrix} 2+1-2 \\ 1-1 \end{pmatrix}
+      = \begin{pmatrix} 1 \\ 0 \end{pmatrix} \neq \begin{pmatrix} 0 \\ 0\end{pmatrix}.\]
+    This is worth reading as information rather than as a failed computation: had $\gamma$ run
+    inside $M$, then $F\circ\gamma$ would be constant and the derivative would vanish. So
+    $\gamma$ meets $M$ at $t=0$ and immediately leaves it.
+  \item \textbf{False:} the dimension is $1$, not $2$.
+  \item \textbf{True.}
+  \item \textbf{False.} By \cref{def:normal_space} the normal space is
+    $N_{(0,0,1)}M = \operatorname{span}\{(1,1,-2)\transp,\ (0,1,-1)\transp\}$, the span of the
+    rows of $\Jac F(0,0,1)$. If $\gamma'(0) = a(1,1,-2)\transp + b(0,1,-1)\transp$, the first
+    coordinate forces $a = 2$ and the second then forces $b = -1$; but the third coordinate of
+    that combination is $-2\cdot2 - (-1) = -3$, not $1$. Note that $\gamma'(0)$ is not tangent
+    either: part \textbf{(a)} says exactly that it is not in $\ker\Jac F(0,0,1) = T_{(0,0,1)}M$.
+    It is simply a vector in neither subspace, which is what a curve leaving $M$ produces.
+  \item \textbf{True.} To solve for $x$ and $z$ in terms of $y$, the block of $\Jac F(0,0,1)$ in
+    the $x$- and $z$-columns must be invertible, and
+    \[\det\begin{pmatrix} 1 & -2 \\ 0 & -1\end{pmatrix} = -1 \neq 0 .\]
+    \Cref{thm:implicit_function_theorem} therefore supplies $\delta > 0$ and $C^1$ functions
+    $\varphi,\psi$ on $(-\delta,\delta)$ with $\varphi(0) = 0$, $\psi(0) = 1$ and
+    $F(\varphi(y),y,\psi(y)) = (2,-2)\transp$ throughout. This exhibits the curve of part
+    \textbf{(c)} concretely, as a graph over the $y$-axis.
+  \item \textbf{True.} Complete $F$ to a map of $\mathbb{R}^3$ to itself by appending the
+    coordinate that part \textbf{(e)} solved \emph{for}, namely $y$:
+    \[\Phi(x,y,z) := \big(F_1(x,y,z),\ F_2(x,y,z),\ y\big), \qquad
+      \Jac\Phi(0,0,1) = \begin{pmatrix} 1 & 1 & -2 \\ 0 & 1 & -1 \\ 0 & 1 & 0\end{pmatrix},\]
+    whose determinant is $1 \cdot (1\cdot 0 - (-1)\cdot 1) = 1 \neq 0$. By
+    \cref{thm:inverse_function_theorem}, $\Phi$ is a $C^1$ diffeomorphism of some
+    $B_\varepsilon((0,0,1))$ onto an open subset of $\mathbb{R}^3$. Writing $\pi(u,v,w) := (u,v)$
+    for the projection, we have $F = \pi\circ\Phi$, and $\pi$ maps open sets to open sets, since
+    $\pi(B_r(p)) = B_r(\pi(p))$. Hence $F(B_\varepsilon) = \pi(\Phi(B_\varepsilon))$ is open.
+\end{enumerate}
+
+\begin{ainote}
+The examination calls $M$ a \qt{smooth manifold} in parts \textbf{(b)} and \textbf{(c)}, but it
+assumes only $F \in C^1$, so what the regular value theorem delivers is a $C^1$ submanifold. The
+distinction changes neither verdict, since both parts are about the dimension.
+\end{ainote}
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:box_normal_to_a_graph_in_r4}]
+% Generator: Claude Opus 5 (High)
+Write points of $\mathbb{R}^4$ as $(x,x_4)$ with $x \in \mathbb{R}^3$, and present the graph as a
+level set: it is $G^{-1}(\{0\})$ for
+\[G(x,x_4) := x_4 - \phi(x), \qquad
+  \nabla G(x,x_4) = \begin{pmatrix} -\nabla\phi(x) \\ 1 \end{pmatrix} \in \mathbb{R}^4 .\]
+This gradient never vanishes, its last entry being $1$, so
+\cref{prop:gradient_orthogonality_level_sets} applies: the graph is a $3$-dimensional submanifold
+of $\mathbb{R}^4$ and its normal space at $X$ is the line spanned by $\nabla G(X)$. Normalising,
+\[N(X) = \frac{1}{\sqrt{1+\lvert\nabla\phi(x)\rvert^2}}
+  \begin{pmatrix} -\partial_1\phi(x) \\ -\partial_2\phi(x) \\ -\partial_3\phi(x) \\ 1
+  \end{pmatrix},\]
+determined up to sign; this is the choice pointing in the direction of increasing $x_4$.
+
+The formula is worth recognising rather than deriving. For $\phi : \mathbb{R}^2 \to \mathbb{R}$
+it is the familiar unit normal $(-\partial_1\phi,-\partial_2\phi,1)/\sqrt{1+\lvert\nabla\phi
+\rvert^2}$ of a surface in $\mathbb{R}^3$, and for $\phi : \mathbb{R} \to \mathbb{R}$ it is
+$(-\phi',1)/\sqrt{1+\phi'^2}$, perpendicular to the tangent $(1,\phi')$ as it should be. Nothing
+about the derivation used $n = 3$; presenting a graph as a level set of $x_{n+1} - \phi(x)$ works
+in every dimension, which is the point of setting the question one dimension past the picture.
+
+\begin{ainote}[A slip in the official key]
+The key gives two displays for this answer. The second, $(-\nabla\phi(x),1)\transp$ divided by
+$\sqrt{1+\lvert\nabla\phi(x)\rvert^2}$, is the formula above. The first is not: it lists a fourth
+component $-\partial_4\phi(x)$ and normalises by
+$\sqrt{1+\partial_1\phi(x)^2+\partial_2\phi(x)^2+\partial_3\phi(x)^2+\partial_4\phi(x)^2}$. Since
+$\phi$ is a function of three variables there is no $\partial_4\phi$, and a vector with those
+four components plus the entry $1$ would have five. Only the second display is correct.
+\end{ainote}
+\end{exercisesolution}
+
 

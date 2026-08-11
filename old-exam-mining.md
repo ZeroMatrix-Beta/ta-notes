@@ -84,12 +84,60 @@ exactly the `e^{x₁+x₂}` the problem asks for). That decision is recorded in 
 
 * **Official solutions to every sheet, in English and German.** `exercises/` ships these too, but a
   second independent write-up is worth having when a solution here was derived rather than checked.
-* **`mock.pdf` + `mocksol.pdf`** — a 180-minute Analysis II mock exam with a key, cited nowhere in
-  `content/`. **Not yet mined.** It is a genuine addition and belongs with the `Probeprfg` mocks in
-  *Where to mine next*.
+* **`mock.pdf` + `mocksol.pdf`** — a 180-minute Analysis II mock exam with a key.
+  ✅ **Mined 2026-08-11, front to back.** See *`mock.pdf` is the August 2024 exam with the numbers
+  changed* below, which is the finding that matters, and the accepted table further down.
 * **The priority markers differ from Corsin's.** Franceschini marks his own recommended problems
   with a heart, `(♡)`, and `(*)` for the harder ones. Where a problem carries a heart, tag it
   `\textnormal{(important)}` exactly as for Corsin's blue marker.
+
+### ⚠️ `mock.pdf` is the August 2024 exam with the numbers changed
+
+**Established 2026-08-11 by reading the two side by side.** This is the same trap as the one above,
+one level up: `exercises_2024/mock.pdf` and `old_exams/examFS24.pdf` (21 August 2024, Serra, already
+mined) are the same paper, question for question, with the data altered. Its **Exercise 1 is
+`examFS24`'s Aufgabe 1 verbatim** — same annulus `U`, same `f(x,y) = sin(xy) − y⁴`, same six parts —
+and it has been `ex:annulus_continuous_image` in `07-compactness/05` since long before this pass.
+
+The rest of the correspondence, with the mock's numbering first:
+
+| mock | `examFS24` | Verdict |
+|---|---|---|
+| Ex 1 (annulus, `sin(xy) − y⁴`) | Aufgabe 1 | **Identical.** Already `ex:annulus_continuous_image`. |
+| Ex 3 (Banach hypotheses, three pairs) | Aufgabe 2 (`X=[0,1]`, `x²`) | Same drill; `ex:banach_hypotheses_true_false` and `ex:bfpt_applicability_table` already carry it twice. Rejected. |
+| Ex 5 (`xy²/(x²+y²+z²)` on `ℝ³`) | Aufgabe 4 (`xy²/(x²+y²)` on `ℝ²`) | Near-duplicate of `ex:regularity_ladder_xy2`. Rejected. |
+| Ex 6 (Taylor, `x₁²+x₃⁴+o(\|x\|⁵)`) | Aufgabe 5 (`10x₂+x₁²+x₂²+o(\|x\|²)`) | Near-duplicate of `ex:expansion_five_verdicts`. Rejected. |
+| Ex 9 (`F : ℝ³→ℝ²`, level set) | Aufgabe 6 (`Φ : ℝ²→ℝ²`) | **Taken.** Wide Jacobian, not square: a different theorem does the work. |
+| Ex 10 (`sin(xy)/(x²+y²)`, `(x+1)log`) | Aufgabe 10 (`cos(xy)/(x²+y²)²`) | Near-duplicate of `ex:improper_cos_over_r4`. Rejected. |
+| Ex 11 (`Φ` non-injective; `Ψ : ℝ²→ℝ³`) | Aufgabe 7 (affine `ℝ³→ℝ³`) | **Taken.** Gram determinant with `m > n`, which the square case cannot reach. |
+| Ex 12 (`∫e^{−x²−y²−α\|z\|}`) | Aufgabe 9 (`∫e^{−α\|x\|}` in the plane) | **Taken.** Product splitting rather than polar coordinates. |
+| Ex 13 (three fields `X`, `Y`, `Z`) | Aufgabe 11 (two fields, two circles) | Near-duplicate of `ex:two_fields_two_circles`. Rejected. |
+| Box 15–22 | Kästchenaufgaben 1–4 | Same *form* (answer-only box questions), different problems. **Four taken.** |
+| Ex 23 (`(x²+y²)e^{αx}` on the disc) | Kurzproblem 1 (`eˣ(x²+αy²)`) | Near-duplicate, **and** it falls under the standing constrained-optimisation rejection at the foot of this file. Rejected twice over. |
+| Ex 25 (paraboloid `U`/`M`, flux of `E` and of a curl) | Kurzproblem 2 (paraboloid `U`/`M`, flux of `E` and of `curl A`) | Near-duplicate. Rejected; see the note below on its part 2. |
+
+**The lesson to carry forward is the one this file already learned about `exercises_2024/`: check
+`content/` for the exercise before transcribing anything.** Six of the fourteen multiple-choice
+blocks were already in the document, and the resemblance is close enough that a pass working from
+the mock alone would have added all six as new material.
+
+**What is left in `mock.pdf`, and why.** Ten blocks were taken (see the accepted table). Of the
+rest, the near-duplicates above account for most; five further ones were considered on their
+merits and dropped:
+
+| Problem | Why |
+|---|---|
+| Ex 2 (`X ⊆ ℝ²`: not open ⟹ closed? convex ⟹ connected? bounded ⟹ compact? complete ⟹ closed?) | Four standard implications, each already covered: `03-open-and-closed-sets` for the first, `08-connectedness` for the second, `rem:boundedness_not_topological` and `ex:kobel_compactness_characterisation` for the third and fourth. |
+| Ex 7 (a Hessian with a parameter `α`, and `∇f` as a diffeomorphism) | The Hessian half is the rejected routine-classification kind and ch. 12 carries six already. Its one distinctive part, that `det Hf ≠ 0` makes `∇f` a local diffeomorphism, **is** `ex:hessian_gradient_diffeomorphism` in ch. 15. |
+| Ex 14 (four concrete `F` for Picard–Lindelöf) | `ex:kobel_picard_lindeloef_single_choice` in `appendix-a-odes.tex` makes the same point (Lipschitz in the state variable, not the independent one) and its part (3), `y + √\|x\|`, is exactly this block's part (3). |
+| Ex 24 (`y'' − y' = f`, then `z' = Az` with a parameter) | The appendix already carries `ex:three_linear_odes`, `ex:ode_inhomogeneous` and `ex:ode_matrix_exponential`. The one part worth having is the boundedness question (all solutions bounded as `t → +∞` exactly for `α ≤ 0`), which is a stability question the course does not develop. |
+| Problem 26 (mollifiers: an explicit bump function `η(t) = e^{−tan²t}/cos²t`, and smoothing a solution of `Lu = f`) | 20 points and five parts, and it needs convolution, which this document does not have. Its one gem is that `∫η = √π` falls out of `s = tan t` in a line. **Reconsider only if a section on convolution is ever written**; the standing rejection of `FS20` Teil B A1 (mollifiers) is the same call made once already. |
+
+⚠️ **One part of Ex 25 is worth reconsidering on its own.** Part 2 asks the reader to *construct* a
+vector potential `A` with `B = curl A`, with a hint at the shape to try. Every existing block in
+`23-flux-divergence` and `26-stokes` goes the other way, from a given `A` to a flux, and
+`examFS24`'s Kurzproblem 2 hands `A` over. If ch. 26 ever wants a construct-the-potential exercise
+to sit beside `ex:ai_which_fields_are_gradients`, this is the one.
 
 `exam1.pdf` is the exam of **21 August 2024** — the same paper as `old_exams/examFS24.pdf`, already
 mined. Same lecturer, same date, same course number, same 12 pages. It is **not** the same *file*:
@@ -129,28 +177,31 @@ already used in chapters 19 and 20.
 | Aufgabe 18 (prove Fubini) | A "reproduce the lecture's proof" part; see the standing rejection at the foot of this file. |
 | Aufgabe 19 (prove the Hessian test) | Same category, and we are **ahead** of it: the exam assumes `f ∈ C³`, our `thm:hessian_test` assumes `C²`. |
 
-### 2. The three mock exams, two of which ship solution keys
+### 2. The three `Probeprfg` mock exams, two of which ship solution keys
 
-None of these is cited in `content/`, and **the keys are the point**: not one paper mined on
-2026-08-11 had a solution to check against, so every solution in the table below rests on
-independent derivation alone. These four files are the only chance in the whole folder to mine
-problems *and* verify the answers.
+None of these is cited in `content/`, and **the keys are the point**: of the papers mined on
+2026-08-11, only `exercises_2024/mock.pdf` had a solution to check against, so every other solution
+in the tables below rests on independent derivation alone.
 
 | Problems | Key | Pages |
 |---|---|---|
 | `old_exams/fs2023/Probeprfg3.pdf` | `old_exams/fs2023/Probeprfg3_Lsg.pdf` | 4 + 6 |
 | `old_exams/fs2023/2022/Probeprfg2.pdf` | `old_exams/fs2023/2022/Probeprfg2_Lsg.pdf` | 4 + 7 |
 | `old_exams/fs2023/Probeprfg1.pdf` | none | 3 |
-| `exercises_2024/mock.pdf` | `exercises_2024/mocksol.pdf` | added to this list 2026-08-11 |
-
-**`exercises_2024/mock.pdf` is a fourth mock and the best of the four.** It is an
-*Analysis II* mock (180 minutes) for Serra's own course, so unlike the three `Probeprfg` papers
-nothing has to be filtered out as single-variable, and it ships a key. Its first section is a
-60-point multiple-choice block whose items are true/false, which converts directly into the style
-used throughout chapters 19 and 20. There is also a German key, `mocksolDE.pdf`.
+| ~~`exercises_2024/mock.pdf`~~ | `exercises_2024/mocksol.pdf` | ✅ **done 2026-08-11** |
 
 Note the trap that the rest of this file warns about applies here too: `Probeprfg2` sits in
 `fs2023/2022/`, not beside its siblings. Copy the path, do not reconstruct it.
+
+**What the mock pass established, and what it costs the three above.** `exercises_2024/mock.pdf`
+was expected to be the best of the four, and in one respect it was: it is the only source mined so
+far that ships a key, and checking against one turned out to be worth more than expected, since it
+surfaced two errors *in the official answers* rather than in ours (see the accepted table). But
+roughly half of it was already in the document under `examFS24` provenance. The three `Probeprfg`
+papers are Analysis I & II and by a different lecturer, so they carry no such risk of duplication —
+which now makes them, on balance, the better targets. **Derive first, open the key second**, as
+`style.md` requires: on the mock that rule is what made the two errata visible instead of
+inherited.
 
 ⚠️ **Derive first, open the key second.** This is the `SolN_Analysis2_eng.pdf` rule in `style.md`,
 and it exists because reading a solution first steers your method even when you do not copy it.
@@ -231,6 +282,42 @@ instruction after they asked whether Jordan measure and Lebesgue measure are the
 digression, stated without proofs, used nowhere later, with four easy `aiexercise`s. The scope
 reversal that authorises it is recorded in `gemini.md`; the `aside` environment was added to
 `main.tex` in the same pass and is documented in `style.md` and `build-and-preamble.md`.
+
+## Accepted — 2026-08-11 pass, `exercises_2024/mock.pdf`
+
+Ten blocks, eight chapters. Every problem was read from a rendered page (`pdftoppm`);
+`pdftotext` was used for triage only. **This is the first source mined with a solution key**, and
+every verdict below was derived first and compared afterwards, per `style.md`. All nine agree with
+`mocksol.pdf` except where a divergence is recorded in an `ainote`, and there are two of those, both
+against the key.
+
+| # | Problem | Lands in | Form | Why it earns its place |
+|---|---|---|---|---|
+| 1 | Box 16 | `07-compactness/05` `ex:box_preimage_of_compact_not_compact` | box question | The section's three headline facts all run in the image direction. This is the one line showing the preimage direction is not among them, and it is what `ex:box_proper_map_not_diffeomorphism` needs to lean on. |
+| 2 | Box 19 | `08-connectedness/01` `ex:box_intersection_disconnected_union_connected` | box question + figure | `cor:union_connected_common_point` makes unions easy and the chapter says nothing about intersections. An annulus crossed by a strip is why. Drawn as FIG-MOCK-19. |
+| 3 | Box 17 | `15-inverse-function-theorem/01` `ex:box_smooth_bijection_rough_inverse` | box question | `x ↦ x³`: bijective, `C^∞`, inverse not differentiable at one point. Global good behaviour does not substitute for `g'(x₀) ≠ 0`. |
+| 4 | Box 18 | `15-inverse-function-theorem/01` `ex:box_proper_map_not_diffeomorphism` | box question | The multivariable form of the one above, and the chapter's only *construct it* problem. Introduces properness, which nothing else in the document names. |
+| 5 | Ex 8 | `16-implicit-function-theorem/01` `ex:graph_over_which_variable` | true/false | `∂G/∂x` never vanishes on `V = {y⁴+y² = x³+x}`, so one direction is free everywhere and all the content sits in the other. Part (d) is the rare case where the theorem fails **and** the answer is genuinely no, provable by hand. |
+| 6 | Ex 9 | `17-submanifolds/02` `ex:level_set_of_a_wide_jacobian` | true/false | Six parts, six distinct ideas: a curve through the point that is not in `M`, the dimension count `3−2`, tangent versus normal, solving for two variables, and the open-mapping conclusion. The `ℝ³→ℝ²` counterpart of `ex:local_diffeo_parameter_alpha`. |
+| 7 | Box 21 | `17-submanifolds/03` `ex:box_normal_to_a_graph_in_r4` | box question | The unit normal to a graph, set one dimension past the picture where it can no longer be read off a drawing. **The official key's first display is wrong** and its second is right; the `ainote` says which. |
+| 8 | Ex 12 | `20-change-of-variables/02` `ex:gaussian_slab_alpha_asymptotics` | true/false | A product integrand split by Fubini into three one-dimensional pieces. Part (a) is the trap: at `α = 0` the `z`-integral diverges, and the printed value `√π` is what one Gaussian factor contributes. |
+| 9 | Ex 11 | `21-gram-determinant/02` `ex:area_formula_two_maps` | true/false + `ainote` | **The best block in the pass.** The chapter defines the Gram determinant and never applies it to a map given by a formula; here `Ψ : ℝ²→ℝ³` is exactly the `m > n` case it was built for. And the exam's own formula sheet states the area formula with **no injectivity hypothesis**, which makes its part (a) false as printed — `Φ` is two-to-one. See below. |
+| 10 | Ex 4 | `22-vector-calculus/02` `ex:differential_identities_true_false` | true/false | Part (d) is the product rule for the divergence, `div(u∇u) = \|∇u\|² + uΔu`, which the chapter never states and which is Green's first identity waiting to be integrated. The printed version puts the Hessian *matrix* where a scalar belongs. |
+
+### Two errors found in the official key
+
+Both were caught because the solutions here were derived before the key was opened, which is the
+entire justification for that rule.
+
+* **`Φ : (x,y) ↦ (xy, x²−y²)` and the area formula (Ex 11, part 1).** The key marks it **true**,
+  and it is what the paper's own formula sheet gives. It is false: `Φ(−p) = Φ(p)`, so `Φ` is
+  two-to-one, and for `E` the closed unit disc the image is the ellipse `4u²+v² ≤ 1` of area `π/2`
+  while the integral returns `π`. The factor is exactly the number of preimages. Recorded as
+  `note:area_formula_needs_injectivity` in `21-gram-determinant/99-solutions.tex`, which keeps both
+  verdicts and says which is which.
+* **The normal to a graph in `ℝ⁴` (Box 21).** The key prints two displays. The second is correct.
+  The first lists a component `−∂₄φ(x)` and normalises by a sum including `∂₄φ(x)²`, but `φ` is a
+  function of *three* variables, so there is no `∂₄φ` and the vector would have five entries.
 
 ## Rejected — do not reconsider
 

@@ -68,6 +68,42 @@ matters is a property of the domain, never of the field.
 \end{remark}
 \end{exercisesolution}
 
+\begin{exercisesolution}[Solution to \cref{ex:differential_identities_true_false}]
+% Generator: Claude Opus 5 (High) --- the four statements are the examiner's; the working is
+% written for these notes. Verdicts checked afterwards against exercises_2024/mocksol.pdf and
+% agree on all four.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{True.} The chain rule applied twice: $\partial_i(e^{w}) = e^{w}\partial_i w$ with
+    $w := u^2$, and $\partial_i(u^2) = 2u\,\partial_i u$.
+  \item \textbf{True.} Both sides are vectors in $\mathbb{R}^n$, and the $j$-th component of the
+    left-hand side is $\partial_i\partial_j u$ while that of the right-hand side is
+    $\partial_j\partial_i u$. These agree by \cref{thm:schwarz_mixed_partials}, which applies
+    because $u$ is smooth.
+  \item \textbf{False.} The quotient rule reads
+    $\partial_i(u/v) = (v\,\partial_i u - u\,\partial_i v)/v^2$, and the printed formula is not
+    that. It is worth noting that the second summand is not even well defined at a point where
+    $\partial_i v$ vanishes, which already settles the matter. For a counterexample where both
+    sides do exist, take $n = 1$, $u \equiv 1$ and $v(x) := e^{x}$. Then $u/v = e^{-x}$, so the
+    left-hand side is $-e^{-x}$, whereas the right-hand side is $0 + 1/e^{x} = e^{-x}$. The two
+    differ in sign.
+  \item \textbf{False}, and it fails before any computation: $\Hess u$ is an $n\times n$ matrix,
+    so for $n \geq 2$ the right-hand side is not a real number, while the left-hand side is. What
+    the product rule for the divergence actually gives is
+    \[\divg(u\nabla u) = \nabla u \cdot \nabla u + u\,\divg(\nabla u)
+      = \lvert\nabla u\rvert^2 + u\,\Delta u ,\]
+    and $\Delta u = \Tr(\Hess u)$ is the \emph{trace} of the Hessian. Replacing $\Hess u$ by
+    $\Tr(\Hess u)$ in the printed statement makes it true.
+\end{enumerate}
+
+\begin{remark}[The identity in part \textbf{(d)} is worth keeping]
+Read from right to left, $\lvert\nabla u\rvert^2 = \divg(u\nabla u) - u\Delta u$ is the
+differential half of integration by parts: integrating it over a bounded $C^1$ domain $\Omega$
+and applying \cref{thm:gauss_divergence} to the first term turns the left-hand side into a
+boundary integral minus $\int_\Omega u\Delta u$. That is Green's first identity, and it is how
+$\lvert\nabla u\rvert^2$ is traded for $u\Delta u$ throughout the theory of the Laplacian.
+\end{remark}
+\end{exercisesolution}
+
 \begin{exercisesolution}[Solution of \cref{ex:11.1}]
 The vector field $V(x,y,z) = (x,y,z-x^2-y^2)$ has divergence
 \[\divg V = \partial_x(x) + \partial_y(y) + \partial_z(z-x^2-y^2) = 1+1+1 = 3.\]

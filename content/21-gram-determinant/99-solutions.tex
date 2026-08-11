@@ -3,6 +3,71 @@
 \section{Solutions}
 \label{sec:gram_determinant_solutions}
 
+\begin{exercisesolution}[Solution to \cref{ex:area_formula_two_maps}]
+% Generator: Claude Opus 5 (High) --- the five statements are the examiner's; the working, the
+% counterexample and the AI-Note below are written for these notes. The verdicts (a) true,
+% (b)-(d) false, (e) true are the official key's; ours agree on (b)-(e) and diverge on (a), for
+% the reason set out in the AI-Note.
+Take the second map first, because there \eqref{eq:mock_area_formula} applies without any
+difficulty. Write $\Psi = L + c$ with
+\[L := \begin{pmatrix} 1 & 1 \\ \alpha & -1 \\ 0 & 1 \end{pmatrix}, \qquad
+  c := \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix},\]
+so $\Jac\Psi(x,y) = L$ at every point. The Gram matrix of its two columns
+$c_1 = (1,\alpha,0)\transp$ and $c_2 = (1,-1,1)\transp$ is
+\[L\transp L = \begin{pmatrix} \langle c_1,c_1\rangle & \langle c_1,c_2\rangle \\
+  \langle c_2,c_1\rangle & \langle c_2,c_2\rangle \end{pmatrix}
+  = \begin{pmatrix} 1+\alpha^2 & 1-\alpha \\ 1-\alpha & 3 \end{pmatrix},\]
+whose determinant is
+\[3(1+\alpha^2) - (1-\alpha)^2 = 3 + 3\alpha^2 - 1 + 2\alpha - \alpha^2 = 2(\alpha^2+\alpha+1).\]
+The integrand of \eqref{eq:mock_area_formula} is therefore the constant
+$\sqrt{2(\alpha^2+\alpha+1)}$, and integrating a constant over $E$ gives
+\[\vol_2(\Psi(E)) = \sqrt{2(\alpha^2+\alpha+1)}\ \vol_2(E).\]
+So \textbf{(e)} is true and \textbf{(c)} and \textbf{(d)} are false. Note that
+$\alpha^2+\alpha+1$ has discriminant $-3$ and so is strictly positive for every real $\alpha$:
+the two columns are independent whatever $\alpha$ is, $\Psi$ is an injective affine map, and the
+formula is exact. Statement \textbf{(c)} is what an $\alpha$-linear guess produces, and
+\textbf{(d)} is what one gets by taking a square root before, rather than after, forming the
+Gram determinant.
+
+For $\Phi$ the Jacobian is square, and there $\sqrt{\det(\Jac\Phi\transp\Jac\Phi)} =
+\lvert\det\Jac\Phi\rvert$. Since
+\[\Jac\Phi(x,y) = \begin{pmatrix} y & x \\ 2x & -2y \end{pmatrix}, \qquad
+  \det\Jac\Phi(x,y) = -2y^2 - 2x^2,\]
+the integrand is $2(x^2+y^2)$. Applied literally, \eqref{eq:mock_area_formula} therefore returns
+$2\int_E(x^2+y^2)$, which is statement \textbf{(a)}, and never $2\int_E(x^2+2y^2)$, so
+\textbf{(b)} is false.
+\end{exercisesolution}
+
+\begin{ainote}[The quoted area formula needs injectivity, and $\Phi$ does not have it]
+\label{note:area_formula_needs_injectivity}
+\Cref{ex:area_formula_two_maps}\textbf{(a)} is marked \emph{true} in the official key, and it is
+what \eqref{eq:mock_area_formula} gives. But \eqref{eq:mock_area_formula} is false as printed,
+because it carries no injectivity hypothesis, and $\Phi$ is exactly the map that exposes this:
+$\Phi(-p) = \Phi(p)$ for every $p$.
+
+Concretely, take $E := \overline{B_1(0)}$ and put $u := xy$, $v := x^2-y^2$. Then
+\[4u^2 + v^2 = 4x^2y^2 + (x^2-y^2)^2 = (x^2+y^2)^2 ,\]
+so $\Phi$ maps $E$ into the ellipse $\{4u^2+v^2 \leq 1\}$, and onto it: given such a $(u,v)$,
+set $s := \sqrt{4u^2+v^2} \leq 1$ and solve $x^2 = (s+v)/2$, $y^2 = (s-v)/2$, both non-negative
+because $v^2 \leq s^2$. These satisfy $x^2+y^2 = s \leq 1$ and $(xy)^2 = (s^2-v^2)/4 = u^2$, so a
+choice of signs gives $xy = u$. Hence
+\[\Phi(E) = \{(u,v) \mid 4u^2+v^2 \leq 1\},\]
+an ellipse with semi-axes $\tfrac12$ and $1$, of area $\pi/2$. The right-hand side of
+\eqref{eq:mock_area_formula}, meanwhile, is
+\[\int_E 2(x^2+y^2)\,dx\,dy = 2\int_0^{2\pi}\!\!\int_0^1 r^2\cdot r\,dr\,d\theta = \pi .\]
+The two differ by a factor of $2$, which is precisely the number of preimages. What is true in
+general is that the integral counts multiplicity,
+\[\int_E \lvert\det\Jac\Phi\rvert\,dx = \int_{\mathbb{R}^n} \#\big(\Phi^{-1}(w)\cap E\big)\,dw
+  \ \geq\ \vol_n(\Phi(E)),\]
+with equality exactly when $\Phi$ is injective off a null set. \Cref{thm:change_of_variables}
+carries the injectivity hypothesis for this reason, and so does
+\cref{def:d_volume_parametrized_submanifold}, which is stated for a \emph{parametrization} rather
+than for an arbitrary $C^1$ map.
+
+The verdict on part \textbf{(a)} is therefore: true as the examination intends it, false as
+mathematics. It is kept here because the gap is more instructive than the computation.
+\end{ainote}
+
 \begin{exercisesolution}[Solution to \cref{ex:9.1}]
 % This label is referenced from 02-volume-of-embedded-surfaces.tex with \cpageref, NOT \cref.
 % exercisesolution wraps `proof`, which has no counter, so a \label inside it is silently

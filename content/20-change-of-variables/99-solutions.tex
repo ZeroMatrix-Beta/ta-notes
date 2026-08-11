@@ -518,4 +518,42 @@ the volume of a straight one.
 \end{remark}
 \end{exercisesolution}
 
+\begin{exercisesolution}[Solution to \cref{ex:gaussian_slab_alpha_asymptotics}]
+% Generator: Claude Opus 5 (High) --- the three statements are the examiner's; the working is
+% written for these notes. Verdicts checked afterwards against exercises_2024/mocksol.pdf and
+% agree on all three.
+The integrand factors as $e^{-x^2}\cdot e^{-y^2}\cdot e^{-\alpha\lvert z\rvert}$, one factor per
+variable. It is continuous and non-negative, so Fubini's theorem splits the integral into a
+product of three one-dimensional ones, and the value in $[0,+\infty]$ is the same whichever
+exhaustion of $\mathbb{R}^3$ computes it. Two of the three factors are Gaussians, so
+\[I_\alpha = \left(\int_{\mathbb{R}} e^{-x^2}dx\right)
+  \left(\int_{\mathbb{R}} e^{-y^2}dy\right)
+  \int_{\mathbb{R}} e^{-\alpha\lvert z\rvert}dz
+  = \pi \int_{\mathbb{R}} e^{-\alpha\lvert z\rvert}dz .\]
+The remaining factor is where $\alpha$ finally matters. For $\alpha > 0$ the integrand is even
+and integrable,
+\[\int_{\mathbb{R}} e^{-\alpha\lvert z\rvert}dz = 2\int_0^\infty e^{-\alpha z}dz = \frac{2}{\alpha},
+  \qquad\text{so}\qquad I_\alpha = \frac{2\pi}{\alpha};\]
+for $\alpha = 0$ the integrand is the constant $1$ and the integral is $+\infty$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{False.} $I_0 = +\infty$: the $z$-direction is not damped at all, so the integrand
+    is constant along every vertical line. The value $\sqrt{\pi}$ is what a \emph{single} Gaussian
+    factor contributes, which is the trap.
+  \item \textbf{True} for every $\alpha > 0$, since $\alpha I_\alpha = \alpha\cdot 2\pi/\alpha =
+    2\pi$ and $I_1 = 2\pi$. Note that the product is independent of $\alpha$, which is the
+    content of the statement.
+  \item \textbf{True.} Substituting the closed form,
+    \[\big(\alpha+\sqrt{\alpha}\big)\frac{2\pi}{\alpha}
+      = 2\pi\left(1 + \frac{1}{\sqrt\alpha}\right) \xrightarrow[\alpha\to+\infty]{} 2\pi .\]
+    The $\sqrt\alpha$ is there only to be negligible; the statement is that $I_\alpha$ decays
+    exactly like $2\pi/\alpha$ and not faster.
+\end{enumerate}
+
+\begin{ainote}
+Part \textbf{(b)} is stated for the whole range $\alpha \geq 0$ the problem opens with, and at
+$\alpha = 0$ it reads $0\cdot(+\infty)$, which is not a real number. The identity is to be read
+for $\alpha > 0$, where it holds; the official key marks it true without comment.
+\end{ainote}
+\end{exercisesolution}
+
 

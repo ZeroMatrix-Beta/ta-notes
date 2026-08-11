@@ -219,6 +219,41 @@ Note that here, our partition of unity simply was the identity (since the parame
 \end{center}
 \end{example}
 
+% Source: exercises_2024/mock.pdf (Analysis II mock examination, Spring Semester 2024,
+% Prof. Joaquim Serra), Exercise 11, p. 3
+% Extractor: Claude Opus 5 (High)
+% The only block in this chapter that puts def:d_volume_parametrized_submanifold to work on a map
+% given by a formula. Its two halves pull in opposite directions and that is the point: Psi is
+% affine and injective, so the formula is exact; Phi is two-to-one, so it is not. See the AI-Note
+% after the solution -- the exam's own formula sheet states the area formula with no injectivity
+% hypothesis, which makes its part (a) false as printed.
+\begin{exercise}[True or False \textnormal{(two maps and the area formula)}]
+\label{ex:area_formula_two_maps}
+The examination this problem is taken from supplies, as a formula to be used without proof, the
+statement that for $\Phi \in C^1(\mathbb{R}^n,\mathbb{R}^m)$ with $m \geq n$ and $K \subseteq
+\mathbb{R}^n$ compact,
+\begin{equation}
+\label{eq:mock_area_formula}
+  \vol_n(\Phi(K)) = \int_K \sqrt{\det\big(\Jac\Phi(x)\transp \Jac\Phi(x)\big)}\,dx .
+\end{equation}
+For $\alpha \in \mathbb{R}$ consider the maps
+\[\Phi : (x,y) \mapsto (xy,\ x^2-y^2), \qquad
+  \Psi : (x,y) \mapsto (x+y,\ \alpha x - y,\ y+1).\]
+Decide whether each of the following is true or false, for every compact $E \subseteq
+\mathbb{R}^2$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $\vol_2(\Phi(E)) = 2\int_E (x^2+y^2)\,dx\,dy$.
+  \item $\vol_2(\Phi(E)) = 2\int_E (x^2+2y^2)\,dx\,dy$.
+  \item $\vol_2(\Psi(E)) = 2\alpha\,\vol_2(E)$.
+  \item $\vol_2(\Psi(E)) = \sqrt{2}\,\lvert\alpha+1\rvert\,\vol_2(E)$.
+  \item $\vol_2(\Psi(E)) = \sqrt{2(\alpha^2+\alpha+1)}\,\vol_2(E)$.
+\end{enumerate}
+\exinfo{This exercise is taken from the mock examination for Analysis II, Spring Semester 2024
+(Prof.\ Joaquim Serra), where it appears as the eleventh block of multiple-choice questions.
+Formula~\eqref{eq:mock_area_formula} is quoted from that paper's own list of results that
+candidates may use without proof.}
+\end{exercise}
+
 
 % --- exercises relocated here from the dissolved sheet 9 ---
 

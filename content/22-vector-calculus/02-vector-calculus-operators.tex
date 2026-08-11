@@ -274,6 +274,28 @@ On $\mathbb{R}^3$, consider
 \end{enumerate}
 \end{aiexercise}
 
+% Source: exercises_2024/mock.pdf (Analysis II mock examination, Spring Semester 2024,
+% Prof. Joaquim Serra), Exercise 4, p. 1
+% Extractor: Claude Opus 5 (High)
+% Part (d) is the reason this block is here: it is the product rule for the divergence, which the
+% chapter never states, and the printed right-hand side is a matrix where a scalar is required.
+% The sheet writes "he Hessian matrix" for "the Hessian matrix"; corrected silently, since the
+% typo carries no mathematical content. Hu rendered as \Hess u per the notation table in style.md.
+\begin{exercise}[True or False \textnormal{(four candidate identities)}]
+\label{ex:differential_identities_true_false}
+Which of the following formulas are correct for \emph{all} smooth functions
+$u,v : \mathbb{R}^n \to (0,\infty)$? Decide each, with justification.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $\partial_i\big(e^{u^2}\big) = e^{u^2}\,2u\,\partial_i u$.
+  \item $\partial_i \nabla u = \nabla \partial_i u$.
+  \item $\partial_i(u/v) = (\partial_i u / v) + (u / \partial_i v)$.
+  \item $\divg(u\nabla u) = \lvert\nabla u\rvert^2 + u\,\Hess u$, where $\Hess u$ is the Hessian
+    matrix of $u$.
+\end{enumerate}
+\exinfo{This exercise is taken from the mock examination for Analysis II, Spring Semester 2024
+(Prof.\ Joaquim Serra), where it appears as the fourth block of multiple-choice questions.}
+\end{exercise}
+
 
 % --- exercises relocated here from the dissolved sheets ---
 

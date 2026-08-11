@@ -361,6 +361,40 @@ fifth parts of the sixth block of true/false questions. Its first three parts ar
 \cref{ex:local_diffeo_parameter_alpha}.}
 \end{exercise}
 
+% Source: exercises_2024/mock.pdf (Analysis II mock examination, Spring Semester 2024,
+% Prof. Joaquim Serra), Exercise 9, p. 2
+% Extractor: Claude Opus 5 (High)
+% The R^3 -> R^2 counterpart of ex:local_diffeo_parameter_alpha / ex:image_of_segment_submanifold
+% above, and not a duplicate of them: there the map is square and the question is invertibility,
+% here it is wide and the question is what a surjective differential buys. Parts (a) and (d) are
+% the ones with teeth --- the curve gamma passes through the point but does not lie in M, which
+% both of them turn on.
+% Part (4) of the printed block carries no "True / False" prompt, unlike its five siblings;
+% transcribed as a statement to be decided, in line with the rest.
+\begin{exercise}[True or False \textnormal{(a level set in $\mathbb{R}^3$, and a curve through it)}]
+\label{ex:level_set_of_a_wide_jacobian}
+Let $F \in C^1(\mathbb{R}^3,\mathbb{R}^2)$ satisfy
+\[F(0,0,1) = \begin{pmatrix} 2 \\ -2\end{pmatrix} \qquad\text{and}\qquad
+  \Jac F(0,0,1) = \begin{pmatrix} 1 & 1 & -2 \\ 0 & 1 & -1\end{pmatrix},\]
+and set $M := F^{-1}\big(\{(2,-2)\transp\}\big)$. For $t < 1$ let
+\[\gamma(t) := \Big(\sin(2t),\ t+\tfrac12t^2,\ \tfrac{\cos t}{1-t}\Big).\]
+Decide whether each of the following is true or false, with justification.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $(F\circ\gamma)'(0) = (0,0)\transp$.
+  \item In a small neighbourhood of $(0,0,1)$, the set $M$ is a smooth submanifold of
+    dimension $2$.
+  \item In a small neighbourhood of $(0,0,1)$, the set $M$ is a smooth submanifold of
+    dimension $1$.
+  \item The vector $\gamma'(0)$ is normal to $M$ at the point $(0,0,1)$.
+  \item There exist $\delta > 0$ and $\varphi,\psi \in C^1((-\delta,\delta),\mathbb{R})$ such
+    that $F(\varphi(y),\,y,\,\psi(y)) = (2,-2)\transp$ for all $y \in (-\delta,\delta)$.
+  \item For all sufficiently small $\varepsilon > 0$, the set
+    $F\big(B_\varepsilon((0,0,1))\big)$ is open in $\mathbb{R}^2$.
+\end{enumerate}
+\exinfo{This exercise is taken from the mock examination for Analysis II, Spring Semester 2024
+(Prof.\ Joaquim Serra), where it appears as the ninth block of multiple-choice questions.}
+\end{exercise}
+
 % Transition: Claude Opus 5 (High)
 Every argument in this section leaned on knowing which vectors point \emph{along} $M$ at a given
 point. The next section makes that space of directions an object in its own right.

@@ -126,3 +126,89 @@ since it is the only place the hypothesis is used.
   \item \textbf{True:} Since $f(x,y) \ge 0$ everywhere on $U$ and $f(0,0) = 0$ with $(0,0) \in U$, the infimum is $0$ and it is attained at the origin.
 \end{enumerate}
 \end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:box_intersection_disconnected_union_connected}]
+% Generator: Claude Opus 5 (High) --- the construction below is the official key's, with the
+% strip widened from half-width 1/10 to 1/4 so that the figure is legible; every verification is
+% written for these notes.
+Take an open annulus and an open vertical strip through its hole:
+\[U_1 := B_1(0) \setminus \overline{B_{1/2}(0)}
+  = \big\{p \in \mathbb{R}^2 \ \big|\ \tfrac12 < \lvert p\rvert < 1\big\}, \qquad
+  U_2 := \big(-\tfrac14,\tfrac14\big)\times\mathbb{R}.\]
+
+% Generator: Claude Opus 5 (High) --- FIG-MOCK-19
+% Geometry: two concentric circles of radii 1 and 1/2 (drawn at 2.2 cm and 1.1 cm per unit),
+% and a vertical strip |x| < 1/4 (drawn at +-0.55 cm) running past both of them. All four
+% boundaries are DASHED, because both sets are open and neither contains its boundary. The
+% annulus is shaded blue, the strip orange, and the two pieces of the intersection purple on
+% top of both. The purple pieces are two lenses, one above and one below the x-axis, and the
+% whole point of the picture is that they do not touch.
+% Arithmetic: on U_1 \cap U_2 we have |x| < 1/4 and |p| > 1/2, so
+%   y^2 > 1/4 - x^2 >= 1/4 - 1/16 = 3/16,  i.e. |y| > sqrt(3)/4 = 0.433.
+% At the drawing scale that is 0.433 * 2.2 = 0.953 cm, which is where each lens must stop:
+% it is sqrt(1.1^2 - 0.55^2) = 1.1 * sqrt(3)/2 = 0.953 cm, the height at which the strip edge
+% x = 0.55 crosses the inner circle. The two agree, as they must.
+\begin{center}
+\begin{tikzpicture}[>=Latex]
+  % --- U_1, the annulus: fill the outer disc, then punch out the inner one ---
+  \fill[blue!12] (0,0) circle (2.2);
+  \fill[white] (0,0) circle (1.1);
+  % --- U_2, the strip (covers the annulus shading where they meet) ---
+  \fill[orange!14] (-0.55,-2.9) rectangle (0.55,2.9);
+  % --- the intersection, painted back on top of both: purple over the outer disc inside the
+  %     strip, then orange restored over the hole, which belongs to U_2 alone ---
+  \begin{scope}
+    \clip (-0.55,-2.9) rectangle (0.55,2.9);
+    \fill[purple!40] (0,0) circle (2.2);
+    \fill[orange!14] (0,0) circle (1.1);
+  \end{scope}
+  % --- boundaries, all dashed: both sets are open ---
+  \draw[blue!70!black, dashed, thick] (0,0) circle (2.2);
+  \draw[blue!70!black, dashed, thick] (0,0) circle (1.1);
+  \draw[orange!85!black, dashed, thick] (-0.55,-2.9) -- (-0.55,2.9);
+  \draw[orange!85!black, dashed, thick] (0.55,-2.9) -- (0.55,2.9);
+  % --- labels ---
+  % label placed inside the blue band: radius 1.65 at 135 degrees, between 1.1 and 2.2
+  \node[blue!70!black, font=\small] at (-1.17,1.17) {$U_1$};
+  \node[orange!85!black, font=\small, anchor=south] at (0,2.95) {$U_2$};
+  \node[purple!75!black, font=\small, align=left, anchor=west] at (2.7,0)
+    {$U_1\cap U_2$:\\two components};
+  \draw[purple!75!black, ->] (2.65,0.35) to[out=150,in=20] (0.62,1.6);
+  \draw[purple!75!black, ->] (2.65,-0.35) to[out=210,in=340] (0.62,-1.6);
+  \draw[gray, dotted] (-2.6,0) -- (2.4,0);
+\end{tikzpicture}
+\end{center}
+
+Four things have to be checked, and the figure does none of them by itself.
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{$U_1$ is open and connected.} It is the intersection of the open set $B_1(0)$
+    with the complement of the closed set $\overline{B_{1/2}(0)}$, hence open. It is
+    path-connected, since any two of its points can be joined by moving radially to the circle of
+    radius $\tfrac34$ and then along that circle, and a path-connected set is connected.
+  \item \textbf{$U_2$ is open and connected.} It is a product of an open interval with
+    $\mathbb{R}$, hence open, and it is convex, hence path-connected and so connected.
+  \item \textbf{$U_1\cap U_2$ is not connected.} If $(x,y)$ lies in it then $\lvert x\rvert <
+    \tfrac14$ and $x^2+y^2 > \tfrac14$, so
+    \[y^2 > \tfrac14 - x^2 > \tfrac14 - \tfrac1{16} = \tfrac3{16} > 0 .\]
+    In particular $y \neq 0$ throughout, so the two open half-planes $\{y>0\}$ and $\{y<0\}$
+    separate $U_1\cap U_2$. Both pieces are non-empty, since $(0,\tfrac34)$ and $(0,-\tfrac34)$
+    both lie in $U_1\cap U_2$. That is a separation, so the intersection is disconnected.
+  \item \textbf{$U_1\cup U_2$ is connected.} Both sets are connected and they share the point
+    $(0,\tfrac34)$, so \cref{cor:union_connected_common_point} applies to the two-element family
+    $\{U_1,U_2\}$.
+\end{enumerate}
+
+\begin{remark}[Why the intersection is the odd one out]
+\Cref{cor:union_connected_common_point} makes unions easy, and nothing in this chapter says
+anything at all about intersections. That silence is not an oversight. A union of connected sets
+sharing a point cannot be split, because any separation would have to split one of the pieces;
+an intersection carries no such argument, and the picture above shows why: the strip enters the
+annulus twice, and what it takes away in between is exactly what would have joined the two
+pieces.
+
+Note also that the construction needs the hole. If $U_1$ were a disc, then $U_1 \cap U_2$ would
+be convex and the example would collapse; the failure of connectedness in \textbf{(c)} is the
+annulus's non-simple-connectedness showing up in a second guise.
+\end{remark}
+\end{exercisesolution}

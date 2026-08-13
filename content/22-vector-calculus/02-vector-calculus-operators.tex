@@ -186,14 +186,20 @@ Let us compute the gradient, the divergence of the gradient, and the rotation of
 \end{example}
 
 % Supplement: Analysis_II_Script_v1.pdf, p. 163
-\begin{exercise}[$\curl\circ\grad=0$ and $\divg\circ\curl=0$]
-\label{ex:curl_grad_div_curl_zero}
+% Reclassified from exercise+exercisesolution to proposition+proof by Claude Opus 5 (Extra),
+% 2026-08-13, and relabelled ex: -> prop: with all five citations updated. These are the two
+% standing identities of the subject: four later passages cite them as established facts, the
+% opener of ch. 24 and the opener of Part VII both promise that d o d = 0 will replace them, and
+% prop:curl_product_rule twenty lines below is the identical shape correctly labelled. An exercise
+% with its answer printed underneath was neither askable nor citable as a result.
+\begin{proposition}[$\curl\circ\grad=0$ and $\divg\circ\curl=0$]
+\label{prop:curl_grad_div_curl_zero}
 Let $f$ be a twice continuously differentiable function and $F$ a twice continuously
-differentiable vector field on an open set $U \subseteq \mathbb{R}^3$. Show that
+differentiable vector field on an open set $U \subseteq \mathbb{R}^3$. Then
 \[\curl(\grad f) = 0 \qquad\text{and}\qquad \divg(\curl F) = 0.\]
-\end{exercise}
+\end{proposition}
 
-\begin{exercisesolution}[Proof of \cref{ex:curl_grad_div_curl_zero}]
+\begin{proof}
 % Generator: Claude Sonnet 5 (High)
 Both identities follow from Schwarz's theorem (\cref{thm:schwarz_mixed_partials}), which
 applies since $f,F \in C^2$.
@@ -209,7 +215,7 @@ components vanish the same way, cyclically permuting the indices. This is exactl
 and every one of the six terms cancels against another by Schwarz: $\partial_1\partial_2F_3$
 cancels $-\partial_2\partial_1F_3$, $-\partial_1\partial_3F_2$ cancels
 $\partial_3\partial_1F_2$, and $\partial_2\partial_3F_1$ cancels $-\partial_3\partial_2F_1$.
-\end{exercisesolution}
+\end{proof}
 
 \begin{remark}
 This is the classical-vector-calculus shadow of \qt{$d^2=0$}
@@ -265,7 +271,7 @@ The identity the official script sets as an exercise, without the first term of
 On $\mathbb{R}^3$, consider
 \[F(x,y,z) := (yz,\ xz,\ xy), \qquad G(x,y,z) := (y,\ -x,\ 0).\]
 \begin{enumerate}[label=\textbf{(\alph*)}]
-  \item Use \cref{ex:curl_grad_div_curl_zero} to rule one of the two out as a gradient field.
+  \item Use \cref{prop:curl_grad_div_curl_zero} to rule one of the two out as a gradient field.
   \item For the other, find a function $f$ with $\nabla f = F$.
   \item Confirm the verdict of part \textbf{(a)} by a second, independent route: compute the
     line integral of the ruled-out field along the unit circle

@@ -263,6 +263,11 @@ belonged to which cell was the reason for it, and that was the part that was bac
 
 **A clean build emits none. Zero is the baseline: if a build reports one, it is yours.**
 
+⚠️ **The page counts below are stale and are kept only as a record of when each check was run.**
+A full build on 2026-08-13 produced **416** pages, not 315; the document has grown by a hundred
+pages since that number was written down. Confirm completeness from the tail of the log, never
+from a remembered page count.
+
 This section used to tabulate three standing warnings as acceptable — 101.24pt in
 `24-differential-forms/02-exterior-derivative.tex` (the `dx \wedge \dots` chain), 10.61pt in
 `26-stokes/04-stokes-theorem.tex`, and 4.62pt in `14-convexity/01-convexity.tex`. All three are
@@ -424,6 +429,17 @@ Two things about it that are easy to get wrong:
   `aside`, and then sets `remarkthm` back, because the `ainote` block immediately below expects to
   inherit it. Forget the restore and the next environment declared silently changes appearance.
 * **There is no `aiaside`, deliberately.** See `style.md` for why; do not add one.
+
+**`importantremark` (given its own colour 2026-08-13, on the user's instruction).** It already
+existed — `\newaliascnt{importantremark}{theorem}` etc. was in the tree since the first pass — but
+was declared inside the shared `remarkthm` block with `notation`/`remark`/`summary`/`goals`/
+`conclusion`, so despite the name it rendered identically to a plain `remark`: same `ThemeGreen`,
+same `\faInfoCircle`. Nothing on the page told a reader it was worth more attention. It now has its
+own `importantremarkthm` (crimson `ImportantCrimson`/`EnvImportantRemark`, `\faExclamationTriangle`),
+declared the same way `asidethm` is: a local `\newtheoremstyle`, `\theoremstyle{importantremarkthm}`,
+the `\newaliascnt`/`\newtheorem`/`\aliascntresetthe` triple, then `\theoremstyle{remarkthm}` restored
+immediately after, since `ainote` still expects to inherit it. `\theHimportantremark` and the
+`\crefname`/`\Crefname` pair already existed and needed no change.
 
 **The rule reaches theorem-like environments only.** `exerciseinfo` and `exercisehint` (added
 2026-08-10) are plain `\newenvironment` formatting blocks with no counter and no `\crefname`,

@@ -4,15 +4,27 @@
 \label{sec:area_via_green}
 
 % Source: Corsin Nick/Class Notes/Week 13.pdf, pp. 5--6
-% Kept inline: solved directly in Corsin Nick/Class Notes/Week 13.pdf, pp. 5--6.
-\begin{exercise}[Area as a boundary functional]
+% Reclassified from exercise+exercisesolution to a worked example by Claude Opus 5 (Extra),
+% 2026-08-13. Three reasons, any one sufficient. Its answer stood directly underneath it, so it
+% was never askable; that answer is where \newterm{shoelace formula} and its \germanfor pair are
+% introduced, and terminology cannot be introduced inside a solution; and ex:area_ellipse
+% immediately below cites the result as an established formula. The solution block also carried no
+% [...] title, which is what made it the document's one exercise with no traceable solution.
+% It did carry "% Kept inline: solved directly in Corsin Nick/Class Notes/Week 13.pdf, pp. 5--6",
+% so the statement-then-answer shape is Corsin's; only the label on it changes.
+% Transition: Claude Opus 5 (Extra)
+Stokes' theorem turns an integral over a region into one over its boundary. Read in that
+direction it computes fluxes and circulations, which is what the previous sections did with it.
+Read in the other direction it says something initially surprising: the area of a region is
+determined by its boundary curve alone, and can be computed without ever looking inside.
+
+\begin{example}[Area as a boundary functional]
 \label{ex:area_boundary_functional}
 Suppose $\gamma : [0,L) \to \mathbb{R}^2$ traces the boundary of a connected $C^\infty$-domain
 $U \subseteq \mathbb{R}^2$ in the positive direction. Express the area of $U$ as a functional
 of $\gamma$.
-\end{exercise}
 
-\begin{exercisesolution}
+\medskip
 By definition, $A(U) = \int_U dx\,dy = \int_U 1\,dx\wedge dy$. By Green's formula
 (\cref{thm:green_theorem}, in its $1$-form guise $\int_\Omega d\omega =
 \int_{\partial\Omega}\omega$),
@@ -21,7 +33,19 @@ for any $F : \overline U \to \mathbb{R}^2$ satisfying $\partial_xF^2 - \partial_
 is satisfied by $F(x,y) = \tfrac12(-y,x)$, giving the \newterm{shoelace formula}
 \germanfor{Gau\ss sche Trapezformel}
 \[A(\gamma) = \frac12\int_0^L \big[\gamma_1(t)\gamma_2'(t) - \gamma_2(t)\gamma_1'(t)\big]\,dt.\]
-\end{exercisesolution}
+\end{example}
+
+\begin{remark}[The choice of $F$ is free, and worth exploiting]
+% Generator: Claude Opus 5 (Extra)
+Any $F$ with $\partial_xF^2 - \partial_yF^1 = 1$ serves, and the three standard choices give
+three different-looking formulas for the same number:
+\[F = \tfrac12(-y,x) \ \leadsto\ \tfrac12\oint (x\,dy - y\,dx), \qquad
+  F = (0,x) \ \leadsto\ \oint x\,dy, \qquad
+  F = (-y,0) \ \leadsto\ -\oint y\,dx.\]
+The symmetric first choice is the one to quote, but on a particular curve one of the other two is
+often much cheaper. If $\gamma_1$ is constant on part of the boundary, $dx$ vanishes there and the
+third form kills that piece outright.
+\end{remark}
 
 \begin{example}[Ellipse]
 \label{ex:area_ellipse}

@@ -7,9 +7,8 @@ a style decision actually changes.
 
 | Companion file | What lives there |
 |---|---|
-| `gemini.md` | Role, fidelity policy, tool usage — read first |
+| `gemini.md` | Role, fidelity policy, tool usage, and the sources — blueprint tutor, reference documents, scope against the script — read first |
 | `build-and-preamble.md` | Build traps, `main.tex` facts, numbering, the preamble's environments |
-| `gemini.md` | Also holds the sources: blueprint tutor, reference documents, scope against the script |
 
 ## Expansion rules — shorthand into prose
 
@@ -562,6 +561,47 @@ does not help and thin in the places it does.
   Read the result as a list of ranges: every transcribed block must sit inside a range naming
   *its own* source. (Use the search tool, not a terminal `grep` — see *Tool Usage*.)
 
+* ⚠️ **An exercise whose answer is printed underneath it has not been set.** Added 2026-08-13 after
+  an audit of all 250 exercises found **54** followed immediately by their own `exercisesolution`,
+  of which only **17** carried the `% Kept inline:` marker that records a tutor having done it that
+  way. The other 37 were placed inline by later passes, and the arrangement is not neutral: a
+  reader meeting a statement and its answer on one page is reading a worked example that has been
+  mislabelled, and the practice value of the block is gone. Worse, a chapter that alternates
+  between the two kinds teaches the reader to stop attempting anything, because there is no way to
+  tell from the page which blocks are answerable.
+
+  **Ask what the block is for, and there are exactly three answers.**
+
+  | The block is | File it as | Because |
+  |---|---|---|
+  | a demonstration the text goes on to use or point at | `example` (or `aiexample`) | it is content, and content cannot be a question |
+  | a statement later results cite as a fact | `proposition`/`lemma` + `proof` | `\cref` should print *Proposition*, not *Exercise* |
+  | a genuine problem, with something for the reader to find | `exercise`, solution in `99-solutions.tex` | printing the answer beneath it destroys the only thing it was for |
+
+  Three signals, each on its own sufficient, that a block belongs in the first two rows:
+
+  * **The running text points forward to it**, or a later passage cites its conclusion as
+    established. `ex:taylor_maximal_expansion` was cited four times as a display before it was
+    made an example; `prop:curl_grad_div_curl_zero` is cited five times and used to be an exercise.
+  * **It introduces terminology.** A `\newterm{...}` or a `\germanfor{...}` inside an
+    `exercisesolution` is always a defect: the glossary and the term's first appearance must live
+    in body content. This is what `ex:area_boundary_functional` was doing with the shoelace formula.
+  * **It is the chapter's first full run of a technique.** Chapter 13's three multiplier
+    computations were all exercises; they are the only place the method is carried out end to end.
+
+  And the counter-signal, which keeps a block an exercise however tempting the inline answer is:
+  **the block has a punchline the reader is meant to find.** `ex:schwarz_application` says
+  \qt{make it as easy as possible for yourself} and hides a monstrous term that Schwarz's theorem
+  makes irrelevant. Printing that underneath is not a convenience, it is the removal of the
+  exercise.
+
+  **Mechanics of a conversion.** Keep the `\label` exactly as it is, including an `ex:` prefix on
+  something that is now an `example` — the prefix is shared across both in this project and every
+  `\cref` keeps resolving. Fold the solution's body into the environment, separated by a `\medskip`
+  where the statement and the working want visibly parting. Rewrite the *chapter's*
+  `99-solutions.tex` opening paragraph, which enumerates what is solved inline and is the one
+  thing that silently goes stale. Say in a `%` comment which of the three signals applied.
+
 * **Exercise Solutions — mirror the source, and record the decision in-line.** Where a solution
   lives in the LaTeX depends on how the *original tutor's own handwritten notes* present it for
   that specific exercise — check the source PDF, don't default blindly:
@@ -704,6 +744,27 @@ Each environment has a precise semantic role. Using the wrong one is a style err
     categories would drift into it. Use a **titled** remark instead —
     `\begin{remark}[Why this hypothesis is there]` — which buys the same skimmability with no
     new semantics and no twelfth colour-coded box competing with `importantremark`.
+* **`importantremark`** — a `remark` whose content actively misleads the reader if they miss it,
+  rather than one they merely miss out on. Crimson, with a warning-triangle icon (given its own
+  colour 2026-08-13; it used to share `remark`'s green and was told apart only by its heading
+  word, which defeated the point). Reach for it when a plain `remark` would let a natural-looking
+  mistake stand: a generalization that looks like it should hold and does not, a hypothesis that
+  is easy to drop without noticing, an implication whose converse the reader is about to assume.
+
+  **The test: does skipping this remark leave the reader with a wrong belief, or just a missed
+  nice-to-know?** Wrong belief → `importantremark`. Nice-to-know → plain `remark`. True but
+  skippable digression → `aside` (see below).
+
+  * **`importantremark`:** `Common misconception!` (a sequence result that does not extend the way
+    it looks like it should, `content/04-sequences/`); `Not one of these arrows reverses`
+    (`content/09-differential/02-jacobi-matrix.tex`); `Only for open subsets`
+    (`content/08-connectedness/02-path-connectedness.tex`); `The asymmetry is real, not an
+    artefact of the proof` (`content/03-open-and-closed-sets/01-open-and-closed-sets.tex`).
+  * **`remark`, not `importantremark`:** an observation that enriches the result next to it but
+    whose absence would not mislead anyone — see the `remark` entry above.
+
+  **Keep it rare, the same way as `aside`.** An `importantremark` on every page stops reading as
+  more urgent than an ordinary `remark`, which is the whole reason it has its own colour.
 * **`aside`** — added 2026-08-11 on the user's instruction, for a fact that is genuinely
   interesting and genuinely not needed: a piece of history, a startling special case, a connection
   to a subject this course does not reach, a "while we are here" observation. Teal, with a

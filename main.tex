@@ -85,6 +85,12 @@
 % editorial commentary. See the environment's own comment further down.
 \definecolor{TealAside}{HTML}{0F7B7B}
 \colorlet{EnvAside}{TealAside}
+% `importantremark' (given its own colour 2026-08-13): a crimson distinct from every other box
+% here, so a genuinely load-bearing remark reads as more urgent than the ordinary green `remark'
+% at a glance, rather than being told apart only by its heading word. See the environment's own
+% comment further down.
+\definecolor{ImportantCrimson}{HTML}{D7263D}
+\colorlet{EnvImportantRemark}{ImportantCrimson}
 
 % --- Proofs ---
 \definecolor{ThemeGreen}{HTML}{008837}
@@ -94,11 +100,17 @@
 \colorlet{ProofQEDBg}{white}
 
 % --- Running text ---
+% Palette worked out at https://paletton.com/#uid=7090u0kw0nJncuSuqtECLjkLNdY
 % \colorlet{TextEmphColor}{MidnightBlue}
-\definecolor{EmphBlue}{HTML}{008CC8}
-\colorlet{TextEmphColor}{EmphBlue}
+% \definecolor{EmphBlue}{HTML}{008CC8}
+% \colorlet{TextEmphColor}{EmphBlue}
+% \definecolor{EmphOrange}{HTML}{EC820C}
+% \colorlet{TextEmphColor}{EmphOrange}
+\definecolor{EmphBrown}{HTML}{BD6400}
+\colorlet{TextEmphColor}{EmphBrown}
 % \colorlet{TextBoldColor}{Brown!80!black}   % Espresso brown
-\definecolor{TextBoldColor}{HTML}{A8651E}    % Warm Bronze Brown
+% \definecolor{TextBoldColor}{HTML}{A8651E}    % Warm Bronze Brown
+\definecolor{TextBoldColor}{HTML}{0E6C95}
 \colorlet{TextMetaNote}{Gray}
 \colorlet{LinkColor}{MidnightBlue}
 \colorlet{FileColor}{Magenta}
@@ -127,10 +139,18 @@
 % These must be *named* colours (not `A!95!B' expressions), because they are
 % handed to hyperref's linkcolor as well -- otherwise the link colour would
 % override the entry colour and the whole TOC would come out midnight blue.
+%
+% Deliberately NOT tied to TextEmphColor/TextBoldColor (2026-08-13, on the user's instruction):
+% those two have been repointed since the TOC palette was set, and the user asked for the TOC to
+% keep looking the way it always did. TocEntryBlue/TocEntryBrown freeze the original
+% EmphBlue/TextBoldColor values under their own names, independent of whatever \emph/\textbf
+% render as now.
+\definecolor{TocEntryBlue}{HTML}{008CC8}
+\definecolor{TocEntryBrown}{HTML}{A8651E}
 \colorlet{TocPartColor}{ThemePurple!85!black}
 \colorlet{TocChapColor}{ThemePurple!95!black}
-\colorlet{TocSecColor}{TextEmphColor}
-\colorlet{TocSubsecColor}{TextBoldColor}
+\colorlet{TocSecColor}{TocEntryBlue}
+\colorlet{TocSubsecColor}{TocEntryBrown}
 \colorlet{TocSubsubColor}{gray}
 \colorlet{TocLabelColor}{ThemePurple!85!black}
 
@@ -385,8 +405,8 @@
 }
 
 \setlist[enumerate]{
-  font=\colorlet{TextBoldColor}{EnumerateBullet}, 
-  label=\textcolor{EnumerateBullet}{\bfseries(\alph*)}, 
+  font=\colorlet{TextBoldColor}{EnumerateBullet},
+  label=\textcolor{EnumerateBullet}{\bfseries(\alph*)},
   ref=(\alph*)
 }
 
@@ -554,10 +574,6 @@
 \newtheorem{summary}[summary]{Summary}
 \aliascntresetthe{summary}
 
-\newaliascnt{importantremark}{theorem}
-\newtheorem{importantremark}[importantremark]{Important remark}
-\aliascntresetthe{importantremark}
-
 \newaliascnt{goals}{theorem}
 \newtheorem{goals}[goals]{Goals}
 \aliascntresetthe{goals}
@@ -600,6 +616,20 @@
 \newaliascnt{aside}{theorem}
 \newtheorem{aside}[aside]{Aside}
 \aliascntresetthe{aside}
+
+% `importantremark' --- given its own colour 2026-08-13, on the user's instruction. It used to
+% share `remarkthm' with plain `remark'/`notation'/`summary'/`goals'/`conclusion', so despite the
+% name nothing on the page distinguished it from an ordinary remark except the heading word.
+\newtheoremstyle{importantremarkthm}%
+{\customenvspace}{\customenvspace}{\normalfont}{}{\color{EnvImportantRemark}\sffamily\bfseries}{:}{0.5em}%
+{\textcolor{EnvImportantRemark}{\faExclamationTriangle}\hspace{0.4em}%
+ \thmname{\textcolor{EnvImportantRemark}{\sffamily\bfseries#1}}\thmnumber{\sffamily\bfseries\ #2}%
+ \thmnote{\ \textcolor{EnvImportantRemark}{\bfseries(}{\normalfont\sffamily\itshape#3}\textcolor{EnvImportantRemark}{\bfseries)}}}
+
+\theoremstyle{importantremarkthm}
+\newaliascnt{importantremark}{theorem}
+\newtheorem{importantremark}[importantremark]{Important remark}
+\aliascntresetthe{importantremark}
 \theoremstyle{remarkthm}
 
 \newtheoremstyle{ainotethm}%
@@ -934,8 +964,6 @@
     {\sffamily\fontsize{18pt}{24pt}\selectfont\bfseries\color{TextEmphColor} Several Variables --- Exercise Class Notes \& Transcript \par}
     \vspace{0.6cm}
     {\sffamily\fontsize{15pt}{22pt}\selectfont\color{TextBoldColor} Lecturer: \textbf{Prof. Joaquim Serra} \par}
-    \vspace{0.1cm}
-    {\sffamily\fontsize{14pt}{20pt}\selectfont\color{TextBoldColor} Teaching Assistant: \textbf{Corsin Nick} \par}
     \vspace{0.3cm}
     {\sffamily\fontsize{14pt}{20pt}\selectfont\color{OliveGreen} Department of Mathematics -- ETH Zürich \par}
     \vspace{2.5cm}
@@ -980,15 +1008,20 @@
 
 % Generator: Claude Opus 5 (High) --- part-level framing prose, new content, not tied to any
 % tutor source. Rewritten 2026-08-09 in the fuller register style.md now prescribes for \part.
+% Correction: Claude Opus 5 (Extra), 2026-08-13 --- the closing sentence claimed Young's inequality
+% was "the engine behind the Hölder and Minkowski inequalities in the next part". Both claims were
+% false: Hölder is derived from Young in rem:young_to_hoelder, in this very chapter, and Minkowski
+% appears nowhere in the document. "Fixes the notation for R^n" went too: no section does that.
 \emph{Analysis II} begins where \emph{Analysis I} stopped, and the first thing to settle is how
 much of it carries over. The definitions of convergence, of continuity, and of a set being open
 survive the move to several variables essentially verbatim. What does not survive is every
 statement that quietly used the ordering of $\mathbb{R}$, and each of those has to be rebuilt on
-a new hypothesis. This part draws that line, fixes the notation for $\mathbb{R}^n$, and rehearses
-two habits used constantly later on: sketching a subset of $\mathbb{R}^n$ from the inequalities
-defining it, and reading a function of two variables off its level sets. It also proves Young's
-inequality, which looks like an isolated exercise here and turns out to be the engine behind the
-Hölder and Minkowski inequalities in the next part.
+a new hypothesis. This part draws that line, and then rehearses the one skill every later chapter
+assumes without ever teaching it: turning a set-builder description into a picture, and a picture
+back into equations. The three families of level sets used for that turn out to be the unit balls
+of the three standard metrics, so the drawing done here is the metric-space theory of the next
+part in disguise. Young's inequality is proved along the way, together with the Hölder inequality
+that follows from it in three lines, because both are wanted as soon as $p$-norms appear.
 
 \input{content/01-prerequisites/00-chapter.tex}
 
@@ -999,15 +1032,22 @@ Hölder and Minkowski inequalities in the next part.
 \part{Metric Spaces and Topology}
 
 % Generator: Claude Opus 5 (High) --- part-level framing prose, new content.
+% Revised 2026-08-13 (Claude Opus 5, Extra): the earlier version named only completeness and
+% compactness and left connectedness, the seventh chapter of the part, unmentioned; it also missed
+% that the part's last compactness theorem (Ascoli--Arzela) is about a family of functions.
 Very little of one-variable analysis actually used the arithmetic of $\mathbb{R}$. Convergence,
 continuity and compactness need only a notion of distance, and this part takes that observation
-seriously by developing all three for an arbitrary metric space. The payoff is not generality for
-its own sake. Function spaces such as $C^0([0,1],\mathbb{R})$ are metric spaces too, so once the
-theory is stated at this level, the same arguments apply to a sequence of functions and to a
-sequence of points alike. Two properties do most of the work: completeness, which guarantees that
-a limit one has constructed actually exists, and compactness, which allows an infinite problem to
-be replaced by a finite one. Almost every existence proof in the remaining five parts leans on
-one of them.
+seriously by developing all of them for an arbitrary metric space. The payoff is not generality
+for its own sake. Function spaces such as $C^0([0,1],\mathbb{R})$ are metric spaces too, so the
+same theorems apply to a sequence of functions and to a sequence of points alike, and the last
+compactness criterion proved here is one for a family of functions rather than for a set of
+points. Three properties then carry the remaining five parts. Completeness manufactures limits
+nobody can write down, and through the Banach fixed point theorem it becomes the engine of both
+the inverse function theorem and the existence theory for differential equations. Compactness
+replaces an infinite problem by a finite one, which is what guarantees that a continuous function
+on a closed bounded set attains its maximum at all. Connectedness forbids a space from falling
+into pieces, and its refinement to simple connectedness decides, five parts later, whether a
+curl-free field has a potential.
 
 \input{content/02-metric-normed-inner-product/00-chapter.tex}
 \input{content/03-open-and-closed-sets/00-chapter.tex}
@@ -1020,14 +1060,20 @@ one of them.
 \part{Differential Calculus}
 
 % Generator: Claude Opus 5 (High) --- part-level framing prose, new content.
+% Revised 2026-08-13 (Claude Opus 5, Extra): the earlier version described the part's plan but
+% named neither of the two things a reader is most likely to be caught by, the counterexamples
+% separating the three candidate derivatives and the failure of the mean value theorem above m=1.
 In one variable the derivative is a number, which makes it tempting to expect the several-variable
 derivative to be a list of numbers. It is not. The right object is a linear map, the one that best
 approximates $f$ near a point, and the partial derivatives are merely its matrix in the standard
-basis. Getting this order of ideas right is what turns the chain rule into a statement about
-composing linear maps rather than a formula to be memorised. This part sets up that differential,
-works out how to compute with it, and closes with Taylor's theorem, which sharpens the linear
-approximation to any order and supplies the quantitative estimates the optimization theory of the
-next part runs on.
+basis. Getting that order of ideas right is what turns the chain rule into a statement about
+composing linear maps rather than a formula to be memorised, and it is also what accounts for the
+counterexamples running through these chapters, in which a function possesses every directional
+derivative at a point and is not even continuous there. The rest of the part asks how good the
+linear approximation actually is. The mean value theorem measures its error and is the first
+result in the course to degrade on the way up, surviving for vector-valued maps only as an
+inequality, and Taylor's theorem then sharpens the approximation to any order and supplies every
+quantitative estimate the optimization theory of the next part runs on.
 
 \input{content/09-differential/00-chapter.tex}
 \input{content/10-chain-rule/00-chapter.tex}
@@ -1036,14 +1082,22 @@ next part runs on.
 \part{Optimization and Convexity}
 
 % Generator: Claude Opus 5 (High) --- part-level framing prose, new content.
+% Revised 2026-08-13 (Claude Opus 5, Extra): added the closing observation. Both the fundamental
+% theorem of algebra (sec:fundamental_theorem_of_algebra) and the spectral theorem
+% (thm:spectral_theorem_optimization) are proved in this part by optimization, and the earlier
+% version of this opener gave a reader no reason to expect either.
 Differentiability turns the search for extrema into algebra. An interior extremum forces the
 gradient to vanish, so the candidates can be found by solving equations, and the sign behaviour of
 the Hessian then decides which kind of point each candidate is. Two complications occupy the rest
 of the part. When the variables are constrained to a level set, the gradient need not vanish at an
-extremum at all, and the method of Lagrange multipliers says what condition replaces it. When the
-Hessian test comes out inconclusive, or when the question asked is global rather than local,
-convexity is the hypothesis that settles it: for a convex function a critical point is not a
-candidate but an answer.
+extremum at all, and the method of Lagrange multipliers supplies the condition that replaces it,
+together with a hypothesis on the constraint gradients that is easy to drop and expensive to lose.
+When the Hessian test comes out inconclusive, or when the question asked is global rather than
+local, convexity is the hypothesis that settles it, because for a convex function a critical point
+is not a candidate but an answer. It is worth watching what optimization gets used \emph{for}
+along the way. Two of the theorems proved in this part are not optimization problems at all: the
+fundamental theorem of algebra, which falls out of minimising $\lvert p\rvert$, and the spectral
+theorem, which falls out of maximising a quadratic form on the unit sphere.
 
 \input{content/12-extrema-hessian/00-chapter.tex}
 \input{content/13-lagrange/00-chapter.tex}
@@ -1052,15 +1106,23 @@ candidate but an answer.
 \part{Inverse and Implicit Functions; Submanifolds}
 
 % Generator: Claude Opus 5 (High) --- part-level framing prose, new content.
-Two questions run through this part. When can an equation $f(x,y) = 0$ be solved for $y$ as a
-function of $x$, and when is a map invertible near a point? Neither has a workable global answer,
-but both have clean local ones, and both reduce to the same linear-algebra hypothesis:
-invertibility of a Jacobian. That is the content of the implicit and inverse function theorems,
-which turn out to be equivalent to each other and are proved here from the contraction principle
-of Part II. Their deeper use is definitional. A level set on which the differential is surjective
-is locally a graph, and being locally a graph is precisely what it means to be a submanifold, a
-subset of $\mathbb{R}^n$ that looks like $\mathbb{R}^m$ from close up. The closing chapters
-develop that notion, since submanifolds are the objects the last two parts integrate over.
+% Correction: Claude Opus 5 (Extra), 2026-08-13 --- the earlier version said the two theorems "turn
+% out to be equivalent to each other and are proved here from the contraction principle". Neither
+% half held. The document derives no equivalence, and only thm:inverse_function_theorem is proved
+% (via lem:lipschitz_perturbation_identity and Banach); thm:implicit_function_theorem is stated.
+% The geodesics chapter, a quarter of the part, also went unmentioned.
+Two questions run through this part. When is a map invertible near a point, and when can an
+equation $f(x,y) = 0$ be solved for $y$ as a function of $x$? Neither has a workable global
+answer, but both have clean local ones, and both rest on the same linear-algebra hypothesis, that
+a Jacobian, or one square block of it, is invertible. The inverse function theorem is proved here
+from the contraction principle of Part II, which is the first place that fixed-point machinery
+repays what it cost to set up. The deeper use of both theorems is definitional. A level set on
+which the differential has full rank is locally a graph, being locally a graph is precisely what
+it means to be a submanifold, and a submanifold is a subset of $\mathbb{R}^n$ that looks like
+$\mathbb{R}^m$ from close up, which is the object the last two parts integrate over. Once such a
+set carries a tangent space at each point one can ask what a straight line becomes on it, and the
+part closes with that question, which takes the first genuine calculus-of-variations argument in
+the course.
 
 \input{content/15-inverse-function-theorem/00-chapter.tex}
 \input{content/16-implicit-function-theorem/00-chapter.tex}
@@ -1070,15 +1132,23 @@ develop that notion, since submanifolds are the objects the last two parts integ
 \part{Integration}
 
 % Generator: Claude Opus 5 (High) --- part-level framing prose, new content.
+% Revised 2026-08-13 (Claude Opus 5, Extra): the earlier version jumped straight from Jordan
+% measure to Fubini, which left the reader unprepared for the two things chapter 19 actually
+% spends its length on (the non-measurable sets, and the Lebesgue digression) and for Feynman's
+% trick, a full section of chapter 20.
 Integration in several variables raises a question that one variable never had to face. Before
 asking what $\int_A f$ is, one has to say which sets $A$ possess a volume at all, and Jordan
-measure is the answer this course uses. With that settled, Fubini's theorem reduces a multiple
-integral to iterated one-dimensional ones, and substitution generalizes to the change of variables
-formula, in which the factor that appears is $\lvert\det \Jac\phi\rvert$, the local volume
-distortion of the substitution. The final chapter leaves flat regions behind altogether. The Gram
-determinant measures how much a parametrization stretches length, area or volume, and with it one
-can integrate over a curve or a surface sitting inside $\mathbb{R}^n$ rather than over a piece of
-$\mathbb{R}^n$ itself.
+measure is the answer this course uses. Most of the work in the first chapter goes into the sets
+it fails on, and they all fail for one reason, that a Jordan cover may use only finitely many
+cubes of a single size. A short digression sketches the Lebesgue theory, which repairs exactly
+that defect and is used nowhere afterwards. With the integral defined, the problem becomes
+computing one, and three tools do nearly all of it: Fubini reduces a multiple integral to iterated
+one-dimensional ones, the change of variables formula trades an awkward domain for a convenient
+one and pays $\lvert\det \Jac\phi\rvert$ for the trade, and differentiation under the integral
+sign reaches integrals possessing no elementary antiderivative at all. The final chapter leaves
+flat regions behind altogether. The Gram determinant measures how much a parametrization stretches
+length, area or volume, and with it one can integrate over a curve or a surface sitting inside
+$\mathbb{R}^n$ rather than over a piece of $\mathbb{R}^n$ itself.
 
 \input{content/19-jordan-measure/00-chapter.tex}
 \input{content/20-change-of-variables/00-chapter.tex}
@@ -1087,16 +1157,22 @@ $\mathbb{R}^n$ itself.
 \part{Vector Calculus and Differential Forms}
 
 % Generator: Claude Opus 5 (High) --- part-level framing prose, new content.
+% Revised 2026-08-13 (Claude Opus 5, Extra): the closing list said "compactness to keep the
+% integrals finite", which names no mechanism the part actually uses; what it uses is compactly
+% supported partitions of unity (prop:partition_of_unity_finite). Simple connectedness, which is
+% what the Poincare lemma turns on, was missing from the list altogether.
 The classical integral theorems of vector calculus look at first like three unrelated results.
 Green's theorem converts a line integral into a double integral, the divergence theorem converts a
-flux through a closed surface into a triple integral, and the theorem of Stokes converts a
-circulation into a flux. This part proves all three, and then explains why they are one theorem.
+flux through a closed surface into a triple integral, and the classical theorem of Stokes converts
+a circulation into a flux. This part proves all three, and then explains why they are one theorem.
 The apparatus that achieves this consists of differential forms and the exterior derivative $d$,
-a single operator that absorbs $\grad$, $\curl$ and $\divg$ at once. In that language each of the
-statements above reads $\int_M d\omega = \int_{\partial M}\omega$, and the classical versions are
-what it becomes when $M$ is a plane region, a solid, or a surface. Everything built earlier is
-needed here: submanifolds to integrate over, orientation to fix the sign, and compactness to keep
-the integrals finite.
+a single operator absorbing $\grad$, $\curl$ and $\divg$ at once, which satisfies the one identity
+$d \circ d = 0$ in place of the two unrelated-looking ones $\curl\grad = 0$ and $\divg\curl = 0$.
+In that language each of the statements above reads $\int_M d\omega = \int_{\partial M}\omega$,
+and the classical versions are what it becomes when $M$ is a plane region, a solid, or a surface.
+Everything built earlier is spent here. Submanifolds supply what one integrates over, orientation
+fixes the sign, compactly supported partitions of unity patch local computations into global ones,
+and simple connectedness decides when a field whose curl vanishes is a gradient after all.
 
 \input{content/22-vector-calculus/00-chapter.tex}
 \input{content/23-flux-divergence/00-chapter.tex}

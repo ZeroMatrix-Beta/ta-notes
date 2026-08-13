@@ -121,6 +121,13 @@ Let $A \subseteq \mathbb{R}^n$ and $f: A \to \mathbb{R}$. Analogous to Analysis 
   \overline{\int}_A f &:= \inf \left\{ \int_A h \;\middle|\; h: \mathbb{R}^n \to \mathbb{R} \text{ dyadic step function with } h \geq f \right\}.
 \end{align*}
 The function $f$ is \newterm{Riemann integrable} if $\underline{\int}_A f = \overline{\int}_A f$. In this case, their common value is denoted by $\int_A f$.
+\end{definition}
+
+% Correction: Claude Opus 5 (Extra), 2026-08-13 --- everything from here to the closing remark
+% below used to sit INSIDE \begin{definition}, which ran to 121 lines and contained two figures,
+% three paragraphs of exposition and a stated theorem. A definition defines; the rest is body
+% prose, and the integrability statement at the end is a result, not part of the definition of
+% one. Nothing was rewritten, only unwrapped.
 
 % Generator: Claude Opus 5 (High) --- FIG-19-01, dyadic step functions sandwiching f.
 % The definition above is a sup and an inf over step functions and never shows one, so the
@@ -232,8 +239,17 @@ construction stacks columns over dyadic cubes instead of intervals:
 \end{tikzpicture}
 \end{center}
 
-This integral satisfies all the \qt{good} properties from the one-dimensional case, such as linearity. Moreover, if $E \subseteq \mathbb{R}^n$ is Jordan measurable and $f: \overline{E} \to [0, \infty)$ is continuous, then $f$ is Riemann integrable on $E$.
-\end{definition}
+\begin{remark}[What the construction inherits from one variable]
+\label{rem:riemann_integral_inherited_properties}
+This integral satisfies all the \qt{good} properties from the one-dimensional case, such as
+linearity. Moreover, if $E \subseteq \mathbb{R}^n$ is Jordan measurable and
+$f: \overline{E} \to [0, \infty)$ is continuous, then $f$ is Riemann integrable on $E$. The course
+states this without proving it, and the proof is the same one as in \emph{Analysis I} with cubes
+in place of intervals: continuity on the compact set $\overline{E}$ gives uniform continuity
+(\cref{prop:compact_implies_uniformly_continuous}), which bounds the oscillation of $f$ on every
+cube of a fine enough mesh simultaneously, and the upper and lower sums then differ by at most
+that bound times $\vol(E)$.
+\end{remark}
 
 % Source: Diego Torres Tejeda/Notes - 17.04 - Diego Torres Tejeda.pdf, p. 1
 % Generator: Gemini 3.6 Flash (High)

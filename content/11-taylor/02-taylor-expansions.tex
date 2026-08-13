@@ -12,7 +12,8 @@ $f \in C^k(U \subseteq \mathbb{R}^n, \mathbb{R})$, $\bar x \in U$:
 \[f(\bar x + h) = \sum_{|\alpha| = 0}^{k} \partial^\alpha f(\bar x)\,\frac{h^\alpha}{\alpha!} + o(|h|^k)\]
 where $\alpha$ is a \newterm{multi-index} \germanfor{Multiindex} in $\mathbb{N}^n$.
 
-In practice, we never use this formula directly, but it is worth unpacking once (e.g., as in \cref{ex:taylor_maximal_expansion}).
+In practice, we never use this formula directly, but it is worth unpacking once, which is what
+\cref{ex:taylor_maximal_expansion} does.
 
 % Generator: Claude Opus 5 (High) --- the multi-index notation above is only well defined
 % because mixed partials commute; the fact is used twice below (in the expansion and in
@@ -61,29 +62,20 @@ Let $f : \mathbb{R}^2 \to \mathbb{R}$ be defined by
 \end{enumerate}
 \end{exercise}
 
-\begin{exercisesolution}[\cref{ex:schwarz_application}]
-\begin{enumerate}[label=\textbf{(\alph*)}]
-  \item Every term in $f$ is a composition of $C^2$ functions (polynomials, exponentials, sine),
-    and the denominator $2+\sin(x)$ is bounded away from zero. Thus $f$ is $C^2$.
-  \item Since $f \in C^2$, by Schwarz's theorem (\cref{thm:schwarz_mixed_partials}) we have
-    $\partial_2 \partial_1 f = \partial_1 \partial_2 f$. Computing $\partial_1$ of the second
-    term would be tedious. However, notice that the second term depends only on $x$, so its
-    derivative with respect to $y$ is $0$. Thus, we first compute $\partial_2 f$:
-    \[\partial_2 f(x,y) = x^2 (2y e^{y^2}) + 0 = 2x^2 y e^{y^2}.\]
-    Then we compute $\partial_1$ of this result:
-    \[\partial_1 \partial_2 f(x,y) = \partial_1 (2x^2 y e^{y^2}) = 4xy e^{y^2}.\]
-    By Schwarz's theorem, $\partial_2 \partial_1 f(x,y) = 4xy e^{y^2}$.
-\end{enumerate}
-\end{exercisesolution}
+% Solution relocated to 99-solutions.tex by Claude Opus 5 (Extra), 2026-08-13. The exercise's whole
+% point is the parenthesis "make it as easy as possible for yourself": the reader is meant to start
+% down the tedious route and discover that Schwarz's theorem removes it. A solution printed
+% immediately underneath makes that discovery impossible. Unlike the two blocks below, this one
+% carried no "% Kept inline:" marker, so nothing in the sources put it here.
 
 % Source: Corsin Nick/Class Notes/Week 4.pdf, pp. 9--10
-\begin{exercise}[Maximal Taylor expansion in $\mathbb{R}^2$]
+% Reclassified from exercise+exercisesolution to a worked example by Claude Opus 5 (Extra),
+% 2026-08-13. Corsin states it and answers it in the same breath, the running text above points
+% forward to it as the one place the general formula is unpacked, and four later passages cite its
+% expansion as an established display. None of that is an exercise; it is a demonstration.
+\begin{example}[Maximal Taylor expansion in $\mathbb{R}^2$]
 \label{ex:taylor_maximal_expansion}
-Let $f \in C^3(\mathbb{R}^2,\mathbb{R})$. Write out the maximal Taylor approximation.
-\end{exercise}
-
-% Kept inline: solved directly in Corsin Nick/Class Notes/Week 4.pdf, pp. 9--10.
-\begin{exercisesolution}[\cref{ex:taylor_maximal_expansion}]
+Let $f \in C^3(\mathbb{R}^2,\mathbb{R})$, and write out the maximal Taylor approximation.
 The multi-indices are:
 \begin{itemize}
   \item $|\alpha| = 0$: $\alpha = (0,0)$
@@ -106,7 +98,27 @@ f(\bar x + h) = &\ f(\bar x) && (\alpha) \\
 &+ o(|h|^3)
 \end{aligned}
 \]
-\end{exercisesolution}
+\end{example}
+
+% Source: Jérôme Paschoud/Notizen/Woche 5.1 Taylor.pdf, p. 3
+% Generator: Gemini 3.6 Flash (High)
+% Moved here from the end of the section, and reclassified from exercise+exercisesolution to a
+% worked example, by Claude Opus 5 (Extra), 2026-08-13. It demonstrates how to read a multi-index,
+% so it belongs beside the notation it demonstrates rather than two hundred lines downstream among
+% the sheet problems; and its answer was printed directly beneath it, so it was never askable.
+\begin{example}[Reading a multi-index: evaluating $\partial^\alpha f$]
+\label{ex:multi_index_evaluation}
+Let $f(x,y,z) := x^3+2y+e^{2x}\cos(z)$, and take the multi-index $\alpha = (2,0,1)$. It calls for
+differentiating twice with respect to $x$, not at all with respect to $y$, and once with respect
+to $z$. Since $f$ is smooth, \cref{thm:schwarz_mixed_partials} says the order does not matter, so
+we may take the cheapest one:
+\begin{align*}
+\partial_x f &= 3x^2 + 2e^{2x}\cos(z) \\
+\partial_{xx} f &= 6x + 4e^{2x}\cos(z) \\
+\partial_{xxz} f &= -4e^{2x}\sin(z).
+\end{align*}
+Hence $\partial^{(2,0,1)} f(x,y,z) = -4e^{2x}\sin(z)$.
+\end{example}
 
 \begin{ainote}
 Corsin writes the recall line as
@@ -315,7 +327,9 @@ identified with one another.
 \end{remark}
 
 % Sonnet 5 (Medium)
-\subsection{A worked example}
+% Retitled from "A worked example" to the plural by Claude Opus 5 (Extra), 2026-08-13: the
+% subsection now holds four of them, two having been brought up out of the exercise tail.
+\subsection{Worked examples}
 
 % Source: Corsin Nick/Class Notes/Week 4.pdf, pp. 11--12
 \begin{exercise}[Taylor expansion of $(x+y^2)e^{-x^2-y^2}$]
@@ -358,6 +372,63 @@ The substitution and multiplication rules from Analysis 1 often make expansions 
   Writing $h = (h_1,h_2) = (x-1, y-1)$:
   \[f(1+h_1, 1+h_2) = f(1,1) + \partial_1 f(1,1)h_1 + \partial_2 f(1,1)h_2 + o(|h|) = e + \frac{e}{2}h_1 + \frac{e}{2}h_2 + o(|h|).\]
 \end{enumerate}
+\end{example}
+
+% Source: Jérôme Paschoud/Notizen/Woche 5.1 Taylor.pdf, pp. 3--4
+% Generator: Gemini 3.6 Flash (High)
+% Moved here from the exercise tail, and reclassified from exercise+exercisesolution to a worked
+% example, by Claude Opus 5 (Extra), 2026-08-13. It is the one place in the chapter where the two
+% routes are run against each other on a single function, which is the argument for the technique
+% and not a question anyone can be asked; three drills of the technique remain as exercises below.
+% Transition: Claude Opus 5 (Extra)
+The claim that the substitution route is cheaper is easier to believe when both routes are run on
+the same function. They are, next, on a function chosen so that the general formula has to inspect
+ten multi-indices in order to discover that nine of them vanish.
+
+\begin{example}[Taylor expansion of $\sin(xy)$, the long way and the short way]
+\label{ex:taylor_expansion_sin_xy}
+Compute the Taylor expansion of $f(x,y) := \sin(xy)$ to order $3$ around $(0,0)$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{Using the general formula:}
+    We list the multi-indices $\alpha$ with $|\alpha| \leq 3$ and compute the partial derivatives at $(0,0)$:
+    \begin{itemize}
+      \item $|\alpha|=0$: $f(0,0) = \sin(0) = 0$.
+      \item $|\alpha|=1$: $\partial_x f = y\cos(xy) \implies 0$. $\partial_y f = x\cos(xy) \implies 0$.
+      \item $|\alpha|=2$: $\partial_{xx} f = -y^2\sin(xy) \implies 0$. $\partial_{yy} f = -x^2\sin(xy) \implies 0$. $\partial_{xy} f = \cos(xy) - xy\sin(xy) \implies 1$.
+      \item $|\alpha|=3$: $\partial_{xxx} f = -y^3\cos(xy) \implies 0$. $\partial_{yyy} f = -x^3\cos(xy) \implies 0$. $\partial_{xxy} f = -2y\sin(xy) - xy^2\cos(xy) \implies 0$. $\partial_{xyy} f = -2x\sin(xy) - x^2y\cos(xy) \implies 0$.
+    \end{itemize}
+    The only non-zero term is $\partial^{(1,1)} f(0,0) = 1$. The corresponding factor in the formula is $\frac{1}{\alpha!}h^\alpha = \frac{1}{(1!)(1!)}xy = xy$. Thus,
+    \[f(x,y) = xy + o(|(x,y)|^3).\]
+  \item \textbf{Using 1D expansions (the clever way):}
+    We know that $\sin(t) = t - \frac{t^3}{6} + O(t^5)$ as $t \to 0$. Substituting $t = xy$ yields
+    \[\sin(xy) = xy - \frac{(xy)^3}{6} + O((xy)^5) = xy + o(|(x,y)|^3).\]
+\end{enumerate}
+\end{example}
+
+% Source: Jérôme Paschoud/Notizen/Woche 5.1 Taylor.pdf, p. 4
+% Generator: Gemini 3.6 Flash (High)
+% Moved here and reclassified alongside the example above (Claude Opus 5, Extra, 2026-08-13). It
+% earns its place next to that one rather than among the drills because it is the only expansion
+% in the chapter where two series are multiplied instead of nested, and because at order 4 the
+% bookkeeping of which cross terms survive is the whole difficulty.
+\begin{example}[Taylor expansion of $\frac{\cos x}{1-y^2}$, where two series meet]
+\label{ex:taylor_expansion_cos_over_1_minus_y2}
+Compute the Taylor expansion of $f(x,y) := \frac{\cos x}{1-y^2}$ to order $4$ around $(0,0)$.
+Here nothing is substituted into anything. The two factors are expanded separately, in their own
+variables, and then multiplied:
+\begin{align*}
+\cos x &= 1 - \frac{x^2}{2} + \frac{x^4}{24} + O(x^6) && (x \to 0), \\
+\frac{1}{1-y^2} &= 1 + y^2 + y^4 + O(y^6) && (y \to 0).
+\end{align*}
+Multiplying and discarding everything of total degree above $4$,
+\begin{align*}
+\frac{\cos x}{1-y^2} &= \left(1 - \frac{x^2}{2} + \frac{x^4}{24} + O(x^6)\right)\left(1 + y^2 + y^4 + O(y^6)\right) \\
+&= 1 + y^2 + y^4 - \frac{x^2}{2} - \frac{x^2y^2}{2} + \frac{x^4}{24} + o(|(x,y)|^4) \\
+&= 1 - \frac{1}{2}x^2 + y^2 + \frac{1}{24}x^4 - \frac{1}{2}x^2y^2 + y^4 + o(|(x,y)|^4).
+\end{align*}
+The one term needing care is $-\tfrac12x^2y^2$. It is the product of two second-order terms, so it
+is of total degree $4$ and has to be kept, whereas the analogous product one order further out is
+of degree $6$ and does not.
 \end{example}
 
 % Sonnet 5 (Medium)
@@ -522,48 +593,16 @@ $|\alpha| < \sigma$.
 \exinfo{This exercise is Problem 5.6 of Problem Sheet 5, Analysis II, Spring Semester 2026.}
 \end{exercise}
 
-% Source: Jérôme Paschoud/Notizen/Woche 5.1 Taylor.pdf, p. 3
-% Generator: Gemini 3.6 Flash (High)
-\begin{exercise}[Evaluating partial derivatives using multi-index notation]
-\label{ex:multi_index_evaluation}
-Let $f(x,y,z) := x^3+2y+e^{2x}\cos(z)$. Calculate the partial derivative $\partial^\alpha f$ for the multi-index $\alpha = (2,0,1)$.
-\end{exercise}
-
-\begin{exercisesolution}[\cref{ex:multi_index_evaluation}]
-The multi-index $\alpha = (2,0,1)$ corresponds to differentiating twice with respect to $x$, zero times with respect to $y$, and once with respect to $z$. Since $f$ is smooth, the order of differentiation does not matter.
-\begin{align*}
-\partial_x f &= 3x^2 + 2e^{2x}\cos(z) \\
-\partial_{xx} f &= 6x + 4e^{2x}\cos(z) \\
-\partial_{xxz} f &= -4e^{2x}\sin(z).
-\end{align*}
-Hence $\partial^{(2,0,1)} f(x,y,z) = -4e^{2x}\sin(z)$.
-\end{exercisesolution}
-
-% Source: Jérôme Paschoud/Notizen/Woche 5.1 Taylor.pdf, pp. 3--4
-% Generator: Gemini 3.6 Flash (High)
-\begin{exercise}[Taylor expansion of $\sin(xy)$]
-\label{ex:taylor_expansion_sin_xy}
-Compute the Taylor expansion of $f(x,y) := \sin(xy)$ to order $3$ around $(0,0)$. 
-\end{exercise}
-
-\begin{exercisesolution}[\cref{ex:taylor_expansion_sin_xy}]
-We can solve this in two ways:
-\begin{enumerate}[label=\textbf{(\alph*)}]
-  \item \textbf{Using the general formula:}
-    We list the multi-indices $\alpha$ with $|\alpha| \leq 3$ and compute the partial derivatives at $(0,0)$:
-    \begin{itemize}
-      \item $|\alpha|=0$: $f(0,0) = \sin(0) = 0$.
-      \item $|\alpha|=1$: $\partial_x f = y\cos(xy) \implies 0$. $\partial_y f = x\cos(xy) \implies 0$.
-      \item $|\alpha|=2$: $\partial_{xx} f = -y^2\sin(xy) \implies 0$. $\partial_{yy} f = -x^2\sin(xy) \implies 0$. $\partial_{xy} f = \cos(xy) - xy\sin(xy) \implies 1$.
-      \item $|\alpha|=3$: $\partial_{xxx} f = -y^3\cos(xy) \implies 0$. $\partial_{yyy} f = -x^3\cos(xy) \implies 0$. $\partial_{xxy} f = -2y\sin(xy) - xy^2\cos(xy) \implies 0$. $\partial_{xyy} f = -2x\sin(xy) - x^2y\cos(xy) \implies 0$.
-    \end{itemize}
-    The only non-zero term is $\partial^{(1,1)} f(0,0) = 1$. The corresponding factor in the formula is $\frac{1}{\alpha!}h^\alpha = \frac{1}{(1!)(1!)}xy = xy$. Thus,
-    \[f(x,y) = xy + o(|(x,y)|^3).\]
-  \item \textbf{Using 1D expansions (the clever way):}
-    We know that $\sin(t) = t - \frac{t^3}{6} + O(t^5)$ as $t \to 0$. Substituting $t = xy$ yields
-    \[\sin(xy) = xy - \frac{(xy)^3}{6} + O((xy)^5) = xy + o(|(x,y)|^3).\]
-\end{enumerate}
-\end{exercisesolution}
+% Restructured by Claude Opus 5 (Extra), 2026-08-13. This was a run of five exercises each with
+% its answer printed directly underneath, so not one of them could be attempted. Two of the five
+% are now worked examples in sec:taylor_expansions's "Worked examples" subsection, where they
+% demonstrate the substitution technique; the three that remain are drills of that same technique
+% and their solutions have moved to 99-solutions.tex. None of the five carried a "% Kept inline:"
+% marker, so nothing in the sources asked for the old arrangement.
+% Transition: Claude Opus 5 (Extra)
+The three expansions below are the same technique again, unassisted. Each yields to a single
+one-variable series, and the only judgement required is which substitution to make and how many
+terms of it survive the truncation.
 
 % Source: Jérôme Paschoud/Notizen/Woche 5.1 Taylor.pdf, p. 4
 % Generator: Gemini 3.6 Flash (High)
@@ -572,32 +611,11 @@ We can solve this in two ways:
 Compute the Taylor expansion of $f(x,y) := \sqrt{1+x+y^2}$ to order $2$ around $(0,0)$.
 \end{exercise}
 
-\begin{exercisesolution}[\cref{ex:taylor_expansion_sqrt_1_plus_x_plus_y2}]
-Using the 1D expansion $\sqrt{1+t} = 1 + \frac{1}{2}t - \frac{1}{8}t^2 + O(t^3)$ with $t = x+y^2$, we obtain:
-\begin{align*}
-\sqrt{1+x+y^2} &= 1 + \frac{1}{2}(x+y^2) - \frac{1}{8}(x+y^2)^2 + O(|(x,y)|^3) \\
-&= 1 + \frac{1}{2}x + \frac{1}{2}y^2 - \frac{1}{8}(x^2+2xy^2+y^4) + o(|(x,y)|^2) \\
-&= 1 + \frac{1}{2}x - \frac{1}{8}x^2 + \frac{1}{2}y^2 + o(|(x,y)|^2).
-\end{align*}
-\end{exercisesolution}
-
 % Supplement: Analysis_II_Script_v1.pdf, p. 59
 \begin{exercise}[Taylor expansion of $\exp(\arctan(x-y))$]
 \label{ex:taylor_expansion_exp_arctan}
 Compute the Taylor expansion of $f(x,y) := \exp(\arctan(x-y))$ to order $2$ around $(0,0)$.
 \end{exercise}
-
-\begin{exercisesolution}[\cref{ex:taylor_expansion_exp_arctan}]
-% Generator: Claude Sonnet 5 (High)
-Write $s := x-y$, itself of order $|h|$. Since $\arctan$ is odd, $\arctan(t) = t + O(t^3)$, so
-\[\arctan(s) = s + O(|h|^3) = s + o(|h|^2).\]
-Since $\exp$ is smooth and bounded near $0$, an $o(|h|^2)$ correction inside $\exp$ contributes
-only an $o(|h|^2)$ correction to the output. Consequently, to order $2$, $\exp(\arctan(s))$ and
-$\exp(s)$ agree:
-\[\exp(\arctan(x-y)) = \exp(x-y) + o(|(x,y)|^2).\]
-Now $\exp(s) = 1+s+\tfrac12s^2+O(s^3)$ with $s^2 = x^2-2xy+y^2$, so
-\[\exp(\arctan(x-y)) = 1 + x - y + \tfrac12x^2 - xy + \tfrac12y^2 + o(|(x,y)|^2).\]
-\end{exercisesolution}
 
 % Supplement: Analysis_II_Script_v1.pdf, p. 59
 \begin{exercise}[Taylor expansion of $1/(1-x^2-y^2)$]
@@ -605,39 +623,14 @@ Now $\exp(s) = 1+s+\tfrac12s^2+O(s^3)$ with $s^2 = x^2-2xy+y^2$, so
 Compute the Taylor expansion of $f(x,y) := \dfrac{1}{1-x^2-y^2}$ to order $2$ around $(0,0)$.
 \end{exercise}
 
-\begin{exercisesolution}[\cref{ex:taylor_expansion_one_over_1_minus_x2_y2}]
-% Generator: Claude Sonnet 5 (High)
-Using $\tfrac{1}{1-t} = 1+t+O(t^2)$ with $t := x^2+y^2$, itself already $O(|h|^2)$, so
-$t^2 = O(|h|^4) = o(|h|^2)$:
-\[\frac{1}{1-x^2-y^2} = 1 + (x^2+y^2) + o(|(x,y)|^2).\]
-\end{exercisesolution}
-
 \begin{remark}
-Together with \cref{ex:taylor_expansion_sin_xy,ex:taylor_expansion_sqrt_1_plus_x_plus_y2} above,
-these two exercises are exactly script Exercise 10.36: \qt{compute the Taylor polynomials up
-to the quadratic order of $\sin(xy)$, $\sqrt{1+x+y^2}$, $\exp(\arctan(x-y))$,
-$1/(1-x^2-y^2)$ --- don't use the general formula!} All four are worked by the same \qt{1D
-substitution} technique this section uses throughout.
+Together with \cref{ex:taylor_expansion_sin_xy}, these three are exactly script Exercise 10.36:
+\qt{compute the Taylor polynomials up to the quadratic order of $\sin(xy)$, $\sqrt{1+x+y^2}$,
+$\exp(\arctan(x-y))$, $1/(1-x^2-y^2)$ --- don't use the general formula!} The last clause is the
+instruction that matters. Each of the four collapses to a line by substitution and to most of a
+page by the general formula, and \cref{ex:taylor_expansion_sin_xy} runs both routes so that the
+difference can be seen rather than asserted.
 \end{remark}
-
-% Source: Jérôme Paschoud/Notizen/Woche 5.1 Taylor.pdf, p. 4
-% Generator: Gemini 3.6 Flash (High)
-\begin{exercise}[Taylor expansion of $\frac{\cos x}{1-y^2}$]
-\label{ex:taylor_expansion_cos_over_1_minus_y2}
-Compute the Taylor expansion of $f(x,y) := \frac{\cos x}{1-y^2}$ to order $4$ around $(0,0)$.
-\end{exercise}
-
-\begin{exercisesolution}[\cref{ex:taylor_expansion_cos_over_1_minus_y2}]
-We multiply the 1D expansions for $\cos x$ and $\frac{1}{1-y^2}$.
-As $x \to 0$, $\cos x = 1 - \frac{x^2}{2} + \frac{x^4}{24} + O(x^6)$.
-As $y \to 0$, $\frac{1}{1-y^2} = 1 + y^2 + y^4 + O(y^6)$.
-Multiplying these together and keeping terms up to order $4$:
-\begin{align*}
-\frac{\cos x}{1-y^2} &= \left(1 - \frac{x^2}{2} + \frac{x^4}{24} + O(x^6)\right)\left(1 + y^2 + y^4 + O(y^6)\right) \\
-&= 1 + y^2 + y^4 - \frac{x^2}{2} - \frac{x^2y^2}{2} + \frac{x^4}{24} + o(|(x,y)|^4) \\
-&= 1 - \frac{1}{2}x^2 + y^2 + \frac{1}{24}x^4 - \frac{1}{2}x^2y^2 + y^4 + o(|(x,y)|^4).
-\end{align*}
-\end{exercisesolution}
 
 % Source: old_exams/fs2023/Prüfung.pdf (9 August 2021), Teil B, Aufgabe 1, p. 13
 % Extractor: Gemini 3.6 Flash (High)

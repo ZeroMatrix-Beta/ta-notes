@@ -5,23 +5,41 @@
 \label{sec:taylor_solutions}
 
 % Transition: Claude Opus 5 (High)
-Most of this chapter's solutions are not collected here. Twelve of the eighteen sit beside their
-exercises, namely those to \cref{ex:transpose_diff} (\cpageref{ex:transpose_diff}),
-\cref{ex:schwarz_application} (\cpageref{ex:schwarz_application}),
-\cref{ex:taylor_maximal_expansion} (\cpageref{ex:taylor_maximal_expansion}),
-\cref{ex:taylor_explicit_example} (\cpageref{ex:taylor_explicit_example}),
-\cref{ex:hessian_taylor_proof} (\cpageref{ex:hessian_taylor_proof}),
-\cref{ex:multi_index_evaluation} (\cpageref{ex:multi_index_evaluation}),
-\cref{ex:taylor_expansion_sin_xy} (\cpageref{ex:taylor_expansion_sin_xy}),
-\cref{ex:taylor_expansion_sqrt_1_plus_x_plus_y2}
-(\cpageref{ex:taylor_expansion_sqrt_1_plus_x_plus_y2}),
-\cref{ex:taylor_expansion_exp_arctan} (\cpageref{ex:taylor_expansion_exp_arctan}),
-\cref{ex:taylor_expansion_one_over_1_minus_x2_y2}
-(\cpageref{ex:taylor_expansion_one_over_1_minus_x2_y2}) and
-\cref{ex:taylor_expansion_cos_over_1_minus_y2}
-(\cpageref{ex:taylor_expansion_cos_over_1_minus_y2}). That is eleven exercises rather than twelve
-solutions, because \cref{ex:taylor_explicit_example} carries two, a cumbersome solution and an easy
+% Rewritten 2026-08-13 (Claude Opus 5, Extra) after the restructure of 02-taylor-expansions.tex.
+% The list used to run to eleven exercises. Four of those are now worked examples and therefore
+% not exercises at all (ex:taylor_maximal_expansion, ex:multi_index_evaluation,
+% ex:taylor_expansion_sin_xy, ex:taylor_expansion_cos_over_1_minus_y2), and four solutions moved
+% into this file (ex:schwarz_application and the three remaining expansion drills).
+Three of this chapter's solutions are not collected here but sit beside their exercises, namely
+those to \cref{ex:transpose_diff} (\cpageref{ex:transpose_diff}),
+\cref{ex:taylor_explicit_example} (\cpageref{ex:taylor_explicit_example}) and
+\cref{ex:hessian_taylor_proof} (\cpageref{ex:hessian_taylor_proof}). That is four solutions rather
+than three, because \cref{ex:taylor_explicit_example} carries two, a cumbersome one and an easy
 one.
+
+\begin{exercisesolution}[Solution to \cref{ex:schwarz_application}]
+% Relocated from 02-taylor-expansions.tex by Claude Opus 5 (Extra), 2026-08-13.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Every term in $f$ is a composition of $C^2$ functions (polynomials, exponentials, sine),
+    and the denominator $2+\sin(x)$ is bounded away from zero. Thus $f$ is $C^2$.
+  \item Since $f \in C^2$, by Schwarz's theorem (\cref{thm:schwarz_mixed_partials}) we have
+    $\partial_2 \partial_1 f = \partial_1 \partial_2 f$. Computing $\partial_1$ of the second
+    term would be tedious. However, notice that the second term depends only on $x$, so its
+    derivative with respect to $y$ is $0$. Thus, we first compute $\partial_2 f$:
+    \[\partial_2 f(x,y) = x^2 (2y e^{y^2}) + 0 = 2x^2 y e^{y^2}.\]
+    Then we compute $\partial_1$ of this result:
+    \[\partial_1 \partial_2 f(x,y) = \partial_1 (2x^2 y e^{y^2}) = 4xy e^{y^2}.\]
+    By Schwarz's theorem, $\partial_2 \partial_1 f(x,y) = 4xy e^{y^2}$.
+\end{enumerate}
+\end{exercisesolution}
+
+\begin{remark}[The monstrous term is the exercise]
+The second term of $f$ was not chosen to be differentiated. It was chosen so that differentiating
+it is out of the question, which leaves the reader with only two options: give up, or notice that
+it does not depend on $y$ and let \cref{thm:schwarz_mixed_partials} take the derivatives in the
+other order. An exercise of this shape has a single decision in it, and taking the decision is the
+entire content.
+\end{remark}
 
 \begin{exercisesolution}[Solution to \cref{ex:reading_off_expansions}]
 % Generator: Claude Opus 5 (High)
@@ -193,6 +211,50 @@ the order-$2$ coefficients differ. The argument above breaks at precisely the ri
 $d = \sigma$ the bound becomes $|R_d(u) + O(t)| \leq M$, which says nothing.
 \end{ainote}
 \end{exercisesolution}
+
+% The three solutions below were relocated here from 02-taylor-expansions.tex by Claude Opus 5
+% (Extra), 2026-08-13. Each sat directly under its own exercise, so the exercise could not be
+% attempted; and since ex:taylor_expansion_sin_xy now demonstrates the technique as a worked
+% example, these three are drills of a method the reader has already been shown.
+\begin{exercisesolution}[Solution to \cref{ex:taylor_expansion_sqrt_1_plus_x_plus_y2}]
+% Generator: Gemini 3.6 Flash (High)
+Using the 1D expansion $\sqrt{1+t} = 1 + \frac{1}{2}t - \frac{1}{8}t^2 + O(t^3)$ with $t = x+y^2$, we obtain:
+\begin{align*}
+\sqrt{1+x+y^2} &= 1 + \frac{1}{2}(x+y^2) - \frac{1}{8}(x+y^2)^2 + O(|(x,y)|^3) \\
+&= 1 + \frac{1}{2}x + \frac{1}{2}y^2 - \frac{1}{8}(x^2+2xy^2+y^4) + o(|(x,y)|^2) \\
+&= 1 + \frac{1}{2}x - \frac{1}{8}x^2 + \frac{1}{2}y^2 + o(|(x,y)|^2).
+\end{align*}
+Note that $t = x+y^2$ is of order $|h|$ and not of order $|h|^2$, because of its $x$. That is why
+the $t^2$ term has to be carried and expanded, and why $2xy^2$ and $y^4$ are then dropped from it.
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:taylor_expansion_exp_arctan}]
+% Generator: Claude Sonnet 5 (High)
+Write $s := x-y$, itself of order $|h|$. Since $\arctan$ is odd, $\arctan(t) = t + O(t^3)$, so
+\[\arctan(s) = s + O(|h|^3) = s + o(|h|^2).\]
+Since $\exp$ is smooth and bounded near $0$, an $o(|h|^2)$ correction inside $\exp$ contributes
+only an $o(|h|^2)$ correction to the output. Consequently, to order $2$, $\exp(\arctan(s))$ and
+$\exp(s)$ agree:
+\[\exp(\arctan(x-y)) = \exp(x-y) + o(|(x,y)|^2).\]
+Now $\exp(s) = 1+s+\tfrac12s^2+O(s^3)$ with $s^2 = x^2-2xy+y^2$, so
+\[\exp(\arctan(x-y)) = 1 + x - y + \tfrac12x^2 - xy + \tfrac12y^2 + o(|(x,y)|^2).\]
+\end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:taylor_expansion_one_over_1_minus_x2_y2}]
+% Generator: Claude Sonnet 5 (High)
+Using $\tfrac{1}{1-t} = 1+t+O(t^2)$ with $t := x^2+y^2$, itself already $O(|h|^2)$, so
+$t^2 = O(|h|^4) = o(|h|^2)$:
+\[\frac{1}{1-x^2-y^2} = 1 + (x^2+y^2) + o(|(x,y)|^2).\]
+\end{exercisesolution}
+
+\begin{remark}[The substitution's own order decides how far to expand]
+Read the three together and one number governs all of them, namely the order of the substituted
+quantity $t$ itself. For $1/(1-x^2-y^2)$ we have $t = x^2+y^2 = O(|h|^2)$, so a single term of the
+geometric series already exhausts order $2$ and $t^2$ is invisible. For $\sqrt{1+x+y^2}$ the same
+$t$ carries an $x$, drops to order $|h|$, and consequently the quadratic term of the series has to
+be expanded in full. The habit worth taking away is to ask what order $t$ is \emph{before}
+deciding how many terms of the one-variable series to write down.
+\end{remark}
 
 \begin{exercisesolution}[Proof of \cref{ex:taylor_parametric_integral}]
 % Generator: Gemini 3.6 Flash (High)

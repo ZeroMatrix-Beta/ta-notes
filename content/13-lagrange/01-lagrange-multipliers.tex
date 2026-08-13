@@ -210,14 +210,27 @@ the end. It is scaffolding, not part of the answer. That does not make it meanin
 \end{remark}
 
 % Source: Corsin Nick/Class Notes/Week 5.pdf, pp. 5--6
-\begin{exercise}[Extrema of $xyz$ on the unit ball]
+% Reclassified from exercise+exercisesolution to a worked example by Claude Opus 5 (Extra),
+% 2026-08-13, together with the two blocks below it. All three were exercises whose full solutions
+% were printed immediately underneath (this one carried "% Kept inline: solved directly in Corsin
+% Nick/Class Notes/Week 5.pdf, pp. 5--6", so the arrangement did mirror the source), and all three
+% are the chapter's demonstrations of the method rather than questions: the running text above
+% points forward to this one, the figure below is keyed to its eight boundary candidates, and
+% ex:second_order_test_on_circle later reopens ex:extrema_on_circle by name. Nothing is lost as
+% practice, because the chapter's eight genuine exercises still sit at the end with their
+% solutions in 99-solutions.tex. Corsin's own order and wording are untouched.
+% Transition: Claude Opus 5 (Extra)
+Three worked examples follow, in increasing order of how much of the work is not the multiplier
+rule. The first has a constraint set with an interior, so it needs the unconstrained theory as
+well; the second is the smallest non-trivial case and gets reopened later with the second-order
+test; the third has to be turned into a constrained problem before any of this applies.
+
+\begin{example}[Extrema of $xyz$ on the unit ball]
 \label{ex:xyz_on_ball}
 Find the local extrema of
 \[f : K \to \mathbb{R}, \quad (x,y,z) \mapsto xyz, \qquad K = \{(x,y,z) \in \mathbb{R}^3 : x^2+y^2+z^2 \leq 1\}.\]
-\end{exercise}
 
-% Kept inline: solved directly in Corsin Nick/Class Notes/Week 5.pdf, pp. 5--6.
-\begin{exercisesolution}[Proof of \cref{ex:xyz_on_ball}]
+\medskip
 We first find the \textbf{interior critical points}:
 \[\nabla f(x,y,z) = (yz,\ xz,\ xy) \overset{!}{=} 0 \implies x = y = 0 \ \text{ or } \ x = z = 0 \ \text{ or } \ y = z = 0.\]
 Then we look for local extrema \textbf{on the boundary}. We need to find the local extrema of
@@ -272,7 +285,7 @@ with an odd number. The interior candidates are \textbf{not extrema at all}: at 
 coordinate axis $f=0$, yet every neighbourhood contains points where $xyz>0$ and points where
 $xyz<0$, since flipping the sign of one coordinate flips the sign of the product. They are the
 three-variable analogue of a saddle.
-\end{exercisesolution}
+\end{example}
 
 \begin{ainote}
 Corsin writes $g(x) = |x| - 1$ for the constraint above, but the Lagrangian uses
@@ -321,12 +334,11 @@ actually differentiated, so it is used throughout.
 
 % Source: Jérôme Paschoud/Notizen/Woche 5.2 Optimierung I.pdf, p. 3
 % Generator: Gemini 3.6 Flash (High)
-\begin{exercise}[Extrema on a circle]
+\begin{example}[Extrema on a circle]
 \label{ex:extrema_on_circle}
 Find the maximum and minimum of $f(x,y) = xy$ under the condition that $(x,y)$ lies on the circle with radius $\sqrt{2}$. (cf.\ Michaels Bsp 7.2.3)
-\end{exercise}
 
-\begin{exercisesolution}[\cref{ex:extrema_on_circle}]
+\medskip
 We want to optimize $f(x,y) = xy$ subject to the constraint $g(x,y) = x^2+y^2-2 = 0$.
 The Lagrangian is
 \[L(x,y,\lambda) := f(x,y) - \lambda g(x,y) = xy - \lambda(x^2+y^2-2).\]
@@ -341,18 +353,18 @@ If $y=0$, then $x=0$, which contradicts $x^2+y^2=2$. Hence $y \neq 0$ and $4\lam
 If $\lambda = 1/2$, then $y = x$. The constraint gives $2x^2 = 2 \implies x = \pm 1$, giving points $(1,1)$ and $(-1,-1)$. At these points, $f(\pm 1, \pm 1) = 1$.
 If $\lambda = -1/2$, then $y = -x$. The constraint gives $2x^2 = 2 \implies x = \pm 1$, giving points $(1,-1)$ and $(-1,1)$. At these points, $f(\pm 1, \mp 1) = -1$.
 Since the circle is compact, these must be the global extrema. The maximum is $1$ and the minimum is $-1$.
-\end{exercisesolution}
+\end{example}
 
 % Source: Jérôme Paschoud/Notizen/Woche 5.2 Optimierung I.pdf, p. 3
 % Generator: Gemini 3.6 Flash (High)
 % Moved up from below the second-order test, next to the other first-order drill it belongs with.
-\begin{exercise}[Largest rectangle in an ellipse]
+\begin{example}[Largest rectangle in an ellipse]
 \label{ex:largest_rectangle_ellipse}
 Given an ellipse $E = \{ (x,y) \in \mathbb{R}^2 \mid x^2/A^2 + y^2/B^2 = 1 \}$, find the rectangle (with sides parallel to the axes) whose vertices lie on $E$ and has the largest area. (cf.\ Michaels Bsp 7.2.7)
-\end{exercise}
 
-\begin{exercisesolution}[\cref{ex:largest_rectangle_ellipse}]
-Let the vertices of the rectangle in the four quadrants be $(\pm x, \pm y)$ with $x, y \geq 0$. The area of the rectangle is $f(x,y) = 4xy$.
+\medskip
+Nothing here is constrained until we make it so. The first step is to name the unknowns and read
+the constraint off the geometry. Let the vertices of the rectangle in the four quadrants be $(\pm x, \pm y)$ with $x, y \geq 0$. The area of the rectangle is $f(x,y) = 4xy$.
 We maximize $f(x,y)$ subject to the constraint $g(x,y) = \frac{x^2}{A^2} + \frac{y^2}{B^2} - 1 = 0$ in the region $x > 0, y > 0$.
 The Lagrangian is
 \[L(x,y,\lambda) := 4xy - \lambda\left(\frac{x^2}{A^2} + \frac{y^2}{B^2} - 1\right).\]
@@ -366,7 +378,11 @@ Equating the expressions for $\lambda$ yields $\frac{2yA^2}{x} = \frac{2xB^2}{y}
 Substituting this into the constraint gives $2\frac{x^2}{A^2} = 1 \implies x = \frac{A}{\sqrt{2}}$.
 Similarly, $y = \frac{B}{\sqrt{2}}$.
 The maximal area is $f\left(\frac{A}{\sqrt{2}}, \frac{B}{\sqrt{2}}\right) = 4 \cdot \frac{A}{\sqrt{2}} \cdot \frac{B}{\sqrt{2}} = 2AB$.
-\end{exercisesolution}
+Note that the answer does not depend on the shape of the ellipse in the way one might expect: the
+optimal rectangle occupies the fraction $2AB/(\pi AB) = 2/\pi$ of the ellipse's area whatever $A$
+and $B$ are, because the substitution $(x,y) = (Au,Bv)$ turns the whole problem into the same
+question about the unit circle.
+\end{example}
 
 \subsection{Second-order conditions on the constraint set}
 
@@ -545,35 +561,12 @@ basis. Each eigenvalue is real because $\lambda_j = \langle v_j, Av_j\rangle$ is
 construction.
 \end{proof}
 
-% Supplement: Analysis_II_Script_v1.pdf, p. 73
-\begin{exercise}[Antipodal points maximise distance on the sphere]
-\label{ex:antipodal_max_distance}
-Let $n \geq 2$. Prove that two points $x,y \in S^{n-1}$ have maximal distance $|x-y|$ if and
-only if $x = -y$. Consider the function $(x,y) \mapsto |x-y|^2$ on
-$S^{n-1}\times S^{n-1} \subset \mathbb{R}^{2n}$.
-\end{exercise}
-
-\begin{exercisesolution}[Proof of \cref{ex:antipodal_max_distance}]
-% Generator: Claude Sonnet 5 (High)
-Since $|x|=|y|=1$ on $S^{n-1}$,
-\[f(x,y) := |x-y|^2 = |x|^2 - 2\langle x,y\rangle + |y|^2 = 2 - 2\langle x,y\rangle,\]
-so maximising $|x-y|$ is the same as maximising $f$, i.e.\ minimising $\langle x,y\rangle$.
-The domain $S^{n-1}\times S^{n-1}$ is compact (a product of compact sets), so $f$ attains a
-maximum somewhere by the extreme value theorem; we locate it with Lagrange multipliers under the
-two constraints $g_1(x,y) := |x|^2-1 = 0$ and $g_2(x,y) := |y|^2-1=0$.
-
-Computing gradients in $\mathbb{R}^{2n} = \mathbb{R}^n_x \times \mathbb{R}^n_y$:
-\[\nabla f = (-2y,\,-2x), \qquad \nabla g_1 = (2x,\,0), \qquad \nabla g_2 = (0,\,2y).\]
-At a critical point, $\nabla g_1,\nabla g_2$ are linearly independent (they are non-zero and
-supported on disjoint blocks of coordinates), so \cref{prop:constrained_optimization} gives
-$\lambda_1,\lambda_2$ with $\nabla f = \lambda_1\nabla g_1 + \lambda_2\nabla g_2$, i.e.\
-\[-2y = 2\lambda_1x, \qquad -2x = 2\lambda_2y \qquad\Longrightarrow\qquad
-  y = -\lambda_1x, \quad x=-\lambda_2y.\]
-So, $x$ and $y$ are parallel. Combined with $|x|=|y|=1$, this forces $y = x$ or $y=-x$.
-These are the only two candidates, and $f(x,x) = 0$ while $f(x,-x) = |2x|^2 = 4$. The maximum
-of $f$ over the compact domain is therefore $4$, attained exactly when $y=-x$ (i.e.\ exactly at
-antipodal pairs, where $|x-y| = 2$).
-\end{exercisesolution}
+% ex:antipodal_max_distance stood here, between the spectral theorem's proof and the corollary
+% drawn from it, with its own full solution printed underneath. Moved down into the exercise block
+% and its solution into 99-solutions.tex by Claude Opus 5 (Extra), 2026-08-13: it is a genuine
+% problem rather than a demonstration (it is the chapter's only worked instance of the
+% *two*-constraint form), and it was interrupting an argument that runs straight from
+% thm:spectral_theorem_optimization into cor:courant_fischer_extreme.
 
 % Generator: Claude Opus 5 (High)
 \begin{corollary}[Extreme eigenvalues as Rayleigh quotients]
@@ -592,6 +585,19 @@ the corresponding eigenvector.
 \end{proof}
 
 % Originally: content/week-05.tex, end of the chapter
+
+% Supplement: Analysis_II_Script_v1.pdf, p. 73
+% Moved here from between thm:spectral_theorem_optimization and cor:courant_fischer_extreme
+% (Claude Opus 5, Extra, 2026-08-13); solution now in 99-solutions.tex.
+\begin{exercise}[Antipodal points maximise distance on the sphere]
+\label{ex:antipodal_max_distance}
+Let $n \geq 2$. Prove that two points $x,y \in S^{n-1}$ have maximal distance $|x-y|$ if and
+only if $x = -y$. Consider the function $(x,y) \mapsto |x-y|^2$ on
+$S^{n-1}\times S^{n-1} \subset \mathbb{R}^{2n}$.
+\exhint{The constraint set is a product of two spheres, so there are two constraints, and
+\cref{prop:constrained_optimization} asks for their gradients to be linearly independent before
+it will produce any multipliers at all.}
+\end{exercise}
 
 \begin{aiexercise}[Extrema on a Circle via Lagrange Multipliers]
 \label{ex:ai_lagrange_circle}

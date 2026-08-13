@@ -3,12 +3,48 @@
 \section{Solutions}
 \label{sec:lagrange_solutions}
 
-% Transition: Claude Opus 5 (High)
-Not every solution in this chapter is collected here. \Cref{ex:xyz_on_ball}
-(\cpageref{ex:xyz_on_ball}), \cref{ex:extrema_on_circle} (\cpageref{ex:extrema_on_circle}),
-\cref{ex:largest_rectangle_ellipse} (\cpageref{ex:largest_rectangle_ellipse}) and
-\cref{ex:antipodal_max_distance} (\cpageref{ex:antipodal_max_distance}) are solved where they
-appear.
+% Rewritten 2026-08-13 (Claude Opus 5, Extra). The three blocks this paragraph used to name as
+% "solved where they appear" are now worked examples rather than exercises, and the fourth,
+% ex:antipodal_max_distance, has moved into the exercise block with its solution below.
+% Transition: Claude Opus 5 (Extra)
+Every exercise in this chapter is solved here. The chapter's three demonstrations of the
+multiplier rule (\cref{ex:xyz_on_ball} on \cpageref{ex:xyz_on_ball},
+\cref{ex:extrema_on_circle} on \cpageref{ex:extrema_on_circle} and
+\cref{ex:largest_rectangle_ellipse} on \cpageref{ex:largest_rectangle_ellipse}) are worked
+examples, and are carried out where they stand.
+
+% Relocated from 01-lagrange-multipliers.tex by Claude Opus 5 (Extra), 2026-08-13.
+\begin{exercisesolution}[Proof of \cref{ex:antipodal_max_distance}]
+% Generator: Claude Sonnet 5 (High)
+Since $|x|=|y|=1$ on $S^{n-1}$,
+\[f(x,y) := |x-y|^2 = |x|^2 - 2\langle x,y\rangle + |y|^2 = 2 - 2\langle x,y\rangle,\]
+so maximising $|x-y|$ is the same as maximising $f$, i.e.\ minimising $\langle x,y\rangle$.
+The domain $S^{n-1}\times S^{n-1}$ is compact (a product of compact sets), so $f$ attains a
+maximum somewhere by the extreme value theorem; we locate it with Lagrange multipliers under the
+two constraints $g_1(x,y) := |x|^2-1 = 0$ and $g_2(x,y) := |y|^2-1=0$.
+
+Computing gradients in $\mathbb{R}^{2n} = \mathbb{R}^n_x \times \mathbb{R}^n_y$:
+\[\nabla f = (-2y,\,-2x), \qquad \nabla g_1 = (2x,\,0), \qquad \nabla g_2 = (0,\,2y).\]
+At a critical point, $\nabla g_1,\nabla g_2$ are linearly independent (they are non-zero and
+supported on disjoint blocks of coordinates), so \cref{prop:constrained_optimization} gives
+$\lambda_1,\lambda_2$ with $\nabla f = \lambda_1\nabla g_1 + \lambda_2\nabla g_2$, i.e.\
+\[-2y = 2\lambda_1x, \qquad -2x = 2\lambda_2y \qquad\Longrightarrow\qquad
+  y = -\lambda_1x, \quad x=-\lambda_2y.\]
+So, $x$ and $y$ are parallel. Combined with $|x|=|y|=1$, this forces $y = x$ or $y=-x$.
+These are the only two candidates, and $f(x,x) = 0$ while $f(x,-x) = |2x|^2 = 4$. The maximum
+of $f$ over the compact domain is therefore $4$, attained exactly when $y=-x$ (i.e.\ exactly at
+antipodal pairs, where $|x-y| = 2$).
+\end{exercisesolution}
+
+\begin{remark}[Squaring first is not a cosmetic step]
+% Generator: Claude Opus 5 (Extra)
+The problem is posed for $|x-y|$ and solved for $|x-y|^2$, and the swap is what makes the
+multiplier rule applicable at all. The Euclidean norm fails to be differentiable exactly where its
+argument vanishes, which here is the diagonal $x=y$, and that is one of the two candidate
+configurations the argument has to compare. Squaring removes the singularity without moving the
+maximiser, since $t \mapsto t^2$ is strictly increasing on $[0,\infty)$. The same manoeuvre is
+worth reaching for whenever a distance is being optimised.
+\end{remark}
 
 \begin{exercisesolution}[Solution to \cref{ex:5.2}]
 % Generator: Claude Sonnet 5 (Medium)

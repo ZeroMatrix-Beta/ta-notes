@@ -47,6 +47,22 @@ came from in *his* notes — and both are worth keeping.
 **Avoid a chapter that is one section repeating the chapter's own title.** If a chapter has exactly
 one section and they share a name, either split the section or let the chapter absorb it.
 
+⚠️ **Five chapters break this rule and are known to** (audited 2026-08-13): **4** (*Sequences and
+Convergence* / `01-sequences-and-convergence.tex`), **13** (*Lagrange Multipliers*), **14**
+(*Convexity*), **15** (*The Inverse Function Theorem*) and **16** (*The Implicit Function
+Theorem*). They were left alone deliberately, because the repair is not free: promoting a
+subsection to a section moves every theorem number in the chapter from `13.a.N` to `13.a.N` /
+`13.b.N` / `13.c.N`, and that ripples through every `\cref` target in the printed document. **It is
+the user's call, not a tidy-up.**
+
+Chapter 13 is the one worth doing: it is 700 lines and already carries two self-contained
+subsections (*Second-order conditions on the constraint set*, *An application: the spectral
+theorem*), and promoting them would put the spectral theorem in the table of contents, which is
+where a reader would look for it. Note that its exercise block sits at the end of the file and
+would have to move up into the first section, since those are all first-order multiplier problems.
+Chapters 15 and 16 have no subsections to promote, so for those the only repair is the other one:
+let the chapter absorb the section.
+
 **Heading suffixes and colours.** All numbered headings carry a green `(...)` suffix in `OliveGreen`
 (`SecNumberColor`): `\chapter{...}` → `Title (Chapter 7)`, and `(Appendix C)` after `\appendix`;
 `\section{...}` → `Title (Section 7.a)`; `\subsection{...}` → `Title (Subsection 7.a.1)`. Part

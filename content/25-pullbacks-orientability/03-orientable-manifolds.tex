@@ -111,6 +111,17 @@ transcribed pages state explicitly. Recorded here for self-containedness, since 
 exercise-sheet solutions below rely on it.
 \end{ainote}
 
+% ⚠️ OPEN, raised by the 2026-08-13 audit. This theorem is stated a second time in
+% content/26-stokes/04-stokes-theorem.tex as thm:stokes_3d, three lines after that section's
+% derivation says it "recovers thm:stokes_classical". So classical Stokes carries two numbers in
+% two chapters. A sentence there now names the relationship, but the duplication stands.
+% Whichever way it is repaired, note the constraint that makes it awkward: thm:stokes_classical is
+% cited from content/23-flux-divergence/99-solutions.tex, which is TWO CHAPTERS EARLIER, so the
+% statement cannot simply be moved down to ch. 26 without leaving that citation pointing forwards.
+% The honest options are to keep this statement as the definitive one and demote thm:stokes_3d to
+% a remark restating the orientation convention (its citations would then read "By Remark ...",
+% which is why it was not just done), or to accept the forward reference from ch. 23 and let ch. 26
+% own the theorem outright.
 \begin{theorem}[Stokes' theorem, classical form in $\mathbb{R}^3$]
 \label{thm:stokes_classical}
 % Generator: Claude Sonnet 5 (Medium)

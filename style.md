@@ -191,6 +191,16 @@ a style decision actually changes.
   ratio is the problem: a mark that is meant to signal a rupture had become this document's
   default connector, so nothing it marked read as a rupture any more.
 
+  **Recounted 2026-08-13: 376** in typeset lines of `content/` (lines opening with `%` excluded;
+  inline trailing comments are still counted, so the true figure is somewhat lower). Two thirds of
+  them are gone, which is real progress, and it is still roughly triple what the rule above asks
+  for over 416 pages. Four files hold a quarter of the remainder and are where a further pass
+  should start:
+  `01-prerequisites/99-solutions.tex` (32), `02-metric-normed-inner-product/02-metric-spaces.tex`
+  (30), `11-taylor/01-mean-value-theorem.tex` (30), `19-jordan-measure/01-jordan-measure.tex` (30).
+  Repair them sentence by sentence; the ban on a global search-and-replace below is not softened by
+  the count having come down.
+
   **The rule is not a quota, it is a test.** Before keeping an em-dash, ask: *does a comma, a
   colon, a semicolon, a pair of parentheses, or a full stop carry this?* If any of them does,
   use it. An em-dash survives only where the sentence genuinely breaks off and no other mark
@@ -601,6 +611,15 @@ does not help and thin in the places it does.
   where the statement and the working want visibly parting. Rewrite the *chapter's*
   `99-solutions.tex` opening paragraph, which enumerates what is solved inline and is the one
   thing that silently goes stale. Say in a `%` comment which of the three signals applied.
+
+  **Finding them.** Search the tool in regex mode for `^\\end\{(exercise|aiexercise)\}` and read
+  the next few lines; a `\begin{exercisesolution}` within two or three of them is a pair. The
+  2026-08-13 pass sorted the two densest chapters (11 and 13) plus the individually clearest cases,
+  taking the count from 54 to **40**, of which **17** are `% Kept inline:`-marked and stay. Do not
+  work down the remainder mechanically. Most of the twenty-odd unmarked pairs left are short
+  verifications (`ex:X_empty_clopen`, `ex:disk_connected`, `ex:finite_set_compact`) where the
+  statement and its two-line check genuinely read as one thought, and converting those to examples
+  would be bookkeeping rather than editing. Apply the three signals; where none fires, leave it.
 
 * **Exercise Solutions — mirror the source, and record the decision in-line.** Where a solution
   lives in the LaTeX depends on how the *original tutor's own handwritten notes* present it for

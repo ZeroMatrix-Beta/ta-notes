@@ -8,6 +8,21 @@ for a square}
 % \continuedfrom{sec:flux_divergence_theorem} back-pointer. Here the section comes first, as
 % motivation, and the pointer would have run forwards; it is gone, and the sentence below
 % already \cref's the theorem it previews.
+%
+% ⚠️ OPEN, raised by the 2026-08-13 audit and deliberately not resolved here. Moving the section
+% forward is defensible for the n=1 warm-up, which is motivation and reads perfectly well before
+% the statement. It is harder to defend for what follows it: the block below is a genuine
+% \begin{proof}[Proof of thm:gauss_divergence for n=2, B=(0,1)^2], and it now sits about ninety
+% lines BEFORE the theorem it proves is stated. A reader meets a proof of something they have not
+% been told yet. Two repairs are available and each costs something:
+%   (a) leave the n=1 warm-up here and move the n=2 proof into sec:flux_divergence_theorem, just
+%       under thm:gauss_divergence, where a proof belongs. Splits one source page across two
+%       sections, and the "conversely, the FTC can be used to PROVE Gauss" sentence loses the
+%       n=1 calculation it answers.
+%   (b) relabel the n=2 block as a worked example previewing the theorem rather than proving it,
+%       which is closer to what it does in its current position, and keep everything in place.
+% (b) is the smaller change and probably the right one. Not taken unilaterally because it alters
+% what the block claims to be, and Corsin's own framing is that it proves the theorem.
 
 % Source: Corsin Nick/Class Notes/Week 11.pdf, p. 2
 Gauss' theorem (\cref{thm:gauss_divergence}), proved in \cref{sec:flux_divergence_theorem}

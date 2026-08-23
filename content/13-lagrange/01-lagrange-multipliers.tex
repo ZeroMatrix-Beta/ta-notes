@@ -597,12 +597,14 @@ $S^{n-1}\times S^{n-1} \subset \mathbb{R}^{2n}$.
 \exhint{The constraint set is a product of two spheres, so there are two constraints, and
 \cref{prop:constrained_optimization} asks for their gradients to be linearly independent before
 it will produce any multipliers at all.}
+\exsol{sol:antipodal_max_distance}
 \end{exercise}
 
 \begin{aiexercise}[Extrema on a Circle via Lagrange Multipliers]
 \label{ex:ai_lagrange_circle}
 % Generator: Gemini 3.6 Flash (Medium)
 Find the maximum and minimum values of $f(x,y) := x + 2y$ subject to the constraint $g(x,y) := x^2 + y^2 - 5 = 0$.
+\exsol{sol:ai_lagrange_circle}
 \end{aiexercise}
 
 
@@ -612,7 +614,7 @@ Find the maximum and minimum values of $f(x,y) := x + 2y$ subject to the constra
 % Source: exercises/Ex5_Analysis2_eng.pdf
 
 \begin{exercise}[Lagrange multipliers \textnormal{(important)}]
-\label{ex:5.2}
+\label{ex:lagrange_ball_extrema}
 Consider the ball $U := \{(x,y,z) : x^2+y^2+z^2 < 1\}$ and the function
 \[f(x,y,z) := 1 - x^2 - y^2 + 4x.\]
 \begin{enumerate}[label=\textbf{(\alph*)}]
@@ -626,28 +628,31 @@ Consider the ball $U := \{(x,y,z) : x^2+y^2+z^2 < 1\}$ and the function
     is attained.
 \end{enumerate}
 \exinfo{This exercise is Problem 5.2 of Problem Sheet 5, Analysis II, Spring Semester 2026.}
+\exsol{sol:lagrange_ball_extrema}
 \end{exercise}
 
 % Originally: content/week-06.tex, \exercisesheet{6}, problem 6.10
 % Source: exercises/Ex6_Analysis2_eng.pdf
 
 \begin{exercise}[Lagrange multipliers \textnormal{(important)}]
-\label{ex:6.10}
+\label{ex:lagrange_sphere_plane}
 Consider the function $f(x,y,z) = 3x-y+2z$ and the set
 \[M = \{(x,y,z) \in \mathbb{R}^3 \mid x^2+y^2+z^2 = 1,\ x+y = 0\}.\]
 Determine the extrema of $f$ on $M$ and their nature.
 \exinfo{This exercise is Problem 6.10 of Problem Sheet 6, Analysis II, Spring Semester 2026.}
+\exsol{sol:lagrange_sphere_plane}
 \end{exercise}
 
 % Originally: content/week-06.tex, \exercisesheet{6}, problem 6.11
 % Source: exercises/Ex6_Analysis2_eng.pdf
 
 \begin{exercise}[Closest point on a hyperbolic paraboloid \textnormal{(important)}]
-\label{ex:6.11}
+\label{ex:closest_point_hyperbolic_paraboloid}
 Find the points on the submanifold
 \[M = \{(x,y,z) \in \mathbb{R}^3 : z = x^2-y^2\}\]
 that are closest to the point $(0,0,1)$.
 \exinfo{This exercise is Problem 6.11 of Problem Sheet 6, Analysis II, Spring Semester 2026.}
+\exsol{sol:closest_point_hyperbolic_paraboloid}
 \end{exercise}
 
 % Source: old_exams/fs2023/Prüfung.pdf (9 August 2021), Teil B, Aufgabe 4, p. 16
@@ -661,6 +666,7 @@ Let $a_1, a_2, a_3 > 0$ and let $b = (b_1, b_2, b_3)\transp \in \mathbb{R}^3 \se
 \[E := \left\{x \in \mathbb{R}^3 \ \middle|\ \frac{x_1^2}{a_1^2} + \frac{x_2^2}{a_2^2} + \frac{x_3^2}{a_3^2} = 1\right\},\]
 and determine the points of $E$ at which these extreme values are attained.
 \exinfo{This exercise is taken from the Analysis I \& II exam of 9 August 2021 (Prof.\ Giovanni Felder), Part B, Problem 4.}
+\exsol{sol:lagrange_ellipsoid_linear}
 \end{exercise}
 
 % Source: old_exams/WS22_Prüfung.pdf (24 January 2022), Teil A, Frage 8, p. 9
@@ -675,6 +681,7 @@ Let $n \ge 1$ and let $A := \{x \in (0,1]^n \mid x_1 + \dots + x_n = 1\}$. Consi
   \item Prove that $f$ attains its minimum on $A$ at $p$.
 \end{enumerate}
 \exinfo{This exercise is taken from the Analysis I \& II exam of 24 January 2022 (Prof.\ Giovanni Felder), Part A, Problem 8.}
+\exsol{sol:entropy_simplex_minimum}
 \end{exercise}
 
 % Source: old_exams/august2025.pdf (Prof. Laura Kobel-Keller), Analysis II examination,
@@ -697,6 +704,7 @@ $a,b \in \mathbb{R}\setminus\{0\}$. Exactly one of the following is correct. Whi
 \end{enumerate}
 \exinfo{This exercise is taken from the Analysis II examination of August 2025
 (Prof.\ Laura Kobel-Keller), Question 4.}
+\exsol{sol:kobel_lagrange_single_choice}
 \end{exercise}
 
 % Source: old_exams/august2025.pdf (Prof. Laura Kobel-Keller), Analysis II examination,
@@ -709,5 +717,6 @@ Determine the maximal value of
 subject to the two constraints $x^2+y^2+z^2 = 1$ and $x^2+y^2 = 1/2$.
 \exinfo{This exercise is taken from the Analysis II examination of August 2025
 (Prof.\ Laura Kobel-Keller), Problem 13, a box problem where only the final answer was graded.}
+\exsol{sol:kobel_sphere_meets_cylinder}
 \end{exercise}
 

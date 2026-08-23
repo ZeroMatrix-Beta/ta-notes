@@ -97,8 +97,16 @@ section and subsection titles are `MidnightBlue`; subsubsection is `TextBoldColo
 
   ⚠️ **Not `\label{ex:4.3}`.** This entry used to offer the sheet number as an alternative for a
   problem quoted from an official sheet. **Withdrawn 2026-08-11 on the user's instruction** — see
-  the label rule in `gemini.md`. Roughly sixty such labels predate the rule and are being swept;
-  do not add more.
+  the label rule in `gemini.md`. **The sweep is finished (2026-08-23):** all 60 surviving
+  `ex:N.M` labels were renamed to descriptive slugs, and the 189 `\cref`/`\Cref` sites and `%`
+  comments that pointed at them were updated with them. `content/` now contains no numeric
+  exercise label; a new one is a regression, not a leftover.
+
+  Each new slug was taken from the exercise's own `\exsol{sol:...}`, so an exercise and its
+  worked solution are now `ex:foo` / `sol:foo` — the pairing is the point, and it is worth
+  keeping when you add an exercise. The sheet number was never carried by the label: it lives in
+  the closing `\exinfo` sentence and the `% Source:` comment, both of which every one of the 60
+  already had, which is why the rename lost no provenance.
 * **Multi-Pass Compilation for Cross-References:** When adding or modifying labels, `\cref` references, or `lastpage` counters, always run full multi-pass compilation (e.g. `latexmk`) until `.aux` files stabilize and all cross-reference warnings resolve.
 
 ## Build traps in this preamble (each has cost a broken build at least once)
@@ -346,18 +354,21 @@ not trustworthy on its own, because parentheses in ordinary text confuse the obv
 }{%
   \end{proof}%
 }
-% Trailing notes on an exercise/example (added 2026-08-10; main.tex, just below
-% exercisesolution, carries the full comment). Both hang off the END of a statement,
+% Trailing notes on an exercise/example (added 2026-08-10 / 2026-08-23; main.tex, just below
+% exercisesolution, carries the full comment). All three hang off the END of a statement,
 % inside the environment, and share one geometry via \exnoteopen: a centred block
 % indented \exnoteindent on each side, small italic, in a muted colour.
-%   \exinfo{...}          \faTag, TextMetaNote gray -- where the problem came from
 %   \exhint[Label]{...}   \faLightbulb[regular], HintTint -- how to start it
+%   \exinfo{...}          \faTag, TextMetaNote gray -- where the problem came from
+%   \exsol{sol:label}     \faCheckCircle[regular], SolTint -- forward link to worked solution
+% Order when multiple appear: \exhint first, \exinfo second, \exsol last closing the block.
 % Deliberately UNNUMBERED, the one case the rule below does not reach: they are
 % formatting blocks inside an already-numbered environment and are never \cref
 % targets, so no \label ever goes inside one. See style.md for when to use each.
 % \hint{...} is RETIRED and no longer defined -- \exhint replaced it.
 \newenvironment{exerciseinfo}{\exnoteopen{TextMetaNote}{\faTag}{Info}}{\exnoteclose}
 \newenvironment{exercisehint}[1][Hint]{\exnoteopen{HintTint}{\faLightbulb[regular]}{#1}}{\exnoteclose}
+\newenvironment{exercisesol}[1][Solution]{\exnoteopen{SolTint}{\faCheckCircle[regular]}{#1}}{\exnoteclose}
 % \newterm  -> ENGLISH quotes (main.tex:209). \germanterm (main.tex:210) is the
 % \glqq...\grqq one. They are deliberately different -- the German-mirroring
 % convention in style.md depends on it. Do not collapse them.

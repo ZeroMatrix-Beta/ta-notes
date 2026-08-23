@@ -4,6 +4,7 @@
 \label{sec:completeness_solutions}
 
 \begin{exercisesolution}[Proof of \cref{ex:cauchy_elementary_facts}]
+\label{sol:cauchy_elementary_facts}
 % Generator: Claude Sonnet 5 (High)
 \textbf{(a) Bounded.} Take $\varepsilon=1$: there is $N$ with $d(x_n,x_m)<1$ for all
 $n,m\geq N$; in particular $d(x_n,x_N)<1$ for $n\geq N$. Setting
@@ -24,6 +25,7 @@ so $x_n \to x$.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution to \cref{ex:completeness_not_topological}]
+\label{sol:completeness_not_topological}
 % Generator: Claude Opus 5 (Medium)
 Write $\varphi : (0,1] \to [1,\infty)$, $\varphi(x) := 1/x$. It is a bijection, and by
 construction $d(x,y) = |\varphi(x)-\varphi(y)|$. Consequently, $d$ is nothing but the Euclidean
@@ -73,6 +75,7 @@ non-topological, and only their combination is.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:completion_well_defined}]
+\label{sol:completion_well_defined}
 % Generator: Claude Sonnet 5 (High)
 \textbf{$\sim$ is an equivalence relation on $\mathcal{C}_X$.} Reflexivity is
 $d(x_n,x_n) = 0 \to 0$. Symmetry is symmetry of $d$. For transitivity, if
@@ -105,6 +108,7 @@ $d(x,y)$ itself; and this identity makes $\iota$ injective, since $d(x,y)=0 \iff
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:completion_is_complete}]
+\label{sol:completion_is_complete}
 % Generator: Claude Sonnet 5 (High)
 Let $(\xi_m)_{m=0}^\infty$ be Cauchy in $\overline X$, with $\xi_m = [(x_{m,n})_{n=0}^\infty]$ for
 some Cauchy sequence $(x_{m,n})_n$ in $X$ representing $\xi_m$. Replacing $(x_{m,n})_n$ by a tail
@@ -140,6 +144,7 @@ $\overline X$, as required.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:completion_universal_property}]
+\label{sol:completion_universal_property}
 % Generator: Claude Sonnet 5 (High)
 \textbf{Construction.} For $\overline x = [(x_n)_n] \in \overline X$, the sequence $(f(x_n))_n$
 is Cauchy in $Y$, since $d_Y(f(x_n),f(x_m)) = d(x_n,x_m) \to 0$ as $(x_n)_n$ is Cauchy in $X$.
@@ -172,6 +177,7 @@ arbitrary, $g = \overline f$.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:banach_hypotheses_sharp}]
+\label{sol:banach_hypotheses_sharp}
 % Generator: Claude Sonnet 5 (High)
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item This is \cref{rem:banach_hypotheses}'s first bullet: $X := (0,1]$ is not complete,
@@ -186,6 +192,7 @@ arbitrary, $g = \overline f$.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:kobel_local_banach_fixed_point}]
+\label{sol:kobel_local_banach_fixed_point}
 % Generator: Claude Opus 5 (High)
 Write $K := \overline{B}_r(x_0)$. The whole content of the exercise is that $f$ restricts to a
 self-map of $K$, after which \cref{thm:banach_fixed_point} finishes the job.
@@ -215,6 +222,7 @@ is the only fixed point of $f$ in $E$, even though the existence argument saw on
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:ai_contraction_cos}]
+\label{sol:ai_contraction_cos}
 % Generator: Gemini 3.6 Flash (Medium)
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item By the Mean Value Theorem, for any $x, y \in [0,1]$, there exists $\xi \in (0,1)$ such that $|f(x) - f(y)| = |f'(\xi)| |x-y| = \frac{1}{2}\sin(\xi) |x-y|$. Since $\sin(x)$ is strictly increasing on $[0,1]$, $\sup_{\xi \in [0,1]} \frac{1}{2}\sin(\xi) = \frac{1}{2}\sin(1) \approx 0.4207 < 1$. Thus $f$ is a contraction (\cref{def:contraction_mapping}) with $L = \frac{1}{2}\sin(1) < 1$.
@@ -222,7 +230,8 @@ is the only fixed point of $f$ in $E$, even though the existence argument saw on
 \end{enumerate}
 \end{exercisesolution}
 
-\begin{exercisesolution}[Solution to \cref{ex:3.5}]
+\begin{exercisesolution}[Solution to \cref{ex:fixed_points_multiple_choice}]
+\label{sol:fixed_points_multiple_choice}
 % Generator: Claude Opus 5 (High)
 \textbf{(a), (c) and (e) are true; (b) and (d) are false.}
 
@@ -266,6 +275,7 @@ is the only fixed point of $f$ in $E$, even though the existence argument saw on
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution to \cref{ex:bfpt_applicability_table}]
+\label{sol:bfpt_applicability_table}
 % Generator: Claude Opus 5 (High)
 Recall that \cref{thm:banach_fixed_point} needs three things at once: $X$ complete, $T$ mapping
 $X$ into $X$, and a Lipschitz constant $\lambda < 1$ that is \emph{actually attained as a bound},
@@ -319,6 +329,7 @@ not merely approached.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution of \cref{ex:incomplete_metric_space_example}]
+\label{sol:incomplete_metric_space_example}
 % Generator: Claude Opus 5 (High)
 Take $X := (0,1]$ with the Euclidean distance $d(x,y) := \lvert x-y\rvert$ inherited from
 $\mathbb{R}$. The sequence $x_k := 1/k$ lies in $X$ and is Cauchy, since $\lvert x_k - x_l\rvert \le
@@ -338,6 +349,7 @@ metric space (\cref{sec:completion_of_a_metric_space}) is built to fill.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution of \cref{ex:kobel_cauchy_single_choice}]
+\label{sol:kobel_cauchy_single_choice}
 % Generator: Claude Opus 5 (High)
 Only \textbf{(d)} is correct.
 \begin{enumerate}[label=\textbf{(\alph*)}]
@@ -363,6 +375,7 @@ Only \textbf{(d)} is correct.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution of \cref{ex:banach_hypotheses_true_false}]
+\label{sol:banach_hypotheses_true_false}
 % Generator: Claude Opus 5 (High)
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item \textbf{True.} For $x,y \in [0,1]$,
@@ -388,6 +401,7 @@ hypotheses fail} as \qt{there is no fixed point} is the standard mistake.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:banach_fixed_point_linear}]
+\label{sol:banach_fixed_point_linear}
 % Generator: Gemini 3.6 Flash (High)
 % Correction: Claude Opus 5 (High) --- rewritten for R^n. Flash's version worked in an abstract
 % metric space and wrote d(f(x)/lambda, f(y)/lambda) = d(f(x),f(y))/lambda, which is meaningless
@@ -421,6 +435,7 @@ but $L$ is not part of the data the question hands you.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:examHS24_TF_banach}]
+\label{sol:examHS24_TF_banach}
 % Generator: Gemini 3.1 Pro (High)
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item \textbf{True:} The derivative is $f'(x) = -\sin(x)$. Since $\lvert f'(x)\rvert = \lvert\sin x\rvert \le 1$ for all $x \in \mathbb{R}$, the mean value theorem gives $\lvert f(x) - f(y)\rvert \le 1 \cdot \lvert x-y\rvert$, so $f$ has Lipschitz constant $1$.

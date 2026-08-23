@@ -68,7 +68,7 @@ $d_2$, the diamond for $d_1$. This is the quickest way to tell the three apart, 
 \[B^{d_1}_1(0) \ \subseteq\ B^{d_2}_1(0) \ \subseteq\ B^{d_3}_1(0)\]
 are precisely the inequalities $d_3 \leq d_2 \leq d_1$ read backwards. The larger the metric, the
 harder it is to be within distance $1$, and hence the smaller the ball. The same family, continued
-to all $p \geq 1$, is sketched in \cref{ex:4.3}\textbf{.1}, where the square reappears as the
+to all $p \geq 1$, is sketched in \cref{ex:p_norms_unit_balls}\textbf{.1}, where the square reappears as the
 limiting case $p \to \infty$.
 
 None of this changes which sets are open. All three metrics have the same open sets, as
@@ -83,6 +83,7 @@ None of this changes which sets are open. All three metrics have the same open s
 \label{ex:ai_disk_boundary}
 % Generator: Gemini 3.6 Flash (Medium)
 Let $D := \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 < 1\}$ be the open unit disk in $\mathbb{R}^2$. Show that the boundary of $D$ is the unit circle $\partial D = \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 = 1\}$.
+\exsol{sol:ai_disk_boundary}
 \end{aiexercise}
 
 
@@ -93,7 +94,7 @@ Let $D := \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 < 1\}$ be the open unit disk i
 % Source: exercises/Ex2_Analysis2_eng.pdf, p. 1
 
 \begin{exercise}[Multiple choice (closure)]
-\label{ex:2.2}
+\label{ex:closure_multiple_choice}
 Let $(X,d)$ be a metric space, and $Y_1, Y_2 \subset X$ subsets. Select all the statements below
 that are necessarily true.
 \begin{enumerate}[label=\textbf{(\alph*)}]
@@ -102,16 +103,17 @@ that are necessarily true.
   \item $\overline{Y_1 \cap Y_2} \subset \overline{Y_1} \cap \overline{Y_2}$
   \item $\overline{Y_1 \cap Y_2} = \overline{Y_1} \cap \overline{Y_2}$
 \end{enumerate}
-\exhint[Official hints]{\textbf{(b):} compare with \cref{ex:2.1}.3. \textbf{(d):} play with a set
+\exhint[Official hints]{\textbf{(b):} compare with \cref{ex:metric_space_examples}.3. \textbf{(d):} play with a set
 of three points (a triangle).}
 \exinfo{This exercise is Problem 2.2 of Problem Sheet 2, Analysis II, Spring Semester 2026.}
+\exsol{sol:closure_multiple_choice}
 \end{exercise}
 
 % Originally: content/exercise-sheets/week-02.tex, problem 2.3
 % Source: exercises/Ex2_Analysis2_eng.pdf, p. 1
 
 \begin{exercise}[Multiple choice (distance from a set)]
-\label{ex:2.3}
+\label{ex:distance_from_set_multiple_choice}
 Let $(X,d)$ be a metric space, and $A \subset X$ a non-empty subset. We define the function
 ``distance from $A$'' as
 \[
@@ -127,13 +129,14 @@ Select all the statements below that are necessarily true.
 \exhint[Official hint]{First convince yourself with a drawing that the name of this function is
 appropriate; then use the characterization of open/closed sets with sequences.}
 \exinfo{This exercise is Problem 2.3 of Problem Sheet 2, Analysis II, Spring Semester 2026.}
+\exsol{sol:distance_from_set_multiple_choice}
 \end{exercise}
 
 % Originally: content/exercise-sheets/week-02.tex, problem 2.4
 % Source: exercises/Ex2_Analysis2_eng.pdf, p. 1
 
 \begin{exercise}[Boundary, Interior etc.]
-\label{ex:2.4}
+\label{ex:boundary_interior_closure_drill}
 Determine the interior, closure, and boundary of the following subsets $Y$ of $\mathbb{R}$, for
 the standard topology on $\mathbb{R}$. No need to justify the answer.
 \begin{center}
@@ -146,4 +149,5 @@ the standard topology on $\mathbb{R}$. No need to justify the answer.
 \end{tabular}
 \end{center}
 \exinfo{This exercise is Problem 2.4 of Problem Sheet 2, Analysis II, Spring Semester 2026.}
+\exsol{sol:boundary_interior_closure_drill}
 \end{exercise}

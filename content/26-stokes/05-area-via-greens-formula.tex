@@ -71,7 +71,7 @@ complete elliptic integral of the second kind, not an elementary function, unlik
 % Source: exercises/Ex12_Analysis2_eng.pdf
 
 \begin{exercise}[Work along paths and Stokes \textnormal{(important)}]
-\label{ex:12.3}
+\label{ex:stokes_work_along_paths}
 Let $F : \mathbb{R}^3 \setminus (\{(0,0)\}\times\mathbb{R}) \to \mathbb{R}^3$ be the vector
 field defined by
 \[F(x,y,z) = \left(\frac{2(xz+y)}{x^2+y^2},\ \frac{2(yz-x)}{x^2+y^2},\ \log(x^2+y^2)\right)\]
@@ -88,6 +88,7 @@ and let $\gamma_1,\gamma_2,\gamma_3 : [0,2\pi] \to \mathbb{R}^3$ be the paths
   F\cdot d\gamma_3$ holds?
 \end{enumerate}
 \exinfo{This exercise is Problem 12.3 of Problem Sheet 12, Analysis II, Spring Semester 2026.}
+\exsol{sol:stokes_work_along_paths}
 \end{exercise}
 
 % Source: exercises/Ex12_Analysis2_eng.pdf, p. 2
@@ -95,8 +96,8 @@ and let $\gamma_1,\gamma_2,\gamma_3 : [0,2\pi] \to \mathbb{R}^3$ be the paths
 % Originally: content/week-12.tex, \exercisesheet{12}, problem 12.4
 % Source: exercises/Ex12_Analysis2_eng.pdf
 
-\begin{exercise}[True or False \textnormal{(important)}]
-\label{ex:12.4}
+\begin{exercise}[True or False (flux on a punctured domain) \textnormal{(important)}]
+\label{ex:flux_on_punctured_domain}
 Let $U := \mathbb{R}^3\setminus\{0\}$ and $F \in C^1(U,\mathbb{R}^3)$. For $r>0$ set
 \[I_r := \int_{\partial B_r} \langle F,n\rangle\,dS\]
 where $n$ denotes the outward normal. Which of the following statements are always true?
@@ -108,6 +109,7 @@ where $n$ denotes the outward normal. Which of the following statements are alwa
   \rvert \leq C/\lvert x\rvert$, then $I_r=0$ for all $r>0$.
 \end{enumerate}
 \exinfo{This exercise is Problem 12.4 of Problem Sheet 12, Analysis II, Spring Semester 2026.}
+\exsol{sol:flux_on_punctured_domain}
 \end{exercise}
 
 % Source: exercises/Ex12_Analysis2_eng.pdf, p. 2
@@ -116,12 +118,13 @@ where $n$ denotes the outward normal. Which of the following statements are alwa
 % Source: exercises/Ex12_Analysis2_eng.pdf
 
 \begin{exercise}[Conservative vector fields \textnormal{(important)}]
-\label{ex:12.5}
+\label{ex:conservative_vector_field_potential}
 For which values of $\lambda \in \mathbb{R}$ is the vector field $F : \mathbb{R}^2 \to
 \mathbb{R}^2$ defined by
 \[F(x,y) = \begin{pmatrix} \lambda x e^y \\ (y+1+x^2)e^y \end{pmatrix}\]
 conservative? Determine a potential for $F$ for these values.
 \exinfo{This exercise is Problem 12.5 of Problem Sheet 12, Analysis II, Spring Semester 2026.}
+\exsol{sol:conservative_vector_field_potential}
 \end{exercise}
 
 % Source: exercises/Ex12_Analysis2_eng.pdf, p. 3
@@ -129,8 +132,8 @@ conservative? Determine a potential for $F$ for these values.
 % Originally: content/week-12.tex, \exercisesheet{12}, problem 12.8
 % Source: exercises/Ex12_Analysis2_eng.pdf
 
-\begin{exercise}[Multiple Choice \textnormal{(important)}]
-\label{ex:12.8}
+\begin{exercise}[Multiple choice (signs in the flux through a rectangle) \textnormal{(important)}]
+\label{ex:outward_flux_sign_convention}
 Let $Q = [a,b]\times[c,d] \subseteq \mathbb{R}^2$ and $f \in C(Q,\mathbb{R}^2)$. Let $n$ be an
 outward normal field on $Q$ and
 \[I_b = \int_{[a,b]\times\{c\}} \langle f,n\rangle, \qquad I_t = \int_{[a,b]\times\{d\}}
@@ -144,6 +147,7 @@ Which of the following expressions corresponds to the outer flux of $f$ through 
   \item $-I_b + I_t - I_r + I_l$
 \end{enumerate}
 \exinfo{This exercise is Problem 12.8 of Problem Sheet 12, Analysis II, Spring Semester 2026.}
+\exsol{sol:outward_flux_sign_convention}
 \end{exercise}
 
 % Source: exercises/Ex12_Analysis2_eng.pdf, p. 3

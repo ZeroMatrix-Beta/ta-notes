@@ -367,8 +367,8 @@ Let $L: \mathbb{R}^n \to \mathbb{R}^n$ be a linear, invertible map. If $E \subse
 % Source: exercises/Ex8_Analysis2_eng.pdf
 
 % Source: exercises/Ex8_Analysis2_eng.pdf, p. 1
-\begin{exercise}[True or False \textnormal{(important)}]
-\label{ex:8.2}
+\begin{exercise}[True or False (null sets and outer measure) \textnormal{(important)}]
+\label{ex:jordan_measure_properties_tf}
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item A bounded countable set is always Jordan-null.
   \item A countable set is always Lebesgue-null.
@@ -390,14 +390,15 @@ gives $\mu_{out}(D) \leq \mu_{out}([0,1]) = 1$, so the work is showing
 $\mu_{out}(D) \geq 1$, essentially that the \qt{smallest} dyadic set containing $D$ also
 contains $[0,1]$.}
 \exinfo{This exercise is Problem 8.2 of Problem Sheet 8, Analysis II, Spring Semester 2026.}
+\exsol{sol:jordan_measure_properties_tf}
 \end{exercise}
 
 % Originally: content/week-08.tex, \exercisesheet{8}, problem 8.4
 % Source: exercises/Ex8_Analysis2_eng.pdf
 
 % Source: exercises/Ex8_Analysis2_eng.pdf, p. 1
-\begin{exercise}[Multiple Choice \textnormal{(important)}]
-\label{ex:8.4}
+\begin{exercise}[Multiple choice (which maps preserve null sets) \textnormal{(important)}]
+\label{ex:jordan_null_image_lipschitz_choice}
 Let $U \subset \mathbb{R}^n$ be a nonempty, open subset, $f : U \to \mathbb{R}^m$ a function,
 and $N \subset U$ a Jordan null set. In which of the following cases is the image
 $f(N) \subset \mathbb{R}^m$ necessarily a null set? \textit{Attention: Only one answer is
@@ -409,6 +410,7 @@ correct!}
   \item If $f$ is locally Lipschitz continuous and $m \geq n$.
 \end{enumerate}
 \exinfo{This exercise is Problem 8.4 of Problem Sheet 8, Analysis II, Spring Semester 2026.}
+\exsol{sol:jordan_null_image_lipschitz_choice}
 \end{exercise}
 
 % Source: old_exams/HS20.pdf (Analysis I & II, 27 January 2021, Prof. Peter S. Jossen),
@@ -417,7 +419,7 @@ correct!}
 % Part (a) of the original asks for the definition of a Lebesgue null set, which
 % rem:lebesgue_vs_jordan_null already gives. Nothing below needs Lebesgue *measure* or integration
 % -- see the ainote after the exercise, and note that Problem Sheet 8 already puts the term
-% "Lebesgue-null" in front of the reader in ex:8.2(b).
+% "Lebesgue-null" in front of the reader in ex:jordan_measure_properties_tf(b).
 \begin{exercise}[Null sets: what they cannot be, and how they combine]
 \label{ex:lebesgue_null_sets_properties}
 Throughout, \newterm{Lebesgue null} is as in \cref{rem:lebesgue_vs_jordan_null}: for every
@@ -433,13 +435,14 @@ $\varepsilon > 0$ the set admits a countable cover by cubes of total volume less
 \exinfo{This exercise is taken from the Analysis I \& II examination of 27 January 2021
 (Prof.\ Peter S.\ Jossen), Part B, Problem 2, whose first part asks for the definition of a
 Lebesgue null set.}
+\exsol{sol:lebesgue_null_sets_properties}
 \end{exercise}
 
 \begin{ainote}
 Nothing in this block uses Lebesgue \emph{measure} or the Lebesgue integral, and this course
 develops neither. \qt{Lebesgue null} is used here only in the elementary sense of
 \cref{rem:lebesgue_vs_jordan_null} (coverable by countably many cubes of arbitrarily small total
-volume), which is the sense already in play in \cref{ex:8.2}\textbf{(b)} on the official problem
+volume), which is the sense already in play in \cref{ex:jordan_measure_properties_tf}\textbf{(b)} on the official problem
 sheet. Part \textbf{(c)} is the one property of that notion this document repeatedly leans on
 without ever proving, which is why the block earns its place.
 \end{ainote}
@@ -466,6 +469,7 @@ on $Q$.
 31 January 2023, Problem 10\textbf{(c)}. That paper names no lecturer. Its first two parts ask
 for the definition of a null set and for closure under countable unions, which are
 \cref{rem:lebesgue_vs_jordan_null} and \cref{ex:lebesgue_null_sets_properties}\textbf{(c)}.}
+\exsol{sol:vanishing_integral_forces_zero_ae}
 \end{exercise}
 
 % Source: exercises/Ex8_Analysis2_eng.pdf, p. 1
@@ -482,6 +486,7 @@ Let $X \subset \mathbb{R}$ be a Jordan null set (\cref{rem:lebesgue_vs_jordan_nu
 \end{enumerate}
 \exinfo{This exercise is Problem 8.1 of Problem Sheet 8, Analysis II, Spring Semester 2026. The
 FS 2024 edition of the course sets it as the bonus problem of its own Sheet 8.}
+\exsol{sol:jordan_null_products}
 \end{exercise}
 
 % Source: old_exams/august2025.pdf (Prof. Laura Kobel-Keller), Analysis II examination,
@@ -500,6 +505,7 @@ is Riemann integrable over $M$.
 again.}
 \exinfo{This exercise is taken from the Analysis II examination of August 2025
 (Prof.\ Laura Kobel-Keller), Problem 16.}
+\exsol{sol:kobel_ball_minus_lattice}
 \end{exercise}
 
 % Source: old_exams/august2025.pdf (Prof. Laura Kobel-Keller), Analysis II examination,
@@ -517,6 +523,7 @@ with $\mu(U) = 1$. Exactly one of the following necessarily holds. Which?
 \end{enumerate}
 \exinfo{This exercise is taken from the Analysis II examination of August 2025
 (Prof.\ Laura Kobel-Keller), Question 6.}
+\exsol{sol:kobel_diffeomorphic_jordan_measure}
 \end{exercise}
 
 % Source: old_exams/august2025.pdf (Prof. Laura Kobel-Keller), Analysis II examination,
@@ -535,4 +542,5 @@ same value as $\int_\Omega f$. Which?
 \end{enumerate}
 \exinfo{This exercise is taken from the Analysis II examination of August 2025
 (Prof.\ Laura Kobel-Keller), Question 7.}
+\exsol{sol:kobel_layer_cake}
 \end{exercise}

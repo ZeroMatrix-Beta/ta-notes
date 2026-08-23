@@ -8,7 +8,8 @@
 Not every solution in this chapter is collected here. \Cref{ex:inclusion_exclusion_dyadic} is
 solved where it appears, on \cpageref{ex:inclusion_exclusion_dyadic}.
 
-\begin{exercisesolution}[Solution to \cref{ex:8.2}]
+\begin{exercisesolution}[Solution to \cref{ex:jordan_measure_properties_tf}]
+\label{sol:jordan_measure_properties_tf}
 % Generator: Claude Opus 5 (High)
 The whole problem turns on one distinction: \textbf{Jordan} outer measure is an infimum over
 \emph{finite} covers, \textbf{Lebesgue} outer measure over \emph{countable} ones. Parts
@@ -54,7 +55,8 @@ theory visible on this sheet traces back to that one sentence.
 \end{ainote}
 \end{exercisesolution}
 
-\begin{exercisesolution}[Solution to \cref{ex:8.4}]
+\begin{exercisesolution}[Solution to \cref{ex:jordan_null_image_lipschitz_choice}]
+\label{sol:jordan_null_image_lipschitz_choice}
 % Generator: Claude Opus 5 (High)
 \textbf{The correct answer is 4: $f$ locally Lipschitz continuous and $m \geq n$.} Both
 hypotheses are needed, and dropping either one admits a counterexample.
@@ -95,6 +97,7 @@ these two steps.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution to \cref{ex:ai_gaussian_two_exhaustions}]
+\label{sol:ai_gaussian_two_exhaustions}
 % Generator: Claude Opus 5 (High)
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item Both families are nested and consist of compact sets whose boundaries are a circle
@@ -138,6 +141,7 @@ classical presentation uses without mentioning.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:examHS24_TF_improper}]
+\label{sol:improper_integrals_inverse_power_tf}
 % Generator: Gemini 3.1 Pro (High)
 Both improper integrals can be evaluated by switching to polar coordinates, where $f(r\cos\theta, r\sin\theta) = r^{-2\alpha}$ and the area element is $r\,dr\,d\theta$.
 \begin{enumerate}[label=\textbf{(\alph*)}]
@@ -150,6 +154,7 @@ Both improper integrals can be evaluated by switching to polar coordinates, wher
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution of \cref{ex:improper_cos_over_r4}]
+\label{sol:improper_cos_over_r4}
 % Generator: Claude Opus 5 (High)
 The integrand is undefined at the origin, so $\lvert f\rvert$ is a continuous non-negative function
 on the open set $\mathbb{R}^2\setminus\{(0,0)\}$ and \cref{def:improper_integral} applies there.
@@ -193,6 +198,7 @@ $\alpha$, and the bounded oscillating factor $\cos(xy)$ changes none of it.
 % Generator: Claude Opus 5 (High)
 % No solution key ships with the Jossen papers, so this is an independent derivation.
 \begin{exercisesolution}[\cref{ex:lebesgue_null_sets_properties}]
+\label{sol:lebesgue_null_sets_properties}
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item \textbf{No.} Pick $p \in U$ and a closed cube $K \subseteq U$ centred at $p$, of side
     length $\ell > 0$; this exists because $U$ is open. Suppose $U$ were Lebesgue null and cover it
@@ -254,6 +260,7 @@ a usable notion, and \textbf{(c)} is the half this document uses most often with
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:vanishing_integral_forces_zero_ae}]
+\label{sol:vanishing_integral_forces_zero_ae}
 % Generator: Claude Opus 5 (High) --- the statement is the examiner's; the proof and the remark
 % are written for these notes. Probeprfg3_Lsg.pdf gives the same level-set argument.
 The set where the conclusion fails is $\{f > 0\}$, and the whole proof is the observation that it
@@ -299,6 +306,7 @@ $f(p) > 0$, continuity gives a whole box on which $f > f(p)/2$, forcing a positi
 % Generator: Claude Opus 5 (High)
 % Solutions to the four aiexercises in 03-a-glimpse-of-lebesgue.tex.
 \begin{exercisesolution}[\cref{ex:ai_lebesgue_null_countable}]
+\label{sol:ai_lebesgue_null_countable}
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item Let $p \in \mathbb{R}^n$ and $\varepsilon > 0$. The single cube of side length
     $\delta := (\varepsilon/2)^{1/n}$ centred at $p$ covers $\{p\}$ and has volume
@@ -330,6 +338,7 @@ positive measure.
 
 % Generator: Claude Opus 5 (High)
 \begin{exercisesolution}[\cref{ex:ai_lebesgue_three_valued}]
+\label{sol:ai_lebesgue_three_valued}
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item Split $[0,1]$ into the three sets on which $f$ is constant:
     \[E_1 := \mathbb{Q}\cap[0,1], \qquad
@@ -361,6 +370,7 @@ over whole intervals and every interval meets $\mathbb{Q}$.
 
 % Generator: Claude Opus 5 (High)
 \begin{exercisesolution}[\cref{ex:ai_dominated_beats_uniform}]
+\label{sol:ai_dominated_beats_uniform}
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item For $0 \le x < 1$ we have $x^k \to 0$, and $1^k = 1$ for every $k$. So the pointwise limit
     is $f = \chi_{\{1\}}$. The convergence is not uniform: taking $x_k := 2^{-1/k} \in (0,1)$ gives
@@ -386,6 +396,7 @@ use the Lebesgue theory for.
 
 % Generator: Claude Opus 5 (High)
 \begin{exercisesolution}[\cref{ex:ai_improper_not_lebesgue}]
+\label{sol:ai_improper_not_lebesgue}
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item $f$ is constant on each $[k,k+1)$, an interval of length $1$, so for integer $N \ge 1$
     \[\int_1^N f(x)\,dx = \sum_{k=1}^{N-1} \frac{(-1)^{k+1}}{k}.\]
@@ -415,6 +426,7 @@ several-variable arguments, the improper Riemann integral for conditionally conv
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution of \cref{ex:jordan_null_products}]
+\label{sol:jordan_null_products}
 % Generator: Claude Opus 5 (High)
 Throughout, unwind the definition in \cref{rem:lebesgue_vs_jordan_null}: $X$ is Jordan null means
 that for every $\varepsilon > 0$ there are \emph{finitely many} intervals
@@ -463,6 +475,7 @@ to see the two notions come apart.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution of \cref{ex:kobel_ball_minus_lattice}]
+\label{sol:kobel_ball_minus_lattice}
 % Generator: Claude Opus 5 (High)
 Two facts do all the work: $M$ is Jordan measurable, and $f$ is continuous and bounded. The
 criterion quoted with \cref{def:riemann_integral_rn} then applies.
@@ -507,6 +520,7 @@ countable removals: $[0,1]\setminus\mathbb{Q}$ is not Jordan measurable at all
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution of \cref{ex:kobel_diffeomorphic_jordan_measure}]
+\label{sol:kobel_diffeomorphic_jordan_measure}
 % Generator: Claude Opus 5 (High)
 The answer is \textbf{(a)}, $\mu(V) < \infty$.
 
@@ -525,6 +539,7 @@ same reason.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution of \cref{ex:kobel_layer_cake}]
+\label{sol:kobel_layer_cake}
 % Generator: Claude Opus 5 (High)
 The answer is \textbf{(a)}, the \newterm{layer-cake formula}
 \[\int_\Omega f = \int_0^{\max f}\mu\big(\{x \in \Omega \mid f(x) > t\}\big)\,dt .\]

@@ -8,7 +8,8 @@ Not every solution in this chapter is collected here. \Cref{ex:chain_rule_comput
 (\cpageref{ex:chain_rule_computation}) and \cref{ex:chain_rule_computation_paschoud}
 (\cpageref{ex:chain_rule_computation_paschoud}) are solved where they appear.
 
-\begin{exercisesolution}[Solution to \cref{ex:4.6}]
+\begin{exercisesolution}[Solution to \cref{ex:directional_derivative_vanishes}]
+\label{sol:directional_derivative_vanishes}
 % Generator: Claude Sonnet 5 (Medium)
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item Define $v(x_2,\dots,x_n) := u(0,x_2,\dots,x_n)$, which is $C^1$ as the restriction of $u$
@@ -43,6 +44,7 @@ Not every solution in this chapter is collected here. \Cref{ex:chain_rule_comput
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:ai_directional_derivative}]
+\label{sol:ai_directional_derivative}
 % Generator: Gemini 3.6 Flash (Medium)
 The gradient of $f(x,y)$ is $\nabla f(x,y) = (2xy, x^2)\transp$. Evaluating at $(1,2)$ gives $\nabla f(1,2) = (4,1)\transp$. Since $f$ is continuously differentiable ($C^\infty$), the directional derivative along the unit vector $v$ is given by the inner product:
 \[
@@ -50,7 +52,8 @@ D_v f(1,2) = \nabla f(1,2) \cdot v = \begin{pmatrix} 4 \\ 1 \end{pmatrix} \cdot 
 \]
 \end{exercisesolution}
 
-\begin{exercisesolution}[Solution to \cref{ex:5.1}]
+\begin{exercisesolution}[Solution to \cref{ex:directional_derivatives_computation}]
+\label{sol:directional_derivatives_computation}
 % Generator: Claude Sonnet 5 (Medium)
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item Since $e^{-x^2-y^2} > 0$ everywhere, the gradient of $f(x,y) = xy^2e^{-x^2-y^2}$ vanishes
@@ -74,7 +77,8 @@ D_v f(1,2) = \nabla f(1,2) \cdot v = \begin{pmatrix} 4 \\ 1 \end{pmatrix} \cdot 
 
 % Originally: new. Problems 5.4 and 5.7 sat in content/exercise-sheets/week-05.tex, which was
 % never \input by anything, so neither had reached the built document or carried a solution.
-\begin{exercisesolution}[Solution to \cref{ex:5.4}]
+\begin{exercisesolution}[Solution to \cref{ex:derivatives_gradient_polar_computation}]
+\label{sol:derivatives_gradient_polar_computation}
 % Generator: Claude Opus 5 (High)
 Throughout, $v$ is the direction and $x$ the base point. Where $f$ is differentiable the answer is
 just $\partial_v f(x) = \langle\nabla f(x), v\rangle$; the interest is in the points where it is
@@ -151,7 +155,8 @@ not, which is what the second half of each part is asking about.
 \end{enumerate}
 \end{exercisesolution}
 
-\begin{exercisesolution}[Solution to \cref{ex:5.7}]
+\begin{exercisesolution}[Solution to \cref{ex:curve_chain_rule_car_earth}]
+\label{sol:curve_chain_rule_car_earth}
 % Generator: Claude Opus 5 (High)
 Write $\theta(t) := \omega t + a(t)$ for the longitude actually occupied in space and
 $\varphi(t) := b(t)$ for the latitude, so that
@@ -198,6 +203,7 @@ lower.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:examHS24_TF_chain_rule}]
+\label{sol:chain_rule_higher_order_tf}
 % Generator: Gemini 3.1 Pro (High)
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item \textbf{True:} This is the standard chain rule $\nabla(u \circ F) = \nabla u(F) \cdot \Jac F$, where the $i$-th component (derivative with respect to $x_i$) is the product of $\nabla u(F)$ with the $i$-th column of the Jacobian $\Jac F$.
@@ -207,6 +213,7 @@ lower.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution of \cref{ex:regularity_ladder_xy2}]
+\label{sol:regularity_ladder_xy2}
 % Generator: Claude Opus 5 (High)
 One substitution settles everything. In polar coordinates $x = r\cos\theta$, $y = r\sin\theta$,
 \[f(r\cos\theta,\, r\sin\theta) = \frac{r\cos\theta \cdot r^2\sin^2\theta}{r^2}

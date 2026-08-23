@@ -342,7 +342,7 @@ Since this holds for any $\Omega$, the \newterm{continuity equation}
 % Source: exercises/Ex11_Analysis2_eng.pdf
 
 \begin{exercise}[Radial vector fields \textnormal{(important)}]
-\label{ex:11.5}
+\label{ex:radial_vector_fields_flux}
 For $\alpha\in\mathbb{R}$ consider the vector field
 \[V_\alpha(x) = \lvert x\rvert^\alpha x, \qquad x\in\mathbb{R}^n\setminus\{0\},\]
 where $\lvert x\rvert$ is the usual Euclidean norm.
@@ -358,6 +358,7 @@ where $\lvert x\rvert$ is the usual Euclidean norm.
   Why doesn't this contradict the Divergence Theorem?
 \end{enumerate}
 \exinfo{This exercise is Problem 11.5 of Problem Sheet 11, Analysis II, Spring Semester 2026.}
+\exsol{sol:radial_vector_fields_flux}
 \end{exercise}
 
 \begin{aiexercise}[Flux of a cubic field through the sphere]
@@ -373,6 +374,7 @@ the flux of $F$ out of $\partial\Omega$.
   \item Evaluate the volume integral. The shell reading of polar coordinates in
     \cref{rem:polar_as_shells} does it without a Jacobian determinant.
 \end{enumerate}
+\exsol{sol:ai_flux_cubic_sphere}
 \end{aiexercise}
 
 \begin{aiexercise}[An open surface has to be closed first]
@@ -391,6 +393,7 @@ $F(x,y,z) := (x,\,y,\,z)$.
   \item Compute the flux through $D$ alone, directly from \cref{def:flux}, and deduce the flux
     of $F$ through $S$.
 \end{enumerate}
+\exsol{sol:ai_capping_a_paraboloid}
 \end{aiexercise}
 
 % Source: old_exams/examHS24.pdf (13 February 2025), Kurzproblem 1, part 2, p. 8
@@ -406,6 +409,7 @@ and the vector fields
 \end{align*}
 Compute the outer flow of $B$ across the boundary of $U$ (take the normal vector to $\partial U$ to point outside of $U$).
 \exinfo{This exercise is taken from the exam of 13 February 2025 (Prof.\ Joaquim Serra), Short Problem 1, part 2.}
+\exsol{sol:examHS24_KP1_part2_flux}
 \end{exercise}
 
 % Source: old_exams/examHS24.pdf (13 February 2025), Kurzproblem 1, part 3, p. 8
@@ -425,6 +429,7 @@ together with the electric point-charge field $E : \mathbb{R}^3 \setminus \{0\} 
 \exhint[Official hint]{In order to exploit the symmetries of the field $E$, consider the flow of $E$ across the boundary of the domain $U \setminus B_r(0)$, where $0 < r < \min\{a,b,c\}$.}
 \exinfo{This exercise is taken from the exam of 13 February 2025 (Prof.\ Joaquim Serra), Short Problem 1, part 3. Part
 \textbf{(a)} is added here as a step; the original asks only for the flux.}
+\exsol{sol:gauss_law_ellipsoid_flux}
 \end{exercise}
 
 % Source: old_exams/examHS24.pdf (13 February 2025), Kästchenaufgabe 3, p. 7
@@ -438,6 +443,7 @@ Determine the value of $\alpha$ for which the outer flux of $F_\alpha$ across $\
 $1$.
 \exinfo{This exercise is taken from the exam of 13 February 2025 (Prof.\ Joaquim Serra), Box Problem 3, where only the
 final answer was graded.}
+\exsol{sol:tuning_alpha_prescribed_flux}
 \end{exercise}
 
 % Source: old_exams/examFS24.pdf (21 August 2024), Kurzproblem 2, p. 9
@@ -464,6 +470,7 @@ Consider the region, the surface and the two vector fields
 \exhint[Official hint]{If needed, you may use the divergence theorem in a piecewise smooth domain
 without proof.}
 \exinfo{This exercise is taken from the exam of 21 August 2024 (Prof.\ Joaquim Serra), Short Problem 2.}
+\exsol{sol:flux_truncated_paraboloid}
 \end{exercise}
 
 % Source: old_exams/fs2023/Prüfung.pdf (9 August 2021), Teil A, Frage 10, p. 11
@@ -476,6 +483,7 @@ for every continuously differentiable vector field $v$ on $\mathbb{R}^3$, the qu
 does not depend on $n$: that is, $I_n = I_m$ for all $n,m \in \mathbb{Z}_{\ge 0}$.
 \exinfo{This exercise is taken from the Analysis I \& II exam of 9 August 2021 (Prof.\ Giovanni Felder), Part A, Problem 10, which opens by
 asking for a statement of the divergence theorem on $B_1(0)$.}
+\exsol{sol:radial_weight_flux_independent}
 \end{exercise}
 
 % Source: old_exams/HS16.pdf (Klausur zur Analysis I/II, winter 2016, Prof. H. Knörrer),
@@ -493,6 +501,7 @@ satisfies $\divg K = 0$ on all of $\mathbb{R}^3$.
 \end{enumerate}
 \exinfo{This exercise is taken from the Analysis I \& II examination of winter 2016
 (Prof.\ H.\ Kn\"orrer), Problem 3.}
+\exsol{sol:knoerrer_divergence_free_compact_support}
 \end{exercise}
 
 % Source: old_exams/FS18.pdf (Analysis I & II, summer 2018, Prof. Manfred Einsiedler),
@@ -575,6 +584,7 @@ $u : U \to \mathbb{R}$ be harmonic. Write $\partial_\nu u := \langle\nabla u,\nu
 \end{enumerate}
 \exinfo{This exercise is taken from the mock examination \emph{Probepr\"ufung Analysis II}
 (undated) in \texttt{old\_exams/fs2023/}, Problem 12. That paper names no lecturer.}
+\exsol{sol:green_first_identity_harmonic}
 \end{exercise}
 
 % Source: old_exams/fs2023/Probeprfg3.pdf (Probeprüfung Analysis II, 31 January 2023),
@@ -600,5 +610,6 @@ each of the following is true or false, with justification.
 \end{enumerate}
 \exinfo{This exercise is taken from the mock examination \emph{Probepr\"ufung Analysis II} of
 31 January 2023, Problem 6. That paper names no lecturer.}
+\exsol{sol:flux_through_nested_spheres}
 \end{exercise}
 

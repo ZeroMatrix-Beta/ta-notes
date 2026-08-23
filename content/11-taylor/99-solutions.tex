@@ -18,6 +18,7 @@ than three, because \cref{ex:taylor_explicit_example} carries two, a cumbersome 
 one.
 
 \begin{exercisesolution}[Solution to \cref{ex:schwarz_application}]
+\label{sol:schwarz_application}
 % Relocated from 02-taylor-expansions.tex by Claude Opus 5 (Extra), 2026-08-13.
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item Every term in $f$ is a composition of $C^2$ functions (polynomials, exponentials, sine),
@@ -42,6 +43,7 @@ entire content.
 \end{remark}
 
 \begin{exercisesolution}[Solution to \cref{ex:reading_off_expansions}]
+\label{sol:reading_off_expansions}
 % Generator: Claude Opus 5 (High)
 Throughout, the tool is \cref{cor:taylor_expansion_unique}: an $o(\lvert h\rvert^{k})$ fit by a
 polynomial of degree $\leq k$ pins down every derivative of order $\leq k$, and nothing beyond.
@@ -88,7 +90,8 @@ polynomial of degree $\leq k$ pins down every derivative of order $\leq k$, and 
 \end{enumerate}
 \end{exercisesolution}
 
-\begin{exercisesolution}[Solution to \cref{ex:4.5}]
+\begin{exercisesolution}[Solution to \cref{ex:mean_value_vector_valued}]
+\label{sol:mean_value_vector_valued}
 % Generator: Claude Opus 5 (High)
 \textbf{No}, and the official hint's function is the cleanest witness. Take
 \[f(t) := \big(\sin(2\pi t),\ \cos(2\pi t)\big), \qquad f \in C^1(\mathbb{R},\mathbb{R}^2).\]
@@ -115,7 +118,8 @@ so the total displacement is zero, but they never once stand still.
 \end{ainote}
 \end{exercisesolution}
 
-\begin{exercisesolution}[Solution to \cref{ex:5.3}]
+\begin{exercisesolution}[Solution to \cref{ex:landau_notation_multiple_choice}]
+\label{sol:landau_notation_multiple_choice}
 % Generator: Claude Sonnet 5 (Medium)
 Throughout, recall the hint: \textit{as $x \to 0$} and \textit{as $|x| \to 0$} describe the same
 limit, so both phrasings are treated identically below. The recurring subtlety is instead between
@@ -155,7 +159,8 @@ can establish) versus \textbf{around}/in a whole neighbourhood of $x=0$ (which i
 
 % Originally: new. Problems 5.5 and 5.6 sat in content/exercise-sheets/week-05.tex, which was
 % never \input by anything, so neither had reached the built document or carried a solution.
-\begin{exercisesolution}[Solution to \cref{ex:5.5}]
+\begin{exercisesolution}[Solution to \cref{ex:taylor_expansion_cost_multiple_choice}]
+\label{sol:taylor_expansion_cost_multiple_choice}
 % Generator: Claude Opus 5 (High)
 \textbf{The answer is (a): degree 3, at a cost of 20 CHF.}
 
@@ -177,7 +182,8 @@ That uses the four values $g(0), g'(0), g''(0), g'''(0)$, so four queries at 5 C
 three queries, which is one derivative short.
 \end{exercisesolution}
 
-\begin{exercisesolution}[Solution to \cref{ex:5.6}]
+\begin{exercisesolution}[Solution to \cref{ex:polynomials_multivariate_expansion}]
+\label{sol:polynomials_multivariate_expansion}
 % Generator: Claude Opus 5 (High)
 Put $R := P - Q = \sum_\alpha c_\alpha X^\alpha$ with $c_\alpha := a_\alpha - b_\alpha$, so the
 hypothesis reads $|R(x)| \leq M|x|^\sigma$ for $|x| \leq 1$ and the claim is that
@@ -217,6 +223,7 @@ $d = \sigma$ the bound becomes $|R_d(u) + O(t)| \leq M$, which says nothing.
 % attempted; and since ex:taylor_expansion_sin_xy now demonstrates the technique as a worked
 % example, these three are drills of a method the reader has already been shown.
 \begin{exercisesolution}[Solution to \cref{ex:taylor_expansion_sqrt_1_plus_x_plus_y2}]
+\label{sol:taylor_expansion_sqrt_1_plus_x_plus_y2}
 % Generator: Gemini 3.6 Flash (High)
 Using the 1D expansion $\sqrt{1+t} = 1 + \frac{1}{2}t - \frac{1}{8}t^2 + O(t^3)$ with $t = x+y^2$, we obtain:
 \begin{align*}
@@ -229,6 +236,7 @@ the $t^2$ term has to be carried and expanded, and why $2xy^2$ and $y^4$ are the
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution to \cref{ex:taylor_expansion_exp_arctan}]
+\label{sol:taylor_expansion_exp_arctan}
 % Generator: Claude Sonnet 5 (High)
 Write $s := x-y$, itself of order $|h|$. Since $\arctan$ is odd, $\arctan(t) = t + O(t^3)$, so
 \[\arctan(s) = s + O(|h|^3) = s + o(|h|^2).\]
@@ -241,6 +249,7 @@ Now $\exp(s) = 1+s+\tfrac12s^2+O(s^3)$ with $s^2 = x^2-2xy+y^2$, so
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution to \cref{ex:taylor_expansion_one_over_1_minus_x2_y2}]
+\label{sol:taylor_expansion_one_over_1_minus_x2_y2}
 % Generator: Claude Sonnet 5 (High)
 Using $\tfrac{1}{1-t} = 1+t+O(t^2)$ with $t := x^2+y^2$, itself already $O(|h|^2)$, so
 $t^2 = O(|h|^4) = o(|h|^2)$:
@@ -257,6 +266,7 @@ deciding how many terms of the one-variable series to write down.
 \end{remark}
 
 \begin{exercisesolution}[Proof of \cref{ex:taylor_parametric_integral}]
+\label{sol:taylor_parametric_integral}
 % Generator: Gemini 3.6 Flash (High)
 % Correction: Claude Opus 5 (High) --- parts (c) and (d) written; Flash's (c) only observed that
 % x = 0 is critical, which answers neither the source's question nor its own weakened one.

@@ -111,7 +111,7 @@ Two lessons worth keeping.
   \item \textbf{Watch whether $v \mapsto \partial_vf(x_0)$ is linear.} If $f$ were differentiable
     we would need $\partial_vf(0,0) = DF_0(v)$, a \emph{linear} function of $v$; but $a^2/b$ is
     not linear in $(a,b)$. That failure alone rules out differentiability, without any mention of
-    continuity, and it is precisely the test that settles \cref{ex:5.1}\textbf{(b)} below.
+    continuity, and it is precisely the test that settles \cref{ex:directional_derivatives_computation}\textbf{(b)} below.
 \end{itemize}
 \end{aiexample}
 
@@ -122,7 +122,7 @@ Two lessons worth keeping.
 % Source: exercises/Ex5_Analysis2_eng.pdf
 
 \begin{exercise}[Derivatives \textnormal{(important)}]
-\label{ex:5.1}
+\label{ex:directional_derivatives_computation}
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item Consider $f(x,y) := xy^2e^{-x^2-y^2}$ for $(x,y) \in \mathbb{R}^2$. Find all the critical
     points of $f$, that is all the points where the gradient of $f$ vanishes. (The point will be
@@ -135,18 +135,19 @@ Two lessons worth keeping.
     properties cannot exist.
 \end{enumerate}
 \exinfo{This exercise is Problem 5.1 of Problem Sheet 5, Analysis II, Spring Semester 2026.}
+\exsol{sol:directional_derivatives_computation}
 \end{exercise}
 
 \begin{remark}
 Corsin's hint, \textit{recall the linearity of the differential}, is the whole of
-\Cref{ex:5.1}(b): a directional derivative must be \textbf{linear} in $v$, and $v_1^2$ is not.
+\Cref{ex:directional_derivatives_computation}(b): a directional derivative must be \textbf{linear} in $v$, and $v_1^2$ is not.
 \end{remark}
 
 % Originally: content/exercise-sheets/week-05.tex, problem 5.4 --- never previously built
 % Source: exercises/Ex5_Analysis2_eng.pdf
 
 \begin{exercise}[Computation of derivatives \textnormal{(semi-important)}]
-\label{ex:5.4}
+\label{ex:derivatives_gradient_polar_computation}
 For each of the following functions compute the directional derivative in the general direction
 $v$ at a general point $x$, that is $\partial_v f(x)$, where applicable.
 \begin{enumerate}[label=\textbf{(\alph*)}]
@@ -171,4 +172,5 @@ one variable). \textbf{5.4.3:} these functions are $C^\infty$, so compute them o
 find an expansion in powers of $t$; by \textit{Corollary 10.45} it must be the Taylor polynomial,
 from which the derivatives can be read off. For example $(x+tv)^2 = x^2 + (xv+vx)t + O(t^2)$.}
 \exinfo{This exercise is Problem 5.4 of Problem Sheet 5, Analysis II, Spring Semester 2026.}
+\exsol{sol:derivatives_gradient_polar_computation}
 \end{exercise}

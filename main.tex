@@ -727,6 +727,7 @@
 \makeatother
 
 \newenvironment{exercisesolution}[1][Solution]{%
+  \phantomsection
   \begin{proof}[#1]%
 }{%
   \end{proof}%
@@ -811,6 +812,16 @@
   \exnoteopen{HintTint}{\faLightbulb[regular]}{#1}%
 }{\exnoteclose}
 \newcommand{\exhint}[2][Hint]{\begin{exercisehint}[#1]#2\end{exercisehint}}
+
+% \faCheckCircle[regular] -- outline checkmark circle for the forward link from an exercise
+% to its worked solution (in the chapter's Solutions section or appendix).
+\colorlet{SolTint}{MidnightBlue!85!ThemeGreen}
+\newenvironment{exercisesol}[1][Solution]{%
+  \exnoteopen{SolTint}{\faCheckCircle[regular]}{#1}%
+}{\exnoteclose}
+\let\exercisesolutionlink\exercisesol
+\let\endexercisesolutionlink\endexercisesol
+\newcommand{\exsol}[2][Solution]{\begin{exercisesol}[#1]\hyperref[#2]{See solution on \cpageref{#2}}\end{exercisesol}}
 
 % ==========================================
 % RETIRED: the week-skeleton macros

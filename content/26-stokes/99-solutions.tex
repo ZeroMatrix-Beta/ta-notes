@@ -12,6 +12,7 @@ Not every solution in this chapter is collected here. \Cref{ex:choose_parameters
 (\cpageref{ex:spherical_cap_flux_stokes_gauss}) are solved where they appear.
 
 \begin{exercisesolution}[Proof of \cref{ex:path_concatenation_work}]
+\label{sol:path_concatenation_work}
 % Generator: Claude Opus 5 (High)
 \textbf{The concatenation is an admissible path.} First check that $\gamma * \sigma$ is defined at
 all. The two formulas overlap at $t = \tfrac12$, where they give $\sigma(1)$ and $\gamma(0)$; these
@@ -58,7 +59,8 @@ since $\varphi$ is then decreasing.
 \end{remark}
 \end{exercisesolution}
 
-\begin{exercisesolution}[Solution of \cref{ex:12.3}]
+\begin{exercisesolution}[Solution of \cref{ex:stokes_work_along_paths}]
+\label{sol:stokes_work_along_paths}
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item The domain is $\{(x,y,z) \in \mathbb{R}^3 : (x,y) \neq (0,0)\}$, i.e.\
     $\mathbb{R}^3$ with the $z$-axis removed. It is connected (path-connected: any two points can
@@ -113,10 +115,11 @@ since $\varphi$ is then decreasing.
 % Note: the official solution's part 2 (our (b)) labels vanishing curl as "divergence-free" where it
 % visibly means curl-free (computes curl F, not div F) --- a wording slip, not repeated here.
 
-\begin{exercisesolution}[Solution of \cref{ex:12.4}]
+\begin{exercisesolution}[Solution of \cref{ex:flux_on_punctured_domain}]
+\label{sol:flux_on_punctured_domain}
 \textbf{(a) False.} The Newton potential's gradient $F(x) = \nabla(1/\lvert x\rvert) =
 -x\lvert x\rvert^{-3}$ is divergence-free on $U$ (it is $V_{-3}$ up to sign, from
-\cref{ex:11.5}, with $n=3$), yet $I_r = \int_{\partial B_r} F\cdot n\,dS =
+\cref{ex:radial_vector_fields_flux}, with $n=3$), yet $I_r = \int_{\partial B_r} F\cdot n\,dS =
 -\vol_2(\partial B_r) \neq 0$.
 
 \textbf{(b) True.} Applying \cref{thm:gauss_divergence} on the shell $B_{r_2}\setminus
@@ -140,7 +143,8 @@ for all $r>0$.
 
 % Verified: solved independently, all four parts match Sol12_Analysis2_eng.pdf.
 
-\begin{exercisesolution}[Solution of \cref{ex:12.5}]
+\begin{exercisesolution}[Solution of \cref{ex:conservative_vector_field_potential}]
+\label{sol:conservative_vector_field_potential}
 Writing $F = (F^1,F^2)$ with $F^1 = \lambda xe^y$, $F^2 = (y+1+x^2)e^y$, the integrability
 condition is $\partial_yF^1 = \partial_xF^2$:
 \[\partial_yF^1 = \lambda xe^y, \qquad \partial_xF^2 = 2xe^y.\]
@@ -157,17 +161,19 @@ which one checks directly satisfies $\nabla f = F$.
 
 % Verified: solved independently, lambda=2 and potential (x^2+y)e^y match Sol12 exactly.
 
-\begin{exercisesolution}[Solution of \cref{ex:12.8}]
+\begin{exercisesolution}[Solution of \cref{ex:outward_flux_sign_convention}]
+\label{sol:outward_flux_sign_convention}
 The four quantities $I_b,I_t,I_l,I_r$ are already defined using the same outward normal field
 $n$ on each of the four edges of $\partial Q$, so the total outer flux is simply their sum,
 with no relative sign corrections needed: $\boxed{I_b+I_t+I_r+I_l}$, answer \textbf{(b)}.
 \end{exercisesolution}
 
 % Verified: solved independently, matches Sol12 answer (b).
-% Correction: Claude Opus 5 (High) --- this comment belongs to ex:12.8 above. Flash appended its
+% Correction: Claude Opus 5 (High) --- this comment belongs to ex:outward_flux_sign_convention above. Flash appended its
 % own solution between the two, leaving the comment claiming a block it had never checked.
 
 \begin{exercisesolution}[Proof of \cref{ex:curl_identity_greens_formula}]
+\label{sol:curl_identity_greens_formula}
 % Generator: Gemini 3.6 Flash (High)
 % Correction: Claude Opus 5 (High) --- \operatorname{rot} -> \curl, J\Phi -> \Jac\Phi, and the line
 % integrals rewritten in this chapter's own notation (\int_{\partial\Omega} F\cdot\tau\,dL, as in
@@ -348,6 +354,7 @@ $1$ is the only genuinely non-analytic step in the proof.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution of \cref{ex:angle_field_true_false}]
+\label{sol:angle_field_true_false}
 % Generator: Claude Opus 5 (High)
 Begin with the computation every part relies on. Writing $X = (P,Q)$ with $P = -y/(x^2+y^2)$ and
 $Q = x/(x^2+y^2)$,
@@ -391,6 +398,7 @@ as in \textbf{(b)}, and a potential appears at once.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution of \cref{ex:two_fields_two_circles}]
+\label{sol:two_fields_two_circles}
 % Generator: Claude Opus 5 (High)
 Both fields are closed on $U$, as the exam states and as one checks in a line: $X_2 = 0$ and $X_1$
 does not depend on $x_2$, so both mixed partials vanish, and the computation for $Y$ is the one
@@ -484,6 +492,7 @@ relative to the puncture.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution of \cref{ex:box_nonconstant_conservative_field}]
+\label{sol:box_nonconstant_conservative_field}
 % Generator: Claude Opus 5 (High)
 Take $U := \mathbb{R}^3$ and
 \[V(x,y,z) := (x,\ y,\ z)\transp = \nabla u(x,y,z), \qquad
@@ -503,6 +512,7 @@ that is the difference between one line and half a page.
 % Generator: Claude Opus 5 (High)
 % No solution key ships with the Jossen papers, so this is an independent derivation.
 \begin{exercisesolution}[\cref{ex:jossen_potential_on_disconnected_domain}]
+\label{sol:jossen_potential_on_disconnected_domain}
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item $U$ is \textbf{open}: it is the preimage of the open set $\mathbb{R}\setminus\{0\}$ under
     the continuous projection $(x,y,z)\mapsto y$.
@@ -579,6 +589,7 @@ beyond differentiability was ever needed.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution of \cref{ex:kobel_line_integral_yz_circle}]
+\label{sol:kobel_line_integral_yz_circle}
 % Generator: Claude Opus 5 (High)
 The answer is \textbf{(c)}, the integral is $0$.
 
@@ -614,6 +625,7 @@ what fails is only that the work is zero around \emph{every} loop.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution of \cref{ex:kobel_irrotational_single_choice}]
+\label{sol:kobel_irrotational_single_choice}
 % Generator: Claude Opus 5 (High)
 The correct answer is \textbf{(d)}, the guarded one.
 \begin{enumerate}[label=\textbf{(\alph*)}]

@@ -3,7 +3,8 @@
 \section{Solutions}
 \label{sec:pullbacks_solutions}
 
-\begin{exercisesolution}[Solution of \cref{ex:12.9}]
+\begin{exercisesolution}[Solution of \cref{ex:change_of_variables_differential_forms}]
+\label{sol:change_of_variables_differential_forms}
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item Writing each $d\psi^j$ in the coordinate basis, $d\psi^j = \sum_{i=1}^n
     \frac{\partial\psi^j}{\partial x^i}\,dx^i$, so
@@ -41,6 +42,7 @@
 % Verified: solved independently, both parts match Sol12, including pullback-invariance.
 
 \begin{exercisesolution}[Solution to \cref{ex:ai_pullback_area_form}]
+\label{sol:ai_pullback_area_form}
 % Generator: Claude Opus 5 (High)
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item The pullback of a coordinate differential is the differential of the corresponding
@@ -72,19 +74,20 @@
     \[\Phi^*(dx\wedge dy) = du_2\wedge du_1 = -\,du_1\wedge du_2,\]
     while $\lvert\det\Jac\Phi\rvert = 1$ and the change of variables formula does not change at
     all. The form notices the reversal; the volume cannot.
-  \item \Cref{ex:12.9} concludes that $\int_U\psi^*\eta = \int_V\eta$, with no sign. Drop
+  \item \Cref{ex:change_of_variables_differential_forms} concludes that $\int_U\psi^*\eta = \int_V\eta$, with no sign. Drop
     the hypothesis $\det > 0$ and take $\psi$ to be the swap above: the pullback acquires a
     factor $-1$, so the two integrals differ by a sign and the conclusion is false as stated. The
     honest statement without the hypothesis carries $\sgn(\det\Jac\psi)$.
 
     \Cref{thm:change_of_variables} is untroubled by the same map because it never claimed
     anything about orientation. This is the precise sense in which the positivity hypothesis in
-    \cref{ex:12.9} is not a technical convenience: it is the price of upgrading an unsigned
+    \cref{ex:change_of_variables_differential_forms} is not a technical convenience: it is the price of upgrading an unsigned
     identity to a signed one.
 \end{enumerate}
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution to \cref{ex:ai_area_form_over_hemisphere}]
+\label{sol:ai_area_form_over_hemisphere}
 % Generator: Claude Opus 5 (High)
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item Along $\phi$ the first two coordinates are the parameters themselves, $x = u$ and

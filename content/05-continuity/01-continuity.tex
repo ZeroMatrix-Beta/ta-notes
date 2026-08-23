@@ -176,7 +176,7 @@ However, if we approach along the $y$-axis (setting $x=0$ first), we get
 \[
 \lim_{y \to 0} f(0, y) = \lim_{y \to 0} \frac{0}{y^2} = 0.
 \]
-Since these limits disagree, $\lim_{(x,y) \to (0,0)} f(x,y)$ does not exist. A robust method to check limits at the origin uniformly across all directions is to switch to \newterm{polar coordinates} ($x = r\cos\varphi, y = r\sin\varphi$). If the limit as $r \to 0$ is independent of $\varphi$, then the function converges. (This is explored further in \cref{ex:3.2}).
+Since these limits disagree, $\lim_{(x,y) \to (0,0)} f(x,y)$ does not exist. A robust method to check limits at the origin uniformly across all directions is to switch to \newterm{polar coordinates} ($x = r\cos\varphi, y = r\sin\varphi$). If the limit as $r \to 0$ is independent of $\varphi$, then the function converges. (This is explored further in \cref{ex:problems_at_origin}).
 \end{example}
 
 \begin{question}
@@ -209,30 +209,32 @@ every such $f$ is continuous.
 % Source: exercises/Ex2_Analysis2_eng.pdf, p. 1
 
 \begin{exercise}[Continuity of the distance]
-\label{ex:2.6}
+\label{ex:continuity_of_distance}
 Let $(X,d)$ be a metric space, and endow $X \times X$ with the product distance
 $d_2(x,y) := d(x_1,y_1) + d(x_2,y_2)$. Show that the distance function
 $d : X \times X \to \mathbb{R}$ is continuous with respect to $d_2$ and, more precisely, that it
 is 1-Lipschitz. Is $d$ also continuous with respect to the distance
 $d_1(x,y) := \max\{d(x_1,y_1), d(x_2,y_2)\}$? Is $d$ also Lipschitz continuous with respect to the
 distance $d_3(x,y) := \sqrt{d(x_1,y_1)^2 + d(x_2,y_2)^2}$? (Notation consistent with
-\cref{ex:2.5}.)
+\cref{ex:product_metric_spaces}.)
 \exinfo{This exercise is Problem 2.6 of Problem Sheet 2, Analysis II, Spring Semester 2026.}
+\exsol{sol:continuity_of_distance}
 \end{exercise}
 
 % Originally: content/exercise-sheets/week-02.tex, problem 2.7
 % Source: exercises/Ex2_Analysis2_eng.pdf, p. 1
 
 \begin{exercise}[Continuity of the composition]
-\label{ex:2.7}
+\label{ex:continuity_of_composition}
 Let $X, Y, Z$ be metric spaces and let $f : X \to Y$, $g : Y \to Z$ be continuous functions. Show
 that $g \circ f : X \to Z$ is continuous using at least two of the three equivalent definitions of
 continuity seen in class.
 \exinfo{This exercise is Problem 2.7 of Problem Sheet 2, Analysis II, Spring Semester 2026.}
+\exsol{sol:continuity_of_composition}
 \end{exercise}
 
 \begin{remark}
-The three equivalent definitions of continuity referenced in \cref{ex:2.7} are exactly the ones
+The three equivalent definitions of continuity referenced in \cref{ex:continuity_of_composition} are exactly the ones
 stated in \cref{sec:continuity} below (\(\varepsilon\)--\(\delta\), sequential, topological).
 \end{remark}
 
@@ -240,7 +242,7 @@ stated in \cref{sec:continuity} below (\(\varepsilon\)--\(\delta\), sequential, 
 % Source: exercises/Ex3_Analysis2_eng.pdf
 
 \begin{exercise}[Problems at the origin]
-\label{ex:3.2}
+\label{ex:problems_at_origin}
 Show that there is no continuous function $f : \mathbb{R}^2 \to \mathbb{R}$ such that
 $f(x,y) = xy/(x^2+y^2)$ for all $(x,y) \neq (0,0)$. On the other hand, show that there is exactly
 one continuous function $g : \mathbb{R}^2 \to \mathbb{R}$ such that
@@ -249,6 +251,7 @@ $g(x,y) = xy/\sqrt{x^2+y^2}$ for all $(x,y) \neq (0,0)$.
 \exhint[Official hint]{If a function is continuous at $0$ and $x_k \to 0$ and $y_k \to 0$, then
 $f(x_k)$ and $f(y_k)$ must converge to the same value.}
 \exinfo{This exercise is Problem 3.2 of Problem Sheet 3, Analysis II, Spring Semester 2026.}
+\exsol{sol:problems_at_origin}
 \end{exercise}
 
 % Quelle: Jérôme Paschoud/Notizen/Woche 2.2 Topologie und Stetigkeit.pdf, p. 2
@@ -269,7 +272,7 @@ Therefore, we can simply choose $\delta := \varepsilon$. Then $d(x, x') < \delta
 \begin{corollary}[Closed sets are exactly the zero sets of a distance function]
 \label{cor:closed_iff_zero_of_distance}
 Let $(X,d)$ be a metric space and $\emptyset \neq E \subseteq X$. The function
-$f_E(x) := d(x,E) = \inf_{z\in E}d(x,z)$ is $1$-Lipschitz, which is \cref{ex:2.3}\textbf{(c)},
+$f_E(x) := d(x,E) = \inf_{z\in E}d(x,z)$ is $1$-Lipschitz, which is \cref{ex:distance_from_set_multiple_choice}\textbf{(c)},
 proved there by the same reverse-triangle-inequality argument as
 \cref{ex:distance_to_point_continuous} above. Moreover,
 \[E \text{ is closed} \quad\Longleftrightarrow\quad E = \{x \in X : f_E(x) = 0\}.\]
@@ -290,7 +293,7 @@ $z_n \to x$. Then $f_E(x) \leq d(x,z_n) \to 0$, so $f_E(x) = 0$, i.e.\ $x \in E$
 \end{proof}
 
 \begin{remark}
-This sharpens \cref{ex:2.3}\textbf{(a)}, which showed only one direction ($E$ closed
+This sharpens \cref{ex:distance_from_set_multiple_choice}\textbf{(a)}, which showed only one direction ($E$ closed
 $\Rightarrow$ $f_E > 0$ off $E$) for a general subset. It is exactly closedness, and nothing
 weaker, that lets $f_E$ detect membership in $E$ by vanishing.
 \end{remark}

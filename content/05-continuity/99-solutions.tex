@@ -8,7 +8,8 @@ Not every solution in this chapter is collected here. \Cref{ex:distance_to_point
 (\cpageref{ex:distance_to_point_continuous}) and \cref{ex:evaluation_map_continuous}
 (\cpageref{ex:evaluation_map_continuous}) are solved where they appear.
 
-\begin{exercisesolution}[Solution to \cref{ex:2.6}]
+\begin{exercisesolution}[Solution to \cref{ex:continuity_of_distance}]
+\label{sol:continuity_of_distance}
 % Generator: Claude Opus 5 (High)
 \textbf{$d$ is $1$-Lipschitz with respect to $d_2$.} Let $x = (x_1,x_2)$ and $y = (y_1,y_2)$ be
 points of $X\times X$. Applying the triangle inequality in $X$ twice,
@@ -20,13 +21,13 @@ which is $1$-Lipschitz continuity (\cref{def:lipschitz_continuous}) and therefor
 (\cref{rem:continuity_hierarchy}).
 
 \textbf{For $d_1$ and $d_3$: yes, still Lipschitz, but the constant changes.} By
-\cref{ex:2.5} part \textbf{(b)} we have $d_2 \leq 2d_1$ and $d_2 \leq \sqrt2\,d_3$, so
+\cref{ex:product_metric_spaces} part \textbf{(b)} we have $d_2 \leq 2d_1$ and $d_2 \leq \sqrt2\,d_3$, so
 \[\big|d(x_1,x_2)-d(y_1,y_2)\big| \leq 2\,d_1(x,y)
   \qquad\text{and}\qquad
   \big|d(x_1,x_2)-d(y_1,y_2)\big| \leq \sqrt2\,d_3(x,y).\]
 This is a general principle rather than a computation: \textbf{Lipschitz continuity survives
 passage to an equivalent metric}, with the constant multiplied by the comparison factor.
-Continuity survives too, being topological, and by \cref{ex:2.5} the three product metrics
+Continuity survives too, being topological, and by \cref{ex:product_metric_spaces} the three product metrics
 induce the same topology.
 
 % Reclassified from ainote to remark: sharpness of the constant is mathematics.
@@ -40,7 +41,8 @@ noticing that the constant has in fact changed.
 \end{remark}
 \end{exercisesolution}
 
-\begin{exercisesolution}[Solution to \cref{ex:2.7}]
+\begin{exercisesolution}[Solution to \cref{ex:continuity_of_composition}]
+\label{sol:continuity_of_composition}
 % Generator: Claude Opus 5 (High)
 All three arguments are short; the point of giving more than one is to see how differently the
 same fact reads through the three definitions of \cref{def:continuous}.
@@ -74,6 +76,7 @@ definition.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution to \cref{ex:continuity_classification}]
+\label{sol:continuity_classification}
 % Generator: Claude Sonnet 5 (Medium)
 \begin{itemize}
   \item $\sqrt{x}$ on $[0,\infty)$: \textbf{uniformly continuous, not Lipschitz.} Uniform
@@ -93,7 +96,8 @@ definition.
 \end{itemize}
 \end{exercisesolution}
 
-\begin{exercisesolution}[Solution to \cref{ex:3.1}]
+\begin{exercisesolution}[Solution to \cref{ex:lipschitz_or_not}]
+\label{sol:lipschitz_or_not}
 % Generator: Claude Opus 5 (High)
 Both parts ask for a map with no fixed point, and each defeats one hypothesis of
 \cref{thm:banach_fixed_point} while keeping the other, which is exactly what
@@ -113,7 +117,8 @@ Both parts ask for a map with no fixed point, and each defeats one hypothesis of
 \end{enumerate}
 \end{exercisesolution}
 
-\begin{exercisesolution}[Solution to \cref{ex:3.2}]
+\begin{exercisesolution}[Solution to \cref{ex:problems_at_origin}]
+\label{sol:problems_at_origin}
 % Generator: Claude Opus 5 (High)
 \textbf{No continuous extension exists for $xy/(x^2+y^2)$.} Suppose $f$ were continuous on
 $\mathbb{R}^2$ and agreed with $xy/(x^2+y^2)$ off the origin. Approach the origin along two
@@ -142,7 +147,8 @@ latter, take a sequence from the dense set converging to the point in question a
 is also why the first half of the problem had only to exhibit \emph{two} conflicting limits.
 \end{exercisesolution}
 
-\begin{exercisesolution}[Solution to \cref{ex:3.6}]
+\begin{exercisesolution}[Solution to \cref{ex:uniform_continuity_multiple_choice}]
+\label{sol:uniform_continuity_multiple_choice}
 % Generator: Claude Opus 5 (High)
 \textbf{(a), (c) and (d) are true; only (b) is false.}
 
@@ -173,7 +179,8 @@ domain is what removes the room to run off to a bad point.
 \end{remark}
 \end{exercisesolution}
 
-\begin{exercisesolution}[Solution to \cref{ex:3.11}]
+\begin{exercisesolution}[Solution to \cref{ex:moduli_of_continuity}]
+\label{sol:moduli_of_continuity}
 % Generator: Claude Opus 5 (High)
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item \textbf{($\Leftarrow$) A modulus of continuity forces uniform continuity.} Suppose

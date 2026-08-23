@@ -17,6 +17,7 @@ Not every solution in this chapter is collected here. \Cref{ex:sup_metric_is_met
 % is flagged in an AI-Note next to the solution concerned.
 
 \begin{exercisesolution}[Proof of \cref{ex:polygon_inequality}]
+\label{sol:polygon_inequality}
 % Generator: Claude Sonnet 5 (High)
 For $N=3$ this is the triangle inequality itself. For the inductive step, assume the claim
 holds for some $N \geq 3$ and let $x_1,\dots,x_{N+1} \in X$. Applying the triangle inequality to
@@ -28,6 +29,7 @@ which is the claim for $N+1$.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:reshaping_same_convergence}]
+\label{sol:reshaping_same_convergence}
 % Generator: Claude Sonnet 5 (High)
 Suppose $x_n \to x$ with respect to $d$, so $d(x_n,x) \to 0$. Concave functions on $[0,\infty)$
 are continuous, so in particular $h$ is continuous at $0$; since $h(0)=0$, this gives
@@ -42,11 +44,13 @@ $d$.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:ai_metric_equivalence}]
+\label{sol:ai_metric_equivalence}
 % Generator: Gemini 3.6 Flash (Medium)
 For any $x = (x_1, x_2) \in \mathbb{R}^2$, we have $\max\{|x_1|, |x_2|\} \leq |x_1| + |x_2|$, giving $d_3(x,0) \leq d_1(x,0)$. Conversely, since $|x_1| \leq \max\{|x_1|, |x_2|\}$ and $|x_2| \leq \max\{|x_1|, |x_2|\}$, summing these yields $|x_1| + |x_2| \leq 2 \max\{|x_1|, |x_2|\}$, i.e., $d_1(x,0) \leq 2 \, d_3(x,0)$. Both bounds are sharp: equality on the left holds for $x=(1,0)$, and equality on the right holds for $x=(1,1)$.
 \end{exercisesolution}
 
-\begin{exercisesolution}[Solution to \cref{ex:2.1}]
+\begin{exercisesolution}[Solution to \cref{ex:metric_space_examples}]
+\label{sol:metric_space_examples}
 % Generator: Claude Opus 5 (High)
 Throughout, non-negativity and symmetry are immediate in every part and are not belaboured; the
 interest is in \textbf{definiteness} and the \textbf{triangle inequality}.
@@ -139,7 +143,8 @@ on definiteness instead. Read alongside
 independent.
 \end{ainote}
 
-\begin{exercisesolution}[Solution to \cref{ex:2.5}]
+\begin{exercisesolution}[Solution to \cref{ex:product_metric_spaces}]
+\label{sol:product_metric_spaces}
 % Generator: Claude Opus 5 (High)
 Write $s := d_X(x,x')$ and $t := d_Y(y,y')$ throughout, so that the three candidates are
 $d_1 = \max\{s,t\}$, $d_2 = s+t$ and $d_3 = \sqrt{s^2+t^2}$. These are precisely the supremum,
@@ -177,6 +182,7 @@ everything below is that one observation.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:integral_reciprocal_inequality}]
+\label{sol:integral_reciprocal_inequality}
 % Generator: Claude Opus 5 (High) --- the statement is the examiner's; the proof, the equality
 % case and the remark are written for these notes. Probeprfg1 ships no solution key.
 Work in $V := C([a,b],\mathbb{R})$ with $\langle g,h\rangle := \int_a^b g h$, and take
@@ -212,7 +218,8 @@ $\big(\sum_i x_i\big)\big(\sum_i 1/x_i\big) \geq n^2$ for positive $x_i$.
 \end{remark}
 \end{exercisesolution}
 
-\begin{exercisesolution}[Proof of \cref{ex:3.7}]
+\begin{exercisesolution}[Proof of \cref{ex:cauchy_schwarz_statement}]
+\label{sol:cauchy_schwarz_statement}
 % Generator: Claude Opus 5 (High)
 This is \cref{thm:cauchy_schwarz}, proved in \cref{sec:cauchy_schwarz} above by expanding
 $\lVert u - \pi_v(u)\rVert^2 \geq 0$, including the equality case. A second, independent proof, by
@@ -237,7 +244,8 @@ minimiser.
 \end{remark}
 \end{exercisesolution}
 
-\begin{exercisesolution}[Proof of \cref{ex:3.8}]
+\begin{exercisesolution}[Proof of \cref{ex:inner_product_induced_norm}]
+\label{sol:inner_product_induced_norm}
 % Generator: Claude Opus 5 (High)
 This is \cref{prop:induced_norm_and_metric}\textbf{(a)}, proved immediately after
 \cref{prop:cauchy_schwarz_geometric_proof}, which is exactly the input the triangle inequality
@@ -247,7 +255,8 @@ middle term by $2\lVert u\rVert\,\lVert v\rVert$ turns the right-hand side into
 $(\lVert u\rVert + \lVert v\rVert)^2$.
 \end{exercisesolution}
 
-\begin{exercisesolution}[Solution to \cref{ex:3.9}]
+\begin{exercisesolution}[Solution to \cref{ex:norm_equivalence_rn}]
+\label{sol:norm_equivalence_rn}
 % Generator: Claude Opus 5 (High)
 Write $e_1,\dots,e_n$ for the standard basis and $|\cdot|$ for the Euclidean norm.
 \begin{enumerate}[label=\textbf{(\alph*)}]
@@ -301,6 +310,7 @@ in the course silently uses $n < \infty$.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:polynomials_infinite_dimensional}]
+\label{sol:polynomials_infinite_dimensional}
 % Generator: Claude Sonnet 5 (High)
 The monomials $\mathcal{B} := \{1,x,x^2,x^3,\dots\}$ form a basis: every polynomial is by
 definition a \emph{finite} linear combination $\sum_{k=0}^n a_kx^k$ of them, so $\mathcal{B}$
@@ -315,7 +325,8 @@ linearly independent by the argument above (restricted to $n \leq d$): a contrad
 finite basis exists, and the (necessarily infinite) $\mathcal{B}$ above is one.
 \end{exercisesolution}
 
-\begin{exercisesolution}[Proof of \cref{ex:3.10}]
+\begin{exercisesolution}[Proof of \cref{ex:hilbert_schmidt_submultiplicative}]
+\label{sol:hilbert_schmidt_submultiplicative}
 % Generator: Claude Opus 5 (High)
 Write $\Psi^i \in \mathbb{R}^n$ for the $i$-th \emph{row} of $\Psi$ and
 $\Phi_j \in \mathbb{R}^n$ for the $j$-th \emph{column} of $\Phi$, so that by the definition of
@@ -337,7 +348,7 @@ $\lVert\Psi\Phi\rVert \leq \lVert\Psi\rVert\,\lVert\Phi\rVert$.
 % property of the norm, so it is mathematics rather than commentary on the transcription.
 \begin{remark}[Submultiplicativity, and what it later buys]
 The Hilbert--Schmidt norm is the same object as the Frobenius norm met in
-\cref{ex:2.1} part \textbf{(e)} on the previous sheet, where it was shown to be the Euclidean
+\cref{ex:metric_space_examples} part \textbf{(e)} on the previous sheet, where it was shown to be the Euclidean
 norm of the
 matrix read as a vector of $\mathbb{R}^{n^2}$. The inequality just proved says that this norm is
 \newterm{submultiplicative} \germanfor{submultiplikativ}, which is exactly the property that
@@ -347,7 +358,8 @@ $\lVert Df\rVert$ be handled like an absolute value in the mean value inequality
 \end{remark}
 \end{exercisesolution}
 
-\begin{exercisesolution}[Solution to \cref{ex:4.3}]
+\begin{exercisesolution}[Solution to \cref{ex:p_norms_unit_balls}]
+\label{sol:p_norms_unit_balls}
 % Generator: Claude Sonnet 5 (Medium)
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item For $n=2$, $\{x : |x|_1 \leq 1\}$ is the diamond with vertices $(\pm 1, 0)$, $(0,\pm 1)$;
@@ -443,7 +455,8 @@ $\lVert Df\rVert$ be handled like an absolute value in the mean value inequality
 % Originally: new. Problem 4.4 was transcribed into content/exercise-sheets/week-04.tex but
 % that file was never \input by anything, so the problem had never appeared in the built
 % document and carried no solution.
-\begin{exercisesolution}[Solution to \cref{ex:4.4}]
+\begin{exercisesolution}[Solution to \cref{ex:p_means_monotonicity}]
+\label{sol:p_means_monotonicity}
 % Generator: Claude Opus 5 (High)
 Throughout write $S(t) := \sum_{i=1}^n x_i^t$, so that
 $\mu_t(x) = \big(S(t)/n\big)^{1/t}$ for $t \neq 0$, and set

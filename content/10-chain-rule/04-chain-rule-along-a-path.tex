@@ -93,13 +93,14 @@ standard facts fall straight out:
 \label{ex:ai_directional_derivative}
 % Generator: Gemini 3.6 Flash (Medium)
 Let $f(x,y) := x^2 y$ defined on $\mathbb{R}^2$. Compute the directional derivative $D_v f(1,2)$ of $f$ at the point $(1,2)$ along the unit vector $v := \frac{1}{\sqrt{2}}(1,1)\transp$.
+\exsol{sol:ai_directional_derivative}
 \end{aiexercise}
 
 % Originally: content/week-04.tex, \exercisesheet{4}
 % Source: exercises/Ex4_Analysis2_eng.pdf
 
 \begin{exercise}[A directional derivative vanishes \textnormal{(important)}]
-\label{ex:4.6}
+\label{ex:directional_derivative_vanishes}
 Let $u \in C^1(\mathbb{R}^n)$ and $\nu \in \mathbb{R}^n$. Show that
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item If $\partial_1 u \equiv 0$ then ``$u$ does not depend on $x_1$''; more rigorously: there
@@ -121,13 +122,14 @@ Let $u \in C^1(\mathbb{R}^n)$ and $\nu \in \mathbb{R}^n$. Show that
 \[u(x,y) := \begin{cases} \max\{0, y-2\}^2 & \text{if } x \geq 0, \\ 0 & \text{if } x \leq 0.\end{cases}\]
 \end{exercisehint}
 \exinfo{This exercise is Problem 4.6 of Problem Sheet 4, Analysis II, Spring Semester 2026.}
+\exsol{sol:directional_derivative_vanishes}
 \end{exercise}
 
 % Originally: content/exercise-sheets/week-05.tex, problem 5.7 --- never previously built
 % Source: exercises/Ex5_Analysis2_eng.pdf
 
 \begin{exercise}[Chain rule for a curve, or: a car on Earth \textnormal{(optional --- ``interesting for physicists'')}]
-\label{ex:5.7}
+\label{ex:curve_chain_rule_car_earth}
 Let $R > 0$ and $\omega \in \mathbb{R}$ be constants. Let
 $\sigma : I \subset \mathbb{R}\to\mathbb{R}^2$, $\sigma(t) = (a(t), b(t))$, which we interpret as
 a curve in a ``map'' representing the longitude and latitude of a car at time $t$.
@@ -150,4 +152,5 @@ car at time $t$.
     $$a'' - 2\tan b\,(\omega+a')\,b' = 0.$$
 \end{enumerate}
 \exinfo{This exercise is Problem 5.7 of Problem Sheet 5, Analysis II, Spring Semester 2026.}
+\exsol{sol:curve_chain_rule_car_earth}
 \end{exercise}

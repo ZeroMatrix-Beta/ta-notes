@@ -49,6 +49,7 @@ correct, but the gloss omits the ``non-''. Corrected in the prose above.
 Let $(X,d)$ be a metric space and $N \geq 3$. Prove, by induction on $N$, that
 \[d(x_1,x_N) \leq \sum_{i=1}^{N-1} d(x_i,x_{i+1})\]
 for all $x_1,\dots,x_N \in X$.
+\exsol{sol:polygon_inequality}
 \end{exercise}
 
 % Generator: Claude Opus 5 (Medium)
@@ -171,7 +172,7 @@ Corsin writes this formula as $\sqrt[m]{\sum_k (x_k-y_k)^m}$, without the absolu
 for any $m$. Two corrections have been applied above. The powers must be taken of
 \textbf{absolute values}, since for odd $m$ the radicand can otherwise be negative. And the
 result is a metric only for $m \geq 1$: for $m \in (0,1)$ the triangle inequality fails, as
-\Cref{ex:4.3}\textbf{.6} shows with $x = e_1$ and $y = e_2$, where
+\Cref{ex:p_norms_unit_balls}\textbf{.6} shows with $x = e_1$ and $y = e_2$, where
 $|x+y|_m = 2^{1/m} > 2 = |x|_m + |y|_m$.
 \end{ainote}
 
@@ -269,6 +270,7 @@ for $m \in (0,1)$.
 In the setting of \cref{prop:concave_reshaping_metric}, show that a sequence $(x_n)_n$ in $X$
 converges to $x$ with respect to $d$ if and only if it converges to $x$ with respect to
 $h \circ d$.
+\exsol{sol:reshaping_same_convergence}
 \end{exercise}
 
 % Source: Corsin Nick/Class Notes/Week 2.pdf, pp. 1--13
@@ -404,7 +406,7 @@ For a single point of $\mathbb{R}^2$ or $\mathbb{R}^3$, plain $(x,y)$ or $(x,y,z
 fine.
 
 The reason this matters more here than in \emph{Analysis I} is that the product metrics of
-\cref{ex:2.5} and the continuity proofs that follow genuinely need both indices at once. An
+\cref{ex:product_metric_spaces} and the continuity proofs that follow genuinely need both indices at once. An
 expression such as $d(x_1,y_1) + d(x_2,y_2)$ is therefore ambiguous until the convention is fixed,
 and means quite different things under the two readings.
 \end{remark}
@@ -486,13 +488,14 @@ Let $x := (x_1, x_2) \in \mathbb{R}^2$. Show that the Manhattan metric $d_1(x,0)
 \[
 d_3(x,0) \leq d_1(x,0) \leq 2 \, d_3(x,0).
 \]
+\exsol{sol:ai_metric_equivalence}
 \end{aiexercise}
 
 % Originally: content/exercise-sheets/week-02.tex, problem 2.1
 % Source: exercises/Ex2_Analysis2_eng.pdf, p. 1
 
 \begin{exercise}[Examples and Non-examples of Metric spaces]
-\label{ex:2.1}
+\label{ex:metric_space_examples}
 Which of the following pairs are metric spaces? Prove it or provide a counterexample.
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item $(B(X), d)$, where $B(X)$ denotes the set of all bounded functions from a non-empty set
@@ -522,6 +525,7 @@ $A := X - Y$, what $\Tr\{A\transp A\}^{1/2}$ actually means; it should look fami
 \textbf{2.1.6:} see what happens if $(X-Y)$ is anti-symmetric. \textbf{2.1.7:} convince yourself
 first that the ``inf'' is in fact a ``min''.}
 \exinfo{This exercise is Problem 2.1 of Problem Sheet 2, Analysis II, Spring Semester 2026.}
+\exsol{sol:metric_space_examples}
 \end{exercise}
 
 % Quelle: Diego Torres Tejeda/Notes - 02.03 - Diego Torres Tejeda.pdf, p. 2
@@ -605,7 +609,7 @@ official hint means when it says to convince yourself the infimum is really a mi
 % Source: exercises/Ex2_Analysis2_eng.pdf, p. 1
 
 \begin{exercise}[Product of metric spaces]
-\label{ex:2.5}
+\label{ex:product_metric_spaces}
 Let $(X, d_X)$ and $(Y, d_Y)$ be a pair of metric spaces. Recall that the set of ordered pairs
 $(x,y)$ with $x \in X$ and $y \in Y$ is denoted by $X \times Y$. Consider the following functions
 $X \times Y \to [0,\infty)$:
@@ -628,4 +632,5 @@ $$
 these things for $\mathbb{R} \times \mathbb{R}$; start from there, then rewrite those arguments in
 this general framework.}
 \exinfo{This exercise is Problem 2.5 of Problem Sheet 2, Analysis II, Spring Semester 2026.}
+\exsol{sol:product_metric_spaces}
 \end{exercise}

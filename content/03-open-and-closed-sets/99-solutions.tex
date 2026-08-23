@@ -10,6 +10,7 @@ Not every solution in this chapter is collected here. \Cref{ex:relative_openness
 (\cpageref{ex:interior_closure_boundary_mixed}) are solved where they appear.
 
 \begin{exercisesolution}[Proof of \cref{ex:ai_open_balls_are_open}]
+\label{sol:ai_open_balls_are_open}
 % Generator: Claude Opus 5 (Medium)
 Let $y \in B_r(x)$, so $d(y,x) < r$, and set $\varepsilon := r - d(y,x) > 0$. We claim that
 $B_\varepsilon(y) \subseteq B_r(x)$, which is exactly what \cref{def:open_closed} requires.
@@ -29,6 +30,7 @@ continuity in \cref{rem:continuity_vs_uniform_continuity}, met here for the firs
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:closure_boundary_of_ball}]
+\label{sol:closure_boundary_of_ball}
 % Generator: Claude Sonnet 5 (High)
 Write $C := \{y \in \mathbb{R}^n : d(x,y) \leq r\}$ for the target set.
 
@@ -53,6 +55,7 @@ For the boundary, $\operatorname{int}(B_r(x)) = B_r(x)$ since $B_r(x)$ is itself
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:ai_disk_boundary}]
+\label{sol:ai_disk_boundary}
 % Generator: Gemini 3.6 Flash (Medium)
 Since $D$ is open, its interior is $\operatorname{int}(D) = D$. The closure of $D$ is $\overline{D} = \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 \leq 1\}$. By \cref{def:interior_closure_boundary}, the boundary is:
 \begin{align*}
@@ -67,7 +70,8 @@ Since $D$ is open, its interior is $\operatorname{int}(D) = D$. The closure of $
 % exercises/Sol2_Analysis2_eng.pdf.
 % ===========================================================================
 
-\begin{exercisesolution}[Solution to \cref{ex:2.2}]
+\begin{exercisesolution}[Solution to \cref{ex:closure_multiple_choice}]
+\label{sol:closure_multiple_choice}
 % Generator: Claude Opus 5 (High)
 \textbf{(a) and (c) are necessarily true; (b) and (d) are not.}
 
@@ -102,7 +106,8 @@ one-directionally with intersections. That is the same asymmetry that runs throu
 \end{remark}
 \end{exercisesolution}
 
-\begin{exercisesolution}[Solution to \cref{ex:2.3}]
+\begin{exercisesolution}[Solution to \cref{ex:distance_from_set_multiple_choice}]
+\label{sol:distance_from_set_multiple_choice}
 % Generator: Claude Opus 5 (High)
 \textbf{(a), (b) and (c) are necessarily true; (d) is not.} It is efficient to prove
 \textbf{(c)} first, since \textbf{(b)} then follows from it.
@@ -139,7 +144,8 @@ one-directionally with intersections. That is the same asymmetry that runs throu
 \end{enumerate}
 \end{exercisesolution}
 
-\begin{exercisesolution}[Solution to \cref{ex:2.4}]
+\begin{exercisesolution}[Solution to \cref{ex:boundary_interior_closure_drill}]
+\label{sol:boundary_interior_closure_drill}
 % Generator: Claude Opus 5 (High)
 All with respect to the standard metric on $\mathbb{R}$, using
 \cref{def:interior_closure_boundary}.
@@ -178,6 +184,7 @@ Three rows repay a second look.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution to \cref{ex:open_closed_self_test}]
+\label{sol:open_closed_self_test}
 % Generator: Claude Opus 5 (High)
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item \textbf{Closed.} The complement is $(-\infty,0)$, which is open, so $[0,\infty)$ is

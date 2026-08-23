@@ -3,7 +3,8 @@
 \section{Solutions}
 \label{sec:differential_solutions}
 
-\begin{exercisesolution}[Solution to \cref{ex:4.1}]
+\begin{exercisesolution}[Solution to \cref{ex:derivative_computation_exponential}]
+\label{sol:derivative_computation_exponential}
 % Generator: Claude Sonnet 5 (Medium)
 Write $u(x,y) = x^{\sin(y)} = e^{\sin(y)\ln x}$ for $x > 0$. Differentiating with the chain rule:
 \[
@@ -12,6 +13,7 @@ Write $u(x,y) = x^{\sin(y)} = e^{\sin(y)\ln x}$ for $x > 0$. Differentiating wit
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:ai_differential_linearization}]
+\label{sol:ai_differential_linearization}
 % Generator: Gemini 3.6 Flash (Medium)
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item Partial derivatives are $\frac{\partial f}{\partial x} = 2xy + y\cos(xy)$ and $\frac{\partial f}{\partial y} = x^2 + x\cos(xy)$. Evaluating at $(1,0)$ yields $\frac{\partial f}{\partial x}(1,0) = 0$ and $\frac{\partial f}{\partial y}(1,0) = 1 + 1 = 2$. Thus $\nabla f(1,0) = (0, 2)\transp$, and the total differential $Df(1,0) \colon \mathbb{R}^2 \to \mathbb{R}$ is $Df(1,0)(h_1, h_2) = 2h_2$.
@@ -20,6 +22,7 @@ Write $u(x,y) = x^{\sin(y)} = e^{\sin(y)\ln x}$ for $x > 0$. Differentiating wit
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:examHS24_TF_diff_piecewise}]
+\label{sol:piecewise_differentiability_tf}
 % Generator: Gemini 3.1 Pro (High)
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item \textbf{True:} For $y > 0$ and $y < 0$ the function is given by continuous formulas. On the interface $y=0$, we have $\lim_{y \to 0^+} y^2 \cos x = 0 = \lim_{y \to 0^-} 0$, which matches $f(x,0) = 0$.
@@ -31,6 +34,7 @@ Write $u(x,y) = x^{\sin(y)} = e^{\sin(y)\ln x}$ for $x > 0$. Differentiating wit
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution of \cref{ex:kobel_differentiable_single_choice}]
+\label{sol:kobel_differentiable_single_choice}
 % Generator: Claude Opus 5 (High)
 The correct answer is \textbf{(c)}.
 \begin{enumerate}[label=\textbf{(\alph*)}]

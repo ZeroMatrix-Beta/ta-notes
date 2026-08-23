@@ -83,6 +83,7 @@ $\sgn(x)$ & $(-1,1)$ \\
 $|x|^{3/2}$ & $(-1,1)$
 \end{tabular}
 \end{center}
+\exsol{sol:continuity_classification}
 \end{exercise}
 
 
@@ -92,7 +93,7 @@ $|x|^{3/2}$ & $(-1,1)$
 % Source: exercises/Ex3_Analysis2_eng.pdf
 
 \begin{exercise}[Lipschitz or not]
-\label{ex:3.1}
+\label{ex:lipschitz_or_not}
 Give an example of:
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item A $\tfrac{1}{2}$-Lipschitz function $f : [0,1) \to [0,1)$ that has no fixed point.
@@ -100,13 +101,14 @@ Give an example of:
     i.e.\ $|f(x) - f(x')| = |x - x'|$ for all $x, x' \in \mathbb{R}^2$.
 \end{enumerate}
 \exinfo{This exercise is Problem 3.1 of Problem Sheet 3, Analysis II, Spring Semester 2026.}
+\exsol{sol:lipschitz_or_not}
 \end{exercise}
 
 % Originally: content/exercise-sheets/week-03.tex, problem 3.6
 % Source: exercises/Ex3_Analysis2_eng.pdf
 
 \begin{exercise}[Multiple choice (uniform continuity)]
-\label{ex:3.6}
+\label{ex:uniform_continuity_multiple_choice}
 Select all the statements below that are true.
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item The function $(x,y) \mapsto x+y$ is uniformly continuous in $\mathbb{R}^2$.
@@ -115,19 +117,20 @@ Select all the statements below that are true.
   \item The function $(x,y) \mapsto xy$ is uniformly continuous in $[0,1]^2$.
 \end{enumerate}
 \exinfo{This exercise is Problem 3.6 of Problem Sheet 3, Analysis II, Spring Semester 2026.}
+\exsol{sol:uniform_continuity_multiple_choice}
 \end{exercise}
 
 \begin{remark}
 Corsin's third reason to care about compactness (\cref{sec:why_compactness_matters}) is precisely
 that a continuous function on a compact space is uniformly continuous, which settles
-\cref{ex:3.6}(c) and (d) at once.
+\cref{ex:uniform_continuity_multiple_choice}(c) and (d) at once.
 \end{remark}
 
 % Originally: content/exercise-sheets/week-03.tex, problem 3.11
 % Source: exercises/Ex3_Analysis2_eng.pdf
 
 \begin{exercise}[(*) Uniform continuity and moduli of continuity]
-\label{ex:3.11}
+\label{ex:moduli_of_continuity}
 Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces and let $f : X \to Y$.
 
 A \textbf{modulus of continuity} is a function $\omega : [0,\infty) \to [0,\infty]$ such that
@@ -162,4 +165,5 @@ $\omega_f(t) := \sup\{d_Y(f(x),f(y)) : d_X(x,y) \leq t\}$. \textbf{3.11.2 / 3.11
 $d_X(x,y) \leq t_1 + t_2$, choose an intermediate point $z$ on the segment from $x$ to $y$ so
 that $d_X(x,z) \leq t_1$ and $d_X(z,y) \leq t_2$, then use the triangle inequality in $Y$.}
 \exinfo{This exercise is Problem 3.11 of Problem Sheet 3, Analysis II, Spring Semester 2026.}
+\exsol{sol:moduli_of_continuity}
 \end{exercise}

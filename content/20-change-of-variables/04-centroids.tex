@@ -32,6 +32,72 @@ consequence is that $z_B$ is where one expects it to be: for a region symmetric 
 centroid lies on that line, because the coordinate perpendicular to it integrates to zero.
 \end{remark}
 
+\begin{center}
+% Generator: Claude Opus 5 (High) --- FIG-20-02: the two halves of the exercise below, drawn.
+% This section defines a *point* and then asserts two things about where it sits, with no picture
+% anywhere: the reader meets the weighted-average formula of part (a) as an identity between two
+% integrals and never sees that it puts $z_B$ on the segment joining the two sub-centroids.
+% Both panels are exact, not schematic --- the coordinates below are the computed centroids, so
+% the picture can be measured against the formulas it illustrates.
+\begin{tikzpicture}[>=Latex, scale=1.0]
+
+  % ---------- Left: centroids add, as an area-weighted average ----------
+  % B_1 = [0,2]x[0,1.8], area 3.6, centroid (1, 0.9)
+  % B_2 = [2,3]x[0,0.9], area 0.9, centroid (2.5, 0.45)
+  % weight of B_2 is 0.9/4.5 = 1/5 exactly, so
+  % z_B = z_1 + (1/5)(z_2 - z_1) = (1.3, 0.81)
+  \node[font=\small\bfseries, text=TextBoldColor] at (1.5, 3.0) {Centroids add};
+
+  \fill[blue!10, opacity=0.7] (0,0) rectangle (2,1.8);
+  \fill[orange!12, opacity=0.7] (2,0) rectangle (3,0.9);
+  \draw[blue!75!black, thick] (0,0) rectangle (2,1.8);
+  \draw[orange!90!black, thick] (2,0) rectangle (3,0.9);
+  \node[blue!80!black, font=\scriptsize] at (0.45, 1.5) {$B_1$};
+  \node[orange!90!black, font=\scriptsize] at (2.75, 0.68) {$B_2$};
+
+  % the segment joining the two sub-centroids, and z_B on it
+  \draw[gray!70!black, dashed] (1,0.9) -- (2.5,0.45);
+  \fill[blue!75!black] (1,0.9) circle (1.5pt) node[above left=-3pt, font=\scriptsize] {$z_{B_1}$};
+  \fill[orange!90!black] (2.5,0.45) circle (1.5pt)
+    node[below right=-3pt, font=\scriptsize] {$z_{B_2}$};
+  \fill[red!80!black] (1.3,0.81) circle (1.8pt);
+  \node[red!80!black, font=\scriptsize, above right=-3pt] at (1.3,0.81) {$z_B$};
+
+  \node[font=\scriptsize, align=center] at (1.5,-0.75)
+    {$\vol_2(B_2)/\vol_2(B) = \tfrac15$, and $z_B$ sits\\one fifth of the way along};
+
+  % ---------- Right: the centroid of a triangle ----------
+  % o=(0,0), p=(3,0), q=(1.2,2.4); centroid = (4.2/3, 2.4/3) = (1.4, 0.8)
+  \begin{scope}[xshift=5.0cm]
+    \node[font=\small\bfseries, text=TextBoldColor] at (1.5, 3.0) {\dots\ and a triangle's};
+
+    \fill[blue!10, opacity=0.7] (0,0) -- (3,0) -- (1.2,2.4) -- cycle;
+    \draw[blue!75!black, thick] (0,0) -- (3,0) -- (1.2,2.4) -- cycle;
+
+    % the three medians, which meet at the centroid
+    \draw[gray!70!black, thin] (0,0) -- (2.1,1.2);
+    \draw[gray!70!black, thin] (3,0) -- (0.6,1.2);
+    \draw[gray!70!black, thin] (1.2,2.4) -- (1.5,0);
+
+    % midpoints
+    \fill[gray!70!black] (2.1,1.2) circle (1.0pt);
+    \fill[gray!70!black] (0.6,1.2) circle (1.0pt);
+    \fill[gray!70!black] (1.5,0) circle (1.0pt);
+
+    \fill[black] (0,0) circle (1.5pt) node[below left=-2pt, font=\scriptsize] {$o$};
+    \fill[black] (3,0) circle (1.5pt) node[below right=-2pt, font=\scriptsize] {$p$};
+    \fill[black] (1.2,2.4) circle (1.5pt) node[above=1pt, font=\scriptsize] {$q$};
+
+    \fill[red!80!black] (1.4,0.8) circle (1.8pt);
+    \node[red!80!black, font=\scriptsize, right=1pt] at (1.4,0.8) {$z_B$};
+
+    \node[font=\scriptsize, align=center] at (1.5,-0.75)
+      {the three medians meet at\\$z_B = \tfrac13(o+p+q)$};
+  \end{scope}
+
+\end{tikzpicture}
+\end{center}
+
 % Source: old_exams/fs2023/Probeprfg3.pdf (Probeprüfung Analysis II, 31 January 2023),
 % Aufgabe 11, p. 4
 % Extractor: Claude Opus 5 (High)
@@ -48,6 +114,7 @@ Let $B \subseteq \mathbb{R}^2$ be Jordan measurable with $\vol_2(B) > 0$.
 \end{enumerate}
 \exinfo{This exercise is taken from the mock examination \emph{Probepr\"ufung Analysis II} of
 31 January 2023, Problem 11. That paper names no lecturer.}
+\exsol{sol:centroid_additivity_and_triangle}
 \end{exercise}
 
 % Source: old_exams/fs2023/Probeprfg2.pdf (Probeprüfung Analysis II, 17 August 2022, revised),
@@ -71,4 +138,5 @@ quarter disc, and for $(s,t) \in \mathbb{R}^2$ put
 \exinfo{Part \textbf{(a)} is taken from the mock examination \emph{Probepr\"ufung Analysis II} of
 17 August 2022 (revised), Problem 1; that paper names no lecturer. Part \textbf{(b)} is added
 here, since the general statement is what the computation is really about.}
+\exsol{sol:centroid_minimises_second_moment}
 \end{exercise}

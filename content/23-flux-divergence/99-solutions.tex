@@ -3,7 +3,8 @@
 \section{Solutions}
 \label{sec:flux_solutions}
 
-\begin{exercisesolution}[Solution of \cref{ex:11.5}]
+\begin{exercisesolution}[Solution of \cref{ex:radial_vector_fields_flux}]
+\label{sol:radial_vector_fields_flux}
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item Writing $V_\alpha^i(x) = \lvert x\rvert^\alpha x_i$,
     \[
@@ -42,6 +43,7 @@
 % Verified: solved independently, all three parts match Sol11 exactly.
 
 \begin{exercisesolution}[Solution to \cref{ex:ai_flux_cubic_sphere}]
+\label{sol:ai_flux_cubic_sphere}
 % Generator: Claude Opus 5 (High)
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item On the unit sphere the exterior unit normal is $\nu(x,y,z) = (x,y,z)$, so the
@@ -73,6 +75,7 @@ any trigonometry: expanding all three fourth powers first is the version that is
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution to \cref{ex:ai_capping_a_paraboloid}]
+\label{sol:ai_capping_a_paraboloid}
 % Generator: Claude Opus 5 (High)
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item Take $\Omega := \{(x,y,z) : x^2+y^2 < 1,\ 0 < z < 1-x^2-y^2\}$, the solid region
@@ -105,13 +108,14 @@ through the paraboloid is $3\pi/2 + \pi = 5\pi/2$ instead. The subtraction in pa
 is doing
 real work; it merely had nothing to subtract.
 
-\Cref{ex:11.1} is the same technique on a hemisphere, and the two are worth reading as a pair:
+\Cref{ex:vector_field_flux_hemisphere} is the same technique on a hemisphere, and the two are worth reading as a pair:
 there the cap contributes $\pi/2$ and must be subtracted, here it contributes nothing. The
 method is identical and only the arithmetic differs, which is the point.
 \end{remark}
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution to \cref{ex:examHS24_KP1_part2_flux}]
+\label{sol:examHS24_KP1_part2_flux}
 % Generator: Gemini 3.1 Pro (High)
 Both fields are $C^1$ on all of $\mathbb{R}^3$, so the divergence theorem
 (\cref{thm:gauss_divergence}) converts the flux into a volume integral:
@@ -135,6 +139,7 @@ What survives is the radial field $(x,y,z)$, whose divergence is $3$.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:gauss_law_ellipsoid_flux}]
+\label{sol:gauss_law_ellipsoid_flux}
 % Generator: Gemini 3.6 Flash (High)
 % Correction: Claude Opus 5 (High) --- \operatorname{div}/\operatorname{vol} -> \divg/\vol, and the
 % triple and double integral signs collapsed to \int, matching thm:gauss_divergence.
@@ -166,6 +171,7 @@ usual sign that the quantity computed is a topological one.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution of \cref{ex:tuning_alpha_prescribed_flux}]
+\label{sol:tuning_alpha_prescribed_flux}
 % Generator: Claude Opus 5 (High)
 The field is polynomial, hence $C^1$, and $U$ is a smooth bounded domain, so the divergence theorem
 (\cref{thm:gauss_divergence}) converts the flux into a volume integral. The divergence is a constant:
@@ -183,6 +189,7 @@ also that the answer is independent of the shape of $U$ and uses only its area.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:radial_weight_flux_independent}]
+\label{sol:radial_weight_flux_independent}
 % Generator: Claude Opus 5 (High)
 Write $w_n(x) := \big(\lvert x\rvert^2\big)^n = (x_1^2+x_2^2+x_3^2)^n$. This is a polynomial, so
 $w_n v$ is a $C^1$ vector field on $\mathbb{R}^3$ and the divergence theorem
@@ -207,6 +214,7 @@ depend on $n$ unless $R = 1$.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution of \cref{ex:flux_truncated_paraboloid}]
+\label{sol:flux_truncated_paraboloid}
 % Generator: Claude Opus 5 (High)
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item $M$ is the paraboloid of revolution $z = 1+x^2+y^2$, opening upwards, with vertex at
@@ -329,6 +337,7 @@ have to compute a volume there.
 % Generator: Claude Opus 5 (High)
 % No solution key ships with the Knörrer papers, so this is an independent derivation.
 \begin{exercisesolution}[\cref{ex:knoerrer_divergence_free_compact_support}]
+\label{sol:knoerrer_divergence_free_compact_support}
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item The product rule for the divergence of a scalar multiple of a vector field reads
     \[\divg(fK) = \langle \nabla f, K\rangle + f \divg K.\]
@@ -365,6 +374,7 @@ that form.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:green_first_identity_harmonic}]
+\label{sol:green_first_identity_harmonic}
 % Generator: Claude Opus 5 (High) --- the statement is the examiner's; the proof and the closing
 % remark are written for these notes. Probeprfg1 ships no solution key.
 \begin{enumerate}[label=\textbf{(\alph*)}]
@@ -416,6 +426,7 @@ indefinite quantity would allow.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution to \cref{ex:flux_through_nested_spheres}]
+\label{sol:flux_through_nested_spheres}
 % Generator: Claude Opus 5 (High) --- the four statements are the examiner's; the working is
 % written for these notes. Verdicts checked afterwards against Probeprfg3_Lsg.pdf.
 \begin{enumerate}[label=\textbf{(\alph*)}]

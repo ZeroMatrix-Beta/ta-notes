@@ -18,22 +18,148 @@ vectors $\partial_1\phi(x),\partial_2\phi(x),\dots,\partial_d\phi(x)$, which by 
 (see \qt{parametrized submanifold}) are linearly independent, i.e.\ $D\phi(x)$ has full rank,
 so the volume is strictly positive.
 
-% Sonnet 5 (Medium) --- FIG-W09-03
+% Generator: Claude Opus 5 (High) --- FIG-W09-03: 3D embedded surface and Gram area element
 \begin{center}
-\begin{tikzpicture}[>=Latex, scale=1.3]
-  \draw[thick] plot[smooth] coordinates {(-2.1,-0.4) (-0.8,0.65) (0.5,-0.15) (2.1,0.75)};
-  \draw[thick] plot[smooth] coordinates {(-1.8,0.9) (-0.5,-0.5) (0.8,0.4) (2.3,-0.65)};
-  \coordinate (P) at (0.0,0.05);
-  \fill (P) circle (1.6pt) node[below left, font=\scriptsize] {$\phi(x)$};
-  \draw[blue, thick, ->] (P) -- ++(1.2,0.4) coordinate (D1)
-    node[right, font=\scriptsize] {$\partial_1\phi(x)$};
-  \draw[purple, thick, ->] (P) -- ++(0.35,1.05) coordinate (D2)
-    node[above, font=\scriptsize] {$\partial_2\phi(x)$};
-  \draw[green!55!black, dashed]
-    (D1) -- ++(0.35,1.05) -- (D2) -- cycle;
-  \node[green!45!black, font=\scriptsize, align=center] at (2.1,1.5)
-    {$\sqrt{\det(D\phi(x)\transp D\phi(x))}$};
-  \draw[green!55!black, thin, ->] (1.55,1.3) -- (0.95,1.0);
+\begin{tikzpicture}[>=Latex]
+
+  % --- Left Panel: Parameter domain V in R^2 ---
+  \begin{scope}[xshift=-4.5cm, yshift=0cm, scale=1.15]
+    \node[font=\small\bfseries, text=TextBoldColor] at (0, 2.4) {Parameter domain $V \subseteq \mathbb{R}^2$};
+    
+    % Coordinate axes (u, v)
+    \draw[->, thick, gray!65] (-1.6,-1.0) -- (1.8,-1.0) node[right, font=\scriptsize, text=black] {$u$};
+    \draw[->, thick, gray!65] (-1.6,-1.0) -- (-1.6,2.0) node[above, font=\scriptsize, text=black] {$v$};
+
+    % Region V (shaded domain)
+    \draw[TextBoldColor, fill=TextBoldColor!6, thick, dashed]
+      plot[smooth cycle, tension=0.7] coordinates {(-1.2,-0.5) (1.2,-0.6) (1.4,1.3) (-0.3,1.6) (-1.3,0.7)};
+    \node[TextBoldColor, font=\small\bfseries] at (-0.9, 1.1) {$V$};
+
+    % Infinitesimal area element at (u, v)
+    \coordinate (U0) at (-0.1, 0.0);
+    \coordinate (U1) at (0.9, 0.0);
+    \coordinate (U2) at (-0.1, 0.8);
+    \coordinate (U12) at (0.9, 0.8);
+
+    % Shaded rectangle [u, u+du] x [v, v+dv]
+    \fill[orange!25, draw=orange!90!black, thick] (U0) rectangle (U12);
+    \node[font=\scriptsize\bfseries, text=orange!95!black] at ($(U0)!0.5!(U12)$) {$du\,dv$};
+
+    % Base vectors
+    \draw[blue!85!black, very thick, ->] (U0) -- (U1) node[midway, below, font=\scriptsize] {$du\,e_1$};
+    \draw[purple!85!black, very thick, ->] (U0) -- (U2) node[midway, left, font=\scriptsize] {$dv\,e_2$};
+    \fill[black] (U0) circle (2pt) node[below left=1pt, font=\scriptsize] {$(u,v)$};
+
+    % Coordinate grid lines passing through (u,v)
+    \draw[gray!50, densely dashed] (-1.0, 0.0) -- (U0);
+    \draw[gray!50, densely dashed] (U1) -- (1.2, 0.0);
+    \draw[gray!50, densely dashed] (-0.1, -0.5) -- (U0);
+    \draw[gray!50, densely dashed] (U2) -- (-0.1, 1.3);
+  \end{scope}
+
+  % --- Mapping arrow phi ---
+  \draw[->, line width=1.4pt, gray!75] (-2.2, 0.6) to[bend left=18] 
+    node[above, font=\large\bfseries, text=TextBoldColor] {$\phi$} 
+    node[below, font=\tiny, text=gray!80!black] {parametrization} (-0.6, 0.6);
+
+  % --- Right Panel: 3D Surface in R^3 with Tangent Plane & Parallelogram ---
+  \begin{scope}[xshift=2.8cm, yshift=0cm, x={(-1.1cm,-0.55cm)}, y={(1.25cm,-0.15cm)}, z={(0cm,1.45cm)}]
+    \node[font=\small\bfseries, text=TextBoldColor] at (0.0, 0.0, 2.2) {Embedded surface $S = \phi(V) \subseteq \mathbb{R}^3$};
+
+    % 3D Coordinate Axes (x, y, z) at corner
+    \draw[->, thick, gray!60] (-1.7, -1.7, -0.6) -- (2.0, -1.7, -0.6) node[below left, font=\scriptsize, text=black] {$x$};
+    \draw[->, thick, gray!60] (-1.7, -1.7, -0.6) -- (-1.7, 2.0, -0.6) node[right, font=\scriptsize, text=black] {$y$};
+    \draw[->, thick, gray!60] (-1.7, -1.7, -0.6) -- (-1.7, -1.7, 1.6) node[above, font=\scriptsize, text=black] {$z$};
+
+    % Background shading of surface
+    \fill[cyan!18, opacity=0.85]
+      (-1.5,-1.5, {0.18*(-1.5)*(-1.5) - 0.12*(-1.5)*(-1.5)})
+      \foreach \u in {-1.5,-1.0,...,1.5} {
+        -- (\u, 1.5, {0.18*\u*\u - 0.12*1.5*1.5 + 0.08*\u})
+      }
+      \foreach \v in {1.5,1.0,...,-1.5} {
+        -- (1.5, \v, {0.18*1.5*1.5 - 0.12*\v*\v + 0.08*1.5})
+      }
+      \foreach \u in {1.5,1.0,...,-1.5} {
+        -- (\u, -1.5, {0.18*\u*\u - 0.12*(-1.5)*(-1.5) + 0.08*\u})
+      }
+      -- cycle;
+
+    % U-curves (coordinate lines v = const)
+    \foreach \v in {-1.5,-1.0,-0.5,0.0,0.5,1.0,1.5} {
+      \draw[cyan!60!blue, thin]
+        plot[smooth, domain=-1.5:1.5, samples=9]
+        (\x, \v, {0.18*\x*\x - 0.12*\v*\v + 0.08*\x});
+    }
+
+    % V-curves (coordinate lines u = const)
+    \foreach \u in {-1.5,-1.0,-0.5,0.0,0.5,1.0,1.5} {
+      \draw[cyan!60!blue, thin]
+        plot[smooth, domain=-1.5:1.5, samples=9]
+        (\u, \x, {0.18*\u*\u - 0.12*\x*\x + 0.08*\u});
+    }
+
+    % Surface outer boundary
+    \draw[TextBoldColor, thick]
+      plot[smooth, domain=-1.5:1.5, samples=9] (\x, -1.5, {0.18*\x*\x - 0.12*1.5*1.5 + 0.08*\x})
+      -- plot[smooth, domain=-1.5:1.5, samples=9] (1.5, \x, {0.18*1.5*1.5 - 0.12*\x*\x + 0.08*1.5})
+      -- plot[smooth, domain=1.5:-1.5, samples=9] (\x, 1.5, {0.18*\x*\x - 0.12*1.5*1.5 + 0.08*\x})
+      -- plot[smooth, domain=1.5:-1.5, samples=9] (-1.5, \x, {0.18*1.5*1.5 - 0.12*\x*\x - 0.08*1.5})
+      -- cycle;
+
+    % Highlight coordinate line v = 0
+    \draw[blue!90!black, line width=1.5pt]
+      plot[smooth, domain=-1.5:1.5, samples=11] (\x, 0, {0.18*\x*\x + 0.08*\x})
+      node[below left=-1pt, font=\tiny\bfseries, text=blue!90!black] {$\phi(u, v_0)$};
+    
+    % Highlight coordinate line u = 0
+    \draw[purple!90!black, line width=1.5pt]
+      plot[smooth, domain=-1.5:1.5, samples=11] (0, \x, {-0.12*\x*\x})
+      node[above right=-1pt, font=\tiny\bfseries, text=purple!90!black] {$\phi(u_0, v)$};
+
+    % Point P = phi(x)
+    \coordinate (P) at (0, 0, 0);
+
+    % Tangent vectors in 3D:
+    \coordinate (T1) at (1.2, 0.0, 0.10);
+    \coordinate (T2) at (0.0, 1.2, 0.0);
+    \coordinate (T12) at ($(T1)+(T2)-(P)$);
+
+    % Semi-transparent Tangent Plane Patch
+    \fill[gray!25, opacity=0.45] 
+      (-0.6, -0.6, -0.05) -- (1.8, -0.6, 0.15) -- (1.8, 1.8, 0.15) -- (-0.6, 1.8, -0.05) -- cycle;
+    \draw[gray!60, dashed, thin]
+      (-0.6, -0.6, -0.05) -- (1.8, -0.6, 0.15) -- (1.8, 1.8, 0.15) -- (-0.6, 1.8, -0.05) -- cycle;
+    \node[gray!70!black, font=\tiny\bfseries] at (1.7, 1.7, 0.15) {$T_{\phi(x)}S$};
+
+    % Tangent Parallelogram on the tangent plane
+    \fill[ThemeGreen!35, opacity=0.85] (P) -- (T1) -- (T12) -- (T2) -- cycle;
+    \draw[ThemeGreen!80!black, thick, dashed] (T1) -- (T12) -- (T2);
+
+    % Tangent Vectors (bold arrows)
+    \draw[blue!95!black, line width=1.8pt, ->] (P) -- (T1) 
+      node[below right=-1pt, font=\scriptsize\bfseries] {$\partial_1\phi(x)\,du$};
+    \draw[purple!95!black, line width=1.8pt, ->] (P) -- (T2) 
+      node[above left=-1pt, font=\scriptsize\bfseries] {$\partial_2\phi(x)\,dv$};
+
+    % Point P dot
+    \fill[black] (P) circle (2.2pt) node[below left=2pt, font=\scriptsize\bfseries] {$\phi(x)$};
+
+    % Normal vector
+    \coordinate (N) at (0, 0, 1.1);
+    \draw[orange!95!black, line width=1.4pt, ->] (P) -- (N) node[above, font=\scriptsize\bfseries] {$\mathbf{n}$};
+
+    % Center of parallelogram for callout
+    \coordinate (Center) at ($(P)!0.5!(T12)$);
+  \end{scope}
+
+  % 2D Screen Overlay Callout for Area formula
+  \node[ThemeGreen!75!black, font=\small, fill=white, inner sep=3.5pt, rounded corners=3pt, draw=ThemeGreen!60, line width=0.8pt, align=center] (AreaBox) at (4.5, 2.3) 
+    {\textbf{Infinitesimal Surface Area:}\\[1.5pt]
+     $d\sigma = \sqrt{\det\big(D\phi(x)\transp D\phi(x)\big)}\,du\,dv$};
+  
+  \draw[ThemeGreen!85!black, thick, ->] (AreaBox.south west) to[out=215, in=60] (3.4, 0.4);
+
 \end{tikzpicture}
 \end{center}
 
@@ -252,6 +378,7 @@ Decide whether each of the following is true or false, for every compact $E \sub
 (Prof.\ Joaquim Serra), where it appears as the eleventh block of multiple-choice questions.
 Formula~\eqref{eq:mock_area_formula} is quoted from that paper's own list of results that
 candidates may use without proof.}
+\exsol{sol:area_formula_two_maps}
 \end{exercise}
 
 
@@ -262,7 +389,7 @@ candidates may use without proof.}
 
 % Source: exercises/Ex9_Analysis2_eng.pdf, p. 1
 \begin{exercise}[Volume \textnormal{(important)}]
-\label{ex:9.1}
+\label{ex:paraboloid_hypersurface_volume}
 Calculate the volume of the region $B \subset \mathbb{R}^3$ enclosed by the surfaces
 $x^2+y^2+z^2=8$ and $2z=x^2+y^2$.
 \exhint[Official hint]{Use cylindrical coordinates.}
@@ -275,6 +402,7 @@ $x^2+y^2+z^2=8$ and $2z=x^2+y^2$.
   \qquad \text{for } (r,\theta,\varphi) \in (0,\infty)\times(0,\pi)\times(0,2\pi).\]
 \end{exercisehint}
 \exinfo{This exercise is Problem 9.1 of Problem Sheet 9, Analysis II, Spring Semester 2026.}
+\exsol{sol:paraboloid_hypersurface_volume}
 \end{exercise}
 
 % The solution in 99-solutions.tex points back at this note, so it carries a label. Possible
@@ -284,7 +412,7 @@ $x^2+y^2+z^2=8$ and $2z=x^2+y^2$.
 \label{note:9.1_coordinates_mislabelled}
 Corsin labels the formula above \qt{cylindrical coordinates}, but $(r\sin\theta\cos\varphi$, $r\sin\theta\sin\varphi$, $r\cos\theta)$ is the \textbf{spherical} parametrization, and his
 range $\theta \in (-\pi/2,\pi/2)$ has been corrected to $(0,\pi)$, the range on which
-$\theta \mapsto \cos\theta$ actually covers $[-1,1]$ bijectively (already logged in \cref{ex:7.6}). The mislabelling is doubly worth noting here, since the official sheet's own hint
+$\theta \mapsto \cos\theta$ actually covers $[-1,1]$ bijectively (already logged in \cref{ex:spherical_coordinates_diffeomorphism}). The mislabelling is doubly worth noting here, since the official sheet's own hint
 recommends \emph{cylindrical} coordinates $(r,\theta,z)$, and that is in fact the more
 natural choice for this problem, as the solution on \cpageref{ex:solution_9.1} does: both surfaces are
 surfaces of revolution about the $z$-axis, which cylindrical coordinates respect directly,
@@ -296,11 +424,12 @@ whereas spherical coordinates mix $r$ and $\theta$ into both defining equations.
 
 % Source: exercises/Ex10_Analysis2_eng.pdf, p. 1
 \begin{exercise}[Spherical quadrilateral \textnormal{(important)}]
-\label{ex:10.1}
+\label{ex:spherical_quadrilateral_area}
 Calculate the area of the spherical quadrilateral $S \subset \mathbb{S}^2$ bounded by the
 meridians $-\pi < \varphi_1 < \varphi_2 < \pi$ and parallels $-\pi/2 < \theta_1 < \theta_2 <
 \pi/2$.
 \exinfo{This exercise is Problem 10.1 of Problem Sheet 10, Analysis II, Spring Semester 2026.}
+\exsol{sol:spherical_quadrilateral_area}
 \end{exercise}
 
 % Originally: content/week-10.tex, \exercisesheet{10}, problem 10.2
@@ -308,7 +437,7 @@ meridians $-\pi < \varphi_1 < \varphi_2 < \pi$ and parallels $-\pi/2 < \theta_1 
 
 % Source: exercises/Ex10_Analysis2_eng.pdf, p. 1
 \begin{exercise}[The surface area of a torus \textnormal{(important)}]
-\label{ex:10.2}
+\label{ex:torus_surface_area}
 Let $S := \{(x,y,0)\in\mathbb{R}^3 \mid x^2+y^2=4\}$ and $T := \{x\in\mathbb{R}^3 \mid d_S(x)
 \leq 1\}$, where $d_S(x) = \inf\{\lvert x-y\rvert \mid y\in S\}$ denotes the minimal distance
 from $S$ to $x\in\mathbb{R}^3$. Parametrize $\partial T$ and then calculate the area.
@@ -322,37 +451,91 @@ for the torus swept by a tube of radius $r$ at distance $R$ from the axis.
 
 % Sonnet 5 (Medium) --- FIG-W10-01
 \begin{center}
-\begin{tikzpicture}[>=Latex, scale=1.0]
+\begin{tikzpicture}[>=Latex, line join=round, line cap=round, scale=1.0]
+  % --- 1. 3D view ---
   \begin{scope}
-    \draw[->] (0,0) -- (2.2,0) node[right, font=\scriptsize] {$x$};
-    \draw[->] (0,0) -- (0,1.8) node[above, font=\scriptsize] {$z$};
-    \draw[->] (0,0) -- (-1.1,-0.7) node[left, font=\scriptsize] {$y$};
-    \draw[blue!70!black, thick] (0.4,0.55) circle (0.9 and 0.35);
-    \draw[blue!70!black, thick] (0.05,0.15) circle (1.5 and 0.6);
-    \draw[blue!70!black, dashed] (-1.0,0.0) arc (180:360:1.5 and 0.6);
+    \node[font=\small\bfseries, text=TextBoldColor] at (0, 2.8) {3D view};
+    
+    % Torus background half
+    \draw[cyan!30!blue, thick, fill=cyan!8, opacity=0.9] (0,0) ellipse (2.0 and 0.8);
+    % Inner hole
+    \draw[cyan!30!blue, thick, fill=white, opacity=1.0] (0,0) ellipse (0.8 and 0.3);
+    
+    % Axes (drawn on top)
+    \draw[->, thick, gray!60] (0,0) -- (2.5, 0) node[right, font=\scriptsize, text=black] {$x$};
+    \draw[->, thick, gray!60] (0,0) -- (0, 1.8) node[above, font=\scriptsize, text=black] {$z$};
+    \draw[->, thick, gray!60] (0,0) -- (-1.4, -1.0) node[left, font=\scriptsize, text=black] {$y$};
+
+    % Draw some cross sections to give 3D feel
+    \draw[cyan!60!blue, thick, dashed] (1.4, 0) ellipse (0.6 and 0.5);
+    \draw[cyan!60!blue, thick, densely dotted] (-1.4, 0) ellipse (0.6 and 0.5);
+    
+    % Torus front half (highlighted)
+    \draw[blue!90!black, thick] (-2.0,0) arc (180:360:2.0 and 0.8);
+    \draw[blue!90!black, thick] (-0.8,0) arc (180:360:0.8 and 0.3);
+    
+    % R and r in 3D
+    \draw[->, red!85!black, thick] (0,0) -- (1.4, 0) node[pos=0.6, below, font=\scriptsize] {$R$};
+    \draw[->, orange!95!black, thick] (1.4,0) -- (1.4, 0.5) node[pos=0.7, right=-1pt, font=\scriptsize] {$r$};
+    \fill[black] (1.4,0) circle (1.5pt);
   \end{scope}
-  \begin{scope}[xshift=5.2cm]
-    \draw[blue!70!black, thick] (0,0) circle (1.6);
-    \draw[blue!70!black, thick] (0,0) circle (0.7);
-    \draw[->] (0,0) -- (55:1.15) node[midway, above, font=\scriptsize] {$R$};
-    \draw[orange, ->] (0,0) -- (18:0.7) node[midway, below, font=\scriptsize] {};
-    \draw[orange, thick, ->] (18:0.7) -- (55:1.6)
-      node[midway, above right, font=\scriptsize] {$r$};
-    \draw (0.55,0) arc (0:18:0.55);
-    \node[font=\scriptsize] at (0.75,0.15) {$\theta$};
-    \draw[->] (1.1,0) -- (2.0,0) node[right, font=\scriptsize] {$x$};
-    \draw[->] (1.1,0) -- (1.1,0.9) node[above, font=\scriptsize] {$y$};
+
+  % --- 2. Top View (xy-plane) ---
+  \begin{scope}[xshift=5.5cm]
+    \node[font=\small\bfseries, text=TextBoldColor] at (0, 2.8) {Top view ($xy$-plane)};
+    
+    \fill[cyan!8, opacity=0.9] (0,0) circle (2.0);
+    \fill[white] (0,0) circle (0.8);
+    
+    \draw[blue!90!black, thick] (0,0) circle (2.0);
+    \draw[blue!90!black, thick] (0,0) circle (0.8);
+    
+    % Axes (drawn on top)
+    \draw[->, thick, gray!60] (0,0) -- (2.6, 0) node[right, font=\scriptsize, text=black] {$x$};
+    \draw[->, thick, gray!60] (0,0) -- (0, 2.3) node[above, font=\scriptsize, text=black] {$y$};
+
+    % Draw central circle R
+    \draw[gray, dashed, thick] (0,0) circle (1.4);
+    
+    \coordinate (O) at (0,0);
+    \coordinate (CenterT) at (40:1.4);
+    \coordinate (OuterT) at (40:2.0);
+    
+    \draw[->, red!85!black, thick] (O) -- (CenterT) node[pos=0.55, above left=-2pt, font=\scriptsize] {$R$};
+    \draw[->, orange!95!black, thick] (CenterT) -- (OuterT) node[pos=0.6, below right=-2pt, font=\scriptsize] {$r$};
+    
+    % Angle theta
+    \draw[gray!80!black, thick] (0.6,0) arc (0:40:0.6);
+    \node[font=\scriptsize, text=black] at (20:0.8) {$\theta$};
   \end{scope}
-  \begin{scope}[xshift=10.4cm]
-    \draw[purple, dotted] (-1.6,0) -- (1.6,0);
-    \draw (0,0) circle (0.9);
-    \draw[->] (0,0) -- (35:0.9) node[midway, above right, font=\scriptsize] {$r$};
-    \draw (0.35,0) arc (0:35:0.35);
-    \node[font=\scriptsize] at (0.55,0.15) {$\varphi$};
-    \draw[->] (-1.6,-0.3) -- (-1.6,0.9) node[above, font=\scriptsize] {$z$};
-    \draw[->] (-1.6,-0.3) -- (-0.6,-0.3) node[right, font=\scriptsize] {$x$};
+
+  % --- 3. Cross section view (rz-plane) ---
+  \begin{scope}[xshift=10.5cm]
+    \node[font=\small\bfseries, text=TextBoldColor] at (0, 2.8) {Cross-section};
+    
+    \coordinate (C) at (1.4, 0);
+    \fill[cyan!8, opacity=0.9] (C) circle (0.6);
+    \draw[blue!90!black, thick] (C) circle (0.6);
+    
+    % Axes (drawn on top)
+    \draw[->, thick, gray!60] (-1.5, 0) -- (2.4, 0) node[right, font=\scriptsize, text=black] {$x,y$};
+    \draw[->, thick, gray!60] (0, -1.2) -- (0, 1.8) node[above, font=\scriptsize, text=black] {$z$};
+
+    \draw[->, orange!95!black, thick] (C) -- ++(50:0.6) node[pos=0.7, above left=-2pt, font=\scriptsize] {$r$};
+    
+    \draw[gray!80!black, thick] (C) ++(0.3,0) arc (0:50:0.3);
+    \node[font=\scriptsize, text=black] at ($(C) + (25:0.45)$) {$\phi$};
+    
+    % Draw R to center
+    % Correction: Claude Opus 5 (high) --- was `ThemeRed', a colour this document never
+    % defines; pgfkeys errored out and the arrow printed black, breaking the colour match
+    % with the $R$ arrow of the Top view panel above. Same tint as there.
+    \draw[->, red!85!black, thick] (0, -0.25) -- (1.4, -0.25) node[midway, below, font=\scriptsize] {$R$};
+    \draw[gray, dotted, thick] (0, 0) -- (1.4, 0);
+    \draw[gray, dotted, thick] (1.4, 0) -- (1.4, -0.3);
   \end{scope}
 \end{tikzpicture}
 \end{center}
 \exinfo{This exercise is Problem 10.2 of Problem Sheet 10, Analysis II, Spring Semester 2026.}
+\exsol{sol:torus_surface_area}
 \end{exercise}

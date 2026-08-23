@@ -9,9 +9,9 @@
 % it", which is false: Theorem 10.28, printed p. 44, is this theorem, with this proof.
 % Supplement: lec_notes.pdf, p. 44 (Theorem 10.28)
 \begin{ainote}
-The mean value theorem is used twice in this chapter, in the official hint to \Cref{ex:4.6} and
+The mean value theorem is used twice in this chapter, in the official hint to \Cref{ex:directional_derivative_vanishes} and
 again in its solution, but none of the transcribed TA notes state it. It is therefore stated here,
-together with the warning that follows, which is what \cref{ex:4.6} actually turns on. In the
+together with the warning that follows, which is what \cref{ex:directional_derivative_vanishes} actually turns on. In the
 lecture notes it is Theorem 10.28 (\qt{Higher dimensional Mean Value Theorem}, p.\ 44), proved
 exactly as below.
 \end{ainote}
@@ -34,9 +34,9 @@ $\varphi(1)-\varphi(0) = \varphi'(t_0)$, which is the claim.
 \begin{importantremark}[It fails for vector-valued $f$]
 \label{rem:mvt_fails_vector_valued}
 The hypothesis \qt{$f : U \to \mathbb{R}$} is essential. \textbf{The theorem is false the moment
-the target is $\mathbb{R}^m$ with $m \geq 2$}, and this is exactly what \cref{ex:4.5} below
+the target is $\mathbb{R}^m$ with $m \geq 2$}, and this is exactly what \cref{ex:mean_value_vector_valued} below
 probes.
-% Corrected: this pointed at \cref{ex:4.6}, which applies the *scalar* theorem to $u(x+t\nu)$
+% Corrected: this pointed at \cref{ex:directional_derivative_vanishes}, which applies the *scalar* theorem to $u(x+t\nu)$
 % and never leaves $\mathbb{R}$. The problem that probes the vector-valued failure is 4.5 ---
 % which was not in the built document when the sentence was written.
 
@@ -336,7 +336,7 @@ DF_{\id}(X) &= \left.\frac{d}{ds}\right|_{s=0} F(\id+sX) \\
 % Source: exercises/Ex4_Analysis2_eng.pdf
 
 \begin{exercise}[Mean value for vector-valued functions \textnormal{(optional)}]
-\label{ex:4.5}
+\label{ex:mean_value_vector_valued}
 Let $f \in C^1(\mathbb{R},\mathbb{R}^m)$ for $m > 1$. Is it true that there is $t \in [0,1]$ such
 that
 $$f(1) - f(0) = Df_t(1) = \begin{pmatrix} f_1'(t) \\ \vdots \\ f_m'(t) \end{pmatrix}?$$
@@ -344,4 +344,5 @@ Prove it or provide a counterexample.
 
 \exhint[Official hint]{Try $f(t) = (\sin(2\pi t), \cos(2\pi t))$.}
 \exinfo{This exercise is Problem 4.5 of Problem Sheet 4, Analysis II, Spring Semester 2026.}
+\exsol{sol:mean_value_vector_valued}
 \end{exercise}

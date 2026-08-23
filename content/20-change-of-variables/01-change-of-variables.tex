@@ -340,7 +340,7 @@ Applying the change of variables formula:
 
 % Source: exercises/Ex8_Analysis2_eng.pdf, pp. 1--2
 \begin{exercise}[Change of variables and Jacobians \textnormal{(important)}]
-\label{ex:8.5}
+\label{ex:change_of_variables_computations}
 For each of the following domains and change of variables find the jacobian and the appropriate
 transformed domain. There is no need to actually compute the integrals!
 \begin{enumerate}[label=\textbf{(\alph*)}]
@@ -364,6 +364,7 @@ $x \neq 0$ and $y \neq 0$; then $y > 0$ forces $x > 0$, so $u > 0$ and $v > 0$ t
 That is what lets you divide by $x$ and $y$ and rearrange the inequalities without their
 directions flipping.}
 \exinfo{This exercise is Problem 8.5 of Problem Sheet 8, Analysis II, Spring Semester 2026.}
+\exsol{sol:change_of_variables_computations}
 \end{exercise}
 
 \begin{ainote}
@@ -389,6 +390,7 @@ Let $T$ be the closed triangle with vertices $(0,0)$, $(1,0)$ and $(0,1)$, and c
   \item The integrand is undefined at the origin, which lies in $T$. Why does this not affect
     the answer?
 \end{enumerate}
+\exsol{sol:ai_triangle_substitution}
 \end{aiexercise}
 
 % Source: old_exams/examHS24.pdf (13 February 2025), Kurzproblem 1, part 1, p. 8
@@ -406,6 +408,7 @@ Let $a, b, c > 0$ and consider the solid ellipsoid
 \end{enumerate}
 \exinfo{This exercise is taken from the exam of 13 February 2025 (Prof.\ Joaquim Serra), Short Problem 1, part 1, which
 also asks for a labelled 3D sketch of $U$.}
+\exsol{sol:volume_ellipsoid_change_variables}
 \end{exercise}
 
 \begin{ainote}
@@ -426,6 +429,7 @@ where $x = (x_1,x_2)$.
   \item What is the area of the image $\varphi(Q)$ of the square $Q := [0,1] \times [0,1]$?
 \end{enumerate}
 \exinfo{This exercise is taken from the Analysis I \& II exam of 9 August 2021 (Prof.\ Giovanni Felder), Part A, Problem 5.}
+\exsol{sol:cubic_shear_area}
 \end{exercise}
 
 % Source: old_exams/examHS24.pdf (13 February 2025), Wahr/Falsch-Fragen, Aufgabe 9, p. 5
@@ -438,6 +442,7 @@ For $\alpha > 0$, compute the integral
 e^{-\alpha(x^2+y^2)}\,dx\,dy$ as well. Compute $2I_\alpha$ using polar coordinates.}
 \exinfo{This exercise is taken from the exam of 13 February 2025 (Prof.\ Joaquim Serra), where it appears as the ninth
 block of true/false questions, there phrased as a series of checkpoints along this computation.}
+\exsol{sol:gaussian_second_moment_polar}
 \end{exercise}
 
 % Source: old_exams/examFS24.pdf (21 August 2024), Wahr/Falsch-Fragen, Aufgabe 9, p. 5
@@ -455,6 +460,7 @@ $\lim_{\alpha\to+\infty}\alpha I_\alpha = 0$.
 \exinfo{This exercise is taken from the exam of 21 August 2024 (Prof.\ Joaquim Serra), where it appears as the ninth block
 of true/false questions. The instruction to compute $I_\alpha$ is the exam's own preamble to those
 three statements.}
+\exsol{sol:radial_exponential_integral}
 \end{exercise}
 
 % Source: old_exams/examHS24.pdf (13 February 2025), Wahr/Falsch-Fragen, Aufgabe 6, p. 4
@@ -477,6 +483,7 @@ true or false.
 \end{enumerate}
 \exinfo{This exercise is taken from the exam of 13 February 2025 (Prof.\ Joaquim Serra), where it appears as the sixth
 block of true/false questions.}
+\exsol{sol:image_of_small_sets_tf}
 \end{exercise}
 
 % Source: old_exams/examHS24.pdf (13 February 2025), Wahr/Falsch-Fragen, Aufgabe 7, p. 4
@@ -503,6 +510,7 @@ true or false.
 \end{enumerate}
 \exinfo{This exercise is taken from the exam of 13 February 2025 (Prof.\ Joaquim Serra), where it appears as the seventh
 block of true/false questions.}
+\exsol{sol:affine_volume_scaling_tf}
 \end{exercise}
 
 % Source: old_exams/examFS24.pdf (21 August 2024), Wahr/Falsch-Fragen, Aufgabe 7, pp. 4--5
@@ -556,6 +564,7 @@ Decide whether each of the following statements is true or false.
 \end{enumerate}
 \exinfo{This exercise is taken from the exam of 13 February 2025 (Prof.\ Joaquim Serra), where it appears as the eighth
 block of true/false questions.}
+\exsol{sol:spherical_coordinates_integral_tf}
 \end{exercise}
 
 % Source: old_exams/examHS24.pdf (13 February 2025), Kästchenaufgabe 2, p. 7
@@ -566,6 +575,7 @@ Give an explicit example of a linear map $\Phi \colon \mathbb{R}^2 \to \mathbb{R
 \[ \vol_2(\Phi(E)) = 2 \vol_2(E) \quad \text{for all } E \subset \mathbb{R}^2 \text{ Jordan measurable.} \]
 \exinfo{This exercise is taken from the exam of 13 February 2025 (Prof.\ Joaquim Serra), Box Problem 2, where only the
 final answer was graded.}
+\exsol{sol:linear_map_volume_scaling_box}
 \end{exercise}
 
 % Source: old_exams/examFS24.pdf (21 August 2024), Kästchenaufgabe 2, p. 7
@@ -580,6 +590,7 @@ from the identity}, such that
 \[\vol_2(\Phi(E)) = \vol_2(E) \quad \text{for all Jordan measurable } E \subseteq \mathbb{R}^2 .\]
 \exinfo{This exercise is taken from the exam of 21 August 2024 (Prof.\ Joaquim Serra), Box Problem 2, where only the final
 answer was graded.}
+\exsol{sol:box_linear_volume_preserving}
 \end{exercise}
 
 % Correction: Claude Opus 5 (High) --- provenance repair. A Gemini 3.1 Pro pass filed the statement
@@ -600,6 +611,7 @@ Decide whether each of the following statements is true or false.
   \item $A$ is Jordan measurable.
   \item The volume of $A$ depends on the choice of the vectors $v_1, v_2, v_3$.
 \end{enumerate}
+\exsol{sol:ai_spanned_ellipsoid_volume}
 \end{aiexercise}
 
 % Source: old_exams/HS18.pdf (Analysis I & II, winter 2018/2019, Prof. Manfred Einsiedler),
@@ -628,6 +640,7 @@ This exercise proves it.
 \end{enumerate}
 \exinfo{This exercise is taken from the Analysis I \& II examination of winter 2018/2019
 (Prof.\ Manfred Einsiedler), Problem 13.}
+\exsol{sol:linear_substitution_elementary_matrices}
 \end{exercise}
 
 % Source: old_exams/HS17.pdf (Analysis I & II, winter 2017/2018, Prof. Manfred Einsiedler),

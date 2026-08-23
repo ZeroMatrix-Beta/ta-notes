@@ -253,11 +253,11 @@ last coordinate.
 % Source: Corsin Nick/Class Notes/Week 7.pdf, p. 6
 \subsubsection{An alternative optimization technique}
 
-\begin{remark}[Parametrized optimization, revisiting \cref{ex:6.9}]
+\begin{remark}[Parametrized optimization, revisiting \cref{ex:extrema_circle_disk}]
 Local parametrizations give a second route to constrained-extremum problems, alongside Lagrange
 multipliers: parametrize the constraint set and optimize the resulting unconstrained function of
 fewer variables. Corsin illustrates this by revisiting $f(x,y) := 2x^2+y^2-x$ on
-$S^1 = \{(x,y)\in\mathbb{R}^2 : x^2+y^2=1\}$, which is exactly \cref{ex:6.9}\textbf{(a)}, solved
+$S^1 = \{(x,y)\in\mathbb{R}^2 : x^2+y^2=1\}$, which is exactly \cref{ex:extrema_circle_disk}\textbf{(a)}, solved
 there via Lagrange multipliers.
 
 Parametrize $S^1$ by $(x(\theta),y(\theta)) := (\cos\theta,\sin\theta)$. Then
@@ -271,7 +271,7 @@ using $\sin^2\theta = 1-\cos^2\theta$. Differentiating,
 \end{enumerate}
 So, the extrema are at $(\cos\theta_1,\sin\theta_1) = (\pm1,0)$ and
 $(\cos\theta_2,\sin\theta_2) = \big(\tfrac12,\pm\tfrac{\sqrt3}{2}\big)$. These are exactly the
-four points found via Lagrange multipliers in the solution to \cref{ex:6.9}\textbf{(a)}, so the
+four points found via Lagrange multipliers in the solution to \cref{ex:extrema_circle_disk}\textbf{(a)}, so the
 two methods agree.
 \end{remark}
 
@@ -417,6 +417,7 @@ and let $\Orth_2(\mathbb{R}) := \{A \in \operatorname{Mat}_2(\mathbb{R}) \mid F(
 (Prof.\ Peter S.\ Jossen), Part B, Problem 4. The original reaches the submanifold property
 through the constant rank theorem, which it also asks the candidate to state; parts \textbf{(d)}
 and \textbf{(e)} are rephrased here to use the regular value theorem instead.}
+\exsol{sol:orthogonal_group_submanifold}
 \end{exercise}
 
 \begin{ainote}

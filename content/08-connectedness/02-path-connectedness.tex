@@ -335,9 +335,10 @@ Let $f \colon X \to Y$ be a continuous map between metric spaces.
   \item Prove that if $X$ is path-connected (\cref{def:path_connected}), then so is $f(X)$.
   \item Conclude that the graph $\Gamma_g := \{(x,g(x)) : x \in U\}$ of a continuous
     $g : U \to \mathbb{R}^m$ is path-connected whenever $U \subseteq \mathbb{R}^n$ is convex.
-    (Compare \cref{ex:4.2}, which asks the same question with \qt{connected} in place
+    (Compare \cref{ex:connected_graphs}, which asks the same question with \qt{connected} in place
     of \qt{path-connected}.)
 \end{enumerate}
+\exsol{sol:ai_connected_image}
 \end{aiexercise}
 
 % --- exercise relocated here from the dissolved sheet 4 ---
@@ -346,12 +347,13 @@ Let $f \colon X \to Y$ be a continuous map between metric spaces.
 % Source: exercises/Ex4_Analysis2_eng.pdf
 
 \begin{exercise}[Connected graphs \textnormal{(important)}]
-\label{ex:4.2}
+\label{ex:connected_graphs}
 Let $U \subset \mathbb{R}^n$ be open and connected and let $f \in C^1(U, \mathbb{R}^m)$. Show that
 its graph
 \[\Gamma_f := \{(x, f(x)) : x \in U\}\]
 is a connected subset of $\mathbb{R}^n \times \mathbb{R}^m$.
 \exinfo{This exercise is Problem 4.2 of Problem Sheet 4, Analysis II, Spring Semester 2026.}
+\exsol{sol:connected_graphs}
 \end{exercise}
 
 % Generator: Claude Opus 5 (High), prompted by Gemini 3.1 Pro's note of 2026-08-11 that the sheet's
@@ -374,4 +376,5 @@ $S^{n-1} := \{x \in \mathbb{R}^n \mid \sum_{i=1}^n x_i^2 = 1\}$ be the unit sphe
 $S^{n-1}$ is path-connected if and only if $n \ge 2$.
 \exinfo{This exercise is taken from the Analysis I \& II exam of 24 January 2022 (Prof.\ Giovanni Felder), Part A, Problem 7, which opens by
 asking for the definition of path-connectedness (\cref{def:path_connected}).}
+\exsol{sol:sphere_path_connected}
 \end{exercise}

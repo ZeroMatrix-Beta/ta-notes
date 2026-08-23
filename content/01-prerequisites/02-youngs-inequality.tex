@@ -62,7 +62,7 @@ The exercise sheet also asks for the vector version
   \langle a,b\rangle \leq \frac{\|a\|_p^p}{p} + \frac{\|b\|_q^q}{q}, \qquad a,b \in \mathbb{R}^n,
 \end{equation}
 where $\|x\|_p := \left(\sum_i |x_i|^p\right)^{1/p}$. This is \emph{not} yet Hölder's inequality:
-it is the scalar case applied coordinatewise and summed (see the solution of \cref{ex:1.4}
+it is the scalar case applied coordinatewise and summed (see the solution of \cref{ex:youngs_inequality}
 below), and the right-hand side is a sum of $p$-th and $q$-th powers rather than the product
 $\|a\|_p\|b\|_q$. The step from one to the other is a normalisation, and it is worth seeing
 once, because the same trick recurs whenever an inequality is homogeneous.
@@ -85,7 +85,7 @@ $(p,q)$.
 
 % Source: exercises/Ex1_Analysis2_eng.pdf, p. 2
 \begin{exercise}[Young's inequality]
-\label{ex:1.4}
+\label{ex:youngs_inequality}
 Let $a,b > 0$, and let $p,q>1$ with $\tfrac{1}{p}+\tfrac{1}{q}=1$. Prove that
 $ab \leq \tfrac{a^p}{p} + \tfrac{b^q}{q}$.
 \begin{enumerate}[label=\textbf{(\alph*)}]
@@ -95,4 +95,5 @@ $ab \leq \tfrac{a^p}{p} + \tfrac{b^q}{q}$.
 \textbf{A bonus:} show that $\langle a,b\rangle \leq \tfrac{\|a\|_p^p}{p} + \tfrac{\|b\|_q^q}{q}$
 for all $a,b \in \mathbb{R}^n$.
 \exinfo{This exercise is Problem 1.4 of Problem Sheet 1, Analysis II, Spring Semester 2026.}
+\exsol{sol:youngs_inequality}
 \end{exercise}

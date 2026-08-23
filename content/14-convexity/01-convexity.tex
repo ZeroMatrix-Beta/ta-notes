@@ -108,6 +108,7 @@ inequality.
   \item If $g, h : \mathbb{R} \to \mathbb{R}$ are convex, is $(x,y) \mapsto g(x)h(y)$ necessarily
     convex?
 \end{enumerate}
+\exsol{sol:convex_or_not}
 \end{exercise}
 
 % Sonnet 5 (Medium)
@@ -171,7 +172,7 @@ Let $U \subseteq \mathbb{R}^n$ be open and convex.
     the equivalence in \textbf{(b)} already holds for $f \in C^1(U)$ with $U \subseteq
     \mathbb{R}^n$ open and convex, one order of regularity weaker than
     \Cref{prop:convexity_characterizations}, which is stated for $f \in C^2(U)$. This is exactly
-    the fact used in \cref{ex:6.7}\textbf{(b)}.
+    the fact used in \cref{ex:convexity_properties_multiple_choice}\textbf{(b)}.
     \end{remark}
   \item Since $f$ is convex and $x_0 \in U$ is a critical point, $Df_{x_0} = 0$, so \textbf{(b)}
     gives
@@ -253,7 +254,7 @@ inequality, which holds for any convex function on an open set.)
 \begin{remark}
 The case $N=2$ is exactly \cref{def:convex_set_function} itself: Jensen's inequality is the
 statement that convexity, defined only for a two-point average, automatically extends to any
-finite weighted average. It is used silently in the solution to \cref{ex:4.4}
+finite weighted average. It is used silently in the solution to \cref{ex:p_means_monotonicity}
 (\cref{ch:metric_spaces}), applied to $\varphi(s):=s\log s$, and is stated explicitly here for
 the first time.
 \end{remark}
@@ -296,8 +297,8 @@ which is the one thing \cref{ex:convex_function_unattained_infimum} was there to
 % Originally: content/week-06.tex, \exercisesheet{6}, problem 6.7
 % Source: exercises/Ex6_Analysis2_eng.pdf
 
-\begin{exercise}[Multiple choice \textnormal{(important)}]
-\label{ex:6.7}
+\begin{exercise}[Multiple choice (properties of convex functions) \textnormal{(important)}]
+\label{ex:convexity_properties_multiple_choice}
 Among the following statements about convex functions mark those (and only those) which are
 always true.
 \begin{enumerate}[label=\textbf{(\alph*)}]
@@ -314,4 +315,5 @@ always true.
   \item A convex set is not necessarily connected.
 \end{enumerate}
 \exinfo{This exercise is Problem 6.7 of Problem Sheet 6, Analysis II, Spring Semester 2026.}
+\exsol{sol:convexity_properties_multiple_choice}
 \end{exercise}

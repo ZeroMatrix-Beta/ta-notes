@@ -60,6 +60,7 @@ Let $f : \mathbb{R}^2 \to \mathbb{R}$ be defined by
   \item Show that $f \in C^2(\mathbb{R}^2, \mathbb{R})$.
   \item Compute $\partial_2 \partial_1 f(x,y)$. (Make it as easy as possible for yourself.)
 \end{enumerate}
+\exsol{sol:schwarz_application}
 \end{exercise}
 
 % Solution relocated to 99-solutions.tex by Claude Opus 5 (Extra), 2026-08-13. The exercise's whole
@@ -254,6 +255,7 @@ indicated point are determined by the given information, and which are not.
     at $(-1,0)$.
 \end{enumerate}
 Assume in each case that $f$ is as smooth as the relevant statement requires.
+\exsol{sol:reading_off_expansions}
 \end{exercise}
 
 % Source: old_exams/examFS24.pdf (21 August 2024), Wahr/Falsch-Fragen, Aufgabe 5, p. 3
@@ -541,7 +543,7 @@ Setting $t = 1$ gives the result.
 % Source: exercises/Ex5_Analysis2_eng.pdf
 
 \begin{exercise}[Multiple choice (Landau notation) \textnormal{(important)}]
-\label{ex:5.3}
+\label{ex:landau_notation_multiple_choice}
 Mark all and only the statements which are true.
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item As $|x| \to 0$, if $f(x) = x_2x_1^2 + O(x_1^2)$, then $f(x) = O(|x|^2)$.
@@ -554,13 +556,14 @@ Mark all and only the statements which are true.
 \end{enumerate}
 \exhint[Official hint]{Revise \textit{Corollary 10.45}.}
 \exinfo{This exercise is Problem 5.3 of Problem Sheet 5, Analysis II, Spring Semester 2026.}
+\exsol{sol:landau_notation_multiple_choice}
 \end{exercise}
 
 % Originally: content/exercise-sheets/week-05.tex, problem 5.5 --- never previously built
 % Source: exercises/Ex5_Analysis2_eng.pdf
 
 \begin{exercise}[Multiple choice (cost of a Taylor expansion) \textnormal{(optional)}]
-\label{ex:5.5}
+\label{ex:taylor_expansion_cost_multiple_choice}
 Assume $g \in C^\infty(\mathbb{R})$ and $f \in C^\infty(\mathbb{R}^n)$ is such that
 $$f(x) = x_1 + x_2x_1 + O(|x|^4) \quad \text{as } x \to 0.$$
 We want to compute the Taylor expansion of $(g\circ f)$ at $x = 0$ of the highest possible order
@@ -576,13 +579,14 @@ compute? How expensive will it be to compute it?
   \item degree 3 and 15 CHF
 \end{enumerate}
 \exinfo{This exercise is Problem 5.5 of Problem Sheet 5, Analysis II, Spring Semester 2026.}
+\exsol{sol:taylor_expansion_cost_multiple_choice}
 \end{exercise}
 
 % Originally: content/exercise-sheets/week-05.tex, problem 5.6 --- never previously built
 % Source: exercises/Ex5_Analysis2_eng.pdf
 
 \begin{exercise}[Polynomials \textnormal{(optional --- ``interesting, but irrelevant for the course'')}]
-\label{ex:5.6}
+\label{ex:polynomials_multivariate_expansion}
 Let $P, Q \in \mathbb{R}[x_1,\dots,x_n]$ be polynomials of $n$ variables; assume that there are
 positive numbers $M, \sigma$ such that
 $$|P(x) - Q(x)| \leq M|x|^\sigma \quad \text{for all } |x| \leq 1.$$
@@ -591,6 +595,7 @@ write $P(X) = \sum_{\alpha\in\mathbb{N}^n} a_\alpha X^\alpha$,
 $Q(X) = \sum_{\alpha\in\mathbb{N}^n} b_\alpha X^\alpha$, then $a_\alpha = b_\alpha$ for all
 $|\alpha| < \sigma$.
 \exinfo{This exercise is Problem 5.6 of Problem Sheet 5, Analysis II, Spring Semester 2026.}
+\exsol{sol:polynomials_multivariate_expansion}
 \end{exercise}
 
 % Restructured by Claude Opus 5 (Extra), 2026-08-13. This was a run of five exercises each with
@@ -609,18 +614,21 @@ terms of it survive the truncation.
 \begin{exercise}[Taylor expansion of $\sqrt{1+x+y^2}$]
 \label{ex:taylor_expansion_sqrt_1_plus_x_plus_y2}
 Compute the Taylor expansion of $f(x,y) := \sqrt{1+x+y^2}$ to order $2$ around $(0,0)$.
+\exsol{sol:taylor_expansion_sqrt_1_plus_x_plus_y2}
 \end{exercise}
 
 % Supplement: Analysis_II_Script_v1.pdf, p. 59
 \begin{exercise}[Taylor expansion of $\exp(\arctan(x-y))$]
 \label{ex:taylor_expansion_exp_arctan}
 Compute the Taylor expansion of $f(x,y) := \exp(\arctan(x-y))$ to order $2$ around $(0,0)$.
+\exsol{sol:taylor_expansion_exp_arctan}
 \end{exercise}
 
 % Supplement: Analysis_II_Script_v1.pdf, p. 59
 \begin{exercise}[Taylor expansion of $1/(1-x^2-y^2)$]
 \label{ex:taylor_expansion_one_over_1_minus_x2_y2}
 Compute the Taylor expansion of $f(x,y) := \dfrac{1}{1-x^2-y^2}$ to order $2$ around $(0,0)$.
+\exsol{sol:taylor_expansion_one_over_1_minus_x2_y2}
 \end{exercise}
 
 \begin{remark}
@@ -652,5 +660,6 @@ The integral need not be evaluated explicitly.
 \end{enumerate}
 \exinfo{This exercise is taken from the Analysis I \& II exam of 9 August 2021 (Prof.\ Giovanni Felder), Part B, Problem 1. The original
 opens with a part asking whether $f$ is continuously differentiable, bounded, and even.}
+\exsol{sol:taylor_parametric_integral}
 \end{exercise}
 

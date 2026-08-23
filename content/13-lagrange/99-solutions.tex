@@ -15,6 +15,7 @@ examples, and are carried out where they stand.
 
 % Relocated from 01-lagrange-multipliers.tex by Claude Opus 5 (Extra), 2026-08-13.
 \begin{exercisesolution}[Proof of \cref{ex:antipodal_max_distance}]
+\label{sol:antipodal_max_distance}
 % Generator: Claude Sonnet 5 (High)
 Since $|x|=|y|=1$ on $S^{n-1}$,
 \[f(x,y) := |x-y|^2 = |x|^2 - 2\langle x,y\rangle + |y|^2 = 2 - 2\langle x,y\rangle,\]
@@ -46,7 +47,8 @@ maximiser, since $t \mapsto t^2$ is strictly increasing on $[0,\infty)$. The sam
 worth reaching for whenever a distance is being optimised.
 \end{remark}
 
-\begin{exercisesolution}[Solution to \cref{ex:5.2}]
+\begin{exercisesolution}[Solution to \cref{ex:lagrange_ball_extrema}]
+\label{sol:lagrange_ball_extrema}
 % Generator: Claude Sonnet 5 (Medium)
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item $\overline{U}$ is closed and bounded in $\mathbb{R}^3$, hence compact by
@@ -76,6 +78,7 @@ worth reaching for whenever a distance is being optimised.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:ai_lagrange_circle}]
+\label{sol:ai_lagrange_circle}
 % Generator: Gemini 3.6 Flash (Medium)
 The constraint set $S := \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 = 5\}$ is compact and $\nabla g(x,y) = (2x, 2y)\transp \neq (0,0)\transp$ on $S$. By Lagrange Multipliers, candidates satisfy $\nabla f = \lambda \nabla g$, i.e.:
 \[
@@ -87,7 +90,8 @@ f(1,2) = 1 + 4 = 5 \quad (\text{maximum}), \qquad f(-1,-2) = -1 - 4 = -5 \quad (
 \]
 \end{exercisesolution}
 
-\begin{exercisesolution}[Solution to \cref{ex:6.10}]
+\begin{exercisesolution}[Solution to \cref{ex:lagrange_sphere_plane}]
+\label{sol:lagrange_sphere_plane}
 % Generator: Claude Sonnet 5 (Medium)
 With $g_1(x,y,z) := x^2+y^2+z^2-1$ and $g_2(x,y,z) := x+y$, the Lagrangian
 $L := f - \lambda_1 g_1 - \lambda_2 g_2$ gives the system
@@ -103,7 +107,8 @@ only Lagrange candidates, so $f$ attains its \textbf{maximum} $2\sqrt3$ at $\tfr
 and its \textbf{minimum} $-2\sqrt3$ at $-\tfrac{1}{\sqrt3}(1,-1,1)$.
 \end{exercisesolution}
 
-\begin{exercisesolution}[Solution to \cref{ex:6.11}]
+\begin{exercisesolution}[Solution to \cref{ex:closest_point_hyperbolic_paraboloid}]
+\label{sol:closest_point_hyperbolic_paraboloid}
 % Generator: Claude Sonnet 5 (Medium)
 Minimizing the distance to $(0,0,1)$ is the same as minimizing
 $f(x,y,z) := x^2+y^2+(z-1)^2$ subject to $g(x,y,z) := z-x^2+y^2 = 0$. Since $f$ is a distance
@@ -126,6 +131,7 @@ $\big(\pm\tfrac{1}{\sqrt2},0,\tfrac12\big)$, at minimal distance $\tfrac{\sqrt3}
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:lagrange_ellipsoid_linear}]
+\label{sol:lagrange_ellipsoid_linear}
 % Generator: Gemini 3.6 Flash (High)
 % Correction: Claude Opus 5 (High) --- ^T -> \transp; the \implies signs inside displays replaced by
 % prose per the logical-arrows rule; and "g := ... - 1 = 0" split, since it was naming g and
@@ -157,6 +163,7 @@ Lagrange computation above is that fact in disguise, with $\sqrt{S}$ the norm of
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:entropy_simplex_minimum}]
+\label{sol:entropy_simplex_minimum}
 % Generator: Claude Opus 5 (High)
 Throughout, write $g(x) := x_1 + \dots + x_n - 1$ for the constraint function, so that
 $A = g^{-1}(0) \cap (0,1]^n$, and note $\nabla g \equiv (1,\dots,1)\transp \neq 0$, so the Lagrange
@@ -196,6 +203,7 @@ part \textbf{(b)} can then simply rule out the boundary.
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution of \cref{ex:kobel_lagrange_single_choice}]
+\label{sol:kobel_lagrange_single_choice}
 % Generator: Claude Opus 5 (High)
 The correct answer is \textbf{(a)}, and one line of the Lagrange system settles it.
 
@@ -229,6 +237,7 @@ $f$, and that an inconsistent Lagrange system is a legitimate --- and here decis
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution of \cref{ex:kobel_sphere_meets_cylinder}]
+\label{sol:kobel_sphere_meets_cylinder}
 % Generator: Claude Opus 5 (High)
 The maximum is $\boxed{5/4}$.
 

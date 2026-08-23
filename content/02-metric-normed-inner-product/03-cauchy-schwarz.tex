@@ -185,6 +185,7 @@ find.}
 \exinfo{This exercise is taken from the mock examination \emph{Probepr\"ufung Analysis II}
 (undated) in \texttt{old\_exams/fs2023/}, Problem 11. That paper names no lecturer, and asks only
 for the inequality; the equality case is added here.}
+\exsol{sol:integral_reciprocal_inequality}
 \end{exercise}
 
 
@@ -194,7 +195,7 @@ for the inequality; the equality case is added here.}
 % Source: exercises/Ex3_Analysis2_eng.pdf
 
 \begin{exercise}[Cauchy--Schwarz]
-\label{ex:3.7}
+\label{ex:cauchy_schwarz_statement}
 Let $V$ be a vector space over $\mathbb{R}$, let $\langle\cdot,\cdot\rangle$ be an inner product
 on $V$, and let $\|\cdot\| : V \to \mathbb{R}$ be given by $\|v\| = \sqrt{\langle v,v\rangle}$.
 Then the inequality
@@ -204,6 +205,7 @@ Then the inequality
 holds for all $v, w \in V$. Furthermore, equality in (1) holds if and only if $v$ and $w$ are
 linearly dependent.
 \exinfo{This exercise is Problem 3.7 of Problem Sheet 3, Analysis II, Spring Semester 2026.}
+\exsol{sol:cauchy_schwarz_statement}
 \end{exercise}
 
 \begin{remark}
@@ -215,19 +217,20 @@ including the geometric reading and an explicit proof hint.
 % Source: exercises/Ex3_Analysis2_eng.pdf
 
 \begin{exercise}[Inner product and norm]
-\label{ex:3.8}
+\label{ex:inner_product_induced_norm}
 Let $V$ be a vector space over $\mathbb{R}$, let $\langle -,-\rangle$ be an inner product on $V$.
 The map defined by
 $$\|\cdot\| : V \to \mathbb{R}, \qquad \|v\| = \sqrt{\langle v,v\rangle}$$
 satisfies the triangular inequality and is a norm.
 \exinfo{This exercise is Problem 3.8 of Problem Sheet 3, Analysis II, Spring Semester 2026.}
+\exsol{sol:inner_product_induced_norm}
 \end{exercise}
 
 % Originally: content/exercise-sheets/week-03.tex, problem 3.9
 % Source: exercises/Ex3_Analysis2_eng.pdf
 
 \begin{exercise}[All norms are equivalent in $\mathbb{R}^n$]
-\label{ex:3.9}
+\label{ex:norm_equivalence_rn}
 Let $|\cdot|$ denote the standard Euclidean norm in $\mathbb{R}^n$ and let
 $f : \mathbb{R}^n \to [0,\infty)$ be another norm (that is, a function satisfying the properties
 of \textit{Definition 9.89}).
@@ -248,6 +251,7 @@ and use that $f$, being a norm, is nondegenerate. \textbf{3.9.5:} if $f$ is equi
 $\tilde f$ is equivalent to $|\cdot|$, it follows by transitivity that $f$ is equivalent to
 $\tilde f$.}
 \exinfo{This exercise is Problem 3.9 of Problem Sheet 3, Analysis II, Spring Semester 2026.}
+\exsol{sol:norm_equivalence_rn}
 \end{exercise}
 
 \begin{remark}
@@ -261,10 +265,11 @@ compact unit sphere.
 \label{ex:polynomials_infinite_dimensional}
 Show that the vector space $\mathbb{R}[x]$ of polynomials with real coefficients is infinite
 dimensional, and exhibit a basis.
+\exsol{sol:polynomials_infinite_dimensional}
 \end{exercise}
 
 \begin{remark}
-This is exactly the hypothesis \cref{ex:3.9} needs and cannot do without.
+This is exactly the hypothesis \cref{ex:norm_equivalence_rn} needs and cannot do without.
 \Cref{rem:norm_equivalence_needs_finite_dimension} already gave $C^0([0,1],\mathbb{R})$ as an
 infinite-dimensional space where norm equivalence fails. Note that $\mathbb{R}[x]$ is the
 algebraically simplest such example, with an explicit basis and no analysis required at all.
@@ -274,7 +279,7 @@ algebraically simplest such example, with an explicit basis and no analysis requ
 % Source: exercises/Ex3_Analysis2_eng.pdf
 
 \begin{exercise}[Hilbert--Schmidt norm of the composition]
-\label{ex:3.10}
+\label{ex:hilbert_schmidt_submultiplicative}
 Take two linear functions $\varphi : \mathbb{R}^d \to \mathbb{R}^n$ and
 $\psi : \mathbb{R}^n \to \mathbb{R}^m$, and denote with $\Phi$, $\Psi$ the matrices that represent
 them in the canonical bases. Recall that the linear map
@@ -288,6 +293,7 @@ notes).
 Notice that $(\Psi\cdot\Phi)^i_j$ ($i$-th row, $j$-th column) is the scalar product of $\Psi^i$
 and $\Phi_j$, which are vectors of $\mathbb{R}^n$. Apply Cauchy--Schwarz to each of them.}
 \exinfo{This exercise is Problem 3.10 of Problem Sheet 3, Analysis II, Spring Semester 2026.}
+\exsol{sol:hilbert_schmidt_submultiplicative}
 \end{exercise}
 
 % Originally: content/week-04.tex, \exercisesheet{4}
@@ -295,7 +301,7 @@ and $\Phi_j$, which are vectors of $\mathbb{R}^n$. Apply Cauchy--Schwarz to each
 
 \begin{exercise}[$p$-norms \textnormal{(semi-important; parts \textbf{(d)} and \textbf{(f)}
 important)}]
-\label{ex:4.3}
+\label{ex:p_norms_unit_balls}
 For $p \geq 1$ and $x \in \mathbb{R}^n$ define the \textbf{$p$-norm} of $x$ as
 \[|x|_p := \Big(\sum_{i=1}^{n} |x_i|^p\Big)^{1/p}.\]
 \begin{enumerate}[label=\textbf{(\alph*)}]
@@ -324,13 +330,14 @@ $(x+y)/2$. To get the general case from the one with positive coordinates, obser
 $x \in \mathbb{R}^n$, denoting $\hat x := (|x_1|,\dots,|x_n|)$, we have
 $|x+y|_p \leq |\hat x + \hat y|_p$ and $|\hat x|_p = |x|_p$ for all $x,y \in \mathbb{R}^n$.}
 \exinfo{This exercise is Problem 4.3 of Problem Sheet 4, Analysis II, Spring Semester 2026.}
+\exsol{sol:p_norms_unit_balls}
 \end{exercise}
 
 % Originally: content/exercise-sheets/week-04.tex, problem 4.4 --- never previously built
 % Source: exercises/Ex4_Analysis2_eng.pdf
 
 \begin{exercise}[$p$-means \textnormal{(optional)}]
-\label{ex:4.4}
+\label{ex:p_means_monotonicity}
 For $x \in \mathbb{R}^n$ with positive coordinates and $p \neq 0$ define the \textbf{$p$-mean} as
 $$\mu_p(x) := \left(\frac{x_1^p + \dots + x_n^p}{n}\right)^{1/p}.$$
 \begin{enumerate}[label=\textbf{(\alph*)}]
@@ -351,4 +358,5 @@ $f(\lambda_1x_1 + \dots + \lambda_nx_n) \geq \lambda_1f(x_1)+\dots+\lambda_nf(x_
 $x_i \in \mathbb{R}$, $0 \leq \lambda_i \leq 1$ with $\lambda_1+\dots+\lambda_n = 1$.
 \textbf{4.4.3:} it might be more convenient to work with $\log f(t)$.}
 \exinfo{This exercise is Problem 4.4 of Problem Sheet 4, Analysis II, Spring Semester 2026.}
+\exsol{sol:p_means_monotonicity}
 \end{exercise}

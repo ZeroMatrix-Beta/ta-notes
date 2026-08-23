@@ -4,6 +4,7 @@
 \label{sec:gram_determinant_solutions}
 
 \begin{exercisesolution}[Solution to \cref{ex:area_formula_two_maps}]
+\label{sol:area_formula_two_maps}
 % Generator: Claude Opus 5 (High) --- the five statements are the examiner's; the working, the
 % counterexample and the AI-Note below are written for these notes. The verdicts (a) true,
 % (b)-(d) false, (e) true are the official key's; ours agree on (b)-(e) and diverge on (a), for
@@ -68,7 +69,8 @@ The verdict on part \textbf{(a)} is therefore: true as the examination intends i
 mathematics. It is kept here because the gap is more instructive than the computation.
 \end{ainote}
 
-\begin{exercisesolution}[Solution to \cref{ex:9.1}]
+\begin{exercisesolution}[Solution to \cref{ex:paraboloid_hypersurface_volume}]
+\label{sol:paraboloid_hypersurface_volume}
 % This label is referenced from 02-volume-of-embedded-surfaces.tex with \cpageref, NOT \cref.
 % exercisesolution wraps `proof`, which has no counter, so a \label inside it is silently
 % misattributed to the last-stepped ambient counter: \cref printed "Section 21.e" here until
@@ -98,7 +100,8 @@ For the second, $\int_0^2 \tfrac12 r^3\,dr = \tfrac12\cdot\tfrac{16}{4} = 2$. So
   = \boxed{\ \frac{4\pi}{3}\big(8\sqrt2-7\big)\ }.\]
 \end{exercisesolution}
 
-\begin{exercisesolution}[Solution to \cref{ex:9.2}]
+\begin{exercisesolution}[Solution to \cref{ex:curve_length_polar_and_vector_integral}]
+\label{sol:curve_length_polar_and_vector_integral}
 % Generator: Claude Sonnet 5 (Medium)
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item By Fubini (\cref{thm:fubini}),
@@ -128,12 +131,13 @@ For the second, $\int_0^2 \tfrac12 r^3\,dr = \tfrac12\cdot\tfrac{16}{4} = 2$. So
 \end{enumerate}
 \end{exercisesolution}
 
-% All three parts of ex:9.2 and ex:9.1 were worked out independently before consulting
+% All three parts of ex:curve_length_polar_and_vector_integral and ex:paraboloid_hypersurface_volume were worked out independently before consulting
 % Sol9_Analysis2_eng.pdf; all four answers (4pi/3 (8sqrt2 - 7), 17/2, -pi/2, 1/36) match the
 % official solution exactly, so there is no divergence to record. (Was an ainote until
 % 2026-08-09: style.md names cross-checking against SolN as editor-facing under Test 2.)
 
-\begin{exercisesolution}[Solution to \cref{ex:10.1}]
+\begin{exercisesolution}[Solution to \cref{ex:spherical_quadrilateral_area}]
+\label{sol:spherical_quadrilateral_area}
 % Generator: Claude Sonnet 5 (Medium)
 We parametrize $\mathbb{S}^2$ (up to a null set) using latitude/longitude spherical
 coordinates
@@ -154,7 +158,8 @@ Gram determinant, so $dA = \cos\theta\,d\theta\,d\varphi$, and
   d\varphi = \boxed{\ (\varphi_2-\varphi_1)\big(\sin\theta_2-\sin\theta_1\big)\ }.\]
 \end{exercisesolution}
 
-\begin{exercisesolution}[Solution to \cref{ex:10.2}]
+\begin{exercisesolution}[Solution to \cref{ex:torus_surface_area}]
+\label{sol:torus_surface_area}
 % Generator: Claude Sonnet 5 (Medium)
 The circle $S$ has radius $2$, and $T$ is the solid torus swept by a tube of radius $1$
 around it, so $\partial T$ is Corsin's general torus surface with $R=2$, $r=1$ fixed. Using
@@ -174,7 +179,8 @@ Hence
   = \boxed{\ 8\pi^2\ }.\]
 \end{exercisesolution}
 
-\begin{exercisesolution}[Solution to \cref{ex:10.3}]
+\begin{exercisesolution}[Solution to \cref{ex:solids_of_revolution_area}]
+\label{sol:solids_of_revolution_area}
 % Generator: Claude Sonnet 5 (Medium)
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item $\partial_{\mathrm{side}}\Omega$ is not closed (it omits, e.g., the limit
@@ -253,7 +259,7 @@ Hence
 \end{exercisesolution}
 
 \begin{ainote}
-All parts of \cref{ex:10.1,ex:10.2,ex:10.3} were worked out independently before consulting
+All parts of \cref{ex:spherical_quadrilateral_area,ex:torus_surface_area,ex:solids_of_revolution_area} were worked out independently before consulting
 \texttt{Sol10\_Analysis2\_eng.pdf}. The three main answers ($(\varphi_2-\varphi_1)(\sin\theta_2
 -\sin\theta_1)$, $8\pi^2$, $\pi\int_a^bf(x)^2dx$ / $2\pi\int_a^bf(x)\sqrt{1+f'(x)^2}dx$ /
 volume $\pi$, area $+\infty$) match exactly. Part \textbf{(e)} was reconstructed independently

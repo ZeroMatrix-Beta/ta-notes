@@ -321,18 +321,23 @@ does not help and thin in the places it does.
   answer or names the wrong answer goes into the chapter's `99-solutions.tex`, next to the
   solution it concerns.
 
-* **Trailing notes on a statement: `\exhint` and `\exinfo`.** Two blocks that hang off the *end*
-  of an exercise or example, inside the environment. Added 2026-08-10; defined in `main.tex`
-  next to `exercisesolution`, where the full comment lives.
+* **Trailing notes on a statement: `\exhint`, `\exinfo`, and `\exsol`.** Three blocks that hang off the *end*
+  of an exercise or example, inside the environment. Added 2026-08-10 / 2026-08-23; defined in `main.tex`
+  next to `exercisesolution`, where the full comments live.
 
   ```latex
   \begin{exercise}[Problems at the origin]
     ... statement ...
     \exhint[Official hint]{If a function is continuous at $0$ and $x_k \to 0$ ...}
     \exinfo{This exercise is Problem 3.2 of Problem Sheet 3, Analysis II, Spring Semester 2026.}
+    \exsol{sol:3.2}
   \end{exercise}
   ```
 
+  - **`\exhint[Label]{...}`** takes an optional label, default `Hint`. Use `[Official hint]` for a
+    hint printed on the sheet, `[Corsin's hint]` / `[Sascha Brack's hints]` for one from a
+    tutor's notes. Capitalise the first word of the hint body — the label ends in a colon
+    supplied by the macro.
   - **`\exinfo{...}` says where the problem came from.** This is why **no exercise title carries
     a `N.M --- ` prefix any more** — all 58 were converted on 2026-08-10. A title names what the
     problem is *about*; the sheet number is provenance and belongs in the Info line. Do not
@@ -341,44 +346,26 @@ does not help and thin in the places it does.
     of Problem Sheet 4, Analysis II, Spring Semester 2026.", "This exercise is taken from the
     Analysis I & II examination of 15 August 2019 (Prof. Peter S. Jossen), Part B, Problem 2.",
     "This example follows the Wikipedia article on the Cantor set." A bare "Sheet 4, Ex. 4.3." is
-    the terse catalogue reference this replaced. (The exam example used to read "the August 2019
-    exam, Problem 2", which no longer models the lecturer rule two bullets below.)
+    the terse catalogue reference this replaced.
   - ⚠️ **`\exinfo` is not an exercise-only macro — a mined `example` needs one too** (2026-08-11,
     on the user's instruction). When an old-exam problem is filed as a worked `example` rather
     than as an `exercise` — because it is too hard to set, or diverges from what the course
     proves — the reader still has to be told that the mathematics is an examiner's. Close the
-    `example` with an `\exinfo` exactly as an `exercise` would, and say what the exam actually
-    asked, since a problem set as *prove this* and reproduced here as *here is the proof* has had
-    its form changed: "This example is taken from the Analysis I & II examination of winter
-    2018/2019 (Prof. Manfred Einsiedler), Problem 9, where it is set as a proof exercise."
-    Anything you added on top (a counterexample, a closing remark) is worth naming in the same
-    sentence, so the `\exinfo` bounds the examiner's contribution rather than claiming all of it.
+    `example` with an `\exinfo` exactly as an `exercise` would.
   - **Name the lecturer for an old-exam citation**, in parentheses after the date
-    (2026-08-11, user). `old_exams/` spans at least eight professors (Knörrer, Einsiedler, Jossen,
-    Teichmann, Kowalski, Salamon, Serra, Felder) with visibly different exam styles and syllabus
-    emphases, so "the exam of 12 August 2020" under-identifies the source:
-    knowing that a problem is Jossen's rather than Serra's is what tells a reader whether its
-    phrasing and its scope are ones this course would use. All 48 pre-existing exam citations were
-    given their lecturer on 2026-08-11.
-
-    **The `% Source:` comment is not required to repeat the name**, and the older ones do not: they
-    give the exact file and page (`old_exams/examHS24.pdf (13 February 2025), Aufgabe 4, p. 3`),
-    and `old-exam-mining.md` maps every file to its lecturer. That is enough for an editor, who
-    needs to reopen the PDF anyway. The reader has no such table, which is why the `\exinfo` must
-    carry the name. New `% Source:` lines may include it and several do; do not sweep the old ones.
-
-    **Say whether the paper is Analysis I & II.** The `HS*`/`FS*` papers and the two Felder ones
-    are combined Analysis I & II exams, so most of what is on them is out of this document's
-    scope and a reader who goes looking should know before opening the file. The Serra papers
-    (`examHS24`, `examFS24`) and `august2025` are Analysis II alone and take no such qualifier.
-  - **`\exhint[Label]{...}`** takes an optional label, default `Hint`. Use `[Official hint]` for a
-    hint printed on the sheet, `[Corsin's hint]` / `[Sascha Brack's hints]` for one from a
-    tutor's notes. Capitalise the first word of the hint body — the label ends in a colon
-    supplied by the macro.
-  - **Order when both appear:** hint first, `\exinfo` last, closing the block.
-  - Use the `exerciseinfo` / `exercisehint` *environments* instead of the one-line macros when
+    (2026-08-11, user). `old_exams/` spans at least eight professors with visibly different exam
+    styles, so knowing that a problem is Jossen's rather than Serra's tells a reader whether its
+    phrasing and scope are ones this course would use.
+  - **`\exsol{sol:label}` provides a forward clickable link to the worked solution** when the
+    solution is not inline (e.g. located in `99-solutions.tex` or an appendix). Renders with an
+    outline checkmark icon (`\faCheckCircle[regular]`) in `SolTint` (`MidnightBlue!85!ThemeGreen`)
+    linking directly to the solution anchor via `\hyperref[sol:label]{See solution on \cpageref{sol:label}}`.
+    The companion environment `exercisesol` / `exercisesolutionlink` is available for custom or
+    multi-paragraph text.
+  - **Order when multiple appear:** `\exhint` first, then `\exinfo`, and `\exsol` last, closing the block.
+  - Use the `exerciseinfo` / `exercisehint` / `exercisesol` *environments* instead of the one-line macros when
     the note carries a display or runs to several paragraphs.
-  - **Both are unnumbered and must never carry a `\label`.** They are formatting blocks inside an
+  - **All are unnumbered and must never carry a `\label`.** They are formatting blocks inside an
     already-numbered environment; the enclosing exercise is what gets referenced. This is a
     deliberate exception to "never leave a new environment unnumbered" in
     `build-and-preamble.md` — see the comment at the definition.

@@ -20,6 +20,24 @@ stale, so that project churn stops rotting the style rules:
 | **`old-exam-mining.md`** | Which `old_exams/` papers are mined, what is **rejected forever**, and **where to mine next** | when a mining pass runs |
 | **`project-state.md`** | ⚠️ **Deprecated 2026-08-10 on the user's instruction.** A stub. Do not write to it. | never |
 
+**`tools/audit.py` is where a good part of the above is actually enforced.** Run it before you
+commit; it exits non-zero on any finding:
+
+```
+python tools/audit.py
+```
+
+It mechanises the rules these files state in prose — descriptive labels, titles that name their
+subject, `% Extractor:` paired with `% Source:`, the `\cpageref` and `\qt{}` traps, tikz colours
+that exist — and cross-checks each `\exinfo` against the `% Source:` and `% Originally:` comments
+beside it. **It opens no source PDF**, which is what makes it cheap enough to run every time;
+verifying a citation against the paper it names is a separate and expensive job.
+
+It exists because on 2026-08-23 the tree held sixty banned `ex:N.M` labels, six titles naming only
+a question format, and a figure using a colour that was never defined — none of them noticed,
+because a tikz colour error is non-fatal and the PDF looked fine. **A rule that is written down
+but not checked is a rule that drifts.** Add a check when you add a rule.
+
 ⚠️ **`old-exam-mining.md` is an inventory, not a status file.** It exists because the alternative is
 re-reading forty exam PDFs to rediscover that a problem was already considered and dropped, which
 is a cost no `git log` entry can save you. It records *decisions about sources*, never how far the

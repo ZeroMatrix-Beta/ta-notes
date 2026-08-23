@@ -50,6 +50,19 @@ folder they sit in.
 paper itself is what goes in a citation. Note also that three pairs are byte-identical duplicates:
 `FS08 = HS08`, `FS09 = HS09`, `FS15 = HS15` (verified by `md5sum`).
 
+⚠️ **List the directory. Do not work from this file's own inventory.** Added 2026-08-11, the hard
+way. A pass had just restructured this ledger and written *"every past paper in the repository has
+been surveyed"*, which was false: `old_exams/fs2023/examsol.pdf` is a complete Analysis II
+examination **with full solutions**, by a lecturer named in no row here, and it had survived every
+previous pass unnoticed. It was found by running `ls` over the folder rather than reading the
+tables below.
+
+The reason it stayed invisible is worth knowing, because it will happen again. Every other paper is
+named `HS*`, `FS*`, `*Prüfung*` or `Probeprfg*`; `examsol.pdf` matches none of those, so it fell
+through every glob and every mental filter. **Before a mining pass, enumerate the directory
+recursively and reconcile it against the source table.** There are 50 files in `old_exams/` as of
+this writing.
+
 **Derive first, open the key second.** This is the `SolN_Analysis2_eng.pdf` rule in `style.md`, and
 it exists because reading a solution first steers your method even when you do not copy it. It has
 already paid: every erratum in *Errors found in the official keys* below was caught because the
@@ -70,8 +83,9 @@ solution here was written before the key was opened.
 | `HS00`–`HS03`, `FS04`–`FS12`, `HS04`–`HS12` | various / unidentified | Mostly *Vordiplom* papers. ✅ surveyed; see the rejection tables |
 | `august2025` | Prof. Laura Kobel-Keller | Analysis II alone (*Analysis II: mehrere Variablen*), bilingual German/English, 21 pp. ✅ **mined front to back 2026-08-11**, all 19 questions read from rendered pages |
 | `examHS24`, `examFS24` | Prof. Joaquim Serra | Analysis II alone. ⚠️ `examHS24` is the exam of **13 February 2025**, `examFS24` of **21 August 2024**. ✅ mined in earlier passes |
-| `WS22_Prüfung`, `fs2023/Prüfung` | Prof. Giovanni Felder | Analysis I & II. **24 January 2022** and **9 August 2021**. The only two of the older papers shipping a solution key. ✅ mined in earlier passes |
+| `WS22_Prüfung`, `fs2023/Prüfung` | Prof. Giovanni Felder | Analysis I & II. **24 January 2022** and **9 August 2021**. Keys are `WS22_Lösung.pdf` and `fs2023/Lösung.pdf`. ✅ mined in earlier passes |
 | `fs2023/Probeprfg1`, `fs2023/2022/Probeprfg2`, `fs2023/Probeprfg3` | **none named** | Analysis II alone. ✅ **mined 2026-08-11**; see below |
+| `fs2023/examsol.pdf` | **Prof. Urs Lang** | Analysis II alone, **18 August 2023**, 7 pp, **problems and full solutions in one document**. ⚠️ **Not mined.** Triaged 2026-08-11 and now the top target; see *Where to mine next*. |
 
 ### Loose official material
 
@@ -178,27 +192,56 @@ a Felder paper, which invites two wrong inferences, and both are wrong.
 ## Where to mine next
 
 The `HS*`/`FS*` block, `august2025`, both Serra papers, both Felder papers, `DiffComp.pdf`,
-`exercises_2024/` and all three `Probeprfg` papers have now been worked through. **Every past paper
-in the repository has been surveyed.** What is left is four specific problems and one file that
-does not exist yet.
+`exercises_2024/` and all three `Probeprfg` papers have been worked through. One whole paper
+remains, and after it three specific problems and one file that does not exist yet.
 
-1. **`exercises_2024/mock.pdf` Exercise 25, part 2.** Construct a vector field `A` with
-   `B = curl A`, with a hint at the shape to try. Every existing block in `23-flux-divergence` and
-   `26-stokes` runs the other way, from a given `A` to a flux, and `examFS24`'s Kurzproblem 2 hands
-   `A` over. If ch. 26 ever wants a construct-the-potential exercise beside
-   `ex:ai_which_fields_are_gradients`, this is the one. The rest of Exercise 25 is a duplicate.
-2. **`Probeprfg3` Aufgabe 5, parts (a) and (b).** An infinite discrete subset of a compact metric
-   space exists; a *closed* discrete one cannot. A good pair, held back only because part (c) of the
-   same block is already `ex:locally_lipschitz_is_lipschitz` and part (d) is `√x` on `[0,1]`. Take
-   the (a)/(b) half if ch. 7 ever wants it.
-3. **`FS19` Teil B Aufgabe 4 (Jossen).** The area `f(t)` of the region cut off by a moving ellipse,
-   and whether `f` is `C¹`. Dropped only for length, since it needs a figure. Pick it up if ch. 20
-   ever wants a parameter-integral example with a picture.
-4. **A second Serra example sheet, if one appears.** `DiffComp.pdf` is titled *Some differential
-   form computations **1***, and its problems are numbered `1.1`–`1.6` under a section heading `1.`.
-   Both strongly suggest a sheet 2 exists. It is not in the repository as of 2026-08-11. If one
-   appears it goes straight to the top of this list: same lecturer, same course, same semester,
-   worked solutions included.
+### 1. ⚠️ `old_exams/fs2023/examsol.pdf` — Prof. Urs Lang, 18 August 2023
+
+**The best remaining target in the repository, and the one that got away.** It is *Analysis II:
+mehrere Variablen*, so nothing is filtered out as single-variable; it is the second most recent
+paper here, after `august2025`; and — uniquely among the Serra-era papers — **the problems and the
+official solutions are the same document**, headed *Aufgaben und Lösungsvorschlag*, with a mark
+scheme. On this file's own criteria it outranks everything mined on 2026-08-11.
+
+⚠️ **It carries a ninth lecturer.** Urs Lang appears nowhere else in the folder, so his emphases are
+unknown; expect his problems to sit differently from Serra's and Kobel-Keller's.
+
+**Triaged, not mined.** The twelve problems were read once at triage level; the verdicts below are
+first impressions and every one still has to be derived before transcription. Structure: four
+computations, four multiple-choice blocks, four theory problems.
+
+| Problem | First impression |
+|---|---|
+| 2.MC2 (D) (`U` bounded and `∇f` bounded, must `f` be bounded?) | **Marked false in the key**, and that is the find. It needs a bounded domain on which the gradient bound does not integrate along paths — the distance between two points measured *inside* `U` is not comparable to `\|x−y\|`. Nothing in the document distinguishes the two. |
+| 2.MC3 (which of four sets are 1-dimensional submanifolds of `ℝ²`) | Four sharply chosen sets: a level set, the figure-eight `t ↦ (sin t, sin 2t)`, the logarithmic spiral `e^{−t}(cos t, sin t)`, and the topologist's sine curve joined to the `y`-axis. The last two are exactly `ex:topologists_sine_curve` (ch. 8) meeting `ex:cross_not_submanifold` (ch. 17), which no single block currently connects. |
+| 3.A3 (`\|f(x)−f(y)\| ≥ α\|x−y\|` forces a `C¹`-diffeomorphism onto an open image; and onto all of `ℝⁿ` when `U = ℝⁿ`) | **Strongest theory problem in the paper.** It is the affirmative answer to the question `ex:local_diffeomorphism_four_consequences` part (d) answers negatively: expansiveness is a hypothesis that *does* upgrade a local diffeomorphism to a global one. Part (b) is a connectedness argument, `V` open and closed and non-empty. |
+| 3.A1 (c) (a harmonic function with a local minimum is locally constant) | Uses the **mean value property** of harmonic functions, which the document does not have. It would sit directly beside `ex:green_first_identity_harmonic`, which introduced "harmonic" and proved a different uniqueness statement. |
+| 2.MC4 (for which of four ODEs is the solution set a 2-dimensional vector space?) | Inhomogeneous, non-linear and third-order cases against one genuine second-order linear equation. Pairs with `ex:which_functions_solve_a_third_order_ode`, which reads structure off a solution; this reads it off the equation. |
+| 2.MC1 (continuous surjections: what transfers from `X` to `Y`?) | Part (D), a continuous bijection from a compact space has continuous inverse, is a real theorem and worth checking against ch. 7 before taking. |
+| 1.A1 (volume under a graph, then flux through that graph) | The flux half is nice — the divergence integrates to zero by symmetry, so the answer comes from the base instead. Check against `ex:flux_truncated_paraboloid` and the ch. 23 blocks first. |
+| 1.A2, 1.A3, 1.A4, 3.A2, 3.A4 | Expect these to fall. A paraboloid surface area (`ex:paraboloid_patch_area`), a Stokes computation over a plane section of a cube (the rejected family), a constant-coefficient ODE with an initial value problem (rejected three times already), the potential/conservative equivalence (`26-stokes/02` proves it), and the largest box in an ellipsoid (the standing constrained-optimisation rejection). |
+
+### 2. Three single problems held back from finished papers
+
+* **`exercises_2024/mock.pdf` Exercise 25, part 2.** Construct a vector field `A` with
+  `B = curl A`, with a hint at the shape to try. Every existing block in `23-flux-divergence` and
+  `26-stokes` runs the other way, from a given `A` to a flux, and `examFS24`'s Kurzproblem 2 hands
+  `A` over. If ch. 26 ever wants a construct-the-potential exercise beside
+  `ex:ai_which_fields_are_gradients`, this is the one. The rest of Exercise 25 is a duplicate.
+* **`Probeprfg3` Aufgabe 5, parts (a) and (b).** An infinite discrete subset of a compact metric
+  space exists; a *closed* discrete one cannot. A good pair, held back only because part (c) of the
+  same block is already `ex:locally_lipschitz_is_lipschitz` and part (d) is `√x` on `[0,1]`. Take
+  the (a)/(b) half if ch. 7 ever wants it.
+* **`FS19` Teil B Aufgabe 4 (Jossen).** The area `f(t)` of the region cut off by a moving ellipse,
+  and whether `f` is `C¹`. Dropped only for length, since it needs a figure. Pick it up if ch. 20
+  ever wants a parameter-integral example with a picture.
+
+### 3. A second Serra example sheet, if one appears
+
+`DiffComp.pdf` is titled *Some differential form computations **1***, and its problems are numbered
+`1.1`–`1.6` under a section heading `1.`. Both strongly suggest a sheet 2 exists. It is not in the
+repository as of 2026-08-11. If one appears it goes straight to the top of this list: same
+lecturer, same course, same semester, worked solutions included.
 
 **The one category deliberately left unharvested** is constrained-optimisation problems, of which
 the folder holds at least five near-identical variants. The reasoning is in the rejection table and

@@ -262,8 +262,12 @@ This confirms that the outward normal vector at a point on the unit sphere is pr
   \node[blue!70!black, font=\small] at (-1.0,0.5) {$S^2$};
 
   \draw[purple, thick, ->] (0,-2.0) -- (0,2.1) node[above, font=\small] {$N_{e_3}S^2$};
-  \fill (0,1.3) circle (1.7pt) node[right, font=\small] {$e_3$};
-  \fill (0,-1.3) circle (1.7pt) node[right, font=\small] {$-e_3$};
+  % Correction: Claude Opus 5 (High) --- `right' puts the label hard against the dot, and the
+  % leading minus of $-e_3$ then merged into the 1.7pt marker: at reading size the south pole
+  % label was indistinguishable from the north pole's $e_3$, which turns the picture of a
+  % normal *line* into two copies of the same point. 2pt of clearance is enough.
+  \fill (0,1.3) circle (1.7pt) node[right=2pt, font=\small] {$e_3$};
+  \fill (0,-1.3) circle (1.7pt) node[right=2pt, font=\small] {$-e_3$};
 \end{tikzpicture}
 \end{center}
 

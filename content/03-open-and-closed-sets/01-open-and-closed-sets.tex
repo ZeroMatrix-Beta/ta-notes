@@ -100,7 +100,11 @@ $X \setminus A$ is open.
     \draw[dashed, blue!80] (0.5,-0.3) circle (0.2);
     \fill (-0.6,-0.1) circle (1pt);
     \draw[dashed, blue!80] (-0.6,-0.1) circle (0.15);
-    \node[right, font=\bfseries] at (1, 0.5) {open};
+    % Correction: Claude Opus 5 (High) --- a bold "open" stood here, anchored `right' at the
+    % set's edge, so it printed in the gutter between this panel and the next and read as
+    % belonging to neither. It also said nothing the caption below does not. The right-hand
+    % panel's annotation is kept because it does more than name the panel: it points at the
+    % one boundary point where the ball fails.
     \node[below] at (0, -1.5) {\textbf{Open Set}};
   \end{scope}
 

@@ -49,17 +49,25 @@ boundedness) are available.
 \begin{center}
 \begin{tikzpicture}[scale=1.1]
   \draw[blue!80!black, thick, fill=blue!5] plot[smooth cycle, tension=0.7] coordinates {(-2, -1.2) (-1.5, 1.5) (1.2, 1.8) (2.2, -0.5) (1.0, -1.5)};
-  \node[blue!80!black, font=\large] at (-2.55, 1.55) {$X$};
+  \node[blue!80!black, font=\large] at (-2.9, 1.75) {$X$};
 
   % The three sets must genuinely cover X -- ellipses chosen so every point of the
   % blob lies inside at least one of them (that is the whole point of a cover).
-  \draw[red!80!black, thick, dotted, fill=red!15, fill opacity=0.35] (-1.15,0.05) ellipse (1.6 and 1.75);
+  %
+  % Correction: Claude Opus 5 (High) --- they did not. U_1 was (-1.15,0.05) r(1.6,1.75) and
+  % U_3 was (1.15,-0.55) r(1.5,1.3), and the bottom edge of the blob near x = 0 fell outside
+  % all three: at (0,-1.45) the three ellipse values are 1.25, 3.80 and 1.07, all above 1. So
+  % the picture drawn to illustrate an open *cover* left a sliver of X uncovered, in the one
+  % place a reader checking the definition would look. U_1 and U_3 are enlarged below; every
+  % control point of the blob and the whole of its bottom edge now sit inside one of them,
+  % with the worst case (-0.5,1.75) at 0.85.
+  \draw[red!80!black, thick, dotted, fill=red!15, fill opacity=0.35] (-1.1,0.0) ellipse (1.9 and 2.0);
   \node[red!80!black, font=\small] at (-1.75, -1.35) {$U_1$};
 
   \draw[orange!90!black, thick, dotted, fill=orange!20, fill opacity=0.35] (0.5,0.95) ellipse (1.5 and 1.25);
   \node[orange!90!black, font=\small] at (1.35, 1.75) {$U_2$};
 
-  \draw[purple!80!black, thick, dotted, fill=purple!15, fill opacity=0.35] (1.15,-0.55) ellipse (1.5 and 1.3);
+  \draw[purple!80!black, thick, dotted, fill=purple!15, fill opacity=0.35] (0.9,-0.45) ellipse (1.9 and 1.6);
   \node[purple!80!black, font=\small] at (2.1, -1.35) {$U_3$};
 
   \node[below, font=\small] at (0, -2.1) {$X = U_1 \cup U_2 \cup U_3$};

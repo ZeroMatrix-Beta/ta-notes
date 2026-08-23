@@ -31,19 +31,31 @@ this context is also called a \newterm{space} \germanfor{Raum} and which we will
 \end{itemize}
 
 \begin{center}
+% Correction: Claude Opus 5 (High) --- each label used to be drawn in its own ring's hue on
+% that ring's fill (green!60!black on green!25, olive on yellow, and so on). Low contrast in
+% colour and almost none once an e-reader flattens it to grey. Worse, the rings were too thin
+% for their labels: at its old height the green ring is only about 1.0cm of half-width and
+% "Normed vector spaces" needs 1.35, so the label spilled onto the yellow ring and appeared to
+% name the wrong one. The nest is enlarged so every ring is wider than the text it carries, the
+% fills are lighter, and the text is dark (!30!black) rather than mid-tone. The hue distinction
+% now lives in the outlines, where nothing has to be read through it.
 \begin{tikzpicture}
-\fill[red!25] (0,0) ellipse (3.2 and 2.4);
-\fill[yellow!35] (0,-0.1) ellipse (2.4 and 1.8);
-\fill[green!25] (0,-0.2) ellipse (1.6 and 1.2);
-\fill[blue!25] (0,-0.3) ellipse (0.8 and 0.6);
-\draw[red!70!black] (0,0) ellipse (3.2 and 2.4);
-\draw[yellow!70!black] (0,-0.1) ellipse (2.4 and 1.8);
-\draw[green!60!black] (0,-0.2) ellipse (1.6 and 1.2);
-\draw[blue!70!black] (0,-0.3) ellipse (0.8 and 0.6);
-\node[red!70!black] at (0,2.0) {\footnotesize Topological spaces};
-\node[olive!60!black] at (0,1.35) {\footnotesize Metric spaces};
-\node[green!60!black] at (0,0.75) {\footnotesize Normed vector spaces};
-\node[blue!70!black] at (0,-0.3) {\footnotesize Inner product spaces};
+\fill[red!20]    (0, 0.00) ellipse (4.0 and 2.9);
+\fill[yellow!25] (0,-0.15) ellipse (3.1 and 2.2);
+\fill[green!20]  (0,-0.30) ellipse (2.2 and 1.5);
+\fill[blue!20]   (0,-0.45) ellipse (1.2 and 0.8);
+\draw[red!70!black]    (0, 0.00) ellipse (4.0 and 2.9);
+\draw[yellow!70!black] (0,-0.15) ellipse (3.1 and 2.2);
+\draw[green!60!black]  (0,-0.30) ellipse (2.2 and 1.5);
+\draw[blue!70!black]   (0,-0.45) ellipse (1.2 and 0.8);
+% Size goes in `font=', not inline as {\scriptsize ...}: in a multi-line node the inline group
+% closes before the last line's paragraph is set, so `spaces' below came out at the outer size
+% while `Inner product' above it was small.
+\node[text=red!30!black,   font=\footnotesize] at (0, 2.35) {Topological spaces};
+\node[text=olive!30!black, font=\footnotesize] at (0, 1.72) {Metric spaces};
+\node[text=green!25!black, font=\scriptsize]   at (0, 0.85) {Normed vector spaces};
+\node[text=blue!30!black,  font=\scriptsize, align=center] at (0,-0.45)
+  {Inner product\\spaces};
 \end{tikzpicture}
 \end{center}
 

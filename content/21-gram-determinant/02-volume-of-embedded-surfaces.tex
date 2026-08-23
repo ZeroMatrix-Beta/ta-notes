@@ -20,7 +20,15 @@ so the volume is strictly positive.
 
 % Generator: Claude Opus 5 (High) --- FIG-W09-03: 3D embedded surface and Gram area element
 \begin{center}
-\begin{tikzpicture}[>=Latex]
+% Correction: Claude Opus 5 (High) --- every label in the right-hand panel sat directly on the
+% shaded surface, the tangent plane or the green parallelogram, with nothing behind it, so the
+% mesh lines ran straight through the glyphs. Legible enough at 300dpi in colour; on a grey,
+% low-contrast e-reader screen it is not. The `lbl' style below puts a soft white plate behind
+% the text only (text opacity=1 keeps the glyphs solid), which is the standard TikZ idiom and
+% costs nothing in print. Anything drawn over a fill from here on should carry it.
+\begin{tikzpicture}[>=Latex,
+  lbl/.style={fill=white, fill opacity=0.78, text opacity=1, inner sep=1.2pt,
+              rounded corners=1pt}]
 
   % --- Left Panel: Parameter domain V in R^2 ---
   \begin{scope}[xshift=-4.5cm, yshift=0cm, scale=1.15]
@@ -110,12 +118,12 @@ so the volume is strictly positive.
     % Highlight coordinate line v = 0
     \draw[blue!90!black, line width=1.5pt]
       plot[smooth, domain=-1.5:1.5, samples=11] (\x, 0, {0.18*\x*\x + 0.08*\x})
-      node[below left=-1pt, font=\tiny\bfseries, text=blue!90!black] {$\phi(u, v_0)$};
+      node[lbl, below left=0pt, font=\tiny\bfseries, text=blue!90!black] {$\phi(u, v_0)$};
     
     % Highlight coordinate line u = 0
     \draw[purple!90!black, line width=1.5pt]
       plot[smooth, domain=-1.5:1.5, samples=11] (0, \x, {-0.12*\x*\x})
-      node[above right=-1pt, font=\tiny\bfseries, text=purple!90!black] {$\phi(u_0, v)$};
+      node[lbl, above right=0pt, font=\tiny\bfseries, text=purple!90!black] {$\phi(u_0, v)$};
 
     % Point P = phi(x)
     \coordinate (P) at (0, 0, 0);
@@ -130,20 +138,22 @@ so the volume is strictly positive.
       (-0.6, -0.6, -0.05) -- (1.8, -0.6, 0.15) -- (1.8, 1.8, 0.15) -- (-0.6, 1.8, -0.05) -- cycle;
     \draw[gray!60, dashed, thin]
       (-0.6, -0.6, -0.05) -- (1.8, -0.6, 0.15) -- (1.8, 1.8, 0.15) -- (-0.6, 1.8, -0.05) -- cycle;
-    \node[gray!70!black, font=\tiny\bfseries] at (1.7, 1.7, 0.15) {$T_{\phi(x)}S$};
+    % text=, not a bare colour: a bare colour in node options sets `color=', which
+    % overrides the fill=white that `lbl' supplies and paints the plate dark.
+    \node[lbl, text=gray!70!black, font=\tiny\bfseries] at (1.7, 1.7, 0.15) {$T_{\phi(x)}S$};
 
     % Tangent Parallelogram on the tangent plane
     \fill[ThemeGreen!35, opacity=0.85] (P) -- (T1) -- (T12) -- (T2) -- cycle;
     \draw[ThemeGreen!80!black, thick, dashed] (T1) -- (T12) -- (T2);
 
     % Tangent Vectors (bold arrows)
-    \draw[blue!95!black, line width=1.8pt, ->] (P) -- (T1) 
-      node[below right=-1pt, font=\scriptsize\bfseries] {$\partial_1\phi(x)\,du$};
-    \draw[purple!95!black, line width=1.8pt, ->] (P) -- (T2) 
-      node[above left=-1pt, font=\scriptsize\bfseries] {$\partial_2\phi(x)\,dv$};
+    \draw[blue!95!black, line width=1.8pt, ->] (P) -- (T1)
+      node[lbl, below right=0pt, font=\scriptsize\bfseries] {$\partial_1\phi(x)\,du$};
+    \draw[purple!95!black, line width=1.8pt, ->] (P) -- (T2)
+      node[lbl, above left=0pt, font=\scriptsize\bfseries] {$\partial_2\phi(x)\,dv$};
 
     % Point P dot
-    \fill[black] (P) circle (2.2pt) node[below left=2pt, font=\scriptsize\bfseries] {$\phi(x)$};
+    \fill[black] (P) circle (2.2pt) node[lbl, below left=2pt, font=\scriptsize\bfseries] {$\phi(x)$};
 
     % Normal vector
     \coordinate (N) at (0, 0, 1.1);

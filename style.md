@@ -431,6 +431,40 @@ does not help and thin in the places it does.
 * **Theorem Environment Spacing:** All theorem-like environments use `\customenvspace` (`2.0ex plus 0.5ex minus 0.2ex`) for above and below spacing.
 * **Line Spread:** Line spread is configured to `\linespread{1.05}` across the entire document.
 
+* ⚠️ **Draw order is paint order, and the reader may not be looking at a bright screen.**
+  Added 2026-08-23 on the user's instruction, who reads the PDF on an e-reader. TikZ paints in
+  source order, so anything emitted after a `\fill` lands on top of it and anything emitted
+  before is buried. Two consequences worth designing for:
+
+  - **A label that sits on a shaded region needs a plate behind it.** Declare the style once in
+    the picture's options and hang it on every such node:
+
+    ```latex
+    \begin{tikzpicture}[>=Latex,
+      lbl/.style={fill=white, fill opacity=0.8, text opacity=1, inner sep=1.2pt,
+                  rounded corners=1pt}]
+      ...
+      \node[lbl, font=\scriptsize] at (1.3,0.81) {$z_B$};
+    ```
+
+    `fill opacity` softens the plate while `text opacity=1` keeps the glyphs solid. Without it
+    the mesh lines of a shaded surface run straight through the characters — legible at 300 dpi
+    in colour, mud on a grey screen. The surface figure in `21-gram-determinant/` had six such
+    labels and is the worked example.
+
+    ⚠️ **Colour such a node with `text=`, never with a bare colour name.** A bare colour in node
+    options sets `color=`, which sets the draw, text *and fill* colour at once — so
+    `node[lbl, gray!70!black]` overrides the `fill=white` and paints a **dark plate with pale
+    text on it**. Write `node[lbl, text=gray!70!black]`. This bit three labels the first time the
+    style was applied, and the build says nothing: it is only visible on the rendered page.
+  - **Never carry a distinction in hue alone.** E-ink renders the whole palette as near-identical
+    greys, so red-versus-orange says nothing. Pair every colour contrast with a second channel —
+    dashed against solid, thick against thin, or a label. The $\varepsilon$-net figure in
+    `07-compactness/` does this correctly: solid blue boundary, dashed orange cover.
+
+  `tools/audit.py` ranks pictures by how many unbacked labels sit in a picture that fills, but it
+  cannot tell whether a given label actually lands on the fill. **Look at the page.**
+
 * **Commutative Diagrams:** Always use the `tikz-cd` package for commutative diagrams.
 * **Coordinate Calculations:** In TikZ `\draw` and `\node` coordinates, unbraced math expressions containing commas or operations will fail to parse (e.g., `at (2.6, 1.0 + 0.3*sin(...))`). Always enclose coordinate math expressions in curly braces `{}` (e.g., `at (2.6, {1.0 + 0.3*sin(...)})`) or pre-calculate the numeric coordinate (e.g., `at (2.6, 1.06)`).
 * **Multi-line Node Text:** `\node[align=center] {Line 1\\Line 2}` is fine and is what this

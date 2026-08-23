@@ -280,7 +280,66 @@ for f in FILES:
                 unknown.append(f"{rel(f)}:{i}  '{name}' is not a colour this document defines")
 report("tikz option naming a colour that does not exist", unknown)
 
-# ---------------------------------------------------------- E. build log ----
+# ------------------------------------------- E. labels sitting on a fill ----
+# Draw order is paint order: a label emitted over a shaded region with nothing
+# behind it has the fill's mesh lines running through its glyphs. Readable at
+# 300dpi in colour, mud on an e-reader. This can only rank suspects -- whether a
+# given label actually lands on the fill needs an eye on the page -- so it is
+# informational. See the draw-order rule in style.md for the `lbl` idiom.
+risky = []
+for f in FILES:
+    text = TEXT[f]
+    for m in re.finditer(r"\\begin\{tikzpicture\}", text):
+        end = text.find(r"\end{tikzpicture}", m.start())
+        body = text[m.start():end if end != -1 else len(text)]
+        line = text[:m.start()].count("\n") + 1
+        # A tint under ~15% is as good as white behind text, so it is not a risk.
+        def solid(opt):
+            if "white" in opt:
+                return False
+            t = re.search(r"!(\d+)", opt)
+            return not t or int(t.group(1)) >= 15
+        # A \fill whose whole path is a few-pt circle is a point marker, not a
+        # region, and nothing is ever written on top of it.
+        fills = [o for o, path in re.findall(r"\\fill\[([^\]]*)\]([^;]*);", body)
+                 if solid(o) and not re.fullmatch(
+                     r"\s*\(?[^)]*\)?\s*circle\s*\(\s*[0-3](\.\d+)?\s*pt\s*\)\s*", path)]
+        fills += [o for o in re.findall(r"fill=([A-Za-z!0-9]+)", body) if solid(o)]
+        bare = [t for o, t in re.findall(r"node\s*\[([^\]]*)\]\s*\{([^}]+)\}", body)
+                if t.strip() and "fill=" not in o and "lbl" not in o]
+        if fills and len(bare) >= 4 and len(fills) * len(bare) >= 40:
+            risky.append(f"{rel(f)}:{line}  {len(fills)} fills, {len(bare)} unbacked "
+                         f"labels  e.g. {bare[:3]}")
+report("picture that fills, with several labels carrying no backing plate",
+       sorted(risky), informational=True)
+
+# A bare colour name in node options sets `color=', which sets fill as well as
+# text -- so it silently cancels the fill=white a backing style supplies and
+# paints a dark plate. Nothing in the build complains.
+plate = []
+for f in FILES:
+    for i, raw in enumerate(TEXT[f].split("\n"), 1):
+        line = code(raw)
+        for m in re.finditer(r"node\s*\[([^\]]*)\]", line):
+            o = m.group(1)
+            toks = [t.strip() for t in o.split(",")]
+            # Options apply left to right, so a bare colour only does damage when
+            # it comes *after* the thing that set fill=white.
+            at = [j for j, t in enumerate(toks) if t == "lbl" or t.startswith("fill=white")]
+            if not at:
+                continue
+            for tok in toks[at[0] + 1:]:
+                if re.fullmatch(r"[a-zA-Z]+(!\d+(!\w+)?)*", tok) and tok not in (
+                        "lbl", "midway", "above", "below", "left", "right", "center",
+                        "thick", "thin", "draw", "fill", "anchor", "align", "white"):
+                    if re.match(r"^(black|white|gray|red|blue|green|orange|purple|cyan|"
+                                r"magenta|yellow|brown|violet|teal|olive|lime|pink|"
+                                r"[A-Z][A-Za-z]+)(!|$)", tok):
+                        plate.append(f"{rel(f)}:{i}  '{tok}' is a bare colour on a "
+                                     f"plated node -- use text={tok}")
+report("bare colour on a backed node (repaints the plate)", plate)
+
+# ---------------------------------------------------------- F. build log ----
 for logname in ("check.log", "main.log"):
     log = ROOT / logname
     if not log.exists():

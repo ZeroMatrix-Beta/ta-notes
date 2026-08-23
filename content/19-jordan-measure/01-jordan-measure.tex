@@ -235,7 +235,13 @@ construction stacks columns over dyadic cubes instead of intervals:
   \draw[thick, red!80!black, fill=red!20, opacity=0.8] (2.5,0,0.5) -- (2.5,0.8,0.5) -- (2.5,0.8,1.5) -- (2.5,0,1.5) -- cycle;
   \draw[thick, red!80!black, fill=red!30, opacity=0.8] (1.5,0.8,0.5) -- (2.5,0.8,0.5) -- (2.5,0.8,1.5) -- (1.5,0.8,1.5) -- cycle;
 
-  \node[font=\small, align=left] at (5, 1, 1) {Integral of a\\dyadic step function:\\sum of column volumes};
+  % Correction: Claude Opus 5 (High) --- this node was centred at (5,1,1), and a centred
+  % three-line box is about 3.4cm wide, so its left half reached back over the end of the
+  % $y$ axis: the axis label landed between "sum" and "of" and the arrow ran into the text.
+  % Font size does not follow `scale', so the box was wider than the coordinates suggest.
+  % Anchored west and lifted clear instead, which cannot drift back over the axis.
+  \node[font=\small, align=left, anchor=west] at (4.0, 1.5, 0)
+    {Integral of a\\dyadic step function:\\sum of column volumes};
 \end{tikzpicture}
 \end{center}
 

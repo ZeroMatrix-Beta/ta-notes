@@ -409,12 +409,16 @@ $x^2+y^2+z^2=8$ and $2z=x^2+y^2$.
 % only since 2026-08-09, when ainote gained its own counter; the solution used to say
 % "see the \texttt{ainote} above", which leaked a LaTeX environment name into the typeset text.
 \begin{ainote}[Corsin's hint is spherical, not cylindrical]
-\label{note:9.1_coordinates_mislabelled}
+% Correction: Claude Opus 5 (High) --- was note:9.1_coordinates_mislabelled. The 2026-08-23
+% label sweep matched only digits straight after the colon, so this one and ex:solution_9.1
+% survived it; the slug now says what the note is about, as the rule requires.
+\label{note:corsin_hint_spherical_not_cylindrical}
 Corsin labels the formula above \qt{cylindrical coordinates}, but $(r\sin\theta\cos\varphi$, $r\sin\theta\sin\varphi$, $r\cos\theta)$ is the \textbf{spherical} parametrization, and his
 range $\theta \in (-\pi/2,\pi/2)$ has been corrected to $(0,\pi)$, the range on which
 $\theta \mapsto \cos\theta$ actually covers $[-1,1]$ bijectively (already logged in \cref{ex:spherical_coordinates_diffeomorphism}). The mislabelling is doubly worth noting here, since the official sheet's own hint
 recommends \emph{cylindrical} coordinates $(r,\theta,z)$, and that is in fact the more
-natural choice for this problem, as the solution on \cpageref{ex:solution_9.1} does: both surfaces are
+natural choice for this problem, as the solution on \cpageref{sol:paraboloid_hypersurface_volume}
+does: both surfaces are
 surfaces of revolution about the $z$-axis, which cylindrical coordinates respect directly,
 whereas spherical coordinates mix $r$ and $\theta$ into both defining equations.
 \end{ainote}
@@ -510,7 +514,11 @@ for the torus swept by a tube of radius $r$ at distance $R$ from the axis.
   \end{scope}
 
   % --- 3. Cross section view (rz-plane) ---
-  \begin{scope}[xshift=10.5cm]
+  % Correction: Claude Opus 5 (High) --- was xshift=10.5cm with the axis running to 2.4, which
+  % put the $x,y$ label past the text block: the one Overfull \hbox in the document (13.99pt,
+  % reported against this picture's closing lines). Panel pulled in and its axis shortened;
+  % 2.1 still clears the tube circle, whose right edge is at 2.0.
+  \begin{scope}[xshift=10.0cm]
     \node[font=\small\bfseries, text=TextBoldColor] at (0, 2.8) {Cross-section};
     
     \coordinate (C) at (1.4, 0);
@@ -518,7 +526,7 @@ for the torus swept by a tube of radius $r$ at distance $R$ from the axis.
     \draw[blue!90!black, thick] (C) circle (0.6);
     
     % Axes (drawn on top)
-    \draw[->, thick, gray!60] (-1.5, 0) -- (2.4, 0) node[right, font=\scriptsize, text=black] {$x,y$};
+    \draw[->, thick, gray!60] (-1.5, 0) -- (2.1, 0) node[right, font=\scriptsize, text=black] {$x,y$};
     \draw[->, thick, gray!60] (0, -1.2) -- (0, 1.8) node[above, font=\scriptsize, text=black] {$z$};
 
     \draw[->, orange!95!black, thick] (C) -- ++(50:0.6) node[pos=0.7, above left=-2pt, font=\scriptsize] {$r$};

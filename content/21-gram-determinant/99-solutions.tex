@@ -75,9 +75,12 @@ mathematics. It is kept here because the gap is more instructive than the comput
 % exercisesolution wraps `proof`, which has no counter, so a \label inside it is silently
 % misattributed to the last-stepped ambient counter: \cref printed "Section 21.e" here until
 % 2026-08-09. Page references are unaffected and are the documented workaround in style.md.
-\label{ex:solution_9.1}
+% Correction: Claude Opus 5 (High) --- a second anchor, \label{ex:solution_9.1}, stood here:
+% numeric, and prefixed ex: on an exercisesolution. It duplicated the sol: label above, which
+% the one \cpageref that used it now points at instead.
 % Generator: Claude Sonnet 5 (Medium)
-Following the official hint rather than Corsin's (\cref{note:9.1_coordinates_mislabelled}), we use
+Following the official hint rather than Corsin's
+(\cref{note:corsin_hint_spherical_not_cylindrical}), we use
 cylindrical coordinates $(x,y,z) = (r\cos\theta,r\sin\theta,z)$, under which $x^2+y^2=r^2$.
 The two bounding surfaces become $r^2+z^2=8$ and $z = r^2/2$; intersecting them,
 \[z^2+2z-8 = 0 \quad\Longrightarrow\quad z = 2 \text{ or } z=-4,\]

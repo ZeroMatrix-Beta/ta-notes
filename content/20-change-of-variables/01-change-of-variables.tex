@@ -66,7 +66,10 @@ From linear algebra, we know that for a linear map given by a matrix $L$, the ab
     \draw[->, thick, blue] (O) -- (V1) node[above left, font=\scriptsize, text=black] {$\left(\begin{smallmatrix} 2 \\ 1 \end{smallmatrix}\right)$};
     \draw[->, thick, blue] (O) -- (V2) node[below left, font=\scriptsize, text=black] {$\left(\begin{smallmatrix} 3 \\ -1 \end{smallmatrix}\right)$};
     
-    \node[blue, align=center, font=\small] at (2.5, -1.5) {Area is $\lvert\det L\rvert = 5$\\ times larger};
+    % Correction: Claude Opus 5 (High) --- this caption sat at (2.5,-1.5), which is where the
+    % `below left' label of V2 = (3,-1) also lands, so the column vector printed on top of
+    % "Area is |det L| = 5". Dropped clear of it; nothing else lies below the parallelogram.
+    \node[blue, align=center, font=\small] at (2.5, -2.1) {Area is $\lvert\det L\rvert = 5$\\ times larger};
   \end{scope}
 \end{tikzpicture}
 \end{center}

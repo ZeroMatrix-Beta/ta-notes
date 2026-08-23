@@ -52,14 +52,24 @@ finite slope $L$ can dominate it.
 
 % Sonnet 5 (Medium)
 \begin{center}
-\begin{tikzpicture}[scale=1.0]
+% Correction: Claude Opus 5 (High) --- each ring label was drawn straight over its own circle
+% and cut in half by it. "uniformly cont." is about 2.2cm wide, so at y = -1.2 its ends reach
+% x = +-1.1, and the r = 1.5 circle passes through y = -1.2 at x = +-0.9: the arc crossed the
+% text's centre line. Same for "continuous" against the r = 2.2 circle. A label near the foot
+% of a circle is always at risk of this, because the arc curves up into it, so rather than
+% hunt for a height that happens to work, the labels now carry a white plate that masks the
+% arc behind the glyphs -- the `lbl' idiom recorded in style.md.
+\begin{tikzpicture}[scale=1.0,
+  lbl/.style={fill=white, fill opacity=0.85, text opacity=1, inner sep=1.2pt,
+              rounded corners=1pt}]
   \draw[blue!70!black, thick] (0,0) circle (2.2);
-  \node[blue!70!black, font=\small] at (0,-1.9) {continuous};
+  \node[lbl, text=blue!70!black, font=\small] at (0,-1.9) {continuous};
   \draw[orange!90!black, thick] (0,0) circle (1.5);
-  \node[orange!90!black, font=\small] at (0,-1.2) {uniformly cont.};
+  \node[lbl, text=orange!90!black, font=\small] at (0,-1.2) {uniformly cont.};
   \draw[purple, thick] (0,0) circle (0.8);
-  \node[purple, font=\small] at (0,0) {Lipschitz};
-  \fill[orange!90!black] (1.1,0.9) circle (1.5pt) node[right, font=\scriptsize] {$\sqrt{x}$};
+  \node[text=purple, font=\small] at (0,0) {Lipschitz};
+  \fill[orange!90!black] (1.1,0.9) circle (1.5pt)
+    node[lbl, right=1pt, text=orange!90!black, font=\scriptsize] {$\sqrt{x}$};
 \end{tikzpicture}
 \end{center}
 

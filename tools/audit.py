@@ -339,6 +339,37 @@ for f in FILES:
                                      f"plated node -- use text={tok}")
 report("bare colour on a backed node (repaints the plate)", plate)
 
+# TikZ paints in source order, so an area fill written after a text node lands on
+# top of it. That is how the $e_3$ label of the tangent-plane figure in ch. 17
+# ended up washed out under a half-transparent plane. Informational: a fill after
+# a label is often perfectly deliberate (the label sits elsewhere in the picture).
+buried = []
+AREA = re.compile(r"\\(?:fill|filldraw)\[([^\]]*)\]([^;]*);|\\draw\[([^\]]*\bfill=[^\]]*)\]")
+for f in FILES:
+    text = TEXT[f]
+    for m in re.finditer(r"\\begin\{tikzpicture\}", text):
+        end = text.find(r"\end{tikzpicture}", m.start())
+        body = text[m.start():end if end != -1 else len(text)]
+        line0 = text[:m.start()].count("\n") + 1
+        nodes = [n.start() for n in re.finditer(r"node\s*\[[^\]]*\]\s*\{[^}]+\}", body)]
+        if not nodes:
+            continue
+        first_node = min(nodes)
+        for a in AREA.finditer(body):
+            opts = a.group(1) or a.group(3) or ""
+            path = a.group(2) or ""
+            if "white" in opts or not solid(opts):
+                continue
+            if re.search(r"circle\s*\(\s*[0-3](\.\d+)?\s*pt\s*\)", path):
+                continue          # point marker, covers nothing
+            if a.start() > first_node:
+                ln = line0 + body[:a.start()].count("\n")
+                buried.append(f"{rel(f)}:{ln}  area fill after a label -- check the "
+                              f"label is not under it  [{opts.strip()[:38]}]")
+                break
+report("area fill drawn after a text node (paints over it)", sorted(buried),
+       informational=True)
+
 # ---------------------------------------------------------- F. build log ----
 for logname in ("check.log", "main.log"):
     log = ROOT / logname

@@ -341,7 +341,12 @@ Note that here, our partition of unity simply was the identity (since the parame
   \draw[very thick, green!60!black] (1.5,-0.5) circle (0.8);
   \node[green!60!black] at (2.3,-1.2) {$B_{r_2}(p_2)$};
   
-  \node[right, font=\footnotesize, align=left, text=green!60!black] at (2.5, -0.3) {
+  % Correction: Claude Opus 5 (High) --- this block sat at (2.5,-0.3). It is eight lines, so
+  % about 2.8cm tall, and `right' centres it vertically on that point: its last line came down
+  % to the height of the $B_{r_2}(p_2)$ label above and overlapped it, printing "whole
+  % submanifold." across the label. Node text does not follow `scale=1.5', so the block is
+  % wider and taller than the coordinates suggest. Shifted right to clear the label.
+  \node[right, font=\footnotesize, align=left, text=green!60!black] at (2.9, -0.3) {
     and $\eta_\ell(x)$ is defined such\\
     that when we integrate\\
     in each ball separately\\

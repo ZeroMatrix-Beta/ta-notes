@@ -465,6 +465,16 @@ does not help and thin in the places it does.
   `tools/audit.py` ranks pictures by how many unbacked labels sit in a picture that fills, but it
   cannot tell whether a given label actually lands on the fill. **Look at the page.**
 
+* ⚠️ **Every picture that draws an arrow sets `>=Latex` in its own option list.**
+  Written down 2026-08-24, having been the de-facto convention in 77 of the 112 pictures and
+  unenforced in the other 15. `\begin{tikzpicture}[>=Latex, scale=1.2]`, not
+  `\begin{tikzpicture}[scale=1.2]`. Omitting it is silent — nothing in the build has an opinion
+  about arrow tips — and TikZ falls back to its default `to` tip, a thin curved barb. Two costs:
+  it does not match the solid triangles the rest of the document uses, and its barbs splay wider
+  as the line thickens, so on a `very thick` path it prints as a **trident with a spike through
+  it**. That is how the outward-spiral figure in `appendix-a-odes.tex` was found — the picture
+  next to it set `>=Latex` and looked right, which is what made the difference visible.
+  `tools/audit.py` now checks this.
 * **Commutative Diagrams:** Always use the `tikz-cd` package for commutative diagrams.
 * **Coordinate Calculations:** In TikZ `\draw` and `\node` coordinates, unbraced math expressions containing commas or operations will fail to parse (e.g., `at (2.6, 1.0 + 0.3*sin(...))`). Always enclose coordinate math expressions in curly braces `{}` (e.g., `at (2.6, {1.0 + 0.3*sin(...)})`) or pre-calculate the numeric coordinate (e.g., `at (2.6, 1.06)`).
 * **Multi-line Node Text:** `\node[align=center] {Line 1\\Line 2}` is fine and is what this

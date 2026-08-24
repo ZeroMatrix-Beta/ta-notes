@@ -280,6 +280,34 @@ for f in FILES:
                 unknown.append(f"{rel(f)}:{i}  '{name}' is not a colour this document defines")
 report("tikz option naming a colour that does not exist", unknown)
 
+# --------------------------------- D2. arrows drawn with no arrow tip set ----
+# The house tip is `>=Latex`, set in the picture's own option list -- 77 of the
+# 112 pictures set it, and it is what style.md's worked example uses. A picture
+# that omits it and still draws `->` silently falls back to TikZ's default `to`
+# tip, a thin curved barb whose barbs splay wider as the line gets thicker: on a
+# `very thick` path it prints as a trident with a spike through it, which is how
+# the outward-spiral figure in appendix A was found. Nothing in the build has an
+# opinion about arrow tips, so this drifted to 15 pictures unnoticed.
+BEGIN_PIC = re.compile(r"\\begin\{tikzpicture\}(\[[^\]]*\])?")
+ARROW_OPT = re.compile(r"\[[^\]]*<?-+>")
+tipless = []
+for f in FILES:
+    text = "\n".join(code(l) for l in TEXT[f].split("\n"))
+    for m in BEGIN_PIC.finditer(text):
+        opts = m.group(1) or ""
+        if ">=" in opts:
+            continue
+        end = text.find("\\end{tikzpicture}", m.end())
+        body = text[m.end(): end if end != -1 else m.end() + 6000]
+        n = len(ARROW_OPT.findall(body))
+        if n:
+            i = text[:m.start()].count("\n") + 1
+            heavy = " (and a very/ultra thick path)" if "very thick" in body \
+                or "ultra thick" in body else ""
+            tipless.append(f"{rel(f)}:{i}  {n} arrow spec(s), no >= in the "
+                           f"picture's options{heavy}")
+report("picture drawing arrows without the >=Latex tip", tipless)
+
 # ------------------------------------------- E. labels sitting on a fill ----
 # Draw order is paint order: a label emitted over a shaded region with nothing
 # behind it has the fill's mesh lines running through its glyphs. Readable at

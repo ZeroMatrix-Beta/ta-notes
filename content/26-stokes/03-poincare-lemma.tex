@@ -30,17 +30,31 @@ closed loop in $U$ can be continuously contracted to a point within $U$.
 
 % Supplement: Sascha Brack/Class Notes/Week_12_Notes_Monday.pdf, p. 7
 \begin{center}
-\begin{tikzpicture}[scale=1.5]
+% Correction: Claude Opus 5 (High) --- five nested arcs, and every label sat in a GAP between
+% two of them (`above' for the top two, `below' for the rest), so no label was attached to the
+% arc it names: gamma_{0.25} read as labelling gamma_0's arc from underneath, and the gamma_1
+% arc printed straight through the word gamma_{0.75}. Each label now sits ON its own arc with
+% the white plate from style.md, which both breaks the line it belongs to -- the standard way
+% to name a family of curves -- and stops any other arc printing through it.
+%
+% The floating $H(0,\cdot) = \gamma_0$ off at (-0.5,0.5) named nothing in particular and
+% duplicated the gamma_0 already on the arc. Folded into that arc's own label, which makes it
+% symmetric with the $\gamma_1 = H(1,\cdot)$ the bottom arc already carried.
+% Note the plate here is fully opaque, unlike the softened one style.md gives for labels over a
+% shaded region. What sits behind these labels is a `thick' black arc, and at 0.85 the remaining
+% 15% printed as a clear grey stroke across the glyphs -- exactly the mud the plate is meant to
+% prevent. A clean break in the line is also how a contour is normally named.
+\begin{tikzpicture}[scale=1.5,
+  lbl/.style={fill=white, text opacity=1, inner sep=1.5pt}]
   \node[circle, fill=blue, inner sep=1.5pt, label=left:{$x_0$}] (x0) at (0,0) {};
   \node[circle, fill=blue, inner sep=1.5pt, label=right:{$x_1$}] (x1) at (3,0.5) {};
-  
-  \draw[thick] (x0) to[out=60, in=150] node[pos=0.5, above] {$\gamma_0$} (x1);
-  \draw[thick] (x0) to[out=40, in=170] node[pos=0.5, above] {$\gamma_{0.25}$} (x1);
-  \draw[thick] (x0) to[out=10, in=200] node[pos=0.5, below] {$\gamma_{0.5}$} (x1);
-  \draw[thick] (x0) to[out=-20, in=220] node[pos=0.5, below] {$\gamma_{0.75}$} (x1);
-  \draw[thick] (x0) to[out=-40, in=240] node[pos=0.5, below] {$\gamma_1 = H(1,\cdot)$} (x1);
-  \node at (-0.5, 0.5) {$H(0,\cdot) = \gamma_0$};
-  
+
+  \draw[thick] (x0) to[out=60, in=150] node[lbl, pos=0.5] {$\gamma_0 = H(0,\cdot)$} (x1);
+  \draw[thick] (x0) to[out=40, in=170] node[lbl, pos=0.5] {$\gamma_{0.25}$} (x1);
+  \draw[thick] (x0) to[out=10, in=200] node[lbl, pos=0.5] {$\gamma_{0.5}$} (x1);
+  \draw[thick] (x0) to[out=-20, in=220] node[lbl, pos=0.5] {$\gamma_{0.75}$} (x1);
+  \draw[thick] (x0) to[out=-40, in=240] node[lbl, pos=0.5] {$\gamma_1 = H(1,\cdot)$} (x1);
+
   \node[blue, align=left, font=\small] at (4, -0.2) {We try to \textbf{reshape}\\the path continuously from\\$\gamma_0$ to $\gamma_1$.};
 \end{tikzpicture}
 \end{center}

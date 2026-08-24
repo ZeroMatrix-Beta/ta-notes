@@ -41,7 +41,7 @@ cannot reach, namely that a diffeomorphism close to the identity cannot let a cu
 From linear algebra, we know that for a linear map given by a matrix $L$, the absolute value of its determinant $\lvert\det L\rvert$ describes how much the map scales volumes. For example, the map $L = \left(\begin{smallmatrix} 2 & 3 \\ 1 & -1 \end{smallmatrix}\right)$ expands areas by a factor of $\lvert\det L\rvert = \lvert-2 - 3\rvert = 5$.
 
 \begin{center}
-\begin{tikzpicture}[scale=0.8]
+\begin{tikzpicture}[>=Latex, scale=0.8]
   % Left side: Unit square
   \draw[->, gray] (-0.5, 0) -- (2, 0);
   \draw[->, gray] (0, -0.5) -- (0, 2);
@@ -91,7 +91,7 @@ We use polar coordinates, but strictly following \cref{thm:change_of_variables},
 \]
 
 \begin{center}
-\begin{tikzpicture}[scale=1]
+\begin{tikzpicture}[>=Latex, scale=1]
   % Left side: (r, phi) plane
   \draw[->, gray] (-0.2, 0) -- (2.5, 0) node[right, font=\scriptsize, text=black] {$r$};
   \draw[->, gray] (0, -0.2) -- (0, 2) node[above, font=\scriptsize, text=black] {$\varphi$};

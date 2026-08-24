@@ -171,7 +171,7 @@ $B := \left(\begin{smallmatrix}0&-1\\1&0\end{smallmatrix}\right)$ is the generat
 the same rotation as before, now with an exponentially growing radius. The trajectory is an
 outward spiral.
 \begin{center}
-\begin{tikzpicture}[scale=1.0]
+\begin{tikzpicture}[>=Latex, scale=1.0]
   \draw[->] (-2.0,0) -- (2.0,0);
   \draw[->] (0,-1.8) -- (0,1.8);
   % \x runs in degrees (TikZ convention), so the growth-rate constant is calibrated per
@@ -211,7 +211,7 @@ rotation combined with the radial approach to $r=1$: trajectories starting outsi
 circle spiral in, and those starting inside spiral out, both converging to the same circular
 orbit.
 \begin{center}
-\begin{tikzpicture}[scale=1.3]
+\begin{tikzpicture}[>=Latex, scale=1.3]
   \draw[gray!60, thick, dashed] (0,0) circle (1);
   \node[gray!60!black, font=\footnotesize] at (0.75,0.75) {$r=1$};
   \draw[red!80!black, thick, ->, domain=0:620, samples=140, smooth]

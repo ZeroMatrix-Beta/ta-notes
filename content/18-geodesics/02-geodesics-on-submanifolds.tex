@@ -123,7 +123,8 @@ the pole.
 %   c''  -> (-0.18, 0.96);  normal -> (-0.576, 0.432);  tangential -> (-0.884, 1.488).
 % The whole point of the figure is that the last of these is not p itself.
 \begin{center}
-\begin{tikzpicture}[>=Latex, scale=1.05]
+\begin{tikzpicture}[>=Latex, scale=1.05,
+  lbl/.style={fill=white, fill opacity=0.8, text opacity=1, inner sep=1.2pt}]
   % ---- LEFT: a great circle. Its acceleration points at the centre. ----
   \begin{scope}
     \draw[gray!55] (0,0) circle (1.6);
@@ -152,7 +153,12 @@ the pole.
     \draw[gray!55, dotted] (-0.576,0.432) -- (-0.18,0.96);
     \draw[gray!55, dotted] (-0.884,1.488) -- (-0.18,0.96);
     \draw[gray!50!black, dashed, ->] (-1.28,0.96) -- (-0.576,0.432);
-    \node[gray!45!black, font=\scriptsize, anchor=north west] at (-0.62,0.40) {normal};
+    % Correction: Claude Opus 5 (High) --- the dotted radial guide above runs from p through the
+    % centre, and the normal arrow lies ALONG it, so any label naming that arrow sits on the
+    % guide's continuation: the dotted line printed through the word. Moving it does not help --
+    % the free space beside the arrow is exactly where the guide goes -- so it takes the white
+    % plate from style.md. `text=' rather than a bare colour, or the fill would be repainted.
+    \node[lbl, text=gray!45!black, font=\scriptsize, anchor=north west] at (-0.62,0.40) {normal};
     \draw[OliveGreen, very thick, ->] (-1.28,0.96) -- (-0.884,1.488);
     \draw[red!75!black, thick, ->] (-1.28,0.96) -- (-0.18,0.96);
     \node[red!75!black, font=\scriptsize, anchor=west] at (-0.12,0.96) {$c''$};

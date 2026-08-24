@@ -86,7 +86,7 @@ Similar to the 1D Riemann integral, we approximate the volume of a set $E \subse
 Furthermore, the multidimensional integral of a non-negative function $f : A \to \mathbb{R}$ is exactly the $(n+1)$-dimensional Jordan measure (volume) of its hypograph $\Gamma_A(f)$:
 
 \begin{center}
-\begin{tikzpicture}[scale=1.2]
+\begin{tikzpicture}[>=Latex, scale=1.2]
   % axes
   \draw[->, thick] (0,0,0) -- (3,0,0) node[right] {$y$};
   \draw[->, thick] (0,0,0) -- (0,2.5,0) node[above] {$z = f(x,y)$};
@@ -216,7 +216,7 @@ exactly the rise of $f$ across it, and those rises telescope. In $\mathbb{R}^n$ 
 construction stacks columns over dyadic cubes instead of intervals:
 
 \begin{center}
-\begin{tikzpicture}[scale=0.9]
+\begin{tikzpicture}[>=Latex, scale=0.9]
   % axes
   \draw[->, gray] (0,0,0) -- (3.5,0,0) node[right, text=black] {$y$};
   \draw[->, gray] (0,0,0) -- (0,2.5,0) node[above, text=black] {$z = g(x,y)$};

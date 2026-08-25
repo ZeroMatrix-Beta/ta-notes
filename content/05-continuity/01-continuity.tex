@@ -101,7 +101,15 @@ precisely that $d_X(x_0,x)<\delta$ implies $d_Y(f(x_0),f(x))<\varepsilon$.
   % Anchored below the dot and inside the blob. Anchored east it extended leftwards across the
   % blob's own outline at x = 3.55, so the label sat half in and half out of the region it names.
   \node[BrickRed!80, font=\scriptsize, anchor=north] at (3.95,-0.04) {$f(x_0)$};
-  \node[OliveGreen, font=\scriptsize, anchor=north west] at (4.35,-0.35)
+  % Correction: Claude Opus 5 (Max) --- anchored north west at (4.35,-0.35), this label occupied
+  % roughly x = 4.35 to 5.65 at heights -0.35 to -0.65, and the $\varepsilon$-ball (centre
+  % (3.95,0.05), radius 0.78) passes x = 4.62 at y = -0.35 and x = 4.35 at y = -0.62: the red
+  % circle cut a diagonal straight across the label's opening glyphs. Nowhere inside the ball
+  % takes it -- a 1.3cm box does not fit between the green blob's edge and the arc anywhere --
+  % so it goes below the ball, where the gap down to $Y$'s own lower edge (about y = -1.45 at
+  % this abscissa) is clear, with a leader back to the region it names.
+  \draw[OliveGreen, thin] (3.95,-0.87) -- (3.95,-0.50);
+  \node[OliveGreen, font=\scriptsize, anchor=north] at (3.95,-0.85)
     {$f\big(B_\delta(x_0)\big)$};
 \end{tikzpicture}
 \end{center}

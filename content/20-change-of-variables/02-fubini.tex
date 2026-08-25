@@ -82,10 +82,21 @@ For any $t \in [0,1]$, the cross-section of $C\Omega$ at height $t$ is $(C\Omega
   \draw[very thick, green!50!black] (0.355, 1.0) -- (1.155, 1.0);
   \fill[green!50!black] (0.355, 1.0) circle (1.4pt);
   \fill[green!50!black] (1.155, 1.0) circle (1.4pt);
-  \node[green!50!black, font=\scriptsize, above] at (0.75, 1.05) {$(1-t)\Omega$};
+  % Correction: Claude Opus 5 (Max), found by rendering p.286 --- centred at (0.75,1.05) this
+  % 0.75-unit box ran from x = 0.375, and the cone's left edge passes x = 0.333 at that height
+  % and x = 0.30 just above it: the blue side printed through "$(1-$". There is no room to
+  % centre it higher either, since the cone narrows -- at y = 1.05 the whole section is only
+  % 0.82 units across. Set outside the cone, past the right-hand end of the section it names
+  % (the cone's right edge is at x = 1.069 at the box's floor).
+  \node[green!50!black, font=\scriptsize, anchor=south west] at (1.20, 1.04) {$(1-t)\Omega$};
 
-  \node[font=\scriptsize, left] at (0, 1.0) {$t$};
-  \node[font=\scriptsize, left] at (0, 0.0) {$0$};
+  % Correction: Claude Opus 5 (Max) --- both of these were struck through by a line. `$t$' sat
+  % `left' at (0,1.0), centred on y = 1.0, and the dashed cross-section guide runs (-0.3,1.0) to
+  % (2.8,1.0) straight through it; `$0$' sat `left' at (0,0) with the $x$ axis running from
+  % (-0.5,0) through it. Same fault and same repair as the struck-through zero in the convexity
+  % figure of ch. 14: set each off the corner, where both lines are clear of it.
+  \node[font=\scriptsize, anchor=south east] at (-0.10, 1.04) {$t$};
+  \node[font=\scriptsize, anchor=north east] at (-0.10, -0.06) {$0$};
 
 \end{tikzpicture}
 \end{center}

@@ -105,7 +105,13 @@ $\{x \in \mathbb{R}^n : |x|^2=R^2\}$ is a submanifold of dimension $n-1$ for $n 
   \draw[->] (-1.7,0) -- (1.7,0) node[right, font=\small] {$x$};
   \draw[->] (0,-1.7) -- (0,1.7) node[above, font=\small] {$y$};
   \draw[blue!70!black, thick] (0,0) circle (1.3);
-  \node[blue!70!black, font=\small] at (1.05,1.05) {$F^{-1}\{R^2\}$};
+  % Correction: Claude Opus 5 (Max) --- this label was centred at (1.05,1.05), on the 45-degree
+  % ray, and the gradient arrow below runs (0.92,0.92) to (1.47,1.47) along that same ray. TikZ
+  % paints in source order and the arrow comes after, so the thick orange arrow was drawn
+  % straight through the name of the curve it is normal to. Moved to the upper left, where the
+  % circle at the label's own heights (y = 0.92 to 1.19) reaches only x = -0.92, half a unit
+  % clear of the box's right edge.
+  \node[blue!70!black, font=\small, anchor=east] at (-1.42,1.05) {$F^{-1}\{R^2\}$};
   \coordinate (Q) at (0.92,0.92);
   \fill (Q) circle (1.5pt);
   \draw[orange!90!black, thick, ->] (Q) -- ++(0.55,0.55)

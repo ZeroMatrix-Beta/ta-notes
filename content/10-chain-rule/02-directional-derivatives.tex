@@ -30,8 +30,14 @@ derivative $\partial_iF$ is the special case $v = e_i$: walk parallel to the $i$
 
     \coordinate (P) at (1.15,1.0);
     % the rays, extended in grey
+    % Correction: Claude Opus 5 (Max) --- the second ray was (0.15,0.15)--(2.35,2.35), i.e. the
+    % line $y=x$, which passes through (1.15,1.15) and so misses $x_0=(1.15,1.0)$ by 0.15. The
+    % $v$ arrow below leaves $x_0$ in direction $(1,1)$, so its extension is $y=x-0.15$, not
+    % $y=x$: the panel captioned "pick a direction and walk along that ray" drew a ray that does
+    % not pass through the point being walked from, 0.15cm clear of it and parallel. The
+    % horizontal ray was always right, since it is drawn at $y=1.0$.
     \draw[gray!55, dashed] (-0.15,1.0) -- (2.75,1.0);
-    \draw[gray!55, dashed] (0.15,0.15) -- (2.35,2.35);
+    \draw[gray!55, dashed] (0.30,0.15) -- (2.50,2.35);
 
     \draw[orange!90!black, very thick, ->] (P) -- ++(0.8,0) node[below, font=\scriptsize] {$e_1$};
     \draw[green!55!black, very thick, ->] (P) -- ++(0,0.8) node[left, font=\scriptsize] {$e_2$};

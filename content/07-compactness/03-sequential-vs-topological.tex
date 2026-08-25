@@ -154,8 +154,16 @@ Therefore, $X$ is sequentially compact.
   \draw[->, purple, dotted, thick] (0.9, 0) to[bend left=10] (0.7, 0.3);
   \draw[->, purple, dotted, thick] (0.7, 0.3) -- (0.78, 0.22);
   
-  \node[green!60!black, anchor=west] at (1.3, 0.4) {\footnotesize accumulation point};
-  \node[purple, anchor=west] at (1.3, 0.1) {\footnotesize subsequence $x_{n_k} \to x$};
+  % Correction: Claude Opus 5 (Max) --- both labels started at x = 1.3, inside the blob. The
+  % outline runs through the control point (1.8,0.2) and crosses x = 1.68 at y = 0.4 and x = 1.80
+  % at y = 0.1, i.e. squarely inside each label's own height, so the `very thick' boundary printed
+  % through both. Moved clear of the blob (its rightmost bulge is about x = 1.87) and given the
+  % leaders they never had, so that each label is attached to what it names rather than merely
+  % matching it in hue --- which style.md forbids relying on by itself.
+  \node[green!60!black, anchor=west] at (2.05, 0.4) {\footnotesize accumulation point};
+  \draw[green!60!black, thin] (2.02, 0.4) -- (1.16, 0.26);
+  \node[purple, anchor=west] at (2.05, 0.1) {\footnotesize subsequence $x_{n_k} \to x$};
+  \draw[purple, thin] (2.02, 0.08) -- (0.98, 0.02);
 \end{tikzpicture}
 \end{center}
 
@@ -300,7 +308,11 @@ $U_{1},\dots,U_{m} \in \mathcal{U}'$ of $K$, hence of $A$.
 \begin{tikzpicture}[scale=1.2]
   % Compact set K
   \draw[very thick] plot[smooth cycle, tension=0.7] coordinates {(-1.5, -1) (-2, 0.5) (0, 1.2) (2, 0.5) (1.5, -1.2)};
-  \node[above left, font=\large] at (-1.8, 0.5) {$K$};
+  % Correction: Claude Opus 5 (Max) --- `above left' at (-1.8,0.5) put the box across x = -2.1
+  % to -1.8, and the blob's outline passes through its own control point (-2,0.5), inside that
+  % span: the very thick boundary ran through the letter. Set inside the blob instead, where the
+  % nearest boundary is at x = -2.0 and the dashed rectangle's left edge at x = -1.0.
+  \node[font=\large] at (-1.35, 0.45) {$K$};
   
   % Closed set A
   \draw[thick, fill=gray!20] (0, 0.5) -- (-0.6, 0) -- (0, -0.5) -- (0.6, 0) -- cycle;
@@ -308,7 +320,11 @@ $U_{1},\dots,U_{m} \in \mathcal{U}'$ of $K$, hence of $A$.
   
   % Open cover V
   \draw[dashed, blue] (-1, 0.8) rectangle (1.2, -0.8);
-  \node[blue, right] at (1.2, 0.5) {$\mathcal{V}$ covers $K$, so also $A$};
+  % Correction: Claude Opus 5 (Max) --- `right' at (1.2,0.5) sent this running rightwards from
+  % the rectangle's edge, and the blob's control point (2,0.5) sits 0.8 units into it at exactly
+  % its vertical centre, so the very thick outline crossed the caption. Below the whole figure
+  % instead: the blob's lowest reach is about y = -1.35 and nothing else is down there.
+  \node[blue, font=\small, below] at (0, -1.5) {$\mathcal{V}$ covers $K$, so also $A$};
 \end{tikzpicture}
 \end{center}
 

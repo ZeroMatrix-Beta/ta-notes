@@ -119,13 +119,21 @@ that controls the \emph{interior} of a domain was read as though it controlled t
       \fill (1,0) circle (1.3pt);
       % Labels are kept clear of the curve: the loop never exceeds |y| = 0.62, the strip
       % 0 < x < 1 is empty, and the right branch reaches y = 1.75 only at x = 1.63.
-      \node[font=\footnotesize, blue!60!black, align=center] at (-0.72,1.3)
+      % Correction: Claude Opus 5 (Max), found by rendering p.14 --- centred at x = -0.72 this
+      % two-line box is about 1.39 units wide, so it reached x = -0.03 and the $y$ axis printed
+      % against the closing bracket of $[-1,0]$. Shifted left; the loop itself never exceeds
+      % $|y| = 0.62$, so there is nothing else at this height.
+      \node[font=\footnotesize, blue!60!black, align=center] at (-0.95,1.3)
         {closed loop\\ over $[-1,0]$};
       % Both kept off the curve: at height y the right branch sits at x with x^3-x = y^2,
       % so y = 1.30 puts it at x = 1.44 and the label starts only at x = 1.95.
       \node[font=\footnotesize, blue!60!black, align=left, anchor=west] at (1.95,1.30)
         {unbounded branch,\\ $\sim x^{3/2}$};
-      \node[font=\footnotesize, gray, align=left, anchor=west] at (-1.62,-1.55)
+      % Same fault, same page: anchored west at x = -1.62 the wider line ("no real points",
+      % about 1.65 units) ran to x = 0.03 and the $y$ axis, which extends down to $y = -2.25$,
+      % struck through its last character. Anchored EAST just left of the axis instead, so the
+      % clearance is fixed by the anchor rather than by a width estimate.
+      \node[font=\footnotesize, gray, align=left, anchor=east] at (-0.15,-1.55)
         {no real points\\ for $0<x<1$};
     \end{tikzpicture}
     \end{center}
@@ -141,8 +149,17 @@ that controls the \emph{interior} of a domain was read as though it controlled t
       \draw[blue!60!black] (0,0) -- (0.92,1.6) node[above] {\footnotesize $y=\sqrt{3}x$};
       \draw[->] (-0.2,0) -- (1.8,0) node[right] {\footnotesize $x$};
       \draw[->] (0,-0.2) -- (0,1.8) node[above] {\footnotesize $y$};
-      \draw (0.5,0) arc (0:45:0.5);
-      \node at (0.65,0.22) {\footnotesize $30^\circ$--$60^\circ$};
+      % Correction: Claude Opus 5 (Max) --- three different angle ranges in one corner. The arc
+      % was `arc (0:45:0.5)', running from the $x$ axis to the line $y=x$, which is precisely the
+      % part of the first quadrant the set EXCLUDES; and it was labelled $30^\circ$--$60^\circ$,
+      % which is neither that nor the shaded wedge. The fill is right: $30$--$60$ is what the
+      % arctan condition alone gives, and $0<x<y$ then cuts everything below $45$, leaving the
+      % $45$--$60$ wedge between $y=x$ and $y=\sqrt3 x$. The arc now spans exactly what is shaded.
+      % The label cannot go inside it: at radius $r$ the wedge is only $0.26r$ across, so a
+      % 0.8-unit box would need $r=3$, six times the arc's radius. Hence the leader.
+      \draw (0.3536,0.3536) arc (45:60:0.5);
+      \draw[gray!60, thin] (0.68,0.36) -- (0.34,0.40);
+      \node[anchor=west, font=\footnotesize] at (0.70,0.35) {$45^\circ$--$60^\circ$};
     \end{tikzpicture}
     \end{center}
   \item Slicing at height $z=t \in (0,1)$: the equation $\sqrt{x^2+y^2} = 1-t$ describes a circle

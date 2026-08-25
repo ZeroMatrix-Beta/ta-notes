@@ -11,9 +11,17 @@ The rigorous definition of the multidimensional integral relies on the \newterm{
 \begin{center}
 \begin{tikzpicture}[scale=0.8]
   % first grid
-  \draw[gray, dotted] (0,0) grid (4,2);
-  \draw[very thick, blue!80!black] (0,0) rectangle (2,2);
-  \node[below, font=\scriptsize] at (1,0) {dyadic cube, side length $1=2^{-0}$};
+  % Correction: Claude Opus 5 (Max) --- the highlighted square was `(0,0) rectangle (2,2)', a
+  % 2x2 BLOCK of the grid's cells, under a caption reading "side length $1$". The right-hand
+  % panel gets the same relation right (a step-0.5 grid with 0.5-sided squares picked out), so
+  % the two panels disagreed about what a cube of the drawn generation looks like -- in the one
+  % figure that introduces the word. The square is now a single cell.
+  % `step=1' is written out for the same reason it is written out on the right: without it the
+  % grid takes TikZ's default step of 1cm, which under `scale=0.8' is 1.25 coordinate units, so
+  % the cells would not be the unit squares the caption names.
+  \draw[gray, dotted, step=1] (0,0) grid (4,2);
+  \draw[very thick, blue!80!black] (0,0) rectangle (1,1);
+  \node[below, font=\scriptsize] at (2,-0.2) {dyadic cube, side length $1=2^{-0}$};
   
   \begin{scope}[shift={(6,0)}]
     \draw[gray, dotted, step=0.5] (0,0) grid (4,2);

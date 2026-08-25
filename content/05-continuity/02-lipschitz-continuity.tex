@@ -67,7 +67,10 @@ finite slope $L$ can dominate it.
   \draw[orange!90!black, thick] (0,0) circle (1.5);
   \node[lbl, text=orange!90!black, font=\small] at (0,-1.2) {uniformly cont.};
   \draw[purple, thick] (0,0) circle (0.8);
-  \node[text=purple, font=\small] at (0,0) {Lipschitz};
+  % Plated like the other two: "Lipschitz" at \small is about 1.45cm, so its ends reach x = +-0.72
+  % against an arc at +-0.80 -- 0.08cm of clearance, which is not clearance. The plate costs
+  % nothing and removes the question.
+  \node[lbl, text=purple, font=\small] at (0,0) {Lipschitz};
   \fill[orange!90!black] (1.1,0.9) circle (1.5pt)
     node[lbl, right=1pt, text=orange!90!black, font=\scriptsize] {$\sqrt{x}$};
 \end{tikzpicture}

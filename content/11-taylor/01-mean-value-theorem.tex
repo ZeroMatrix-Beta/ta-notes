@@ -91,7 +91,14 @@ Applying the Cauchy--Schwarz inequality and the definition of the operator norm,
     % Domain boundary
     \draw[blue!60!black, thick, fill=blue!5] plot[smooth cycle, tension=0.7] coordinates
       {(-0.4,-0.5) (-0.6,1.8) (2.2,2.2) (2.8,0.2) (1.8,-0.8)};
-    \node[blue!80!black, font=\small] at (0.0,1.9) {$U \subseteq \mathbb{R}^n$};
+    % Correction: Claude Opus 5 (Max) --- centred at (0,1.9), this label's box ran roughly
+    % x = -0.75 to 0.75 at y = 1.73 to 2.07, and the domain blob has a CONTROL POINT at
+    % (-0.6,1.8) -- inside that box, so the thick blue outline provably crossed the label,
+    % no interpolation needed to see it. Moved down into the blob's interior: at y = 1.6 the
+    % left boundary is at x = -0.76 and the top boundary does not come below y = 2.18, while
+    % the segment [x,x+h] passes y = 0.76 at the label's right edge.
+    % 0.3 -> 0.2 to open the gap to the $x+h$ label, which now runs left from (2.2,1.3) to 1.2.
+    \node[blue!80!black, font=\small] at (0.2,1.6) {$U \subseteq \mathbb{R}^n$};
 
     % Line segment [x, x+h]
     \coordinate (X) at (0.3, 0.4);
@@ -100,8 +107,21 @@ Applying the Cauchy--Schwarz inequality and the definition of the operator norm,
 
     \draw[thick, orange!90!black] (X) -- (XH);
     \fill[red!80!black] (X) circle (1.8pt) node[below left, font=\footnotesize] {$x$};
-    \fill[red!80!black] (XH) circle (1.8pt) node[above right, font=\footnotesize] {$x+h$};
-    \fill[green!55!black] (XI) circle (1.8pt) node[below right, font=\footnotesize] {$\xi = x+t_0 h$};
+    % Correction: Claude Opus 5 (Max), found by rendering p.149 --- `above right' ran this box
+    % from x = 2.2 to about 3.2 at y = 1.3 to 1.6, and the blob's right boundary passes x = 2.83
+    % at y = 1.32 and x = 2.78 at y = 1.60: the thick blue outline printed between the "x" and
+    % the "+h". Every right-extending placement from this point hits it, since the boundary is
+    % only 0.63 units away and the label is 1.0 wide, so it goes left instead; the segment
+    % [x,x+h] ends at this very point, so `above left' clears that too.
+    \fill[red!80!black] (XH) circle (1.8pt) node[above left, font=\footnotesize] {$x+h$};
+    % Correction: Claude Opus 5 (Max), found by rendering p.149 --- `below right' ran this
+    % 1.5-unit box from x = 1.25 to 2.75, and the domain's right-hand boundary comes in far
+    % enough at that height to cut its last characters. It cannot go straight below the dot
+    % either: the segment [x,x+h] passes through $\xi$, so anything centred under it is crossed
+    % by the segment on its way down-left. Offset perpendicular to the segment instead, below
+    % and right, where the segment stays left of the box (it reaches only x = 0.51 at y = 0.50).
+    \fill[green!55!black] (XI) circle (1.8pt);
+    \node[green!55!black, font=\footnotesize] at (1.40,0.35) {$\xi = x+t_0 h$};
 
     % Direction vector h
     \draw[->, thick, orange!90!black] (X) -- (XH) node[midway, above, font=\scriptsize] {$h$};
@@ -121,7 +141,12 @@ Applying the Cauchy--Schwarz inequality and the definition of the operator norm,
     \coordinate (FXI) at (1.45, 1.25); % F(xi)
 
     \fill[red!80!black] (FX) circle (1.8pt) node[below left, font=\footnotesize] {$F(x)$};
-    \fill[red!80!black] (FXH) circle (1.8pt) node[above right, font=\footnotesize] {$F(x+h)$};
+    % Correction: Claude Opus 5 (Max), found by rendering p.149 --- `above right' put this box at
+    % x = 2.1 to 3.2, y = 1.4 to 1.7, and the dashed $u$ arrow below both runs along it and
+    % carries its own label into x = 2.7 to 3.9, y = 1.68 to 1.92: the two overprinted and
+    % neither could be read. Sent below the point instead, on the other side of the $u$ line,
+    % which is empty --- the displacement label sits lower still, at y = 0.5 to 0.8.
+    \fill[red!80!black] (FXH) circle (1.8pt) node[below right, font=\footnotesize] {$F(x+h)$};
     \fill[green!55!black] (FXI) circle (1.8pt) node[above left, font=\footnotesize] {$F(\xi)$};
 
     % Displacement vector F(x+h) - F(x)
@@ -130,8 +155,12 @@ Applying the Cauchy--Schwarz inequality and the definition of the operator norm,
     % Tangent vector DF_xi(h) at F(xi)
     \draw[->, very thick, green!55!black] (FXI) -- ++(0.95, 0.6) node[above, font=\footnotesize] {$DF_{\xi}(h)$};
 
-    % Unit dual vector direction u
-    \draw[->, dashed, gray!70!black] (FX) -- ++(2.4, 1.6) node[right, font=\scriptsize] {$u = \frac{y}{|y|}$};
+    % Unit dual vector direction u. It is deliberately collinear with the red displacement
+    % arrow, since $u = y/|y|$ IS that direction; the dashed part visible past $F(x+h)$ is the
+    % ray continuing, which is the honest picture. Lengthened from (2.4,1.6) to (3.0,2.0) --
+    % same 2:3 ratio, so still exactly parallel to $y = (1.8,1.2)$ -- so that its label clears
+    % $DF_\xi(h)$, whose box reaches x = 2.9. Found by rendering p.149.
+    \draw[->, dashed, gray!70!black] (FX) -- ++(3.0, 2.0) node[right, font=\scriptsize] {$u = \frac{y}{|y|}$};
   \end{scope}
 
 \end{tikzpicture}
@@ -243,10 +272,11 @@ Taking square roots gives $|\Jac F(x,y) v| \leq \sqrt{2}|v|$, so $\|DF_{(x,y)}\|
 \begin{center}
 % Generator: Claude Opus 5 (High) --- FIG-W04-06: the scalar theorem and its vector-valued
 % failure, side by side.
-% Left: f(x) = 0.35 + 1.5x - 0.55x^2 on [0.15, 2.4]. Chord slope between a=0.15 and b=2.4 is
-% f'(xi) with f'(x) = 1.5 - 1.1x, and (f(b)-f(a))/(b-a) = 1.5 - 1.1*(a+b)/2 = 1.5 - 1.4025
-% = 0.0975, so xi = (1.5 - 0.0975)/1.1 = 1.275 -- the midpoint (a+b)/2, as it must be for a
-% parabola. Marked there.
+% Left: f(x) = 0.35 + 1.5x - 0.55x^2, with the chord and the mean-value point on it.
+% Corrected 2026-08-24 (Claude Opus 5, Max): this block used to repeat the chord arithmetic for
+% a = 0.15, giving slope 0.0975 and xi = 1.275, and the drawing has used a = 0.35 since before
+% that -- two copies of the same computation, one of them stale. The live numbers sit inline
+% beside the chord they constrain, which is the only place they can be checked against it.
 % Right: the circle t -> (cos t, sin t); start = end, yet the velocity has length 1 throughout.
 \begin{tikzpicture}[>=Latex, scale=1.0]
 

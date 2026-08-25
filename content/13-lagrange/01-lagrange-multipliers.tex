@@ -309,15 +309,25 @@ actually differentiated, so it is used throughout.
   \draw[green!60!black, thick, ->] (0.8,-1.0) -- (-0.8,1.0) node[above left, font=\footnotesize] {$y$};
 
   % Inscribed cube vertices (+-1/sqrt(3), +-1/sqrt(3), +-1/sqrt(3))
-  \coordinate (A1) at (-0.6, -0.5);
-  \coordinate (A2) at (0.6, -0.5);
-  \coordinate (A3) at (0.8, 0.2);
-  \coordinate (A4) at (-0.4, 0.2);
+  % Correction: Claude Opus 5 (Max) --- the cube was not centred on the sphere. The top face was
+  % the bottom face translated by (0,1.2), so the eight vertices had centroid
+  %   ((-0.6+0.6+0.8-0.4)/4 + 0, (-0.5-0.5+0.2+0.2)/4 + 0.6) = (0.1, 0.45),
+  % not the origin. Two consequences, both visible: the whole cube floated above the equator
+  % ellipse, and B3 = (0.8,1.4) sat at radius 1.612 and B4 = (-0.4,1.4) at 1.456, against a
+  % sphere drawn with radius 1.4 -- so two of the eight dots captioned "critical points on S^2"
+  % were printed OUTSIDE the sphere's own outline, which no projection of a point of S^2 can be.
+  % Every vertex is shifted by (-0.1,-0.45), which moves the cube's centre onto the sphere's and
+  % changes nothing else. Screen radii afterwards, all inside 1.4 as they must be:
+  %   A1 1.180  A2 1.074  A3 0.743  A4 0.559  B1 0.743  B2 0.559  B3 1.180  B4 1.074.
+  \coordinate (A1) at (-0.7, -0.95);
+  \coordinate (A2) at (0.5, -0.95);
+  \coordinate (A3) at (0.7, -0.25);
+  \coordinate (A4) at (-0.5, -0.25);
 
-  \coordinate (B1) at (-0.6, 0.7);
-  \coordinate (B2) at (0.6, 0.7);
-  \coordinate (B3) at (0.8, 1.4);
-  \coordinate (B4) at (-0.4, 1.4);
+  \coordinate (B1) at (-0.7, 0.25);
+  \coordinate (B2) at (0.5, 0.25);
+  \coordinate (B3) at (0.7, 0.95);
+  \coordinate (B4) at (-0.5, 0.95);
 
   % Cube edges
   \draw[red!80!black, thick, dotted] (A1)--(A2)--(A3)--(A4)--cycle;

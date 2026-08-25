@@ -135,8 +135,14 @@ to turn vertical, and above a single $x$ there may sit two values of $y$, or non
     \fill (Q) circle (1.7pt);
 
     \draw[red!80!black, very thick, ->] (Q) -- ++(0,0.85);
-    \node[red!80!black, font=\scriptsize, align=center] at (1.75,2.95)
-      {move in $y$ only: $f$ unchanged to first order};
+    % Correction: Claude Opus 5 (Max) --- this was one line of about 4.4 units at scale 1.05,
+    % centred at x = 1.75, so it ran from roughly x = -0.5 to x = 4.0: the orange $y$ axis at
+    % x = 0 printed through its opening words and its right end overhung the panel, whose $x$
+    % axis stops at 3.5. `align=center' was set with no `\\' and so was doing nothing. Broken
+    % over two lines, as its twin in the left panel already is, and nudged right and up so the
+    % level set clears it -- the curve reaches x = 0.44 at y = 2.60, the box's lower edge.
+    \node[red!80!black, font=\scriptsize, align=center] at (1.95,2.90)
+      {move in $y$ only:\\ $f$ unchanged to first order};
 
     % two y's over one x, just left of x_0; none just right of it
     \draw[gray, dashed] (1.15,0) -- (1.15,2.75);
@@ -184,7 +190,13 @@ why the statement is local.
   \fill (P) circle (1.7pt) node[above left, font=\scriptsize] {$(x_0,y_0)$};
 
   % Box extents.
-  \draw[green!60!black, <->] (1.4,0.62) -- node[below, font=\scriptsize] {$B_r(x_0)$} (3.6,0.62);
+  % Correction: Claude Opus 5 (Max) --- `node[below]' on this path defaults to pos=0.5, putting
+  % the label's centre at x = 2.5 -- which is exactly where the dotted guide from (2.5,0) up to
+  % $(x_0,y_0)$ runs, so the guide printed straight down the middle of $B_r(x_0)$. Moved to
+  % pos=0.25 (centre x = 1.95, box about 1.55 to 2.35), which clears the guide by 0.15 units and
+  % still reads as naming the arrow it sits under.
+  \draw[green!60!black, <->] (1.4,0.62)
+    -- node[below, pos=0.25, font=\scriptsize] {$B_r(x_0)$} (3.6,0.62);
   \draw[orange!90!black, <->] (1.13,0.9) -- node[left, font=\scriptsize] {$B_s(y_0)$} (1.13,2.4);
   \draw[dotted, gray] (2.5,0) -- (P);
   \node[below, font=\scriptsize] at (2.5,-0.05) {$x_0$};
@@ -233,7 +245,10 @@ smallest possible instance.
   \draw[green!60!black, thick] (0,0) circle (1);
 
   \draw[red!80!black, dashed, thick, domain=-0.9:0.9, samples=40, smooth]
-    plot ({\x}, {sqrt(1-\x*\x)}) node[right, font=\scriptsize] {$y=\sqrt{1-x^2}$};
+    % `right' with no offset starts the label at the plot's last point, (0.9,0.436), which lies
+    % ON the green circle -- so the arc runs through its first glyph. 3pt of clearance, the same
+    % idiom as the $-e_3$ label in ch. 17.
+    plot ({\x}, {sqrt(1-\x*\x)}) node[right=3pt, font=\scriptsize] {$y=\sqrt{1-x^2}$};
 
   \coordinate (X0) at (0.4,0);
   \draw[dotted, gray] (X0) -- (0.4,0.917);

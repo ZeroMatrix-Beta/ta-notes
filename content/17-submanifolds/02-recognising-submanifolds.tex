@@ -183,12 +183,13 @@ there are several distinct ways to violate that.
 % Generator: Claude Opus 5 (High) --- FIG-17-05
 % Geometry check. Panel (a) is the lemniscate y^2 = x^2 - x^4, parametrized as
 % (cos t, sin t cos t) for t in [0, 2pi); at t = pi/2 and t = 3pi/2 the curve passes through
-% (0,0), which is why the self-crossing is at the origin and nowhere else. Panel (b): the
-% circle has centre (-0.45,0) radius 0.62, so its rightmost point is (0.17, 0); the stick
-% runs from (0.17,0) to (1.15,0), i.e. it starts exactly ON the circle -- the junction dot
-% is at (0.17,0). Panel (c): the square is [0,1]^2 scaled to side 1.3; the marked edge point
-% (0.65, 0) is the midpoint of the bottom edge, and the half-disc above it is the part of a
-% small ball that actually lies in the square.
+% (0,0), which is why the self-crossing is at the origin and nowhere else.
+% Corrected 2026-08-24 (Claude Opus 5, Max): the rest of this block described a superseded
+% draft. It gave panel (b)'s circle as centre (-0.45,0) with rightmost point (0.17,0) and a
+% stick to (1.15,0), and panel (c)'s marked point as (0.65,0). The drawing uses centre
+% (-0.50,0), rightmost point (0.12,0), a stick to (1.25,0), and a marked point at (0.65,-0.65).
+% The inline comments on each scope had those right all along, so the duplicate here is dropped
+% rather than re-stated: one copy of a number is one copy that can go stale.
 \begin{center}
 \begin{tikzpicture}[>=Latex, scale=1.15,
     bad/.style={red!80!black},

@@ -43,8 +43,14 @@ standard facts fall straight out:
 % Generator: Claude Opus 5 (High) --- FIG-W04-04: level sets of f(x,y) = x^2 + 2y^2, a path
 % crossing them, and the decomposition of gamma' at one point.
 % Level sets are the ellipses x^2 + 2y^2 = c, i.e. semi-axes sqrt(c) and sqrt(c/2).
-% At P = (1.10, 0.55): grad f = (2x, 4y) = (2.20, 2.20), i.e. the 45-degree direction,
-% which is indeed normal to the ellipse there (the ellipse tangent has slope -x/(2y) = -1).
+% Corrected 2026-08-24 (Claude Opus 5, Max): this block described a superseded draft. It said
+% P = (1.10, 0.55) with grad f = (2.20, 2.20) at 45 degrees, and the comment at the marked point
+% below said c = 1.815. None of the three is what the picture draws. The point is pinned by the
+% path, not chosen: at x = 1.10 the path gives y = 0.6826, and the level set through it is
+% c = 1.10^2 + 2*0.6826^2 = 2.142, which is the middle ellipse actually plotted.
+% At P = (1.10, 0.6826): grad f = (2x, 4y) = (2.20, 2.7304), slope 1.2411; the ellipse's tangent
+% there has slope -x/(2y) = -0.8058, and 1.2411 * (-0.8058) = -1.0000, so the gradient really is
+% normal to the level set at the marked point.
 \begin{tikzpicture}[>=Latex, scale=1.5]
   \draw[->] (-2.35,0) -- (2.5,0) node[right, font=\footnotesize] {$x$};
   \draw[->] (0,-1.75) -- (0,1.95) node[above, font=\footnotesize] {$y$};
@@ -62,8 +68,8 @@ standard facts fall straight out:
     plot (\x, {0.28 + 0.30*\x + 0.06*\x*\x});
   \node[blue!75!black, font=\scriptsize, anchor=south east] at (0.55,0.42) {$\gamma$};
 
-  % the point P on the middle ellipse (c = 1.815) and on the path:
-  % path at x = 1.10 gives y = 0.28 + 0.33 + 0.0726 = 0.6826 -- adjust c to match the point.
+  % the point P on the middle ellipse (c = 2.142, as computed in the header) and on the path:
+  % path at x = 1.10 gives y = 0.28 + 0.33 + 0.0726 = 0.6826 -- c is chosen to match the point.
   \coordinate (P) at (1.10,0.6826);
   \fill[black] (P) circle (0.8pt);
   \node[font=\scriptsize, below right] at (1.13,0.63) {$\gamma(t)$};

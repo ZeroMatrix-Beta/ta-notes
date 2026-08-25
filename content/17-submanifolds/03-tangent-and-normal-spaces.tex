@@ -26,10 +26,15 @@ basis of $T_pM$:
   }
   \coordinate (P) at (0.1,-0.05);
   \fill (P) circle (1.7pt) node[below, font=\small] {$p = f(q)$};
+  % Correction: Claude Opus 5 (Max) --- these read $\partial f/\partial x_i$, but $f$ is
+  % parametrized by $q$ here: the paragraph directly above writes the columns as
+  % $\partial f/\partial q_i$ and \cref{def:tangent_space} directly below spans
+  % $\partial_1f(q),\dots,\partial_mf(q)$. In this chapter $x$ is the ambient variable, so the
+  % figure was naming derivatives in the wrong space.
   \draw[orange!90!black, thick, ->] (P) -- ++(1.1,0.35)
-    node[right, font=\scriptsize] {$\partial f/\partial x_1$};
+    node[right, font=\scriptsize] {$\partial f/\partial q_1$};
   \draw[purple, thick, ->] (P) -- ++(0.35,0.95)
-    node[above, font=\scriptsize] {$\partial f/\partial x_2$};
+    node[above, font=\scriptsize] {$\partial f/\partial q_2$};
 \end{tikzpicture}
 \end{center}
 

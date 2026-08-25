@@ -57,7 +57,12 @@ and its \textbf{length measures how tightly the level curves are packed} there.
   % above and below the top and bottom ones. A first version put "$f=1$" at (2.05,-0.30)
   % and it was overprinted by the red label at (2.42,-0.02). The numeric level values were
   % carrying nothing the figure needs, so they are gone and one caption names the curves.
-  \node[gray!55!black, font=\scriptsize, anchor=west] at (2.0,-1.18) {level curves of $f$};
+  % Correction: Claude Opus 5 (Max) --- the comment below reasons about the eight gradient
+  % arrows and forgets the outermost level curve, which crosses both text labels in this picture.
+  % Here: anchored west at (2.0,-1.18) the box spanned x = 2.0 to 3.48 at y = -1.30 to -1.06, and
+  % the c = 2.25 ellipse passes x = 2.12 at y = -1.06 -- inside it. Dropped to y = -1.35, where
+  % the ellipse has come in to x = 1.72 at the box's top edge.
+  \node[gray!55!black, font=\scriptsize, anchor=west] at (2.0,-1.35) {level curves of $f$};
 
   % Gradients at eight points of the middle level curve, at 0.45x true length.
   \foreach \px/\py/\gx/\gy in {%
@@ -68,7 +73,11 @@ and its \textbf{length measures how tightly the level curves are packed} there.
     \fill[MidnightBlue!70] (\px,\py) circle (1.1pt);
   }
   \node[BrickRed, font=\scriptsize, anchor=south] at (0,1.98) {$\nabla f$ is longest here};
-  \node[BrickRed, font=\scriptsize, anchor=west] at (2.52,0) {and shortest here};
+  % Same fault: anchored west at (2.52,0) the box began 0.48 units short of the c = 2.25 ellipse,
+  % which crosses y = 0 at x = 3.0 -- so the outermost level curve ran through the label between
+  % "and" and "shortest". Started past the ellipse instead (it reaches only x = 2.99 across the
+  % label's height). The gap back to the arrow is harmless: the arrow points straight at it.
+  \node[BrickRed, font=\scriptsize, anchor=west] at (3.10,0) {and shortest here};
 \end{tikzpicture}
 \end{center}
 Both readings are the same fact. Moving a distance $\varepsilon$ in the direction $\nabla f$

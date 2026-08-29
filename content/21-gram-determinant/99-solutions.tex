@@ -272,3 +272,46 @@ tangent space being forced to both contain $\operatorname{span}\{e_2,e_3\}$ and 
 direction of $v_\varepsilon$) and agrees with the official solution in substance, though the
 write-up above is condensed relative to the official one.
 \end{ainote}
+
+\begin{exercisesolution}[Solution to \cref{ex:ai_circle_two_atlases}]
+\label{sol:ai_circle_two_atlases}
+% Generator: Claude Opus 5 (Ultracode)
+Throughout, $\Jac\Phi$ is the $2\times1$ matrix $\Phi'$, so
+$\Jac\Phi\transp\Jac\Phi = \lvert\Phi'\rvert^2$ is a $1\times1$ Gram determinant and its square
+root is the familiar speed $\lvert\Phi'\rvert$ of \cref{sec:length_of_curve}.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Here $\Phi'(t) = (-\sin t,\cos t)$ has $\lvert\Phi'\rvert \equiv 1$, so
+    \[\int_{S^1} 1 \mathop{d\text{vol}}_1 = \int_0^{2\pi} 1\,dt = 2\pi .\]
+    The omitted point $(1,0)$ is a single point, hence $\vol_1$-null, and contributes nothing ---
+    which is the shortcut \cref{rem:one_chart_recovers_the_earlier_definition} describes.
+  \item Let $\eta_1,\eta_2$ be \emph{any} partition of unity subordinate to this atlas, so that
+    $\eta_1+\eta_2 \equiv 1$ on $S^1$. Since $\lvert\Phi_i'\rvert \equiv 1$ for both,
+    \[\int_{S^1} 1 \mathop{d\text{vol}}_1
+      = \int_0^{2\pi}\eta_1(\cos t,\sin t)\,dt + \int_{-\pi}^{\pi}\eta_2(\cos t,\sin t)\,dt .\]
+    The second integrand is a $2\pi$-periodic function of $t$, and the integral of such a function
+    over any interval of length $2\pi$ is the same, so the second integral may be taken over
+    $(0,2\pi)$ as well. Adding the two under one integral sign,
+    \[\int_{S^1} 1 \mathop{d\text{vol}}_1
+      = \int_0^{2\pi}\big(\eta_1+\eta_2\big)(\cos t,\sin t)\,dt
+      = \int_0^{2\pi} 1\,dt = 2\pi ,\]
+    and no particular partition was ever chosen. That is
+    \cref{prop:integral_over_submanifold_well_defined} in miniature: the $\eta_l$ disappear
+    because they sum to $1$, and everything else was already parametrization-independent.
+  \item \textbf{The two images miss $(\pm1,0)$.} $\operatorname{Im}(\Psi_+)$ is the open upper
+    semicircle and $\operatorname{Im}(\Psi_-)$ the open lower one, so their union is
+    $S^1\setminus\{(1,0),(-1,0)\}$ and the family covers no neighbourhood of either point.
+
+    What fails is then not the arithmetic but the definition. Subordinacy forces
+    $\operatorname{supp}(\eta_\pm) \subseteq \operatorname{Im}(\Psi_\pm)$, so both $\eta_+$ and
+    $\eta_-$ vanish at $(1,0)$ and at $(-1,0)$; their sum vanishes there too and cannot be the
+    constant $1$ on $S^1$. No partition of unity subordinate to this family exists, and
+    \cref{def:integral_scalar_submanifold} never gets started.
+
+    It is worth noticing that the recipe nevertheless returns the right number. Taking
+    $\eta_\pm$ summing to $1$ off those two points and substituting $u = \cos t$, which turns
+    $(1-u^2)^{-1/2}\,\lvert du\rvert$ into $dt$, gives $\pi + \pi = 2\pi$ again. The reason is the
+    one from part \textbf{(a)}: the uncovered set is $\vol_1$-null. So this atlas is illegitimate
+    and harmless at once, and only the first of those is a statement about $S^1$ --- the second
+    is an accident of the set that was missed.
+\end{enumerate}
+\end{exercisesolution}

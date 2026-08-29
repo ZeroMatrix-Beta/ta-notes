@@ -417,6 +417,14 @@ for logname in ("main.log", "check.log"):
         report(f"{logname} predates the newest .tex source -- rebuild before trusting it",
                [f"{logname} is older than the sources; the counts below are from a stale build"])
     lt = log.read_text(encoding="utf-8", errors="replace")
+    # The mtime test above cannot catch a build that is still running: latexmk keeps
+    # touching the log, so it looks newer than every source while its content is only
+    # half written. That happened on 2026-08-30 and produced a "Clean" verdict off a log
+    # that had reached page 183 of 427. "Output written on" is the line pdftex emits when
+    # it has finished, so its absence means the run failed or has not got there yet.
+    if "Output written on" not in lt:
+        report(f"{logname} has no \"Output written on\" line -- build unfinished or failed",
+               [f"{logname} is incomplete; nothing below it can be trusted"])
     errs = re.findall(r"^! .*$", lt, re.M)
     undef = re.findall(r"^LaTeX Warning: (?:Reference|Citation) .*$", lt, re.M)
     over = re.findall(r"Overfull \\hbox \(([0-9.]+)pt", lt)

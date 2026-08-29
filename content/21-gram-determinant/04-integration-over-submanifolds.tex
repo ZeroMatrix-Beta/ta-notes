@@ -20,3 +20,87 @@ Given an $m$-dimensional submanifold $M \subseteq \mathbb{R}^n$, an atlas of loc
 \end{definition}
 
 This definition pieces together the local integrals (weighted by $\eta_l$) to compute the global integral over the entire submanifold, generalizing the volume integral from \cref{def:d_volume_parametrized_submanifold}.
+
+% Generator: Claude Opus 5 (Ultracode) --- the section defined the integral and stopped there,
+% leaving the one question the definition raises unanswered: it is written in terms of an atlas
+% and a partition of unity, neither of which is canonical, so it says nothing until those choices
+% are shown not to matter.
+The definition names two things that are not canonical --- an atlas, and a partition of unity
+subordinate to it --- so it defines nothing until those choices are shown not to matter.
+
+\begin{proposition}[The integral depends on neither the atlas nor the partition]
+\label{prop:integral_over_submanifold_well_defined}
+The right-hand side of \cref{def:integral_scalar_submanifold} is unchanged when the atlas
+$\{\Phi_l\}_{l=1}^N$ is replaced by any other finite atlas of $M$ and $\{\eta_l\}$ by any
+partition of unity subordinate to it.
+\end{proposition}
+
+\begin{proof}
+Two steps, and the first carries the whole argument.
+
+\textbf{One patch, two parametrizations.} Let $\Phi : V \to \mathbb{R}^n$ and
+$\Psi : W \to \mathbb{R}^n$ be local parametrizations with the same image, and let $g$ be
+continuous with $\operatorname{supp}(g)$ contained in that image. The transition map
+$\tau := \Psi^{-1}\circ\Phi : V \to W$ is a $C^1$-diffeomorphism and $\Phi = \Psi\circ\tau$, so
+the chain rule gives $\Jac\Phi(x) = \Jac\Psi(\tau(x))\,\Jac\tau(x)$ and therefore
+\[\Jac\Phi\transp\Jac\Phi
+  = \Jac\tau\transp\,\big(\Jac\Psi\transp\Jac\Psi\big)\,\Jac\tau .\]
+Both outer factors are $m \times m$, so taking determinants and using multiplicativity twice,
+\[\sqrt{\det\big(\Jac\Phi\transp\Jac\Phi\big)(x)}
+  = \big\lvert\det\Jac\tau(x)\big\rvert\,
+    \sqrt{\det\big(\Jac\Psi\transp\Jac\Psi\big)(\tau(x))} .\]
+The factor $\lvert\det\Jac\tau\rvert$ is precisely what \cref{thm:change_of_variables} consumes,
+so substituting $y = \tau(x)$ gives
+\[\int_V g(\Phi(x))\sqrt{\det\big(\Jac\Phi\transp\Jac\Phi\big)}\,dx
+  = \int_W g(\Psi(y))\sqrt{\det\big(\Jac\Psi\transp\Jac\Psi\big)}\,dy .\]
+The Gram determinant was built to make exactly this cancellation happen, and this is where that
+pays.
+
+\textbf{Two atlases.} Let $\{(\Phi_l,\eta_l)\}_{l=1}^N$ and $\{(\Psi_k,\theta_k)\}_{k=1}^K$ be two
+systems as in \cref{def:integral_scalar_submanifold}, producing values $I$ and $J$. Since
+$\sum_{k}\theta_k \equiv 1$ on $M$, inserting that sum into $I$ and exchanging the two finite sums,
+\[I = \sum_{l=1}^N\sum_{k=1}^K \int_{V_l}
+      \big(\eta_l\,\theta_k\,f\big)(\Phi_l(x))
+      \sqrt{\det\big(\Jac\Phi_l\transp\Jac\Phi_l\big)}\,dx .\]
+The integrand of the $(l,k)$ term is supported in
+$\operatorname{Im}(\Phi_l)\cap\operatorname{Im}(\Psi_k)$; restricting $\Phi_l$ and $\Psi_k$ to the
+preimages of that intersection makes them two parametrizations of one patch, so the first step
+applies and replaces $\Phi_l$ by $\Psi_k$ in that term. Doing so for every $(l,k)$ and then summing
+over $l$ first, using $\sum_l\eta_l \equiv 1$, collapses the double sum to $J$. Hence $I = J$.
+\end{proof}
+
+\begin{remark}[When a single chart already does, this costs nothing]
+\label{rem:one_chart_recovers_the_earlier_definition}
+If $M$ is covered by a single parametrization $\Phi_1$, the only partition subordinate to that
+atlas is $\eta_1 \equiv 1$, and \cref{def:integral_scalar_submanifold} collapses to
+\[\int_M f \mathop{d\text{vol}}_m
+  = \int_{V_1} f(\Phi_1(x))\sqrt{\det\big(\Jac\Phi_1\transp\Jac\Phi_1\big)}\,dx ,\]
+which is \cref{def:d_volume_parametrized_submanifold} with $f$ carried along; at $f \equiv 1$ it
+returns $\vol_m(M)$ exactly. So the general definition extends the earlier one rather than
+competing with it.
+
+In practice one almost never builds a partition of unity, because a single chart usually covers
+all of $M$ but a null set --- spherical coordinates miss only a half-meridian of $S^2$, which
+carries no $\vol_2$ --- and a null set contributes nothing to the integral. That is why every
+surface integral in \cref{sec:volume_embedded_surfaces} could be evaluated from one
+parametrization without comment. The partition of unity is what makes the definition \emph{exist}
+for an arbitrary $M$; it is not a device for computing with.
+\end{remark}
+
+% Generator: Claude Opus 5 (Ultracode)
+\begin{aiexercise}[Two atlases on the circle, and one that is not an atlas]
+\label{ex:ai_circle_two_atlases}
+Let $M := S^1 \subseteq \mathbb{R}^2$ and take $f \equiv 1$, so that the integral is the length.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Evaluate $\int_{S^1} 1 \mathop{d\text{vol}}_1$ from the single parametrization
+    $\Phi(t) := (\cos t,\sin t)$ on $(0,2\pi)$, whose image omits one point of $S^1$.
+  \item Now take the two-arc atlas $\Phi_1 := \Phi$ on $(0,2\pi)$ and $\Phi_2(t) :=
+    (\cos t,\sin t)$ on $(-\pi,\pi)$. Show that \emph{every} partition of unity subordinate to it
+    returns the same value, without choosing one.
+  \item The two graph parametrizations $\Psi_\pm(u) := \big(u,\pm\sqrt{1-u^2}\big)$ on $(-1,1)$
+    satisfy $\sqrt{\det(\Jac\Psi_\pm\transp\Jac\Psi_\pm)} = (1-u^2)^{-1/2}$, and each semicircle
+    has length $\pi$. Why does $\{\Psi_+,\Psi_-\}$ nonetheless fail to be an atlas of $S^1$, and
+    what goes wrong if one uses it in \cref{def:integral_scalar_submanifold} anyway?
+\end{enumerate}
+\exsol{sol:ai_circle_two_atlases}
+\end{aiexercise}

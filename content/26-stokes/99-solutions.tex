@@ -119,8 +119,15 @@ since $\varphi$ is then decreasing.
 \label{sol:flux_on_punctured_domain}
 \textbf{(a) False.} The Newton potential's gradient $F(x) = \nabla(1/\lvert x\rvert) =
 -x\lvert x\rvert^{-3}$ is divergence-free on $U$ (it is $V_{-3}$ up to sign, from
-\cref{ex:radial_vector_fields_flux}, with $n=3$), yet $I_r = \int_{\partial B_r} F\cdot n\,dS =
--\vol_2(\partial B_r) \neq 0$.
+% Correction: Claude Opus 5 (Ultracode) --- read "$I_r = -\vol_2(\partial B_r)$", dropping the
+% factor $1/r^2$: on $\partial B_r$ the integrand is $\langle F,n\rangle = -|x|^2/r^4 = -1/r^2$,
+% not $-1$. The printed value $-4\pi r^2$ also contradicts part (b) directly, which proves $I_r$
+% does not depend on $r$; the true value $-4\pi$ is the one consistent with it. The verdict
+% "false" was unaffected, since both values are non-zero.
+\cref{ex:radial_vector_fields_flux}, with $n=3$), yet on $\partial B_r$ the normal is $n = x/r$
+and $\langle F,n\rangle = -\lvert x\rvert^2/r^4 = -1/r^2$, so
+\[I_r = \int_{\partial B_r} F\cdot n\,dS = -\frac{1}{r^2}\vol_2(\partial B_r) = -4\pi \neq 0,\]
+a constant, exactly as part \textbf{(b)} predicts.
 
 \textbf{(b) True.} Applying \cref{thm:gauss_divergence} on the shell $B_{r_2}\setminus
 B_{r_1} \Subset U$ for $0<r_1<r_2$, whose boundary is $\partial B_{r_2}$ (outward) together
@@ -498,8 +505,10 @@ Take $U := \mathbb{R}^3$ and
 \[V(x,y,z) := (x,\ y,\ z)\transp = \nabla u(x,y,z), \qquad
   u(x,y,z) := \tfrac12\big(x^2+y^2+z^2\big).\]
 This $V$ is a polynomial, hence $C^\infty$, it is a gradient by construction, and it is not
-constant. The radial field $V(x,y,z) = (x,0,0)\transp = \nabla(x^2/2)$ serves equally well, and is
-the shortest answer that meets every clause.
+% Correction: Claude Opus 5 (Ultracode) --- $(x,0,0)$ was called "the radial field", which it is
+% not; the radial field is the $(x,y,z)$ given just above. Renamed.
+constant. The single-coordinate field $V(x,y,z) = (x,0,0)\transp = \nabla(x^2/2)$ serves equally
+well, and is the shortest answer that meets every clause.
 \begin{remark}[Why the question is easier than it looks]
 The clause to watch is \qt{nonconstant}, which rules out the reflex answer $V \equiv e_1$. Beyond
 that, no verification is needed at all: writing down a potential \emph{first} and differentiating

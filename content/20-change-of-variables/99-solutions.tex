@@ -245,10 +245,20 @@ done by parts:
 Therefore $2I_\alpha = 2\pi \cdot \frac{1}{2\alpha^2} = \frac{\pi}{\alpha^2}$, and
 \[I_\alpha = \frac{\pi}{2\alpha^2}.\]
 \begin{remark}
+% Correction: Claude Opus 5 (Ultracode) --- the second check read
+% "$\tfrac12\cdot\tfrac{1}{2\alpha}\cdot\tfrac{\pi}{\alpha}$", which is $\pi/(4\alpha^2)$: half
+% the value it was offered as confirming, and the sentence asserted "which it does". The leading
+% $\tfrac12$ is spurious. The integrand already factorises as $x^2e^{-\alpha x^2}$ times
+% $e^{-\alpha y^2}$, so the two one-dimensional moments multiply with nothing in front. Written
+% out, since a check that has to be re-derived to be trusted is not doing its job.
 Two sanity checks come free. Scaling $(x,y) \mapsto (x,y)/\sqrt\alpha$ predicts $I_\alpha =
-\alpha^{-2} I_1$, which the answer satisfies; and $I_\alpha$ should equal
-$\tfrac12 \cdot \tfrac{1}{2\alpha}\cdot\tfrac{\pi}{\alpha}$ read off from the one-dimensional
-Gaussian moments, which it does. The symmetry trick in the first line is the same one that
+\alpha^{-2} I_1$, which the answer satisfies; and the integrand factorises as
+$x^2e^{-\alpha x^2}\cdot e^{-\alpha y^2}$, so $I_\alpha$ is the product of the two
+one-dimensional moments,
+\[\left(\int_{\mathbb{R}} x^2e^{-\alpha x^2}dx\right)\left(\int_{\mathbb{R}} e^{-\alpha y^2}dy\right)
+  = \frac{1}{2\alpha}\sqrt{\frac{\pi}{\alpha}}\cdot\sqrt{\frac{\pi}{\alpha}}
+  = \frac{1}{2\alpha}\cdot\frac{\pi}{\alpha} = \frac{\pi}{2\alpha^2},\]
+as found. The symmetry trick in the first line is the same one that
 evaluates $\int_{\mathbb{R}} e^{-x^2}dx$ by squaring it: an integral that resists in Cartesian
 coordinates becomes radial once it is paired with its own mirror image.
 \end{remark}

@@ -8,7 +8,7 @@
 % Generator: Claude Sonnet 5 (High)
 \textbf{(a) Bounded.} Take $\varepsilon=1$: there is $N$ with $d(x_n,x_m)<1$ for all
 $n,m\geq N$; in particular $d(x_n,x_N)<1$ for $n\geq N$. Setting
-% Correction: Claude Opus 5 (High) --- the bound read "$\leq 1+M$ for every $n$", but the $1$ is
+% Correction: Claude Opus 5 (Ultracode) --- the bound read "$\leq 1+M$ for every $n$", but the $1$ is
 % $d(x_n,x_N)$, which is only known to be $<1$ once $n \geq N$; for the finitely many $n<N$ that
 % term is bounded by $M$ instead, giving $2M$. The exercise asks for boundedness of
 % $\{d(x_n,x_0) : n\geq0\}$, so the small $n$ are not outside the claim.
@@ -121,7 +121,7 @@ some Cauchy sequence $(x_{m,n})_n$ in $X$ representing $\xi_m$. Replacing $(x_{m
 of itself if necessary, which is harmless because a Cauchy sequence and any of its tails represent
 the same class, differing in only finitely many terms, we may assume each representative is already
 \newterm{regularized}:
-% Correction: Claude Opus 5 (High) --- the regularization radius was $1/m$ throughout, but the
+% Correction: Claude Opus 5 (Ultracode) --- the regularization radius was $1/m$ throughout, but the
 % outer sequence is indexed from $m=0$, where $1/m$ is undefined. Written $1/(m+1)$ instead, which
 % leaves the diagonal construction and every subsequent estimate unchanged.
 \[d(x_{m,n},x_{m,n'}) < \tfrac1{m+1} \qquad \text{for all } n,n' \geq 0.\]
@@ -135,7 +135,7 @@ regularization bound (with $n=m$) gives
 
 \textbf{$(y_m)_m$ is Cauchy in $X$.} By the triangle inequality for $\overline d$ (already
 established in \cref{ex:completion_well_defined}) and \eqref{eq:completion_diagonal_close},
-% Broken into align* by Claude Opus 5 (High): as one \[...\] line the chain ran 9pt past
+% Broken into align* by Claude Opus 5 (Ultracode): as one \[...\] line the chain ran 9pt past
 % the margin once the radius became 1/(m+1).
 \begin{align*}
   d(y_m,y_{m'}) &= \overline d\big(\iota(y_m),\iota(y_{m'})\big) \\

@@ -148,8 +148,14 @@ can establish) versus \textbf{around}/in a whole neighbourhood of $x=0$ (which i
     around it.
   \item \textbf{False}, for the same reason as \textbf{(d)}: even the sharper estimate
     $f(x) = x_2x_1 + O(|x|^3)$ only pins down the second-order Taylor data of $f$ \textbf{at} the
-    point $x=0$ (by Corollary 10.45, this does give $f$ twice differentiable \emph{at} $0$ with
-    $\partial_{11}f(0) = 0$), but it does not force twice differentiability in a whole
+    % Correction: Claude Opus 5 (Ultracode) --- read "by Corollary 10.45", unitalicised, which reads as
+    % an internal reference to a number this document does not have: the corollary meant is the
+    % script's (printed p. 56, "Polynomial expansions determine higher derivatives"), and our own
+    % form of it is cor:taylor_expansion_unique, printed 11.b.20. Elsewhere the file cites the
+    % script in italics for exactly this reason. Pointed at our statement instead, which is what
+    % the top of sol:reading_off_expansions already does.
+    point $x=0$ (by \cref{cor:taylor_expansion_unique}, this does give $f$ twice differentiable
+    \emph{at} $0$ with $\partial_{11}f(0) = 0$), but it does not force twice differentiability in a whole
     neighbourhood \textbf{around} $x=0$. Without an a priori assumption such as $f \in C^2$ near
     $0$, one can cook up genuinely pathological examples, e.g.\
     $f(x) := x_1x_2 + |x|^4\sin(|x|^{-100})$, for which $\partial_1 f(x) \to \infty$ as

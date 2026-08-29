@@ -71,7 +71,12 @@ statements necessarily hold.
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item With $g(x,y) := x^2+y^2-1$, the Lagrangian is $L(x,y,\lambda) := f(x,y) - \lambda g(x,y)$,
     giving the system
-    \[0 = \partial_x L = 2x(2-\lambda) - 1, \qquad 0 = \partial_y L = 2y(2-2\lambda), \qquad 0 = \partial_\lambda L = -(x^2+y^2-1).\]
+    % Correction: Claude Opus 5 (Ultracode) --- the middle equation read $2y(2-2\lambda)$, twice the
+    % true value. With $f = 2x^2+y^2-x$ and $g = x^2+y^2-1$, $\partial_y L = 2y - 2\lambda y
+    % = 2y(1-\lambda)$. The error is invisible downstream, since $2-2\lambda$ and $1-\lambda$
+    % vanish at the same $\lambda = 1$, so every value below is unaffected; but a reader checking
+    % the derivative against $f$ finds it does not match.
+    \[0 = \partial_x L = 2x(2-\lambda) - 1, \qquad 0 = \partial_y L = 2y(1-\lambda), \qquad 0 = \partial_\lambda L = -(x^2+y^2-1).\]
     From the middle equation, either $y = 0$ or $\lambda = 1$.
 
     \textbf{If $y = 0$:} then $x^2 = 1$, so $x = \pm 1$, giving the points $(1,0)$ and $(-1,0)$

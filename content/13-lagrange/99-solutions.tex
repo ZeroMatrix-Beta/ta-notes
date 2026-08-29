@@ -24,11 +24,21 @@ The domain $S^{n-1}\times S^{n-1}$ is compact (a product of compact sets), so $f
 maximum somewhere by the extreme value theorem; we locate it with Lagrange multipliers under the
 two constraints $g_1(x,y) := |x|^2-1 = 0$ and $g_2(x,y) := |y|^2-1=0$.
 
-Computing gradients in $\mathbb{R}^{2n} = \mathbb{R}^n_x \times \mathbb{R}^n_y$:
-\[\nabla f = (-2y,\,-2x), \qquad \nabla g_1 = (2x,\,0), \qquad \nabla g_2 = (0,\,2y).\]
+% Correction: Claude Opus 5 (Ultracode) --- the display gave $\nabla f = (-2y,-2x)$ directly under
+% the definition $f := |x-y|^2$, whose actual gradient is $(2(x-y), -2(x-y))$. The identity
+% $f = 2 - 2\langle x,y\rangle$ holds only ON the constraint set, and differentiating a constrained
+% identity is not allowed. The conclusion is untouched, for the reason now given in the text: the
+% two gradients differ by $\nabla g_1 + \nabla g_2$, which the multipliers absorb. Optimising $h$
+% is stated explicitly instead, which is what the sentence above it already proposed.
+It is $h(x,y) := -2\langle x,y\rangle$ that we optimise, not $f$ itself. The two are interchangeable
+here for a reason worth stating: $f = g_1 + g_2 + 2 + h$ identically on $\mathbb{R}^{2n}$, so $f$
+and $h$ agree on $M$ and their gradients differ by $\nabla g_1 + \nabla g_2$ --- a combination the
+multipliers absorb, leaving the same critical points. Computing gradients in
+$\mathbb{R}^{2n} = \mathbb{R}^n_x \times \mathbb{R}^n_y$:
+\[\nabla h = (-2y,\,-2x), \qquad \nabla g_1 = (2x,\,0), \qquad \nabla g_2 = (0,\,2y).\]
 At a critical point, $\nabla g_1,\nabla g_2$ are linearly independent (they are non-zero and
 supported on disjoint blocks of coordinates), so \cref{prop:constrained_optimization} gives
-$\lambda_1,\lambda_2$ with $\nabla f = \lambda_1\nabla g_1 + \lambda_2\nabla g_2$, i.e.\
+$\lambda_1,\lambda_2$ with $\nabla h = \lambda_1\nabla g_1 + \lambda_2\nabla g_2$, i.e.\
 \[-2y = 2\lambda_1x, \qquad -2x = 2\lambda_2y \qquad\Longrightarrow\qquad
   y = -\lambda_1x, \quad x=-\lambda_2y.\]
 So, $x$ and $y$ are parallel. Combined with $|x|=|y|=1$, this forces $y = x$ or $y=-x$.

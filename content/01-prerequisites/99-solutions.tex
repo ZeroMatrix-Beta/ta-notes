@@ -170,7 +170,12 @@ that controls the \emph{interior} of a domain was read as though it controlled t
     $t \geq 1$, and the slice is then a circle of radius $\sqrt{t^2-1}$. Note that the radius is
     $\sqrt{t^2-1}$ and not $t$; this is the single most common slip on this part, and it turns the
     answer into a cone. $E$ is instead a bowl-shaped surface of revolution with vertex at
-    $(0,0,1)$, obtained by rotating the curve $y = \sqrt{1+x^2}$ about the $z$-axis. It approaches
+    % Correction: Claude Opus 5 (High) --- read "$y = \sqrt{1+x^2}$ about the $z$-axis", which is
+    % the wrong plane: that curve lies in the $xy$-plane, and revolving it about the $z$-axis
+    % sweeps out a piece of that same plane, not this surface. The figure below already plots
+    % $z = \sqrt{1+x^2}$ against a vertical $z$ axis, so picture and prose disagreed.
+    $(0,0,1)$, obtained by rotating the curve $z = \sqrt{1+x^2}$ of the $xz$-plane about the
+    $z$-axis. It approaches
     slope $1$ for large $x,y$ without ever attaining it, which is exactly how it differs from the
     cone $z = \sqrt{x^2+y^2}$ that it is so often mistaken for.
   \item The level sets $\{\max\{|x|,|y|\}=t\}$ are the boundaries of the squares $[-t,t]^2$.
@@ -290,7 +295,12 @@ translates directly into a set difference:
     % the removed wedge, dashed
     \draw[red!70!black, thick, dashed] (0,0) -- (30:1.5);
     \draw[red!70!black, thick, dashed] (0,0) -- (-30:1.5);
-    \draw[red!70!black, dotted] (0.55,0) arc (0:30:0.55);
+    % Correction: Claude Opus 5 (High) --- the arc was `(0.55,0) arc (0:30:0.55)', spanning the
+    % half-wedge $0^\circ$--$30^\circ$, directly beneath a label reading "$60^\circ$ wedge
+    % removed". The set removed is $|\arctan(y/x)|\leq\pi/6$, i.e. $-30^\circ$ to $+30^\circ$;
+    % the arc now spans all of it, and so measures what the label names. Same fault as the
+    % sector arc corrected in part (c) of the previous solution in this file.
+    \draw[red!70!black, dotted] (-30:0.55) arc (-30:30:0.55);
     \node[red!70!black, font=\footnotesize, anchor=west] at (1.0,0.0) {$60^\circ$ wedge removed};
     \fill (0,0) circle (1.2pt);
     \node[font=\scriptsize, align=center, anchor=north] at (0,-1.72)

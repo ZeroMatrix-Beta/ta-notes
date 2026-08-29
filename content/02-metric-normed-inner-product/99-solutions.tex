@@ -31,9 +31,12 @@ which is the claim for $N+1$.
 \begin{exercisesolution}[Proof of \cref{ex:reshaping_same_convergence}]
 \label{sol:reshaping_same_convergence}
 % Generator: Claude Sonnet 5 (High)
-Suppose $x_n \to x$ with respect to $d$, so $d(x_n,x) \to 0$. Concave functions on $[0,\infty)$
-are continuous, so in particular $h$ is continuous at $0$; since $h(0)=0$, this gives
-$h(d(x_n,x)) \to 0$, i.e.\ $x_n \to x$ with respect to $h \circ d$.
+% Correction: Claude Opus 5 (High) --- this direction read "Concave functions on $[0,\infty)$
+% are continuous, so in particular $h$ is continuous at $0$", which is false at the endpoint and
+% was the only thing carrying the step. Continuity at $0$ is now a hypothesis of the exercise;
+% the remark below gives the counterexample that makes it necessary.
+Suppose $x_n \to x$ with respect to $d$, so $d(x_n,x) \to 0$. By hypothesis $h$ is continuous at
+$0$, and $h(0)=0$, so $h(d(x_n,x)) \to 0$, i.e.\ $x_n \to x$ with respect to $h \circ d$.
 
 Conversely, suppose $x_n \to x$ with respect to $h \circ d$. Fix $\varepsilon > 0$; by hypothesis
 \textbf{(a)} of \cref{prop:concave_reshaping_metric}, $\delta := h(\varepsilon) > 0$. Choose $N$
@@ -41,6 +44,24 @@ such that $h(d(x_n,x)) < \delta$ for all $n \geq N$. If $d(x_n,x) \geq \varepsil
 such $n$, monotonicity \textbf{(b)} would give $h(d(x_n,x)) \geq h(\varepsilon) = \delta$, a
 contradiction. So $d(x_n,x) < \varepsilon$ for all $n \geq N$, i.e.\ $x_n \to x$ with respect to
 $d$.
+
+\begin{remark}[Why continuity at $0$ has to be assumed separately]
+Concavity does not supply that hypothesis, and it is worth seeing why not. A concave function is
+automatically continuous on the \emph{interior} of its domain, but $[0,\infty)$ has an endpoint,
+and at an endpoint a concave function may jump --- upwards, since concavity is what bounds it
+below by its chords. Take
+\[h(0) := 0, \qquad h(t) := 1+t \quad \text{for } t>0.\]
+All three hypotheses of \cref{prop:concave_reshaping_metric} hold: $h$ vanishes exactly at $0$,
+it is non-decreasing, and it is concave, the only case needing a look being a blend of $0$ with
+some $t>0$, where the value $1+(1-\lambda)t$ does exceed the chord's $(1-\lambda)(1+t)$. So
+$h \circ d$ is a perfectly good metric. It is just a discrete one: $h(d(x,y)) > 1$ whenever
+$x \neq y$, so the sequences converging in $h \circ d$ are exactly the eventually constant ones,
+and on $\mathbb{R}$ with the standard metric $\tfrac1n \to 0$ is lost.
+
+Note which half of the proof breaks. The converse direction uses only \textbf{(a)} and
+\textbf{(b)}, never continuity, and remains true for this $h$ --- an eventually constant sequence
+converges in every metric. It is the forward direction that needs the hypothesis.
+\end{remark}
 \end{exercisesolution}
 
 \begin{exercisesolution}[Proof of \cref{ex:ai_metric_equivalence}]

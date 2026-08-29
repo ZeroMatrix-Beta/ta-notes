@@ -8,8 +8,14 @@
 % Generator: Claude Sonnet 5 (High)
 \textbf{(a) Bounded.} Take $\varepsilon=1$: there is $N$ with $d(x_n,x_m)<1$ for all
 $n,m\geq N$; in particular $d(x_n,x_N)<1$ for $n\geq N$. Setting
-$M := \max\{d(x_0,x_N),\dots,d(x_{N-1},x_N),\,1\}$, the triangle inequality gives
-$d(x_n,x_0) \leq d(x_n,x_N)+d(x_N,x_0) \leq 1+M$ for every $n$, so $(x_n)_n \subseteq B_{1+M}(x_0)$.
+% Correction: Claude Opus 5 (High) --- the bound read "$\leq 1+M$ for every $n$", but the $1$ is
+% $d(x_n,x_N)$, which is only known to be $<1$ once $n \geq N$; for the finitely many $n<N$ that
+% term is bounded by $M$ instead, giving $2M$. The exercise asks for boundedness of
+% $\{d(x_n,x_0) : n\geq0\}$, so the small $n$ are not outside the claim.
+$M := \max\{d(x_0,x_N),\dots,d(x_{N-1},x_N),\,1\}$, we get $d(x_n,x_N) \leq M$ for \emph{every}
+$n$: by the choice of $M$ for the finitely many $n < N$, and because $d(x_n,x_N) < 1 \leq M$ for
+$n \geq N$. Since $d(x_N,x_0) \leq M$ as well, the triangle inequality gives
+$d(x_n,x_0) \leq d(x_n,x_N)+d(x_N,x_0) \leq 2M$ for every $n$, so $(x_n)_n \subseteq B_{2M+1}(x_0)$.
 
 \textbf{(b) Convergent $\Rightarrow$ Cauchy.} If $x_n \to x$, fix $\varepsilon>0$ and choose $N$
 with $d(x_n,x)<\varepsilon/2$ for $n\geq N$. Then for $n,m\geq N$,
@@ -115,19 +121,28 @@ some Cauchy sequence $(x_{m,n})_n$ in $X$ representing $\xi_m$. Replacing $(x_{m
 of itself if necessary, which is harmless because a Cauchy sequence and any of its tails represent
 the same class, differing in only finitely many terms, we may assume each representative is already
 \newterm{regularized}:
-\[d(x_{m,n},x_{m,n'}) < \tfrac1m \qquad \text{for all } n,n' \geq 0.\]
+% Correction: Claude Opus 5 (High) --- the regularization radius was $1/m$ throughout, but the
+% outer sequence is indexed from $m=0$, where $1/m$ is undefined. Written $1/(m+1)$ instead, which
+% leaves the diagonal construction and every subsequent estimate unchanged.
+\[d(x_{m,n},x_{m,n'}) < \tfrac1{m+1} \qquad \text{for all } n,n' \geq 0.\]
 Set $y_m := x_{m,m}$, the diagonal sequence the exercise asks about. Letting $n'\to\infty$ in the
 regularization bound (with $n=m$) gives
 \begin{equation}
-\overline d\big(\iota(y_m),\,\xi_m\big) = \lim_{n\to\infty} d(x_{m,m},x_{m,n}) \ \leq\ \tfrac1m.
+\overline d\big(\iota(y_m),\,\xi_m\big) = \lim_{n\to\infty} d(x_{m,m},x_{m,n})
+  \ \leq\ \tfrac1{m+1}.
 \label{eq:completion_diagonal_close}
 \end{equation}
 
 \textbf{$(y_m)_m$ is Cauchy in $X$.} By the triangle inequality for $\overline d$ (already
 established in \cref{ex:completion_well_defined}) and \eqref{eq:completion_diagonal_close},
-\[d(y_m,y_{m'}) = \overline d\big(\iota(y_m),\iota(y_{m'})\big)
-  \ \leq\ \overline d(\iota(y_m),\xi_m) + \overline d(\xi_m,\xi_{m'}) + \overline d(\xi_{m'},\iota(y_{m'}))
-  \ \leq\ \tfrac1m + \overline d(\xi_m,\xi_{m'}) + \tfrac1{m'}.\]
+% Broken into align* by Claude Opus 5 (High): as one \[...\] line the chain ran 9pt past
+% the margin once the radius became 1/(m+1).
+\begin{align*}
+  d(y_m,y_{m'}) &= \overline d\big(\iota(y_m),\iota(y_{m'})\big) \\
+  &\leq\ \overline d(\iota(y_m),\xi_m) + \overline d(\xi_m,\xi_{m'})
+         + \overline d(\xi_{m'},\iota(y_{m'})) \\
+  &\leq\ \tfrac1{m+1} + \overline d(\xi_m,\xi_{m'}) + \tfrac1{m'+1}.
+\end{align*}
 Given $\varepsilon>0$, Cauchyness of $(\xi_m)_m$ gives $M_1$ with
 $\overline d(\xi_m,\xi_{m'}) < \varepsilon/3$ for $m,m'\geq M_1$; taking also
 $M \geq \max\{M_1,\,3/\varepsilon\}$ makes all three terms $< \varepsilon/3$ for $m,m'\geq M$, so
@@ -136,7 +151,7 @@ $(y_m)_m$ is Cauchy in $X$ and defines a class $\overline x := [(y_m)_m] \in \ov
 \textbf{$\xi_m \to \overline x$.} Using \eqref{eq:completion_diagonal_close} again and the same
 triangle inequality,
 \[\overline d(\xi_m,\overline x) \ \leq\ \overline d(\xi_m,\iota(y_m)) + \overline d(\iota(y_m),\overline x)
-  \ \leq\ \tfrac1m + \lim_{k\to\infty}d(y_m,y_k).\]
+  \ \leq\ \tfrac1{m+1} + \lim_{k\to\infty}d(y_m,y_k).\]
 The first term $\to 0$ as $m\to\infty$ by construction, and the second does too, being (for each
 fixed $m$) bounded by $\sup_{k\geq m}d(y_m,y_k)$, which $\to0$ as $m\to\infty$ since $(y_m)_m$ is
 Cauchy. Hence $\overline d(\xi_m,\overline x) \to 0$, i.e.\ $\xi_m \to \overline x$ in

@@ -31,9 +31,13 @@ point $0$ changes all four answers. Without it the set misses its own limit poin
 closed, and the Cauchy sequence $\tfrac1n$ has nowhere to converge inside the set. With it, the
 set is closed and bounded, hence compact by \cref{thm:heine_borel}.
 
+% Correction: Claude Opus 5 (High) --- read "each endpoint $n\pm\frac1n$ is a limit point outside
+% the set", which is false for the very first one: $1+\frac11 = 2$ lies inside $B_{1/2}(2)$, since
+% the $n=1$ and $n=2$ intervals overlap. The intervals separate only from $n=3$ on. Argued from
+% $0$ instead, which is outside the union for every $n$.
 \textbf{$\bigcup_{n\geq1}B_{1/n}(n)$.} Open as a union of open sets
-(\cref{item:arbitrary_union_open}); not closed, since each endpoint $n\pm\tfrac1n$ is a limit
-point outside the set; unbounded, so certainly not compact.
+(\cref{item:arbitrary_union_open}); not closed, since $0$ is a limit point of the union that does
+not belong to it; unbounded, so certainly not compact.
 
 \textbf{$S$ is a trap.} The two spanning vectors are parallel, so $S$ is not $\mathbb{R}^2$ but
 the $x$-axis, a line, which is closed, unbounded and not compact.
@@ -391,7 +395,7 @@ statement than either implication above.
 \begin{remark}[Compactness of $B$ is not decoration]
 Two closed sets can have a non-closed sum, so \textbf{(b)} genuinely needs more than closedness.
 Take
-\[A := \{(n,0) \mid n \in \mathbb{N}\}, \qquad B := \{(-n,\tfrac1n) \mid n \in \mathbb{N}\}.\]
+\[A := \{(n,0) \mid n \geq 1\}, \qquad B := \{(-n,\tfrac1n) \mid n \geq 1\}.\]
 Both are closed, since each is a set of isolated points running off to infinity and so has no
 accumulation point at all. Their sum contains $(0,\tfrac1n)$ for every $n$, and those converge to
 the origin. But $(0,0) \in A+B$ would need $n = m$ and $\tfrac1m = 0$ at once, so the origin is

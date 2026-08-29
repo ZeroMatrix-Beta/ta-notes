@@ -267,9 +267,14 @@ for $m \in (0,1)$.
 % Supplement: Analysis_II_Script_v1.pdf, p. 7
 \begin{exercise}[Reshaping a metric does not change its convergent sequences]
 \label{ex:reshaping_same_convergence}
-In the setting of \cref{prop:concave_reshaping_metric}, show that a sequence $(x_n)_n$ in $X$
-converges to $x$ with respect to $d$ if and only if it converges to $x$ with respect to
-$h \circ d$.
+% Correction: Claude Opus 5 (High) --- the hypothesis "continuous at $0$" was missing, and
+% without it the statement is false; see the remark on the solution for the counterexample. The
+% proposition above is untouched, being true as it stands. This exercise is not the script's
+% Exercise 9.9 (which asks only that $h \circ d$ be a metric) but a follow-on question written
+% here, so the missing hypothesis is ours rather than a transcription slip.
+In the setting of \cref{prop:concave_reshaping_metric}, assume in addition that $h$ is continuous
+at $0$. Show that a sequence $(x_n)_n$ in $X$ converges to $x$ with respect to $d$ if and only if
+it converges to $x$ with respect to $h \circ d$.
 \exsol{sol:reshaping_same_convergence}
 \end{exercise}
 

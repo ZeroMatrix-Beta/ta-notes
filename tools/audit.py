@@ -399,10 +399,23 @@ report("area fill drawn after a text node (paints over it)", sorted(buried),
        informational=True)
 
 # ---------------------------------------------------------- F. build log ----
-for logname in ("check.log", "main.log"):
+# main.log comes first because it is the log of the tracked main.pdf. The order was
+# the other way round until 2026-08-30, and combined with the `break` below that meant
+# a stale check.log -- left behind by an ad-hoc single-chapter build -- silently stood
+# in for the real one: main.log was never opened at all. The error, undefined-reference
+# and overfull counts printed here therefore described a document nobody had built.
+# check.log was four days old when this was found. Nothing had slipped through, but only
+# by luck.
+for logname in ("main.log", "check.log"):
     log = ROOT / logname
     if not log.exists():
         continue
+    # A clean verdict read off a log older than the sources is worth nothing: it
+    # describes the previous build. Say so rather than reporting zeros.
+    newest_src = max([p.stat().st_mtime for p in FILES] + [MAIN.stat().st_mtime])
+    if log.stat().st_mtime < newest_src:
+        report(f"{logname} predates the newest .tex source -- rebuild before trusting it",
+               [f"{logname} is older than the sources; the counts below are from a stale build"])
     lt = log.read_text(encoding="utf-8", errors="replace")
     errs = re.findall(r"^! .*$", lt, re.M)
     undef = re.findall(r"^LaTeX Warning: (?:Reference|Citation) .*$", lt, re.M)

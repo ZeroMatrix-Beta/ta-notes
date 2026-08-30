@@ -212,7 +212,11 @@ $M$ at $p \in M$ is
 Represent $S^2$ implicitly: $S^2 = F^{-1}\{1\} = \{(x,y,z)\in\mathbb{R}^3 : F(x,y,z)=1\}$ where
 $F(x,y,z) = x^2+y^2+z^2$. We determine $N_{e_3}S^2$:
 \[\nabla F(0,0,1) = (2x,2y,2z)\big|_{(x,y,z)=(0,0,1)} = 2e_3.\]
-So, $N_{e_3}S^2 = \operatorname{span}\{e_3\} = \{0\}\times\mathbb{R}$.
+% Correction: Claude Opus 5 (Ultracode) --- the span was written $\{0\}\times\mathbb{R}$, which
+% names a subset of $\mathbb{R}^2$; the normal line lives in $\mathbb{R}^3$. Same ambiguity the
+% ainote on ex:topologists_sine_curve corrects, where $\{0\}$ was adjoined to a subset of
+% $\mathbb{R}^2$ and had to become $\{(0,0)\}$.
+So, $N_{e_3}S^2 = \operatorname{span}\{e_3\} = \{(0,0)\}\times\mathbb{R}$.
 \end{example}
 
 % Generator: Claude Opus 5 (High) --- the example above is the $n=3$, $F = \lvert x\rvert^2$

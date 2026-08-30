@@ -224,7 +224,11 @@ Let $U \subseteq \mathbb{R}^n$ be open, and let $F : U \to \mathbb{R}^n$ be a co
 By definition of the path integral and the chain rule,
 \begin{align*}
 \int_\gamma F \cdot d\gamma &= \int_0^1 F(\gamma(t)) \cdot \gamma'(t) \,dt = \int_0^1 \nabla f(\gamma(t)) \cdot \gamma'(t) \,dt \\
-&= \int_0^1 Jf(\gamma(t)) J\gamma(t) \,dt = \int_0^1 J(f \circ \gamma)(t) \,dt = \int_0^1 (f \circ \gamma)'(t) \,dt.
+% Correction: Claude Opus 5 (Ultracode) --- three surviving instances of the bare $J$ notation,
+% $Jf$, $J\gamma$ and $J(f\circ\gamma)$, where the document writes $\Jac$. The same substitution
+% was already applied to sol:volume_ellipsoid_change_variables and to
+% sol:curl_identity_greens_formula; this display was missed.
+&= \int_0^1 \Jac f(\gamma(t))\, \Jac \gamma(t) \,dt = \int_0^1 \Jac(f \circ \gamma)(t) \,dt = \int_0^1 (f \circ \gamma)'(t) \,dt.
 \end{align*}
 By the fundamental theorem of calculus, this equals $(f \circ \gamma)(1) - (f \circ \gamma)(0) = f(\gamma(1)) - f(\gamma(0))$.
 \end{proof}

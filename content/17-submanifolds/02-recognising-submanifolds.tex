@@ -287,10 +287,20 @@ so no such $T$ exists.
 \begin{remark}[When to reach for which]
 Both tests disprove the same statement, and neither subsumes the other.
 Counting components is the tool when the offending point \emph{separates} the set, and it needs
+% Correction: Claude Opus 5 (Ultracode) --- the example given was the cusp $\{y^2=x^3\}$, which
+% this test does not in fact detect. Along its parametrization $t \mapsto (t^2,t^3)$ the field
+% $T((t^2,t^3)) := (2,3t)$ is continuous and nowhere zero, and $t$ is a continuous function of the
+% point because that parametrization is a homeomorphism onto the set (its inverse is $y/x$ off the
+% origin). So a continuous nonvanishing tangent field exists and the test returns nothing; the
+% unit tangent does not even jump, tending to $(1,0)$ along both branches. The cusp does fail to
+% be a $C^1$ submanifold, but for a reason neither test sees: as a graph over the $y$-axis it is
+% $x = y^{2/3}$, which is not $C^1$ at the origin. Replaced by the corner, where the direction
+% genuinely does jump and counting genuinely says nothing.
 no differentiability. The tangent-field test is the tool when the set stays connected but the
-direction of travel jumps. A cusp such as $\{y^2 = x^3\}$ at the origin is the standard case,
-where removing the origin leaves the expected two pieces and only the tangent direction gives the
-failure away.
+direction of travel jumps. The corner $\{y = \lvert x\rvert\}$ at the origin is the standard
+case: removing the origin leaves the expected two pieces, so counting gives nothing away, whereas
+a tangent field would have to point along $(1,1)$ as the origin is approached from the right and
+along $(1,-1)$ from the left, and no single nonzero vector is both.
 \end{remark}
 \end{aiexample}
 

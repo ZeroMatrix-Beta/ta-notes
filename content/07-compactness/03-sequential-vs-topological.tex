@@ -179,15 +179,25 @@ $U_{i_0} \ni x$ contains a ball around $x$, so $r(x) > 0$; and since $X$ is boun
 constant $L$; the notion is named and placed in context as \cref{def:lipschitz_continuous},
 but only the displayed estimate is used here.) Write
 $R(x) := \sup\{\rho \geq 0 : B_\rho(x) \subseteq U_i \text{ for some } i\}$, so that
-$r = \tfrac12 R$; it is $R$ that the argument bounds, and the factor $\tfrac12$ must be carried
-through.
+% Correction: Claude Opus 5 (Ultracode) --- the estimate was run with the ball $B_{r(x)}(x)$,
+% which yields only $R(y) \geq r(x) - d(x,y)$ and, after halving,
+% $r(y) \geq \tfrac12 r(x) - \tfrac12 d(x,y)$. That does NOT give the Lipschitz bound claimed on
+% the next line: rearranged it reads $r(x)-r(y) \leq \tfrac12 r(x) + \tfrac12 d(x,y)$, with a
+% stray $\tfrac12 r(x)$ left over, and it is not even sharp at $x=y$ --- the sign that a factor
+% has been lost. It is $R$, not $r$, that is Lipschitz on the nose, so the radius has to run up
+% to $R(x)$ rather than stopping at its halfway point. The conclusion was right; the derivation
+% did not reach it.
+$r = \tfrac12 R$; it is $R$ that the argument bounds, and the factor $\tfrac12$ is carried
+through at the end.
 
-Let $x,y \in X$ with $d(x,y) < r(x)$. Since $r(x) < R(x)$, we have
-$B_{r(x)}(x) \subseteq U_i$ for some $i$, so $y \in U_i$, and the triangle inequality gives
-\[B_{r(x)-d(x,y)}(y) \subseteq B_{r(x)}(x) \subseteq U_i
-\qquad\Longrightarrow\qquad R(y) \geq r(x)-d(x,y).\]
-Halving, $r(y) = \tfrac12R(y) \geq \tfrac12\big(r(x)-d(x,y)\big)$, which also holds trivially
-when $d(x,y) \geq r(x)$ since $r(y) \geq 0$. By symmetry,
+Fix $x,y \in X$ and let $\rho < R(x)$ be any radius with $B_\rho(x) \subseteq U_i$ for some $i$.
+The triangle inequality gives
+\[B_{\rho-d(x,y)}(y) \subseteq B_{\rho}(x) \subseteq U_i
+\qquad\Longrightarrow\qquad R(y) \geq \rho-d(x,y),\]
+trivially so when $\rho \leq d(x,y)$, the ball on the left being empty. Letting
+$\rho \uparrow R(x)$, which is legitimate because $R(x)$ is the supremum of such radii and is
+finite, gives $R(y) \geq R(x)-d(x,y)$; exchanging $x$ and $y$ gives the reverse inequality, so
+$\lvert R(x)-R(y)\rvert \leq d(x,y)$. Halving,
 \[|r(x)-r(y)| \leq \tfrac12\,d(x,y),\]
 so $r$ is $\tfrac12$-Lipschitz, and in particular continuous, which is all that is needed below.
 

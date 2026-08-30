@@ -215,7 +215,12 @@ the moral of \cref{rem:intervals_are_the_base_case}.
 % Supplement: Sascha Brack/Class Notes/Week_03_Notes_Monday.pdf, p. 4
 \begin{corollary}[Linear maps preserve the unit cube]
 \label{cor:linear_maps_unit_cube}
-Given the $n$-dimensional unit cube $[0,1]^n \subset \mathbb{R}^n$, any linear map $L : \mathbb{R}^n \to \mathbb{R}^n$ maps $[0,1]^n$ to an $n$-dimensional parallelepiped. Since linear maps in Euclidean space are continuous, the image $L([0,1]^n)$ is connected. Furthermore, since $[0,1]^n$ is compact, $L([0,1]^n)$ is also compact.
+% Correction: Claude Opus 5 (Ultracode) --- read "maps $[0,1]^n$ to an $n$-dimensional
+% parallelepiped", which fails for every singular $L$: at $L = 0$ the image is a single point.
+% Qualified as possibly degenerate, the way ex:equations_to_drawings part (e) already handles the
+% same collapse in the plane. The two claims the corollary is actually for, connected and
+% compact, hold for every $L$ and are untouched.
+Given the $n$-dimensional unit cube $[0,1]^n \subset \mathbb{R}^n$, any linear map $L : \mathbb{R}^n \to \mathbb{R}^n$ maps $[0,1]^n$ to a parallelepiped, possibly degenerate: if $L$ is singular the image collapses to a parallelepiped of lower dimension, and to the single point $\{0\}$ when $L = 0$. Since linear maps in Euclidean space are continuous, the image $L([0,1]^n)$ is connected. Furthermore, since $[0,1]^n$ is compact, $L([0,1]^n)$ is also compact.
 \end{corollary}
 
 \begin{exercise}[Properties of connectedness]

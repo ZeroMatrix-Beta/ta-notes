@@ -124,10 +124,15 @@ subsequence $(x_{n_k})_{k=0}^{\infty}$ converges to $x$.
 \begin{remark}[A claim in the lecture script that is not fully correct]
 The official lecture script states that a sequence converges to $x$ if and only if $x$ is its
 \emph{only} accumulation point (\cref{def:accumulation_point}). Sascha Brack's class notes flag
+% Correction: Claude Opus 5 (Ultracode) --- the first counterexample was indexed
+% $x_{2n+1} := 1/n$, $x_{2n} := 1-1/n$, which is undefined at $n=0$ (both terms divide by zero)
+% and puts $x_3 = 1/1 = 1$ outside the very space $[0,1)$ the example is set in. Reindexed on
+% $k$ directly, matching the second counterexample's form; the mathematics is unchanged.
 this as false in general, with two counterexamples worth recording. First, a sequence can have a
-unique accumulation point without converging: on $[0,1)$, let $x_{2n+1} := \tfrac1n$ and
-$x_{2n} := 1-\tfrac1n$; the only accumulation point is $0$, yet $(x_n)$ does not converge, since
-the terms $x_{2n} \to 1 \notin [0,1)$ leave every neighbourhood of $0$ infinitely often. Second,
+unique accumulation point without converging: on $[0,1)$, let $x_k := \tfrac1k$ for odd
+$k \geq 3$ and $x_k := 1-\tfrac1k$ for even $k \geq 2$, both of which lie in $[0,1)$; the only
+accumulation point is $0$, yet $(x_k)$ does not converge, since the even terms tend to
+$1 \notin [0,1)$ and so leave every neighbourhood of $0$ infinitely often. Second,
 even in $\mathbb{R}$ itself, the sequence with $x_n := \tfrac1n$ for odd $n$ and $x_n := n$ for
 even $n$ has $0$ as its only accumulation point but is unbounded, hence divergent. What \emph{is}
 true is the easier direction: if $(x_n)$ converges to $x$, then $x$ is its unique accumulation

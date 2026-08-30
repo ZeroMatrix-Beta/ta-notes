@@ -435,6 +435,29 @@ for logname in ("main.log", "check.log"):
            informational=True)
     break
 
+# ------------------------------------------------- G. the tracked PDF -------
+# main.pdf is tracked, so a truncated one can be committed and pushed looking entirely
+# normal in `git status`. That happened on 2026-08-30: latexmk had zeroed the file and not
+# yet rewritten it when `git add main.pdf` ran, and commit 4c3a0b0 shipped 0 bytes. The log
+# checks above cannot see this -- they describe the log, not the artifact.
+pdf = ROOT / "main.pdf"
+pdf_problems = []
+if not pdf.exists():
+    pdf_problems.append("main.pdf does not exist -- nothing to commit alongside the source")
+else:
+    size = pdf.stat().st_size
+    if size < 500_000:
+        pdf_problems.append(
+            f"main.pdf is only {size} bytes; a healthy build of this document is around 3 MB. "
+            "Almost certainly truncated by a build that was still running.")
+    else:
+        # A complete PDF ends with %%EOF. latexmk writes this last, so its absence means the
+        # file on disk is a partial write even when the size looks plausible.
+        tail = pdf.read_bytes()[-1024:]
+        if b"%%EOF" not in tail:
+            pdf_problems.append("main.pdf has no %%EOF marker -- the file is a partial write")
+report("main.pdf is not a complete document", pdf_problems)
+
 # ------------------------------------------------------------- verdict ------
 print("\n" + "-" * 62)
 if findings:

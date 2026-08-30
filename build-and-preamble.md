@@ -430,6 +430,19 @@ with the source; every other root PDF stays ignored. The cost is that each rebui
 adds a ~2 MB blob to history permanently. Rebuild it in the same commit as the source change, so
 the two never disagree.
 
+⚠️ **Never `git add main.pdf` while a build is running.** `latexmk` truncates the file to zero
+and then writes it, so staging it mid-build stages an **empty blob**, and `git status` afterwards
+shows only a harmless-looking `M main.pdf` for the *next* version. This happened on 2026-08-30:
+commit `4c3a0b0` shipped a 0-byte `main.pdf` and was pushed before anyone noticed, because the
+commit itself looked completely normal. Two habits prevent it:
+
+* Wait for the build to exit, and confirm it: `main.log` must contain `Output written on`.
+  `tools/audit.py` checks exactly this and refuses to certify an unfinished build, but it reads
+  the *log* — it says nothing about whether the PDF you are about to stage is the finished one.
+* Before committing, check the size: a healthy `main.pdf` is roughly 3 MB. `git cat-file -s
+  HEAD:main.pdf` after committing is the cheapest possible confirmation, and it is what caught
+  this one.
+
 MiKTeX at `C:\Users\miche\AppData\Local\Programs\MiKTeX\miktex\bin\x64`.
 **Be careful with** the theorem / `aliascnt` / `cleveref` block at roughly `main.tex:415–675` —
 its comments document real bugs already solved (duplicate hyperref anchors, `cleveref` printing

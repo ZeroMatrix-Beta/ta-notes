@@ -463,8 +463,16 @@ $\lvert\det\Phi\rvert$, so the requirement is exactly $\lvert\det\Phi\rvert = 1$
 $\Phi \neq \id$. The shear
 \[\Phi(x,y) := (x+y,\ y), \qquad
   \Phi = \begin{pmatrix} 1 & 1 \\ 0 & 1\end{pmatrix}, \qquad \det\Phi = 1,\]
-does it. So do the reflection $(x,y)\mapsto(y,x)$ and the point reflection
-$(x,y)\mapsto(-x,-y)$, both of determinant $-1$, and every rotation.
+% Correction: Claude Opus 5 (Ultracode) --- these two were given as "both of determinant $-1$".
+% Only the swap has determinant $-1$; the point reflection is $\operatorname{diag}(-1,-1)$, whose
+% determinant is $(-1)(-1) = +1$. In the plane a point reflection is the rotation by $\pi$, so it
+% was in any case already covered by "every rotation", and listing it as orientation-reversing
+% inverts the one fact it was there to illustrate. Both remain valid answers, since only
+% $\lvert\det\rvert = 1$ is required.
+does it. So do the reflection $(x,y)\mapsto(y,x)$, of determinant $-1$, and every rotation,
+of determinant $+1$. The point reflection $(x,y)\mapsto(-x,-y)$ is one of the latter: in the
+plane it \emph{is} the rotation by $\pi$, with determinant $(-1)(-1) = +1$, which is worth
+noticing because in $\mathbb{R}^3$ the same formula gives determinant $-1$ instead.
 \begin{remark}[What the extra clause is for]
 Dropping \qt{different from the identity} would make the problem vacuous, and adding it makes the
 answer informative: the volume-preserving linear maps of the plane form a large group, namely

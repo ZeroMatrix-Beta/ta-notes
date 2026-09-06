@@ -188,7 +188,13 @@ Let us compute the gradient, the divergence of the gradient, and the rotation of
     \item \textbf{Rotation of the gradient} ($\curl(\nabla \phi)$):
     \begin{align*}
     \curl(\nabla \phi) &= \begin{pmatrix} \partial_y(2z e^{-xy}) - \partial_z(2y - xz^2 e^{-xy}) \\ \partial_z(2x - yz^2 e^{-xy}) - \partial_x(2z e^{-xy}) \\ \partial_x(2y - xz^2 e^{-xy}) - \partial_y(2x - yz^2 e^{-xy}) \end{pmatrix} \\
-    &= \begin{pmatrix} -2xz e^{-xy} - (-2xz e^{-xy}) \\ -2yz e^{-xy} - (-2yz e^{-xy}) \\ -z^2 e^{-xy} - (-z^2 e^{-xy}) \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}.
+    % Correction: Claude Opus 5 (Ultracode) --- the third row read
+    % $-z^2e^{-xy} - (-z^2e^{-xy})$. Both partials are missing a term: by the product rule,
+    % $\partial_x(2y - xz^2e^{-xy}) = (xyz^2 - z^2)e^{-xy}$ and likewise
+    % $\partial_y(2x - yz^2e^{-xy}) = (xyz^2 - z^2)e^{-xy}$. The two omissions were identical, so
+    % the entry still cancelled to $0$ and the answer was right --- but the step shown to the
+    % reader was not. Rows one and two were already exact.
+    &= \begin{pmatrix} -2xz e^{-xy} - (-2xz e^{-xy}) \\ -2yz e^{-xy} - (-2yz e^{-xy}) \\ (xyz^2 - z^2) e^{-xy} - (xyz^2 - z^2) e^{-xy} \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}.
     \end{align*}
     This is not a coincidence: for any $C^2$ function $f$, $\curl(\nabla f) = 0$ by Schwarz's theorem.
 \end{itemize}

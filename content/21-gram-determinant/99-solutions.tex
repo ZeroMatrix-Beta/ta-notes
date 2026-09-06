@@ -155,8 +155,11 @@ the exercise's range $\theta\in(-\pi/2,\pi/2)$. Computing
   -\sin\varphi\sin\theta\\ \cos\theta\end{pmatrix} = \begin{pmatrix}\cos\varphi\cos^2\theta\\
   \sin\varphi\cos^2\theta\\ \sin\theta\cos\theta\end{pmatrix},\]
 its length is $\lvert\partial_\varphi\Phi\times\partial_\theta\Phi\rvert = \cos\theta$ (for
+% Correction: Claude Opus 5 (Ultracode) --- "this is the Gram determinant" names the square root
+% of it, which under this chapter's convention is the area element, not the determinant. Same
+% slip as in 01-area-and-the-gram-determinant.tex and 03-length-of-a-curve.tex.
 $\theta\in(-\pi/2,\pi/2)$, so $\cos\theta>0$). By \cref{prop:flux_r3}\textbf{(b)}, this is the
-Gram determinant, so $dA = \cos\theta\,d\theta\,d\varphi$, and
+square root of the Gram determinant, so $dA = \cos\theta\,d\theta\,d\varphi$, and
 \[\int_S dA = \int_{\varphi_1}^{\varphi_2}\!\!\int_{\theta_1}^{\theta_2} \cos\theta\,d\theta\,
   d\varphi = \boxed{\ (\varphi_2-\varphi_1)\big(\sin\theta_2-\sin\theta_1\big)\ }.\]
 \end{exercisesolution}
@@ -214,7 +217,9 @@ Hence
          = f(x)\big({-\xi_2}+f'(x)\xi_1\big), \\
       \lvert\partial_x\Phi\times\partial_\theta\Phi\rvert &= f(x)\sqrt{1+f'(x)^2}.
     \end{align*}
-    By \cref{prop:flux_r3}\textbf{(b)}, this is the Gram determinant, so
+    % Correction: Claude Opus 5 (Ultracode) --- as above, this names the square root of the Gram
+    % determinant, which is the area element rather than the determinant itself.
+    By \cref{prop:flux_r3}\textbf{(b)}, this is the square root of the Gram determinant, so
     \[\vol_2(\partial_{\mathrm{side}}\Omega) = \int_a^b\!\!\int_0^{2\pi} f(x)\sqrt{1+f'(x)^2}\,
       d\theta\,dx = \boxed{\ 2\pi\int_a^b f(x)\sqrt{1+f'(x)^2}\,dx\ }.\]
 
@@ -235,7 +240,22 @@ Hence
     \lim_{y\to f(a)^-}g'(y)$, so $g\in C^1$ across $y=f(a)$. Around a boundary point $P :=
     (a,f(a)\cos\phi,f(a)\sin\phi)$, the map $(t,\theta)\mapsto\big(g(t),f(g(t))\cos\theta,
     f(g(t))\sin\theta\big)$ is then a regular $C^1$ parametrization of $\partial\Omega$ (using
-    $f(a)>0$ to keep the angular direction non-degenerate). The symmetric argument at $b$, using
+    $f(a)>0$ to keep the angular direction non-degenerate).
+
+    % Correction: Claude Opus 5 (Ultracode) --- both directions of (e) were proved only for
+    % $f(a)>0$, which $(*)$ does not require, and the archetypal instance violates it: the ball
+    % $f(x)=\sqrt{1-x^2}$ on $(-1,1)$ satisfies $(*)$ and has $f(a)=f(b)=0$. With $f(a)=0$ the
+    % point $P$ used below collapses onto the axis and the curve $(a,f(a)-t,0)$ leaves
+    % $\partial\Omega$ entirely. The claim is true in that case too; the missing arguments are
+    % supplied here, one per direction.
+    If instead $f(a)=0$, that parametrization degenerates and the boundary point to examine is
+    $P := (a,0,0)$, on the axis. Since $f'(a^+)=+\infty$, $f$ is increasing near $a$, so its
+    inverse $h := f^{-1}$ is defined on $(0,\delta)$ with $h(0^+) = a$ and
+    $h'(y) = 1/f'(h(y)) \to 0$ as $y \to 0^+$. Setting $h(0) := a$, the map
+    $(y,z) \mapsto h\big(\sqrt{y^2+z^2}\big)$ has partial derivatives $h'(r)\,y/r$ and
+    $h'(r)\,z/r$ with $r := \sqrt{y^2+z^2}$, which are continuous and tend to $0$ as $r \to 0$.
+    So it is $C^1$ near the origin and exhibits $\partial\Omega$ near $P$ as a $C^1$ graph over
+    the $(y,z)$-plane. The symmetric argument at $b$, using
     $f'(b^-)=-\infty$, handles the other end, so $\partial\Omega$ is a $C^1$ submanifold and
     $\Omega$ is a bounded $C^1$ domain.
 
@@ -243,7 +263,8 @@ Hence
     point, $\Omega$ would be disconnected by part \textbf{(a)}, which
     \cref{def:bounded_ck_domain} excludes, since it requires $\Omega$ itself to make sense as a
     single bounded open set with $(n-1)$-manifold boundary (implicit in the exercise's setup).
-    Therefore $f>0$ on $(a,b)$. For the endpoint condition at $a$: the point
+    Therefore $f>0$ on $(a,b)$. For the endpoint condition at $a$, suppose first that $f(a)>0$.
+    Then the point
     $P:=(a,f(a),0)\in\partial\Omega$ is a smooth boundary point, so
     $T_P(\partial\Omega)$ is $2$-dimensional and contains
     \[\frac{d}{dt}\Big|_{t=0^+}\big(a,f(a)-t,0\big) = -e_2, \qquad
@@ -257,7 +278,18 @@ Hence
     direction of $v_{\varepsilon_k}$ would converge to some $\alpha e_1+\beta e_2 \notin
     \operatorname{span}\{e_2,e_3\}$ (its $e_1$-component is the nonzero constant $1$, up to
     normalization), contradicting $T_P(\partial\Omega)=\operatorname{span}\{e_2,e_3\}$. So
-    $f'(a^+)=+\infty$; the symmetric argument at $b$ gives $f'(b^-)=-\infty$.
+    $f'(a^+)=+\infty$.
+
+    If $f(a)=0$ the relevant boundary point is $P := (a,0,0)$ and the argument is shorter.
+    Suppose $f'(a^+) = L$ were finite. Rotation about the $x$-axis maps $\partial\Omega$ to
+    itself and fixes $P$, so it acts on $T_P(\partial\Omega)$; the only $2$-plane in
+    $\mathbb{R}^3$ invariant under all of those rotations is
+    $\operatorname{span}\{e_2,e_3\}$, so that is what $T_P(\partial\Omega)$ must be. But the
+    curve $s\mapsto\big(a+s,\ f(a+s),\ 0\big)$ lies in $\partial\Omega$, passes through $P$ at
+    $s=0$ and has tangent $(1,L,0)$ there, whose $e_1$-component is $1$. That vector is not in
+    $\operatorname{span}\{e_2,e_3\}$, a contradiction, so $f'(a^+)=+\infty$ in this case too.
+    Geometrically, a finite slope leaves the body with a conical vertex, or with a cusp when
+    $L=0$. The symmetric argument at $b$ gives $f'(b^-)=-\infty$.
 \end{enumerate}
 \end{exercisesolution}
 

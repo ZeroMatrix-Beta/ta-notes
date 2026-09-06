@@ -85,10 +85,24 @@ A classic application of the change of variables formula is computing the Gaussi
 \[
 I^2 = \left( \int_{-\infty}^\infty e^{-x^2}\,dx \right) \left( \int_{-\infty}^\infty e^{-y^2}\,dy \right) = \int_{\mathbb{R}^2} e^{-(x^2+y^2)} \mathop{d\text{vol}}(x,y).
 \]
-We use polar coordinates, but strictly following \cref{thm:change_of_variables}, we define the forward map $\Phi: \mathbb{R}^2 \setminus \{(0,0)\} \to (0, \infty) \times [-\pi, \pi)$ by
+% Correction: Claude Opus 5 (Ultracode) --- the forward map was given as
+% $\Phi : \mathbb{R}^2\setminus\{(0,0)\} \to (0,\infty)\times[-\pi,\pi)$, which is not a
+% diffeomorphism between open sets and so does not meet the hypotheses of the theorem this
+% example advertises itself as "strictly following": atan2 into $[-\pi,\pi)$ jumps by $2\pi$
+% across the ray $\{y=0,\ x<0\}$, so $\Phi$ is not even continuous there, and the codomain is not
+% open. The set that has to be removed is the whole closed slit $\{y=0,\ x\le0\}$, not just the
+% origin -- which is also what the "null set" further down was naming wrongly. The chapter gets
+% this right elsewhere (ex:volume_ellipse says "minus a null set (the positive $x$-axis)"), so
+% this example was the odd one out. The value $\pi$ is unaffected.
+We use polar coordinates, but strictly following \cref{thm:change_of_variables}, we work on the
+slit plane
+\[\mathbb{R}^2_\ast := \mathbb{R}^2 \setminus \{(x,0) : x \leq 0\}\]
+and define the forward map $\Phi: \mathbb{R}^2_\ast \to (0, \infty) \times (-\pi, \pi)$ by
 \[
 \Phi(x,y) := \left( \sqrt{x^2+y^2}, \operatorname{atan2}(y,x) \right) =: (r, \varphi).
 \]
+Both sets are open and $\Phi$ is a $C^\infty$-diffeomorphism between them, with the slit removed
+precisely because the angle cannot be chosen continuously across it.
 
 \begin{center}
 % Correction: Claude Opus 5 (Max) --- the picture exhibited no size difference at all, under a
@@ -156,12 +170,27 @@ Its determinant is
 \[
 \det \Jac\Phi(x,y) = \frac{x^2}{(x^2+y^2)^{3/2}} + \frac{y^2}{(x^2+y^2)^{3/2}} = \frac{1}{\sqrt{x^2+y^2}} = \frac{1}{r}.
 \]
-Applying the theorem (ignoring the null set $\{(0,0)\}$ where $\Phi$ is undefined), we get
+Applying the theorem (the discarded slit is $\vol_2$-null, so removing it changes neither
+side), we get
 \[
-I^2 = \int_{\Phi(\mathbb{R}^2 \setminus \{(0,0)\})} \frac{e^{-r^2}}{\lvert1/r\rvert} \,dr\,d\varphi = \int_{-\pi}^\pi d\varphi \int_0^\infty r e^{-r^2}\,dr = 2\pi \cdot \left[ -\frac{1}{2} e^{-r^2} \right]_0^\infty = 2\pi \cdot \frac{1}{2} = \pi.
+I^2 = \int_{\Phi(\mathbb{R}^2_\ast)} \frac{e^{-r^2}}{\lvert1/r\rvert} \,dr\,d\varphi = \int_{-\pi}^\pi d\varphi \int_0^\infty r e^{-r^2}\,dr = 2\pi \cdot \left[ -\frac{1}{2} e^{-r^2} \right]_0^\infty = 2\pi \cdot \frac{1}{2} = \pi.
 \]
 Since $I > 0$, we conclude that $I = \sqrt{\pi}$.
 \end{example}
+
+\begin{ainote}
+\label{note:gaussian_is_improper}
+One hypothesis is still being stretched, and it is worth naming rather than hiding.
+\Cref{thm:change_of_variables} asks for a Jordan measurable $A$ with $\overline A$ inside the
+domain, and $\mathbb{R}^2_\ast$ is unbounded, hence not Jordan measurable at all: every integral
+in this computation is improper. What licenses it is
+\cref{sec:improper_integrals}: the integrand is non-negative, so
+\cref{lem:improper_integral_as_limit} says any exhaustion by compact Jordan measurable sets
+gives the same value, and one may run the change of variables on each piece and pass to the
+limit. \Cref{ex:ai_gaussian_two_exhaustions} does exactly this for this integral, with two
+different exhaustions. The slit is genuinely necessary; the unboundedness is genuinely harmless,
+but only because $e^{-(x^2+y^2)} \geq 0$.
+\end{ainote}
 
 % Supplement: Sascha Brack/Class Notes/Week_08_Notes_Friday.pdf, pp. 2--3
 \begin{example}[Change of variables on a diamond]

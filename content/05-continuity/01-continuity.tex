@@ -184,8 +184,33 @@ However, if we approach along the $y$-axis (setting $x=0$ first), we get
 \[
 \lim_{y \to 0} f(0, y) = \lim_{y \to 0} \frac{0}{y^2} = 0.
 \]
-Since these limits disagree, $\lim_{(x,y) \to (0,0)} f(x,y)$ does not exist. A robust method to check limits at the origin uniformly across all directions is to switch to \newterm{polar coordinates} ($x = r\cos\varphi, y = r\sin\varphi$). If the limit as $r \to 0$ is independent of $\varphi$, then the function converges. (This is explored further in \cref{ex:problems_at_origin}).
+Since these limits disagree, $\lim_{(x,y) \to (0,0)} f(x,y)$ does not exist. A useful method for
+checking limits at the origin is to switch to \newterm{polar coordinates}
+($x = r\cos\varphi, y = r\sin\varphi$). What must be produced is a bound
+% Correction: Claude Opus 5 (Ultracode) --- this sentence read "If the limit as $r \to 0$ is
+% independent of $\varphi$, then the function converges", which is false; see the ainote below.
+% The solution of ex:problems_at_origin always argued correctly ("the bound is uniform in
+% $\theta$"), so only this statement of the method was wrong, not any use of it.
+\[\big\lvert f(r\cos\varphi,\,r\sin\varphi) - L\big\rvert \ \leq\ g(r)
+  \qquad\text{with } g(r) \to 0 \text{ as } r \downarrow 0,\]
+where $g$ does \emph{not} depend on $\varphi$; then $\lim_{(x,y)\to(0,0)}f(x,y) = L$.
+(This is explored further in \cref{ex:problems_at_origin}).
 \end{example}
+
+\begin{ainote}
+\label{note:polar_limits_need_uniformity}
+The uniformity is the whole content of the method, and dropping it is the standard trap. It is
+\emph{not} enough that $\lim_{r\to0}f(r\cos\varphi,r\sin\varphi)$ exist for each fixed $\varphi$
+and take the same value throughout: that only says the limit is $L$ along every straight ray,
+and a function can approach the origin along a curve without ever following a ray. For
+\[f(x,y) := \frac{x^2y}{x^4+y^2}, \qquad
+  f(r\cos\varphi,r\sin\varphi) = \frac{r\cos^2\varphi\sin\varphi}{r^2\cos^4\varphi+\sin^2\varphi},\]
+the limit as $r \downarrow 0$ is $0$ for every fixed $\varphi$, including $\sin\varphi = 0$,
+where $f$ vanishes identically. Yet along the parabola $y = x^2$ one gets
+$f = x^4/(2x^4) = \tfrac12$, so the limit does not exist. The denominator is what defeats the
+ray test: it is small precisely where $\sin\varphi$ is comparable to $r$, which no fixed
+$\varphi$ ever sees.
+\end{ainote}
 
 \begin{question}
 Let $(X, d_X)$ and $(Y, d_Y)$ be metric spaces, where $d_Y$ is the discrete metric. Is

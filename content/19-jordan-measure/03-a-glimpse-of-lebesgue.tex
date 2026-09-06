@@ -175,7 +175,16 @@ It is tempting to conclude that the Lebesgue integral simply subsumes the Rieman
 \emph{proper} integrals on a box, \cref{thm:lebesgue_criterion_riemann}\textbf{(b)} says exactly
 that. For \emph{improper} ones it is false in both directions, and the standard witness is
 \[\int_0^\infty \frac{\sin x}{x}\,dx = \frac{\pi}{2},\]
-which exists as an improper Riemann integral (\cref{def:improper_integral}) but not as a Lebesgue
+% Correction: Claude Opus 5 (Ultracode) --- this cited \cref{def:improper_integral} for an
+% integral that definition explicitly excludes: it is stated for non-negative $f$ only, and
+% rem:improper_needs_nonnegativity says in as many words that $\int_0^\infty (\sin x)/x$ is *not*
+% an improper integral in that sense. Two statements in the same chapter therefore contradicted
+% each other on the same example. The mathematical point is untouched; it needs the classical
+% limit-of-proper-integrals notion, which is what ex:feynman_dirichlet_integral actually uses.
+which exists as the limit $\lim_{R\to\infty}\int_0^R$ of proper Riemann integrals (\emph{not}
+as an improper integral in the sense of \cref{def:improper_integral}, whose non-negativity
+hypothesis this integrand fails, as \cref{rem:improper_needs_nonnegativity} spells out), but
+not as a Lebesgue
 integral, because $\int_0^\infty \lvert \sin x\rvert/x \,dx = \infty$ and the Lebesgue theory
 integrates only absolutely. The improper Riemann integral is a limit of integrals and can exploit
 cancellation between the humps; the Lebesgue integral is defined through $\lvert f\rvert$ and

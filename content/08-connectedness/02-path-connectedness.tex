@@ -265,8 +265,15 @@ $\gamma_1$ within $U$ is a continuous map $H : [0,1]\times[0,1] \to U$ with
 for all $s,t \in [0,1]$. If such an $H$ exists we say $\gamma_1$ is \newterm{homotopic}
 \germanfor{homotop} to $\gamma_0$.
 
-The set $U$ is \newterm{simply connected} \germanfor{einfach zusammenhängend} if any two paths
-in $U$ with the same endpoints are homotopic.
+% Correction: Claude Opus 5 (Ultracode) --- the condition read only "any two paths in $U$ with
+% the same endpoints are homotopic". That is a universally quantified statement over pairs of
+% paths sharing endpoints, so it holds vacuously across components: $B_1(0,0) \cup B_1(5,0)$ is
+% open, any two paths in it with common endpoints lie in one (convex) disc and are homotopic by
+% the straight-line homotopy, so it came out simply connected while not being path-connected --
+% which made the first implication of rem:three_connectedness_notions below false. Added the
+% path-connectedness clause, which is the standard definition and what every use here assumes.
+The set $U$ is \newterm{simply connected} \germanfor{einfach zusammenhängend} if it is
+path-connected and any two paths in $U$ with the same endpoints are homotopic.
 \end{definition}
 
 \begin{remark}[Reading the definition as a deformation]
@@ -290,8 +297,14 @@ For an \emph{open} subset of $\mathbb{R}^n$ the three properties are strictly or
 implying the one after it and none of the converses holding:
 \[\text{simply connected} \ \Longrightarrow\ \text{path-connected}
   \ \Longrightarrow\ \text{connected}.\]
-The second implication is \cref{lem:path_connected_implies_connected}, and the first is immediate
-from the definitions, since a homotopy between two paths presupposes that two such paths exist.
+% Correction: Claude Opus 5 (Ultracode) --- the first implication was justified by "a homotopy
+% between two paths presupposes that two such paths exist", which does not follow: nothing in the
+% homotopy condition asserts that any path joins a given pair of points. It is path-connectedness
+% in def:simply_connected that carries the implication, and that clause was missing until now.
+The second implication is \cref{lem:path_connected_implies_connected}. The first holds because
+path-connectedness is part of \cref{def:simply_connected} itself, and it has to be stated
+there rather than deduced, since the homotopy condition alone is vacuous on a set whose
+components cannot be joined at all.
 Each failure has a standard witness:
 \begin{itemize}
   \item \textbf{Connected but not path-connected:} the topologist's sine curve,

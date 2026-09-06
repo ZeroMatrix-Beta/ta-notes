@@ -458,6 +458,52 @@ else:
             pdf_problems.append("main.pdf has no %%EOF marker -- the file is a partial write")
 report("main.pdf is not a complete document", pdf_problems)
 
+# ------------------------------------------------- H. the German glossary ---
+# appendix-b-glossary.tex states two invariants at its head and nothing enforced them.
+# On 2026-09-06 the tree held 116 mirrored terms against 89 rows -- 27 terms introduced with
+# no glossary entry -- plus one German word mirrored twice. Neither is visible in the built
+# PDF: a missing row is a silent omission and a duplicate mirroring just reads as a repeat.
+GLOSSARY = CONTENT / "appendix-b-glossary.tex"
+
+_UML = [('\\"a', "ä"), ('\\"o', "ö"), ('\\"u', "ü"),
+        ('\\"A', "Ä"), ('\\"O', "Ö"), ('\\"U', "Ü"),
+        ("\\ss ", "ss"), ("\\ss", "ss")]
+
+def gnorm(s):
+    """Compare German terms across the two spellings the tree uses: LaTeX escapes
+    (`H\\"aufungspunkt`, `Gau\\ss sche`) in content/, literal UTF-8 in the glossary."""
+    for k, v in _UML:
+        s = s.replace(k, v)
+    s = s.replace("ß", "ss").replace("\\", "")
+    return re.sub(r"\s+", " ", s).strip().lower()
+
+GERMANFOR = re.compile(r"\\germanfor\{((?:[^{}]|\{[^{}]*\})*)\}")
+
+mirrored = collections.defaultdict(list)
+for f in FILES:
+    if f == GLOSSARY:
+        continue
+    for i, line in enumerate(TEXT[f].splitlines(), 1):
+        for m in GERMANFOR.finditer(code(line)):
+            mirrored[gnorm(m.group(1))].append(f"{rel(f)}:{i}")
+
+glossary_rows = {}
+if GLOSSARY.exists():
+    for line in TEXT[GLOSSARY].splitlines():
+        stripped = code(line)
+        if "&" not in stripped:
+            continue
+        cells = [c.strip() for c in stripped.split("\\\\")[0].split("&")]
+        if len(cells) == 3 and not cells[0].startswith("\\textbf"):
+            glossary_rows[gnorm(cells[1])] = cells[1]
+
+report("German term mirrored more than once (mirroring is first-introduction only)",
+       [f"{term}  {sites}" for term, sites in sorted(mirrored.items()) if len(sites) > 1])
+report("mirrored German term with no row in appendix-b-glossary.tex",
+       [f"{mirrored[t][0]}  {t}" for t in sorted(mirrored) if t not in glossary_rows])
+report("glossary row whose German term is mirrored nowhere in content/",
+       [glossary_rows[t] for t in sorted(glossary_rows) if t not in mirrored])
+
 # ------------------------------------------------------------- verdict ------
 print("\n" + "-" * 62)
 if findings:

@@ -35,10 +35,19 @@ shortest path between points on a sphere or any other submanifold.
 
 \begin{lemma}[A few differentiation identities]
 \label{lem:inner_product_derivative_identities}
+% Correction: Claude Opus 5 (Ultracode) --- the second identity was stated for every $C^1$ curve,
+% but it needs $\alpha(t) \neq 0$: for $\alpha(t) = (t-\tfrac12,0,\dots,0)$ the left-hand side is
+% the derivative of $\lvert t-\tfrac12\rvert$, which does not exist at $t=\tfrac12$, and the
+% right-hand side is $0/0$ there. Every use in this chapter already has $\alpha \neq 0$
+% (prop:geodesic_straight_line has $\lvert c'\rvert \equiv \lambda > 0$), so only the statement
+% needed repair.
 Let $\alpha,\beta : (0,1) \to \mathbb{R}^n$ be $C^1$. Then
 \[\frac{d}{dt}\langle\alpha(t),\beta(t)\rangle = \langle\alpha'(t),\beta(t)\rangle
-  + \langle\alpha(t),\beta'(t)\rangle, \qquad
-  \frac{d}{dt}\lvert\alpha(t)\rvert = \frac{1}{\lvert\alpha(t)\rvert}\langle\alpha(t),\alpha'(t)\rangle.\]
+  + \langle\alpha(t),\beta'(t)\rangle,\]
+and at every $t$ with $\alpha(t) \neq 0$,
+\[\frac{d}{dt}\lvert\alpha(t)\rvert = \frac{1}{\lvert\alpha(t)\rvert}\langle\alpha(t),\alpha'(t)\rangle.\]
+The restriction is necessary: for $\alpha(t) = \big(t-\tfrac12,0,\dots,0\big)$ the function
+$\lvert\alpha(t)\rvert = \lvert t-\tfrac12\rvert$ is not differentiable at $t=\tfrac12$.
 \end{lemma}
 
 % Source: Corsin Nick/Class Notes/Week 10.pdf, pp. 4--5

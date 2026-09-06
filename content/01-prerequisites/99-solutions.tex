@@ -256,9 +256,17 @@ one intermediate level set:
   \item Intersect the closed unit ball with the plane: $\{x^2+y^2+z^2 \leq 1\} \cap \{x+y+z=0\}$.
   \item Remove a $60^\circ$ wedge from a disk:
     $\{x^2+y^2 \leq 1\} \setminus \{|\arctan(y/x)| \leq \pi/6,\ x>0\}$.
+% Correction: Claude Opus 5 (Ultracode) --- the set was given by an *equality*, which describes
+% only the lateral surface (at $z=0$ its slice is the perimeter of $[-1,1]^2$, not the filled
+% square), while the prose called it "a pyramid ... over the square", i.e. the solid. The sibling
+% exercise is careful about exactly this distinction, saying "the lateral surface of a right
+% circular cone ... base circle excluded", so the two answers should not disagree in convention.
+% Both sets are now given and named.
   \item Combining the square level sets from \cref{ex:equations_to_drawings} part \textbf{(f)} with the conical
-    slicing from part \textbf{(d)}: $\{1-z = \max\{|x|,|y|\},\ 0 \leq z \leq 1\}$ is a pyramid of
-    height $1$ over the square $[-1,1]^2$, apex at $(0,0,1)$.
+    slicing from part \textbf{(d)}: $\{1-z \geq \max\{|x|,|y|\},\ 0 \leq z \leq 1\}$ is the solid
+    pyramid of height $1$ over the square $[-1,1]^2$, apex at $(0,0,1)$. Writing an equality
+    instead, $\{1-z = \max\{|x|,|y|\},\ 0 \leq z \leq 1\}$, keeps only the lateral surface: the
+    four triangular faces, with the base square excluded.
 \end{enumerate}
 
 The two planar answers are worth drawing, since in both cases the description \qt{remove a piece}

@@ -186,11 +186,18 @@ the proof that the divergence has.
 \label{sol:vector_field_flux_hemisphere}
 The vector field $V(x,y,z) = (x,y,z-x^2-y^2)$ has divergence
 \[\divg V = \partial_x(x) + \partial_y(y) + \partial_z(z-x^2-y^2) = 1+1+1 = 3.\]
+% Correction: Claude Opus 5 (Ultracode) --- this asserted that the upper half ball "is a bounded
+% $C^1$ domain" and cited thm:gauss_divergence. It is not one: the hemisphere meets the equatorial
+% disc at a right angle along the equator, where the exterior normal jumps, so $\partial\Omega$
+% is not a $C^1$ hypersurface there. The document already owns the right tool --
+% thm:gauss_divergence_piecewise, added for exactly this situation -- so only the hypothesis check
+% and the citation were wrong. The value $3\pi/2$ is unchanged.
 $S$ is not itself the boundary of a bounded $C^1$ domain, so close it up with the equatorial
 disk $D := \{(x,y,0) : x^2+y^2\leq1\}$: then $\Omega := \{(x,y,z)\in B_1(0) : z\geq0\}$, the
-upper half ball, is a bounded $C^1$ domain with $\partial\Omega = S\cup D$, and $S$'s
+upper half ball, is a bounded \emph{piecewise} $C^1$ domain with $\partial\Omega = S\cup D$ (the
+two faces meet along the equator, a circle, which carries no $\vol_2$-measure), and $S$'s
 \qt{inside to outside} normal agrees with the outward normal of $\Omega$ on $S$. By
-\cref{thm:gauss_divergence},
+\cref{thm:gauss_divergence_piecewise},
 \[\int_S V\cdot\nu\,d\vol_2 + \int_D V\cdot\nu_D\,d\vol_2 = \int_\Omega \divg V\,dx
   = 3\vol_3(\Omega) = 3\cdot\frac{2\pi}{3} = 2\pi,\]
 using $\vol_3(\Omega) = \frac12\cdot\frac43\pi = \frac{2\pi}{3}$. On $D$ the outward normal is

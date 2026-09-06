@@ -358,13 +358,33 @@ The trick in \textbf{(a)} is worth keeping: to force a supremum to be attained, 
 $M - f$ and let the failure to attain it manufacture an unbounded function. It reappears whenever a
 statement about suprema has to be converted into a statement about boundedness.
 
-None of the reverse implications hold. A space satisfying \textbf{(i)} is called
-\newterm{pseudocompact}, and there are pseudocompact metric spaces that are not compact. Inside
-$\mathbb{R}^n$ the gap closes, by \cref{thm:heine_borel}. The chain proved here is
+% Correction: Claude Opus 5 (Ultracode) --- this paragraph read "None of the reverse implications
+% hold. A space satisfying (i) is called pseudocompact, and there are pseudocompact metric spaces
+% that are not compact. Inside R^n the gap closes, by thm:heine_borel." All three claims are false
+% in the setting the exercise fixes: for a *metric* space pseudocompactness is equivalent to
+% compactness, so there is no such example and no gap for Heine-Borel to close. Every standard
+% pseudocompact-but-not-compact witness ([0,omega_1), the Mrowka Psi-spaces) is non-metrizable,
+% which is exactly why the half-remembered counterexample does not apply here.
+A space satisfying \textbf{(i)} is called \newterm{pseudocompact}. The chain proved above is
 \textbf{(iii)} $\Rightarrow$ \textbf{(i)} $\Leftrightarrow$ \textbf{(ii)} and \textbf{(iv)}
 $\Rightarrow$ \textbf{(i)}; that \textbf{(iii)} and \textbf{(iv)} are themselves equivalent for
 metric spaces is \cref{thm:sequential_topological_compactness_equivalence}, which is a much deeper
 statement than either implication above.
+
+What is worth adding is that the reverse implications hold as well, so for a metric space all
+four statements are equivalent and pseudocompactness is not a weaker notion at all. Given
+\cref{thm:sequential_topological_compactness_equivalence} it is enough to prove
+\textbf{(i)} $\Rightarrow$ \textbf{(iv)}, and the contrapositive is a direct construction.
+Suppose some sequence has no accumulation point. Passing to distinct terms, the set
+$S := \{x_1,x_2,\dots\}$ is then closed, and every point of $X$ has a neighbourhood meeting $S$
+finitely often. Put
+\[r_k := \min\Big\{\tfrac13\,d\big(x_k,\,S\setminus\{x_k\}\big),\ \tfrac1k\Big\} > 0,
+  \qquad f(x) := \sum_{k\ge1} k\,\max\Big\{0,\ 1 - \tfrac{1}{r_k}d(x,x_k)\Big\}.\]
+The factor $\tfrac13$ makes the balls $B_{r_k}(x_k)$ pairwise disjoint, and the cap $\tfrac1k$
+makes every point of $X$ have a neighbourhood on which all but finitely many summands vanish; so
+$f$ is locally a finite sum of continuous functions, hence continuous. But $f(x_k) = k$, so $f$
+is unbounded and \textbf{(i)} fails. (The slicker route is the same idea packaged: $S$ is closed
+and discrete, $x_k \mapsto k$ is continuous on it, and Tietze extends that to $X$.)
 \end{remark}
 \end{exercisesolution}
 

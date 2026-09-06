@@ -5,12 +5,45 @@
 \label{sec:stokes_general}
 
 % Source: Corsin Nick/Class Notes/Week 13.pdf, p. 2
+% Correction: Claude Opus 5 (Ultracode) --- two repairs to the hypotheses. (1) The theorem asked
+% for omega to have "compact support in R^n", which does not make supp(omega) ∩ M compact and
+% leaves the statement false; see the ainote below for the counterexample. (2) It said
+% "orientable", then never fixed an orientation and never said dM carries the induced one, so the
+% sign of the right-hand side was undetermined. thm:stokes_classical, which is the case m=2, n=3
+% of this theorem, already stated both correctly, so the general statement was strictly weaker
+% than its own special case. Nothing downstream changes: every application in the document is to
+% a compact M, where both hypotheses are automatic.
 \begin{theorem}[Stokes' theorem]
 \label{thm:stokes_general}
-Let $M \subseteq \mathbb{R}^n$ be an orientable $m$-manifold with (possibly empty) boundary,
-and let $\omega \in \Omega^{m-1}(\mathbb{R}^n)$ have compact support in $\mathbb{R}^n$. Then
+Let $M \subseteq \mathbb{R}^n$ be an oriented $m$-manifold with (possibly empty) boundary, with
+$\partial M$ carrying the induced orientation of \cref{def:induced_orientation}, and let
+$\omega \in \Omega^{m-1}(\mathbb{R}^n)$ be a $C^1$ form for which
+$\supp\omega \cap M$ is compact. Then
 \[\int_{\partial M} \omega = \int_M d\omega.\]
 \end{theorem}
+
+\begin{ainote}
+\label{note:stokes_hypotheses_are_load_bearing}
+Both hypotheses earn their place, and it is worth seeing what each one stops.
+
+\textbf{Compactness of $\supp\omega \cap M$, not of $\supp\omega$.} Requiring only that $\omega$
+be compactly supported in $\mathbb{R}^n$ is not enough, because $M$ need not be closed in
+$\mathbb{R}^n$ and the support can then run off the end of $M$ without ever leaving a compact set
+of $\mathbb{R}^n$. Take $n = m = 1$ and $M = (0,1)$, which has $\partial M = \emptyset$ under
+\cref{def:submanifold_with_boundary}, since every one of its points has an open chart. Let
+$\omega = f \in \Omega^0(\mathbb{R})$ be compactly supported with $f \equiv 0$ near $0$ and
+$f \equiv 1$ near $1$. Then $\int_M d\omega = \int_0^1 f' = 1$, while $\int_{\partial M}\omega$
+is an integral over the empty set and vanishes. What fails is that $\supp\omega \cap M = (0,1)$
+is not compact. When $M$ itself is compact, which is the case in every application below,
+the condition is automatic.
+
+\textbf{An orientation, not merely orientability.} Both integrals change sign when an orientation
+is reversed, so a theorem that only asserts one \emph{exists} cannot pin down the sign of either
+side. The two orientations must moreover be matched, which is what
+\cref{def:induced_orientation} does: it is the outward-vector-first convention, and it is the
+same one that produces $\tau = (-\nu_2,\nu_1)$ in Green's theorem and the right-hand rule in
+\cref{rem:right_hand_rule_as_cross_product}.
+\end{ainote}
 
 \begin{ainote}
 \Cref{thm:stokes_classical} was stated ahead of Corsin's own notes, as background

@@ -80,7 +80,16 @@ The second half is an optimality argument, and it is the reason the section is h
 minimiser one expands and asks which term first detects a direction of descent. The first-order
 term is $b_1$, the second-order term is $b_2$, and \emph{either may vanish}: the deciding index
 is $\ell$, the first non-zero coefficient after $b_0$, and nothing in the hypotheses bounds it.
-For $f(z) = z^7 + 1$ recentred at a minimiser, $\ell$ is $7$.
+% Correction: Claude Opus 5 (Ultracode) --- read "For $f(z) = z^7+1$ recentred at a minimiser,
+% $\ell$ is $7$", which is false: the minimisers of $\lvert z^7+1\rvert$ are its seven roots, and
+% recentring at one of those gives $b_0 = 0$ and $b_1 = 7z_0^6 \neq 0$, so $\ell = 1$. The index
+% $7$ appears at $z_0 = 0$, which is not a minimiser -- but $z_0 = 0$ is exactly the shape of
+% point the proof reasons about, since it assumes $b_0 \neq 0$ for contradiction. Rebased there,
+% which is what makes the illustration do its job.
+Expanding $f(z) = z^7+1$ about the origin, for instance, gives $b_0 = 1 \neq 0$ and $\ell = 7$:
+six whole orders pass before any term detects a direction of descent. (That the origin is not
+in fact a minimiser of $\lvert f\rvert$ is precisely what the descent construction goes on to
+show: along $\varphi = \pi/7$ the modulus drops to $1-r^7$.)
 
 So the pattern of \cref{thm:hessian_test} does not merely fail to apply here, it could not: a
 test that stops at second order cannot see an obstruction of order seven. What replaces it is the

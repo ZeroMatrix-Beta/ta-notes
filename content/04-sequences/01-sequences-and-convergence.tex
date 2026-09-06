@@ -137,9 +137,18 @@ even in $\mathbb{R}$ itself, the sequence with $x_n := \tfrac1n$ for odd $n$ and
 even $n$ has $0$ as its only accumulation point but is unbounded, hence divergent. What \emph{is}
 true is the easier direction: if $(x_n)$ converges to $x$, then $x$ is its unique accumulation
 point (this follows directly from \cref{prop:uniqueness_of_limits} together with the fact that
-every subsequence of a convergent sequence converges to the same limit). The converse needs an
-extra hypothesis, such as compactness of the ambient space (\cref{sec:compactness}) together with
-some control ruling out the first counterexample's boundary-escaping behaviour.
+% Correction: Claude Opus 5 (Ultracode) --- the closing clause read "such as compactness of the
+% ambient space together with some control ruling out the first counterexample's
+% boundary-escaping behaviour", which overstates what is needed: compactness alone suffices, and
+% the escaping behaviour it points at *is* the non-compactness of $[0,1)$. Suggesting a residual
+% gap where there is none is the sort of hedge a reader remembers as a real caveat.
+every subsequence of a convergent sequence converges to the same limit). The converse needs one
+extra hypothesis and no more: (sequential) compactness of the ambient space
+(\cref{sec:compactness}). If $(x_k)$ has $x$ as its only accumulation point but does not converge
+to it, some $\varepsilon>0$ leaves a subsequence outside $B_\varepsilon(x)$; compactness gives
+that subsequence a convergent sub-subsequence, whose limit $y$ satisfies
+$d(y,x) \geq \varepsilon$ and is a second accumulation point, a contradiction. Both
+counterexamples above are simply non-compact: $[0,1)$ in the first, $\mathbb{R}$ in the second.
 \end{remark}
 
 \begin{proposition}[Open/closed sets via sequences]

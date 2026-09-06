@@ -167,13 +167,22 @@ where the exterior unit normal $\nu$ is defined at every boundary point off the 
 \end{theorem}
 
 \begin{ainote}
+% Correction: Claude Opus 5 (Ultracode) --- this inventory named only two of the sites needing
+% the piecewise version, and the document has five. The three it missed were
+% sol:vector_field_flux_hemisphere (which additionally *asserted* the upper half ball was a
+% bounded C^1 domain -- corrected there), sol:ai_capping_a_paraboloid, and ex:divergence_cylinder.
+% An inventory that is silently incomplete is worse than none, since the next reader takes its
+% silence for coverage.
 \Cref{thm:gauss_divergence_piecewise} is stated here without proof, as the course states it: the
 August 2024 exam grants it explicitly, telling candidates they may use the divergence theorem in a
-piecewise smooth domain without proof. It is worth having written down, because this document had
-already been using it twice over. A cube has edges and corners and is not a $C^1$ domain, so
+piecewise smooth domain without proof. It is worth having written down, because this document was
+already using it in five places. A cube has edges and corners and is not a $C^1$ domain, so
 \cref{ex:flux_divergence_cube} below needs this version and not
 \cref{thm:gauss_divergence}; so does \cref{ex:flux_truncated_paraboloid}, whose region has an edge
-where the paraboloid meets its lid.
+where the paraboloid meets its lid. The same goes for \cref{ex:divergence_cylinder}, a solid
+cylinder with two edge circles; for \cref{sol:vector_field_flux_hemisphere}, an upper half ball
+whose hemisphere meets its equatorial disc at a right angle; and for
+\cref{sol:ai_capping_a_paraboloid}, capped on the rim $x^2+y^2=1$.
 
 The reason it is true is worth a sentence even without a proof. Cut $\Omega$ along finitely many
 surfaces into pieces that \emph{are} $C^1$ domains and apply \cref{thm:gauss_divergence} to each.
@@ -228,7 +237,9 @@ By symmetry, the integral of $2x$ over $[-1,1]$ is $0$, and similarly for $y$ an
 \begin{example}[Flux out of a cylinder]
 \label{ex:divergence_cylinder}
 Let $\Omega := \{(x,y,z) \in \mathbb{R}^3 \mid x^2 + y^2 \leq R^2,\ 0 \leq z \leq H\}$ be a cylinder of radius $R$ and height $H$. Consider the vector field $F(x,y,z) := (x^3 + \sin(z), y^3 + xz, z^3 + xy)\transp$.
-We compute the outward flux of $F$ through $\partial\Omega$ using the divergence theorem.
+We compute the outward flux of $F$ through $\partial\Omega$ using the divergence theorem in
+the piecewise form \cref{thm:gauss_divergence_piecewise}, needed here because the two rim circles
+where the lateral surface meets the lids are edges, so $\Omega$ is not a $C^1$ domain.
 First, we compute the divergence of $F$:
 \[\divg F(x,y,z) = 3x^2 + 3y^2 + 3z^2 = 3(x^2 + y^2 + z^2).\]
 By the divergence theorem, the flux is the integral of the divergence over $\Omega$. We compute this using cylindrical coordinates $(r, \theta, z)$:

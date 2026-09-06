@@ -195,10 +195,15 @@ condition is available at every point.
     extension is continuous, because $t \log t \to 0$ as $t \to 0^+$. Therefore $f$ attains a minimum
     somewhere on $\Delta$.
 
-    Where? Suppose the minimum were attained at a point $x \in \Delta \setminus A$, so that exactly
+    % Correction: Claude Opus 5 (Ultracode) --- this cited part (a) for "its smallest value there
+    % is $-\log k$", but (a) only produces a unique critical point and its value; that this value
+    % is the minimum on a $k$-face is the statement of part (b) in dimension $k$. Run as an
+    % induction on $n$ the argument is fine, so it is relabelled as one rather than rewritten.
+    We argue by induction on $n$; the case $n=1$ is immediate, since $A=\{1\}$ and $f(1)=0=-\log1$.
+    Suppose the minimum were attained at a point $x \in \Delta \setminus A$, so that exactly
     $k$ of the coordinates are positive, with $1 \le k \le n-1$. On that face, $f$ is the same
-    expression in $k$ variables summing to $1$, and by part \textbf{(a)} applied with $k$ in place of
-    $n$ its smallest value there is $-\log k$. Since $k < n$ gives $-\log k > -\log n = f(p)$, and
+    expression in $k$ variables summing to $1$, so the induction hypothesis applied with $k$ in
+    place of $n$ gives that its smallest value there is $-\log k$. Since $k < n$ gives $-\log k > -\log n = f(p)$, and
     $p \in \Delta$, such a point cannot be a minimiser. The minimum is therefore attained in the
     interior, where by \textbf{(a)} the only candidate is $p$. Hence $\min_A f = f(p) = -\log n$.
 \end{enumerate}
@@ -229,11 +234,19 @@ theorem there is no constrained extremum either.
 \begin{remark}[Why the other three are wrong, and what they are testing]
 \begin{itemize}
   \item \textbf{(b)} fails on the geometry, and the phrase to distrust is \emph{independently of
-    the values of $a$ and $b$}. The set $\{ay^2+bz^2 = \pi\}$ in $\mathbb{R}^3$ is never compact,
-    whatever the signs: the variable $x$ is entirely unconstrained, so the set is a cylinder over a
+    % Correction: Claude Opus 5 (Ultracode) --- "never compact, whatever the signs" is false in
+    % the one sign pattern the sentence after it also omits: for $a,b<0$ the constraint reads
+    % $ay^2+bz^2 = \pi$ with a non-positive left-hand side, so the set is empty, and the empty set
+    % is compact. The verdict on (b) is unaffected, since an empty constraint set attains no
+    % extremum either, but for the opposite reason to the one given.
+    the values of $a$ and $b$}. Whenever the set $\{ay^2+bz^2 = \pi\}$ in $\mathbb{R}^3$ is
+    non-empty it is unbounded, hence not compact: the variable $x$ is entirely unconstrained, so
+    the set is a cylinder over a
     conic in the $(y,z)$-plane and is unbounded along the $x$-axis. When $a,b>0$ that conic is an
     ellipse and the set is an elliptic cylinder; when $a$ and $b$ have opposite signs it is a
-    hyperbola and the set is unbounded in the $(y,z)$-directions as well.
+    hyperbola and the set is unbounded in the $(y,z)$-directions as well. The remaining pattern
+    $a,b<0$ makes the left-hand side non-positive, so the constraint set is \emph{empty}, which is
+    compact but attains no extremum either. Under every sign pattern, then, \textbf{(b)} fails.
   \item \textbf{(c)} fails for the reason \textbf{(a)} succeeds. Setting $a=b$ makes the cross
     section a circle and does nothing to the first Lagrange equation, which is where the
     obstruction lives.

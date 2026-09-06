@@ -18,7 +18,12 @@ $x \mapsto \int_Y f(x,y)\,dy$.
 % Generator: Gemini 3.6 Flash (High)
 \begin{proposition}[Cavalieri's principle]
 \label{prop:cavalieri_principle}
-Let $A, B \subseteq \mathbb{R}^{n+1}$ be Jordan measurable sets. For each height $t \in \mathbb{R}$, denote by $A_t := \{x \in \mathbb{R}^n \mid (x,t) \in A\}$ and $B_t := \{x \in \mathbb{R}^n \mid (x,t) \in B\}$ the $n$-dimensional cross-sections at $t$. If the cross-sectional volumes agree for all $t \in \mathbb{R}$, i.e.\
+% Correction: Claude Opus 5 (Ultracode) --- the statement wrote $\mu_n(A_t)$ without ever
+% assuming the slices are Jordan measurable, which does not follow from Jordan measurability of
+% $A$: see the ainote below for a set whose slice at one height is $\mathbb{Q}\cap[0,1]$. The
+% hypothesis is now stated. (Every set the document applies this to has interval or ball slices,
+% so no application changes.)
+Let $A, B \subseteq \mathbb{R}^{n+1}$ be Jordan measurable sets. For each height $t \in \mathbb{R}$, denote by $A_t := \{x \in \mathbb{R}^n \mid (x,t) \in A\}$ and $B_t := \{x \in \mathbb{R}^n \mid (x,t) \in B\}$ the $n$-dimensional cross-sections at $t$, and suppose every one of these slices is itself Jordan measurable. If the cross-sectional volumes agree for all $t \in \mathbb{R}$, i.e.\
 \[
 \mu_n(A_t) = \mu_n(B_t) \quad \forall t \in \mathbb{R},
 \]
@@ -26,12 +31,37 @@ then the total $(n+1)$-dimensional volumes are equal: $\mu_{n+1}(A) = \mu_{n+1}(
 \end{proposition}
 
 \begin{proof}
-By Fubini's Theorem (\cref{thm:fubini}), integrating the indicator function over slices gives:
+Both sets are bounded, so fix a box $Q\times[c,d]$ containing them. Integrating the indicator
+function over slices gives:
 \[
 \mu_{n+1}(A) = \int_{\mathbb{R}^{n+1}} \chi_A(x,t) \,dx\,dt = \int_{\mathbb{R}} \left( \int_{\mathbb{R}^n} \chi_{A_t}(x) \,dx \right) dt = \int_{\mathbb{R}} \mu_n(A_t) \,dt.
 \]
 Replacing $\mu_n(A_t)$ with $\mu_n(B_t)$ yields $\mu_{n+1}(B)$.
 \end{proof}
+
+\begin{ainote}
+\label{note:cavalieri_hypotheses}
+% Correction: Claude Opus 5 (Ultracode) --- the proof cited thm:fubini, which is stated for a
+% *continuous* integrand on a product of boxes, for an indicator function on all of R^{n+1}. The
+% step is standard but it is not the theorem cited, so the citation is replaced by this note
+% rather than left pointing at a statement that does not cover it.
+Two things in that proof are being used in slightly stronger form than
+\cref{thm:fubini} states them, and both are worth naming.
+
+First, $\chi_A$ is not continuous, so the version of Fubini in play is the one for
+\emph{Riemann integrable} functions on a box: $\chi_A$ is Riemann integrable there precisely
+because $A$ is Jordan measurable, and the iterated identity holds provided the inner integral
+exists at every $t$, which is what the slice hypothesis buys.
+
+Second, that hypothesis is not free. Take
+\[A := \big([0,1]\times(0,1]\big) \ \cup\ \big((\mathbb{Q}\cap[0,1])\times\{0\}\big)
+  \ \subseteq\ \mathbb{R}^2 .\]
+Its interior is $(0,1)^2$ and its closure is $[0,1]^2$, so $\partial A$ is the frame of the unit
+square, which is $\vol_2$-null: $A$ is Jordan measurable with $\mu_2(A) = 1$. But
+$A_0 = \mathbb{Q}\cap[0,1]$ is not Jordan measurable, and $\mu_1(A_0)$ simply does not exist. A
+single bad slice is enough to make the inner integral undefined, which is why the hypothesis is
+stated on every $t$ rather than derived.
+\end{ainote}
 
 \begin{theorem}[Volume of a cone over a measurable base]
 \label{thm:cone_volume_formula}

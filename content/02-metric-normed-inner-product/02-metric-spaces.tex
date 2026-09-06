@@ -353,8 +353,15 @@ $|x-y|^2 = \langle x-y,x-y\rangle$ gives the closed form
 $d_0(x,y) = \sqrt{2-2\langle x,y\rangle}$. The geodesic metric described above measures arc length
 along a great circle instead, and is the solid blue curve in both panels. It is given by
 \[d_1(x,y) := \arccos\big(\langle x,y\rangle\big) \in [0,\pi].\]
-Both are genuine metrics on $S^2$ (\cref{ex:metric_examples}\textbf{(d)} already noted $d_0$;
-$d_1$ measures the same distance a great-circle flight would fly). They disagree as soon as
+% Correction: Claude Opus 5 (Ultracode) --- the parenthesis had the attribution the wrong way
+% round: it credited ex:metric_examples(d) with $d_0$, but that item introduces the *geodesic*
+% metric ("the closest path between two points on the sphere is an arc of a great circle ... this
+% defines a metric"), which is $d_1$. The chord metric $d_0$ is new here, as the restriction of
+% the ambient Euclidean metric. The sentence two lines above already said so, so the remark
+% contradicted itself.
+Both are genuine metrics on $S^2$ (\cref{ex:metric_examples}\textbf{(d)} already noted $d_1$,
+which measures the distance a great-circle flight would fly; $d_0$ appears here for the first
+time). They disagree as soon as
 $x \neq y$, since the chord always cuts inside the sphere. Therefore, $d_0(x,y) \leq d_1(x,y)$,
 with equality only in the limit $y \to x$. This is the sharpest instance in the chapter of a
 general warning. A subset inherits a metric from its ambient space, but that inherited metric need

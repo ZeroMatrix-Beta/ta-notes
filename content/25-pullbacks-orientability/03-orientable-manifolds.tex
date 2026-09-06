@@ -12,8 +12,14 @@ margin annotations quoted and figured below.
 
 \begin{definition}[Support of a $k$-form]
 \label{def:support_of_k_form}
+% Correction: Claude Opus 5 (Ultracode) --- dropped a second German mirroring of the term
+% "Traeger" from this line. The mirroring rule is first-introduction-only, and
+% def:support_of_function in the preceding section already carries it; a German term appearing
+% twice is a style error rather than a harmless repetition, per the maintenance note at the head
+% of appendix-b-glossary.tex. (Spelled without the macro here on purpose, so that a grep for the
+% mirroring macro does not report this comment as a third occurrence.)
 Let $U \subseteq \mathbb{R}^n$ be open and $\alpha \in \Omega^k(U)$. The \newterm{support}
-\germanfor{Tr\"ager} of $\alpha$ is the closed set
+of $\alpha$ is the closed set
 \[\supp\alpha := \overline{\{x\in U : \alpha_x \neq 0\}} \subseteq \overline{U}.\]
 We say $\alpha$ has \newterm{compact support} in $U$ if $\supp\alpha$ is bounded and contained
 in $U$.

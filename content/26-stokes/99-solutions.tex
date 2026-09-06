@@ -388,8 +388,15 @@ also a gradient is precisely what the domain decides.
     is \textbf{(a)} and \textbf{(b)} in one sentence.
   \item \textbf{False.} Injectivity on $[0,1)$ makes $\gamma$ a simple closed curve, but it says
     nothing about \emph{where} that curve runs. Two things can go wrong. First, the loop need not
-    enclose the origin at all: the circle of radius $\tfrac12$ about $(0,1)$ is a simple closed curve
-    in $U$ through $(0,1)$, and since it bounds a disc on which $X$ is defined and closed, Green's
+    % Correction: Claude Opus 5 (Ultracode) --- the witness was "the circle of radius 1/2 about
+    % (0,1) ... through (0,1)", which contradicts itself: a centre does not lie on its own circle,
+    % so that curve does not meet the exercise's standing requirement gamma(0) = gamma(1) = (0,1).
+    % Recentred at (0,3/2), which does pass through (0,1), stays at distance >= 1 from the origin
+    % and bounds a disc missing it. The verdict and the second reason below were already correct.
+    enclose the origin at all: the circle of radius $\tfrac12$ about $\big(0,\tfrac32\big)$ is a
+    simple closed curve in $U$ passing through $(0,1)$, and since it bounds a disc on which $X$
+    is defined and closed (every point of that disc is at distance at least $1$ from the
+    origin), Green's
     theorem (\cref{thm:green_theorem}) gives $\int_\gamma X \cdot d\gamma = 0$. Second, even a loop
     that does enclose the origin may be traversed clockwise, giving $-2\pi$. The correct general
     statement is that the integral equals $2\pi$ times the winding number of $\gamma$ about the

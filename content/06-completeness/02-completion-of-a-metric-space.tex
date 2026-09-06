@@ -44,10 +44,18 @@ particular, verify that $\overline d$ is indeed a metric on $\overline X$.
 \begin{exercise}[The completion is complete]
 \label{ex:completion_is_complete}
 As the name suggests, the completion $(\overline X,\overline d)$ of a metric space is complete,
+% Correction: Claude Opus 5 (Ultracode) --- the exercise asked for the diagonal of *arbitrary*
+% representatives, which need not even be Cauchy. Take $X=\mathbb{R}$ and $x_{m,n} := 1$ for
+% $n\le m$, $0$ for $n>m$: every row is Cauchy with limit $0$, so the sequence in the completion
+% is constant at $[0]$, yet the diagonal is constantly $1$ and represents $[1]\neq[0]$. The
+% solution sol:completion_is_complete already supplies the missing step, regularising each
+% representative so that $d(x_{m,n},x_{m,n'}) < 1/(m+1)$; the statement now says so.
 meaning every Cauchy sequence in $\overline X$ converges. A sequence in $\overline X$ is
 essentially a sequence of sequences, i.e.\
-$\big[(x_{m,n})_{n=0}^\infty\big]_{m=0}^\infty$. Show that $\big[(x_{n,n})_{n=0}^\infty\big]$ is a
-limit of this sequence.
+$\big[(x_{m,n})_{n=0}^\infty\big]_{m=0}^\infty$. Show that the representatives may be chosen so
+that $\big[(x_{n,n})_{n=0}^\infty\big]$ is a
+limit of this sequence. (Some such choice is needed: for arbitrary representatives the diagonal
+need not be Cauchy at all.)
 \exsol{sol:completion_is_complete}
 \end{exercise}
 

@@ -11,19 +11,31 @@ solved where it appears, on \cpageref{ex:convexity_characterizations}.
 \label{sol:convexity_properties_multiple_choice}
 % Generator: Claude Sonnet 5 (Medium)
 \begin{enumerate}[label=\textbf{(\alph*)}]
-  \item \textbf{False.} Let $f(x) := \max\{x_1, \tfrac12\}^4$ on $U := B_1 \subset \mathbb{R}^n$.
-    The inner function $x \mapsto \max\{x_1,\tfrac12\}$ is convex and takes values in
-    $[\tfrac12,\infty)$, and $t \mapsto t^4$ is convex and increasing there. A convex
-    increasing function composed with a convex function is convex, so $f$ is convex. For all $x \in U$ with $x_1 \leq \tfrac12$,
-    $f(x) = (\tfrac12)^4$ identically, so $f$ has a (non-strict) local maximum at $x=0$, yet
+% Correction: Claude Opus 5 (Ultracode) --- the witness was $f(x) := \max\{x_1,\tfrac12\}^4$,
+% which is not $C^1$ and so does not satisfy the hypothesis of the statement it was refuting:
+% writing $\phi(t) := \max(t,\tfrac12)^4$, one has $\phi' \equiv 0$ for $t < \tfrac12$ while
+% $\phi'(t) \to 4(\tfrac12)^3 = \tfrac12$ as $t \downarrow \tfrac12$, a jump of $\tfrac12$ across
+% a hyperplane that meets $B_1$. The verdict "False" was right and is unchanged; only the witness
+% is. Moving the kink to where the fourth power is already flat repairs it, and the replacement
+% is $C^3$. The remark's "grows without bound as $x_1 \to 1$" was also wrong for either function
+% ($f < 1$ throughout $B_1$ in the old one), so it is restated as what was actually meant.
+  \item \textbf{False.} Let $f(x) := \max\{x_1 - \tfrac12,\ 0\}^4$ on
+    $U := B_1 \subset \mathbb{R}^n$, which is open and convex.
+    The inner function $x \mapsto \max\{x_1-\tfrac12,0\}$ is convex and takes values in
+    $[0,\infty)$, and $t \mapsto t^4$ is convex and increasing there. A convex
+    increasing function composed with a convex function is convex, so $f$ is convex. It is also
+    $C^3$: writing $\phi(t) := \max(t,0)^4$, the derivatives $\phi' = 4t_+^3$,
+    $\phi'' = 12t_+^2$ and $\phi''' = 24t_+$ all match the zero function at $t=0$, and only the
+    fourth derivative jumps. For all $x \in U$ with $x_1 \leq \tfrac12$,
+    $f(x) = 0$ identically, so $f$ has a (non-strict) local maximum at $x=0$, yet
     $\nabla f$ does not vanish once $x_1 > \tfrac12$.
 
     \begin{remark}
     Worth noting: $x=0$ here is simultaneously a (non-strict) local \emph{minimum} too, since $f$
     is locally constant on the whole region $\{x_1 \leq \tfrac12\} \cap U$. This is exactly why
     the counterexample doesn't contradict \textbf{(b)}: $x=0$ is not a \emph{global} maximum of
-    $f$ on $U$ (as $f$ grows without bound as $x_1 \to 1$), so \textbf{(b)}'s stronger hypothesis
-    simply isn't triggered.
+    $f$ on $U$ (any point with $x_1 > \tfrac12$ has $f$ strictly larger), so \textbf{(b)}'s
+    stronger hypothesis simply isn't triggered.
     \end{remark}
   \item \textbf{True.} Since $z$ is a local maximum, $\nabla f(z) = 0$
     (\cref{prop:extremum_implies_critical}). Convexity gives $f(x) \geq f(z) + \nabla f(z)\cdot(x-z)

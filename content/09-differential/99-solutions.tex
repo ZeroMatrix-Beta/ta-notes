@@ -57,9 +57,25 @@ The correct answer is \textbf{(c)}.
     \[\frac{\lVert f(h)-f(0)-L(h)\rVert}{\lVert h\rVert}
       = \lVert h\rVert \cdot \frac{\lVert f(h)-f(0)-L(h)\rVert}{\lVert h\rVert^2} \to 0\]
     as well. So $f$ is differentiable, with $Df_0 = L$.
+% Correction: Claude Opus 5 (Ultracode) --- this cited "the counterexample of (a)", namely
+% $xy/(x^2+y^2)$, as a function with bounded partials. Its partials are not bounded:
+% $\partial_yf = x(x^2-y^2)/(x^2+y^2)^2$ takes the value $1/x$ at $(x,0)$, which blows up as
+% $x \to 0$, and does so *along an axis*, so the hedge "bounded near the origin along each axis"
+% was wrong too. A function failing the hypothesis cannot refute the statement, so the verdict
+% (which is correct) had no witness. Replaced with one that does have bounded partials.
   \item \textbf{False.} Bounded partial derivatives are no better than existing ones for this
-    purpose --- the counterexample of \textbf{(a)} has partials that are bounded near the origin
-    along each axis, and boundedness says nothing about the behaviour in between. What \emph{does}
+    purpose. A witness is
+    \[f(x,y) := \frac{xy^2}{x^2+y^2} \quad \text{for } (x,y)\neq(0,0), \qquad f(0,0) := 0,\]
+    the function of \cref{ex:regularity_ladder_xy2}. Away from the origin
+    \[\partial_xf = \frac{y^2(y^2-x^2)}{(x^2+y^2)^2}, \qquad
+      \partial_yf = \frac{2x^3y}{(x^2+y^2)^2},\]
+    both homogeneous of degree $0$ and continuous off the origin, hence bounded on the whole
+    plane; at the origin both partials exist and vanish, since $f$ vanishes on each axis. So the
+    only candidate derivative is $L = 0$. But along $h = (s,s)$ with $s > 0$,
+    \[\frac{f(h)-f(0)-L(h)}{\lVert h\rVert} = \frac{s^3/(2s^2)}{s\sqrt2} = \frac{1}{2\sqrt2}
+      \not\to 0,\]
+    so $f$ is not differentiable at $0$. Boundedness constrains the partials only in the
+    coordinate directions and says nothing about the behaviour in between. What \emph{does}
     suffice is \emph{continuity} of the partials, which is
     \cref{thm:continuous_partials_imply_differentiable}; note that this is a genuinely stronger
     hypothesis than the one offered here, and that \cref{ex:differentiable_not_c1} shows it is not

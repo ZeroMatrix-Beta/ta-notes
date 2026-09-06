@@ -486,16 +486,41 @@ If $\Omega = \mathbb{R}^n$, one can choose the domain to be the entire interval 
 
 % Source: Jérôme Paschoud/Notizen/Woche 14.2 DGL und Picard Lindelof.pdf, p. 4
 % Generator: Gemini 3.1 Pro (High)
+% Correction: Claude Opus 5 (Ultracode) --- three repairs. (1) The example claimed the equation
+% "has a unique solution" with *no initial condition* stated, which is false: $u(t) = Ce^{\arctan
+% t}$ solves it for every $C$. Uniqueness is a property of an initial value problem, so one is
+% now prescribed. (2) It set $I = [0,\infty)$ and $\Omega = [0,\infty)$ and then invoked
+% cor:picard_lindeloef_simplified, whose hypotheses require $I$ compact and $\Omega$ open --
+% neither held. $I$ is now a compact $[0,T]$ and $\Omega$ is $\mathbb{R}$, and the solution is
+% extended to $[0,\infty)$ by letting $T$ grow. (3) Added the closed form, since the whole point
+% of the example is that the abstract theorem agrees with what separation of variables gives.
 \begin{example}[Applying Picard--Lindelöf]
 \label{ex:picard_lindeloef_application}
-Let $I = [0, \infty)$ and $\Omega = [0, \infty)$. Consider the function $f: I \times \Omega \to \mathbb{R}$ given by $f(t, y) = \frac{y}{1+t^2}$. We want to prove that the differential equation $u'(t) - \frac{u(t)}{1+t^2} = 0$ has a unique solution for $u: (0, \infty) \to \mathbb{R}$.
+Fix $T > 0$, let $I := [0,T]$ and $\Omega := \mathbb{R}$, and consider the function
+$f: I \times \Omega \to \mathbb{R}$ given by $f(t, y) = \frac{y}{1+t^2}$. We want to prove that
+the initial value problem
+\[u'(t) - \frac{u(t)}{1+t^2} = 0, \qquad u(0) = y_0\]
+has a unique solution $u : I \to \mathbb{R}$, for whatever $y_0 \in \mathbb{R}$ is prescribed.
 
 We rewrite the ODE as $u'(t) = f(t, u(t))$. To apply the Picard--Lindelöf theorem, we check if $f$ satisfies the Lipschitz condition in $y$:
 \[
 \lvert f(t, y_1) - f(t, y_2) \rvert = \left\lvert \frac{y_1}{1+t^2} - \frac{y_2}{1+t^2} \right\rvert = \frac{1}{1+t^2} \lvert y_1 - y_2 \rvert \leq 1 \cdot \lvert y_1 - y_2 \rvert.
 \]
-Since $\frac{1}{1+t^2} \leq 1$ for all $t \in [0, \infty)$, the function $f$ is Lipschitz continuous in $y$ with Lipschitz constant $L=1$. Thus, by Picard--Lindelöf, the ODE possesses a unique solution.
+Since $\frac{1}{1+t^2} \leq 1$ for all $t \in I$, the function $f$ is Lipschitz continuous in $y$
+with Lipschitz constant $L=1$, uniformly in $t$. Because $\Omega = \mathbb{R}$,
+\cref{cor:picard_lindeloef_simplified} delivers a unique solution on the whole of $I$, not merely
+near $t=0$. As $T$ was arbitrary and any two of these solutions agree on the shorter interval by
+the same uniqueness, they patch together to a unique solution on $[0,\infty)$, which
+separating variables identifies as $u(t) = y_0e^{\arctan t}$.
 \end{example}
+
+\begin{ainote}
+Note where the initial condition is doing its work. Picard--Lindelöf never says that a
+differential equation has a unique solution; that is false for every equation with a
+one-parameter family of solutions, this one included. What it says is that an initial value
+problem does. The distinction is easy to lose because the Lipschitz estimate, which is the part
+requiring effort, does not mention $y_0$ at all.
+\end{ainote}
 
 % Supplement: Analysis_II_Script_v1.pdf, p. 192
 \begin{exercise}[$C^1$ in space implies locally Lipschitz]
@@ -922,10 +947,19 @@ points carve up.
       \quad\Longrightarrow\quad \frac{e^y}{1-e^y} = A e^{x}
       \quad\Longrightarrow\quad e^y = \frac{Ae^x}{1+Ae^x},\]
     that is
-    \[y(x) = x + \ln A - \ln\!\big(1 + Ae^{x}\big),\]
-    together with the constant solution $y \equiv 0$, the root of $1-e^y$. Note $y < 0$
-    throughout: every solution approaches the equilibrium $0$ from below as $x \to \infty$, which
-    the formula shows directly, since $\ln(1+Ae^x) - x - \ln A \to 0$.
+    % Correction: Claude Opus 5 (Ultracode) --- this read "Note $y < 0$ throughout: every solution
+    % approaches the equilibrium $0$ from below", which is false. Solutions with $y_0 > 0$ exist
+    % (there $y' = 1-e^y < 0$) and descend to $0$ from above. The displayed formula silently took
+    % $A > 0$, since $\ln A$ is otherwise undefined, and so covered only the lower branch -- but
+    % the exercise asks for the solution "for a general initial datum". Absolute values added and
+    % both branches described.
+    \[y(x) = x + \ln\lvert A\rvert - \ln\!\big\lvert 1 + Ae^{x}\big\rvert,\]
+    together with the constant solution $y \equiv 0$, the root of $1-e^y$. The sign of $A$
+    selects the branch: $A > 0$ gives the solutions lying below the equilibrium, defined for
+    every $x$, and $A < 0$ those lying above it, defined for $x > -\ln\lvert A\rvert$ and blowing
+    up as $x$ descends to that endpoint. In both cases $y \to 0$ as $x \to \infty$, from below
+    in the first and from above in the second, which the formula shows directly, since
+    $\ln\lvert 1+Ae^x\rvert - x - \ln\lvert A\rvert \to 0$.
 
   \item $\displaystyle y' = F(x,y) := \frac{1-y^2}{x}$, with $U = \{(x,y) : x \neq 0\}$, two
     open half-planes. The theorem applies on each.

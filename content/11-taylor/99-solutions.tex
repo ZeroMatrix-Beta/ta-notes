@@ -154,12 +154,25 @@ can establish) versus \textbf{around}/in a whole neighbourhood of $x=0$ (which i
     % form of it is cor:taylor_expansion_unique, printed 11.b.20. Elsewhere the file cites the
     % script in italics for exactly this reason. Pointed at our statement instead, which is what
     % the top of sol:reading_off_expansions already does.
-    point $x=0$ (by \cref{cor:taylor_expansion_unique}, this does give $f$ twice differentiable
-    \emph{at} $0$ with $\partial_{11}f(0) = 0$), but it does not force twice differentiability in a whole
-    neighbourhood \textbf{around} $x=0$. Without an a priori assumption such as $f \in C^2$ near
+    % Correction: Claude Opus 5 (Ultracode) --- the parenthetical claimed the estimate "does give
+    % $f$ twice differentiable *at* $0$ with $\partial_{11}f(0) = 0$", citing
+    % cor:taylor_expansion_unique. Two things were wrong. That corollary assumes $f \in C^{k+1}$,
+    % which is exactly the hypothesis this part is denying, so the citation was circular; and the
+    % claim is false, as the example in the very next sentence shows, since that $f$ has no
+    % $\partial_{11}f(0)$ at all. What the estimate really pins down is the second-order Taylor
+    % polynomial, not the existence of any second partial derivative.
+    point $x=0$, in the sense that the second-order Taylor \emph{polynomial} is determined. It
+    does not force twice differentiability in a whole
+    neighbourhood \textbf{around} $x=0$, and it does not even produce a second partial derivative
+    \emph{at} $0$. Without an a priori assumption such as $f \in C^2$ near
     $0$, one can cook up genuinely pathological examples, e.g.\
-    $f(x) := x_1x_2 + |x|^4\sin(|x|^{-100})$, for which $\partial_1 f(x) \to \infty$ as
-    $x \to 0$, so $\partial_1 f$ is not even continuous at $0$.
+    $f(x) := x_1x_2 + |x|^4\sin(|x|^{-100})$, which does satisfy $f(x) = x_1x_2 + O(|x|^3)$ and
+    yet has, along the $x_1$-axis and for $t>0$,
+    \[\partial_1 f(t,0) = 4t^3\sin\!\big(t^{-100}\big)
+      - 100\,t^{-97}\cos\!\big(t^{-100}\big).\]
+    So $\partial_1 f$ is not even continuous at $0$; and since $\partial_1f(0)=0$, the
+    difference quotient $\partial_1f(t,0)/t$ carries the unbounded term
+    $-100\,t^{-98}\cos(t^{-100})$ and has no limit, so $\partial_{11}f(0)$ does not exist.
 \end{enumerate}
 \end{exercisesolution}
 

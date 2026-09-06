@@ -129,8 +129,14 @@ not. It is a sketch and not a proof: the details are omitted.
 
 \begin{remark}[Proof sketch: the diagonal argument]
 \label{rem:ascoli_diagonal_sketch}
-Fix a countable dense subset $D = \{q_1,q_2,\dots\} \subseteq K$ (the points of $K$ with rational
-coordinates will do).
+% Correction: Claude Opus 5 (Ultracode) --- the parenthetical read "the points of $K$ with
+% rational coordinates will do", which fails for most compact $K$: $K = \{\sqrt2\}$ contains no
+% rational point at all, and neither does a Cantor set of irrationals, so the proposed $D$ can be
+% empty. The existence of $D$ is true for a different reason, given below; the theorem is
+% unaffected.
+Fix a countable dense subset $D = \{q_1,q_2,\dots\} \subseteq K$, which exists because $K$ is
+compact and therefore totally bounded: take a finite $\tfrac1j$-net for each $j$ and let $D$ be
+the union of them all.
 
 \textbf{Step 1: converge on $D$, using boundedness.} The values $(f_k(q_1))_k$ form a bounded
 sequence in $\mathbb{R}^m$, so by Bolzano--Weierstrass some subsequence converges at $q_1$. Pass

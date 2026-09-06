@@ -124,8 +124,13 @@ which is the complex exponential written in real coordinates. Its Jacobian is
   \qquad \det\Jac f(x,y) = e^{2x}(\cos^2y+\sin^2y) = e^{2x} > 0,\]
 so $\Jac f$ is invertible at \emph{every} point and $f$ is a local $C^\infty$-diffeomorphism
 everywhere by \cref{thm:inverse_function_theorem}. Yet $f(x,y+2\pi) = f(x,y)$ for all $(x,y)$, so
+% Correction: Claude Opus 5 (Ultracode) --- read "no horizontal strip of height $2\pi$ or more",
+% which the next sentence immediately contradicts by restricting to $\mathbb{R}\times(-\pi,\pi)$,
+% of height exactly $2\pi$. On an open strip $\mathbb{R}\times(a,a+2\pi)$ the map is injective:
+% if $y$ and $y+2\pi$ both lay in $(a,a+2\pi)$ then $y+2\pi < a+2\pi$ forces $y < a$. The
+% threshold is strictly more than $2\pi$.
 $f$ is not injective. Indeed, every value in its image is attained infinitely often, and $f$ is a
-global diffeomorphism on no horizontal strip of height $2\pi$ or more.
+global diffeomorphism on no horizontal strip of height greater than $2\pi$.
 
 Restricting the codomain does not help either: $f$ misses the origin and nothing else, so
 $f : \mathbb{R}^2 \to \mathbb{R}^2\setminus\{0\}$ is surjective but still not injective. What

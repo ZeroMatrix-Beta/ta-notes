@@ -321,8 +321,12 @@ The condition $\rank(A) = 1$ means $\det(A) = 0$ but $A \neq 0$.
 So, $M$ is the zero set of $F : \mathbb{R}^4 \setminus \{0\} \to \mathbb{R}$, $F(a,b,c,d) = ad - bc$.
 The space $\operatorname{Mat}_{2\times 2}(\mathbb{R})$ is isomorphic to $\mathbb{R}^4$.
 The Jacobian of $F$ is
-\[ \Jac F(a,b,c,d) = \begin{pmatrix} \partial_a F & \partial_b F & \partial_c F & \partial_d F \end{pmatrix} = \begin{pmatrix} d & -c & -a & b \end{pmatrix}. \]
-For $\Jac F$ to not have maximal rank (which is 1), we must have $d = 0$, $c = 0$, $a = 0$, and $b = 0$, which means $A = 0$.
+% Correction: Claude Opus 5 (Ultracode) --- the last two entries read $-a$ and $b$; since
+% $F(a,b,c,d) = ad - bc$, they are $\partial_cF = -b$ and $\partial_dF = a$. The display labels
+% its own entries, so no ordering convention rescued it. The conclusion is untouched: the printed
+% row and the correct one vanish on exactly the same set, namely $A = 0$.
+\[ \Jac F(a,b,c,d) = \begin{pmatrix} \partial_a F & \partial_b F & \partial_c F & \partial_d F \end{pmatrix} = \begin{pmatrix} d & -c & -b & a \end{pmatrix}. \]
+For $\Jac F$ to not have maximal rank (which is 1), we must have $d = 0$, $c = 0$, $b = 0$, and $a = 0$, which means $A = 0$.
 But the zero matrix is excluded from $M$ because its rank is 0, not 1.
 Thus $\Jac F(A) \neq 0$ for all $A \in M$. By the regular value theorem, $M$ is a submanifold.
 The ambient dimension is $4$ and the number of independent constraints is $1$.

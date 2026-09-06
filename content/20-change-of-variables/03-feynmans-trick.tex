@@ -6,8 +6,14 @@
 
 \begin{theorem}[Differentiation under the integral sign]
 \label{thm:feynmans_trick}
+% Correction: Claude Opus 5 (Ultracode) --- $K$ was required only to be compact, so
+% $\int_K f(x,y)\,dx$ need not exist and the statement was about a possibly undefined object: a
+% fat Cantor set times a box is compact with inner measure strictly below its outer measure, and
+% def:riemann_integral_rn then assigns it no value. Added Jordan measurability, matching
+% def:improper_integral, which already says "compact and Jordan measurable".
 Let $U \subseteq \mathbb{R}^n\times\mathbb{R}$ be open, $f \in C^1(U)$, and let
-$K \subseteq \mathbb{R}^n$ be compact such that $K\times[a,b] \subseteq U$. Then the function
+$K \subseteq \mathbb{R}^n$ be compact and Jordan measurable such that
+$K\times[a,b] \subseteq U$. Then the function
 \[(a,b) \to \mathbb{R}, \qquad y \mapsto \int_K f(x,y)\,dx\]
 is continuously differentiable, and
 \[\frac{d}{dy}\int_K f(x,y)\,dx = \int_K \frac{\partial}{\partial y}f(x,y)\,dx

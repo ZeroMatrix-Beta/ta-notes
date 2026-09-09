@@ -121,11 +121,11 @@ precisely because the angle cannot be chosen continuously across it.
 \begin{tikzpicture}[>=Latex, scale=1]
   % Left side: (r, phi) plane. Two CONGRUENT rectangles, 0.5 wide and 0.6 tall, differing only
   % in where they sit along r -- so r_2 - r_1 = r_4 - r_3 = 0.5 by construction.
-  \draw[->, gray] (-0.2, 0) -- (2.6, 0) node[right, font=\scriptsize, text=black] {$r$};
-  \draw[->, gray] (0, -0.2) -- (0, 1.8) node[above, font=\scriptsize, text=black] {$\varphi$};
-
   \draw[thick, fill=red!20]  (0.4, 0.5) rectangle (0.9, 1.1);
   \draw[thick, fill=blue!20] (1.5, 0.5) rectangle (2.0, 1.1);
+
+  \draw[->, gray] (-0.2, 0) -- (2.6, 0) node[right, font=\scriptsize, text=black] {$r$};
+  \draw[->, gray] (0, -0.2) -- (0, 1.8) node[above, font=\scriptsize, text=black] {$\varphi$};
 
   \node[left, font=\scriptsize] at (0, 1.1) {$\varphi_2$};
   \node[left, font=\scriptsize] at (0, 0.5) {$\varphi_1$};
@@ -143,9 +143,6 @@ precisely because the angle cannot be chosen continuously across it.
 
   % Right side: (x,y) plane. Same angular band for both, so only the radius differs.
   \begin{scope}[shift={(6.5, 0.5)}]
-    \draw[->, gray] (-0.6, 0) -- (2.6, 0) node[right, font=\scriptsize, text=black] {$x$};
-    \draw[->, gray] (0, -0.6) -- (0, 2.6) node[above, font=\scriptsize, text=black] {$y$};
-
     \foreach \r in {0.4, 0.9, 1.5, 2.0} { \draw[gray!45, dashed] (0,0) circle (\r); }
 
     % Red sector: the image of the rectangle near the origin.
@@ -154,6 +151,9 @@ precisely because the angle cannot be chosen continuously across it.
     % Blue sector: the image of the congruent rectangle further out.
     \draw[thick, fill=blue!20]
       (10:1.5) -- (10:2.0) arc (10:45:2.0) -- (45:1.5) arc (45:10:1.5) -- cycle;
+
+    \draw[->, gray] (-0.6, 0) -- (2.6, 0) node[right, font=\scriptsize, text=black] {$x$};
+    \draw[->, gray] (0, -0.6) -- (0, 2.6) node[above, font=\scriptsize, text=black] {$y$};
   \end{scope}
 
   \node[align=center, font=\small] at (4.4, -1.7)

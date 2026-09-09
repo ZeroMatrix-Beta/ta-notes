@@ -1,0 +1,75 @@
+% Originally: content/week-05.tex, \section{Lagrange multipliers} (Corsin Week 5)
+
+\section{An application: the spectral theorem}
+\label{sec:spectral_theorem_optimization}
+
+% Generator: Claude Opus 5 (High) --- lead-in for the theorem below.
+The spectral theorem has been used freely since \cref{rem:diagonalizing_hessian}, on the strength
+of linear algebra alone. It can also be \emph{proved} here, and the proof is a fair test of what
+\cref{prop:constrained_optimization} is worth. Maximise the quadratic form
+$x \mapsto \langle x, Ax\rangle$ over the unit sphere, and the multiplier that falls out is an
+eigenvalue. Nothing is circular in this, since \cref{prop:constrained_optimization} nowhere uses
+diagonalisation.
+
+% Generator: Claude Opus 5 (High) --- not in Corsin's notes; included because it is the one
+% place in the course where an analytic tool repays a debt to linear algebra, and because the
+% Rayleigh-quotient argument is a genuine use of \cref{prop:constrained_optimization} with more
+% than one constraint.
+\begin{theorem}[Spectral theorem, via constrained optimization]
+\label{thm:spectral_theorem_optimization}
+Every symmetric $A \in \mathbb{R}^{n\times n}$ admits an orthonormal basis
+$\{v_1,\dots,v_n\}$ of $\mathbb{R}^n$ consisting of eigenvectors of $A$, with real eigenvalues.
+\end{theorem}
+
+\begin{proof}
+Let $f(x) := \langle x, Ax\rangle$, a polynomial and hence continuous, and let
+$g(x) := \lvert x\rvert^2 - 1$, so that the unit sphere is $S^{n-1} = g^{-1}\{0\}$. Since $A$ is
+symmetric, $\nabla f(x) = 2Ax$; also $\nabla g(x) = 2x$.
+
+We construct the $v_j$ one at a time. Suppose $v_1,\dots,v_k$ are already orthonormal
+eigenvectors of $A$, with eigenvalues $\lambda_1,\dots,\lambda_k$ (for $k=0$ there is nothing to
+suppose). Put
+\[K_k := S^{n-1} \cap \{x : \langle x,v_j\rangle = 0 \text{ for } j=1,\dots,k\},\]
+the unit sphere of the orthogonal complement of $\operatorname{span}\{v_1,\dots,v_k\}$. This is
+closed and bounded, hence compact by \cref{thm:heine_borel}, and non-empty as long as $k<n$, so
+$f$ attains a maximum on it at some $v_{k+1} \in K_k$.
+
+The constraints active at $v_{k+1}$ are $g$ together with the $k$ linear functions
+$h_j(x) := \langle x,v_j\rangle$, whose gradients are $\nabla g(v_{k+1}) = 2v_{k+1}$ and
+$\nabla h_j(v_{k+1}) = v_j$. These $k+1$ vectors are orthogonal and non-zero, hence linearly
+independent, so \cref{prop:constrained_optimization} applies and yields multipliers with
+\[2Av_{k+1} = 2\lambda_{k+1}v_{k+1} + \sum_{j=1}^{k}\mu_jv_j.\]
+Pair both sides with $v_i$ for a fixed $i \leq k$. On the right, $\langle v_{k+1},v_i\rangle = 0$
+and $\langle v_j,v_i\rangle = \delta_{ji}$, leaving $\mu_i$. On the left, symmetry of $A$ moves it
+across the inner product,
+\[\langle Av_{k+1}, v_i\rangle = \langle v_{k+1}, Av_i\rangle
+  = \lambda_i\langle v_{k+1},v_i\rangle = 0,\]
+using that $v_i$ is already an eigenvector. Hence $\mu_i = 0$ for every $i \leq k$, and the
+displayed identity collapses to $Av_{k+1} = \lambda_{k+1}v_{k+1}$. So, $v_{k+1}$ is a unit
+eigenvector orthogonal to all its predecessors, and after $n$ steps the $v_j$ form the required
+basis. Each eigenvalue is real because $\lambda_j = \langle v_j, Av_j\rangle$ is a real number by
+construction.
+\end{proof}
+
+% ex:antipodal_max_distance stood here, between the spectral theorem's proof and the corollary
+% drawn from it, with its own full solution printed underneath. Moved down into the exercise block
+% and its solution into 99-solutions.tex by Claude Opus 5 (Extra), 2026-08-13: it is a genuine
+% problem rather than a demonstration (it is the chapter's only worked instance of the
+% *two*-constraint form), and it was interrupting an argument that runs straight from
+% thm:spectral_theorem_optimization into cor:courant_fischer_extreme.
+
+% Generator: Claude Opus 5 (High)
+\begin{corollary}[Extreme eigenvalues as Rayleigh quotients]
+\label{cor:courant_fischer_extreme}
+For symmetric $A \in \mathbb{R}^{n\times n}$,
+\[\lambda_{\min}(A) = \min_{x \in S^{n-1}}\langle x,Ax\rangle, \qquad
+  \lambda_{\max}(A) = \max_{x \in S^{n-1}}\langle x,Ax\rangle.\]
+\end{corollary}
+
+\begin{proof}
+Write $x \in S^{n-1}$ in the orthonormal eigenbasis of \cref{thm:spectral_theorem_optimization}
+as $x = \sum_j c_jv_j$ with $\sum_j c_j^2 = 1$. Then
+$\langle x,Ax\rangle = \sum_j \lambda_jc_j^2$ is a convex combination of the eigenvalues, so it
+lies between $\lambda_{\min}$ and $\lambda_{\max}$; both bounds are attained by taking $x$ to be
+the corresponding eigenvector.
+\end{proof}

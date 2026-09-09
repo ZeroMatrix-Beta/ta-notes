@@ -170,16 +170,17 @@ e_{i_1}^*\wedge\cdots\wedge e_{i_k}^*(v_1,\ldots,v_k) = \det\!\left(
   % orientation of the shadow: v' then w' is counterclockwise, matching det = +3.6
   \draw[OliveGreen!60!black, ->, thick] (0.674,-0.646) arc (-135:135:0.22);
 
-  % axes
-  \draw[->, gray!70!black] (0,0) -- (-1.87,-1.19) node[below left, font=\scriptsize] {$x_1$};
-  \draw[->, gray!70!black] (0,0) -- (3.6,0) node[right, font=\scriptsize] {$x_2$};
-  \draw[->, gray!70!black] (0,0) -- (0,2.6) node[above, font=\scriptsize] {$x_3$};
-
   % the actual parallelogram spanned by v and w, floating above
+  % Correction: Gemini 3.7 Flash (High) --- draw floating parallelogram fill before coordinate axes so x_3 axis is not painted over.
   \fill[MidnightBlue!22, opacity=0.75]
     (0,0) -- (-0.10,0.90) -- (1.66,1.62) -- (1.76,0.72) -- cycle;
   \draw[MidnightBlue!70, thick]
     (0,0) -- (-0.10,0.90) -- (1.66,1.62) -- (1.76,0.72) -- cycle;
+
+  % axes
+  \draw[->, gray!70!black] (0,0) -- (-1.87,-1.19) node[below left, font=\scriptsize] {$x_1$};
+  \draw[->, gray!70!black] (0,0) -- (3.6,0) node[right, font=\scriptsize] {$x_2$};
+  \draw[->, gray!70!black] (0,0) -- (0,2.6) node[above, font=\scriptsize] {$x_3$};
 
   % projection lines: each vertex drops straight down to its shadow
   \draw[gray!60, dashed] (-0.10,0.90) -- (-0.10,-0.70);

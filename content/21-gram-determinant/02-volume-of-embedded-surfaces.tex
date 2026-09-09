@@ -82,13 +82,7 @@ so the volume is strictly positive.
     % at $3.51$ and the $z$ label sitting above it. Masking with a white plate was the other
     % option and is rejected: it would leave the axis visibly interrupted, which is right for the
     % formula callout below (a box laid over the scene) and wrong for a heading.
-    \node[lbl, font=\small\bfseries, text=TextBoldColor] at (0.0, 0.0, 2.9) {Embedded surface $S = \phi(V) \subseteq \mathbb{R}^3$};
-
-    % 3D Coordinate Axes (x, y, z) at corner
-    \draw[->, thick, gray!60] (-1.7, -1.7, -0.6) -- (2.0, -1.7, -0.6) node[lbl, below left, font=\scriptsize, text=black] {$x$};
-    \draw[->, thick, gray!60] (-1.7, -1.7, -0.6) -- (-1.7, 2.0, -0.6) node[lbl, right, font=\scriptsize, text=black] {$y$};
-    \draw[->, thick, gray!60] (-1.7, -1.7, -0.6) -- (-1.7, -1.7, 1.6) node[lbl, above, font=\scriptsize, text=black] {$z$};
-
+    % Correction: Gemini 3.7 Flash (High) --- draw surface background fill before 3D axes and labels to prevent painting over them.
     % Background shading of surface
     \fill[cyan!18, opacity=0.85]
       (-1.5,-1.5, {0.18*(-1.5)*(-1.5) - 0.12*(-1.5)*(-1.5)})
@@ -102,6 +96,13 @@ so the volume is strictly positive.
         -- (\u, -1.5, {0.18*\u*\u - 0.12*(-1.5)*(-1.5) + 0.08*\u})
       }
       -- cycle;
+
+    \node[lbl, font=\small\bfseries, text=TextBoldColor] at (0.0, 0.0, 2.9) {Embedded surface $S = \phi(V) \subseteq \mathbb{R}^3$};
+
+    % 3D Coordinate Axes (x, y, z) at corner
+    \draw[->, thick, gray!60] (-1.7, -1.7, -0.6) -- (2.0, -1.7, -0.6) node[lbl, below left, font=\scriptsize, text=black] {$x$};
+    \draw[->, thick, gray!60] (-1.7, -1.7, -0.6) -- (-1.7, 2.0, -0.6) node[lbl, right, font=\scriptsize, text=black] {$y$};
+    \draw[->, thick, gray!60] (-1.7, -1.7, -0.6) -- (-1.7, -1.7, 1.6) node[lbl, above, font=\scriptsize, text=black] {$z$};
 
     % U-curves (coordinate lines v = const)
     \foreach \v in {-1.5,-1.0,-0.5,0.0,0.5,1.0,1.5} {

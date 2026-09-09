@@ -286,6 +286,9 @@ not.
   \end{scope}
 
   % Panel 3: Neither
+  % Correction: Gemini 3.7 Flash (High) --- in panel (c), x_n previously converged to (1.8, 0)
+  % which lies on the dashed (open) boundary y=0 and thus escaped; redirected to the solid (closed)
+  % boundary at (1.8, 0.9) so that its limit belongs to the set and x_n remains trapped, matching the prose.
   \begin{scope}[shift={(5.6,0)}]
     \fill[blue!5] (0,0) rectangle (1.8,1.8);
     \draw[thick] (0,0) -- (0,1.8);
@@ -293,12 +296,12 @@ not.
     \draw[thick, dashed] (0,1.8) -- (1.8,1.8);
     \draw[thick, dashed] (0,0) -- (1.8,0);
 
-    \draw[orange!90!black, thick, dotted, ->] (0.6,0.4).. controls (0.8,1.1) and (1.0,1.5).. (1.2,1.8);
-    \node[orange!90!black, font=\footnotesize, left] at (0.6,0.4) {$y_n$};
+    \draw[orange!90!black, thick, dotted, ->] (0.5,1.1).. controls (0.8,1.4) and (1.0,1.6).. (1.2,1.8);
+    \node[orange!90!black, font=\footnotesize, left] at (0.5,1.1) {$y_n$};
 
-    \draw[purple, thick, dotted, ->] (0.4,1.2).. controls (0.9,0.8) and (1.3,0.3).. (1.75,0.05);
-    \node[purple, font=\footnotesize, left] at (0.4,1.2) {$x_n$};
-    \node[red, font=\small] at (1.8,0) {$\times$};
+    \draw[purple, thick, dotted, ->] (0.4,0.4).. controls (0.8,0.5) and (1.3,0.7).. (1.75,0.9);
+    \node[purple, font=\footnotesize, left] at (0.4,0.4) {$x_n$};
+    \node[red, font=\small] at (1.8,0.9) {$\times$};
 
     \node[below, font=\small] at (0.9,-0.1) {(c) $[0,1]\times(0,1)$ (\textbf{neither})};
   \end{scope}

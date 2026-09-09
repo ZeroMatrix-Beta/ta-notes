@@ -259,3 +259,55 @@ reason rather than by accident. \Cref{ex:local_invertible_not_globally_injective
 point on a connected domain, where the folding is harder to see and no less real.
 \end{remark}
 \end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:expansive_local_diffeomorphism_global_inverse}]
+\label{sol:expansive_local_diffeomorphism_global_inverse}
+% Generator: Gemini 3.7 Flash (High)
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{Injectivity:} Suppose $f(x) = f(y)$ for some $x, y \in U$. Then
+    \[0 = \|f(x) - f(y)\| \geq \alpha \|x - y\|,\]
+    which forces $\|x - y\| = 0$ since $\alpha > 0$. Hence $x = y$, proving injectivity.
+
+    \textbf{Invertibility of the differential:} Fix $x \in U$ and let $v \in \mathbb{R}^n \setminus \{0\}$.
+    Since $U$ is open, $x + tv \in U$ for all $t > 0$ sufficiently small. Applying the expansiveness
+    inequality with $y = x + tv$ gives
+    \[\frac{\|f(x + tv) - f(x)\|}{t} \geq \frac{\alpha \|tv\|}{t} = \alpha \|v\|.\]
+    As $t \downarrow 0$, the left-hand side converges by differentiability of $f$ to the directional
+    derivative $\|Df_x(v)\|$. Thus
+    \[\|Df_x(v)\| \geq \alpha \|v\| > 0 \qquad \text{for all } v \neq 0.\]
+    In particular, $\ker(Df_x) = \{0\}$, so the linear map $Df_x : \mathbb{R}^n \to \mathbb{R}^n$ is
+    injective. Since domain and codomain have the same finite dimension $n$, $Df_x$ is a linear
+    isomorphism (equivalently, $\det \Jac f(x) \neq 0$).
+
+    \textbf{$C^1$-diffeomorphism onto $f(U)$:} By the inverse function theorem
+    (\cref{thm:inverse_function_theorem}), $f$ is a local $C^1$-diffeomorphism around every $x \in U$.
+    In particular, $f$ is an open map, so the image $f(U) \subseteq \mathbb{R}^n$ is open.
+    Moreover, since $f$ is globally injective on $U$, the inverse map $f^{-1} : f(U) \to U$ is well-defined.
+    Around any $y_0 = f(x_0) \in f(U)$, the global inverse agrees with the local $C^1$-inverse provided
+    by \cref{thm:inverse_function_theorem}, so $f^{-1}$ is of class $C^1$. Thus $f : U \to f(U)$ is a
+    $C^1$-diffeomorphism.
+
+  \item \textbf{Closedness of the image:} Suppose $U = \mathbb{R}^n$. Let $(y_k)_{k \in \mathbb{N}}$ be
+    a sequence in $f(\mathbb{R}^n)$ converging to some $y \in \mathbb{R}^n$. For each $k$, choose
+    $x_k \in \mathbb{R}^n$ with $f(x_k) = y_k$.
+    Since $(y_k)$ converges in $\mathbb{R}^n$, it is a Cauchy sequence. By expansiveness,
+    \[\|x_j - x_k\| \leq \frac{1}{\alpha} \|f(x_j) - f(x_k)\| = \frac{1}{\alpha} \|y_j - y_k\|.\]
+    Hence $(x_k)_{k \in \mathbb{N}}$ is a Cauchy sequence in $\mathbb{R}^n$. Because $\mathbb{R}^n$ is
+    complete (\cref{prop:Rn_coordinatewise_complete}), there exists $x \in \mathbb{R}^n$ such that $x_k \to x$.
+    By continuity of $f$,
+    \[y = \lim_{k \to \infty} y_k = \lim_{k \to \infty} f(x_k) = f(x) \in f(\mathbb{R}^n).\]
+    Therefore $f(\mathbb{R}^n)$ contains all its limit points, so $f(\mathbb{R}^n)$ is closed in $\mathbb{R}^n$.
+
+    \textbf{Surjectivity and global diffeomorphism:} The image $V := f(\mathbb{R}^n)$ is:
+    \begin{itemize}
+      \item non-empty (since $\mathbb{R}^n \neq \emptyset$),
+      \item open in $\mathbb{R}^n$ (by part \textbf{(a)} with $U = \mathbb{R}^n$),
+      \item closed in $\mathbb{R}^n$ (as just proved).
+    \end{itemize}
+    Since $\mathbb{R}^n$ is connected (being path-connected, \cref{lem:path_connected_implies_connected}),
+    its only open and closed subsets are $\emptyset$ and $\mathbb{R}^n$ itself. Since $V \neq \emptyset$,
+    we conclude $V = \mathbb{R}^n$.
+    Thus $f$ is surjective. Combined with the injectivity and local $C^1$-diffeomorphism established in
+    part \textbf{(a)}, $f : \mathbb{R}^n \to \mathbb{R}^n$ is a global $C^1$-diffeomorphism.
+\end{enumerate}
+\end{exercisesolution}

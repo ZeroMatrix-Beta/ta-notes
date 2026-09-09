@@ -435,6 +435,25 @@ Decide whether each of the following is true or false, with justification.
 \exsol{sol:level_set_of_a_wide_jacobian}
 \end{exercise}
 
+% Source: old_exams/fs2023/examsol.pdf (Analysis II, 18 August 2023, Prof. Urs Lang), Aufgabe 2.MC3
+% Extractor: Gemini 3.7 Flash (High)
+% Classification of four candidate 1-submanifolds of R^2: a punctured algebraic curve (regular value),
+% a self-intersecting figure-eight (fails local Euclidean structure), a logarithmic spiral (embedded
+% curve despite accumulating on the origin), and the topologist's sine curve with its limiting axis
+% (fails local path-connectedness).
+\begin{exercise}[Identifying 1-dimensional submanifolds in the plane]
+\label{ex:identifying_one_submanifolds_in_plane}
+Which of the following subsets of $\mathbb{R}^2$ are $1$-dimensional $C^1$-submanifolds (without boundary) of $\mathbb{R}^2$? Decide each case with proof or counterexample.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $M_1 := \big\{(x,y) \in \mathbb{R}^2 \;\big|\; x^4 + y^4 - 2(x^2 - y^2) = 0\big\} \setminus \{(0,0)\}$ (the lemniscate punctured at its self-intersection node).
+  \item $M_2 := \big\{(\sin t,\ \sin 2t) \in \mathbb{R}^2 \;\big|\; t \in \mathbb{R}\big\}$ (the figure-eight curve).
+  \item $M_3 := \big\{(e^{-t}\cos t,\ e^{-t}\sin t) \in \mathbb{R}^2 \;\big|\; t \in \mathbb{R}\big\}$ (the open logarithmic spiral).
+  \item $M_4 := \big\{(x, \sin(1/x)) \in \mathbb{R}^2 \;\big|\; x \in (0, 1)\big\} \cup (\{0\} \times [-1, 1])$ (the topologist's sine curve with its limiting vertical segment).
+\end{enumerate}
+\exinfo{This exercise is taken from the examination of 18 August 2023 (Prof.\ Urs Lang), Problem 2.MC3.}
+\exsol{sol:identifying_one_submanifolds_in_plane}
+\end{exercise}
+
 % Transition: Claude Opus 5 (High)
 Every argument in this section leaned on knowing which vectors point \emph{along} $M$ at a given
 point. The next section makes that space of directions an object in its own right.

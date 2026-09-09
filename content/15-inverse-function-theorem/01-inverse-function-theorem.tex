@@ -426,3 +426,25 @@ true or false, with justification.
 17 August 2022 (revised), Problem 6. That paper names no lecturer.}
 \exsol{sol:local_diffeomorphism_four_consequences}
 \end{exercise}
+
+% Source: old_exams/fs2023/examsol.pdf (Analysis II, 18 August 2023, Prof. Urs Lang), Aufgabe 3.A3
+% Extractor: Gemini 3.7 Flash (High)
+% The affirmative counterpart to ex:local_diffeomorphism_four_consequences(d): expansiveness
+% forces injectivity and nonsingular differential everywhere, and completeness of R^n combined
+% with connectedness upgrades the local diffeomorphism to a global diffeomorphism of R^n.
+\begin{exercise}[Expansive local diffeomorphisms and global invertibility]
+\label{ex:expansive_local_diffeomorphism_global_inverse}
+Let $U \subseteq \mathbb{R}^n$ be an open set, and let $f \in C^1(U, \mathbb{R}^n)$ be expansive:
+there exists a constant $\alpha > 0$ such that
+\[
+\|f(x) - f(y)\| \geq \alpha \|x - y\| \qquad \text{for all } x, y \in U.
+\]
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Prove that $f$ is injective, that the differential $Df_x$ is invertible at every point $x \in U$,
+    and that $f : U \to f(U)$ is a $C^1$-diffeomorphism onto an open set $f(U) \subseteq \mathbb{R}^n$.
+  \item Now suppose $U = \mathbb{R}^n$. Prove that $f(\mathbb{R}^n)$ is closed in $\mathbb{R}^n$,
+    and deduce that $f : \mathbb{R}^n \to \mathbb{R}^n$ is a surjective global $C^1$-diffeomorphism.
+\end{enumerate}
+\exinfo{This exercise is taken from the examination of 18 August 2023 (Prof.\ Urs Lang), Problem 3.A3.}
+\exsol{sol:expansive_local_diffeomorphism_global_inverse}
+\end{exercise}

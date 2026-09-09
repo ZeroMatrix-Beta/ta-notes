@@ -192,51 +192,33 @@ a Felder paper, which invites two wrong inferences, and both are wrong.
 ## Where to mine next
 
 The `HS*`/`FS*` block, `august2025`, both Serra papers, both Felder papers, `DiffComp.pdf`,
-`exercises_2024/` and all three `Probeprfg` papers have been worked through. One whole paper
-remains, and after it three specific problems and one file that does not exist yet.
+`exercises_2024/`, all three `Probeprfg` papers, and `old_exams/fs2023/examsol.pdf` (Prof. Urs Lang)
+have all been mined. The three held-back problems have also been harvested.
 
-### 1. ⚠️ `old_exams/fs2023/examsol.pdf` — Prof. Urs Lang, 18 August 2023
+### 1. A second Serra example sheet, if one appears
 
-**The best remaining target in the repository, and the one that got away.** It is *Analysis II:
-mehrere Variablen*, so nothing is filtered out as single-variable; it is the second most recent
-paper here, after `august2025`; and — uniquely among the Serra-era papers — **the problems and the
-official solutions are the same document**, headed *Aufgaben und Lösungsvorschlag*, with a mark
-scheme. On this file's own criteria it outranks everything mined on 2026-08-11.
+`DiffComp.pdf` is titled *Some differential form computations **1***, and its problems are numbered
+`1.1`–`1.6` under a section heading `1.`. Both strongly suggest a sheet 2 exists. It is not in the
+repository as of 2026-09-09. If one appears it goes straight to the top of this list: same
+lecturer, same course, same semester, worked solutions included.
 
-⚠️ **It carries a ninth lecturer.** Urs Lang appears nowhere else in the folder, so his emphases are
-unknown; expect his problems to sit differently from Serra's and Kobel-Keller's.
+**The one category deliberately left unharvested** is constrained-optimisation problems, of which
+the folder holds at least five near-identical variants. The reasoning is in the rejection table and
+it has not changed.
 
-**Triaged, not mined.** The twelve problems were read once at triage level; the verdicts below are
-first impressions and every one still has to be derived before transcription. Structure: four
-computations, four multiple-choice blocks, four theory problems.
+## Accepted — 2026-09-09, Urs Lang & Held-Back Problems
 
-| Problem | First impression |
-|---|---|
-| 2.MC2 (D) (`U` bounded and `∇f` bounded, must `f` be bounded?) | **Marked false in the key**, and that is the find. It needs a bounded domain on which the gradient bound does not integrate along paths — the distance between two points measured *inside* `U` is not comparable to `\|x−y\|`. Nothing in the document distinguishes the two. |
-| 2.MC3 (which of four sets are 1-dimensional submanifolds of `ℝ²`) | Four sharply chosen sets: a level set, the figure-eight `t ↦ (sin t, sin 2t)`, the logarithmic spiral `e^{−t}(cos t, sin t)`, and the topologist's sine curve joined to the `y`-axis. The last two are exactly `ex:topologists_sine_curve` (ch. 8) meeting `ex:cross_not_submanifold` (ch. 17), which no single block currently connects. |
-| 3.A3 (`\|f(x)−f(y)\| ≥ α\|x−y\|` forces a `C¹`-diffeomorphism onto an open image; and onto all of `ℝⁿ` when `U = ℝⁿ`) | **Strongest theory problem in the paper.** It is the affirmative answer to the question `ex:local_diffeomorphism_four_consequences` part (d) answers negatively: expansiveness is a hypothesis that *does* upgrade a local diffeomorphism to a global one. Part (b) is a connectedness argument, `V` open and closed and non-empty. |
-| 3.A1 (c) (a harmonic function with a local minimum is locally constant) | Uses the **mean value property** of harmonic functions, which the document does not have. It would sit directly beside `ex:green_first_identity_harmonic`, which introduced "harmonic" and proved a different uniqueness statement. |
-| 2.MC4 (for which of four ODEs is the solution set a 2-dimensional vector space?) | Inhomogeneous, non-linear and third-order cases against one genuine second-order linear equation. Pairs with `ex:which_functions_solve_a_third_order_ode`, which reads structure off a solution; this reads it off the equation. |
-| 2.MC1 (continuous surjections: what transfers from `X` to `Y`?) | Part (D), a continuous bijection from a compact space has continuous inverse, is a real theorem and worth checking against ch. 7 before taking. |
-| 1.A1 (volume under a graph, then flux through that graph) | The flux half is nice — the divergence integrates to zero by symmetry, so the answer comes from the base instead. Check against `ex:flux_truncated_paraboloid` and the ch. 23 blocks first. |
-| 1.A2, 1.A3, 1.A4, 3.A2, 3.A4 | Expect these to fall. A paraboloid surface area (`ex:paraboloid_patch_area`), a Stokes computation over a plane section of a cube (the rejected family), a constant-coefficient ODE with an initial value problem (rejected three times already), the potential/conservative equivalence (`26-stokes/02` proves it), and the largest box in an ellipsoid (the standing constrained-optimisation rejection). |
+Seven blocks, six chapters. Verified against the official solution keys and derived in full.
 
-### 2. Three single problems held back from finished papers
-
-* **`exercises_2024/mock.pdf` Exercise 25, part 2.** Construct a vector field `A` with
-  `B = curl A`, with a hint at the shape to try. Every existing block in `23-flux-divergence` and
-  `26-stokes` runs the other way, from a given `A` to a flux, and `examFS24`'s Kurzproblem 2 hands
-  `A` over. If ch. 26 ever wants a construct-the-potential exercise beside
-  `ex:ai_which_fields_are_gradients`, this is the one. The rest of Exercise 25 is a duplicate.
-* **`Probeprfg3` Aufgabe 5, parts (a) and (b).** An infinite discrete subset of a compact metric
-  space exists; a *closed* discrete one cannot. A good pair, held back only because part (c) of the
-  same block is already `ex:locally_lipschitz_is_lipschitz` and part (d) is `√x` on `[0,1]`. Take
-  the (a)/(b) half if ch. 7 ever wants it.
-* **`FS19` Teil B Aufgabe 4 (Jossen).** The area `f(t)` of the region cut off by a moving ellipse,
-  and whether `f` is `C¹`. Dropped only for length, since it needs a figure. Pick it up if ch. 20
-  ever wants a parameter-integral example with a picture.
-
-### 3. A second Serra example sheet, if one appears
+| # | Source | Lecturer | Lands in | Form | Why it earns its place |
+|---|---|---|---|---|---|
+| 1 | `fs2023/examsol.pdf` 3.A3 | Lang | `15-inverse/01` `ex:expansive_local_diffeomorphism_global_inverse` | exercise | Expansiveness $\|f(x)-f(y)\| \ge \alpha\|x-y\|$ upgrades a local diffeomorphism to a global diffeomorphism of $\mathbb{R}^n$. Connects invertibility of $Df$ to completeness and connectedness. |
+| 2 | `fs2023/examsol.pdf` 2.MC2 (D) | Lang | `11-taylor/01` `ex:bounded_gradient_unbounded_function` | exercise | Bounded gradient does not force boundedness on a bounded non-convex domain. Explicit spiral corridor counterexample showing intrinsic path metric divergence. |
+| 3 | `fs2023/examsol.pdf` 2.MC3 | Lang | `17-submanifolds/02` `ex:identifying_one_submanifolds_in_plane` | exercise | Tests four planar sets for the 1-submanifold property: regular value level set, self-intersecting figure-eight, logarithmic spiral, and topologist's sine curve. |
+| 4 | `fs2023/examsol.pdf` 3.A1 (c) | Lang | `23-flux-divergence/02` `ex:harmonic_mean_value_maximum_principle` | exercise | Spherical and solid mean value property for harmonic functions, proved via the Divergence Theorem, yielding the Strong Maximum Principle. |
+| 5 | `exercises_2024/mock.pdf` Ex 25 pt 2 | Serra | `26-stokes/04` `ex:constructing_vector_potential_divergence_free` | exercise | Constructing an explicit vector potential $A$ with $\operatorname{curl} A = B$ for a divergence-free field in $\mathbb{R}^3$, plus gauge invariance $A + \nabla\psi$. |
+| 6 | `Probeprfg3` A5(a)–(b) | — | `07-compactness/03` `ex:infinite_discrete_subsets_compact` | exercise | An infinite discrete subset of a compact metric space can exist (accumulating on the boundary), but a *closed* discrete subset must be finite. |
+| 7 | `FS19` Teil B A4 | Jossen | `20-change-of-variables/03` `ex:moving_ellipse_parameter_integral` | exercise + TikZ | Parameter-dependent area $A(t)$ of a cut-off moving ellipse, its boundary $C^1$ regularity, and differentiation with moving limits. |
 
 `DiffComp.pdf` is titled *Some differential form computations **1***, and its problems are numbered
 `1.1`–`1.6` under a section heading `1.`. Both strongly suggest a sheet 2 exists. It is not in the

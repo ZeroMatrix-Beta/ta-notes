@@ -672,3 +672,57 @@ have been kept apart. Under a hypothesis on $G$ this weak, nothing stronger than
 survives.
 \end{remark}
 \end{exercisesolution}
+
+\begin{exercisesolution}[Solution to \cref{ex:constructing_vector_potential_divergence_free}]
+\label{sol:constructing_vector_potential_divergence_free}
+% Generator: Gemini 3.7 Flash (High)
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item By linearity of the curl and the fundamental vector identity $\curl(\nabla\psi) \equiv 0$
+    (\cref{prop:curl_grad_div_curl_zero}) for any $C^2$ function $\psi$:
+    \[\curl \widetilde{A} = \curl(A + \nabla\psi) = \curl A + \curl(\nabla\psi) = B + 0 = B.\]
+    This ambiguity $A \mapsto A + \nabla\psi$ is the classical \newterm{gauge freedom} in electromagnetism.
+
+  \item For the ansatz $A = (A_1, A_2, 0)\transp$, the components of $\curl A$ are:
+    \[\curl A = \begin{pmatrix} \partial_y 0 - \partial_z A_2 \\ \partial_z A_1 - \partial_x 0 \\ \partial_x A_2 - \partial_y A_1 \end{pmatrix}
+      = \begin{pmatrix} -\partial_z A_2 \\ \partial_z A_1 \\ \partial_x A_2 - \partial_y A_1 \end{pmatrix}.\]
+    Equating this with $B = (B_1, B_2, B_3)\transp$ gives the three partial differential equations
+    \[-\partial_z A_2 = B_1, \qquad \partial_z A_1 = B_2, \qquad \partial_x A_2 - \partial_y A_1 = B_3.\]
+    The proposed functions are
+    \[A_1(x,y,z) = \int_0^z B_2(x,y,s)\,ds, \qquad
+      A_2(x,y,z) = -\int_0^z B_1(x,y,s)\,ds + \int_0^x B_3(t,y,0)\,dt.\]
+    Differentiating with respect to $z$ by the fundamental theorem of calculus:
+    \[\partial_z A_1(x,y,z) = B_2(x,y,z), \qquad \partial_z A_2(x,y,z) = -B_1(x,y,z),\]
+    so $-\partial_z A_2 = B_1$ and $\partial_z A_1 = B_2$ hold identically.
+    Now compute the third component $\partial_x A_2 - \partial_y A_1$:
+    \[\partial_x A_2(x,y,z) = -\int_0^z \partial_x B_1(x,y,s)\,ds + B_3(x,y,0),\]
+    \[\partial_y A_1(x,y,z) = \int_0^z \partial_y B_2(x,y,s)\,ds.\]
+    Subtracting them:
+    \[\partial_x A_2 - \partial_y A_1 = -\int_0^z \big(\partial_x B_1(x,y,s) + \partial_y B_2(x,y,s)\big)\,ds + B_3(x,y,0).\]
+    Since $\divg B = \partial_x B_1 + \partial_y B_2 + \partial_z B_3 = 0$, we have
+    $\partial_x B_1 + \partial_y B_2 = -\partial_z B_3$. Substituting this into the integral:
+    \begin{align*}
+      \partial_x A_2 - \partial_y A_1 &= -\int_0^z \big(-\partial_s B_3(x,y,s)\big)\,ds + B_3(x,y,0) \\
+      &= \int_0^z \partial_s B_3(x,y,s)\,ds + B_3(x,y,0) \\
+      &= \big[B_3(x,y,z) - B_3(x,y,0)\big] + B_3(x,y,0) = B_3(x,y,z).
+    \end{align*}
+    Thus all three component equations are satisfied, so $\curl A = B$ on all of $\mathbb{R}^3$.
+
+  \item We are given $B(x,y,z) = (2xy,\ -y^2 + 2yz,\ -z^2)\transp$.
+    First verify divergence-free:
+    \[\divg B = \partial_x(2xy) + \partial_y(-y^2 + 2yz) + \partial_z(-z^2) = 2y + (-2y + 2z) - 2z = 0.\]
+    Now apply the formulas from part \textbf{(b)}:
+    \begin{align*}
+      A_1(x,y,z) &= \int_0^z B_2(x,y,s)\,ds = \int_0^z (-y^2 + 2ys)\,ds = -y^2 z + yz^2, \\
+      A_2(x,y,z) &= -\int_0^z B_1(x,y,s)\,ds + \int_0^x B_3(t,y,0)\,dt = -\int_0^z 2xy\,ds + \int_0^x 0\,dt = -2xyz, \\
+      A_3(x,y,z) &= 0.
+    \end{align*}
+    Thus $A(x,y,z) = (-y^2 z + yz^2,\ -2xyz,\ 0)\transp$.
+    Direct verification of $\curl A$:
+    \begin{align*}
+      (\curl A)_1 &= \partial_y 0 - \partial_z(-2xyz) = 2xy = B_1, \\
+      (\curl A)_2 &= \partial_z(-y^2 z + yz^2) - \partial_x 0 = -y^2 + 2yz = B_2, \\
+      (\curl A)_3 &= \partial_x(-2xyz) - \partial_y(-y^2 z + yz^2) = -2yz - (-2yz + z^2) = -z^2 = B_3.
+    \end{align*}
+    Therefore $\curl A = B$.
+\end{enumerate}
+\end{exercisesolution}

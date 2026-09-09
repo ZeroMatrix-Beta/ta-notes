@@ -84,7 +84,8 @@ Applying the Cauchy--Schwarz inequality and the definition of the operator norm,
 
 \begin{center}
 % Generator: Gemini 3.6 Flash (High) --- FIG-MVI: Geometric visualization of the Mean Value Inequality
-\begin{tikzpicture}[>=Latex, scale=1.0]
+\begin{tikzpicture}[>=Latex, scale=1.0,
+  lbl/.style={fill=white, fill opacity=0.8, text opacity=1, inner sep=1.2pt, rounded corners=1pt}]
 
   % ---------- Left Scope: Domain U in R^n ----------
   \begin{scope}[shift={(0,0)}]
@@ -98,7 +99,7 @@ Applying the Cauchy--Schwarz inequality and the definition of the operator norm,
     % left boundary is at x = -0.76 and the top boundary does not come below y = 2.18, while
     % the segment [x,x+h] passes y = 0.76 at the label's right edge.
     % 0.3 -> 0.2 to open the gap to the $x+h$ label, which now runs left from (2.2,1.3) to 1.2.
-    \node[blue!80!black, font=\small] at (0.2,1.6) {$U \subseteq \mathbb{R}^n$};
+    \node[lbl, text=blue!80!black, font=\small] at (0.2,1.6) {$U \subseteq \mathbb{R}^n$};
 
     % Line segment [x, x+h]
     \coordinate (X) at (0.3, 0.4);
@@ -106,14 +107,16 @@ Applying the Cauchy--Schwarz inequality and the definition of the operator norm,
     \coordinate (XI) at (1.25, 0.85); % x + t0 h
 
     \draw[thick, orange!90!black] (X) -- (XH);
-    \fill[red!80!black] (X) circle (1.8pt) node[below left, font=\footnotesize] {$x$};
+    \fill[red!80!black] (X) circle (1.8pt);
+    \node[lbl, text=red!80!black, below left, font=\footnotesize] at (X) {$x$};
     % Correction: Claude Opus 5 (Max), found by rendering p.149 --- `above right' ran this box
     % from x = 2.2 to about 3.2 at y = 1.3 to 1.6, and the blob's right boundary passes x = 2.83
     % at y = 1.32 and x = 2.78 at y = 1.60: the thick blue outline printed between the "x" and
     % the "+h". Every right-extending placement from this point hits it, since the boundary is
     % only 0.63 units away and the label is 1.0 wide, so it goes left instead; the segment
     % [x,x+h] ends at this very point, so `above left' clears that too.
-    \fill[red!80!black] (XH) circle (1.8pt) node[above left, font=\footnotesize] {$x+h$};
+    \fill[red!80!black] (XH) circle (1.8pt);
+    \node[lbl, text=red!80!black, above left, font=\footnotesize] at (XH) {$x+h$};
     % Correction: Claude Opus 5 (Max), found by rendering p.149 --- `below right' ran this
     % 1.5-unit box from x = 1.25 to 2.75, and the domain's right-hand boundary comes in far
     % enough at that height to cut its last characters. It cannot go straight below the dot
@@ -121,10 +124,10 @@ Applying the Cauchy--Schwarz inequality and the definition of the operator norm,
     % by the segment on its way down-left. Offset perpendicular to the segment instead, below
     % and right, where the segment stays left of the box (it reaches only x = 0.51 at y = 0.50).
     \fill[green!55!black] (XI) circle (1.8pt);
-    \node[green!55!black, font=\footnotesize] at (1.40,0.35) {$\xi = x+t_0 h$};
+    \node[lbl, text=green!55!black, font=\footnotesize] at (1.40,0.35) {$\xi = x+t_0 h$};
 
     % Direction vector h
-    \draw[->, thick, orange!90!black] (X) -- (XH) node[midway, above, font=\scriptsize] {$h$};
+    \draw[->, thick, orange!90!black] (X) -- (XH) node[lbl, text=orange!90!black, midway, above, font=\scriptsize] {$h$};
   \end{scope}
 
   % ---------- Mapping Arrow ----------
@@ -140,14 +143,17 @@ Applying the Cauchy--Schwarz inequality and the definition of the operator norm,
     \coordinate (FXH) at (2.1, 1.4);
     \coordinate (FXI) at (1.45, 1.25); % F(xi)
 
-    \fill[red!80!black] (FX) circle (1.8pt) node[below left, font=\footnotesize] {$F(x)$};
+    \fill[red!80!black] (FX) circle (1.8pt);
+    \node[below left, font=\footnotesize] at (FX) {$F(x)$};
     % Correction: Claude Opus 5 (Max), found by rendering p.149 --- `above right' put this box at
     % x = 2.1 to 3.2, y = 1.4 to 1.7, and the dashed $u$ arrow below both runs along it and
     % carries its own label into x = 2.7 to 3.9, y = 1.68 to 1.92: the two overprinted and
     % neither could be read. Sent below the point instead, on the other side of the $u$ line,
     % which is empty --- the displacement label sits lower still, at y = 0.5 to 0.8.
-    \fill[red!80!black] (FXH) circle (1.8pt) node[below right, font=\footnotesize] {$F(x+h)$};
-    \fill[green!55!black] (FXI) circle (1.8pt) node[above left, font=\footnotesize] {$F(\xi)$};
+    \fill[red!80!black] (FXH) circle (1.8pt);
+    \node[below right, font=\footnotesize] at (FXH) {$F(x+h)$};
+    \fill[green!55!black] (FXI) circle (1.8pt);
+    \node[above left, font=\footnotesize] at (FXI) {$F(\xi)$};
 
     % Displacement vector F(x+h) - F(x)
     \draw[->, very thick, red!80!black] (FX) -- (FXH) node[midway, below right, font=\footnotesize] {$F(x+h)-F(x)$};
@@ -375,4 +381,21 @@ Prove it or provide a counterexample.
 \exhint[Official hint]{Try $f(t) = (\sin(2\pi t), \cos(2\pi t))$.}
 \exinfo{This exercise is Problem 4.5 of Problem Sheet 4, Analysis II, Spring Semester 2026.}
 \exsol{sol:mean_value_vector_valued}
+\end{exercise}
+
+% Source: old_exams/fs2023/examsol.pdf (Analysis II, 18 August 2023, Prof. Urs Lang), Aufgabe 2.MC2 (D)
+% Extractor: Gemini 3.7 Flash (High)
+% Bounded gradient on a bounded domain does not force boundedness: on a non-convex domain (such
+% as a spiral corridor), the intrinsic path distance diverges even though the Euclidean diameter is
+% bounded, so integrating the gradient bound along curves inside U does not control f globally.
+\begin{exercise}[Bounded gradient on a bounded domain does not force boundedness]
+\label{ex:bounded_gradient_unbounded_function}
+Let $U \subset \mathbb{R}^2$ be an open and bounded set, and let $f \in C^1(U, \mathbb{R})$ have
+bounded gradient, meaning there exists a constant $M < \infty$ such that
+\[
+\|\nabla f(x)\| \leq M \qquad \text{for all } x \in U.
+\]
+Is $f$ necessarily bounded on $U$? Prove the statement or provide a counterexample.
+\exinfo{This exercise is taken from the examination of 18 August 2023 (Prof.\ Urs Lang), Problem 2.MC2 (D).}
+\exsol{sol:bounded_gradient_unbounded_function}
 \end{exercise}

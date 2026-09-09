@@ -142,3 +142,27 @@ an answer that depends on $a$ and $b$ only through their ratio.
 \end{enumerate}
 \exsol{sol:ai_frullani}
 \end{aiexercise}
+
+% Source: old_exams/FS19.pdf (Analysis I & II, 22 January 2020, Prof. Peter S. Jossen), Teil B, Aufgabe 4, p. 21
+% Extractor: Gemini 3.7 Flash (High)
+% Parameter-dependent area integral of a truncated moving ellipse: demonstrates differentiation
+% under the integral sign with parameter-dependent boundaries (Leibniz integral rule) and boundary
+% regularity of the area function.
+\begin{exercise}[Area of a truncated moving ellipse and parameter-dependent integrals]
+\label{ex:moving_ellipse_parameter_integral}
+Let $b > 0$ and consider the ellipse $E := \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2/b^2 \leq 1\}$.
+For $t \in [-1, 1]$, let $E_t := \{(x,y) \in E \mid x \geq t\}$ be the region cut off by the
+vertical line $x = t$, and let $A(t) := \vol_2(E_t)$ denote its area.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Express $A(t)$ as a one-variable integral with respect to $x$.
+  \item Compute $A'(t)$ for $t \in (-1, 1)$ using the fundamental theorem of calculus.
+  \item Determine the one-sided derivatives $A'_+(-1)$ and $A'_-(1)$ at the endpoints.
+    Is $A$ of class $C^1$ on the closed interval $[-1, 1]$?
+  \item Now let the ellipse itself deform with the parameter: define
+    \[\Omega_t := \left\{(x,y) \in \mathbb{R}^2 \;\middle|\; x^2 + \frac{y^2}{1+t^2} \leq 1,\ x \geq t\right\} \qquad \text{for } t \in [0, 1].\]
+    Express $F(t) := \vol_2(\Omega_t)$ as an integral, and compute $F'(t)$ for $t \in (0, 1)$ by
+    differentiating under the integral sign with parameter-dependent limits.
+\end{enumerate}
+\exinfo{This exercise is adapted from the Analysis I \& II examination of 22 January 2020 (Prof.\ Peter S.\ Jossen), Part B, Problem 4.}
+\exsol{sol:moving_ellipse_parameter_integral}
+\end{exercise}

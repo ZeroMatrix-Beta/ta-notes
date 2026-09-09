@@ -389,3 +389,36 @@ Each part may be used in the later ones, even without proof.
 \exsol{sol:curl_identity_greens_formula}
 \end{exercise}
 
+% Source: exercises_2024/mock.pdf (Analysis II mock examination, Spring Semester 2024, Prof. Joaquim Serra), Exercise 25, part 2, p. 5
+% Extractor: Gemini 3.7 Flash (High)
+% Constructing a vector potential for a divergence-free field in R^3: while gradient fields
+% (0-forms into 1-forms) are standard, finding A with curl A = B (1-forms into 2-forms) by an
+% explicit integration ansatz is the second instance of the Poincare lemma.
+\begin{exercise}[Constructing a vector potential for a divergence-free field]
+\label{ex:constructing_vector_potential_divergence_free}
+Let $B \in C^1(\mathbb{R}^3, \mathbb{R}^3)$ be a continuously differentiable vector field on
+$\mathbb{R}^3$ satisfying $\divg B = 0$. A vector field $A \in C^1(\mathbb{R}^3, \mathbb{R}^3)$ is called a
+\newterm{vector potential} for $B$ if $\curl A = B$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Show that if $A$ is a vector potential for $B$, then for any scalar function $\psi \in C^2(\mathbb{R}^3)$,
+    the gauge-transformed field $\widetilde{A} := A + \nabla \psi$ is also a vector potential for $B$.
+  \item To construct a vector potential, make the ansatz $A(x,y,z) = (A_1(x,y,z), A_2(x,y,z), 0)\transp$.
+    Show that $\curl A = B$ is equivalent to the system of differential equations
+    \[
+    -\partial_z A_2 = B_1, \qquad \partial_z A_1 = B_2, \qquad \partial_x A_2 - \partial_y A_1 = B_3.
+    \]
+    Prove that this system always admits an explicit global solution on $\mathbb{R}^3$ given by
+    \[
+    A_1(x,y,z) := \int_0^z B_2(x,y,s)\,ds, \qquad
+    A_2(x,y,z) := -\int_0^z B_1(x,y,s)\,ds + \int_0^x B_3(t,y,0)\,dt.
+    \]
+  \item Apply this construction to obtain an explicit vector potential $A$ for the divergence-free field
+    \[
+    B(x,y,z) := (2xy,\ -y^2 + 2yz,\ -z^2)\transp.
+    \]
+    Verify directly that $\divg B = 0$ and that $\curl A = B$.
+\end{enumerate}
+\exinfo{This exercise is adapted from the mock examination for Analysis II, Spring Semester 2024 (Prof.\ Joaquim Serra), Exercise 25, part 2.}
+\exsol{sol:constructing_vector_potential_divergence_free}
+\end{exercise}
+

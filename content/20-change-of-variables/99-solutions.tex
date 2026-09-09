@@ -689,4 +689,69 @@ above.
 \end{ainote}
 \end{exercisesolution}
 
+\begin{exercisesolution}[Solution to \cref{ex:moving_ellipse_parameter_integral}]
+\label{sol:moving_ellipse_parameter_integral}
+% Generator: Gemini 3.7 Flash (High)
+\begin{center}
+\begin{tikzpicture}[>=Latex, scale=1.6, lbl/.style={fill=white, text opacity=1, inner sep=1.2pt, font=\scriptsize}]
+  % Shaded region E_t: fill drawn first (before axes)
+  \begin{scope}
+    \clip (0.4, -1.1) rectangle (1.4, 1.1);
+    \fill[MidnightBlue!15] (0,0) ellipse (1.2 and 0.8);
+  \end{scope}
+
+  % Coordinate axes
+  \draw[->, thick, gray!70!black] (-1.4, 0) -- (1.5, 0) node[lbl, right] {$x$};
+  \draw[->, thick, gray!70!black] (0, -1.0) -- (0, 1.0) node[lbl, above] {$y$};
+
+  % Ellipse boundary
+  \draw[MidnightBlue!80!black, very thick] (0,0) ellipse (1.2 and 0.8);
+
+  % Cutoff line x = t
+  \draw[BrickRed, thick, dashed] (0.4, -0.95) -- (0.4, 0.95) node[lbl, text=BrickRed, above] {$x = t$};
+
+  % Region label
+  \node[MidnightBlue!80!black, font=\small] at (0.75, 0.25) {$E_t$};
+
+  % Marker for semi-axes
+  \fill[MidnightBlue!80!black] (1.2, 0) circle (1.2pt);
+  \node[lbl, below right] at (1.2, 0) {$1$};
+  \fill[MidnightBlue!80!black] (0, 0.8) circle (1.2pt);
+  \node[lbl, above left] at (0, 0.8) {$b$};
+\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item For each fixed $x \in [t, 1]$, the vertical cross-section of the ellipse consists of
+    $y \in [-b\sqrt{1-x^2},\, b\sqrt{1-x^2}]$. By Fubini's theorem:
+    \[A(t) = \int_t^1 \left(\int_{-b\sqrt{1-x^2}}^{b\sqrt{1-x^2}} dy\right) dx = 2b\int_t^1 \sqrt{1-x^2}\,dx.\]
+
+  \item Since the integrand $g(x) := 2b\sqrt{1-x^2}$ is continuous on $[-1, 1]$, the fundamental
+    theorem of calculus gives
+    \[A'(t) = \frac{d}{dt}\left(2b\int_t^1 \sqrt{1-x^2}\,dx\right) = -2b\sqrt{1-t^2} \qquad \text{for all } t \in (-1, 1).\]
+
+  \item At the right endpoint $t = 1$, we have $A(1) = 0$. The left-sided difference quotient satisfies
+    \[\lim_{t \to 1^-} \frac{A(t) - A(1)}{t - 1} = \lim_{t \to 1^-} A'(t) = \lim_{t \to 1^-} \big(-2b\sqrt{1-t^2}\big) = 0,\]
+    so $A'_-(1) = 0$. Similarly at the left endpoint $t = -1$, where $A(-1) = \pi b$ is the full area of the ellipse:
+    \[\lim_{t \to -1^+} \frac{A(t) - A(-1)}{t - (-1)} = \lim_{t \to -1^+} A'(t) = \lim_{t \to -1^+} \big(-2b\sqrt{1-t^2}\big) = 0,\]
+    so $A'_+(-1) = 0$.
+    Since $A'(t) = -2b\sqrt{1-t^2}$ is continuous on the open interval $(-1, 1)$ and its limits as
+    $t \to \pm 1$ equal the one-sided derivatives $0$, the derivative $A'$ extends continuously to
+    the closed interval $[-1, 1]$. Hence $A \in C^1([-1, 1])$.
+
+  \item The domain $\Omega_t$ has horizontal width $x \in [t, 1]$ and vertical bounds
+    $y \in [-\sqrt{1+t^2}\sqrt{1-x^2},\, \sqrt{1+t^2}\sqrt{1-x^2}]$. Integrating out $y$:
+    \[F(t) = \int_t^1 2\sqrt{1+t^2}\sqrt{1-x^2}\,dx = 2\sqrt{1+t^2} \int_t^1 \sqrt{1-x^2}\,dx.\]
+    Here the parameter $t$ enters both the integrand and the lower integration limit. Applying the
+    product rule (or Leibniz's integral rule with moving limits):
+    \begin{align*}
+      F'(t) &= \left(\frac{d}{dt} 2\sqrt{1+t^2}\right) \int_t^1 \sqrt{1-x^2}\,dx + 2\sqrt{1+t^2} \frac{d}{dt}\left(\int_t^1 \sqrt{1-x^2}\,dx\right) \\
+      &= \frac{2t}{\sqrt{1+t^2}} \int_t^1 \sqrt{1-x^2}\,dx - 2\sqrt{1+t^2}\sqrt{1-t^2} \\
+      &= \frac{2t}{\sqrt{1+t^2}} \int_t^1 \sqrt{1-x^2}\,dx - 2\sqrt{1-t^4}.
+    \end{align*}
+    The first term accounts for the dilation of the vertical semi-axis, while the second term accounts
+    for the loss of area as the vertical cutting plane sweeps rightward at unit speed.
+\end{enumerate}
+\end{exercisesolution}
+
 

@@ -396,4 +396,61 @@ four components plus the entry $1$ would have five. Only the second display is c
 \end{ainote}
 \end{exercisesolution}
 
+\begin{exercisesolution}[Solution to \cref{ex:identifying_one_submanifolds_in_plane}]
+\label{sol:identifying_one_submanifolds_in_plane}
+% Generator: Gemini 3.7 Flash (High)
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item \textbf{$M_1$ is a $1$-dimensional submanifold.}
+    Consider the smooth function $F : \mathbb{R}^2 \setminus \{(0,0)\} \to \mathbb{R}$ given by
+    $F(x,y) := x^4 + y^4 - 2x^2 + 2y^2$. The set $M_1$ is the zero level set $F^{-1}\{0\}$.
+    Its gradient is
+    \[\nabla F(x,y) = \big(4x^3 - 4x,\ 4y^3 + 4y\big) = \big(4x(x^2-1),\ 4y(y^2+1)\big).\]
+    Critical points satisfy $\nabla F(x,y) = (0,0)$. The second component vanishes if and only if $y = 0$.
+    Setting $y = 0$, the first component vanishes if $x \in \{0, 1, -1\}$.
+    \begin{itemize}
+      \item $(0,0)$ is excluded from the domain $\mathbb{R}^2 \setminus \{(0,0)\}$.
+      \item At $(\pm 1, 0)$, we have $F(\pm 1, 0) = 1 - 2 = -1 \neq 0$, so these points do not lie in $M_1$.
+    \end{itemize}
+    Thus $\nabla F(x,y) \neq (0,0)$ everywhere on $M_1$. By the regular value theorem
+    (\cref{thm:regular_value_theorem}), $0$ is a regular value of $F$, so $M_1$ is an embedded
+    $1$-dimensional $C^1$ (indeed smooth) submanifold of $\mathbb{R}^2$.
+
+  \item \textbf{$M_2$ is NOT a submanifold.}
+    The curve passes through the origin $(0,0)$ at $t = 0$ (with velocity vector $(1, 2)\transp$) and
+    at $t = \pi$ (with velocity vector $(-1, 2)\transp$). These two velocity vectors are linearly
+    independent, so the two branches cross transversally at $(0,0)$.
+    For any sufficiently small open ball $B_\varepsilon(0,0)$, the punctured intersection
+    $(M_2 \cap B_\varepsilon(0,0)) \setminus \{(0,0)\}$ has four distinct connected components
+    (the four incoming and outgoing branches; compare \cref{ex:cross_not_submanifold} and
+    \cref{sec:recognising_submanifolds}). However, for any $1$-dimensional manifold, every point has a
+    connected neighbourhood homeomorphic to an open interval, from which deleting the point leaves at
+    most two connected components. Thus $M_2$ cannot be a $1$-submanifold in any neighbourhood of the origin.
+
+  \item \textbf{$M_3$ IS a $1$-dimensional submanifold.}
+    Parametrize the curve by $\gamma(t) = (e^{-t}\cos t,\ e^{-t}\sin t)$ for $t \in \mathbb{R}$.
+    The Euclidean distance to the origin is $r(t) = \|\gamma(t)\| = e^{-t}$, which is strictly
+    monotonically decreasing on $\mathbb{R}$. In particular, $\gamma : \mathbb{R} \to M_3$ is a bijection,
+    and each circle $\partial B_r(0)$ intersects $M_3$ in at most one point.
+    Furthermore,
+    \[\gamma'(t) = e^{-t}(-\cos t - \sin t,\ -\sin t + \cos t)\transp,\]
+    so $\|\gamma'(t)\|^2 = 2e^{-2t} > 0$ for all $t \in \mathbb{R}$, which means $\gamma$ is an immersion.
+    To show $M_3$ is an embedded submanifold of $\mathbb{R}^2$, fix any $p = \gamma(t_0) \in M_3$.
+    Let $r_0 = e^{-t_0} > 0$, and consider the open annulus $A := \{(x,y) \in \mathbb{R}^2 : e^{-t_0-1} < \|(x,y)\| < e^{-t_0+1}\}$.
+    By strict monotonicity of $r(t)$, the intersection $M_3 \cap A$ is precisely the image
+    $\gamma((t_0-1, t_0+1))$, which is an open, non-self-intersecting arc of finite length.
+    Since $\gamma'$ is nowhere zero, this arc is the image of a smooth local parametrization.
+    (Note that while the origin $(0,0)$ lies in the closure $\overline{M_3}$, $(0,0) \notin M_3$,
+    and every point of $M_3$ is strictly away from $0$.) Hence $M_3$ is a $1$-submanifold of $\mathbb{R}^2$.
+
+  \item \textbf{$M_4$ is NOT a submanifold.}
+    Consider any point $p = (0, y_0)$ on the limiting segment $\{0\} \times [-1, 1]$.
+    Any open ball $B_\varepsilon(p)$ in $\mathbb{R}^2$ contains the vertical segment $\{0\} \times (y_0-\varepsilon, y_0+\varepsilon)$
+    and also infinitely many disjoint oscillatory wave segments of the graph $y = \sin(1/x)$ for $x \in (0, \varepsilon)$.
+    Because no path within $M_4 \cap B_\varepsilon(p)$ can connect the vertical segment to the oscillating
+    waves without leaving a sufficiently small ball, the intersection $M_4 \cap B_\varepsilon(p)$ is not
+    locally connected (cf.\ \cref{ex:topologists_sine_curve}). In particular, no neighbourhood of $p$ in
+    $M_4$ is homeomorphic to an open interval. Thus $M_4$ is not a $1$-dimensional submanifold.
+\end{enumerate}
+\end{exercisesolution}
+
 

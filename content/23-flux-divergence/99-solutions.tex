@@ -425,6 +425,51 @@ indefinite quantity would allow.
 \end{remark}
 \end{exercisesolution}
 
+\begin{exercisesolution}[Solution to \cref{ex:harmonic_mean_value_maximum_principle}]
+\label{sol:harmonic_mean_value_maximum_principle}
+% Generator: Gemini 3.7 Flash (High)
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Change variables on the sphere via $x = x_0 + r\xi$ with $\xi \in \partial B_1(0)$. Then
+    \[\phi(r) = \frac{1}{\omega_{n-1}} \int_{\partial B_1(0)} u(x_0 + r\xi) \, d\vol_{n-1}(\xi).\]
+    Since $u$ is $C^2$ and the sphere is compact, we may differentiate under the integral sign:
+    \[\phi'(r) = \frac{1}{\omega_{n-1}} \int_{\partial B_1(0)} \langle \nabla u(x_0 + r\xi),\, \xi \rangle \, d\vol_{n-1}(\xi).\]
+    Re-scaling back to $\partial B_r(x_0)$, where $\xi = \frac{x - x_0}{r} = \nu(x)$ is the outward unit normal,
+    \[\phi'(r) = \frac{1}{\omega_{n-1} r^{n-1}} \int_{\partial B_r(x_0)} \langle \nabla u(x),\, \nu(x) \rangle \, d\vol_{n-1}(x).\]
+    By Gauss's divergence theorem (\cref{thm:gauss_divergence}) applied to the vector field $F = \nabla u$ on the ball $B_r(x_0)$:
+    \[\int_{\partial B_r(x_0)} \langle \nabla u, \nu \rangle \, d\vol_{n-1} = \int_{B_r(x_0)} \divg(\nabla u) \, d\vol_n = \int_{B_r(x_0)} \Delta u \, d\vol_n = 0,\]
+    because $u$ is harmonic ($\Delta u \equiv 0$). Therefore $\phi'(r) = 0$ for all $r \in (0, R]$.
+
+  \item Since $\phi'(r) = 0$ on $(0, R]$, $\phi(r)$ is constant. By continuity of $u$ at $x_0$,
+    \[\lim_{r \downarrow 0} \phi(r) = \lim_{r \downarrow 0} \frac{1}{\omega_{n-1} r^{n-1}} \int_{\partial B_r(x_0)} u(x) \, d\vol_{n-1}(x) = u(x_0).\]
+    Thus $\phi(r) = u(x_0)$ for every $r \in (0, R]$. This establishes the spherical mean value property.
+
+    To obtain the volume mean value property, integrate the spherical identity in polar/spherical coordinates:
+    \[\int_0^r \rho^{n-1} \left( \int_{\partial B_\rho(x_0)} u \, d\vol_{n-1} \right) d\rho = \int_0^r \rho^{n-1} \big(\omega_{n-1} \rho^{n-1} u(x_0)\big) \, d\rho = u(x_0) \omega_{n-1} \int_0^r \rho^{n-1} \, d\rho = u(x_0) \frac{\omega_{n-1} r^n}{n}.\]
+    By spherical slicing / Fubini's theorem, the left-hand integral equals $\int_{B_r(x_0)} u(x) \, d\vol_n(x)$.
+    Since $\alpha_n = \omega_{n-1}/n$ is the volume of the unit ball, this yields
+    \[u(x_0) = \frac{1}{\alpha_n r^n} \int_{B_r(x_0)} u(x) \, d\vol_n(x).\]
+
+  \item Suppose $u$ attains a local minimum at $x_0 \in \Omega$. Then there exists $R > 0$ such that
+    $\overline{B_R(x_0)} \subset \Omega$ and $u(x) \geq u(x_0)$ for all $x \in B_R(x_0)$.
+    For any $0 < r < R$, the solid mean value property gives
+    \[0 = \frac{1}{\alpha_n r^n} \int_{B_r(x_0)} \big(u(x) - u(x_0)\big) \, d\vol_n(x).\]
+    The integrand $u(x) - u(x_0)$ is continuous and non-negative on $B_r(x_0)$. If it were strictly
+    positive at any point $x_1 \in B_r(x_0)$, by continuity it would remain strictly positive on a small
+    ball around $x_1$, forcing the integral to be strictly positive. Hence $u(x) - u(x_0) \equiv 0$
+    on $B_r(x_0)$, so $u(x) = u(x_0)$ for all $x \in B_R(x_0)$.
+
+    Now define $S := \{x \in \Omega \mid u(x) = u(x_0)\}$.
+    \begin{itemize}
+      \item $S$ is non-empty since $x_0 \in S$.
+      \item $S$ is closed in $\Omega$ by continuity of $u$ ($S = u^{-1}\{u(x_0)\}$).
+      \item $S$ is open in $\Omega$: for any $x \in S$, $x$ is also a global minimum of $u$ on $\Omega$ (if $u(x_0)$ is the minimum value), so the same ball argument proves that a full ball around $x$ lies in $S$.
+    \end{itemize}
+    Since $\Omega$ is connected, the only non-empty clopen subset of $\Omega$ is $\Omega$ itself.
+    Therefore $S = \Omega$, which proves that $u$ is constant on $\Omega$.
+    The case of a local maximum follows by replacing $u$ with $-u$.
+\end{enumerate}
+\end{exercisesolution}
+
 \begin{exercisesolution}[Solution to \cref{ex:flux_through_nested_spheres}]
 \label{sol:flux_through_nested_spheres}
 % Generator: Claude Opus 5 (High) --- the four statements are the examiner's; the working is

@@ -447,3 +447,23 @@ Show that $X$ is compact.
 \begin{exercisesolution}[Proof of \cref{ex:finite_set_compact}]
 The set $X$ contains exactly $7 \times 7 = 49$ points, so it is finite. By \cref{ex:compact_finite_complete}, every finite subset of a metric space is compact. Alternatively, using sequential compactness (as hinted in the notes), any sequence in $X$ must take at least one value infinitely often (by the pigeonhole principle), thus it contains a constant, hence convergent, subsequence.
 \end{exercisesolution}
+
+% Source: old_exams/fs2023/Probeprfg3.pdf (Probeprüfung Analysis II, 31 January 2023), Aufgabe 5(a)--(b), p. 2
+% Extractor: Gemini 3.7 Flash (High)
+% The paper names no lecturer; see old-exam-mining.md.
+% Infinite discrete versus closed discrete subsets: a compact space can accommodate an infinite
+% discrete set (which must necessarily accumulate outside itself), but cannot hold a closed one.
+\begin{exercise}[Infinite discrete versus closed discrete subsets of a compact space]
+\label{ex:infinite_discrete_subsets_compact}
+Let $(X, d)$ be a metric space. A subset $S \subseteq X$ is called \newterm{discrete} if every
+point $p \in S$ is an isolated point of $S$, that is, there exists $r > 0$ such that
+$B_r(p) \cap S = \{p\}$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Give an example of a compact metric space $K$ containing an infinite discrete subset $S \subset K$.
+  \item Prove that if $K$ is a compact metric space, then every \emph{closed} discrete subset
+    $S \subseteq K$ must be finite.
+\end{enumerate}
+\exinfo{This exercise is taken from the mock examination \emph{Probepr\"ufung Analysis II} of
+31 January 2023, Problem 5(a)--(b). That paper names no lecturer.}
+\exsol{sol:infinite_discrete_subsets_compact}
+\end{exercise}

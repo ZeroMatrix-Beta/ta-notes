@@ -355,4 +355,43 @@ running a sign argument off the displayed identity, as the classification of $x=
 \end{ainote}
 \end{exercisesolution}
 
+\begin{exercisesolution}[Solution to \cref{ex:bounded_gradient_unbounded_function}]
+\label{sol:bounded_gradient_unbounded_function}
+% Generator: Gemini 3.7 Flash (High)
+\textbf{No}, $f$ is not necessarily bounded on $U$.
+
+The Mean Value Inequality (\cref{thm:mean_value_inequality}) asserts that if the straight line
+segment $[x, y]$ lies in $U$, then $|f(x) - f(y)| \leq M \|x - y\|$. On a convex or star-shaped domain,
+this bounds $|f(x) - f(y)|$ by $M \operatorname{diam}(U)$. But on a general non-convex domain, points
+$x, y$ that are close in $\mathbb{R}^2$ may only be connectable by paths inside $U$ of immense length,
+or not connectable at all.
+
+\textbf{Counterexample: the spiral corridor.}
+In polar coordinates $(r, \theta)$ on $\mathbb{R}^2 \setminus \{0\}$, define the open set
+\[
+U := \left\{ (r\cos\theta, r\sin\theta) \in \mathbb{R}^2 \;\middle|\; \theta > 2, \ 1 - \frac{1}{\theta} < r < 1 - \frac{1}{\theta + \pi} \right\}.
+\]
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+  \item \textbf{$U$ is bounded and open:} For all points in $U$, $\frac{1}{2} < 1 - \frac{1}{2} < r < 1$, so $U \subset B_1(0)$ is bounded in $\mathbb{R}^2$. It is open because it is the pre-image of the open set $\{(\theta, r) : \theta > 2, 1 - 1/\theta < r < 1 - 1/(\theta+\pi)\}$ under the smooth local diffeomorphism $(\theta, r) \mapsto (r\cos\theta, r\sin\theta)$.
+  \item \textbf{No self-intersection:} At angles differing by $2\pi k$ ($k \in \mathbb{N}_{\geq 1}$), the radial interval for $\theta + 2\pi k$ is strictly higher than for $\theta$:
+    \[1 - \frac{1}{\theta + \pi} < 1 - \frac{1}{\theta + 2\pi} < 1 - \frac{1}{\theta + 2\pi k}.\]
+    Thus successive coils of the spiral never overlap, and each point in $U$ corresponds to a unique angle $\theta$.
+  \item \textbf{Unbounded function with bounded gradient:} Define $f : U \to \mathbb{R}$ by
+    \[f(r\cos\theta, r\sin\theta) := \sqrt{\theta}.\]
+    Since $f$ depends only on the angular coordinate $\theta$, its gradient in orthogonal polar coordinates is
+    \[\nabla f = \frac{\partial f}{\partial r} e_r + \frac{1}{r} \frac{\partial f}{\partial \theta} e_\theta = 0 \cdot e_r + \frac{1}{r} \frac{1}{2\sqrt{\theta}} e_\theta.\]
+    Since $r > \frac{1}{2}$ and $\theta > 2$ on $U$, the norm of the gradient satisfies
+    \[\|\nabla f(x)\| = \frac{1}{2r\sqrt{\theta}} \leq \frac{1}{2 \cdot \frac{1}{2} \cdot \sqrt{2}} = \frac{1}{\sqrt{2}} < 1 \qquad \text{for all } x \in U.\]
+    Thus $\|\nabla f\|$ is uniformly bounded on $U$ by $M = 1$.
+    However, as $\theta \to \infty$ within $U$, $f(x) = \sqrt{\theta} \to +\infty$. Therefore $f$ is unbounded on the bounded open set $U$.
+\end{enumerate}
+\begin{remark}[Intrinsic metric versus Euclidean metric]
+The failure occurs because the \emph{intrinsic path distance} $d_U(x, y)$ inside $U$ (the infimum of
+lengths of paths joining $x$ and $y$ within $U$) is not comparable to the Euclidean distance $\|x - y\|$.
+Integrating $\|\nabla f\| \leq M$ along a curve $\gamma$ inside $U$ yields $|f(x) - f(y)| \leq M \operatorname{Length}(\gamma)$,
+which controls variation only in terms of intrinsic path length. Because the spiral wraps infinitely many times
+inside $B_1(0)$, its intrinsic diameter is infinite while its Euclidean diameter is at most $2$.
+\end{remark}
+\end{exercisesolution}
+
 

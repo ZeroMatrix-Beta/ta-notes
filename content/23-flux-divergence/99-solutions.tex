@@ -443,9 +443,20 @@ indefinite quantity would allow.
     \[\lim_{r \downarrow 0} \phi(r) = \lim_{r \downarrow 0} \frac{1}{\omega_{n-1} r^{n-1}} \int_{\partial B_r(x_0)} u(x) \, d\vol_{n-1}(x) = u(x_0).\]
     Thus $\phi(r) = u(x_0)$ for every $r \in (0, R]$. This establishes the spherical mean value property.
 
-    To obtain the volume mean value property, integrate the spherical identity in polar/spherical coordinates:
-    \[\int_0^r \rho^{n-1} \left( \int_{\partial B_\rho(x_0)} u \, d\vol_{n-1} \right) d\rho = \int_0^r \rho^{n-1} \big(\omega_{n-1} \rho^{n-1} u(x_0)\big) \, d\rho = u(x_0) \omega_{n-1} \int_0^r \rho^{n-1} \, d\rho = u(x_0) \frac{\omega_{n-1} r^n}{n}.\]
-    By spherical slicing / Fubini's theorem, the left-hand integral equals $\int_{B_r(x_0)} u(x) \, d\vol_n(x)$.
+    To obtain the volume mean value property, integrate the spherical identity in
+    polar/spherical coordinates. Spherical slicing (Fubini) writes an integral over the ball as
+    an integral of its sphere integrals, and part \textbf{(b)} evaluates each of those: since
+    $\phi(\rho) = u(x_0)$, the sphere $\partial B_\rho(x_0)$ contributes
+    $\omega_{n-1}\rho^{n-1}u(x_0)$. Hence
+    \begin{align*}
+      \int_{B_r(x_0)} u(x) \, d\vol_n(x)
+        &= \int_0^r \left( \int_{\partial B_\rho(x_0)} u \, d\vol_{n-1} \right) d\rho \\
+        &= \int_0^r \omega_{n-1} \rho^{n-1} u(x_0) \, d\rho
+         = u(x_0) \frac{\omega_{n-1} r^n}{n}.
+    \end{align*}
+    Note that no extra factor of $\rho^{n-1}$ enters: the surface measure $d\vol_{n-1}$ on
+    $\partial B_\rho(x_0)$ already carries it, which is exactly why the sphere integral above is
+    proportional to $\rho^{n-1}$ rather than constant.
     Since $\alpha_n = \omega_{n-1}/n$ is the volume of the unit ball, this yields
     \[u(x_0) = \frac{1}{\alpha_n r^n} \int_{B_r(x_0)} u(x) \, d\vol_n(x).\]
 

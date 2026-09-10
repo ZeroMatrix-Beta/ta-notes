@@ -82,7 +82,25 @@ so the volume is strictly positive.
     % at $3.51$ and the $z$ label sitting above it. Masking with a white plate was the other
     % option and is rejected: it would leave the axis visibly interrupted, which is right for the
     % formula callout below (a box laid over the scene) and wrong for a heading.
-    % Correction: Gemini 3.7 Flash (High) --- draw surface background fill before 3D axes and labels to prevent painting over them.
+    \node[lbl, font=\small\bfseries, text=TextBoldColor] at (0.0, 0.0, 2.9) {Embedded surface $S = \phi(V) \subseteq \mathbb{R}^3$};
+
+    % 3D Coordinate Axes (x, y, z) at corner.
+    % ⚠️ These three lines and the heading above them are drawn BEFORE the surface fill, and that
+    % is deliberate. The frame stands at the corner $(-1.7,-1.7,-0.6)$, and with this scope's
+    % basis the kernel of the projection is $(1, 0.88, 0.47)$: the eye is off the $+x+y+z$ corner,
+    % so the frame is BEHIND and below the surface. Where the fill covers an axis it is showing
+    % depth, not losing a line.
+    % Reverted 2026-09-10 (Claude Opus 5, Ultracode): 4ac647b moved the heading and these axes
+    % after the fill, "to prevent painting over them". Rendered before and after, the only
+    % difference is a few short grey fragments now crossing the middle of the surface, which read
+    % as stray marks rather than as an axis --- the axis proper runs off to the lower left, far
+    % from where they appear. The heading was never at risk either: at screen height
+    % $1.45 \times 2.9 = 4.21$ it sits well above the surface's highest point, screen $y = 1.27$
+    % (maximise $0.261u^2 - 0.434u - 0.174v^2 - 0.15v$ over $[-1.5,1.5]^2$).
+    \draw[->, thick, gray!60] (-1.7, -1.7, -0.6) -- (2.0, -1.7, -0.6) node[lbl, below left, font=\scriptsize, text=black] {$x$};
+    \draw[->, thick, gray!60] (-1.7, -1.7, -0.6) -- (-1.7, 2.0, -0.6) node[lbl, right, font=\scriptsize, text=black] {$y$};
+    \draw[->, thick, gray!60] (-1.7, -1.7, -0.6) -- (-1.7, -1.7, 1.6) node[lbl, above, font=\scriptsize, text=black] {$z$};
+
     % Background shading of surface
     \fill[cyan!18, opacity=0.85]
       (-1.5,-1.5, {0.18*(-1.5)*(-1.5) - 0.12*(-1.5)*(-1.5)})
@@ -96,13 +114,6 @@ so the volume is strictly positive.
         -- (\u, -1.5, {0.18*\u*\u - 0.12*(-1.5)*(-1.5) + 0.08*\u})
       }
       -- cycle;
-
-    \node[lbl, font=\small\bfseries, text=TextBoldColor] at (0.0, 0.0, 2.9) {Embedded surface $S = \phi(V) \subseteq \mathbb{R}^3$};
-
-    % 3D Coordinate Axes (x, y, z) at corner
-    \draw[->, thick, gray!60] (-1.7, -1.7, -0.6) -- (2.0, -1.7, -0.6) node[lbl, below left, font=\scriptsize, text=black] {$x$};
-    \draw[->, thick, gray!60] (-1.7, -1.7, -0.6) -- (-1.7, 2.0, -0.6) node[lbl, right, font=\scriptsize, text=black] {$y$};
-    \draw[->, thick, gray!60] (-1.7, -1.7, -0.6) -- (-1.7, -1.7, 1.6) node[lbl, above, font=\scriptsize, text=black] {$z$};
 
     % U-curves (coordinate lines v = const)
     \foreach \v in {-1.5,-1.0,-0.5,0.0,0.5,1.0,1.5} {

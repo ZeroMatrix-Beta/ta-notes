@@ -560,7 +560,7 @@ first into a cylinder and then into a torus $\mathbb{T}^2 := \mathbb{R}^2/\mathb
     glueA/.style={blue!70!black, line width=1.1pt},
     glueB/.style={orange!90!black, line width=1.1pt}]
 
-  % ---------- (1) the unit square with its edge identifications ----------
+  % ---------- (a) the unit square with its edge identifications ----------
   \begin{scope}[shift={(0,0)}]
     \fill[blue!7] (0,0) rectangle (2,2);
     \draw[glueB] (0,0) -- (2,0);
@@ -575,10 +575,10 @@ first into a cylinder and then into a torus $\mathbb{T}^2 := \mathbb{R}^2/\mathb
     \draw[glueB,->] (0.86,2) -- (1.10,2);
     \draw[glueB,->] (1.06,2) -- (1.30,2);
     \node[font=\scriptsize, align=center, anchor=north] at (1,-0.34)
-      {\textbf{(1)} the square $[0,1]^2$\\ opposite edges identified};
+      {\textbf{(a)} the square $[0,1]^2$\\ opposite edges identified};
   \end{scope}
 
-  % ---------- (2) glue the blue pair: a cylinder ----------
+  % ---------- (b) glue the blue pair: a cylinder ----------
   \begin{scope}[shift={(4.0,0)}]
     \draw[glueB] (1.0,1.72) ellipse (0.72 and 0.26);
     \draw[gray!55, dashed] (0.28,0.28) arc (180:0:0.72 and 0.26);
@@ -586,10 +586,10 @@ first into a cylinder and then into a torus $\mathbb{T}^2 := \mathbb{R}^2/\mathb
     \draw[black!70] (0.28,1.72) -- (0.28,0.28);
     \draw[black!70] (1.72,1.72) -- (1.72,0.28);
     \node[font=\scriptsize, align=center, anchor=north] at (1,-0.34)
-      {\textbf{(2)} glue left to right:\\ a cylinder, two orange rims};
+      {\textbf{(b)} glue left to right:\\ a cylinder, two orange rims};
   \end{scope}
 
-  % ---------- (3) glue the orange rims to each other: a torus ----------
+  % ---------- (c) glue the orange rims to each other: a torus ----------
   % The seam where the two rims meet is a MERIDIAN of the tube, not a circle round the hole, so
   % it is drawn as the small orange ellipse standing across the tube at the right. An earlier
   % version put a dashed ellipse around the centre, which read as a second hole.
@@ -604,7 +604,7 @@ first into a cylinder and then into a torus $\mathbb{T}^2 := \mathbb{R}^2/\mathb
     \node[glueB, font=\scriptsize, anchor=west] at (2.22,0.46) {seam};
     \draw[glueB, very thin] (2.20,0.44) -- (1.80,0.22);
     \node[font=\scriptsize, align=center, anchor=north] at (1,-1.34)
-      {\textbf{(3)} glue the two rims:\\ the torus $\mathbb{T}^2$};
+      {\textbf{(c)} glue the two rims:\\ the torus $\mathbb{T}^2$};
   \end{scope}
 \end{tikzpicture}
 \end{center}

@@ -172,7 +172,12 @@ why the statement is local.
 \begin{center}
 \begin{tikzpicture}[>=Latex, scale=1.2]
   % The box background fill first, so axes and curves sit cleanly on top
-  \fill[green!7] (1.4,0.9) rectangle (3.6,2.4);
+  % Correction: Claude Opus 5 (Ultracode) --- the box was $[1.4,3.6] \times [0.9,2.4]$. Its
+  % $x$-range is centred on $x_0 = 2.5$ exactly, but its $y$-range has centre $1.65$ against
+  % $y_0 = 1.52$, so the side labelled $B_s(y_0)$ was a ball not centred at its own centre.
+  % Shifted to $[0.77, 2.27]$, which has centre $1.52$ and the same half-height $0.75$; the graph
+  % runs between $y = 1.495$ and $y = 1.751$ over the box, so it stays well inside either way.
+  \fill[green!7] (1.4,0.77) rectangle (3.6,2.27);
 
   \draw[green!60!black, thick, ->] (-0.4,0) -- (5.3,0) node[right, font=\small] {$x \in \mathbb{R}^d$};
   \draw[orange!90!black, thick, ->] (0,-0.4) -- (0,3.4) node[above, font=\small] {$y \in \mathbb{R}^{n-d}$};
@@ -185,7 +190,7 @@ why the statement is local.
   \node[gray!55!black, font=\scriptsize, right] at (4.45,0.80) {further branches};
 
   % The box outline, then the graph redrawn on top so it reads as the box's content.
-  \draw[green!60!black, thick] (1.4,0.9) rectangle (3.6,2.4);
+  \draw[green!60!black, thick] (1.4,0.77) rectangle (3.6,2.27);
   \draw[blue!80!black, very thick, domain=1.4:3.6, samples=60, smooth]
     plot ({\x}, {1.72 - 0.30*(\x-1.5) + 0.10*(\x-1.5)*(\x-1.5)});
 
@@ -200,7 +205,7 @@ why the statement is local.
   % still reads as naming the arrow it sits under.
   \draw[green!60!black, <->] (1.4,0.62)
     -- node[below, pos=0.25, font=\scriptsize] {$B_r(x_0)$} (3.6,0.62);
-  \draw[orange!90!black, <->] (1.13,0.9) -- node[left, font=\scriptsize] {$B_s(y_0)$} (1.13,2.4);
+  \draw[orange!90!black, <->] (1.13,0.77) -- node[left, font=\scriptsize] {$B_s(y_0)$} (1.13,2.27);
   \draw[dotted, gray] (2.5,0) -- (P);
   \node[below, font=\scriptsize] at (2.5,-0.05) {$x_0$};
 

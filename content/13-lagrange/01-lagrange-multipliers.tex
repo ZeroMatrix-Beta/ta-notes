@@ -24,11 +24,27 @@ maxima of $T|_{S^2}$, which \textbf{are not necessarily critical points of $T$}!
   \node[red!80!black, font=\tiny, right] at (-0.1, 1.4) {local extremum of $T|_{S^2}$};
 
   % Point p (oblique gradient = not extremum)
+  % Correction: Claude Opus 5 (Ultracode) --- the dotted line through $p$ was drawn
+  % $(-0.3,-0.3)$ to $(1.0,-0.6)$, direction $(1.3,-0.3)$ at $-13.0^\circ$, and the gradient was
+  % drawn $(0.75,-0.2)$ at $-14.9^\circ$: the two were $1.9^\circ$ apart. So the panel whose whole
+  % claim is that $\nabla T(p)$ *has* a tangential component drew it lying along the tangent,
+  % i.e. with no normal component at all -- the opposite failure from the one at $q$, and just as
+  % wrong. The dotted line was not the tangent either: at $p$ the radius is
+  % $p/|p| = (0.614,-0.789)$, so the tangent is $\tau = (0.789,0.614)$, and
+  % $(1.3,-0.3)\cdot(0.614,-0.789) = 0.562 \neq 0$.
+  % Redrawn from $\tau$ and $n$: the dotted line is now the true tangent, and
+  %   $\nabla T(p) := 0.55\,n + 0.50\,\tau = (0.732,-0.127)$,
+  % which stands $42.3^\circ$ off the radius and $47.7^\circ$ off the tangent -- visibly neither.
+  % Its tangential half is drawn as well, since that is the thing the caption names.
   \coordinate (P) at (0.35, -0.45);
+  \draw[orange!90!black, dotted, thick] (-0.163, -0.849) -- (0.863, -0.051);
+  \draw[orange!90!black, thick, ->] (P) -- ++(0.732, -0.127)
+    node[below right, font=\small] {$\nabla T(p)$};
+  \draw[orange!60!black, thin, dashed] (0.7445, -0.143) -- (1.082, -0.577);
+  \draw[orange!90!black, thick, ->] (P) -- ++(0.3945, 0.3070);
   \fill[orange!90!black] (P) circle (1.8pt) node[left, font=\footnotesize] {$p$};
-  \draw[orange!90!black, thick, ->] (P) -- ++(0.75, -0.2) node[below right, font=\small] {$\nabla T(p)$};
-  \draw[orange!90!black, dotted, thick] (-0.3, -0.3) -- (1.0, -0.6);
-  \node[orange!90!black, font=\tiny, align=left] at (1.1, -0.1) {has tangent component $\implies$\\not a local extremum};
+  \node[orange!90!black, font=\tiny, align=center, anchor=north] at (0.4, -1.48)
+    {tangential component $\neq 0$\\$\implies$ not a local extremum};
 \end{tikzpicture}
 \end{center}
 
@@ -317,17 +333,31 @@ actually differentiated, so it is used throughout.
   % sphere drawn with radius 1.4 -- so two of the eight dots captioned "critical points on S^2"
   % were printed OUTSIDE the sphere's own outline, which no projection of a point of S^2 can be.
   % Every vertex is shifted by (-0.1,-0.45), which moves the cube's centre onto the sphere's and
-  % changes nothing else. Screen radii afterwards, all inside 1.4 as they must be:
-  %   A1 1.180  A2 1.074  A3 0.743  A4 0.559  B1 0.743  B2 0.559  B3 1.180  B4 1.074.
-  \coordinate (A1) at (-0.7, -0.95);
-  \coordinate (A2) at (0.5, -0.95);
-  \coordinate (A3) at (0.7, -0.25);
-  \coordinate (A4) at (-0.5, -0.25);
+  % changes nothing else.
+  %
+  % Correction: Claude Opus 5 (Ultracode) --- the cube then disagreed with its own axes. Its three
+  % edge vectors were $(1.2,0)$, $(0.2,0.7)$ and $(0,1.2)$, so $e_1 \mapsto (1,0)$ and
+  % $e_3 \mapsto (0,1)$ matched the drawn $x$ and $z$ axes, but $e_2 \mapsto (0.2,0.7)$ points up
+  % and to the RIGHT while the $y$ axis above is drawn towards $(-0.8,1.0)$, up and to the LEFT:
+  % $54.6^\circ$ apart, so the picture was not a projection of the frame it labels.
+  % Rebuilt from the axes instead of adjusted. Taking half-edges
+  %   $e_1 \mapsto (0.6,0)$, $e_2 \mapsto 0.35\,(-0.8,1.0) = (-0.28,0.35)$, $e_3 \mapsto (0,0.6)$,
+  % a vertex is $\pm(0.6,0) \pm(-0.28,0.35) \pm(0,0.6)$, i.e. screen
+  %   $x = \pm 0.6 \mp 0.28$, $y = \pm 0.35 \pm 0.6$.
+  % Bottom face $A$ is $e_3 = -1$, top face $B$ is $e_3 = +1$, so $B_i = A_i + (0,1.2)$ still, and
+  % $A_1A_2A_3A_4$ is still a parallelogram: $A_1A_2 = (1.2,0) = 2e_1$, $A_2A_3 = (-0.56,0.7) = 2e_2$.
+  % Screen radii, all inside 1.4 as they must be:
+  %   A1 1.002  A2 1.295  A3 0.406  A4 0.915  B1 0.406  B2 0.915  B3 1.002  B4 1.295,
+  % and the centroid is $(0,0)$ exactly, as before.
+  \coordinate (A1) at (-0.32, -0.95);
+  \coordinate (A2) at (0.88, -0.95);
+  \coordinate (A3) at (0.32, -0.25);
+  \coordinate (A4) at (-0.88, -0.25);
 
-  \coordinate (B1) at (-0.7, 0.25);
-  \coordinate (B2) at (0.5, 0.25);
-  \coordinate (B3) at (0.7, 0.95);
-  \coordinate (B4) at (-0.5, 0.95);
+  \coordinate (B1) at (-0.32, 0.25);
+  \coordinate (B2) at (0.88, 0.25);
+  \coordinate (B3) at (0.32, 0.95);
+  \coordinate (B4) at (-0.88, 0.95);
 
   % Cube edges
   \draw[red!80!black, thick, dotted] (A1)--(A2)--(A3)--(A4)--cycle;

@@ -192,7 +192,16 @@ one intermediate level set:
 
 \begin{center}
 % Generator: Claude Opus 5 (High) --- FIG-W01-02.
-% Oblique projection: a horizontal circle of radius R is drawn as an ellipse (R and 0.34*R).
+% Oblique projection: a horizontal circle of radius R is drawn as an ellipse (R and f*R).
+% Panels (d) and (f) use f = 0.34 (0.44/1.3 and 0.22/0.65 respectively).
+% Correction: Claude Opus 5 (Ultracode) --- panel (e) used f = 0.30/1.75 = 0.171 for its rim and
+% f = 0.20/1.00 = 0.200 for its level circle, disagreeing with each other and with the line above.
+% The rim is now 0.35 = 0.20*1.75, so (e) is internally consistent at f = 0.20.
+% It cannot be brought up to 0.34, and that is worth recording so the next pass does not try:
+% (e)'s vertex sits at z = 1 rather than at the origin, so its drawn z-range is only [1, 2.02].
+% At f = 0.34 the rim would be (1.75 and 0.595) about (0,2.02), spanning y = 1.425 to 2.615 --
+% past the z axis tip at 2.5 -- and at x = 1.0 its lower arc reaches y = 1.532, which falls
+% inside the level circle's own span [1.334, 1.766] there, so the two would cross.
 % (4) apex (0,0,1) at the top, radius 1-z, so radius 1 at z=0: a downward-opening cone.
 % (5) z = sqrt(1+x^2+y^2): vertex (0,0,1), radius sqrt(z^2-1); at z=2 the radius is sqrt3=1.73.
 % (6) z = max(|x|,|y|): apex at the origin, level sets are SQUARES of half-side z.
@@ -217,7 +226,7 @@ one intermediate level set:
     \draw[gray!65, dashed] (-1.9,1.9) -- (0,0) -- (1.9,1.9);
     \draw[blue!70!black, thick, domain=-1.75:1.75, samples=80]
       plot (\x, {sqrt(1+\x*\x)});
-    \draw[blue!70!black, thick] (0,2.02) ellipse (1.75 and 0.30);
+    \draw[blue!70!black, thick] (0,2.02) ellipse (1.75 and 0.35);
     \draw[blue!70!black, dotted] (0,1.41) ellipse (1.0 and 0.20);
     \fill (0,1.0) circle (1.5pt) node[below right, font=\footnotesize] {$(0,0,1)$};
     \node[gray!70!black, font=\footnotesize, anchor=west] at (1.2,0.45) {$z=|x|$};

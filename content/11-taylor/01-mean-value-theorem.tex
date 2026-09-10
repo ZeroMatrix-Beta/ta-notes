@@ -141,7 +141,13 @@ Applying the Cauchy--Schwarz inequality and the definition of the operator norm,
 
     \coordinate (FX) at (0.3, 0.2);
     \coordinate (FXH) at (2.1, 1.4);
-    \coordinate (FXI) at (1.45, 1.25); % F(xi)
+    % Correction: Claude Opus 5 (Ultracode) --- $F(\xi)$ sat at $(1.45,1.25)$, which is not on the
+    % curve plotted above: the nearest point of that curve is $(1.505,1.234)$ at $t = 0.45$, about
+    % one dot-radius away, so the mean-value point was drawn beside the path it is supposed to lie
+    % on. Pinned to $t = 0.45$: writing $s(t) := \sin(180t^\circ) = \sin(\pi t)$,
+    %   $P(0.45) = (0.3 + 0.81 + 0.4\,s,\ 0.2 + 0.54 + 0.5\,s)$ with $s = \sin 81^\circ = 0.98769$,
+    % giving $(1.50508, 1.23385)$.
+    \coordinate (FXI) at (1.505, 1.234); % F(xi), on the curve at t = 0.45
 
     \fill[red!80!black] (FX) circle (1.8pt);
     \node[below left, font=\footnotesize] at (FX) {$F(x)$};
@@ -158,8 +164,12 @@ Applying the Cauchy--Schwarz inequality and the definition of the operator norm,
     % Displacement vector F(x+h) - F(x)
     \draw[->, very thick, red!80!black] (FX) -- (FXH) node[midway, below right, font=\footnotesize] {$F(x+h)-F(x)$};
 
-    % Tangent vector DF_xi(h) at F(xi)
-    \draw[->, very thick, green!55!black] (FXI) -- ++(0.95, 0.6) node[above, font=\footnotesize] {$DF_{\xi}(h)$};
+    % Tangent vector DF_xi(h) at F(xi). It is the derivative of $t \mapsto F(x+th)$, so it must be
+    % TANGENT to the curve, and was not: drawn as $(0.95,0.6)$ it stood $3.4^\circ$ off.
+    % $P'(t) = (1.8 + 0.4\pi\cos\pi t,\ 1.2 + 0.5\pi\cos\pi t)$, and at $t = 0.45$,
+    % $\pi\cos(0.45\pi) = 0.49139$, so $P'(0.45) = (1.99656, 1.44570)$, of length $2.4650$.
+    % Scaled to the arrow's old length $1.123$: $(0.910, 0.659)$.
+    \draw[->, very thick, green!55!black] (FXI) -- ++(0.910, 0.659) node[above, font=\footnotesize] {$DF_{\xi}(h)$};
 
     % Unit dual vector direction u. It is deliberately collinear with the red displacement
     % arrow, since $u = y/|y|$ IS that direction; the dashed part visible past $F(x+h)$ is the

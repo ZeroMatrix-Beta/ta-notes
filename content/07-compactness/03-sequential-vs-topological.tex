@@ -315,26 +315,59 @@ set. Compactness of $K$ gives a finite subcover
 $U_{1},\dots,U_{m} \in \mathcal{U}'$ of $K$, hence of $A$.
 
 \begin{center}
-\begin{tikzpicture}[scale=1.2]
+% Correction: Claude Opus 5 (Ultracode), found by rendering printed p. 91 --- the figure drew one
+% dashed rectangle round $A$, called it $\mathcal{V}$, and captioned it "$\mathcal{V}$ covers $K$,
+% so also $A$". Three things were wrong at once. The rectangle spans $x \in [-1,1.2]$,
+% $y \in [-0.8,0.8]$ while $K$ reaches $x = \pm 2$ and $y = 1.2$: it visibly does not cover $K$,
+% which is the "open cover that does not cover" this document has been caught by before.
+% $\mathcal{V}$ occurs nowhere in the proposition or the proof, which use $\mathcal{U}$ and
+% $\mathcal{U}' = \mathcal{U} \cup \{X\setminus A\}$. And the implication ran backwards: the proof
+% enlarges a cover of $A$ into one of $K$, not the other way round.
+% The redraw shows the enlargement itself, which is the step the remark below names
+% ("enlarge the cover, then discard the extra set"): $\mathcal{U}$ round $A$, and $X\setminus A$
+% -- drawn even-odd, clipped to $K$, since only its part inside $K$ does any work -- supplying
+% everything else.
+\begin{tikzpicture}[scale=1.2,
+  lbl/.style={fill=white, fill opacity=0.8, text opacity=1, inner sep=1.2pt,
+              rounded corners=1pt}]
+  % X \ A, drawn first so nothing later is painted over.
+  \begin{scope}
+    \clip plot[smooth cycle, tension=0.7] coordinates {(-1.5, -1) (-2, 0.5) (0, 1.2) (2, 0.5) (1.5, -1.2)};
+    \fill[green!12, even odd rule] (-2.4,-1.6) rectangle (2.4,1.6)
+      (0, 0.5) -- (-0.6, 0) -- (0, -0.5) -- (0.6, 0) -- cycle;
+  \end{scope}
+
   % Compact set K
   \draw[very thick] plot[smooth cycle, tension=0.7] coordinates {(-1.5, -1) (-2, 0.5) (0, 1.2) (2, 0.5) (1.5, -1.2)};
   % Correction: Claude Opus 5 (Max) --- `above left' at (-1.8,0.5) put the box across x = -2.1
   % to -1.8, and the blob's outline passes through its own control point (-2,0.5), inside that
   % span: the very thick boundary ran through the letter. Set inside the blob instead, where the
   % nearest boundary is at x = -2.0 and the dashed rectangle's left edge at x = -1.0.
-  \node[font=\large] at (-1.35, 0.45) {$K$};
-  
+  \node[lbl, font=\large] at (-1.35, 0.45) {$K$};
+
   % Closed set A
-  \draw[thick, fill=gray!20] (0, 0.5) -- (-0.6, 0) -- (0, -0.5) -- (0.6, 0) -- cycle;
+  \draw[thick, fill=gray!25] (0, 0.5) -- (-0.6, 0) -- (0, -0.5) -- (0.6, 0) -- cycle;
   \node[font=\large] at (0, 0) {$A$};
-  
-  % Open cover V
+
+  % The added set. Its true boundary is the diamond's edge, already drawn above. Set on the LEFT,
+  % where the gap between the rectangle (left edge x = -1.0) and K (x = -1.9 at this height) is
+  % widest; on the right it landed on the rectangle's own corner.
+  \node[lbl, text=green!35!black, font=\small] at (-1.5, -0.5) {$X\setminus A$};
+
+  % The cover of A that the proof starts from.
   \draw[dashed, blue] (-1, 0.8) rectangle (1.2, -0.8);
+  % Inside the rectangle's top-right corner rather than outside it: anchored there, the label
+  % straddled K's own thick outline, which passes through this corner.
+  \node[lbl, text=blue, font=\small, anchor=north east] at (1.12, 0.72) {$\mathcal{U}$};
+
   % Correction: Claude Opus 5 (Max) --- `right' at (1.2,0.5) sent this running rightwards from
   % the rectangle's edge, and the blob's control point (2,0.5) sits 0.8 units into it at exactly
   % its vertical centre, so the very thick outline crossed the caption. Below the whole figure
   % instead: the blob's lowest reach is about y = -1.35 and nothing else is down there.
-  \node[blue, font=\small, below] at (0, -1.5) {$\mathcal{V}$ covers $K$, so also $A$};
+  % One line, not two: the second line restated the sentence directly below the figure and drove
+  % the picture's box wider than the blob itself.
+  \node[blue, font=\small, below] at (0, -1.5)
+    {$\mathcal{U}$ covers $A$; adding $X\setminus A$ covers $K$};
 \end{tikzpicture}
 \end{center}
 

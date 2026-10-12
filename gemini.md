@@ -18,7 +18,6 @@ stale, so that project churn stops rotting the style rules:
 | **`style.md`** | Prose, notation, environments, lists, figures, exercises, provenance conventions | when a style decision changes |
 | **`build-and-preamble.md`** | Build traps, `main.tex` facts and line numbers, numbering, document layout, the environment set | when `main.tex` changes |
 | **`old-exam-mining.md`** | Which `old_exams/` papers are mined, what is **rejected forever**, and **where to mine next** | when a mining pass runs |
-| **`project-state.md`** | ⚠️ **Deprecated 2026-08-10 on the user's instruction.** A stub. Do not write to it. | never |
 
 **`tools/audit.py` is where a good part of the above is actually enforced.** Run it before you
 commit; it exits non-zero on any finding:

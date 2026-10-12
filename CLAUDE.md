@@ -11,5 +11,5 @@ tool usage and the sources, and indexes the two other rule files:
 Read `gemini.md` plus whichever file covers the task at hand. New rules go in the
 file matching their lifetime — that separation is deliberate.
 
-`project-state.md` is **deprecated** and is a stub. There is no file for project
-status: `git log` is the record of what has been done. Do not write status anywhere.
+There is no file for project status: `git log` is the record of what has been done.
+Do not write status anywhere.

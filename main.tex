@@ -405,8 +405,10 @@
 }
 
 \setlist[enumerate]{
-  font=\colorlet{TextBoldColor}{EnumerateBullet},
-  label=\textcolor{EnumerateBullet}{\bfseries(\alph*)},
+  % Every label in the enumerate color and sans-serif bold, however it is written: the default
+  % (a), label=(1), or label=\textbf{(i)} (TextBoldColor is redirected for \textbf).
+  font=\sffamily\bfseries\color{EnumerateBullet}\colorlet{TextBoldColor}{EnumerateBullet},
+  label=(\alph*),
   ref=(\alph*)
 }
 

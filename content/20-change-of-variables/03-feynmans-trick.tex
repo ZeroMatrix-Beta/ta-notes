@@ -84,7 +84,8 @@ Differentiating under the integral sign with respect to $t$ (which is justified 
 This standard integral can be evaluated using integration by parts twice, or by using Euler's formula $e^{ix} = \cos x + i\sin x$ and noting that $e^{-tx}\sin x = \operatorname{Im}(e^{(-t+i)x})$:
 \[\int_0^\infty e^{(-t+i)x} \,dx = \left[ \frac{e^{(-t+i)x}}{-t+i} \right]_0^\infty = 0 - \frac{1}{-t+i} = \frac{t+i}{t^2+1}.\]
 Taking the imaginary part gives $\int_0^\infty e^{-tx} \sin x \,dx = \frac{1}{t^2+1}$. Thus,
-\[I'(t) = -\frac{1}{t^2+1} \implies I(t) = -\arctan(t) + C.\]
+\[I'(t) = -\frac{1}{t^2+1},\]
+which integrates to $I(t) = -\arctan(t) + C$.
 Since $\lim_{t \to \infty} I(t) = 0$, we must have $C = \lim_{t \to \infty} \arctan(t) = \frac{\pi}{2}$.
 Therefore, $I(t) = \frac{\pi}{2} - \arctan(t)$.
 The original integral corresponds to the limit as $t \to 0^+$ (which requires an extra justification step usually provided by Abel's theorem, but we formally take the limit):

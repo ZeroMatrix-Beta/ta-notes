@@ -114,11 +114,11 @@ Decide whether the following subsets are open, closed, compact, or complete (und
   \item $f^{-1}([0,1])$ where $f : \mathbb{R}^n \to \mathbb{R}$ is continuous
   \item $f^{-1}((0,1))$ where $f : \mathbb{R}^n \to \mathbb{R}$ is continuous
   \item $S := \operatorname{span}\{(1,0,0)\transp, (3,1,0)\transp\} \subseteq \mathbb{R}^3$
-  \item $\{x \in \mathbb{R}^3 \mid \exists s \in S \text{ s.t.\ } d(x, s) < 1\}$ for a subset $S \subseteq \mathbb{R}^3$
+  \item $\{x \in \mathbb{R}^3 \mid \exists s \in S \text{ such that } d(x, s) < 1\}$ for a subset $S \subseteq \mathbb{R}^3$
 \end{enumerate}
 \end{exercise}
 
-\begin{exercisesolution}[Proof of \cref{ex:topological_properties_table}]
+\begin{exercisesolution*}[Solution to \cref{ex:topological_properties_table}]
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item $[0,1] \subseteq \mathbb{R}$: \textbf{Closed}, \textbf{compact}, \textbf{complete}. (Not open).
   \item $\mathbb{Q} \subseteq \mathbb{R}$: \textbf{None}. It is neither open nor closed, not bounded (so not compact), and not complete.
@@ -131,9 +131,9 @@ Decide whether the following subsets are open, closed, compact, or complete (und
   \item $f^{-1}([0,1])$: \textbf{Closed}, \textbf{complete} (continuous preimage of a closed set).
   \item $f^{-1}((0,1))$: \textbf{Open} (continuous preimage of an open set).
   \item $S := \operatorname{span}\{(1,0,0)\transp, (3,1,0)\transp\} \subseteq \mathbb{R}^3$: \textbf{Closed}, \textbf{complete} (it is a $2$-dimensional subspace, hence closed in $\mathbb{R}^3$).
-  \item $\{x \in \mathbb{R}^3 \mid \exists s \in S \text{ s.t.\ } d(x, s) < 1\}$: \textbf{Open}. This set is equivalently written as $\{x \in \mathbb{R}^3 \mid d(x, S) < 1\}$ or $\bigcup_{s \in S} B_1(s)$, which is an arbitrary union of open balls.
+  \item $\{x \in \mathbb{R}^3 \mid \exists s \in S \text{ such that } d(x, s) < 1\}$: \textbf{Open}. This set is equivalently written as $\{x \in \mathbb{R}^3 \mid d(x, S) < 1\}$ or $\bigcup_{s \in S} B_1(s)$, which is an arbitrary union of open balls.
 \end{enumerate}
-\end{exercisesolution}
+\end{exercisesolution*}
 
 This captures our intuition of a \qt{compact} set. We will briefly show that Heine--Borel is
 \textbf{false} for $\mathbb{R}^n$ with an \textbf{arbitrary metric}.

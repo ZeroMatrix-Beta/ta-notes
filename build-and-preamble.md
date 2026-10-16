@@ -352,6 +352,12 @@ not trustworthy on its own, because parentheses in ordinary text confuse the obv
 }{%
   \end{proof}%
 }
+\newenvironment{exercisesolution*}[1][Solution]{%
+  \renewcommand{\qedsymbol}{\solvedbox}%
+  \begin{proof}[#1]%
+}{%
+  \end{proof}%
+}
 % Trailing notes on an exercise/example (added 2026-08-10 / 2026-08-23; main.tex, just below
 % exercisesolution, carries the full comment). All three hang off the END of a statement,
 % inside the environment, and share one geometry via \exnoteopen: a centred block

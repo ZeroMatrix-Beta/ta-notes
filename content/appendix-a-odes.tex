@@ -981,12 +981,22 @@ points carve up.
     \[y(x) = x\,\tan\!\big(\ln\lvert x\rvert + c\big).\]
 \end{enumerate}
 
-\begin{remark}[What part \textbf{(d)} shows that the others do not]
+% Correction: Claude (xhigh) --- this said that in (a) and (c) the solutions stop only at the
+% excluded lines, and was titled "What part (d) shows that the others do not". Both are false:
+% (a) with K = 2 gives y = 2(x-1)/(2-x), which blows up at x = 2 inside the strip x > 1; (c) with
+% A < 0 blows up at x = |A|^{-1/2}; and (b), as its own text says, blows up for A < 0. What is
+% special about (d) is that EVERY solution blows up, at both ends.
+\begin{remark}[Solutions can stop inside $U$]
 \label{rem:maximal_interval_can_be_bounded}
-In \textbf{(a)} and \textbf{(c)} the solution stops where the \emph{equation} stops, at the points
-the normal form had to exclude. Part \textbf{(d)} is different: $F$ is perfectly well behaved on
-the whole half-plane $x>0$, and yet the solution $x\tan(\ln x + c)$ blows up as
-$\ln x + c \to \pi/2$, at a point of $U$ that nothing in the equation singles out.
+It is tempting to think that a solution stops only where the \emph{equation} stops, at the
+points the normal form had to exclude. Part \textbf{(a)} already refutes this. With $K = 2$ its
+solution is $y = 2(x-1)/(2-x)$, which starts in the strip $x > 1$ and blows up as $x \to 2$, at a
+point of $U$ that nothing in the equation singles out. The same happens in \textbf{(c)} for
+$A < 0$, at $x = \lvert A\rvert^{-1/2}$, and in \textbf{(b)} for $A < 0$, at $x = -\ln\lvert A\rvert$.
+Part \textbf{(d)} shows it in its purest form. There $F$ is perfectly well behaved on the whole
+half-plane $x>0$ and has no constant solution, and yet \emph{every} solution $x\tan(\ln x + c)$
+blows up at both ends of the interval on which $\ln x + c$ runs through $(-\pi/2,\pi/2)$. Every
+maximal interval is bounded and lies strictly inside $(0,\infty)$.
 
 This is exactly the last clause of \cref{thm:picard_lindeloef_local} in action --- as $x$ tends to
 an endpoint of the maximal interval, $(x,y(x))$ must leave every compact subset of $U$, and here it

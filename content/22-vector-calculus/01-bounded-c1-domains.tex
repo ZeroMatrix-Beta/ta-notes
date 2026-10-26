@@ -5,11 +5,19 @@
 
 % Source: Corsin Nick/Class Notes/Week 10.pdf, p. 6
 % Def. 14.3
+% Correction: Claude (xhigh) --- condition (b) added. The definition consisted of (a) alone, and
+% under (a) alone the Gauss-map claim below is false; see rem:c1_domain_needs_one_side and the
+% ainote after it.
 \begin{definition}[Bounded $C^k$ domain]
 \label{def:bounded_ck_domain}
 Given $k \geq 1$, a bounded open set $\Omega \subset \mathbb{R}^n$ is called a
-\newterm{bounded $C^k$ domain} if $M := \partial\Omega$ is an $(n-1)$-dimensional submanifold
-of class $C^k$.
+\newterm{bounded $C^k$ domain} if
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item $M := \partial\Omega$ is an $(n-1)$-dimensional submanifold of class $C^k$, and
+  \item $\Omega$ lies locally on one side of $M$: every $p \in M$ has an open neighbourhood $V$
+    with a function $g \in C^k(V)$ such that $\nabla g \neq 0$ on $V$ and
+    $\Omega \cap V = \{x \in V : g(x) < 0\}$.
+\end{enumerate}
 \end{definition}
 
 Citing the 2024 lecture notes, Corsin builds up the machinery needed to actually \emph{use}
@@ -26,6 +34,47 @@ exists a unique interior and exterior Gauss map; write
   normal}\]
 for the exterior unit normal map.
 
+% Generator: Claude (xhigh)
+Condition \textbf{(b)} is what makes this true. With $V$ and $g$ as there,
+$\partial\Omega \cap V = \{x \in V : g(x) = 0\}$, so $\nabla g(p)$ spans the normal line
+$N_p(\partial\Omega)$, and the unit normal $\nabla g(p)/\lvert\nabla g(p)\rvert$ is exterior:
+$g$ increases in that direction, so $g(p+hv) > 0$ and $p + hv \notin \Omega$ for small $h > 0$.
+Its negative is interior for the same reason. A normal line holds only these two unit vectors,
+so $\nu = \nabla g/\lvert\nabla g\rvert$ near $p$, whichever $g$ was chosen, and this is
+continuous.
+
+% Generator: Claude (xhigh)
+\begin{remark}[Why a smooth boundary is not enough]
+\label{rem:c1_domain_needs_one_side}
+Condition \textbf{(a)} alone admits sets on which none of the above makes sense. Take
+\[\Omega := B_1(0) \setminus \partial B_{1/2}(0) \subseteq \mathbb{R}^3,\]
+the open unit ball with the sphere of radius $\tfrac12$ removed. It is bounded and open, and
+$\partial\Omega = \partial B_1(0) \cup \partial B_{1/2}(0)$ is a smooth surface, so
+\textbf{(a)} holds. But $\Omega$ lies on \emph{both} sides of the inner sphere: at a point $p$
+of it, both unit normals $\pm 2p$ are interior. There is no exterior normal at $p$, hence no
+exterior Gauss map, and the flux of \cref{def:flux} is undefined.
+
+No choice of normal on the inner sphere repairs this. For $F(x) := x$, with $\divg F = 3$, the
+volume side of the divergence theorem (\cref{thm:gauss_divergence}) is
+$\int_\Omega 3\,d\vol_3 = 4\pi$, the removed sphere being a null set. The outer sphere alone
+already contributes $\int_{\partial B_1(0)}\langle x,x\rangle\,d\vol_2 = 4\pi$ to the boundary
+side, and the inner sphere adds $\pm\tfrac12\vol_2\big(\partial B_{1/2}(0)\big) = \pm\tfrac{\pi}{2}
+\neq 0$, whichever unit normal it is given.
+
+Condition \textbf{(b)} excludes the example. Since $\nabla g(p) \neq 0$, it puts points with
+$g > 0$, which lie outside $\overline\Omega$, arbitrarily close to every boundary point, and
+near the inner sphere there are none.
+\end{remark}
+
+\begin{ainote}
+Corsin's notes state \cref{def:bounded_ck_domain} with condition \textbf{(a)} alone and then
+assert that a unique interior and exterior Gauss map exists, which
+\cref{rem:c1_domain_needs_one_side} refutes. Condition \textbf{(b)} has been added here so that
+the assertion, and with it the flux and the divergence theorem built on it, holds. The domains to
+which this document applies those results all satisfy it.
+\end{ainote}
+
+% Source: Corsin Nick/Class Notes/Week 10.pdf, p. 6
 \begin{theorem}[Jordan--Brouwer separation theorem]
 \label{thm:jordan_brouwer}
 If $M \subseteq \mathbb{R}^{n+1}$ is an $n$-dimensional compact and connected submanifold,

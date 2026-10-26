@@ -79,6 +79,43 @@ means: \qt{the space cannot be separated by open sets.}
 \end{tikzpicture}
 \end{center}
 
+% Generator: Claude (xhigh) --- added because the figure above, the proofs of
+% ex:connectedness_tf (a) and (c) and the proof of cor:union_connected_common_point all test a
+% subset against disjoint open sets of the whole space, while def:connectedness asks for sets open
+% in the subset. Nothing connected the two until now.
+The figure draws $U_1$ and $U_2$ as open sets of the surrounding plane, while
+\cref{def:connectedness} asks, for a subset, for sets that are open \emph{in the subset}. The two
+pictures agree, and several proofs below use the first one.
+
+\begin{lemma}[Separating a subset by open sets of the whole space]
+\label{lem:separation_by_ambient_open_sets}
+Let $(X,d)$ be a metric space and $A \subseteq X$. Then $A$ is disconnected if and only if there
+are open sets $U_1, U_2 \subseteq X$ with
+\[A \subseteq U_1 \cup U_2, \qquad U_1 \cap U_2 = \emptyset, \qquad A \cap U_1 \neq \emptyset,
+  \qquad A \cap U_2 \neq \emptyset.\]
+\end{lemma}
+
+\begin{proof}
+\textbf{($\Leftarrow$)} Put $W_i := A \cap U_i$. If $a \in W_i$, some ball $B_\varepsilon(a)$
+lies in $U_i$, so the ball of radius $\varepsilon$ about $a$ in $A$, which is
+$B_\varepsilon(a) \cap A$, lies in $W_i$. So $W_1$ and $W_2$ are open in $A$, and they are
+non-empty, disjoint and cover $A$. They disconnect $A$.
+
+\textbf{($\Rightarrow$)} Let $W_1, W_2$ be open in $A$, non-empty and disjoint, with
+$A = W_1 \cup W_2$, and set
+\[U_1 := \{x \in X : d(x,W_1) < d(x,W_2)\}, \qquad U_2 := \{x \in X : d(x,W_2) < d(x,W_1)\}.\]
+Both are open, since $x \mapsto d(x,W_i)$ is continuous by
+\cref{cor:closed_iff_zero_of_distance}, and they are disjoint by construction. Let
+$a \in W_1$. Then $d(a,W_1) = 0$, and since $W_1$ is open in $A$ there is $\varepsilon>0$ with
+$B_\varepsilon(a) \cap A \subseteq W_1$, so no point of $W_2$ lies within $\varepsilon$ of $a$
+and $d(a,W_2) \geq \varepsilon > 0$. Hence $W_1 \subseteq U_1$, and likewise
+$W_2 \subseteq U_2$. This gives $A \subseteq U_1 \cup U_2$, with both $U_i$ meeting $A$.
+\end{proof}
+
+The work is all in the forward direction. Open sets of $X$ that merely cut $W_1$ and $W_2$ out of
+$A$ always exist, but they may overlap away from $A$, and the distance functions are what push
+them apart.
+
 % Generator: Claude Opus 5 (High) --- the base case of connectedness, used three times in this
 % chapter (path-connectedness, the topologist's sine curve, the intermediate value theorem)
 % but stated nowhere in the source notes.
@@ -239,10 +276,12 @@ Are the following true or false?
 \begin{exercisesolution}[Proof of \cref{ex:connectedness_tf}]
 \textbf{(a) True.} \textit{Proof.} Let $X$ be a metric space, $V_1, V_2 \subseteq X$ connected,
 and $x_0 \in V_1 \cap V_2$. Suppose $V_1 \cup V_2 \subseteq U_1 \cup U_2$ with
-$U_1, U_2 \subseteq X$ open and disjoint. Assume without loss of generality $x_0 \in U_1$. Then
-$U_1 \cap V_1 \neq \emptyset$ and $U_1 \cap V_2 \neq \emptyset$. So, since $V_1, V_2$ are
-connected, $V_1 \cap U_2 = V_2 \cap U_2 = \emptyset$. Therefore
-$(V_1 \cup V_2) \cap U_2 = \emptyset$ and $V_1 \cup V_2$ is connected.
+$U_1, U_2 \subseteq X$ open and disjoint. By \cref{lem:separation_by_ambient_open_sets} it is
+enough to show that one of them misses $V_1 \cup V_2$. Assume without loss of generality
+$x_0 \in U_1$. Then $U_1 \cap V_1 \neq \emptyset$ and $U_1 \cap V_2 \neq \emptyset$. So, since
+$V_1, V_2$ are connected, \cref{lem:separation_by_ambient_open_sets} gives
+$V_1 \cap U_2 = V_2 \cap U_2 = \emptyset$. Therefore $(V_1 \cup V_2) \cap U_2 = \emptyset$ and
+$V_1 \cup V_2$ is connected.
 
 \textbf{(b) False.} \textit{Counterexample:}
 \[
@@ -255,13 +294,25 @@ U \cap V = \{(-1,0), (1,0)\}.
 \textbf{(c) True.} Suppose $X$ is a metric space, $A \subseteq X$ a subset with closure
 $\overline{A}$. Suppose $U_1, U_2 \subseteq X$ are disjoint open sets covering $\overline{A}$, and
 assume without loss of generality $\overline{A} \cap U_1 \neq \emptyset$. Then, since $U_1$ is
-open, $A \cap U_1 \neq \emptyset$. By connectedness of $A$, $U_2 \cap A = \emptyset$, and since
-$U_2$ is open, also $U_2 \cap \overline{A} = \emptyset$.
+open, $A \cap U_1 \neq \emptyset$. By connectedness of $A$ and
+\cref{lem:separation_by_ambient_open_sets}, $U_2 \cap A = \emptyset$, and since $U_2$ is open,
+also $U_2 \cap \overline{A} = \emptyset$. So no such pair separates $\overline{A}$, which is
+therefore connected by \cref{lem:separation_by_ambient_open_sets} once more.
 \end{exercisesolution}
 
 \begin{ainote}
 Corsin writes $|x| = R^2$ in the definition of $S^1$ above; it must be $|x| = 1$, as the
 stated intersection $\{(\pm 1, 0)\}$ confirms. Corrected here.
+\end{ainote}
+
+% Correction: Claude (xhigh) --- the proofs of (a) and (c) tested connectedness against disjoint
+% open sets of X without saying why that is the same as def:connectedness; they now cite
+% lem:separation_by_ambient_open_sets at each step that needs it.
+\begin{ainote}
+Corsin's proofs of \textbf{(a)} and \textbf{(c)} test connectedness against disjoint open sets of
+the whole space $X$, whereas \cref{def:connectedness} asks for sets open in the subset. The two
+tests agree, but only by \cref{lem:separation_by_ambient_open_sets}, which his notes do not
+state. His arguments are unchanged above, and the references to the lemma are added.
 \end{ainote}
 
 \begin{center}
@@ -306,8 +357,12 @@ Let $(X,d)$ be a metric space, $p \in X$, and $\{V_i\}_{i\in I}$ a family of con
 $X$ with $p \in V_i$ for every $i \in I$. Then $\bigcup_{i\in I}V_i$ is connected.
 \end{corollary}
 
+% Correction: Claude (xhigh) --- now says that separations by disjoint open sets of X are enough,
+% which is lem:separation_by_ambient_open_sets.
 \begin{proof}
-Suppose $\bigcup_i V_i \subseteq U_1 \cup U_2$ with $U_1,U_2$ open and disjoint, and say
+By \cref{lem:separation_by_ambient_open_sets} it suffices to rule out disjoint open sets
+$U_1, U_2 \subseteq X$ that cover the union and both meet it. So suppose
+$\bigcup_i V_i \subseteq U_1 \cup U_2$ with $U_1,U_2$ open and disjoint, and say
 $p \in U_1$. For each $i$, the argument of \cref{ex:connectedness_tf}\textbf{(a)} applies to
 $V_i$ alone: it meets $U_1$ (at $p$) and is connected, so it cannot also meet $U_2$, i.e.\
 $V_i \subseteq U_1$. This holds for every $i \in I$, so $\bigcup_i V_i \subseteq U_1$, and $U_2$

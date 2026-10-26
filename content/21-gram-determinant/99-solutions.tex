@@ -232,15 +232,34 @@ Hence
     This is the classical \newterm{Gabriel's horn} \germanfor{Torricellis Trompete}: finite
     volume, infinite surface area.
 
-  \item ($\Leftarrow$) Suppose $(*)$ holds. Since $f'(a^+)=+\infty$, the inverse
+  % Correction: Claude (xhigh) --- (<=) parametrized the boundary near the rim of the end disc
+  % by (g(t), f(g(t))cos, f(g(t))sin), which is constant in t for t <= f(a) and so is no
+  % parametrization; the radius is t itself. The domain of f^{-1} was also misstated, and the
+  % one-sidedness that def:bounded_ck_domain(b) now asks for is checked. (=>) claimed that the
+  % definition excludes a disconnected Omega; it has no connectedness clause. f > 0 is now proved
+  % from the pinch at a zero of f, and the endpoint argument, which showed only |f'| -> infinity
+  % and for f(a) = 0 assumed the limit f'(a^+) exists, is redone for both cases at once.
+  \item ($\Leftarrow$) Suppose $(*)$ holds, and write $\rho := \sqrt{y^2+z^2}$. Away from the two
+    ends, $\partial\Omega$ is the side surface $\{\rho = f(x)\}$, regularly parametrized as in
+    part \textbf{(c)} because $f > 0$, and $\Omega = \{\rho < f(x)\}$ lies on one side of it:
+    $G(x,y,z) := \rho - f(x)$ is $C^1$ off the axis with
+    $\nabla G = \big({-f'(x)},\ y/\rho,\ z/\rho\big) \neq 0$, as condition \textbf{(b)} of
+    \cref{def:bounded_ck_domain} asks.
+
+    At the end $x = a$, suppose first that $f(a) > 0$. Since $f'(a^+)=+\infty$, the inverse
     function theorem applies to $f|_{(a,a+\varepsilon)}$ for $\varepsilon$ small, giving a $C^1$,
     increasing inverse there; extend it by
-    \[g(y) := \begin{cases} f^{-1}(y) & f(a)<y<f(a)+\varepsilon, \\ a & y\leq f(a). \end{cases}\]
+    \[g(y) := \begin{cases} f^{-1}(y) & f(a)<y<f(a+\varepsilon), \\ a & y\leq f(a). \end{cases}\]
     Since $f'(a^+)=+\infty$, $\lim_{y\to f(a)^+}g'(y) = \lim_{x\to a^+} 1/f'(x) = 0 =
-    \lim_{y\to f(a)^-}g'(y)$, so $g\in C^1$ across $y=f(a)$. Around a boundary point $P :=
-    (a,f(a)\cos\phi,f(a)\sin\phi)$, the map $(t,\theta)\mapsto\big(g(t),f(g(t))\cos\theta,
-    f(g(t))\sin\theta\big)$ is then a regular $C^1$ parametrization of $\partial\Omega$ (using
-    $f(a)>0$ to keep the angular direction non-degenerate).
+    \lim_{y\to f(a)^-}g'(y)$, so $g\in C^1$ across $y=f(a)$. Around a boundary point
+    $P := (a,f(a)\cos\phi,f(a)\sin\phi)$, the map
+    \[(t,\theta)\mapsto\big(g(t),\ t\cos\theta,\ t\sin\theta\big)\]
+    is then a regular $C^1$ parametrization of $\partial\Omega$. For $t \leq f(a)$ it traces the
+    end disc $\{x = a\}$, and for $t > f(a)$ the side surface, where $t = f(g(t))$. Its partial
+    derivatives $\big(g'(t),\cos\theta,\sin\theta\big)$ and $\big(0,-t\sin\theta,t\cos\theta\big)$
+    are linearly independent because $t$ is close to $f(a) > 0$. Near $P$, moreover,
+    $\Omega = \{x > g(\rho)\}$, so $G := g(\rho) - x$ has $\partial_x G = -1$ and exhibits $\Omega$
+    on one side of its boundary.
 
     % Correction: Claude Opus 5 (Ultracode) --- both directions of (e) were proved only for
     % $f(a)>0$, which $(*)$ does not require, and the archetypal instance violates it: the ball
@@ -255,41 +274,61 @@ Hence
     $(y,z) \mapsto h\big(\sqrt{y^2+z^2}\big)$ has partial derivatives $h'(r)\,y/r$ and
     $h'(r)\,z/r$ with $r := \sqrt{y^2+z^2}$, which are continuous and tend to $0$ as $r \to 0$.
     So it is $C^1$ near the origin and exhibits $\partial\Omega$ near $P$ as a $C^1$ graph over
-    the $(y,z)$-plane. The symmetric argument at $b$, using
-    $f'(b^-)=-\infty$, handles the other end, so $\partial\Omega$ is a $C^1$ submanifold and
-    $\Omega$ is a bounded $C^1$ domain.
+    the $(y,z)$-plane, with $\Omega = \{x > h(\rho)\}$ on one side of it. The symmetric argument
+    at $b$, using $f'(b^-)=-\infty$, handles the other end. So $\partial\Omega$ is a $C^1$
+    submanifold with $\Omega$ locally on one side of it, and $\Omega$ is a bounded $C^1$ domain.
 
-    ($\Rightarrow$) Suppose $\Omega$ is a bounded $C^1$ domain. If $f$ vanished at some interior
-    point, $\Omega$ would be disconnected by part \textbf{(a)}, which
-    \cref{def:bounded_ck_domain} excludes, since it requires $\Omega$ itself to make sense as a
-    single bounded open set with $(n-1)$-manifold boundary (implicit in the exercise's setup).
-    Therefore $f>0$ on $(a,b)$. For the endpoint condition at $a$, suppose first that $f(a)>0$.
-    Then the point
-    $P:=(a,f(a),0)\in\partial\Omega$ is a smooth boundary point, so
+    ($\Rightarrow$) Suppose $\Omega$ is a bounded $C^1$ domain, and $\Omega \neq \emptyset$, that
+    is, $f \not\equiv 0$. Only condition \textbf{(a)} of \cref{def:bounded_ck_domain} is needed,
+    through two standard facts about a $C^1$ surface: near each of its points it is the graph of
+    a $C^1$ function over its tangent plane there, and its tangent planes depend continuously on
+    the point. One more observation is used twice. Rotations about the $x$-axis map $\Omega$, and
+    hence $\partial\Omega$, to itself. At a point $P \in \partial\Omega$ on the axis they therefore
+    map $T_P(\partial\Omega)$ to itself, and the only $2$-plane in $\mathbb{R}^3$ invariant under
+    all of them is $\operatorname{span}\{e_2,e_3\}$. Near such a $P$, then, $\partial\Omega$ is a
+    graph $x = h(y,z)$ with $h$ of class $C^1$ and $\nabla h = 0$ at the centre.
+
+    \emph{First, $f>0$ on $(a,b)$.} Suppose not. The zero set of $f$ in $(a,b)$ is then closed in
+    $(a,b)$, non-empty, and not all of $(a,b)$, so, as $(a,b)$ is connected, it is not open.
+    Hence there are a zero $x_0 \in (a,b)$ of $f$ and points $x_k \to x_0$ with $f(x_k) > 0$, and
+    $f'(x_0) = 0$ because $x_0$ is a minimum of $f \geq 0$. The points $P := (x_0,0,0)$ and
+    $Q_k := (x_k, f(x_k), 0)$ lie in $\partial\Omega$: each is a limit of points of $\Omega$,
+    namely of $(x_k,0,0)$ and of $\big(x_k, (1-\tfrac1j)f(x_k), 0\big)$ as $j \to \infty$, and
+    none lies in $\Omega$. As $Q_k \to P$, for large $k$ the point $Q_k$ lies on the graph above,
+    so $x_k = h(f(x_k),0)$, while $x_0 = h(0,0)$. The mean value theorem, applied to $h$ and to
+    $f$, gives
+    \[\lvert x_k - x_0\rvert \leq \eta_k\,f(x_k) \qquad\text{and}\qquad
+      f(x_k) = \lvert f(x_k) - f(x_0)\rvert \leq \eta_k'\,\lvert x_k - x_0\rvert,\]
+    where $\eta_k$ is the largest value of $\lvert\partial_y h\rvert$ on the segment from $(0,0)$
+    to $(f(x_k),0)$, and $\eta_k'$ the largest value of $\lvert f'\rvert$ between $x_0$ and $x_k$.
+    Both tend to $0$, because $\partial_y h(0,0) = 0 = f'(x_0)$. Hence
+    $\lvert x_k - x_0\rvert \leq \eta_k\eta_k'\,\lvert x_k - x_0\rvert$, which is impossible once
+    $\eta_k\eta_k' < 1$, since $x_k \neq x_0$. Geometrically, where $f$ vanishes the body is
+    pinched, and its boundary comes to a cusp tangent to the axis, which no $C^1$ surface does.
+
+    \emph{Next, the condition at $a$.} Let $P := (a,f(a),0)$, which lies in $\partial\Omega$, and
+    first show $T_P(\partial\Omega) = \operatorname{span}\{e_2,e_3\}$. If $f(a) = 0$, then $P$
+    lies on the axis and the rotation observation gives it. If $f(a) > 0$, then
     $T_P(\partial\Omega)$ is $2$-dimensional and contains
     \[\frac{d}{dt}\Big|_{t=0^+}\big(a,f(a)-t,0\big) = -e_2, \qquad
       \frac{d}{dt}\Big|_{t=0^-}\big(a,f(a)\cos t,f(a)\sin t\big) = f(a)e_3,\]
-    so $T_P(\partial\Omega) = \operatorname{span}\{e_2,e_3\}$. But $T_P(\partial\Omega)$ must
-    also contain the limit of the (rescaled, if necessary) tangent vectors
-    \[v_\varepsilon := \frac{d}{dt}\Big|_{t=0^+}\big(a+\varepsilon+t,\ f(a+\varepsilon+t),\
-      0\big) = \big(1,\ f'(a+\varepsilon),\ 0\big)\]
-    as $\varepsilon\to0^+$ (these are tangent to $\partial\Omega$ at nearby points converging to
-    $P$). If $f'(a+\varepsilon)$ stayed bounded along some sequence $\varepsilon_k\to0^+$, the
-    direction of $v_{\varepsilon_k}$ would converge to some $\alpha e_1+\beta e_2 \notin
-    \operatorname{span}\{e_2,e_3\}$ (its $e_1$-component is the nonzero constant $1$, up to
-    normalization), contradicting $T_P(\partial\Omega)=\operatorname{span}\{e_2,e_3\}$. So
-    $f'(a^+)=+\infty$.
+    the first curve running along the end disc and the second around its rim, so again
+    $T_P(\partial\Omega) = \operatorname{span}\{e_2,e_3\}$.
 
-    If $f(a)=0$ the relevant boundary point is $P := (a,0,0)$ and the argument is shorter.
-    Suppose $f'(a^+) = L$ were finite. Rotation about the $x$-axis maps $\partial\Omega$ to
-    itself and fixes $P$, so it acts on $T_P(\partial\Omega)$; the only $2$-plane in
-    $\mathbb{R}^3$ invariant under all of those rotations is
-    $\operatorname{span}\{e_2,e_3\}$, so that is what $T_P(\partial\Omega)$ must be. But the
-    curve $s\mapsto\big(a+s,\ f(a+s),\ 0\big)$ lies in $\partial\Omega$, passes through $P$ at
-    $s=0$ and has tangent $(1,L,0)$ there, whose $e_1$-component is $1$. That vector is not in
-    $\operatorname{span}\{e_2,e_3\}$, a contradiction, so $f'(a^+)=+\infty$ in this case too.
-    Geometrically, a finite slope leaves the body with a conical vertex, or with a cusp when
-    $L=0$. The symmetric argument at $b$ gives $f'(b^-)=-\infty$.
+    The side points $P_x := (x,f(x),0)$, $a<x<b$, lie in $\partial\Omega$ and converge to $P$ as
+    $x \to a^+$, and the curve $s \mapsto (s,f(s),0)$ shows that $(1,f'(x),0)$ is tangent to
+    $\partial\Omega$ at $P_x$. As tangent planes depend continuously on the point, the unit
+    vectors $(1,f'(x),0)/\sqrt{1+f'(x)^2}$ must approach $\operatorname{span}\{e_2,e_3\}$, so
+    their $e_1$-component $1/\sqrt{1+f'(x)^2}$ tends to $0$: $\lvert f'(x)\rvert \to \infty$ as
+    $x \to a^+$. Being continuous and eventually non-zero, $f'$ then has a single sign on some
+    interval $(a,a+\delta)$, by the intermediate value theorem, and that sign cannot be negative.
+    If $f(a) = 0$, a decreasing $f$ would turn negative. If $f(a) > 0$, a decreasing $f$ would
+    put, for every $\rho$ slightly below $f(a)$, the two points $(a,\rho,0)$ of the end disc and
+    $\big(f^{-1}(\rho),\rho,0\big)$ of the side into $\partial\Omega$ near $P$. They are different
+    points with the same $(y,z)$-coordinates, which contradicts $\partial\Omega$ being a graph over
+    $\operatorname{span}\{e_2,e_3\}$ near $P$. Hence $f'(a^+)=+\infty$. Geometrically, a finite
+    slope leaves an edge along the rim of the end disc, or a conical vertex or cusp when
+    $f(a) = 0$. The symmetric argument at $b$ gives $f'(b^-)=-\infty$.
 \end{enumerate}
 \end{exercisesolution}
 
@@ -333,10 +372,11 @@ root is the familiar speed $\lvert\Phi'\rvert$ of \cref{sec:length_of_curve}.
     semicircle and $\operatorname{Im}(\Psi_-)$ the open lower one, so their union is
     $S^1\setminus\{(1,0),(-1,0)\}$ and the family covers no neighbourhood of either point.
 
-    What fails is then not the arithmetic but the definition. Subordinacy forces
-    $\operatorname{supp}(\eta_\pm) \subseteq \operatorname{Im}(\Psi_\pm)$, so both $\eta_+$ and
-    $\eta_-$ vanish at $(1,0)$ and at $(-1,0)$; their sum vanishes there too and cannot be the
-    constant $1$ on $S^1$. No partition of unity subordinate to this family exists, and
+    What fails is then not the arithmetic but the definition. Subordinacy asks for open sets
+    $U_\pm \subseteq \mathbb{R}^2$ with $U_\pm \cap S^1 = \operatorname{Im}(\Psi_\pm)$ and
+    $\operatorname{supp}(\eta_\pm) \subseteq U_\pm$. Neither $U_+$ nor $U_-$ contains $(1,0)$ or
+    $(-1,0)$, so both $\eta_+$ and $\eta_-$ vanish at those two points; their sum vanishes there
+    too and cannot be the constant $1$ on $S^1$. No partition of unity subordinate to this family exists, and
     \cref{def:integral_scalar_submanifold} never gets started.
 
     It is worth noticing that the recipe nevertheless returns the right number. Taking

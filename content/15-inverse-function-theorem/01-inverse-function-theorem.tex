@@ -54,16 +54,21 @@ where $\phi : U \to \mathbb{R}^n$ is a $\lambda$-Lipschitz function with constan
 
 \begin{proof}
 \begin{enumerate}[label=\textbf{(\alph*)}]
+  % Correction: Claude (xhigh) --- the fixed-point map was defined on the closed ball of radius r,
+  % but only the open ball B_r(x) is assumed to lie in U, so phi need not be defined on its
+  % boundary. The argument now runs on a slightly smaller closed ball, which the strict
+  % inequality |y_0 - F(x)| < (1-lambda)r leaves room for.
   \item Fix $y_0 \in B_{(1-\lambda)r}(F(x))$. We seek a point $x_0 \in B_r(x)$ satisfying $F(x_0) = y_0$, which is equivalent to the fixed-point equation $x_0 = y_0 - \phi(x_0)$.
-  Define $g : \overline{B_r(x)} \to \mathbb{R}^n$ by $g(z) := y_0 - \phi(z)$. For any $z_1, z_2 \in \overline{B_r(x)}$,
+  Since $|y_0 - F(x)| < (1-\lambda)r$, we can choose $r' < r$ with $|y_0 - F(x)| < (1-\lambda)r'$. Then $\overline{B_{r'}(x)} \subseteq B_r(x) \subseteq U$, which matters because $\phi$ is defined only on $U$.
+  Define $g : \overline{B_{r'}(x)} \to \mathbb{R}^n$ by $g(z) := y_0 - \phi(z)$. For any $z_1, z_2 \in \overline{B_{r'}(x)}$,
   \[
   |g(z_1) - g(z_2)| = |\phi(z_1) - \phi(z_2)| \leq \lambda |z_1 - z_2|,
   \]
-  so $g$ is a $\lambda$-contraction. Next, we verify that $g$ maps $\overline{B_r(x)}$ into itself:
+  so $g$ is a $\lambda$-contraction. Next, we verify that $g$ maps $\overline{B_{r'}(x)}$ into itself:
   \[
-  |g(z) - x| \leq |g(z) - g(x)| + |g(x) - x| \leq \lambda |z - x| + |y_0 - F(x)| < \lambda r + (1-\lambda)r = r.
+  |g(z) - x| \leq |g(z) - g(x)| + |g(x) - x| \leq \lambda |z - x| + |y_0 - F(x)| < \lambda r' + (1-\lambda)r' = r'.
   \]
-  Thus $g(\overline{B_r(x)}) \subseteq B_r(x) \subseteq \overline{B_r(x)}$. Since $\overline{B_r(x)}$ is complete, the Banach fixed-point theorem (\cref{thm:banach_fixed_point}) yields a unique point $x_0 \in B_r(x)$ with $g(x_0) = x_0$, i.e.\ $F(x_0) = y_0$. This proves $B_{(1-\lambda)r}(F(x)) \subseteq F(B_r(x))$. The outer inclusion follows directly from $|F(y) - F(x)| \leq |y - x| + |\phi(y) - \phi(x)| < (1+\lambda)r$.
+  Thus $g(\overline{B_{r'}(x)}) \subseteq B_{r'}(x) \subseteq \overline{B_{r'}(x)}$. Since $\overline{B_{r'}(x)}$ is complete, the Banach fixed-point theorem (\cref{thm:banach_fixed_point}) yields a unique point $x_0 \in \overline{B_{r'}(x)}$ with $g(x_0) = x_0$, i.e.\ $F(x_0) = y_0$, and $x_0 = g(x_0) \in B_{r'}(x) \subseteq B_r(x)$. This proves $B_{(1-\lambda)r}(F(x)) \subseteq F(B_r(x))$. The outer inclusion follows directly from $|F(y) - F(x)| \leq |y - x| + |\phi(y) - \phi(x)| < (1+\lambda)r$.
 
   \item For any $x_1, x_2 \in U$, applying the reverse triangle inequality gives
   \[
@@ -302,7 +307,10 @@ Thus, for every $x_0 \in U$, there is a neighbourhood $V_0 \subseteq U$ such tha
 
 % Source: old_exams/examHS24.pdf (13 February 2025), Wahr/Falsch-Fragen, Aufgabe 5, pp. 3--4
 % Extractor: Claude Opus 5 (High)
-\begin{exercise}[True or False \textnormal{(a degenerate critical point)}]
+% Correction: Claude (xhigh) --- titled "(a degenerate critical point)", but det Hess f(0) = -1,
+% so the point is non-degenerate. Retitled without naming the type, since "non-degenerate" would
+% give away part (e).
+\begin{exercise}[True or False \textnormal{(a critical point and its Hessian)}]
 \label{ex:hessian_gradient_diffeomorphism}
 Let $f \in C^\infty(\mathbb{R}^3)$ satisfy
 \[f(0) = 0, \qquad \nabla f(0) = \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}, \qquad

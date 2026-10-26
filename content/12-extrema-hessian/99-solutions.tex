@@ -57,9 +57,11 @@ None of \textbf{(a)}--\textbf{(c)} hold in general:
   \item \textbf{(b) False:} $f(x) = x_1^3$ at $x_0 = 0$ has $\Hess f(0) = 0$ (positive
     semidefinite), but $f$ takes negative values arbitrarily close to $0$, so $x_0$ is not a
     local minimum at all.
-  \item \textbf{(c) False:} $f(x) = -x_1^4$ at $x_0 = 0$ has $\Hess f(0) = 0$ (positive
-    semidefinite, vacuously, since it is the zero matrix), yet $x_0$ \emph{is} a (strict) local
-    maximum of $f$.
+  % Correction: Claude (xhigh) --- the witness was -x_1^4, whose maximum at 0 is not strict for
+  % n >= 2 (f vanishes along the whole hyperplane x_1 = 0), although it was called strict.
+  \item \textbf{(c) False:} $f(x) = -\lvert x\rvert^4$ at $x_0 = 0$ has $\Hess f(0) = 0$
+    (positive semidefinite, vacuously, since it is the zero matrix), yet $x_0$ \emph{is} a
+    strict local maximum of $f$.
 \end{itemize}
 Since \textbf{(a)}--\textbf{(c)} all fail, \textbf{(d) is the correct answer}: none of the above
 statements necessarily hold.

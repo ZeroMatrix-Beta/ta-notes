@@ -224,9 +224,29 @@ The two textbook cases sit on either side.
 The heuristic runs in one direction only, and is worth stating carefully. Concavity
 \emph{guarantees} a metric, whereas convexity merely \emph{suggests} failure. Convexity is not a
 proof of anything, and a convex $h$ must still be refuted by an explicit triple, as above.
-Finally, note that the $m$-metrics of the preceding \cref{ex:metric_examples} split at $m = 1$ for
-the same reason, seen along each axis: $t \mapsto t^{1/m}$ is concave for $m \geq 1$ and convex
-for $m \in (0,1)$.
+
+% Correction: Claude (xhigh) --- read "the m-metrics split at m = 1 for the same reason, seen along
+% each axis: t -> t^(1/m) is concave for m >= 1 and convex for m in (0,1)". Along an axis
+% d_m(x,y) = |x_k - y_k| for every m, so nothing is reshaped there. Rewritten as the two-stage
+% reshaping that actually breaks the triangle inequality for m < 1.
+The $m$-metrics of the preceding \cref{ex:metric_examples} fail for $m \in (0,1)$, and the
+curvature picture locates the failure, though not along the coordinate axes: two points on one
+axis have $d_m(x,y) = \lvert x_k-y_k\rvert$ for every $m$, so nothing is reshaped there. The
+reshaping happens in two stages.
+\begin{itemize}
+  \item Each coordinate distance first passes through $t \mapsto t^m$. For $m \in (0,1)$ this
+    profile is concave, so $(a,b) \mapsto \lvert a-b\rvert^m$ is a metric on $\mathbb{R}$ by
+    \cref{prop:concave_reshaping_metric}, and summing over the coordinates gives a metric on
+    $\mathbb{R}^n$,
+    \[\rho_m(x,y) := \sum_{k=1}^n \lvert x_k-y_k\rvert^m.\]
+  \item Then $d_m = \rho_m^{1/m}$ passes $\rho_m$ through $s \mapsto s^{1/m}$, which is convex for
+    $m<1$, and this is the stage that breaks the triangle inequality:
+    $d_m(e_1,e_2) = 2^{1/m} > 2 = d_m(e_1,0) + d_m(0,e_2)$.
+\end{itemize}
+So for $m \in (0,1)$ it is the root that has to go, and $\rho_m$ is the metric to use. For
+$m \geq 1$ the two curvatures swap, $t^m$ convex and $s^{1/m}$ concave, and the proposition
+decides nothing. The triangle inequality for $d_m$ is then Minkowski's inequality, which needs a
+proof of its own.
 \end{remark}
 
 % Generator: Claude Opus 5 (High) --- FIG-02-04

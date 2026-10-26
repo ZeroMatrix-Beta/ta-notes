@@ -130,10 +130,16 @@ a $2$-dimensional submanifold of $\mathbb{R}^3$, and throughout fix the point
 \end{center}
 
 % Generator: Claude Opus 5 (High)
+% Correction: Claude (xhigh) --- said "one graph and one parametrization cover all of it", but
+% the parametrization of ex:half_sphere_three_ways(c) misses the pole and a meridian arc. The
+% graph map is the global parametrization, and it is now named as such.
 \begin{remark}[Why all three theorems are stated \emph{locally}]
 \label{rem:why_submanifolds_are_local}
-The half-sphere is unusually obliging: one graph and one parametrization cover all of it. That is
-not the general situation, and each description fails to globalise for its own reason.
+The spherical coordinates of part \textbf{(c)} miss the north pole and the meridian arc where
+$\psi = 0$, but otherwise the half-sphere is unusually obliging: a single equation and a single
+graph each describe all of it, and the graph doubles as a global parametrization,
+$(x,y) \mapsto (x,y,f(x,y))$ on $V$. That is not the general situation, and each description
+fails to globalise for its own reason.
 \begin{itemize}
   \item \textbf{A parametrization need not be global.} The circle $\mathbb{S}^1$ is a
     $1$-dimensional submanifold, yet no single parametrization covers it. Suppose

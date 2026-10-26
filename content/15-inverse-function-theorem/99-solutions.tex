@@ -39,13 +39,13 @@ non-degenerate, and $H$ is indefinite.
 
 Since $f$ is smooth with $f(0) = 0$ and $\nabla f(0) = 0$, Taylor's theorem gives
 \begin{equation}
-\label{eq:degenerate_critical_taylor}
+\label{eq:hessian_gradient_diffeomorphism_taylor}
 f(x) = \tfrac12 \langle Hx, x\rangle + o(\lvert x\rvert^2)
      = \tfrac12 x_1^2 + x_2x_3 + o(\lvert x\rvert^2)
      \qquad \text{as } x \to 0 .
 \end{equation}
 \begin{enumerate}[label=\textbf{(\alph*)}]
-  \item \textbf{False.} Along the $x_1$-axis, \eqref{eq:degenerate_critical_taylor} gives
+  \item \textbf{False.} Along the $x_1$-axis, \eqref{eq:hessian_gradient_diffeomorphism_taylor} gives
     $f(t,0,0) = \tfrac12 t^2 + o(t^2) > 0 = f(0)$ for small $t \neq 0$, so $f$ takes values larger
     than $f(0)$ arbitrarily close to the origin.
   \item \textbf{True.} We have just seen a direction along which $f$ increases. In the plane
@@ -53,13 +53,13 @@ f(x) = \tfrac12 \langle Hx, x\rangle + o(\lvert x\rvert^2)
     $f(0,t,-t) = -t^2 + o(t^2) < 0 = f(0)$. Taking both values above and below $f(0)$ in every
     neighbourhood of the origin is exactly what a saddle point does.
   \item \textbf{False.} The quadratic form is correct only up to a change of coordinates, and the
-    statement is made in the original ones. By \eqref{eq:degenerate_critical_taylor} the second-order
+    statement is made in the original ones. By \eqref{eq:hessian_gradient_diffeomorphism_taylor} the second-order
     part of $f$ is $\tfrac12 x_1^2 + x_2 x_3$, which is not $x_1^2 - x_2^2 - x_3^2$: evaluating both
     at $(0,1,1)$ gives $1$ and $-2$. What \emph{is} true is that in suitable coordinates the form
     becomes $\tfrac12(u_1^2 + u_2^2 - u_3^2)$, matching the eigenvalues $1,1,-1$ --- note in
     passing that this has signature $(2,1)$, not the $(1,2)$ the stated expression suggests.
   \item \textbf{True.} This is the same Taylor expansion read with a weaker conclusion: the
-    right-hand side of \eqref{eq:degenerate_critical_taylor} is bounded by a constant times
+    right-hand side of \eqref{eq:hessian_gradient_diffeomorphism_taylor} is bounded by a constant times
     $\lvert x\rvert^2$ near $0$. Vanishing to first order at a point is precisely what $O(\lvert
     x\rvert^2)$ records.
   \item \textbf{True}, and this is where the chapter's theorem enters. The map $\nabla f$ is smooth,

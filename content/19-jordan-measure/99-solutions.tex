@@ -58,34 +58,65 @@ theory visible on this sheet traces back to that one sentence.
 \begin{exercisesolution}[Solution to \cref{ex:jordan_null_image_lipschitz_choice}]
 \label{sol:jordan_null_image_lipschitz_choice}
 % Generator: Claude Opus 5 (High)
-\textbf{The correct answer is 4: $f$ locally Lipschitz continuous and $m \geq n$.} Both
-hypotheses are needed, and dropping either one admits a counterexample.
+% Correction: Claude (xhigh) --- three changes. The options were called 1--4 although the
+% statement labels them (a)--(d). The Cantor function was used on [0,1], which is not open; it is
+% now extended to R. And the proof of (d) worked on "a compact neighbourhood K \subset U of
+% \overline N", which need not exist, because \overline N can reach the boundary of U; then (d)
+% fails for Jordan null images (counterexample in the ainote at the end). The proof now assumes
+% \overline N \subset U for the Jordan null conclusion and proves the Lebesgue null one in general.
+\textbf{The answer is (d): $f$ locally Lipschitz continuous and $m \geq n$.} Both hypotheses
+are needed, and dropping either one admits a counterexample. One caveat about the word
+\qt{null}: read as \emph{Jordan} null, \textbf{(d)} also needs $\overline N \subset U$, which is
+automatic when $U = \mathbb{R}^n$, while read as \emph{Lebesgue} null it holds exactly as stated.
+Both versions are proved below.
 
-\textbf{Why 1 and 2 fail:} uniform continuity is not enough. Let $c : [0,1] \to [0,1]$ be the
-Cantor function, which is continuous on a compact interval and hence uniformly continuous, and
-let $N \subset [0,1]$ be the Cantor set. Then $N$ is Jordan-null (it is covered by $2^k$
-intervals of total length $(2/3)^k \to 0$), while $c(N) = [0,1]$ is not null. Here $n = m = 1$, so
-this single example kills option 1 \emph{and} option 2. The extra hypothesis $m \geq n$ does
-nothing to rescue mere continuity. Intuitively, a uniformly continuous map has no bound on how
-much it may stretch, only on how abruptly.
+\textbf{Why (a) and (b) fail:} uniform continuity is not enough. Let $c : \mathbb{R} \to [0,1]$
+be the Cantor function on $[0,1]$, extended by $0$ to the left of $0$ and by $1$ to the right of
+$1$. It is continuous, uniformly so on the compact interval $[0,1]$ and constant outside it, so
+it is uniformly continuous on $U := \mathbb{R}$. Let $N \subset [0,1]$ be the Cantor set. Then
+$N$ is Jordan-null (it is covered by $2^k$ intervals of total length $(2/3)^k \to 0$), while
+$c(N) = [0,1]$ is not null in either sense. Here $n = m = 1$, so this single example kills
+\textbf{(a)} \emph{and} \textbf{(b)}. The extra hypothesis $m \geq n$ does nothing to rescue mere
+continuity. Intuitively, a uniformly continuous map has no bound on how much it may stretch, only
+on how abruptly.
 
-\textbf{Why 3 fails:} $m \geq n$ is not decoration. Let $f : \mathbb{R}^2 \to \mathbb{R}$,
+\textbf{Why (c) fails:} $m \geq n$ is not decoration. Let $f : \mathbb{R}^2 \to \mathbb{R}$,
 $f(x,y) := y$, which is Lipschitz with constant $1$, and let
 $N := \{0\}\times[0,1]$, a segment and so Jordan-null in $\mathbb{R}^2$. Then $f(N) = [0,1]$,
 which is not null in $\mathbb{R}^1$. Here $m = 1 < 2 = n$: a projection loses a dimension, and
 what was negligible in the source stops being negligible in the smaller target.
 
-\textbf{Why 4 holds.} Let $N$ be Jordan-null. Being Jordan-null it is bounded, and we may work on
-a compact neighbourhood $K \subset U$ of $\overline N$ on which $f$ is Lipschitz with some
-constant $L$ (local Lipschitz continuity plus compactness gives a single constant). Fix
-$\varepsilon > 0$ and cover $N$ by finitely many cubes $Q_1,\dots,Q_M \subset K$ of sides
-$s_i \leq 1$ with $\sum_i s_i^{\,n} < \varepsilon$. Each $Q_i$ has diameter $s_i\sqrt n$, so
-$f(Q_i \cap N)$ has diameter at most $L s_i\sqrt n$ and therefore fits inside a cube of side
-$L s_i \sqrt n$ in $\mathbb{R}^m$, of volume $(L\sqrt n)^m s_i^{\,m}$. Since $s_i \leq 1$ and
-$m \geq n$ we have $s_i^{\,m} \leq s_i^{\,n}$, so the images are covered with total volume at
-most
+\textbf{Why (d) holds when $\overline N \subset U$.} Let $N$ be Jordan-null with
+$\overline N \subset U$. Being Jordan-null, $N$ is bounded, so $\overline N$ is compact and has
+positive distance from the closed set $\mathbb{R}^n \setminus U$. Choose $\delta > 0$ below that
+distance (any $\delta > 0$ if $U = \mathbb{R}^n$) and put
+$K := \{x \in \mathbb{R}^n : \dist(x,\overline N) \leq \delta\}$, a compact subset of $U$. On $K$
+the map $f$ is Lipschitz with a single constant $L$. Otherwise there are $x_k, y_k \in K$ with
+$\lvert f(x_k) - f(y_k)\rvert > k\lvert x_k - y_k\rvert$; as $f$ is bounded on $K$, this forces
+$\lvert x_k - y_k\rvert \to 0$, so a subsequence of both converges to one point of $K$, and the
+local Lipschitz bound near that point is violated once $k$ exceeds its constant.
+
+Fix $\varepsilon > 0$ and cover $N$ by finitely many cubes $Q_1,\dots,Q_M$, each meeting $N$, of
+sides $s_i \leq \min\{1,\delta/\sqrt n\}$ with $\sum_i s_i^{\,n} < \varepsilon$ (subdividing the
+cubes of a Jordan cover keeps its total volume). Each $Q_i$ has diameter
+$s_i\sqrt n \leq \delta$ and meets $N$, so $Q_i \subset K$. Hence $f(Q_i \cap N)$ has diameter at
+most $L s_i\sqrt n$ and therefore fits inside a cube of side $L s_i \sqrt n$ in $\mathbb{R}^m$, of
+volume $(L\sqrt n)^m s_i^{\,m}$. Since $s_i \leq 1$ and $m \geq n$ we have
+$s_i^{\,m} \leq s_i^{\,n}$, so the images are covered with total volume at most
 \[(L\sqrt n)^m \sum_{i=1}^M s_i^{\,n} \;<\; (L\sqrt n)^m\,\varepsilon.\]
-As $\varepsilon$ was arbitrary, $f(N)$ is null.
+As $\varepsilon$ was arbitrary, $f(N)$ is Jordan null.
+
+\textbf{Why (d) holds in general, for Lebesgue null images.} Drop the assumption
+$\overline N \subset U$ and exhaust $U$ by the compact sets
+\[K_j := \big\{x \in \mathbb{R}^n : \lvert x\rvert \leq j,\ \dist(x,\mathbb{R}^n\setminus U) \geq
+  \tfrac1j\big\}, \qquad j \geq 1,\]
+reading the distance as $+\infty$ when $U = \mathbb{R}^n$. Each $K_j$ lies in $U$, and every point
+of the open set $U$ lies in some $K_j$. The set $N_j := N \cap K_j$ is Jordan null, being a subset
+of $N$, and $\overline{N_j} \subseteq K_j \subset U$. The case just proved makes every $f(N_j)$
+Jordan null, hence Lebesgue null, and
+\[f(N) = \bigcup_{j\geq1} f(N_j)\]
+is Lebesgue null as a countable union of Lebesgue null sets
+(\cref{ex:lebesgue_null_sets_properties}\textbf{(c)}).
 
 \begin{ainote}
 The proof shows exactly where each hypothesis is spent. \emph{Lipschitz} is what converts a bound
@@ -93,6 +124,21 @@ on the side of a cube into a bound on the diameter of its image. Continuity alon
 such conversion. \emph{$m \geq n$} is what makes $s_i^{\,m} \leq s_i^{\,n}$, i.e.\ what stops the
 volume from being measured with too few powers of $s_i$. The two counterexamples attack precisely
 these two steps.
+\end{ainote}
+
+% Generator: Claude (xhigh)
+\begin{ainote}[Jordan null or Lebesgue null?]
+As printed, the problem does not say which null sets it means, and for Jordan null images
+\textbf{(d)} is false without $\overline N \subset U$. Take $n = m = 1$, $U := (0,1)$ and
+$N := \{1/k : k \geq 2\}$, which is Jordan null: one interval $[0,\varepsilon/2]$ covers all but
+finitely many of its points. Enumerate $\mathbb{Q}\cap[0,1] = \{q_2, q_3, \dots\}$ and let $f$ be
+the piecewise linear function with $f(1/k) := q_k$, linear on each $[1/(k+1), 1/k]$ and equal to
+$q_2$ on $[1/2, 1)$. Every compact subset of $(0,1)$ meets only finitely many of the linear
+pieces, so $f$ is locally Lipschitz, and $m \geq n$. Yet
+$f(N) = \mathbb{Q}\cap[0,1]$ is not Jordan null (\cref{rem:lebesgue_vs_jordan_null}), although it
+is Lebesgue null, as the general case above says it must be. What breaks is the single Lipschitz
+constant. The values $f(1/k) = q_k$ do not converge, so $f$ is Lipschitz on no interval
+$(0,\eta)$, and the slopes of the pieces are unbounded near $0 \in \overline N \setminus U$.
 \end{ainote}
 \end{exercisesolution}
 

@@ -623,8 +623,15 @@ where $\omega_{n-1} r^{n-1} = \vol_{n-1}(\partial B_r(x_0))$ is the surface area
     u(x_0) = \frac{1}{\alpha_n r^n} \int_{B_r(x_0)} u(x) \, d\vol_n(x),
     \]
     where $\alpha_n r^n = \vol_n(B_r(x_0))$.
-  \item Prove the \newterm{strong maximum principle}: if $u$ attains a local minimum (or a local maximum) at some
-    point $x_0 \in \Omega$, then $u$ is constant on $\Omega$.
+  % Correction: Claude (xhigh) --- read "attains a local minimum (or a local maximum)". The
+  % solution's openness step then claimed that every point of the level set is again a global
+  % minimum, which only follows for a global one. The local version is true, but only through real
+  % analyticity of harmonic functions, which this course does not develop (see the remark after
+  % the solution). Restated for an extremum over all of Omega, the standard form of the theorem.
+  % ⚠️ TO CHECK AGAINST THE SOURCES: open old_exams/fs2023/examsol.pdf, Aufgabe 3.A1 (c), and see
+  % whether the exam asks for a local or a global extremum. If local, say so in an ainote here.
+  \item Prove the \newterm{strong maximum principle}: if $u$ attains its minimum (or its maximum)
+    over $\Omega$ at some point $x_0 \in \Omega$, then $u$ is constant on $\Omega$.
 \end{enumerate}
 \exinfo{This exercise is taken from the examination of 18 August 2023 (Prof.\ Urs Lang), Problem 3.A1 (c).}
 \exsol{sol:harmonic_mean_value_maximum_principle}

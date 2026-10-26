@@ -86,9 +86,31 @@ This standard integral can be evaluated using integration by parts twice, or by 
 Taking the imaginary part gives $\int_0^\infty e^{-tx} \sin x \,dx = \frac{1}{t^2+1}$. Thus,
 \[I'(t) = -\frac{1}{t^2+1},\]
 which integrates to $I(t) = -\arctan(t) + C$.
-Since $\lim_{t \to \infty} I(t) = 0$, we must have $C = \lim_{t \to \infty} \arctan(t) = \frac{\pi}{2}$.
+Since $\lvert\sin x\rvert \le x$, we have $\lvert I(t)\rvert \le \int_0^\infty e^{-tx}\,dx = \frac1t$,
+so $\lim_{t \to \infty} I(t) = 0$ and we must have $C = \lim_{t \to \infty} \arctan(t) = \frac{\pi}{2}$.
 Therefore, $I(t) = \frac{\pi}{2} - \arctan(t)$.
-The original integral corresponds to the limit as $t \to 0^+$ (which requires an extra justification step usually provided by Abel's theorem, but we formally take the limit):
+% Correction: Claude (xhigh) --- the limit t -> 0+ was taken formally, with a pointer to
+% Abel's theorem; replaced by a direct tail bound that proves continuity of I at 0.
+The original integral is the improper integral $I(0)$, and it remains to show that
+$I(t) \to I(0)$ as $t \to 0^+$. The tail can be bounded directly. For $t \ge 0$ the function
+$h_t(x) := e^{-tx}/x$ is positive and decreasing on $(0,\infty)$, so integrating by parts on
+$[R,S]$ with $0 < R < S$ gives
+\[
+\begin{aligned}
+\left\lvert\int_R^S h_t(x)\sin x\,dx\right\rvert
+&= \left\lvert\Big[-h_t(x)\cos x\Big]_R^S + \int_R^S h_t'(x)\cos x\,dx\right\rvert \\
+&\le h_t(R) + h_t(S) + \int_R^S \big(-h_t'(x)\big)\,dx = 2h_t(R) \le \frac{2}{R}.
+\end{aligned}
+\]
+By the Cauchy criterion the improper integral $I(t)$ therefore exists for every $t \ge 0$, and
+its tail beyond $R$ is at most $2/R$ in absolute value, uniformly in $t$. On $[0,R]$ we use
+$\lvert e^{-tx}-1\rvert \le tx$ and $\lvert\sin x\rvert \le 1$, so that
+\[
+\lvert I(t) - I(0)\rvert
+\le \int_0^R \lvert e^{-tx}-1\rvert\,\frac{\lvert\sin x\rvert}{x}\,dx + \frac{2}{R} + \frac{2}{R}
+\le tR + \frac{4}{R}.
+\]
+Choosing $R = t^{-1/2}$ gives $\lvert I(t)-I(0)\rvert \le 5\sqrt t \to 0$, and hence
 \[\int_0^\infty \frac{\sin x}{x} \,dx = \lim_{t \to 0^+} \left( \frac{\pi}{2} - \arctan(t) \right) = \frac{\pi}{2}.\]
 \end{example}
 

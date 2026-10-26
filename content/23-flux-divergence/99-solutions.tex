@@ -460,25 +460,45 @@ indefinite quantity would allow.
     Since $\alpha_n = \omega_{n-1}/n$ is the volume of the unit ball, this yields
     \[u(x_0) = \frac{1}{\alpha_n r^n} \int_{B_r(x_0)} u(x) \, d\vol_n(x).\]
 
-  \item Suppose $u$ attains a local minimum at $x_0 \in \Omega$. Then there exists $R > 0$ such that
-    $\overline{B_R(x_0)} \subset \Omega$ and $u(x) \geq u(x_0)$ for all $x \in B_R(x_0)$.
-    For any $0 < r < R$, the solid mean value property gives
-    \[0 = \frac{1}{\alpha_n r^n} \int_{B_r(x_0)} \big(u(x) - u(x_0)\big) \, d\vol_n(x).\]
-    The integrand $u(x) - u(x_0)$ is continuous and non-negative on $B_r(x_0)$. If it were strictly
-    positive at any point $x_1 \in B_r(x_0)$, by continuity it would remain strictly positive on a small
-    ball around $x_1$, forcing the integral to be strictly positive. Hence $u(x) - u(x_0) \equiv 0$
-    on $B_r(x_0)$, so $u(x) = u(x_0)$ for all $x \in B_R(x_0)$.
-
-    Now define $S := \{x \in \Omega \mid u(x) = u(x_0)\}$.
+  % Correction: Claude (xhigh) --- this assumed only a local minimum and then asserted, for the
+  % openness of S, that every point of S "is also a global minimum", which does not follow. With
+  % the statement now about a minimum over all of Omega, the ball argument is run once, at an
+  % arbitrary point of S, and the openness step is a consequence rather than an appeal.
+  \item Suppose $u$ attains its minimum over $\Omega$ at $x_0$, and write $m := u(x_0)$, so that
+    $u \geq m$ on all of $\Omega$. Let
+    \[S := \{x \in \Omega \mid u(x) = m\}.\]
     \begin{itemize}
       \item $S$ is non-empty since $x_0 \in S$.
-      \item $S$ is closed in $\Omega$ by continuity of $u$ ($S = u^{-1}\{u(x_0)\}$).
-      \item $S$ is open in $\Omega$: for any $x \in S$, $x$ is also a global minimum of $u$ on $\Omega$ (if $u(x_0)$ is the minimum value), so the same ball argument proves that a full ball around $x$ lies in $S$.
+      \item $S$ is closed in $\Omega$ by continuity of $u$, since $S = u^{-1}(\{m\})$.
+      \item $S$ is open. Let $y \in S$ and choose $R > 0$ with $\overline{B_R(y)} \subset \Omega$.
+        For every $0 < r < R$, the solid mean value property of part \textbf{(b)}, applied at $y$,
+        gives
+        \[0 = \frac{1}{\alpha_n r^n} \int_{B_r(y)} \big(u(x) - m\big) \, d\vol_n(x).\]
+        The integrand $u - m$ is continuous, and it is non-negative because $m$ is the minimum
+        of $u$ over all of $\Omega$. If it were strictly positive at some point $x_1 \in B_r(y)$,
+        by continuity it would remain strictly positive on a small ball around $x_1$, forcing the
+        integral to be strictly positive. Hence $u \equiv m$ on $B_r(y)$ for every $r < R$, so
+        $B_R(y) \subseteq S$.
     \end{itemize}
     Since $\Omega$ is connected, the only non-empty clopen subset of $\Omega$ is $\Omega$ itself.
     Therefore $S = \Omega$, which proves that $u$ is constant on $\Omega$.
-    The case of a local maximum follows by replacing $u$ with $-u$.
+    The case of a maximum follows by replacing $u$ with $-u$.
 \end{enumerate}
+
+% Generator: Claude (xhigh)
+\begin{remark}[Why part (c) asks for an extremum over all of $\Omega$]
+\label{rem:strong_maximum_principle_local_extremum}
+The openness step is where this is spent: a point $y \in S$ shares the value $m$, and
+$u - m \geq 0$ near $y$ only because $m$ is the minimum of $u$ over all of $\Omega$. If $x_0$ is
+merely a local minimum, the same ball argument still shows that $u$ is constant on a ball around
+$x_0$. At a point $y \in S$ far from $x_0$, however, nothing prevents $u$ from taking values below
+$m$ nearby, so the argument cannot be repeated there.
+
+The conclusion is nevertheless true for a local extremum too. Harmonic functions are real
+analytic, so a harmonic function that is constant on a ball is constant on the whole connected
+set $\Omega$. That fact is not developed in this course, which is why part \textbf{(c)} is stated
+for the extremum over $\Omega$, the form in which the strong maximum principle is usually given.
+\end{remark}
 \end{exercisesolution}
 
 \begin{exercisesolution}[Solution to \cref{ex:flux_through_nested_spheres}]

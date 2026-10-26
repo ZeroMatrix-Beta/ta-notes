@@ -291,10 +291,14 @@ continuously shrunk to a point inside $U$.
 % Feedback: Gemini 3.1 Pro (2026-08-11) --- singled out as the clearest summary in the chapter,
 % ordering the three notions with a witness for each failure. Keep both the chain and the two
 % closing warnings; the dimension warning is the part readers get wrong.
+% Correction: Claude (xhigh) --- opened with "for an open subset of R^n ... none of the converses
+% holding", and then said two bullets later that connected and path-connected coincide for open
+% sets, which is prop:open_euclidean_connected_path_connected. The chain is now stated for all
+% subsets of R^n, where neither converse holds, and the open case is said once, in the first
+% bullet. The chain and both closing warnings are kept, as the feedback above asks.
 \begin{importantremark}[Three notions, and how they are ordered]
 \label{rem:three_connectedness_notions}
-For an \emph{open} subset of $\mathbb{R}^n$ the three properties are strictly ordered, each
-implying the one after it and none of the converses holding:
+For subsets of $\mathbb{R}^n$ the three properties are ordered, each implying the one after it:
 \[\text{simply connected} \ \Longrightarrow\ \text{path-connected}
   \ \Longrightarrow\ \text{connected}.\]
 % Correction: Claude Opus 5 (Ultracode) --- the first implication was justified by "a homotopy
@@ -305,14 +309,15 @@ The second implication is \cref{lem:path_connected_implies_connected}. The first
 path-connectedness is part of \cref{def:simply_connected} itself, and it has to be stated
 there rather than deduced, since the homotopy condition alone is vacuous on a set whose
 components cannot be joined at all.
-Each failure has a standard witness:
+Neither converse holds in general, and each failure has a standard witness:
 \begin{itemize}
   \item \textbf{Connected but not path-connected:} the topologist's sine curve,
-    \cref{ex:topologists_sine_curve}. This one needs the set to be non-open;
+    \cref{ex:topologists_sine_curve}. This one needs the set to be non-open:
     \cref{prop:open_euclidean_connected_path_connected} says the two notions coincide for open
-    subsets of $\mathbb{R}^n$.
+    subsets of $\mathbb{R}^n$, so for an open set the chain has only two distinct steps.
   \item \textbf{Path-connected but not simply connected:} the punctured plane
-    $\mathbb{R}^2\setminus\{0\}$, or any annulus. The loop around the hole cannot be contracted,
+    $\mathbb{R}^2\setminus\{0\}$, or any open annulus, so this failure survives for open sets.
+    The loop around the hole cannot be contracted,
     and \cref{ex:vortex_field_not_conservative} turns exactly that failure into a vector field with
     no potential.
 \end{itemize}

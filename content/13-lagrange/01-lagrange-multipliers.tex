@@ -262,12 +262,16 @@ giving the system of equations
 \frac{\partial L}{\partial z} &= xy - 2\lambda z = 0,
 \end{aligned}
 \]
-We then have
+% Correction: Claude (xhigh) --- the display below carried the parenthetical "(if any coordinate
+% is 0, so are the others)", which is false: (1,0,0) with lambda = 0 solves the system. The
+% division in (*) needs x, y, z non-zero, and the vanishing case is the one treated after the list
+% of solutions. Flagged in the ainote after this example.
+If $x$, $y$, $z$ are all non-zero, we then have
 \begin{equation*}
 2\lambda = \frac{yz}{x} = \frac{xz}{y} = \frac{xy}{z} \tag{$*$}
 \end{equation*}
 and multiplying these in pairs gives
-\[\underbrace{y^2z^2 = x^2z^2}_{y^2 = x^2} = \underbrace{x^2y^2}_{y^2 = z^2} \qquad \text{(if any coordinate is 0, so are the others)},\]
+\[\underbrace{y^2z^2 = x^2z^2}_{y^2 = x^2} = \underbrace{x^2y^2}_{y^2 = z^2},\]
 and therefore $x^2 = y^2 = z^2$.
 Then $x^2+y^2+z^2 = 1 \implies 3x^2 = 1 \implies x = \pm\frac{1}{\sqrt{3}}$, giving
 \textbf{8 solutions}:
@@ -307,6 +311,13 @@ three-variable analogue of a saddle.
 Corsin writes $g(x) = |x| - 1$ for the constraint above, but the Lagrangian uses
 $x^2+y^2+z^2-1$, i.e.\ $|x|^2-1$. Both cut out the same sphere; the squared version is the one
 actually differentiated, so it is used throughout.
+
+% Generator: Claude (xhigh)
+Next to the pairwise products the notes also remark that if any coordinate is $0$, so are the
+others. That is false, since $(1,0,0)$ with $\lambda = 0$ solves the system. The products in
+$(*)$ simply need $x,y,z \neq 0$, and the case of a vanishing coordinate is the one handled after
+the list of solutions, where it yields the points on the coordinate axes. The remark has been
+replaced by that assumption.
 \end{ainote}
 
 % Source: Corsin Nick/Class Notes/Week 5.pdf, p. 6
